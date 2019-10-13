@@ -5,7 +5,7 @@ b) Using a Master Node - Nodes can decide on a master node that receives the met
 Configuring a master node:
 
 1)	Identify an IP and port for the master node
-2)	Set the master nodes to listen to the selected IP and Port
+2)	Set the master node in a listening mode on the selected IP and Port
 3)	To update the master node:
 Use the command ‘blockchain push’ to send the JSON file to the master node
 
