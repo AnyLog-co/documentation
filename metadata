@@ -1,5 +1,5 @@
 Members of the network can syncronize their metadata in 2 ways:
-a) Using a blockchain - by sending updateds to the blockchain and retrieving the metadata from the blockchain,
+a) Using a blockchain - by sending updateds to the blockchain and retrieving the metadata from the blockchain.
 b) Using a Master Node - Nodes can decide on a master node that receives the metadata updates and provides members with a copy of the metadata.
 
 Configuring a master node:
