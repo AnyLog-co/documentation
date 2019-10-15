@@ -11,7 +11,7 @@ There are 2 types of commands that can be issued: Info commands and SQL commands
 
 Requests are done using the GET command with keys and values in the headers as detailed below.
 
-To retrieve the status of the node\:
+To retrieve the status of the node:
 Header Key             Header Value            
 \--------------         ------------------
 type                   info
