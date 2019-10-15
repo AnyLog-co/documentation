@@ -13,7 +13,8 @@ Whereas host and port are the connection information and the timeout value repre
 ## The client side:
 
 Using a REST client, connect to a network node configured to provide REST services. 
-There are 2 types of commands that can be issued: Info commands and SQL commands. Info commands provide info on the metadata and the SQL commands are queries issued to the network.
+There are 2 types of commands that can be issued: Info commands and SQL commands. 
+Info commands provide info on the status and metadata and SQL commands are queries issued to the network.
 
 Requests are done using the GET command with keys and values in the headers as detailed below.
 
