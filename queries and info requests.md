@@ -1,4 +1,4 @@
-#Issuing requests and info requests to the AnyLog Network
+# Issuing requests and info requests to the AnyLog Network
 
 Queries (and info requests) can be issued from any REST client to the AnyLog Network. Any node member of the network can be configured to serve as a REST server to satisfy client requests. 
 The server side:
@@ -13,7 +13,7 @@ Requests are done using the GET command with keys and values in the headers as d
 
 To retrieve the status of the node:
 Header Key             Header Value            
---------------         ------------------
+\--------------         ------------------
 type                   info
 details                get status
 
