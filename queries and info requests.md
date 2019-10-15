@@ -60,3 +60,42 @@ type                   info
 dbms                   [the logical database name]
 details                info table [the logical database name] [the logical table name] columns
 </pre>
+
+#### SQL Queries:
+To issue a SQL query:
+<pre>
+Header Key             Header Value          
+--------------         ------------------
+type                   sql
+dbms                   [the logical database name]
+details                [a sql query]
+</pre>
+
+## SQL supported:
+
+* Select count(*) is supported.
+* Retrieve rows or columns from rows is supported.
+* We focus on queries that specify time interval. Time intervals are indexed on the nodes that host the data and are efficient.
+Here is the initial SQL functionality supported on a query node:
+On the projection list:
+Column name
+Min
+Max
+Sum
+Count
+Avg
+Count Distinct
+Range
+Time functions over Column values
+On the where clause
+Greater than
+Less than
+Equal
+Not Equal
+Group By
+Order By
+Limit
+
+## Optimized time series data queries:
+
+Users can leverage optimized time series queries.
