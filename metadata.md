@@ -20,7 +20,7 @@ This functionality has not been yet released.
 
 When metadata is created, use the AnyLog command ```blockchain push``` to send the JSON file to the master node
 
-####To retrieve data from the master node:
+#### To retrieve data from the master node:
 
 * Use the command ‘blockchain pull to log` to pull the log file from the master node. The output file will be paced in the blockchain directory. The file name is prefixed by the name of the log file and the suffix is '.new'.
 * Use the command ‘blockchain pull to dbms` to pull the metadata from the master node. The output file is a set of SQL insert statements that will update a local database with the metadata. The file name is prefixed by the name of the log file and the suffix is '.new.sql'.
