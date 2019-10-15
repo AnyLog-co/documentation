@@ -97,19 +97,30 @@ details                [a sql query]
 
 The following proprietry functions can be used:
 ```
-period (time-interval, units, date-time, date-column)
+period (time-interval, units, date-time, date-column, filter-criteria)
 ```
+The **period** function finds the first occurrence of data before or at a specified date (and if a filter-criteria is 
+specified, the occurrence needs to satisfy the filter-criteria) and considers the readings
+in a period of time which is measured by the type of the time interval (Minutes, Hours, Days, Weeks, Months or Years)
+and the number of units of the time interval (i.e. 3 days - whereas **time-interval** is day and **unit** is 3).
+
 **date-column** is the column name of the column that determines the date and time to consider.
 **period** determines the last occurrence which is smaller or equal to the **date-time**.
 The **time-interval** and the **units** (of time-interval) determine the time range to consider.
+**filter-criteria** is optional. If provided, the data considered needs to satisfy the filter criteria.
+
 
 ```
 increments (time-interval, units, date-column)
 ```
-**date-column** is the column name of the column that determines the date and time to consider.
-The **time-interval** and the **units** (of time-interval) determine the time range to consider.
+The **increments** functions considers data in increments of time (i.e. every 5 minutes) within a time range 
+(i.e. between October 15 2019 and October 16 2019). 
 
-Users can leverage optimized time series queries as the examples below:
+**date-column** is the column name of the column that determines the date and time to consider.
+The **time-interval** and the **units** (of time-interval) determine the time increments to consider (i.e. every 2 days) 
+and the time-range is determined in the where clause.
+
+Examples:
 
 1) Consider the last minute of reading from ping_sensor  
 ```
