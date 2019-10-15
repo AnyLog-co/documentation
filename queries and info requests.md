@@ -19,11 +19,11 @@ details                get status
 
 To retrieve the last executed query:
 Header Key             Header Value            
---------------         ------------------
+\--------------         ------------------
 type                   info
 details                job status
 To retrieve the last executed queries:
 Header Key             Header Value            
---------------         ------------------
+\--------------         ------------------
 type                   info
 details                job status all
