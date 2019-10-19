@@ -16,14 +16,14 @@ There are 3 types of information captured on every executed query:
 
 ## Command options for profiling and monitoring queries
 
-```job status all``` - provides status information on the last executed jobs
-```job status``` - provides status information on the most recent executed job
-```job status n``` - provides status information on a particular job whereas n is the id of the job
+```job status all``` - provides status information on the last executed jobs<br/>
+```job status``` - provides status information on the most recent executed job<br/>
+```job status n``` - provides status information on a particular job whereas n is the id of the job<br/>
 
-```job explain all``` - provides the explain plan of the last executed jobs
-```job explain``` - provides the explain plan on the most recent executed job
-```job explain n``` - provides the explain plan on a particular job
+```job explain all``` - provides the explain plan of the last executed jobs<br/>
+```job explain``` - provides the explain plan on the most recent executed job<br/>
+```job explain n``` - provides the explain plan on a particular job<br/>
 
-```job profile all``` - provides the profiling information of the last executed jobs
-```job explain``` - provides the profiling information on the most recent executed job
-```job explain n``` - provides the profiling information on a particular job
+```job profile all``` - provides the profiling information of the last executed jobs<br/>
+```job explain``` - provides the profiling information on the most recent executed job<br/>
+```job explain n``` - provides the profiling information on a particular job<br/>
