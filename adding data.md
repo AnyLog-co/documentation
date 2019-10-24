@@ -1,10 +1,11 @@
 # Adding Data to Nodes in the Network
  
 AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).
-Any connected node can host data.  
-There are 2 methods to deliver data to Operators in the network:
-Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.  
-Using a WATCH directory - the client installed the AnyLog agent software and is a member of the network. Adding data is by placing the data in the WATCH directory. 
+Any connected node can host data. 
+ 
+There are 2 methods to deliver data to Operators in the network:  
+1) Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.
+2) Using a WATCH directory - the client installed the AnyLog agent software and is a member of the network. Adding data is by placing the data in the WATCH directory.   
 
 ## Data transfer to Operator with REST API
 
