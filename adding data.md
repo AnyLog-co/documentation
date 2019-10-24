@@ -6,10 +6,13 @@
  
  ## Data transfer to Operator with REST API
  
- In this method, data is being transferred to particular Operator node in the network using a REST API.
- The Operator serves as a REST server waiting for incoming messages with data.
+ In this method, data is being transferred to a particular node in the network using a REST API.
+ Depending on the configuration, the receiving node can operate as an Operator and host the data,  
+ or operate as a Publisher and transfers the data to Operator nodes that will host the data.
+  
+ In both cases, the receiving node serves as a REST server waiting for incoming messages with data.
  
- #### On the AnyLog Operator node: 
+ #### On the Receiving Node (an AnyLog node): 
  Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
  
 <pre>
@@ -20,7 +23,7 @@ run rest server [ip] [port] [timeout]
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned in the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.
     
- #### On the sender side:
+ #### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
  
 Using a REST client, use the ***PUT*** command and send the data with the following keys and values in the header:  
 <pre>
