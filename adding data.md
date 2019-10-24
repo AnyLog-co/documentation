@@ -1,19 +1,21 @@
 # Adding Data to Nodes in the Network
  
- AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).
- Any connected node can host data.  
- The methods to deliver data to Operator nodes in the network is described in the this document.
- 
- ## Data transfer to Operator with REST API
- 
- In this method, data is being transferred to a particular node in the network using a REST API.
- Depending on the configuration, the receiving node can operate as an Operator and host the data,  
- or operate as a Publisher and transfers the data to Operator nodes that will host the data.
-  
- In both cases, the receiving node serves as a REST server waiting for incoming messages with data.
- 
- #### On the Receiving Node (an AnyLog node): 
- Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
+AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).
+Any connected node can host data.  
+There are 2 methods to deliver data to Operators in the network:
+Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.  
+Using a WATCH directory - the client installed the AnyLog agent software and is a member of the network. Adding data is by placing the data in the WATCH directory. 
+
+## Data transfer to Operator with REST API
+
+In this method, data is being transferred to a particular node in the network using a REST API.
+Depending on the configuration, the receiving node can operate as an Operator and host the data,  
+or operate as a Publisher and transfers the data to Operator nodes that will host the data.
+
+In both cases, the receiving node serves as a REST server waiting for incoming messages with data.
+
+#### On the Receiving Node (an AnyLog node): 
+Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
  
 <pre>
 run rest server [ip] [port] [timeout]
@@ -23,7 +25,7 @@ run rest server [ip] [port] [timeout]
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned in the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.
     
- #### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
+#### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
  
 Using a REST client, use the ***PUT*** command and send the data with the following keys and values in the header:  
 <pre>
@@ -51,16 +53,13 @@ curl    --header "type":"json file"
 </pre>
 
 
- ## Data transfer using a Publisher Nodes
+## Data transfer using a Publisher Nodes
  
- Install the AnyLog software on the node that receives the data.
- Configure the AnyLog agent as a Publisher Node.
- Configure the node to include the policies to determine the Operators that would service the data.
- Configure a ***watcg directory***.
+ 1) Install the AnyLog software on the node that receives the data.
+ 2) Configure the AnyLog agent as a Publisher Node.
+ 3) Configure the node to include the policies to determine the Operators that would service the data.
+ 4) Configure a ***watch directory***.
  
- Place the data at the ***watcg directory***.
- 
- The Publisher node connects with the Operators that will host the data and delivers the new data to the Operators.
-  
- 
+ The configured AnyLog node processes data placed on the watch directory whenever new data is added to the directory.
+ Therefore, when data is added to the watch directory, the Publisher node connects with the Operators that will host the data and delivers the new data to the Operators.
  
