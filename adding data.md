@@ -5,7 +5,8 @@ Any connected node can host data.
  
 There are 2 methods to deliver data to Operators in the network:  
 1) Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.
-2) Using a WATCH directory - the client installed the AnyLog agent software and is a member of the network. Adding data is by placing the data in the WATCH directory.   
+2) Using a WATCH directory -  The client is a a member of the network (The AnyLog software is installed ion the client). Adding data is by placing the data in the WATCH directory.   
+
 
 ## Data transfer to Operator with REST API
 
