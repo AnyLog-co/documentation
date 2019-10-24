@@ -5,14 +5,14 @@ Any connected node can host data.
  
 There are 2 methods to deliver data to Operators in the network:  
 1) Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.
-2) Using a WATCH directory -  The client is a a member of the network (The AnyLog software is installed ion the client). Adding data is by placing the data in the WATCH directory.   
+2) Using a WATCH directory -  The client is a a member of the network (the AnyLog software is installed ion the client). Adding data is by placing the data in the WATCH directory.   
 
 
-## Data transfer to Operator with REST API
+## Data transfer using a REST API
 
 In this method, data is being transferred to a particular node in the network using a REST API.
 Depending on the configuration, the receiving node can operate as an Operator and host the data,  
-or operate as a Publisher and transfers the data to Operator nodes that will host the data.
+or it can be configured to operate as a Publisher and transfers the data to one or more Operator nodes that will host the data.
 
 In both cases, the receiving node serves as a REST server waiting for incoming messages with data.
 
@@ -22,14 +22,14 @@ Configure the node to operate as a REST server using the following command on th
 <pre>
 run rest server [ip] [port] [timeout]
 </pre>
-***[ip]*** - The ip supporting the REST connection  
+***[ip]*** - The IP supporting the REST connection  
 ***[port]*** - The REST port  
-***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned in the time interval, the system returns ***timeout error***.  
+***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.
     
 #### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
  
-Using a REST client, use the ***PUT*** command and send the data with the following keys and values in the header:  
+Use a REST client software (such as curl pr postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:  
 <pre>
 Key     Value
 ------  -------------
