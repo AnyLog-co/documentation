@@ -1,0 +1,10 @@
+Putty definitions:
+get anylog-aws.pem from Ori
+use puttygen to convert anylog-aws.pem to anylog-aws.ppk
+set Session->Host name (or IP address): 
+set connection->Data->auto-login username = ubuntu
+set connection->Proxy->username = ubuntu  password = demo
+set connection->Rlogin->username = ubuntu
+set connection->SSH->Auth->Authentication methods-> uncheck->attemps TIS...
+set connection->SSH->Auth->Private key file for authontication: anylog-aws.pem
+Save all (with your prefered 'Saved session' name
