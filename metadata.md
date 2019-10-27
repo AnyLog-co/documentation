@@ -50,6 +50,10 @@ A node may keep a copy of the blockchain data on a local database. On the local 
 
 The following process creates the local blockchain database:
 
+* Define a location for the blockchain log file by declaring ***blockchain_file*** constant 
+with the path and file name of the log file.  
+Example: ```blockchain_file = $HOME/AnyLog-demo/data/blockchain/blockchain.txt```
+
 * Connect the node to the local database.    
 ```connect dbms psql anylog@127.0.0.1:demo 5432 blockchain```
 
