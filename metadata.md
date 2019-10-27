@@ -38,7 +38,7 @@ When metadata is created, use the AnyLog command ```blockchain push``` to send t
     
 The following script pulls the metadata from a Master Node and copies the log file to the local node to serve as the metadata on the local node.  
 ```
-run client [ip]:[port] "blockchain pull to log"    # create a log file on the Master Node
+run client [ip]:[port] "blockchain pull to log"    # create a copy of the log file on the Master Node
 run client [ip]:[port] "file get [source path and file name] [destination path and file name] # copy the log file from the Master Node to the Local Node.
 ```
 In the following script:  
