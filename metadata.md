@@ -35,6 +35,16 @@ When metadata is created, use the AnyLog command ```blockchain push``` to send t
 * To copy these files from the master node, use the command ```file get [source location] [destination location]``` whereas:
     * [source location] is the path name and file name on the master node.
     * [destination location] is the path name and file name on the requesting node. 
+    
+The following script pulls the metadata from a Master Node and copies the log file to the local node to serve as the metadata on the local node.  
+```
+run client [ip]:[port] "blockchain pull to log"    # create a log file on the Master Node
+run client [ip]:[port] "file get [source path and file name] [destination path and file name] # copy the log file from the Master Node to the Local Node.
+```
+In the following script:  
+``` [ip]:[port] ``` - the ip and port of the Master Node.  
+```[source path and file name]``` - the path and file name of the log file on the Master Node.  
+```[destination path and file name]``` - the path and file name of the metadata log file on the Local Node.
 
 ## Blockchain commands
 
