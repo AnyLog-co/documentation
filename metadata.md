@@ -44,3 +44,16 @@ When metadata is created, use the AnyLog command ```blockchain push``` to send t
 ```blockchain pull [to log or dbms]``` - get a copy of the blockchain from the master node.  
 ```blockchain create table``` - create the ledger table in the database that maintains a copy of the metadata.  
 
+## Using a local database
+
+A node may keep a copy of the blockchain data on a local database. On the local database, the blockchain data is maintain in a table called ***ledger***.   
+
+The following process creates the local blockchain database:
+
+* Connect the node to the local database.    
+```connect dbms psql anylog@127.0.0.1:demo 5432 blockchain```
+
+* Create the local ***ledger*** table.  
+```blockchain create table```
+
+
