@@ -1,20 +1,6 @@
-.. AnyLog documentation master file, created by
-   sphinx-quickstart on Thu Oct 31 19:34:20 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+# documentation
+The AnyLog Network Documentation
 
-Welcome to AnyLog's documentation!
-==================================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+The AnyLog Network allows clusters of machines to operate as a single repository.
+We currently operate with a selected group of companies that are using the network to manage their data and companies that build applications that leverage the network as a unified source of IoT data.
+As we are in an early Beta stage, this program is not available to all. To join the program, email a request to info@anylog.co
