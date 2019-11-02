@@ -1,6 +1,36 @@
 # Profiling and Monitoring Queries
 
-Queries can be profiled and monitored by issueing commands on the AnyLog command prompt or from a REST client.
+Queries are profiled and monitored by issuing commands on the AnyLog command prompt or from a REST client.
+
+Profiling is supported by several processes:  
+a. a process providing statistical information on queries execution time.  
+b. a process identifying slow queries.  
+c. a process to identify the SQL used on each participating node.  
+
+## Statistical information
+In order to get statistical information, use the following command:  
+On the AnyLog command prompt:  
+```show queries time```  
+From a REST client send a REST message and place in the headers the following keys and values:  
+```type : info```  
+```details : show queries time```
+
+## Identifying slow queries
+
+Slow queries can be redirected to the query log with the following AnyLog command:  
+
+```set query log profile [n] seconds```   
+
+The  ***set query log*** records all queries in the query log whereas adding ***profile [n] seconds***
+places in the query log only queries with execution time greater or equal to [n] seconds.
+
+To view the slow query log use the following command on the AnyLog command prompt:  
+```show query log```  
+From a REST client send a REST message and place in the headers the following keys and values:  
+```type : info```  
+```details : show query log```
+
+## Identify the SQL used on each participating node
 
 Queries are executed in a context of jobs. A job contains a query that was executed by a user or application 
 with some additional information that can be presented to users by issueing a monitoring command.
@@ -14,7 +44,7 @@ There are 3 types of information captured on every executed query:
 2. Explain - Provides the information on how the queries were executed on the operator nodes and on the node that issued the query.
 3. Profile - provides profiling information.
 
-## Command options for profiling and monitoring queries
+### Command options for profiling and monitoring queries
 
 ```job status all``` - provides status information on the last executed jobs<br/>
 ```job status``` - provides status information on the most recent executed job<br/>
