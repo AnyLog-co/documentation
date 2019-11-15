@@ -49,7 +49,7 @@ Connecting to a local database is done on the AnyLog command prompt. It connects
 The following example connects a logical database, named my_iot_dbms to a PostgreSQL database:
 ```connect dbms psql anylog@127.0.0.1:demo 5432 my_iot_dbms```
 
-### Disconnecting from a logical database
+### Disconnecting from a local database
 Disconnect is done by calling the disconnect command as follows:  
 ```disconnect dbms [dbms_name]```  
 ***[dbms_name]*** is the logical database name.
