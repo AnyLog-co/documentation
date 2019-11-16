@@ -32,5 +32,6 @@ Command                             Details
 set [name] = [value]                Assigns a value to a given name 
 set query log                       Activates a log recording queries being processed
 set query log profile [n] seconds   Records in the query log only queries with execution time greater or equal to [n] seconds
-set new query timer                 Resets the list and timers that monitor query execution time     
+set new query timer                 Resets the list and timers that monitor query execution time
+set command display [on/off]        When a script is executed, determine if the script commands are displayed. Default value is on.
 </pre>
