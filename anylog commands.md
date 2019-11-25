@@ -4,7 +4,7 @@
 ## Show Commands
 
 The show commands provide status information on the node receiving the REST call.
-These commands are supported on the AnyLog command line or by using a REST client with the following key value pairs in the header information:
+The show commands are supported on the AnyLog command line or by using a REST client with the following key value pairs in the header information:
 <pre>
 Key      Value
 ------   -------------
@@ -19,12 +19,32 @@ show [log name] log         Provides the information maintained in the named log
 show dbms                   Lists the connected databases
 show connections            Lists the type of connections (IPs and ports) supported by the node
 show watch directories      List the directories being watched for incomming data
-show queries time           Lists execution time of queries      
+show queries time           Lists execution time of queries    
 </pre>
 
-### Set Commands
+### REST status commands
+The following commands are issued using the REST API to provide REST API status.  
+
+<pre>
+Command                     Details
+------                      -------------
+show peer                   Provides the host and port of the peer issueing the REST call. The values are returned   
+                            to the caller and send to the AnyLog stdout.
+show peer command on        Enable monitoring of peer commands. When REST calls are issued, the IP and Port of the caller and the command are send 
+                            to the AnyLog stdout.
+show peer command off       Disable monitoring of peer commands.     
+</pre>
+
+
+## Set Commands
 
 The set commands modify state and setting information
+
+<pre>
+show peer
+</pre>
+
+
 
 <pre>
 Command                             Details
