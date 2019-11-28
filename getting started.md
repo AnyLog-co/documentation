@@ -52,14 +52,22 @@ An Ubuntu machine for each instance.
 #### Configuring the linux machine
 
 
-## Running an AnyLog Instance
+#### Running an AnyLog Instance
 
 To run the instance on a local machine, from the AnyLog root, issue the command:  
-```python3 source/cmd/user_cmd.py```
+```python3 source/cmd/user_cmd.py```  
+An AnyLog instance shows the AnyLog command line.
 
-## Configuring a Publisher Node
+#### Configuring a Publisher Node
 
-## Configuring an Operator Node
+On the AnyLog command line of the Publishes instance call the script:
 
+
+#### Configuring an Operator Node
+
+On the AnyLog command line of the Publishes instance call the script:
+
+
+## Managing Data Example
 
  
