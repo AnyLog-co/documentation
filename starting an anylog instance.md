@@ -1,4 +1,4 @@
-# Running an AnyLog instance and AnyLog commands
+# Starting an AnyLog Instance
 
 An AnyLog instance is initiated by calling AnyLog on the OS command line.  
 Once an AnyLog instance is called, it presents the AnyLog command prompt. The command prompt allows to issue AnyLog commands.    

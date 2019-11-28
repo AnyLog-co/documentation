@@ -17,7 +17,7 @@ A node can have one or more roles.
 ## The MetaData
 The metadata can be placed on a Master Node that is shared by other members of the network.  
 The members that share a Master Node for a group and make their data sharable between the group members.  
-For the TestNet members, a Master Node is available at IP: 18.217.99.117 and Port: 2049
+For the TestNet members, a Master Node is available at ```IP: 18.217.99.117 and Port: 2049```
 
 ## Local directory structure
  
