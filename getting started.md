@@ -19,6 +19,47 @@ The metadata can be placed on a Master Node that is shared by other members of t
 The members that share a Master Node for a group and make their data sharable between the group members.  
 For the TestNet members, a Master Node is available at IP: 18.217.99.117 and Port: 2049
 
+## Local directory structure
+ 
+This setup is using identical directory structure on all nodes:  
+
+<pre>
+Directory Structure   Explabnation
+-------------------   -----------------------------------------
+--> AnyLog-demo       [AnyLog Root]
+    -->data           [Intermediate data processed by this node]
+       -->watch       [Data placed on this directory is eithe a JSON file or SQL file and is processed by the node]
+       -->in          [Data send from a different node]
+       -->out         [Data to be transferred to another node]
+       -->test        [Test data]
+    -->blockchain     [A JSON file representing the metadata relevant to the node. The file in a Master Node will contains all the metadata]
+    -->source         [The source files of the AnyLog instance maintined in a sub-folders]
+    -->scripts        [Script files that install and configure the AnyLog instance role]
+       -->install     [Installation scripts]
+       -->anylog      [AnyLog scripts, configure the AnyLog instance]
+</pre>
+
+## Prerequisites
+
+An Ubuntu machine for each instance.  
+
+#### Installing an Ubuntu VM
+
+#### Installing Python
+
+#### Download the code base and scripts from GitHub
+
+#### Configuring the linux machine
+
+
+## Running an AnyLog Instance
+
+To run the instance on a local machine, from the AnyLog root, issue the command:  
+```python3 source/cmd/user_cmd.py```
+
+## Configuring a Publisher Node
+
+## Configuring an Operator Node
 
 
  
