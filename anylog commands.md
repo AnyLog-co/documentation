@@ -13,13 +13,15 @@ details  one of the show commands
 </pre>
 
 <pre>
-Command                     Details
-------                      -------------
-show [log name] log         Provides the information maintained in the named log (event, error, file, query) 
-show dbms                   Lists the connected databases
-show connections            Lists the type of connections (IPs and ports) supported by the node
-show watch directories      List the directories being watched for incomming data
-show queries time           Lists execution time of queries    
+Command                             Details
+------                              -------------
+show [log name] log                 Returns the information maintained in the named log (event, error, file, query) 
+show dbms                           Returns the connected databases
+show connections                    Returns the type of connections (IPs and ports) supported by the node
+show watch directories              Returns the directories being watched for incomming data
+show queries time                   Returns execution time of queries
+Show servers for dbms [dbms name]   Returns the IP and Port information of the servers supporting the database
+Show servers for dbms [dbms name] and table [table name]
 </pre>
 
 ### REST status commands
