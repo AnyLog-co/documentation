@@ -54,3 +54,13 @@ Disconnect is done by calling the disconnect command as follows:
 ```disconnect dbms [dbms_name]```  
 ***[dbms_name]*** is the logical database name.
 
+### Management commands
+```show event log``` - shows the last events processed on the node.  
+```show error log``` - shows the last errors identified on the node.   
+```show file log``` - on an operator node, shows the last data files processed on the node.  
+If keywords are added to the ***show*** commands, than the output considers only log entries containing the keywords.  
+For example: ```show event log SQL``` will only show log entries containing the keyword ***sql***  
+
+```dictionary show``` - shows definitions maintained in the dictionary.  
+```directory show``` - show the active watch directories.  
+

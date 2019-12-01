@@ -41,7 +41,9 @@ Directory Structure   Explabnation
 
 ## Prerequisites
 
+Access to the AnyLog on Github
 An Ubuntu machine for each instance.  
+PostgreSQL as a default local database on each node.
 
 #### Installing an Ubuntu VM
 
@@ -68,6 +70,26 @@ On the AnyLog command line of the Publishes instance call the script:
 On the AnyLog command line of the Publishes instance call the script:
 
 
-## Managing Data Example
+## Running the demo
+
+The Demo directory includes the scripts to configure a node as an Operator and a node as a Publisher.  
+The Publisher node is operating as a REST server such that it can accept queries from a REST client.  
+Demo data is available in the sample_data directory (inside demo directory).  
+
+To build the demo environment, the following needs to be done:
+* Install 2 Ubuntu Linux machines.
+* Install the AnyLog package on each machine.
+* Run the AnyLog instance on each machine.
+* On the Operator node, run the script ```operator_init.anylog```.  
+This script initiates variables and calls the script ```operator_watch.anylog``` that configures the node to watch data placed in the ***watch*** directory.
+* On the Publisher node, run the script ```publisher_init.anylog```.  
+This script initiates variables and calls the script ```publisher_watch.anylog``` that configures the node to watch data placed in the ***watch*** directory.  
+* Copy one of the data files from the ***sample data*** directory to the watch directory.  
+The data will be send to the Operator node and stored on the local database.
+* Using a REST client, connect to a Query node (the Publisher node in this demo) and issue a query.  
+Details on issuing queries are available here -  
+
+
+
 
  
