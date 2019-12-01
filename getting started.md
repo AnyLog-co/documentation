@@ -1,5 +1,5 @@
 # Getting Started
-This document explains how to install and run anylog instances.  
+This document explains how to install and run AnyLog instances.  
 
 ## Type of instances
 ***Publishers*** - nodes that receive data from a data source (i.e. devices) and distribute the data to Operators.  
@@ -17,7 +17,9 @@ A node can have one or more roles.
 ## The MetaData
 The metadata can be placed on a Master Node that is shared by other members of the network.  
 The members that share a Master Node for a group and make their data sharable between the group members.  
-For the TestNet members, a Master Node is available at ```IP: 18.217.99.117 and Port: 2049```
+For the TestNet members, a Master Node is available at ```IP: 18.217.99.117 and Port: 2049```.
+Alternatively, replace the command ```blockchain push``` with the command ```blockchain add``` to manage the metadata locally.
+More information on the blockchain commands is available here - [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md)
 
 ## Local directory structure
  
@@ -44,31 +46,13 @@ Directory Structure   Explabnation
 Access to the AnyLog on Github
 An Ubuntu machine for each instance.  
 PostgreSQL as a default local database on each node.
-
-#### Installing an Ubuntu VM
-
-#### Installing Python
-
-#### Download the code base and scripts from GitHub
-
-#### Configuring the linux machine
-
+Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/README.md)
 
 #### Running an AnyLog Instance
 
 To run the instance on a local machine, from the AnyLog root, issue the command:  
 ```python3 source/cmd/user_cmd.py```  
-An AnyLog instance shows the AnyLog command line.
-
-#### Configuring a Publisher Node
-
-On the AnyLog command line of the Publishes instance call the script:
-
-
-#### Configuring an Operator Node
-
-On the AnyLog command line of the Publishes instance call the script:
-
+Info on starting an AnyLog instance ins available here - [Starting an instance](https://github.com/AnyLog-co/documentation/blob/master/starting%20an%20anylog%20instance.md)
 
 ## Running the demo
 
@@ -87,7 +71,8 @@ This script initiates variables and calls the script ```publisher_watch.anylog``
 * Copy one of the data files from the ***sample data*** directory to the watch directory.  
 The data will be send to the Operator node and stored on the local database.
 * Using a REST client, connect to a Query node (the Publisher node in this demo) and issue a query.  
-Details on issuing queries are available here -  
+Details on issuing queries are available here - [Queries](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md)
+
 
 
 
