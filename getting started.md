@@ -4,7 +4,7 @@ This document explains how to install and run AnyLog instances.
 ## Type of instances
 ***Publishers*** - nodes that receive data from a data source (i.e. devices) and distribute the data to Operators.  
 ***Operators*** - nodes that host the data and satisfy queries.  
-***Query Nodes*** - nodes that receive the queries and manage the query processes.
+***Query Nodes*** - nodes that receive the queries and manage the query processes.  
 ***Master Nodes*** - optional nodes, nodes that maintain a complete copy of the metadata. Any node can be declared as a Master node.   
 A node can have one or more roles.
 
@@ -12,12 +12,13 @@ A node can have one or more roles.
 * Nodes participating with this setup are members of the AnyLog TestNet.
 * This setup assumes permitted network without security restrictions (unless metadata is kept private, see details below).
 * If metadata is shared, data placed on the network is available to all participating members.
-* The TestNet is using Master Nodes to share metadata information. A later version would enable the blockchain.
+* The TestNet is using Master Nodes to share metadata information.  
   
 ## The MetaData
 The metadata can be placed on a Master Node that is shared by other members of the network.  
-The members that share a Master Node for a group and make their data sharable between the group members.  
-For the TestNet members, a Master Node is available at ```IP: 18.217.99.117 and Port: 2049```.
+The members that share a Master Node form a group and make their data sharable between the group members.  
+For the TestNet members, a Master Node is available at ```IP: 18.217.99.117 and Port: 2049```.  
+Members can also use a Master Node which is available to selected members. These members form a private group and only share data among the members of the private group.  
 Alternatively, replace the command ```blockchain push``` with the command ```blockchain add``` to manage the metadata locally.
 More information on the blockchain commands is available here - [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md)
 
@@ -43,10 +44,10 @@ Directory Structure   Explabnation
 
 ## Prerequisites
 
-Access to the AnyLog on Github
-An Ubuntu machine for each instance.  
-PostgreSQL as a default local database on each node.
-Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/README.md)
+* Access to the AnyLog on Github
+* An Ubuntu machine for each instance.  
+* PostgreSQL as a default local database on each node.  
+* Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/README.md)
 
 #### Running an AnyLog Instance
 
@@ -56,9 +57,9 @@ Info on starting an AnyLog instance ins available here - [Starting an instance](
 
 ## Running the demo
 
-The Demo directory includes the scripts to configure a node as an Operator and a node as a Publisher.  
-The Publisher node is operating as a REST server such that it can accept queries from a REST client.  
-Demo data is available in the sample_data directory (inside demo directory).  
+The Demo directory includes the scripts to configure a node as an Operator and a second node as a Publisher.    
+The Publisher node acts as a query node and is offering a REST API such that it can accept queries from a REST client.    
+Demo data is available in the ***sample_data*** directory (inside demo directory).  
 
 To build the demo environment, the following needs to be done:
 * Install 2 Ubuntu Linux machines.
@@ -72,6 +73,7 @@ This script initiates variables and calls the script ```publisher_watch.anylog``
 The data will be send to the Operator node and stored on the local database.
 * Using a REST client, connect to a Query node (the Publisher node in this demo) and issue a query.  
 Details on issuing queries are available here - [Queries](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md)
+* Details on the AnyLog Demo scripts are available here - [scripts](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/demo/README.md)
 
 
 
