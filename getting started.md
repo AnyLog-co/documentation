@@ -48,6 +48,12 @@ Directory Structure   Explabnation
 * An Ubuntu machine for each instance.  
 * PostgreSQL as a default local database on each node.  
 * Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/README.md)
+* Installation instructions on the packages below are available here [Wiki](https://github.com/AnyLog-co/AnyLog-demo/wiki) 
+     * Install Virtualbox & Ubuntu
+     * Install AnyLog Prerequisites
+     * Setting a new branch & other Git commands
+     * AnyLog Documentation
+     * How to do a Pull Request
 
 #### Running an AnyLog Instance
 
