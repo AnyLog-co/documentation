@@ -44,7 +44,7 @@ Directory Structure   Explabnation
 
 ## Prerequisites
 
-* Access to the AnyLog on Github
+* Access to the [AnyLog codebase](https://github.com/AnyLog-co/AnyLog-demo) on Github
 * An Ubuntu machine for each instance.  
 * PostgreSQL as a default local database on each node.  
 * Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-demo/blob/develop/README.md)
