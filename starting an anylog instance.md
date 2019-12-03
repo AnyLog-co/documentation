@@ -75,7 +75,7 @@ This section details a configuration checklist for each type of node in the clus
 
 If a local database is used to manage the metadata:
 * Connect to the ***blockchain database***.
-* If the ***ledger table*** was not created on the local database, use ```blockchain create table``` to create the table.  
+* If the ***ledger table*** was not created on the blockchain database, use ```blockchain create table``` to create the table.  
 
 ***Note:***  
 Use ```show dbms``` to see the databases connected on each node.  
