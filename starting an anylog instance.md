@@ -72,6 +72,8 @@ This section details a configuration checklist for each type of node in the clus
 
 * Correct IP and ports defined. Use ```!ip``` to see the default IP used on each machine.
 * Dictionary definitions that map to the directory structure used. Use ```dictionary show``` to see all the dictionary definitions.
+* Listener for TCP incoming messages. Use ```show connections``` to see open connections. Use ```run tcp server [ip] [port]``` to declare a TCP connection.
+
 
 If a local database is used to manage the metadata:
 * Connect to the ***blockchain database***.
@@ -93,6 +95,7 @@ Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a 
 #### Query Node
 
 * Test that the ```system_query``` database is connected.
+* Listener for REST incoming messages. Use ```show connections``` to see open connections. Use ```run rest server [ip] [port] [timeout]``` to declare a REST connection.
 
 #### Master Node (if available)
 
