@@ -64,3 +64,37 @@ For example: ```show event log SQL``` will only show log entries containing the 
 ```dictionary show``` - shows definitions maintained in the dictionary.  
 ```directory show``` - show the active watch directories.  
 
+## Configuration checklist
+
+This section details a configuration checklist for each type of node in the cluster.
+  
+#### All Nodes
+
+* Correct IP and ports defined. Use ```!ip``` to see the default IP used on each machine.
+* Dictionary definitions that map to the directory structure used. Use ```dictionary show``` to see all the dictionary definitions.
+
+If a local database is used to manage the metadata:
+* Connect to the ***blockchain database***.
+* If the ***ledger table*** was not created on the local database, use ```blockchain create table``` to create the table.  
+
+***Note:***  
+Use ```show dbms``` to see the databases connected on each node.  
+Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a specif database.
+
+#### Operator Node
+
+* Test that the supported databases are connected. These needs to include the databases that support the user's data.
+* Test that the ***watch directory*** is being used. Use ```directory show``` to see the watched directories. 
+
+#### Publisher Node
+
+* Test that the ***watch directory*** is being used. Use ```directory show``` to see the watched directories. 
+
+#### Query Node
+
+* Test that the ```system_query``` database is connected.
+
+#### Master Node (if available)
+
+* Test that the ```blockchain``` database is connected.
+
