@@ -29,7 +29,7 @@ This setup is using identical directory structure on all nodes:
 <pre>
 Directory Structure   Explabnation
 -------------------   -----------------------------------------
---> AnyLog-Netwoork       [AnyLog Root]
+--> AnyLog-Network       [AnyLog Root]
     -->data           [Intermediate data processed by this node]
        -->watch       [Data placed on this directory is either a JSON file or SQL file and is processed by the node]
        -->prep        [Data in processing state]
@@ -44,11 +44,11 @@ Directory Structure   Explabnation
 
 ## Prerequisites
 
-* Access to the [AnyLog codebase](https://github.com/AnyLog-co/AnyLog-Netwoork) on Github
+* Access to the [AnyLog codebase](https://github.com/AnyLog-co/AnyLog-Network) on Github
 * An Ubuntu machine for each instance.  
 * PostgreSQL as a default local database on each node.  
-* Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-Netwoork/blob/develop/README.md)
-* Installation instructions on the packages below are available here - [Wiki](https://github.com/AnyLog-co/AnyLog-Netwoork/wiki) 
+* Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/README.md)
+* Installation instructions on the packages below are available here - [Wiki](https://github.com/AnyLog-co/AnyLog-Network/wiki) 
      * Install Virtualbox & Ubuntu
      * Install AnyLog Prerequisites
      * Setting a new branch & other Git commands
@@ -79,7 +79,7 @@ This script initiates variables and calls the script ```publisher_watch.anylog``
 The data will be send to the Operator node and stored on the local database.
 * Using a REST client, connect to a Query node (the Publisher node in this demo) and issue a query.  
 Details on issuing queries are available here - [Queries](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md)
-* Details on the AnyLog Demo scripts are available here - [scripts](https://github.com/AnyLog-co/AnyLog-Netwoork/blob/develop/demo/README.md)
+* Details on the AnyLog Demo scripts are available here - [scripts](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/demo/README.md)
 
 
 
