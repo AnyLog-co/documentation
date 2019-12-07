@@ -70,7 +70,7 @@ Retrieving the metadata from a Master Node is done by a blockchain pull request 
 Metadata queries evaluate the data in the local JSON file.  
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
-* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
+* Using the command ```bring``` or ```bring.unique``` - pulling and formatting the values from the retrieved JSON objects.
 
 The following examples retrieves all the operators with SLA at level 5 that are located in California:  
 
