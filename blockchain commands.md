@@ -72,7 +72,7 @@ Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
 * Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
 
-The following examples retrieves all the operators with SLA at level 5 that are located in California::  
+The following examples retrieves all the operators with SLA at level 5 that are located in California:  
 
 a) Using an assignment of the JSON objects to ***selected_operators*** and pulling the IP and Port from each JSON object:
  
@@ -91,4 +91,16 @@ c) Using a ***where*** condition replacing the JSON structure in the search of t
  
 <pre>
 blockchain get "operator" where "SLA" = "5" and “location” = ”CA” bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
+</pre>
+
+The following examples retrieves all the databases which are in the JSON objects describing the tables:  
+
+<pre>
+blockchain get table bring ['table']['dbms'] seperator = " " 
+</pre>
+
+The following examples retrieves unique databases which are in the JSON objects describing the tables:  
+
+<pre>
+blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
