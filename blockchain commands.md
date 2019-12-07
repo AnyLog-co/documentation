@@ -66,14 +66,29 @@ Updating the Master Node is Done by a blockchain push request that is send to th
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
 
 
-### Getting attribute values from the retrieved data
-A search over the metadata returns all the JSON objects that satisfy the search criteria.  
-Relieving attribute values from the JSON objects is done using the ***from*** command.    
+### Queries over the Metadata
+Metadata queries evaluate the data in the local JSON file.  
+Queries are done in 2 steps:
+* Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
+* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
 
-Example:  
-The following example retrieves all the operators with SLA at level 5 that are located in Califorrnia:  
+The following examples retrieves all the operators with SLA at level 5 that are located in California::  
 
+a) Using an assignment of the JSON objects to ***selected_operators*** and pulling the IP and Port from each JSON object:
+ 
 <pre>
-selected_operator = blockchain get "operator" {"SLA" : "5", “location”:”CA”} # get operators with SLA == 5 and location is CA
-ip_port = from !selected_operator bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " # get the IPs and ports of these operators
+selected_operators = blockchain get "operator" {"SLA" : "5", “location”:”CA”} # get operators with SLA == 5 and location is CA
+ip_port = from !selected_operators bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " # get the IPs and ports of these operators
+</pre>
+
+b) Using a single call:
+ 
+<pre>
+blockchain get "operator" {"SLA" : "5", “location”:”CA”} bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
+</pre>
+
+c) Using a ***where*** condition replacing the JSON structure in the search of the JSON objects:
+ 
+<pre>
+blockchain get "operator" where "SLA" = "5" and “location” = ”CA” bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
 </pre>
