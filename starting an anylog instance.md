@@ -16,7 +16,7 @@ will initiate an AnyLog instance and configure the node to listen to TCP message
 
 ## Assigning values to variables
 Values are assigned by using the equal sign.  
-my_location =  $HOME/AnyLog-demo/tests/scripts/script_test_blockchain.anylog assignes the detailed path to the variable my_location.  
+my_location =  $HOME/AnyLog-Network/tests/scripts/script_test_blockchain.anylog assignes the detailed path to the variable my_location.  
 Referencing the assigned value is by an exclamation point followed by the variable name.  
 ```!my_location``` provides the assigned path and file name.  
 
