@@ -56,7 +56,8 @@ Maintaining a master node in the network is optional.
 
 ```blockchain commit [json data]``` – add a JSON object to the blockchain  
 ```blockchain fetch``` – retrieve the blockchain data from the blockchain to a JSON file.  
-```blockchain create table``` – creates a local table on the local database that maintains metadata information.  
+```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
+```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.
 
 
 ### Updating a Master Node
@@ -104,3 +105,8 @@ The following examples retrieves unique databases which are in the JSON objects 
 <pre>
 blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
+
+### Retrieve blockchain data from the local database
+
+Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
+Example: ```sql blockchain text "select * from ledger"```
