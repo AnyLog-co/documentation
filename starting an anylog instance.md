@@ -99,5 +99,12 @@ Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a 
 
 #### Master Node (if available)
 
-* Test that the ```blockchain``` database is connected.
+* Test that the ```blockchain``` database is connected and the ledger table is declared.  
+
+#### Example calls
+* To view connections use ```show conections``` 
+* To view the location of the watch directories use: ```directory show```
+* Example connecting to the blockchain database: ```connect dbms psql !db_user !db_port blockchain```
+* To view database connected use: ```show dbms```
+* Creating the ledger table is by calling ```blockchain create table```
 
