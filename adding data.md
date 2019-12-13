@@ -55,11 +55,13 @@ curl    --header "type":"json file"
 </pre>
 
 
-## Data transfer using a Publisher Node
+## Configuring a Publisher Node to receive data
  
  1) Configure an AnyLog Node as a Publisher Node.
- 2) Configure the node to include the policies to determine the Operators that would service the data.
- 3) Configure a ***watch directory***.
+ 2) Configure the node as a REST server.
+ 2) Create the directory structure that hosts local data.
+ 3) Configure the node to include the policies to determine the Operators that would service the data.
+ 4) Configure a ***watch directory***.
  
  The configured AnyLog Publisher Node processes data placed on the watch directory whenever new data is added to the directory.  
  When data is added to the watch directory, the Publisher Node transfers the data to the Operators that are configured to host the data.
