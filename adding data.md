@@ -59,11 +59,15 @@ curl    --header "type":"json file"
  
  1) Configure an AnyLog Node as a Publisher Node.
  2) Configure the node as a REST server.
- 2) Create the directory structure that hosts local data.
- 3) Configure the node to include the policies to determine the Operators that would service the data.
- 4) Configure a ***watch directory***.
+ 3) Create the directory structure that hosts local data.
+ 4) Configure the node to include the policies to determine the Operators that would service the data.
+ 5) Configure a ***watch directory*** to a parameter called ***watch_dir***.
+ 6) Configure a ***rest directory*** to a parameter called ***rest_work_dir***.
+ 7) Configure an ***error directory*** to a parameter called ***err_dir***.
  
- The configured AnyLog Publisher Node processes data placed on the watch directory whenever new data is added to the directory.  
- When data is added to the watch directory, the Publisher Node transfers the data to the Operators that are configured to host the data.
-  
- 
+ ## The process
+ * The rest client sends the data to the AnyLog Node.
+ * The data is placed on the ***rest directory***.
+ * The data is moved to the ***watch directory***.
+ * If the process fails, the data is moved to the ***error directory***.
+ * The AnyLog Node applies the ***watch process*** on the data.
