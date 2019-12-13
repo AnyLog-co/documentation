@@ -62,7 +62,7 @@ curl    --header "type":"json file"
  3) Create the directory structure that hosts local data.
  4) Configure the node to include the policies to determine the Operators that would service the data.
  5) Configure a ***watch directory*** to a parameter called ***watch_dir***.
- 6) Configure a ***rest directory*** to a parameter called ***rest_work_dir***.
+ 6) Configure a ***rest directory*** to a parameter called ***rest_dir***.
  7) Configure an ***error directory*** to a parameter called ***err_dir***.
  
  ## The process
