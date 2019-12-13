@@ -70,8 +70,9 @@ This section details a configuration checklist for each type of node in the clus
   
 #### All Nodes
 
+* Directory structure to maintain local copy of the blockchain and local data was created.
+ Dictionary definitions that map to the directory structure used. Use ```dictionary show``` to see all the dictionary definitions.
 * Correct IP and ports defined. Use ```!ip``` to see the default IP used on each machine.
-* Dictionary definitions that map to the directory structure used. Use ```dictionary show``` to see all the dictionary definitions.
 * Listener for TCP incoming messages. Use ```show connections``` to see open connections. Use ```run tcp server [ip] [port]``` to declare a TCP connection.
 
 
@@ -99,7 +100,7 @@ Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a 
 
 #### Master Node (if available)
 
-* Test that the ```blockchain``` database is connected and the ledger table is declared.  
+* Test that the ```blockchain``` database is connected and the ledger table is created declared.  
 
 #### Example calls
 * To view connections use ```show conections``` 
