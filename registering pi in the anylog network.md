@@ -1,16 +1,16 @@
 # Registering PI in the AnyLog Network
 
-This document explains how data is mapped to a relational schema.    
+This document explains how PI data is mapped to a relational schema such that SQL queries can consider the data stored in PI.    
 
-PI instances can become members of the AnyLog Network. When a PI instance becomes a member, SQL queries that are issued to the network consider the data on the PI instance.  
+AnyLog allows PI instances to become members of the AnyLog Network. When a PI instance becomes a member, SQL queries that are issued to the network consider the data on the PI instance.  
 If the data on the PI instance is part of the data set that is needed to be considered to satisfy the SQL query,  
 the data is retrieved and evaluated as if it is being stored in a relational database.  
 To make PI a member of the AnyLog network, the PI data is mapped to one or more relational tables.  
-When a query in SQL is issued against a relational table, the relevant mapped PI data become part of the returned data set.  
+When a query in SQL is issued against a relational table, the relevant mapped PI data becomes part of the returned data set.  
 
 The mapping of PI data to a relational schema is done using JSON object and it assumes the following:  
 a) PI data is Hierarchical - PI objects are organized in a tree structure.  
-b) Attributes in the hierarchy can be mapped to Relational table and users can issue SQL queries against these table as if the data is organized in a relational database.  
+b) Attributes in the hierarchy can be mapped to a Relational Table (or multiple tables) and users can issue SQL queries against these table as if the data is organized in a relational database.  
 
 ## The treatment of the data in PI
 AnyLog treats the PI data as if it is organized in a hierarchical model with 4 layers: 
@@ -26,9 +26,11 @@ The mapping process involves 3 types of declarations:
 #### 1) Declaring the AF and Database to use
  
 To map PI data to a relational table structure, the relevant Asset Framework and Database needs to be declared and assigned to a logical database.  
-For example:  ```connect dbms pi anylog@127.0.0.1:demo 5432 lsl_demo``` assign PI to the lsl_demo database/
-The declaration of the PI Asset Framework and the PI Database means that the data in the named database can be considered for lsl_demo.  
-The declaration is done by naming the asset framework name using ***af.name*** and asset framework ID using ***af.id***.
+For example:  ```connect dbms pi anylog@127.0.0.1:demo 5432 lsl_demo``` assign PI to the lsl_demo database.  
+The declaration of the PI Asset Framework and the PI Database means that the data in the named database can be considered when queries to tables of lsl_demo are issued.  
+The declaration is done by naming the relevant asset framework and database to use:
+* To assign PI AF to a logical relational database, use ***af.name*** or ***af.id*** to indicate the relevant AF.
+* To assign PI Database to a logical relational database, use ***af.dbms*** to indicate the relevant database.  
 
 #### 2) Declaring the data conditions 
 This is an optional declaration that assigns data data to a table only if the named values exist in PI.  
@@ -37,6 +39,11 @@ In the example below, data is considered in the ping_sensor table only if the el
 #### 3) Declaring the participating attributes
 This declaration mapps the attribute names in PI and the attribute names in the relational table.  
 The mapping is done by mentioning the attribute name in PI followed by the attribute name in the Relational table.
+
+#### The outcome
+When a user issues ```connect dbms pi ... lsl_demo``` call, the AnyLog instance will recognize that queries to lsl_demo will consider the data in PI.  
+For each issued query to ***lsl_demo***, the data conditions would be evaluated. If the data conditions declared exists,  
+the participating PI attributes would be considered as columns in the ***lsl_demo*** table.
 
 Example:
 ```json
