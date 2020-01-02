@@ -1,9 +1,11 @@
 # Registering PI in the AnyLog Network
 
+This document explains how data is mapped to a relational schema.    
+
 PI instances can become members of the AnyLog Network. When a PI instance becomes a member, SQL queries that are issued to the network consider the data on the PI instance.  
 If the data on the PI instance is part of the data set that is needed to be considered to satisfy the SQL query,  
-the data is retrieved and evaluated as if it is being stored in a relational database.
-To make PI a member of the AnyLog network, the PI data is mapped to one or more relational tables. This document explains how data is mapped to a relational schema.  
+the data is retrieved and evaluated as if it is being stored in a relational database.  
+To make PI a member of the AnyLog network, the PI data is mapped to one or more relational tables.  
 When a query in SQL is issued against a relational table, the relevant mapped PI data become part of the returned data set.  
 
 The mapping of PI data to a relational schema is done using JSON object and it assumes the following:  
