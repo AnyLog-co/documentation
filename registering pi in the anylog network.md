@@ -1,7 +1,14 @@
 # Registering PI in the AnyLog Network
 
-PI objects are organized in a tree structure.  
-Attributes in the hierarchy can be mapped to Relational table and users can issue SQL queries against these table as if the data is organized in a relational database.  
+PI instances can become members of the AnyLog Network. When a PI instance becomes a member, SQL queries that are issued to the network consider the data on the PI instance.  
+If the data on the PI instance is part of the data set that is needed to be considered to satisfy the SQL query,  
+the data is retrieved and evaluated as if it is being stored in a relational database.
+To make PI a member of the AnyLog network, the PI data is mapped to one or more relational tables. This document explains how data is mapped to a relational schema.  
+When a query in SQL is issued against a relational table, the relevant mapped PI data become part of the returned data set.  
+
+The mapping of PI data to a relational schema is done using JSON object and it assumes the following:  
+a) PI data is Hierarchical - PI objects are organized in a tree structure.  
+b) Attributes in the hierarchy can be mapped to Relational table and users can issue SQL queries against these table as if the data is organized in a relational database.  
 
 ## The treatment of the data in PI
 AnyLog treats the PI data as if it is organized in a hierarchical model with 4 layers: 
@@ -51,3 +58,14 @@ operator = {"operator" : {
                 }
     }
 ```
+
+The first part of the JSON structure declares the AnyLog Operator instance that manage the PI instance.  
+This section of the JSON is the same as a declaration of an Operator using a relational database.
+The ***"mapping"*** section maps the PI data to the relational view.  
+In this example, the data of database "LitSanLeandro" in the AF called "XOMPASS-LITSL" is mapped to the "ping_sensor" table in the logical database of "lsl_demo".
+The sensor data from sensors called "ping" belonging to element "ADVA ALM OTDR" are mapped to the "ping_sensor" table such that:  
+* Sensor Timestamp is mapped to column timestamp in the "ping_sensor" table.
+* Sensor Value is mapped to column value in the "ping_sensor" table.
+* Sensor Name is mapped to device_name in the "ping_sensor" table.
+* Sensor WebId is mapped to webid in the "ping_sensor" table.
+
