@@ -66,6 +66,10 @@ Updating the Master Node is Done by a blockchain push request that is send to th
 ### Retrieving the Metadata from a Master Node
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
 
+### Interacting with the blockchain data
+For a node to be active, it needs to maintain a local copy of the blockchain data in a local JSON file.
+The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
+A user can validate the availability and the structure of the blockchain using the command: ```blockchain test```.
 
 ### Queries over the Metadata
 Metadata queries evaluate the data in the local JSON file.  
@@ -106,6 +110,12 @@ The following examples retrieves unique databases which are in the JSON objects 
 blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
 
+### Using - Show Commands
+The following show commands retrieve data from the blockchain:
+* ```show servers for dbms [dbms name]``` - retrieve the IPs and Ports of the database servers hosting tables for the named database.  
+* ```show servers for dbms [dbms name] and [table name]``` - retrieve the IPs and Ports of the database servers hosting the named table.
+* ```show tables for dbms [dbms name]``` - retrieve the names of the tables that are assigned to the named database.
+ 
 ### Retrieve blockchain data from the local database
 
 Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
