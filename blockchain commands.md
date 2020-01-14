@@ -75,7 +75,14 @@ A user can validate the availability and the structure of the blockchain using t
 Metadata queries evaluate the data in the local JSON file.  
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
-* Using the command ```bring``` or ```bring.unique``` - pulling and formatting the values from the retrieved JSON objects.
+* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
+
+#### bring options
+The keyword bring can be suffixed with ***.unique*** or ***.recent***.     
+* ```bring.unique``` returns unique values.  
+* ```bring.recent``` - considering and returning the recent event satisfying the ***get*** criteria. The most recent event is determined by the following:  
+        - If the JSON file includes a "date" attribite, comparing the dates.  
+        - Without the "date" attribute, the last in the list is considered the ***recent*** object
 
 The following examples retrieves all the operators with SLA at level 5 that are located in California:  
 
