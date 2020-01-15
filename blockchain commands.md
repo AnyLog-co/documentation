@@ -82,7 +82,7 @@ The keyword bring can be suffixed with ***.unique*** or ***.recent***.
 * ```bring.unique``` returns unique values.  
 * ```bring.recent``` - considering and returning the recent event satisfying the ***get*** criteria. The most recent event is determined by the following:  
         - If the JSON file includes a "date" attribite, comparing the dates.  
-        - Without the "date" attribute, the last in the list is considered the ***recent*** object
+        - Without the "date" attribute, the last object satisfying the ***get*** criteria in the JSON file is considered the ***recent*** object.
 
 The following examples retrieves all the operators with SLA at level 5 that are located in California:  
 
@@ -96,13 +96,13 @@ ip_port = from !selected_operators bring ['operator']['ip'] ":" ['operator']['po
 b) Using a single call:
  
 <pre>
-blockchain get "operator" {"SLA" : "5", “location”:”CA”} bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
+blockchain get operator {"SLA" : "5", “location”:”CA”} bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
 </pre>
 
 c) Using a ***where*** condition replacing the JSON structure in the search of the JSON objects:
  
 <pre>
-blockchain get "operator" where "SLA" = "5" and “location” = ”CA” bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
+blockchain get operator where SLA = 5 and location = CA bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
 </pre>
 
 The following examples retrieves all the databases which are in the JSON objects describing the tables:  
@@ -116,6 +116,13 @@ The following examples retrieves unique databases which are in the JSON objects 
 <pre>
 blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
+
+The following examples retrieves the most recent declaration of an operator supporting database called lsl_demo:  
+
+<pre>
+blockchain get operator where dbms = lsl_demo bring.recent 
+</pre>
+
 
 ### Using - Show Commands
 The following show commands retrieve data from the blockchain:
