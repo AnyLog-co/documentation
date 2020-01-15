@@ -117,7 +117,7 @@ The following examples retrieves unique databases which are in the JSON objects 
 blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
 
-The following examples retrieves the most recent declaration of an operator supporting database called lsl_demo:  
+The following examples retrieves the most recent declaration of an operator supporting a database called lsl_demo:  
 
 <pre>
 blockchain get operator where dbms = lsl_demo bring.recent 
