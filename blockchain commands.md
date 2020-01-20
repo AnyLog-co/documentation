@@ -1,12 +1,12 @@
 
 # Blockchain commands
- 
+
 ## The metadata
 AnyLog maintains the metadata in the blockchain. The metadata is organized as a collection of objects and each object is described by a JSON structure.  
 The objects are hierarchical. The top layer represents the type of the object and the lower levels provide a description of the object.  
 
 Example of object types: database, table, operator, device.  
-The following example describes an operator (this type of representation is referenced as [json data]):
+The following example describes an operator (this type of representation is referenced as ***json data***):
 ```
 {"operator" : {	
    "id" : "0xodef4362a4E72E4D2F489773ffaEBF687952FC56441",
