@@ -161,6 +161,7 @@ details                [a sql query]
 </pre>
 
 #### Servers option:
+The ***servers*** option allows to direct a query to a particular server (or servers).
 If servers are not specified, the network resolved the destination servers from the metadata information and the participating servers are all the servers that maintain the relevant data.  
 If one or more servers are specified, only the specified servers will be included in the query process.
 
@@ -175,7 +176,7 @@ servers                10.0.0.13:2048, 10.0.0.28:2050
 </pre>
 
 #### Instructions:
-Allows to to specify instructions to the execution and output of the queries.
+***instructions*** detail execution and output destinations of queries.
 
 ##### Include multiple tables of different databases in the same query:
 This option allows to treat tables that share the same structure but with different names as a single collection of data.
@@ -191,8 +192,8 @@ instructions           include: south_pi.readings, central_pi.readings
 </pre>
 
 ##### Output the data to a static table on the Query Node
-The output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
-When the query is executed the new query results overwrite the existing query results unless drop is set to false.
+With this option, the output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
+When the query is executed the query results overwrite the existing query results unless drop is set to false.
 
 Example:
 <pre>
