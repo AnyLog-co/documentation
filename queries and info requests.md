@@ -193,9 +193,9 @@ details                SELECT mp_id, timestamp, type, region, substation, bank_c
 instructions           include: south_pi.readings, central_pi.readings
 </pre>
 
-##### Output the data to a static table on the Query Node
+##### Output the data to a static table on the Query Node:
 With this option, the output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
-When the query is executed the query results overwrite the existing query results unless drop is set to false.
+When the query is executed the query results overwrite the previous query results unless drop is set to false.
 
 Example:
 <pre>
