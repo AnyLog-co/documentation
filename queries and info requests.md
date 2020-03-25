@@ -72,6 +72,8 @@ dbms                   [the logical database name]
 details                [a sql query]
 </pre>
 
+More details are [below](#queries-using-rest-client)
+
 ## SQL supported:
 
 ##### On the projection list:
@@ -146,3 +148,59 @@ This query will find the last reading prior to the specified date and where the 
 SELECT increments(minute, 5,timestamp), max(timestamp), avg(value) from ping_sensor where timestamp >= '2019-06-01 19:34:09' and timestamp < '2019-09-29 19:34:09';```
 ```
 This query will provide the max and avg values every 5 minutes between the specified dates and times.
+
+##Queries using REST client
+
+#### Basic header info:
+<pre>
+Header Key             Header Value          
+--------------         ------------------
+type                   sql
+dbms                   [the logical database name]
+details                [a sql query]
+</pre>
+
+####Servers option:
+If servers are not specified, the network resolved the destination servers from the metadata information and the participating servers are all the servers that maintain the relevant data.  
+If one or more servers are specified, only the specified servers will be included in the query process.
+
+Example:
+<pre>
+Header Key             Header Value          
+--------------         ------------------
+type                   sql
+dbms                   my_sensors_database
+details                select * from g30 limit 10
+servers                10.0.0.13:2048, 10.0.0.28:2050     
+</pre>
+
+####Instructions:
+Allows to to specify instructions to the execution and output of the queries.
+
+#####Include multiple tables of different databases in the same query:
+This option allows to treat tables that share the same structure but with different names as a single collection of data.
+ 
+Example:
+<pre>
+Header Key             Header Value          
+--------------         ------------------
+type                   sql
+dbms                   my_sensors_database
+details                SELECT mp_id, timestamp, type, region, substation, bank_customer, aphase, bphase, cphase from readings WHERE type='A' AND mp_id=16976001 OR mp_id=54544001 OR mp_id=37318000 AND timestamp >= '2019-12-01 00:00:00' AND timestamp <= '2019-12-07 00:00:00' 
+instructions           include: south_pi.readings, central_pi.readings
+</pre>
+
+#####Output the data to a static table on the Query Node
+The output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
+When the query is executed the new query results overwrite the existing query results unless drop is set to false.
+
+Example:
+<pre>
+Header Key             Header Value          
+--------------         ------------------
+type                   sql
+dbms                   my_sensors_database
+details                SELECT mp_id, timestamp, type, region, substation, bank_customer, aphase, bphase, cphase from readings WHERE type='A' AND mp_id=16976001 OR mp_id=54544001 OR mp_id=37318000 AND timestamp >= '2019-12-01 00:00:00' AND timestamp <= '2019-12-07 00:00:00' 
+instructions           include: south_pi.readings, central_pi.readings
+instructions           table: static_output drop: false 
+</pre>
