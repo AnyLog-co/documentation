@@ -72,7 +72,7 @@ dbms                   [the logical database name]
 details                [a sql query]
 </pre>
 
-More details are [below](#queries-using-rest-client)
+More details are [below](#queries-using-rest-client).
 
 ## SQL supported:
 
@@ -176,7 +176,9 @@ servers                10.0.0.13:2048, 10.0.0.28:2050
 </pre>
 
 #### Instructions:
-***instructions*** detail execution and output destinations of queries.
+***Instructions*** detail execution and output destinations of queries.
+Instructions can consider tables that are with different names (but share the same structure) as a single dataset.  
+In addition, instructions can redirect the query output to a table on the query node.
 
 ##### Include multiple tables of different databases in the same query:
 This option allows to treat tables that share the same structure but with different names as a single collection of data.
