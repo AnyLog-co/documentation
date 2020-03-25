@@ -149,7 +149,7 @@ SELECT increments(minute, 5,timestamp), max(timestamp), avg(value) from ping_sen
 ```
 This query will provide the max and avg values every 5 minutes between the specified dates and times.
 
-##Queries using REST client
+## Queries using REST client
 
 #### Basic header info:
 <pre>
@@ -160,7 +160,7 @@ dbms                   [the logical database name]
 details                [a sql query]
 </pre>
 
-####Servers option:
+#### Servers option:
 If servers are not specified, the network resolved the destination servers from the metadata information and the participating servers are all the servers that maintain the relevant data.  
 If one or more servers are specified, only the specified servers will be included in the query process.
 
@@ -174,10 +174,10 @@ details                select * from g30 limit 10
 servers                10.0.0.13:2048, 10.0.0.28:2050     
 </pre>
 
-####Instructions:
+#### Instructions:
 Allows to to specify instructions to the execution and output of the queries.
 
-#####Include multiple tables of different databases in the same query:
+##### Include multiple tables of different databases in the same query:
 This option allows to treat tables that share the same structure but with different names as a single collection of data.
  
 Example:
@@ -190,7 +190,7 @@ details                SELECT mp_id, timestamp, type, region, substation, bank_c
 instructions           include: south_pi.readings, central_pi.readings
 </pre>
 
-#####Output the data to a static table on the Query Node
+##### Output the data to a static table on the Query Node
 The output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
 When the query is executed the new query results overwrite the existing query results unless drop is set to false.
 
