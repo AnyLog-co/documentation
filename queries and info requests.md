@@ -155,13 +155,13 @@ Repeatable queries are executed periodically and the output is usually directed 
 The query results can either replace the previously queried data or be added to the previously queried data.  
 To allow repeatable queries, configure a scheduler process. This process is invoked in time intervals to invoke the queries that need to be issued.
 
-####Invoking a scheduler is by the following command:
+#### Invoking a scheduler is by the following command:
 <pre>
 run scheduler [time]
 </pre>
 ***time*** specifies the scheduler interval in seconds. The default time is 10 seconds.
 
-####Declaring a repeatable query:
+#### Declaring a repeatable query:
 
 <pre>
 schedule [options] command [command to execute]
