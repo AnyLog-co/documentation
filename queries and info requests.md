@@ -207,3 +207,32 @@ details                SELECT mp_id, timestamp, type, region, substation, bank_c
 instructions           include: south_pi.readings, central_pi.readings
 instructions           table: static_output drop: false 
 </pre>
+
+## Repeatable Queries
+
+Repeatable queries are executed periodically and the output is usually directed to a table.  
+The query results can either replace the previously queried data or be added to the previously queried data.  
+To allow repeatable queries, configure a scheduler process. This process is invoked in time intervals to determine the queries that need to be issued.
+
+####Invoking a scheduler is by the following command:
+<pre>
+run scheduler [time]
+</pre>
+***time*** specified the scheduler interval in seconds. The default time is 10 seconds.
+
+####Declaring a repeatable query:
+
+<pre>
+schedule [options] command [command to execute]
+</pre>
+
+***Options:***  
+- ***time*** - repeat command every specified number of seconds (default is 15 seconds)
+
+Example:
+<pre>
+
+</pre>schedule time 15 command run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
+
+This command will be executed every 15 seconds. The output would be added to a table called 'my_table' on the query node.
+ 
