@@ -22,9 +22,9 @@ File name is structured as follows:
 [ID Publisher] - Unique ID of the publisher  
 [Time] - Time assigned to the file    
 [Hash Value of Data] - Unique ID of the data file  
-[File Type] - Describing how data is organized (JSON/SQL).  
+[File Type] - Describing how data is organized (JSON/SQL)  
 
-#### The info table
+## The info table
 
 Nodes can monitor the state of the data files using a local database.
 * The local database name is ```almgm``` (AnyLog Management).
@@ -33,9 +33,8 @@ Nodes can monitor the state of the data files using a local database.
 ##### The structure of the ```tsd_info``` table:
 
 * Each segment in the file name is a column in the table.
-* The table includes a status field which is updated as described below.
-* The column ***Hash Value of Data*** is a 16 bytes number and serves as a unique key.
-* Each row in the table is extended with a 2 status fields. The status fields are described below.
+* The table includes 2 status fields which are updated as described below.
+* The column ***Hash Value of Data*** is a 16 bytes number and serves as a unique key in the table.
 
 ##### The values on the status fields:
 
@@ -59,6 +58,29 @@ The following command determines the hash value of a file:
 
 ## Creating and Updating the ```tsd_info``` table
 
+Managing the data data is with the following commands and processes:
 
+* To create the management table, first connect a database to the ```almgm``` logical database.  
+Example: ```'connect dbms psql anylog@127.0.0.1:demo 5432 almgm```
+
+* creating the ```tsd_mgm``` table:  
+```create internal table almgm```  
+This call creates the table with the needed columns.
+
+* Rename a file to satisfy the name convention:
+```time file rename [source file path and name] dbms = [dbms name] table = [table name], par = [partition name], 'device = [device ID], publisher = [publisher ID], time = [time], hash = [hash value]```  
+If hash value is not provided, the hash value if calculated.
+If time is not provided, the cyurrent date and time is used.    
+The new file name can be assigned to a variable: ```new_name = time file rename ...```
+
+* Updating a new entry in the ```tsd_mgm``` table:   
+```time file new [file name] status```
+
+* Changing the status of a file:  
+```time file update [hash value] status```
+
+* Retrieving the status of a file:  
+```time file get [hash value]```
+  
 
 
