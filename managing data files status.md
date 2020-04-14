@@ -63,12 +63,16 @@ Managing the data data is with the following commands and processes:
 * To create the management table, first connect a database to the ```almgm``` logical database.  
 Example: ```'connect dbms psql anylog@127.0.0.1:demo 5432 almgm```
 
-* creating the ```tsd_mgm``` table:  
-```create internal table almgm```  
+* Creating the ```tsd_mgm``` table:  
+```create internal table tsd_mgm```  
+This call creates the table with the needed columns.
+
+* Dropping the ```tsd_mgm``` table:  
+```drop internal table tsd_mgm```  
 This call creates the table with the needed columns.
 
 * Rename a file to satisfy the name convention:
-```time file rename [source file path and name] dbms = [dbms name] table = [table name], par = [partition name], 'device = [device ID], publisher = [publisher ID], time = [time], hash = [hash value]```  
+```time file rename [source file path and name] dbms = [dbms name] table = [table name], device = [device ID], publisher = [publisher ID], time = [time], hash = [hash value]```  
 If hash value is not provided, the hash value if calculated.
 If time is not provided, the cyurrent date and time is used.    
 The new file name can be assigned to a variable: ```new_name = time file rename ...```
