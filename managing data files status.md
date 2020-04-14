@@ -85,6 +85,9 @@ The new file name can be assigned to a variable: ```new_name = time file rename 
 
 * Retrieving the status of a file:  
 ```time file get [hash value]```
+
+* Calculating the hash value of a file:  
+```file hash [path and file name]```
   
 Examples:  
 
