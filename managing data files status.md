@@ -81,10 +81,29 @@ The new file name can be assigned to a variable: ```new_name = time file rename 
 ```time file new [file name] status```
 
 * Changing the status of a file:  
-```time file update [hash value] status```
+```time file update [hash value] [status]```
 
 * Retrieving the status of a file:  
 ```time file get [hash value]```
   
+Examples:  
+
+* For a given file, changing the file name to the convention described:  
+```given_file = $HOME/AnyLog-Network/data/bkup/dweet_demo.94b54214_d0a9_4e92_8acc_e2b6675da185.2020_03_23_02_24_40_600Z.bldg_pmc.json```  
+Changing the file name:  
+```new_name = time file rename !given_file dbms = dweet_demo table = bldg_pmc par = 1 device = 265X48X2X34:2787 publisher = 548X23X243X12:2048```  
+In this example, the hash value will be calculated and current time would be added to the file such that the new name satisfies the convention.  
+
+* The new file name:  
+```dweet_demo.bldg_pmc.1.265X48X2X34:2787.548X23X243X12:2048.2020-04-12T12:57:35Z.78eba9a0938d5f36b0a41135bf55b0e2.json```
+
+* Updating the tsd_mgm table:  
+```time file new !new_name delivered```
+
+* Changing the status of a file:  
+```time file update 78eba9a0938d5f36b0a41135bf55b0e2 Loaded```
+
+* Retrieving the status of a file:  
+```time file get 78eba9a0938d5f36b0a41135bf55b0e2```
 
 
