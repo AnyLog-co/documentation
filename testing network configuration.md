@@ -1,0 +1,34 @@
+# Testing the network configuration
+
+## overview
+
+Nodes in the network are configured to receive messages from 2 sources:  
+
+a. From peer nodes using TCP protocol.  
+This functionality is enables by calling the command: ```run tcp server ip port```  
+
+b. From users and applications using REST API.  
+This functionality is enabled by calling the command: ```run REST server ip port```  
+
+Each node can send a message to a peer in the network.  
+The command ```run client servers command``` makes a node a client to one or more peer nodes
+and the message is delivered by specifying the destination hosts and ports.
+
+The servers to receive the message can be specified as follows:
+* a single server can be specified as host:port or host and port with space separated.
+* multiple servers in parenthesis with comma separated - (host:port, host:port) or (host port, host port).
+ 
+
+## Tesing the host and ports
+
+When a server is up, the configured ips and ports can be tested as follows:  
+
+To test the TCP server configuration use the command:  
+```run client (host:port) "get status"```
+
+To test the REST server configuration use the command:    
+```rest get url =  http://ip:port type = info details = "get status"```  
+Example:  
+rest get url =  http://10.0.0.159:2049 type = info details = "get status"
+
+
