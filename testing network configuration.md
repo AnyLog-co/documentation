@@ -17,6 +17,8 @@ and the message is delivered by specifying the destination hosts and ports.
 The servers to receive the message can be specified as follows:
 * a single server can be specified as host:port or host and port with space separated.
 * multiple servers in parenthesis with comma separated - (host:port, host:port) or (host port, host port).
+* A condition that is satisfied from the blockchain and provides a list of servers.
+* A name of a database will provide the IP and ports of the Operators that support the database. For example: (dbms = lsl_demo)
  
 
 ## Tesing the host and ports

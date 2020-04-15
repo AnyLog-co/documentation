@@ -57,8 +57,8 @@ Maintaining a master node in the network is optional.
 ```blockchain commit [json data]``` – add a JSON object to the blockchain  
 ```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
 ```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
-```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.
-
+```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.  
+```blockchain delete local file``` - deletes the local JSON file with the blockchain data. 
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
