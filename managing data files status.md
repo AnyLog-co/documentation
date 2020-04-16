@@ -73,9 +73,10 @@ This call creates the table with the needed columns.
 
 * Rename a file to satisfy the name convention:
 ```time file rename [source file path and name] dbms = [dbms name] table = [table name], device = [device ID], publisher = [publisher ID], time = [time], hash = [hash value]```  
-If hash value is not provided, the hash value if calculated.
+If publisher is not provided, the IP and Port of the processing node is used.    
+If hash value is not provided, the hash value if calculated.  
 If time is not provided, the cyurrent date and time is used.    
-The new file name can be assigned to a variable: ```new_name = time file rename ...```
+The new file name can be assigned to a variable: ```new_name = time file rename ...```  
 
 * Updating a new entry in the ```tsd_mgm``` table:   
 ```time file new [file name] status```
