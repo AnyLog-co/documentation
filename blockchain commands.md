@@ -35,6 +35,11 @@ If a node is interested in some specific attribute values from the derived objec
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second serach is using the command ***from*** and is explained later in this document.
 
+## The Objects IDs
+
+When a JSON object is added to the metadata, one of the fields describing the object is an ID field.  
+The ID value can be provided by the user or generated dynamically when the object is added to the blockchain data.  
+If the value is auto-generated, it is based on the MD5 Hash value of the object. 
 
 ## The Storage of the Metadata
 The metadata is stored in 3 places:  
@@ -59,6 +64,10 @@ Maintaining a master node in the network is optional.
 ```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
 ```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.  
 ```blockchain delete local file``` - deletes the local JSON file with the blockchain data. 
+
+
+```blockchain test``` - test the structure of the local JSON file  
+```blockchain get id [json data]``` - returns the hash value of the JSON data.
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
