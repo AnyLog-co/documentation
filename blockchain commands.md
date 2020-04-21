@@ -66,8 +66,9 @@ Maintaining a master node in the network is optional.
 ```blockchain delete local file``` - deletes the local JSON file with the blockchain data. 
 
 
-```blockchain test``` - test the structure of the local JSON file  
-```blockchain get id [json data]``` - returns the hash value of the JSON data.
+```blockchain test``` - test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. 
+```blockchain get id [json data]``` - returns the hash value of the JSON data.  
+```blockchain test id``` - returns True if the id exists in the local blockchain file. Otherwise returns False.
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
