@@ -25,6 +25,45 @@ The name or type of the sensor that generates the data and any other type of inf
 Script Definitions:  
  ```type:inclusive``` - mapping instructions that are added to the ***default transformation***.  
  ```type:exclusive``` - mapping instructions that replace the ***default transformation***.
+ 
+ * Attributes - a section providing attribute names and mapping instructions.  
+ The mapping details for each attribute name:
+ 
+    * ***name*** - a column name in the table which is different than the attribute name.
+    * ***type*** - use the specified type to validate the data type of the attribute value.
+    * ***default*** - a default value if the attribute value is missing or the value is not convertable to the declared type.
+    * ***if then statements*** a list of python based rules that can be validated and operated on the attribute name or attribute value during the transformation process.
+    
+#### Example
+```
+<instruct = {"instructions" : {
+   "dbms" : "lsl_demo",
+   "table" : "ping_sensor",
+   "script" : {
+      "type" : "inclusive"
+   },
+   "attributes" : {
+      "device_number" : {
+         "name" : "device",
+         "type" : "CHAR(30)",
+         "default" : "''"
+      },
+      "device_name" : [
+         "if value.upper().startswith('VM') then value = 'Basic Network Element'",
+         "if value.upper().startswith('F') then value = 'FSP3000'",
+         "if value.upper() == 'ADVA FSP3000R7' then value = 'FSP3000'",
+         "if value.upper() == 'ADVA ALM OTDR' then value = 'OTDR'",
+         "if value.upper().startswith('APC') then value = 'OTDR'",
+         "if value.startswith('Ubiquiti') then value = 'Ubiquity 10G Switch'",
+         "if value.startswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
+         "if value.startwith('ULoco') then value = 'ULoco Dev'",
+         "if value.startswith('Catalyst') then value = 'ULoco Dev'",
+         "if value.upper().startswith('CATALYST') then value = 'ULoco Dev'"
+         ]
+      }
+   }
+}> 
+```  
 
 
  
