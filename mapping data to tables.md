@@ -26,8 +26,8 @@ Script Definitions:
  ```type:inclusive``` - mapping instructions that are added to the ***default transformation***.  
  ```type:exclusive``` - mapping instructions that replace the ***default transformation***.
  
- * Attributes - a section providing attribute names and mapping instructions.  
- The mapping details for each attribute name:
+ * Attributes - a section providing mapping instructions for named attributes.  
+ Mapping assigned to an attribute name can be one or more of the following:
  
     * ***name*** - a column name in the table which is different than the attribute name.
     * ***type*** - use the specified type to validate the data type of the attribute value.
@@ -49,13 +49,13 @@ Script Definitions:
          "default" : "''"
       },
       "device_name" : [
-         "if value.upper().startswith('VM') then value = 'Basic Network Element'",
+         "if value.upper()[:2] == 'VM' then value = 'Basic Network Element'",
          "if value.upper().startswith('F') then value = 'FSP3000'",
          "if value.upper() == 'ADVA FSP3000R7' then value = 'FSP3000'",
          "if value.upper() == 'ADVA ALM OTDR' then value = 'OTDR'",
-         "if value.upper().startswith('APC') then value = 'OTDR'",
+         "if value.upper().find('APC') != -1 then value = 'OTDR'",
          "if value.startswith('Ubiquiti') then value = 'Ubiquity 10G Switch'",
-         "if value.startswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
+         "if value.endsswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
          "if value.startwith('ULoco') then value = 'ULoco Dev'",
          "if value.startswith('Catalyst') then value = 'ULoco Dev'",
          "if value.upper().startswith('CATALYST') then value = 'ULoco Dev'"
