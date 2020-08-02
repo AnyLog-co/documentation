@@ -15,12 +15,12 @@ These processes are activated on the AL command line. Command line options are a
 
 ## AnyLog Messaging
 
-A listener thread on the declared IP and port.  
+A listener thread on a declared IP and port.  
 The listener is required to receive AnyLog messages from peers in the network. 
 
 ## REST requests
 
-A listener thread on the declared IP and port.  
+A listener thread on a declared IP and port.  
 The listener is required to receive REST requests from users of the network.
 
 ## Operator Process
