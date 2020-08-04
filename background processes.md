@@ -26,6 +26,7 @@ The listener is required to receive REST requests from users of the network.
 ## Operator Process
 
 A process that identifies JSON files, transforms the files to a structure that can be assigned to a data table and inserts the data to a local database.
+Files injested are recorded such that it is possible to trace the source data and source device of data readings.
 
 ## Publisher Process
 
