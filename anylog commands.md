@@ -1,5 +1,33 @@
 # AnyLog Commands
 
+Commands can be issued in 2 ways:  
+a) Using the AnyLog command line - AnyLog instances provide a command line interface. Users can issue commands using the command line interface.  
+All the available commands are supported by the command line interface.  
+b) Using a REST API - A subset of the commands are supported using a REST API.
+The REST API is the main method to issue queries that evaluate data maintained by members of the network. 
+
+
+## The help command
+
+The command: ```help``` lists all the coommand options.
+The command ```help``` followed by a specific command, provides information and examples on the specific command.  
+Example: ```help blockchain```  provides information and command options to the command ```blockchain```.
+
+## Scripts, Threads and Policies
+
+These are different methods to execute commands on the command line.
+
+### script
+The command ```script``` folowed by a path and file name will execute all the script commands.
+
+### thread
+The command ```thread``` folowed by a path and file name will execute all the commands that are specified in the script file.  
+The command ```thread``` allocates a dedecated thread to execute the commands. This option is used to support commands that are continually executing.  
+An example would be a script that waits for files to be generated and process the files when identified.
+    
+### policy
+A set of commands that are placed on the blockchhain.
+When the policy is called, the commands asociated with the policy are executed.
 
 ## Show Commands
 
