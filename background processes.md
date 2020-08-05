@@ -10,6 +10,7 @@ The background threads:
 4. An automated Publisher process. Activated by the command: ```run publisher```
 5. An automated Blockchain Synchronizer. Activated by the command: ```run blockchain sync```
 6. A Scheduler process. Activated by the command ```run scheduler```
+7. The HA process. Activated by the command ```run ha```
 
 These processes are activated on the AL command line. Command line options are available using ***help***  
 
@@ -41,5 +42,8 @@ With a master node, the process sends a message to the master node to receive up
  
  A process that triggers the scheduled tasks.
  
-
+ ## HA Process
+ 
+ Delivers data files processed by the local node to a standby node or nodes.
+ 
 
