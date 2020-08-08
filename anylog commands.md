@@ -75,13 +75,17 @@ show peer
 </pre>
 
 
-
 <pre>
 Command                             Details
 ------                              -------------
-set [name] = [value]                Assigns a value to a given name 
-set query log                       Activates a log recording queries being processed
-set query log profile [n] seconds   Records in the query log only queries with execution time greater or equal to [n] seconds
-set new query timer                 Resets the list and timers that monitor query execution time
-set command display [on/off]        When a script is executed, determine if the script commands are displayed. Default value is on.
+set [name] = [value]                Assigns a value to a given name. 
+set query log                       Activates a log recording queries being processed.
+set query log profile [n] seconds   Records in the query log only queries with execution time greater or equal to [n] seconds.
+set new query timer                 Resets the list and timers that monitor query execution time.
+set debug [on/off]                  Print the executed commands processed in scripts.  
+set debug interactive               Interactive mode is only available with threads.  
+                                    Interactive mode pauses the execution after a command is being execute.  
+                                    The user is required to input 'next' to proceed to the next command.
+set threads pool [n]                create a pool of workers thread that distributes query processing. n represents the number of threads.
 </pre>
+

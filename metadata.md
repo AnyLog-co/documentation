@@ -65,9 +65,37 @@ with the path and file name of the log file.
 Example: ```blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
 
 * Connect the node to the local database.    
-```connect dbms psql anylog@127.0.0.1:demo 5432 blockchain```
+Example using PostgreSQL to manage the blockchain data:  
+```connect dbms psql anylog@127.0.0.1:demo 5432 blockchain```  
+Example using SQLite to manage the blockchain data:   
+```connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain```
 
 * Create the local ***ledger*** table.  
-```blockchain create table```
+```blockchain create table```  
+The command will create the 'ledger' table in the database assigned to 'blockchain'.
 
+## Creating tables
+
+Tables are ctreated dynamically as needed when data is ingested by the database.   
+The structure of the table is determined is based on the attributes names and the values in the JSON file.  
+The first file ingested creates the table and the consecutive JSON files assigned to the table are mapped to the table schema.
+
+### File names
+
+The sensor data (or time series data) is placed in the watch directory.  
+The file name follows a convention that determines how the file is being processed and if needed, allows to locate the file based on the properties of the data being ingested.  
+The file type is ***json*** indicating the internal structure.  
+The file name composed of 5 substrings seperated by a period. The subsyrings are as follows:
+<pre>
+DBMA Name - The logical database name
+Table Name - The logical table that needs to contain the file data.
+Source - (optional) An ID that identifies the source of the data.
+Hash - (optional) A hash value that uniquely identifies the file by the contents of the file.
+Instructions - (optional) An ID that identifies the set of instructions that map the JSON data to the table structure
+</pre>
+
+### File ingestion
+
+When a file is ingested, the local node determines if the table exists in the local database.
+ 
 
