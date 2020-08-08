@@ -76,19 +76,20 @@ The command will create the 'ledger' table in the database assigned to 'blockcha
 
 ## Creating tables
 
-Tables are ctreated dynamically as needed when data is ingested by the database.   
-The structure of the table is determined is based on the attributes names and the values in the JSON file.  
-The first file ingested creates the table and the consecutive JSON files assigned to the table are mapped to the table schema.
+The structure of each table can be determined by users or generated dynamically, based on the attributes names and the values in the JSON file.  
+When a file is ingested, and a schema is not available, and a user provided schema is not available, the  
+tables is ctreated dynamically.    
+Once a table schema is avaiable, the ingestion process maps the attribute names and values to the table's columns names and values.
 
 ### File names
 
-The sensor data (or time series data) is placed in the watch directory.  
+The sensor data (or time series data) is placed in the ***Watch Sirectory***.  
 The file name follows a convention that determines how the file is being processed and if needed, allows to locate the file based on the properties of the data being ingested.  
 The file type is ***json*** indicating the internal structure.  
-The file name composed of 5 substrings seperated by a period. The subsyrings are as follows:
+The file name structure is composed of 5 substrings seperated by a period. The subsyrings are as follows:
 <pre>
-DBMA Name - The logical database name
-Table Name - The logical table that needs to contain the file data.
+DBMS Name - The logical database name
+Table Name - The logical table that contains the file data.
 Source - (optional) An ID that identifies the source of the data.
 Hash - (optional) A hash value that uniquely identifies the file by the contents of the file.
 Instructions - (optional) An ID that identifies the set of instructions that map the JSON data to the table structure
@@ -97,29 +98,27 @@ Instructions - (optional) An ID that identifies the set of instructions that map
 ### File ingestion
 
 When a file is ingested, the local node determines if the table exists in the local database.  
-If the table exists, the file is ingested using one of 2 methods:  
+If the table does not exists, the node will determine if the table was declared by a different node and appears on the blockchain.  
+If the table is available on the blockchain, the node will create an identical table on the local database.  
+If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.  
+When the table is located or created, the file is ingested using one of 2 methods:  
 1. The default mapping - attribute names are assigned to column names. If a column name is not part of the table's structure, the attribute value is ignored.  
 2. If mapping ***Instructions*** appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
 
-If the table does not exists, the node will determine if the table was declared by a different node and appears on the blockchain.  
-If the table is available on the blockchain, the node will create an identical table on the local database.  
-If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.
-
 ### Creating a new table
 
-If a table is created in an automated way, based on the first file ingested, the JSON attribute names are mapped to the  
-column names and the attribute values are evaluated to determine the data type.  
+If a table is created in an automated way, based on the first file ingested, the JSON attributes names are mapped to the 
+columns names and the attribute values are evaluated to determine the data type.  
 A table can be created by a user together with instructions that determines how the JSON data is mapped to the table's schema.  
 
 ### Duplicating an existing table to a new node
 
-The copmmand: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the specified logical table.
+The copmmand: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
 
 ### Validating a schema
 
-As a schema of a table exists on the local database and on the blockchain, the command ```test table``` compares the table definitions on the blockchain and on the local database node.  
+As a schema of a table can exist on the local database and on the blockchain, the command ```test table``` compares the table definitions on the local database with the schema definition on the blockchain.  
 The structure of the command is as follows:  
 ```test table [table name] where dbms = [dbms name]```  
 Example: ```test table ping_sensor where dbms = lsl_demo```
  
-
