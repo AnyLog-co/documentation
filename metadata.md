@@ -96,6 +96,30 @@ Instructions - (optional) An ID that identifies the set of instructions that map
 
 ### File ingestion
 
-When a file is ingested, the local node determines if the table exists in the local database.
+When a file is ingested, the local node determines if the table exists in the local database.  
+If the table exists, the file is ingested using one of 2 methods:  
+1. The default mapping - attribute names are assigned to column names. If a column name is not part of the table's structure, the attribute value is ignored.  
+2. If mapping ***Instructions*** appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
+
+If the table does not exists, the node will determine if the table was declared by a different node and appears on the blockchain.  
+If the table is available on the blockchain, the node will create an identical table on the local database.  
+If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.
+
+### Creating a new table
+
+If a table is created in an automated way, based on the first file ingested, the JSON attribute names are mapped to the  
+column names and the attribute values are evaluated to determine the data type.  
+A table can be created by a user together with instructions that determines how the JSON data is mapped to the table's schema.  
+
+### Duplicating an existing table to a new node
+
+The copmmand: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the specified logical table.
+
+### Validating a schema
+
+As a schema of a table exists on the local database and on the blockchain, the command ```test table``` compares the table definitions on the blockchain and on the local database node.  
+The structure of the command is as follows:  
+```test table [table name] where dbms = [dbms name]```  
+Example: ```test table ping_sensor where dbms = lsl_demo```
  
 
