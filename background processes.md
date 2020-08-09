@@ -40,6 +40,12 @@ The file naming convention id detailed at the [metadata section.](https://github
 From the file name, the logical database and table names are determined. In addition, the file name optionaly includes the ID of the Mapping Instructions.  
 Mapping instructions are detailed in the [mapping data to tables section.](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md)  
 
+#### Recording file ingested
+This is an optional process to recod the details of the ingested files.
+When JSON files are processed, a local table named **tsd_info** assigned to a database named **almgm** is updated to reflect the list of files processed.  
+Interaction with the data maintained by **tsd_info** is by the command ```time file```.  The command provides the functionality to create the table and retrieve the data maintained in the table.  
+The information maintained by **tsd_info** is leveraged to trace source data, source devices, and to support the High Availability (HA) processes.
+
 
 ## Publisher Process
 
@@ -61,9 +67,13 @@ A process that triggers the scheduled tasks.
  
 ## HA Process
  
-Delivers data files processed by the local node to a standby node or nodes.
+Delivers data files processed by the local node to a standby node or nodes.  
+When an operator ingests data, the process records the hash values of the files ingested.
+    
+If HA is activated, every file processed is transferred to the standby nodes. 
+Users can enable a synchronization process to validate that all the data on a particular node is available on the standby nodes and if differences are found, the process will transfer the needed data to make the nodes identical.  
+  
 
-When operator ingests data, the process can record the hash values of the files ingested into tsd_info table.
   
 
  
