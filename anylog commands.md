@@ -41,75 +41,74 @@ A set of commands that are placed on the blockchhain.
 When the policy is called, the commands asociated with the policy are executed.
 
 
-
 ## The commands
 
-blockchain [add] [json data]
-blockchain [get] [key][atribute name value pairs]
-blockchain [push] [json data]
-blockchain [pull] to [json | sql | stdout]
-blockchain create table
-blockchain drop table
-blockchain delete local file
-blockchain get id [json]
-blockchain test
-call [name]
-connect dbms [db_type] [db_user@db_ip:db_passwd][db_port][db_name] ["memory"]
-create table [table name] where dbms = [dbms_name]
-create view [dbms name].[table name] (comma seperated column names, values and mapping information)
-debug [on/off] [list of process names]
-dictionary set [key] = [value] or [key] = [value]
-dictionary get [key] or [!key]
-dictionary show
-directory [path] get [file|dir] [repeat = n]
-directory show
-disconnect dbms [dbms name]
-do [command]
-drop table [table name] where dbms = [dbms name]
-echo [text]
-else [command]
-email where from = [sender email] and password = [sender password] and to = [receiver email] and message = [message text]
-end script
-event [event_name] [info]
-exit [process type|reset]
-file  [option] [file name] [second file] [ignore error]
-from [json string] bring [attribute names or strings] seperatotr = [value]
-generate insert from json where dbms_name = [dbms_name] and table_name = [table_name] and json_file = [json_file] and sql_dir = [sql_directory] and instructions = [instructions_id]
-get [info type] [info string]
-goto [name]
-help [command]
-if [int/str] [condition] then [command]
-include policy [where conditions to identify the policy]
-incr [variable] [value]
-info dbms [table name] [info type]
-info table [db name] [table name] [info type]
-info view [db name] [table name] [info type]
-job [operation] [job id|'all']
-log [type of log] [function] [info string]
-next
-on error goto [name]
-on error call [name]
-on error end script
-on error ignore
-partition [dbms name] [table name] using [column name] by [time interval]
-pi sql text [sql stmt]
-pi debug [on/off]
-print [text to print]
-process [path and file name]
-python [python string]
-random substr [seperator] [string]
-rest get where url=[url] and [list list of 'key' = 'value' pairs]
-return
-run blockchain sync [options]
-run client (IPs and Ports) [AnyLog command]
-run ha [options]
-run operator [options]
-run publisher [options]
-run rest server [ip] [port] [timeout]
-run scheduler [time]
-run tcp server [ip] [port]
-run udp server [ip] [port]
-schedule [options] command [command to execute]
+blockchain [add] [json data]  
+blockchain [get] [key][atribute name value pairs]  
+blockchain [push] [json data]  
+blockchain [pull] to [json | sql | stdout]  
+blockchain create table  
+blockchain drop table  
+blockchain delete local file  
+blockchain get id [json]  
+blockchain test  
+call [name]  
+connect dbms [db_type] [db_user@db_ip:db_passwd][db_port][db_name] ["memory"]  
+create table [table name] where dbms = [dbms_name]  
+create view [dbms name].[table name] (comma seperated column names, values and mapping information)  
+debug [on/off] [list of process names]  
+dictionary set [key] = [value] or [key] = [value]  
+dictionary get [key] or [!key]  
+dictionary show  
+directory [path] get [file|dir] [repeat = n]  
+directory show  
+disconnect dbms [dbms name]  
+do [command]  
+drop table [table name] where dbms = [dbms name]  
+echo [text]  
+else [command]  
+email where from = [sender email] and password = [sender password] and to = [receiver email] and message = [message text]  
+end script  
+event [event_name] [info]  
+exit [process type|reset]  
+file  [option] [file name] [second file] [ignore error]  
+from [json string] bring [attribute names or strings] seperatotr = [value]  
+generate insert from json where dbms_name = [dbms_name] and table_name = [table_name] and json_file = [json_file] and sql_dir = [sql_directory] and instructions = [instructions_id]  
+get [info type] [info string]  
+goto [name]  
+help [command]  
+if [int/str] [condition] then [command]  
+include policy [where conditions to identify the policy]  
+incr [variable] [value]  
+info dbms [table name] [info type]  
+info table [db name] [table name] [info type]  
+info view [db name] [table name] [info type]  
+job [operation] [job id|'all']  
+log [type of log] [function] [info string]  
+next  
+on error goto [name]  
+on error call [name]  
+on error end script  
+on error ignore  
+partition [dbms name] [table name] using [column name] by [time interval]  
+pi sql text [sql stmt]  
+pi debug [on/off]  
+print [text to print]  
+process [path and file name]  
+python [python string]  
+random substr [seperator] [string]  
+rest get where url=[url] and [list list of 'key' = 'value' pairs]  
+return  
+run blockchain sync [options]  
+run client (IPs and Ports) [AnyLog command]  
+run ha [options]  
+run operator [options]  
+run publisher [options]  
+run rest server [ip] [port] [timeout]  
+run scheduler [time]  
+run tcp server [ip] [port]  
+run udp server [ip] [port]  
+schedule [options] command [command to execute]  
 
 
 ## Set Command
@@ -174,18 +173,18 @@ Show servers for dbms [dbms name] and table [table name]
 
 
 
-sleep [sleep time in seconds]
-sql [db_name][source] [sql stmt]
-stop [all/thread id]
-suggest create [input JSON file]
-system [OS command]
-test node
-test connect ip:port
-test table [table name] where dbms = [dbms name]
-thread [path and file name]
-time file rename [file name] to dbms = [dbms name] and table = [table name] and source = [source name] and instructions = [instructions id]
-time file new [file name] [optional status 1] [optional status 2]
-time file update [hash value] [optional status 1] [optional status 2]
-time file get [retrieve info]
-trace level = [value] [command]
+sleep [sleep time in seconds]  
+sql [db_name][source] [sql stmt]  
+stop [all/thread id]  
+suggest create [input JSON file]  
+system [OS command]  
+test node  
+test connect ip:port  
+test table [table name] where dbms = [dbms name]  
+thread [path and file name]  
+time file rename [file name] to dbms = [dbms name] and table = [table name] and source = [source name] and instructions = [instructions id]  
+time file new [file name] [optional status 1] [optional status 2]  
+time file update [hash value] [optional status 1] [optional status 2]  
+time file get [retrieve info]  
+trace level = [value] [command]  
 
