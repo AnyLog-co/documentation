@@ -47,7 +47,7 @@ A process that identifies JSON files and distributes the files to Operators that
 
 #### Overview
 Files are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every file that is copied to the directory is being processed.  
-The procrss locates from the blockchain the Operators that are hosting the table's data, designates an Operator to the file and transfers the file to the designated Operator.  
+The process locates from the blockchain the Operators that are hosting the table's data, designates an Operator to the file and transfers the file to the designated Operator.  
   
 
 ## Blockchain Synchronizer
