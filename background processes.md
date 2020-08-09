@@ -36,7 +36,7 @@ The processing is by mapping each JSON file to SQL Insert Statements such that t
 
 #### The mapping process
 The JSON file name follows a convention that uniquely identifies the file and determines the processes that assign the JSON data to a table.  
-The file naming convention id detailed at the [metadata section.](https://github.com/AnyLog-co/documentation/blob/master/metadata.md)
+The file naming convention id detailed at the [metadata section.](https://github.com/AnyLog-co/documentation/blob/master/metadata.md#file-names)
 From the file name, the logical database and table names are determined. In addition, the file name optionaly includes the ID of the Mapping Instructions.  
 Mapping instructions are detailed in the [mapping data to tables section.](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md)  
 
