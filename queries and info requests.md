@@ -96,6 +96,47 @@ More details are [below](#queries-using-rest-client).
 * Order By
 * Limit
 
+## Time Functions
+
+The where condition can include functions that manipulate time.
+The following functions are supported:
+
+<pre>
+date
+timestamp
+</pre>
+
+
+The following modifiers are supported:
+
+<pre>
+start of year
+start of month
+start of day
+</pre>
+
+The keyword ***now*** is converted to the current day-time string.  
+
+The following values and keywords pairs (values including + or - signs) can be used to modify time.  
+The plural 's' character at the end of the modifier names is optional.  
+
+<pre>
+X seconds
+x minutes
+x hours
+x weeks
+x days
+x months
+x years
+</pre>
+
+###Examples:
+<pre>
+run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date(date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts'));"    
+run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = timestamp('2020-05-28 18:56:49.890199','+1 month','-1 day', '-2 hours', '+2 minuts');"
+</pre>
+
+  
 ## Optimized time series data queries:
 
 The following proprietry functions can be used:
