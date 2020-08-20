@@ -7,6 +7,19 @@ There are 2 methods to deliver data to Operators in the network:
 1) Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.
 2) Using a WATCH directory -  The client is a a member of the network (the AnyLog software is installed ion the client). Adding data is by placing the data in the WATCH directory.   
 
+Files received by nodes are processes depending on the configuration of the node.
+If a node is configured as a Publisher, it will send each file received to one of the Operators that manage the table containing the data.
+If a node is configured as an Operator, it will add each file received to a local table that contains that type of data.
+
+## JSON File naming
+
+The file name is used to identify the file and determine how the file is processed.
+The file name is partitioned to segments seperated by a dot as follows: 
+
+<pre>
+[dbms name].[table name].[data source].[hash value].[instructions].json
+</pre>
+
 
 ## Data transfer using a REST API
 
