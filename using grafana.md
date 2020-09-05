@@ -60,6 +60,35 @@ Updating the ***Additional JSON Data*** section will provide additional informat
 The information provided overrides the default behaviour and can pull data from any database managed by AnyLog (as long as the user maintains valid permissions).  
 The additional information is provided using a JSON script and the user can specify anyone of the following elements:
 
+<pre>
+DBMS            - the name of the logical database to use
+SQL             - a sql statement to use
+time_column     - the name of the time column in the Time Series format
+value_column    - the name of the value column in the Time Series format
+servers         - replacing the relevant servers with a list of destinations servers to satisfy the query.
+instructions    - additional AnyLog query instructions
+</pre>
+
+Example:
+
+<pre>
+{
+"dbms" : "lsl_demo",
+"sql" : "select * from ping_sensor",
+"time_column" : "timestamp",
+"value_column" : "value"
+"servers" : "10.0.0.25:2048"
+}
+</pre>
+
+## Modifying the default behaviour using the Grafana Panel
+
+A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.  
+Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.  
+This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
+
+ 
+
   
 
 
