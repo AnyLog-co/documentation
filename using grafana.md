@@ -12,7 +12,7 @@ Using a HTTP and JSON API, Grafana communicates with AnyLog to retrieve data suc
 To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
 ```run rest server [ip] [port] [max time]```  
 [ip] and [port] are the IP and Port that would be available to REST calls.  
-[max time] is am optional value that determines the max execution time in seconds for a call before being aborted.  
+[max time] is an optional value that determines the max execution time in seconds for a call before being aborted.  
 A 0 value means a call would never be aborted and the default time is 20 seconds.  
  
 ## Establishing a connection
@@ -56,16 +56,16 @@ The default behaviour can be modified by updating ***Additional JSON Data*** sec
 
 ## Modifying the default behaviour
 
-Updating the ***Additional JSON Data*** section will provide additional information to the query process.  
+Updating the ***Additional JSON Data*** section provides additional information to the query process.  
 The information provided overrides the default behaviour and can pull data from any database managed by AnyLog (as long as the user maintains valid permissions).  
-The additional information is provided using a JSON script and the user can specify anyone of the following elements:
+The additional information is provided using a JSON script with the following attribute names:
 
 <pre>
-DBMS            - the name of the logical database to use
-SQL             - a sql statement to use
+dbms            - the name of the logical database to use
+sql             - a sql statement to use
 time_column     - the name of the time column in the Time Series format
 value_column    - the name of the value column in the Time Series format
-servers         - replacing the relevant servers with a list of destinations servers to satisfy the query.
+servers         - replacing the network determined servers with a list of destinations servers to use
 instructions    - additional AnyLog query instructions
 </pre>
 
@@ -85,16 +85,7 @@ Example:
 
 A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.  
 Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.  
-This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
-
- 
-
-  
-
-
-
-
-
+This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.\
 
 
   
