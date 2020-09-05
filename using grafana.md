@@ -85,10 +85,8 @@ Example:
 
 A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.  
 Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.  
-This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.\
-
-
-  
+This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
+ 
 
 
 
