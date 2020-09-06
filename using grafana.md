@@ -76,8 +76,9 @@ Example 1 - adding filter conditions
 
 <pre>
 {
+
 "dbms" : "lsl_demo",
-"where" : "'device name' = 'EG258' or "'device name' = 'KM=256'",
+"where" : "device_name = 'EG258' or device_name = KM256",
 "time_column" : "timestamp",
 "value_column" : "value",
 "servers" : "10.0.0.25:2048"
