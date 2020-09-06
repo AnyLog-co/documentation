@@ -64,13 +64,28 @@ The additional information is provided using a JSON script with the following at
 dbms            - The name of the logical database to use. Overrides the dbms name in the configuration page.
 table           - The name of the table to use. Overrides the table name in the sql statement.
 sql             - A sql statement to use.
+where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
 time_column     - The name of the time column in the Time Series format.
 value_column    - The name of the value column in the Time Series format.
 servers         - Replacing the network determined servers with a list of destinations servers to use.
 instructions    - Additional AnyLog query instructions.
 </pre>
 
-Example:
+
+Example 1 - adding filter conditions
+
+<pre>
+{
+"dbms" : "lsl_demo",
+"where" : "'device name' = 'EG258' or "'device name' = 'KM=256'",
+"time_column" : "timestamp",
+"value_column" : "value",
+"servers" : "10.0.0.25:2048"
+}
+</pre>
+
+
+Example 2 - changing the SQL statement to retrieve source data
 
 <pre>
 {
