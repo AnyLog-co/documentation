@@ -61,12 +61,13 @@ The information provided overrides the default behaviour and can pull data from 
 The additional information is provided using a JSON script with the following attribute names:
 
 <pre>
-dbms            - the name of the logical database to use
-sql             - a sql statement to use
-time_column     - the name of the time column in the Time Series format
-value_column    - the name of the value column in the Time Series format
-servers         - replacing the network determined servers with a list of destinations servers to use
-instructions    - additional AnyLog query instructions
+dbms            - The name of the logical database to use. Overrides the dbms name in the configuration page.
+table           - The name of the table to use. Overrides the table name in the sql statement.
+sql             - A sql statement to use.
+time_column     - The name of the time column in the Time Series format.
+value_column    - The name of the value column in the Time Series format.
+servers         - Replacing the network determined servers with a list of destinations servers to use.
+instructions    - Additional AnyLog query instructions.
 </pre>
 
 Example:
@@ -76,7 +77,7 @@ Example:
 "dbms" : "lsl_demo",
 "sql" : "select * from ping_sensor",
 "time_column" : "timestamp",
-"value_column" : "value"
+"value_column" : "value",
 "servers" : "10.0.0.25:2048"
 }
 </pre>
