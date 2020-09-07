@@ -114,8 +114,19 @@ Example 3 - changing the SQL statement to retrieve source data
 
 ## Modifying the default behaviour using the Grafana Panel
 
-A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.  
-Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.  
+#### Modifying the time range
+* A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.
+* A query issued using ***Table*** format is bounded by the time range specified on the panel.  
+Users can modify the query to ignore the time selection by updating the Additional JSON Data with the key: 'time_range' and the value: 'false'.
+<pre>  
+Example:
+{
+    "sql" : "select * from ping_sensor",
+    "time_range" : false,
+}
+</pre>
+#### Modifying the query data points limit
+Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.    
 This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
  
 
