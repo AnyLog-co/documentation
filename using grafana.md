@@ -45,10 +45,19 @@ Grafana allows to present data in 2 modes:
 * In a ***Table*** format.
 
 #### Using the Time Series format
-The default behaviour - AnyLog issues a query to the selected table for the data in the selected time range.
+The time series format collects and visualize reading data as a function of time.
+AnyLog offers 2 predefined queries and users cab specify additional queries using the ***Additional JSON Data*** options on the panel.  
+
+***The increments query*** (The default query)   
+A query to the selected table for the data in the selected time range.
 Depending on the number of data point requested, the query time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
 In the default behavior, AnyLog makes the best guess to determine the relevant column representing the time and the relevant value column.  
-The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).
+The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).  
+
+***The period query***  
+A query to retrieve reading information at the end of the provided time range (or, if not available, before and nearest to the end of the time range).      
+From the derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
+To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.
   
  #### Using the Table format
 The default behaviour shows the data provided to the ***time series format*** with the default query. 
@@ -72,11 +81,18 @@ instructions    - Additional AnyLog query instructions.
 </pre>
 
 
-Example 1 - adding filter conditions
-
+Example 1 - executing a 'period' query
 <pre>
 {
+"type" : "period",
+"time_column" : "timestamp",
+"value_column" : "value",
+}
+</pre>
 
+Example 2 - adding filter conditions
+<pre>
+{
 "dbms" : "lsl_demo",
 "where" : "device_name = 'EG258' or device_name = KM256",
 "time_column" : "timestamp",
@@ -85,9 +101,7 @@ Example 1 - adding filter conditions
 }
 </pre>
 
-
-Example 2 - changing the SQL statement to retrieve source data
-
+Example 3 - changing the SQL statement to retrieve source data
 <pre>
 {
 "dbms" : "lsl_demo",
