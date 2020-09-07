@@ -122,7 +122,7 @@ Users can modify the query to ignore the time selection by updating the Addition
 Example:
 {
     "sql" : "select * from ping_sensor",
-    "time_range" : false,
+    "time_range" : false
 }
 </pre>
 #### Modifying the query data points limit
