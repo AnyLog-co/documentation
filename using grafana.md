@@ -5,7 +5,7 @@
 AnyLog includes a Grafana connector such that Grafana can serve as a visualization tier using a build-in/transparent interface that maps Grafana calls to queries over data maintained in the AnyLog Network.  
 Using a HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.  
 
-Using Grafana, users can visualize time series data using SQL or using pre-defined queries.
+Using Grafana, users can visualize time series data using using pre-defined queries and SQL.
 
 ## Prerequisites
 
@@ -43,16 +43,16 @@ Failure to connect may be the result of one of the following:
 * The Metric window shows the list of tables supported by the database. Select a table from the options provided.
 
 Grafana allows to present data in 2 modes:
-* In a ***Time Series*** format and with reference to the time selection (on the upper right side of the panel) .
-* In a ***Table*** format where data is presented as a set     
+* In a ***Time Series*** format and with reference to the time selection (on the upper right side of the panel).  
+* In a ***Table*** format where data is presented in rows and columns.  
 
 #### Using the Time Series format
-The time series format collects and visualize data values as a function of time.
-AnyLog offers 2 predefined queries and users cab specify additional queries using the ***Additional JSON Data*** options on the panel.  
+The time series format collects and visualize data values as a function of time.  
+AnyLog offers 2 predefined queries and users can modify the default queries or specify additional queries using the ***Additional JSON Data*** options on the panel.    
 
 ##### The predefined queries 
 ***The increments query*** (The default query)   
-A query to retrieve statistics on the tiem series data in the selected time range.  
+A query to retrieve statistics on the time series data in the selected time range.  
 Depending on the number of data point requested, the time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
 In the default behavior, AnyLog makes the best guess to determine the relevant column representing the time and the relevant value column.  
 The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).  
@@ -104,6 +104,9 @@ This value is configured by modifying the value ***Max data points*** in the Gra
 
 ## Examples
 
+The examples below query data from logical tables that are maintained in the AnyLog tables.
+In these examples, the table name is 'ping_senor', the name of the time column is 'timestamp' and the name of the value column is 'value'.
+
 ### Executing a 'period' query
 A pre-defined qiery - for the time range in the panel, determine the last time with value and calculate the min max and average values for the data values in the interval.
 <pre> 
@@ -125,10 +128,25 @@ Depending on the number of data points, divide the time range into intervals and
 </pre>
 
 ### Executing multiple queries
-The 2 queries below ...
- 
-
-
+The 2 queries below are defined on the same panel and provide visualization of 2 different devices (that are stored at the same table).  
+Query 1:
+<pre>
+{
+    "sql": "SELECT increments(), MIN(timestamp), MAX(timestamp), AVG(value) FROM ping_sensor",
+    "where": "device_name='SPEED_SENSOR'"
+    "time_column" : "timestamp",
+    "value_column" : "value"
+}
+</pre>
+Query 2:
+<pre>
+{
+    "sql": "SELECT increments(), MIN(timestamp), MAX(timestamp), AVG(value) FROM ping_sensor",
+    "where": "device_name='REMOTE-SENSOR'"
+    "time_column" : "timestamp",
+    "value_column" : "value"
+}
+</pre>
 
 
 
