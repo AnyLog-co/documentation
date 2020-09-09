@@ -2,8 +2,10 @@
 
 ## Overview
 
-AnyLog users can leverage Grafana as a visualization tier using a build-in/transparent interface that maps Grafana calls to queries over data maintained in the AnyLog Network.  
-Using a HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.
+AnyLog includes a Grafana connector such that Grafana can serve as a visualization tier using a build-in/transparent interface that maps Grafana calls to queries over data maintained in the AnyLog Network.  
+Using a HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.  
+
+Using Grafana, users can visualize time series data using SQL or using pre-defined queries.
 
 ## Prerequisites
 
@@ -42,15 +44,15 @@ Failure to connect may be the result of one of the following:
 
 Grafana allows to present data in 2 modes:
 * In a ***Time Series*** format and with reference to the time selection (on the upper right side of the panel) .
-* In a ***Table*** format.
+* In a ***Table*** format. By default, queries using the table format reference the time selection or specify to ignore the time range.    
 
 #### Using the Time Series format
 The time series format collects and visualize reading data as a function of time.
 AnyLog offers 2 predefined queries and users cab specify additional queries using the ***Additional JSON Data*** options on the panel.  
 
 ***The increments query*** (The default query)   
-A query to the selected table for the data in the selected time range.
-Depending on the number of data point requested, the query time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
+A query to retrieve statistics on the tiem series data in the selected time range.  
+Depending on the number of data point requested, the time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
 In the default behavior, AnyLog makes the best guess to determine the relevant column representing the time and the relevant value column.  
 The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).  
 
