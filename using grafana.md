@@ -102,38 +102,30 @@ Both types of queries - ***Time Series*** and ***Table*** are always bounded by 
 This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
 
 
+## Examples
 
-Example 1 - executing a 'period' query
-<pre>
+### Executing a 'period' query
+A pre-defined qiery - for the time range in the panel, determine the last time with value and calculate the min max and average values for the data values in the interval.
+<pre> 
 {
 "type" : "period",
 "time_column" : "timestamp",
-"value_column" : "value",
+"value_column" : "value"
 }
 </pre>
 
-Example 2 - adding filter conditions
+### Executing a 'range' query
+Depending on the number of data points, divide the time range into intervals and return the difference between the Max value and the Min value in each interval. 
 <pre>
 {
-"dbms" : "lsl_demo",
-"where" : "device_name = 'EG258' or device_name = KM256",
+"sql" : "select increments(), max(timestamp), range(value) from ping_sensor",
 "time_column" : "timestamp",
-"value_column" : "value",
-"servers" : "10.0.0.25:2048"
+"value_column" : "value"
 }
 </pre>
 
-Example 3 - changing the SQL statement to retrieve source data
-<pre>
-{
-"dbms" : "lsl_demo",
-"sql" : "select * from ping_sensor",
-"time_column" : "timestamp",
-"value_column" : "value",
-"servers" : "10.0.0.25:2048"
-}
-</pre>
-
+### Executing multiple queries
+The 2 queries below ...
  
 
 
