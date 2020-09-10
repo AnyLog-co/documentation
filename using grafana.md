@@ -63,7 +63,7 @@ The derived time is the latest time with values within the time range.
 From the derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
 
-More information on increments and period types of queries are available in [queries and info requests](queries and info requests.md).
+More information on increments and period types of queries are available in [queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
   
  #### Using the Table format
 The default behaviour shows the data provided to the ***time series format*** with the default query. 
