@@ -107,6 +107,16 @@ This value is configured by modifying the value ***Max data points*** in the Gra
 The examples below query data from logical tables that are maintained in the AnyLog tables.
 In these examples, the table name is 'ping_senor', the name of the time column is 'timestamp' and the name of the value column is 'value'.
 
+### Executing an 'increments' query
+A pre-defined qiery - for the time range in the panel, divide the time range to intervals and calculate min, max and average value for each interval in the range.
+<pre> 
+{
+"type" : "increments",
+"time_column" : "timestamp",
+"value_column" : "value"
+}
+</pre>
+
 ### Executing a 'period' query
 A pre-defined qiery - for the time range in the panel, determine the last time with value and calculate the min max and average values for the data values in the interval.
 <pre> 
