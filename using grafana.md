@@ -61,7 +61,9 @@ The default behaviour can be modified by updating ***Additional JSON Data*** sec
 A query to retrieve data values at the end of the provided time range (or, if not available, before and nearest to the end of the time range).
 The derived time is the latest time with values within the time range.         
 From the derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
-To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.
+To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
+
+More information on increments and period types of queries are available in [queries and info requests](queries and info requests.md).
   
  #### Using the Table format
 The default behaviour shows the data provided to the ***time series format*** with the default query. 
@@ -128,10 +130,11 @@ A pre-defined qiery - for the time range in the panel, determine the last time w
 </pre>
 
 ### Executing a 'range' query
-Depending on the number of data points, divide the time range into intervals and return the difference between the Max value and the Min value in each interval. 
+Depending on the number of data points, divide the time range into intervals and return the difference between the Max value and the Min value in each interval.
+In the example below, the intervals are determined by the user to be one day intervals.
 <pre>
 {
-"sql" : "select increments(), max(timestamp), range(value) from ping_sensor",
+"sql" : "select increments('day', 1, timestamp), max(timestamp), range(value) from ping_sensor",
 "time_column" : "timestamp",
 "value_column" : "value"
 }
