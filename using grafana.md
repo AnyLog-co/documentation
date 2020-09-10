@@ -46,11 +46,11 @@ Grafana allows to present data in 2 modes:
 * In a ***Time Series*** format and with reference to the time selection (on the upper right side of the panel).  
 * In a ***Table*** format where data is presented in rows and columns.  
 
-#### Using the Time Series format
+## Using the Time Series format
 The time series format collects and visualize data values as a function of time.  
 AnyLog offers 2 predefined queries and users can modify the default queries or specify additional queries using the ***Additional JSON Data*** options on the panel.    
 
-##### The predefined queries 
+### The predefined queries 
 ***The increments query*** (The default query)   
 A query to retrieve statistics on the time series data in the selected time range.  
 Depending on the number of data point requested, the time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
@@ -65,7 +65,7 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
 
 More information on increments and period types of queries are available in [queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
   
- #### Using the Table format
+## Using the Table format
 The default behaviour shows the data provided to the ***time series format*** with the default query. 
 The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).
 
@@ -88,7 +88,7 @@ instructions    - Additional AnyLog query instructions.
 
 ## Modifying the default behaviour using the Grafana Panel
 
-#### Modifying the time range
+### Modifying the time range
 * A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.
 * A query issued using ***Table*** format is bounded by defauly with the time range.  
 Users can modify the query to ignore the time selection by updating the Additional JSON Data with the key: 'time_range' and the value: 'false'.
@@ -99,7 +99,7 @@ Example:
     "time_range" : false
 }
 </pre>
-#### Modifying the query data points limit
+### Modifying the query data points limit
 Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.    
 This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
 
