@@ -78,7 +78,9 @@ The additional information is provided using a JSON script with the following at
 <pre>
 dbms            - The name of the logical database to use. Overrides the dbms name in the configuration page.
 table           - The name of the table to use. Overrides the table name in the sql statement.
+type            - The type of the query. The default value is 'sq' and other valid types are: 'increments', 'period' and 'info'.         
 sql             - A sql statement to use.
+details         - An AnyLog command which is not a SQL statement.
 where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
 time_column     - The name of the time column in the Time Series format.
 value_column    - The name of the value column in the Time Series format.
@@ -161,5 +163,31 @@ Query 2:
 }
 </pre>
 
+## Metadata Queries
 
-
+The AnyLog Metadata can be queried using Grafana Table Format.
+Metadata queries are specified using JSON in the ***Additional JSON Data*** section.  
+Using the value ***info*** for the key ***type*** identifies a request which is not SQL.  
+The request for Metada is specified using the key ***details***.   
+Examples:  
+Retrieving the tables in a database called lsl_demo:
+<pre>
+{
+   "type" : "info",
+   "details": "blockchain get table where dbms = lsl_demo" 
+}
+</pre>
+Retrieving the list of Operators:
+<pre>
+{
+   "type" : "info",
+   "details": "blockchain get operator" 
+}
+</pre>
+Retrieving the list of Publishers:
+<pre>
+{
+   "type" : "info",
+   "details": "blockchain get publisher" 
+}
+</pre>
