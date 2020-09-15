@@ -3,21 +3,51 @@
 AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).
 Any connected node can host data. 
  
-There are 2 methods to deliver data to Operators in the network:  
-1) Using a REST API - the client is not necessarily a member of the network, data is delivered using the PUT command.
-2) Using a WATCH directory -  The client is a a member of the network (the AnyLog software is installed ion the client). Adding data is by placing the data in the WATCH directory.   
-
+There are 2 methods to deliver data to Operators in the network:
+1) Using a WATCH directory - Adding data is by placing the data in the WATCH directory.  
+2) Using a REST API - the REST client is not necessarily a member of the network, data is delivered using the PUT command.
+   
 Files received by nodes are processes depending on the configuration of the node.
 If a node is configured as a Publisher, it will send each file received to one of the Operators that manage the table containing the data.
 If a node is configured as an Operator, it will add each file received to a local table that contains that type of data.
 
+## Placing data in the WATCH directory
+
+This option allows to add data by placing the data on the watch directory.  
+Operator nodes are configured such that any file (of the type JSON or SQL) that is placed on a WATCH directory is being processed.  
+The default processing is as follows:  
+1. The file is read by the operator.
+2. From the file name, the processing variables are determined. These include the logical database, table name and the method to determine the mapping of the data.
+3. If a logical table does not exists, a table is created.
+4. The file data is added to the table.
+
 ## JSON File naming
 
-The file name is used to identify the file and determine how the file is processed.
-The file name is partitioned to segments seperated by a dot as follows: 
+The file name is used to identify the file and determine how the file is processed.  
+The file name is partitioned to segments separated by a dot as follows: 
 
 <pre>
 [dbms name].[table name].[data source].[hash value].[instructions].json
+</pre>
+
+Users can display the segments dynamically by issuing the following command:
+<pre>
+show json file structure
+</pre>
+The name segments are treated as follows:
+ 
+<pre>
+dbms name       - The logical database to contain the file data.
+table name      - The logical table to contain the file data.
+data source     - A unique ID to identify the data source (i.e. and ID of the sensor).
+hash value      - A hash value that identifies the file. 
+instructions    - An ID of a policy that determines the mapping of the file data to the table's structure.
+json            - The content of data inside the file is of JSON data.
+</pre>
+
+Users can determine the hash value of a file by issuing the command:
+<pre>
+file hash [file name and path]
 </pre>
 
 
