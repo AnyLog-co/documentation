@@ -65,6 +65,7 @@ Configure the node to operate as a REST server using the following command on th
 <pre>
 run rest server [ip] [port] [timeout]
 </pre>
+
 ***[ip]*** - The IP supporting the REST connection  
 ***[port]*** - The REST port  
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
