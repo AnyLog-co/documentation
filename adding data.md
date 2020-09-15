@@ -22,7 +22,7 @@ The default processing is as follows:
 4. The file data is added to the table.
 
 ## JSON File naming
-test
+
 The file name is used to identify the file and determine how the file is processed.  
 The file name is partitioned to segments separated by a dot as follows: 
 
@@ -39,7 +39,7 @@ The name segments are treated as follows:
 <pre>
 dbms name       - The logical database to contain the file data.
 table name      - The logical table to contain the file data.
-data source     - A unique ID to identify the data source (i.e. and ID of the sensor).
+data source     - A unique ID to identify the data source (i.e. an ID of the sensor).
 hash value      - A hash value that identifies the file. 
 instructions    - An ID of a policy that determines the mapping of the file data to the table's structure.
 json            - The content of data inside the file is of JSON data.
@@ -50,7 +50,6 @@ Users can determine the hash value of a file by issuing the command:
 file hash [file name and path]
 </pre>
 
-
 ## Data transfer using a REST API
 
 In this method, data is being transferred to a particular node in the network using a REST API.
@@ -59,7 +58,7 @@ or it can be configured to operate as a Publisher and transfers the data to one 
 
 In both cases, the receiving node serves as a REST server waiting for incoming messages with data.
 
-#### On the Receiving Node (an AnyLog node): 
+### On the Receiving Node (an AnyLog node): 
 Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
  
 <pre>
@@ -71,47 +70,31 @@ run rest server [ip] [port] [timeout]
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.
     
-#### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
+### On the sender node (a client node which is not necessarily a member of the AnyLog Network):
  
-Use a REST client software (such as curl pr postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:  
+Use a REST client software (such as Curl or Postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:
+  
 <pre>
-Key     Value
-------  -------------
-type    [type of data transferred]
-dbms    [database name]
-table   [table name]
-details [data to add]
+Key             Value
+------          -------------
+type            type of data transferred - use json for JSON data
+dbms            The logical database to contain the data
+table           The logical table to contain the data
+source          A unique ID to identify the data source (i.e. an ID of a sensor).
+instructions    An ID of a policy that determines the mapping of the file data to the table's structure.
 </pre>
 
-***[type of data transferred]*** - for JSON data use ***json file ***, for SQL data use ***sql file***     
-***[database name]*** - the logical name of the database to use  
-***[table name]*** - the table to use  
-***[data to add]*** - the data to add  
+The JSON data is transferred using the data-row part of the REST call and can include any number of readings.
 
-##### Example:
+##### Example using Curl:
 
 <pre>
-curl    --header "type":"json file"  
-        --header "dbms":"anylog_test" 
-        --header "table":"my_table"
-        --header "details":"{"parentelement": "11e78320-93b1-11e9-b465-d4856454f4ba", "webid": "F1AbEfLbwwL8F6EiShvDV-QH70AIIPnEbGT6RG0ZdSFZFT0ugL19tYGrwdFojNpadLPwI4gWE9NUEFTUy1MSVRTTFxMSVRTQU5MRUFORFJPXFNBTiBTRUJBU1RJQU4gMjg4MVxSRU1PVEUtU0VSVkVSLUFORFJFU3xQSU5H", "device_name": "REMOTE-SERVER-ANDRES", "value": 168, "timestamp": "2019-10-11T17:13:39.0430145Z"}"
-        --request PUT host:port
+curl --location --request PUT '10.0.0.78:2049' \
+--header 'type: json' \
+--header 'dbms: lsl_demo' \
+--header 'table: ping_sensor' \
+--header 'Content-Type: text/plain' \
+--data-raw '{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}
+{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}
+{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
 </pre>
-
-
-## Configuring a Publisher Node to receive data
- 
- 1) Configure an AnyLog Node as a Publisher Node.
- 2) Configure the node as a REST server.
- 3) Create the directory structure that hosts local data.
- 4) Configure the node to include the policies to determine the Operators that would service the data.
- 5) Configure a ***watch directory*** to a parameter called ***watch_dir***.
- 6) Configure a ***rest directory*** to a parameter called ***rest_dir***.
- 7) Configure an ***error directory*** to a parameter called ***err_dir***.
- 
- ## The process
- * The rest client sends the data to the AnyLog Node.
- * The data is placed on the ***rest directory***.
- * The data is moved to the ***watch directory***.
- * If the process fails, the data is moved to the ***error directory***.
- * The AnyLog Node applies the ***watch process*** on the data.
