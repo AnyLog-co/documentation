@@ -22,7 +22,7 @@ The default processing is as follows:
 4. The file data is added to the table.
 
 ## JSON File naming
-
+test
 The file name is used to identify the file and determine how the file is processed.  
 The file name is partitioned to segments separated by a dot as follows: 
 
