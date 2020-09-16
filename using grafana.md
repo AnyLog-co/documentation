@@ -56,6 +56,7 @@ A query to retrieve statistics on the time series data in the selected time rang
 Depending on the number of data point requested, the time range is divided to intervals and the min, max and average are collected for each interval and graphically presented.  
 In the default behavior, AnyLog makes the best guess to determine the relevant column representing the time and the relevant value column.  
 The default behaviour can be modified by updating ***Additional JSON Data*** section (on the lower left side of the panel).  
+To execute a period query, include the key: 'type' and the value: 'increments' in the Additional JSON Data section.  
 
 ***The period query***  
 A query to retrieve data values at the end of the provided time range (or, if not available, before and nearest to the end of the time range).
@@ -84,7 +85,8 @@ details         - An AnyLog command which is not a SQL statement.
 where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
 time_column     - The name of the time column in the Time Series format.
 value_column    - The name of the value column in the Time Series format.
-servers         - Replacing the network determined servers with a list of destinations servers to use.
+time_range      - When using a Table view, determines if the query needs to consider the time range. The default value is 'true'.
+servers         - Replacing the network determined servers with a list of Operators (data hosting servers) to use.
 instructions    - Additional AnyLog query instructions.
 </pre>
 
@@ -108,8 +110,9 @@ This value is configured by modifying the value ***Max data points*** in the Gra
 
 ## Examples
 
-The examples below query data from logical tables that are maintained in the AnyLog tables.
-In these examples, the table name is 'ping_senor', the name of the time column is 'timestamp' and the name of the value column is 'value'.
+The examples below query data from logical tables in the AnyLog Network.  
+In these examples, the table name is 'ping_senor', the name of the time column is 'timestamp' and the name of the value column is 'value'.  
+When interval is considered, the interval is determined by dividing the time range by the number of data points requested. These values can be modified on the Grafana panel or specified in the query.    
 
 ### Executing an 'increments' query
 A pre-defined qiery - for the time range in the panel, divide the time range to intervals and calculate min, max and average value for each interval in the range.
@@ -122,7 +125,7 @@ A pre-defined qiery - for the time range in the panel, divide the time range to 
 </pre>
 
 ### Executing a 'period' query
-A pre-defined qiery - for the time range in the panel, determine the last time with value and calculate the min max and average values for the data values in the interval.
+A pre-defined qiery that considers the time range in the panel, determines the last time with value and calculate the min max and average values for the data values in the interval.
 <pre> 
 {
 "type" : "period",
