@@ -56,7 +56,12 @@ file hash [file name and path]
 In this method, data is being transferred to a particular node in the network using a REST API.
 Depending on the configuration, the receiving node can operate as an Operator and host the data, or it can be configured to operate as a Publisher and transfers the data to one or more Operator nodes that will host the data.  
 
-In both cases, the receiving node serves as a REST server waiting for incoming messages with new data.
+In both cases, the receiving node serves as a REST server waiting for incoming messages with new data.  
+
+The transferred data is processed in one of two modes:
+* In a file mode - The transferred data is a file, the file is written to the Prep dirctory and then moved to the Watch directory.
+* In a streaming mode - Data is accumulated in an internal buffer and being processed when a time threshold or a volume threshold are triggered. 
+File Mode and Streming Mode are [detailed below](#File Mode and Streaming Mode).
 
 ### Configuring the Receiving Node (an AnyLog node): 
 Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
@@ -98,3 +103,7 @@ curl --location --request PUT '10.0.0.78:2049' \
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
 </pre>
+
+
+## File Mode and Streaming Mode
+
