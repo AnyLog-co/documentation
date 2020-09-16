@@ -77,7 +77,7 @@ Use a REST client software (such as Curl or Postman) and issue a ***PUT*** comma
 <pre>
 Key             Value
 ------          -------------
-type            The type of data transferred (***json*** for JSON data).
+type            The type of data transferred. The default value is ***json***.
 dbms            The logical database to contain the data.
 table           The logical table to contain the data.
 source          A unique ID to identify the data source (i.e. an ID of a sensor).
