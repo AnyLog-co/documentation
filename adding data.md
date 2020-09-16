@@ -68,7 +68,7 @@ run rest server [ip] [port] [timeout]
 ***[ip]*** - The IP supporting the REST connection  
 ***[port]*** - The REST port  
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
-The default value is 20 seconds.
+The default value is 20 seconds.  
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
  
