@@ -140,13 +140,16 @@ If the default values are not set, the node assigned the value 60 seconds to the
 Setting the threshold for a particular table is with the following command:
 
 ```set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume]```  
-If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.  
+Notes:    
+* If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
+* If the time is set to 0 seconds and the volume is set to 0 bytes - the threshold for the table's buffer is removed and the data associated with the table is assigned with the threshold default values.    
 
 Retrieving the thresholds values is with the following command:
 
 ```show rest``` 
 
-The Show command provides information on the REST API usage and status including the buffer thresholds.
+The command provides information on the REST API usage and status including the buffer thresholds.  
+
  
   
 
