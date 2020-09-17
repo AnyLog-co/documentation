@@ -111,10 +111,33 @@ curl --location --request PUT '10.0.0.78:2049' \
 Data ingested to a local database is organized in files. Each file contains one or more sensor readings (or other type of time series data) organized in a JSON format.
 Users adding data with the REST API determine the mode in which data is processed:
 
-* Using a file mode (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other PUT requests.  
-A file mode is usually used when the PUT request contains a large amount of data or when the data is not frequenty created.    
-* Using a streaming mode - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Uppon a threshold. the accumulated data is organized as a file that is processed as a single unit.
-A streaming mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
+* Using a ***File Mode*** (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other PUT requests.  
+A File Mode is usually used when the PUT request contains a large amount of data or when the data is not frequenty created.  
+    
+* Using a ***Streaming Mode*** - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Upon a threshold, the accumulated data is organized as a file that is processed as a single unit.
+A Streaming Mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
+
+#### Setting and retrieving thresholds for a Streaming Mode
+
+Thresholds determine when buffered data is processed and are based on a time threshold and a data volume threshold.
+If both are set, the earlier of the two triggers the processing of the data.
+ 
+Users can configure a default value as well as thresholds for each each type of data by assigning a threshold to the table associated with the data.  
+
+Setting the default values is with the following command:
+
+```set buffer threshold where time = [time in seconds] and volume = [data volume]```
+
+Setting the threshold for a particular table is with the following command:
+
+```set buffer threshold where dbms = [dbms name] and table = [table name] and time = [time in seconds] and volume = [data volume]```
+
+Retrieving the thresholds values is with the following command:
+
+```show rest``` 
+
+The Show command provides information on the REST API usage and status including the buffer thresholds.
+ 
   
 
  
