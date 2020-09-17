@@ -61,7 +61,7 @@ In both cases, the receiving node serves as a REST server waiting for incoming m
 The transferred data is processed in one of two modes:
 * In a file mode - The transferred data is a file, the file is written to the Prep dirctory and then moved to the Watch directory.
 * In a streaming mode - Data is accumulated in an internal buffer and being processed when a time threshold or a volume threshold are triggered. 
-File Mode and Streming Mode are [detailed below](#File Mode and Streaming Mode).
+File Mode and Streaming Mode are [detailed below](#File Mode and Streaming Mode).
 
 ### Configuring the Receiving Node (an AnyLog node): 
 Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
@@ -86,6 +86,7 @@ type            The type of data transferred. The default value is ***json***.
 dbms            The logical database to contain the data.
 table           The logical table to contain the data.
 source          A unique ID to identify the data source (i.e. an ID of a sensor).
+mode            File or Streaming (see details below). The default value is 'file'.
 instructions    An ID of a policy that determines the mapping of the file data to the table's structure.
 </pre>
 
@@ -104,6 +105,18 @@ curl --location --request PUT '10.0.0.78:2049' \
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
 </pre>
 
-
 ## File Mode and Streaming Mode
+
+Data ingested to a local database is organized in files. Each file contains one or more sensor readings (or other type of time series data) organized in a JSON format.
+Users adding data with the REST API determine the mode in which data is processed:
+
+* Using a file mode (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other PUT requests.  
+A file mode is usually used when the PUT request contains a large amount of data or when the data is not frequenty created.    
+* Using a streaming mode - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Uppon a threshold. the accumulated data is organized as a file that is processed as a single unit.
+A streaming mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
+  
+
+ 
+   
+
 
