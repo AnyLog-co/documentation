@@ -61,7 +61,8 @@ In both cases, the receiving node serves as a REST server waiting for incoming m
 The transferred data is processed in one of two modes:
 * In a file mode - The transferred data is a file, the file is written to the Prep dirctory and then moved to the Watch directory.
 * In a streaming mode - Data is accumulated in an internal buffer and being processed when a time threshold or a volume threshold are triggered. 
-File Mode and Streaming Mode are [detailed below](#File Mode and Streaming Mode).
+File Mode and Streaming Mode are detailed [below](#file-mode-and-streaming-mode).
+
 
 ### Configuring the Receiving Node (an AnyLog node): 
 Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
