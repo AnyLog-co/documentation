@@ -87,8 +87,8 @@ run rest server [ip] [port] [timeout]
 ***[port]*** - The REST port  
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.  
-* As an Operator (to host the new data) or as a Publisher (to transfer the new data to open or more Operators).
-
+* As an Operator (to host the new data) or as a Publisher (to transfer the new data to open or more Operators).  
+Details on how an operator is configured are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#publisher-process).
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
  
