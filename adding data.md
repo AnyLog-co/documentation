@@ -156,7 +156,9 @@ Example:
 If the default values are not set, the node assigned the value 60 seconds to the time threshold and 1000 bytes to the volume threshold.
 
 Setting the threshold for a particular table is with the following command:  
-```set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume]```  
+<pre> 
+set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume]
+</pre>  
 Notes:    
 * If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
 * If the time is set to 0 seconds and the volume is set to 0 bytes - the threshold for the table's buffer is removed and the data associated with the table is assigned with the threshold default values.    
