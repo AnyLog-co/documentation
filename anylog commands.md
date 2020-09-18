@@ -79,8 +79,9 @@ rest [operation] where url=[url] and [option] = [value] and [option] = [value] .
 </pre>
 
 Explanation:  
-The rest command allows to sens a REST request to a REST server.  
-The rest call provides the target URL and additional values.  
+The rest command allows to send REST requestd to an AnyLog REST server.  
+Using REST to deliver requests between members of the network is used to test and validate the REST functionality of the member that offers REST services.       
+The rest call provides the target URL (of the REST server) and additional values.  
 The URL must be provided, the other key value pairs are optional headers and data values.
 
 Supported REST commands:
