@@ -53,7 +53,7 @@ file hash [file name and path]
 
 ### The Data Format
 
-To process a file containing JSON instances, the JSON instances needs to be organized as strings with the new line character separating between the JSON instances.  
+To process a file containing JSON instances, the JSON instances need to be organized as strings with the new line character (LF) separating between the instances.  
 Example:  
 <pre>
 {"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}  
@@ -75,16 +75,20 @@ File Mode and Streaming Mode are detailed [below](#file-mode-and-streaming-mode)
 
 
 ### Configuring the Receiving Node (an AnyLog node): 
-Configure the node to operate as a REST server using the following command on the AnyLog command prompt:
- 
+
+The node processing the PUT request needs to be configured as follows:
+
+* As a REST server to receive the REST requests from the client.
+using the following command on the AnyLog command prompt:
 <pre>
 run rest server [ip] [port] [timeout]
 </pre>
-
 ***[ip]*** - The IP supporting the REST connection  
 ***[port]*** - The REST port  
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
 The default value is 20 seconds.  
+* As an Operator (to host the new data) or as a Publisher (to transfer the new data to open or more Operators).
+
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
  
