@@ -4,7 +4,7 @@ Background processes are optional processes that if activated, are running using
 
 The background threads:
 
-1. A listener for the AnyLog Messaging. Activated by the command: ```run tcp server```
+1. A listener for the AnyLog Peer-to-Peer Messaging. Activated by the command: ```run tcp server```
 2. A listener for a user REST Request.  Activated by the command: ```run rest server```
 3. An automated Operator process. Activated by the command: ```run operator```
 4. An automated Publisher process. Activated by the command: ```run publisher```
@@ -16,13 +16,31 @@ These processes are activated on the AL command line. Command line options are a
 
 ## AnyLog Messaging
 
-A listener thread on a declared IP and port.  
-The listener is required to receive AnyLog messages from peers in the network. 
+A process that receives messages from member nodes in the network. This process makes the node a member in the AnyLog Network.  
 
+Usage:
+<pre>
+run tcp server [ip] [port] [threads]
+</pre>
+Explanation:  
+[ip] [port] - The process listens for incomming messages on the assigned IP and and Port.
+[Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
+
+ 
 ## REST requests
 
-A listener thread on a declared IP and port.  
-The listener is required to receive REST requests from users of the network.
+A process that receives REST messages from users and applications which are not members of the network.  
+This process receives requests to query data and metada, process the request and replies with the requested information.
+
+Usage:
+<pre>
+run rest server [ip] [port] [timeout]
+</pre>
+Explanation:
+[ip] [port] - The process listens for incomming messages on the assigned IP and and Port.
+[timeout] - An optional parameter that determines wait a timeout period in seconds.  
+When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.
+
 
 ## Operator Process
 
