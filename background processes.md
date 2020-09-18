@@ -69,12 +69,13 @@ run operator where [option] = [value] and [option] = [value] ...
 </pre>
         
 Explanation:  
-Monitors new data added to the watch directory and load the new data to a local database.
+Monitors new data added to the watch directory and load the new data to a local database.  
+
 Options:  
 
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
-| watch_dir  | The location of the watch directory.  | !watch_dir  |
+| watch_dir  | The directory monitored by the Operator. Files placed on the Watch directory are processed by the Operator.  | !watch_dir  |
 | bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
 | error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
 | delete_json   | True/False for deletion of the JSON file if processing is successful.  | false |
@@ -90,20 +91,52 @@ Options:
 | master_node   |  The IP and Port of a Master node (if a master node is used).  |  |
 | update_tsd_info   | True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingested.  |  |
 
-Examples:  
-Usage:
+Example:  
 <pre>
 run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and source = file_name[2] and compress_sql = true and compress_json = true and update_tsd_info = true
 </pre>
 
 ## Publisher Process
 
-A process that identifies JSON files and distributes the files to Operators that are hosting the data.
+A process that identifies JSON files with new data and distributes the files to Operators that are hosting the data.
 
 #### Overview
 Files are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every file that is copied to the directory is being processed.  
-The process locates from the blockchain the Operators that are hosting the table's data, designates an Operator to the file and transfers the file to the designated Operator.  
-  
+The process locates from the blockchain the policies that determine which Operators host the data, designates an Operator to the file and transfers the file to the designated Operator.
+
+#### Assigning an Operator to the data
+To determine a target Operator to host the data, the Publisher determines the table associated with the data and considers 2 types of policies:
+
+1) A Policy of type ***distribution***. A distribution policy assigns data from a specifc Publishers or types of Publishers to a particular Operator.
+2) If there is no relevant distribution policy, the Publisher considers the Operators that declared support for the table and selects a target Operator.
+
+
+Usage:
+<pre>
+run operator where [option] = [value] and [option] = [value] ...
+</pre>
+        
+Explanation:  
+Monitors new data added to the watch directory and distributes the new data to an Operator.
+
+Options:  
+
+| Option        | Explanation   | Default Value |
+| ------------- | ------------- | ------------- |
+| watch_dir  | The directory monitored by the Publisher. Files placed on the Watch directory are processed by the Publisher.  | !watch_dir  |
+| bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
+| error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
+| delete_json   | True/False for deletion of the JSON file if processing is successful.  | false |
+| delete_sql   | True/False for deletion of the SQL file if processing is successful.  | false |
+| compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | false |
+| compress_sql   | True/False to enable/disable compression of the SQL file if processing is successful.  | false |
+| dbms_name   | The segment in the file name from which the database name is taken.  | 0 |
+| table_name   | The segment in the file name from which the table name is taken.  | 1 |
+
+Example:  
+<pre>
+run publisher where dbms_name = file_name[0] and table_name = file_name[3] and delete_json = true and delete_sql = true
+</pre>
 
 ## Blockchain Synchronizer
 
