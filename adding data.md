@@ -22,7 +22,7 @@ The default processing is as follows:
 3. If a logical table does not exists, a table is created.
 4. The file data is added to the table.
 
-## JSON File naming
+### JSON File naming
 
 The file name includes the information needed to determine how the file's data is processed.  
 The file name is partitioned to segments separated by a dot as follows: 
@@ -49,6 +49,16 @@ json            - The content of data inside the file is of JSON data.
 Users can determine the hash value of a file by issuing the command:
 <pre>
 file hash [file name and path]
+</pre>
+
+### The Data Format
+
+To process a file containing JSON instances, the JSON instances needs to be organized as strings with the new line character separating between the JSON instances.  
+Example:  
+<pre>
+{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}  
+{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}  
+{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}  
 </pre>
 
 ## Data transfer using a REST API
@@ -106,6 +116,12 @@ curl --location --request PUT '10.0.0.78:2049' \
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
 </pre>
 
+### The Data Format
+
+To process a PUT request with new data, the data is organized in the message body as strings with the new line character separating between the JSON instances.
+Extra New-Line (LF), Tab and Carriage Return characters (CR) are replaced with space. 
+
+
 ## File Mode and Streaming Mode
 
 Data ingested to a local database is organized in files. Each file contains one or more sensor readings (or other type of time series data) organized in a JSON format.
@@ -128,27 +144,27 @@ Volume threshold can be specified byes, KB, MB or GB.
  
 Users can configure a default value as well as thresholds for each each type of data by assigning a threshold to the table associated with the data.  
 
-Setting the default values is with the following command:
-
+Setting the default values is with the following command:  
 ```set buffer threshold where time = [time] and volume = [data volume]```  
 Example:  
 ```set buffer threshold where time = 1 hour and volume = 2KB```  
 
 If the default values are not set, the node assigned the value 60 seconds to the time threshold and 1000 bytes to the volume threshold.
 
-
-Setting the threshold for a particular table is with the following command:
-
+Setting the threshold for a particular table is with the following command:  
 ```set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume]```  
 Notes:    
 * If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
 * If the time is set to 0 seconds and the volume is set to 0 bytes - the threshold for the table's buffer is removed and the data associated with the table is assigned with the threshold default values.    
 
-Retrieving the thresholds values is with the following command:
-
+Retrieving the thresholds values is with the following command:  
 ```show rest``` 
 
-The command provides information on the REST API usage and status including the buffer thresholds.  
+The command provides information on the REST API usage and status including the buffer thresholds.
+
+
+
+
 
  
   
