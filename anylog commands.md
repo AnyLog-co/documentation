@@ -48,7 +48,6 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 
 The ***set*** commands allows to set variables and configuration parameters.  
 
-
 Options:  
 
 | Option        | Explanation  |
@@ -58,7 +57,7 @@ Options:
 | set query log  | Initiate a log to record the executed queries. |
 | set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
 | set new query timer | Reset the query timer. |
-| set debug [on/off]  | Print the executed commands processed in scripts |
+| set debug [on/off]  | Print the executed commands processed in scripts. |
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
@@ -89,39 +88,79 @@ Params options can be the following:
 | max_volume  | limit data volume returned by each participating operator. |
 | send_mode   | use \'all\' to return an error if any of the participating servers is not connected. |
 |             | use \'any\' to send the query only to the connected servers. |
-|             | The default value is \'all\' |
+|             | The default value is \'all\'. |
 | reply_mode  | use \'all\' to return an error if any of the participating servers did not reply after timeout. |
 |             | use \'any\' to return the query results using the available data after timeout. |
-|             | The default value is \'all\' |
-
-
-## Get Command
-
+|             | The default value is \'all\'. |
 
 ## Show Command
 
-show [info type] [info string]
+Returns information on variables setup and state of the node.
 
-The show commands provide status information on the node receiving the REST call.
-The show commands are supported on the AnyLog command line or by using a REST client with the following key value pairs in the header information:
-<pre>
-Key      Value
-------   -------------
-type     info
-details  one of the show commands
-</pre>
+Options:  
+
+| Option        | Information provided  |
+| ------------- | ------------| 
+| show event log  | The Last commands processed by the node. | 
+| show error log  | The last commands that returned an error. |
+| show file log  | The last data files processed by the node. |
+| show query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| show databases  | The list of databases managed on the local node. |
+| show connections | The list of TCP and REST connections supported by the node. |
+| show query mode | The query mode variables assigned by the command ***set query mode***. |
+| show queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
+| show watch directories | The list of the Watch directories on the node. |
+| show dictionary | The list of the variable names and their assigned values. |
+| show threads | The list of the threads executing users scripts. |
+| show synchronizer | Information on the blockchain synchronize process. |
+| show scheduler | Information on the scheduled tasks. |
+| show operator | Information on the Operator processes. |
+| show publisher | Information on the Publisher processes. |
+| show rest | Information on the REST processes. |
+| show ha | Information on the High Availability processes. |
+| show partitions | Information on how data is partitioned on the local databases. |
+| show partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
+| show partitions dropped | Information on partitions which were dropped.  |
+| show workers pool | Details the number of query workers assigned by the command ***set threads pool [n]***. |
+| show tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]*** |
+| show files [directory path] | Details the files in the specified directory |
+| show directories [directory path] | Details the sub-directories in the specified directory |
+| show version | The code version |
+| show json file structure | Details the convention for JSON file name |
+
+#### Show log
+
+In the logs, if info string is specified, only events containing one or more of the keywords in the info string are presented.
+
+Examples:
 
 <pre>
-Command                             Details
-------                              -------------
-show [log name] log                 Returns the information maintained in the named log (event, error, file, query) 
-show dbms                           Returns the connected databases
-show connections                    Returns the type of connections (IPs and ports) supported by the node
-show watch directories              Returns the directories being watched for incomming data
-show queries time                   Returns execution time of queries
-Show servers for dbms [dbms name]   Returns the IP and Port information of the servers supporting the database
-Show servers for dbms [dbms name] and table [table name]
+show event log "SQL Error"
 </pre>
+Will show only log instances containing the keywords "SQL" or "Error".
+
+<pre>
+show query log "timestamp"
+</pre>
+If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
+
+#### show workers pool & show tcp pool
+These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
+For example:
+<pre>
+show workers pool
+</pre>
+returns:
+<pre>
+show workers pool
+</pre>
+returns:
+<pre>
+Workers Pool with 3 workers: [0, 1, 1]
+</pre>
+Meaning that the first thread of the 3 is in rest while 2 threads are busy.
+
+## Get Command
 
 
 ## Rest Command
