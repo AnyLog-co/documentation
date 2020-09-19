@@ -38,61 +38,72 @@ An example would be a script that waits for files to be generated and process th
     
 ##### policy
 A set of commands that are placed on the blockchhain.
-When the policy is called, the commands asociated with the policy are executed.
+When the policy is called, the commands associated with the policy are executed.  
+Policies allows to initiate and modify processes on nodes by publishing processes on the blockchain.   
+Policies impact one or more nodes vs. scripts which are private and maintained on the local drive of each node. 
 
-
-## The commands
 
 
 ## Set Command
 
-set [variable name] = [value]
-set query mode using [params]
-set query log
-set query log profile [n] seconds
-set new query timer
-set function key f[value] [string]
-set debug [on/off/interactive]
-set thread pool [n]
+The ***set*** commands allows to set variables and configuration parameters.  
 
 
-The set commands modify state and setting information
+Options:  
 
+| Option        | Explanation  |
+| ------------- | ------------| 
+| set [variable name] = [value]  | Assigning a value to a variable. Same as: [variable name] = [value] | 
+| set query mode  | Setting execution instructions to the issued queries. |
+| set query log  | Initiate a log to record the executed queries. |
+| set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
+| set new query timer | Reset the query timer. |
+| set debug [on/off]  | Print the executed commands processed in scripts |
+| set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
+| set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
+| set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
+| set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
+
+
+#### Set variable
+
+To see the value assigned to a variable use exclamation point prefixed to the variable name.
 <pre>
-Command                             Details
-------                              -------------
-set [name] = [value]                Assigns a value to a given name. 
-set query log                       Activates a log recording queries being processed.
-set query log profile [n] seconds   Records in the query log only queries with execution time greater or equal to [n] seconds.
-set new query timer                 Resets the list and timers that monitor query execution time.
-set debug [on/off]                  Print the executed commands processed in scripts.  
-set debug interactive               Interactive mode is only available with threads.  
-                                    Interactive mode pauses the execution after a command is being executed.  
-                                    The user is required to input 'next' to proceed to the next command.
-set threads pool [n]                create a pool of workers thread that distributes query processing. n represents the number of threads.
+![variable name] = [value]
 </pre>
 
-## Rest Command
-
+To see all assigned values use the command:
 <pre>
-rest [operation] where url=[url] and [option] = [value] and [option] = [value] ...
+show dictionary
 </pre>
 
-Explanation:  
-The rest command allows to send REST requestd to an AnyLog REST server.  
-Using REST to deliver requests between members of the network is used to test and validate the REST functionality of the member that offers REST services.       
-The rest call provides the target URL (of the REST server) and additional values.  
-The URL must be provided, the other key value pairs are optional headers and data values.
+#### Set query mode
 
-Supported REST commands:
-GET - to retrieve data and metadata from the AnyLog Network.  
-PUT - to add data to the AnyLog Network. 
+The query mode sets a cap on query exection at the Operator Node by setting a limit on execution time or data volume transferred or both.
+  
+Params options can be the following:
 
-Examples:
-<pre>
-'rest get where url = http://10.0.0.159:2049 and type = info and details = "get status"\n'
-'rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temprature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"',
-</pre>
+| param        | Explanation  |
+| ------------- | ------------| 
+| timeout  | limit execution on each server by the provided time limit | 
+| timeout  | limit execution on each server by the provided time limit |
+
+
+                     '\ttimeout - limit execution on each server by the provided time limit\n'
+                     '\tmax_volume - limit data volume returned by each participating operator\n'
+                     '\tsend_mode - use \'all\' to return an error if any of the participating servers is not connected\n'
+                     '\t\t use \'any\' to send the query only to the connected servers. The default value is \'all\'.\n'
+                     '\treply_mode - use \'all\' to return an error if any of the participating servers did not reply after timeout.\n'
+                     '\t\t use \'any\' to return the query results using the available data after timeout. The default value is \'all\'.\n'
+ 
+
+
+
+
+
+
+## Get Command
+
 
 ## Show Command
 
@@ -117,5 +128,28 @@ show watch directories              Returns the directories being watched for in
 show queries time                   Returns execution time of queries
 Show servers for dbms [dbms name]   Returns the IP and Port information of the servers supporting the database
 Show servers for dbms [dbms name] and table [table name]
+</pre>
+
+
+## Rest Command
+
+<pre>
+rest [operation] where url=[url] and [option] = [value] and [option] = [value] ...
+</pre>
+
+Explanation:  
+The rest command allows to send REST requestd to an AnyLog REST server.  
+Using REST to deliver requests between members of the network is used to test and validate the REST functionality of the member that offers REST services.       
+The rest call provides the target URL (of the REST server) and additional values.  
+The URL must be provided, the other key value pairs are optional headers and data values.
+
+Supported REST commands:
+GET - to retrieve data and metadata from the AnyLog Network.  
+PUT - to add data to the AnyLog Network. 
+
+Examples:
+<pre>
+'rest get where url = http://10.0.0.159:2049 and type = info and details = "get status"\n'
+'rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"',
 </pre>
 
