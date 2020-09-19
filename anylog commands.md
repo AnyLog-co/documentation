@@ -69,7 +69,7 @@ Options:
 
 To see the value assigned to a variable use exclamation point prefixed to the variable name.
 <pre>
-![variable name] = [value]
+![variable name]
 </pre>
 
 To see all assigned values use the command:
@@ -85,21 +85,14 @@ Params options can be the following:
 
 | param        | Explanation  |
 | ------------- | ------------| 
-| timeout  | limit execution on each server by the provided time limit | 
-| timeout  | limit execution on each server by the provided time limit |
-
-
-                     '\ttimeout - limit execution on each server by the provided time limit\n'
-                     '\tmax_volume - limit data volume returned by each participating operator\n'
-                     '\tsend_mode - use \'all\' to return an error if any of the participating servers is not connected\n'
-                     '\t\t use \'any\' to send the query only to the connected servers. The default value is \'all\'.\n'
-                     '\treply_mode - use \'all\' to return an error if any of the participating servers did not reply after timeout.\n'
-                     '\t\t use \'any\' to return the query results using the available data after timeout. The default value is \'all\'.\n'
- 
-
-
-
-
+| timeout     | limit execution on each server by the provided time limit. | 
+| max_volume  | limit data volume returned by each participating operator. |
+| send_mode   | use \'all\' to return an error if any of the participating servers is not connected. |
+|             | use \'any\' to send the query only to the connected servers. |
+|             | The default value is \'all\' |
+| reply_mode  | use \'all\' to return an error if any of the participating servers did not reply after timeout. |
+|             | use \'any\' to return the query results using the available data after timeout. |
+|             | The default value is \'all\' |
 
 
 ## Get Command
