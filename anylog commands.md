@@ -162,6 +162,34 @@ Meaning that the first thread of the 3 is in rest while 2 threads are busy.
 
 ## Get Command
 
+The get command provides information on hardware state and status, files, resources and security of the node. 
+
+Options:  
+
+| Option        | Information provided  |
+| ------------- | ------------| 
+| get status  | Replies with the string 'running' if the node is active. | 
+| get hostname | The name assigned to the node. | 
+| get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
+| get memory info | Info on the memory of the current node. |
+| get cpu info | Info on the CPU of the current node. |
+| get database size [database name] | The size of the named database in bytes. |
+| get node id | Returns a unique identifier of the node. |
+| get hardware id | Returns a unique identfier of the hardware. |
+| get servers for dbms [dbms name] and table [table name] | The list of IPs and Ports of the servers supporting the table. |
+| get servers for dbms [dbms name] | The list of IPs and Ports of the servers supporting the dbms. |
+| get tables for dbms [dbms name] | The list of tables of the named database. |
+| get files in [dir name] where type = [file type] and hash = [hash value] | The list of files in the specified dir that satisfy the optional filter criteria. |
+
+Security related Options:  
+
+| Option        | Information provided  |
+| ------------- | ------------| 
+| get public key  | The node\'s public key. | 
+| get public key using keys_file = [file name] | Retrieves the public key from the specified file. |
+| get permissions | Provide the permissions for the current node using the node public key. |
+| get permissions for member [member id] | The permissions for the member identified by its public key. |
+| get authentication | Returns ON or OFF depending on the current status. |
 
 ## Rest Command
 
