@@ -181,7 +181,7 @@ Options:
 | get tables for dbms [dbms name] | The list of tables of the named database. |
 | get files in [dir name] where type = [file type] and hash = [hash value] | The list of files in the specified dir that satisfy the optional filter criteria. |
 
-Security related Options:  
+Security related options:  
 
 | Option        | Information provided  |
 | ------------- | ------------| 
@@ -191,7 +191,7 @@ Security related Options:
 | get permissions for member [member id] | The permissions for the member identified by its public key. |
 | get authentication | Returns ON or OFF depending on the current status. |
 
-## Rest Command
+## REST Command
 
 <pre>
 rest [operation] where url=[url] and [option] = [value] and [option] = [value] ...
