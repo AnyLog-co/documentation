@@ -143,8 +143,8 @@ File mode is the default mode. Changing the mode to streaming is by updating the
 
 | key  | value  | Explanation |
 | ---- | -------| ------------|
-| mode | file | The body of the message is JSON data. Operator database load (or Publisher send data) is with no wait. This is the default behaviour. |
-| mode | streaming | The body of the message is JSON data that is buffered in the node. Operator database load (or Publisher send data) is based on time and volume threshold. |
+| mode | file | The body of the message is JSON data. Database load (on an Operator Node) and data send (on a Publisher Node) are with no wait. File mode is the default behaviour. |
+| mode | streaming | The body of the message is JSON data that is buffered in the node. Database load (on an Operator Node) and data send (on a Publisher Node) are based on time and volume thresholds. |
 
 
 #### Setting and retrieving thresholds for a Streaming Mode
