@@ -137,6 +137,9 @@ A File Mode is usually used when the PUT request contains a large amount of data
 * Using a ***Streaming Mode*** - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Upon a threshold, the accumulated data is organized as a file that is processed as a single unit.
 A Streaming Mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
 
+To enable file mode update the header with the key ***mode*** and the value ***file***. File mode is the default mode.      
+To enable streaming mode update the header with the key ***mode*** and the value ***streaming***.
+
 #### Setting and retrieving thresholds for a Streaming Mode
 
 Thresholds determine when buffered data is processed and are based on a time threshold and a data volume threshold.
