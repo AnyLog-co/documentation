@@ -194,3 +194,49 @@ Retrieving the list of Publishers:
    "details": "blockchain get publisher" 
 }
 </pre>
+
+## Using the Worldmap Panel to plot the AnyLog Network
+
+The Worldmap Panel is a tile map of the world that can be overlaid with circles representing the Nodes in the AnyLog Network and their status.
+
+### Prerequisites
+
+* Install the Grafana Worldmap plugin.  
+ Instalation details are available on the [Grafana Worldmap Panel Page](https://grafana.com/grafana/plugins/grafana-worldmap-panel/installation).
+
+* AnyLog Nodes registered on the blockchain with the following information:
+    
+    - Location information in the form of latitude and Longitude.  
+    Location should be represented using the key: ***loc*** with the location values as a string with a comma separating between the latitude and Longitude.   
+    For example: ```"loc": "33.836082,-81.163727"```      
+    The example below demonstrates the AnyLog commands to map IP and Port to latitude Longitude:
+    <pre>
+    info = rest get where url = https://ipinfo.io/json
+    coordinates = from !info bring ['loc']
+    latitude = python !coordinates.split(',')[0]
+    longitude = python !coordinates.split(',')[1]
+    </pre>
+    
+    Additional optional information that is leveraged by the map:
+    - Name
+    - IP and Port
+    - Hostname
+    
+### Configuring the Grafana Panel
+
+The grafana Panel includes 2 sections that needs to be updated.
+
+For the Query Info update the following fields:
+
+* Format as: Table
+* Matric: Any table
+* In the Additional Json Data add the key ***type*** and the value ***map***.  
+
+In the Panel Info under Map Data Options update the following fields:
+
+* Table Query Format: coordinates
+* Location Name Field: hostname
+* Metric Field: metric
+* Latitude Field: latitude
+* Longitude Field: longitude
+
