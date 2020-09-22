@@ -230,7 +230,15 @@ For the Query Info update the following fields:
 
 * Format as: Table
 * Matric: Any table
-* In the Additional Json Data add the key ***type*** and the value ***map***.  
+* In the Additional Json Data add the following keys and values:
+
+| key  | value  | Explanation |
+| ---- | -------| ------------|
+| type | map | Queries the metadata to provide the list of nodes. |
+| member | all | Default, provides a map of all the participating nodes, or, limit by a member type. |
+| member |operator/publisher/query/master | Provides a map of all the participating nodes, or, limit by a member type. |
+
+    - key ***type*** and the value ***map***.  
 
 In the Panel Info under Map Data Options update the following fields:
 
