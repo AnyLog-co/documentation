@@ -197,7 +197,7 @@ Retrieving the list of Publishers:
 
 ## Using the Worldmap Panel to plot the AnyLog Network
 
-The Worldmap Panel is a tile map of the world that can be overlaid with circles representing the Nodes in the AnyLog Network and their status.
+The Worldmap Panel is a tile map of the world that can be overlaid with circles representing Nodes in the AnyLog Network and their status.
 
 ### Prerequisites
 
@@ -235,10 +235,9 @@ For the Query Info update the following fields:
 | key  | value  | Explanation |
 | ---- | -------| ------------|
 | type | map | Queries the metadata to provide the list of nodes. |
-| member | all | Default, provides a map of all the participating nodes, or, limit by a member type. |
-| member |operator/publisher/query/master | Provides a map of all the participating nodes, or, limit by a member type. |
+| member | all | Default value, provides info on all the participating nodes. |
+|        |operator/publisher/query/master | Provides info on the requested members. |
 
-    - key ***type*** and the value ***map***.  
 
 In the Panel Info under Map Data Options update the following fields:
 
