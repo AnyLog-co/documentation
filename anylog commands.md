@@ -118,6 +118,7 @@ Options:
 | show publisher | Information on the Publisher processes. |
 | show rest | Information on the REST processes. |
 | show ha | Information on the High Availability processes. |
+| show inserts | Statistics on inserts of data to the local database. |
 | show partitions | Information on how data is partitioned on the local databases. |
 | show partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | show partitions dropped | Information on partitions which were dropped.  |
