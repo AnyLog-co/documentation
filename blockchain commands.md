@@ -52,17 +52,18 @@ A master node is a node that maintains a complete copy of the metadata in a loca
 Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
-```blockchain add [json data]``` – add a JSON object to the local JSON file.  
-```blockchain get [json search]``` – retrieve from the JSON file all objects that satisfy the search criteria.  
-```blockchain push [json data]``` – add a JSON object to the local database  
+```blockchain add [JSON data]``` – add a JSON object to the local JSON file.  
+```blockchain get [JSON search]``` – retrieve from the JSON file all objects that satisfy the search criteria.  
+```blockchain push [JSON data]``` – add a JSON object to the local database  
 ```blockchain pull to sql``` – retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements.  
-```blockchain pull to json``` – retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file.  
+```blockchain pull to JSON``` – retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file.  
 
 
-```blockchain commit [json data]``` – add a JSON object to the blockchain  
+```blockchain commit [JSON data]``` – add a JSON object to the blockchain  
 ```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
 ```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
 ```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.  
+```blockchain drop policy [JSON data]``` – removes the policy specified by the JSON file fom local database that maintains metadata information.
 ```blockchain delete local file``` - deletes the local JSON file with the blockchain data. 
 
 
