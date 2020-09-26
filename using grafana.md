@@ -235,9 +235,17 @@ For the Query Info update the following fields:
 | key  | value  | Explanation |
 | ---- | -------| ------------|
 | type | map | Queries the metadata to provide the list of nodes. |
-| member | all | Default value, provides info on all the participating nodes. |
-|        |operator/publisher/query/master | Provides info on the requested members. |
+| member | A list one or more members to query | The members listed would be shown on the map. |
+| metric  | A list of integer values | Assigns a metric to each listed member. The metric determines the color on the map. |
 
+Example:
+<pre>
+{
+    "type" : "map",
+    "member" : ["operator","publisher"],
+    "metric" : [0,2]
+}
+</pre>
 
 In the Panel Info under Map Data Options update the following fields:
 
