@@ -103,7 +103,7 @@ Example: ```sql blockchain text "select * from ledger"```
 #### bring options
 The blockchain ***get*** command can be extended to retrieve predefined sections from the metadata. This option is detailed below.
 
-## Using the Bring command
+## The 'From JSON Object Bring' command
 
 The Bring command retrieves and formats data from a JSON object as follows:
 <pre>
