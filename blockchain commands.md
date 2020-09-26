@@ -112,22 +112,24 @@ from [JSON object] bring [list of keys and formatting instructions]
 
 The bring is followed by a list of keys that are applied on the JSON object. 
 The keys are structured such that a Python call with each key on the JSON data returns a value, which if available, is returned to the caller.    
-Each key can be prefixed or suffixed with strings that are added to the returned values.    
-The formatting instruction may use the keyword ***separator*** to provide a suffix to the output string returned from each object.
+Each key can be prefixed or suffixed with strings that are added to the returned values. 
+   
+* The formatting instruction may use the keyword ***separator*** to provide a suffix to the output string returned from each object.  
 Special separators:
+
 | separators  | Explanation |
 | ---- | ------------|
 | separator = \n | A new line character is added at the end of the data returned from each JSON object  |
 | separator = \t | A tab is added at the end of the data returned from each JSON object  |
   
 
-The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
+* The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
 
-The keyword bring can be suffixed with the following keywords:     
-* ```bring.unique``` - returns unique values.  
-* ```bring.first``` - returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.
-* ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
-* ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
+* The keyword bring can be suffixed with the following keywords:     
+    * ```bring.unique``` - returns unique values.  
+    * ```bring.first``` - returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.
+    * ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
+    * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
     
 ### Examples
 
@@ -168,5 +170,11 @@ The following example retrieves the most recent declaration of an operator suppo
 
 <pre>
 blockchain get operator where dbms = lsl_demo bring.recent 
+</pre>
+
+The following example returns the list of IPs and Ports of the Operators as a list of JSON objects.
+
+<pre>
+blockchain get operator bring.json ['operator']['ip'] [operator']['port']
 </pre>
 
