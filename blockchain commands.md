@@ -88,13 +88,37 @@ Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
 * Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
 
+
+### Using - Show Commands
+The following show commands retrieve data from the blockchain:
+* ```show servers for dbms [dbms name]``` - retrieve the IPs and Ports of the database servers hosting tables for the named database.  
+* ```show servers for dbms [dbms name] and [table name]``` - retrieve the IPs and Ports of the database servers hosting the named table.
+* ```show tables for dbms [dbms name]``` - retrieve the names of the tables that are assigned to the named database.
+ 
+### Retrieve blockchain data from the local database
+
+Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
+Example: ```sql blockchain text "select * from ledger"```
+
 #### bring options
-The keyword bring can be suffixed with ***.unique*** or ***.recent***.     
+The blockchain ***get*** command can be extended to retrieve predefined sections from the metadata. This option is detailed below.
+
+## Using the Bring command
+
+The Bring command is applied to JSON data. The command is used to retrieve and format data from a JSON object as follows:
+<pre>
+from [JSON object] bring [list of keys and formating instructions]
+</pre>
+The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
+
+The keyword bring can be suffixed with the following keywords:     
 * ```bring.unique``` returns unique values.  
+* ```bring.first``` returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.
 * ```bring.recent``` - considering and returning the recent event satisfying the ***get*** criteria. The most recent event is determined by the following:  
         - If the JSON file includes a "date" attribite, comparing the dates.  
         - Without the "date" attribute, the last object satisfying the ***get*** criteria in the JSON file is considered the ***recent*** object.
-
+* ```bring.json``` returns the requested key values in a JSON format. Formatting instructions are ignored.
+    
 The following examples retrieves all the operators with SLA at level 5 that are located in California:  
 
 a) Using an assignment of the JSON objects to ***selected_operators*** and pulling the IP and Port from each JSON object:
@@ -116,32 +140,21 @@ c) Using a ***where*** condition replacing the JSON structure in the search of t
 blockchain get operator where SLA = 5 and location = CA bring ['operator']['ip'] ":" ['operator']['port'] seperator = " " 
 </pre>
 
-The following examples retrieves all the databases which are in the JSON objects describing the tables:  
+The following example retrieves all the databases which are in the JSON objects describing the tables:  
 
 <pre>
 blockchain get table bring ['table']['dbms'] seperator = " " 
 </pre>
 
-The following examples retrieves unique databases which are in the JSON objects describing the tables:  
+The following example retrieves unique databases which are in the JSON objects describing the tables:  
 
 <pre>
 blockchain get table bring.unique ['table']['dbms'] seperator = " " 
 </pre>
 
-The following examples retrieves the most recent declaration of an operator supporting a database called lsl_demo:  
+The following example retrieves the most recent declaration of an operator supporting a database called lsl_demo:  
 
 <pre>
 blockchain get operator where dbms = lsl_demo bring.recent 
 </pre>
 
-
-### Using - Show Commands
-The following show commands retrieve data from the blockchain:
-* ```show servers for dbms [dbms name]``` - retrieve the IPs and Ports of the database servers hosting tables for the named database.  
-* ```show servers for dbms [dbms name] and [table name]``` - retrieve the IPs and Ports of the database servers hosting the named table.
-* ```show tables for dbms [dbms name]``` - retrieve the names of the tables that are assigned to the named database.
- 
-### Retrieve blockchain data from the local database
-
-Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
-Example: ```sql blockchain text "select * from ledger"```
