@@ -101,8 +101,8 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| show event log  | The Last commands processed by the node. | 
-| show error log  | The last commands that returned an error. |
+| show event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
+| show error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | show file log  | The last data files processed by the node. |
 | show query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | show databases  | The list of databases managed on the local node. |
@@ -129,9 +129,9 @@ Options:
 | show version | The code version |
 | show json file structure | Details the convention for JSON file name |
 
-#### Show log
+#### Show log instances with keywords
 
-In the logs, if info string is specified, only events containing one or more of the keywords in the info string are presented.
+Adding keywords to the ***show log*** command - only events containing one or more of the keywords are presented.
 
 Examples:
 
