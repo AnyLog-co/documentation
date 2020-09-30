@@ -111,7 +111,7 @@ To determine a target Operator to host the data, the Publisher determines the ta
 2) If there is no relevant distribution policy, the Publisher considers the Operators that declared support for the table and selects a target Operator.
 
 
-Usage:
+Usage:  
 <pre>
 run operator where [option] = [value] and [option] = [value] ...
 </pre>
@@ -120,7 +120,6 @@ Explanation:
 Monitors new data added to the watch directory and distributes the new data to an Operator.
 
 Options:  
-
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
 | watch_dir  | The directory monitored by the Publisher. Files placed on the Watch directory are processed by the Publisher.  | !watch_dir  |
@@ -140,8 +139,29 @@ run publisher where dbms_name = file_name[0] and table_name = file_name[3] and d
 
 ## Blockchain Synchronizer
 
-A process that maintains an updated version of the blockchain data.
-With a master node, the process sends a message to the master node to receive updates of the metadata.
+A process that updates the local copy of the metadata by periodically copying the metadata from a blockchian or a master node.  
+This process maintains an updated version of the blockchain data on the local node.  
+The source of the metadata depends on the node configuration and can be a blockchain or a master node.  
+
+Usage:  
+<pre>
+run blockchain sync [options]
+</pre>
+
+Options:  
+| Option        | Explanation   |
+| ------------- | ------------- | 
+| source  | The source of the metadata with optional values: 'blockchain' and 'master'.  |
+| dest  | The destination of the metadata such as a file (a local file) or a DBMS (a local DBMS).  |
+| connection  | The connection information that is needed to retrieve the data. For Master, the IP and Port of the master node.  |
+| time  | The frequency of the synchronization.  |
+
+Examples:  
+<pre>
+run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
+run blockchain sync where source = eos and time = 5 minutes and destination = file and destination = dbms
+</pre>
+
 
 ## Scheduler Process
  
