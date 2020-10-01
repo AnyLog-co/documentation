@@ -112,6 +112,7 @@ Options:
 | show watch directories | The list of the Watch directories on the node. |
 | show dictionary | The list of the variable names and their assigned values. |
 | show threads | The list of the threads executing users scripts. |
+| show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md)|
 | show synchronizer | Information on the blockchain synchronize process. |
 | show scheduler | Information on the scheduled tasks. |
 | show operator | Information on the Operator processes. |
