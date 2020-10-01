@@ -2,7 +2,7 @@
 
 Background processes are optional processes that if activated, are running using dedicated threads according to the user specifications.
 
-The background threads:
+The background processes:
 
 1. A listener for the AnyLog Peer-to-Peer Messaging. Activated by the command: ```run tcp server```
 2. A listener for a user REST Request.  Activated by the command: ```run rest server```
@@ -12,7 +12,11 @@ The background threads:
 6. A Scheduler process. Activated by the command ```run scheduler```
 7. The HA process. Activated by the command ```run ha```
 
-These processes are activated on the AL command line. Command line options are available using ***help***  
+These processes are activated on the AL command line.  
+The command ***show processes*** provides the list of the running processes.  
+The ***show*** command provides options to detail the status of each process. The options of the ***show*** command are detailed in 
+[commands](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#show-command).
+ 
 
 ## AnyLog Messaging
 
