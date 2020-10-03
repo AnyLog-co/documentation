@@ -173,8 +173,8 @@ Options:
 | get status  | Replies with the string 'running' if the node is active. | 
 | get hostname | The name assigned to the node. | 
 | get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
-| get memory info | Info on the memory of the current node. |
-| get cpu info | Info on the CPU of the current node. |
+| get memory info | Info on the memory of the current node. The function depends on psutil installed. |
+| get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
 | get database size [database name] | The size of the named database in bytes. |
 | get node id | Returns a unique identifier of the node. |
 | get hardware id | Returns a unique identfier of the hardware. |
