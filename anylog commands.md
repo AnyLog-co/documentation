@@ -216,3 +216,37 @@ Examples:
 'rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"',
 </pre>
 
+### Using REST command to retrive data from a data source
+
+Using a ***REST GET*** command data can be pulled from a REST data source and written to a file.  
+To pull data, the command results are assigned to a process that directs the data to a file as follows:
+<pre>
+[File and Data Format Instructions] = rest get where url=[url] and [option] = [value] and [option] = [value] ...
+</pre>
+
+File and data format instructions are key value pairs separated by the equal sign and provide several options:
+
+
+| Key        | Value  |
+| ---------- | -------| 
+| file       | Path and File Name. |
+| key        | If the GET request reurnes a dictionary, output the values of the provided key. |
+| show       | True/False - designating to display status as data is written to the output file. The default value is False. |
+
+
+Example:  
+The following example extract data from the [PurpleAir Website](https://www2.purpleair.com/).  
+The call to https://www.purpleair.com/json provides latest sensor reading which are organized as a list within a dictionary.    
+The following command, pulls the dictionary using a ***GET*** call, from the dictionary the key ***results*** provides the list with the readings and the data is saved to a file called purpleair.json in the prep directory.
+<pre>
+[file=!prep_dir/purpleair.json, key=results, show=true] = rest get where url = https://www.purpleair.com/json
+</pre>
+
+
+
+
+ 
+
+
+
+
