@@ -92,7 +92,7 @@ Options:
 | table_name   | The segment in the file name from which the table name is taken.  | 1 |
 | limit_tables   | a list of comma separated names within brackets listing the table names to process.  |  |
 | craete_table   |  A True value creates a table if the table doesn\'t exists.  | true |
-| master_node   |  The IP and Port of a Master node (if a master node is used).  |  |
+| master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 | update_tsd_info   | True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingested.  |  |
 
 Example:  
@@ -117,7 +117,7 @@ To determine a target Operator to host the data, the Publisher determines the ta
 
 Usage:  
 <pre>
-run operator where [option] = [value] and [option] = [value] ...
+run publisher where [option] = [value] and [option] = [value] ...
 </pre>
         
 Explanation:  
@@ -135,6 +135,7 @@ Options:
 | compress_sql   | True/False to enable/disable compression of the SQL file if processing is successful.  | false |
 | dbms_name   | The segment in the file name from which the database name is taken.  | 0 |
 | table_name   | The segment in the file name from which the table name is taken.  | 1 |
+| master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 
 Example:  
 <pre>
