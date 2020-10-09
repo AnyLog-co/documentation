@@ -44,8 +44,8 @@ Directory Structure   Explabnation
 
 Users can set any other structure by changing the values to the variables that address the different directories or by declaring a home directory to AnyLog.  
 When an AnyLog Node starts, it considers 2 system variables:  
-***anylog_lib*** - to the determine the home directory to the Python Libraries.  
-***anylog_home*** - to determine the home directory for the data files.  
+***ANYLOG_LIB*** - to the determine the home directory to the Python Libraries.  
+***ANYLOG_HOME*** - to determine the home directory for the data files.  
 The home directory for the data files can be changed dynamically using the command:
 ```
 set anylog home [absolute path]
