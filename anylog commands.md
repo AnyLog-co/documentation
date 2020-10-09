@@ -62,6 +62,7 @@ Options:
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
+| set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 
 
 #### Set variable
