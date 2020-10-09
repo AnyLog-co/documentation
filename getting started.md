@@ -29,7 +29,7 @@ This setup is using identical directory structure on all nodes:
 <pre>
 Directory Structure   Explabnation
 -------------------   -----------------------------------------
---> AnyLog-Network       [AnyLog Root]
+--> AnyLog-Network     [AnyLog Root]
     -->data           [Intermediate data processed by this node]
        -->watch       [Data placed on this directory is either a JSON file or SQL file and is processed by the node]
        -->prep        [Data in processing state]
@@ -41,6 +41,16 @@ Directory Structure   Explabnation
        -->install     [Installation scripts]
        -->anylog      [AnyLog scripts, configure the AnyLog instance]
 </pre>
+
+Users can set any other structure by changing the values to the variables that address the different directories or by declaring a home directory to anylog.  
+When an AnyLog Node starts, it considers 2 system parameters:  
+***anylog_lib*** - to the determine the home directory to the Python Libraries.  
+***anylog_home*** - to determine the home directory for the data files.  
+The home directory for the data files can be changed dynamically uing the command:
+```
+set anylog home [absolute path]
+```
+
 
 ## Prerequisites
 
