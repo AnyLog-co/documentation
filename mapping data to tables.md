@@ -68,7 +68,7 @@ Script Definitions:
 # PurpleAir Example
 
 PurpleAir (https://www2.purpleair.com/) provides air quality monitoring solutions. It offers a REST API to download air quality measurements from differenn areas in the world.    
-The 2 examples below downloads the data and updates a local database of an Operator.
+The 2 examples below download the data and update a local database of an Operator.
 In the first example, the schema is determined by the PurpleAir data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
 In the second example, the schema is determined by a user and the PurpleAir data is mapped to the schema as defined by the user.    
 
@@ -83,22 +83,21 @@ run operator where create_table = true and dbms_name = file_name[0] and table_na
 
 The above command configures the node as an Operator. Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST.  
 These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
-The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch*** type ```!watch_dir``` on the command line.  
+The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the command line.  
 
-When data is copied to the watch directory, the name of the file can determine the metadata. If the file name is: purpleair.readings.json  
-***dbms_name = file_name[0]*** will treat the first section of the file name (purpleair) as the logical database name.
-***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.
+When data is copied to the watch directory, the name of the file can determine the metadata. If the file name is: purpleair.readings.json    
+***dbms_name = file_name[0]*** will treat the first section of the file name (purpleair) as the logical database name.  
+***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
 
 The actual storage can be in Postgress or SQLite. To assign a physical database to the logical database use the following command:
-
-Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
-
 
 <pre> 
 connect dbms sqlite !db_user !db_port purpleair
 </pre>
 
-To use Postgress, replace ***sqlite*** with ***psql***. 
+To use Postgress, replace ***sqlite*** with ***psql***.
+
+Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
 ## Downloading the data
 
@@ -110,9 +109,9 @@ Using a REST GET command from the AnyLog Command line:
  
  The commands downloads a JSON file from PurpleAir that includes a list of recent readings.
  
- The data in the brackets provides the download destination:  
+ The informtion in the brackets provides the download destination:  
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
- ***key*** provides the key in the PurpleAir JSON file to the list of readings.  
+ ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
  ***show*** provides a visual status bar that monitors the write to file process.
  
  #### Example 1:
@@ -162,7 +161,7 @@ Using a REST GET command from the AnyLog Command line:
 </pre>
 
  The policy declares a schema for the table ***readings*** in the ***purpleair*** database.  
- The keys inside the schema determine the column names, the source name determine the attribute name in the JSON file.  
+ The keys inside the schema determine the column names, the source name determine the attribute name in the PurpleAir JSON file.  
  The key ***loc*** represents the coordinates of the sensor provided the readings and the value in the table is declared as a concatenation of the values with attribute names ***lat*** and ***lon*** separated by a comma.
     
  To add the Policy to the blockchain use the command:
@@ -173,22 +172,27 @@ blockchain add !instruct
 
 Notes:
 
-1) This command only updates the local copy of the blockchain. To update a master node, use the command:  
+1) Drop the existing readings schema (if exists) using the command:
+    <pre>
+    drop table readings where dbms = purpleair
+    </pre>
+
+2) This command only updates the local copy of the blockchain. To update a master node, use the command:  
     <pre>
     run client (!master_node) blockchain push !instruct
     </pre>
     and wait for the local copy of the blockchain to be updated.
 
-2) When the policy is added to the blockchain, the Policy is updated with a unique ID. To view the Policy as updated on the blockchain use the command:
+3) When the policy is added to the blockchain, the Policy is updated with a unique ID. To view the Policy as updated on the blockchain use the command:
     <pre>
     blockchain get instructions
     </pre>
 
     The ID provides a unique identifier to the policy. To assign the policy to the PurpleAir data change the filename to include the policy ID to be as follows:  
     ***purpleair.readings.0.id.json***  
-    The 0 value is usually used for the ud of the data source which we do not use in this example.
+    The 0 value is usually used for the ID of the data source which we do not use in this example.
 
-3) Configure the operator to consider instructions identified on file names as follows:
+4) Configure the operator to consider instructions identified on file names as follows:  
     a) Terminate current Operator configuration using the command line:
     <pre>
     exit opoerator
