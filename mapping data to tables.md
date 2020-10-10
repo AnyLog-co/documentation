@@ -139,6 +139,10 @@ Using a REST GET command from the AnyLog Command line:
  Copy the data to the ***watch*** directory. 
  The logical database ***purpleair*** will be updated to include the table ***readings*** with the PurpleAir Data.
  
+ To view the status of the Operator:
+<pre>
+ show operator
+</pre> 
  To view the list of tables on a local database:
 <pre>
  info dbms purpleair tables
