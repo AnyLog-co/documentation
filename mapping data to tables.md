@@ -170,7 +170,7 @@ To view a sample of the data on the local database:
                 "default_val" : 0
             },
             "loc" : {
-                 "data_type" : "str"
+                 "data_type" : "str",
                  "source_name" : ["[lat]",",","[lon]"]
             },
             "timestamp" : {
