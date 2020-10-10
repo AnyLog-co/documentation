@@ -75,7 +75,6 @@ In the second example, the schema is determined by a user and the PurpleAir data
 
 ## Prerequisite
 
-
 An AnyLog Node configured as an Operator. For example by issuing the following command on the AnyLog command line:
 
 <pre> 
@@ -92,7 +91,14 @@ When data is copied to the watch directory, the name of the file can determine t
 
 The actual storage can be in Postgress or SQLite. To assign a physical database to the logical database use the following command:
 
+Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
+
+
+<pre> 
 connect dbms sqlite !db_user !db_port purpleair
+</pre>
+
+To use Postgress, replace ***sqlite*** with ***psql***. 
 
 ## Downloading the data
 
@@ -108,6 +114,96 @@ Using a REST GET command from the AnyLog Command line:
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
  ***key*** provides the key in the PurpleAir JSON file to the list of readings.  
  ***show*** provides a visual status bar that monitors the write to file process.
+ 
+ #### Example 1:
+ 
+ Copy the data to the ***watch*** directory. 
+ The logical database ***purpleair*** will be updated to include the table ***readings*** with the PurpleAir Data.
+ 
+ #### Example 2:
+ 
+ To determine the schema add an Instructions Policy to the blockchain as follows:
+ * Assign the policy to a variable. Note that the the text between the ***<...>*** signs are treated on the AnyLog command line as a continues string.
+<pre> 
+< instruct = {"instructions" : {
+"dbms" : "purpleair",
+"table" : "readings",
+
+"schema"     : {
+
+            "device_id" : {
+                "data_type" : "int",
+                "source_name" : "ID",
+                "default_val" : 0
+            },
+            "loc" : {
+                 "data_type" : "str"
+                 "source_name" : ["[lat]",",","[lon]"]
+            },
+            "timestamp" : {
+                "data_type" : "timestamp",
+                "source_name" : "lastseen"
+            },
+            "humidity" : {
+                "data_type" : "int",
+                "source_name" : "humidity"
+            },
+            "temperature" : {
+                "data_type" : "int",
+                "source_name" : "temp_f"
+            },
+            "pressure" : {
+                "data_type" : "int",
+                "source_name" : "pressure"
+            }
+    }
+}
+} >
+</pre>
+
+ The policy declares a schema for the table ***readings*** in the ***purpleair*** database.  
+ The keys inside the schema determine the column names, the source name determine the attribute name in the JSON file.  
+ The key ***loc*** represents the coordinates of the sensor provided the readings and the value in the table is declared as a concatenation of the values with attribute names ***lat*** and ***lon*** separated by a comma.
+    
+ To add the Policy to the blockchain use the command:
+
+<pre>
+blockchain add !instruct
+</pre>
+
+Notes:
+
+1) This command only updates the local copy of the blockchain. To update a master node, use the command:  
+    <pre>
+    run client (!master_node) blockchain push !instruct
+    </pre>
+    and wait for the local copy of the blockchain to be updated.
+
+2) When the policy is added to the blockchain, the Policy is updated with a unique ID. To view the Policy as updated on the blockchain use the command:
+    <pre>
+    blockchain get instructions
+    </pre>
+
+    The ID provides a unique identifier to the policy. To assign the policy to the PurpleAir data change the filename to include the policy ID to be as follows:  
+    ***purpleair.readings.0.id.json***  
+    The 0 value is usually used for the ud of the data source which we do not use in this example.
+
+3) Configure the operator to consider instructions identified on file names as follows:
+    a) Terminate current Operator configuration using the command line:
+    <pre>
+    exit opoerator
+    </pre>
+    b) Provide configuration to treat the instructions when data is loaded using the following command:
+    <pre>
+    run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and instructions = file_name[4] and compress_sql = true and compress_json = true
+    </pre>
+
+Copy the file ***purpleair.readings.0.id.json*** to the ***watch*** directory. 
+The logical database ***purpleair*** will be updated to include the table ***readings*** with the defined schema and PurpleAir Data.
+ 
+
+
+
  
  
  
