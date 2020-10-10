@@ -95,7 +95,7 @@ The actual storage can be in Postgress or SQLite. To assign a physical database 
 connect dbms sqlite !db_user !db_port purpleair
 </pre>
 
-To use Postgress, replace ***sqlite*** with ***psql*** and to see active databases on this node use the command '''show databases''.
+To use Postgress, replace ***sqlite*** with ***psql*** and to see active databases on this node use the command ```show databases```.
 
 Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
