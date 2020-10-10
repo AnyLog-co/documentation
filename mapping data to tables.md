@@ -139,6 +139,20 @@ Using a REST GET command from the AnyLog Command line:
  Copy the data to the ***watch*** directory. 
  The logical database ***purpleair*** will be updated to include the table ***readings*** with the PurpleAir Data.
  
+ To view the list of tables on a local database:
+<pre>
+ info dbms purpleair tables
+</pre> 
+To view the list of columns in a table:
+<pre>
+ info table purpleair readings columns
+</pre> 
+To view a sample of the data on the local database:
+<pre>
+ sql purpleair "select * from readings limit 10"
+</pre>
+
+ 
  #### Example 2:
  
  To determine the schema add an Instructions Policy to the blockchain as follows:
