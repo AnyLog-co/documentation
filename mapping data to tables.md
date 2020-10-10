@@ -75,11 +75,31 @@ In the second example, the schema is determined by a user and the PurpleAir data
 
 ## Prerequisite
 
-An AnyLog Node configured as an Operator. For example by issuing the following command on the AnyLog command line:
-
-<pre> 
-run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and compress_sql = true and compress_json = true
-</pre>
+1) An AnyLog node member in the network:  
+    Use the following command to connect a node to the network using default IP and port 2048:  
+    <pre> 
+    run tcp server !ip 2048
+    </pre>
+    Update the operator as a member of the network supporting PurpleAir data.  
+    Declare the operator (Note that the the instruction between the ***<...>*** signs below are treated on the AnyLog command line as a continues string): 
+    <pre> 
+    < operator = {"operator" : {
+            "dbms" : "purpleair",
+            "table" : "*",
+            "ip" : !ip,
+            "port" : "2048"
+        }
+    } >
+    </pre>
+    Update the blockchain:  
+    <pre>
+    blockchain add !operator
+    </pre>
+2) An AnyLog Node configured as an Operator. For example by issuing the following command on the AnyLog command line:
+    
+    <pre> 
+    run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and compress_sql = true and compress_json = true
+    </pre>
 
 The above command configures the node as an Operator. Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST.  
 These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
@@ -122,7 +142,7 @@ Using a REST GET command from the AnyLog Command line:
  #### Example 2:
  
  To determine the schema add an Instructions Policy to the blockchain as follows:
- * Assign the policy to a variable. Note that the the text between the ***<...>*** signs are treated on the AnyLog command line as a continues string.
+ * Assign the policy to a variable. Note that the the instructions between the ***<...>*** signs are treated on the AnyLog command line as a continues string.
 <pre> 
 < instruct = {"instructions" : {
 "dbms" : "purpleair",
