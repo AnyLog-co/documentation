@@ -72,12 +72,34 @@ The 2 examples below downloads the data and updates a local database of an Opera
 In the first example, the schema is determined by the PurpleAir data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
 In the second example, the schema is determined by a user and the PurpleAir data is mapped to the schema as defined by the user.    
 
-# Downloading the data
+
+## Prerequisite
+
+
+An AnyLog Node configured as an Operator. For example by issuing the following command on the AnyLog command line:
+
+<pre> 
+run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and compress_sql = true and compress_json = true
+</pre>
+
+The above command configures the node as an Operator. Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST.  
+These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
+The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch*** type ```!watch_dir``` on the command line.  
+
+When data is copied to the watch directory, the name of the file can determine the metadata. If the file name is: purpleair.readings.json  
+***dbms_name = file_name[0]*** will treat the first section of the file name (purpleair) as the logical database name.
+***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.
+
+The actual storage can be in Postgress or SQLite. To assign a physical database to the logical database use the following command:
+
+connect dbms sqlite !db_user !db_port purpleair
+
+## Downloading the data
 
 Using a REST GET command from the AnyLog Command line: 
  
  <pre> 
-[file=!prep_dir/purpleair.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
+[file=!prep_dir/purpleair.readings.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
  </pre> 
  
  The commands downloads a JSON file from PurpleAir that includes a list of recent readings.
