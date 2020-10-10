@@ -63,7 +63,29 @@ Script Definitions:
       }
    }
 }> 
-```  
+``` 
 
+# PurpleAir Example
 
+PurpleAir (https://www2.purpleair.com/) provides air quality monitoring solutions. It offers a REST API to download air quality measurements from differenn areas in the world.    
+The 2 examples below downloads the data and updates a local database of an Operator.
+In the first example, the schema is determined by the PurpleAir data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
+In the second example, the schema is determined by a user and the PurpleAir data is mapped to the schema as defined by the user.    
+
+# Downloading the data
+
+Using a REST GET command from the AnyLog Command line: 
+ 
+ <pre> 
+[file=!prep_dir/purpleair.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
+ </pre> 
+ 
+ The commands downloads a JSON file from PurpleAir that includes a list of recent readings.
+ 
+ The data in the brackets provides the download destination:  
+ ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
+ ***key*** provides the key in the PurpleAir JSON file to the list of readings.  
+ ***show*** provides a visual status bar that monitors the write to file process.
+ 
+ 
  
