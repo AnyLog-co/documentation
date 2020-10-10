@@ -95,7 +95,7 @@ In the second example, the schema is determined by a user and the PurpleAir data
     <pre>
     blockchain add !operator
     </pre>
-2) An AnyLog Node configured as an Operator. For example by issuing the following command on the AnyLog command line:
+2) Configure the node as an Operator by issuing the following command on the AnyLog command line:
     
     <pre> 
     run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and compress_sql = true and compress_json = true
