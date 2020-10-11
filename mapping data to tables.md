@@ -127,7 +127,7 @@ Using a REST GET command from the AnyLog Command line:
 [file=!prep_dir/purpleair.readings.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
  </pre> 
  
- The commands downloads a JSON file from PurpleAir that includes a list of recent readings.
+ The example above downloads a JSON file from PurpleAir that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
  
  The informtion in the brackets provides the download destination:  
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  

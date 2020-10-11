@@ -242,6 +242,9 @@ The following command, pulls the dictionary using a ***GET*** call, from the dic
 <pre>
 [file=!prep_dir/purpleair.json, key=results, show=true] = rest get where url = https://www.purpleair.com/json
 </pre>
+An Example of the usage of the REST GET command is available in the section [Mapping Data to Tables](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md#purpleair-example).
+
+ 
 
 
 
