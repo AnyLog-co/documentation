@@ -227,7 +227,7 @@ Notes:
     </pre>
 
     The ID provides a unique identifier to the policy. To assign the policy to the PurpleAir data change the filename to include the policy ID to be as follows:  
-    ***purpleair.readings.0.a5ed649d2009490f6568a4c9c767efbf.json***  
+    ***purpleair.readings.0.1eb8c6aae8898cb59905219b4056b619.json***  
     The 0 value is usually used for the ID of the data source which we do not use in this example.
 
 4) Configure the operator to consider instructions identified on file names as follows:  
