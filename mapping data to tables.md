@@ -169,28 +169,28 @@ To view a sample of the data on the local database:
 "schema"     : {
 
             "device_id" : {
-                "data_type" : "int",
+                "type" : "int",
                 "source_name" : "ID",
-                "default_val" : 0
+                "default" : 0
             },
             "loc" : {
-                 "data_type" : "str",
+                 "type" : "str",
                  "source_name" : ["[lat]",",","[lon]"]
             },
             "timestamp" : {
-                "data_type" : "timestamp",
+                "type" : "timestamp",
                 "source_name" : "lastseen"
             },
             "humidity" : {
-                "data_type" : "int",
+                "type" : "int",
                 "source_name" : "humidity"
             },
             "temperature" : {
-                "data_type" : "int",
+                "type" : "int",
                 "source_name" : "temp_f"
             },
             "pressure" : {
-                "data_type" : "int",
+                "type" : "int",
                 "source_name" : "pressure"
             }
     }
