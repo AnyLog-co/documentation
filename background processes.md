@@ -178,7 +178,31 @@ These are examples of scheduled tasks that can be declared as periodic processes
 The scheduled tasks can be an AnyLog command like a Query that needs to be periodically executed or multiple commands that are organized as a script file.  
 The script can describe the terms that needs to be satisfied (if such are available) and the task to execute.  
 When a scheduled task is declared, it is associated with a time interval and assigned to the scheduler. The scheduler will execute the task script in a frequency that depends on the assigned time interval.      
-  
+
+In order to use Scheduled Tasks, a node needs to be configured with a Scheduler running. If a scheduler is running, it is possible to assign tasks to the scheduler.  
+
+### Invoking the scheduler
+Usage:
+<pre>
+run scheduler
+</pre>
+This command will allow users to declare tasks that will be executed periodically.
+
+### Adding tasks to the scheduler
+Usage:
+<pre>
+schedule [options] command [command to execute]
+</pre>
+The command ***schedule**** declares a scheduled command that is placed in the scheduler.  
+If the scheduler is active, the command will be repeatably executed according to the time specified in the options.
+   
+Examples:
+<pre>
+schedule time = 10 seconds command system date
+schedule time = 1 minute command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
+</pre>
+
+
  
 ## HA Process
  
