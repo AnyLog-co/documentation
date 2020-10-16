@@ -171,6 +171,14 @@ run blockchain sync where source = eos and time = 5 minutes and destination = fi
 ## Scheduler Process
  
 A process that triggers the scheduled tasks.
+
+#### Overview
+Users can declare scheduled tasks on each node of the network. For example, a node can be configured to run a particular report once a day, or to monitor the values generated from a device or a user may want to test the availability of disk space or a size of a database to determine if removal of data is needed.    
+These are examples of scheduled tasks that can be declared as periodic processes or as rules which if met, process a task.    
+The scheduled tasks can be an AnyLog command like a Query that needs to be periodically executed or multiple commands that are organized as a script file.  
+The script can describe the terms that needs to be satisfied (if such are available) and the task to execute.  
+When a scheduled task is declared, it is associated with a time interval and assigned to the scheduler. The scheduler will execute the task script in a frequency that depends on the assigned time interval.      
+  
  
 ## HA Process
  
