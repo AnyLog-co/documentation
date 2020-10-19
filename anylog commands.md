@@ -288,9 +288,10 @@ Options are provided in the format ```key = value``` and multiple options are se
 | ---------- | -------| 
 | include    | Adding data from a different database and table to the query result. The value is specified as ***dbms.table***. |
 | table      | A designated table to maintain the query results. |
-| dest       | Output destination like stdout (default), rest, none (to only updates results dbms).  |
+| dest       | Output destination like stdout (default), rest, file, none (to only updates results dbms).  |
 | max_time   | Cap the query execution time.  |
 | drop       | True/False - drop the output table when query starts (default is True).  |
+| file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
 
 
 
