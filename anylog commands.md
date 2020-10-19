@@ -197,13 +197,16 @@ Security related options:
 
 ## REST Command
 
+The ***rest*** command allows to send REST requestd to a REST server. The Rest server can be an AnyLog node that provides a REST connection or a non-AnyLog node that satisfies REST requests. 
+
 <pre>
 rest [operation] where url=[url] and [option] = [value] and [option] = [value] ...
 </pre>
 
 Explanation:  
-The rest command allows to send REST requestd to an AnyLog REST server.  
-Using REST to deliver requests between members of the network is used to test and validate the REST functionality of the member that offers REST services.       
+When an AnyLog node is running, it offers a REST API. The REST allows to accept REST calls from users and applications (like Grafana) to the Network members.    
+Activating the REST API on a particular node is explained in [REST requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests).  
+Using the REST command users can issue REST calls between members of the network and between non-members to members of the network.         
 The rest call provides the target URL (of the REST server) and additional values.  
 The URL must be provided, the other key value pairs are optional headers and data values.
 
@@ -216,6 +219,7 @@ Examples:
 'rest get where url = http://10.0.0.159:2049 and type = info and details = "get status"\n'
 'rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"',
 </pre>
+
 
 ### Using REST command to retrive data from a data source
 
