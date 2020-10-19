@@ -249,11 +249,48 @@ The following command, pulls the dictionary using a ***GET*** call, from the dic
 An Example of the usage of the REST GET command is available in the section [Mapping Data to Tables](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md#purpleair-example).
 
  
+## SQL Command
 
+The ***sql*** command allows to execute sql statements on the data hosted by members of the network. 
 
+<pre>
+sql [dbms name] [options] [sql statement]
+</pre>
 
+Explanation:  
+The SQL statement is applied to the logical database and is executed according to the options provided.  
+If the sql is send to nodes in the network, there is no need to specify the target servers, the network protocol identifies all the nodes that host data for the logical database.  
+The format to distribute the call to all the servers with relevant data is as follows:  
+<pre>
+run client () sql [dbms name] [options] [sql statement]
+</pre>
+Whereas processing the query on designated servers is done by specifying the IPs and Ports of the servers inside the parenthesis as in the example below:  
+<pre>
+run client (ip:port, ip:port ...) sql [dbms name] [options] [sql statement]
+</pre>
+Nodes that receives the SQL statement will execute the statement if a logical database is declared on their node. 
+To assign a logical database to a physical database use the command: ```connect dbms```.     
+To view the list of logical databases on a particular node use the command: ```show databases```.  
+If a logical database is not declared on the node, the node will return an error message.  
+A node that issues a query needs to declare a logical database to host the query results and the name of the logical database is ***system_query***.  
+An example of using SQLite as the physical database for ***system_query*** is the following:
+<pre>  
+connect dbms sqlite !db_user !db_port system_query memory
+</pre>
+The ***memory*** keyword is optional and directs the database to reside in RAM.  
+The ***sqlite*** keyword can be replaced with ***psql*** to leverage PostgreSQL to host the results sets.  
 
- 
+### Options
+
+Options are provided in the format ```key = value``` and multiple options are seperated by the```and``` keyword.  
+
+| Key        | Value  |
+| ---------- | -------| 
+| include    | Adding data from a different database and table to the query result. The value is specified as ***dbms.table***. |
+| table      | A designated table to maintain the query results. |
+| dest       | Output destination like stdout (default), rest, none (to only updates results dbms).  |
+| max_time   | Cap the query execution time.  |
+| drop       | True/False - drop the output table when query starts (default is True).  |
 
 
 
