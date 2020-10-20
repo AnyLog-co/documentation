@@ -261,6 +261,8 @@ Explanation:
 The SQL statement is applied to the logical database and is executed according to the options provided.  
 If the sql is send to nodes in the network, there is no need to specify the target servers, the network protocol identifies all the nodes that host data for the logical database.  
 The format to distribute the call to all the servers with relevant data is as follows:  
+
+Usage:
 <pre>
 run client () sql [dbms name] [options] [sql statement]
 </pre>
@@ -304,3 +306,29 @@ run client () sql purpleair file = !prep_dir/my_data.json and dest = file and fo
 Details on queries executed against time series data are available in [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md#queries-and-info-requests-to-the-anylog-network).
 ### Monitoring queries  
 Details on profiling and monitoring queries are available in [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
+
+# Backup Command
+
+The ***backup*** command transfers data from local database to a file for archival.  
+If the table's data is not partitioned, the backup includes the entire table's data set.  
+If the table data is partitioned, the backup operates at a partition level and can include one partition or all the partitions of the table.
+
+Usage:
+<pre>
+backup table where dbms = [dbms name] and table = [table name] and partition = [partition name] and dest = [output directory]
+</pre>
+
+Explanation:
+
+Backup the data of a particular partition or all the partitions of a table.  
+Partition name is optional, if omitted all the partitions of the table participate in the backup process.  
+If the table is not partitioned, the entire table participates in the backup process.
+The data of each partition is written into a file at the location specified with the keyword 'dest'.    
+The file data is organized in a JSON format which can be processed and ingested by a node in the network. 
+
+Examples:
+<pre>
+backup table where dbms = purpleair and table = readings and dest = !bkup_dir
+backup partition where dbms = purpleair and table = readings and partition = par_readings_2018_08_00_d07_timestamp and dest = !bkup_dir
+</pre>
+
