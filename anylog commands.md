@@ -294,7 +294,7 @@ Options are provided in the format ```key = value``` and multiple options are se
 | max_time   | Cap the query execution time.  |
 | drop       | True/False - drop the output table when query starts (default is True).  |
 | file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
-| format     | Output format, the default being JSON. Options: json, table, backup |
+| format     | Output format, the default being JSON. Options: json, table |
 
 
 ### Example

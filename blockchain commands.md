@@ -77,6 +77,17 @@ Updating the Master Node is Done by a blockchain push request that is send to th
 ### Retrieving the Metadata from a Master Node
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
 
+### Removing policies from a master node
+Deleting a policy from a master node is with the command:
+<pre>
+blockchain drop policy [JSON data]
+</pre>
+JSON data is the policy to drop.
+If JSON data is a list of multiple policies, a where condition is required. For example:  
+<pre>
+blockchain drop policy !operator where ip = 10.0.0.25
+</pre>
+
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the blockchain data in a local JSON file.
 The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
