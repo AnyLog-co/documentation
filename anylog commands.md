@@ -292,7 +292,15 @@ Options are provided in the format ```key = value``` and multiple options are se
 | max_time   | Cap the query execution time.  |
 | drop       | True/False - drop the output table when query starts (default is True).  |
 | file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
+| format     | Output format, the default being JSON. Options: json, table, backup |
 
 
 
+### Example
+<pre>  
+run client () sql purpleair file = !prep_dir/my_data.json and dest = file and format = json "select * from readings limit 10"
+</pre>
 
+### Predefined SQL functions
+Details on queries executed against time series data are available in [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md#queries-and-info-requests-to-the-anylog-network).  
+Details on profiling and monitoring queries are available in [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
