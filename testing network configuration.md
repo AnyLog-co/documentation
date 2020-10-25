@@ -28,6 +28,9 @@ For example: ```run client (dbms = lsl_demo) "blockchain test"```
 
 When a server is up, the configured ips and ports can be tested as follows:  
 
+For simplicity disable authentication:
+```set authentication off```
+
 To test the TCP server configuration use the command:  
 ```run client (host:port) "get status"```
 
