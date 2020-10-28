@@ -295,6 +295,7 @@ Options are provided in the format ```key = value``` and multiple options are se
 | drop       | True/False - drop the output table when query starts (default is True).  |
 | file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
 | format     | Output format, the default being JSON. Options: json, table |
+| timezone   | Time is stored in UTC and queried and presented using local timezone. Use ***utc** to avoid mapping to local timezone. |
 
 
 ### Example
