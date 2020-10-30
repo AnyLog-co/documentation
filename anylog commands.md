@@ -336,7 +336,7 @@ backup partition where dbms = purpleair and table = readings and partition = par
 
 # File Command
 
-The ***file*** commands provide the means to operate on file including deleting file, compressing and decompressing files and copying files between member nodes.
+The ***file*** command provides the means to operate on files including deleting files, compressing and decompressing files and copying files between member nodes.
 
 ## Files operations:
 
@@ -370,7 +370,7 @@ In the example above:
 
 Get a file from a member node.
 <pre>
-[get] [file path and name on member] [destination path and name on current node]
+[get] [file path and name on the member node] [destination path and file name on current node]
 </pre>
 
 Example:
@@ -388,15 +388,16 @@ Move the source file to a destination directory
 
 Examples:
 <pre>
-file move !my_file
+file move !prep_dir/my_file !watch_dir
 </pre>
+The example above moves the file from the prep directory to the watch directory.
 
  
 ### Compress and decompress a file
 
 <pre>
 file compress [source path and file name] [target path and file name]
-file compress [compressed path and file name] [target path and file name]
+file decompress [path and file name of compressed file] [target path and file name]
 </pre>
 For compression, the target path and file name are optional. If omitted, the target file name and the location is the same and the source file with the extension ***.gz***.  
 For decompression, the target path and file name are optional. If omitted, the target file name and the location is the same and the compressed file with the extension ***.dat***.
