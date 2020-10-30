@@ -167,6 +167,8 @@ run blockchain sync where source = master and time = 3 seconds and dest = file a
 run blockchain sync where source = eos and time = 5 minutes and destination = file and destination = dbms
 </pre>
 
+Information on Master Node configuration is available at [master node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
+
 
 ## Scheduler Process
  
