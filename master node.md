@@ -41,6 +41,3 @@ A node can enable a synchronization process. This process periodically pulls the
 The synchronization process is detailed at [blockchain synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
 
-
-
-
