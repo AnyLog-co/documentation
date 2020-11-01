@@ -333,6 +333,48 @@ backup table where dbms = purpleair and table = readings and dest = !bkup_dir
 backup partition where dbms = purpleair and table = readings and partition = par_readings_2018_08_00_d07_timestamp and dest = !bkup_dir
 </pre>
 
+# Partition Command
+
+Users data is maintained on local databases organized in tables. As the data is ***time series data*** it is possible to organize the data in partitions based on time.    
+If the data of a table is partitioned, the partitioning is hidden from the users and applications. Users interact with the data using the table name and the distribution of the processing to the different partitions is transparent.       
+Any date-time column can be levarged as the partition column. 
+
+Usage:  
+<pre>
+partition [dbms name] [table name] using [column name] by [time interval]
+</pre>
+
+Time intervals options are: year, month, week and days and can be used with a counter, for example, ***3 months*** would create a partition every year's quarter.  
+ 
+Examples:
+<pre>
+partition lsl_demo ping_sensor using timestamp by 2 days
+partition lsl_demo ping_sensor using timestamp by month
+partition lsl_demo * using timestamp by month
+</pre>
+
+# Drop Partition Command
+
+When data needs to be removed from a node, users can process the removal by dropping partitions. As the data is partitioned by time, it is possible to drop the oldest partition whicle the system continues to process data with the remaining partitions.
+Users can leverage the [backup](Backup Command) process prior to the drop of the partition.
+
+
+Usage:  
+<pre>
+drop partition [partition name] where dbms = [dbms name] and table = [table name]
+</pre>
+  
+Explanation:  
+Drops a partition in the named database and table.
+[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped.
+If the table has only one partition, an error value is returned
+
+Examples:
+<pre>
+drop partition par_readings_2019_08_02_d07_timestamp where dbms = purpleair and table = readings
+drop partition where dbms = purpleair and table = readings
+</pre>
+
 
 # File Command
 
