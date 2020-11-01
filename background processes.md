@@ -163,7 +163,7 @@ Options:
 
 Examples:  
 <pre>
-run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
+run blockchain sync where source = master and time = 3 seconds and dest = file and connection = !ip_port
 run blockchain sync where source = eos and time = 5 minutes and destination = file and destination = dbms
 </pre>
 
