@@ -58,8 +58,7 @@ Maintaining a master node in the network is optional.
 ```blockchain pull to sql``` – retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements.    
 ```blockchain pull to JSON``` – retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file.    
 ```blockchain update file [path and file name]``` – copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy.    
-```blockchain update dbms [path and file name] [ignore message]``` – add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data.  
-The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix.  
+```blockchain update dbms [path and file name] [ignore message]``` – add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix.  
 
 
 ```blockchain commit [JSON data]``` – add a JSON object to the blockchain  
