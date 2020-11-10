@@ -60,7 +60,6 @@ Maintaining a master node in the network is optional.
 ```blockchain update file [path and file name]``` – copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy.    
 ```blockchain update dbms [path and file name] [ignore message]``` – add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix.  
 
-
 ```blockchain commit [JSON data]``` – add a JSON object to the blockchain  
 ```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
 ```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
@@ -68,10 +67,13 @@ Maintaining a master node in the network is optional.
 ```blockchain drop policy [JSON data]``` – removes the policy specified by the JSON data fom local database that maintains metadata information.  
 ```blockchain delete local file``` - deletes the local JSON file with the blockchain data. 
 
-
 ```blockchain test``` - test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. 
 ```blockchain get id [json data]``` - returns the hash value of the JSON data.  
 ```blockchain test id``` - returns True if the id exists in the local blockchain file. Otherwise returns False.
+
+```blockchain load metadata [conditions]``` - update the local metadata from policies published on the blockchain.
+```blockchain query metadata [conditions]``` - provides a diagram representation of the local metadata.
+```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies.
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
@@ -100,7 +102,6 @@ Metadata queries evaluate the data in the local JSON file.
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
 * Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
-
 
 ### Using - Show Commands
 The following show commands retrieve data from the blockchain:
@@ -144,6 +145,15 @@ Special separators:
     * ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
     * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
     
+## Data Distribution Policies
+The policies that determine how data is distributed among nodes of the network are managed by a set of commands that are detailed below.  
+```blockchain load metadata [conditions]``` - when the blockchain is updated, ***load*** forces an update of the metadata tier by evaluating the relevant policies published on the blockchain.
+```blockchain query metadata [conditions]``` - provides a visual diagram representation of data is distributed to the nodes in the network.
+```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies. These are the policies that determine how data is distributed.
+****conditions*** - a set of conditions that limit the number of policies participate in the process.  
+For example, a node can specify the company nad or database and or table of interest.  
+More information is available at [Data Distribution and Configuration]()
+
 ### Examples
 
 The following examples retrieve all the operators with SLA at level 5 that are located in California:  
