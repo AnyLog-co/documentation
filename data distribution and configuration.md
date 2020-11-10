@@ -2,7 +2,7 @@
 # Data Distribution and Configuration
 
 The distribution of data to nodes in the network is determined by policies published on the blockchain.  
-A policy is a JSON object that is structured as a nested disctionaries. The root dictionary has one attribute that determines the type of the policy and the children are structured as needed to describe the policy.  
+A policy is a JSON object that is structured as a nested dictionaries. The root dictionary has one attribute that determines the type of the policy and the children are structured as needed to describe the policy.  
 
 There are 2 ways to represent how data is distributed.
 1. Assigning data to Operators - using this approach, Operators declare the tables they support and the data is distributed to the relevant operators.  
@@ -13,17 +13,17 @@ This method does not offer the High Availability (HA) features and is usually us
 
 * A set of policies published on the blockchain that determine how data is distributed.
 * The participating Operators are connected to the network.
-To view connection information call:  
+To view connection information issue the following command:  
 ```show connections``` on each participating operator.  
 * Operators that host data are configured to provide a local database service.  
 For example, to support a database called ***lsl_data*** using PotgreSQL, the ***connect dbms*** is called as follows:  
-``` connect dbms psql !db_user !db_port lsl_data```
-To view connected databases call:
+``` connect dbms psql !db_user !db_port lsl_data```  
+To view connected databases call:  
 ```show databases```
  
 ## Assigning data to Operators
 
-Operators declare the tables supported using a policies as the example below:
+Using the first method, Operators declare the tables supported using a policies as the example below:
 
 ### Example
 
@@ -41,6 +41,7 @@ When data is distributed to a table or is being queried, all the relevant Operat
 
 ## Declaring Clusters and assigning Operators to Clusters 
 
+This method declares clusters, assigns Operators to Clusters and provides redundancy and HA.  
 A CLuster is a policy that determines the following:
 1. A set of tables that are supported by the Cluster Members.
 2. For each table, the portion of the data that will be provided to the Cluster Members for hosting.
@@ -56,7 +57,8 @@ For each table, the policy provides a distribution ID. The distribution ID deter
 With N Clusters, each Cluster maintains a distribution ID (a number in the range 1 to N), the table's data will be split to N and each Cluster will receive approximately 1/N of the data.
  
 ### Assigning Operators to Clusters
-The Cluster Policy determines the logical distribution of the data. The assignments of nodes is by declaring Operators with the ID of the Cluster they manage.  
+The Cluster policy determines the logical distribution of the data. The assignments of nodes is by declaring Operators with the ID of the Cluster they manage.  
+The Cluster ID is generated when the Cluster policy is added to the blockchain.  
 
 ## Activating the policies
 
@@ -86,14 +88,14 @@ blockchain query metadata
 
 ### Example Policies
 
-The following example declares the following:
-a) 2 tables: cos_data and sin_data.
-b) 2 clusters, the first supports the 2 tables and the second supports cos_data only.
-c) 3 Operators - 2 Operators supporting the first cluster and 1 operator supporting the second cluster.
+The following example declares the following:  
+1. 2 tables: cos_data and sin_data.  
+2. 2 clusters, the first supports the 2 tables and the second supports cos_data only.  
+3. 3 Operators - 2 Operators supporting the first cluster and 1 operator supporting the second cluster.  
 
 #### Declaring the tables
 <pre>
-<table =  {"table": {"create": "CREATE TABLE IF NOT EXISTS cos_data(  row_id SERIAL "
+{"table": {"create": "CREATE TABLE IF NOT EXISTS cos_data(  row_id SERIAL "
                       "PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL "
                       "DEFAULT NOW(),  timestamp TIMESTAMP NOT NULL DEFAULT "
                       "NOW(),  value FLOAT ); CREATE INDEX "
@@ -102,11 +104,10 @@ c) 3 Operators - 2 Operators supporting the first cluster and 1 operator support
                       "cos_data(insert_timestamp);",
             "dbms": "purpleair",
             "id": "c096ee7b923554382cb1cf875f13278a",
-            "name": "cos_data"}}>
+            "name": "cos_data"}}
 
-blockchain add !table
 
-<table =  {"table": {"create": "CREATE TABLE IF NOT EXISTS sin_data(  row_id SERIAL "
+{"table": {"create": "CREATE TABLE IF NOT EXISTS sin_data(  row_id SERIAL "
                       "PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL "
                       "DEFAULT NOW(),  timestamp TIMESTAMP NOT NULL DEFAULT "
                       "NOW(),  value FLOAT ); CREATE INDEX "
@@ -115,16 +116,13 @@ blockchain add !table
                       "sin_data(insert_timestamp);",
             "dbms": "purpleair",
             "id": "e46d9b768d7eef2abaacb17b251191aa",
-            "name": "sin_data"}}>
-
-blockchain add !table
+            "name": "sin_data"}}
 
 </pre>
 
 #### Declaring the Clusters
 <pre>
-
-<cluster = {"cluster" : {
+{"cluster" : {
                 "company" : "anylog",
                 "status" : "active",
                 "table" : [
@@ -143,11 +141,9 @@ blockchain add !table
                 ]
 
     }
-}>
+}
 
-blockchain add !cluster
-
-<cluster = {"cluster" : {
+cluster = {"cluster" : {
                 "company" : "anylog",
                 "status" : "active",
                 "table" : [
@@ -159,39 +155,31 @@ blockchain add !cluster
                             ]
 
     }
-}>
-
-blockchain add !cluster
-
+}
 </pre>
 
 #### Declaring the Operators
 
 <pre>
-<operator = {"operator" : {
+{"operator" : {
     "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
     "ip" : "10.0.0.25",
     "port" : "2048"
     }
-}>
+}
 
-blockchain add !operator
-
-<operator = {"operator" : {
+{"operator" : {
     "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
     "ip" : "10.0.0.87",
     "port" : "2048"
     }
-}>
-blockchain add !operator
+}
 
-
-<operator = {"operator" : {
+{"operator" : {
     "cluster" : "56142ddfa243bb3bc8c6688848af01db",
     "ip" : "10.0.0.169",
     "port" : "2148"
     }
-}>
-blockchain add !operator
+}
 </pre>
 
