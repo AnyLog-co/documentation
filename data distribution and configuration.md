@@ -25,6 +25,8 @@ To view connected databases call:
 
 Operators declare the tables supported using a policies as the example below:
 
+### Example
+
 <pre>
 {"operator" : {
     "dbms" : "lsl_data"
@@ -48,3 +50,148 @@ The cluster policy includes a list of tables that are supported. The tables are 
 ***company*** - the name of the company that owns the data (optional).  
 ***dbms*** - the name of the logical database that hosts the data.  
 ***name*** - the name of the logical table that hosts the data.  
+
+### The distribution ID
+For each table, the policy provides a distribution ID. The distribution ID determines the portion of the table's data that will be managed by the cluster.    
+With N Clusters, each Cluster maintains a distribution ID (a number in the range 1 to N), the table's data will be split to N and each Cluster will receive approximately 1/N of the data.
+ 
+### Assigning Operators to Clusters
+The Cluster Policy determines the logical distribution of the data. The assignments of nodes is by declaring Operators with the ID of the Cluster they manage.  
+
+## Activating the policies
+
+When the policies are declared they bacome availabele to the relevant nodes using one of the methods that distributes the blockchain updates.  
+For example, by configuring the nodes to use the blockchain synchronizer using the command:
+<pre>
+run blockchain sync
+</pre>
+Information on the Synchronizer process is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
+The Synchronizer process will automatically update the metadata by the policies declared.
+To manually force the updated policies, use the command:
+<pre>
+blockchain load metadata
+</pre>
+
+## View data distribution policies
+The command below provides a visual chart of how data is distributed to nodes in the network:
+<pre>
+blockchain query metadata
+</pre>
+
+## Test Cluster policies
+The command below tests the validity of the Cluster policies:
+<pre>
+blockchain query metadata
+</pre>
+
+### Example Policies
+
+The following example declares the following:
+a) 2 tables: cos_data and sin_data.
+b) 2 clusters, the first supports the 2 tables and the second supports cos_data only.
+c) 3 Operators - 2 Operators supporting the first cluster and 1 operator supporting the second cluster.
+
+#### Declaring the tables
+<pre>
+<table =  {"table": {"create": "CREATE TABLE IF NOT EXISTS cos_data(  row_id SERIAL "
+                      "PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL "
+                      "DEFAULT NOW(),  timestamp TIMESTAMP NOT NULL DEFAULT "
+                      "NOW(),  value FLOAT ); CREATE INDEX "
+                      "cos_data_timestamp_index ON cos_data(timestamp); CREATE "
+                      "INDEX cos_data_insert_timestamp_index ON "
+                      "cos_data(insert_timestamp);",
+            "dbms": "purpleair",
+            "id": "c096ee7b923554382cb1cf875f13278a",
+            "name": "cos_data"}}>
+
+blockchain add !table
+
+<table =  {"table": {"create": "CREATE TABLE IF NOT EXISTS sin_data(  row_id SERIAL "
+                      "PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL "
+                      "DEFAULT NOW(),  timestamp TIMESTAMP NOT NULL DEFAULT "
+                      "NOW(),  value FLOAT ); CREATE INDEX "
+                      "sin_data_timestamp_index ON sin_data(timestamp); CREATE "
+                      "INDEX sin_data_insert_timestamp_index ON "
+                      "sin_data(insert_timestamp);",
+            "dbms": "purpleair",
+            "id": "e46d9b768d7eef2abaacb17b251191aa",
+            "name": "sin_data"}}>
+
+blockchain add !table
+
+</pre>
+
+#### Declaring the Clusters
+<pre>
+
+<cluster = {"cluster" : {
+                "company" : "anylog",
+                "status" : "active",
+                "table" : [
+                            { "name" : "cos_data",
+                              "dbms" : "purpleair",
+                               "distribution" : 1,
+                               "status" : "active",
+                               "start_date" : "2020-11-08"
+                            },
+                            { "name" : "sin_data",
+                               "dbms" : "purpleair",
+                               "distribution" : 1,
+                               "status" : "active",
+                               "start_date" : "2020-11-08"
+                            }
+                ]
+
+    }
+}>
+
+blockchain add !cluster
+
+<cluster = {"cluster" : {
+                "company" : "anylog",
+                "status" : "active",
+                "table" : [
+                            { "name" : "cos_data",
+                               "dbms" : "purpleair",
+                               "distribution" : 2,
+                               "status" : "active"
+                            }
+                            ]
+
+    }
+}>
+
+blockchain add !cluster
+
+</pre>
+
+#### Declaring the Operators
+
+<pre>
+<operator = {"operator" : {
+    "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
+    "ip" : "10.0.0.25",
+    "port" : "2048"
+    }
+}>
+
+blockchain add !operator
+
+<operator = {"operator" : {
+    "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
+    "ip" : "10.0.0.87",
+    "port" : "2048"
+    }
+}>
+blockchain add !operator
+
+
+<operator = {"operator" : {
+    "cluster" : "56142ddfa243bb3bc8c6688848af01db",
+    "ip" : "10.0.0.169",
+    "port" : "2148"
+    }
+}>
+blockchain add !operator
+</pre>
+
