@@ -152,7 +152,7 @@ The policies that determine how data is distributed among nodes of the network a
 ```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies. These are the policies that determine how data is distributed.
 ****conditions*** - a set of conditions that limit the number of policies participate in the process.  
 For example, a node can specify the company nad or database and or table of interest.  
-More information is available at [Data Distribution and Configuration]()
+More information is available at [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).  
 
 ### Examples
 
