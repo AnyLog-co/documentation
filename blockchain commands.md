@@ -71,9 +71,9 @@ Maintaining a master node in the network is optional.
 ```blockchain get id [json data]``` - returns the hash value of the JSON data.  
 ```blockchain test id``` - returns True if the id exists in the local blockchain file. Otherwise returns False.
 
-```blockchain load metadata [conditions]``` - update the local metadata from policies published on the blockchain.
-```blockchain query metadata [conditions]``` - provides a diagram representation of the local metadata.
-```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies.
+```blockchain load metadata [conditions]``` - update the local metadata from policies published on the blockchain.  
+```blockchain query metadata [conditions]``` - provides a diagram representation of the local metadata.  
+```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies.  
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
@@ -147,9 +147,9 @@ Special separators:
     
 ## Data Distribution Policies
 The policies that determine how data is distributed among nodes of the network are managed by a set of commands that are detailed below.  
-```blockchain load metadata [conditions]``` - when the blockchain is updated, ***load*** forces an update of the metadata tier by evaluating the relevant policies published on the blockchain.
-```blockchain query metadata [conditions]``` - provides a visual diagram representation of data is distributed to the nodes in the network.
-```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies. These are the policies that determine how data is distributed.
+```blockchain load metadata [conditions]``` - when the blockchain is updated, ***load*** forces an update of the metadata tier by evaluating the relevant policies published on the blockchain.  
+```blockchain query metadata [conditions]``` - provides a visual diagram representation of data is distributed to the nodes in the network.  
+```blockchain test cluster [conditions]``` - provides analysis of the \'cluster\' policies. These are the policies that determine how data is distributed.  
 ****conditions*** - a set of conditions that limit the number of policies participate in the process.  
 For example, a node can specify the company nad or database and or table of interest.  
 More information is available at [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).  
