@@ -11,6 +11,7 @@ The background processes:
 5. An automated Blockchain Synchronizer. Activated by the command: ```run blockchain sync```
 6. A Scheduler process. Activated by the command ```run scheduler```
 7. The HA process. Activated by the command ```run ha```
+8. A MQTT client process that subscribes to a broker by the command ```run mqtt client```
 
 These processes are activated on the AL command line.  
 The command ***show processes*** provides the list of the running processes.  
@@ -207,17 +208,41 @@ schedule time = 1 minute command run client () "sql anylog_test text SELECT max(
 </pre>
 
 
- 
 ## HA Process
  
 Delivers data files processed by the local node to a standby node or nodes.  
 When an operator ingests data, the process records the hash values of the files ingested.
     
 If HA is activated, every file processed is transferred to the standby nodes. 
-Users can enable a synchronization process to validate that all the data on a particular node is available on the standby nodes and if differences are found, the process will transfer the needed data to make the nodes identical.  
-  
+Users can enable a synchronization process to validate that all the data on a particular node is available on the standby nodes and if differences are found, the process will transfer the needed data to make the nodes identical.
 
-  
+## MQTT Client
+
+This process initiates a client that subscribes to a list of topics registered on a MQTT broker.
+
+<pre>
+run mqtt client where [list of options]
+</pre>
+The list of options are represented by 'key' = value' and separated by 'and'.
+
+Options:  
+| Option        | Explanation   |
+| ------------- | ------------- | 
+| broker  | The url or IP of the broker. |
+| port  | The port of the broker. The default value is 1883.|
+| topic  | The dbms and table to use for each topic using the following format[dbms name].[table name].[topic].[QoC] |
+
+***QoC*** - The Quality of Service:  
+0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
+1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
+2 - The highest level of service. Guarantees that each message is received only once by the client.  
+ 
+Example:  
+The example below connects to a broker to pull data assigned to a topic ***ping*** and associate the data to DBMS ***lsl_demo*** and a table ***ping_sensor***.
+<pre>
+run mqtt client where broker = "mqtt.eclipse.org" and topic = lsl_data.ping_sensor.ping.2
+</pre>
+
 
  
 
