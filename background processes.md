@@ -238,7 +238,7 @@ Options:
 2 - The highest level of service. Guarantees that each message is received only once by the client.  
  
 Example:  
-The example below connects to a broker to pull data assigned to a topic ***ping*** and associate the data to DBMS ***lsl_demo*** and a table ***ping_sensor***.
+The example below connects to a broker to pull data assigned to a topic ***ping*** and associate the data to the DBMS ***lsl_demo*** and the ***ping_sensor*** table.
 <pre>
 run mqtt client where broker = "mqtt.eclipse.org" and topic = lsl_data.ping_sensor.ping.2
 </pre>
