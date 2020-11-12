@@ -223,24 +223,26 @@ This process initiates a client that subscribes to a list of topics registered o
 <pre>
 run mqtt client where [list of options]
 </pre>
-The list of options are represented by 'key' = value' and separated by 'and'.
-
+The list of options are represented by 'key' = value' and separated by 'and'.  
+The details of the topic are enclosed in brackets and the command could subscribe to multiple topics.  
 Options:  
 | Option        | Explanation   |
 | ------------- | ------------- | 
 | broker  | The url or IP of the broker. |
 | port  | The port of the broker. The default value is 1883.|
-| topic  | The dbms and table to use for each topic using the following format: [dbms name].[table name].[topic].[QoC] |
+| topic  | The dbms and table to use for each topic using the following format: (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]). |
 
-***QoC*** - The Quality of Service:  
+***name*** - The topic name to which the process subscribes.  
+***QoC*** - The Quality of Service:    
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
 2 - The highest level of service. Guarantees that each message is received only once by the client.  
+
  
 Example:  
 The example below connects to a broker to pull data assigned to a topic ***ping*** and associate the data to the DBMS ***lsl_demo*** and the ***ping_sensor*** table.
 <pre>
-run mqtt client where broker = "mqtt.eclipse.org" and topic = lsl_data.ping_sensor.ping.2
+run mqtt client where broker = "mqtt.eclipse.org" and topic = (name = $SYS/# and dbms = lsl_demo and table =ping_sensot and qos = 2)
 </pre>
 
 
