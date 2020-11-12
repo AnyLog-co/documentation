@@ -119,7 +119,7 @@ Options:
 | show operator | Information on the Operator processes. |
 | show publisher | Information on the Publisher processes. |
 | show mqtt client | Information on mqtt topics subscriptions. |
-| show rest | Information on the REST processes. |
+| show streaming | Information on streaming data from REST and MQTT calls. |
 | show ha | Information on the High Availability processes. |
 | show inserts | Statistics on inserts of data to the local database. |
 | show partitions | Information on how data is partitioned on the local databases. |
