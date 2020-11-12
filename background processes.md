@@ -230,7 +230,7 @@ Options:
 | ------------- | ------------- | 
 | broker  | The url or IP of the broker. |
 | port  | The port of the broker. The default value is 1883.|
-| topic  | The dbms and table to use for each topic using the following format[dbms name].[table name].[topic].[QoC] |
+| topic  | The dbms and table to use for each topic using the following format: [dbms name].[table name].[topic].[QoC] |
 
 ***QoC*** - The Quality of Service:  
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
