@@ -233,6 +233,8 @@ Options:
 | topic  | The dbms and table to use for each topic using the following format: (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]). |
 
 ***name*** - The topic name to which the process subscribes.  
+***dbms*** - The logical DBMS that contains the topic's data.
+***table*** - The name of the table to contain the data.
 ***QoC*** - The Quality of Service:    
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
