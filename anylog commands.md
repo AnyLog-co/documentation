@@ -118,6 +118,7 @@ Options:
 | show scheduler | Information on the scheduled tasks. |
 | show operator | Information on the Operator processes. |
 | show publisher | Information on the Publisher processes. |
+| show mqtt client | Information on mqtt topics subscriptions. |
 | show rest | Information on the REST processes. |
 | show ha | Information on the High Availability processes. |
 | show inserts | Statistics on inserts of data to the local database. |
