@@ -230,7 +230,10 @@ Options:
 | ------------- | ------------- | 
 | broker  | The url or IP of the broker. |
 | port  | The port of the broker. The default value is 1883.|
-| topic  | The dbms and table to use for each topic using the following format: (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]). |
+| topic  | The topic name, the AnyLog dbms and table to use for each topic's data and the Quality of Service requested. |
+
+The MQTT command can include multiple topics whereas each topic and the database and table assigned to host the data, and the QoS are described using the following format:    
+ (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]).
 
 ***name*** - The topic name to which the process subscribes.  
 ***dbms*** - The logical DBMS that contains the topic's data.  
