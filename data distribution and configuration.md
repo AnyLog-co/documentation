@@ -59,6 +59,7 @@ With N Clusters, each Cluster maintains a distribution ID (a number in the range
 ### Assigning Operators to Clusters
 The Cluster policy determines the logical distribution of the data. The assignments of nodes is by declaring Operators with the ID of the Cluster they manage.  
 The Cluster ID is generated when the Cluster policy is added to the blockchain.  
+Operators associated to a cluster are identified uniquely by a Member ID - within a cluster, Operators have an ID starting at 1 representing the order on which they joined the cluster. The Member ID is used to uniquely Identify a member of the cluster (using a shorter ID than the Node ID).  
 
 ## Activating the policies
 
@@ -163,6 +164,7 @@ cluster = {"cluster" : {
 <pre>
 {"operator" : {
     "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
+    "member" : 1,
     "ip" : "10.0.0.25",
     "port" : "2048"
     }
@@ -170,6 +172,7 @@ cluster = {"cluster" : {
 
 {"operator" : {
     "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
+    "member" : 2,
     "ip" : "10.0.0.87",
     "port" : "2048"
     }
@@ -177,6 +180,7 @@ cluster = {"cluster" : {
 
 {"operator" : {
     "cluster" : "56142ddfa243bb3bc8c6688848af01db",
+    "member" : 1,
     "ip" : "10.0.0.169",
     "port" : "2148"
     }
