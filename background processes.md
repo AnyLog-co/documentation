@@ -212,7 +212,7 @@ schedule time = 1 minute command run client () "sql anylog_test text SELECT max(
 
 The HA process is supported by 2 processes:  
 1. Data Distributor - Distributing data to Peer Operators. When data is associated to a cluster. it is delivered to all the Operator nodes that are associated with the cluster. When the Operator receives data from a Publisher, the Operator identify the Cluster Members and transfers the data to these Members.  
-2. Data Synchronizer - The Operator participates in a process that continuously validates the completeness of the data set on his local database and if data is missing, it pulls the data from the peer members of the cluster.    
+2. Data Consumer - The Operator participates in a process that continuously validates the completeness of the data set on his local database and if data is missing, it pulls the data from the peer members of the cluster.    
 
 The Distributor Process copies data placed in a distribution directory to the Cluster Members. It manages 2 types of files:
 1.  Archived Data - files that include the data of specific partitions. These files were generated using the [backup command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command).
@@ -241,10 +241,10 @@ Example:
 run data distributor where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and distr_dir = !distr_dir
 </pre>
 
-### Invoking the Data Synchronizer Process
+### Invoking the Data Consumer Process
 Usage:
 <pre>
-run data sync where cluster_id = [id]
+run data consumer where cluster_id = [id]
 </pre>
 
 
