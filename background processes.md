@@ -218,6 +218,7 @@ The Distributor Process copies data placed in a distribution directory to the Cl
 1.  Archived Data - files that include the data of specific partitions. These files were generated using the [backup command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command).
 2.  Source Data - Files delivered to the node by a Publisher and are maintained on a local database.  
 This table summarizes the file types and their destination:
+
 | File Type     | Content   | Copy Destination |
 | ------------- | --------- | ---------------- |
 | backup | Copy of a data table partition  | Logger Nodes |
