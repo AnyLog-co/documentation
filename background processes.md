@@ -230,7 +230,7 @@ Usage:
 run data distributor where cluster_id = [id] and distr_dir = [data directory location] and archive_dir = [archive directory location]
 </pre>
 
-***[id]**** is the ID of the policy declaring the cluster.  
+***[id]*** is the ID of the policy declaring the cluster.  
 ***[data directory location]*** is the location to retrive the files to be distributed.  
 ***[archive directory location]*** is the location containing a backup of the source data and the database data (organized by partitions).    
 
