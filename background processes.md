@@ -243,9 +243,19 @@ run data distributor where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and dis
 </pre>
 
 ### Invoking the Data Consumer Process
-Usage:
+The data consumer process considers a date range, all the source data within the date range is validated - if data is missing, it retrieves the data from the cluster member nodes.   
+Usage:  
 <pre>
-run data consumer where cluster_id = [id]
+run data consumer where cluster_id = [id] and start_date = [date] and end_date = [date]
+</pre>
+[id] is the ID of the policy declaring the cluster
+[date] is provided in the following format: YY-MM-DD HH:MM:SS or by subtracting time from the current time, for example: -30d subtracts 30 days from the current date and time.  
+start_date must be provided. if end_date is not provided, the current date and time is used.   
+
+Example:  
+The example below will test and sync the last 3 days of data.
+<pre>
+run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_date = -3d
 </pre>
 
 
