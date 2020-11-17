@@ -118,9 +118,10 @@ Options:
 | show scheduler | Information on the scheduled tasks. |
 | show operator | Information on the Operator processes. |
 | show publisher | Information on the Publisher processes. |
+| show distributor | With HA enabled, information on the distributions of source files to cluster members. |
+| show consumer | With HA enabled, information on pulling source files from cluster members. |
 | show mqtt client | Information on mqtt topics subscriptions. |
 | show streaming | Information on streaming data from REST and MQTT calls. |
-| show ha | Information on the High Availability processes. |
 | show inserts | Statistics on inserts of data to the local database. |
 | show partitions | Information on how data is partitioned on the local databases. |
 | show partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
