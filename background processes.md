@@ -230,12 +230,12 @@ Usage:
 run data distributor where cluster_id = [id] and distr_dir = [data directory location] and archive_dir = [archive directory location]
 </pre>
 
-[id] is the ID of the policy declaring the cluster.  
-[data directory location] is the location to retrive the files to be distributed.  
-[archive directory location] is the location containing a backup of the source data and the database data (organized by partitions).  
+***[id]**** is the ID of the policy declaring the cluster.  
+***[data directory location]*** is the location to retrive the files to be distributed.  
+***[archive directory location]*** is the location containing a backup of the source data and the database data (organized by partitions).    
 
-Before the data is copied to a member machine, the data is compressed.
-After the copy, the data is transferred to the backup location on the current node.  
+Before the data is copied to a member machine, the data is compressed.  
+After the copy, the data is transferred to the backup location on the current node.    
 
 Example:
 <pre>
@@ -248,8 +248,8 @@ Usage:
 <pre>
 run data consumer where cluster_id = [id] and start_date = [date] and end_date = [date]
 </pre>
-[id] is the ID of the policy declaring the cluster
-[date] is provided in the following format: YY-MM-DD HH:MM:SS or by subtracting time from the current time, for example: -30d subtracts 30 days from the current date and time.  
+***[id]*** is the ID of the policy declaring the cluster.  
+***[date]*** is provided in the following format: YY-MM-DD HH:MM:SS or by subtracting time from the current time, for example: -30d subtracts 30 days from the current date and time.      
 start_date must be provided. if end_date is not provided, the current date and time is used.   
 
 Example:  
