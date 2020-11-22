@@ -84,11 +84,10 @@ Options:
 | bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
 | error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
 | delete_json   | True/False for deletion of the JSON file if processing is successful.  | false |
-| delete_sql   | True/False for deletion of the SQL file if processing is successful.  | false |
 | compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | false |
-| compress_sql   | True/False to enable/disable compression of the SQL file if processing is successful.  | false |
+| compress_sql   | True/False to enable/disable compression of the SQL file.  | True |
 | move_json   | True moves the JSON file to the 'bkup' dir if processing is successful.  | false |
-| move_sql   | True moves the SQL file to the 'bkup' dir if processing is successful.  | false |
+| move_sql   | True moves the SQL file to the 'bkup' dir if processing is successful. The SQL file deleted if move_sql is false.| false |
 | dbms_name   | The segment in the file name from which the database name is taken.  | 0 |
 | table_name   | The segment in the file name from which the table name is taken.  | 1 |
 | limit_tables   | a list of comma separated names within brackets listing the table names to process.  |  |
