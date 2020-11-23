@@ -186,6 +186,7 @@ Options:
 | get servers for dbms [dbms name] | The list of IPs and Ports of the servers supporting the dbms. |
 | get tables for dbms [dbms name] | The list of tables of the named database. |
 | get files in [dir name] where type = [file type] and hash = [hash value] | The list of files in the specified dir that satisfy the optional filter criteria. |
+| get file timestamp [file path and name] | Get the file's timestamp. |
 
 Security related options:  
 
