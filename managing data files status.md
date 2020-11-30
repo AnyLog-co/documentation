@@ -121,15 +121,25 @@ Example:
 time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
 </pre>
 
-#### Retrieve an entry in the TSD table
+#### Retrieve information from a TSD table
+The following call allows to retrieve information from a TSD table:
 <pre> 
-time file get [hash value]
+time file get [options]
 </pre>
-
+Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+ 
+| Key        | Value  | Default | 
+| ---------- | -------| -------| 
+| limit    | Setting a limit on the number of rows retrieved from the table, 0 value sets no limit. | 100 |
+| hash    | retrieve a key with the specified hash value. | |
+| start_date | retrieve entries with a date greater or equal to the start_date. | |
+| end_date | retrieve entries with a date earlier than the end_date. | |
+  
 Examples:  
 <pre> 
-time file get *
-time file get 6c78d0b005a86933ba44573c09365ad5
+time file get
+time file get where hash = 6c78d0b005a86933ba44573c09365ad5
+time file get where start_date = -3d and end_date = -2d
 time file get last 20 events
 time file get count
 </pre>
