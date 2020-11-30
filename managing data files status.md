@@ -84,84 +84,53 @@ The ***time file*** command allows to a) change file names to follow the data fi
 <pre>
 time file rename [source file path and name] to dbms = [dbms name] and table = [table name] and source = [source ID] and hash = [hash value] and instructions = [instructions id]
 </pre>
-This command will change the source file name to the convention using the values provided.  
+This command will change the source file name to the convention using the values provided.
+If ***dbms*** or ***table*** are not provided, they are unchanged.  
 If ***source*** is not provided, the value '0' is used.  
 If ***hash*** value is not provided, the hash value of the file will be calculated.  
-If ***instructions id*** is not provided, the value '0' is used.    
-
-* Updating a new entry in the ```tsd_mgm``` table:   
-```time file new [file name] status```
-
-* Changing the status of a file:  
-```time file update [hash value] [status]```
-
-* Retrieving the status of a file:  
-```time file get [hash value]```
-
-* Calculating the hash value of a file:  
-```file hash [path and file name]```
-  
-Examples:  
-
-* For a given file, changing the file name to the convention described:  
-```given_file = $HOME/AnyLog-Network/data/bkup/dweet_demo.94b54214_d0a9_4e92_8acc_e2b6675da185.2020_03_23_02_24_40_600Z.bldg_pmc.json```  
-Changing the file name:  
-```new_name = time file rename !given_file dbms = dweet_demo table = bldg_pmc par = 1 device = 265X48X2X34:2787 publisher = 548X23X243X12:2048```  
-In this example, the hash value will be calculated and current time would be added to the file such that the new name satisfies the convention.  
-
-* The new file name:  
-```dweet_demo.bldg_pmc.1.265X48X2X34:2787.548X23X243X12:2048.2020-04-12T12:57:35Z.78eba9a0938d5f36b0a41135bf55b0e2.json```
-
-* Updating the tsd_mgm table:  
-```time file new !new_name delivered```
-
-* Changing the status of a file:  
-```time file update 78eba9a0938d5f36b0a41135bf55b0e2 Loaded```
-
-* Retrieving the status of a file:  
-```time file get 78eba9a0938d5f36b0a41135bf55b0e2```
-
-
----
-Usage:
-
-        time file rename [file name] to dbms = [dbms name] and table = [table name] and source = [source name] and instructions = [instructions id]
-        time file new [file name] [optional status 1] [optional status 2]
-        time file update [hash value] [optional status 1] [optional status 2]
-        time file get [retrieve info]
-        time file compare [file operator] [file standby] [output file]
-
-Explanation:
-
-        Manage a table with information about files ingested to the database. The table name is tsd_info and the database name is almgm
-        To create a local table for a time file use: 'create table tsd_info where dbms = almgm'
-        time file rename - Changes a file name to the standard name. If timestamp is not provided, current timestamp is used.
-        File name is structured as: [dbms name].[table name].[source].[hash value].[instructions].json
-        Values in brackets means a substring taken from the original name whereas the value represent location in the original name
-        time file new - update the table tsd_info with new file info. Returns a unique id that represents the file
-        time file update - update the time file status
-                time file get - retrieve the info on an existing time file entry
-                retrieve info can be one of the following:
-                range where [conditions] - retrieve the hash values satisfying the condition
-                        Output can be redirected to a file to compare values on differet machines
-                * - retrieve all data
-                Hash Value - retrieve info on a single time file event
-                last n events
-                count - return the number of events recorded in the tsd_info table
-                compare - compare the hash values in 2 sorted files to determine
-                        the hash values in the first file which are missing in the second file
+If ***instructions id*** is not provided, the value '0' is used.   
 
 Examples:
+1) The example below adds the hash value to the file name.
+<pre>
+ time file rename !prep_dir/lsl_demo.ping_sensor.json
+</pre>
+2) The example below modifies the file name to include a different table name and the hash value.
+<pre>
+ time file rename !prep_dir/lsl_demo.ping_sensor.json to table = heat_sensor 
+</pre>
 
-        time file get range where time >= '2020-01-01' and time < '2021-01-01' into !outfile
-        time file rename !json_file to dbms_name = [0] and table_name = [1]
-        time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
-        time file new !json_file
-        time file get *
-        time file get 6c78d0b005a86933ba44573c09365ad5
-        time file get last 20 events
-        time file get count
-        time file compare !file1 !file2 !outfile
+#### Show the list of TSD tables on this node
+<pre>
+time file tables
+</pre>
 
-Link: https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files
+#### Add a new entry to the TSD table
+<pre>
+time file new [file name] [optional status 1] [optional status 2]
+</pre>
+This command will add the information in the file name as a new entry to the ***tsd_info*** table.
+
+#### Update the status fields in an TSD entry
+<pre> 
+time file update [hash value] [optional status 1] [optional status 2]
+</pre>
+This command will update the status fields in a ***tsd_info*** entry with the specified hash value.    
+Example:
+<pre> 
+time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
+</pre>
+
+#### Retrieve an entry in the TSD table
+<pre> 
+time file get [hash value]
+</pre>
+
+Examples:  
+<pre> 
+time file get *
+time file get 6c78d0b005a86933ba44573c09365ad5
+time file get last 20 events
+time file get count
+</pre>
 
