@@ -141,7 +141,5 @@ Examples:
 time file get
 time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where start_date = -3d and end_date = -2d
-time file get last 20 events
-time file get count
 </pre>
 
