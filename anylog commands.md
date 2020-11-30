@@ -46,6 +46,7 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 | Commands        | 
 | ------------- |
 | [backup](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) | 
+| [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md) | 
 | [drop partition](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command) | 
 | [file](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#file-command) | 
 | [get](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command) | 
