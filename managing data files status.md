@@ -131,6 +131,7 @@ Options determine the information of interest, expressed as a where condition wi
 | Key        | Value  | Default | 
 | ---------- | -------| -------| 
 | limit    | Setting a limit on the number of rows retrieved from the table, 0 value sets no limit. | 100 |
+| table    | The name of the table to use. | tsd_info |
 | hash    | retrieve a key with the specified hash value. | |
 | start_date | retrieve entries with a date greater or equal to the start_date. | |
 | end_date | retrieve entries with a date earlier than the end_date. | |
@@ -138,7 +139,7 @@ Options determine the information of interest, expressed as a where condition wi
 Examples:  
 <pre> 
 time file get
-time file get where hash = 6c78d0b005a86933ba44573c09365ad5
+time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where start_date = -3d and end_date = -2d
 time file get last 20 events
 time file get count
