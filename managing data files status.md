@@ -106,10 +106,20 @@ time file tables
 </pre>
 
 #### Add a new entry to the TSD table
+Adding data to a TSD table is by naming a file that is named using the naming convention.  
+The proces retrieves the info from the file name and updates a TSD table. Below is the command format:
 <pre>
-time file new [file name] [optional status 1] [optional status 2]
+time file new [file path and name] [optional status 1] [optional status 2] [optional: using the keyword into and: TSD table name and a row id]
 </pre>
-This command will add the information in the file name as a new entry to the ***tsd_info*** table.
+[file path and name] - a path to a file that is named according to the JSON file naming convention.  
+[optional status 1] - a first status field in the table.  
+[optional status 2] - a second status field in the table.  
+[optional TSD table name and row id] - a TSD table name and a row ID separated by a dot.  If omitted, ***tsd_info*** is used.
+
+Example:
+<pre>
+time file new !prep_dir/lsl_demo.ping_sensor.0.c490e6000d9487962d890a7cba2e1e74.0.json into tsd_51.8
+</pre>
 
 #### Update the status fields in an TSD entry
 <pre> 
