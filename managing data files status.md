@@ -152,3 +152,18 @@ time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where start_date = -3d and end_date = -2d
 </pre>
 
+#### Drop the TSD tables
+
+Local tsd_info tables can be dropped using one of the following commands:
+<pre> 
+drop table [tsd table name] where dbms = almgm
+</pre>
+or
+<pre> 
+time file drop [table name]
+</pre>
+Dropping all TSD tables is by the following command:
+<pre> 
+time file drop all
+</pre>
+
