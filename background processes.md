@@ -94,10 +94,12 @@ Options:
 | craete_table   |  A True value creates a table if the table doesn\'t exists.  | true |
 | master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 | update_tsd_info   | True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingested.  |  |
+| distributor   | A True value move the data to the directory assigned to the Distributor process.  | distr_dir  |
+| archive   | A True value move the data to the archive directory.  |  |
 
 Example:  
 <pre>
-run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and source = file_name[2] and compress_sql = true and compress_json = true and update_tsd_info = true
+run operator where create_table = true and update_tsd_info = true and distributor = true
 </pre>
 
 ## Publisher Process
@@ -226,7 +228,7 @@ This table summarizes the file types and their destination:
 ### Invoking the Data Distributor Process
 Usage:
 <pre>
-run data distributor wheredistr_dir = [data directory location] and archive_dir = [archive directory location]
+run data distributor where distr_dir = [data directory location] and archive_dir = [archive directory location]
 </pre>
 
 ***[data directory location]*** is the location to retrive the files to be distributed.  
