@@ -141,11 +141,12 @@ Options:
 | show partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | show partitions dropped | Information on partitions which were dropped.  |
 | show workers pool | Details the number of query workers assigned by the command ***set threads pool [n]***. |
-| show tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]*** |
-| show files [directory path] | Details the files in the specified directory |
-| show directories [directory path] | Details the sub-directories in the specified directory |
-| show version | The code version |
-| show json file structure | Details the convention for JSON file name |
+| show tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]***. |
+| show files [directory path] | Details the files in the specified directory. |
+| show directories [directory path] | Details the sub-directories in the specified directory. |
+| show version | The code version. |
+| show cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
+| show json file structure | Details the convention for JSON file name. |
 
 #### Show log instances with keywords
 
