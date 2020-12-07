@@ -146,6 +146,7 @@ Options:
 | show directories [directory path] | Details the sub-directories in the specified directory. |
 | show version | The code version. |
 | show cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
+| show tsd info [table name] | Information on the synchronization status between the cluster members. |
 | show json file structure | Details the convention for JSON file name. |
 
 #### Show log instances with keywords
