@@ -179,3 +179,15 @@ time file drop tsd_123
 time file drop all
 </pre>
 
+#### Deleting a single TSD row
+Usage
+<pre> 
+time file delete [row id] from [tsd table name]
+</pre>
+
+Examples:  
+<pre> 
+time file delete 16 from tsd_info
+time file delete 126 from tsd_129
+</pre>
+  
