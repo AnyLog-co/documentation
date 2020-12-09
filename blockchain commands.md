@@ -65,8 +65,8 @@ Maintaining a master node in the network is optional.
 ```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
 ```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
 ```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.  
-```blockchain drop policy [JSON data]``` – removes the policy specified by the JSON data fom local database that maintains metadata information.  
-```blockchain replace policy [policy id] with [new policy]``` - replace an existing policy in the local blockchain database\n'      
+```blockchain drop policy [JSON data]``` – removes the policy specified by the JSON data fom local database that maintains metadata information.    
+```blockchain replace policy [policy id] with [new policy]``` - replace an existing policy in the local blockchain database.        
 ```blockchain delete local file``` - deletes the local JSON file with the blockchain data.  
 
 ```blockchain test``` - test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. 
