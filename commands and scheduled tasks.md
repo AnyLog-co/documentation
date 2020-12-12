@@ -42,6 +42,16 @@ Using the scheduler, users can schedule commands and processes such that they wi
 Each scheduler object is an AnyLog command or an AnyLog script that contains a process that is executed periodically.  
 Initiating the scheduler is explained at [Scheduler Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#scheduler-process).  
 
- 
- 
+To review the list of scheduled tasks, issue the command:
+<pre>
+show scheduler
+</pre>
+
+When a task is placed in the scheduler, it is set as an Active task that is executed. 
+Users can switch the status of a task to be non-active, change a non-active status to active and remove a task from the scheduler using the following commands:
+<pre>
+task [id] stop
+task [id] run
+task [id] remove
+</pre>
 
