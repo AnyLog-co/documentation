@@ -1,4 +1,4 @@
-# Commands and Scheduled Jobs
+# Commands and Scheduled Tasks
 
 AnyLog commands are issued against data and metadata on the local node and can be send to peers in the network.
 
@@ -34,6 +34,14 @@ The command ```job status [ID]``` provides information on state of a particular 
 
 More information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
-  
+
+## Scheduled tasks
+
+The Scheduler enables to control when computing tasks take place in the network environment without manual intervention.  
+Using the scheduler, users can schedule commands and processes such that they will be executed within specified time intervals.      
+Each scheduler object is an AnyLog command or an AnyLog script that contains a process that is executed periodically.  
+Initiating the scheduler is explained at [Scheduler Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#scheduler-process).  
+
+ 
  
 

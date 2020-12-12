@@ -126,6 +126,7 @@ Explanation:
 Monitors new data added to the watch directory and distributes the new data to an Operator.
 
 Options:  
+
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
 | watch_dir  | The directory monitored by the Publisher. Files placed on the Watch directory are processed by the Publisher.  | !watch_dir  |
@@ -156,6 +157,7 @@ run blockchain sync [options]
 </pre>
 
 Options:  
+
 | Option        | Explanation   |
 | ------------- | ------------- | 
 | source  | The source of the metadata with optional values: 'blockchain' and 'master'.  |
@@ -199,13 +201,20 @@ Usage:
 <pre>
 schedule [options] command [command to execute]
 </pre>
-The command ***schedule**** declares a scheduled command that is placed in the scheduler.  
-If the scheduler is active, the command will be repeatably executed according to the time specified in the options.
+The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
+If the scheduler is active, the command will be repeatably executed according to the time specified in the options.  
+Options include the following:
+  
+| Option        | Explanation   |
+| ------------- | ------------- | 
+| time  | The time intervals for the execution of the task.  |
+| name  | A name that is associated with the task. |
+
    
 Examples:
 <pre>
 schedule time = 10 seconds command system date
-schedule time = 1 minute command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
+schedule time = 1 minute and name = "SQL command" command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
 </pre>
 
 
