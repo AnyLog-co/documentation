@@ -174,7 +174,7 @@ Notes:
 * If the time is set to 0 seconds and the volume is set to 0 bytes - the threshold for the table's buffer is removed and the data associated with the table is assigned with the threshold default values.    
 
 Retrieving the thresholds values is with the following command:  
-```show rest``` 
+```show streaming``` 
 
 The command provides information on the REST API usage and status including the buffer thresholds.
 
