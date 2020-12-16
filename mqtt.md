@@ -64,7 +64,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 
 Publishing time series data event to a broker:
-<pre>
+```
 <message = "{"value":210,
             "ts":1607959427550,
             "protocol":"modbus",
@@ -78,5 +78,5 @@ Publishing time series data event to a broker:
 
 
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
-</pre>
+```
 
