@@ -1,4 +1,4 @@
-# Managing Metadata Changes
+# Managing Metadata
 
 The metadata is organized in a local log file in a JSON format on each node that is a member of the network.
 * The node operates against the local log file and does not require continues connection to a blockchain.
