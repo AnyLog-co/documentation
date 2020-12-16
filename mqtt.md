@@ -38,4 +38,45 @@ run mqtt client where broker = "mqtt.eclipseprojects.io" and topic = (name = $SY
 run mqtt client where broker = "mqtt.googleapis.com" and client_id = "114497471765763749456" and project_id = "sound-micron-297304" and topic = (name = $SYS/# and dbms = lsl_demo and table =ping_sensor and qos = 1)
 </pre>
 
+Executing ***run mqtt client*** dedicates a thread to process subscribed messages. To terminate the thread process use the command:
+<pre>
+exit mqtt
+</pre>
+
+To determine the state of the processing use the command:
+<pre>
+show mqtt client
+</pre>
  
+
+## Publishing
+
+Users can publish a message to a particular topic in a broker using the following command:  
+<pre>
+mqtt publish where broker = [url] and topic = [topic]
+</pre>
+
+Examples:  
+Publishing "Hellow World" to a broker:
+<pre>
+mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
+</pre>
+
+
+Publishing time series data event to a broker:
+<pre>
+<message = "{"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}}">
+            
+            mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
+
+
+mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
+</pre>
+
