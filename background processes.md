@@ -270,5 +270,5 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 
 ## MQTT Client
 
-This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#mqtt) section.
+This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
 
