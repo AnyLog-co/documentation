@@ -74,6 +74,6 @@ Publishing time series data event to a broker:
                     "machine_name":"cutter 23",
                     "serial_number":"1234567890"}}>
             
-mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
+mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 ```
 
