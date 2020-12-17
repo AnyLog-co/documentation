@@ -56,14 +56,24 @@ Users can publish a message to a particular topic in a broker using the followin
 mqtt publish where broker = [url] and topic = [topic]
 </pre>
 
-Examples:  
+Example:  
 Publishing "Hellow World" to a broker:
 <pre>
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
 </pre>
 
+## Demo - Subscribe and Publish
 
-Publishing time series data event to a broker:
+This demo publishes and subscribes to a topic called ***anylog*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
+CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
+
+### Subscribing to the topic is using the following command:
+
+<pre>
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and log = true  and password = uRimssLO4dIo and topic = (name = test and dbms = lsl_demo and table =ping_sensor and qos = 1)
+</pre>
+
+### Publishing time series data event to a broker:
 ```
 <message = {"value":210,
             "ts":1607959427550,
@@ -73,7 +83,8 @@ Publishing time series data event to a broker:
                     "company":"Anylog",
                     "machine_name":"cutter 23",
                     "serial_number":"1234567890"}}>
-            
+
+
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 ```
 
