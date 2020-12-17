@@ -10,7 +10,8 @@ This process initiates a client that subscribes to a list of topics registered o
 <pre>
 run mqtt client where [list of options]
 </pre>
-The list of options are represented by 'key' = value' and separated by 'and'.  
+The list of options are represented by 'key' = value' and separated by 'and'. 
+Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting.   
 The details of the topic are enclosed in brackets and the command could subscribe to multiple topics.  
 Options:  
 | Option        | Explanation   |
@@ -18,6 +19,15 @@ Options:
 | broker  | The url or IP of the broker. |
 | port  | The port of the broker. The default value is 1883.|
 | topic  | The topic name, the AnyLog dbms and table to use for each topic's data and the Quality of Service requested. |
+| user  | The name of the authorized user. |
+| password  | The password associated with the user. |
+| log  | A true/false value to output the broker log messages. |
+| project_id  | A project ID associated with the broker account. |
+| client_id  | A client ID associated with the account. |
+| client_id  | A client ID associated with the account. |
+| location  | A name identifying the service location. |
+| private_key  | A private key to authenticate requests. |
+
 
 The MQTT command can include multiple topics whereas each topic and the database and table assigned to host the data, and the QoS are described using the following format:    
  (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]).
@@ -70,7 +80,7 @@ CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the M
 ### Subscribing to the topic is using the following command:
 
 <pre>
-run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and log = true  and password = uRimssLO4dIo and topic = (name = test and dbms = lsl_demo and table =ping_sensor and qos = 1)
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = lsl_demo and table =ping_sensor and qos = 1)
 </pre>
 
 ### Publishing time series data event to a broker:
