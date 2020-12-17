@@ -24,7 +24,6 @@ Options:
 | log  | A true/false value to output the broker log messages. |
 | project_id  | A project ID associated with the broker account. |
 | client_id  | A client ID associated with the account. |
-| client_id  | A client ID associated with the account. |
 | location  | A name identifying the service location. |
 | private_key  | A private key to authenticate requests. |
 
