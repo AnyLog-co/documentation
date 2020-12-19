@@ -163,7 +163,7 @@ Setting the default values is with the following command:
 Example:  
 ```set buffer threshold where time = 1 hour and volume = 2KB```  
 
-If the default values are not set, the node assigned the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
+By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
 
 Setting the threshold for a particular table is with the following command:  
 <pre> 

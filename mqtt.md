@@ -91,8 +91,9 @@ Each of these threads is identified by a unique id. Use the ***show*** command d
 
 ***Setting Buffers Thresholds***  
 When a message is processed it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as JSON files and placed in the designated directories for processing.  
-The amount of data in each file depends on thresholds based on time and file size. 
-Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode)
+The amount of data in each file depends on thresholds based on time and file size.  
+Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).    
+By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
 
 ***Terminating Clients****  
 * To terminate all the MQTT clients use the command: 
