@@ -5,27 +5,57 @@ Users can publish data to a topic  in a broker.
 
 ## Subscribing to a broker
 
-This process initiates a client that subscribes to a list of topics registered on a MQTT broker.
+This process initiates a client that subscribes to a list of topics registered on a MQTT broker.  
+When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.    
+On the AnyLog instance, messages are aggregated to files and being treated according to the configuration of the node.    
+For example, the data can be ingested to a local database or send to a different node.    
+The message data on the ANyLog instance is treated as ***streaming data***, this process is explained at [File Mode and STreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
 
+***The command structure***
 <pre>
 run mqtt client where [list of options]
 </pre>
 The list of options are represented by 'key' = value' and separated by 'and'. 
-Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting.   
-The details of the topic are enclosed in brackets and the command could subscribe to multiple topics.  
-Options:  
-| Option        | Explanation   |
+Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting.     
+The details of the topic are enclosed in brackets and the MQTT client process could subscribe to multiple topics.  
+The command format with subscriptions to multiple topics is as follows:  
+<pre>
+run mqtt client where [connection parameters] and [generic parameters] and topic = [topic 1 params] and topic = [topic 2 params] .... 
+</pre>
+
+Connection parameters, broker URL is mandatory and the rest depends on the broker and the way the broker is configured.  
+
+***The connection params***
+  
+| Option        | Details   |
 | ------------- | ------------- | 
 | broker  | The url or IP of the broker. |
 | port  | The port of the broker. The default value is 1883.|
-| topic  | The topic name, the AnyLog dbms and table to use for each topic's data and the Quality of Service requested. |
 | user  | The name of the authorized user. |
 | password  | The password associated with the user. |
-| log  | A true/false value to output the broker log messages. |
-| project_id  | A project ID associated with the broker account. |
 | client_id  | A client ID associated with the account. |
+| project_id  | A project ID associated with the broker account. |
 | location  | A name identifying the service location. |
 | private_key  | A private key to authenticate requests. |
+
+
+The generic params provide configuration parameters and can modify the default settings.
+
+***The generic params***
+  
+| Option        | Details   |
+| ------------- | ------------- | 
+| log  | A true/false value to output the broker log messages. |
+| qos  | The quality of service. THe default value is 0 |
+| prep_dir  | The location of a directory to organize the incomming message data. |
+| watch_dir  | The location of the watch directory. |
+| err_dir  |The location of the error directory. |
+
+***The topic params***
+  
+| Option        | Details   |
+| ------------- | ------------- | 
+| topic  | The topic name, the AnyLog dbms and table to use for each topic's data and the Quality of Service requested. |
 
 
 The MQTT command can include multiple topics whereas each topic and the database and table assigned to host the data, and the QoS are described using the following format:    
