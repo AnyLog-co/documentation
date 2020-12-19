@@ -23,9 +23,15 @@ The command format with subscriptions to multiple topics is as follows:
 run mqtt client where [connection parameters] and [generic parameters] and topic = [topic 1 params] and topic = [topic 2 params] .... 
 </pre>
 
-Connection parameters, broker URL is mandatory and the rest depends on the broker and the way the broker is configured.  
+To subscribe to one or more topics, 3 types of parameters needs to be provided:  
+1. Connection Params - providing the information that allows to connect to the broker.  
+2. Generic Params - Configuration parameters that apply to messages regardless of the subscribed topic.  
+3. Topic Params - Include the topic name and the rules of how to map the message such that it can be processed by the AnyLog node.  
+  
 
-***The connection params***
+***The connection params***  
+
+To connect to a broker, the broker URL is mandatory and the rest depends on the type of broker and the way the broker is configured.  
   
 | Option        | Details   |
 | ------------- | ------------- | 
@@ -38,37 +44,42 @@ Connection parameters, broker URL is mandatory and the rest depends on the broke
 | location  | A name identifying the service location. |
 | private_key  | A private key to authenticate requests. |
 
+***The generic params***
 
 The generic params provide configuration parameters and can modify the default settings.
-
-***The generic params***
   
 | Option        | Details   |
 | ------------- | ------------- | 
 | log  | A true/false value to output the broker log messages. |
-| qos  | The quality of service. THe default value is 0 |
+| qos  | The quality of service. THe default value is 0. |
 | prep_dir  | The location of a directory to organize the incomming message data. |
 | watch_dir  | The location of the watch directory. |
 | err_dir  |The location of the error directory. |
 
 ***The topic params***
+The topic params are specified within brackets and determine the topic name and how to process the message data.  
+The interpretation of the data associated with the topic needs to extract the following:    
+The name of the dbms that contains the data, the name of the table that contains the data and the data itself.  
+The following params can be detailed for each topic:  
   
 | Option        | Details   |
 | ------------- | ------------- | 
-| topic  | The topic name, the AnyLog dbms and table to use for each topic's data and the Quality of Service requested. |
+| name  | The topic name to which the process subscribes. |
+| qos  | The Quality of Service, if omitted, the value provided in the the generic params is used (or, if not available, the default value). |
+| dbms  | The logical DBMS that contains the topic's data or a 'bring' command to extract the dbms name. |
+| table  | The name of the table to contain the data or a 'bring' command to extract the table name. |
+| column.name.type  | The column name of the data to extract from the message, the data type and the 'bring' command' to extract the column data. |
 
-
-The MQTT command can include multiple topics whereas each topic and the database and table assigned to host the data, and the QoS are described using the following format:    
- (name = [topic name] and dbms = [dbms name] and table = [table name] and qos = [value]).
-
-***name*** - The topic name to which the process subscribes.  
-***dbms*** - The logical DBMS that contains the topic's data.  
-***table*** - The name of the table to contain the data.  
-***QoC*** - The Quality of Service:    
+***QoC*** - The Quality of Service:      
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
 2 - The highest level of service. Guarantees that each message is received only once by the client.  
 
+***Bring Command***  
+An AnyLog command that extracts data from a JSON structure. 
+The message data is structured in JSON and the ***bring command*** is applied to the message to retrieve the needed data.  
+The ***bring command*** is expressed and processed in the same way it is being expressed and used in the blockchain commands.  
+The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
  
 Example:  
 The example below connects to a broker to pull data assigned to a topic ***ping*** and associate the data to the DBMS ***lsl_demo*** and the ***ping_sensor*** table.
