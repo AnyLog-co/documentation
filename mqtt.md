@@ -7,25 +7,24 @@ Users can publish data to a topic  in a broker.
 
 This process initiates a client that subscribes to a list of topics registered on a MQTT broker.      
 When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.        
-On the AnyLog instance, messages are mapped to JSON structures and aggregated to files that are treated according to the configuration of the node.      
-For example, the data can be ingested to a local database or send to a different node.    
-The message data on the nNyLog instance is treated as ***streaming data***, this process is explained at [File Mode and STreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
+On the AnyLog instance, messages are mapped to JSON structures and aggregated to files that are treated according to the configuration of the node. For example, the data can be ingested to a local database or send to a different node.    
+The message data on the AnyLog instance is treated as ***streaming data***, this process is explained at [File Mode and STreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
 
 ***The command structure***
 <pre>
 run mqtt client where [list of options]
 </pre>
 The list of options are represented by 'key' = value' and separated by 'and'. 
-Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting.     
-The details of the topic are enclosed in brackets and the MQTT client process could subscribe to multiple topics.  
+Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting and how the messages need to be processed.       
+The details of the topic are enclosed in parentheses and the MQTT client declared on the command line could subscribe to multiple topics.    
 The command format with subscriptions to multiple topics is as follows:  
 <pre>
-run mqtt client where [connection parameters] and [generic parameters] and topic = [topic 1 params] and topic = [topic 2 params] .... 
+run mqtt client where [connection parameters] and [generic parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
 </pre>
 
-To subscribe to one or more topics, 3 types of parameters needs to be provided:  
+The subscription details of each topic are enclosed in the parenthesis and include 3 types of parameters:    
 1. Connection Params - providing the information that allows to connect to the broker.  
-2. Generic Params - Configuration parameters that apply to messages regardless of the subscribed topic.  
+2. Generic Params - Configuration parameters that apply to all messages regardless of the subscribed topic.  
 3. Topic Params - Include the topic name and the rules of how to map the message such that it can be processed by the AnyLog node.  
   
 
@@ -51,24 +50,24 @@ The generic params provide configuration parameters and can modify the default s
 | Option        | Details   |
 | ------------- | ------------- | 
 | log  | A true/false value to output the broker log messages. |
-| qos  | The quality of service. THe default value is 0. |
+| qos  | The Quality of Service. The default value is 0. |
 | prep_dir  | The location of a directory to organize the incomming message data. |
 | watch_dir  | The location of the watch directory. |
 | err_dir  |The location of the error directory. |
 
-***The topic params***
-The topic params are specified within brackets and determine the topic name and how to process the message data.  
+***The topic params***  
+The topic params are specified within parenthesis and determine the topic name and how to process the message data.  
 The interpretation of the data associated with the topic needs to extract the following:    
 The name of the dbms that contains the data, the name of the table that contains the data and the data itself.  
-The following params can be detailed for each topic:  
+The following params are provided for each topic:  
   
 | Option        | Details   |
 | ------------- | ------------- | 
 | name  | The topic name to which the process subscribes. |
 | qos  | The Quality of Service, if omitted, the value provided in the the generic params is used (or, if not available, the default value). |
-| dbms  | The logical DBMS that contains the topic's data or a 'bring' command to extract the dbms name. |
-| table  | The name of the table to contain the data or a 'bring' command to extract the table name. |
-| column.name.type  | The column name of the data to extract from the message, the data type and the 'bring' command' to extract the column data. |
+| dbms  | The logical DBMS that contains the topic's data or a ***'bring' command*** to extract the dbms name. |
+| table  | The name of the table to contain the data or a ***'bring' command*** to extract the table name. |
+| column.name.type  | The column name of the data to extract from the message, the data type and the ***'bring' command*** to extract the column data. |
 
 ***QoC*** - The Quality of Service:      
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
@@ -76,7 +75,7 @@ The following params can be detailed for each topic:
 2 - The highest level of service. Guarantees that each message is received only once by the client.  
 
 ***Bring Command***  
-An AnyLog command that extracts data from a JSON structure. 
+The ***bring command*** is an AnyLog command that extracts data from a JSON structure.   
 The message data is structured in JSON and the ***bring command*** is applied to the message to retrieve the needed data.  
 The ***bring command*** is expressed and processed in the same way it is being expressed and used in the blockchain commands.  
 The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
@@ -87,7 +86,7 @@ The command usage is explained at: [The 'From JSON Object Bring' command](https:
 * Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.  
 * Executing ***run mqtt client*** command dedicates a thread (***client*** to the MQTT broker) to process subscribed messages. 
 Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
-Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.
+* Each of these threads is identified by a unique ID. Use the ***show*** command detailed below to view the ID associated to each client.
 
 ***Configuring work directories***    
 The MQTT messages are transformed to files which are processed according to the node configuration. These files can update local databases or transferred to peers in the network.    
@@ -105,7 +104,7 @@ By default, the node assigns the value 60 seconds to the time threshold and 10,0
 <pre>
 exit mqtt
 </pre>
-* To terminate a particular client use the command (***n*** is the client id):
+* To terminate a particular client use the command (***n*** is the client ID):
 <pre>
 exit mqtt [n]
 </pre>
@@ -116,7 +115,7 @@ exit mqtt [n]
 <pre>
 show mqtt clients
 </pre>    
-* To view the status of a particular client use the command (***n*** is the client id): 
+* To view the status of a particular client use the command (***n*** is the client ID): 
 <pre>
 show mqtt client [n]
 </pre>
@@ -147,7 +146,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 ## Demo - Subscribe and Publish
 
-This demo publishes and subscribes to a topic called ***anylog*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
+This demo publishes and subscribes to a topic called ***test*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
 CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
 
 ### Subscribing to the topic:
