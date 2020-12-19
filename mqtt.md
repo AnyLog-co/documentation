@@ -89,13 +89,18 @@ The command usage is explained at: [The 'From JSON Object Bring' command](https:
 Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
 Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.
 
+***Configuring work directories***
+The MQTT messages are transformed to files which are processed according to the node configuration. These files can update local databases are be send to peers in the network.  
+The processing of the data requires the identification of 3 directories - prep_dir, watch_dir and err_dir.  
+Unless modified on the command line, the default locations are used. The command ```show dictionary``` allows to view the locations associated to each directory.       
+
 ***Setting Buffers Thresholds***  
 When a message is processed it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as JSON files and placed in the designated directories for processing.  
 The amount of data in each file depends on thresholds based on time and file size.  
 Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).    
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
 
-***Terminating Clients****  
+***Terminating Clients***  
 * To terminate all the MQTT clients use the command: 
 <pre>
 exit mqtt
