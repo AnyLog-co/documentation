@@ -152,7 +152,7 @@ CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the M
 ### Subscribing to the topic:
 
 <pre>
-run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = lsl_demo and table =ping_sensor and qos = 1)
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
 </pre>
 
 ### Publishing time series data event to a broker:
