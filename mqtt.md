@@ -82,19 +82,30 @@ The ***bring command*** is expressed and processed in the same way it is being e
 The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
 
 ### Processing messages and terminating a subscription
-* Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.
-* Executing ***run mqtt client*** dedicates a thread (client) to process subscribed messages. Every call to ***run mqtt client*** dedicates a new thread to process the detailed topics. Each thread is identified by a unique id.  
-* To view status of each processing thread information use the ```show mqtt clients``` command.   
-* To view the status of a particular client use the command: ``show mqtt client [n]``` whereas ***n*** is the client id.
+* Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.  
+* Executing ***run mqtt client*** command dedicates a thread (***client*** to the MQTT broker) to process subscribed messages. 
+Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
+Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.  
 * To terminate all the MQTT clients use the command: 
 <pre>
 exit mqtt
 </pre>
-* To terminate a particular client use the command:
+* To terminate a particular client use the command (***n*** is the client id):
 <pre>
 exit mqtt [n]
 </pre>
-***n*** is the client id.
+
+### View client status
+  
+* To view status of all clients use the following command:
+<pre>
+show mqtt clients
+</pre>    
+* To view the status of a particular client use the command (***n*** is the client id): 
+<pre>
+show mqtt client [n]
+</pre>
+
  
 ### Example:  
 The example below connects to a broker to pull data assigned to a topic.
@@ -127,6 +138,8 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
 </pre>
 
 ### Publishing time series data event to a broker:
+
+***Define a message***  
 ```
 
 
@@ -138,9 +151,14 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
                     "company":"Anylog",
                     "machine_name":"cutter 23",
                     "serial_number":"1234567890"}}>
-
-
-mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
-
 ```
+***Publish the message***  
+<pre>
+mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
+</pre>
+
+***View the client status***  
+<pre>
+show mqtt clients
+</pre>    
 
