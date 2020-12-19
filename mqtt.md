@@ -89,7 +89,7 @@ The command usage is explained at: [The 'From JSON Object Bring' command](https:
 Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
 Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.
 
-***Configuring work directories***  
+***Configuring work directories***    
 The MQTT messages are transformed to files which are processed according to the node configuration. These files can update local databases or transferred to peers in the network.    
 The processing of the data requires the identification of 3 directories - prep_dir, watch_dir and err_dir.  
 Unless modified on the command line, the default locations are used. The command ```show dictionary``` details the path associated to each directory.         
