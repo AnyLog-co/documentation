@@ -82,10 +82,19 @@ The ***bring command*** is expressed and processed in the same way it is being e
 The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
 
 ### Processing messages and terminating a subscription
+
+***Processing Messages***  
 * Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.  
 * Executing ***run mqtt client*** command dedicates a thread (***client*** to the MQTT broker) to process subscribed messages. 
 Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
-Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.  
+Each of these threads is identified by a unique id. Use the ***show*** command detailed below to view the ID associated to each client.
+
+***Setting Buffers Thresholds***  
+When a message is processed it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as JSON files and placed in the designated directories for processing.  
+The amount of data in each file depends on thresholds based on time and file size. 
+Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode)
+
+***Terminating Clients****  
 * To terminate all the MQTT clients use the command: 
 <pre>
 exit mqtt
@@ -105,6 +114,10 @@ show mqtt clients
 <pre>
 show mqtt client [n]
 </pre>
+* To view the streaming data status, use the following command:
+<pre>
+show streaming
+</pre>    
 
  
 ### Example:  
@@ -131,7 +144,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 This demo publishes and subscribes to a topic called ***anylog*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
 CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
 
-### Subscribing to the topic is using the following command:
+### Subscribing to the topic:
 
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = lsl_demo and table =ping_sensor and qos = 1)
@@ -141,8 +154,6 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
 
 ***Define a message***  
 ```
-
-
 <message = {"value":210,
             "ts":1607959427550,
             "protocol":"modbus",
@@ -157,8 +168,14 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 </pre>
 
-***View the client status***  
+### View all client status  
 <pre>
 show mqtt clients
 </pre>    
+
+To view the ***Streaming Data*** buffers state use the following command:
+<pre>
+show streaming
+</pre>    
+
 
