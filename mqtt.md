@@ -124,7 +124,12 @@ show mqtt client [n]
 show streaming
 </pre>    
 
- 
+### View registered brokers
+Users can see the list of brokers and the subscribed users and topics in each broker using the command:
+<pre>
+show mqtt brokers
+</pre>
+
 ### Example:  
 The example below connects to a broker to pull data assigned to a topic.
 <pre>
@@ -181,6 +186,12 @@ show mqtt clients
 To view the ***Streaming Data*** buffers state use the following command:
 <pre>
 show streaming
-</pre>    
+</pre>   
+
+### View registered brokers
+<pre>
+show mqtt brokers
+</pre>
+ 
 
 
