@@ -162,7 +162,7 @@ CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the M
 ### Enable the streamer process***
 <pre>
 run streamer 
-<\pre> 
+</pre> 
 
 ### Subscribing to the topic:
 
