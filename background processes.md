@@ -278,9 +278,11 @@ A process that pushes streaming data to files.
 When streaming data is added to the internal buffers, the streamer process, based on a time threshold, writes the buffers to files.
 Usage
 <pre>
-run streamer
+run streamer where prep_dir = [path to prep directory] and watch_dir = [path to watch directory] and err_dir = [path to err directory]
 </pre>
 
+If prep_dir, watch_dir and err_dir and not specified, the default locations are used.    
+To view the default paths used, use the command ```show dictionary```.  
 The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
 
 
