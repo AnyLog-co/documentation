@@ -12,6 +12,7 @@ The background processes:
 6. A Scheduler process. Activated by the command ```run scheduler```
 7. The HA process. Activated by the command ```run ha```
 8. A MQTT client process that subscribes to a broker by the command ```run mqtt client```
+9. A dedicated thread to flush streaming data to dis. Activated by the command ```run streamer```
 
 These processes are activated on the AL command line.  
 The command ***show processes*** provides the list of the running processes.  
@@ -271,4 +272,15 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 ## MQTT Client
 
 This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
+
+## Streamer process
+A process that pushes streaming data to files.  
+When streaming data is added to the internal buffers, the streamer process, based on a time threshold, writes the buffers to files.
+Usage
+<pre>
+run streamer
+</pre>
+
+The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
+
 
