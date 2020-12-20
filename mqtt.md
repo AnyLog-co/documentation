@@ -99,7 +99,7 @@ The amount of data in each file depends on thresholds based on time and file siz
 The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
 <pre>
 run streamer 
-<\pre> 
+</pre> 
 Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).    
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
 
