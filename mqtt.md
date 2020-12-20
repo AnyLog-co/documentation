@@ -100,8 +100,9 @@ The time thresholds are enforced by the ***Streaming*** process. To enable the s
 <pre>
 run streamer 
 </pre> 
-Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).    
-By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
+More information on the Streamer process is available at the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) section.  
+Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).      
+By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
 
 ***Terminating Clients***  
 * To terminate all the MQTT clients use the command: 
