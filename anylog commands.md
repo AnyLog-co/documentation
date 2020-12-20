@@ -134,7 +134,9 @@ Options:
 | show publisher | Information on the Publisher processes. |
 | show distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | show consumer | With HA enabled, information on pulling source files from cluster members. |
-| show mqtt client | Information on mqtt topics subscriptions. |
+| show mqtt clients | Information on MQTT clients and the subscribed topics. |
+| show mqtt client [n]| Information on a MQTT client, ***n*** is the client ID. |
+| show mqtt brokers | Information on mqtt brokers and the topics subscribed with each broker. |
 | show streaming | Information on streaming data from REST and MQTT calls. |
 | show inserts | Statistics on inserts of data to the local database. |
 | show partitions | Information on how data is partitioned on the local databases. |
