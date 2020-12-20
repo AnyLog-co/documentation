@@ -96,6 +96,10 @@ Unless modified on the command line, the default locations are used. The command
 ***Setting Buffers Thresholds***  
 When a message is processed, it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as a JSON file that is placed in the designated directory for processing.    
 The amount of data in each file depends on thresholds based on time and file size.  
+The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
+<pre>
+run streamer 
+<\pre> 
 Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).    
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.
 
@@ -153,6 +157,11 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 This demo publishes and subscribes to a topic called ***test*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
 CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
+
+### Enable the streamer process***
+<pre>
+run streamer 
+<\pre> 
 
 ### Subscribing to the topic:
 

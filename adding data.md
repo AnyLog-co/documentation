@@ -155,6 +155,13 @@ If both are set, the earlier of the two triggers the processing of the data.
 Time threshold can be specified in seconds, minutes, hours or days.  
 Volume threshold can be specified byes, KB, MB or GB.
 
+Volume thresholds are enforced by the processes that add the data to the buffers (i.e. REST processes and MQTT processes).  
+The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
+<pre>
+run streamer 
+<\pre> 
+More information on the streamer process is available at the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) section.
+
  
 Users can configure a default value as well as thresholds for each each type of data by assigning a threshold to the table associated with the data.  
 

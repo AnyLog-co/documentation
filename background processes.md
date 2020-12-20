@@ -273,7 +273,7 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 
 This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
 
-## Streamer process
+## Streamer Process
 A process that pushes streaming data to files.  
 When streaming data is added to the internal buffers, the streamer process, based on a time threshold, writes the buffers to files.
 Usage
