@@ -159,7 +159,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 This demo publishes and subscribes to a topic called ***test*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
 CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
 
-### Enable the streamer process
+### Enable the streamer process:
 <pre>
 run streamer 
 </pre> 
