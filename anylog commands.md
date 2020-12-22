@@ -76,6 +76,7 @@ Options:
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
+| set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 
@@ -207,6 +208,7 @@ Options:
 | get files in [dir name] where type = [file type] and hash = [hash value] | The list of files in the specified dir that satisfy the optional filter criteria. |
 | get file timestamp [file path and name] | Get the file's timestamp. |
 | get error [error number] | Get the error text for the error number. |
+| get echo queue | Get the queue with the ***echo*** commands and messages. |
 
 Security related options:  
 
