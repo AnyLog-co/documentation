@@ -154,6 +154,22 @@ Publishing "Hellow World" to a broker:
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
 </pre>
 
+## Debugging
+
+Users are able to enable the MQTT ***on_log()*** callback and display the MQTT message.  
+Enabling the on_log() callback is done on the  ***run mqtt client*** call with the ```log = true``` option.  
+Example:
+<pre>
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
+</pre>
+
+Users are able to display the incoming messages using the following command:
+ <pre>
+set debug mqtt [on/off]
+</pre>
+* on - Sends incoming messages and the processing status to the stdout.
+* off - disables the debug functionality.
+
 ## Demo - Subscribe and Publish
 
 This demo publishes and subscribes to a topic called ***test*** on a MQTT managed services at [https://www.cloudmqtt.com](https://www.cloudmqtt.com/).  
