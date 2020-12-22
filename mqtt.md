@@ -156,6 +156,12 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 ## Debugging
 
+Debug provides the means to track the processing of messages by enabling the following:
+* Display of the MQTT processing and calls.
+* Display of the messages being processed.
+* Flushing source messages.
+
+#### Display of the MQTT processing and calls
 Users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
 Enabling the on_log() callback is done on the  ***run mqtt client*** call with the ```log = true``` option.  
 Example:
@@ -163,12 +169,21 @@ Example:
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
 </pre>
 
+#### Display of the messages being processed
 Users are able to display the incoming messages using the following command:
- <pre>
-set debug mqtt [on/off]
+<pre>
+set mqtt debug [on/off]
 </pre>
 * on - Sends incoming messages and the processing status to the stdout.
 * off - disables the debug functionality.
+
+#### Flushing source messages
+Users are able to disable the AnyLog processing and flush incomming messages to files.  
+The name of the file is based on the broker ID and the topic associated with the message.    
+The following example subscribes to the topic ***anylog*** and writes all the incomming messages to a file.    
+<pre>
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = anylog
+</pre>
 
 ## Demo - Subscribe and Publish
 
