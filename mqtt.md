@@ -156,7 +156,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 ## Debugging
 
-Users are able to enable the MQTT ***on_log()*** callback and display the MQTT message.  
+Users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
 Enabling the on_log() callback is done on the  ***run mqtt client*** call with the ```log = true``` option.  
 Example:
 <pre>
