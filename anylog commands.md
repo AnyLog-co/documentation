@@ -71,8 +71,8 @@ Options:
 | set query log  | Initiate a log to record the executed queries. |
 | set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
 | set new query timer | Resets the query timer. |
-| set debug [on/off]  | Prints the executed commands processed in scripts. |
-| set mqtt debug [on/off]  | Prints the MQTT messages and their processing status. |
+| set debug [on/off]  | Displays the executed commands processed in scripts. |
+| set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
