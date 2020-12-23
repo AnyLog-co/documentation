@@ -187,9 +187,10 @@ The following example subscribes to the topic ***anylog*** and writes all the in
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = anylog
 </pre>
 
-#### Updating a log file with messages that were not successfully processed.
+#### Updating a log file with messages that were not successfully processed
 By setting the log_error option to true, messages that were not successfully processed will be written to a log file.  
-The name of the file starts with err and extended by the broker ID and the topic associated with the message.  
+The name of the file starts with "err_" and extended by the broker ID and the topic associated with the message.  
+The log file is written to the error directory.  
 Example:  
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log_error = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
