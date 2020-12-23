@@ -50,6 +50,7 @@ The generic params provide configuration parameters and can modify the default s
 | Option        | Details   |
 | ------------- | ------------- | 
 | log  | A true/false value to output the broker log messages. |
+| log_error | A true value enables a log file for messages that were not successfully processed. |
 | qos  | The Quality of Service. The default value is 0. |
 | prep_dir  | The location of a directory to organize the incomming message data. |
 | watch_dir  | The location of the watch directory. |
@@ -160,6 +161,7 @@ Debug provides the means to track the processing of messages by enabling the fol
 * Display of the MQTT processing and calls.
 * Display of the messages being processed.
 * Flushing source messages.
+* Updating a log file with messages that were not successfully processed.
 
 #### Display of the MQTT processing and calls
 Users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
@@ -184,6 +186,15 @@ The following example subscribes to the topic ***anylog*** and writes all the in
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = anylog
 </pre>
+
+#### Updating a log file with messages that were not successfully processed.
+By setting the log_error option to true, messages that were not successfully processed will be written to a log file.  
+The name of the file starts with err and extended by the broker ID and the topic associated with the message.  
+Example:  
+<pre>
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log_error = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
+</pre>
+
 
 ## Demo - Subscribe and Publish
 
