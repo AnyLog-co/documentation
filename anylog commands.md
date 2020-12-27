@@ -78,7 +78,7 @@ Options:
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
 | set new echo queue  | Resets the queue. |
-| set new echo queue where size = [n] | Resets the queue and sets the size of the queue to old the last n messages (between 1 and 100). |
+| set new echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 
@@ -211,6 +211,7 @@ Options:
 | get file timestamp [file path and name] | Get the file's timestamp. |
 | get error [error number] | Get the error text for the error number. |
 | get echo queue | Get the queue with the ***echo*** commands and messages. |
+| get peers status | Get status of members nodes that failed to respond. |
 
 Security related options:  
 
