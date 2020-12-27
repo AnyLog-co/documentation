@@ -211,7 +211,7 @@ Options:
 | get file timestamp [file path and name] | Get the file's timestamp. |
 | get error [error number] | Get the error text for the error number. |
 | get echo queue | Get the queue with the ***echo*** commands and messages. |
-| get peers status | Get status of members nodes that failed to respond. |
+| get members status | Get status of members nodes that are messaged by this node. |
 
 Security related options:  
 
