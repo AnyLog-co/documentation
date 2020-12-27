@@ -159,7 +159,7 @@ Volume thresholds are enforced by the processes that add the data to the buffers
 The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
 <pre>
 run streamer 
-<\pre> 
+</pre>
 More information on the streamer process is available at the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) section.
 
  
