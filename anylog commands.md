@@ -121,9 +121,6 @@ Options:
 | Option        | Information provided  |
 | ------------- | ------------| 
 | show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
-| show synchronizer | Information on the blockchain synchronize process. |
-| show operator | Information on the Operator processes. |
-| show publisher | Information on the Publisher processes. |
 | show distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | show consumer | With HA enabled, information on pulling source files from cluster members. |
 | show mqtt clients | Information on MQTT clients and the subscribed topics. |
@@ -184,6 +181,9 @@ Options:
 | get event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
 | get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | get file log  | The last data files processed by the node. |
+| get synchronizer | Information on the blockchain synchronize process. |
+| get operator | Information on the Operator processes. |
+| get publisher | Information on the Publisher processes. |
 | get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | get status  | Replies with the string 'running' if the node is active. | 
 | get connections | The list of TCP and REST connections supported by the node. |
