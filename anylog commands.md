@@ -122,7 +122,6 @@ Options:
 | ------------- | ------------| 
 | show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | show partitions dropped | Information on partitions which were dropped.  |
-| show workers pool | Details the number of query workers assigned by the command ***set threads pool [n]***. |
 | show tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]***. |
 | show files [directory path] | Details the files in the specified directory. |
 | show directories [directory path] | Details the sub-directories in the specified directory. |
@@ -191,6 +190,7 @@ Options:
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
+| get workers pool | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
 | get threads | The list of the threads executing users scripts. |
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
