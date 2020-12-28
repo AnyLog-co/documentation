@@ -120,8 +120,6 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| show queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
-| show watch directories | The list of the Watch directories on the node. |
 | show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | show synchronizer | Information on the blockchain synchronize process. |
 | show scheduler | Information on the scheduled tasks. |
@@ -197,6 +195,8 @@ Options:
 | get query mode | The query param variables assigned by the command ***set query mode***. |
 | get threads | The list of the threads executing users scripts. |
 | get hostname | The name assigned to the node. | 
+| get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
+| get watch directories | The list of the Watch directories on the node. |
 | get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
 | get memory info | Info on the memory of the current node. The function depends on psutil installed. |
 | get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
