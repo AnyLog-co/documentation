@@ -112,49 +112,6 @@ Params options can be the following:
 |             | use \'any\' to return the query results using the available data after timeout. |
 |             | The default value is \'all\'. |
 
-## Show Command
-
-Returns information on variables setup and state of the node.
-
-Options:  
-
-| Option        | Information provided  |
-| ------------- | ------------| 
-| show partitions dropped | Information on partitions which were dropped.  |
-| show files [directory path] | Details the files in the specified directory. |
-| show directories [directory path] | Details the sub-directories in the specified directory. |
-
-#### Show log instances with keywords
-
-Adding keywords to the ***show log*** command - only events containing one or more of the keywords are presented.
-
-Examples:
-
-<pre>
-show event log "SQL Error"
-</pre>
-Will show only log instances containing the keywords "SQL" or "Error".
-
-<pre>
-show query log "timestamp"
-</pre>
-If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
-
-#### show workers pool & show tcp pool
-These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
-For example:
-<pre>
-show workers pool
-</pre>
-returns:
-<pre>
-show workers pool
-</pre>
-returns:
-<pre>
-Workers Pool with 3 workers: [0, 1, 1]
-</pre>
-Meaning that the first thread of the 3 is in rest while 2 threads are busy.
 
 ## Get Command
 
@@ -225,6 +182,44 @@ Security related options:
 | get permissions | Provide the permissions for the current node using the node public key. |
 | get permissions for member [member id] | The permissions for the member identified by its public key. |
 | get authentication | Returns ON or OFF depending on the current status. |
+
+
+#### Get log instances with keywords
+
+Adding keywords to the ***get log*** command - only events containing one or more of the keywords are presented.
+
+Examples:
+
+<pre>
+get event log "SQL Error"
+</pre>
+Returns log instances containing the keywords "SQL" or "Error".
+
+<pre>
+get query log "timestamp"
+</pre>
+If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
+
+#### get workers pool & get tcp pool
+These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
+For example:
+<pre>
+get workers pool
+</pre>
+returns:
+<pre>
+Workers Pool with 3 workers: [0, 1, 1]
+</pre>
+Meaning that the first thread of the 3 is in rest while 2 threads are busy.
+<pre>
+get query pool
+</pre>
+returns:
+<pre>
+Query Pool with 3 workers: [0, 1, 1]
+</pre>
+Meaning that the first thread of the 3 is in rest while 2 threads are busy.
+
 
 ## REST Command
 
