@@ -15,9 +15,9 @@ The background processes:
 9. A dedicated thread to flush streaming data to dis. Activated by the command ```run streamer```
 
 These processes are activated on the AL command line.  
-The command ***show processes*** provides the list of the running processes.  
+The command ***get processes*** provides the list of the running processes.  
 The ***show*** command provides options to detail the status of each process. The options of the ***show*** command are detailed in 
-[commands](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#show-command).
+[commands](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
  
 
 ## AnyLog Messaging

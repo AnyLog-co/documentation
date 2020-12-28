@@ -120,7 +120,6 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | show partitions dropped | Information on partitions which were dropped.  |
 | show files [directory path] | Details the files in the specified directory. |
 | show directories [directory path] | Details the sub-directories in the specified directory. |
@@ -171,6 +170,7 @@ Options:
 | get event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
 | get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | get file log  | The last data files processed by the node. |
+| get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get synchronizer | Information on the blockchain synchronize process. |
 | get operator | Information on the Operator processes. |
 | get publisher | Information on the Publisher processes. |
