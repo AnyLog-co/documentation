@@ -124,7 +124,6 @@ Options:
 | show distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | show consumer | With HA enabled, information on pulling source files from cluster members. |
 | show streaming | Information on streaming data from REST and MQTT calls. |
-| show inserts | Statistics on inserts of data to the local database. |
 | show partitions dropped | Information on partitions which were dropped.  |
 | show workers pool | Details the number of query workers assigned by the command ***set threads pool [n]***. |
 | show tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]***. |
@@ -197,6 +196,7 @@ Options:
 | get hostname | The name assigned to the node. | 
 | get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories | The list of the Watch directories on the node. |
+| get inserts | Statistics on SQL Inserts of data to the local databases. |
 | get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
 | get memory info | Info on the memory of the current node. The function depends on psutil installed. |
 | get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
