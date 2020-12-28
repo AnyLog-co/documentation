@@ -122,7 +122,6 @@ Options:
 | ------------- | ------------| 
 | show processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | show synchronizer | Information on the blockchain synchronize process. |
-| show scheduler | Information on the scheduled tasks. |
 | show operator | Information on the Operator processes. |
 | show publisher | Information on the Publisher processes. |
 | show distributor | With HA enabled, information on the distributions of source files to cluster members. |
@@ -194,6 +193,7 @@ Options:
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
 | get threads | The list of the threads executing users scripts. |
+| get scheduler | Information on the scheduled tasks. |
 | get hostname | The name assigned to the node. | 
 | get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories | The list of the Watch directories on the node. |
