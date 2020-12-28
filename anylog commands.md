@@ -70,15 +70,12 @@ Options:
 | set query mode  | Setting execution instructions to the issued queries. |
 | set query log  | Initiate a log to record the executed queries. |
 | set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
-| set new query timer | Resets the query timer. |
 | set debug [on/off]  | Displays the executed commands processed in scripts. |
 | set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
-| set new echo queue  | Resets the queue. |
-| set new echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 
@@ -124,6 +121,8 @@ Options:
 | ------------- | ------------| 
 | reset [event/error/file/query] log | Deletes the log entries in the specified file  |
 | reset query timer | Resets the query timer. | 
+| reset echo queue  | Resets the queue. |
+| reset echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
 
 
 
