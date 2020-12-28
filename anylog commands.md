@@ -123,9 +123,6 @@ Options:
 | show partitions dropped | Information on partitions which were dropped.  |
 | show files [directory path] | Details the files in the specified directory. |
 | show directories [directory path] | Details the sub-directories in the specified directory. |
-| show cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
-| show tsd info [table name] | Information on the synchronization status between the cluster members. |
-| show json file structure | Details the convention for JSON file name. |
 
 #### Show log instances with keywords
 
@@ -171,12 +168,15 @@ Options:
 | get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | get file log  | The last data files processed by the node. |
 | get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
+| get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
 | get operator | Information on the Operator processes. |
 | get publisher | Information on the Publisher processes. |
 | get distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | get consumer | With HA enabled, information on pulling source files from cluster members. |
 | get streaming | Information on streaming data from REST and MQTT calls. |
+| get cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
+| get tsd info [table name] | Information on the synchronization status between the cluster members. |
 | get mqtt clients | Information on MQTT clients and the subscribed topics. |
 | get mqtt client [n]| Information on a MQTT client, ***n*** is the client ID. |
 | get mqtt brokers | Information on mqtt brokers and the topics subscribed with each broker. |
@@ -211,7 +211,10 @@ Options:
 | get file timestamp [file path and name] | Get the file's timestamp. |
 | get error [error number] | Get the error text for the error number. |
 | get echo queue | Get the queue with the ***echo*** commands and messages. |
-| get members status | Get status of members nodes that are messaged by this node. |
+| get files [directory path] | Details the files in the specified directory. |
+| get directories [directory path] | Details the sub-directories in the specified directory. |
+| get json file structure | Details the convention for JSON file name. |
+
 
 Security related options:  
 
