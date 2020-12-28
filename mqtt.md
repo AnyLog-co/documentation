@@ -127,7 +127,7 @@ show mqtt client [n]
 </pre>
 * To view the streaming data status, use the following command:
 <pre>
-show streaming
+get streaming
 </pre>    
 
 ### View registered brokers
@@ -238,7 +238,7 @@ show mqtt clients
 
 To view the ***Streaming Data*** buffers state use the following command:
 <pre>
-show streaming
+get streaming
 </pre>   
 
 ### View registered brokers
