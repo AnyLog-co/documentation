@@ -120,10 +120,6 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| show event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
-| show error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
-| show file log  | The last data files processed by the node. |
-| show query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | show databases  | The list of databases managed on the local node. |
 | show connections | The list of TCP and REST connections supported by the node. |
 | show query mode | The query mode variables assigned by the command ***set query mode***. |
@@ -195,6 +191,10 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
+| get event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
+| get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| get file log  | The last data files processed by the node. |
+| get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | get status  | Replies with the string 'running' if the node is active. | 
 | get hostname | The name assigned to the node. | 
 | get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
