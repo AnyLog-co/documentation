@@ -193,7 +193,7 @@ Options:
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
 | get threads | The list of the threads executing users scripts. |
-| get scheduler | Information on the scheduled tasks. |
+| get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
 | get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories | The list of the Watch directories on the node. |
