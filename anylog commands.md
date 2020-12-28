@@ -92,7 +92,7 @@ To see the value assigned to a variable use exclamation point prefixed to the va
 
 To see all assigned values use the command:
 <pre>
-show dictionary
+get dictionary
 </pre>
 
 #### Set query mode
@@ -111,6 +111,20 @@ Params options can be the following:
 | reply_mode  | use \'all\' to return an error if any of the participating servers did not reply after timeout. |
 |             | use \'any\' to return the query results using the available data after timeout. |
 |             | The default value is \'all\'. |
+
+
+
+## Reset Command
+
+The ***reset*** commands allows to reset variables and configuration parameters.  
+
+Options:  
+
+| Option        | Explanation  |
+| ------------- | ------------| 
+| reset [event/error/file/query] log | Deletes the log entries in the specified file  |
+| reset query timer | Resets the query timer. | 
+
 
 
 ## Get Command
