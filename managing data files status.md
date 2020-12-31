@@ -120,6 +120,11 @@ Example:
 time file new !prep_dir/lsl_demo.ping_sensor.0.c490e6000d9487962d890a7cba2e1e74.0.json 
 </pre>
 
+To validate that the file exixts on the local directory use the ketword ***add**. 
+<pre>
+time file add [file path and name] [optional status 1] [optional status 2] [optional: using the keyword into and: TSD table name and a row id]
+</pre>
+
 #### Update the status fields in an TSD entry
 <pre> 
 time file update [hash value] [optional status 1] [optional status 2]
