@@ -63,19 +63,20 @@ Maintaining a master node in the network is optional.
 
 ```blockchain commit [JSON data]``` – add a JSON object to the blockchain  
 ```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
-```blockchain create table``` – creates a local table (called ***ledger***) on the local database that maintains metadata information.  
-```blockchain drop table``` – drops the local table (***ledger***) on the local database that maintains metadata information.  
-```blockchain drop policy [JSON data]``` – removes the policy specified by the JSON data fom local database that maintains metadata information.    
+```blockchain create table``` – create a local table (called ***ledger***) on the local database that maintains metadata information.  
+```blockchain drop table``` – drop the local table (***ledger***) on the local database that maintains metadata information.  
+```blockchain drop policy [JSON data]``` – remove the policy specified by the JSON data from the local database that maintains metadata information.
+```blockchain drop by host [ip]``` – remove all policies that were added from the provided IP.        
 ```blockchain replace policy [policy id] with [new policy]``` - replace an existing policy in the local blockchain database.        
-```blockchain delete local file``` - deletes the local JSON file with the blockchain data.  
+```blockchain delete local file``` - delete the local JSON file with the blockchain data.  
 
 ```blockchain test``` - test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. 
-```blockchain get id [json data]``` - returns the hash value of the JSON data.  
-```blockchain test id``` - returns True if the id exists in the local blockchain file. Otherwise returns False.
+```blockchain get id [json data]``` - return the hash value of the JSON data.  
+```blockchain test id``` - return True if the id exists in the local blockchain file. Otherwise returns False.
 
 ```blockchain load metadata [conditions]``` - update the local metadata from policies published on the blockchain.  
-```blockchain query metadata [conditions]``` - provides a diagram representation of the local metadata.  
-```blockchain test cluster [conditions]``` - provides an analysis of the \'cluster\' policies.  
+```blockchain query metadata [conditions]``` - provide a diagram representation of the local metadata.  
+```blockchain test cluster [conditions]``` - provid an analysis of the \'cluster\' policies.  
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
