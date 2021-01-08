@@ -237,13 +237,15 @@ For the Query Info update the following fields:
 | type | map | Queries the metadata to provide the list of nodes. |
 | member | A list one or more members to query | The members listed would be shown on the map. |
 | metric  | A list of integer values | Assigns a metric to each listed member. The metric determines the color on the map. |
+| attribute | An attribute name of the member / The value assigned to the attribute name in the Policy and shown when the cursor hovers over the circle |
 
 Example:
 <pre>
 {
     "type" : "map",
     "member" : ["operator","publisher"],
-    "metric" : [0,2]
+    "metric" : [0,2],
+    "attribute" : "name"
 }
 </pre>
 
