@@ -93,6 +93,34 @@ Example:
 id authenticate !json_script
 </pre>
 
+# Encrypt and Decrypt messages
 
+When a message is send, the sender can encrypt the message using the public key of the receiver.  
+When the message arrives at the receiver, the receiver is able to decrypt the message using his private key.
+
+## Encrypting a message
+Command:
+<pre>
+id encrypt !message !public_key
+</pre> 
+
+Example:
+<pre>
+id encrypt !message !public_key
+</pre>
+
+
+## Decrypting a message
+Command:
+<pre>
+id decrypt [message text] where key = [private key] and password = [password]
+</pre> 
+If key is not provided, the decryption will apply the private key of the node.
+
+Exampls:
+<pre>
+id decript !message where key = !private_key and password = !my_password
+id decript !message where password = !my_password
+</pre>
 
 
