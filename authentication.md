@@ -62,15 +62,20 @@ If only a file name is provided (without a path), the file is written to the Any
 # Signing a policy
 
 Users and nodes can publish policies on the blockchain.  
-Using the ***id sign*** command, these policies are updated with the public key and signature of the publisher such that the publisher can be authenticated and his authorization can be validated.  
+Using the ***id sign*** command, these policies are updated with the public key and the signature of the publisher such that the publisher can be authenticated and his authorization can be validated.    
+If the private key is not provided, the policy would be signed by the private key assigned to the node.    
 
-Command:
+Command options:
 <pre>
-id sign [JSON Policy] where key = [private key] and Password = [password]
+id sign [JSON Policy] where key = [private key] and password = [password]
+id sign [JSON Policy] where password = [password]
 </pre> 
 
-Example:
+If ***id sign*** assigns the results to a variable, the variable value is the signed message.  
+If ***id sign*** does not assign the results to a variable, the value of the variable providing the policy changes.
+Examples:
 <pre>
+id sign !json_script where key = !my_key and password = my_password
 id sign !json_script where password = my_password
 </pre>
   
