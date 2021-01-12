@@ -11,4 +11,18 @@ The private key signs messages sends from the nodes to peers in the network such
 the processing node can validate the authentication of the message and determine the authorization assigned by the relevant permission group.
 
 When an external user or application connects to a node in the network, the node validates the user name and passowrd
-against a local list and if validated, the user inherits the permissions provided to the node.    
+against a local list and if validated, the user inherits the permissions provided to the node.
+
+
+# Creating a private and public key for the node
+
+Command:
+<pre>
+id create keys for node where password = [password]
+</pre> 
+
+The command creates a public and private key for the node.
+The public key serves as an identifier of the node and can be retrieved using the command:
+<pre>
+get node id
+</pre> 
