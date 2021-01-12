@@ -63,7 +63,16 @@ If only a file name is provided (without a path), the file is written to the Any
 
 Users and nodes can publish policies on the blockchain.  
 Using the ***id sign*** command, these policies are updated with the public key and signature of the publisher such that the publisher can be authenticated and his authorization can be validated.  
-  
+
+Command:
+<pre>
+id sign [JSON Policy] where key = [private key] and Password = [password]
+</pre> 
+
+Example:
+<pre>
+id sign !json_script where password = my_password
+</pre>
   
 
 
