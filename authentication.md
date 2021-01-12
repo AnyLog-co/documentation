@@ -59,6 +59,12 @@ If a file name is not provided, the keys are displayed on the screen and the use
 If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
 
   
+# Signing a policy
+
+Users and nodes can publish policies on the blockchain.  
+Using the ***id sign*** command, these policies are updated with the public key and signature of the publisher such that the publisher can be authenticated and his authorization can be validated.  
+  
+  
 
 
 
