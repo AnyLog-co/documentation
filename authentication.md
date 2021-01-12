@@ -79,7 +79,20 @@ id sign !json_script where key = !my_key and password = my_password
 id sign !json_script where password = my_password
 </pre>
   
+  
+# Verify signature
 
+Verify that the provided script was signed using the private key associated with the public key on the policy.  
+
+Command:
+<pre>
+id verify [JSON Policy]
+</pre> 
+
+Example:
+<pre>
+id verify !json_script
+</pre>
 
 
 
