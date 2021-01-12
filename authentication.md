@@ -40,5 +40,26 @@ When a policy is processed, these keys allow to validate the following:
 1. That the policy was signed by the user associated with the public key.
 2. That the user associated with the public key is authorized to sign the policy.
 
+Command:
+<pre>
+id create keys for node where password = [password] and keys_file = [file path and name]
+</pre> 
+
+Providing a key file is optional.
+Examples:
+<pre>
+id create keys for node where password = my_password  
+id create keys for node where password = my_password and keys_file = !usb_path/my_keys
+</pre> 
+
+The command creates a public and private key.      
+If a file name is provided, the keys are stored in the file.        
+The file location can be on a detached drive like a USB such that the user is able to physically secure the keys.    
+If a file name is not provided, the keys are displayed on the screen and the user needs to copy and secure the keys.  
+  
+  
+
+
+
 
 
