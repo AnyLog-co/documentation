@@ -14,7 +14,9 @@ When an external user or application connects to a node in the network, the node
 against a local list and if validated, the user inherits the permissions provided to the node.
 
 
-# Creating a private and public key for the node
+# Creating a private and public key for a node
+
+These keys are kept on the node. The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.
 
 Command:
 <pre>
@@ -26,3 +28,17 @@ The public key serves as an identifier of the node and can be retrieved using th
 <pre>
 get node id
 </pre> 
+Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
+
+
+# Creating a private and public key for a user
+
+These keys are provided to a user and managed by the user. 
+The public key uniquely identifies the user and the private key allows to sign policies added to the the blockchain by the user.  
+When a policy is added to the blockchain, the public key is added to the policy.    
+When a policy is processed, these keys allow to validate the following:
+1. That the policy was signed by the user associated with the public key.
+2. That the user associated with the public key is authorized to sign the policy.
+
+
+
