@@ -80,18 +80,17 @@ id sign !json_script where password = my_password
 </pre>
   
   
-# Verify signature
+# Authenticate signature
 
-Verify that the provided script was signed using the private key associated with the public key on the policy.  
-
+Authenticate the policy by validating that the policy was signed using the private key associated with the public key on the policy.  
 Command:
 <pre>
-id verify [JSON Policy]
+id authenticate [JSON Policy]
 </pre> 
 
 Example:
 <pre>
-id verify !json_script
+id authenticate !json_script
 </pre>
 
 
