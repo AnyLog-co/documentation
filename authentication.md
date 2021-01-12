@@ -56,7 +56,8 @@ The command creates a public and private key.
 If a file name is provided, the keys are stored in the file.        
 The file location can be on a detached drive like a USB such that the user is able to physically secure the keys.    
 If a file name is not provided, the keys are displayed on the screen and the user needs to copy and secure the keys.  
-  
+If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
+
   
 
 
