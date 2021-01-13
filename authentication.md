@@ -131,11 +131,13 @@ The receiving node considers the permissions policy to determine that the public
 
 Command:
 <pre>
-id validate where key = [public_key] and command = [command text]
+id validate where key = [public_key] and command = [command text] and table = [table name] and dbms = [dbms name]
 </pre>   
+Table and dbms are optional and are used with SQL command.
 
 Example:
 <pre>
-id validate where key = !public_key and command = !command
+id validate where key = !public_key and command = copy
+id validate where key = !public_key and command = sql and dbms = lsl_demo and table = ping_sensor
 </pre>   
 
