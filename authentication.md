@@ -123,4 +123,19 @@ id decript !message where key = !private_key and password = !my_password
 id decript !message where password = !my_password
 </pre>
 
+# Validate permitted command
+
+When a node receives a command from a peer node, the receiving node is using the public key of the peer to validate the authorization of the peer to issue the command.  
+Authorization is validated against ***permissions*** policies.  
+The receiving node considers the permissions policy to determine that the public key of the peer is represented in a permission policy which is signed by an authorized member.  
+
+Command:
+<pre>
+id validate where key = [public_key] and command = [command text]
+</pre>   
+
+Example:
+<pre>
+id validate where key = !public_key and command = !command
+</pre>   
 
