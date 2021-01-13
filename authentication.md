@@ -141,3 +141,19 @@ id validate where key = !public_key and command = copy
 id validate where key = !public_key and command = sql and dbms = lsl_demo and table = ping_sensor
 </pre>   
 
+# Add users
+
+Users names and passwords are added to each node to only allow connections with permitted users.  
+The ***id add user*** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
+Command:
+<pre>
+id add user where name = [user name] and password = [password] and expiration = [duration]
+</pre>   
+If expiration time is specified, the user permission to connect to the node is revoked after the time interval.  
+Duration can be specified in seconds, minutes, hours and days.
+If expiration is not specified, the user connection is never terminated.
+
+Example:
+<pre>
+id add user where name = ori and password = 123 and expiration = 2 minutes
+</pre>  
