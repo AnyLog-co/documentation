@@ -36,6 +36,11 @@ Failure to connect may be the result of one of the following:
 * Firewalls are not properly configured and make the IP and Port not available.
 * AnyLog is configured with authentication detection that is not being satisfied.
 
+## Enabling Authentication
+
+Enabling authentication is explained at [Authenticating HTTP requests](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#Authenticating-http-requests).
+
+
 ## Using Grafana to visualize AnyLog data
 
 * On the Grafana menu, use the ***+*** sign to create a new panel.

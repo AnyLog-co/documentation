@@ -159,7 +159,7 @@ id add user where name = ori and password = 123 and expiration = 2 minutes
 </pre>  
 
 
-# Authentication HTTP requests
+# Authenticating HTTP requests
 
 Nodes in the network can be configured to enable authentication of HTTP REST requests.
 
