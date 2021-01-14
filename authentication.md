@@ -157,3 +157,35 @@ Example:
 <pre>
 id add user where name = ori and password = 123 and expiration = 2 minutes
 </pre>  
+
+
+# Authentication HTTP requests
+
+Nodes in the network can be configured to enable authentication of HTTP REST requests.
+
+## Enabling Basic Authentication
+
+Basic authentication is enabled using the following procedure:
+
+1. On the AnyLog node, update the list of permitted users using the command: [id add user](add-users).
+2. When the REST call is send, include the following key-value pair to the header:
+<pre>
+key - "Authorization"  
+value - Base64 encoded string of the user name and password separated by a colon.
+</pre>
+
+Examples of basic authentication setup on 3rd parties tools:
+
+#### Grafana
+
+On the Data Source connection page:
+1. In the ***Auth*** section: Enable ***Basic Auth***.
+2. In the ***Basic Auth Details*** section: Add the user name and password.
+
+#### Postman
+
+In the Authorization Tab:
+1, select: ***Basic Auth***.
+2. Update user name and password.
+
+

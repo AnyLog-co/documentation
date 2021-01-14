@@ -151,7 +151,7 @@ Query 1:
 <pre>
 {
     "sql": "SELECT increments(), MIN(timestamp), MAX(timestamp), AVG(value) FROM ping_sensor",
-    "where": "device_name='SPEED_SENSOR'"
+    "where": "device_name='SPEED_SENSOR'",
     "time_column" : "timestamp",
     "value_column" : "value"
 }
@@ -160,7 +160,7 @@ Query 2:
 <pre>
 {
     "sql": "SELECT increments(), MIN(timestamp), MAX(timestamp), AVG(value) FROM ping_sensor",
-    "where": "device_name='REMOTE-SENSOR'"
+    "where": "device_name='REMOTE-SENSOR'",
     "time_column" : "timestamp",
     "value_column" : "value"
 }
