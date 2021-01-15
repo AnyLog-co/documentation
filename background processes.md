@@ -137,14 +137,17 @@ Options:
 | delete_sql   | True/False for deletion of the SQL file if processing is successful.  | false |
 | compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | false |
 | compress_sql   | True/False to enable/disable compression of the SQL file if processing is successful.  | false |
-| dbms_name   | The segment in the file name from which the database name is taken.  | 0 |
-| table_name   | The segment in the file name from which the table name is taken.  | 1 |
+| company   | The name of the company that owns the file. | The database name determines the company |
 | master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 
 Example:  
 <pre>
-run publisher where dbms_name = file_name[0] and table_name = file_name[3] and delete_json = true and delete_sql = true
+run publisher where delete_json = true and delete_sql = true
+run publisher where company = anylog and delete_json = true and delete_sql = true
 </pre>
+In the first example, the name of the database in each JSON file (the first segment in the file name) determines the company that owns the data (the dbms name and the company name are the same).      
+In the second example, all the databases are considered as databases of the specified company ('anylog' in the example).
+
 
 ## Blockchain Synchronizer
 
