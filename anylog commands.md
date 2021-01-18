@@ -164,6 +164,7 @@ Options:
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
 | get version | The code version. |
+| get git [version/info] [path to github root] | ***git version*** - the first 5 digits of the commit used, ***git info*** provides additional information. If path is not specified, the dictionary !anylog_path is used.|
 | get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories | The list of the Watch directories on the node. |
 | get inserts | Statistics on SQL Inserts of data to the local databases. |
