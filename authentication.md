@@ -158,6 +158,18 @@ Example:
 id add user where name = ori and password = 123 and expiration = 2 minutes
 </pre>  
 
+# Remove users
+
+A user can be removed with the following command:
+<pre>
+id remove user where name = [user name]
+</pre>   
+
+Example:
+<pre>
+id remove user where name = john
+</pre>  
+
 
 # Authenticating HTTP requests
 
