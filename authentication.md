@@ -170,6 +170,17 @@ Example:
 id remove user where name = john
 </pre>  
 
+# Update password
+
+A user can be modify his password using the following command:
+<pre>
+id update user password where name = [user name] and old = [old password] and new = [new password]
+</pre>   
+
+Example:
+<pre>
+id update user password where name = ori and old = 123456 and new = iugsek88ekA
+</pre>  
 
 # Authenticating HTTP requests
 
