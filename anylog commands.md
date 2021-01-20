@@ -77,6 +77,7 @@ Options:
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
+| set local password = [password]  | Provide a password to protect sensitive information that is kept on the node(like private keys and users passwords) . |
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 
 
