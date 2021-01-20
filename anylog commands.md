@@ -66,7 +66,6 @@ Options:
 
 | Option        | Explanation  |
 | ------------- | ------------| 
-| set [variable name] = [value]  | Assigning a value to a variable. Same as: [variable name] = [value] | 
 | set query mode  | Setting execution instructions to the issued queries. |
 | set query log  | Initiate a log to record the executed queries. |
 | set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
@@ -79,7 +78,7 @@ Options:
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set local password = [password]  | Provide a password to protect sensitive information that is kept on the node(like private keys and users passwords) . |
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
-
+| set traceback [on/off]  | Print the code path with every call to the error log. |
 
 #### Set variable
 
