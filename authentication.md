@@ -147,11 +147,20 @@ Users names and passwords are added to each node to only allow connections with 
 The ***id add user*** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
 Command:
 <pre>
-id add user where name = [user name] and password = [password] and expiration = [duration]
-</pre>   
+id add user where name = [user name] and type = [user type] and password = [password] and expiration = [duration]
+</pre>  
+
+Command variables:
+| Option        | Explanation  |
+| ------------- | ------------| 
+| user name  | A unique name to identify the user. |
+| user type  | The type of user, i.e. ***admin***. The default value is ***user***. |
+| password  | Any character string. |
+| expiration  | A time limit that terminates permissions for the user.|
+ 
 If expiration time is specified, the user permission to connect to the node is revoked after the time interval.  
 Duration can be specified in seconds, minutes, hours and days.
-If expiration is not specified, the user connection is never terminated.
+If expiration is not specified, the user permissions are not limited by time. User can be removed using the ```remove user``` command.
 
 Example:
 <pre>

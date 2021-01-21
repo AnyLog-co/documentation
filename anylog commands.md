@@ -185,6 +185,7 @@ Options:
 | get files [directory path] | Details the files in the specified directory. |
 | get directories [directory path] | Details the sub-directories in the specified directory. |
 | get json file structure | Details the convention for JSON file name. |
+| get users | The list of users declared using the command ```id add user ...```. |
 
 
 Security related options:  
