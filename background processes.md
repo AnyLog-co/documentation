@@ -40,12 +40,13 @@ This process receives requests to query data and metada, process the request and
 
 Usage:
 <pre>
-run rest server [ip] [port] [timeout]
+run rest server [ip] [port] where timeout = [timeout] and ssl = [true/false]
 </pre>
 Explanation:  
 [ip] [port] - The process listens for incomming messages on the assigned IP and and Port.  
 [timeout] - An optional parameter that determines wait a timeout period in seconds.    
-When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.
+When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
+If ssl is set to True, connection is using HTTPS and authentication requires Certificates.
 
 ## Operator Process
 
