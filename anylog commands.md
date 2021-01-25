@@ -76,7 +76,8 @@ Options:
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
-| set local password = [password]  | Provide a password to protect sensitive information that is kept on the node(like private keys and users passwords) . |
+| set local password = [password]  | Provide a password to protect sensitive information that is kept on the node(like private keys and users passwords). |
+| set private password = [password] [in file] | Provide the password of the private key with an optional command text [in file] to [keep encrypted copy on the filesystem](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#saving-passwords).|
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. |
 

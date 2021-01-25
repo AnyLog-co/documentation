@@ -226,15 +226,15 @@ In the Authorization Tab:
 
 For authentication of users, members and message encryption, nodes operate with 2 secret passwords:  
 1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
-2. The private key password - enables the usage of the private key to sign policies and authenticate members.  
+2. The private key password - enables the usage of the private key to sign policies and authenticate members.    
 The local password is provided using the command:
 <pre>
 set local password = [password]
 </pre>
 The private key password is provided using the command:
 <pre>
-set private password = [password] [on file]
+set private password = [password] [in file]
 </pre>
-[in file] - An optional term that will keep the password in an encrypted file protected by the ***local password***.  
-if the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.  
-If the private password is available, the encrypted provate key password is written to the local file system.
+[in file] - An optional command text to store the password in an encrypted file protected by the ***local password***.  
+If the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.    
+If the private password is available, the encrypted password (of the private key) is written to the local file system.
