@@ -222,7 +222,7 @@ In the Authorization Tab:
 2. Update user name and password.
 
 
-# Saving passwords
+# Using passwords
 
 For authentication of users, members and message encryption, nodes operate with 2 secret passwords:  
 1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
