@@ -30,7 +30,6 @@ get node id
 </pre> 
 Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
 
-
 # Creating a private and public key for a user
 
 These keys are provided to a user and managed by the user. 
@@ -223,3 +222,19 @@ In the Authorization Tab:
 2. Update user name and password.
 
 
+# Saving passwords
+
+For authentication of users, members and message encryption, nodes operate with 2 secret passwords:  
+1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
+2. The private key password - enables the usage of the private key to sign policies and authenticate members.  
+The local password is provided using the command:
+<pre>
+set local password = [password]
+</pre>
+The private key password is provided using the command:
+<pre>
+set private password = [password] [on file]
+</pre>
+[in file] - An optional term that will keep the password in an encrypted file protected by the ***local password***.  
+if the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.  
+If the private password is available, the encrypted provate key password is written to the local file system.
