@@ -50,7 +50,7 @@ Header Key             Header Value
 --------------         ------------------
 type                   info
 dbms                   [the logical database name]
-details                info dbms [the logical database name] tables
+details                get tables for dbms [the logical database name]
 </pre>
 
 To retrieve columns info of a particular table:

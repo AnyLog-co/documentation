@@ -180,7 +180,8 @@ Options:
 | get hardware id | Returns a unique identfier of the hardware. |
 | get servers for dbms [dbms name] and table [table name] | The list of IPs and Ports of the servers supporting the table. |
 | get servers for dbms [dbms name] | The list of IPs and Ports of the servers supporting the dbms. |
-| get tables for dbms [dbms name] | The list of tables of the named database. |
+| get tables for dbms [dbms name] | The list of tables of the named database and where the table is declared (local database and/or blockchain) |
+| get views for dbms [dbms name] | The list of views of the named database. |
 | get files in [dir name] where type = [file type] and hash = [hash value] | The list of files in the specified dir that satisfy the optional filter criteria. |
 | get file timestamp [file path and name] | Get the file's timestamp. |
 | get error [error number] | Get the error text for the error number. |
