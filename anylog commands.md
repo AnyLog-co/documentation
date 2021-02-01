@@ -55,6 +55,7 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 | [set](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#set-command) | 
 | [show](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#show-command) | 
 | [sql](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#sql-command) | 
+| [test](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#sql-command) | 
 | [time file](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-command) | 
 
 
@@ -525,4 +526,41 @@ file delete [path and file name]
 Example:
 <pre>
 file delete !prep_dir/my_file
+</pre>
+
+
+
+## Test Command
+
+The ***test*** command executes specific tests on the current node.  
+
+Options:  
+
+### Test Node
+The ***test node*** command tests the node connections and local blockchain file.
+
+Example:
+<pre>
+test node
+</pre>
+
+### Test Connection
+The ***test connection*** command tests the given IP and Port to determine if accessible and open.
+
+Example:
+<pre>
+test connection 10.0.0.223:2041
+</pre>
+
+### Test Table
+The ***test table*** command compares the table definition in the local dbms and the blockchain definition of the table.  
+
+Usage:  
+<pre>
+test table [table name] where dbms = [dbms name]
+</pre>
+  
+Example:
+<pre>
+test table ping_sensor where dbms = lsl_demo
 </pre>
