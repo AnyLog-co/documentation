@@ -532,12 +532,12 @@ file delete !prep_dir/my_file
 
 ## Test Command
 
-The ***test*** command executes specific tests on the current node.  
+The ***test*** command executes the requested tests on the current node.  
 
 Options:  
 
 ### Test Node
-The ***test node*** command tests the node connections and local blockchain file.
+The ***test node*** command tests the node connections and the local blockchain file.
 
 Example:
 <pre>
