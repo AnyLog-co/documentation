@@ -70,6 +70,11 @@ set reply ip = !external_ip
 set reply ip = 24.23.250.144
 </pre>
 
+The value assigned to the ***reply ip*** can be retrieved using the folowing command:
+<pre>
+get reply ip
+</pre>
+
 ### Using the message socket to determine the reply IP 
 This configuration will retrieve the peer IP from the message socket and use the retrieved IP for the reply message.  
 Usage:

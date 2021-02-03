@@ -83,6 +83,7 @@ Options:
 | set private password = [password] [in file] | Provide the password of the private key with an optional command text [in file] to keep encrypted copy on the filesystem. See also [Using passwords](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-passwords).|
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. |
+| set reply ip = [ip/none]  | Set the IP address that for a reply message. |
 
 #### Set variable
 
@@ -191,6 +192,7 @@ Options:
 | get directories [directory path] | Details the sub-directories in the specified directory. |
 | get json file structure | Details the convention for JSON file name. |
 | get users | The list of users declared using the command ```id add user ...```. |
+| get reply ip | Retrieve the IP address for reply messages. |
 
 
 Security related options:  
