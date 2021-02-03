@@ -32,6 +32,7 @@ Explanation:
 [ip] [port] - The process listens for incomming messages on the assigned IP and and Port.
 [Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
 
+Additional information is available at (network configuration)[] 
  
 ## REST requests
 

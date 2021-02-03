@@ -1,14 +1,23 @@
-# Testing the network configuration
+# Network Configuration
 
 ## overview
 
 Nodes in the network are configured to receive messages from 2 sources:  
 
-a. From peer nodes using TCP protocol.  
-This functionality is enables by calling the command: ```run tcp server ip port```  
+a. From users and applications using a REST API.  
+This functionality is enabled by calling the command: ***run rest server***  
 
-b. From users and applications using REST API.  
-This functionality is enabled by calling the command: ```run REST server ip port```  
+b. From peer nodes using the native AnyLog API.  
+This functionality is enables by calling the command: ***run tcp server ip port***  
+
+## Configuring a REST server process
+Any node in the network can be configured to receive requests using the REST API.
+More details on the REST API are available at (using rest)[https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#using-rest].  
+More details on setting a node as a REST server is available at (background processes)[https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests].  
+
+## Configuring a TCP server process
+This process is used for communication between peers in the network.
+ 
 
 Each node can send a message to a peer in the network.  
 The command ```run client (list of servers) command``` makes a node a client to one or more peer nodes

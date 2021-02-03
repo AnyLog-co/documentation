@@ -1,4 +1,4 @@
-# Using Grafana
+# Using REST
 
 ## Overview
 
