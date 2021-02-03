@@ -29,10 +29,10 @@ Usage:
 run tcp server [ip] [port] [threads]
 </pre>
 Explanation:  
-[ip] [port] - The process listens for incomming messages on the assigned IP and and Port.
+[ip] [port] - The process listens for incoming messages on the assigned IP and and Port.
 [Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
 
-Additional information is available at (network configuration)[] 
+Additional information is available at (network configuration)[https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]. 
  
 ## REST requests
 
@@ -48,6 +48,8 @@ Explanation:
 [timeout] - An optional parameter that determines wait a timeout period in seconds.    
 When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
 If ssl is set to True, connection is using HTTPS and authentication requires Certificates.
+
+Additional information is available at (network configuration)[https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]. 
 
 ## Operator Process
 
