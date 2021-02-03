@@ -31,7 +31,7 @@ Usage:
 <pre>
 run rest server [ip] [port] where timeout = [timeout] and ssl = [true/false]
 </pre>
-More details on the REST API are available at [using rest(https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#using-rest).  
+More details on the REST API are available at [using rest](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#using-rest).  
 More details on setting a node as a REST server is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests).  
 
 ## Configuring a TCP server process
