@@ -10,7 +10,7 @@ This functionality is enabled by calling the command: ***run rest server***
 b. From peer nodes using the native AnyLog API.  
 This functionality is enables by calling the command: ***run tcp server***  
 
-## Determining the IP addresses recognized by the current node
+## Determining the IP addresses recognized by a node in the network
 
 When a node starts, it determines the local IP addresses available to the node. These addresses initialize 2 dictionary variables:  
 
@@ -20,7 +20,7 @@ When a node starts, it determines the local IP addresses available to the node. 
 | external_ip   | The Public IP | !external_ip |
 
 Some systems fail to identify their IP addresses and the values can be set by the user.  
-To view all networks recognized by the node issue the following command:
+To view all IPs recognized by the node issue the following command:
 <pre>
 get ip list
 </pre> 
@@ -31,8 +31,8 @@ Usage:
 <pre>
 run rest server [ip] [port] where timeout = [timeout] and ssl = [true/false]
 </pre>
-More details on the REST API are available at (using rest)[https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#using-rest].  
-More details on setting a node as a REST server is available at (background processes)[https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests].  
+More details on the REST API are available at [using rest(https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#using-rest).  
+More details on setting a node as a REST server is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests).  
 
 ## Configuring a TCP server process
 This process is used for communication between peers in the network and makes the node a member in the AnyLog Network.  
@@ -45,7 +45,7 @@ Explanation:
 [ip] [port] - The process listens for incoming messages on the assigned IP and and Port.
 [Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
 
-Additional information is available at (network configuration)[https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]. 
+Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
 When the command ***run tcp server*** is initiated, the node dedicates a process to listen for incoming messages on the IP and Port.
 The IP and Port specified on the command line are considered as the Source IP and Port.  
