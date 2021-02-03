@@ -35,7 +35,7 @@ More details on the REST API are available at [using rest](https://github.com/An
 More details on setting a node as a REST server is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests).  
 
 ## Configuring a TCP server process
-This process is used for communication between peers in the network and makes the node a member in the AnyLog Network.  
+This process makes each node a member in the AnyLog Network and allows communication between peers in the network.  
 
 Usage:
 <pre>
@@ -47,12 +47,12 @@ Explanation:
 
 Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
-When the command ***run tcp server*** is initiated, the node dedicates a process to listen for incoming messages on the IP and Port.
+When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
 The IP and Port specified on the command line are considered as the Source IP and Port.  
 When a message is send to a peer, the node requests the peer to reply to the Source IP and Port.
 
 In some use cases, the Source IP represent an internal network which is not accessible by the peer nodes. 
-To address the internal netwoks, a user can configure the node as follows:
+To address internal networks, a user can configure the node in one of the following ways:
 
 a) Request peers to reply using a different IP address.  
 b) Request peers to determine the IP address from the message socket.
@@ -71,7 +71,7 @@ set reply ip = 24.23.250.144
 </pre>
 
 ### Using the message socket to determine the reply IP 
-This configuration will retrieve the peer IP from the message socket and use the retrieved IP for the reply
+This configuration will retrieve the peer IP from the message socket and use the retrieved IP for the reply message.  
 Usage:
 <pre>
 set reply ip = none
@@ -79,7 +79,7 @@ set reply ip = none
 
 # Testing the network configuration
 
-Different command line calls can view and test the network configuration.  
+Different command calls can view and test the network configuration.  
 
 View active connection using the command:
 <pre>
@@ -110,8 +110,7 @@ DIsplay the IP and Port used in a message:
 trace level = 1 tcp
 </pre>
 
-DIsplay the IP and Port used in a REST message:  
-Send a view message to the REST IP and Port.  
+DIsplay the IP and Port used in a REST message by sending a VIEW request to the REST server.    
 Example:
 <pre>
 curl --location --request VIEW 24.23.250.144:2049
