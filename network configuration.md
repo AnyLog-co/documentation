@@ -47,6 +47,7 @@ Explanation:
 
 Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
+### The source IP
 When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
 The IP and Port specified on the command line are considered as the Source IP and Port.  
 When a message is send to a peer, the node requests the peer to reply to the Source IP and Port.
@@ -79,8 +80,16 @@ get reply ip
 This configuration will retrieve the peer IP from the message socket and use the retrieved IP for the reply message.  
 Usage:
 <pre>
-set reply ip = none
+set reply ip = dynamic
 </pre>
+
+### Reset the reply IP to the Source IP 
+Calling reset will disable the use of reply IP. Replies will use the Source IP.  
+Usage:
+<pre>
+reset reply ip
+</pre>
+
 
 # Testing the network configuration
 
