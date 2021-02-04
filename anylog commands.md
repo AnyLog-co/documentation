@@ -128,7 +128,7 @@ Options:
 | reset query timer | Reset the query timer. | 
 | reset echo queue  | Reset the queue. |
 | reset echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
-| reset reply IP | Assign the reply IP to be the Source IP. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip)|
+| reset reply IP | Assign the reply IP to be the Source IP. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
 
 
 ## Get Command
