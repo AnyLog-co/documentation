@@ -174,6 +174,7 @@ Options:
 | get watch directories | The list of the Watch directories on the node. |
 | get inserts | Statistics on SQL Inserts of data to the local databases. |
 | get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
+| get platform info | Info on the type and version of the OS, node name and type of processor. |
 | get memory info | Info on the memory of the current node. The function depends on psutil installed. |
 | get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
 | get ip info | Get the list of IP addresses available on the node. |
