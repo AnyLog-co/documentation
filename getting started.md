@@ -141,6 +141,11 @@ set dbms_name = test
 get dictionary
 </pre>
 
+### Retrieving environment variables
+
+Users the $ sign prefixed to the variable name, users can retrieve the values assigned to an environment variable.
+For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the assigned value to PATH.
+
 ### Get info on active background processes
 
 An active node may be configured such that some background processes are enabled.
@@ -172,7 +177,7 @@ reset query log
 
 ## Making a node a member of the network
 
-Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md)
+Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md).
 
 Users can also use the same node in different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks or they switch between a main net and a testnet.
