@@ -1,6 +1,6 @@
 # Getting Started
  
-This documents provides a high level summary of some of the main functionalities supported by the AnyLog Network.   
+This document provides a high level summary of some of the main functionalities supported by the AnyLog Network.   
 This document explains how to install, configure and run AnyLog instances. 
 
 ## About AnyLog
@@ -252,21 +252,22 @@ For example:
 <pre>
 run client () sql my_dbms "select count(*) from my_table"
 </pre>
-More information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
+Additional information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
 
 # Network security
 
 Several mechanisms secure the data managed by the network:
-* Nodes authentication - each node is assigned with a private and public key.
+* Nodes authentication - Each node is assigned with a private and a public key.
 The public key servers as the identification of the node and the private key is used to sign messages send by the node.
-When a node sends a message, the message data includes the public key of the sender and a signature done with the private key of the sender.
-Using the signature, the node that received the message is able to authenticate the sender. Then the node evaluates the permissions
+When a node sends a message, the message data includes the public key and a signature over key information.
+Using the signature and the signed information, the node that received the message is able to authenticate the sender. Then the node evaluates the permissions
 provided to the sender and determines if the sender is authorized as needed.
-* User authentication - users can be assigned with private and public keys and consider as a node with the process described above.  
+* User authentication - Users can be assigned with private and public keys and consider as a node with the process described above.  
 * Basic authentication - Nodes can be updated with a list of user names and passoword and satisfy commands from users providing the registered passwords.
 * Certificate - The network can provide certificates to Clients and Servers and configured such that connection to clients use SSL with client and server Certificate authentication.
-* Encryption - message send between nodes in the network can be encrypted.
-More information is available at [User Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md).
+* Encryption - Message send between nodes in the network can be encrypted.  
+
+Additional information is available at [User Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md).
 
   
 
