@@ -225,7 +225,7 @@ Destination can be represented in any of the following ways:
 * As variables. For example: ```!dest_ip !dest_port```
 * If more than a single destination is specified, the destinations are contained in parentheses.  
   
-***command*** - any of the AnyLog commands  
+***command*** - any of the AnyLog commands.  
 
 Examples:
 
@@ -241,4 +241,4 @@ For example:
 <pre>
 run client () sql my_dbms "select count(*) from my_table"
 </pre>
-More information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md)
+More information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
