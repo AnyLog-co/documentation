@@ -1,7 +1,8 @@
 # Getting Started
  
-This document provides a high level summary of some of the main functionalities supported by the AnyLog Network.   
-This document explains how to install, configure and run AnyLog instances. 
+This document provides the following:
+* A high level summary of some of the main functionalities supported by the AnyLog Network.   
+* Explanations on how to install, configure and run AnyLog instances. 
 
 ## About AnyLog
 
