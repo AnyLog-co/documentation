@@ -20,9 +20,10 @@ The ***show*** command provides options to detail the status of each process. Th
 [commands](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
  
 
-## AnyLog Messaging
+## The TCP Server process
 
-A process that receives messages from member nodes in the network. This process makes the node a member in the AnyLog Network.  
+A process that initiates threads that listen for incoming messages from peer nodes and, assuming authorization, execute the commands contained in the messages.
+This process makes the node a member in the AnyLog Network.  
 
 Usage:
 <pre>
