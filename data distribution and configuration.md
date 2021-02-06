@@ -1,8 +1,8 @@
 
 # Data Distribution and Configuration
 
-The distribution of data to nodes in the network is determined by policies published on the blockchain.
-A policy is a structure that determines how nodes needs to trat or process data or information that is required during the processing of the data.     
+The distribution of data to nodes in the network is determined by policies published on the blockchain.  
+A policy is a structure that determines how nodes needs to treat or process data or information that is required during the processing of the data.     
 Each policy is a JSON object that is structured as nested dictionaries. The root dictionary has one attribute that determines the type of the policy and the children provide the content of the policy.  
 
 There are 2 ways to represent how data is distributed.
@@ -13,14 +13,14 @@ This method does not offer the High Availability (HA) features and is usually us
 ## The organization of the data for HA
 
 Users view the data as if it is organized in tables assigned to databases.  
-The physical organization of the data partitions the data to logical clusters. Each of the logical clusters is supported by multiple Operators
+The physical organization of the data partitions the data to clusters. Each of the clusters is supported by multiple Operators
 that maintain identical copies of the cluster's data. Therefore if an Operator nodes fails, the cluster's data is available on a surviving node.    
 The way data is treated is as follows:  
 * Data is assigned to a logical table.
 * Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
 * Each cluster is assigned to X operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.
 
-In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the table's data.  
+In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the data.    
 The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the second Operator
 (and based on the policies, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator).
 
@@ -75,28 +75,31 @@ When data is distributed to a table or is being queried, all the relevant Operat
 ## Declaring Clusters and assigning Operators to Clusters 
 
 This method declares clusters, assigns Operators to Clusters and provides redundancy and HA.  
-A CLuster is a policy that determines the following:
-1. A set of tables that are supported by the Cluster Members.
-2. For each table, the portion of the data that will be provided to the Cluster Members for hosting.
+A CLuster is a policy that groups together the following:
+1. A set of tables.
+2. A set of Operators that will maintain the cluster data.
+
+Declaring clusters and assigning Operators to each cluster can be done in 2 ways:
+1.  Listing the tables on each Cluster Policy and assigning the Operators to the cluster.
+2.  Listing the tables on the Operator's Policies and assigning the Operators to the cluster.  
 
 ### Declaring the Cluster's tables
-The cluster policy includes a list of tables that are supported. The tables are identified by:  
+With method 1, the cluster policy includes a list of tables that are supported. The tables are identified by:  
 ***company*** - the name of the company that owns the data (optional).  
 ***dbms*** - the name of the logical database that hosts the data.  
 ***name*** - the name of the logical table that hosts the data.  
+With method 2, the cluster policy includes compamy name only. Tables will be assigned to the cluster using the Policies of the Operators.
 
-### The distribution ID
-For each table, the policy provides a distribution ID. The distribution ID determines the portion of the table's data that will be managed by the cluster.    
-With N Clusters, each Cluster maintains a distribution ID (a number in the range 1 to N), the table's data will be split to N and each Cluster will receive approximately 1/N of the data.
- 
+
 ### Assigning Operators to Clusters
 The Cluster policy determines the logical distribution of the data. The assignments of nodes is by declaring Operators with the ID of the Cluster they manage.  
 The Cluster ID is generated when the Cluster policy is added to the blockchain.  
-Operators associated to a cluster are identified uniquely by a Member ID - within a cluster, Operators have an ID starting at 1 representing the order on which they joined the cluster. The Member ID is used to uniquely Identify a member of the cluster (using a shorter ID than the Node ID).  
+Operators associated to a cluster are identified uniquely by a Member ID.   
+The Member ID is generated automatically and is used to uniquely Identify a member of the cluster (using a shorter ID than the Node ID).  
 
 ## Activating the policies
 
-When the policies are declared they bacome availabele to the relevant nodes using one of the methods that distributes the blockchain updates.  
+When the policies are declared they become available to the relevant nodes using one of the methods that distributes the blockchain updates.  
 For example, by configuring the nodes to use the blockchain synchronizer using the command:
 <pre>
 run blockchain sync
