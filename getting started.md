@@ -221,7 +221,7 @@ The format to send a command is the following:
 <pre>
 run client (destination) command
 </pre>
-Command sections:  
+#### The message sections:  
 ***run client*** - Making the current node a client of a member node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
 ***(destination)*** - the destination nodes identified by the IP and Port assigned to their
