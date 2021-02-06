@@ -13,10 +13,10 @@ A node in the network is assigned with one or more roles. The optional roles are
 
 | Node Type     | Role  |
 | ----------- | ------------| 
-| Publisher   | a node that receives data from a data source (i.e. devices) and distribute the data to Operators. | 
-| Operator   | a node that hosts the data and satisfy queries. |
-| Query  | a node that orchestrates a query processe. |
-| Master | a node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
+| Publisher   | A node that receives data from a data source (i.e. devices) and distribute the data to Operators. | 
+| Operator   | A node that hosts the data and satisfies queries. |
+| Query  | A node that orchestrates a query process. |
+| Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
 
 ## Managing the MetaData
 The metadata is the network related information that is shared by members of the network.
