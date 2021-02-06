@@ -24,21 +24,21 @@ In the example below, the data of tables 1-4 is distributed to 2 clusters. Each 
 The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the second Operator
 (and based on the policies, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator).
 
-|--------------------|          |--------------------|          |--------------------|
-|                    |          |                    |   --->   |     Operator 1     |         
-|                    |   --->   |                    |          |--------------------|
-|                    |          |      Cluster 1              
-|      Table 1       |          |                    |          |--------------------|
-|                    |          |                    |   --->   |     Operator 2     |
-|      Table 2       |          |--------------------|          |--------------------|
-|                    |
-|      Table 3       |          |--------------------|          |--------------------|
-|                    |          |                    |   --->   |     Operator 3     |
-|      Table 4       |          |                    |          |--------------------|
-|                    |          |      Cluster 2     |
-|                    |   --->   |                    |          |--------------------|
-|                    |          |                    |   --->   |     Operator 4     |
-|--------------------|          |--------------------|          |--------------------|
+|--------------------|          |--------------------|          |--------------------|  
+|                    |          |                    |   --->   |     Operator 1     |          
+|                    |   --->   |                    |          |--------------------|  
+|                    |          |      Cluster 1     |  
+|      Table 1       |          |                    |          |--------------------|  
+|                    |          |                    |   --->   |     Operator 2     |  
+|      Table 2       |          |--------------------|          |--------------------|  
+|                    |  
+|      Table 3       |          |--------------------|          |--------------------|  
+|                    |          |                    |   --->   |     Operator 3     |  
+|      Table 4       |          |                    |          |--------------------|  
+|                    |          |      Cluster 2     |  
+|                    |   --->   |                    |          |--------------------|  
+|                    |          |                    |   --->   |     Operator 4     |  
+|--------------------|          |--------------------|          |--------------------|  
 
 
 ## Prerequisites
