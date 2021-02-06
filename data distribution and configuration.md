@@ -18,26 +18,27 @@ that maintain identical copies of the cluster's data. Therefore if an Operator n
 The way data is treated is as follows:  
 * Data is assigned to a logical table.
 * Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
-* Each cluster is assigned to X operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.  
+* Each cluster is assigned to X operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.
+
+In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the table's data.  
+The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the second Operator
+(and based on the policies, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator).
 
 |--------------------|          |--------------------|          |--------------------|
 |                    |          |                    |   --->   |     Operator 1     |         
 |                    |   --->   |                    |          |--------------------|
-|                    |          |      Clueter 1              
-|        Table       |          |                    |          |--------------------|
+|                    |          |      Cluster 1              
+|      Table 1       |          |                    |          |--------------------|
 |                    |          |                    |   --->   |     Operator 2     |
-|                    |          |--------------------|          |--------------------|
+|      Table 2       |          |--------------------|          |--------------------|
 |                    |
-|                    |          |--------------------|          |--------------------|
-|                    |          |                    |   --->   |     Operator 1     |
+|      Table 3       |          |--------------------|          |--------------------|
+|                    |          |                    |   --->   |     Operator 3     |
+|      Table 4       |          |                    |          |--------------------|
+|                    |          |      Cluster 2     |
 |                    |   --->   |                    |          |--------------------|
-|                    |          |      Clueter 1     |
-|                    |
-|                    |
-|                    |
-|                    |
-|                    |
-|--------------------|
+|                    |          |                    |   --->   |     Operator 4     |
+|--------------------|          |--------------------|          |--------------------|
 
 
 ## Prerequisites
