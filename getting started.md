@@ -1,18 +1,50 @@
 # Getting Started
 This document explains how to install and run AnyLog instances.  
 
+## About AnyLog
+
+AnyLog is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the AnyLog Software.    
+Joining a network requires the following steps:  
+1) Install the AnyLog Software on a compute instance.
+2) Configure the node such that it can join an exiting network (or create a new network).
+
 ## Type of instances
-***Publishers*** - nodes that receive data from a data source (i.e. devices) and distribute the data to Operators.  
-***Operators*** - nodes that host the data and satisfy queries.  
-***Query Nodes*** - nodes that receive the queries and manage the query processes.  
-***Master Nodes*** - optional nodes, nodes that maintain a complete copy of the metadata. Any node can be declared as a Master node.   
-A node can have one or more roles.
+A node in the network is assigned with one or more roles. The optional roles are the following:  
+
+| Node Type     | Role  |
+| ----------- | ------------| 
+| Publisher   | a node that receives data from a data source (i.e. devices) and distribute the data to Operators. | 
+| Operator   | a node that hosts the data and satisfy queries. |
+| Query  | a node that orchestrates a query processe. |
+| Master | a node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
+
+## Managing the MetaData
+The metadata is information that is shared by members of the network.
+The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
+The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
+The interaction with the metadata is not dependent on the repository. When a member node operates, it is configured to use a particular metadata repository and
+there are no operational differences which are dependent on the type of blockchain repository.  
+
+
+
+## Managing the Data
+The users data is distributed in local databases on the Operators Node. Operators can use different databases for different sets of data.  
+Currently AnyLog Operators can use the following databases:
+[PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.  
+[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.
+
+  
+
+
+
+## Installing the AnyLog Software
+
 
 ## The AnyLog TestNet
+AnyLog offers a TestNet, Users can add nodes to the TestNet and test the network functionality.
 * Nodes participating with this setup are members of the AnyLog TestNet.
-* This setup assumes permitted network without security restrictions (unless metadata is kept private, see details below).
-* If metadata is shared, data placed on the network is available to all participating members.
-* The TestNet is using Master Nodes to share metadata information.  
+* This setup assumes permitted network without security restrictions.
+* The TestNet is using a Master Node to share metadata information.  
   
 ## The MetaData
 The metadata can be placed on a Master Node that is shared by other members of the network.  
