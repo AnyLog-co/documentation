@@ -47,12 +47,12 @@ The data of each cluster is maintained by 2 Operators such that if an Operator f
 * A set of policies published on the blockchain that determine how data is distributed.
 * The participating Operators are connected to the network.
 To view connection information issue the following command:  
-```show connections``` on each participating operator.  
+```get connections``` on each participating operator.  
 * Operators that host data are configured to provide a local database service.  
 For example, to support a database called ***lsl_data*** using PotgreSQL, the ***connect dbms*** is called as follows:  
 ``` connect dbms psql !db_user !db_port lsl_data```  
 To view connected databases call:  
-```show databases```
+```get databases```
  
 ## Assigning data to Operators
 
@@ -116,11 +116,28 @@ The command below provides a visual chart of how data is distributed to nodes in
 <pre>
 blockchain query metadata
 </pre>
+The command presents a hierarchical view of how the data is distributed:
+<pre>
+|-- Company --|   |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |--- Operator Connection, Member ID, Status ---|     
+litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                                                            [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                                                            [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                                                            [0012  remote active]
+                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                                                            [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                                                            [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                                                            [0012  remote active]
+
+</pre>
 
 ## Test Cluster policies
 The command below tests the validity of the Cluster policies:
 <pre>
-blockchain query metadata
+blockchain test metadata
 </pre>
 
 ## Example Policies
