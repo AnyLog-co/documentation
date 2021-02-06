@@ -35,14 +35,14 @@ bash $HOME/anylog-deployment/deploy_anylog.sh
 </pre>
 
 The script interactively requests the user to determine the type of node or nodes to install and some of the main configuration parameters. 
-The selected deployment and configuration decisions are maintained in an INI file such that the deployment decisions can be replicated in new deployments.
+  The selected deployment and configuration decisions are maintained in an INI file such that the deployment decisions can be replicated in new deployments.
 
 #### The deployments options
 
-| Type     | Nodes deploDetails  | ploDetails  |
+| Type     | Nodes deploDetails  | Details  |
 | ----------- | ------------| ------  |
 | node   | A single node. The type of node is determined by the interactive script  |
-| config   | Deployment (or redeployment of a node (or nodes) based on the config file |
+| config   | Deployment (or redeployment) of a node (or nodes) based on the config file |
 | full   | Master, Operator, Publisher, Query | All types of nodes are deployed  | 
 | cluster   | Operator, Publisher, Query | Deployment of all nodes without a master node  |
  
@@ -51,5 +51,5 @@ The selected deployment and configuration decisions are maintained in an INI fil
 The deployment includes the option to install and enable Postgres and Grafana as docker images. 
 
 #### The configuration file
-Once a node is set up, a copy of the configuration is stored in 
-anylog-deployment/support/config directory and connection details will be in anylog-deployment/support/credentials.txt
+A copy of the configuration is stored in 
+```anylog-deployment/support/config``` directory and connection details are saved in ```anylog-deployment/support/credentials.txt```.
