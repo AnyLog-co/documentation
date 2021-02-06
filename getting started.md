@@ -19,25 +19,39 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Master | a node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
 
 ## Managing the MetaData
-The metadata is information that is shared by members of the network.
+The metadata is the network related information that is shared by members of the network.
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
 The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
 The interaction with the metadata is not dependent on the repository. When a member node operates, it is configured to use a particular metadata repository and
-there are no operational differences which are dependent on the type of blockchain repository.  
-
-
+there are no operational differences which are dependent on the type of metadata repository.  
+***Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.***   
+Nodes in the network are configured to pull the metadata periodically (if it was changed) and the processing in a node considers the 
+local copy of the blockchain. Therefore, if connection to the blockchain platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
+Synchronizing the local copy of the blockchain data is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
 ## Managing the Data
 The users data is distributed in local databases on the Operators Node. Operators can use different databases for different sets of data.  
 Currently AnyLog Operators can use the following databases:
 [PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.  
-[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.
+[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.    
+The data managed by the network is distributed to many nodes but the network protocol provides a unified view over the distributed data -
+ the query process for user data does not need to identify the nodes that host the relevant data.  
+For each query, the network protocol resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
 
-  
+## AnyLog Install
 
+AnyLog can be installed from Docker or by dowkoading the codebase from github and calling an install script.
 
-
-## Installing the AnyLog Software
+* Access to the [AnyLog codebase](https://github.com/AnyLog-co/AnyLog-Network) on Github
+* An Ubuntu machine for each instance.  
+* PostgreSQL as a default local database on each node.  
+* Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/README.md)
+* Installation instructions on the packages below are available here - [Wiki](https://github.com/AnyLog-co/AnyLog-Network/wiki) 
+     * Install Virtualbox & Ubuntu
+     * Install AnyLog Prerequisites
+     * Setting a new branch & other Git commands
+     * AnyLog Documentation
+     * How to do a Pull Request
 
 
 ## The AnyLog TestNet
@@ -84,18 +98,6 @@ set anylog home [absolute path]
 ```
 
 
-## Prerequisites
-
-* Access to the [AnyLog codebase](https://github.com/AnyLog-co/AnyLog-Network) on Github
-* An Ubuntu machine for each instance.  
-* PostgreSQL as a default local database on each node.  
-* Installation details are available here - [Install](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/README.md)
-* Installation instructions on the packages below are available here - [Wiki](https://github.com/AnyLog-co/AnyLog-Network/wiki) 
-     * Install Virtualbox & Ubuntu
-     * Install AnyLog Prerequisites
-     * Setting a new branch & other Git commands
-     * AnyLog Documentation
-     * How to do a Pull Request
 
 #### Running an AnyLog Instance
 

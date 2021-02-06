@@ -155,8 +155,8 @@ In the second example, all the databases are considered as databases of the spec
 
 ## Blockchain Synchronizer
 
-A process that updates the local copy of the metadata by periodically copying the metadata from a blockchian or a master node.  
-This process maintains an updated version of the blockchain data on the local node.  
+A process that periodically connects to the bloackchain platform (or a master node) to updates the local copy of the metadata.  
+This process maintains an updated version of the blockchain data on the local node such that when the node queries the metadata, it is able to satisfy the query locally.    
 The source of the metadata depends on the node configuration and can be a blockchain or a master node.  
 
 Usage:  
@@ -170,7 +170,7 @@ Options:
 | ------------- | ------------- | 
 | source  | The source of the metadata with optional values: 'blockchain' and 'master'.  |
 | dest  | The destination of the metadata such as a file (a local file) or a DBMS (a local DBMS). If dest includes both, the local file and the local DBMS are updated. |
-| connection  | The connection information that is needed to retrieve the data. For Master, the IP and Port of the master node.  |
+| connection  | The connection information that is needed to retrieve the data. For a Master node, the IP and Port of the master node.  |
 | time  | The frequency of the synchronization.  |
 
 Comments:
