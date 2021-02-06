@@ -166,7 +166,7 @@ Every node maintains 4 dynamic logs that capture different types of events:
 * The event log - registers the executed commands
 * The error log - registers the commands that failed to execute.
 * The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
-more information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
+Additional information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
 <pre>
@@ -186,7 +186,7 @@ reset query log
 
 Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md).
 
-Users can also use the same node in different networks or configurations. This is a useful functionality for testing when users
+Users can associate a node to different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks or they switch between a main-net and a testnet.
 
 ### Switching between different setups
@@ -209,11 +209,11 @@ blockchain switch network where master = [IP:Port]
  
 ## Communicating between peers in the network
 
-Nodes in the network can send a message to peers in the network. Each message includes a command and sometimes additional data.      
+Nodes in the network can send messages to peers in the network. Each message includes a command and sometimes additional data.      
 When a meesage is received at a node, the node retrieves the command and the data from the message and executes the command.    
 Depending on the command in the message, some messages trigger a reply (for example, a command to derive a status, or a SQL query)
 and some types of commands are only executed on the node (for example, a command to change a state or a commmad to display a message).    
-If authentication is disabled, a node that received a message will executed all the commands in the incomming messages.   
+If authentication is disabled, a node will execute all the commands in the incoming messages.   
 If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
 If validation fails, the node will discard the incoming message.  
 
@@ -221,8 +221,9 @@ The format to send a command is the following:
 <pre>
 run client (destination) command
 </pre>
-
-***run client*** - transforms the command message to a message that is executed on one or more destination nodes.  
+Command sections:
+***run client*** - Making the current node a client of a member node (or nodes). The command is organized in a message
+ delivered to one or more destination nodes and is executed on the destination nodes.  
 ***(destination)*** - the destination nodes identified by the IP and Port assigned to their
 [TCP Server configuration](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process).
 Destination can be represented in any of the following ways:
