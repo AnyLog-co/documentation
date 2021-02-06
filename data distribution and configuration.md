@@ -123,7 +123,7 @@ The command below tests the validity of the Cluster policies:
 blockchain query metadata
 </pre>
 
-### Example Policies
+## Example Policies
 
 The following example declares the following:  
 1. 2 tables: cos_data and sin_data.  

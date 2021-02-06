@@ -30,7 +30,7 @@ local copy of the blockchain. Therefore, if connection to the blockchain platfor
 Synchronizing the local copy of the blockchain data is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
 ## Managing the Data
-The users data is distributed in local databases on the Operators Node. Operators can use different databases for different sets of data.  
+The users data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently AnyLog Operators can use the following databases:  
 [PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
 [SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
@@ -92,11 +92,11 @@ The command line prompt appear as ***AL >*** and it can be changed by issuing th
 node_name = my_node_name
 </pre>
 
-Using the CLI, user can interact with the node or peers nodes in the network.  
-The supported commands allow to retrieve and modify configuration, state of different processes 
-and issue SQL queries to data stored locally and data that is stored by other members of the network.  
+Using the CLI, a user can interact with the node or peer nodes in the network.  
+The supported commands allow to retrieve and modify configuration, state of different processes, query and update the blockchain data and
+issue SQL queries to data stored locally and data that is stored by other members of the network.    
 
-Exiting and terminating an AnyLog node is by issueing the command ***exit*** on the CLI.
+Exiting and terminating an AnyLog node is by issuing the command ***exit*** on the CLI.
 
 ### The help command
 The list of commands is available by executing the ***help command*** on the CLI:
@@ -112,6 +112,8 @@ help set
 help set echo queue
 help blockchain
 help blockchain push
+help connect dbms
+help sql
 </pre>
 
 ### The node dictionary
