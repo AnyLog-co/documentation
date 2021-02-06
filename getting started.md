@@ -31,9 +31,10 @@ Synchronizing the local copy of the blockchain data is explained in the followin
 
 ## Managing the Data
 The users data is distributed in local databases on the Operators Node. Operators can use different databases for different sets of data.  
-Currently AnyLog Operators can use the following databases:
-[PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.  
-[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.    
+Currently AnyLog Operators can use the following databases:  
+[PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
+[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
+
 The data managed by the network is distributed to many nodes but the network protocol provides a unified view over the distributed data -
  the query process for user data does not need to identify the nodes that host the relevant data.  
 For each query, the network protocol resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
@@ -180,7 +181,7 @@ reset query log
 Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md).
 
 Users can also use the same node in different networks or configurations. This is a useful functionality for testing when users
-deploy multiple networks or they switch between a main net and a testnet.
+deploy multiple networks or they switch between a main-net and a testnet.
 
 ### Switching between different setups
 
