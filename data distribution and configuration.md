@@ -1,13 +1,44 @@
 
 # Data Distribution and Configuration
 
-The distribution of data to nodes in the network is determined by policies published on the blockchain.  
-A policy is a JSON object that is structured as a nested dictionaries. The root dictionary has one attribute that determines the type of the policy and the children are structured as needed to describe the policy.  
+The distribution of data to nodes in the network is determined by policies published on the blockchain.
+A policy is a structure that determines how nodes needs to trat or process data or information that is required during the processing of the data.     
+Each policy is a JSON object that is structured as nested dictionaries. The root dictionary has one attribute that determines the type of the policy and the children provide the content of the policy.  
 
 There are 2 ways to represent how data is distributed.
 1. Assigning data to Operators - using this approach, Operators declare the tables they support and the data is distributed to the relevant operators.  
 This method does not offer the High Availability (HA) features and is usually used for testing.  
-2. Declaring Clusters and assigning Operators to Clusters - this is the recomended approach for production as it offers redundancy and HA.  
+2. Declaring Clusters and assigning Operators to Clusters - this is the recommended approach for production as it offers redundancy and High Availability (HA).
+
+## The organization of the data for HA
+
+Users view the data as if it is organized in tables assigned to databases.  
+The physical organization of the data partitions the data to logical clusters. Each of the logical clusters is supported by multiple Operators
+that maintain identical copies of the cluster's data. Therefore if an Operator nodes fails, the cluster's data is available on a surviving node.    
+The way data is treated is as follows:  
+* Data is assigned to a logical table.
+* Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
+* Each cluster is assigned to X operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.  
+
+|--------------------|          |--------------------|          |--------------------|
+|                    |          |                    |   --->   |     Operator 1     |         
+|                    |   --->   |                    |          |--------------------|
+|                    |          |      Clueter 1              
+|        Table       |          |                    |          |--------------------|
+|                    |          |                    |   --->   |     Operator 2     |
+|                    |          |--------------------|          |--------------------|
+|                    |
+|                    |          |--------------------|          |--------------------|
+|                    |          |                    |   --->   |     Operator 1     |
+|                    |   --->   |                    |          |--------------------|
+|                    |          |      Clueter 1     |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|--------------------|
+
 
 ## Prerequisites
 

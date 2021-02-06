@@ -39,6 +39,9 @@ The data managed by the network is distributed to many nodes but the network pro
  the query process for user data does not need to identify the nodes that host the relevant data.  
 For each query, the network protocol resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
 
+The section [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md)
+details how the user data is organized in the network.
+
 ## AnyLog Install
 
 AnyLog can be installed from Docker or by downloading the codebase from github and calling an install script.
