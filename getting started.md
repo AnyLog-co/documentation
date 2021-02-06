@@ -241,7 +241,7 @@ run client 10.0.0.78:20348 get status
 run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
 </pre>
 
-Queries are nor required to specify destinations. If destination is specified, only the destination nodes participate in the query.    
+Queries are not required to specify destinations. If destination is specified, only the destination nodes participate in the query.    
 If destination is not specified, the network protocol identifies the destination.
 When destination is not specified, the parentheses are left empty.  
 For example:
