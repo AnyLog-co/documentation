@@ -7,14 +7,18 @@
 
 ## Deploying AnyLog 
 
-The deployment process sets the environment and installs AnyLog an AnyLog node (or nodes) with basic configurations. 
+The deployment process sets the environment and installs an AnyLog node (or nodes) with basic configurations. 
 
 ### Setup the Environment
-* Download the StackScript container from Docker Hub    
-```wget http://172.105.178.102/StackScript $HOME```
+* Download the StackScript container from Docker Hub
+<pre>
+wget http://172.105.178.102/StackScript $HOME
+</pre>
 
 * Run the container
-```bash $HOME/StackScript```  
+<pre>
+bash $HOME/StackScript
+</pre>
 
 The StackScript container script will do the following:  
     * Update env
@@ -26,7 +30,9 @@ The StackScript container script will do the following:
 ### Install AnyLog
 
 Execute the following command to install AnyLog:
-```bash $HOME/anylog-deployment/deploy_anylog.sh ```
+<pre>
+bash $HOME/anylog-deployment/deploy_anylog.sh
+</pre>
 
 The script interactively requests the user to determine the type of node or nodes to install and some of the main configuration parameters. 
 The selected deployment and configuration decisions are maintained in an INI file such that the deployment decisions can be replicated in new deployments.
