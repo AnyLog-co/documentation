@@ -1,4 +1,4 @@
-# AnyLog Install
+# AnyLog Docker Install
 
 ## Prerequisites: 
 * A Linux/Ubuntu OS (Recommend 18.04LTS or higher)
