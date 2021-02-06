@@ -70,6 +70,17 @@ Directory Structure   Explabnation
 
 ## Basic operations
 
+## Starting AnyLog from the Linux CLI
+
+From the AnyLog-Network directory issue the following command:
+<pre>
+python3 source/cmd/user_cmd.py [command line arguments]
+</pre>
+The command line arguments are optional and can include a list of AnyLog commands separated by the ***and*** keyword.  
+The commands specified in the command line are executed upon initialization of the node and can include configuration and setup instructions.
+
+If the initialization commands are organized in a script file, call the command ***process*** followed by the path to the script. 
+
 ### AnyLog Command Line Interface
 When a node starts, it provides the ***AnyLog Command Line Interface*** (CLI).  
 The command line prompt appear as ***AL >*** and it can be changed by issuing the following command on the CLI:
@@ -79,7 +90,9 @@ node_name = my_node_name
 
 Using the CLI, user can interact with the node or peers nodes in the network.  
 The supported commands allow to retrieve and modify configuration, state of different processes 
-and issue SQL queries to data stored locally and data that is stored by other members of the network.
+and issue SQL queries to data stored locally and data that is stored by other members of the network.  
+
+Exiting and terminating an AnyLog node is by issueing the command ***exit*** on the CLI.
 
 ### The help command
 The list of commands is available by executing the ***help command*** on the CLI:
@@ -99,7 +112,7 @@ help blockchain push
 
 ### The node dictionary
 
-Every node contains a dictionary. The dictionary mapskeys to values and when users or applications interact with a node,
+Every node contains a dictionary. The dictionary maps keys to values and when users or applications interact with a node,
 they can use the keys names prefixed with exclamation point (!) rather than the values.  
 All the keys and values are organized in a dictionary and can be processed using the following command:
 
@@ -112,15 +125,15 @@ All the keys and values are organized in a dictionary and can be processed using
  master_node = 126.32.47.29:2048
  </pre>
  
-If the value string is identical to a command name, setting a value returns an error and the user can enforce the value using the command set.    
+If the value string is identical to a command name, setting a value returns an error and the user can enforce the value using the command ***set***.    
 Example:
 <pre>
 set dbms_name = test
 </pre>
  
-* Retrieve a value assigned to a key:
+* Retrieve a value assigned to a key is by executing ***!key***. For example:
 <pre>
-!key
+!dbms_name
 </pre>
 
 * Retrieve all the assigned values:
