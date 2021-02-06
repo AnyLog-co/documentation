@@ -24,6 +24,7 @@ In the example below, the data of tables 1-4 is distributed to 2 clusters. Each 
 The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the second Operator
 (and based on the policies, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator).
 
+<pre>
 |--------------------|          |--------------------|          |--------------------|  
 |                    |          |                    |   --->   |     Operator 1     |          
 |                    |   --->   |                    |          |--------------------|  
@@ -39,7 +40,7 @@ The data of each cluster is maintained by 2 Operators such that if an Operator f
 |                    |   --->   |                    |          |--------------------|  
 |                    |          |                    |   --->   |     Operator 4     |  
 |--------------------|          |--------------------|          |--------------------|  
-
+</pre>
 
 ## Prerequisites
 
