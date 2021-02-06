@@ -70,7 +70,7 @@ Directory Structure   Explabnation
 
 ## Basic operations
 
-## Starting AnyLog from the Linux CLI
+### Starting AnyLog from the Linux CLI
 
 From the AnyLog-Network directory issue the following command:
 <pre>
@@ -140,3 +140,37 @@ set dbms_name = test
 <pre>
 get dictionary
 </pre>
+
+### Get info on active background processes
+
+An active node may be configured such that some background processes are enabled.
+To view the list of active processes issue the following command:
+<pre>
+get processes
+</pre>
+More information on the background processes is available the [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md) section.
+
+### The dynamic logs
+Every node maintains 4 dynamic logs that capture different types of events:
+* The event log - registers the executed commands
+* The error log - registers the commands that failed to execute.
+* The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
+
+To view the content of the logs issue the following commands:
+<pre>
+get event log
+get error log
+get query log
+</pre>
+
+The content of the logs can be reset using the following commands:
+<pre>
+reset event log
+reset error log
+reset query log
+</pre>
+
+## Making a node a member of the network
+
+Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md)
+
