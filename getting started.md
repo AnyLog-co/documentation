@@ -119,8 +119,8 @@ help sql
 ### The node dictionary
 
 Every node contains a dictionary. The dictionary maps keys to values and when users or applications interact with a node,
-they can use the keys names prefixed with exclamation point (!) rather than the values.  
-All the keys and values are organized in a dictionary and can be processed using the following command:
+they can use the key names prefixed with exclamation point (!) rather than the values.  
+All the keys and values are organized in a dictionary and can be processed using the following commands:
 
 * Assigning a value to a key:
  <pre>
@@ -149,12 +149,12 @@ get dictionary
 
 ### Retrieving environment variables
 
-Users the $ sign prefixed to the variable name, users can retrieve the values assigned to an environment variable.
+By adding the $ sign to a variable name, users can retrieve the values assigned to an environment variable.
 For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the assigned value to PATH.
 
 ### Get info on active background processes
 
-An active node may be configured such that some background processes are enabled.
+An active node is configured such that some background processes are enabled.
 To view the list of active processes issue the following command:
 <pre>
 get processes
@@ -166,6 +166,7 @@ Every node maintains 4 dynamic logs that capture different types of events:
 * The event log - registers the executed commands
 * The error log - registers the commands that failed to execute.
 * The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
+more information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
 <pre>

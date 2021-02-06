@@ -10,10 +10,10 @@ c. a process to identify the SQL used on each participating node.
 ## Statistical information
 In order to get statistical information, use the following command:  
 On the AnyLog command prompt:  
-```show queries time```  
+```get queries time```  
 From a REST client send a REST message and place in the headers the following keys and values:  
 ```type : info```  
-```details : show queries time```
+```details : get queries time```
 
 ## Identifying slow queries
 
@@ -25,10 +25,10 @@ The  ***set query log*** records all queries in the query log whereas adding ***
 places in the query log only queries with execution time greater or equal to [n] seconds.
 
 To view the slow query log use the following command on the AnyLog command prompt:  
-```show query log```  
+```get query log```  
 From a REST client send a REST message and place in the headers the following keys and values:  
 ```type : info```  
-```details : show query log```
+```details : get query log```
 
 ## Identify the SQL used on each participating node
 
