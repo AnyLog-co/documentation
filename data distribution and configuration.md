@@ -118,7 +118,7 @@ blockchain query metadata
 </pre>
 The command presents a hierarchical view of how the data is distributed:
 <pre>
-|-- Company --|   |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
+|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
 litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
                                                                                                                                             [0008  remote active]
