@@ -121,18 +121,38 @@ The command presents a hierarchical view of how the data is distributed:
 |- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
 litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                                                            [0008  remote active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
                                                          ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                                                            [0015  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
                                                          ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                                                            [0012  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
                                 ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                                                            [0008  remote active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
                                                          ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                                                            [0015  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
                                                          ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                                                            [0012  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
 
+</pre>
+
+## View tables managed by an Operator
+
+Excuting the command ```get cluster info``` on an Operator node presents the cluster supported by the Operator,
+the members Operators that are supporting the cluster and the tables associated with the cluster.
+
+<pre>
+Cluster ID : 2436e8aeeee5f0b0d9a55aa8de396cc2
+Member ID  : 206
+Participating Operators:
+      IP              Port Member Status 
+      ---------------|----|------|------|
+      139.162.126.241|2048|   206|active|
+      139.12.224.186 |2048|   008|active|
+Tables Supported:
+      Company       DBMS          Table                
+      -------------|-------------|--------------------|
+      litsanleandro|litsanleandro|ping_sensor         |
+      litsanleandro|litsanleandro|percentagecpu_sensor|
 </pre>
 
 ## Test Cluster policies
