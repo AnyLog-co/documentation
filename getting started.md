@@ -68,4 +68,31 @@ Directory Structure   Explabnation
        -->anylog      [AnyLog scripts, configure the AnyLog instance]
 </pre>
 
+## Basic operations
+
+When a node starts, it provides the ***AnyLog Command Line Interface*** (CLI).
+  The command line prompt appear as ***AL >*** and it can be changed by issuing the following command on the CLI:
+<pre>
+node_name = my_node_name
+</pre>
+
+Using the CLI, user can interact with the node or peers nodes in the network.  
+The supported commands allow to retrieve and modify configuration, state of different processes and issue SQL queries to data stored locally and data that is stored by other members of the network.
+
+The list of commands is available by executing the help command on the CLI:
+<pre>
+help
+</pre>
+
+Users can apply the help command to detail specific options and examples of usage. Below are some examples:
+<pre>
+help get 
+help get mqtt clients
+help set
+help set echo queue
+help blockchain
+help blockchain push
+</pre>
+ 
+
  
