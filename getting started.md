@@ -218,10 +218,26 @@ run client (destination) command
 
 ***run client*** - transforms the command message to a message that is executed on one or more destination nodes.  
 ***(destination)*** - the destination nodes identified by the IP and Port assigned to their
-[TCP Server configuration]()
+[TCP Server configuration](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process).
+Destination can be represented in any of the following ways:
+* As a comma seperated list of IP-Ports pairs. The IP and Port are seperated by space. For example: ```139.162.126.241 2048, 172.105.13.202 2048)```    
+* For a single destination node - as an IP-Port string. For example:  ```10.0.0.78:20348```  
+* As variables. For example: ```!dest_ip !dest_port```
+* If more than a single destination is specified, the destination is contained in parentheses.
+***command*** - any of the AnyLog commands  
 
+Examples:
 
+<pre>
+run client 10.0.0.78:20348 get status
+run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
+</pre>
 
- 
-
-## Simple deployment Example
+Queries do not need to specify destinations. If destination is specified, only the destination nodes participate in the query.  
+If destination is not specified, the network protocol identoifies the destination, The message is send with empty parentheses.  
+For example:
+<pre>
+run client 10.0.0.78:20348 get status
+run client () sql my_dbms "select count(*) from my_table"
+</pre>
+More information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md)

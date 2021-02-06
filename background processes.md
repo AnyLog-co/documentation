@@ -16,8 +16,8 @@ The background processes:
 
 These processes are activated on the AL command line.  
 The command ***get processes*** provides the list of the running processes.  
-The ***show*** command provides options to detail the status of each process. The options of the ***show*** command are detailed in 
-[commands](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
+The ***get*** command provides options to detail the status of each process. The command options are detailed in 
+[Get Command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
  
 
 ## The TCP Server process
