@@ -137,7 +137,7 @@ litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a
 
 ## View tables managed by an Operator
 
-Excuting the command ```get cluster info``` on an Operator node presents the cluster supported by the Operator,
+Excuting the command ```get cluster info``` on an Operator node presents the cluster supported by the operator,
 the members Operators that are supporting the cluster and the tables associated with the cluster.
 
 <pre>
