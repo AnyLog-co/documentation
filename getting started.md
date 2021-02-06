@@ -70,21 +70,24 @@ Directory Structure   Explabnation
 
 ## Basic operations
 
-When a node starts, it provides the ***AnyLog Command Line Interface*** (CLI).
-  The command line prompt appear as ***AL >*** and it can be changed by issuing the following command on the CLI:
+### AnyLog Command Line Interface
+When a node starts, it provides the ***AnyLog Command Line Interface*** (CLI).  
+The command line prompt appear as ***AL >*** and it can be changed by issuing the following command on the CLI:
 <pre>
 node_name = my_node_name
 </pre>
 
 Using the CLI, user can interact with the node or peers nodes in the network.  
-The supported commands allow to retrieve and modify configuration, state of different processes and issue SQL queries to data stored locally and data that is stored by other members of the network.
+The supported commands allow to retrieve and modify configuration, state of different processes 
+and issue SQL queries to data stored locally and data that is stored by other members of the network.
 
-The list of commands is available by executing the help command on the CLI:
+### The help command
+The list of commands is available by executing the ***help command*** on the CLI:
 <pre>
 help
 </pre>
 
-Users can apply the help command to detail specific options and examples of usage. Below are some examples:
+Users can apply the ***help command*** to detail specific options and examples of usage. Below are some examples:
 <pre>
 help get 
 help get mqtt clients
@@ -93,6 +96,34 @@ help set echo queue
 help blockchain
 help blockchain push
 </pre>
- 
 
+### The node dictionary
+
+Every node contains a dictionary. The dictionary mapskeys to values and when users or applications interact with a node,
+they can use the keys names prefixed with exclamation point (!) rather than the values.  
+All the keys and values are organized in a dictionary and can be processed using the following command:
+
+* Assigning a value to a key:
+ <pre>
+ key = value
+ </pre>
+ Example:
+ <pre>
+ master_node = 126.32.47.29:2048
+ </pre>
  
+If the value string is identical to a command name, setting a value returns an error and the user can enforce the value using the command set.    
+Example:
+<pre>
+set dbms_name = test
+</pre>
+ 
+* Retrieve a value assigned to a key:
+<pre>
+!key
+</pre>
+
+* Retrieve all the assigned values:
+<pre>
+get dictionary
+</pre>
