@@ -203,4 +203,25 @@ blockchain switch network where master = [IP:Port]
  
 ## Communicating between peers in the network
 
+Nodes in the network can send a message to peers in the network. Each message includes a command and sometimes additional data.      
+When a meesage is received at a node, the node retrieves the command and the data from the message and executes the command.    
+Depending on the command in the message, some messages trigger a reply (for example, a command to derive a status, or a SQL query)
+and some types of commands are only executed on the node (for example, a command to change a state or a commmad to display a message).    
+If authentication is disabled, a node that received a message will executed all the commands in the incomming messages.   
+If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
+If validation fails, the node will discard the incoming message.  
+
+The format to send a command is the following:
+<pre>
+run client (destination) command
+</pre>
+
+***run client*** - transforms the command message to a message that is executed on one or more destination nodes.  
+***(destination)*** - the destination nodes identified by the IP and Port assigned to their
+[TCP Server configuration]()
+
+
+
+ 
+
 ## Simple deployment Example
