@@ -223,7 +223,7 @@ Destination can be represented in any of the following ways:
 * As a comma seperated list of IP-Ports pairs. The IP and Port are seperated by space. For example: ```139.162.126.241 2048, 172.105.13.202 2048)```    
 * For a single destination node - as an IP-Port string. For example:  ```10.0.0.78:20348```  
 * As variables. For example: ```!dest_ip !dest_port```
-* If more than a single destination is specified, the destinations are contained in parentheses.  
+* If more than a single destination is specified, the destinations are contained in parentheses.    
 ***command*** - any of the AnyLog commands  
 
 Examples:
