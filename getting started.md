@@ -201,3 +201,6 @@ The following command makes the [blockchain synchronizer process](https://github
 blockchain switch network where master = [IP:Port]
 </pre>
  
+## Communicating between peers in the network
+
+## Simple deployment Example
