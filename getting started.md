@@ -174,3 +174,24 @@ reset query log
 
 Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md)
 
+Users can also use the same node in different networks or configurations. This is a useful functionality for testing when users
+deploy multiple networks or they switch between a main net and a testnet.
+
+### Switching between different setups
+
+Users may have multiple [directories setups](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure)
+on the same node. Using the following command, users can associate a node to a different setup location:
+<pre>
+set anylog home [path to AnyLog root]
+</pre>
+AnyLog root is the ***AnyLog-Network*** directory.
+
+### Switching between different master nodes
+
+Users may need to switch between different master nodes.
+The following command makes the [blockchain synchronizer process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
+ connect to a different master node:
+<pre>
+blockchain switch network where master = [IP:Port]
+</pre>
+ 
