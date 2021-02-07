@@ -42,6 +42,15 @@ The data managed by the network is distributed to many nodes but the network pro
  the query process for user data does not need to identify the nodes that host the relevant data.  
 For each query, the network protocol resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
 
+Related documentation:
+
+| Section        | Information provided  |
+| ------------- | ------------| 
+|[Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) |
+ How the user data is organized in the network. | 
+|[Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) |
+ How the user data is organized and registered in an Operator node. | 
+
 The section [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md)
 details how the user data is organized in the network.    
 The section [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
