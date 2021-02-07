@@ -229,7 +229,7 @@ A node receiving REST requests interprets and executes the command regardless if
 Additional information on the REST API to AnyLOg is available at the following section: [Using REST](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md).
 
  
-## Communicating between peers in the network
+## Sending messages to peers in the network
 
 Nodes in the network can send messages to peers in the network. Each message includes a command and sometimes additional data.      
 When a meesage is received at a node, the node retrieves the command and the data from the message and executes the command.    
