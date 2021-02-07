@@ -26,8 +26,9 @@ The ***get*** command provides options to detail the status of each process. The
 
 ## The TCP Server process
 
-A process that initiates threads that listen for incoming messages from peer nodes and, assuming authorization, execute the commands contained in the messages.
-This process makes the node a member in the AnyLog Network.  
+A process that listens for incoming messages from peer nodes. When a message is received, the process executes the command contained in the message.    
+The IP and ports used by the process are published on the Blockchain and make the node recognizable, searchable and accessible by network peers.      
+This process makes the node a member in the AnyLog Network.    
 
 Usage:
 <pre>
@@ -42,7 +43,7 @@ Additional information is available in the [network configuration](https://githu
 ## REST requests
 
 A process that receives REST messages from users and applications which are not members of the network.  
-This process receives requests to query data and metada, process the request and replies with the requested information.
+This process receives requests to query data and metadata, and replies with the requested information.
 
 Usage:
 <pre>
@@ -58,7 +59,8 @@ Additional information is available at (network configuration)[https://github.co
 
 ## Operator Process
 
-A process that places users data in a local database. The Operator identifies JSON files, transforms the files to a structure that can be assigned to a data table and inserts the data to a local database.  
+A process that places users data local databases. The Operator identifies JSON files, transforms the files to a structure 
+that can be assigned to data tables and inserts the data local databases.    
 Files ingested are recorded such that it is possible to trace the source data and source device of data readings.
 
 #### Overview

@@ -28,10 +28,10 @@ The metadata is the network related information that is shared by members of the
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
 The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
 The interaction with the metadata is not dependent on the repository. When a member node operates, it is configured to use a particular metadata repository and
-there are no operational differences which are dependent on the type of metadata repository.  
+there are no operational differences which are dependent on the type of of the metadata repository used.  
 ***Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.***   
 Nodes in the network are configured to pull the metadata periodically (if it was changed) and the processing in a node considers the 
-local copy of the blockchain. Therefore, if connection to the blockchain platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
+local copy of the metadata. Therefore, if a connection to the blockchain platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
 Synchronizing the local copy of the blockchain data is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
 ## The Data
@@ -114,12 +114,12 @@ issue SQL queries to data stored locally and data that is stored by other member
 Exiting and terminating an AnyLog node is by issuing the command ***exit*** on the CLI.
 
 ### The help command
-The list of commands is available by executing the ***help command*** on the CLI:
+The list of commands is available by executing the ***help*** command on the CLI:
 <pre>
 help
 </pre>
 
-Users can apply the ***help command*** to detail specific options and examples of usage. Below are some examples:
+Users can apply the ***help*** command to detail specific options and examples of usage. Below are some examples:
 <pre>
 help get 
 help get mqtt clients
@@ -135,7 +135,7 @@ help sql
 
 Every node contains a dictionary. The dictionary maps keys to values and when users or applications interact with a node,
 they can use the key names prefixed with an exclamation point (!) rather than specifying the values.  
-All the keys and values are organized in a dictionary and can be processed using the following commands:
+The keys and values are organized in a dictionary and can be processed using the following commands:
 
 * Assigning a value to a key:
  <pre>
@@ -224,7 +224,7 @@ blockchain switch network where master = [IP:Port]
 
 ## Using the REST API to issue AnyLog commands
 
-Users can execute the AnyLog commands by sending the commands via REST requests to a node in the network.  
+Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
 Additional information on the REST API to AnyLOg is available at the following section: [Using REST](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md).
 
