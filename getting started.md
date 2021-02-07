@@ -23,7 +23,7 @@ A node in the network is assigned with one or more roles. The optional roles are
 
 Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
 
-## Managing the MetaData
+## The Network MetaData
 The metadata is the network related information that is shared by members of the network.
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
 The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
@@ -34,15 +34,15 @@ Nodes in the network are configured to pull the metadata periodically (if it was
 local copy of the blockchain. Therefore, if connection to the blockchain platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
 Synchronizing the local copy of the blockchain data is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
-## Managing the Data
+## The Data
 The users data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently AnyLog Operators can use the following databases:  
 [PostgreSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
 [SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
 
 The data managed by the network is distributed to many nodes but the network protocol provides a unified view over the distributed data -
- the query process for user data does not need to identify the nodes that host the relevant data.  
-For each query, the network protocol resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
+ the query process does not need to identify the nodes that host the relevant data - for each query, the network protocol 
+ resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
 
 Related documentation:
 
@@ -52,15 +52,15 @@ Related documentation:
 | [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md) | Delivering data to Operators in the network. |
 | [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) | Delivering data to Operators using a MQTT broker. |
 | [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
-| [Queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md) | Queries to the data hosted by nodes in  the network. |
+| [Queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
 | [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
 | [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/using%20grafana.md) | Integrating Grafana to visualize data. |
  
 ## AnyLog Install
 
 AnyLog can be installed from Docker or by downloading the codebase from github and calling an install script.
-Docker install is detailed in the section: [AnyLog Docker Install](https://github.com/AnyLog-co/documentation/blob/master/anylog%20docker%20install.md).
-Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](https://github.com/AnyLog-co/documentation/blob/master/starting%20an%20anylog%20instance.md).
+* Docker install is detailed in the section: [AnyLog Docker Install](https://github.com/AnyLog-co/documentation/blob/master/anylog%20docker%20install.md).
+* Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](https://github.com/AnyLog-co/documentation/blob/master/starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
 
@@ -134,7 +134,7 @@ help sql
 ### The node dictionary
 
 Every node contains a dictionary. The dictionary maps keys to values and when users or applications interact with a node,
-they can use the key names prefixed with exclamation point (!) rather than the values.  
+they can use the key names prefixed with an exclamation point (!) rather than specifying the values.  
 All the keys and values are organized in a dictionary and can be processed using the following commands:
 
 * Assigning a value to a key:
