@@ -292,7 +292,8 @@ provided to the sender and determines if the sender is authorized as needed.
 * Certificate - The network can provide certificates to Clients and Servers and configured such that connection to clients use SSL with client and server Certificate authentication.
 * Encryption - Message send between nodes in the network can be encrypted.  
 
-Additional information is available at [User Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md).
+Additional information is available in the [User Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md) section.
+
 
   
 
