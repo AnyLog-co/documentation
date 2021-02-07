@@ -4,19 +4,23 @@ Background processes are optional processes that if activated, are running using
 
 The background processes:
 
-1. A listener for the AnyLog Peer-to-Peer Messaging. Activated by the command: ```run tcp server```
-2. A listener for a user REST Request.  Activated by the command: ```run rest server```
-3. An automated Operator process. Activated by the command: ```run operator```
-4. An automated Publisher process. Activated by the command: ```run publisher```
-5. An automated Blockchain Synchronizer. Activated by the command: ```run blockchain sync```
-6. A Scheduler process. Activated by the command ```run scheduler```
-7. The HA process. Activated by the command ```run ha```
-8. A MQTT client process that subscribes to a broker by the command ```run mqtt client```
-9. A dedicated thread to flush streaming data to dis. Activated by the command ```run streamer```
+
+| Command               | functionality  |
+| --------------------- | ------------| 
+| run tcp server       | A listener for the AnyLog Peer-to-Peer Messaging  |
+| run rest server | A listener for REST Request from users and applications from nodes that are not members of the network |
+| run operator | A configurable operator process that ingests data to the local tables |
+| run publisher | A configurable publisher process that sends data to operators for processing |
+| run blockchain sync | A configurable process to periodically pull from the blockchain platform (or master node) an updated copy of the metadata |
+| run scheduler | Initiate a scheduler to periodically monitor state of events and data  |
+| run mqtt client | Initiate processes that pull data from MQTT brokers |
+| run streamer | Initiate a dedicated thread to flush streaming data to disk |
+| run data distributor | A process that synchronizes data between different operators of the same cluster |
+| run data consumer | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 
 These processes are activated on the AL command line.  
 The command ***get processes*** provides the list of the running processes.  
-The ***get*** command provides options to detail the status of each process. The command options are detailed in 
+The ***get*** command provides options to detail the status of each process. The ***get*** command options are detailed in 
 [Get Command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
  
 
@@ -33,7 +37,7 @@ Explanation:
 [ip] [port] - The process listens for incoming messages on the assigned IP and and Port.
 [Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
 
-Additional information is available at (network configuration)[https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]. 
+Additional information is available in the [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]) section. 
  
 ## REST requests
 
@@ -282,15 +286,15 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
 
 ## Streamer Process
-A process that pushes streaming data to files.  
-When streaming data is added to the internal buffers, the streamer process, based on a time threshold, writes the buffers to files.
+A process that flushes streaming data to files.  
+When streaming data is added to the internal buffers, the streamer process, based on time and data volume thresholds, writes the buffers to files.
 Usage
 <pre>
 run streamer where prep_dir = [path to prep directory] and watch_dir = [path to watch directory] and err_dir = [path to err directory]
 </pre>
 
 If prep_dir, watch_dir and err_dir and not specified, the default locations are used.    
-To view the default paths used, use the command ```show dictionary```.  
+To view the default paths used, use the command ```get dictionary```.  
 The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
 
 
