@@ -9,7 +9,7 @@ There are 3 ways to issue AnyLog commands:
 
 1)	On the OS command line, by initiating an AnyLog instance followed by one or more commands to execute.  
 If multiple commands are issued on the OS command line, the commands needs to be separated by the keyword ***and***.  
-Example: the command ```anylog run tcp server 192.168.234.6:2046 and run rest server 192.168.234.6:2047```   
+Example: the command ```run tcp server 192.168.234.6:2046 and run rest server 192.168.234.6:2047```   
 will initiate an AnyLog instance and configure the node to listen to TCP messages and REST messages on the detailed IPs and Ports.     
 2)	On the AnyLog command line by issuing the command on the AnyLog command line prompt.  
 3)	By configuring a node as a REST server and issuing command to the configured REST IP and Port. The REST API only support a subset of the commands.
@@ -55,14 +55,14 @@ Disconnect is done by calling the disconnect command as follows:
 ***[dbms_name]*** is the logical database name.
 
 ### Management commands
-```show event log``` - shows the last events processed on the node.  
-```show error log``` - shows the last errors identified on the node.   
-```show file log``` - on an operator node, shows the last data files processed on the node.  
+```get event log``` - shows the last events processed on the node.  
+```get error log``` - shows the last errors identified on the node.   
+```get file log``` - on an operator node, shows the last data files processed on the node.  
 If keywords are added to the ***show*** commands, than the output considers only log entries containing the keywords.  
-For example: ```show event log SQL``` will only show log entries containing the keyword ***sql***  
+For example: ```get event log SQL``` will only show log entries containing the keyword ***sql***  
 
-```dictionary show``` - shows definitions maintained in the dictionary.  
-```directory show``` - show the active watch directories.  
+```get dictionary``` - shows definitions maintained in the dictionary.  
+```get watch directories``` - shows the active watch directories.  
 
 ## Configuration checklist
 
@@ -71,9 +71,9 @@ This section details a configuration checklist for each type of node in the clus
 #### All Nodes
 
 * Directory structure to maintain local copy of the blockchain and local data was created.
- Dictionary definitions that map to the directory structure used. Use ```dictionary show``` to see all the dictionary definitions.
+ Dictionary definitions that map to the directory structure used. Use ```get dictionary``` to see all the dictionary definitions.
 * Correct IP and ports defined. Use ```!ip``` to see the default IP used on each machine.
-* Listener for TCP incoming messages. Use ```show connections``` to see open connections. Use ```run tcp server [ip] [port]``` to declare a TCP connection.
+* Listener for TCP incoming messages. Use ```get connections``` to see open connections. Use ```run tcp server [ip] [port]``` to declare a TCP connection.
 
 
 If a local database is used to manage the metadata:
@@ -81,17 +81,17 @@ If a local database is used to manage the metadata:
 * If the ***ledger table*** was not created on the blockchain database, use ```blockchain create table``` to create the table.  
 
 ***Note:***  
-Use ```show dbms``` to see the databases connected on each node.  
+Use ```get databases``` to see the databases connected on each node.  
 Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a specif database.
 
 #### Operator Node
 
 * Test that the supported databases are connected. These needs to include the databases that support the user's data.
-* Test that the ***watch directory*** is being used. Use ```directory show``` to see the watched directories. 
+* Test that the ***watch directory*** is being used. Use ```get watch directories``` to visualize the watched directories. 
 
 #### Publisher Node
 
-* Test that the ***watch directory*** is being used. Use ```directory show``` to see the watched directories. 
+* Test that the ***watch directory*** is being used. Use ```get watch directories``` to see the watched directories. 
 
 #### Query Node
 
@@ -103,9 +103,9 @@ Use ```connect dbms psql [dbms user] [dbms port] [dbms name]``` to connect to a 
 * Test that the ```blockchain``` database is connected and the ledger table is created declared.  
 
 #### Example calls
-* To view connections use ```show conections``` 
-* To view the location of the watch directories use: ```directory show```
+* To view connections use ```get conections``` 
+* To view the location of the watch directories use: ```get watch directories```
 * Example connecting to the blockchain database: ```connect dbms psql !db_user !db_port blockchain```
-* To view database connected use: ```show dbms```
+* To view database connected use: ```get databases```
 * Creating the ledger table is by calling ```blockchain create table```
 

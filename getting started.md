@@ -58,7 +58,8 @@ Related documentation:
 ## AnyLog Install
 
 AnyLog can be installed from Docker or by downloading the codebase from github and calling an install script.
-Docker install is detailed in the section: [AnyLog Docker Install](https://github.com/AnyLog-co/documentation/blob/master/anylog%20docker%20install.md)
+Docker install is detailed in the section: [AnyLog Docker Install](https://github.com/AnyLog-co/documentation/blob/master/anylog%20docker%20install.md).
+Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](https://github.com/AnyLog-co/documentation/blob/master/starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
 
@@ -222,7 +223,10 @@ blockchain switch network where master = [IP:Port]
 
 ## Execute commands using a REST API
 
-Users can execute the ANyLOg commands 
+Users can execute the AnyLog commands by sending the commands via REST requests to a node in the network.  
+A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
+Additional information on the REST API to AnyLOg is available at the following section: [Using REST](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md).
+ 
  
 ## Communicating between peers in the network
 
