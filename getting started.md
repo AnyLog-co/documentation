@@ -167,7 +167,7 @@ get dictionary
 By adding the $ sign to a variable name, users can retrieve the values assigned to an environment variable.
 For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the assigned value to PATH.
 
-### Get info on active background processes
+### Retrieving info on active background processes
 
 An active node is configured such that some background processes are enabled.
 To view the list of active processes issue the following command:
