@@ -36,7 +36,7 @@ run tcp server [ip] [port] [threads]
 </pre>
 Explanation:  
 [ip] [port] - The IP and Port of the socket that is in the listening state.  
-[Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
+[Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 3.
 
 Additional information is available in the [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]) section. 
  
