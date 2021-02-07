@@ -272,7 +272,7 @@ run client () sql my_dbms "select count(*) from my_table"
 </pre>
 Additional information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
 
-## Querying and updating data in the blockchain
+## Querying and updating metadata in the blockchain
 
 The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
