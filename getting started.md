@@ -46,10 +46,10 @@ Related documentation:
 
 | Section        | Information provided  |
 | ------------- | ------------| 
-|[Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) |
- How the user data is organized in the network. | 
-|[Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) |
- How the user data is organized and registered in an Operator node. | 
+| [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) 
+| How the user data is organized in the network. | 
+| [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) 
+| How the user data is organized and registered in an Operator node. | 
 
 The section [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md)
 details how the user data is organized in the network.    
