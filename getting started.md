@@ -289,7 +289,7 @@ Using the signature and the signed information, the node that received the messa
 provided to the sender and determines if the sender is authorized as needed.
 * User authentication - Users can be assigned with private and public keys and consider as a node with the process described above.  
 * Basic authentication - Nodes can be updated with a list of user names and passoword and satisfy commands from users providing the registered passwords.
-* Certificate - The network can provide certificates to Clients and Servers and configured such that connection to clients use SSL with client and server Certificate authentication.
+* Certificate - The network can provide certificates to Clients and Servers and configured such that connection to clients use SSL with client and server Certificate Authentication.
 * Encryption - Message send between nodes in the network can be encrypted.  
 
 Additional information is available in the [User Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md) section.
