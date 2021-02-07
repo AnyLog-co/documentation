@@ -21,6 +21,8 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Query  | A node that orchestrates a query process. |
 | Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
 
+Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
+
 ## Managing the MetaData
 The metadata is the network related information that is shared by members of the network.
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
@@ -47,7 +49,6 @@ Related documentation:
 | Section       | Information provided  |
 | ------------- | ------------| 
 | [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
-| [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | The Organization of the data in an Operator node. | 
 | [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md) | Delivering data to Operators in the network. |
 | [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) | Delivering data to Operators using a MQTT broker. |
 | [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
@@ -221,12 +222,12 @@ The following command makes the [blockchain synchronizer process](https://github
 blockchain switch network where master = [IP:Port]
 </pre>
 
-## Execute commands using a REST API
+## Using the REST API to issue AnyLog commands
 
 Users can execute the AnyLog commands by sending the commands via REST requests to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
 Additional information on the REST API to AnyLOg is available at the following section: [Using REST](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md).
- 
+
  
 ## Communicating between peers in the network
 
@@ -271,7 +272,14 @@ run client () sql my_dbms "select count(*) from my_table"
 </pre>
 Additional information is available at [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
 
-# Network security
+## Querying and updating data in the blockchain
+
+The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
+Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
+Additional information on the blockchain commands is available in the [Blockchain commands](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md) section.
+
+
+## Network security
 
 Several mechanisms secure the data managed by the network:
 * Nodes authentication - Each node is assigned with a private and a public key.

@@ -105,12 +105,6 @@ Metadata queries evaluate the data in the local JSON file.
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
 * Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
-
-### Using - Show Commands
-The following show commands retrieve data from the blockchain:
-* ```show servers for dbms [dbms name]``` - retrieve the IPs and Ports of the database servers hosting tables for the named database.  
-* ```show servers for dbms [dbms name] and [table name]``` - retrieve the IPs and Ports of the database servers hosting the named table.
-* ```show tables for dbms [dbms name]``` - retrieve the names of the tables that are assigned to the named database.
  
 ### Retrieve blockchain data from the local database
 
