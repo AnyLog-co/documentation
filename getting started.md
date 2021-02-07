@@ -48,12 +48,13 @@ Related documentation:
 | ------------- | ------------| 
 | [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
 | [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | The Organization of the data in an Operator node. | 
-
-The section [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md)
-details how the user data is organized in the network.    
-The section [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
-details how new file added to an Opertor node is registered and treated.
-
+| [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md) | Delivering data to Operators in the network. |
+| [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) | Delivering data to Operators using a MQTT broker. |
+| [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
+| [Queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md) | Queries to the data hosted by nodes in  the network. |
+| [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
+| [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/using%20grafana.md) | Integrating Grafana to visualize data. |
+ 
 ## AnyLog Install
 
 AnyLog can be installed from Docker or by downloading the codebase from github and calling an install script.
@@ -218,6 +219,10 @@ The following command makes the [blockchain synchronizer process](https://github
 <pre>
 blockchain switch network where master = [IP:Port]
 </pre>
+
+## Execute commands using a REST API
+
+Users can execute the ANyLOg commands 
  
 ## Communicating between peers in the network
 
