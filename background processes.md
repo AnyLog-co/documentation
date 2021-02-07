@@ -11,10 +11,10 @@ The background processes:
 | run rest server | A listener for REST Request from users and applications from nodes that are not members of the network |
 | run operator | A configurable operator process that ingests data to the local tables |
 | run publisher | A configurable publisher process that sends data to operators for processing |
-| run blockchain sync | A configurable process to periodically pull from the blockchain platform (or master node) an updated copy of the metadata |
+| run blockchain sync | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
 | run scheduler | Initiate a scheduler to periodically monitor state of events and data  |
-| run mqtt client | Initiate processes that pull data from MQTT brokers |
-| run streamer | Initiate a dedicated thread to flush streaming data to disk |
+| run mqtt client | Initiate a process that pulls data from MQTT brokers |
+| run streamer | Initiate a process to flush streaming data to disk |
 | run data distributor | A process that synchronizes data between different operators of the same cluster |
 | run data consumer | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 
