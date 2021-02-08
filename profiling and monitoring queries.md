@@ -45,14 +45,10 @@ The command ***query*** provides information on the last executed queries and th
 
  
 
-```query status all``` - provides status information on the last executed querys<br/>
-```query status``` - provides status information on the most recent executed query<br/>
-```query status n``` - provides status information on a particular query whereas n is the id of the job<br/>
+```query status all``` - The status information on the last executed querys<br/>
+```query status``` - The status information on the most recent executed query<br/>
+```query status n``` - The status information on a particular query whereas n is the id of the job<br/>
 
-```query explain all``` - provides the explain plan of the last executed querys<br/>
-```query explain``` - provides the explain plan on the most recent executed query<br/>
-```query explain n``` - provides the explain plan on a particular query<br/>
-
-```query profile all``` - provides the profiling information of the last executed querys<br/>
-```query explain``` - provides the profiling information on the most recent executed query<br/>
-```query explain n``` - provides the profiling information on a particular query<br/>
+```query explain all``` - The explain plan of the last executed querys<br/>
+```query explain``` - The explain plan on the most recent executed query<br/>
+```query explain n``` - The explain plan on a particular query<br/>
