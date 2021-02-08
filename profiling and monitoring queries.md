@@ -30,30 +30,29 @@ From a REST client send a REST message and place in the headers the following k
 ```type : info```  
 ```details : get query log```
 
-## Identify the SQL used on each participating node
-
-Queries are executed in a context of jobs. A job contains a query that was executed by a user or application 
-with some additional information that can be presented to users by issueing a monitoring command.
-
-By default, job information in maintained for the last 20 executed queries. 
-Each job has a unique ID and the commands can present the status of all jobs,
-a particular job (by ID) or the last executed job. 
-
-There are 3 types of information captured on every executed query:
-1. Status - details the status of each query
-2. Explain - Provides the information on how the queries were executed on the operator nodes and on the node that issued the query.
-3. Profile - provides profiling information.
-
 ### Command options for profiling and monitoring queries
 
-```job status all``` - provides status information on the last executed jobs<br/>
-```job status``` - provides status information on the most recent executed job<br/>
-```job status n``` - provides status information on a particular job whereas n is the id of the job<br/>
+Queries are executed in a context of jobs. A job is a process that executes a command and is listed in a structure
+that maintains information on how the command is being executed and the execution status.
 
-```job explain all``` - provides the explain plan of the last executed jobs<br/>
-```job explain``` - provides the explain plan on the most recent executed job<br/>
-```job explain n``` - provides the explain plan on a particular job<br/>
+The command ***query*** considers the query commands that are listed on the job structure.
+Each job (including a query) is assigned with an ID which can be used by a user to indicate the job in interest.
 
-```job profile all``` - provides the profiling information of the last executed jobs<br/>
-```job explain``` - provides the profiling information on the most recent executed job<br/>
-```job explain n``` - provides the profiling information on a particular job<br/>
+The command ***query*** provides information on the last executed queries and there are 3 types of information captured on every executed query:  
+1. Status - details the status of each query
+2. Explain - Provides the SQL statement used on the nodes that participate in the query process.
+3. Profile - provides profiling information.
+
+ 
+
+```query status all``` - provides status information on the last executed querys<br/>
+```query status``` - provides status information on the most recent executed query<br/>
+```query status n``` - provides status information on a particular query whereas n is the id of the job<br/>
+
+```query explain all``` - provides the explain plan of the last executed querys<br/>
+```query explain``` - provides the explain plan on the most recent executed query<br/>
+```query explain n``` - provides the explain plan on a particular query<br/>
+
+```query profile all``` - provides the profiling information of the last executed querys<br/>
+```query explain``` - provides the profiling information on the most recent executed query<br/>
+```query explain n``` - provides the profiling information on a particular query<br/>
