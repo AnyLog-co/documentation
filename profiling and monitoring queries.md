@@ -32,17 +32,15 @@ From a REST client send a REST message and place in the headers the following k
 
 ### Command options for profiling and monitoring queries
 
-Queries are executed in a context of jobs. A job is a process that executes a command and is listed in a structure
-that maintains information on how the command is being executed and the execution status.
+Queries are executed in a context of jobs. A job is a process that sends a message to a peer in the network and is listed in a structure
+that maintains information on the status of the message and the command execution status.
 
-The command ***query*** considers the query commands that are listed on the job structure.
+The command ***query*** considers the queries commands that are send to peers in the network.
 Each job (including a query) is assigned with an ID which can be used by a user to indicate the job in interest.
 
-The command ***query*** provides information on the last executed queries and there are 3 types of information captured on every executed query:  
+The command ***query*** provides information on the last executed queries and there are 2 types of information captured on every executed query:  
 1. Status - details the status of each query
 2. Explain - Provides the SQL statement used on the nodes that participate in the query process.
-3. Profile - provides profiling information.
-
  
 
 ```query status all``` - The status information on the last executed querys<br/>
