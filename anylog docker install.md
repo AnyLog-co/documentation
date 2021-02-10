@@ -10,7 +10,7 @@
 The deployment process sets the environment and installs an AnyLog node (or nodes) with basic configurations. 
 
 ### Setup the Environment
-* Download the StackScript container from Docker Hub
+* Download the StackScript container from Docker Hub (provide the user-name or assign system variable ${USER}).
 <pre>
 wget --no-check-certificate --user ${USER} --ask-password https://172.105.178.102/packages/StackScript $HOME
 </pre>
