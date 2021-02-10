@@ -31,7 +31,7 @@ The interaction with the metadata is not dependent on the repository. When a mem
 there are no operational differences which are dependent on the type of of the metadata repository used.  
 ***Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.***   
 Nodes in the network are configured to pull the metadata periodically (if it was changed) and the processing in a node considers the 
-local copy of the metadata. Therefore, nodes processes are not dependent on the metadata platform and if a connection to the blockchain platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
+local copy of the metadata. Therefore, nodes processes are not dependent on the metadata platform and if a connection to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.  
 Synchronizing the local copy of the blockchain data is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
 ## The Data
