@@ -42,7 +42,8 @@ Currently AnyLog Operators can use the following databases:
 
 The data managed by the network is distributed to many nodes but the network protocol provides a unified view over the distributed data -
 the users or applications issuing the queries do not need to identify the nodes that host the relevant data - for each query, the network protocol 
-resolves the location of the relevant data. Each query process starts with a node that receives a query from a user or application. This node is called the Query Node.
+resolves the location of the relevant data.   
+Each query process starts with a node that receives a query from a user or application. This node is called the Query Node.
 The Query Node determines which are the [Operators](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#type-of-instances) 
 that host the data that needs to be evaluated to satisfy the query, and delivers the query to these Operators.
 Each of the Operators process the query locally and replies to the Query Node with a result. The Query Node aggregates all the results and returns a unified result to the user or application that issued the query.  
