@@ -41,7 +41,7 @@ Currently AnyLog Operators can use the following databases:
 [SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
 
 The data managed by the network is distributed to many nodes but the network protocol provides a unified view over the distributed data -
- the query process does not need to identify the nodes that host the relevant data - for each query, the network protocol 
+ the users or applications issuing the queries do not need to identify the nodes that host the relevant data - for each query, the network protocol 
  resolves the location of the relevant data and returns a reply as if the data is organized in a single database.  
 
 Related documentation:
