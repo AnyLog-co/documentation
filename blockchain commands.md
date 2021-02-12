@@ -53,7 +53,7 @@ Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
 
-| Command                              | Details |
+|` Command                             `| Details |
 | ------------------------------------ | ------------| 
 |<img width=40/>|<img width=200/>|
 | blockchain connect                   | Connect to a blockchain platform. | 
