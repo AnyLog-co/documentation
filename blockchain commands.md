@@ -78,7 +78,7 @@ Maintaining a master node in the network is optional.
 | blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
 | blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
 | blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
-| ------------------------------------ | -------------------------------------------------------------------------|
+
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
 
