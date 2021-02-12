@@ -10,9 +10,9 @@
 The deployment process sets the environment and installs an AnyLog node (or nodes) with basic configurations. 
 
 ### Setup the Environment
-* Download the StackScript container from Docker Hub
+* Download the StackScript container from Docker Hub (provide the user-name or assign system variable ${USER}).
 <pre>
-wget http://172.105.178.102/StackScript $HOME
+wget --no-check-certificate --user ${USER} --ask-password https://172.105.178.102/packages/StackScript $HOME
 </pre>
 
 * Run the container
@@ -24,7 +24,7 @@ The StackScript container script will do the following:
 * Update env
 * Install unzip, ssh, wget and screen
 * Install & configure docker
-* Download [AnyLog Deployment package](https://www.google.com/url?q=https://anylog-packages.eu-central-1.linodeobjects.com/anylog-deployment.zip&sa=D&source=editors&ust=1612581360946000&usg=AOvVaw1XtS2vQi6M4sv08Z61VgBz)
+* Download AnyLog Deployment package
 * Unzip AnyLog Deployment package 
 
 ### Install AnyLog
