@@ -158,6 +158,7 @@ Options:
 | get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | get status  | Replies with the string 'running' if the node is active. | 
 | get connections | The list of TCP and REST connections supported by the node. |
+| get platforms | The list connected blockchain platforms. |
 | get dictionary | The list of the variable names and their assigned values. |
 | get databases  | The list of databases managed on the local node. |
 | get partitions | Information on how data is partitioned on the local databases. |

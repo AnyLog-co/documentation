@@ -52,31 +52,32 @@ A master node is a node that maintains a complete copy of the metadata in a loca
 Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
-```blockchain add [JSON data]``` – add a JSON object to the local JSON file.  
-```blockchain get [JSON search]``` – retrieve from the JSON file all objects that satisfy the search criteria.  
-```blockchain push [JSON data]``` – add a JSON object to the local database.    
-```blockchain pull to sql [optional output file]``` – retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements.    
-```blockchain pull to json [optional output file]``` – retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file.
-```blockchain pull to stdout``` – retrieve the blockchain data from the local database to stdout.          
-```blockchain update file [path and file name]``` – copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy.    
-```blockchain update dbms [path and file name] [ignore message]``` – add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix.  
 
-```blockchain commit [JSON data]``` – add a JSON object to the blockchain  
-```blockchain checkout``` – retrieve the blockchain data from the blockchain to a JSON file.  
-```blockchain create table``` – create a local table (called ***ledger***) on the local database that maintains metadata information.  
-```blockchain drop table``` – drop the local table (***ledger***) on the local database that maintains metadata information.  
-```blockchain drop policy [JSON data]``` – remove the policy specified by the JSON data from the local database that maintains metadata information.
-```blockchain drop by host [ip]``` – remove all policies that were added from the provided IP.        
-```blockchain replace policy [policy id] with [new policy]``` - replace an existing policy in the local blockchain database.        
-```blockchain delete local file``` - delete the local JSON file with the blockchain data.  
-
-```blockchain test``` - test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. 
-```blockchain get id [json data]``` - return the hash value of the JSON data.  
-```blockchain test id``` - return True if the id exists in the local blockchain file. Otherwise returns False.
-
-```blockchain load metadata [conditions]``` - update the local metadata from policies published on the blockchain.  
-```blockchain query metadata [conditions]``` - provide a diagram representation of the local metadata.  
-```blockchain test cluster [conditions]``` - provid an analysis of the \'cluster\' policies.  
+| Command        | Details |
+| ------------- | ------------| 
+| blockchain connect  | Connect to a blockchain platform. | 
+| blockchain add [JSON data]  | Add a JSON object to the local JSON file. |
+| blockchain get [JSON search]  | Retrieve from the JSON file all objects that satisfy the search criteria.   |
+| blockchain push [JSON data]  | Add a JSON object to the local database. |
+| blockchain pull to sql [optional output file]  | Retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements. |
+| blockchain pull to json [optional output file]| Retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file. |
+| blockchain pull to stdout| Retrieve the blockchain data from the local database to stdout. |
+| blockchain update file [path and file name]| Copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy. |    
+| blockchain update dbms [path and file name] [ignore message]| Add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix. |  
+| blockchain commit [JSON data]|  – Add a JSON object to a blockchain platform. |  
+| blockchain checkout| Retrieve the blockchain data from the blockchain platform to a JSON file. |  
+| blockchain create table| Create a local table (called ***ledger***) on the local database that maintains metadata information. |  
+| blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
+| blockchain drop policy [JSON data]| Remove the policy specified by the JSON data from the local database that maintains metadata information. |
+| blockchain drop by host [ip]| Remove all policies that were added from the provided IP. |        
+| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |        
+| blockchain delete local file| Delete the local JSON file with the blockchain data. |  
+| blockchain test| Test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. | 
+| blockchain get id [json data]| Return the hash value of the JSON data. |  
+| blockchain test id| Return True if the id exists in the local blockchain file. Otherwise returns False. |
+| blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
+| blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
+| blockchain test cluster [conditions]| Provid an analysis of the \'cluster\' policies. |  
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
