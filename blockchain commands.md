@@ -53,7 +53,7 @@ Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
 
-| ===============  Command =============== | ===============  Details  =============== |
+| ===========Command============ | ===============Details=============== |
 | ------------------------------------ | ------------| 
 | blockchain connect [platform name] where [connection parameters] | Connect to a blockchain platform. | 
 | blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
