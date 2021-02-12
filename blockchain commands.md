@@ -52,8 +52,16 @@ A master node is a node that maintains a complete copy of the metadata in a loca
 Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
+<style>
+table th:first-of-type {
+    width: 20%;
+}
+table th:nth-of-type(2) {
+    width: 80%;
+}
+</style>
 
-|` Command                             `| Details |
+| Command                              | Details |
 | ------------------------------------ | ------------| 
 |<img width=40/>|<img width=200/>|
 | blockchain connect                   | Connect to a blockchain platform. | 
