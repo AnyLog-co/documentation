@@ -55,6 +55,7 @@ Maintaining a master node in the network is optional.
 
 | Command                              | Details |
 | ------------------------------------ | ------------| 
+|<img width=40/>|<img width=200/>|
 | blockchain connect                   | Connect to a blockchain platform. | 
 | blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
 | blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
