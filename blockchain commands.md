@@ -53,12 +53,12 @@ Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
 
-| Command        | Details |
-| ------------- | ------------| 
-| blockchain connect  | Connect to a blockchain platform. | 
-| blockchain add [JSON data]  | Add a JSON object to the local JSON file. |
-| blockchain get [JSON search]  | Retrieve from the JSON file all objects that satisfy the search criteria.   |
-| blockchain push [JSON data]  | Add a JSON object to the local database. |
+| Command                              | Details |
+| ------------------------------------ | ------------| 
+| blockchain connect                   | Connect to a blockchain platform. | 
+| blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
+| blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
+| blockchain push [JSON data]          | Add a JSON object to the local database. |
 | blockchain pull to sql [optional output file]  | Retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements. |
 | blockchain pull to json [optional output file]| Retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file. |
 | blockchain pull to stdout| Retrieve the blockchain data from the local database to stdout. |
