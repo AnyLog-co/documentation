@@ -53,9 +53,9 @@ Maintaining a master node in the network is optional.
 
 ## The blockchain commands:
 
-| `.            Command               .` | `.              Details             .` |
+|             Command                |               Details              |
 | ------------------------------------ | ------------| 
-| blockchain connect                   | Connect to a blockchain platform. | 
+| blockchain connect [platform name] where [connection parameters] | Connect to a blockchain platform. | 
 | blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
 | blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
 | blockchain push [JSON data]          | Add a JSON object to the local database. |
@@ -77,8 +77,8 @@ Maintaining a master node in the network is optional.
 | blockchain test id| Return True if the id exists in the local blockchain file. Otherwise returns False. |
 | blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
 | blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
-| blockchain test cluster [conditions]| Provid an analysis of the \'cluster\' policies. |  
-
+| blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
+| ------------------------------------ | -------------------------------------------------------------------------|
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
 
