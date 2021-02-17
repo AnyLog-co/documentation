@@ -22,13 +22,13 @@ connect dbms sqlite anylog@127.0.0.1:demo 5432 system_query
 
 ## Connect to Ethereum node on Infura and provide contract info
 <pre>
-<blockchain connect ethereum where
+< blockchain connect ethereum where
         provider = "https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1" and
 		contract = "0x64bb40d197825d173a117c5305c036fac6c8a082" and
 		private_key = "a4caa21209188ef5c3be6ee4f73c12a8c306a917c969638fb69f164b0ed95380" and 
 		public_key = "0x982AF5e1589f1486b4bA17aFB6eb940aAeBBdfdB" and 
 		gas_read = 2000000  and
-		gas_write = 3000000>
+		gas_write = 3000000 >
 </pre>
 
 ## Test Connection
@@ -38,11 +38,11 @@ get platforms
 
 ## Add a new policy
 <pre>
-<test_policy= {"test" : {
+< test_policy= {"test" : {
                 "company" : "AnyLog",
                 "name"   : "test_policy_#x"
     }
-}>
+} >
 
 blockchain commit to ethereum !test_policy
 </pre>
@@ -58,5 +58,4 @@ blockchain checkout from ethereum
 ## Synchronize the blockchain data with a local copy every 30 seconds
 <pre>
 run blockchain sync where source = blockchain and platform = ethereum and time = 30 seconds and dest = file
-
 </pre>
