@@ -85,5 +85,18 @@ Example:
 info table dmci machine_data columns
 </pre>
 
+### Validating a schema
+
+As a schema of a table can exist on the local database and on the blockchain, the command ***test table*** compares the table definitions on the local database with the schema definition on the blockchain.  
+The structure of the command is as follows:  
+<pre>
+test table [table name] where dbms = [dbms name]
+</pre>
+
+Example: 
+<pre>
+test table ping_sensor where dbms = lsl_demo
+</pre> 
+
 
 
