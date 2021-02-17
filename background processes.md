@@ -162,7 +162,7 @@ In the second example, all the databases are considered as databases of the spec
 
 ## Blockchain Synchronizer
 
-A process that periodically connects to the bloackchain platform (or a master node) to updates the local copy of the metadata.  
+A process that periodically connects to the bloackchain platform (or a master node) to update the local copy of the metadata.  
 This process maintains an updated version of the blockchain data on the local node such that when the node queries the metadata, it is able to satisfy the query locally.    
 The source of the metadata depends on the node configuration and can be a blockchain or a master node.  
 
@@ -180,16 +180,21 @@ Options:
 | connection  | The connection information that is needed to retrieve the data. For a Master node, the IP and Port of the master node.  |
 | time  | The frequency of the synchronization.  |
 
-Comments:
 
-Examples:  
+### Example - synchronizing with a blockchain
+
 <pre>
-run blockchain sync where source = master and time = 3 seconds and dest = file and connection = !ip_port
-run blockchain sync where source = eos and time = 5 minutes and destination = file and destination = dbms
+run blockchain sync where source = blockchain and platform = ethereum and time = 30 seconds and dest = file
+</pre>
+
+Information on blockchain configuration is available at [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md).
+
+### Example - synchronizing with a master-node  
+<pre>
+run blockchain sync where source = master and time = 1 minute and dest = file and connection = !ip_port
 </pre>
 
 Information on Master Node configuration is available at [master node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
-
 
 ## Scheduler Process
  

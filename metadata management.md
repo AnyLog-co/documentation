@@ -1,25 +1,23 @@
 # Managing Metadata
 
 The metadata is organized on a global metadata platform. The platform can be one of the following:
-* A blockchain platform.
-* A master node.  
-***A Master Node*** is node that maintains a complete copy of the Metadata in a local database.
+* A blockchain platform
+* A master node - A member node in the AnyLog network that maintains a complete copy of the Metadata in a local database.
   
 Every node in the network is configured to periodically retrieve updates from the global platform and on each node, 
-the metadata is organized in a local log file in a JSON format.  
+the metadata is organized in a local log file in a JSON format.
+
 A node operates with the global metadata as follows:  
-* The node operates against the local log file and does not require continues connection to a blockchain.
-* The node may maintain a copy of the local JSON log file on a local database.
-* The node may update a global metadata with changes to the metadata.
-* Every node is configured to retrieve all updates from the global platform.  
+* The node operates against the local log file and does not require continues connection to the global metadata platform.
+* The node may maintain a copy of the local JSON log file in a local database.
+* The node is configured to periodically retrieve all updates from the global platform.  
 
 When a node joins the network, the node downloads the existing metadata from a Master Node or from the blockchain.  
 A node may also store a copy of the metadata on a local database. However, for a node to operate, the node only needs the local log file.
 On each node, the metadata represents the information which is relevant to the particular node and therefore the metadata on each node may be different.
-When nodes make changes to the metadata, these changes become available to all nodes of the network by the processes explained below.
-Each node may be configured such that it will continuously get updates of changes to the metadata. 
+When nodes make changes to the metadata, these changes become available to all nodes of the network as each node synchronizes the local metadata with the global platform.
 
-Members of the network can synchronize their metadata with other members of the network in 2 ways:
+Members of the network synchronize their metadata with other members of the network in the following manner:
 
 * Using a blockchain - By sending updates to the blockchain and retrieving the metadata from the blockchain.
 * Using a Master Node - By sending updates to the Master Node and receiving updates from the Master Node.
@@ -28,7 +26,7 @@ Members of the network can synchronize their metadata with other members of the 
 
 Policies are rules and logic that determine how nodes in the network operate. 
 The policies are placed on the global metadata layer and become available to the nodes of the network with the blockchain/master-node synchronization process.  
-Each node considers the policies to enable and configure the mechanisms that manage the processes on the node.  
+Each node determines the policies to consider and these policies configure the mechanisms that manage the processes on the node.  
 Using policies nodes declare their availability on the network, the list of tables supported, how data is being distributed, mapping roles, security policies and more.  
 Policies are organized as JSON objects with a single root attribute name. The root attribute name is called the policy type.  
 Below is an example of a policy declaring an Operator node:
@@ -49,12 +47,16 @@ Below is an example of a policy declaring an Operator node:
                 'member' : 86}}]
 </pre>
 
-Some types of policies require particular attributes. There is no limit on the attributes names and values which are not the root of the policy.  
-The attributes ***id*** and ***date*** are added dynamically when the policy is updating the blockchain or the master node.  
+Some types of policies require particular attributes. For example, an Operator Policy requires the declaration of the IP and Port which the Operator uses to receive messages from peers.  
+Within a policy, there is no limit on the attributes names and values which are not the root of the policy.    
+The attributes ***id*** and ***date*** are added dynamically when the policy is updating the blockchain or the master node.    
 If authentication is enabled, the attributes ***public_key*** and ***signatire*** are added dynamically.
 
 ## The blockchain commands
 
+These are sets of command that allow to update and query the global metadata layer.   
+The blockchain command are issued to a metadata repository which can be on the local node (either as a JSON file or hosted in a database), a master-node or a blockchain platform.  
+ 
 The ***blockchain commands*** are detailed in the [blockchain commands section](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md).
 
 ### Updating a blockchain
@@ -117,7 +119,7 @@ To retrieve data from the master node:
 | blockchain pull to dbms | The output file is a set of SQL insert statements to create the metadata on a local database |
 | blockchain pull to json | The output file are the JSON policies |
 
-* Use the command ***file get*** to copy a blockchain file from a node (like the master node) to a destination node.
+* Use the command ***file get*** to copy a file from a node (like the master node) to a destination node.
 <pre>
 file get [source location] [destination location]
 </pre>
@@ -195,7 +197,7 @@ The file name structure is composed of 8 substrings separated by a period. The s
 | TSD row ID | The ID of the row in  the TSD table that contains information about the file. | No |
 | TSD date | The time and date when the file was injested to the local database. | No |
 
-Note: Details on the TSD tables is available at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files)/
+Note: Details on the TSD tables is available at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files).
 
 ### File ingestion
 
