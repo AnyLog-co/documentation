@@ -1,12 +1,17 @@
 # Managing Metadata
 
-The metadata is organized in a local log file in a JSON format on each node that is a member of the network.
+The metadata is organized on a global metadata platform. The platform can be one of the following:
+* A blockchain platform.
+* A master node.
+***A Master Node*** is node that maintains a complete copy of the Metadata in a local database.
+  
+Every node in the network is configured to periodically retrieve updates from the global platform and on each node, 
+the metadata is organized in a local log file in a JSON format.  
+A node operates with the global metadata as follows:  
 * The node operates against the local log file and does not require continues connection to a blockchain.
 * The node may maintain a copy of the local JSON log file on a local database.
-* The node may update a blockchain with changes to the metadata.
-* The node may update a Master Node with changes to the metadata.  
-
-***A Master Node*** is node that maintains a complete copy of the Metadata in a local database.
+* The node may update a global metadata with changes to the metadata.
+* Every node is configured to retrieve all updates from the global platform.  
 
 When a node joins the network, the node can download the existing metadata from a Master Node or from the blockchain.
 A node may also store a copy of the metadata on a local database. However, for a node to operate, the node only needs the local log file.

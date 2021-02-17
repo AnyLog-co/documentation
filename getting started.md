@@ -35,6 +35,14 @@ The processing in a node considers the local copy of the metadata and therefore,
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
 Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
+
+Related documentation:
+
+| Section       | Information provided  |
+| ------------- | ------------| 
+| [metadata management](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
+| [metadata requests](https://github.com/AnyLog-co/documentation/blob/master/metadata%20requests.md) | Details on how the metadata can be queried. |
+
 ## The Data
 The users data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently AnyLog Operators can use the following databases:  
