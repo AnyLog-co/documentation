@@ -1,6 +1,7 @@
 # Queries and info requests to the AnyLog Network
 
-Queries (and info requests) can be issued from any REST client to the AnyLog Network. Any node member of the network can be configured to serve as a REST server to satisfy client requests. 
+Queries (and info requests) can be issued to the AnyLog Network from the AnyLog CLI and from any REST client.  
+Any node member of the network can be configured to serve as a REST server to satisfy client requests. 
 
 ## The server side:
 
