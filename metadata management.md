@@ -213,5 +213,5 @@ When the table is located or created, the file is ingested using one of 2 method
 
 ### Creating a local dbms table published as a policy on the blockchin
 
-The copmmand: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
+The command: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
 
