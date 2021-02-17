@@ -15,7 +15,7 @@ The command ***time file*** allows to modify file names to follow the naming con
   
 ## The structure of the data files 
 The data files contain Time Series Data (TSD) that is organized in JSON format.
-Each file name follows a convention. To view the naming comvention use the command:  ```show json file structure```.
+Each file name follows a convention. To view the naming comvention use the command:  ```get json file struct```.
 More details are provided below.
 
 #### The file naming convention

@@ -2,7 +2,7 @@
 
 The metadata is organized on a global metadata platform. The platform can be one of the following:
 * A blockchain platform.
-* A master node.
+* A master node.  
 ***A Master Node*** is node that maintains a complete copy of the Metadata in a local database.
   
 Every node in the network is configured to periodically retrieve updates from the global platform and on each node, 
@@ -147,7 +147,7 @@ Example:
 blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
 </pre>
 
-* Connect the node to the local database.    
+### Connect the node to the local database.    
 Example using PostgreSQL to manage the blockchain data:
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 blockchain
@@ -158,9 +158,9 @@ Example using SQLite to manage the blockchain data:
 connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain
 </pre>
 
-* Create the local ***ledger*** table.
+### Create the local ***ledger*** table.
 <pre>
-```blockchain create table```
+blockchain create table
 </pre>
 The command will create the 'ledger' table in the database assigned to 'blockchain'.
 
@@ -173,22 +173,34 @@ Once a table schema is avaiable, the ingestion process maps the attribute names 
 
 ### File names
 
-The sensor data (or time series data) is placed in the ***Watch Sirectory***.  
+The sensor data (or time series data) is placed in the ***watch directory***.  
+Note: ***watch directories*** are explained at [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network).
 The file name follows a convention that determines how the file is being processed and if needed, allows to locate the file based on the properties of the data being ingested.  
-The file type is ***json*** indicating the internal structure.  
-The file name structure is composed of 5 substrings seperated by a period. The subsyrings are as follows:
+The command ***get json file struct*** details the file structure convention and has the following output:  
 <pre>
-DBMS Name - The logical database name
-Table Name - The logical table that contains the file data.
-Source - (optional) An ID that identifies the source of the data.
-Hash - (optional) A hash value that uniquely identifies the file by the contents of the file.
-Instructions - (optional) An ID that identifies the set of instructions that map the JSON data to the table structure
+[dbms name].[table name].[data source].[hash value].[instructions].[TSD member ID].[TSD row ID].[TSD date].json
 </pre>
+
+The file type is ***json*** indicating the internal structure.  
+The file name structure is composed of 8 substrings separated by a period. The substrings are as follows:
+
+| Section       | Explanation  | Mandatory  |
+| ------------- | ----------- | --------  |
+| DBMS Name | The logical database name | Yes |
+| Table Name | The logical table that contains the file data. | Yes |
+| Source | An ID that identifies the source of the data. | No |
+| Hash | A hash value that uniquely identifies the file by the contents of the file. | No |
+| Instructions | An ID that identifies the set of instructions that map the JSON data to the table structure. | No |
+| TSD member ID | An ID of the TSD table containing information on the JSON file. | No |
+| TSD row ID | The ID of the row in  the TSD table that contains information about the file. | No |
+| TSD date | The time and date when the file was injested to the local database. | No |
+
+Note: Details on the TSD tables is available at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files)/
 
 ### File ingestion
 
 When a file is ingested, the local node determines if the table exists in the local database.  
-If the table does not exists, the node will determine if the table was declared by a different node and appears on the blockchain.  
+If the table does not exist, the node will determine if the table was declared by a different node and appears on the blockchain.  
 If the table is available on the blockchain, the node will create an identical table on the local database.  
 If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.  
 When the table is located or created, the file is ingested using one of 2 methods:  
