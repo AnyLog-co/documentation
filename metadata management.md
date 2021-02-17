@@ -19,7 +19,7 @@ On each node, the metadata represents the information which is relevant to the p
 When nodes make changes to the metadata, these changes become available to all nodes of the network by the processes explained below.
 Each node may be configured such that it will continuously get updates of changes to the metadata. 
 
-Members of the network can syncronize their metadata with other members of the network in 2 ways:
+Members of the network can synchronize their metadata with other members of the network in 2 ways:
 
 * Using a blockchain - By sending updateds to the blockchain and retrieving the metadata from the blockchain.
 * Using a Master Node - By sending updateds to the Master Node and receiving updates from the Master Node/
