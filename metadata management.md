@@ -146,29 +146,27 @@ A node may keep a copy of the blockchain data on a local database. On the local 
 
 The following process creates the local blockchain database:
 
-1. Define a location for the blockchain log file by declaring ***blockchain_file*** constant 
-with the path and file name of the log file.  
+1. Define a location for the blockchain log file by declaring ***blockchain_file*** constant with the path and file name of the log file.  
   Example:
   <pre>  
   blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
   </pre>
 
 2. Connect the node to the local database.    
-Example using PostgreSQL to manage the blockchain data:
-<pre>
-connect dbms psql anylog@127.0.0.1:demo 5432 blockchain
-</pre>
-
-Example using SQLite to manage the blockchain data:   
-<pre>
-connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain
-</pre>
+  * Example using PostgreSQL to manage the blockchain data:
+  <pre>
+  connect dbms psql anylog@127.0.0.1:demo 5432 blockchain
+  </pre>
+  * Example using SQLite to manage the blockchain data:   
+  <pre>
+  connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain
+  </pre>
 
 3. Create the local ***ledger*** table.
-<pre>
-blockchain create table
-</pre>
-The command will create the 'ledger' table in the database assigned to 'blockchain'.
+  <pre>
+  blockchain create table
+  </pre>
+  The command will create the 'ledger' table in the database assigned to 'blockchain'.
 
 ## Creating data tables
 
