@@ -136,6 +136,10 @@ In the above script:
 [source path and file name] - the path and file name of the log file on the Master Node.
 [destination path and file name] - the path and file name of the metadata log file on the Local Node.
 
+## Periodically synchronizing the local copy of the metadata with a blockchain or a master node
+
+Details are available at the section [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).
+
 ## Using a local database
 
 A node may keep a copy of the blockchain data on a local database. On the local database, the blockchain data is maintained in a table called ***ledger***.   
