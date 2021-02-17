@@ -54,7 +54,7 @@ If authentication is enabled, the attributes ***public_key*** and ***signatire**
 
 ## The blockchain commands
 
-These are sets of command that allow to update and query the global metadata layer.   
+These are sets of command that allow to update and query the metadata layer.   
 The blockchain command are issued to a metadata repository which can be on the local node (either as a JSON file or hosted in a database), a master-node or a blockchain platform.  
  
 The ***blockchain commands*** are detailed in the [blockchain commands section](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md).
@@ -119,11 +119,11 @@ To retrieve data from the master node:
 | blockchain pull to dbms | The output file is a set of SQL insert statements to create the metadata on a local database |
 | blockchain pull to json | The output file are the JSON policies |
 
-* Use the command ***file get*** to copy a file from a node (like the master node) to a destination node.
+* Use the command ***file get*** to copy the output file (of thhe pull command) from a node (like the master node) to a destination node.
 <pre>
 file get [source location] [destination location]
 </pre>
-[source location] is the path name and file name on the master node.
+[source location] is the path name and file name on the master node.  
 [destination location] is the path name and file name on the requesting node.
 
 The following script pulls the metadata from a Master Node and copies the log file to the local node to serve as the metadata on the local node.
@@ -146,14 +146,14 @@ A node may keep a copy of the blockchain data on a local database. On the local 
 
 The following process creates the local blockchain database:
 
-* Define a location for the blockchain log file by declaring ***blockchain_file*** constant 
+1. Define a location for the blockchain log file by declaring ***blockchain_file*** constant 
 with the path and file name of the log file.  
 Example:
 <pre>  
 blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
 </pre>
 
-### Connect the node to the local database.    
+2. Connect the node to the local database.    
 Example using PostgreSQL to manage the blockchain data:
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 blockchain
@@ -164,13 +164,13 @@ Example using SQLite to manage the blockchain data:
 connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain
 </pre>
 
-### Create the local ***ledger*** table.
+3. Create the local ***ledger*** table.
 <pre>
 blockchain create table
 </pre>
 The command will create the 'ledger' table in the database assigned to 'blockchain'.
 
-## Creating tables
+## Creating data tables
 
 The structure of each table can be determined by users or generated dynamically, based on the attributes names and the values in the JSON file.  
 When a file is ingested, and a schema is not available, and a user provided schema is not available, the  
