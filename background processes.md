@@ -196,6 +196,16 @@ run blockchain sync where source = master and time = 1 minute and dest = file an
 
 Information on Master Node configuration is available at [master node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
 
+### Forcing synchronization
+
+The Synchronization process may be configured to minutes or hours. When a node updates a new policy, the node can trigger synchronization using 
+the synchronization command (without command options).  
+Example:
+<pre>
+run blockchain sync
+</pre>
+The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.   
+
 ## Scheduler Process
  
 A process that triggers the scheduled tasks.
