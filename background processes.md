@@ -35,15 +35,15 @@ Usage:
 run tcp server [ip] [port] [external ip] [external port] [threads]
 </pre>
 Explanation:  
-[ip] [port] - The IP and Port of the socket that is in the listening state.  
-[external ip] [external port] - Optional parameters to indicate an IP and Port that are accessible from an external network.  
-[Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 3.
+***[ip] [port]*** - The IP and Port of the socket that is in the listening state.  
+***[external ip] [external port]*** - Optional parameters to indicate an IP and Port that are accessible from an external network.  
+***[Threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 3.
 
 When an AnyLog instance initiates, it tries to identify the local IP and Port and the IP and Port that is accessible from the Internet.
 These values are placed in the dictionary with the leys ***ip*** and ***external_ip*** respectively.  
 The following example starts a TCP server instance using these values:  
 <pre>
-run tcp server!ip 20048 !external_ip] 20048
+run tcp server!ip 20048 !external_ip.] 20048
 </pre>
 
 
