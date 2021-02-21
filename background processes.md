@@ -66,7 +66,7 @@ Explanation:
 When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
 If ssl is set to True, connection is using HTTPS and authentication requires Certificates.
 
-Additional information is available at (network configuration)[https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]. 
+Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
 ## Operator Process
 
