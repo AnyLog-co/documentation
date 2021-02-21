@@ -43,7 +43,7 @@ When an AnyLog instance initiates, it tries to identify the local IP and Port an
 These values are placed in the dictionary with the leys ***ip*** and ***external_ip*** respectively.  
 The following example starts a TCP server instance using these values:  
 <pre>
-run tcp server!ip 20048 !external_ip.] 20048
+run tcp server !ip 20048 !external_ip 20048
 </pre>
 
 
