@@ -32,14 +32,25 @@ This process makes the node a member in the AnyLog Network.
 
 Usage:
 <pre>
-run tcp server [ip] [port] [threads]
+run tcp server [ip] [port] [external ip] [external port] [threads]
 </pre>
 Explanation:  
 [ip] [port] - The IP and Port of the socket that is in the listening state.  
+[external ip] [external port] - Optional parameters to indicate an IP and Port that are accessible from an external network.  
 [Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 3.
 
-Additional information is available in the [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]) section. 
+When an AnyLog instance initiates, it tries to identify the local IP and Port and the IP and Port that is accessible from the Internet.
+These values are placed in the dictionary with the leys ***ip*** and ***external_ip*** respectively.  
+The following example starts a TCP server instance using these values:  
+<pre>
+run tcp server!ip 20048 !external_ip] 20048
+</pre>
+
+
+Additional information is available in the [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md]) section.   
  
+ 
+
 ## REST requests
 
 A process that receives REST messages from users and applications which are not members of the network.  
