@@ -195,6 +195,7 @@ Options:
 | get json file structure | Details the convention for JSON file name. |
 | get users | The list of users declared using the command ```id add user ...```. |
 | get reply ip | Retrieve the IP address for reply messages. |
+| get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
 
 
 Security related options:  
