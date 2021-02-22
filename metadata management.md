@@ -8,7 +8,7 @@ A node in the network interacts with 2 layers of metadata:
   accessible to permitted members of the network.  
 * With a global metadata layer shared by all the members of the network.
 
-This document provides an overview of the global metadata layer.  
+This document provides an overview on the global metadata layer.  
 The document [metadata requests](https://github.com/AnyLog-co/documentation/blob/master/metadata%20requests.md#metadata-requests) 
 provides an overview of the local metadata layer.
 

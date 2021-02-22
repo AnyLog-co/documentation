@@ -4,8 +4,10 @@ Nodes in the network interact with a global metadata layer that manages and sync
 the member nodes and with a local setup and configurations that determine how data is managed locally on the node.  
 
 An overview on the global metadata layer is provided in [Managing Metadata](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#managing-metadata).  
-This document explains the layout and organization of the data on the nodes and how the node processes interact with the global and local metadata.
+This document explains the layout and organization of the data on the nodes and how the node processes interact with the global and local metadata.  
  
+Note: The processes of a node in the network are agnostic to where the global metadata is hosted (a blockchain or a master node). 
+References to the blockchain should be interpreted as references to the metadata that can be hosted by a blockchain as well as a master node.
 
 ## Creating data tables
 
