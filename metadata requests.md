@@ -24,15 +24,21 @@ Once a table schema is available, the ingestion process maps the attribute names
 
 
 ### Adding data
-A node that hosts the data is managing the data in a local database. 
-Data can be received as files in JSON format or can be collected by the node and transformed to files in JSON format.  
-The JSON files are placed in a ***watch directory*** and ingested to the local database. 
 
+A node that hosts the data is responsible to satisfy queries over the data. The way the data is managed on each node can vary as long
+as the query protocol and interfaces are satisfied.
+Data can be received as files in JSON format or can be collected by the node and transformed to files in JSON format.  
+The JSON files are placed in a ***watch directory*** and ingested to the local database.
+The ***watch directory*** is determined by the configuration and when a file is placed in the directory, it is read and ingested by the local databases.  
+A description of the directory structure of a node is available at the section [Local directory structure](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure).  
+The section [Adding Data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network) 
+details explain how watch=directories are used and how data is added to nodes in the network using REST.       
+The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) details how data is added to nodes 
+in the network using a broker.  
 
 ### File names
 
-The sensor data (or time series data) is placed in the ***watch directory***.  
-Note: ***watch directories*** are explained at [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network).  
+The sensor data (or time series data) is placed in the ***watch directory***.
 The file name follows a convention that determines how the file is being processed.    
 The command ***get json file struct*** details the file structure convention and has the following output:  
 <pre>
