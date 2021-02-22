@@ -7,22 +7,26 @@ An overview on the global metadata layer is provided in [Managing Metadata](http
 This document explains the layout and organization of the data on the nodes and how the node processes interact with the global and local metadata.  
  
 Note: The processes of a node in the network are agnostic to where the global metadata is hosted (a blockchain or a master node). 
-References to the blockchain should be interpreted as references to the metadata that can be hosted by a blockchain as well as a master node.
+References to the blockchain should be interpreted as references to the metadata that can be hosted using a blockchain as well as a master node.
 
 ## Creating data tables
 
-The structure of each table can be determined by users or generated dynamically, based on the attributes names and the values in the JSON file.  
+The structure of each table can be determined by users or generated dynamically, based on the attributes names and the values in the JSON files.  
 When a file is ingested, and a schema is not available, the table schema is created dynamically.    
 When a schema is first created (by a user or by a node in the network), it is added as a policy to the blockchain such that the table's schema is available to all 
 the nodes in the network. If a table is available as a policy on the blockchain, a node that needs to manage data associated with the table retrieves the policy and 
 transforms the policy to a table that is maintained by a local database.  
 A node can determine to partition the data by time. This process is done by declaring the table and the time interval for partitioning. The partitioning 
-by time is transparent to the query processes in the network.
+is transparent to the query processes in the network.  
+The partitioning command is as follows:
+<pre>
+partition [dbms name] [table name] using [column name] by [time interval]
+</pre>
 An example of time partitioning is the following configuration command:  
 <pre>
 partition dmci ping_sensor using timestamp by 1 month
 </pre>
-Once a table schema is available, the ingestion process maps the attribute names and values to the table's columns names and values.
+Once a table schema is available, the ingestion process maps the data in the JSON files to the table's schema.
 
 
 ### Adding data
@@ -32,11 +36,10 @@ as the query protocol and interfaces are satisfied.
 Data can be received as files in JSON format or can be collected by the node and transformed to files in JSON format.  
 The JSON files are placed in a ***watch directory*** and ingested to the local database.
 The ***watch directory*** is determined by the configuration and when a file is placed in the directory, it is read and ingested by the local databases.  
-A description of the directory structure of a node is available at the section [Local directory structure](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure).  
+A description of the directory structure of a node is available at the section [Local Directory Structure](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure).  
 The section [Adding Data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network) 
-details explain how watch=directories are used and how data is added to nodes in the network using REST.       
-The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) details how data is added to nodes 
-in the network using a broker.  
+details how watch-directories are used and how data is added to nodes in the network using REST.       
+The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) details how data is added using a broker.  
 
 ### File names
 
