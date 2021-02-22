@@ -1,5 +1,19 @@
 # Managing Metadata
 
+## Overview
+
+A node in the network interacts with 2 layers of metadata:
+* With a local metadata layer. The local metadata layer includes the local databases, tables and views 
+  that are used by the node to organize the data locally such that the data is unified with data on peer nodes and is 
+  accessible to permitted members of the network.  
+* With a global metadata layer shared by all the members of the network.
+
+This document provides an overview of the global metadata layer.  
+The document [metadata requests](https://github.com/AnyLog-co/documentation/blob/master/metadata%20requests.md#metadata-requests) 
+provides an overview of the local metadata layer.
+
+## The global metadata
+
 The metadata is organized on a global metadata platform. The platform can be one of the following:
 * A blockchain platform
 * A master node - A member node in the AnyLog network that maintains a complete copy of the Metadata in a local database.
@@ -167,51 +181,4 @@ The following process creates the local blockchain database:
   blockchain create table
   </pre>
   The command will create the 'ledger' table in the database assigned to 'blockchain'.
-
-## Creating data tables
-
-The structure of each table can be determined by users or generated dynamically, based on the attributes names and the values in the JSON file.  
-When a file is ingested, and a schema is not available, the table schema is created dynamically.    
-Once a table schema is available, the ingestion process maps the attribute names and values to the table's columns names and values.
-
-### File names
-
-The sensor data (or time series data) is placed in the ***watch directory***.  
-Note: ***watch directories*** are explained at [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network).  
-The file name follows a convention that determines how the file is being processed.    
-The command ***get json file struct*** details the file structure convention and has the following output:  
-<pre>
-[dbms name].[table name].[data source].[hash value].[instructions].[TSD member ID].[TSD row ID].[TSD date].json
-</pre>
-
-The file type is ***json*** indicating the internal structure.  
-The file name structure is composed of 8 substrings separated by a period. The substrings are as follows:
-
-| Section       | Explanation  | Mandatory  |
-| ------------- | ----------- | --------  |
-| DBMS Name | The logical database name | Yes |
-| Table Name | The logical table that contains the file data. | Yes |
-| Source | An ID that identifies the source of the data. | No |
-| Hash | A hash value that uniquely identifies the file by the contents of the file. | No |
-| Instructions | An ID that identifies the set of instructions that map the JSON data to the table structure. | No |
-| TSD member ID | An ID of the TSD table containing information on the JSON file. | No |
-| TSD row ID | The ID of the row in  the TSD table that contains information about the file. | No |
-| TSD date | The time and date when the file was injested to the local database. | No |
-
-Note: Details on the TSD tables is available at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files).
-
-### File ingestion
-
-When a file is ingested, the local node determines if the table exists in the local database.  
-If the table does not exist, the node will determine if the table was declared by a different node and appears on the blockchain.  
-If the table is available on the blockchain, the node will create an identical table on the local database.  
-If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.  
-When the table is located or created, the file is ingested using one of 2 methods:  
-1. The default mapping - attribute names are assigned to column names. If a column name is not part of the table's structure, the attribute value is ignored.  
-2. If mapping ***Instructions*** appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
-
-
-### Creating a local dbms table published as a policy on the blockchin
-
-The command: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
 
