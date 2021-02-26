@@ -16,10 +16,16 @@ When a node starts, it determines the local IP addresses available to the node. 
 
 | Variable Name | Explanation   | Retrieve value |
 | ------------- | ------------- | ------------- |
-| ip            | IPv4 Address | !ip |
+| ip            | The Public IP or a Local IP if the node is on a local network | !ip |
 | external_ip   | The Public IP | !external_ip |
 
-Some systems fail to identify their IP addresses and the values can be set by the user.  
+to view the values assigned in the dictionary use the following calls:
+<pre>
+!ip
+!external_ip
+</pre> 
+
+Some systems fail to identify their IP addresses, and the values can be set by the user.  
 To view all IPs recognized by the node issue the following command:
 <pre>
 get ip list
@@ -41,19 +47,20 @@ Usage:
 <pre>
 run tcp server [ip] [port] [threads]
 </pre>
+Explanation:   
 Explanation:  
-[ip] [port] - The process listens for incoming messages on the assigned IP and and Port.
-[Threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 1
+***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog network.   
+***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
+***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
 
 Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
-### The source IP
+### The Source Address
 When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
-The IP and Port specified on the command line are considered as the Source IP and Port.  
-When a message is send to a peer, the node requests the peer to reply to the Source IP and Port.
-
-In some use cases, the Source IP represent an internal network which is not accessible by the peer nodes. 
-To address internal networks, a user can configure the node in one of the following ways:
+As a node connected to the network is listening on the specified IP and Port, when the node sends a message to a peer, it requests that the reply is send to the declared IP and Port.  
+Therefore, for an outgoing message, the declared IP and Port serve as a Source Address identifying the node that issued the message and an address for a reply message.   
+ 
+A user can configure a node to modify the reply address in one of the following ways:
 
 a) Request peers to reply using a different IP address.  
 b) Request peers to determine the IP address from the message socket.
