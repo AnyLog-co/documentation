@@ -19,11 +19,6 @@ When a node starts, it determines the local IP addresses available to the node. 
 | ip            | The Public IP or a Local IP if the node is on a local network | !ip |
 | external_ip   | The Public IP | !external_ip |
 
-to view the values assigned in the dictionary use the following calls:
-<pre>
-!ip
-!external_ip
-</pre> 
 
 Some systems fail to identify their IP addresses, and the values can be set by the user.  
 To view all IPs recognized by the node issue the following command:
