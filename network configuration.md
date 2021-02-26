@@ -27,7 +27,7 @@ get ip list
 </pre> 
 
 ## Configuring a REST server process
-Any node in the network can be configured to receive requests using the REST API.
+Any node in the network can be configured to receive requests using the REST API.  
 Usage:
 <pre>
 run rest server [ip] [port] where timeout = [timeout] and ssl = [true/false]
@@ -42,9 +42,8 @@ Usage:
 <pre>
 run tcp server [ip] [port] [threads]
 </pre>
-Explanation:   
-Explanation:  
-***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog network.   
+   
+***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog Network.   
 ***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
 ***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
 
@@ -52,16 +51,16 @@ Additional information is available at [network configuration](https://github.co
 
 ### The Source Address
 When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
-As a node connected to the network is listening on the specified IP and Port, when the node sends a message to a peer, it requests that the reply is send to the declared IP and Port.  
+When the node sends a message to a peer, it requests that the reply is send to the declared IP and Port.  
 Therefore, for an outgoing message, the declared IP and Port serve as a Source Address identifying the node that issued the message and an address for a reply message.   
  
-A user can configure a node to modify the reply address in one of the following ways:
+A user can configure a node to use a different reply address in one of the following ways:
 
-a) Request peers to reply using a different IP address.  
-b) Request peers to determine the IP address from the message socket.
+a) Request peers to reply using a different address.  
+b) Request peers to determine the reply address from the message socket.
 
 ### Setting a different IP address for replies 
-Using the ***set reply ip*** command, user can direct a server to use a different IP address for replies.
+Using the ***set reply ip*** command, user can direct a node sending a message, to receive the reply on a different IP address.    
 Usage:
 <pre>
 set reply ip = [ip]
