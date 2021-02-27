@@ -35,6 +35,7 @@ Below are valid examples:
 
 
 ## Copy a file on the local node
+
 Using the command ***file copy*** users can copy files on the same node.    
 
 Example:
@@ -68,12 +69,38 @@ run client 132.148.12.32:2048 file copy !source_dir/data.json !!prep_dir/json.da
 In the example above:
 ***prep_dir*** will be mapped to a path using the dictionary of the remote node.
 
+
+### Copying multiple files from a local node to a remote node
+
+Using the command ***file copy*** and identifying source files on the local node and a destination directory on the remote node, 
+users can copy multiple files using a single call.      
+Usage:
+<pre>
+run client (destination) [file copy] [path and files on the local node] [directory on the remote node]
+</pre>
+***destination*** is the IP and Port of the remote node.  
+***path and files on the local node*** is a string representing a path to a directory and files identified by their name prefix and type prefix.
+***directory on the remote node*** is a string representing a valid directory location on the remote node. The last character of the string needs to be a slash (indicating a directory).  
+
+Examples:
+
+<pre>
+run client 10.0.0.78:2048 file get !!prep_dir/* !temp_dir/
+</pre>
+The above example copies all the files from the directory assigned to the key ***prep_dir*** on the remote machine to the directory assigned to the key ***temp_dir*** on the local machine.
+
+<pre>
+run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
+</pre>
+The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
+
+
 ## File copy from a remote node to a local node
 
 The command ***file get*** copies a file from a remote node to the local node.  
 Usage:
 <pre>
-run client 132,148.12.32:2048 [get] [file path and name on the remote node] [path and file name on the local node]
+run client 132,148.12.32:2048 [file get] [file path and name on the remote node] [path and file name on the local node]
 </pre>
 
 Example:
@@ -84,15 +111,16 @@ The example above copies the blockchain file from a member node to the current n
 ***!!blockchain_file*** is translated on the remote node and ***!blockchain_file*** is translated on the local node.
 
 ### Copying multiple files from a remote node to a local node
-Using the command ***file get*** and identifying source files on the remote note and a destination directory on the local node, 
-users can copy multiple files ina single call.      
+
+Using the command ***file get*** and identifying source files on the remote node and a destination directory on the local node, 
+users can copy multiple files in a single call.      
 Usage:
 <pre>
-run client (destination) [get] [path and files on the remote node] [destination directory on the local node]
+run client (destination) [get] [path and files on the remote node] [directory on the local node]
 </pre>
 ***destination*** is the IP and Port of the remote node.  
 ***path and files on the remote node*** is a string representing a path to a directory and files identified by their name prefix and type prefix.
-***destination directory on the local node*** is a string representing a valid directory location on the local node. The last character of the string needs to be a slash (indicating a directory).  
+***directory on the local node*** is a string representing a valid directory location on the local node. The last character of the string needs to be a slash (indicating a directory).  
 
 Examples:
 
