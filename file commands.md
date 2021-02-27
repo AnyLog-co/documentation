@@ -21,51 +21,68 @@ Operations supported:
 
 ## Files names:
 
-File names needs to be provided with the path to the file. Users can use keys defined in the dictionary as representatives of file names and paths.
+File names needs to be provided with the path to the file. Users can use keys defined in the dictionary as representatives of file names and paths.    
+File names and paths can be prefixed by a key from a dictionary and are translated as follows:  
+* A key designated with a single exclamation point ***!*** is replaced to a value using the dictionary of the local node. 
+* A key designated with 2 exclamation points ***!!*** is replaced to a value using the dictionary of the remote node.  
 Below are valid examples:  
 
 | Path/Name | Comments | 
 | ------------- | ---- |
 | !blockchain_file | The path and file name for the local blockchain file. | 
-| !prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** |
+| !prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** in the local node|
+| !!prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** in the remote node|
 
-When a command is executed on 2 nodes, users can use use 2 exclamation points to indicate translation of the key on the remote node (see the examples below).
 
+## Copy a file on the local node
+Using the command ***file copy*** users can copy files on the same node.    
 
-### Copy files between nodes in the network
+Example:
+<pre>
+file copy !err_dir/data.json !!prep_dir/json.data
+</pre>
+In the example above the file ```data.json``` from the ```!err_dir``` was copied to the ```!prep_dir``` and named ```json.data```.
 
-Files can be copied to and from nodes in the network.  
+## Copy files between nodes in the network
+
+Users can copy files from a remote node to the local node or from the local node to a remote node.  
+
 The command ***file copy*** copies a file from the current node to a remote node.
 The command ***file get*** copies a file  from a remote node to the current node.
 
-#### file copy
+To transfer the files, users specify the remote node using ***run client (IP:Port)*** instruction whereas the IP:Port is the address of the remote node.
 
-Copy a file from the current node to a destination node.
+## file copy from the local node to a remote node
+
+Usage:
 <pre>
-[copy] [file path and name on current node] [destination path and name on target node]
+run client (destination) [copy] [file path and name on the current node] [file path and name on the remote node]
 </pre>
+***destination*** is the IP and Port of the remote node.  
+***file path and name*** can be the path and name on the local and remote nodes or keys that are translated using the local or remote dictionaries. 
 
 Example:
 <pre>
-run client (destination) file copy !source_dir/data.json !!prep_dir/json.data
+run client 132.148.12.32:2048 file copy !source_dir/data.json !!prep_dir/json.data
 </pre>
 In the example above:
-***destination*** is the IP and Port of the destination node.  
-***prep_dir*** will be mapped to a path using the dictionary of the target machine.
+***prep_dir*** will be mapped to a path using the dictionary of the remote node.
+
 
 #### file get
 
-Get a file from a member node.
+The command file get copies a file from a remote node to the local node.  
+Usage:
 <pre>
-[get] [file path and name on the member node] [destination path and file name on current node]
+run client 132,148.12.32:2048 [get] [file path and name on the remote node] [path and file name on the local node]
 </pre>
 
 Example:
 <pre>
-run client (destination) file get !!blockchain_file !blockchain_file
+run client 10.0.0.78:2048 file get !!blockchain_file !blockchain_file
 </pre>
 The example above copies the blockchain file from a member node to the current node.
-***!blockchain_file*** is translated on the current node and ***!!blockchain_file*** is translated on the member node.
+***!!blockchain_file*** is translated on the remote node and ***!blockchain_file*** is translated on the local node.
 
 ### Move a file
 Move the source file to a destination directory
