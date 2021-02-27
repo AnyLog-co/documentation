@@ -42,7 +42,7 @@ The command ***file get*** copies a file  from a remote node to the current node
 
 Copy a file from the current node to a destination node.
 <pre>
-[copy] [file path and name on curret node] [destination path and name on target machine]
+[copy] [file path and name on current node] [destination path and name on target node]
 </pre>
 
 Example:
