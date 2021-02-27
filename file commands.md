@@ -6,10 +6,8 @@ Operations supported:
 
 | Operation  | ---- | 
 | ------------- | ---- |
-| file copy | Copy a file from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| file get | Copy a file from a remote node to the current node. |
-| directory copy | Copy all files from a specified directory to a remote node. |
-| directory get | Copy all files from a directory in a remote node to the local node. |
+| file copy | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| file get | Copy a file or files from a remote node to the current node. |
 | file move | Move a file to a different location on the local node. |
 | file compress | Compress a file. |
 | file decompress | Decompress a file. |
