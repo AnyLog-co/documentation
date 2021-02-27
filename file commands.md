@@ -85,12 +85,12 @@ run client (destination) [file copy] [path and files on the local node] [directo
 Examples:
 
 <pre>
-run client 10.0.0.78:2048 file get !!prep_dir/* !temp_dir/
+run client 10.0.0.78:2048 file copy !prep_dir/* !!temp_dir/
 </pre>
-The above example copies all the files from the directory assigned to the key ***prep_dir*** on the remote machine to the directory assigned to the key ***temp_dir*** on the local machine.
+The above example copies all the files from the directory assigned to the key ***prep_dir*** on the local node to the directory assigned to the key ***temp_dir*** on the remote node.
 
 <pre>
-run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
+run client 10.0.0.78:2048 file copy !prep_dir/bl*.js* !!temp_dir/
 </pre>
 The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
 
@@ -127,7 +127,7 @@ Examples:
 <pre>
 run client 10.0.0.78:2048 file get !!prep_dir/* !temp_dir/
 </pre>
-The above example copies all the files from the directory assigned to the key ***prep_dir*** on the remote machine to the directory assigned to the key ***temp_dir*** on the local machine.
+The above example copies all the files from the directory assigned to the key ***prep_dir*** on the remote node to the directory assigned to the key ***temp_dir*** on the local node.
 
 <pre>
 run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
