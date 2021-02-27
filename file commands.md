@@ -1,19 +1,42 @@
 # File Commands
 
-The ***file*** command provides the means to operate on files including deleting files, compressing and decompressing files and copying files between member nodes.
+The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.    
 
-## Files operations:
+Operations supported:
 
-To operate with a file, both the file path and the file name needs to be provided. 
-Users can specify a complete file path and name or use the pre-declared parameters.
-For example: ```!prep_dir``` can be used to represent the path to the ***prep*** directory. In this case the path is translated using the dictionary of the node processing the command.  
-Some commands (like ***get*** and ***copy***) are executed on 2 nodes. in these cases it is possible to use 2 exclamation points to indicate translation of the variable on the second machine (see the examples below).
+| Operation  | ---- | 
+| ------------- | ---- |
+| file copy | Copy a file from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| file get | Copy a file from a remote node to the current node. |
+| directory copy | Copy all files from a specified directory to a remote node. |
+| directory get | Copy all files from a directory in a remote node to the local node. |
+| file move | Move a file to a different location on the local node. |
+| file compress | Compress a file. |
+| file decompress | Decompress a file. |
+| file test | Test if a file exists. |
+| file delete | Delete a file. |
+| file hash | Calculate the hash value of the data contained in the file. |
+| get files | List the files in a given directory on a remote node or the local node. |
+| get directories | List the subdirectories in a given directory on a remote node or the local node. |
+
+## Files names:
+
+File names needs to be provided with the path to the file. Users can use keys defined in the dictionary as representatives of file names and paths.
+Below are valid examples:  
+
+| Path/Name | Comments | 
+| ------------- | ---- |
+| !blockchain_file | The path and file name for the local blockchain file. | 
+| !prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** |
+
+When a command is executed on 2 nodes, users can use use 2 exclamation points to indicate translation of the key on the remote node (see the examples below).
+
 
 ### Copy files between nodes in the network
 
 Files can be copied to and from nodes in the network.  
-The command ***file copy*** copies a file from the current node to a member node.
-The command ***file get*** copies a file  from a member node to the current node.
+The command ***file copy*** copies a file from the current node to a remote node.
+The command ***file get*** copies a file  from a remote node to the current node.
 
 #### file copy
 
