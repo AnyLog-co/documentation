@@ -31,7 +31,7 @@ Below are valid examples:
 | Path/Name | Comments | 
 | ------------- | ---- |
 | !blockchain_file | The path and file name of the local blockchain file. | 
-| !prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** on the local node|
+| !prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** in the local node|
 | !!prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** in the remote node|
 
 
@@ -41,18 +41,18 @@ Using the command ***file copy*** users can copy files on the same node.
 
 Example:
 <pre>
-file copy !err_dir/data.json !!prep_dir/json.data
+file copy !err_dir/data.json !prep_dir/json.data
 </pre>
 In the example above the file ```data.json``` from the ```!err_dir``` was copied to the ```!prep_dir``` and named ```json.data```.
 
 ## Copy files between nodes in the network
 
-Users can copy files from a remote node to the local node or from the local node to a remote node.  
+Users can copy files from the local node to a remote node and from a remote node to the local node.  
 
-The command ***file copy*** copies a file from the local node to a remote node.
-The command ***file get*** copies a file  from a remote node to the local node.
+* The command ***file copy*** copies a file (or files) from the local node to a remote node.  
+* The command ***file get*** copies a file (or files) from a remote node to the local node.  
 
-To transfer the files, users specify the remote node using ***run client (IP:Port)*** instruction whereas the IP:Port is the address of the remote node.
+The remote node is identified by specifying the IP and Port of the remote node using the command directive: ***run client (IP:Port)***.
 
 ## File copy from a local node to a remote node
 
