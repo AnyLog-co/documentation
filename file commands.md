@@ -199,7 +199,7 @@ Example:
 file delete !prep_dir/my_file
 </pre>
 
-## list files in a given directory
+## List files in a given directory
 Usage:
 <pre>
 get files [directory path]
@@ -215,7 +215,7 @@ Example, list files on a remote node:
 run client 10.0.0.78:2048 get files !!err_dir
 </pre>
 
-## list subdirectories in a given directory
+## List subdirectories in a given directory
 Usage:
 <pre>
 get directories [directory path]
