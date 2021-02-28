@@ -23,8 +23,8 @@ Operations supported:
 
 File names needs to be provided with the path to the file. Users can use keys defined in the dictionary as representatives of file names and paths.    
 File names and paths can be prefixed by a key from a dictionary and are translated as follows:  
-* A key designated with a single exclamation point ***!*** is replaced to a value using the dictionary of the local node. 
-* A key designated with 2 exclamation points ***!!*** is replaced to a value using the dictionary of the remote node.  
+* A key designated with a single exclamation point ***!*** is replaced by the value in the dictionary of the local node. 
+* A key designated with 2 exclamation points ***!!*** is replaced by the value in the dictionary of the remote node.  
 
 Below are valid examples:  
 
