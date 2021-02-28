@@ -84,7 +84,6 @@ run client (destination) [file copy] [path and files on the local node] [directo
 ***directory on the remote node*** is a string representing a valid directory location on the remote node. The last character of the string needs to be a slash (indicating a directory).  
 
 Examples:
-
 <pre>
 run client 10.0.0.78:2048 file copy !prep_dir/* !!temp_dir/
 </pre>
@@ -135,8 +134,9 @@ run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 </pre>
 The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
 
-### Move a file
+## Move a file
 Move the source file to a destination directory on the local node.
+Usage:
 <pre>
 [move] [source path and file name] [dest directory]
 </pre>
@@ -148,8 +148,8 @@ file move !prep_dir/my_file !watch_dir
 The example above moves the file from the prep directory to the watch directory.
 
  
-### Compress and decompress a file
-
+## Compress and decompress a file
+Usage:
 <pre>
 file compress [source path and file name] [target path and file name]
 file decompress [path and file name of compressed file] [target path and file name]
@@ -163,7 +163,8 @@ file decompress new_file,gz source_file.dat
 </pre>
 
 
-### Test if a file exists
+## Test if a file exists
+Usage:
 <pre>
 file test [path and file name]
 </pre>
@@ -175,7 +176,8 @@ file test !prep_dir/my_file
 </pre>
 
 
-### Calculating the hash value of the data contained in a file
+## Calculating the hash value of the data contained in a file
+Usage:
 <pre>
 file hash [path and file name]
 </pre>
@@ -185,7 +187,8 @@ Example:
 file hash !prep_dir/my_file
 </pre>
 
-### delete a file
+## delete a file
+Usage:
 <pre>
 file delete [path and file name]
 </pre>
@@ -195,3 +198,34 @@ Example:
 file delete !prep_dir/my_file
 </pre>
 
+## list files in a given directory
+Usage:
+<pre>
+get files [directory path]
+</pre>
+
+Example, list files on the loca node:
+<pre>
+get files !err_dir
+</pre>
+
+Example, list files on a remote node:
+<pre>
+run client 10.0.0.78:2048 get files !!err_dir
+</pre>
+
+## list subdirectories in a given directory
+Usage:
+<pre>
+get directories [directory path]
+</pre>
+
+Example, list subdirectories on the local node:
+<pre>
+get directories !archive_dir
+</pre>
+
+Example, list subdirectories on a remote node:
+<pre>
+run client 10.0.0.78:2048 get directories !!archive_dir
+</pre>
