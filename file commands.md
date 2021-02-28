@@ -1,13 +1,15 @@
 # File Commands
 
-The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.    
+The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.  
+In the examples below, the ***local node*** is the node where the command is executed. 
+The ***remote node*** is identified by the IP and Port declared in the [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process) process.
 
 Operations supported:
 
 | Operation  | ---- | 
 | ------------- | ---- |
 | file copy | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| file get | Copy a file or files from a remote node to the current node. |
+| file get | Copy a file or files from a remote node to the local node. |
 | file move | Move a file to a different location on the local node. |
 | file compress | Compress a file. |
 | file decompress | Decompress a file. |
@@ -23,13 +25,14 @@ File names needs to be provided with the path to the file. Users can use keys de
 File names and paths can be prefixed by a key from a dictionary and are translated as follows:  
 * A key designated with a single exclamation point ***!*** is replaced to a value using the dictionary of the local node. 
 * A key designated with 2 exclamation points ***!!*** is replaced to a value using the dictionary of the remote node.  
+
 Below are valid examples:  
 
 | Path/Name | Comments | 
 | ------------- | ---- |
-| !blockchain_file | The path and file name for the local blockchain file. | 
-| !prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** in the local node|
-| !!prep_dir/sensor_data.json | The file ***sensor_data.json*** at the directory assigned to the key ***prep_dir*** in the remote node|
+| !blockchain_file | The path and file name of the local blockchain file. | 
+| !prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** on the local node|
+| !!prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** in the remote node|
 
 
 ## Copy a file on the local node
@@ -46,8 +49,8 @@ In the example above the file ```data.json``` from the ```!err_dir``` was copied
 
 Users can copy files from a remote node to the local node or from the local node to a remote node.  
 
-The command ***file copy*** copies a file from the current node to a remote node.
-The command ***file get*** copies a file  from a remote node to the current node.
+The command ***file copy*** copies a file from the local node to a remote node.
+The command ***file get*** copies a file  from a remote node to the local node.
 
 To transfer the files, users specify the remote node using ***run client (IP:Port)*** instruction whereas the IP:Port is the address of the remote node.
 
@@ -105,7 +108,7 @@ Example:
 <pre>
 run client 10.0.0.78:2048 file get !!blockchain_file !blockchain_file
 </pre>
-The example above copies the blockchain file from a member node to the current node.
+The example above copies the blockchain file from a member node to the local node.
 ***!!blockchain_file*** is translated on the remote node and ***!blockchain_file*** is translated on the local node.
 
 ### Copying multiple files from a remote node to a local node
