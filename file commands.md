@@ -52,16 +52,16 @@ Users can copy files from the local node to a remote node and from a remote node
 * The command ***file copy*** copies a file (or files) from the local node to a remote node.  
 * The command ***file get*** copies a file (or files) from a remote node to the local node.  
 
-The remote node is identified by specifying the IP and Port of the remote node using the command directive: ***run client (IP:Port)***.
+The remote node is identified by specifying an IP and Port using the command directive: ***run client (IP:Port)***.
 
 ## File copy from a local node to a remote node
 
 Usage:
 <pre>
-run client (destination) [copy] [file path and name on the local node] [file path and name on the remote node]
+run client (destination) file copy [file path and name on the local node] [file path and name on the remote node]
 </pre>
 ***destination*** is the IP and Port of the remote node.  
-***file path and name*** can be the path and name on the local and remote nodes or keys that are translated using the local or remote dictionaries. 
+***file path and name*** identify the file names on each node and can be keys that are translated using the local or remote dictionaries. 
 
 Example:
 <pre>
@@ -80,7 +80,7 @@ Usage:
 run client (destination) [file copy] [path and files on the local node] [directory on the remote node]
 </pre>
 ***destination*** is the IP and Port of the remote node.  
-***path and files on the local node*** is a string representing a path to a directory and files identified by their name prefix and type prefix.
+***path and files on the local node*** is a string representing a path to a directory and files identified by their name prefix and type prefix.  
 ***directory on the remote node*** is a string representing a valid directory location on the remote node. The last character of the string needs to be a slash (indicating a directory).  
 
 Examples:
@@ -93,7 +93,7 @@ The above example copies all the files from the directory assigned to the key **
 <pre>
 run client 10.0.0.78:2048 file copy !prep_dir/bl*.js* !!temp_dir/
 </pre>
-The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
+The above example only copies files with **bl** as a file name prefix and ***js*** as a prefix to the file type.  
 
 
 ## File copy from a remote node to a local node
@@ -117,7 +117,7 @@ Using the command ***file get*** and identifying source files on the remote node
 users can copy multiple files in a single call.      
 Usage:
 <pre>
-run client (destination) [get] [path and files on the remote node] [directory on the local node]
+run client (destination) [file get] [path and files on the remote node] [directory on the local node]
 </pre>
 ***destination*** is the IP and Port of the remote node.  
 ***path and files on the remote node*** is a string representing a path to a directory and files identified by their name prefix and type prefix.
@@ -136,7 +136,7 @@ run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
 
 ### Move a file
-Move the source file to a destination directory
+Move the source file to a destination directory on the local node.
 <pre>
 [move] [source path and file name] [dest directory]
 </pre>
