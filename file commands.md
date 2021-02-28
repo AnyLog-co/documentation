@@ -8,16 +8,16 @@ Operations supported:
 
 | Operation  | ---- | 
 | ------------- | ---- |
-| file copy | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| file get | Copy a file or files from a remote node to the local node. |
-| file move | Move a file to a different location on the local node. |
-| file compress | Compress a file. |
-| file decompress | Decompress a file. |
-| file test | Test if a file exists. |
-| file delete | Delete a file. |
-| file hash | Calculate the hash value of the data contained in the file. |
-| get files | List the files in a given directory on a remote node or the local node. |
-| get directories | List the subdirectories in a given directory on a remote node or the local node. |
+| [file copy](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#copy-files-between-nodes-in-the-network) | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node) | Copy a file or files from a remote node to the local node. |
+| [file move](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#move-a-file) | Move a file to a different location on the local node. |
+| [file compress](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#compress-and-decompress-a-file) | Compress a file. |
+| [file decompress](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#compress-and-decompress-a-file) | Decompress a file. |
+| [file test](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#test-if-a-file-exists) | Test if a file exists. |
+| [file hash](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file. |
+| [file delete](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#delete-a-file) | Delete a file. |
+| [get files](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
+| [get directories](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
 
 ## Files names:
 
@@ -135,13 +135,13 @@ run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
 
 ## Move a file
-Move the source file to a destination directory on the local node.
+Move the source file to a destination directory on the local node.  
 Usage:
 <pre>
 [move] [source path and file name] [dest directory]
 </pre>
 
-Examples:
+Example:
 <pre>
 file move !prep_dir/my_file !watch_dir
 </pre>
@@ -149,6 +149,7 @@ The example above moves the file from the prep directory to the watch directory.
 
  
 ## Compress and decompress a file
+These commands provide a simple interface to compress and decompress files. 
 Usage:
 <pre>
 file compress [source path and file name] [target path and file name]
@@ -176,7 +177,7 @@ file test !prep_dir/my_file
 </pre>
 
 
-## Calculating the hash value of the data contained in a file
+## Calculate the hash value of the data contained in a file
 Usage:
 <pre>
 file hash [path and file name]
@@ -187,7 +188,7 @@ Example:
 file hash !prep_dir/my_file
 </pre>
 
-## delete a file
+## Delete a file
 Usage:
 <pre>
 file delete [path and file name]
