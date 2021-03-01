@@ -82,31 +82,36 @@ The ***bring command*** is expressed and processed in the same way it is being e
 The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).  
 
 ***Mapping the message data***  
-Values pulled from the message determine the database, table, and the column values. 
-The MQTT command, declares, for each subscribed topic, how to retrieve the needed values. The chart below summarizes the information extracted from each message:
+Values pulled from the message determine the database, table, and the column values to update. 
+The MQTT command, declares, for each subscribed topic, how to retrieve the needed values.    
+The chart below summarizes the information extracted from each message:
 
-| Name        | Details   | Structure |
+| Name        | Details   | Command Structure |
 | ------------- | ------------- | ---- |
-| dbms  | Determine the dbms to contain the data. | dbms = value or dbms = [bring command]|
-| table  | Determine the table to contain the data. |  table = value or table = [bring command]|
-| column  | Multiple column names are assigned with their value. | column.[column name].[data_type] = [bring command] |
+| dbms  | The dbms to contain the data. | ***dbms = value*** or ***dbms = [bring command]***|
+| table  | Determine the table to contain the data. |  ***table = value*** or ***table = [bring command]***|
+| column  | Multiple column names are assigned with their value. | ***column.[column name].[data_type] = [bring command]*** |
 
+***Retrieving column values***  
 The columns values pulled from the message are assigned to a new JSON structure which is the structure that creates and updates the database tables.  
 The format declaring the columns and their calues is the following:
 <pre>
 column.[column name].[data type] = [bring command]
 </pre> 
-***column name*** - The name of the column that is used in the database table.  
+***column name*** - The name of the column that is used in the database table.    
 ***data type*** - The data type to use which is one of the following: ***str, int, float, timestamp***.  
-Example - assigning the name ***machines_data*** as the database name:
+
+***Examples***
+
+Example 1 - assigning the name ***machines_data*** as the database name:
 <pre>
 dbms = machines_data
 </pre> 
-Example - retrieving the machine name and the serial number from the message as the table name:
+Example 2 - retrieving the machine name and the serial number from the message as the table name:
 <pre>
 table = "bring [metadata][machine_name] _ [metadata][serial_number]"
 </pre> 
-Example - retrieving the timestamp and value from the message and mapping the retrieved values to columns in the table.
+Example 3 - retrieving the timestamp and value from the message and mapping the retrieved values to columns in the table.
 <pre>
 column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
 </pre> 
