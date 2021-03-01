@@ -182,9 +182,9 @@ set mqtt debug [on/off]
 #### Flushing source messages
 Users are able to disable the AnyLog processing and flush incomming messages to files.  
 The name of the file is based on the broker ID and the topic associated with the message.    
-The following example subscribes to the topic ***anylog*** and writes all the incomming messages to a file.    
+The following example subscribes to the topic ***anylog*** and writes all the incomming messages to a file in the watch directory.    
 <pre>
-run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = anylog
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = anylog
 </pre>
 
 #### Updating a log file with messages that were not successfully processed
