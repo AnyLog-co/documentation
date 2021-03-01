@@ -70,7 +70,7 @@ The following params are provided for each topic:
 | table  | The name of the table to contain the data or a ***'bring' command*** to extract the table name. |
 | column.name.type  | The column name of the data to extract from the message, the data type and the ***'bring' command*** to extract the column data. |
 
-***QoC*** - The Quality of Service:      
+***QoS*** - The Quality of Service:      
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message.  
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
 2 - The highest level of service. Guarantees that each message is received only once by the client.  
