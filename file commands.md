@@ -132,7 +132,7 @@ The above example copies all the files from the directory assigned to the key **
 <pre>
 run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 </pre>
-The above example only copies files with **bl** as a file name prefix and ***js*** and a prefix to the file type.  
+The above example only copies files with **bl** as a file name prefix and ***js*** as a prefix to the file type.  
 
 ## Move a file
 Move the source file to a destination directory on the local node.  
@@ -149,7 +149,7 @@ The example above moves the file from the prep directory to the watch directory.
 
  
 ## Compress and decompress a file
-These commands provide a simple interface to compress and decompress files. 
+These commands provide a simple interface to compress and decompress files.   
 Usage:
 <pre>
 file compress [source path and file name] [target path and file name]
