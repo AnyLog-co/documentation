@@ -155,8 +155,8 @@ Usage:
 file compress [source path and file name] [target path and file name]
 file decompress [path and file name of compressed file] [target path and file name]
 </pre>
-For compression, the target path and file name are optional. If omitted, the target file name and the location is the same and the source file with the extension ***.gz***.  
-For decompression, the target path and file name are optional. If omitted, the target file name and the location is the same and the compressed file with the extension ***.dat***.
+For compression, the target path and file name are optional. If omitted, the file location remains unchanged, and the file name is extended by ***.gz***.  
+For decompression, the target path and file name are optional. If omitted, the file location remains unchanged, and the file name is extended by ***.dat***.
 Examples:
 <pre>
 file compress source_file.dat new_file.gz
