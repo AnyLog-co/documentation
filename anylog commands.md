@@ -196,6 +196,7 @@ Options:
 | get users | The list of users declared using the command ```id add user ...```. |
 | get reply ip | Retrieve the IP address for reply messages. |
 | get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
+| get acceess [path and file name or directory name] | Get the access rights to the provided file or directory. |
 
 
 Security related options:  
