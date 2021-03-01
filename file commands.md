@@ -19,9 +19,9 @@ Operations supported:
 | [get files](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
 | [get directories](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
 
-## Files names:
+## Files names
 
-File names needs to be provided with the path to the file. Users can use keys defined in the dictionary as representatives of file names and paths.    
+File names are provided with their paths. Users can use keys defined in the dictionary as representatives of file names and paths.    
 File names and paths can be prefixed by a key from a dictionary and are translated as follows:  
 * A key designated with a single exclamation point ***!*** is replaced by the value in the dictionary of the local node. 
 * A key designated with 2 exclamation points ***!!*** is replaced by the value in the dictionary of the remote node.  
