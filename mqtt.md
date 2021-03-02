@@ -8,13 +8,13 @@ Users can publish data to a topic  in a broker.
 This process initiates a client that subscribes to a list of topics registered on a MQTT broker.      
 When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.        
 On the AnyLog instance, messages are mapped to JSON structures and aggregated to files that are treated according to the configuration of the node. For example, the data can be ingested to a local database or send to a different node.    
-The message data on the AnyLog instance is treated as ***streaming data***, this process is explained at [File Mode and STreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
+The message data on the AnyLog instance is treated as ***streaming data***, this process is explained at [File Mode and Ssreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
 
 ***The command structure***
 <pre>
 run mqtt client where [list of options]
 </pre>
-The list of options are represented by 'key' = value' and separated by 'and'. 
+The list of options are represented by key = value' pairs and separated by an 'and'. 
 Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting and how the messages need to be processed.       
 The details of the topic are enclosed in parentheses and the MQTT client declared on the command line could subscribe to multiple topics.    
 The command format with subscriptions to multiple topics is as follows:  
@@ -78,12 +78,12 @@ The following params are provided for each topic:
 ***Bring Command***  
 The ***bring command*** is an AnyLog command that extracts data from a JSON structure.   
 The message data is structured in JSON and the ***bring command*** is applied to the message to retrieve the needed data.  
-The ***bring command*** is expressed and processed in the same way it is being expressed and used in the blockchain commands.  
+The ***bring command*** is used in the same way it is being used in the blockchain commands.    
 The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).  
 
 ***Mapping the message data***  
-Values pulled from the message determine the database, table, and the column values to update. 
-The MQTT command, declares, for each subscribed topic, how to retrieve the needed values.    
+Values pulled from the message determine the database, table, columns and the columns values to update. 
+The parameters provided in the ***run mqtt client*** command, declares, for each subscribed topic, how to retrieve the needed values.    
 The chart below summarizes the information extracted from each message:
 
 | Name        | Details   | Command Structure |  Comments |
@@ -99,7 +99,7 @@ The format declaring the columns and their values is the following:
 column.[column name].[data type] = [bring command]
 </pre> 
 ***column name*** - The name of the column that is used in the database table.    
-***data type*** - The data type to use which is one of the following: ***str, int, float, timestamp, bool***.  
+***data type*** - The data type to use. Supported data types are the following: ***str, int, float, timestamp, bool***.  
 
 ***Examples***
 
