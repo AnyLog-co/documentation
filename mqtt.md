@@ -94,7 +94,7 @@ The chart below summarizes the information extracted from each message:
 
 ***Retrieving column values***  
 The columns values pulled from the message are assigned to a new JSON structure which is the structure that creates and updates the database tables.  
-The format declaring the columns and their calues is the following:
+The format declaring the columns and their values is the following:
 <pre>
 column.[column name].[data type] = [bring command]
 </pre> 
@@ -116,6 +116,7 @@ Example 3 - retrieving the timestamp and value from the message and mapping the 
 column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
 </pre> 
 
+A complete example is provided [below](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#example).
 
 ### Processing messages and terminating a subscription
 
