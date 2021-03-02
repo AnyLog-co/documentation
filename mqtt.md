@@ -86,11 +86,11 @@ Values pulled from the message determine the database, table, and the column val
 The MQTT command, declares, for each subscribed topic, how to retrieve the needed values.    
 The chart below summarizes the information extracted from each message:
 
-| Name        | Details   | Command Structure |
-| ------------- | ------------- | ---- |
-| dbms  | The dbms to contain the data. | ***dbms = value*** or ***dbms = [bring command]***|
-| table  | Determine the table to contain the data. |  ***table = value*** or ***table = [bring command]***|
-| column  | Multiple column names are assigned with their value. | ***column.[column name].[data_type] = [bring command]*** |
+| Name        | Details   | Command Structure |  Comments |
+| ------------- | ------------- | ---- |----|
+| dbms  | The dbms to contain the data. | ***dbms = value*** or ***dbms = [bring command]***| Uppercase letters are replaced to lowercase and space is replaced by underscore |
+| table  | Determine the table to contain the data. |  ***table = value*** or ***table = [bring command]***| Uppercase letters are replaced to lowercase and space is replaced by underscore |
+| column  | Multiple column names are assigned with their value. | ***column.[column name].[data_type] = [bring command]*** | |
 
 ***Retrieving column values***  
 The columns values pulled from the message are assigned to a new JSON structure which is the structure that creates and updates the database tables.  
@@ -99,7 +99,7 @@ The format declaring the columns and their values is the following:
 column.[column name].[data type] = [bring command]
 </pre> 
 ***column name*** - The name of the column that is used in the database table.    
-***data type*** - The data type to use which is one of the following: ***str, int, float, timestamp***.  
+***data type*** - The data type to use which is one of the following: ***str, int, float, timestamp, bool***.  
 
 ***Examples***
 
