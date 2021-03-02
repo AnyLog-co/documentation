@@ -84,6 +84,7 @@ Options:
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|
 | set reply ip = [ip/none]  | Set the IP address that for a reply message. |
+| set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 
 #### Set variable
 
