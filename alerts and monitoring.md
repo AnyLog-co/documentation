@@ -4,15 +4,25 @@ Nodes in the network can be configured to execute commands periodically.
 These commands can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
 The output of the calls can trigger alerts or aggregated in a database that is queried or monitored as needed.
 
-The mechanism of issuing repeatable commands is based on a Scheduler. 
+The mechanism of issuing repeatable commands is based on a Scheduler.  
+Nodes can have one or more schedulers, the schedulers are identified with an ID. Scheduler #0 is a system scheduler and 
+in most cases scheduler #1 is for users scheduled tasks 
 The Scheduler contains the commands to execute and the time interval to schedule each command.
 
 ## Invoking a scheduler
 The scheduler is initiated using the folowing command:
 <pre>
-run scheduler [time]
+run scheduler [id]
 </pre>
-***time*** specifies the scheduler interval in seconds. The default time is 10 seconds.
+***id*** Optional value, representing the scheduler ID. The defailt value is 1, representing a user scheduler.
+
+## View scheduled commands
+The ***get scheduler*** command retrieves the scheduled commands for each scheduler as follows:
+<pre>
+get scheduler [id]
+</pre>
+***id*** Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
+
 
 ## Repeatable Queries
 
