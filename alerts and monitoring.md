@@ -11,7 +11,7 @@ in most cases schedulers #1 and higher are for users scheduled tasks.
 The Scheduler contains the commands to execute and the time interval to schedule each command.  
 
 The 2 common ways to represent alerts and monitoring are the following:
-* Schedule a script. The code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
+* Schedule a task. The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
 * Schedule a repeatable query. A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
 
 ## Invoking a scheduler
@@ -28,6 +28,44 @@ get scheduler [id]
 </pre>
 ***id*** Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
 
+## Terminating a scheduler
+Users can terminate a specific scheduler or all scheduler using the following commands:
+<pre>
+exit scheduler [id]
+</pre>
+***id*** The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
+
+
+## Scheduling tasks
+
+A task is represented by a script and the following command schedules repeatable execution o the task:
+
+<pre>
+schedule [options] command [command to execute]
+</pre>
+
+***Options:***  
+***time*** - repeat command every specified number of seconds (default is 15 seconds)
+
+***[command to execute]***
+
+| Option        | Explanation  |
+| ------------- | ------------| 
+| process | Executing the script using the scheduler thread. |
+| thread | Executing the script using a dedicated thread. |
+
+## Examples
+
+### Sending an email alert if disj space is under a threshold
+
+The following commands are executed every 5 minutes. 
+The first command determines the free space and places it in a variable called disk_space.  
+The second commands sends an email if disk space is under a threshold.
+
+<pre>
+schedule time = 5 minutes command disk_d_free = get disk free d:\
+schedule time = 5 minutes command if !disk_d_free > 1000000000 then email where from = anylog.iot@gmail.com and password = google4anylog and to = moshe@anylog.co and subject = "anylog alert" and message = "Disk Drive D is under a threshold"
+</pre>
 
 
 
@@ -36,7 +74,6 @@ get scheduler [id]
 Repeatable queries are executed periodically and the output is usually directed to a table.  
 The query results can either replace the previously queried data or be added to the previously queried data.  
 To allow repeatable queries, configure a scheduler process. This process is invoked in time intervals to invoke the queries that need to be issued.
-
 
 #### Declaring a repeatable query:
 
