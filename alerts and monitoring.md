@@ -1,13 +1,18 @@
 # Alerts and Monitoring
 
-Nodes in the network can be configured to execute commands periodically.
-These commands can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
-The output of the calls can trigger alerts or aggregated in a database that is queried or monitored as needed.
+Nodes in the network can be configured to execute commands and scripts periodically.  
+These commands and scripts can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
+The output of the calls triggers alerts or aggregated in a database that is queried or monitored as needed.  
+Scripts can include any logic expressed using the AnyLog commands.
 
 The mechanism of issuing repeatable commands is based on a Scheduler.  
-Nodes can have one or more schedulers, the schedulers are identified with an ID. Scheduler #0 is a system scheduler and 
-in most cases scheduler #1 is for users scheduled tasks 
-The Scheduler contains the commands to execute and the time interval to schedule each command.
+Nodes can be configured with one or more schedulers. The schedulers are identified with an ID. Scheduler #0 is a system scheduler and 
+in most cases schedulers #1 and higher are for users scheduled tasks. 
+The Scheduler contains the commands to execute and the time interval to schedule each command.  
+
+The 2 common ways to represent alerts and monitoring are the following:
+* Schedule a script. The code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
+* Schedule a repeatable query. A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
 
 ## Invoking a scheduler
 The scheduler is initiated using the folowing command:
@@ -22,6 +27,8 @@ The ***get scheduler*** command retrieves the scheduled commands for each schedu
 get scheduler [id]
 </pre>
 ***id*** Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
+
+
 
 
 ## Repeatable Queries
