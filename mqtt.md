@@ -199,6 +199,7 @@ Debug provides the means to track the processing of messages by enabling the fol
 * Display of the messages being processed.
 * Flushing source messages.
 * Updating a log file with messages that were not successfully processed.
+* Subscribing to all topics.
 
 #### Display of the MQTT processing and calls
 Users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
@@ -219,7 +220,7 @@ set mqtt debug [on/off]
 #### Flushing source messages
 Users are able to disable the AnyLog processing and flush incomming messages to files.  
 The name of the file is based on the broker ID and the topic associated with the message.    
-The following example subscribes to the topic ***anylog*** and writes all the incomming messages to a file in the watch directory.    
+The following example subscribes to the topic ***anylog*** and writes all the incoming messages to a file in the watch directory.    
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = anylog
 </pre>
@@ -231,6 +232,15 @@ The log file is written to the error directory.
 Example:  
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log_error = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
+</pre>
+
+####  Subscribing to all topics
+By setting the topic to the pound sign (#), all published messages are considered such that:    
+If the topic is defined - the message is processed according to the subscription definitions.  
+If the topic is not defiled, the message is flushed to a log file.  
+Example:  
+<pre>
+run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = "#"
 </pre>
 
 
