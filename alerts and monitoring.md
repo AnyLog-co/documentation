@@ -3,37 +3,37 @@
 Nodes in the network can be configured to execute commands and scripts periodically.  
 These commands and scripts can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
 The output of the calls triggers alerts or aggregated in a database that is queried or monitored as needed.  
-Scripts can include any logic expressed using the AnyLog commands.
+Scripts can include any logic expressed with the AnyLog commands.
 
 The mechanism of issuing repeatable commands is based on a Scheduler.  
-Nodes can be configured with one or more schedulers. The schedulers are identified with an ID. Scheduler #0 is a system scheduler and 
-in most cases schedulers #1 and higher are for users scheduled tasks. 
-The Scheduler contains the commands to execute and the time interval to schedule each command.  
+Nodes can be configured with one or more schedulers. The schedulers are identified by an ID such that scheduler #0 is a system scheduler and 
+schedulers #1 and higher are for users scheduled tasks. 
+Each Scheduler contains commands to execute and the time interval to schedule each command.  
 
 The 2 common ways to represent alerts and monitoring are the following:
-* Schedule a task. The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
-* Schedule a repeatable query. A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
+* ***Schedule a task*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
+* ***Schedule a repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
 
 ## Invoking a scheduler
 The scheduler is initiated using the folowing command:
 <pre>
 run scheduler [id]
 </pre>
-***id*** Optional value, representing the scheduler ID. The defailt value is 1, representing a user scheduler.
+***id*** - Optional value, representing the scheduler ID. The defailt value is 1, representing a user scheduler.
 
 ## View scheduled commands
 The ***get scheduler*** command retrieves the scheduled commands for each scheduler as follows:
 <pre>
 get scheduler [id]
 </pre>
-***id*** Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
+***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
 
 ## Terminating a scheduler
 Users can terminate a specific scheduler or all scheduler using the following commands:
 <pre>
 exit scheduler [id]
 </pre>
-***id*** The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
+***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
 
 ## Scheduling tasks
@@ -56,7 +56,7 @@ schedule [options] command [command to execute]
 
 ## Examples
 
-### Sending an email alert if disj space is under a threshold
+### Sending an email alert if disk space is under a threshold
 
 The following commands are executed every 5 minutes. 
 The first command determines the free space and places it in a variable called disk_space.  
