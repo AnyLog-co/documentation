@@ -7,22 +7,34 @@ The background processes:
 
 | Command               | functionality  |
 | --------------------- | ------------| 
-| run tcp server       | A listener for the AnyLog Peer-to-Peer Messaging  |
-| run rest server | A listener for REST Request from users and applications from nodes that are not members of the network |
-| run operator | A configurable operator process that ingests data to the local tables |
-| run publisher | A configurable publisher process that sends data to operators for processing |
-| run blockchain sync | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
-| run scheduler | Initiate a scheduler to periodically monitor state of events and data  |
-| run mqtt client | Initiate a process that pulls data from MQTT brokers |
-| run streamer | Initiate a process to flush streaming data to disk |
-| run data distributor | A process that synchronizes data between different operators of the same cluster |
-| run data consumer | A process that retrieves data to make the local databases consistent among operators of the same cluster |
+| [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process) | A listener for the AnyLog Peer-to-Peer Messaging  |
+| [run rest server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) | A listener for REST Request from users and applications from nodes that are not members of the network |
+| [run operator](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) | A configurable operator process that ingests data to the local tables |
+| [run publisher](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#publisher-process) | A configurable publisher process that sends data to operators for processing |
+| [run blockchain sync](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
+| [run scheduler](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |
+| [run mqtt client](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) | Initiate a process that pulls data from MQTT brokers |
+| [run smtp client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client) | Initiate an SMTP client allowing emails amd sms messages using the Simple Mail Transfer Protocol (SMTP). |
+| [run streamer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) | Initiate a process to flush streaming data to disk |
+| [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
+| [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 
 These processes are activated on the AL command line.  
 The command ***get processes*** provides the list of the running processes.  
 The ***get*** command provides options to detail the status of each process. The ***get*** command options are detailed in 
 [Get Command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
  
+## Process termination
+
+The command ***exit*** followed by the process name terminates the process.  
+Examples:
+<pre>
+exit TCP
+exit operator
+exit MQTT
+exit SMTP
+</pre>
+
 
 ## The TCP Server process
 
@@ -318,7 +330,30 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 
 ## MQTT Client
 
-This process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
+The ***MQTT Client*** process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
+
+## SMTP Client
+
+The ***SMTP Client*** process initiates an SMTP client allowing to support email amd sms messages using the Simple Mail Transfer Protocol (SMTP).
+
+The following command initiates the SMTP client:
+<pre>
+run smtp client where host = [optional host name] and port = [opttional port] and email = [email address] and password = [email password] and ssl = [true/false]
+</pre>
+ 
+| parameter        | Details   | Default |
+| ------------- | ------------- | ------ |
+| ***host name***  | The connection URL to the email server | "smtp.gmail.com"  |
+| ***port***   | A name that is associated with the task | 587 for non secure connection and 465 for secure connection (SSL)  |
+| ***email***  | The sender email address |  |
+| ***password***  | The sender email password |  |
+| ***ssl***  | Using an SMTP with secure connection | false |
+
+Example:
+<pre>
+'run smtp client where email = anylog.iot@gmail.com and password = google4anylog
+</pre>
+
 
 ## Streamer Process
 A process that flushes streaming data to files.  
