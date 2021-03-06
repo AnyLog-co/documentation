@@ -67,6 +67,9 @@ schedule time = 5 minutes command disk_d_free = get disk free d:\
 schedule time = 5 minutes command if !disk_d_free > 1000000000 then email where from = anylog.iot@gmail.com and password = google4anylog and to = moshe@anylog.co and subject = "anylog alert" and message = "Disk Drive D is under a threshold"
 </pre>
 
+Note: to set a Google account for email alerts - do the following:
+* [create a new Google account](https://accounts.google.com/signup)
+* Turn [Allow less secure apps to ON](https://myaccount.google.com/lesssecureapps). Be aware that this makes it easier for others to gain access to the account.
 
 
 ## Repeatable Queries

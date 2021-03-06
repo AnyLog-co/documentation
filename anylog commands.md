@@ -54,7 +54,6 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 | [partition](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command) | 
 | [rest](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command) | 
 | [set](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#set-command) | 
-| [show](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#show-command) | 
 | [sql](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#sql-command) | 
 | [test](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#sql-command) | 
 | [time file](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-command) | 
