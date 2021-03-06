@@ -64,7 +64,7 @@ The second commands sends an email if disk space is under a threshold.
 
 <pre>
 schedule time = 5 minutes command disk_d_free = get disk free d:\
-schedule time = 5 minutes command if !disk_d_free > 1000000000 then email where from = anylog.iot@gmail.com and password = google4anylog and to = moshe@anylog.co and subject = "anylog alert" and message = "Disk Drive D is under a threshold"
+schedule time = 5 minutes command if !disk_d_free > 1000000000 then email where from = anylog.iot@gmail.com and password = google4anylog and to = my_name@my_company.com and subject = "anylog alert" and message = "Disk Drive D is under a threshold"
 </pre>
 
 Note: to set a Google account for email alerts - do the following:
