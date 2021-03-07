@@ -204,7 +204,7 @@ The major USA carriers and gateways are the following:
 A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses).
 
 
-# Appendix - Demo: Configuring a cluster of nodes to monitor and alert when node status and data values change
+# Appendix - Demo: Configuring a cluster of nodes to monitor and alert when nodes status or data values change
 
 This appendix demonstrates a setup of multiple nodes that are configured to monitor and alert when nodes state and data values change above or below configured thresholds.  
 Using the setup below, the following processes are enabled:
