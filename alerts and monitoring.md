@@ -39,7 +39,7 @@ exit scheduler [id]
 
 Ther repeatable commands can consider the status of a node or values of data in a database and trigger the following:
 * An update of a database table - the table can be a log table which is being monitored or a summary/rollup table that represents accumulative state of the data.
-* A message to a user - messages can be in the form of an email on an SMS. The messaging commands are detailed [below]().
+* A message to a user - messages can be in the form of an email on an SMS. The messaging commands are detailed [below](#sending-messages).
 
 ### Adding tasks to the scheduler
 Usage:
