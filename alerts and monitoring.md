@@ -15,7 +15,7 @@ The 2 common ways to represent alerts and monitoring are the following:
 * ***Schedule a repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
 
 ## Invoking a scheduler
-The scheduler is initiated using the folowing command:
+The scheduler is initiated using the following command:
 <pre>
 run scheduler [id]
 </pre>
@@ -35,6 +35,61 @@ exit scheduler [id]
 </pre>
 ***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
+## Sending messages
+Users can invoke email and sms messages when thresholds or alerting conditions are met.  
+To facilitate messages, declare the SMTP server using ***[run smtp client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client) command.
+
+### Sending an email
+Usage:
+<pre>
+email to [receiver email] where subject = [message subject] and message = [message text]
+</pre>
+Command Options: 
+
+| Option        | Explanation  | Default  |
+| ------------- | ------------| ---- | 
+| receiver email | The destination address | |
+| message subject | Any text | AnyLog Alert |
+| message text | Any text | AnyLog Network Alert from Node: [node name] |
+
+Example:
+<pre>
+email to my_name@my_company.com
+</pre>
+
+### Sending an sms
+Usage:
+<pre>
+sms to [receiver phone] where gateway = [sms gateway] and subject = [message subject] and message = [message text]
+</pre>
+Command Options: 
+
+| Option        | Explanation  | Default  |
+| ------------- | ------------| ---- | 
+| receiver phone | The destination phone number | |
+| gateway | [The SMS carrier gateway](https://en.wikipedia.org/wiki/SMS_gateway) |  |
+| message subject | Any text | AnyLog Alert |
+| message text | Any text | AnyLog Network Alert from Node: [node name] |
+
+Example with Tmobile as a carrier:
+<pre>
+sms to 6508147334 where gateway = tmomail.net
+</pre>
+The major USA carriers and gateways are the following:
+
+| Carrier        | Gateway  | 
+| ------------- | ------------|  
+| AT&T | txt.att.netr |
+| Sprint |messaging.sprintpcs.com |
+| T-Mobile | tmomail.net |
+| Verizon | vtext.com |
+| Boost Mobile | myboostmobile.com |
+| Metro PCS | mymetropcs.com |
+| Tracfone | mmst5.tracfone.com |
+| U.S. Cellula | email.uscc.net |
+| Virgin Mobile | vmobl.com |
+
+A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses)
 
 ## Scheduling tasks
 
@@ -66,11 +121,6 @@ The second commands sends an email if disk space is under a threshold.
 schedule time = 5 minutes command disk_d_free = get disk free d:\
 schedule time = 5 minutes command if !disk_d_free > 1000000000 then email where from = anylog.iot@gmail.com and password = google4anylog and to = my_name@my_company.com and subject = "anylog alert" and message = "Disk Drive D is under a threshold"
 </pre>
-
-Note: to set a Google account for email alerts - do the following:
-* [create a new Google account](https://accounts.google.com/signup)
-* Turn [Allow less secure apps to ON](https://myaccount.google.com/lesssecureapps). Be aware that this makes it easier for others to gain access to the account.
-
 
 ## Repeatable Queries
 

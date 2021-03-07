@@ -354,6 +354,10 @@ Example:
 'run smtp client where email = anylog.iot@gmail.com and password = google4anylog
 </pre>
 
+Note: To set a Google account for the sender email address - do the following:
+* [create a new Google account](https://accounts.google.com/signup)
+* Turn [Allow less secure apps to ON](https://myaccount.google.com/lesssecureapps). Be aware that this makes it easier for others to gain access to the account.
+
 
 ## Streamer Process
 A process that flushes streaming data to files.  
