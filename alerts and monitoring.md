@@ -230,8 +230,8 @@ monitored_drive = D:\
 The following is the script to monitor the disk space:
 
 <pre>
-disk_d_free = get disk free !monitored_drive
-if !disk_d_free < 1000000000 
+disk_free = get disk free !monitored_drive
+if !disk_free < 1000000000 
 then email to my_name@my_company.com where subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
 then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
 then stop alert for one day
