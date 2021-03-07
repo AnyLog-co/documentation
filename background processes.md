@@ -334,7 +334,9 @@ The ***MQTT Client*** process is explained in the [mqtt](https://github.com/AnyL
 
 ## SMTP Client
 
-The ***SMTP Client*** process initiates an SMTP client allowing to support email amd sms messages using the Simple Mail Transfer Protocol (SMTP).
+The ***SMTP Client*** process initiates an SMTP client facilitating emails amd SMS messages using the Simple Mail Transfer Protocol (SMTP).
+Sending emails and SMS messages serves to alert and monitor the status of nodes and the data hosted by nodes.  
+Details on how emails and SMS messages are triggered ate available in the [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section,
 
 The following command initiates the SMTP client:
 <pre>
@@ -356,7 +358,7 @@ run smtp client where email = anylog.iot@gmail.com and password = google4anylog
 
 Note: To set a Google account for the sender email address - do the following:
 * [create a new Google account](https://accounts.google.com/signup)
-* Turn [Allow less secure apps to ON](https://myaccount.google.com/lesssecureapps). Be aware that this makes it easier for others to gain access to the account.
+* Turn [Allow less secure apps to ON](https://myaccount.google.com/lesssecureapps). Be aware that this makes it easier for others to gain access to the account.  
 
 
 ## Streamer Process
