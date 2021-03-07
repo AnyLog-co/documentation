@@ -65,17 +65,6 @@ schedule time = 10 seconds command system date
 schedule time = 1 minute and name = "SQL command" command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
 </pre>
 
-# Assigning a dedicated thread for a task
-Tasks may have short duration. For example, a task to determine the free disk space on a particular disk drive is instantaneous.    
-Tasks to monitor database values on peer nodes do not exhaust substantial CPU on the managing node as the database processes are done on the peers.  
-However, a task to process data on the current node may be CPU intensive and can be assigned to a dedicated thread by declaring the 
-query in a script and processing the script with the ***thread** directive (rather than ***process*** directive).
-
-| Option        | Explanation  |
-| ------------- | ------------| 
-| process | Executing the script using the scheduler thread. |
-| thread | Executing the script using a dedicated thread. |
-
 ## Examples
 
 The following commands are executed every 5 minutes. 
@@ -89,22 +78,12 @@ schedule time = 5 minutes command if !disk_d_free < 1000000000 then email to my_
 
 ## Repeatable Queries
 
-Repeatable queries are executed periodically and the output is usually directed to a table.  
-The query results can either replace the previously queried data or be added to the previously queried data.  
-To allow repeatable queries, configure a scheduler process. This process is invoked in time intervals to invoke the queries that need to be issued.
-
-#### Declaring a repeatable query:
-
-<pre>
-schedule [options] command [command to execute]
-</pre>
-
-***Options:***  
-***time*** - repeat command every specified number of seconds (default is 15 seconds)
+Repeatable queries are queries that are executed periodically.   
+The result set of the query can update a summary table as in the example below:  
 
 Example:
 <pre>
-schedule time 15 command run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
+schedule time = 15 minutes command run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
 </pre>
 
 This command will be executed every 15 seconds. The output would be added to a table called 'my_table' on the query node.
@@ -190,7 +169,7 @@ Example:
 email to my_name@my_company.com
 </pre>
 
-### Sending an sms
+### Sending SMS messages
 Usage:
 <pre>
 sms to [receiver phone] where gateway = [sms gateway] and subject = [message subject] and message = [message text]
@@ -224,3 +203,27 @@ The major USA carriers and gateways are the following:
 
 A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses).
 
+
+# Appendix - Demo: Configuring a cluster of nodes to monitor and alert when node status and data values change
+
+This appendix demonstrates a setup of multiple nodes that are configured to monitor and alert when nodes state and data values change above or below configured thresholds.  
+Using the setup below, the following processes are enabled:
+
+1) On each monitored machine, if disk space is less than a threshold, an administrator will be notified by an email and a SMS message.
+2) On each monitored machine, if CPU utilization is higher than a threshold, an administrator will be notified by an email and a SMS message.
+3) A repeatable query on each node that hosts data will update a summary table with aggregated values from the source tables.
+4) The shared table will be monitored (using Grafana) to alert when values exceed or below thresholds.
+5) The shared table will be monitored (using Grafana) to alert when nodes are not reporting or a sensor did not deliver data.
+
+## Nodes setup
+* The monitoring and alerts instructions are placed in scripts that are organized in a designated directory.
+* The path to the scripts directory is assigned with the key ***scripts_dir***. The example below associates a physical location to the scripts directory.
+<pre>
+scripts_dir = D:\Node\AnyLog-Network\scripts
+</pre>
+The physical location may be different for every node, depending on the node hardware and the OS used.
+
+
+## Example 1 - monitoring disk space
+
+The following is 
