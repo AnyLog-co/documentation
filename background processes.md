@@ -2,8 +2,7 @@
 
 Background processes are optional processes that if activated, are running using dedicated threads according to the user specifications.
 
-The background processes:
-
+The background processes are issued using an initialization script or on the AnyLog command lime and are detailed below:
 
 | Command               | functionality  |
 | --------------------- | ------------| 
@@ -19,10 +18,19 @@ The background processes:
 | [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
 | [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 
-These processes are activated on the AL command line.  
-The command ***get processes*** provides the list of the running processes.  
-The ***get*** command provides options to detail the status of each process. The ***get*** command options are detailed in 
-[Get Command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command).
+# View the status of the Background Processes
+
+The following command lists the background processes, their status, and for each process, the main configuration parameters used.
+<pre>
+get processes
+</pre>
+
+Detailed information on each process can be retrieved using the ***get commands***. For example, the following command details the status of the Operator process:
+<pre>
+get operator
+</pre>
+
+The ***get*** command options are detailed in [Get Command](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command) section.
  
 ## Process termination
 
