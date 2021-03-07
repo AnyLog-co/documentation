@@ -1,6 +1,6 @@
 # Alerts and Monitoring
 
-Nodes in the network can be configured to execute commands and scripts periodically.  
+Nodes in the network can be configured to repeatably execute commands and scripts.  
 These commands and scripts can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
 The output of the calls triggers alerts or aggregated in a database that is queried or monitored as needed.  
 Scripts can include any logic expressed with the AnyLog commands.
@@ -8,10 +8,10 @@ Scripts can include any logic expressed with the AnyLog commands.
 The mechanism of issuing repeatable commands is based on a Scheduler.  
 Nodes can be configured with one or more schedulers. The schedulers are identified by an ID such that scheduler #0 is a system scheduler and 
 schedulers #1 and higher are for users scheduled tasks. 
-Each Scheduler contains commands to execute and the time interval to schedule each command.  
+Each Scheduler contains the commands to execute and the time interval associated with each command.  
 
 The 2 common ways to represent alerts and monitoring are the following:
-* ***Schedule a task*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
+* ***Scheduled task*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
 * ***Schedule a repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
 
 ## Invoking a scheduler
@@ -35,61 +35,32 @@ exit scheduler [id]
 </pre>
 ***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
-## Sending messages
-Users can invoke emails and sms messages when thresholds or alerting conditions are met.  
-To facilitate messages, declare the ***SMTP client*** process. Details are available at [run smtp client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client).
+## Types of alerts and monitoring
 
-### Sending an email
+Ther repeatable commands can consider the status of a node or values of data in a database and trigger the following:
+* An update of a database table - the table can be a log table which is being monitored or a summary/rollup table that represents accumulative state of the data.
+* A message to a user - messages can be in the form of an email on an SMS. The messaging commands are detailed [below]().
+
+### Adding tasks to the scheduler
 Usage:
 <pre>
-email to [receiver email] where subject = [message subject] and message = [message text]
+schedule [options] command [command to execute]
 </pre>
-Command Options: 
+The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
+If the scheduler is active, the command will be repeatably executed according to the time specified in the options.  
+Options include the following:
+  
+| Option        | Explanation   |
+| ------------- | ------------- | 
+| time  | The time intervals for the execution of the task.  |
+| name  | A name that is associated with the task. |
 
-| Option        | Explanation  | Default  |
-| ------------- | ------------| ---- | 
-| receiver email | The destination address | |
-| message subject | Any text | AnyLog Alert |
-| message text | Any text | AnyLog Network Alert from Node: [node name] |
-
-Example:
+   
+Examples:
 <pre>
-email to my_name@my_company.com
+schedule time = 10 seconds command system date
+schedule time = 1 minute and name = "SQL command" command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
 </pre>
-
-### Sending an sms
-Usage:
-<pre>
-sms to [receiver phone] where gateway = [sms gateway] and subject = [message subject] and message = [message text]
-</pre>
-Command Options: 
-
-| Option        | Explanation  | Default  |
-| ------------- | ------------| ---- | 
-| receiver phone | The destination phone number | |
-| gateway | [The SMS carrier gateway](https://en.wikipedia.org/wiki/SMS_gateway) |  |
-| message subject | Any text | AnyLog Alert |
-| message text | Any text | AnyLog Network Alert from Node: [node name] |
-
-Example with T-mobile as a carrier:
-<pre>
-sms to 6508147334 where gateway = tmomail.net
-</pre>
-The major USA carriers and gateways are the following:
-
-| Carrier        | Gateway  | 
-| ------------- | ------------|  
-| AT&T | txt.att.netr |
-| Sprint |messaging.sprintpcs.com |
-| T-Mobile | tmomail.net |
-| Verizon | vtext.com |
-| Boost Mobile | myboostmobile.com |
-| Metro PCS | mymetropcs.com |
-| Tracfone | mmst5.tracfone.com |
-| U.S. Cellula | email.uscc.net |
-| Virgin Mobile | vmobl.com |
-
-A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses).
 
 ## Scheduling tasks
 
@@ -203,4 +174,59 @@ instructions           include: south_pi.readings, central_pi.readings
 instructions           table: static_output drop: false 
 </pre>
 
- 
+ ## Sending messages
+Users can invoke emails and sms messages when thresholds or alerting conditions are met.  
+To facilitate messages, declare the ***SMTP client*** process. Details are available at [run smtp client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client).
+
+### Sending an email
+Usage:
+<pre>
+email to [receiver email] where subject = [message subject] and message = [message text]
+</pre>
+Command Options: 
+
+| Option        | Explanation  | Default  |
+| ------------- | ------------| ---- | 
+| receiver email | The destination address | |
+| message subject | Any text | AnyLog Alert |
+| message text | Any text | AnyLog Network Alert from Node: [node name] |
+
+Example:
+<pre>
+email to my_name@my_company.com
+</pre>
+
+### Sending an sms
+Usage:
+<pre>
+sms to [receiver phone] where gateway = [sms gateway] and subject = [message subject] and message = [message text]
+</pre>
+Command Options: 
+
+| Option        | Explanation  | Default  |
+| ------------- | ------------| ---- | 
+| receiver phone | The destination phone number | |
+| gateway | [The SMS carrier gateway](https://en.wikipedia.org/wiki/SMS_gateway) |  |
+| message subject | Any text | AnyLog Alert |
+| message text | Any text | AnyLog Network Alert from Node: [node name] |
+
+Example with T-mobile as a carrier:
+<pre>
+sms to 6508147334 where gateway = tmomail.net
+</pre>
+The major USA carriers and gateways are the following:
+
+| Carrier        | Gateway  | 
+| ------------- | ------------|  
+| AT&T | txt.att.netr |
+| Sprint |messaging.sprintpcs.com |
+| T-Mobile | tmomail.net |
+| Verizon | vtext.com |
+| Boost Mobile | myboostmobile.com |
+| Metro PCS | mymetropcs.com |
+| Tracfone | mmst5.tracfone.com |
+| U.S. Cellula | email.uscc.net |
+| Virgin Mobile | vmobl.com |
+
+A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses).
+
