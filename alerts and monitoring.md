@@ -237,5 +237,5 @@ then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk S
 then stop alert for one day
 </pre>
 
-Note, once a message is send, the repeatable script is aulted for one day such that the the Email box and the messaging will not be exhusted with the same message every 5 minutes.
+Note, once a message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
 
