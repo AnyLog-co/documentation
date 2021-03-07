@@ -334,9 +334,9 @@ The ***MQTT Client*** process is explained in the [mqtt](https://github.com/AnyL
 
 ## SMTP Client
 
-The ***SMTP Client*** process initiates an SMTP client facilitating emails amd SMS messages using the Simple Mail Transfer Protocol (SMTP).
+The ***SMTP Client*** process initiates an SMTP client facilitating emails and SMS messages using the Simple Mail Transfer Protocol (SMTP).
 Sending emails and SMS messages serves to alert and monitor the status of nodes and the data hosted by nodes.  
-Details on how emails and SMS messages are triggered ate available in the [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section,
+Details on how emails and SMS messages are triggered ate available in the [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section.
 
 The following command initiates the SMTP client:
 <pre>
