@@ -38,13 +38,16 @@ exit scheduler [id]
 ## Types of alerts and monitoring
 
 Ther repeatable commands can consider the status of a node or values of data in a database and trigger the following:
-* An update of a database table - the table can be a log table which is being monitored or a summary/rollup table that represents accumulative state of the data.
-* A message to a user - messages can be in the form of an email on an SMS. The messaging commands are detailed [below](#sending-messages).
+* An update of a database table - the table can be a log table, or a summary/rollup table that represents accumulative state of the data.
+* A message to a user - messages can be in the form of an emails on SMS messages. The messaging commands are detailed [below](#sending-messages).
 
 ### Adding tasks to the scheduler
+
+A task is represented by a command or a script with scheduling instructions.  
+
 Usage:
 <pre>
-schedule [options] command [command to execute]
+schedule [options] command [command/script to execute]
 </pre>
 The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
 If the scheduler is active, the command will be repeatably executed according to the time specified in the options.  
@@ -62,18 +65,11 @@ schedule time = 10 seconds command system date
 schedule time = 1 minute and name = "SQL command" command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
 </pre>
 
-## Scheduling tasks
-
-A task is represented by a script and the following command schedules repeatable execution o the task:
-
-<pre>
-schedule [options] command [command to execute]
-</pre>
-
-***Options:***  
-***time*** - repeat command every specified number of seconds (default is 15 seconds)
-
-***[command to execute]***
+# Assigning a dedicated thread for a task
+Tasks may have short duration. For example, a task to determine the free disk space on a particular disk drive is instantaneous.    
+Tasks to monitor database values on peer nodes do not exhaust substantial CPU on the managing node as the database processes are done on the peers.  
+However, a task to process data on the current node may be CPU intensive and can be assigned to a dedicated thread by declaring the 
+query in a script and processing the script with the ***thread** directive (rather than ***process*** directive).
 
 | Option        | Explanation  |
 | ------------- | ------------| 
@@ -81,8 +77,6 @@ schedule [options] command [command to execute]
 | thread | Executing the script using a dedicated thread. |
 
 ## Examples
-
-### Sending an email alert if disk space is under a threshold
 
 The following commands are executed every 5 minutes. 
 The first command determines the free space and places it in a variable called disk_space.  
