@@ -351,7 +351,7 @@ run smtp client where host = [optional host name] and port = [opttional port] an
 
 Example:
 <pre>
-'run smtp client where email = anylog.iot@gmail.com and password = google4anylog
+run smtp client where email = anylog.iot@gmail.com and password = google4anylog
 </pre>
 
 Note: To set a Google account for the sender email address - do the following:
