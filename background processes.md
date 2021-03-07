@@ -20,7 +20,7 @@ The background processes are issued using an initialization script or on the Any
 
 ## View the status of the Background Processes
 
-The following command lists the background processes, their status, and for each process, the main configuration parameters used.
+The following command lists the background processes, their status, and for each process, the main configuration used.
 <pre>
 get processes
 </pre>
@@ -338,7 +338,9 @@ run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_
 
 ## MQTT Client
 
-The ***MQTT Client*** process is explained in the [mqtt](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) section.
+The ***MQTT Client*** process provides a mechanism to subscribe to topics of a MQTT broker. When  messages are received,
+the client retrieves the message and transforms the incoming messages to data structures that are processed by the node.    
+Details on the MQTT Client process are available at the [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) section.
 
 ## SMTP Client
 
