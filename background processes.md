@@ -18,7 +18,7 @@ The background processes are issued using an initialization script or on the Any
 | [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
 | [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 
-# View the status of the Background Processes
+## View the status of the Background Processes
 
 The following command lists the background processes, their status, and for each process, the main configuration parameters used.
 <pre>
