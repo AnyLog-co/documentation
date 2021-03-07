@@ -222,9 +222,20 @@ Using the setup below, the following processes are enabled:
 scripts_dir = D:\Node\AnyLog-Network\scripts
 </pre>
 The physical location may be different for every node, depending on the node hardware and the OS used.
-* nodes will assign the key physical_drive to the hard drive containing the sensor data. The example below declares the monitored drive.
-physical_drive = D:\
+* nodes will assign the key ***monitored_drive*** to the hard drive containing the sensor data. The example below declares the monitored drive.
+monitored_drive = D:\
 
 ## Example 1 - monitoring disk space
 
 The following is the script to monitor the disk space:
+
+<pre>
+disk_d_free = get disk free !monitored_drive
+if !disk_d_free < 1000000000 
+then email to my_name@my_company.com where subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
+then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
+then stop alert for one day
+</pre>
+
+Note, once a message is send, the repeatable script is aulted for one day such that the the Email box and the messaging will not be exhusted with the same message every 5 minutes.
+
