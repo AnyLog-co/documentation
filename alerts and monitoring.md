@@ -217,13 +217,14 @@ Using the setup below, the following processes are enabled:
 
 ## Nodes setup
 * The monitoring and alerts instructions are placed in scripts that are organized in a designated directory.
-* The path to the scripts directory is assigned with the key ***scripts_dir***. The example below associates a physical location to the scripts directory.
+* The path to the scripts directory is assigned with the key ***scripts_dir***. The example below associates a physical location to the scripts' directory.
 <pre>
 scripts_dir = D:\Node\AnyLog-Network\scripts
 </pre>
 The physical location may be different for every node, depending on the node hardware and the OS used.
-
+* nodes will assign the key physical_drive to the hard drive containing the sensor data. The example below declares the monitored drive.
+physical_drive = D:\
 
 ## Example 1 - monitoring disk space
 
-The following is 
+The following is the script to monitor the disk space:
