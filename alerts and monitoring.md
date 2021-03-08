@@ -57,8 +57,15 @@ Options include the following:
 | Option        | Explanation   |
 | ------------- | ------------- | 
 | time  | The time intervals for the execution of the task.  |
-| name  | A name that is associated with the task. |
+| start | Scheduled start time for first execution of the task. The default value is the current day and time. | 
+| name  | A name that is associated with the task. The name in a scheduler needs to be unique |
 
+Note:
+* Multiple tasks with the same name are rejected.
+  
+### Setting the start time
+Start time allows to pause the execution of a tasks. For example, a task that alerts by sending an email or a SMS message may be paused for a few hours to avoid continues messaging.      
+When a ***schedule*** command is first initiated, users can express a starting date and time. This value can be modified using the command [task](#Modifying-Tasks).
 
 ### Examples
 
@@ -90,11 +97,30 @@ get scheduler [id]
 </pre>
 ***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
 
-## Managing tasks
-Each task in the scheduler can be paused, removed, or associated with a start time. These operations are done using the ***task*** command.
+## Managing Tasks
+Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. These operations are done using the ***task*** command.
 
 ### Pausing a task
-The following command pauses a task from being executed. The commandremains on the scheduler but will not be executed until ***task resume** uis called.
+The ***task pause*** command pauses a task from being executed. The commandremains on the scheduler but will not be executed until ***task resume** uis called.
+
+
+### Modifying Tasks
+***start*** can be a string representing date and time or represented as time forward from the current date and time.      
+Time Forward Examples:
++ 2h - starting two hours from current time.
++ 1d - starting one day from current day and time. 
+The following chart includes the time forward options:
+    
+| Option        | Time Unit   |
+| ------------- | ------------- | 
+| y  | year  |
+| m  | month  |
+| w  | week  |
+| d  | day  |
+| h  | hour  |
+| m  | minute  |
+| s  | second  |
+
 
 
 ## Queries using REST client
