@@ -48,7 +48,7 @@ A task is represented by a command or a script with scheduling instructions.
 
 Usage:
 <pre>
-schedule [options] command [command/script to execute]
+schedule [options] task [command/script to execute]
 </pre>
 The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
 If the scheduler is active, the command will be repeatably executed according to the time specified in the options.    
@@ -74,8 +74,8 @@ The first command determines the free space and places it in a variable called d
 The second commands sends an email if disk space is under a threshold.
 
 <pre>
-schedule time = 5 minutes command disk_d_free = get disk free d:\
-schedule time = 5 minutes command if !disk_d_free < 1000000000 then email to my_name@my_company.com and message = "Disk Drive D is under a threshold"
+schedule time = 5 minutes task disk_d_free = get disk free d:\
+schedule time = 5 minutes task if !disk_d_free < 1000000000 then email to my_name@my_company.com and message = "Disk Drive D is under a threshold"
 </pre>
 
 ## Repeatable Queries
@@ -85,7 +85,7 @@ The result set of the query can update a summary table as in the example below:
 
 Example:
 <pre>
-schedule time = 15 minutes command run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
+schedule time = 15 minutes task run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
 </pre>
 
 This command will be executed every 15 seconds. The output would be added to a table called 'my_table' on the query node.
@@ -98,14 +98,46 @@ get scheduler [id]
 ***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
 
 ## Managing Tasks
-Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. These operations are done using the ***task*** command.
 
-### Pausing a task
-The ***task pause*** command pauses a task from being executed. The commandremains on the scheduler but will not be executed until ***task resume** uis called.
+Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. These operations are done using the ***task*** command.  
+Note, that the ***task*** command can include the scheduler ID, otherwise scheduler #1 is referenced.
 
+### Pausing and resuming a task
+The ***task stop*** pauses a task from being executed. The command remains on the scheduler but will not be executed until ***task resume** uis called.
+Usage:
+<pre>
+task stop where scheduler = [scheduler id] and name = [task name]
+or
+task stop where scheduler = [scheduler id] and id = [task id]
+</pre>
 
-### Modifying Tasks
-***start*** can be a string representing date and time or represented as time forward from the current date and time.      
+The ***task resume*** makes the task executable. If the ***start*** date and time are validated, the task will be placed to execution by the scheduler.
+Usage:
+<pre>
+task resume where scheduler = [scheduler id] and name = [task name]
+or
+task resume where scheduler = [scheduler id] and id = [task id]
+</pre>
+
+### Removing a task
+The ***task remove*** command removes the task from the scheduler.
+Usage:
+<pre>
+task remove where scheduler = [scheduler id] and name = [task name]
+or
+task remove where scheduler = [scheduler id] and id = [task id]
+</pre>
+
+### Modifying the start date and time of a task
+The ***task init*** sets a new starting date and time for a task.
+Usage:
+<pre>
+task init where scheduler = [scheduler id] and name = [task name] and start = [date and time]
+or
+task remove where scheduler = [scheduler id] and id = [task id] and start = [date and time]
+</pre>
+
+The date and time can be a time string or represented as time forward from the current date and time.      
 Time Forward Examples:
 + 2h - starting two hours from current time.
 + 1d - starting one day from current day and time. 
@@ -278,6 +310,6 @@ Note, once a message is sent, the repeatable script is suspended for one day suc
 The script is placed in a file called ***monitor_space*** and is added to the scheduler using the ***schedule*** command:
 
 <pre>
-schedule new time = 5 minutes and name = "monitor_space" command process !scripts_dir/monitor_space
+schedule new time = 5 minutes and name = "monitor_space" task process !scripts_dir/monitor_space
 </pre>
 
