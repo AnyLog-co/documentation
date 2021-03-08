@@ -1,47 +1,48 @@
 # Alerts and Monitoring
 
-Nodes in the network can be configured to repeatably execute commands and scripts.  
-These commands and scripts can monitor the state of the node and the data hosted on the node or the state of peer nodes and their data.  
-The output of the calls triggers alerts or aggregated in a database that is queried or monitored as needed.  
-Scripts can include any logic expressed with the AnyLog commands.
+Nodes in the network can be configured to repeatably execute tasks.   
+A task is a single command or multiple commands that are organized in a script file and are executed periodically by the scheduler.    
+These tasks monitor the state of nodes and values of data hosted by the nodes of the network. Tasks can process state and data on the local node or on remote nodes.  
+The output of the tasks triggers alerts or aggregated in a database that is queried or monitored as needed.  
+Tasks can include any logic expressed with the AnyLog commands.
 
-The mechanism of issuing repeatable commands is based on a Scheduler.  
-Nodes can be configured with one or more schedulers. The schedulers are identified by an ID such that scheduler #0 is a system scheduler and 
+The mechanism of issuing repeatable tasks is based on a Scheduler.  
+Nodes can be configured with one or more schedulers. The schedulers are identified by an ID. Scheduler #0 is a system scheduler and 
 schedulers #1 and higher are for users scheduled tasks. 
-Each Scheduler contains the commands to execute and the time interval associated with each command.  
-
-The 2 common ways to represent alerts and monitoring are the following:
-* ***Scheduled task*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
-* ***Schedule a repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
+Each Scheduler contains the tasks to execute and the time interval associated with each task.  
 
 ## Invoking a scheduler
+
 The scheduler is initiated using the following command:
 <pre>
 run scheduler [id]
 </pre>
 ***id*** - Optional value, representing the scheduler ID. The defailt value is 1, representing a user scheduler.
 
-## View scheduled commands
-The ***get scheduler*** command retrieves the scheduled commands for each scheduler as follows:
-<pre>
-get scheduler [id]
-</pre>
-***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
-
 ## Terminating a scheduler
+
 Users can terminate a specific scheduler or all scheduler using the following commands:
 <pre>
 exit scheduler [id]
 </pre>
 ***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
+
+
+Additional examples are in the [Appendix](Appendix:-Demo) below.
+
 ## Types of alerts and monitoring
 
-Ther repeatable commands can consider the status of a node or values of data in a database and trigger the following:
+Repeatable tasks can consider the status of a node or values of data in a database and trigger the following:
+
 * An update of a database table - the table can be a log table, or a summary/rollup table that represents accumulative state of the data.
 * A message to a user - messages can be in the form of an emails on SMS messages. The messaging commands are detailed [below](#sending-messages).
 
-### Adding tasks to the scheduler
+The way tasks are used to monitor are the following:
+* ***Scheduled script*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
+* ***Scheduled repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
+
+## Adding tasks to the scheduler
 
 A task is represented by a command or a script with scheduling instructions.  
 
@@ -50,7 +51,7 @@ Usage:
 schedule [options] command [command/script to execute]
 </pre>
 The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
-If the scheduler is active, the command will be repeatably executed according to the time specified in the options.  
+If the scheduler is active, the command will be repeatably executed according to the time specified in the options.    
 Options include the following:
   
 | Option        | Explanation   |
@@ -58,14 +59,8 @@ Options include the following:
 | time  | The time intervals for the execution of the task.  |
 | name  | A name that is associated with the task. |
 
-   
-Examples:
-<pre>
-schedule time = 10 seconds command system date
-schedule time = 1 minute and name = "SQL command" command run client () "sql anylog_test text SELECT max(timestamp) ping_sensor"
-</pre>
 
-## Examples
+### Examples
 
 The following commands are executed every 5 minutes. 
 The first command determines the free space and places it in a variable called disk_space.  
@@ -87,6 +82,20 @@ schedule time = 15 minutes command run client () "sql anylog_test text table: my
 </pre>
 
 This command will be executed every 15 seconds. The output would be added to a table called 'my_table' on the query node.
+
+## View scheduled commands
+The ***get scheduler*** command retrieves the scheduled commands for each scheduler as follows:
+<pre>
+get scheduler [id]
+</pre>
+***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
+
+## Managing tasks
+Each task in the scheduler can be paused, removed, or associated with a start time. These operations are done using the ***task*** command.
+
+### Pausing a task
+The following command pauses a task from being executed. The commandremains on the scheduler but will not be executed until ***task resume** uis called.
+
 
 ## Queries using REST client
 
@@ -204,7 +213,8 @@ The major USA carriers and gateways are the following:
 A detailed list of mobile carriers and gateways is available [here](https://kb.sandisk.com/app/answers/detail/a_id/17056/~/list-of-mobile-carrier-gateway-addresses).
 
 
-# Appendix - Demo: Configuring a cluster of nodes to monitor and alert when nodes status or data values change
+# Appendix: Demo
+# Configuring a cluster of nodes to monitor and alert when nodes status or data values change
 
 This appendix demonstrates a setup of multiple nodes that are configured to monitor and alert when nodes state and data values change above or below configured thresholds.  
 Using the setup below, the following processes are enabled:
@@ -238,4 +248,10 @@ then stop alert for one day
 </pre>
 
 Note, once a message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
+
+The script is placed in a file called ***monitor_space*** and is added to the scheduler using the ***schedule*** command:
+
+<pre>
+schedule new time = 5 minutes and name = "monitor_space" command process !scripts_dir/monitor_space
+</pre>
 
