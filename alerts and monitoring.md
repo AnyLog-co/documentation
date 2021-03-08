@@ -99,7 +99,9 @@ get scheduler [id]
 
 ## Managing Tasks
 
-Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. These operations are done using the ***task*** command.  
+Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. 
+A task can be called to be immediately executed regardless of the scheduler setting. 
+These operations are done using the ***task*** command.  
 Note, that the ***task*** command can include the scheduler ID, otherwise scheduler #1 is referenced.
 
 ### Pausing and resuming a task
@@ -153,6 +155,14 @@ The following chart includes the time forward options:
 | m  | minute  |
 | s  | second  |
 
+### Immediate execution of a task
+
+A task can be callued to immediate exection using the following command:
+<pre>
+task run where scheduler = [scheduler id] and name = [task name]
+or
+task run where scheduler = [scheduler id] and id = [task id]
+</pre>
 
 
 ## Queries using REST client
