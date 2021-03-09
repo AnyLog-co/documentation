@@ -270,7 +270,7 @@ Note, in the example above, using the command [task init](#modifying-the-start-d
 The script is placed in a file called ***monitor_space*** and is added to the scheduler using the [schedule](#Adding-tasks-to-the-scheduler) command:
 
 <pre>
-schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
+schedule time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
 </pre>
 
 ## Example - Repeatable query
