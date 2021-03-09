@@ -275,8 +275,8 @@ schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_d
 
 ## Example - Repeatable query
 
-The following is a repeatable query, configured on a query node. The repatable query is issued every 5 minutes to query all the nodes tha host data assigned to the cos_data table.  
-
+The following is a repeatable query, configured on a query node. The repeatable query is issued every 5 minutes to query all the nodes tha host data assigned to the cos_data table.    
+The repeatable query does not specify time tanges, these are automatically being set as needed replacing the key strings - ***TIME(PREVIOUS)*** and ***TIME(CURRENT)***.
 Example:
 <pre>
 schedule time = 5 minutes and name = "Summary cos_data Table" task run client () sql dmci table = my_table and drop = false "SELECT max(timestamp), min(value), max(value), avg(value) from cos_data where timestamp >= TIME(PREVIOUS) and timestamp < TIME(CURRENT)"
