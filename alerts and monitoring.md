@@ -259,10 +259,10 @@ The following is the script to monitor the disk space:
 
 <pre>
 disk_free = get disk free !monitored_drive
-if !disk_free < 1000000000 
-then email to my_name@my_company.com where subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
-then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
-then task init where name = "Monitor Space" and start +1d
+if !disk_free < 1000000000 then
+do email to my_name@my_company.com where subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
+do sms to 650555555  where gateway = tmomail.net and subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
+do task init where name = "Monitor Space" and start +1d
 </pre>
 
 Note, in the example above, using the command [task init](#modifying-the-start-date-and-time-of-a-task), when the message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
@@ -270,7 +270,7 @@ Note, in the example above, using the command [task init](#modifying-the-start-d
 The script is placed in a file called ***monitor_space*** and is added to the scheduler using the [schedule](#Adding-tasks-to-the-scheduler) command:
 
 <pre>
-schedule time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
+schedule time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space.al
 </pre>
 
 ## Example - Repeatable query
@@ -280,7 +280,7 @@ The repeatable query is issued every 5 minutes to query all the nodes that host 
 The repeatable query does not specify time ranges, these are set dynamically, as needed, replacing the query key strings - ***TIME(PREVIOUS)*** and ***TIME(CURRENT)*** of the SQL command.
 
 <pre>
-schedule time = 5 minutes and name = "Summary cos_data Table" task run client () sql dmci table = my_table and drop = false "SELECT max(timestamp), min(value), max(value), avg(value) from cos_data where timestamp >= TIME(PREVIOUS) and timestamp < TIME(CURRENT)"
+schedule time = 5 minutes and name = "Summary cos_data Table" task run client () sql dmci table = summary_sensor and drop = false "SELECT max(timestamp), min(value), max(value), avg(value) from cos_data where timestamp >= TIME(PREVIOUS) and timestamp < TIME(CURRENT)"
 </pre>
 
 The summary table is configured as a data source to Grafana to monitor and alert as follows:
