@@ -27,8 +27,6 @@ exit scheduler [id]
 </pre>
 ***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
-
-
 Additional examples are in the [Appendix](Appendix:-Demo) below.
 
 ## Types of alerts and monitoring
@@ -74,8 +72,8 @@ The first command determines the free space and places it in a variable called d
 The second commands sends an email if disk space is under a threshold.
 
 <pre>
-schedule time = 5 minutes task disk_d_free = get disk free d:\
-schedule time = 5 minutes task if !disk_d_free < 1000000000 then email to my_name@my_company.com and message = "Disk Drive D is under a threshold"
+schedule time = 5 minutes and name = "Get Disk Space" task disk_d_free = get disk free d:\
+schedule time = 5 minutes and name = "Alert Disk Space" task if !disk_d_free < 1000000000 then email to my_name@my_company.com and message = "Disk Drive D is under a threshold"
 </pre>
 
 ## Repeatable Queries
@@ -85,7 +83,7 @@ The result set of the query can update a summary table as in the example below:
 
 Example:
 <pre>
-schedule time = 15 minutes task run client () "sql anylog_test text table: my_table drop: false SELECT max(timestamp), avg(value) from ping_sensor where period (  minute, 1, now(), timestamp, and device_name='APC SMART X 3000')"
+schedule time = 5 minutes and name = "Summary cos_data Table" task run client () sql dmci table = my_table and drop = false "SELECT max(timestamp), min(value), max(value), avg(value) from cos_data where timestamp >= TIME(PREVIOUS) and timestamp < TIME(CURRENT)"
 </pre>
 
 This command will be executed every 15 seconds. The output would be added to a table called 'my_table' on the query node.
@@ -152,7 +150,7 @@ The following chart includes the time forward options:
 | w  | week  |
 | d  | day  |
 | h  | hour  |
-| m  | minute  |
+| t  | minute  |
 | s  | second  |
 
 ### Immediate execution of a task
@@ -165,66 +163,7 @@ task run where scheduler = [scheduler id] and id = [task id]
 </pre>
 
 
-## Queries using REST client
-
-#### Basic header info:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   sql
-dbms                   [the logical database name]
-details                [a sql query]
-</pre>
-
-#### Servers option:
-The ***servers*** option allows to direct a query to a particular server (or servers).
-If servers are not specified, the network resolved the destination servers from the metadata information and the participating servers are all the servers that maintain the relevant data.  
-If one or more servers are specified, only the specified servers will be included in the query process.
-
-Example:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   sql
-dbms                   my_sensors_database
-details                select * from g30 limit 10
-servers                10.0.0.13:2048, 10.0.0.28:2050     
-</pre>
-
-#### Instructions:
-***Instructions*** detail execution and output destinations of queries.
-Instructions can consider tables that are with different names (but share the same structure) as a single dataset.  
-In addition, instructions can redirect the query output to a table on the query node.
-
-##### Include multiple tables of different databases in the same query:
-This option allows to treat tables that share the same structure but with different names as a single collection of data.
- 
-Example:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   sql
-dbms                   my_sensors_database
-details                SELECT mp_id, timestamp, type, region, substation, bank_customer, aphase, bphase, cphase from readings WHERE type='A' AND mp_id=16976001 OR mp_id=54544001 OR mp_id=37318000 AND timestamp >= '2019-12-01 00:00:00' AND timestamp <= '2019-12-07 00:00:00' 
-instructions           include: south_pi.readings, central_pi.readings
-</pre>
-
-##### Output the data to a static table on the Query Node:
-With this option, the output data is redirected to a table on the Query Node. The database name is ***system_query*** and the table name is specified in the header's value.
-When the query is executed the query results overwrite the previous query results unless drop is set to false.
-
-Example:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   sql
-dbms                   my_sensors_database
-details                SELECT mp_id, timestamp, type, region, substation, bank_customer, aphase, bphase, cphase from readings WHERE type='A' AND mp_id=16976001 OR mp_id=54544001 OR mp_id=37318000 AND timestamp >= '2019-12-01 00:00:00' AND timestamp <= '2019-12-07 00:00:00' 
-instructions           include: south_pi.readings, central_pi.readings
-instructions           table: static_output drop: false 
-</pre>
-
- ## Sending messages
+## Sending messages
 Users can invoke emails and sms messages when thresholds or alerting conditions are met.  
 To facilitate messages, declare the ***SMTP client*** process. Details are available at [run smtp client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client).
 
@@ -312,14 +251,14 @@ disk_free = get disk free !monitored_drive
 if !disk_free < 1000000000 
 then email to my_name@my_company.com where subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
 then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk Space Alert" and message = "Disk Drive is under a threshold"
-then stop alert for one day
+then task init where name = "Monitor Space" and start +1d
 </pre>
 
-Note, once a message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
+Note, in the example above, using the command [task init](#Modifying-the-start-date-and-time-of-a-ask) when the message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
 
 The script is placed in a file called ***monitor_space*** and is added to the scheduler using the ***schedule*** command:
 
 <pre>
-schedule new time = 5 minutes and name = "monitor_space" task process !scripts_dir/monitor_space
+schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
 </pre>
 
