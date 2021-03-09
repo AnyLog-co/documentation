@@ -47,9 +47,10 @@ Usage:
 <pre>
 schedule [options] task [command/script to execute]
 </pre>
-The command ***schedule**** declares a scheduled task that is placed in the scheduler.  
+The command ***schedule*** declares a scheduled task that is placed in the scheduler.  
 If the scheduler is active, the command will be repeatably executed according to the time specified in the options.    
-Options include the following:
+
+The command options are the following:
   
 | Option        | Explanation   |
 | ------------- | ------------- | 
@@ -65,8 +66,8 @@ The start time of a task can be modified using the command [task init](#modifyin
 
 ### Examples
 
-The following commands are executed every 5 minutes. 
-The first command determines the free space of disk drive D and places it in a variable called disk_space.  
+The following tasks are executed every 5 minutes.  
+The first command determines the free space of disk drive D and places it in a variable called ***disk_space***.  
 The second command sends an email if disk space is under a threshold.
 
 <pre>
@@ -91,17 +92,17 @@ The ***get scheduler*** command retrieves the scheduled commands for each schedu
 <pre>
 get scheduler [id]
 </pre>
-***id*** - Optional value, representing the scheduler ID. If not specified, the information from all the scheduled commands from all schedulers is returned.
+***id*** - Optional value, representing the scheduler ID. If not specified, the information from all schedulers is returned.
 
 ## Managing Tasks
 
 Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. 
 A task can be called to be immediately executed regardless of the scheduler setting. 
 These operations are done using the ***task*** command.  
-Note, that the ***task*** command can include the scheduler ID, otherwise scheduler #1 is referenced.
+Note, that the ***task*** command can specify a scheduler ID, otherwise scheduler #1 is referenced.
 
 ### Pausing and resuming a task
-The ***task stop*** pauses a task from being executed. The command remains on the scheduler but will not be executed until ***task resume** uis called.
+The ***task stop*** pauses a task from being executed. The command remains on the scheduler but will not be executed until ***task resume*** uis called.   
 Usage:
 <pre>
 task stop where scheduler = [scheduler id] and name = [task name]
@@ -109,7 +110,7 @@ or
 task stop where scheduler = [scheduler id] and id = [task id]
 </pre>
 
-The ***task resume*** makes the task executable. If the ***start*** date and time are validated, the task will be placed to execution by the scheduler.
+The ***task resume*** makes the task active on the scheduler.  
 Usage:
 <pre>
 task resume where scheduler = [scheduler id] and name = [task name]
@@ -137,8 +138,11 @@ task init where scheduler = [scheduler id] and id = [task id] and start = [date 
 
 The date and time can be a time string or represented as time forward from the current date and time.      
 Time Forward Examples:
-+ 2h - starting two hours from current time.
-+ 1d - starting one day from current day and time. 
+<pre>
++ 2h - starting two hours from current time.  
++ 1d - starting one day from current day and time.    
+</pre>
+
 The following chart includes the time forward options:
     
 | Option        | Time Unit   |
@@ -150,6 +154,13 @@ The following chart includes the time forward options:
 | h  | hour  |
 | t  | minute  |
 | s  | second  |
+
+Example:
+
+<pre>
+task init where name = "Get Disk Space" and start = +2h
+</pre>
+Using the above command, disk space monitoring will be paused for 2 hours.
 
 ### Immediate execution of a task
 
@@ -227,8 +238,8 @@ Using the setup below, the following processes are enabled:
 1) On each monitored machine, if disk space is less than a threshold, an administrator will be notified by an email and a SMS message.
 2) On each monitored machine, if CPU utilization is higher than a threshold, an administrator will be notified by an email and a SMS message.
 3) A repeatable query on each node that hosts data will update a summary table with aggregated values from the source tables.
-4) The summary table will be monitored (using Grafana) to alert when values exceed or below thresholds.
-5) The summary table will be monitored (using Grafana) to alert when nodes are not reporting or a sensor did not deliver data.
+4) The summary table will be monitored (using Grafana) to alert when nodes are not reporting or a sensor did not deliver data.
+5) The summary table will be monitored (using Grafana) to alert when values exceed or below thresholds.
 
 ## Nodes setup
 * The monitoring and alerts instructions are placed in scripts that are organized in a designated directory.
@@ -238,7 +249,9 @@ scripts_dir = D:\Node\AnyLog-Network\scripts
 </pre>
 The physical location may be different for every node, depending on the node hardware and the OS used.
 * nodes will assign the key ***monitored_drive*** to the hard drive containing the sensor data. The example below declares the monitored drive.
+<pre>
 monitored_drive = D:\
+</pre>
 
 ## Example - Monitoring disk space
 
@@ -252,7 +265,7 @@ then sms to 6503466174  where gateway = tmomail.net and subject = "AnyLog Disk S
 then task init where name = "Monitor Space" and start +1d
 </pre>
 
-Note, in the example above, using the command [task init](#modifying-the-start-date-and-time-of-a-task) when the message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
+Note, in the example above, using the command [task init](#modifying-the-start-date-and-time-of-a-task), when the message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
 
 The script is placed in a file called ***monitor_space*** and is added to the scheduler using the ***schedule*** command:
 
@@ -263,6 +276,11 @@ schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_d
 ## Example - Repeatable query
 
 The following is a repeatable query, configured on a query node. The repatable query is issued every 5 minutes to query all the nodes tha host data assigned to the cos_data table.  
+
+Example:
+<pre>
+schedule time = 5 minutes and name = "Summary cos_data Table" task run client () sql dmci table = my_table and drop = false "SELECT max(timestamp), min(value), max(value), avg(value) from cos_data where timestamp >= TIME(PREVIOUS) and timestamp < TIME(CURRENT)"
+</pre>
 
 The summary table is configured using Grafana to monitor and alert as follows:
 1) If operator nodes are not reporting within the last 10 minutes, an alert is sent to the system administrator.
