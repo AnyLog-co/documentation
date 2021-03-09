@@ -129,7 +129,7 @@ task remove where scheduler = [scheduler id] and id = [task id]
 </pre>
 
 ### Modifying the start date and time of a task
-The ***task init*** sets a new starting date and time for a task.
+The ***task init*** sets a new starting date and time for a task.    
 Usage:
 <pre>
 task init where scheduler = [scheduler id] and name = [task name] and start = [date and time]
@@ -203,7 +203,7 @@ Example with T-mobile as a carrier:
 <pre>
 sms to 6508147334 where gateway = tmomail.net
 </pre>
-The major USA carriers and gateways are the following:
+The major USA carriers and their gateways are the following:
 
 | Carrier        | Gateway  | 
 | ------------- | ------------|  
@@ -229,8 +229,8 @@ Using the setup below, the following processes are enabled:
 1) On each monitored machine, if disk space is less than a threshold, an administrator will be notified by an email and a SMS message.
 2) On each monitored machine, if CPU utilization is higher than a threshold, an administrator will be notified by an email and a SMS message.
 3) A repeatable query on each node that hosts data will update a summary table with aggregated values from the source tables.
-4) The shared table will be monitored (using Grafana) to alert when values exceed or below thresholds.
-5) The shared table will be monitored (using Grafana) to alert when nodes are not reporting or a sensor did not deliver data.
+4) The summary table will be monitored (using Grafana) to alert when values exceed or below thresholds.
+5) The summary table will be monitored (using Grafana) to alert when nodes are not reporting or a sensor did not deliver data.
 
 ## Nodes setup
 * The monitoring and alerts instructions are placed in scripts that are organized in a designated directory.
@@ -242,7 +242,7 @@ The physical location may be different for every node, depending on the node har
 * nodes will assign the key ***monitored_drive*** to the hard drive containing the sensor data. The example below declares the monitored drive.
 monitored_drive = D:\
 
-## Example 1 - monitoring disk space
+## Example - Monitoring disk space
 
 The following is the script to monitor the disk space:
 
@@ -261,4 +261,13 @@ The script is placed in a file called ***monitor_space*** and is added to the sc
 <pre>
 schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
 </pre>
+
+## Example - Repeatable query
+
+The following is a repeatable query, configured on a query node. The repatable query is issued every 5 minutes to query all the nodes tha host data assigned to the cos_data table.  
+
+The summary table is configured using Grafana to monitor and alert as follows:
+1) If operator nodes are not reporting within the last 10 minutes, an alert is sent to the system administrator.
+2) If sensors did not generate data within the last 30 minutes, the system administrator is notified.
+3) If data values are above and beyond thresholds, the system administrator is notified.
 
