@@ -267,7 +267,7 @@ then task init where name = "Monitor Space" and start +1d
 
 Note, in the example above, using the command [task init](#modifying-the-start-date-and-time-of-a-task), when the message is sent, the repeatable script is suspended for one day such that the Email box and the messaging will not be exhausted with the same message every 5 minutes.
 
-The script is placed in a file called ***monitor_space*** and is added to the scheduler using the ***schedule*** command:
+The script is placed in a file called ***monitor_space*** and is added to the scheduler using the [schedule](#Adding-tasks-to-the-scheduler) command:
 
 <pre>
 schedule new time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space
