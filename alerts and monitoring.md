@@ -27,18 +27,17 @@ exit scheduler [id]
 </pre>
 ***id*** - The ID of the scheduler to terminate. If not specified, all schedulers are terminated.
 
-Additional examples are in the [Appendix](Appendix:-Demo) below.
-
 ## Types of alerts and monitoring
 
-Repeatable tasks can consider the status of a node or values of data in a database and trigger the following:
+Repeatable tasks serve as a mechanism to repeatedly monitor the state of nodes or values of data in a database and trigger the following:
 
 * An update of a database table - the table can be a log table, or a summary/rollup table that represents accumulative state of the data.
-* A message to a user - messages can be in the form of an emails on SMS messages. The messaging commands are detailed [below](#sending-messages).
+* A message to a user - messages can be in the form of an emails or SMS messages. The messaging commands are detailed [below](#sending-messages).
 
-The way tasks are used to monitor are the following:
-* ***Scheduled script*** - The task is represented by a script whereas the code in the script is executed periodically to monitor state or data on the local node or on members of the network. The script can update a database that is monitored as needed.
-* ***Scheduled repeatable query*** - A repeatable query is a query that is executed periodacally and updates a summary (rollup) table that is monitored as needed.
+A task is expressed in one of 3 ways:
+* As a ***scheduled command*** - The task is represented by a command that is continuously executed.
+* As a ***scheduled script*** - The task is represented by a script whereas the code in the script monitors state or data on the local node or on members of the network. 
+* As a ***scheduled repeatable query*** - A repeatable query is a query that is executed periodically and updates a summary (rollup) table that is monitored as needed.
 
 ## Adding tasks to the scheduler
 
