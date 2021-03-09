@@ -55,20 +55,19 @@ Options include the following:
 | ------------- | ------------- | 
 | time  | The time intervals for the execution of the task.  |
 | start | Scheduled start time for first execution of the task. The default value is the current day and time. | 
-| name  | A name that is associated with the task. The name in a scheduler needs to be unique |
+| name  | A name that is associated with the task. The name in a scheduler needs to be unique (otherwise an error message is returned). |
 
-Note:
-* Multiple tasks with the same name are rejected.
   
 ### Setting the start time
 Start time allows to pause the execution of a tasks. For example, a task that alerts by sending an email or a SMS message may be paused for a few hours to avoid continues messaging.      
-When a ***schedule*** command is first initiated, users can express a starting date and time. This value can be modified using the command [task](#Modifying-Tasks).
+When a ***schedule*** command is first initiated, users can express a starting date and time. 
+The start time of a task can be modified using the command [task init](#modifying-the-start-date-and-time-of-a-task).
 
 ### Examples
 
 The following commands are executed every 5 minutes. 
-The first command determines the free space and places it in a variable called disk_space.  
-The second commands sends an email if disk space is under a threshold.
+The first command determines the free space of disk drive D and places it in a variable called disk_space.  
+The second command sends an email if disk space is under a threshold.
 
 <pre>
 schedule time = 5 minutes and name = "Get Disk Space" task disk_d_free = get disk free d:\
@@ -133,7 +132,7 @@ Usage:
 <pre>
 task init where scheduler = [scheduler id] and name = [task name] and start = [date and time]
 or
-task remove where scheduler = [scheduler id] and id = [task id] and start = [date and time]
+task init where scheduler = [scheduler id] and id = [task id] and start = [date and time]
 </pre>
 
 The date and time can be a time string or represented as time forward from the current date and time.      
