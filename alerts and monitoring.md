@@ -194,6 +194,12 @@ Example:
 email to my_name@my_company.com
 </pre>
 
+Multiple message texts on the command line, like the example below, will be represented as multiple lines in the email message:
+<pre>
+email to my_name@my_company.com  where subject = "anylog alert" and message = "Value of Heater sensor is above threshold" and message = "Reporting node: 24.23.250.144 (Operator SF)"
+</pre>
+
+
 ### Sending SMS messages
 Usage:
 <pre>
