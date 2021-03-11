@@ -13,12 +13,6 @@ sql [dbms name] [query options] [select statement]
 * ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
 with the tables' data receive and process the query. Users can detail specific nodes of interest by providing their IP and Ports.  
   
-WIth the first example below, the query process considers all the nodes with relevant data. With the second example, only the specified nodes are participating n the query process:
-<pre> 
-run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
-run client (24.23.250.144:7848, 16.87.143.85:7848) sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
-</pre> 
-
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed as key = value pairs.
 With multiple option, the keyword ***and*** seperates between each key value pair.
@@ -44,9 +38,10 @@ The format for a network query is the following:
 run client () sql [dbms name] [query options] [select statement]
 </pre> 
 
-Example:
+WIth the first example below, the query process considers all the nodes with relevant data. With the second example, only the specified nodes are participating n the query process:
 <pre> 
-run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor"
+run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
+run client (24.23.250.144:7848, 16.87.143.85:7848) sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
 </pre> 
 
 
