@@ -1,24 +1,14 @@
 # Queries 
 
-Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.  
-Executing a query for the data on the local node is with the following format:
+Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
+The command ***sql*** directs the node to process a query. The command format is detailed below: 
 <pre> 
 sql [dbms name] [query options] [select statement]
 </pre>  
-
-Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.   
-The ***run client*** directive deliver the query to the target nodes specified in the parenthesis. If target nodes are not specified, 
-the network protocol will determine the target nodes from the metadata layer and the query will be processed by evaluating the data in 
-all the relavant nodes.
-The generic format for a query that considers the data on all the relevant nodes is the following:
-<pre> 
-run client () sql [dbms name] [query options] [select statement]
-</pre> 
-
-* ***run client ()*** directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
-with the tables' data receive and process the query. The parenthesis can detail specific nodes of interest.  
 * ***[dbms name]*** is the logical DBMS containing the data.
 * ***[select statement]*** is a query using a supported format.
+* ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
+with the tables' data receive and process the query. The parenthesis can detail specific nodes of interest.  
 
 ## Query options
 The query options are instructions on the format and target location of the result set. The query options are expressed and key = value pairs.
@@ -33,6 +23,17 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | drop | True/False | drop local output table when new query starts | True |
 | dest | stdout / rest / dbms / file | destination of result set | stdout |
 | file | file name | file name for result set if 'dest' is set to file |  |
+
+### Network processing
+Without the ***run client*** directive, the query will be executed on the local node.  
+Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.     
+The ***run client*** directive deliver the query to the target nodes specified in the parenthesis. If target nodes are not specified, 
+the network protocol will determine the target nodes from the metadata layer and the query will be processed by evaluating the data in 
+all the relavant nodes.
+The generic format for a query that considers the data on all the relevant nodes is the following:
+<pre> 
+run client () sql [dbms name] [query options] [select statement]
+</pre> 
 
 Example:
 <pre> 
