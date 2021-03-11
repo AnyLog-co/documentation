@@ -12,27 +12,26 @@ sql [dbms name] [query options] [select statement]
 with the tables' data receive and process the query. The parenthesis can detail specific nodes of interest.  
 
 ## Query options
-The query options are instructions on the format and target location of the result set. The query options are expressed and key = value pairs.
+The query options are instructions on the format and target location for the result set. The query options are expressed as key = value pairs.
 With multiple option, the keyword ***and*** seperates between each key value pair.
 
 | key  | Values Options  | Details     | Default Value |
 | ---- | --------------- | ------------| --------------|
 | format | json / table | The format of the result set | JSON |
 | timezone | utc / local | timezone used for time values in the result set | local |
-| output | none | if none, the output is not delivered to stdout  | ignored |
 | include | dbms.table | allows to treat remote tables with a different name as the table being queried | ignored |
 | drop | True/False | drop local output table when new query starts | True |
 | dest | stdout / rest / dbms / file | destination of result set | stdout |
-| file | file name | file name for result set if 'dest' is set to file |  |
+| file | file name | file name for the output data |  |
 | table | table name | table name for the output data | random table names are assigned to each executing query |
 
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
 Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.     
-The ***run client*** directive deliver the query to the target nodes specified in the parenthesis. If target nodes are not specified, 
+The ***run client*** directive delivers the query to the target nodes specified in the parenthesis. If target nodes are not specified, 
 the network protocol will determine the target nodes from the metadata layer and the query will be processed by evaluating the data in 
-all the relavant nodes.
-The generic format for a query that considers the data on all the relevant nodes is the following:
+all the relavant nodes.  
+The format for a network query is the following:
 <pre> 
 run client () sql [dbms name] [query options] [select statement]
 </pre> 
@@ -165,7 +164,7 @@ The **increments** functions considers data in increments of time (i.e. every 5 
 The **time-interval** and the **units** (of time-interval) determine the time increments to consider (i.e. every 2 days) 
 and the time-range is determined in the where clause.
 
-Examples:
+#### Examples:
 
 1) Consider the last minute of reading from ping_sensor  
 ```
