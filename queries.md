@@ -82,7 +82,9 @@ start of month
 start of day
 </pre>
 
-The keyword ***now*** is converted to the current day-time string.  
+The keyword ***now*** is converted to the current day-time string.   
+The keyword ***date*** is converted to the current date string.  
+
 
 The following values and keywords pairs (values including + or - signs) can be used to modify time.  
 The plural 's' character at the end of the modifier names is optional. 
@@ -129,7 +131,8 @@ datetime [utc] [date-time function]
 #### Examples:
 <pre>
 datetime now() + 3 days
-datetime date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+datetime utc date() + 2 days
+datetime timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
 </pre>
 
   
