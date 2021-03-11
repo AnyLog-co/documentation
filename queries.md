@@ -6,7 +6,7 @@ The command ***sql*** directs the node to process a query. The command format is
 sql [dbms name] [query options] [select statement]
 </pre>  
 * ***[dbms name]*** is the logical DBMS containing the data.
-* ***query options*** detail formatting instructions and output directions.
+* ***[query options]*** include formatting instructions and output directions.
 * ***[select statement]*** is a query using a supported format.
 * ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
 with the tables' data receive and process the query. The parenthesis can detail specific nodes of interest.  
