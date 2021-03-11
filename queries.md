@@ -87,8 +87,8 @@ start of day
 
 Examples:
 <pre>
-timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')',
-date('now','start of month','-2 month','+ 3 days', '-5 hours', '+1 minute')',
+timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+date('now','start of month','-2 month','+ 3 days', '-5 hours', '+1 minute')
 </pre>
 
 The function ***now()*** is converted to the current day-time string.   
