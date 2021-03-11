@@ -179,7 +179,8 @@ Options:
 | get platform info | Info on the type and version of the OS, node name and type of processor. |
 | get memory info | Info on the memory of the current node. The function depends on psutil installed. |
 | get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
-| get ip info | Get the list of IP addresses available on the node. |
+| get ip list | Get the list of IP addresses available on the node. |
+| get cpu temperature | Get the temperature of the CPU. |
 | get database size [database name] | The size of the named database in bytes. |
 | get node id | Returns a unique identifier of the node. |
 | get hardware id | Returns a unique identfier of the hardware. |
