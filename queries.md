@@ -1,77 +1,46 @@
-# Queries and info requests to the AnyLog Network
+# Queries 
 
-Queries (and info requests) can be issued to the AnyLog Network from the AnyLog CLI and from any REST client.  
-Any node member of the network can be configured to serve as a REST server to satisfy client requests. 
+Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.  
+Executing a query for the data on the local node is with the following format:
+<pre> 
+sql [dbms name] [query options] [select statement]
+</pre>  
 
-## The server side:
+Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.   
+The ***run client*** directive deliver the query to the target nodes specified in the parenthesis. If target nodes are not specified, 
+the network protocol will determine the target nodes from the metadata layer and the query will be processed by evaluating the data in 
+all the relavant nodes.
+The generic format for a query that considers the data on all the relevant nodes is the following:
+<pre> 
+run client () sql [dbms name] [query options] [select statement]
+</pre> 
 
-Configuring a node is by issuing an AnyLog command: 
-```
-	run rest server [host] [port] [timeout]
-```
-Whereas host and port are the connection information and the timeout value represent the max time that a request will wait for a query reply (the default is 20 seconds).
+* ***run client ()*** directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
+with the tables' data receive and process the query. The parenthesis can detail specific nodes of interest.  
+* ***[dbms name]*** is the logical DBMS containing the data.
+* ***[select statement]*** is a query using a supported format.
 
-## The client side:
+## Query options
+The query options are instructions on the format and target location of the result set. The query options are expressed and key = value pairs.
+With multiple option, the keyword ***and*** seperates between each key value pair.
 
-Using a REST client, connect to a network node configured to provide REST services. 
-There are 2 types of commands that can be issued: Info commands and SQL commands. 
-Info commands provide info on the status and metadata and SQL commands are queries issued to the network.
+| key  | Values Options  | Details     | Default Value |
+| ---- | --------------- | ------------| --------------|
+| format | json / table | The format of the result set | JSON |
+| timezone | utc / local | timezone used for time values in the result set | local |
+| output | none | if none, the output is not delivered to stdout  | ignored |
+| include | dbms.table | allows to treat remote tables with a different name as the table being queried | ignored |
+| drop | True/False | drop local output table when new query starts | True |
+| dest | stdout / rest / dbms / file | destination of result set | stdout |
+| file | file name | file name for result set if 'dest' is set to file |  |
 
-Requests are done using the GET command with keys and values in the headers as detailed below.
+Example:
+<pre> 
+run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor"
+</pre> 
 
-#### Status Requests:
-To retrieve the status of the node:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   info
-details                get status
-</pre>
-
-To retrieve the last executed query:
-<pre>
-Header Key             Header Value            
---------------         ------------------
-type                   info
-details                job status
-</pre>
-
-To retrieve the last executed queries:
-<pre>
-Header Key             Header Value            
---------------         ------------------
-type                   info
-details                job status all
-</pre>
-
-#### Metadata Requests:
-To retrieve the list of tables in a database:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   info
-dbms                   [the logical database name]
-details                get tables for dbms [the logical database name]
-</pre>
-
-To retrieve columns info of a particular table:
-<pre>
-Header Key             Header Value            
---------------         ------------------
-type                   info
-dbms                   [the logical database name]
-details                info table [the logical database name] [the logical table name] columns
-</pre>
 
 #### SQL Queries:
-To issue a SQL query:
-<pre>
-Header Key             Header Value          
---------------         ------------------
-type                   sql
-dbms                   [the logical database name]
-details                [a sql query]
-</pre>
 
 More details are [below](#queries-using-rest-client).
 
@@ -107,7 +76,6 @@ date
 timestamp
 </pre>
 
-
 The following modifiers are supported:
 
 <pre>
@@ -119,7 +87,7 @@ start of day
 The keyword ***now*** is converted to the current day-time string.  
 
 The following values and keywords pairs (values including + or - signs) can be used to modify time.  
-The plural 's' character at the end of the modifier names is optional.  
+The plural 's' character at the end of the modifier names is optional. 
 
 <pre>
 X seconds
@@ -131,9 +99,36 @@ x months
 x years
 </pre>
 
+Time units can be also represented by the first character of the unit name. For example: +3d is equivalent to + 3 days.
+Minutes is assigned with the character ***t*** to differentiate from a month.
+The following example represents 4 minutes before the current time:  
+<pre>
+-4t
+</pre>
+This above example is equivalent to:
+<pre>
+now() -4t
+</pre>
+
+## Datetime command
+Using the commmand ***datetime*** users can translate a date-time function to the date-time string.  
+Usage:
+<pre>
+datetime [utc] [date-time function]
+</pre>
+***[utc]*** is an optional string to convert the function to UTC time
+***[date-time function] is the function used to derive the date-time string.
+
+Examples:
+<pre>
+datetime now() + 3 days
+datetime date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+</pre>
+
 #### Examples
 
 <pre>
+run client () sql lsl_demo "select min(value) from ping_sensor where reading_time >= now() -3d and time < now());"
 run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date(date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts'));"    
 run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = timestamp('2020-05-28 18:56:49.890199','+1 month','-1 day', '-2 hours', '+2 minuts');"
 </pre>
