@@ -40,10 +40,6 @@ run client () sql litsanleandro format = table "select count(*), min(value), max
 </pre> 
 
 
-#### SQL Queries:
-
-More details are [below](#queries-using-rest-client).
-
 ## SQL supported:
 
 ##### On the projection list:
@@ -110,6 +106,15 @@ This above example is equivalent to:
 now() -4t
 </pre>
 
+#### Examples
+
+<pre>
+run client () sql lsl_demo "select min(value) from ping_sensor where reading_time >= now() -3d and time < now());"
+run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date(date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts'));"    
+run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = timestamp('2020-05-28 18:56:49.890199','+1 month','-1 day', '-2 hours', '+2 minuts');"
+</pre>
+
+
 ## Datetime command
 Using the commmand ***datetime*** users can translate a date-time function to the date-time string.  
 Usage:
@@ -119,27 +124,22 @@ datetime [utc] [date-time function]
 ***[utc]*** is an optional string to convert the function to UTC time
 ***[date-time function] is the function used to derive the date-time string.
 
-Examples:
+#### Examples:
 <pre>
 datetime now() + 3 days
 datetime date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
 </pre>
 
-#### Examples
-
-<pre>
-run client () sql lsl_demo "select min(value) from ping_sensor where reading_time >= now() -3d and time < now());"
-run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date(date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts'));"    
-run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = timestamp('2020-05-28 18:56:49.890199','+1 month','-1 day', '-2 hours', '+2 minuts');"
-</pre>
-
   
 ## Optimized time series data queries:
 
-The following proprietry functions can be used:
-```
+The following functions optimize queries over time-series data:
+
+### The Period Function
+Usage:
+<pre>
 period (time-interval, units, date-time, date-column, filter-criteria)
-```
+</pre>
 The **period** function finds the first occurrence of data before or at a specified date (and if a filter-criteria is 
 specified, the occurrence needs to satisfy the filter-criteria) and considers the readings
 in a period of time which is measured by the type of the time interval (Minutes, Hours, Days, Weeks, Months or Years)
@@ -150,10 +150,11 @@ and the number of units of the time interval (i.e. 3 days - whereas **time-inter
 The **time-interval** and the **units** (of time-interval) determine the time range to consider.
 **filter-criteria** is optional. If provided, the data considered needs to satisfy the filter criteria.
 
-
-```
+### The Increment Function
+Usage:
+<pre>
 increments (time-interval, units, date-column)
-```
+</pre>
 The **increments** functions considers data in increments of time (i.e. every 5 minutes) within a time range 
 (i.e. between October 15 2019 and October 16 2019). 
 
