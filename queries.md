@@ -82,11 +82,10 @@ start of month
 start of day
 </pre>
 
-The keyword ***now*** is converted to the current day-time string.   
-The keyword ***date*** is converted to the current date string.  
+The function ***now()*** is converted to the current day-time string.   
+The function ***date()*** is converted to the current date string.  
 
-
-The following values and keywords pairs (values including + or - signs) can be used to modify time.  
+The following values and keywords pairs (prefixed by + or - signs) can be used to modify a date-time function or string.  
 The plural 's' character at the end of the modifier names is optional. 
 
 <pre>
@@ -99,22 +98,20 @@ x months
 x years
 </pre>
 
-Time units can be also represented by the first character of the unit name. For example: +3d is equivalent to + 3 days.
+Time units can be also represented by the first character of the unit name. For example: ***+3d*** is equivalent to ***+ 3 days***.
 Minutes is assigned with the character ***t*** to differentiate from a month.
-The following example represents 4 minutes before the current time:  
+The following examples are equivalent and represents 4 minutes before the current time:  
 <pre>
 -4t
-</pre>
-This above example is equivalent to:
-<pre>
 now() -4t
+now() -4 minutes
 </pre>
 
 #### Examples
 
 <pre>
 run client () sql lsl_demo "select min(value) from ping_sensor where reading_time >= now() -3d and time < now());"
-run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date(date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts'));"    
+run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = date('now','start of month','+1 month','-1 day', '-2 hours', '+2 minuts');"    
 run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time = timestamp('2020-05-28 18:56:49.890199','+1 month','-1 day', '-2 hours', '+2 minuts');"
 </pre>
 
