@@ -45,12 +45,12 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 # List of Commands:
 | Commands        | 
 | ------------- |
-| [alerts](https://https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring |
+| [alerts](https://https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) |
 | [backup](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) | 
 | [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md) | 
 | [drop partition](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command) | 
 | [file](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md) | 
-| [get](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command) | 
+| [get](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#get-command) |
 | [partition](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command) | 
 | [rest](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command) | 
 | [set](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#set-command) | 
@@ -175,12 +175,6 @@ Options:
 | get queries time | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories | The list of the Watch directories on the node. |
 | get inserts | Statistics on SQL Inserts of data to the local databases. |
-| get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
-| get platform info | Info on the type and version of the OS, node name and type of processor. |
-| get memory info | Info on the memory of the current node. The function depends on psutil installed. |
-| get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
-| get ip list | Get the list of IP addresses available on the node. |
-| get cpu temperature | Get the temperature of the CPU. |
 | get database size [database name] | The size of the named database in bytes. |
 | get node id | Returns a unique identifier of the node. |
 | get hardware id | Returns a unique identfier of the hardware. |
@@ -200,8 +194,21 @@ Options:
 | get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
 | get acceess [path and file name or directory name] | Get the access rights to the provided file or directory. |
 
+#### Monitoring node status options:
 
-Security related options:  
+| Option        | Information provided  |
+| ------------- | ------------| 
+| get disk [usage/total/used/free] [path]  | Disk statistics about the provided path. |
+| get platform info | Info on the type and version of the OS, node name and type of processor. |
+| get memory info | Info on the memory of the current node. The function depends on psutil installed. |
+| get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
+| get ip list | The list of IP addresses available on the node. |
+| get cpu temperature | The CPU temperature. |
+| get node info [options] | Different statistics on the node. |
+
+Add tional information is available at [monitoring nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes).
+
+#### Security and encryption related options:  
 
 | Option        | Information provided  |
 | ------------- | ------------| 
