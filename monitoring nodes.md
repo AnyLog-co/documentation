@@ -69,7 +69,10 @@ The format to place statistics in a table is the following:
 get node info [options] into dbms = [dbms name] and table = [table name]
 </pre>
 
-The following example organizes the CPU utilization in a database table. The tables data is partitioned by date such that data of the previous day is deleted.
+### Example
+
+The following example organizes the CPU utilization in a database table.   
+The tables' data is partitioned by date such that data of the previous day is removed.
 
 1) Bacground processes to enable:
 
@@ -95,7 +98,7 @@ Note: Partition command is detailed [here](https://github.com/AnyLog-co/document
 schedule time = 15 seconds and name = "Monitor CPU" task get node info cpu_percent into dbms = monitor and table = cpu_percent
 </pre>
 
-4) Removing older than 1 day data is by placing the ***drop partition*** command in the scheduler:
+4) Removing older than 1 day data (by placing the ***drop partition*** command in the scheduler)
 
 <pre>
 schedule time = 1 day and start = +1d and name = "Drop 1 day CPU data" task drop partition where dbms = monitor and table = cpu_percent
