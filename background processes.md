@@ -8,7 +8,7 @@ The background processes are issued using an initialization script or on the Any
 | --------------------- | ------------| 
 | [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process) | A listener for the AnyLog Peer-to-Peer Messaging  |
 | [run rest server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) | A listener for REST Request from users and applications from nodes that are not members of the network |
-| [run operator](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) | A configurable operator process that ingests data to the local tables |
+| [run operator](#operator-process) | A configurable operator process that ingests data to the local tables |
 | [run publisher](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#publisher-process) | A configurable publisher process that sends data to operators for processing |
 | [run blockchain sync](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
 | [run scheduler](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |

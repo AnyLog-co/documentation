@@ -60,5 +60,50 @@ Options are one of the following keys:
 | net_io_counters  | Network I/O statistics. |
 
 
+## Organizing statistics in a database table
 
+Users can use the scheduler to continuously call for statistics and organize the statistics in a database table.  
+The format to place statistics in a table is the following:
+
+<pre>
+get node info [options] into dbms = [dbms name] and table = [table name]
+</pre>
+
+The following example organizes the CPU utilization in a database table. The tables data is partitioned by date such that data of the previous day is deleted.
+
+1) Bacground processes to enable:
+
+* [Streamer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) such that the data is flushed to disk.
+* [Operator](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process) for the flushed data to be ingested to the table.
+* [Scheduler](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#invoking-a-scheduler) to process scheduled tasks.
+
+
+1) Connect to database called ***monitor*** using SQLite
+<pre>
+connect dbms sqlite !db_user !db_port monitor
+</pre>
+
+2) Partition the data collected by day
+<pre>
+partition dmci ping_sensor using timestamp by 1 day
+</pre>
+
+Note: Partition command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
+
+3) Using the scheduler, collect CPU utilization every 10 seconds
+<pre>
+schedule time = 15 seconds and name = "Monitor CPU" task get node info cpu_percent into dbms = monitor and table = cpu_percent
+</pre>
+
+4) Removing older than 1 day data is by placing the ***drop partition*** command in the scheduler:
+
+<pre>
+schedule time = 1 day and start = +1d and name = "Drop 1 day CPU data" task drop partition where dbms = monitor and table = cpu_percent
+</pre>
+
+Note:
+* Drop partition command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command).
+* As partition name is not specified, only the oldest partition is dropped and the active partition is never dropped.
+
+ 
 
