@@ -95,9 +95,10 @@ Directory Structure   Explabnation
        -->prep        [Directory for system intermediate data]
        -->watch       [Directory monitored by the system, data files placed in the directory are being processed] 
     -->source         [The root directory for source or executable files]
-    -->scripts        [Script files that install and configure the AnyLog instance role]
+    -->scripts        [System scripts to install and configure the AnyLog node]
        -->install     [Installation scripts]
-       -->anylog      [AnyLog scripts, configure the AnyLog instance]
+       -->anylog      [Configuration Scripts]
+    -->local_scripts  [Users scripts]
 </pre>
 
 ## Basic operations
