@@ -59,6 +59,11 @@ Options are one of the following keys:
 | disk_io_counters  | System disk I/O statistics. |
 | net_io_counters  | Network I/O statistics. |
 
+Example:
+<pre>
+get node info disk_io_counters
+</pre>
+
 
 ## Organizing statistics in a database table
 
