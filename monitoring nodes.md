@@ -88,7 +88,7 @@ The tables' data is partitioned by date such that data of the previous day is re
 * [Scheduler](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#invoking-a-scheduler) to process scheduled tasks.
 
 
-1) Connect to database called ***monitor*** using SQLite
+1) Connect to a SQLite database. The logical database name is ***monitor***.
 <pre>
 connect dbms sqlite !db_user !db_port monitor
 </pre>
@@ -100,7 +100,7 @@ partition dmci ping_sensor using timestamp by 1 day
 
 Note: Partition command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
 
-3) Using the scheduler, collect CPU utilization every 10 seconds
+3) Using the scheduler, collect CPU utilization every 15 seconds
 <pre>
 schedule time = 15 seconds and name = "Monitor CPU" task get node info cpu_percent into dbms = monitor and table = cpu_percent
 </pre>
