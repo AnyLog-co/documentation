@@ -294,3 +294,8 @@ The summary table is configured as a data source to Grafana to monitor and alert
 2) If sensors did not generate data within the last 30 minutes, the system administrator is notified.
 3) If data values are above or below thresholds, the system administrator is notified.
 
+## Example - Monitoring CPU usage
+
+The section [Organizing statistics in a database table](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-statistics-in-a-database-table)
+details how to organize operational statistics (like CPU utilization) in a table.
+
