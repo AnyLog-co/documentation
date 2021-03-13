@@ -106,8 +106,7 @@ Commands that broken over multiple lines are enclosed between the signs ***<*** 
 
 ### Example
 
-<pre>
-
+```
  curl --location --request POST '172.18.12.129:2149' \
  --header 'command: blockchain push !operator' \
  --header 'destination: !master_node' \
@@ -120,7 +119,7 @@ Commands that broken over multiple lines are enclosed between the signs ***<*** 
                 “id” : “1be222b10132005d6d141beecb589ead”,
                 “date” : “2021-01-30T00:45:35.079162Z”,
                 “member” : 111669}}>'
-</pre> 
+``` 
 
  
 
