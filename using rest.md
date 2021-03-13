@@ -19,9 +19,9 @@ Additional information on the REST API is available at the section [Rest request
 ## HTTP methods suported
 
 AnyLog commands are supported using the the HTTP methods GET, PUT and POST.  
-***GET*** is used to retrieve information.
-***PUT*** is used to add data to nodes in the network.
-***POST*** is used as a default method to execute all other AnyLog commands.
+***GET*** is used to retrieve information.  
+***PUT*** is used to add data to nodes in the network.  
+***POST*** is used as a default method to execute all other AnyLog commands.  
 
 ### The AnyLog commands supported by GET.
 
