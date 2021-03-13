@@ -13,8 +13,8 @@ To configure an AnyLog Node to satisfy REST calls, issue the following command o
 ```run rest server [ip] [port] [max time]```  
 [ip] and [port] are the IP and Port that would be available to REST calls.  
 [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.  
-A 0 value means a call would never be aborted and the default time is 20 seconds.
-  Additional information on the REST API is available at the section [Rest requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-request).
+A 0 value means a call would never be aborted and the default time is 20 seconds.    
+Additional information on the REST API is available at the section [Rest requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-request).
   
 ## HTTP methods suported
 
