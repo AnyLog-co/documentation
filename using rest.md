@@ -23,7 +23,7 @@ AnyLog commands are supported using the the HTTP methods GET, PUT and POST.
 ***PUT*** is used to add data to nodes in the network.  
 ***POST*** is used as a default method to execute all other AnyLog commands.  
 
-### The AnyLog commands supported by GET.
+### The AnyLog commands supported by GET
 
 | HTTP Method   | AnyLog commands  | Comments | 
 | ------------- | -----------------|  ------|
@@ -94,7 +94,7 @@ The header setup for GET and POST is the following:
 * Options ***User-Agent***:  
 Needs to specify "AnyLog" as the product followed by the version. 
   The value of this header determines the client product and how requests are processed. 
-  For example, Grafan visualization is using the AnyLog REST API and processing is using this header to determine the client product.
+  For example, Grafan visualization is using the AnyLog REST API and processing is using this header to determine mapping to Grafana API.
 
 ## The message body setup
 
