@@ -108,12 +108,12 @@ Commands that broken over multiple lines are enclosed between the signs ***<*** 
 
 <pre>
 
-curl --location --request POST '172.18.12.129:2149' \
---header 'command: blockchain push !operator' \
---header 'destination: !master_node' \
---header 'Content-Type: text/plain' \
---data-raw 'operator_name = anylog_node_323
-<operator = {“operator” : {“cluster” : “7a00b26006a6ab7b8af4c400a5c47f2a”,
+ curl --location --request POST '172.18.12.129:2149' \
+ --header 'command: blockchain push !operator' \
+ --header 'destination: !master_node' \
+ --header 'Content-Type: text/plain' \
+ --data-raw 'operator_name = anylog_node_323
+ <operator = {“operator” : {“cluster” : “7a00b26006a6ab7b8af4c400a5c47f2a”,
                 “name” = !operator_name,
                 “ip” : “10.0.0.78”,
                 “port” : 2048,
