@@ -78,11 +78,12 @@ This process receives requests to query data and metadata, and replies with the 
 
 Usage:
 <pre>
-run rest server [ip] [port] where timeout = [timeout] and ssl = [true/false]
+run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 </pre>
 Explanation:  
 [ip] [port] - The IP and Port of the socket that is in the listening state.    
-[timeout] - An optional parameter that determines wait a timeout period in seconds.    
+[timeout] - An optional parameter that determines wait a timeout period in seconds. 
+***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 5.
 When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
 If ssl is set to True, connection is using HTTPS and authentication requires Certificates.
 
