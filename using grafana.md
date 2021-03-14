@@ -102,20 +102,22 @@ instructions    - Additional AnyLog query instructions.
 * A query issued using ***Time Series*** format is always bounded by the time range specified on the panel.
 * A query issued using ***Table*** format is bounded by defauly with the time range.  
 Users can modify the query to ignore the time selection by updating the Additional JSON Data with the key: 'time_range' and the value: 'false'.  
-  Example:
+  
+Example:
 <pre>  
 {
     "sql" : "select * from ping_sensor",
     "time_range" : false
 }
 </pre>
+
 ### Modifying the query data points limit
 Both types of queries - ***Time Series*** and ***Table*** are always bounded by ***Max data points*** that determine the number of entries returned.    
 This value is configured by modifying the value ***Max data points*** in the Grafana ***Query Options*** on the panel.
 
 ## Debug Queries
 
-Adding a key ***trace_level*** with a number value will display the generated query on the node console.  
+Adding ***trace_level*** as a key to the ***Additional JSON Data*** section with a number value will display the generated query on the node console.  
 The following example displays the generated query whenever the network is requested to process a query by Grafana:
 <pre>  
 {
