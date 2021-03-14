@@ -99,7 +99,8 @@ get scheduler [id]
 Each task in the scheduler can be called to be executed, paused, removed, or associated with a new start time. 
 A task can be called to be immediately executed regardless of the scheduler setting. 
 These operations are done using the ***task*** command.  
-Note, that the ***task*** command can specify a scheduler ID, otherwise scheduler #1 is referenced.
+
+Note, If the ***task*** command doesn't specify a scheduler ID, scheduler #1 is referenced.
 
 ### Pausing and resuming a task
 The ***task stop*** pauses a task from being executed. The command remains on the scheduler but will not be executed until ***task resume*** uis called.   
