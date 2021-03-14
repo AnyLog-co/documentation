@@ -74,7 +74,6 @@ Options:
 | set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
 | set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
-| set threads pool [n]  | Creates a pool of workers threads that distributes query processing to multiple threads. |
 | set echo queue [on/off]  | Creates a queue to contain echo commands and messages. |
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set encryption [on/off]  | Enable / Disable encryption of TCP messages. Default value is OFF. |
@@ -166,7 +165,8 @@ Options:
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
 | get workers pool | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
-| get tcp pool | Details the number TCP workers thread that execute peer command. The number of threads [n] is set by the command ***run tcp server [n]***. |
+| get tcp pool | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
+| get rest pool | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
 | get threads | The list of the threads executing users scripts. |
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
