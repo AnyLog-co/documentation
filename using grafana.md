@@ -155,8 +155,8 @@ A pre-defined qiery that considers the time range in the panel, determines the l
 </pre>
 
 ### Executing a 'range' query
-Depending on the number of data points, divide the time range into intervals and return the difference between the Max value and the Min value in each interval.
-In the example below, the intervals are determined by the user to be one day intervals.
+Depending on the number of data points, divide the time range into intervals and return the difference between the Max Value and the Min Value in each interval.
+In the example below, the intervals are determined by the user to be one-day intervals.
 <pre>
 {
 "sql" : "select increments('day', 1, timestamp), max(timestamp), range(value) from ping_sensor",
@@ -191,7 +191,7 @@ Query 2:
 The AnyLog Metadata can be queried using Grafana Table Format.
 Metadata queries are specified using JSON in the ***Additional JSON Data*** section.  
 Using the value ***info*** for the key ***type*** identifies a request which is not SQL.  
-The request for Metada is specified using the key ***details***.   
+The request for Metadata is specified using the key ***details***.   
 Examples:  
 Retrieving the tables in a database called lsl_demo:
 <pre>
@@ -222,7 +222,7 @@ The Worldmap Panel is a tile map of the world that can be overlaid with circles 
 ### Prerequisites
 
 * Install the Grafana Worldmap plugin.  
- Instalation details are available on the [Grafana Worldmap Panel Page](https://grafana.com/grafana/plugins/grafana-worldmap-panel/installation).
+ Installation details are available on the [Grafana Worldmap Panel Page](https://grafana.com/grafana/plugins/grafana-worldmap-panel/installation).
 
 * AnyLog Nodes registered on the blockchain with the following information:
     
