@@ -44,7 +44,8 @@ Enabling authentication is explained at [Authenticating HTTP requests](https://g
 ## Using Grafana to visualize AnyLog data
 
 * On the Grafana menu, use the ***+*** sign to create a new panel.
-* Or, open an existing panel in Edit mode.
+* Or, open an existing panel in Edit mode.  
+* On the left side, under the graph location, select ***Query*** and underneath select the AnyLog data source unique name from the pull down list.
 * The Metric window shows the list of tables supported by the database. Select a table from the options provided.
 
 Grafana allows to present data in 2 modes:
