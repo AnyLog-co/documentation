@@ -4,7 +4,9 @@ Nodes in the network can be monitored to determine disk usage, cpu usage, memory
 Monitoring can be done by retrieving utilization values or by continuously updating database tables with the monitoring data.  
 
 The commands below detail the monitoring functionality:
-Note: Some functionalities require psutil installed.
+Note: 
+* Some functionalities require psutil installed.
+* Monitoring places tasks on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
 
 ## Monitoring commands
 
