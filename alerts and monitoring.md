@@ -57,11 +57,31 @@ The command options are the following:
 | time  | The time intervals for the execution of the task.  |
 | start | Scheduled start time for first execution of the task. The default value is the current day and time. | 
 | name  | A name that is associated with the task. The name in a scheduler needs to be unique (otherwise an error message is returned). |
+| scheduler  | The ID of the scheduler, the default value is 1 (a user scheduler). |
 
   
 ### Setting the start time
 Start time allows to pause the execution of a tasks. For example, a task that alerts by sending an email or a SMS message may be paused for a few hours to avoid continues messaging.      
 When a ***schedule*** command is first initiated, users can express a starting date and time. 
+
+The start date and time can be also initiated with the following strings:
+
+| Option        |
+| ------------- | 
+| now() |
+| start of year | 
+| start of month |
+| start of day |
+| start of hour |
+| start of minute |
+
+Example:
+
+<pre>
+schedule time = 1 day and name = "Sync Devices" and start = \"start of day\" task process !local_scripts/sync_spript.al.",
+</pre>
+Using the above command, sync_script.al is processed at the start of each day.
+
 The start time of a task can be modified using the command [task init](#modifying-the-start-date-and-time-of-a-task).
 
 ### Examples
@@ -159,9 +179,10 @@ The following chart includes the time forward options:
 Example:
 
 <pre>
-task init where name = "Get Disk Space" and start = +2h
+schedule task init where name = "Get Disk Space" and start = +2h
 </pre>
 Using the above command, disk space monitoring will be paused for 2 hours.
+
 
 ### Immediate execution of a task
 
