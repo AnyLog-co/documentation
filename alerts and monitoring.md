@@ -78,7 +78,7 @@ The start date and time can be also initiated with the following strings:
 Example:
 
 <pre>
-schedule time = 1 day and name = "Sync Devices" and start = "start of day" task process !local_scripts/sync_spript.al.",
+schedule time = 1 day and name = "Sync Devices" and start = "start of day" task process !local_scripts/sync_spript.al",
 </pre>
 Using the above command, sync_script.al is processed at the start of each day.
 
