@@ -27,6 +27,7 @@ Open the Grafana ***Data Sources*** configuration page.
 * On the ***Custom HTTP Headers***, name the default database to use as follows:  
 ```al.dbms.[dbms name]```  For example: al.dbms.lsl_demo  
 Declaring the database connects Grafana to the specified database on the HTTP connection and makes the database tables available to query.  
+
 ***Notes:***  
 * To interact with a different database, create a new JSON data source and declare a different database name in the headers.  
 * If the ***Custom HTTP Header*** field is empty, all tables from all databases appear for selection on the dashboard ***Metric Selection*** pull down menue.
