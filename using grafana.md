@@ -30,7 +30,8 @@ Declaring the database connects Grafana to the specified database on the HTTP co
 
 ***Notes:***  
 * To interact with a different database, create a new JSON data source and declare a different database name in the headers.  
-* If the ***Custom HTTP Header*** field is empty, all tables from all databases appear for selection on the dashboard's ***Metric Selection*** pull-down menu.
+* If the ***Custom HTTP Header*** field is empty, all tables from all databases appear for selection on the dashboard (Edit Panel/Metric Selection/pull-down menu).
+* If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.  
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.  
 Failure to connect may be the result of one of the following:
