@@ -26,8 +26,10 @@ Open the Grafana ***Data Sources*** configuration page.
 * On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
 * On the ***Custom HTTP Headers***, name the default database to use as follows:  
 ```al.dbms.[dbms name]```  For example: al.dbms.lsl_demo  
-Declaring the database connects Grafana to the specified database on the http connection and makes the database tables available to query.  
-***Note:*** to interact with a different database, create a new JSON data source and declare a different database name in the headers.
+Declaring the database connects Grafana to the specified database on the HTTP connection and makes the database tables available to query.  
+***Notes:***  
+* To interact with a different database, create a new JSON data source and declare a different database name in the headers.  
+* If the ***Custom HTTP Header*** field is empty, all tables from all databases appear for selection on the dashboard ***Metric Selection*** pull down menue.
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.  
 Failure to connect may be the result of one of the following:
