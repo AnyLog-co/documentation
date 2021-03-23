@@ -25,7 +25,7 @@ By configuring a node as message broker, data can be delivered from Edgex direct
 
 As detailed below, Edgex is configured to send the data to a message broker and an AnyLog instance is configured as a Message Broker.  
 The AnyLog node receiving the data can be an Operator node that hosts the data or a Publisher node that delivers the data to one or multiple Operator nodes 
-(the [getting started](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#type-of-instances) document details the types of nodes participating in the AnyLog network). 
+(the [getting started](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#type-of-instances) document details the types of nodes participating in the AnyLog Network). 
 
 ## Prerequisites
 
