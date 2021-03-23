@@ -17,6 +17,7 @@ The background processes are issued using an initialization script or on the Any
 | [run streamer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) | Initiate a process to flush streaming data to disk |
 | [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
 | [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
+| [run message broker](#message-broker) | A process that receives data from 3rd parties platforms using supported protocols |
 
 ## View the status of the Background Processes
 
@@ -360,5 +361,23 @@ run streamer where prep_dir = [path to prep directory] and watch_dir = [path to 
 If prep_dir, watch_dir and err_dir and not specified, the default locations are used.    
 To view the default paths used, use the command ```get dictionary```.  
 The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
+
+## Message Broker
+An AnyLog node can serve as a message broker to receive data from 3rd parties applications and platforms.  
+When data is received to the broker, and depending on how the receiving AnyLog Node is configured, the data can be mapped to the 
+destination format and transferred through the [Streamer Process](#streamer-process) to JSON files that can be ingested to a local database on the local node 
+or transferred to Operator nodes that will host the data.
+
+Usage
+<pre>
+run message broker [ip] [port] [local ip] [Local port] [threads]
+</pre>
+
+The ***run message broker*** command configures a process in a listening mode on the specified IP and port.  
+* The first pair of IP and Port that are used by a listener process to receive messages from members of the network.  
+* The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.  
+* threads - an optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.  
+
+An example of configuring AnyLog as an MQTT message broker is available at the section [Using EdgeX](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex).
 
 
