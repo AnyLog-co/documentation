@@ -54,10 +54,101 @@ run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts a
 Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
 Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
 
-## Configuring Edgex
+## Downloading and Configuring Edgex
 
-Edgex is configuted to deliver the data to AnyLog as an MQTT broker
+The following instruction specify how to download Edgex, start and stop an Edgex instance:
+
+1) Create a working directory for Edgex install (in the example below called edgex).
+<pre>
+mkdir edgex 
+cd edgex 
+</pre>
+
+2) Download EdgeX
+<pre>
+wget https://raw.githubusercontent.com/jonas-werner/EdgeX_Tutorial/master/docker-compose_files/docker-compose_step1.yml
+</pre>
+
+3) Create the yml file to use
+<pre>
+cp docker-compose_step1.yml docker-compose.yml 
+</pre>
+
+4) Download Docker-Compose
+<pre>
+docker-compose pull 
+</pre>
+
+5) Start Edgex
+<pre>
+docker-compose up -d 
+</pre>
+
+6) Validate Edgex is running
+
+* Validate services through browser - ```http://127.0.0.1:8500/ui/dc1/services```
+* Validate services through docker
+    * check docker images
+    <pre>
+    docker image ls
+    </pre>
+    * check docker containers 
+    <pre>
+    docker ps -a
+    </pre>
+* valide services using cURL by listing connected devices(s) - curl http://localhost:48082/api/v1/device
+
+7) Stop EdgeX
+*  Stop & remove docker containers
+<pre>
+docker-compose down
+</pre>
+*  Stop & remove docker containers and volumes
+<pre>
+docker-compose down -v
+</pre>
 
 
+### Configure
 
+In a docker-compose.yml file, services represent the containers that will be created,
+In [docker-compose.yml](https://github.com/oshadmon/Udemy/blob/master/EdgeX/docker-compose_step2.yml) uncomment app-service-mqtt
 
+app-service-mqtt:
+<pre>
+      image: edgexfoundry/docker-app-service-configurable:1.1.0
+      ports:
+        - "0.0.0.0:48101:48101"
+      container_name: edgex-app-service-configurable-mqtt
+      hostname: edgex-app-service-configurable-mqtt
+      networks:
+        edgex-network:
+          aliases:
+            - edgex-app-service-configurable-mqtt
+      environment:
+        <<: *common-variables
+        edgex_profile: mqtt-export
+        Service_Host: edgex-app-service-configurable-mqtt
+        Service_Port: 48101
+        MessageBus_SubscribeHost_Host: edgex-core-data
+        Binding_PublishTopic: events
+        # Added for MQTT export using app service
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_ADDRESS: "YOUR-UNIQUE-BROKER-URL" 
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PORT: "YOUR-UNIQUE-BROKER-PORT" 
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PROTOCOL: tcp
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_TOPIC: "YOUR-UNIQUE-TOPIC"
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_AUTORECONNECT: "true"
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_RETAIN: "true"
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_PERSISTONERROR: "false"
+        # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PUBLISHER: 
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_USER: "YOUR-UNIQUE-USER"
+        WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PASSWORD: "YOUR-UNIQUE-PASSWORD"
+        # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_QOS: ["your quality or service"]
+        # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_KEY: [your Key]  
+        # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_CERT: [your Certificate]
+
+      depends_on:
+        - consul
+  #     - logging  # uncomment if re-enabled remote logging
+        - data
+</pre>
