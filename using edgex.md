@@ -28,3 +28,7 @@ The AnyLog node receiving the data can be an Operator node that hosts the data o
 
 ## Prerequisites
 
+* An Anylog node configured as a Message Broker
+* An Edgex platformed configured to publish the device data on an AnyLog node as the message broker.
+
+
