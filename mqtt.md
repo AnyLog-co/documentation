@@ -3,7 +3,7 @@
 Users can subscribe and retrieve data from one or more topics in a MQTT broker.
 Users can publish data to a topic  in a broker.
 
-## Subscribing to a broker
+## Subscribing to a Broker
 
 This process initiates a client that subscribes to a list of topics registered on a MQTT broker.      
 When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.        

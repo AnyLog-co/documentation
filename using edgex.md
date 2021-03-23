@@ -45,15 +45,18 @@ Details on the the ***run message broker*** command are available at the [Messag
 section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
 
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the subscription process to 3rd parties MQTT brokers whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.    
+This process is identical to the subscription process to 3rd parties MQTT brokers whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
+  
 Example:
 <pre>
 run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
 </pre>
-Note: ***broker=local*** replace the assignment of an IP and port.  
-Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
+Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
 
 ## Configuring Edgex
+
+Edgex is configuted to deliver the data to AnyLog as an MQTT broker
 
 
 
