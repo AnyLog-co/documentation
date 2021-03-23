@@ -29,7 +29,7 @@ The AnyLog node receiving the data can be an Operator node that hosts the data o
 
 ## Prerequisites
 
-* An Anylog node configured as a Message Broker
+* An Anylog node configured as a [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker).
 * An Edgex platform configured to publish the device data on an AnyLog node as the message broker.
 
 ## Configuring AnyLog
@@ -55,6 +55,7 @@ Note: the key value pair ***broker=local*** replace the assignment of an IP and 
 Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
 
 ## Downloading and Configuring Edgex
+An overview on how Edgex publishes data on a message broker is available [here](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/). 
 
 The following instruction specify how to download Edgex, start and stop an Edgex instance:
 
