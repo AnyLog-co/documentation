@@ -32,4 +32,29 @@ The AnyLog node receiving the data can be an Operator node that hosts the data o
 * An Anylog node configured as a Message Broker
 * An Edgex platform configured to publish the device data on an AnyLog node as the message broker.
 
+## Configuring AnyLog
+
+The AnyLog node receiving the data needs to be configured as follows:
+
+* Enable the ***Message Broker*** functionality:
+Usage
+<pre>
+run message broker [ip] [port] [local ip] [Local port] [threads]
+</pre>
+Details on the the ***run message broker*** command are available at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
+section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
+
+* Subscribe to the messages received on the broker and detail the mapping of the messages to the needed structure.
+This process is identical to the subscription process to a 3rd party MQTT broker whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
+Example:
+<pre>
+run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
+</pre>
+Note: ***broker=local*** replace the assignment of an IP and port.
+Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+
+## Configuring Edgex
+
+
+
 
