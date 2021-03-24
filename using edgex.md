@@ -45,7 +45,8 @@ Details on the the ***run message broker*** command are available at the [Messag
 section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
 
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the subscription process to 3rd parties MQTT brokers whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
+This process is identical to the [subscription process to 3rd parties MQTT brokers](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) 
+  whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
   
 Example:
 <pre>
