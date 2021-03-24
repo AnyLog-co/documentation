@@ -183,7 +183,7 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
 
 Users can publish a message to a particular topic in a broker using the following command:  
 <pre>
-mqtt publish where broker = [url] and topic = [topic]
+mqtt publish where broker = [url] and port = [port value] and user = [user name]  and password = [password name] and topic = [topic] and qos = [value] and message = [published message]
 </pre>
 
 Example:  
