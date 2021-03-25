@@ -155,6 +155,7 @@ Options:
 | get mqtt clients | Information on MQTT clients and the subscribed topics. |
 | get mqtt client [n]| Information on a MQTT client, ***n*** is the client ID. |
 | get mqtt brokers | Information on mqtt brokers and the topics subscribed with each broker. |
+| get broker | Information on the Message Broker. |
 | get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | get status  | Replies with the string 'running' if the node is active. | 
 | get connections | The list of TCP and REST connections supported by the node. |
