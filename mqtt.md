@@ -124,12 +124,12 @@ A complete example is provided [below](https://github.com/AnyLog-co/documentatio
 * Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.  
 * Executing ***run mqtt client*** command dedicates a thread (***client*** to the MQTT broker) to process subscribed messages. 
 Multiple calls to ***run mqtt client*** dedicates a multiple threads and each thread is processing the topics on the command line.    
-* Each of these threads is identified by a unique ID. Use the ***show*** command detailed below to view the ID associated to each client.
+* Each of these threads is identified by a unique ID. Use the ***get*** command detailed below to view the ID associated to each client.
 
 ***Configuring work directories***    
 The MQTT messages are transformed to files which are processed according to the node configuration. These files can update local databases or transferred to peers in the network.    
 The processing of the data requires the identification of 3 directories - prep_dir, watch_dir and err_dir.  
-Unless modified on the command line, the default locations are used. The command ```show dictionary``` details the path associated to each directory.         
+Unless modified on the command line, the default locations are used. The command ```get dictionary``` details the path associated to each directory.         
 
 ***Setting Buffers Thresholds***  
 When a message is processed, it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as a JSON file that is placed in the designated directory for processing.    
@@ -156,11 +156,11 @@ exit mqtt [n]
   
 * To view status of all clients use the following command:
 <pre>
-show mqtt clients
+get mqtt clients
 </pre>    
 * To view the status of a particular client use the command (***n*** is the client ID): 
 <pre>
-show mqtt client [n]
+get mqtt client [n]
 </pre>
 * To view the streaming data status, use the following command:
 <pre>
@@ -170,7 +170,7 @@ get streaming
 ### View registered brokers
 Users can see the list of brokers and the subscribed users and topics in each broker using the command:
 <pre>
-show mqtt brokers
+get mqtt brokers
 </pre>
 
 ### Example:  
@@ -280,7 +280,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 ### View all client status  
 <pre>
-show mqtt clients
+get mqtt clients
 </pre>    
 
 To view the ***Streaming Data*** buffers state use the following command:
@@ -290,7 +290,7 @@ get streaming
 
 ### View registered brokers
 <pre>
-show mqtt brokers
+get mqtt brokers
 </pre>
  
 

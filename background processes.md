@@ -145,6 +145,12 @@ Example:
 run operator where create_table = true and update_tsd_info = true and distributor = true
 </pre>
 
+To check the status of the Operator process, use the following command:
+<pre>
+get operator
+</pre>
+
+
 ## Publisher Process
 
 A process that identifies JSON files with new data and distributes the files to Operators that are hosting the data.
@@ -158,7 +164,6 @@ To determine a target Operator to host the data, the Publisher determines the ta
 
 1) A Policy of type ***distribution***. A distribution policy assigns data from a specifc Publishers or types of Publishers to a particular Operator.
 2) If there is no relevant distribution policy, the Publisher considers the Operators that declared support for the table and selects a target Operator.
-
 
 Usage:  
 <pre>
@@ -190,6 +195,10 @@ run publisher where company = anylog and delete_json = true and delete_sql = tru
 In the first example, the name of the database in each JSON file (the first segment in the file name) determines the company that owns the data (the dbms name and the company name are the same).      
 In the second example, all the databases are considered as databases of the specified company ('anylog' in the example).
 
+To check the status of the Publisher process, use the following command:
+<pre>
+get publisher
+</pre>
 
 ## Blockchain Synchronizer
 
@@ -291,6 +300,11 @@ Example:
 run data distributor where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and distr_dir = !distr_dir
 </pre>
 
+To check the status of the Distributor process, use the following command:
+<pre>
+get distributor
+</pre>
+
 ### Invoking the Data Consumer Process
 The data consumer process considers a date range, all the source data assigned to time within the date range is validated - if data is missing, it retrieves the data from the cluster member nodes.   
 Usage:  
@@ -314,6 +328,10 @@ The example below will test and sync the last 3 days of data.
 run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_date = -3d
 </pre>
 
+To check the status of the Consumer process, use the following command:
+<pre>
+get consumer
+</pre>
 
 ## MQTT Client
 
@@ -362,13 +380,18 @@ If prep_dir, watch_dir and err_dir and not specified, the default locations are 
 To view the default paths used, use the command ```get dictionary```.  
 The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
 
+To check the status of the Streamer Process, use the following command:
+<pre>
+get streaming
+</pre>
+
 ## Message Broker
 An AnyLog node can serve as a message broker to receive data from 3rd parties applications and platforms.  
 When data is received to the broker, and depending on how the receiving AnyLog Node is configured, the data can be mapped to the 
 destination format and transferred through the [Streamer Process](#streamer-process) to JSON files that can be ingested to a local database on the local node 
 or transferred to Operator nodes that will host the data.
 
-Usage
+Usage:
 <pre>
 run message broker [ip] [port] [local ip] [Local port] [threads]
 </pre>
@@ -380,4 +403,8 @@ The ***run message broker*** command configures a process in a listening mode on
 
 An example of configuring AnyLog as an MQTT message broker is available at the section [Using EdgeX](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex).
 
+To check the status of the Message Broker, use the following command:
+<pre>
+get broker
+</pre>
 
