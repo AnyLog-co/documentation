@@ -335,7 +335,7 @@ run client (ip:port, ip:port ...) sql [dbms name] [options] [sql statement]
 </pre>
 Nodes that receives the SQL statement will execute the statement if a logical database is declared on their node. 
 To assign a logical database to a physical database use the command: ```connect dbms```.     
-To view the list of logical databases on a particular node use the command: ```show databases```.  
+To view the list of logical databases on a particular node use the command: ```get databases```.  
 If a logical database is not declared on the node, the node will return an error message.  
 A node that issues a query needs to declare a logical database to host the query results and the name of the logical database is ***system_query***.  
 An example of using SQLite as the physical database for ***system_query*** is the following:
