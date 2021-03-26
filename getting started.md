@@ -1,7 +1,7 @@
 # Getting Started
  
 This document provides the following:
-* A high level summary of some of the main functionalities supported by the AnyLog Network.   
+* A high level summary of the main functionalities supported by the AnyLog Network.   
 * Explanations on how to install, configure and run AnyLog instances. 
 
 ## About AnyLog
@@ -9,7 +9,7 @@ This document provides the following:
 AnyLog is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the AnyLog Software.    
 Joining a network requires the following steps:  
 1) Install the AnyLog Software on a compute instance.
-2) Configure the node such that it can join an exiting network (or create a new network).
+2) Configure a node such that it can join an exiting network (or create a new network).
 
 ## Type of instances
 A node in the network is assigned with one or more roles. The optional roles are the following:  
@@ -20,6 +20,10 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Operator   | A node that hosts the data and satisfies queries. |
 | Query  | A node that orchestrates a query process. |
 | Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
+
+Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.   
+If a blockchain platform is used, there is no need in a Master node as the metadata is registered on (and is available from) the blockchain platform.  
+
 
 Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
 
