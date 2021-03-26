@@ -22,9 +22,8 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
 
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.   
-If a blockchain platform is used, there is no need in a Master node as the metadata is registered on (and is available from) the blockchain platform.  
-
-
+Enabling the blockchain functionality using the Ethereum blockchain is explained in the [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) section.
+If a blockchain platform is used, there is no need in a Master node as the metadata is registered on (and is available from) the blockchain.  
 Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
 
 ## The Network MetaData
