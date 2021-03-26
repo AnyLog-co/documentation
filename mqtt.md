@@ -181,7 +181,7 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
 
 ## Using AnyLog as a broker
 By enabling the AnyLog [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker) functionality on a particular node, 
-the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [using edgex](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex) section.
+the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [Using Edgex](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex) section.
 
 ## Publishing
 
