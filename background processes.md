@@ -388,7 +388,7 @@ get streaming
 ## Message Broker
 An AnyLog node can serve as a message broker to receive data from 3rd parties applications and platforms.  
 When data is received in the broker, and depending on how the receiving AnyLog Node is configured, the data can be mapped to the 
-destination format and transferred through the [Streamer Process](#streamer-process) to JSON files that can be ingested to a local database on the local node 
+destination format and transferred through the [Streamer Process](#streamer-process) to JSON files that can be ingested into a local database on the local node 
 or transferred to Operator nodes that will host the data.
 
 Usage:
