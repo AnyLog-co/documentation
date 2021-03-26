@@ -179,6 +179,10 @@ The example below connects to a broker to pull data assigned to a topic.
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
 </pre>
 
+## Using AnyLog as a broker
+By enabling the AnyLog [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker) functionality on a particular node, 
+the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [using edgex](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex) section.
+
 ## Publishing
 
 Users can publish a message to a particular topic in a broker using the following command:  
