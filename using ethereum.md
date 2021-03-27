@@ -37,7 +37,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 ## Prerequisites
 
 * Open an account in Infura - instructions are [here](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
-* From Infura get a Project ID and API endpoint.
+* From Infura get a Project ID and an API endpoint.
   Or use the following demo ID and endpoint:
   * Project Endpoint: https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
 * An AnyLog node to configure.
@@ -102,7 +102,7 @@ For a Rinkeby TestNet, funds can be added from this [webite](https://www.rinkeby
 
 The following command will deploy a contract that contains the logic to anchor the policies which are shared by the nodes in the network.
 Users can maintain multiple independent networks by deploying multiple contracts and associating nodes to different contracts.  
-Nodes that are assigned to the same contract, form a network.  
+***Nodes that are assigned to the same contract, form a network.***
 
 * Publish a contract and assign the contract address to a variable:
 
@@ -112,7 +112,6 @@ contract = blockchain deploy contract where  platform = ethereum and public_key 
 
 Executing the ***deploy contract*** command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
 
-Note: ***Nodes that share the same contract form a network.***
 
 * Add the contract information to the Ethererum connection information using the command ***set account info***
 <pre>
@@ -129,7 +128,7 @@ Name     Active Balance                          URL                            
 ethereum|True  |Ether: 2 Wei: 999567574000000000|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|0xb425E72041d1c5a640BFc4479A808Da83b83b515|
         |      |                                |                                                             |0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0|
 </pre>
-Note that the Ethereum connection is now assigned with the contract (and the balance is the outcome of the [transferring funds](#transfer-funds-to-the-account) step).
+Note that the Ethereum connection is now associated with the contract (and the balance is the outcome of the [transfer funds](#transfer-funds-to-the-account) step).
 
 ## Updating a policy on the blockchain
 
@@ -143,4 +142,4 @@ The variable ***test_policy*** is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 
-Details are available in the [Blockchain Configuration](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md#blockchain-configuration) section.
+Details are available in the [Blockchain Configuration](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20configuration.md) section.
