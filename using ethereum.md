@@ -30,10 +30,9 @@ This document details how to use Ethereum as the metadata layer by providing and
 * Create accounts, the accounts are used for blockchain transactions payments. Note that although accounts creation is available 
   directly from an AnyLog node, the functionality is supported to simplify testing and users should create accounts using proper tools (see the highlighted note above). 
 * Publish the AnyLog contract, the contract manages the global metadata (in the form of Policies) which is shared by members of the network.
+  Policies are detailed in the [Managing Metadata](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#managing-metadata) section.
 * Update a policy on the blockchain.
 * Configure an AnyLog node to continuously synchronize the local copy of the metadata (that is hosted on the node) with the global copy of the metadata (that is hosted on the blockchain).
-
-Note, the AnyLog metadata is represented on the blockchain in the form of Policies. Policies are detailed in the [Managing Metadata](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#managing-metadata) section.  
 
 ## Prerequisites
 
