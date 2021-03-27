@@ -55,7 +55,7 @@ provider = https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
 
 * Use the following command to connect using the Endpoint:
 <pre>
-blockchain connect ethereum where provider = !provider
+blockchain connect to ethereum where provider = !provider
 </pre>
 
 * Use the following command to test the connection parameters and status:
@@ -103,19 +103,36 @@ For a Rinkeby TestNet, funds can be added from this [webite](https://www.rinkeby
 
 The following command will deploy a contract that contains the logic to anchor the policies which are shared by the nodes in the network.
 Users can maintain multiple independent networks by deploying multiple contracts and associating nodes to different contracts.  
-Nodes that are assigned to the same contract, form a network.
+Nodes that are assigned to the same contract, form a network.  
+
+* Publish a contract and assign the contract address to a variable:
 
 <pre>
 contract = blockchain deploy contract where  platform = ethereum and public_key = !public_key
 </pre>
 
-Executing the ***deploy contract*** command provides the contract address.    
-Nodes that share the same contract form a network.
+Executing the ***deploy contract*** command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
 
-Add the contract information to the Ethererum connection information using the command
+Note: ***Nodes that share the same contract form a network.***
+
+* Add the contract information to the Ethererum connection information using the command ***set account info***
 <pre>
 blockchain set account info where platform = ethereum and contract = !contract
 </pre>
+
+## Review the connection information
+
+
+Executing the ***get platforms*** command provides the following output:
+<pre>
+
+Blockchains connected
+Name     Active Balance                          URL                                                           Public Key/Contract
+--------|------|--------------------------------|-------------------------------------------------------------|------------------------------------------|
+ethereum|True  |Ether: 2 Wei: 999567574000000000|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|0xb425E72041d1c5a640BFc4479A808Da83b83b515|
+        |      |                                |                                                             |0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0|
+
+Note that the Ethereum connection is now assigned with the contract (and the balance is the outcome of the [transferring funds](#transfer-funds-to-the-account) step).
 
 
 ## Updating a policy on the blockchain
