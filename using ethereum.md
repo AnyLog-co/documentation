@@ -92,6 +92,26 @@ Use the following command to specify the account information to use:
 blockchain set account info where platform = ethereum and private_key = !private_key and public_key = !public_key
 </pre>
 
+## Publish the AnyLog contract on the blockchain
 
+The following command will deploy a contract that contains the logic to anchor the policies which are shared by the nodes in the network.
+Users can maintain multiple independent networks by deploying multiple contracts and associating nodes to different contracts.  
+Nodes that are assined to the same contract, form a network.
 
+<pre>
+blockchain deploy contract where  platform = ethereum and public_key = !public_key
+</pre>
 
+## Updating a policy on the blockchain
+
+The following commad updates a policy on the blockchain:
+
+<pre>
+blockchain commit to ethereum !test_policy
+</pre>
+
+The variable ***test_policy*** is assigned with the policy to update.
+
+## Synchronize the local copy of the metadata with the blockchain data
+
+Details are available in [Blockchain Configuration](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md#blockchain-configuration).
