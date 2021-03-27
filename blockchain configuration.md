@@ -1,23 +1,22 @@
 # Blockchain Configuration
 
 Nodes in the network can be configured to synchronize their local metadata with a global metadata hosted by a blockchain platform.
-With propper configuration, when the node updates the metadata, the updates will be published on the blockchain platform
+With propper configuration, when a node updates the metadata, the updates will be published on the blockchain platform
 and at the same time, updates done by peer nodes and are published on the blockchain, become available to 
 the members of the network.  
 This document explains how to configure a node sch that updates to the metadata are published on the 
-blockchain platform and how to configure a node to continuously receive metadata updates published by peers.
+blockchain platform and how to configure to continuously receive metadata updates published by peers.
 
 Notes:
-* Using the blockchain as a metadata platform requires a contract that maintains the metadata information. The initial setup
-usinf Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md).
-  
-* The metadata is represented as Policies which are detailed in the [Policies](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#policies) section.
-* The blockchain examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
-
+* Using the blockchain as a metadata platform requires a contract that manage the metadata information. The initial contract setup
+with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md).
+* The published metadata is represented as Policies which are detailed in the [Policies](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#policies) section.
+* The examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
 
 ## Prerequisites
 
-* An AnyLog contract on the blockchain platform. The contract manages the metadata policies.
+* An AnyLog contract on the blockchain platform. The contract manages the metadata policies (publishing the contract is detailed at 
+  [Publish the AnyLog contract on the blockchain](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#publish-the-anylog-contract-on-the-blockchain)).
 * The blockchain connection and contract information.
 * An anylog instance to configure.
 
