@@ -114,4 +114,4 @@ The variable ***test_policy*** is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 
-Details are available in [Blockchain Configuration](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md#blockchain-configuration).
+Details are available in the [Blockchain Configuration](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md#blockchain-configuration) section.
