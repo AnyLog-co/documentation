@@ -5,7 +5,7 @@
 Users can configure their network to use [Ethereum](https://en.wikipedia.org/wiki/Ethereum) as a global metadata layer such 
 that all updates to the metadata are represented by the blockchain and shared among all members of the network.
 
-This document explains how to leverage Ethereum as the underlying global metadata platform for the AnyLog Network. This document demonstrates the 
+This document explains how to leverage Ethereum as the underlying global metadata platform for the AnyLog Network and demonstrates the 
 initial setup that is needed to facilitate Ethereum as the metadata layer.   
 Once the setup is completed, nodes can synchronize their local metadata with the global metadata by configuring the synchronizer 
 to connect to Ethereum. The details of configuring a node to sync with Ethererum are detailed at  
