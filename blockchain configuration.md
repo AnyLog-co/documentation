@@ -8,7 +8,7 @@ This document explains how to configure a node sch that updates to the metadata 
 blockchain platform and how to configure to continuously receive metadata updates published by peers.
 
 Notes:
-* Using the blockchain as a metadata platform requires a contract that manage the metadata information. The initial contract setup
+* Using the blockchain as a metadata platform requires a contract that manages the metadata information. The initial contract setup
 with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md).
 * The published metadata is represented as Policies which are detailed in the [Policies](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#policies) section.
 * The examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
