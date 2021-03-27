@@ -1,14 +1,25 @@
 # Blockchain Configuration
 
-Connecting to a blockchain platform requires the following steps:
+Nodes in the network can be configured to synchronize their local metadata with a global metadata hosted by a blockchain platform.
+With propper configuration, when the node updates the metadata, the updates will be published on the blockchain platform
+and at the same time, updates done by peer nodes and are published on the blockchain, become available to 
+the members of the network.  
+This document explains how to configure a node sch that updates to the metadata are published on the 
+blockchain platform and how to configure a node to continuously receive metadata updates published by peers.
 
-* Deploying a contract on the blockchain platform. The contract excepts updates of new policies.
-* Pushing new policies from the network nodes to the blockchain.
-* Configuring the participating nodes to periodically pull the blockchain data.
+Notes:
+* Using the blockchain as a metadata platform requires a contract that maintains the metadata information. The initial setup
+usinf Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md).
+  
+* The metadata is represented as Policies which are detailed in the [Policies](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#policies) section.
+* The blockchain examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
 
 
-The following example connects to Ethereum node on [Infura](https://infura.io/) and demonstrates the functionality.  
-A detailed Ethereume example is available at the section [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md).
+## Prerequisites
+
+* An AnyLog contract on the blockchain platform. The contract manages the metadata policies.
+* The blockchain connection and contract information.
+* An anylog instance to configure.
 
 
 ## Setup of a new node
