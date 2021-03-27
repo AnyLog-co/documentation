@@ -37,6 +37,7 @@ Note, the AnyLog metadata is represented on the blockchain in the form of Polici
   * Project ID: 1qJR0deXYuwf0JYwdTz3YXQ14MZ
   * Project Endpoint: https://rinkeby.infura.io/v3/YOUR-PROJECT-ID
 * An AnyLog node to configure.
+* For a Rinkeby TestNet, funds can be added from this [webite](https://www.rinkeby.io/#faucet).  
 
 ## The blockchain commands
 The AnyLog Blockchain commands are detailed [here](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-blockchain-commands).
