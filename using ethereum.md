@@ -39,8 +39,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * Open an account in Infura - instructions are [here](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
 * From Infura get a Project ID and API endpoint.
   Or use the following demo ID and endpoint:
-  * Project ID: 1qJR0deXYuwf0JYwdTz3YXQ14MZ
-  * Project Endpoint: https://rinkeby.infura.io/v3/YOUR-PROJECT-ID
+  * Project Endpoint: https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
 * An AnyLog node to configure.
 
 ## The blockchain commands
