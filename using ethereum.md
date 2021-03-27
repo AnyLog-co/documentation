@@ -48,7 +48,7 @@ The AnyLog Blockchain commands are detailed [here](https://github.com/AnyLog-co/
 
 ## Connecting to Ethereum
 
-* Assign the Endpoint to a variable call ***provider***:
+* Assign the Endpoint to a variable:
 <pre>
 provider = https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
 </pre>
@@ -90,7 +90,7 @@ public_key = 0xb425E72041d1c5a640BFc4479A808Da83b83b515
 private_key = 0x2e0796621732f74ac49a532e523bedbd707e4d1324506ff63528b553dc101ab0
 </pre>
 
-Use the following command to specify the account information to use:
+* Use the ***set account info*** command to specify the account information to use:
 
 <pre>
 blockchain set account info where platform = ethereum and private_key = !private_key and public_key = !public_key
@@ -106,11 +106,17 @@ Users can maintain multiple independent networks by deploying multiple contracts
 Nodes that are assigned to the same contract, form a network.
 
 <pre>
-blockchain deploy contract where  platform = ethereum and public_key = !public_key
+contract = blockchain deploy contract where  platform = ethereum and public_key = !public_key
 </pre>
 
 Executing the ***deploy contract*** command provides the contract address.    
 Nodes that share the same contract form a network.
+
+Add the contract information to the Ethererum connection information using the command
+<pre>
+blockchain set account info where platform = ethereum and contract = !contract
+</pre>
+
 
 ## Updating a policy on the blockchain
 
