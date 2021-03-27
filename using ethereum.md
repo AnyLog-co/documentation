@@ -43,7 +43,7 @@ The AnyLog Blockchain commands are detailed [here](https://github.com/AnyLog-co/
 
 ## Connecting to Ethereum
 
-* Assign theEndpoint to a variable call ***provider***:
+* Assign the Endpoint to a variable call ***provider***:
 <pre>
 provider = https://rinkeby.infura.io/v3/1qJR0deXYuwf0JYwdTz3YXQ14MZ
 provider = https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
@@ -54,12 +54,12 @@ Use the following command to connect using the Endpoint:
 blockchain connect ethereum where provider = !provider
 </pre>
 
-Use the following command to test the connecttion parameters and status:
+Use the following command to test the connection parameters and status:
 <pre>
 get platforms
 </pre>
 
-And receiving the following output:
+Executing the ***get platforms*** command provides the following output:
 <pre>
 Blockchains connected
 Name     Active Balance                   URL                                                           Public Key/Contract
@@ -69,10 +69,29 @@ ethereum|True  |Failed to extract balance|https://rinkeby.infura.io/v3/45e96d7ac
 </pre>
 Note that keys were not yet created and therefore there in no available balance.  
 
-# Create an Account
+## Create an Account 
 
 Use the following command to create a  new Ethereum avccount:
 <pre>
 blockchain create account ethereum
+</pre>
+
+Executing the ***create account*** command provides an account address and a private key that can be used to create and maintain the metadata contract.
+
+## Associate an account with the Ethereum connection
+
+* Assign the the public key and private key to variables as in the example below:
 <pre>
+public_key = 0x1b9111b1Cf17cB64C45fD724d87c118A592ab909
+private_key = 0xb06d88b2fd29ed27783bd01050bb46980caf7252bf02788093c97885c1a30f67
+</pre>
+
+Use the following command to specify the account information to use:
+
+<pre>
+blockchain set account info where platform = ethereum and private_key = !private_key and public_key = !public_key
+</pre>
+
+
+
 
