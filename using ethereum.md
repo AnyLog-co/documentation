@@ -122,18 +122,15 @@ blockchain set account info where platform = ethereum and contract = !contract
 
 ## Review the connection information
 
-
 Executing the ***get platforms*** command provides the following output:
 <pre>
-
 Blockchains connected
 Name     Active Balance                          URL                                                           Public Key/Contract
 --------|------|--------------------------------|-------------------------------------------------------------|------------------------------------------|
 ethereum|True  |Ether: 2 Wei: 999567574000000000|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|0xb425E72041d1c5a640BFc4479A808Da83b83b515|
         |      |                                |                                                             |0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0|
-
+</pre>
 Note that the Ethereum connection is now assigned with the contract (and the balance is the outcome of the [transferring funds](#transfer-funds-to-the-account) step).
-
 
 ## Updating a policy on the blockchain
 
