@@ -75,7 +75,7 @@ wget https://raw.githubusercontent.com/jonas-werner/EdgeX_Tutorial/master/docker
 <pre>
 cp docker-compose_step1.yml docker-compose.yml 
 </pre>
-Change the file configuration as [detailed below](#configure-the-docker-composeyml-file).
+Change the file configuration as [detailed below](#configure-the-edgex-docker-composeyml-file).
 
 4) Download Docker-Compose
 <pre>
@@ -116,11 +116,12 @@ docker-compose down -v
 
 In a docker-compose.yml file, services represent the containers that will be created. 
 To configure EdgeX to publish data on AnyLog as an MQTT message broker, configure the file as follows:
+
 * uncomment the app-service-mqtt
 * Replace "YOUR-UNIQUE-BROKER-URL" and "YOUR-UNIQUE-BROKER-PORT" with the AnyLog URL and Port declared on the AnyLog ***run message broker*** command.
 
-app-service-mqtt:
 <pre>
+app-service-mqtt:
       image: edgexfoundry/docker-app-service-configurable:1.1.0
       ports:
         - "0.0.0.0:48101:48101"
