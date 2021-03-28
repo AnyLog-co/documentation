@@ -52,7 +52,7 @@ The AnyLog Blockchain commands are detailed [here](https://github.com/AnyLog-co/
 provider = https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
 </pre>
 
-* Use the following command to connect using the Endpoint:
+* Use the following command to connect the AnyLog node to the Endpoint:
 <pre>
 blockchain connect to ethereum where provider = !provider
 </pre>
