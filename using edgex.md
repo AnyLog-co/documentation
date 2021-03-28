@@ -119,6 +119,7 @@ To configure EdgeX to publish data on AnyLog as an MQTT message broker, configur
 
 * uncomment the app-service-mqtt
 * Replace "YOUR-UNIQUE-BROKER-URL" and "YOUR-UNIQUE-BROKER-PORT" with the AnyLog URL and Port declared on the AnyLog ***run message broker*** command.
+* Replace "YOUR-UNIQUE-TOPIC" with the topic name to use.
 
 <pre>
 app-service-mqtt:
@@ -158,5 +159,15 @@ app-service-mqtt:
   #     - logging  # uncomment if re-enabled remote logging
         - data
 </pre>
+
+### VIew statistics relating data processed on the AnyLog Broker
+
+The ***get broker*** command provides in information on the data processed on the broker.  
+Usage:  
+<pre>
+get broker
+</pre>
+
+
 
 
