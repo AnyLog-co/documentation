@@ -37,7 +37,7 @@ The AnyLog node receiving the data can be an Operator node that hosts the data o
 The AnyLog node receiving the data needs to be configured as follows:
 
 * Enable the ***Message Broker*** functionality:   
-Usage
+Usage:
 <pre>
 run message broker [ip] [port] [local ip] [Local port] [threads]
 </pre>
@@ -162,7 +162,7 @@ app-service-mqtt:
 
 ### VIew statistics relating data processed on the AnyLog Broker
 
-The ***get broker*** command provides in information on the data processed on the broker.  
+The ***get broker*** command provides statistics on the data processed using the broker service on the AnyLog node.  
 Usage:  
 <pre>
 get broker
