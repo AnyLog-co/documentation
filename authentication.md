@@ -14,7 +14,7 @@ When an external user or application connects to a node in the network, the node
 against a local list and if validated, the user inherits the permissions provided to the node.
 
 
-# Creating a private and public key for a node
+# Creating a private and a public key for a node in the netork
 
 These keys are kept on the node. The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.
 
@@ -30,7 +30,7 @@ get node id
 </pre> 
 Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
 
-# Creating a private and public key for a user
+# Creating a private and a public key for a user
 
 These keys are provided to a user and managed by the user. 
 The public key uniquely identifies the user and the private key allows to sign policies added to the the blockchain by the user.  
