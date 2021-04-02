@@ -7,6 +7,8 @@ The HA process is such that multiple Operators maintain the same data such that 
 are directed to the surviving node.    
 This document explains how to configure AnyLog to provide High Availability and the commands that monitor and report on the HA state.
 
+This document extends the explanations in [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
+
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
