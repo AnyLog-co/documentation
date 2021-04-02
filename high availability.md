@@ -2,10 +2,10 @@
 
 ## Overview
 
-AnyLog can be configured such that data maintained in the Opertors Nodes is highly available.  
-The HA process is such that multiple Operators maintain the same data such that is an Operator fails, the data is available on a surviving Operator and queries 
+AnyLog can be configured such that data is highly available.  
+The HA process is such that multiple Operators maintain the same data such that if an Operator fails, the data is available on a surviving Operator and queries 
 are directed to the surviving node.    
-This document explains how to configure AnyLog to provide High Availability and the commands that monitor and report on the HA state.
+This document explains how to configure AnyLog to provide High Availability, and details the commands that monitor and report on the HA state.
 
 This document extends the explanations in [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
@@ -13,7 +13,7 @@ This document extends the explanations in [Data Distribution and Configuration](
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
 one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster) and the number of
-operators assigned to each cluster determine the number of copies of the data maintained in the cluster (all the operators assigned to a cluster maintain the same data).  
+operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators assigned to a cluster maintain the same data).  
 
 Below is an example of a policy declaring a cluster:
 
@@ -35,7 +35,7 @@ Below is an example of a policy declaring a cluster:
 The cluster includes the list of tables that use the cluster for storage. If the same table is listed in multiple clusters,
 the data of the table is split between the clusters.  
 Notes: 
-1) A cluster is a logical definition, the actual storage is on the operators that are associated with the cluster (and all the operators assined to a cluster maintain the same data).
+1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
 2) The ID and Date attributes of the policy are added by the network protocol.
 3) A policy ID uniquely identifies a policy, therefore, the ID of the cluster policy uniquely identifies the cluster.
 
@@ -54,11 +54,11 @@ An Operator is assigned to a cluster in the following manner:
 </pre>
 
 Note: 
-1) The value for the key ***cluster*** is the Cluster ID that is assigned to the Operator.
-2) All the data provided to the cluster will be hosted with the operator (as well as with the other operators that are associated with the cluster).
+1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy.
+2) All the data provided to the cluster will be hosted by the operator (as well as with the other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
-The example below enables 3 processes on the Operator:
+The example below enables 3 processes on the Operator node:
 
 | Command        | Functionality  |
 | ---------- | -------| 
