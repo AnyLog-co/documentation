@@ -57,3 +57,19 @@ Note:
 1) The value for the key ***cluster*** is the Cluster ID that is assigned to the Operator.
 2) All the data provided to the cluster will be hosted with the operator (as well as with the other operators that are associated with the cluster).
 
+## Configuring an Operator Node
+The example below enables 3 processes on the Operator:
+
+| Command        | Functionality  |
+| ---------- | -------| 
+| run operator | Enables the process that ingests data to the local databases |
+| run data distributor | Distributes data received from external sources, like sensors, to the operators that support the cluster |
+| run data consumer | Enables the process that retrieves data which is missing on the Operator Node from the operators that support the cluster |
+
+Example:
+
+<pre>
+run operator where create_table = true and update_tsd_info = true and archive = true and distributor = true
+run data distributor
+run data consumer where start_date = -30d 
+</pre>
