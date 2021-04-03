@@ -169,6 +169,7 @@ Options are optional and determine the information of interest, expressed as a w
 | table    | The name of the table to use. | tsd_info |
 | start_date | retrieve entries with a date greater or equal to the start_date. | |
 | end_date | retrieve entries with a date earlier than the end_date. | |
+
 Examples:  
 <pre> 
 time file summary
