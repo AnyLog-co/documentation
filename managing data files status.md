@@ -194,8 +194,8 @@ The output provides the summary on each table as follows:
 | To ID | The last Row ID in the TSD table within the requested time range |
 | Files Count | The number of files ingested within the requested time range |
 | Source Count | The number of sources (like sensors) providing data during the requested time range |
-| Status 1 | The number of unique status messages updates in the "status 1" coulumn. The value 1 indicates all status messages are the same |
-| Status 2 | The number of unique status messages updates in the "status 2" coulumn. The value 1 indicates all status messages are the same |
+| Status 1 | The number of unique status-message updates in the "status 1" coulumn. The value 1 indicates all status messages are the same |
+| Status 2 | The number of unique status-message updates in the "status 2" coulumn. The value 1 indicates all status messages are the same |
 | Total Rows | The number of rows ingested in the requested time range |
 
 #### Creating and dropping the TSD tables
