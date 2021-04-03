@@ -136,11 +136,11 @@ time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "Fil
 </pre>
 
 #### Retrieve information from a TSD table
-The following call allows to retrieve information from a TSD table:
+The following command retrieves information from a TSD table. The information includes the details of each file ingested to the local database.
 <pre> 
-time file get [options]
+time file get where [options]
 </pre>
-Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
 | ---------- | -------| -------| 
@@ -156,6 +156,45 @@ time file get
 time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where start_date = -3d and end_date = -2d
 </pre>
+
+The following command retrieves summary information from a TSD table. 
+<pre> 
+time file summary where [options]
+</pre>
+Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+ 
+| Key        | Value  | Default | 
+| ---------- | -------| -------| 
+| table    | The name of the table to use. | tsd_info |
+| start_date | retrieve entries with a date greater or equal to the start_date. | |
+| end_date | retrieve entries with a date earlier than the end_date. | |
+Examples:  
+<pre> 
+time file summary
+time file summary where start_date = -3d
+</pre>
+
+An example of the output is the following:
+<pre>
+DBMS          Table       Start Date          From ID End Date            To ID Files Count Source Count Status 1 Status 2 Total Rows
+-------------|-----------|-------------------|-------|-------------------|-----|-----------|------------|--------|--------|----------|
+litsanleandro|heat_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|   50|         50|           1|       1|       1|   453,455|
+litsanleandro|ping_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|  378|        378|           1|       1|       1|    77,624|
+</pre>
+The output provides the summary on each table as follows:
+| Column name| explanation | 
+| ---------- | -------|
+| DBMS | The DBMS containing the ingested data |
+| Table | The Table containing the ingested data |
+| Start Date | The first date within the requested time range with data ingested |
+| From ID | The first Row ID in the TSD table within the requested time range |
+| End Date | The last date within the requested time range with data ingested |
+| To ID | The last Row ID in the TSD table within the requested time range |
+| Files Count | The number of files ingested within the requested time range |
+| Source Count | The number of sources (like sensors) providing data during the requested time range |
+| Status 1 | The number of unique status messages updates in the "status 1" coulumn. The value 1 indicates all status messages are the same |
+| Status 2 | The number of unique status messages updates in the "status 2" coulumn. The value 1 indicates all status messages are the same |
+| Total Rows | The number of rows ingested in the requested time range |
 
 #### Creating and dropping the TSD tables
 The ***tsd_info*** table is created using the following command:
