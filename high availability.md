@@ -77,14 +77,14 @@ run data consumer where start_date = -30d
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
 
-## VIew the distribution of data to clusters:
+## View the distribution of data to clusters:
 The following command shows how data is distributed:
 <pre>
 blockchain query metadata
 </pre>
 Note: More details are available [here](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#view-data-distribution-policies).
 
-## VIew the distribution of data to an operator:
+## View the distribution of data to an operator:
 The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:
 <pre>
 get cluster info
