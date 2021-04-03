@@ -157,6 +157,7 @@ time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where start_date = -3d and end_date = -2d
 </pre>
 
+
 #### Retrieve summary information from a TSD table
 The following command retrieves summary information from a TSD table. 
 <pre> 
@@ -197,6 +198,13 @@ The output provides the summary on each table as follows:
 | Status 1 | The number of unique status-message updates in the "status 1" coulumn. The value 1 indicates all status messages are the same |
 | Status 2 | The number of unique status-message updates in the "status 2" coulumn. The value 1 indicates all status messages are the same |
 | Total Rows | The number of rows ingested in the requested time range |
+
+#### Retrieve the list of files which were not ingested on the local node
+The following command retrieves the list of files that were identified as missing and the source node failed to deliver. 
+<pre> 
+time file errors where [options]
+</pre>
+The options are the same as the options in the [time file get](#retrieve-information-from-a-tsd-table) command. 
 
 #### Creating and dropping the TSD tables
 The ***tsd_info*** table is created using the following command:
