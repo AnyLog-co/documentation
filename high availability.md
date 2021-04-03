@@ -55,7 +55,7 @@ An Operator is assigned to a cluster in the following manner:
 
 Note: 
 1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy.
-2) All the data provided to the cluster will be hosted by the operator (as well as with the other operators that are associated with the cluster).
+2) All the data provided to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
 The example below enables 3 processes on the Operator node:
@@ -73,6 +73,9 @@ run operator where create_table = true and update_tsd_info = true and archive = 
 run data distributor
 run data consumer where start_date = -30d 
 </pre>
+
+With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
+synchronize its locally hosted data with the peer operators that support the cluster.
 
 ## VIew the distribution of data to clusters:
 The following command shows how data is distributed:
