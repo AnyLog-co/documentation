@@ -73,3 +73,16 @@ run operator where create_table = true and update_tsd_info = true and archive = 
 run data distributor
 run data consumer where start_date = -30d 
 </pre>
+
+## VIew the distribution of data to clusters:
+The following command shows how data is distributed:
+<pre>
+blockchain query metadata
+</pre>
+Note: More details are available [here](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#view-data-distribution-policies).
+
+## VIew the distribution of data to an operator:
+The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:
+<pre>
+get cluster info
+</pre>
