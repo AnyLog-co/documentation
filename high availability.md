@@ -155,7 +155,7 @@ A listed file name:
 </pre>
 The archive directory is determined by the first 6 digits of the last field in the file name (the name segment before the file type 
 representing the file ingestion date and time - 210404201021 in the example below).  
-Details on file naming are available at the [The file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention) section.
+Details on file naming are available at the [file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention) section.
 
 ## Query execution
 
