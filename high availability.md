@@ -64,11 +64,11 @@ The example below enables 3 processes on an Operator node. By enabling these pro
 will be synchronized among the Operators such that the local databases on each Operator maintain a complete data set 
 and all the Operators supporting the cluster maintain identical data.
 
-| Command        | Functionality  |
+| Command        | Functionality  | 
 | ---------- | -------| 
-| run operator | Enables the process that ingests data to the local databases. |
-| run data distributor | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
-| run data consumer | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
+| [run operator](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process) | Enables the process that ingests data to the local databases. |
+| [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
+| [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
 
 Example:
 
