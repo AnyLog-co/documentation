@@ -74,13 +74,15 @@ This call creates the table with the needed columns.
 ```drop table tsd_info where dbms = almgm```  
 This call creates the table with the needed columns.
 
-## Time File command
+## Time File commands
 
-The ***time file*** command allows to a) change file names to follow the data files naming convention and b) monitor the data ingested on each Operator node.
+The ***time file*** commands is a set of commands to monitor and manage the data ingested on each Operator node.
 
 ### Usage: 
  
 #### Set the file name to satisfy the naming convention
+The ***time file rename*** command changes the names of files containing data to follow the data files naming convention.  
+Usage:  
 <pre>
 time file rename [source file path and name] to dbms = [dbms name] and table = [table name] and source = [source ID] and hash = [hash value] and instructions = [instructions id]
 </pre>
@@ -171,9 +173,11 @@ Options are optional and determine the information of interest, expressed as a w
 | start_date | retrieve entries with a date greater or equal to the start_date. | |
 | end_date | retrieve entries with a date earlier than the end_date. | |
 
+Note: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
 Examples:  
 <pre> 
 time file summary
+time file summary where table = *
 time file summary where start_date = -3d
 </pre>
 

@@ -58,6 +58,7 @@ Note:
 2) All the data provided to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
+
 The example below enables 3 processes on the Operator node:
 
 | Command        | Functionality  |
@@ -77,7 +78,7 @@ run data consumer where start_date = -30d
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
 
-## View the distribution of data to clusters:
+## View the distribution of data to clusters
 
 The command ***get data nodes*** details the Operators that host each table's data.
 Usage:
@@ -94,9 +95,35 @@ blockchain query metadata
 </pre>
 Note: More details are available [here](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#view-data-distribution-policies).
 
+## View the distribution of data to an operator
 
-## View the distribution of data to an operator:
 The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:
 <pre>
 get cluster info
 </pre>
+
+## The Time Series Data (TSD) Management tables
+
+As multiple Operators support each cluster and as each operator can receive data from different sources, the operators sync the data they receive
+such that all operators og a cluster host identical set of data.
+TH synchronization is supported by push and pull processes.  
+The push is done when an Operator receives data from a data source, the data is pushed by the Operator to the peer members of the cluster.
+The pull is done by each member when the member determines that data available on peer nodes is missing.  
+The state of the data on each node is recorded on a set of tables called tsd table in the following manner:  
+* Data received from a data source is registered in a table called TSD_INFO.
+* Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
+Note: When an Operator policy is added, the policy is updated with a member id. The member id is unique among the cluster members.
+  
+The following ***time file*** commands allow to query the TSD tables:
+
+* Use the ***time file summary*** command to find the total rows ingested
+<pre>
+time file summary where table = * wnd start_date = -10d
+</pre>
+
+* Use the errors command to list the files that were not ingested
+<pre>
+time file errors where table = tsd_159 wnd start_date = -10d
+</pre>
+
+Additional information on the time file commands is available at [Time File command](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands)
