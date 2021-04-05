@@ -133,11 +133,12 @@ Additional information on the time file commands is available at the [Time File 
 
 ## Query execution
 
-Queries are executed by identifying the clusters that host the relevant data, identifying an active Operator for each cluster 
-and shipping the query to the identified Operators for execution. If an Operator fails to respond, thr Operator is flagged as non-active and 
+Queries are executed by dynamically and transparently identifying the clusters that host the relevant data, identifying an active Operator for each cluster 
+and shipping the query to the identified Operators for execution. The query process assembles a unified and complete reply from
+the participating data regardless of the Operator that participated in the query process. If an Operator fails to respond, the Operator is flagged as non-active and 
 queries will not be shipped to the non-active Operator.
 
-The following command provides information on the querirs being executed, their status and the Operators that partocipate in the query process:
+The following command provides information on the queries being executed, their status and the Operators that participate in the query process:
 <pre>
 query status
 </pre>
@@ -149,6 +150,6 @@ Users can add to a cluster as many Operator Nodes as needed. This process can be
 if it is needed to increase the number of copies of the data.  
 Adding a node is by [configuring an AnyLog Instance](#configuring-an-operator-node) to be an Operator and adding
 a [policy](#the-operator-policy) that associates the Operator to the cluster.       
-The added node will automatically synchronize with the cluster peers to create on the newly added node a complete set of the cluster's data.
+The added Operator will automatically synchronize with the cluster peers to create on the newly added node a complete set of the cluster's data.
 
 
