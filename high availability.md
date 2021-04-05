@@ -121,12 +121,12 @@ The following ***time file*** commands allow to query the TSD tables:
 
 * Use the ***time file summary*** command to find the total rows ingested within a time interval.
 <pre>
-time file summary where table = * wnd start_date = -10d
+time file summary where table = * and start_date = -10d
 </pre>
 
 * Use the errors command to list the files that were not ingested within a time interval.
 <pre>
-time file errors where table = tsd_159 wnd start_date = -10d
+time file errors where table = tsd_159 and start_date = -10d
 </pre>
 
 Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
