@@ -23,17 +23,19 @@ More details are provided below.
 File name is structured as follows:
 <pre>
 [dbms name].[table name].[data source].[hash value].[instructions].[TSD member].[TSD ID].[TSD date].[file type]
-
 </pre>
-[dbms name] - The name of the database to include the data.
-[table name] - The name of the table to include the data.
-[data source] - The ID of the data source generating the data.
-[hash value] - The hash value of the file.
-[instructions] - The ID of the policy that mapps the file data to a table structure (or '0' if no associated policy).
-[TSD member] - If the file was send by a cluster member, the member ID sending the data.
-[TSD ID] - The ID of the file in the TSD table.
-[TSD date] - A 12 bytes key in the format: YYMMDDHHMMSS.
-[file type] - json, for a JSON file.
+
+| Name Section | Functionality  | 
+| ---------- | -------| 
+| dbms name | The name of the database to include the data. |
+| table name | The name of the table to include the data.  | 
+| data source | The ID of the data source generating the data. | 
+| hash value | The hash value of the file. | 
+| instructions | The ID of the policy that mapps the file data to a table structure (or '0' if no associated policy). | 
+| TSD member | If the file was send by a cluster member, the member ID sending the data. | 
+| TSD ID | The ID of the file in the TSD table. | 
+| TSD date | A 12 bytes key in the format: YYMMDDHHMMSS representing the date and time the file was processed. | 
+| file type | json, for a JSON file. | 
 
 ## The info table
 

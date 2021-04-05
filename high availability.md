@@ -129,7 +129,33 @@ time file summary where table = * and start_date = -10d
 time file errors where table = tsd_159 and start_date = -10d
 </pre>
 
-Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
+Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.  
+
+## The Archive of source data
+
+When a data file is provided to an Operator, the file is ingested into the local database. The source file is compressed and 
+archived in an archive directory such that, if needed, the source file can be used to complete a data set on an Operator node that 
+requests the data.  
+The location of the archive is configurable, and the root of the archive is addressed by ```archive_dir``` parameter.  
+The following command displays the location:
+<pre>
+!archive_dir
+</pre>
+The subdirectories partition the files by days usinf the following hierarchy: Year --> Month --> Day.
+Users can navigate in the hiereachy using the ***get directories*** and ***get files*** commands.
+The example below navigates from the root to list the files ingested on April 4th, 2021:
+<pre>
+get files !archive_dir/21/04/04
+</pre>
+The [time file errors](#the-time-series-data-tsd-management-tables) command list the files which were not properly ingested 
+and each listed file name includes the directory name where the file is archived as in the example below:  
+A listed file name:
+<pre>
+/app/AnyLog-Network/data/archive/21/04/04/litsanleandro.ping_sensor.0.bd617b6ddb873750d9db561814297f23.0.120.119.210404201021.json
+</pre>
+The archived directory are the first 6 digits of the last field in the file name (the name segment before the file type 
+representing the file ingestion date and time).  
+More detailed on the file naming are available at [The file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention).
 
 ## Query execution
 
