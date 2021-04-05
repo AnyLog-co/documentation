@@ -78,11 +78,22 @@ With the configuration above, each operator that receives data will share the da
 synchronize its locally hosted data with the peer operators that support the cluster.
 
 ## View the distribution of data to clusters:
-The following command shows how data is distributed:
+
+The command ***get data nodes*** details the Operators that host each table's data.
+Usage:
+<pre>
+get data nodes where company = [company name] and dbms = [dbms name] and table = [table name]  
+</pre>
+
+The where condition is optional. If company name or database name or table name are not provided, the process assumes a 
+request for all values.
+
+The following command provides similar information using a different presentation:
 <pre>
 blockchain query metadata
 </pre>
 Note: More details are available [here](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#view-data-distribution-policies).
+
 
 ## View the distribution of data to an operator:
 The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:

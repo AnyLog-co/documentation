@@ -194,6 +194,7 @@ Options:
 | get reply ip | Retrieve the IP address for reply messages. |
 | get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
 | get acceess [path and file name or directory name] | Get the access rights to the provided file or directory. |
+| get data nodes | Details the Operators that host each table's data. |
 
 #### Monitoring node status options:
 
