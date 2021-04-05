@@ -130,3 +130,25 @@ time file errors where table = tsd_159 wnd start_date = -10d
 </pre>
 
 Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
+
+## Query execution
+
+Queries are executed by identifying the clusters that host the relevant data, identifying an active Operator for each cluster 
+and shipping the query to the identified Operators for execution. If an Operator fails to respond, thr Operator is flagged as non-active and 
+queries will not be shipped to the non-active Operator.
+
+The following command provides information on the querirs being executed, their status and the Operators that partocipate in the query process:
+<pre>
+query status
+</pre>
+Additional information is available in [Command options for profiling and monitoring queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#command-options-for-profiling-and-monitoring-queries).
+
+## Adding Operator Nodes to a Cluster
+
+Users can add to a cluster as many Operator Nodes as needed. This process can be done when an Operator node fails or
+if it is needed to increase the number of copies of the data.  
+Adding a node is by [configuring an AnyLog Instance](#configuring-an-operator-node) to be an Operator and adding
+a [policy](#the-operator-policy) that associates the Operator to the cluster.       
+The added node will automatically synchronize with the cluster peers to create on the newly added node a complete set of the cluster's data.
+
+
