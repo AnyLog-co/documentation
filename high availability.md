@@ -32,12 +32,13 @@ Below is an example of a policy declaring a cluster:
                'status' : 'active'}},
 </pre>
 
-The cluster includes the list of tables that use the cluster for storage. If the same table is listed in multiple clusters,
+The cluster policy includes the list of tables that use the cluster for storage. If the same table is listed in multiple clusters,
 the data of the table is split between the clusters.  
+
 Notes: 
 1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
-2) The ID and Date attributes of the policy are added by the network protocol.
-3) A policy ID uniquely identifies a policy, therefore, the ID of the cluster policy uniquely identifies the cluster.
+2) A policy ID and Date attributes of the policy are added by the network protocol.
+3) The policy ID uniquely identifies the cluster.
 
 ## The Operator Policy
 
@@ -59,13 +60,14 @@ Note:
 
 ## Configuring an Operator Node
 
-The example below enables 3 processes on the Operator node:
+The example below enables 3 processes on the Operator node. These processes allow hosting the data and synchronization such that 
+the data maintain on the operator is identical to the data maintained by a different operator that support the same cluster.
 
 | Command        | Functionality  |
 | ---------- | -------| 
-| run operator | Enables the process that ingests data to the local databases |
-| run data distributor | Distributes data received from external sources, like sensors, to the operators that support the cluster |
-| run data consumer | Enables the process that retrieves data which is missing on the Operator Node from the operators that support the cluster |
+| run operator | Enables the process that ingests data to the local databases. |
+| run data distributor | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
+| run data consumer | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
 
 Example:
 
@@ -80,7 +82,7 @@ synchronize its locally hosted data with the peer operators that support the clu
 
 ## View the distribution of data to clusters
 
-The command ***get data nodes*** details the Operators that host each table's data.
+The command ***get data nodes*** details the Operators that host each table's data.  
 Usage:
 <pre>
 get data nodes where company = [company name] and dbms = [dbms name] and table = [table name]  
@@ -126,4 +128,4 @@ time file summary where table = * wnd start_date = -10d
 time file errors where table = tsd_159 wnd start_date = -10d
 </pre>
 
-Additional information on the time file commands is available at [Time File command](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands)
+Additional information on the time file commands is available at the [Time File commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
