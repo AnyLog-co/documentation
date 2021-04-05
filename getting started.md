@@ -296,6 +296,11 @@ The network maintains a global metadata that is stored in a blockchain or in a M
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
 Additional information on the blockchain commands is available in the [Blockchain commands](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md) section.
 
+## High Availability (HA)
+
+Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
+Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
+Additional information on the HA processes is available in the [High Availability](https://github.com/AnyLog-co/documentation/blob/master/high%20availability.md#high-availability-ha) section.
 
 ## Network security
 
