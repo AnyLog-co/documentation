@@ -108,25 +108,25 @@ get cluster info
 ## The Time Series Data (TSD) Management Tables
 
 As multiple Operators support each cluster and as each operator can receive data from different sources, the operators sync the data they receive
-such that all operators supporting the same cluster host identical set of data.
-TH synchronization is supported by push and pull processes.  
+such that all operators supporting the same cluster host identical set of data.  
+The synchronization is supported by push and pull processes:  
 The push is done when an Operator receives data from a data source, the data is pushed by the Operator to the peer members of the cluster.
 The pull is done by each member when the member determines that data available on peer nodes is missing.  
-The state of the data on each node is recorded on a set of tables called tsd table in the following manner:  
+The state of the data on each node is recorded on a set of tables called TSD tables in the following manner:  
 * Data received from a data source is registered in a table called TSD_INFO.
 * Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
-Note: When an Operator policy is added, the policy is updated with a member id. The member id is unique among the cluster members.
+Note: When an Operator policy is added, the policy is updated with a member ID. The member ID is unique among the cluster members.
   
 The following ***time file*** commands allow to query the TSD tables:
 
-* Use the ***time file summary*** command to find the total rows ingested
+* Use the ***time file summary*** command to find the total rows ingested within a time interval.
 <pre>
 time file summary where table = * wnd start_date = -10d
 </pre>
 
-* Use the errors command to list the files that were not ingested
+* Use the errors command to list the files that were not ingested within a time interval.
 <pre>
 time file errors where table = tsd_159 wnd start_date = -10d
 </pre>
 
-Additional information on the time file commands is available at the [Time File commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
+Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.
