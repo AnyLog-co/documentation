@@ -141,9 +141,9 @@ The following command displays the location:
 <pre>
 !archive_dir
 </pre>
-The subdirectories partition the files by days usinf the following hierarchy: Year --> Month --> Day.
-Users can navigate in the hiereachy using the ***get directories*** and ***get files*** commands.
-The example below navigates from the root to list the files ingested on April 4th, 2021:
+The subdirectories of the archive partition the files by days using the following hierarchy: Year --> Month --> Day.  
+Users can navigate in the hiereachy using the ***get directories*** and ***get files*** commands.  
+The example below retrieves the list of files ingested on April 4th, 2021:
 <pre>
 get files !archive_dir/21/04/04
 </pre>
@@ -153,9 +153,9 @@ A listed file name:
 <pre>
 /app/AnyLog-Network/data/archive/21/04/04/litsanleandro.ping_sensor.0.bd617b6ddb873750d9db561814297f23.0.120.119.210404201021.json
 </pre>
-The archived directory are the first 6 digits of the last field in the file name (the name segment before the file type 
-representing the file ingestion date and time).  
-More detailed on the file naming are available at [The file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention).
+The archive directory is determined by the first 6 digits of the last field in the file name (the name segment before the file type 
+representing the file ingestion date and time - 210404201021 in the example below).  
+Details on file naming are available at the [The file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention) section.
 
 ## Query execution
 
