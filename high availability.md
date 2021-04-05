@@ -60,8 +60,9 @@ Note:
 
 ## Configuring an Operator Node
 
-The example below enables 3 processes on the Operator node. These processes allow hosting the data and synchronization such that 
-the data maintain on the operator is identical to the data maintained by a different operator that support the same cluster.
+The example below enables 3 processes on an Operator node. By enabling these processes on all Operators, the data  
+will be synchronized among the Operators such that the local databases on each Operator maintain a complete data set 
+and all the Operators supporting the cluster maintain identical data.
 
 | Command        | Functionality  |
 | ---------- | -------| 
