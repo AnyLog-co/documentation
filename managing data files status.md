@@ -76,7 +76,7 @@ This call creates the table with the needed columns.
 
 ## Time File commands
 
-The ***time file*** commands is a set of commands to monitor and manage the data ingested on each Operator node.
+The ***time file*** commands are a set of commands to monitor and manage data ingested on each Operator node.
 
 ### Usage: 
  
