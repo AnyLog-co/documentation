@@ -104,10 +104,10 @@ The following command provides the list of tables supported by the Operator and 
 get cluster info
 </pre>
 
-## The Time Series Data (TSD) Management tables
+## The Time Series Data (TSD) Management Tables
 
 As multiple Operators support each cluster and as each operator can receive data from different sources, the operators sync the data they receive
-such that all operators og a cluster host identical set of data.
+such that all operators supporting the same cluster host identical set of data.
 TH synchronization is supported by push and pull processes.  
 The push is done when an Operator receives data from a data source, the data is pushed by the Operator to the peer members of the cluster.
 The pull is done by each member when the member determines that data available on peer nodes is missing.  
