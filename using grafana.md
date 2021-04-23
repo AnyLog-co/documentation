@@ -93,6 +93,7 @@ type            - The type of the query. The default value is 'sq' and other val
 sql             - A sql statement to use.
 details         - An AnyLog command which is not a SQL statement.
 where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
+functions       - A list of SQL functions to use which overwrites the default functions. 
 time_column     - The name of the time column in the Time Series format.
 value_column    - The name of the value column in the Time Series format.
 time_range      - When using a Table view, determines if the query needs to consider the time range. The default value is 'true'.
