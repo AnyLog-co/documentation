@@ -98,6 +98,16 @@ If JSON data is a list of multiple policies, a where condition is required. For 
 blockchain drop policy !operator where ip = 10.0.0.25
 </pre>
 
+### Reflecting blockchain updates on a the local copy of the metadata
+When a process on a node updates a policy on a remote blockchain platform (or on a master node), the process can wait for 
+the update to be reflected on the local copy using the ***blockchain wait for ...*** command:
+<pre>
+blockchain prepare policy !policy     # Add an ID and a date to the policy being updated
+run client (!master_node) blockchain push !policy   # Make the update
+is_updated = blockchain wait for !policy  # Force sync and validate that the update is available
+</pre>
+The wait command will force synchronization with the blockchain platform and validates that the update is reflected on the local file.
+
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the blockchain data in a local JSON file.
 The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
