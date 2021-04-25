@@ -106,7 +106,7 @@ blockchain prepare policy !policy     # Add an ID and a date to the policy being
 run client (!master_node) blockchain push !policy   # Make the update
 is_updated = blockchain wait for !policy  # Force sync and validate that the update is available
 </pre>
-The wait command will force synchronization with the blockchain platform and validates that the update is reflected on the local file.
+The wait command forces synchronization with the blockchain platform and validates that the update is reflected on the local file.
 
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the blockchain data in a local JSON file.
