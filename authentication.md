@@ -240,10 +240,16 @@ For authentication of users, members and message encryption, nodes operate with 
 1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
 2. The private key password - enables the usage of the private key to sign policies and authenticate members.   
  
+### The local password
 The local password is provided using the command:
 <pre>
 set local password = [password]
 </pre>
+If a local password was provided to a node, restarting the node requires to re-provide the same password. 
+When the password is re-provided, it is validated to determine that it is identical to the initial password.
+
+
+### The private key password
 The private key password is provided using the command:
 <pre>
 set private password = [password] [in file]
