@@ -78,7 +78,7 @@ Options:
 | set authentication [on/off]  | Enable / Disable user and message authentication. Default value is ON. |
 | set encryption [on/off]  | Enable / Disable encryption of TCP messages. Default value is OFF. |
 | set compression [on/off]  | Enable / Disable compression of data messages. Default value is OFF. |
-| set local password = [password]  | Provide a password to protect sensitive information that is kept on the node(like private keys and users passwords). |
+| set local password = [password]  | Provide a password to protect sensitive information that is kept on the node (like private keys and users passwords). See also [Using passwords](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-passwords).|
 | set private password = [password] [in file] | Provide the password of the private key with an optional command text [in file] to keep encrypted copy on the filesystem. See also [Using passwords](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-passwords).|
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|

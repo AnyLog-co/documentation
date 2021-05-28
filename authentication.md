@@ -10,11 +10,23 @@ When a public key is associated with the permission group, the node is assigned 
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
 the processing node can validate the authentication of the message and determine the authorization assigned by the relevant permission group.
 
-When an external user or application connects to a node in the network, the node validates the user name and passowrd
-against a local list and if validated, the user inherits the permissions provided to the node.
+When an external user or application connects to a node in the network, and user authentication is enabled, the node validates the user name and password
+against a local list and if validated, the user inherits the permissions provided to the node.  
 
+Use the following command to enable user authentication:
+<pre>
+set user authentication on
+</pre>
+Use the following command to disable user authentication:
+<pre>
+set user authentication off
+</pre>
+Use the following command to determine if user authentication is enabled:
+<pre>
+get authentication
+</pre>
 
-# Creating a private and a public key for a node in the netork
+# Creating a private and a public key for a node in the network
 
 These keys are kept on the node. The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.
 
