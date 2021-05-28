@@ -211,9 +211,9 @@ Nodes in the network can be configured to enable authentication of HTTP REST req
 Basic authentication is enabled using the following procedure:
 
 1. On the AnyLog node:  
-    a. Provide the [local passoword](#The-local-password) (if was not yet provided) usinf the command: ```set local password = [the local passoword]``` 
-    b. Enable user authentication using the command: ```set user authentication on```.        
-    c. Update the list of permitted users using the command: [id add user](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#add-users).
+    a. Provide the [local passoword](#The-local-password) (if was not yet provided) usinf the command: ```set local password = [the local passoword]```   
+    b. Enable user authentication using the command: ```set user authentication on```.          
+    c. Update the list of permitted users using the command: [id add user](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#add-users).  
 2. When the REST call is send, include the following key-value pair to the header:
 <pre>
 key - "Authorization"  
