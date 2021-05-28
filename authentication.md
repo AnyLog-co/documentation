@@ -192,7 +192,7 @@ id remove user where name = john
 
 # Update password
 
-A user can be modify his password using the following command:
+A user can modify his password using the following command:
 <pre>
 id update user password where name = [user name] and old = [old password] and new = [new password]
 </pre>   
@@ -206,13 +206,14 @@ id update user password where name = ori and old = 123456 and new = iugsek88ekA
 
 Nodes in the network can be configured to enable authentication of HTTP REST requests.
 
-## Enabling Basic Authentication
+## Enabling Basic Authentication in a node in the network
 
 Basic authentication is enabled using the following procedure:
 
 1. On the AnyLog node:  
-    a. Enable user authentication using the command: ```set user authentication on```.        
-    b. Update the list of permitted users using the command: [id add user](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#add-users).
+    a. Provide the [local passoword](#The-local-password) (if was not yet provided) usinf the command: ```set local password = [the local passoword]``` 
+    b. Enable user authentication using the command: ```set user authentication on```.        
+    c. Update the list of permitted users using the command: [id add user](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#add-users).
 2. When the REST call is send, include the following key-value pair to the header:
 <pre>
 key - "Authorization"  
@@ -221,13 +222,13 @@ value - Base64 encoded string of the user name and password separated by a colon
 
 Examples of basic authentication setup on 3rd parties tools:
 
-#### Grafana
+#### Enabling Basic Authentication in Grafana
 
 On the Data Source connection page:
 1. In the ***Auth*** section: Enable ***Basic Auth***.
 2. In the ***Basic Auth Details*** section: Add the user name and password.
 
-#### Postman
+#### Enabling Basic Authentication in Postman
 
 In the Authorization Tab:  
 1, select: ***Basic Auth***.  
