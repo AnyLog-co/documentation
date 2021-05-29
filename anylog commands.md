@@ -207,8 +207,11 @@ Options:
 | get ip list | The list of IP addresses available on the node. |
 | get cpu temperature | The CPU temperature. |
 | get node info [options] | Different statistics on the node. |
+| get monitored | Retrieve the list of topics monitored by an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
+| get monitored [topic] | Retrieve monitored info on a specific topic from an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
 
-Add tional information is available at [monitoring nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes).
+
+Additional information is available at [monitoring nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes).
 
 #### Security and encryption related options:  
 
