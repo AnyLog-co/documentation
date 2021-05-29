@@ -1,12 +1,16 @@
 # Monitoring nodes
 
-Nodes in the network can be monitored to determine disk usage, cpu usage, memory usage and networking functionality.  
-Monitoring can be done by retrieving utilization values or by continuously updating database tables with the monitoring data.  
+Nodes in the network can collect and monitor information on data and state. The collected information can be retrieved from the 
+node, or [collected in a database](#Organizing-node-status-in-a-database-table) or send to an 
+[aggregator node](#Organizing-node-status-in-an-aggregator-node) where data from multiple nodes is aggregated and available to query.  
 
-The commands below detail the monitoring functionality:
-Note: 
+Examples of information monitored:
+* Data ingested to local databases and data volumes in the tables.
+* Disk usage, cpu utilization, memory usage and networking functionality.  
+
+Notes: 
 * Some functionalities require psutil installed.
-* Monitoring places tasks on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
+* To support continues monitoring, monitoring tasks are placed on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
 
 ## Monitoring commands
 
@@ -43,7 +47,7 @@ get disk [options] [path]
 get ip list
 </pre>
 
-## Statistics commands
+## The "get node info" command
 
 The ***get node info*** command retrieves additional info and statistics on the current operation of the node.  
 Usage:
@@ -69,7 +73,7 @@ get node info disk_io_counters
 </pre>
 
 
-## Organizing statistics in a database table
+## Organizing node status in a database table
 
 Users can use the scheduler to continuously call for statistics and organize the statistics in a database table.  
 The format to place statistics in a table is the following:
@@ -118,4 +122,76 @@ Note:
 * As partition name is not specified, only the oldest partition is dropped and the active partition is never dropped.
 
  
+## Organizing node status in an aggregator node
 
+An aggregator node is a node that maintains info from multiple nodes, organizes the info by topics and provide a view on 
+the status (associated with each topic) of the different nodes in a single query. Setting a node as an aggregator is simple and does not require a database.
+It provides near real-time view of the monitored nodes' status. However, not as with a database, it only provides the current status 
+and not the historical status information.
+The monitoring process is based on a push process, each participating node pushes a state to the aggregator node periodically.
+The push process is triggered by the scheduler on each participating node.  
+The configuration of a setup with an aggregator node is as follows:
+* On the scheduler of each participating node, trigger the command that retrieved the monitored data, and save the retrieved info in a variable.
+* On the scheduler of each participating node, trigger a message to the aggregator with the command: ***monitor*** that details a topic name with the retrieved info.
+* The command ***get monitored*** on the aggregator retrieves the list of monitored topics.
+* The command ***get monitored [topic]*** on the aggregator retrieves the info associated with the specific topic for each participating node.
+
+### The monitor command
+
+The ***monitor*** command organizes data by topics such that when a topic is queried, the status associated with the topic, 
+from each participating node is retrieved.   
+
+Command details:
+<pre>
+monitor [topic] where ip = [node-ip] and name = [node-name] and info = [json-struct]
+</pre>
+
+| Command option | Details  |
+| ------------- | ------------| 
+| topic  | A string representing a topic. | 
+| ip  |the IP of the node associated with the info. If IP is not provided, the IP of the node sending the monitored info is used. | 
+| name | Optional string identifying a name for the node. |
+| info | A json structure containing the monitored info. |
+
+Example:
+
+<pre>
+monitor operator where ip = 127.0.0.1 and name = 'dmc-usa' and info = { "total events" : 1000, "events per second" : 10" }
+</pre>
+
+### Retrieving the list of monitored topics
+
+<pre>
+get monitored
+</pre>
+
+### Retrieving monitored info
+
+The following command retrieves monitored info, for each participating node, on each monitored topic:
+
+<pre>
+get monitored [topic]
+</pre>
+
+
+### Example configuring a participating node
+
+The following example configures monitoring of 2 topics:
+1. Nodes status (topic name: nodes)
+2. Monitor operators status  (topic name: operators)
+The monitoring commands are assigned to the scheduler for continues monitoring.
+
+Configuring topic ***nodes***
+<pre>
+schedule name = node_status and time = 15 seconds task node_status = get status format = json
+schedule name = monitor_node and time = 15 seconds task run client 23.239.12.151:2048 monitor Nodes where info = !node_status"
+</pre>
+
+Configuring topic ***Operators***
+Note: the command ***get operator stat*** will be using the variables ***disk_space*** and ***cpu_percent*** is assigned with values.
+<pre>
+schedule name = disk_space and time = 15 seconds task disk_space = get disk percentage .
+schedule name = cpu_percent and time = 15 seconds task cpu_percent = get node info cpu_percent
+schedule name = get_operator_stat and time = 15 seconds task operator_stat = get operator stat format = json
+schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
+</pre>
