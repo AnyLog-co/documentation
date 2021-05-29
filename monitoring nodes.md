@@ -122,7 +122,7 @@ Note:
 * As partition name is not specified, only the oldest partition is dropped and the active partition is never dropped.
 
  
-## Organizing node status in an aggregator node
+## Organizing nodes status in an aggregator node
 
 An aggregator node is a node that maintains info from multiple nodes, organizes the info by topics and provide a view on 
 the status (associated with each topic) of the different nodes in a single query. Setting a node as an aggregator is simple and does not require a database.
