@@ -130,8 +130,9 @@ It provides near real-time view of the monitored nodes' status. However, not as 
 and not the historical status information.
 The monitoring process is based on a push process, each participating node pushes a state to the aggregator node periodically.
 The push process is triggered by the scheduler on each participating node.  
+
 The configuration of a setup with an aggregator node is as follows:
-* On the scheduler of each participating node, trigger the command that retrieved the monitored data, and save the retrieved info in a variable.
+* On the scheduler of each participating node, trigger the command that retrieved the monitored info, and save the retrieved info in JSON format7 in a variable.
 * On the scheduler of each participating node, trigger a message to the aggregator with the command: ***monitor*** that details a topic name with the retrieved info.
 * The command ***get monitored*** on the aggregator retrieves the list of monitored topics.
 * The command ***get monitored [topic]*** on the aggregator retrieves the info associated with the specific topic for each participating node.
@@ -139,7 +140,7 @@ The configuration of a setup with an aggregator node is as follows:
 ### The monitor command
 
 The ***monitor*** command organizes data by topics such that when a topic is queried, the status associated with the topic, 
-from each participating node is retrieved.   
+from each participating node is available.   
 
 Command details:
 <pre>
@@ -178,8 +179,9 @@ get monitored [topic]
 
 The following example configures monitoring of 2 topics:
 1. Nodes status (topic name: nodes)
-2. Monitor operators status  (topic name: operators)
-The monitoring commands are assigned to the scheduler for continues monitoring.
+2. Monitor operators status  (topic name: operators)  
+
+In the example below, the monitoring commands are assigned to the scheduler for continues monitoring.
 
 Configuring topic ***nodes***
 <pre>
