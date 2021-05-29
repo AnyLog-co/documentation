@@ -181,7 +181,7 @@ The following example configures monitoring of 2 topics:
 1. Nodes status (topic name: nodes)
 2. Monitor operators status  (topic name: operators)  
 
-In the example below, the monitoring commands are assigned to the scheduler for continues monitoring.
+In the examples below, the monitoring commands are assigned to the scheduler for continues monitoring.
 
 Configuring topic ***nodes***
 <pre>
