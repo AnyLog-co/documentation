@@ -12,7 +12,7 @@ Notes:
 * Some functionalities require psutil installed.
 * To support continues monitoring, monitoring tasks are placed on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
 
-## Commands to monitor data
+## Monitoring data commands
 
 * List of tables in databases and the number of rows in each table
 <pre>
@@ -38,7 +38,7 @@ get operator
 get operator stat format = json
 </pre>
 
-## Commands to monitor nodes state 
+## Monitoring state commands 
 
 * Info on the type and version of the OS, node name and type of processor.
 <pre>
