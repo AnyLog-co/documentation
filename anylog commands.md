@@ -195,6 +195,7 @@ Options:
 | get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
 | get acceess [path and file name or directory name] | Get the access rights to the provided file or directory. |
 | get data nodes | Details the Operators that host each table's data. |
+| get rows count | Details the number of rows in all or specified tables. |
 
 #### Monitoring node status options:
 

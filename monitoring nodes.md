@@ -12,7 +12,33 @@ Notes:
 * Some functionalities require psutil installed.
 * To support continues monitoring, monitoring tasks are placed on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
 
-## Monitoring commands
+## Commands to monitor data
+
+* List of tables in databases and the number of rows in each table
+<pre>
+get rows count where dbms = [dbms name] and table = [table name] and format = [json]
+</pre>
+
+Notes:
+1) If dbms name in not specified, all tables in all databases are considered.  
+2) If table name in not specified, all tables in the specified database are considered.
+3) The default output format is in a table structure. specifying ***format = json*** provides the output in a JSON format.
+
+Examples:
+<pre>
+get rows coun
+get rows count where dbms = dmci and format = json
+get rows count where dbms = aiops and table = lic1_fout
+</pre>
+
+* Commands providing details on ingestion of data by an Operator node
+
+<pre>
+get operator
+get operator stat format = json
+</pre>
+
+## Commands to monitor nodes state 
 
 * Info on the type and version of the OS, node name and type of processor.
 <pre>
