@@ -97,6 +97,7 @@ Use a REST client software (such as Curl or Postman) and issue a ***PUT*** comma
 <pre>
 Key             Value
 ------          -------------
+User-Agent      AnyLog/1.23
 type            The type of data transferred. The default value is ***json***.
 dbms            The logical database to contain the data.
 table           The logical table to contain the data.
@@ -111,6 +112,7 @@ The JSON data is transferred using the data-raw part of the REST call and can in
 
 <pre>
 curl --location --request PUT '10.0.0.78:2049' \
+--header 'User-Agent: AnyLog/1.23' \
 --header 'type: json' \
 --header 'dbms: lsl_demo' \
 --header 'table: ping_sensor' \
