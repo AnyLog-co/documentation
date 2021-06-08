@@ -101,17 +101,18 @@ column.[column name].[data type] = [bring command]
 ***column name*** - The name of the column that is used in the database table.    
 ***data type*** - The data type to use. Supported data types are the following: ***str, int, float, timestamp, bool***.  
 
+
 ***Associating column names with data types and data***  
 The ***column.name.type*** groups the following:   
 * A column in a table by referencing the column name  
 * A data type that is associated with the column  
-* A [bring command](#bring-command) that details how to extract the column data from the source data.  
+* A bring command that details how to extract the column data from the source data.  
 There are 2 ways to detail the association:  
   1.  identify column name and data type with the bring command and expressed as follows:
     <pre>
     column.[column name].[column type] = [bring command]
     </pre> 
-    In the example below, the column ***value** is with a data type float and is associated with data retrieved from the source data using the bring command.   
+    In the example below, the column **value** is assigned with a float data type and is associated with data retrieved from the source data using the bring command.   
     <pre>
     column.value.float = "bring [readings][][value]"
     </pre> 
@@ -119,7 +120,7 @@ There are 2 ways to detail the association:
     <pre>
     column.[column name] = (value = [bring command] and type = [bring command])
     </pre> 
-    In the example below, the column ***value** is associated with data type and value retrieved from the source data:   
+    In the example below, the column **value** is associated with data type and value retrieved from the source data:   
     <pre>
     column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
     </pre> 
