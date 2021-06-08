@@ -68,12 +68,12 @@ The following params are provided for each topic:
 | qos  | The Quality of Service, if omitted, the value provided in the the generic params is used (or, if not available, the default value). |
 | dbms  | The logical DBMS that contains the topic's data or a ***'bring' command*** to extract the dbms name. |
 | table  | The name of the table to contain the data or a ***'bring' command*** to extract the table name. |
-| column.name.type  | The column name of the data to extract from the message, the data type and the ***'bring' command*** to extract the column data. |
+| column.name.type  | The column name and column type that is associated with the data extracted from the message. The column is associated with the ***'bring' command*** that details the rule to extract the column data. |
 
 ***QoS*** - The Quality of Service:      
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message. The ) value serves as the default value.
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
-2 - The highest level of service. Guarantees that each message is received only once by the client.  
+2 - The highest level of service. Guarantees that each message is received only once by the client.
 
 ***Bring Command***  
 The ***bring command*** is an AnyLog command that extracts data from a JSON structure.   
@@ -101,6 +101,29 @@ column.[column name].[data type] = [bring command]
 ***column name*** - The name of the column that is used in the database table.    
 ***data type*** - The data type to use. Supported data types are the following: ***str, int, float, timestamp, bool***.  
 
+***Associating column names with data types and data***  
+The ***column.name.type*** groups the following:   
+* A column in a table by referencing the column name  
+* A data type that is associated with the column  
+* A [bring command](#bring-command) that details how to extract the column data from the source data.  
+There are 2 ways to detail the association:  
+  1.  identify column name and data type with the bring command and expressed as follows:
+    <pre>
+    column.[column name].[column type] = [bring command]
+    </pre> 
+    In the example below, the column ***value** is with a data type float and is associated with data retrieved from the source data using the bring command.   
+    <pre>
+    column.value.float = "bring [readings][][value]"
+    </pre> 
+  2. identify a column name. The column type and the value are retrieved from the source data using the bring command and expressed as follows:
+    <pre>
+    column.[column name] = (value = [bring command] and type = [bring command])
+    </pre> 
+    In the example below, the column ***value** is associated with data type and value retrieved from the source data:   
+    <pre>
+    column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
+    </pre> 
+
 ***Examples***
 
 Example 1 - assigning the name ***machines_data*** as the database name:
@@ -115,6 +138,7 @@ Example 3 - retrieving the timestamp and value from the message and mapping the 
 <pre>
 column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
 </pre> 
+
 
 A complete example is provided [below](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#example).
 
