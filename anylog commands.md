@@ -413,13 +413,58 @@ Usage:
 partition [dbms name] [table name] using [column name] by [time interval]
 </pre>
 
-Time intervals options are: year, month, week and days, with and without a counter - for example, ***3 months*** would create a partition every year's quarter.  
+Time intervals options are: 
+* year 
+* month 
+* week 
+* days 
+  
+The time interval can be assigned with a counter - for example, ***3 months*** sets 4 months partions.  
  
 Examples:
 <pre>
 partition lsl_demo ping_sensor using timestamp by 2 days
 partition lsl_demo ping_sensor using timestamp by month
 partition lsl_demo * using timestamp by month
+</pre>
+
+## Retrieving information on existence and configuration of partitions on the node 
+
+The following command lists the partitions configurations:
+<pre>
+get partitions
+</pre>
+
+The ***info*** table command provides information on the partitions that are existing on the node:  
+
+Usage:
+<pre>
+ info table [db name] [table name] [info type]
+</pre>
+[dbms name] - the name of the logical database containing the table  
+[table name] - the name of the table  
+[info type] - the type of the requested info:  
+
+The type of information provided on each table is determined by the ***info type*** as follows:
+
+| Info Type  | Details  |
+| ---------- | -------| 
+| exists | Returns 'true' or 'false' indicating if the table exists  |
+| columns    | The table's/partition's columns names and data types  |
+| partitions | The list of partitions of the specified table  |
+| partitions last | The name of the last partition (by the partition date/time interval)  |
+| partitions first | The name of the first partition (by the partition date/time interval)  |
+| partitions count | The number of partitions  |
+| partitions dates | The date/time interval assigned to each partition  |
+
+Examples:
+<pre>
+info table sensors readings columns
+info table sensors readings exists
+info table sensors readings partitions
+info table sensors readings partitions last
+info table sensors readings partitions first
+info table sensors readings partitions count
 </pre>
 
 # Drop Partition Command
