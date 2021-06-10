@@ -419,7 +419,7 @@ Time intervals options are:
 * week 
 * day 
   
-The time interval can be assigned with a counter (and cam be expressed as singular or plurals) - for example, ***3 months*** sets 4 months partions.  
+The time interval can be assigned with a counter (and cam be expressed as singular or plurals) - for example, ***3 months*** sets 4 months partitions.  
  
 Examples:
 <pre>
