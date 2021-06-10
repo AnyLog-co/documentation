@@ -428,7 +428,7 @@ partition lsl_demo ping_sensor using timestamp by month
 partition lsl_demo * using timestamp by month
 </pre>
 
-## Retrieving information on existence and configuration of partitions on the node 
+## partitions status and configurations
 
 The following command lists the partitions configurations:
 <pre>
