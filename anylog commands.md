@@ -417,9 +417,9 @@ Time intervals options are:
 * year 
 * month 
 * week 
-* days 
+* day 
   
-The time interval can be assigned with a counter - for example, ***3 months*** sets 4 months partions.  
+The time interval can be assigned with a counter (and cam be expressed as singular or plurals) - for example, ***3 months*** sets 4 months partions.  
  
 Examples:
 <pre>
@@ -435,13 +435,13 @@ The following command lists the partitions configurations:
 get partitions
 </pre>
 
-The ***info*** table command provides information on the partitions that are existing on the node:  
+The ***info table*** command provides information on the partitions that are existing on the node:  
 
 Usage:
 <pre>
  info table [db name] [table name] [info type]
 </pre>
-[dbms name] - the name of the logical database containing the table  
+[dbms name] - the name of the logical database containing the table and its partitions  
 [table name] - the name of the table  
 [info type] - the type of the requested info:  
 
