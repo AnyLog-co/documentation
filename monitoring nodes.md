@@ -163,8 +163,8 @@ The monitoring process is based on a push process, each participating node pushe
 The push process is triggered by the scheduler on each participating node.  
 
 The configuration of a setup with an aggregator node is as follows:
-* On the scheduler of each participating node, trigger the command that retrieved the monitored info, and save the retrieved info in JSON format7 in a variable.
-* On the scheduler of each participating node, trigger a message to the aggregator with the command: ***monitor*** that details a topic name with the retrieved info.
+* On the scheduler of each participating node, trigger the command that retrieves the monitored info, and assigns the retrieved status info (in JSON format) to a variable.
+* On the scheduler of each participating node, trigger a message to the aggregator (using the command: ***monitor***) that details a topic name with the status info (by naming the assigned variable).
 * The command ***get monitored*** on the aggregator retrieves the list of monitored topics.
 * The command ***get monitored [topic]*** on the aggregator retrieves the info associated with the specific topic for each participating node.
 
@@ -206,13 +206,13 @@ get monitored [topic]
 </pre>
 
 
-### Example configuring a participating node
+### Example, configuring a participating node
 
 The following example configures monitoring of 2 topics:
 1. Nodes status (topic name: nodes)
 2. Monitor operators status  (topic name: operators)  
 
-In the examples below, the monitoring commands are assigned to the scheduler for continues monitoring.
+In the examples below, the monitoring commands are assigned to the scheduler for continues monitoring (on each participating/monitored node).
 
 Configuring topic ***nodes***
 <pre>
