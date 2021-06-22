@@ -373,7 +373,7 @@ run client () sql purpleair file = !prep_dir/my_data.json and dest = file and fo
 </pre>
 
 ### Predefined SQL functions
-Details on queries executed against time series data are available in [Queries and info requests to the AnyLog Network](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md#queries-and-info-requests-to-the-anylog-network).
+Details on queries executed against time series data are available in [Optimized time series data queries](https://github.com/AnyLog-co/documentation/blob/master/queries.md#optimized-time-series-data-queries).
 ### Monitoring queries  
 Details on profiling and monitoring queries are available in [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
@@ -479,13 +479,14 @@ drop partition [partition name] where dbms = [dbms name] and table = [table name
   
 Explanation:  
 Drops a partition in the named database and table.  
-[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped.
-If the table has only one partition, an error value is returned
+[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.    
+If partition name is asterisk (*), all the partitions are dropped.  
 
 Examples:
 <pre>
 drop partition par_readings_2019_08_02_d07_timestamp where dbms = purpleair and table = readings
 drop partition where dbms = purpleair and table = readings
+drop partition * where dbms = purpleair and table = readings
 </pre>
 
 
