@@ -128,7 +128,7 @@ This process is done as follows:
 
 1. Define a MQTT client, assign the broker to ***rest*** and identify the User-Agent on the rest calls.     
    
-   For example: 
+   Example: 
   <pre>
   run mqtt client where broker = rest and user-agent = anylog and topic = (name = opcua and dbms = "bring [dbms]" and table = "bring [table]" and column.timestamp.timestamp = "bring [ts]" and column.value.float = "bring [value]")
   </pre>
