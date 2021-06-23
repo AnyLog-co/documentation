@@ -123,17 +123,21 @@ curl --location --request POST '172.18.12.129:2149' \
 
 ## Subscribing to REST calls 
 
-Users can associate REST calls with topics and subscribe to the topics such that when data is added, the subscription logic would apply to the data.  
+Users can associate REST calls with topics and subscribe to the topics such that when data is added, the subscription logic applies to the data.  
 This process is done as follows:
 
-1. Define a MQTT client and assign the broker to ***rest*** and identify the User-Agent on the rest calls.   
-   Note: The User-Agent request header is a characteristic string that lets servers and network peers identify the application, operating system, vendor, and/or version of the requesting user agent.
+1. Define a MQTT client, assign the broker to ***rest*** and identify the User-Agent on the rest calls.     
+   
    For example: 
   <pre>
   run mqtt client where broker = rest and user-agent = anylog and topic = (name = opcua and dbms = "bring [dbms]" and table = "bring [table]" and column.timestamp.timestamp = "bring [ts]" and column.value.float = "bring [value]")
   </pre>
+    
+  Notes:  
+  a) The User-Agent request header is a characteristic string that lets servers and network peers identify the application, operating system, vendor, and/or version of the requesting user agent.  
+  b) Details on the ***rum mqtt client*** command are available in the [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) section.
 
-2. Issue rest call to the AnyLog node.  
+2. Issue REST calls to the AnyLog node.  
    Example:  
 <pre>
 curl --location --request POST '10.0.0.78:7849' \
