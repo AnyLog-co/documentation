@@ -7,7 +7,7 @@ data monitor where dbms = aiops and intervals = 10 and time = 1 minute and time_
 ## Query Data Monitoring
 **Commnad**: Get Data monitored 
 ```
-get monitored data
+get data monitored 
 ```
 
 **Sample Output**: 
