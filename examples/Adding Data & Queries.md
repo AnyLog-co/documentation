@@ -1,7 +1,7 @@
 # Adding Data and Queries 
 
 ## Adding Data 
-```
+<pre>
 curl --location --request POST '192.168.50.159:2051' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: data' \
@@ -9,15 +9,38 @@ curl --location --request POST '192.168.50.159:2051' \
 --data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
  {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
  {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
-```
+</pre>
 
 ## Queries 
+
+### Executing Queries - General Consideration
+   
+|     | Consideration   | Explanation   |
+| --- | ------------- | ------------- | 
+|   1 | Specify time range  | In most cases, operators nodes partitioned data by time - specifying the date range minimize processing to the relevant partitions.  |
+|   2 | Specify include tables  | The same query will be executed concurrently in the different tables to provide the the best performance. Result set is grouped by the extend values.|
+|   3 | Specify the columns needed  | Less data would be transferred over the network (note also that each table includes management columns which are redundant in most queries processes).|
+|   4 | Use the Increment function if possible  | The Increment query executes functions (min, max, avg, count and sum) on the operator nodes - it provides higher degree of parallelism and much less data transferred over the network .|
+|   5 | Configure the query on the AnyLog node | For efficient concurrent processing - see comment below. |  
+
+Configuring the query pool size is as follows:
+<pre>
+set query pool [n]
+</pre>
+[n] is the number of threads in the pool and is determined as follows:  
+For each query, all participating partitions can be processed concurrently, each with a dedicated thread - if the treads pool is able to provide the needed threads (otherwise processes would be serialized).  
+For example, if data is partitioned by day and 2 days are considered, the process can leverage 2 threads per table.  
+If the profile of the representative queries is to consider 4 tables and 2 days for each, a pool of 8 threads would be efficient.  
+If the node satisfies multiple concurrent queries, than the pool size should increase accordingly.  
+Note that the CPU availability on the specific hardware sets a cap on the availability of threads and only testing can determine the optimal pool size.
+
+
 **Command**: Tags Summary 
-```
+<pre>
 curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,fic11,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value, count(*) as row_count from fic11"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
-```
+</pre>
 **Sample Outout**: 
-```
+<pre>
 
 table     min_ts                     max_ts                     min_value          avg_value          max_value        row_count 
 --------- -------------------------- -------------------------- ------------------ ------------------ ---------------- --------- 
@@ -30,14 +53,15 @@ ai_mv     2021-06-17 21:35:28.345601 2021-06-24 18:29:47.755653                0
 valve_pos 2021-06-17 21:36:29.710816 2021-06-24 18:29:47.755653                0.0  30.53904173433069            100.0    107801 
 lic1_sp   2021-06-17 21:35:28.345601 2021-06-24 18:29:47.755653               50.0  50.94744400110993 51.2325785564247    107812 
 {"Statistics":[{"Count": 8,"Time": 00:00:02}]}
-```
+</pre>
 
 **Command**: Using _PERIOD_ find the last occurence & calculate to the nearest value
-```
+<pre>
 curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,fic11,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select max(timestamp) as max_timestamp, min(value) as min_value, avg(value) as avg_value, max(value) as max_value, count(*) as row_count from fic11 where period(day, 1, now(), timestamp);"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
-```
+</pre>
 **Sample Output**: 
-```
+<pre>
+
 table     max_timestamp              min_value          avg_value          max_value        row_count 
 --------- -------------------------- ------------------ ------------------ ---------------- --------- 
 err       2021-06-24 20:41:18.063693                0.0                0.0              0.0     17408 
@@ -49,14 +73,16 @@ ai_mv     2021-06-24 20:41:18.063693                0.0  40.04704018814899 95.61
 valve_pos 2021-06-24 20:41:18.063693                0.0 33.239299279330346            100.0     17408 
 lic1_sp   2021-06-24 20:41:18.063693   51.2325785564247 51.232578556424706 51.2325785564247     17408 
 {"Statistics":[{"Count": 8,"Time": 00:00:01}]}
-```
+</pre>
 
 **Command**: Using _INCREMENTS_ consider a partitioned segment of time
-```
+<pre>
+
 curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include = (fic12,fic11,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend = (@table_name as table) and format=table "select increments(day, 1, timestamp), min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value, count(*) as row_count from fic11 limit 10"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
-```
+</pre>
 **Sample Output**: 
-```
+<pre>
+
 table     min_ts                     max_ts                     min_value        avg_value          max_value        row_count 
 --------- -------------------------- -------------------------- ---------------- ------------------ ---------------- --------- 
 fic11     2021-06-17 21:35:28.345601 2021-06-17 21:43:02.706479  101.21904438785    104.98534195167 109.274003264401       300 
@@ -70,4 +96,4 @@ lic1      2021-06-17 21:35:28.345601 2021-06-17 21:43:02.706479 49.9895726612152
 ai_mv     2021-06-18 02:46:10.643434 2021-06-18 23:59:57.882238 29.9952775239944  32.47524779401523 56.1007857322693     31388 
 fic13     2021-06-18 02:46:10.643434 2021-06-18 23:59:57.882238 80.6143484115391  88.15540538945622 105.059081405841     31373 
 {"Statistics":[{"Count": 10,"Time": 00:00:04}]}
-```
+</pre>
