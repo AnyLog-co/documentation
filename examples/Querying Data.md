@@ -1,6 +1,4 @@
-# Adding Data and Queries 
-
-## Queries 
+# Querying Data
 
 ### Executing Queries - General Consideration
    
