@@ -93,7 +93,7 @@ processed on each segment and the data transferred over the network only include
 For example, one day of data includes a value every second. Transferring a day of the source data includes 60 X 60 X 24 =  86,400 data instances.  
 If the query partitions the data to minutes and calculates the needed functions on each minute (i.e. min(val), max(val)), only 1/60 data instances are transferred.  
 * This type of query can be utilized if the functions over the segments satisfy the process.
-* This type of query can provide significant performance advantage with large data sets and queries that need to consider large data volumes on multiple nodes. 
+* This type of query can provide significant performance advantage with large data sets and in particular with queries that consider large data volumes hosted in multiple operator nodes. 
 
 **Command**:
 <pre>
