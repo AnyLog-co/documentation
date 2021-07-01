@@ -1,16 +1,5 @@
 # Adding Data and Queries 
 
-## Adding Data 
-<pre>
-curl --location --request POST '192.168.50.159:2051' \
---header 'User-Agent: AnyLog/1.23' \
---header 'command: data' \
---header 'Content-Type: text/plain' \
---data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
- {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
- {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
-</pre>
-
 ## Queries 
 
 ### Executing Queries - General Consideration
@@ -140,3 +129,32 @@ timestamp                  value
 2019-10-15 10:22:13.051010   750
 2019-10-15 10:22:13.051010   750
 </pre>
+
+
+#### Example 5 - Python3 script to execute query
+<pre>
+import requests
+
+# REST connection information (IP + Port) 
+conn = '192.168.50.159:2051' 
+
+# Header for POST data 
+query = 'sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and stat=false "select timestamp, value from fic11 where date(timestamp) = \'2021-06-30\';"'
+headers = {
+    'command': query,
+    'destination': 'network', 
+    'User-Agent': 'AnyLog/1.23',
+    'Content-Type': 'text/plain'
+}
+
+# Query data 
+try:
+    r = requests.get('http://%s' % conn, headers=headers)
+except Exception as e: 
+    print('Failed to GET data to %s (Error: %s)' % (conn, e))
+else: 
+    if r.status_code != 200: 
+        print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
+    else:
+        print(r.json()) 
+</pre> 
