@@ -123,7 +123,7 @@ fic13     2021-06-18 02:46:10.643434 2021-06-18 23:59:57.882238 80.6143484115391
 
 **Command**: 
 <pre>
-curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,fic11,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from test_data where date(timestamp) = "2019-10-15";"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
+curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from fic11 where date(timestamp) = "2019-10-15";"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
 </pre>
 **Sample Output**: 
 <pre>
