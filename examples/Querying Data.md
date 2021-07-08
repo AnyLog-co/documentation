@@ -1,6 +1,4 @@
-# Adding Data and Queries 
-
-## Queries 
+# Querying Data
 
 ### Executing Queries - General Consideration
    
@@ -190,7 +188,7 @@ except Exception as e:
     print('Failed to GET data to %s (Error: %s)' % (conn, e))
 else: 
     if r.status_code != 200: 
-        print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
+        print('Failed to GET data to %s due to network error: %s' % (conn, r.status_code))
     else:
         print(r.json()) 
 </pre> 
