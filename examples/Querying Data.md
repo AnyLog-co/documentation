@@ -111,84 +111,127 @@ fic13     2021-06-18 02:46:10.643434 2021-06-18 23:59:57.882238 80.6143484115391
 **Command**: 
 <pre>
 # Bash cURL format 
-curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from fic11 where timestamp > NOW() - 1 day order by timestamp asc;"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
-
-# Python3 format 
-import requests 
-conn = '13.67.180.124:2149'
-r = requests.get('http://%s' % conn, headers={
-    'command': 'sql aiops include=(valve_pos, fic11, fic12, ai_mv, err, lic1, fic13, sic1003_mv, sic1002_pv, pdic1000_pv, sic1003_sv, tic1001a_mv, sic1001_pv, pdic1000_sv, sic1001_mv, pdic1000_mv, sic1002_mv, sic1003_pv, sic1002_sv, tic1001a_pv, tic10
-01a_sv, sic1001_sv, pdic1000_aimv, tic1001b_mv, tic1001d_mv, tic1001c_mv, tic1002b_mv, tic1002a_mv, tic1003a_mv, tic1003b_mv, tic1003d_mv, tic1002c_mv, tic1002d_mv, tic1003c_mv) and extend=(@table_name as table) and format=table "SELECT timestamp, val
-ue FROM lic1_sp WHERE timestamp > NOW() - 1 day order by timestampi asc"', 
-    'destination': 'network', 
-    'User-Agent': 'AnyLog/1.23'
-}) 
-try: 
-    output = r.json()
-except Exception as e:
-    output = r.text
-print(output)  
+curl -X GET 20.97.12.66:2049 -H 'command: sql aiops include=(pdic1000_sv, pdic1000_mv, pdic1000_aimvsic1001_pv, sic1001_sv, sic1001_mv, sic1002_pv, sic1002_sv, sic1002_mv, sic1003_pv, sic1003_sv, sic1003_mv, tic1001a_pv, tic1001a_sv, tic1001a_mv, tic1001b_pv, tic1001b_sv, tic1001b_mv, tic1001c_pv, tic1001c_sv, tic1001c_mv, tic1001d_pv, tic1001d_sv, tic1001d_mv, tic1002a_pv, tic1002a_sv, tic1002a_mv, tic1002b_pv, tic1002b_sv, tic1002b_mv, tic1002c_pv, tic1002c_sv, tic1002c_mv, tic1002d_pv, tic1002d_sv, tic1002d_mv, tic1003a_pv, tic1003a_sv, tic1003a_mv, tic1003b_pv, tic1003b_sv, tic1003b_mv, tic1003c_pv, tic1003c_sv, tic1003c_mv, tic1003d_pv, tic1003d_sv, tic1003d_mv) and extend=(@table_name as table) and format=table "SELECT timestamp, value FROM pdic1000_pv WHERE timestamp > NOW() - 1 minute;"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
 
 </pre>
 **Sample Output**: 
 <pre>
-
-table     timestamp                  value             
---------- -------------------------- ----------------- 
-lic1      2021-07-07 00:27:15.898272  43.4801443571863 
-ai_mv     2021-07-07 00:27:15.898272               0.0 
-fic13     2021-07-07 00:27:15.898272  30.0381783080729 
-err       2021-07-07 00:27:15.898272               0.0 
-valve_pos 2021-07-07 00:27:15.898272  56.4906663401367 
-lic1_sp   2021-07-07 00:27:15.898272 43.48649047431325 
-fic12     2021-07-07 00:27:15.898272  51.0311249999719 
-fic11     2021-07-07 00:27:15.898272  36.0335187495409 
-fic12     2021-07-07 00:27:17.713731  48.8032271058607 
-lic1      2021-07-07 00:27:17.713731  43.4827153219738 
-fic13     2021-07-07 00:27:17.713731  27.8497703750513 
-lic1_sp   2021-07-07 00:27:17.713731 43.48649047431325 
-ai_mv     2021-07-07 00:27:17.713731               0.0 
-fic11     2021-07-07 00:27:17.713731  33.8344706401114 
-valve_pos 2021-07-07 00:27:17.713731  56.4909473172322 
-err       2021-07-07 00:27:17.713731               0.0 
-err       2021-07-07 00:27:19.520875               0.0 
-fic13     2021-07-07 00:27:19.520875  30.0022483511345 
-ai_mv     2021-07-07 00:27:19.520875               0.0 
-valve_pos 2021-07-07 00:27:19.520875  56.4936246116901 
-lic1      2021-07-07 00:27:19.520875  43.4794950306474 
-fic12     2021-07-07 00:27:19.520875  51.0064269297124 
-fic11     2021-07-07 00:27:19.520875  35.9976516493904 
-lic1_sp   2021-07-07 00:27:19.520875 43.48649047431325 
-ai_mv     2021-07-07 00:27:21.378099               0.0 
+table       timestamp                  value              
+----------- -------------------------- ------------------ 
+tic1001d_pv 2021-07-08 18:19:04.979354   88.2449085515011 
+tic1002b_sv 2021-07-08 18:19:04.979354               65.0 
+tic1001c_mv 2021-07-08 18:19:04.979354   37.6733999072454 
+tic1003b_sv 2021-07-08 18:19:04.979354               77.0 
+tic1001c_sv 2021-07-08 18:19:04.979354               88.0 
+tic1003c_pv 2021-07-08 18:19:04.979354   77.2422568991932 
+sic1001_mv  2021-07-08 18:19:04.979354   64.9716613827291 
+pdic1000_sv 2021-07-08 18:19:04.979354 1.7000000000000002 
+tic1002b_mv 2021-07-08 18:19:04.979354 14.850591794255505 
+tic1001c_pv 2021-07-08 18:19:04.979354   88.2472641929698 
+tic1003c_mv 2021-07-08 18:19:04.979354 26.886259691403556 
+tic1001b_mv 2021-07-08 18:19:04.979354   38.3979534411363 
+pdic1000_pv 2021-07-08 18:19:04.979354 1.6694853540171364 
+tic1002d_mv 2021-07-08 18:19:04.979354  14.67298242489326 
+tic1002b_pv 2021-07-08 18:19:04.979354   65.2412332296145 
+tic1003d_mv 2021-07-08 18:19:04.979354 27.321843807872185 
+tic1003c_sv 2021-07-08 18:19:04.979354               77.0 
+sic1001_sv  2021-07-08 18:19:04.979354 1112.6295349885281 
+tic1002a_mv 2021-07-08 18:19:04.979354 15.239008949995238 
+tic1002c_sv 2021-07-08 18:19:04.979354               65.0 
+tic1002a_sv 2021-07-08 18:19:04.979354               65.0 
+tic1003a_pv 2021-07-08 18:19:04.979354   77.2438187767012 
+tic1001b_sv 2021-07-08 18:19:04.979354               88.0 
+tic1002a_pv 2021-07-08 18:19:04.979354   65.2423583125674 
+tic1001b_pv 2021-07-08 18:19:04.979354   88.2485414195323 
 ...
-{"Statistics":[{"Count": 1415,"Time": 00:00:00}]}
+
+{"Statistics":[{"Count": 1030,"Time": 00:00:11}]}
 </pre>
 
 
-#### Example 5 - Python3 script to execute query
-<pre>
-import requests
-
-# REST connection information (IP + Port) 
-conn = '192.168.50.159:2051' 
-
-# Header for POST data 
-query = 'sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and stat=false "select timestamp, value from fic11 where date(timestamp) = \'2021-06-30\';"'
+#### Python3 Example for Query #4 
+<pre> 
+import requests 
+conn = '20.97.12.66:2049'
 headers = {
-    'command': query,
-    'destination': 'network', 
-    'User-Agent': 'AnyLog/1.23',
-    'Content-Type': 'text/plain'
-}
+    'command': 'sql aiops include=(pdic1000_sv, pdic1000_mv, pdic1000_aimvsic1001_pv, sic1001_sv, sic1001_mv, sic1002_pv, sic1002_sv, sic1002_mv, sic1003_pv, sic1003_sv, sic1003_mv, tic1001a_pv, tic1001a_sv, tic1001a_mv, tic1001b_pv, tic1001b_sv, tic1001b_mv, tic1001c_pv, tic1001c_sv, tic1001c_mv, tic1001d_pv, tic1001d_sv, tic1001d_mv, tic1002a_pv, tic1002a_sv, tic1002a_mv, tic1002b_pv, tic1002b_sv, tic1002b_mv, tic1002c_pv, tic1002c_sv, tic1002c_mv, tic1002d_pv, tic1002d_sv, tic1002d_mv, tic1003a_pv, tic1003a_sv, tic1003a_mv, tic1003b_pv, tic1003b_sv, tic1003b_mv, tic1003c_pv, tic1003c_sv, tic1003c_mv, tic1003d_pv, tic1003d_sv, tic1003d_mv) and extend=(@table_name as table) and format=table "SELECT timestamp, value FROM pdic1000_pv WHERE timestamp > NOW() - 1 minute;"',
+    'destination': 'network',
+    'User-Agent': 'AnyLog/1.23'
+} 
 
-# Query data 
-try:
+try: 
     r = requests.get('http://%s' % conn, headers=headers)
 except Exception as e: 
-    print('Failed to GET data to %s (Error: %s)' % (conn, e))
+    print('Failted to execute GET against %s (Error: %s)' % (conn, e))
+    output = None 
 else: 
     if r.status_code != 200: 
-        print('Failed to GET data to %s due to network error: %s' % (conn, r.status_code))
+        print('Failed to execute GET against %s due to network error: %s' % (conn, r.status_code))
+        output = None 
+    else: 
+        try: 
+            output = r.json() 
+        except: 
+            output = r.text 
+print(output) 
+</pre>  
+
+#### Example 5 - Python3 example for extracting data for a specific date
+<pre>
+import requests
+conn = '20.97.12.66:2049'
+timestamp = "'2021-06-30'"
+headers = {
+    'command':  'sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from fic11 where date(timestamp) = %s;"' % timestamp,
+    'destination': 'network',
+    'User-Agent': 'AnyLog/1.23'
+}
+
+try:
+    r = requests.get('http://%s' % conn, headers=headers)
+except Exception as e:
+    print('Failted to execute GET against %s (Error: %s)' % (conn, e))
+    output = None
+else:
+    if r.status_code != 200:
+        print('Failed to execute GET against %s due to network error: %s' % (conn, r.status_code))
+        output = None
     else:
-        print(r.json()) 
+        try:
+            output = r.json()
+        except:
+            output = r.text
+print(output)
+</pre> 
+
+**Sample Output**: 
+<pre>
+table     timestamp                  value            
+--------- -------------------------- ---------------- 
+lic1      2021-06-30 00:00:01.187161 51.2417970185479 
+fic13     2021-06-30 00:00:01.187161 97.5027218603217 
+valve_pos 2021-06-30 00:00:01.187161 32.8683365000774 
+lic1_sp   2021-06-30 00:00:01.187161 51.2325785564247 
+err       2021-06-30 00:00:01.187161              0.0 
+fic12     2021-06-30 00:00:01.187161 48.4847256919909 
+fic11     2021-06-30 00:00:01.187161 63.4247859436764 
+ai_mv     2021-06-30 00:00:01.187161  40.369501709938 
+fic11     2021-06-30 00:00:04.102653 62.3517240299968 
+lic1      2021-06-30 00:00:04.102653 51.2396323321372 
+fic13     2021-06-30 00:00:04.102653 95.8887756808981 
+valve_pos 2021-06-30 00:00:04.102653 32.8672429316431 
+ai_mv     2021-06-30 00:00:04.102653 40.3275907039642 
+fic12     2021-06-30 00:00:04.102653 47.4013203318753 
+err       2021-06-30 00:00:04.102653              0.0 
+lic1_sp   2021-06-30 00:00:04.102653 51.2325785564247 
+valve_pos 2021-06-30 00:00:05.576321 32.8682091413195 
+err       2021-06-30 00:00:05.576321              0.0 
+lic1      2021-06-30 00:00:05.576321 51.2342293232265 
+fic11     2021-06-30 00:00:05.576321 65.9449471311061 
+fic12     2021-06-30 00:00:05.576321 50.8891526566533 
+fic13     2021-06-30 00:00:05.576321 102.405896621961 
+lic1_sp   2021-06-30 00:00:05.576321 51.2325785564247 
+ai_mv     2021-06-30 00:00:05.576321 40.1976078748703 
+err       2021-06-30 00:00:07.530079              0.0 
+{"Statistics":[{"Count": 1056,"Time": 00:00:02}]}
 </pre> 
