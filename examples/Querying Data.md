@@ -112,22 +112,58 @@ fic13     2021-06-18 02:46:10.643434 2021-06-18 23:59:57.882238 80.6143484115391
 
 **Command**: 
 <pre>
-curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from fic11 where date(timestamp) = "2021-06-30";"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
+# Bash cURL format 
+curl -X GET 13.67.180.124:2149 -H 'command: sql aiops include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) and extend=(@table_name as table) and format=table "select timestamp, value from fic11 where timestamp > NOW() - 1 day order by timestamp asc;"' -H "destination: network" -H "User-Agent: AnyLog/1.23" -w "\n"
+
+# Python3 format 
+import requests 
+conn = '13.67.180.124:2149'
+r = requests.get('http://%s' % conn, headers={
+    'command': 'sql aiops include=(valve_pos, fic11, fic12, ai_mv, err, lic1, fic13, sic1003_mv, sic1002_pv, pdic1000_pv, sic1003_sv, tic1001a_mv, sic1001_pv, pdic1000_sv, sic1001_mv, pdic1000_mv, sic1002_mv, sic1003_pv, sic1002_sv, tic1001a_pv, tic10
+01a_sv, sic1001_sv, pdic1000_aimv, tic1001b_mv, tic1001d_mv, tic1001c_mv, tic1002b_mv, tic1002a_mv, tic1003a_mv, tic1003b_mv, tic1003d_mv, tic1002c_mv, tic1002d_mv, tic1003c_mv) and extend=(@table_name as table) and format=table "SELECT timestamp, val
+ue FROM lic1_sp WHERE timestamp > NOW() - 1 day order by timestampi asc"', 
+    'destination': 'network', 
+    'User-Agent': 'AnyLog/1.23'
+}) 
+try: 
+    output = r.json()
+except Exception as e:
+    output = r.text
+print(output)  
+
 </pre>
 **Sample Output**: 
 <pre>
 
-timestamp                  value
--------------------------- -----
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010    50
-2019-10-15 10:22:13.051010   750
-2019-10-15 10:22:13.051010   750
-2019-10-15 10:22:13.051010   750
+table     timestamp                  value             
+--------- -------------------------- ----------------- 
+lic1      2021-07-07 00:27:15.898272  43.4801443571863 
+ai_mv     2021-07-07 00:27:15.898272               0.0 
+fic13     2021-07-07 00:27:15.898272  30.0381783080729 
+err       2021-07-07 00:27:15.898272               0.0 
+valve_pos 2021-07-07 00:27:15.898272  56.4906663401367 
+lic1_sp   2021-07-07 00:27:15.898272 43.48649047431325 
+fic12     2021-07-07 00:27:15.898272  51.0311249999719 
+fic11     2021-07-07 00:27:15.898272  36.0335187495409 
+fic12     2021-07-07 00:27:17.713731  48.8032271058607 
+lic1      2021-07-07 00:27:17.713731  43.4827153219738 
+fic13     2021-07-07 00:27:17.713731  27.8497703750513 
+lic1_sp   2021-07-07 00:27:17.713731 43.48649047431325 
+ai_mv     2021-07-07 00:27:17.713731               0.0 
+fic11     2021-07-07 00:27:17.713731  33.8344706401114 
+valve_pos 2021-07-07 00:27:17.713731  56.4909473172322 
+err       2021-07-07 00:27:17.713731               0.0 
+err       2021-07-07 00:27:19.520875               0.0 
+fic13     2021-07-07 00:27:19.520875  30.0022483511345 
+ai_mv     2021-07-07 00:27:19.520875               0.0 
+valve_pos 2021-07-07 00:27:19.520875  56.4936246116901 
+lic1      2021-07-07 00:27:19.520875  43.4794950306474 
+fic12     2021-07-07 00:27:19.520875  51.0064269297124 
+fic11     2021-07-07 00:27:19.520875  35.9976516493904 
+lic1_sp   2021-07-07 00:27:19.520875 43.48649047431325 
+ai_mv     2021-07-07 00:27:21.378099               0.0 
+...
+{"Statistics":[{"Count": 1415,"Time": 00:00:00}]}
 </pre>
 
 
