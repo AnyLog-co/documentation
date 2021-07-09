@@ -364,8 +364,11 @@ Options are provided in the format ```key = value``` and multiple options are se
 | drop       | True/False - drop the output table when query starts (default is True).  |
 | file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
 | format     | Output format, the default being JSON. Options: json, table |
-| timezone   | Time is stored in UTC and queried and presented using local timezone. Use ***utc** to avoid mapping to local timezone. |
-
+| timezone   | Time is stored in UTC and queried and presented using local timezone. Use ***utc*** to avoid mapping to local timezone. |
+|            | If date/time columns are entered in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601), the values are converted to local timezone.|
+|            | To force conversion (if ISO 8601 format is not used) use ***timezone = local***.| 
+| include    | Specify tables (dbms.table) that are treated as the table being queried. Example: include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) |
+| extend     | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  |
 
 ### Example
 <pre>  
