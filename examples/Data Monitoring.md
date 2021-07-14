@@ -1,4 +1,17 @@
 # Data Monitoring
+
+Data can be monitored in different ways and in different stages of the data processing as summarized by the following table:
+
+
+|     | Stage   | Command on the AnyLog Node | Command to retrieve the data | Comments |
+| --- | ------------- | ------------- |   ---------- | ---------- |
+| 1 | When monitored value is provided to the AnyLog node | data monitor where ... |  get data monitored  ||
+| 2 | When data is ingested to files |  |  get rows count  ||
+| 3 | When data is ingested to files |  |    | [By issuing a query](https://github.com/AnyLog-co/documentation/blob/master/examples/Querying%20Data.md) |
+
+Additional information is available in the [monitoring data section](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20data.md#monitoring-data)
+
+
 ## Initiate Data Monitoring
 ```
 data monitor where dbms = aiops and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
@@ -39,35 +52,6 @@ aiops|lic1     |0:8:0|      0.18|   11|51.22| 51.24| 51.23|
 ...
 ```
 
-**Command**: Get streaming status 
-```
-get streaming
-```
-
-**Sample Output**: 
-```
-
-Flush Thresholds
-Threshold         Value  Streamer
------------------|------|--------|
-Default Time     |    60|Running |
-Default Volume   |10,000|        |
-Default Immediate|True  |        |
-Buffered Rows    |     1|        |
-Flushed Rows     |     5|        |
-
-Statistics
-DBMS-Table      File Put File Rows Streaming Put Streaming Rows Immediate Last Process
----------------|--------|---------|-------------|--------------|---------|-------------------|
-aiops.fic11    |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:06|
-aiops.fic12    |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:06|
-aiops.fic13    |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-aiops.lic1     |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-aiops.lic1_sp  |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-aiops.ai_mv    |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-aiops.valve_pos|       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-aiops.err      |       0|        0|        2,136|         2,136|    2,122|2021-06-24 23:27:07|
-```
 
 **Command**: Get summary of rows count for a given operator node
 ```

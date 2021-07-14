@@ -41,4 +41,11 @@ Example:
 data monitor where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
 </pre>
 
+## Retrieve the status of the monitored data
 
+The command ***get data monitored*** retrieves the monitored data.   
+Examples:  
+<pre>
+get data monitored
+get data monitored where dbms = dmci and table = sensor_reading
+</pre>
