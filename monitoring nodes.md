@@ -26,7 +26,7 @@ Notes:
 
 Examples:
 <pre>
-get rows coun
+get rows count
 get rows count where dbms = dmci and format = json
 get rows count where dbms = aiops and table = lic1_fout
 </pre>
@@ -116,18 +116,27 @@ Reply:
 [From Node 10.0.0.78:7848]  'AnyLog@24.23.250.144:7848 running'
 </pre>
 The ***get status*** command can be extended to return additional status information.  
-For example the scheduler can be configured to monitor the CPU utilization, 
-the CPU temperature and disk free space and usage. The ***get status*** command can request to include their values.  
+For example, the scheduler can be configured to monitor the CPU utilization, 
+CPU temperature and disk free space and usage. The ***get status*** command can request to include their values.  
 Example:  
 Setup on the monitored node:
 <pre>
 cpu_percent = get node info cpu_percent
 cpu_temperature = get cpu temperature
+disk_free = get disk free d:\
 disk_percentage = get disk percentage d:\
 </pre>
 Getting the status information:
 <pre>
-run client 10.0.0.78:7848 get status include cpu_percent cpu_temperature disk_percentage
+run client 10.0.0.78:7848 get status include cpu_percent cpu_temperature disk_free disk_percentage
+</pre>
+Reply:
+<pre>
+[From Node 10.0.0.78:7848]
+{'status' : 'AnyLog@24.23.250.144:7848 running',
+ 'cpu_percent' : '6.7',
+ 'disk_free' : '990713614336',
+ 'disk_percentage' : '99.05'}
 </pre>
 
 ## Organizing node status in a database table
