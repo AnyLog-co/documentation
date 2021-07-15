@@ -118,14 +118,17 @@ Reply:
 The ***get status*** command can be extended to return additional status information.  
 For example the scheduler can be configured to monitor the CPU utilization, 
 the CPU temperature and disk free space and usage. The ***get status*** command can request to include their values.  
-Example:
+Example:  
+Setup on the monitored node:
 <pre>
 cpu_percent = get node info cpu_percent
 cpu_temperature = get cpu temperature
 disk_percentage = get disk percentage d:\
+</pre>
+Getting the status information:
+<pre>
 run client 10.0.0.78:7848 get status include cpu_percent cpu_temperature disk_percentage
 </pre>
-
 
 ## Organizing node status in a database table
 
