@@ -104,6 +104,29 @@ get node info disk_io_counters
 </pre>
 
 
+## The "get status" command
+
+A node can issue a ***get status*** command to any peer in the network. Below is an example of the command and reply:  
+Usage:
+<pre>
+run client 10.0.0.78:7848 get status
+</pre>
+Reply:  
+<pre>
+[From Node 10.0.0.78:7848]  'AnyLog@24.23.250.144:7848 running'
+</pre>
+The ***get status*** command can be extended to return additional status information.  
+For example the scheduler can be configured to monitor the CPU utilization, 
+the CPU temperature and disk free space and usage. The ***get status*** command can request to include their values.  
+Example:
+<pre>
+cpu_percent = get node info cpu_percent
+cpu_temperature = get cpu temperature
+disk_percentage = get disk percentage d:\
+run client 10.0.0.78:7848 get status include cpu_percent cpu_temperature disk_percentage
+</pre>
+
+
 ## Organizing node status in a database table
 
 Users can use the scheduler to continuously call for statistics and organize the statistics in a database table.  
