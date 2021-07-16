@@ -64,7 +64,7 @@ Using the command below, the scheduler is configured (every 15 seconds) to push 
 schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
 </pre>
   
-### retrieving the info from the aggregator node
+### Retrieving the info from the aggregator node
 
 Using the command ***get monitored operators***, all the info associated with the key ***operators*** (and partitioned by the monitored nodes) is returned to the caller.
 
