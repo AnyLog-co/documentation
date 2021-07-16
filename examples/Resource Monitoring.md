@@ -58,9 +58,7 @@ schedule name = get_operator_stat and time = 15 seconds task operator_stat = get
 
 
 ### Periodically pushing the info to the aggregator node
-2.  Using the scheduler, every 15 seconds the info is pushed to the aggregator node.  
-On the aggregator node, the pushed info is organized by nodes and topics. The info organized in this example is called ***operators*** 
-    and can be retrieved on the aggregator node using thew following call:
+Using the command below, the scheduler is configured (every 15 seconds) to push the info assigned to the topic ***operators*** to the aggregator node.  
       
 <pre>
 schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
