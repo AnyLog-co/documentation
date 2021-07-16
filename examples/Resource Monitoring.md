@@ -72,21 +72,21 @@ Using the command ***get monitored operators***, all the info associated with th
 
 If a node is operational, the ***get status*** command returns the value "running".  
 The ***get status*** command can be extended to return any variable value.  
-In the example below, *get status* returns values that are assigned by the device connector API as follows:
+In the example below, *get status* returns values that are assigned by the device connector API as follows:  
 Using POST, the variable counter_devices is updated to represent the number of connected devices:
 counter_devices is first assigned with the value 0:
 <pre>
 counter_devices = 0
 </pre>
-Every new device, increments the value:
+Every new device, the value is incremented:
 <pre>
 counter_devices = incr !counter_devices 1
 </pre>
 
-Pushing the info to the aggregator node is dome as follows:
+Pushing the info to the aggregator node is done as follows:
 * Periodically, on the monitored node, updating the status into variables 
 <pre>
-schedule name = get_node_stat and time = 15 seconds task node_stat = get status include  counter_devices
+schedule name = get_node_stat and time = 15 seconds task node_stat = get status include counter_devices
 </pre>
 * Periodically, pushing the info from the monitored node to the aggregator node:
 <pre>
