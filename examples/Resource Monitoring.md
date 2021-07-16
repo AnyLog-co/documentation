@@ -73,7 +73,7 @@ Using the command ***get monitored operators***, all the info associated with th
 If a node is operational, the ***get status*** command returns the value "running".  
 The ***get status*** command can be extended to return any variable value.  
 In the example below, *get status* returns values that are assigned by the device connector API as follows:  
-Using POST, the variable counter_devices is updated to represent the number of connected devices:
+Using POST, the variable counter_devices is updated to represent the number of connected devices:  
 counter_devices is first assigned with the value 0:
 <pre>
 counter_devices = 0
