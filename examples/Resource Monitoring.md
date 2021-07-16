@@ -44,8 +44,9 @@ An aggregator node is a node that receives status from member nodes such that a 
 To provide the functionality, each participating node collects the needed information and periodically pushes the info to the aggregator node.
 
 ### Collecting info on a participating node 
-Example- pushing the operator status (including disk space and cpu utilization) to an aggregator node:  
-In the example below, every 15 seconds the Operator status together with disk space and CPU utilization are collected
+In the example below, a monitored node is configured to push the information on data ingestion (including disk space and cpu utilization) to an aggregator node.  
+The command ***get operator*** retrieves the needed ingestion information. 
+In the example below, every 15 seconds the ingestion status (retrieved by the ***get operator*** command) together with disk space and CPU utilization are assigned
     to the variables: operator_stat, disk_space and cpu_percent respectively.  
     Note: disk_space and cpu_percent are reserved names that are added to the JSON structure with the operator info.
     
@@ -59,7 +60,7 @@ schedule name = get_operator_stat and time = 15 seconds task operator_stat = get
 ### Periodically pushing the info to the aggregator node
 2.  Using the scheduler, every 15 seconds the info is pushed to the aggregator node.  
 On the aggregator node, the pushed info is organized by nodes and topics. The info organized in this example is called ***operators*** 
-    and can be queried on the aggregator node using thew following call:
+    and can be retrieved on the aggregator node using thew following call:
       
 <pre>
 schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
