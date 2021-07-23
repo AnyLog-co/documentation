@@ -477,12 +477,13 @@ Users can leverage the [backup](https://github.com/AnyLog-co/documentation/blob/
 
 Usage:  
 <pre>
-drop partition [partition name] where dbms = [dbms name] and table = [table name]
+drop partition [partition name] where dbms = [dbms name] and table = [table name] and keep = [value]
 </pre>
   
 Explanation:  
 Drops a partition in the named database and table.  
-[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.    
+[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.  
+[keep] is optional. If a value is provided, the oldest partition will be dropped only if the number of remaining partitions is greater or equal to the value provided.  
 If partition name is asterisk (*), all the partitions are dropped.  
 
 Examples:
@@ -490,6 +491,7 @@ Examples:
 drop partition par_readings_2019_08_02_d07_timestamp where dbms = purpleair and table = readings
 drop partition where dbms = purpleair and table = readings
 drop partition * where dbms = purpleair and table = readings
+drop partition where dbms = aiops and table = cx_482f2efic11_fb_factualvalue and keep = 5
 </pre>
 
 
