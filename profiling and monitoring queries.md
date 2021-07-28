@@ -50,3 +50,23 @@ The command ***query*** provides information on the last executed queries and th
 ```query explain all``` - The explain plan of the last executed querys<br/>
 ```query explain``` - The explain plan on the most recent executed query<br/>
 ```query explain n``` - The explain plan on a particular query<br/>
+
+## Retrieving the status of queries being processed on an Operator node
+
+Each operator can process many concurrent queries.  
+The command ***get query status*** provides the info on the currently processed queries.  
+Usage:
+<pre>
+get query status where node = [node id] and job = [job id]
+</pre> 
+
+[node id] is the IP of the query node.  
+[job id] is the id of the query assigned by the query node (the command ***query status*** on the query node provides the job id).  
+
+Example:
+<pre>
+ get query status where node = 10.0.0.78 and job = 12
+</pre> 
+
+
+
