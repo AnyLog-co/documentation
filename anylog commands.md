@@ -194,7 +194,8 @@ Options:
 | get users | The list of users declared using the command ```id add user ...```. |
 | get reply ip | Retrieve the IP address for reply messages. |
 | get archived files [YYYY-MM-DD] | List the files archived on the provided date. |
-| get acceess [path and file name or directory name] | Get the access rights to the provided file or directory. |
+| get size [dir name] [YYYY-MM-DD] | List the size of a directory including sub-directories. |
+| get access [path and file name or directory name] | Get the access rights to the provided file or directory. |
 | get data nodes | Details the Operators that host each table's data. |
 | get rows count | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
