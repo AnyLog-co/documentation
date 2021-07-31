@@ -54,10 +54,10 @@ The command ***query*** provides information on the last executed queries and th
 ## Retrieving the status of queries being processed on an Operator node
 
 Each operator can process many concurrent queries.  
-The command ***get query status*** provides the info on the currently processed queries.  
+The command ***get query execution*** provides the info on the currently processed queries.  
 Usage:
 <pre>
-get query status where node = [node id] and job = [job id]
+get query execution where node = [node id] and job = [job id]
 </pre> 
 
 [node id] is the IP of the query node.  
@@ -65,7 +65,7 @@ get query status where node = [node id] and job = [job id]
 
 Example:
 <pre>
- get query status where node = 10.0.0.78 and job = 12
+ get query execution where node = 10.0.0.78 and job = 12
 </pre> 
 
 
