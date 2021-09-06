@@ -16,13 +16,14 @@ Notes:
 
 * The command ***get rows count*** provides the list of tables in databases and the number of rows in each table.
 <pre>
-get rows count where dbms = [dbms name] and table = [table name] and format = [json]
+get rows count where dbms = [dbms name] and table = [table name] and format = [json] and group = [partition/table]
 </pre>
 
 Notes:
 1) If dbms name in not specified, all tables in all databases are considered.  
 2) If table name in not specified, all tables in the specified database are considered.
 3) The default output format is in a table structure. specifying ***format = json*** provides the output in a JSON format.
+4) The ***group*** variable determines if rows count are presented for each partition (the default) or aggregated and presented for each table (and the table name is prefixed with ***per_*** string). 
 
 Examples:
 <pre>
