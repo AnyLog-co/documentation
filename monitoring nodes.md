@@ -30,6 +30,7 @@ Examples:
 get rows count
 get rows count where dbms = dmci and format = json
 get rows count where dbms = aiops and table = lic1_fout
+get rows count where dbms = aiops and table = lic1_fout and group = table
 </pre>
 
 * The command ***get operator*** provides details on ingestion of data by an Operator node.
