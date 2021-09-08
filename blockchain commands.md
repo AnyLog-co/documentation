@@ -79,7 +79,7 @@ Maintaining a master node in the network is optional.
 | blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
 | blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
 | blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
-| blockchain wait for [policy] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |  
+| blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |  
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
