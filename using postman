@@ -11,4 +11,5 @@ To run AnyLog queries using Postman, follow the following steps:
 3. Add a request
 4. Enter the request URL and port number (the URL can also be an IP address)
 5. Add 2 header keys: "User-Agent" and "command" with values "AnyLog/1.23" and "[query command]", respectively
+![github image]()
 6. Press send, and wait for a response
