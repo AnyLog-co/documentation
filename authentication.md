@@ -258,3 +258,26 @@ set private password = [password] [in file]
 [in file] - An optional command text to store the password in an encrypted file protected by the ***local password***.  
 If the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.    
 If the private password is available, the encrypted password (of the private key) is written to the local file system.
+
+# SSL
+To enable SSL connections, you need to determine if you are the designated trusted user (i.e the root user of the network or certificate authority) or a user of AnyLog (i.e. client or server). 
+
+### Setup root user
+The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
+To create the private key and public certificate of the root user (or certificate authority), run the following command on the AnyLog CLI:
+<pre>
+id generate certificate authority
+</pre>
+
+To generate a public certificate and private key pair, run the following command on the AnyLog CLI:
+<pre>
+id generate certificate request
+id sign certificate request
+</pre>
+
+### Setup AnyLog user
+Request a certificate and private key pair from the certificate authority.
+Deploy AnyLog node with SSL enabled with the following command: 
+<pre>
+run rest server !ip 2049 where timeout = 0 and threads = 6 and ssl = true
+</pre>
