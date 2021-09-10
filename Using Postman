@@ -1,0 +1,14 @@
+# How too use Postman as the query interface
+Postman is an API platform for building and using APIs. 
+For AnyLog purposes, you can run queries through Postman with either SSL enabled or not. 
+You can download Postman here: https://www.postman.com/downloads/.
+We layout an example below for "GET" requests. 
+
+### Without SSL
+To run AnyLog queries using Postman, follow the following steps:
+1. Open Postman
+2. Create a collection
+3. Add a request
+4. Enter the request URL and port number (the URL can also be an IP address)
+5. Add 2 header keys: "User-Agent" and "command" with values "AnyLog/1.23" and "[query command]", respectively
+6. Press send, and wait for a response
