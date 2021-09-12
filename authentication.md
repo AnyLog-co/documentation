@@ -10,8 +10,8 @@ When a public key is associated with the permission group, the node is assigned 
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
 the processing node can validate the authentication of the message and determine the authorization assigned by the relevant permission group.
 
-When an external user or application connects to a node in the network, and user authentication is enabled, the node validates the user name and password
-against a local list and if validated, the user inherits the permissions provided to the node.  
+When an external user or application connects to a node in the network, and user authentication is enabled, the node validates the username and password
+against a local lis and if validated, the user inherits the permissions provided to the node.  
 
 Use the following command to enable user authentication:
 <pre>
@@ -162,6 +162,7 @@ id add user where name = [user name] and type = [user type] and password = [pass
 </pre>  
 
 Command variables:
+
 | Option        | Explanation  |
 | ------------- | ------------| 
 | user name  | A unique name to identify the user. |
@@ -259,21 +260,53 @@ set private password = [password] [in file]
 If the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.    
 If the private password is available, the encrypted password (of the private key) is written to the local file system.
 
-# SSL
-To enable SSL connections, you need to determine if you are the designated trusted user (i.e the root user of the network or certificate authority) or a user of AnyLog (i.e. client or server). 
 
-### Setup root user
+# Using SSL Certificates
+
+Nodes which are not members of the network interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
+An example is a Grafana node that issues queries to the network is issued a [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
+which is delivered to the AnyLog node with the queries requests.    
+The process with SSL certificate is based on the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard and is the following:  
+* The root user of the network or a designated user is treated as a Certificate Authority (CA).
+* A node which is not a member of the network issues a Certificate Request (CR).
+* The AnyLog CA validates the identity of the node issuing the CR and if validated, signs the CR. This process provides to
+  the requesting node a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
+
+## Setup the CA
 The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
-To create the private key and public certificate of the root user (or certificate authority), run the following command on the AnyLog CLI:
+To create the private key and public certificate of the root user (or Certificate Authority), run the following command on the AnyLog CLI:
 <pre>
-id generate certificate authority
+id generate certificate authority where [command options]
 </pre>
 
+The command options:
+
+| Option        | Explanation  |
+| ------------- | ------------|
+| password  | A password to protect the CA private key. |
+| country  | The [two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the country where your organization is located. |
+| state  | Town, city, village. |
+| locality  | Town, city, village. |
+| org  | Organization name.|
+| hostname  | The URL representing the CA.|
+
+Example:
+<pre>
+id generate certificate authority where country = "US" and 
+</pre>
+
+
+
+
+## Generating a certificate request
 To generate a public certificate and private key pair, run the following command on the AnyLog CLI:
 <pre>
 id generate certificate request
 id sign certificate request
 </pre>
+
+
+## Signing a certificate request
 
 ### Setup AnyLog user
 Request a certificate and private key pair from the certificate authority.
