@@ -263,18 +263,20 @@ If the private password is available, the encrypted password (of the private key
 
 # Using SSL Certificates
 
-Nodes which are not members of the network interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
+Nodes which are not members of the network (called servers in the description below) interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
 An example is a Grafana node using [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
 which is delivered to the AnyLog node with the queries requests.  
 
 ### The process with SSL certificate is based on the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard and is the following:  
 * The root user of the network or a designated user is treated as a Certificate Authority (CA).
-* A node which is not a member of the network issues a Certificate Request (CR).
-* The AnyLog CA validates the identity of the node issuing the CR and if validated, signs the CR. This process provides to
-  the requesting node a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
+* A server (a node which is not a member of the network) is provided with a Certificate Request (CR).
+* The AnyLog CA validates the identity of the server and if validated, signs the CR. This process provides to
+  the server a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
 
-Note: When the certificate commands are issued, different files are generated. These files are written to the location assigned to the ***pem_dir*** variable (by default to the AnyLog-Network/data/pem directory).  
-To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.
+Notes: 
+    1) When the certificate commands are issued, different files are generated. These files are written to the location assigned to the ***pem_dir*** variable (by default to the AnyLog-Network/data/pem directory).
+        To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.
+   2) [org] in the file name is a key based on the organization name provided in the command line ((value assigned to the key org whereas spaces are replaced with hyphen sign).
 
 ## Setup the CA
 The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
@@ -300,8 +302,6 @@ id generate certificate authority where country = US and state = CA and locality
 </pre>
 
 When the command is issued 2 files are generated:  
-Note: [org] is a key based on the organization name provided in the command line (spaces are replaced with hyphen sign).
-
 
 | Type        | Name  | Explanation |
 | ------------- | ------------| ---- |
@@ -310,14 +310,51 @@ Note: [org] is a key based on the organization name provided in the command line
 
 
 ## Generating a certificate request
-To generate a public certificate and private key pair, run the following command on the AnyLog CLI:
+
+A server which is not a member of the AnyLog network is represented by a Certificate Request (CR) and a Private Key.
+Use the following command to generate a certificate request:
 <pre>
-id generate certificate request
-id sign certificate request
+id generate certificate request where [command options]
 </pre>
+
+The command options:
+
+| Option        | Explanation  |
+| ------------- | ------------|
+| password  | A password to protect the generated private key. |
+| country  | The [two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the country where your organization is located. |
+| locality  | Province, region, county or state (e.g. West Sussex, Normandy, New Jersey). |
+| state  | Town, city, village. |
+| org  | Organization name.|
+| alt_names  | An extension to the X.509 specification that allows to specify additional host names for a single SSL certificate.|
+| hostname  | The URL representing the node that issues the CR.|
+| ip  | The IP of the node that issues the CR.|
+
+Example:
+<pre>
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 127.0.0.1 and hostname =  acme.co and ip = "192.56.76.4"
+</pre>
+
+When the command is issued 2 files are generated:  
+
+| Type        | Name  | Explanation |
+| ------------- | ------------| ---- |
+| .key  | server-[org]-private_key | The Private Key for the requesting server. |
+| .csr  | server-[org]-csr | A CR representing the server. |
 
 
 ## Signing a certificate request
+
+To allow an AnyLog node authenticate the server, the CA signs the CR using the following command:
+
+<pre>
+id sign certificate request where [command options]
+</pre>
+
+The command options:
+
+
+
 
 ### Setup AnyLog user
 Request a certificate and private key pair from the certificate authority.
