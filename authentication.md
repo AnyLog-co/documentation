@@ -266,6 +266,8 @@ If the private password is available, the encrypted password (of the private key
 Nodes which are not members of the network (called servers in the description below) interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
 An example is a Grafana node using [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
 which is delivered to the AnyLog node with the queries requests.  
+In addition, the participating AnyLog nodes are issued with Signed Certificate Requests such that a server which is not a member of the network
+can authenticate the nodes using the Certificate Authority public key.
 
 ### The process with SSL certificate is based on the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard and is the following:  
 * The root user of the network or a designated user is treated as a Certificate Authority (CA).
@@ -332,7 +334,7 @@ The command options:
 
 Example:
 <pre>
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 127.0.0.1 and hostname =  acme.co and ip = "192.56.76.4"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_names = 127.0.0.1 and hostname =  acme.co and ip = "192.56.76.4"
 </pre>
 
 When the command is issued 2 files are generated:  
@@ -353,12 +355,48 @@ id sign certificate request where [command options]
 
 The command options:
 
+| Option        | Explanation  |
+| ------------- | ------------|
+| ca_org  | The organization name of the CA. |
+| server_org  | The organization name of the server associated with the CR. |
 
-
-
-### Setup AnyLog user
-Request a certificate and private key pair from the certificate authority.
-Deploy AnyLog node with SSL enabled with the following command: 
+Example:
 <pre>
-run rest server !ip 2049 where timeout = 0 and threads = 6 and ssl = true
+id sign certificate request where ca_org = AnyLog and server_org = "Acme Inc"
 </pre>
+
+When the command is issued 1 file is generated:  
+
+| Type        | Name  | Explanation |
+| ------------- | ------------| ---- |
+| .crt  | server-[org]-public-key | The Signed Certificate Request. |
+
+
+## Generating and signing certificate request to the AnyLog node
+
+The following example generates generate certificate request for the AnyLog node.
+
+<pre>
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_names = 127.0.0.1 and hostname =  anylog.co and ip = "192.38.78.8"
+</pre>
+
+Signing the CR using the CA private key:
+<pre>
+id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
+</pre>
+
+
+
+## Setup the AnyLog Node and the connecting Server
+
+### Setup the AnyLog node
+Make the following files available in the ***pem*** directory:
+1) The Public Key of the CA: ca-[org]-public_key.crt
+2) The Public Key of the CA: ca-[org]-public_key.crt
+3) The Public Key of the CA: ca-[org]-public_key.crt
+
+Deploy AnyLog with SSL enabled using the following command: 
+<pre>
+run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Acme Inc"
+</pre>
+
