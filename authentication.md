@@ -385,18 +385,42 @@ Signing the CR using the CA private key:
 id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
 </pre>
 
+## Summary of the example files
+With the examples described above, the following files were generated:
+
+
+| File Name        | Explanation  |
+| ------------- | ------------|
+| ca-anylog-private-key.key  | The private key of the CA. |
+| ca-anylog-public-key.crt  | The public key of the CA. |
+| server-acme-inc-csr.csr  | The non-signed CR of the server (Acme Inc). |
+| server-acme-inc-private-key.key  | The private key key of the server (Acme Inc). |
+| server-acme-inc-public-key.crt  | The signed certificate request of the server (Acme Inc). |
+| server-node-128-csr.csr  | The non-signed CR of the AnyLog node (Node 128). |
+| server-node-128-private-key.key  | The private key key of the AnyLog node (Node 128). |
+| server-node-128-public-key.crt  | The signed certificate request of the AnyLog node (Node 128). |
 
 
 ## Setup the AnyLog Node and the connecting Server
 
 ### Setup the AnyLog node
+
 Make the following files available in the ***pem*** directory:
-1) The Public Key of the CA: ca-[org]-public_key.crt
-2) The Public Key of the CA: ca-[org]-public_key.crt
-3) The Public Key of the CA: ca-[org]-public_key.crt
+1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt)
+2) The Private Key of the AnyLog Node: server-[org]-csr.csr  (using the example files: server-node-128-private-key.key)
+3) The Signed CR of the AnyLog Node: server-[org]-public-key.crt  (using the example files: server-node-128-public-key.crt)
+
 
 Deploy AnyLog with SSL enabled using the following command: 
 <pre>
-run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Acme Inc"
+run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
 </pre>
 
+### Setup the Server (Client Side)
+
+The client is configured using the following files:
+1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt)
+2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
+3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
+
+Example of Postman configuration is available at [using postman](https://github.com/AnyLog-co/documentation/blob/master/using%20postman.md#how-too-use-postman-as-the-query-interface).
