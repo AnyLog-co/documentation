@@ -272,6 +272,9 @@ The process with SSL certificate is based on the [X.509](https://en.wikipedia.or
 * The AnyLog CA validates the identity of the node issuing the CR and if validated, signs the CR. This process provides to
   the requesting node a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
 
+Note: When the certificate commands are issued, different files are generated. These files are written to the location assigned to the ***pem_dir*** variable (by default to the AnyLog-Network/data/pem directory).  
+To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.
+
 ## Setup the CA
 The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
 To create the private key and public certificate of the root user (or Certificate Authority), run the following command on the AnyLog CLI:
@@ -285,16 +288,17 @@ The command options:
 | ------------- | ------------|
 | password  | A password to protect the CA private key. |
 | country  | The [two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the country where your organization is located. |
+| locality  | Province, region, county or state (e.g. West Sussex, Normandy, New Jersey). |
 | state  | Town, city, village. |
-| locality  | Town, city, village. |
 | org  | Organization name.|
 | hostname  | The URL representing the CA.|
 
 Example:
 <pre>
-id generate certificate authority where country = "US" and 
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
 </pre>
 
+When the command is isuued 
 
 
 
