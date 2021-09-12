@@ -85,8 +85,13 @@ Explanation:
 [ip] [port] - The IP and Port of the socket that is in the listening state.    
 [timeout] - An optional parameter that determines wait a timeout period in seconds. 
 ***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 5.
-When a REST request is issued, if a respond is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
-If ssl is set to True, connection is using HTTPS and authentication requires Certificates.
+When a REST request is issued, if a response is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
+If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates).  
+
+The following CLI command provides the info on how the REST server is configured:
+<pre>
+get rest server info
+</pre>
 
 Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 

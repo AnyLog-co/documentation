@@ -416,6 +416,12 @@ Deploy AnyLog with SSL enabled using the following command:
 run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
 </pre>
 
+Use the following command to retrieve the REST server configuration:
+<pre>
+get rest server info
+</pre>
+
+
 ### Setup the Server (Client Side)
 
 The client is configured using the following files:

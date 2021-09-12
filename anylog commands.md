@@ -153,6 +153,7 @@ Options:
 | get streaming | Information on streaming data from REST and MQTT calls. |
 | get cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
 | get tsd info [table name] | Information on the synchronization status between the cluster members. |
+| get rest server info | Information on the way the REST server is configured. |
 | get mqtt clients | Information on MQTT clients and the subscribed topics. |
 | get mqtt client [n]| Information on a MQTT client, ***n*** is the client ID. |
 | get mqtt brokers | Information on mqtt brokers and the topics subscribed with each broker. |
