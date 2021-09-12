@@ -264,9 +264,10 @@ If the private password is available, the encrypted password (of the private key
 # Using SSL Certificates
 
 Nodes which are not members of the network interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
-An example is a Grafana node that issues queries to the network is issued a [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
-which is delivered to the AnyLog node with the queries requests.    
-The process with SSL certificate is based on the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard and is the following:  
+An example is a Grafana node using [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
+which is delivered to the AnyLog node with the queries requests.  
+
+### The process with SSL certificate is based on the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard and is the following:  
 * The root user of the network or a designated user is treated as a Certificate Authority (CA).
 * A node which is not a member of the network issues a Certificate Request (CR).
 * The AnyLog CA validates the identity of the node issuing the CR and if validated, signs the CR. This process provides to
@@ -298,8 +299,14 @@ Example:
 id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
 </pre>
 
-When the command is isuued 
+When the command is issued 2 files are generated:  
+Note: [org] is a key based on the organization name provided in the command line (spaces are replaced with hyphen sign).
 
+
+| Type        | Name  | Explanation |
+| ------------- | ------------| ---- |
+| .key  | ca-[org]-private_key | The Private Key for the CA |
+| .crt  | ca-[org]-public_key | The Public Key for the CA. It will be provided to every AnyLog node that authenticates non-member nodes with CR signed by the AnyLog CA |
 
 
 ## Generating a certificate request
