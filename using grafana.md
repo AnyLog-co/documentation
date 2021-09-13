@@ -94,6 +94,7 @@ sql             - A sql statement to use.
 details         - An AnyLog command which is not a SQL statement.
 where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
 functions       - A list of SQL functions to use which overwrites the default functions. 
+timezone        - ***utc*** (default) or ***default*** to change time values to local time before the transfer to Grafana.
 time_column     - The name of the time column in the Time Series format.
 value_column    - The name of the value column in the Time Series format.
 time_range      - When using a Table view, determines if the query needs to consider the time range. The default value is 'true'.
@@ -148,6 +149,19 @@ A pre-defined qiery - for the time range in the panel, divide the time range to 
 "value_column" : "value"
 }
 </pre>
+
+The "increments" function provides by default values representing the "min", "max" and "avg" values for every interval.
+The following example adds "range" (the difference between max and min) and "count" (number of values in each interval) to the returned values:
+<pre> 
+{
+"type" : "increments",
+"time_column" : "timestamp",
+"value_column" : "value",
+"timezone" : "local",
+"functions" : ["avg", "min", "max", "range", "count"]
+"}
+</pre>
+
 
 ### Executing a 'period' query
 A pre-defined qiery that considers the time range in the panel, determines the last time with value and calculate the min max and average values for the data values in the interval.
