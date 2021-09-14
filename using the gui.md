@@ -10,7 +10,22 @@ The AnyLog GUI serves as an example application that interacts with the network.
 
 
 ## Configure Grafana
+Change the following configuration options in the .ini configuration file:
+Notes: 
+- You must restart Grafana for any configuration changes to take effect.
+- Optional locations for the Grafana .ini file:
+  * Winodws Config: `C:\Program Files\GrafanaLabs\grafana\conf\custom.ini`
+  * Linux Config: `/etc/grafana/grafana.ini`
+  * For Docker, the Grafana config file name is `grafana.ini`, except it's stored within a Docker volume (if created); if not it is a hidden file. 
+[Grafana Docker Documentation](https://grafana.com/docs/grafana/latest/installation/docker/)
+  
+| Section | Parameter | Value  | Details  |
+| ------------- | ------------- | ------------| ------------| 
+| auth  | disable_login_form | true |  When false, the HTTP header X-Frame-Options: deny will be set in Grafana HTTP responses which will instruct browsers to not allow rendering. | 
+| auth.anonymous | enabled | true | When true, users are able to view Grafana dashboards without logging-in. They are **not** able to change dashboards. 
 
+
+  
 ### The home dashboard
 * [Set the home dashboard for the server](https://grafana.com/docs/grafana/latest/administration/preferences/change-home-dashboard/) - the login process connects to the home dashboard to validate that Grafana is accessible.
 
