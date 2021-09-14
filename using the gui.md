@@ -22,8 +22,12 @@ Notes:
 | Section | Parameter | Value  | Details  |
 | ------------- | ------------- | ------------| ------------| 
 | auth  | disable_login_form | true |  When false, the HTTP header X-Frame-Options: deny will be set in Grafana HTTP responses which will instruct browsers to not allow rendering. | 
-| auth.anonymous | enabled | true | When true, users are able to view Grafana dashboards without logging-in. They are **not** able to change dashboards. 
+| auth.anonymous | enabled | true | When true, users are able to view Grafana dashboards without logging-in. They are **not** able to change dashboards. |
+| security | allow_embedding | true | When false, the HTTP header X-Frame-Options: deny will be set in Grafana HTTP responses which will instruct browsers to not allow rendering. |
 
+## Create dashboards and folders
+The GUI allows to create folders and dashboards in Grafana. To do so, provide dashboard and folder permissions in Grafana. 
+Assigning and removing permissions is explained at [Grant dashboard and folder permissions](https://grafana.com/docs/grafana/latest/permissions/dashboard-folder-permissions/).
 
   
 ### The home dashboard
