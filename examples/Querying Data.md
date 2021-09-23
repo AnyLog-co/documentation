@@ -149,7 +149,7 @@ tic1001b_pv 2021-07-08 18:19:04.979354   88.2485414195323
 </pre>
 
 
-#### Example #5 - last value generated
+#### Example #5 - last value generated for each included table
 
 **Command**: 
 <pre>
