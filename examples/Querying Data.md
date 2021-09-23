@@ -149,6 +149,30 @@ tic1001b_pv 2021-07-08 18:19:04.979354   88.2485414195323
 </pre>
 
 
+#### Example #5 - last value generated
+
+**Command**: 
+<pre>
+# AnyLog CLI format 
+run client () sql aiops include=(lic1_pv,lic1_sv,lic1_mv,fic11_pv,fic12_pv) and extend=(@table_name as table) and format = table "SELECT table_name, timestamp, value FROM fic13_pv WHERE timestamp > timestamp(now, '- 1 day') order by timestamp desc limit 1 per table;"
+</pre>
+**Sample Output**: 
+<pre>
+table    timestamp                  value
+-------- -------------------------- ----------------
+lic1_pv  2021-09-22 19:50:22.247229 50.0120689683407
+lic1_mv  2021-09-22 19:50:22.247229 65.3239553149617
+fic13_pv 2021-09-22 19:50:22.247229 104.169663032697
+fic11_pv 2021-09-22 19:50:22.247229 24.3174650020081
+fic12_pv 2021-09-22 19:50:22.247229 74.2116546634527
+lic1_sv  2021-09-22 19:50:22.247229             50.0
+
+
+{"Statistics":[{"Count": 6,
+                 "Time": 00:00:00}]}
+</pre>
+
+
 #### Python3 Example for Query #4 
 <pre> 
 import requests 
