@@ -164,14 +164,14 @@ run blockchain sync where source = master and time = 30 seconds and dest = file 
 
 ## Push data to the network
 There many ways and interfaces to add data to the network. The simplest is to add a JSON file to the watch directory.  
-View the location of the watch directory using the command: ***connect dbms*** (see the example above where lsl_demo database is declared).
+View the location of the watch directory using the command: 
 <pre>
 !watch_dir
 </pre>
 Note:  
 * Use the following file name convention: [database name].[table name].json
-* To be alligned with the example use: ***lsl_demo.ping_sensor.json***
-* To assign the data to a different database, the database needs to be declared using the command:
+* To be aligned with the example use: ***lsl_demo.ping_sensor.json***
+* To assign the data to a different database, the database needs to be declared using the command ```connect dbms``:
 
 ### the process
 * Create a file in a temporary directory
