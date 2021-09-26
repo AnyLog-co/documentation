@@ -204,7 +204,7 @@ File data Example
 </pre>
 
 
-## Run queries on the Query Node (or any othe node with system_query database declared)
+## Run queries on the Query Node (or any other node with system_query database declared)
 
 <pre>
 run client () sql lsl_demo format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
