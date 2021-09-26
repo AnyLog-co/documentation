@@ -109,11 +109,11 @@ run client !master_node get connections  # will show the config on the master
 
 <pre>
 # trace level = 3 run tcp server
-<cluster = {"cluster" : {
+< cluster = {"cluster" : {
                 "company" : "anylog",
                 "name"   : "cluster_1"
     }
-}>
+} >
 
 run client !master_node blockchain push !cluster
 run blockchain sync   # Force blockchain sync now
@@ -131,11 +131,11 @@ cluster_id = blockchain get cluster where name = cluster_1 bring.first [cluster]
 </pre>
 Define and add the policy
 <pre>
-<operator = {"operator" : {
+< operator = {"operator" : {
     "cluster" : !cluster_id,
     "ip" : !operator_ip,
     "port" : !operator_port.int    }
-}>
+} >
 run client !master_node blockchain push !operator
 run blockchain sync   # Force blockchain sync now
 blockchain wait where command = "blockchain get operator where cluster = !cluster_id" # wait for the local update
