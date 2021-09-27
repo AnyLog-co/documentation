@@ -204,9 +204,21 @@ File data Example
 </pre>
 
 
-## Run queries on the Query Node (or any othe node with system_query database declared)
+### Examples commands to monitor status and state on the operator node
+
+<pre>
+get operator
+get rows count
+get rows count where group = table
+</pre>
+
+
+## Run queries on the Query Node (or any other node with system_query database declared)
 
 <pre>
 run client () sql lsl_demo format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
 run client () sql lsl_demo format = table "select count(*), min(value), max(value) from ping_sensor"
 </pre>
+
+
+
