@@ -12,7 +12,7 @@ git clone https://github.com/AnyLog-co/AnyLog-API
 ```
 
 
-1. Create a personalized config file based on the type of node you want to deploy. (Sample Config File)[examples/sample_config.ini]
+1. Create a personalized config file based on the type of node you want to deploy. [Sample Config File](examples/sample_config.ini)
 
 
 2. Deploy a REST based AnyLog instance 
