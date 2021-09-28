@@ -6,7 +6,7 @@ Any connected node can host data.
 There are multiple ways to add data to Operators in the network:
 * [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
 * [Using a REST API](#data-transfer-using-a-rest-api) - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
-* Configuring the AnyLog node as a message broker and publishing the data on the broker. 
+* [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and publishing the data on the broker. 
 
 ## The node type
 An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
@@ -95,7 +95,7 @@ Details on how an operator is configured are available [here](https://github.com
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
 
-#### Using a PUT command
+### Using a PUT command
  
 Use a REST client software (such as Curl or Postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:
   
@@ -128,7 +128,7 @@ curl --location --request PUT '10.0.0.78:2049' \
 </pre>
 
 
-#### Using a POST command
+### Using a POST command
 
 **cURL Example**: 
 <pre>
@@ -246,3 +246,28 @@ The command provides information on the REST API usage and status including the 
 
 ## Configuring the AnyLog node as a message broker
 
+Any AnyLog node can be configured with a [Message Broker](https://en.wikipedia.org/wiki/Message_broker) functionality.  
+By configuring a node as message broker, data can be delivered a client directly to AnyLog without the need to deliver the data through a third party platform or through the cloud.
+
+## Configuring AnyLog
+
+The AnyLog node receiving the data needs to be configured as follows:
+
+* Enable the ***Message Broker*** functionality:   
+Usage:
+<pre>
+run message broker [ip] [port] [local ip] [Local port] [threads]
+</pre>
+Details on the the ***run message broker*** command are available at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
+section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
+
+* Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
+This process is identical to the [subscription process to 3rd parties MQTT brokers](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) 
+  whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
+  
+Example:
+<pre>
+run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
+</pre>
+Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
+Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
