@@ -56,7 +56,7 @@ blockchain delete local file
 create table ledger where dbms = blockchain                 # Create an internal table
 </pre>
 
-# Configure the Operator Node
+## Configure the Operator Node
 
 <pre>
 set authentication off    # Disable users authentication
