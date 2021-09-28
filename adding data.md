@@ -4,8 +4,8 @@ AnyLog hosts the data on nodes in the network that are configured as Operators (
 Any connected node can host data. 
  
 There are multiple ways to add data to Operators in the network:
-* Using a WATCH directory - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
-* Using a REST API - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
+* [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
+* [Using a REST API](#data-transfer-using-a-rest-api) - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
 * Configuring the AnyLog node as a message broker and publishing the data on the broker. 
 
 ## The node type
@@ -244,14 +244,5 @@ Retrieving the thresholds values is with the following command:
 
 The command provides information on the REST API usage and status including the buffer thresholds.
 
-
-
-
-
- 
-  
-
- 
-   
-
+## Configuring the AnyLog node as a message broker
 
