@@ -3,23 +3,26 @@
 AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).
 Any connected node can host data. 
  
-There are 2 methods to deliver data to Operators in the network:
-1) Using a WATCH directory - Adding data is by placing the data in the WATCH directory.  
-2) Using a REST API - the REST client is not necessarily a member of the network, data is delivered using the PUT command.
-   
+There are multiple ways to add data to Operators in the network:
+* Using a WATCH directory - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
+* Using a REST API - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
+* Configuring the AnyLog node as a message broker and publishing the data on the broker. 
+
+## The node type
+An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
 Files received by nodes are processed depending on the configuration of the node.
 If a node is configured as a Publisher, it will send each file received to one of the Operators that manage the table containing the data.
 If a node is configured as an Operator, it will add each file received to a local table that contains that type of data.
 
 ## Placing data in the WATCH directory
 
-This option allows to add data by placing new data in a Watch Directory.  
+This option allows adding data by placing new data in a Watch Directory.  
 A Watch Directory is a disk directory designated to new data. Operators monitor data placed in a watch directory such that when new data is identified, the data processing functionality is triggered.   
 Operator nodes are configured such that any file (of the type JSON or SQL) that is placed on a WATCH directory is being processed.  
 The default processing is as follows:  
 1. The file is read by the operator.
-2. From the file name, the processing variables and logic are determined. These include the logical database, table name and the method to determine the mapping of the data.
-3. If a logical table does not exists, a table is created.
+2. From the file name, the processing variables and logic are determined. These include the logical database, table name, and the method to determine the mapping of the data.
+3. If a logical table does not exist, a table is created.
 4. The file data is added to the table.
 
 ### JSON File naming
@@ -76,7 +79,7 @@ File Mode and Streaming Mode are detailed [below](#file-mode-and-streaming-mode)
 
 ### Configuring the Receiving Node (an AnyLog node): 
 
-The node processing the PUT request needs to be configured as follows:
+The node processing the REST request needs to be configured as follows:
 
 * As a REST server to receive the REST requests from the client.
 using the following command on the AnyLog command prompt:
@@ -91,6 +94,8 @@ The default value is 20 seconds.
 Details on how an operator is configured are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#publisher-process).
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
+
+#### Using a PUT command
  
 Use a REST client software (such as Curl or Postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:
   
@@ -122,16 +127,68 @@ curl --location --request PUT '10.0.0.78:2049' \
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
 </pre>
 
+
+#### Using a POST command
+
+**cURL Example**: 
+<pre>
+curl --location --request POST '192.168.50.159:2051' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: data' \
+--header 'Content-Type: text/plain' \
+--data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
+ {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
+ {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
+</pre>
+
+**Python Example**: 
+<pre> 
+import json 
+import requests
+
+# REST connection information (IP + Port) 
+conn = '192.168.50.159:2051' 
+
+# Header for POST data 
+headers = {
+    'command': 'data',
+    'User-Agent': 'AnyLog/1.23',
+    'Content-Type': 'text/plain'
+}
+
+# data to POST 
+data = [
+    {"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
+    {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
+    {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}
+]
+
+# Convert to JSON 
+jdata = json.dumps(data) 
+
+# POST proces 
+try:
+    r = requests.post('http://%s' % conn, headers=headers, data=jdata)
+except Exception as e: 
+    print('Failed to POST data to %s (Error: %s)' % (conn, e))
+else: 
+    if r.status_code != 200: 
+        print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
+    else:
+        print('Success') 
+</pre> 
+
+
 ### The Data Format
 
-To process a PUT request with new data, the data is organized in the message body as strings with the new line character separating between the JSON instances.
+To process a PUT or POST requests with new data, the data is organized in the message body as strings with the new line character separating between the JSON instances.
 Extra New-Line (LF), Tab and Carriage Return characters (CR) are replaced with space. 
 
 
 ## File Mode and Streaming Mode
 
 Data ingested to a local database is organized in files. Each file contains one or more sensor readings (or other type of time series data) organized in a JSON format.
-Users adding data with the REST API determine the mode in which data is processed:
+Users adding data with the REST API determines the mode in which data is processed:
 
 * Using a ***File Mode*** (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other PUT requests.  
 A File Mode is usually used when the PUT request contains a large amount of data or when the data is not frequenty created.  
