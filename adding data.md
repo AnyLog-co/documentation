@@ -264,10 +264,30 @@ section in the [Background Processes](https://github.com/AnyLog-co/documentation
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
 This process is identical to the [subscription process to 3rd parties MQTT brokers](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) 
   whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
-  
-Example:
+
+* Add the data and associate the data with a topic assigned to the broker.  
+
+
+### Example:
+
+#### Init a broker
+<pre>
+run message broker [ip] [port] [local ip] [Local port] [threads]
+</pre>
+
+#### Define topic and data mappping instructions
 <pre>
 run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
 </pre>
 Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+Details on the ***run mqtt client*** command, and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+
+#### Publish data to the broker
+curl --location --request POST '10.0.0.78:7849' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: data' \
+--header 'Content-Type: text/plain' \
+--header 'topic: anylog' 
+--data-raw ' [{"dbms" : "dmci", "table" : "fic11", "value": 50, "ts": "2019-10-14T17:22:13.051101Z"},
+ {"dbms" : "dmci", "table" : "fic16", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"},
+ {"dbms" : "dmci", "table" : "ai_mv", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"}]'
