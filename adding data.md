@@ -247,8 +247,8 @@ The command provides information on the REST API usage and status including the 
 
 ## Subscribing to a third party message broker
 
-Details are available at the [message broker section](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
+Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
 
 ## Configuring the AnyLog node as a message broker
 
-Details are available at the [message broker section](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+Details are available at the [message broker section - ](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).

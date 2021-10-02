@@ -1,8 +1,8 @@
 # Using a Message Broker
 
 There are 2 ways to configure a node:
-* As a subscriber to a third party message broker
-* As a message broker
+* As a [subscriber to a third party message broker](#subscribing-to-a-third-party-broker)
+* As a [message broker](#configuring-an-anylog-node-as-a-message-broker)
 
 In both cases, user are are able to do the following:
 
