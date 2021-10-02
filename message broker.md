@@ -25,12 +25,12 @@ Providing the ***broker*** value is mandatory. ALl the other fields are optional
 The details of the topic are enclosed in parentheses and the MQTT client declared on the command line could subscribe to multiple topics.    
 The command format with subscriptions to multiple topics is as follows:  
 <pre>
-run mqtt client where [connection parameters] and [generic parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
+run mqtt client where [connection parameters] and [Config parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
 </pre>
 
 The subscription details of each topic are enclosed in the parenthesis and include 3 types of parameters:    
 1. Connection Params - providing the information that allows to connect to the broker.  
-2. Generic Params - Configuration parameters that apply to all messages regardless of the subscribed topic.  
+2. Config Params - Configuration parameters that apply to all messages regardless of the subscribed topic.  
 3. Topic Params - Include the topic name and the rules of how to map the message such that it can be processed by the AnyLog node.  
   
 
@@ -49,9 +49,9 @@ To connect to a broker, the broker URL is mandatory and the rest depends on the 
 | location  | A name identifying the service location. |
 | private_key  | A private key to authenticate requests. |
 
-***The generic params***
+***The Config params***
 
-The generic params provide configuration parameters and can modify the default settings.
+The Config Params provide configuration parameters and can modify the default settings.
   
 | Option        | Details   |
 | ------------- | ------------- | 
@@ -71,7 +71,7 @@ The following params are provided for each topic:
 | Option        | Details   |
 | ------------- | ------------- | 
 | name  | The topic name to which the process subscribes. |
-| qos  | The Quality of Service, if omitted, the value provided in the the generic params is used (or, if not available, the default value). |
+| qos  | The Quality of Service, if omitted, the value provided in the the Config Params is used (or, if not available, the default value). |
 | dbms  | The logical DBMS that contains the topic's data or a ***'bring' command*** to extract the dbms name. |
 | table  | The name of the table to contain the data or a ***'bring' command*** to extract the table name. |
 | column.name.type  | The column name and column type that is associated with the data extracted from the message. The column is associated with the ***'bring' command*** that details the rule to extract the column data. |
