@@ -6,7 +6,8 @@ Any connected node can host data.
 There are multiple ways to add data to Operators in the network:
 * [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
 * [Using a REST API](#data-transfer-using-a-rest-api) - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
-* [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and publishing the data on the broker. 
+* [Subscribing to a third party message broker](#subscribing-to-a-third-party-message-broker) and receiving the published data from the third party broker. 
+* [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients. 
 
 ## The node type
 An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
@@ -244,50 +245,10 @@ Retrieving the thresholds values is with the following command:
 
 The command provides information on the REST API usage and status including the buffer thresholds.
 
+## Subscribing to a third party message broker
+
+Details are available at the [message broker section]()
+
 ## Configuring the AnyLog node as a message broker
 
-Any AnyLog node can be configured with a [Message Broker](https://en.wikipedia.org/wiki/Message_broker) functionality.  
-By configuring a node as message broker, data can be delivered a client directly to AnyLog without the need to deliver the data through a third party platform or through the cloud.
-
-## Configuring AnyLog
-
-The AnyLog node receiving the data needs to be configured as follows:
-
-* Enable the ***Message Broker*** functionality:   
-Usage:
-<pre>
-run message broker [ip] [port] [local ip] [Local port] [threads]
-</pre>
-Details on the the ***run message broker*** command are available at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
-section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
-
-* Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the [subscription process to 3rd parties MQTT brokers](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) 
-  whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
-
-* Add the data and associate the data with a topic assigned to the broker.  
-
-
-### Example:
-
-#### Init a broker
-<pre>
-run message broker [ip] [port] [local ip] [Local port] [threads]
-</pre>
-
-#### Define topic and data mappping instructions
-<pre>
-run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
-</pre>
-Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the ***run mqtt client*** command, and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
-
-#### Publish data to the broker
-curl --location --request POST '10.0.0.78:7849' \
---header 'User-Agent: AnyLog/1.23' \
---header 'command: data' \
---header 'Content-Type: text/plain' \
---header 'topic: anylog' 
---data-raw ' [{"dbms" : "dmci", "table" : "fic11", "value": 50, "ts": "2019-10-14T17:22:13.051101Z"},
- {"dbms" : "dmci", "table" : "fic16", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"},
- {"dbms" : "dmci", "table" : "ai_mv", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"}]'
+Details are available at the [message broker section]()
