@@ -251,4 +251,4 @@ Details are available at the [message broker section - Subscribing to a third pa
 
 ## Configuring the AnyLog node as a message broker
 
-Details are available at the [message broker section - ](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+Details are available at the [message broker section - Configuring an AnyLog node as a message broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
