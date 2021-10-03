@@ -131,7 +131,7 @@ There are 2 ways to detail the association:
     column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
     </pre> 
 
-***Examples***
+***Examples - associating published data with the needed schema***
 
 Example 1 - assigning the name ***machines_data*** as the database name:
 <pre>
@@ -147,7 +147,7 @@ column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
 </pre> 
 
 
-A complete example is provided [below](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#example).
+A complete example is provided [below](#example).
 
 ### Processing messages and terminating a subscription
 
@@ -204,7 +204,7 @@ Users can see the list of brokers and the subscribed users and topics in each br
 get mqtt brokers
 </pre>
 
-### Example:  
+### Example
 The example below connects to a broker to pull data assigned to a topic.
 <pre>
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
