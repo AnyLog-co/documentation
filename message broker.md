@@ -352,7 +352,7 @@ Details on the the ***run message broker*** command are available at the [Messag
 section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
 
 ## Subscription to topics published on the AnyLog node
-* Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
+Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
 This process is identical to the  [Subscribing to a third party broker](#subscribing0-to-a-third-party-broker) 
   whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
 
@@ -392,9 +392,29 @@ Note: the key value pair ***broker=local*** replace the assignment of an IP and 
 mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 </pre>
 
-# AnyLog as a broker receiving REST commands and mapping the data to the needed schema based on the provided topic
+# AnyLog as a broker receiving REST commands 
 
-### Publish data to the broker
+This option allows mapping of data streamed to AnyLog using the REST API to the needed schema based on a provided topic.
+This option requires 2 special settings:  
+1) The subscription identifies the key ***broker*** by the value ***rest***. Data delivered to the REST server using POST command will be mapped as defined in the topic assignment.
+2) The target API is identified using the ***user-agent*** keyword, for example: ***user-agent=anylog*** will deliver the call to the AnyLog native process.
+
+## Subscription to topics published on the AnyLog node
+Usage:
+<pre>
+run mqtt client where broker = rest and user-agent = [detination API] and [Config parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
+</pre>
+Note: the key value pair ***broker=rest*** replaces the assignment of an IP and port (when 3rd parties brokers are used).    
+
+## Example
+
+## Subscribe to a topic and provide data mapping instructions
+<pre>
+run mqtt client where broker = rest and user-agent=anylog and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
+</pre>
+
+
+### Publish data using REST
 curl --location --request POST '10.0.0.78:7849' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: data' \
