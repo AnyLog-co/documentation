@@ -418,8 +418,23 @@ run mqtt client where broker = rest and user-agent=anylog and user = mqwdtklv an
 curl --location --request POST '10.0.0.78:7849' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: data' \
+--header 'topic: test' \
 --header 'Content-Type: text/plain' \
---header 'topic: anylog' 
---data-raw ' [{"dbms" : "dmci", "table" : "fic11", "value": 50, "ts": "2019-10-14T17:22:13.051101Z"},
- {"dbms" : "dmci", "table" : "fic16", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"},
- {"dbms" : "dmci", "table" : "ai_mv", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"}]'
+--data-raw '[{"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}},
+{"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}}
+
+]'
