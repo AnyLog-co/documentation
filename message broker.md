@@ -361,9 +361,27 @@ run mqtt client where broker = local and [Config parameters] and topic = (topic 
 </pre>
 
 
+***Define a message***  
+```
+<message = {"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}}>
+```
+***Publish the message***  
+<pre>
+mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
+</pre>
+
+
+
 ### Example:
 
-#### Init a broker
+#### Init an AnyLog node as a broker
 <pre>
 run message broker !external_ip 7850 !ip 7850 6
 </pre>
@@ -375,7 +393,11 @@ run mqtt client where broker = local and user = mqwdtklv and password = uRimssLO
 run mqtt client where broker = local and user-agent=python and topic=(name="test" and dbms="foglamp" and table=weather and column.timestamp.timestamp="bring [timestamp]" and column.city.str="bring [reading][city]" and column.wind_speed.float="bring [reading][wind_speed]" and column.temperature.float="bring [reading][temperature]" and column.humidity.int="bring [reading][humidity]")
 </pre>
 Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the ***run mqtt client*** command, and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+
+
+
+
+
 
 #### Publish data to the broker
 curl --location --request POST '10.0.0.78:7849' \
