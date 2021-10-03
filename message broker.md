@@ -1,10 +1,11 @@
 # Using a Message Broker
 
-There are 2 ways to configure a node:
+There are 3 ways to configure a node:
 * As a [subscriber to a third party message broker](#subscribing-to-a-third-party-broker)
-* As a [message broker](#configuring-an-anylog-node-as-a-message-broker)
+* As a [message broker](#configuring-an-anylog-node-as-a-message-broker) - receiving published data from a client using standard APIs like MQTT.
+* As a [broker receiving REST commands]() and mapping the data to the needed schema based on the provided topic.
 
-In both cases, user are are able to do the following:
+In both cases, user are able to do the following:
 
 * Users can subscribe and retrieve data from one or more topics in a  broker.
 * Users can publish data to a topic  in a broker.
@@ -391,7 +392,7 @@ Note: the key value pair ***broker=local*** replace the assignment of an IP and 
 mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 </pre>
 
-## Publish data on a message broker using REST - Post command
+# AnyLog as a broker receiving REST commands and mapping the data to the needed schema based on the provided topic
 
 ### Publish data to the broker
 curl --location --request POST '10.0.0.78:7849' \

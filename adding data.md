@@ -7,7 +7,9 @@ There are multiple ways to add data to Operators in the network:
 * [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](https://github.com/AnyLog-co/documentation/blob/master/examples/network%20setup.md#push-data-to-the-network).
 * [Using a REST API](#data-transfer-using-a-rest-api) - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
 * [Subscribing to a third party message broker](#subscribing-to-a-third-party-message-broker) and receiving the published data from the third party broker. 
-* [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients. 
+* [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients.   
+    If an AnyLog node is configured as a message broker, clients are able to publish data on the AnyLog node and map the published data to an existing schema. 
+
 
 ## The node type
 An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
