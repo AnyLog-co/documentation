@@ -154,9 +154,9 @@ Options:
 | get cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
 | get tsd info [table name] | Information on the synchronization status between the cluster members. |
 | get rest server info | Information on the way the REST server is configured. |
-| get mqtt clients | Information on MQTT clients and the subscribed topics. |
-| get mqtt client [n]| Information on a MQTT client, ***n*** is the client ID. |
-| get mqtt brokers | Information on mqtt brokers and the topics subscribed with each broker. |
+| get msg clients | Information on clients subscribed to topics. |
+| get msg client [n]| Information on a particular client, ***n*** is the client ID. |
+| get msg brokers | Information on message brokers and the topics subscribed with each broker. |
 | get broker | Information on the Message Broker. |
 | get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 

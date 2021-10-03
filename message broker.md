@@ -188,11 +188,11 @@ exit mqtt [n]
   
 * To view status of all clients use the following command:
 <pre>
-get mqtt clients
+get msg clients
 </pre>    
 * To view the status of a particular client use the command (***n*** is the client ID): 
 <pre>
-get mqtt client [n]
+get msg client [n]
 </pre>
 * To view the streaming data status, use the following command:
 <pre>
@@ -202,7 +202,7 @@ get streaming
 ### View registered brokers
 Users can see the list of brokers and the subscribed users and topics in each broker using the command:
 <pre>
-get mqtt brokers
+get msg brokers
 </pre>
 
 ### Example
@@ -314,7 +314,7 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 
 ### View all client status  
 <pre>
-get mqtt clients
+get msg clients
 </pre>    
 
 To view the ***Streaming Data*** buffers state use the following command:
@@ -324,7 +324,7 @@ get streaming
 
 ### View registered brokers
 <pre>
-get mqtt brokers
+get msg brokers
 </pre>
  
 
