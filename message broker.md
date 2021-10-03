@@ -9,7 +9,7 @@ In both cases, user are are able to do the following:
 * Users can subscribe and retrieve data from one or more topics in a  broker.
 * Users can publish data to a topic  in a broker.
 
-## Subscribing to a third party broker
+# Subscribing to a third party broker
 
 This process initiates a client that subscribes to a list of topics registered on a MQTT broker.      
 When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.        
@@ -285,6 +285,7 @@ CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the M
 <pre>
 run streamer 
 </pre> 
+Info on the ***run streamer*** command is available in the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) in the ***Background Processes" section.
 
 ### Subscribing to the topic:
 
@@ -326,7 +327,7 @@ get mqtt brokers
 </pre>
  
 
-## Configuring an AnyLog node as a message broker
+# Configuring an AnyLog node as a message broker
 
 By enabling the AnyLog [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker) functionality on a particular node, 
 the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [Using Edgex](https://github.com/AnyLog-co/documentation/blob/master/using%20edgex.md#using-edgex) section.
