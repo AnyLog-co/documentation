@@ -215,43 +215,48 @@ File mode is the default mode. Changing the mode to streaming is by updating the
 | mode | streaming | The body of the message is JSON data that is buffered in the node. Database load (on an Operator Node) and data send (on a Publisher Node) are based on time and volume thresholds. |
 
 
-#### Setting and retrieving thresholds for a Streaming Mode
+## Setting and retrieving thresholds for a Streaming Mode
 
 Thresholds determine when buffered data is processed and are based on a time threshold and a data volume threshold.
-If both are set, the earlier of the two triggers the processing of the data.
+As multiple thresholds ate set, the earlier of the two triggers the processing of the data.  
 
-Time threshold can be specified in seconds, minutes, hours or days.  
-Volume threshold can be specified byes, KB, MB or GB.
-
-Volume thresholds are enforced by the processes that add the data to the buffers (i.e. REST processes and MQTT processes).  
-The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
-<pre>
-run streamer 
-</pre>
-More information on the streamer process is available at the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) section.
-
- 
-Users can configure a default value as well as thresholds for each each type of data by assigning a threshold to the table associated with the data.  
-
-Setting the default values is with the following command:  
-```set buffer threshold where time = [time] and volume = [data volume]```  
-Example:  
-```set buffer threshold where time = 1 hour and volume = 2KB```  
-
-By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
-
-Setting the threshold for a particular table is with the following command:  
+Usage:
 <pre> 
-set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume]
+set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume] and write_immediate = [true/false]
 </pre>  
-Notes:    
+
+Options:
+
+| Option        | Explanation   | Default Value |
+| ------------- | ------------- | ------------- |
+| dbms_name  | The name of the database associated with the data  | All databases  |
+| table_name  | The name of the table associated with the data  | All tables of the specified database  |
+| time  | The time threshold to flush the streaming data  | 60 seconds  |
+| volume  | The accumulated data volume that calls the data flush process  | 10KB  |
+| write_immediate  | Local database is immediate (independent of the calls to flush)  | false  |
+
+Note:
+* Time threshold can be specified in seconds, minutes, hours or days.  
+* Volume threshold can be specified byes, KB, MB or GB.
+* Volume thresholds are enforced by the processes that add the data to the buffers (i.e. REST processes and MQTT processes).  
+* The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
+    <pre>
+    run streamer 
+    </pre>
+    More information on the streamer process is available at the [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) section.
 * If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
-* If the time is set to 0 seconds and the volume is set to 0 bytes - the threshold for the table's buffer is removed and the data associated with the table is assigned with the threshold default values.    
+* If the time is set to 0 seconds and the volume is set to 0 bytes - the thresholds are reverted to the default values.    
 
-Retrieving the thresholds values is with the following command:  
-```get streaming``` 
+Example:  
+<pre>
+set buffer threshold where time = 1 hour and volume = 2KB
+</pre>
 
+### Retrieving the thresholds values is with the following command:  
 The command provides information on the REST API usage and status including the buffer thresholds.
+<pre>
+get streaming
+</pre>
 
 ## Subscribing to a third party message broker
 
