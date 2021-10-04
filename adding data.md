@@ -69,7 +69,12 @@ Example:
 
 ## Data transfer using a REST API
 
-In this method, data is being transferred to a particular node in the network using a REST API.
+Using HTTP methods, data is transferred to a particular node in the network.
+There are 2 methods that support the transfer of data:
+* PUT - data is provided in JSON format and mapped to a table structure whereas attribute names are dynamically mapped to column names and attribute values are mapped to column values.
+* POST - data is provided in JSON format, the data includes a topic that determines the mapping to the table structure.  Details are available in the section [AnyLog as a broker receiving REST commands](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#anylog-as-a-broker-receiving-rest-commands)
+
+
 Depending on the configuration, the receiving node can operate as an Operator and host the data, or it can be configured to operate as a Publisher and transfers the data to one or more Operator nodes that will host the data.  
 
 In both cases, the receiving node serves as a REST server waiting for incoming messages with new data.  

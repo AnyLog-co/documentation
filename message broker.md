@@ -3,7 +3,7 @@
 There are 3 ways to configure a node:
 * As a [subscriber to a third party message broker](#subscribing-to-a-third-party-broker)
 * As a [message broker](#configuring-an-anylog-node-as-a-message-broker) - receiving published data from a client using standard APIs like MQTT.
-* As a [broker receiving REST commands]() and mapping the data to the needed schema based on the provided topic.
+* As a [broker receiving REST commands](#anylog-as-a-broker-receiving-rest-commands) and mapping the data to the needed schema based on the provided topic.
 
 In both cases, user are able to do the following:
 
@@ -408,11 +408,10 @@ Note: the key value pair ***broker=rest*** replaces the assignment of an IP and 
 
 ## Example
 
-## Subscribe to a topic and provide data mapping instructions
+### Subscribe to a topic and provide data mapping instructions
 <pre>
 run mqtt client where broker = rest and user-agent=anylog and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
 </pre>
-
 
 ### Publish data using REST
 curl --location --request POST '10.0.0.78:7849' \
@@ -438,3 +437,15 @@ curl --location --request POST '10.0.0.78:7849' \
                     "serial_number":"1234567890"}}
 
 ]'
+
+## Debugging the POST commands
+Users can enable trace to debug the POST calls.  
+The following command displays (on the AnyLog REST server) the REST command issued by a client.
+<pre>
+trace level = 1 run rest server 
+</pre>
+
+The following command displays (on the AnyLog REST server) the REST command issued by a client including the header and the message body.
+<pre>
+trace level = 2 run rest server 
+</pre>
