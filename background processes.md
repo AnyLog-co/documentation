@@ -74,24 +74,38 @@ Additional information is available in the [network configuration](https://githu
  
 ## REST requests
 
-A process that receives REST messages from users and applications which are not members of the network.  
-This process receives requests to query data and metadata, and replies with the requested information.
+A node in the network can be configured to receive HTTP requests from a client (from applications which are not members of the network). 
 
 Usage:
 <pre>
 run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 </pre>
-Explanation:  
-[ip] [port] - The IP and Port of the socket that is in the listening state.    
-[timeout] - An optional parameter that determines wait a timeout period in seconds. 
-***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 5.
-When a REST request is issued, if a response is not provided within the specified wait time, the request process terminates.  A 0 value means no wait limit and the default value is 20 seconds.  
-If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates).  
 
-The following CLI command provides the info on how the REST server is configured:
-<pre>
-get rest server info
-</pre>
+Options:  
+
+| Option        | Explanation   | Default Value |
+| ------------- | ------------- | ------------- |
+| ip  | The IP supporting the HTTP methods.  |   |
+| port  | The port supporting the HTTP methods. |   |
+| timeout  | Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***. | 20 seconds  |
+| threads  | The number of concurrent threads supporting HTTP requests. | 5  |
+| ssl  | Boolean value to determine if messages are send over HTTPS with client certificates. | false  |
+
+Notes:
+* If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates).
+* The following command provides the info on how the REST server is configured:
+    <pre>
+    get rest server info
+    </pre>
+* Debugging HTTP command calls:
+    The following command displays (on the AnyLog REST server) the REST command issued by a client.
+    <pre>
+    trace level = 1 run rest server 
+    </pre>
+    The following command displays (on the AnyLog REST server) the REST command issued by a client including the header and the message body.
+    <pre>
+    trace level = 2 run rest server 
+    </pre>
 
 Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
