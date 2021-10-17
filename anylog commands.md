@@ -70,6 +70,7 @@ Options:
 | set query mode  | Setting execution instructions to the issued queries. |
 | set query log  | Initiate a log to record the executed queries. |
 | set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
+| set rest log on/off | Enable/Disable a log to record the processed REST commands. The log is retrieved using the 'get rest log' command. |
 | set debug [on/off]  | Displays the executed commands processed in scripts. |
 | set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
 | set debug interactive  | Waits for the user interactive command \'next\' to move to the next command. |
@@ -159,6 +160,7 @@ Options:
 | get msg brokers | Information on message brokers and the topics subscribed with each broker. |
 | get broker | Information on the Message Broker. |
 | get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| get rest log  | The last REST commands processed by the node. Enable this log using the ***set rest log on*** command|
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
 | get connections | The list of TCP and REST connections supported by the node. |
 | get platforms | The list connected blockchain platforms. |
