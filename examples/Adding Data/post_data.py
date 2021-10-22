@@ -75,7 +75,7 @@ if __name__ == '__main__':
     data = {
         'dbms': 'yudash',
         'table': 'sample_data',
-        'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f +08:00'),
+        'timestamp': datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
         'value': random.random(),
         'unit': 'Celsius'
     }
