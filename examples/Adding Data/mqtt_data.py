@@ -84,6 +84,6 @@ if __name__ == '__main__':
         'value': random.random(),
         'unit': 'Celsius'
     }
-
+    
     if mqtt_data(broker=broker, port=mqtt_port, topic=mqtt_topic, payload=data):
         print('Success!')
