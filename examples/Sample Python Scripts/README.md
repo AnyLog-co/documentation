@@ -1,6 +1,6 @@
 # Adding Data
 
-The following provides examples of adding via: 
+The following provides examples of adding data:  
 * [PUT](put_data.py)
 * [POST](post_data.py) 
 * [MQTT](mqtt_data.py)
@@ -14,3 +14,5 @@ run message broker !external_ip !anylog_borker_port !ip !anylog_broker_port
 
 run mqtt client where broker=local and port=!anylog_broker_port and log=false and topic=(...)
 ```
+
+File [query_data.py](query_data.py) shows basic examples of querying data aginst AnyLog in Python3
