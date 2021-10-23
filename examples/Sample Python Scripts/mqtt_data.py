@@ -79,7 +79,7 @@ if __name__ == '__main__':
     mqtt_topic = 'yudash-broker'
     data = {
         'dbms': 'yudash',
-        'table': 'sample_data',
+        'table': 'sample_table',
         'timestamp': datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
         'value': random.random(),
         'unit': 'Celsius'
