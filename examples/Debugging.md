@@ -23,10 +23,15 @@ Examples:
 |3 | Add header and body info     |  Detailed info on the message headers and body |
 
 
-## The REST Log
+## The Error Log and the REST Log
+
+Errors always update the error log. The following command returns the errors from the log file.
+<pre>
+get error log
+</pre>
 
 A special log contain the rest calls.  
-By default, a REST call that failes updates the ***REST log***.  
+By default, a REST call that failes updates the ***REST log*** with detailed information from the REST HEADER and BODY.  
 The following command returns the data at the log:
 
 <pre>
@@ -40,4 +45,30 @@ set rest log on
 And reverting to the default behaviour using the following command:
 <pre>
 set rest log off
+</pre>
+
+## REST calls statistics
+
+Statistics on REST calls is retrieved with the following command:
+<pre>
+get rest
+</pre>
+
+## Monitoring data streams
+
+When data is added using REST, it is first organized by tables (in the streaming buffers) based on the information contained in the REST call 
+(details are available in the [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network) section.)
+
+Statistics on the mapping of data to the needed schema is available with the following command:
+<pre>
+get streaming
+</pre>
+
+## Monitoring Operator data ingestion processes
+
+Data is ingested to the table with the operator process.
+
+Statistics on the ingestion process is available with the following command:
+<pre>
+get operator
 </pre>
