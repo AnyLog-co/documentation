@@ -42,9 +42,15 @@ Users can direct every call to the log (regardless if the call failed) using the
 <pre>
 set rest log on
 </pre>
-And reverting to the default behaviour using the following command:
+
+Reverting to the default behaviour will place only failed calls in the log. The following command reverts to default:
 <pre>
 set rest log off
+</pre>
+
+Reset the log data is with the following command:
+<pre>
+reset rest log
 </pre>
 
 ## REST calls statistics
