@@ -72,3 +72,13 @@ Statistics on the ingestion process is available with the following command:
 <pre>
 get operator
 </pre>
+
+## Monitoring the Message Broker processes
+If data is added to an AnyLog Node as a message broker, debugging the broker processes are detailed [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#debugging).
+
+## Monitoring and profiling queries
+
+Users can view the queries issued to a node and execution details. In addition users can declare a query log to capture queries which are not efficiently executed.  
+Details are available in the [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries) section.
+
+
