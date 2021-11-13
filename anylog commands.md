@@ -140,7 +140,7 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| [get event log](get-logged-instances)  | Records the Last commands processed by the node. | 
+| [get event log](#get-logged-instances)  | Records the Last commands processed by the node. | 
 | get error log  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | get file log  | Records the last data files processed by the node. |
 | get rest log  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
