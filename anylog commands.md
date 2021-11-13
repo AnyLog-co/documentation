@@ -140,9 +140,10 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| get event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
-| get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
-| get file log  | The last data files processed by the node. |
+| [get event log](get-logged-instances)  | Records the Last commands processed by the node. | 
+| get error log  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| get file log  | Records the last data files processed by the node. |
+| get rest log  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
 | get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
@@ -233,7 +234,8 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
 
-#### Get log instances with keywords
+#### Get logged instances
+
 
 Adding keywords to the ***get log*** command - only events containing one or more of the keywords are presented.
 
