@@ -245,7 +245,7 @@ get [log type] log where format = [format type] and keys = key1 key2 ...
 
   
 * ***log type*** - options are: ***event, error, file, query, rest***   
-  The ***where*** condition is optional and details the following:
+The ***where*** condition is optional and details the following:
 * ***format*** - the format of the output, the valid values are ***table*** or ***json***, ***table*** is the default value.  
 * ***key*** - if added, allows to specify one or more keywords to retieve only logged events containing the keywords.
 
