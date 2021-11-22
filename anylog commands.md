@@ -140,9 +140,11 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| get event log  | The Last commands processed by the node. Adding a list of keywords narrows the output to log events containing the keywords. | 
-| get error log  | The last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
-| get file log  | The last data files processed by the node. |
+| [get event log](#get-logged-instances)  | Records the Last commands processed by the node. | 
+| [get error log](#get-logged-instances)  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| [get file log](#get-logged-instances)  | Records the last data files processed by the node. |
+| [get rest log](#get-logged-instances)  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
+| [get query log](#get-logged-instances)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
@@ -159,8 +161,6 @@ Options:
 | get msg client [n]| Information on a particular client, ***n*** is the client ID. |
 | get msg brokers | Information on message brokers and the topics subscribed with each broker. |
 | get broker | Information on the Message Broker. |
-| get query log  | The last queries processed by the node. Enable this log using the ***set query log*** command|
-| get rest log  | The last REST commands processed by the node. Enable this log using the ***set rest log on*** command|
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
 | get connections | The list of TCP and REST connections supported by the node. |
 | get platforms | The list connected blockchain platforms. |
@@ -169,9 +169,9 @@ Options:
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
-| get workers pool | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
-| get tcp pool | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
-| get rest pool | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
+| [get workers pool](#get-pools-info) | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
+| [get tcp pool](#get-pools-info) | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
+| [get rest pool](#get-pools-info) | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
 | get threads | The list of the threads executing users scripts. |
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
@@ -233,23 +233,37 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
 
-#### Get log instances with keywords
+## Get logged instances
 
-Adding keywords to the ***get log*** command - only events containing one or more of the keywords are presented.
+Each node maintains buffers to record events and errors such that users and applications are able to retrieve the recent events and errors as they accrue.    
+The command format: 
+<pre>
+get [log type] log where format = [format type] and keys = key1 key2 ...
+</pre>
+
+### Command options
+
+  
+* ***log type*** - options are: ***event, error, file, query, rest***   
+
+The ***where*** condition is optional and details the following:
+* ***format*** - the format of the output, the valid values are ***table*** or ***json***, ***table*** is the default value.  
+* ***key*** - if added, allows to specify one or more keywords to retieve only logged events containing the keywords.
 
 Examples:
 
 <pre>
-get event log "SQL Error"
+get event log where format = json and keys = SQL Error
 </pre>
-Returns log instances containing the keywords "SQL" or "Error".
+Returns log instances containing the keywords "SQL" or "Error". The reply format is JSON.
 
 <pre>
-get query log "timestamp"
+get query log where keys = "timestamp"
 </pre>
 If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
 
-#### get workers pool & get tcp pool
+## Get pools info
+
 These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
 For example:
 <pre>
