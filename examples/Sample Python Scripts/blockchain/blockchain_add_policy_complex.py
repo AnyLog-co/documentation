@@ -108,7 +108,7 @@ def main():
             if policy_id[key] is None:
                 print('Failed to add policy of type: %s' % key)
                 exit(1)
-            elif not blockchain.post(conn=args.rest_conn, master_node=args.master_node, policy=policy, auth=auth,
+            elif not blockchain.post_policy(conn=args.rest_conn, master_node=args.master_node, policy=policy, auth=auth,
                                      timeout=args.timeout):
                 print('Failed to add policy of type %s' % key)
             else:
