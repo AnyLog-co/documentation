@@ -1,18 +1,22 @@
-# Adding Data
+# REST via Python
 
-The following provides examples of adding data:  
-* [PUT](put_data.py)
-* [POST](post_data.py) 
-* [MQTT](mqtt_data.py)
+The following provides python example for communicating with AnyLog via REST
 
-For MQTT & POST commands user should have a running `mqtt client` on the correlated node. 
+## Blockchain Data
+By default AnyLog has a a set of "hard-set" blockchain policies. Howeve  
 
-AnyLog has an option to run a built-in [MQTT](../../message%20broker.md) broker/client combo, to configure: 
+## Sending Data
+AnyLog supports passing data through both REST (_POST_ and _PUT_) as well as through _MQTT_.
+* [PUT](data/put_data.py) 
+* [POST](data/post_data.py) 
+* [MQTT](data/mqtt_data.py)
 
-```
-run message broker !external_ip !anylog_borker_port !ip !anylog_broker_port
+An AnyLog instance that's receiving data through either _MQTT_ or _POST_ should have a running 
+[message client](../../message%20broker.md) process running on it.
 
-run mqtt client where broker=local and port=!anylog_broker_port and log=false and topic=(...)
-```
+In addition, it's important to note that AnyLog can run not just as a message client, but also as a 
+[message broker](../../background%20processes.md#message-broker) - allowing content to come in directly via MQTT rather   
+than through a third-party application like _Eclipse Mosquito_ and _Cloud MQTT_.
 
-File [query_data.py](query_data.py) shows basic examples of querying data aginst AnyLog in Python3
+
+

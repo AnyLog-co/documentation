@@ -1,8 +1,5 @@
 import argparse
-import json
-import time
-
-import import_packages
+import blockchain_rest as blockchain
 
 POLICIES = {
     'manufacturer': { # Manufacturer of device
@@ -14,10 +11,10 @@ POLICIES = {
 
     },
     'owner': {  # Owner of device (usually the customer or company generating the data)
-        'name': 'Precision Engineering Inc',
-        'Address': '400 St Louis St, Mobile, Alabama 36602, US',
-        'url': 'http://www.precision-eng.com/',
-        'contact': '+12514438844'
+        'name': 'New Engineering',
+        'Address': '400 St Louis St, Mobile, Nevada 36602, US',
+        'url': 'http://www.new-engineering.com/',
+        'contact': '+12515336844'
     },
     'device': {  # device information
         'name': 'fic',
@@ -62,9 +59,7 @@ POLICIES = {
 def main():
     """
     The following is an example of adding a set of policies where each policy requires the ID of the previous policy.
-    The example is used by a client who's interested in a hierarchical view of their sensors both in terms of
-        manufacturer and customer.
-    Note - in this case each sensor would corresponds to a different table in the database.
+    Note - If the code is unable to generate a policy ID, the program stops
     :positional arguments:
         rest_conn             REST connection information
         master_node           TCP master information
@@ -75,6 +70,11 @@ def main():
     :params:
         anylog_conn:anylog_api.AnyLogConnect - connection to AnyLog
         policy_id:dict - new policy to be added into blockchain
+    :steps:
+        1. create a dictionary of the desired policy
+        2. POST policy to local node to extract ID
+        3. GET policy ID from local node
+        4. POST policy to blockchain
     """
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('rest_conn',       type=str,   default='127.0.0.1:2049', help='REST connection information')
@@ -89,7 +89,6 @@ def main():
     auth = ()
     if args.auth is not None: 
         auth = tuple(args.auth.split(','))
-    anylog_conn = anylog_api.AnyLogConnect(conn=args.rest_conn, auth=auth, timeout=args.timeout)
 
     for key in POLICIES:
         # Generate policy based on POLICY
@@ -104,14 +103,19 @@ def main():
         elif 'sensor' in key:
             policy['sensor']['sensor_type'] = policy_id['sensor_type']
 
-        # declare policy
-        policy_id[key] = policy_cmd.declare_policy(conn=anylog_conn, master_node=args.master_node,
-                                                   new_policy=policy, exception=True)
+        if blockchain.prepare_policy(conn=args.rest_conn, policy=policy, auth=args.auth, timeout=args.timeout):
+            policy_id[key] = blockchain.get_policy_id(conn=args.rest_conn, auth=args.auth, timeout=args.timeout)
+            if policy_id[key] is None:
+                print('Failed to add policy of type: %s' % key)
+                exit(1)
+            elif not blockchain.post(conn=args.rest_conn, master_node=args.master_node, policy=policy, auth=auth,
+                                     timeout=args.timeout):
+                print('Failed to add policy of type %s' % key)
+            else:
+                print('Successfully posted policy of type %s' % key)
 
-        # validate policy was added
-        if policy_id[key] is None:
-            print('Failed to add policy of type: %s' % key)
-            exit(1)
+
+
 
 
 if __name__ == '__main__':
