@@ -11,7 +11,7 @@ c. a process to identify the SQL used on each participating node.
 In order to get statistical information, use the following command:  
 On the AnyLog command prompt:  
 ```get queries time```  
-From a REST client send a REST message and place in the headers the following keys and values:  
+From a REST client send a REST message and place in the headers the following keys and values:  
 ```type : info```  
 ```details : get queries time```
 

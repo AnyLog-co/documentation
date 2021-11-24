@@ -12,11 +12,26 @@ get [log type] log where format = [format type] and keys = key1 key2 ...
 
 The ***where*** condition is optional and details the following:
 * ***format*** - the format of the output, the valid values are ***table*** or ***json***, ***table*** is the default value.  
-* ***key*** - if added, allows to specify one or more keywords to retrieve only logged events containing the keywords.
+* ***key*** - if added, allows to specify one or more keywords to retrieve only logged events containing the keywords.  
+
+### Reset the log data
+All the logged data can be reset using the following command:
+
+<pre>
+reset [log type] log
+</pre>
+
+Examples:
+<pre>
+reset event log
+reset error log
+reset query log
+</pre>
+
 
 ## The Event Log
 
-The msg log records the events processed on the node. The events include the AnyLog commands being executed and the error messages.  
+The event log records the events processed on the node. The events include the AnyLog commands being executed and the error messages.  
 The following examples retrieve the event log:
 1. Return all log instances:
 <pre>
@@ -27,15 +42,51 @@ get event log
 get event log where format = json and keys = SQL Error
 </pre>
 
-
 ## The Error Log
 
-## The MSG Log
+The error log contains all error messages. the following example retrieve the error log instances:  
+1. Return all error instances:
+<pre>
+get error log
+</pre>
+2. Return error instances containing the keywords "rest". The reply format is JSON.
+<pre>
+get error log where format = json and keys = rest
+</pre>
+
+## The connector Log
+
+
 
 ## The Query Log
 
+The query log collects the queries processed allowing to view and monitor the queries.  
+This log is optional and needs to be activated in order to collect the query information.  
 
+### Activating the Query Log
+The query log can be activated in 2 modes:
+
+| Mode |   Details    |  Command  |
+| ------------------------------------ | ------------| ----|
+| All queries Included | Every executed query on the node will be included in the log | ```set query log on``` |
+| Only slow queries included | Only queries that exceed a threshold time execution are included  | ```set query log profile [n] seconds```  |
+
+The following command disables the query log:
 <pre>
-get query log where keys = "timestamp"
+set query log off
 </pre>
-If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
+
+Examples:
+1. Collecting all queries executed on the node in the log:
+<pre>
+set query log on
+</pre>
+2. Collecting all queries executed on the node with execution time equal or greater than 6 seconds:
+<pre>
+set query log profile 6 seconds
+</pre>
+Examples:
+3. Disable the query log
+<pre>
+set query log off
+</pre>
