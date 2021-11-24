@@ -141,6 +141,37 @@ Reply:
  'disk_percentage' : '99.05'}
 </pre>
 
+
+## The "get processes" command
+
+The ***get processes command*** retrieves the list of background processes and their current status.  
+It allows to review the main configuration choices of the node usinf a single call.  
+Usage:
+<pre>
+get processes
+</pre>
+
+Example reply:
+<pre>
+    Process         Status       Details
+    ---------------|------------|---------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 24.23.250.144:7848 and 10.0.0.78:7848, Threads Pool: 6 |
+    REST           |Running     |Listening on: 10.0.0.78:7849, Threads Pool: 5, Timeout: 20, SSL: None|
+    Operator       |Running     |Cluster Member: True, Using Master: 10.0.0.25:2548                   |
+    Publisher      |Not declared|                                                                     |
+    Blockchain Sync|Running     |Failed to connect to master using: 10.0.0.25:2548                    |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)]                                  |
+    Distributor    |Running     |                                                                     |
+    Consumer       |Running     |No peer Operators supporting the cluster                             |
+    MQTT           |Running     |                                                                     |
+    Message Broker |Running     |Listening on: 24.23.250.144:7850 and 10.0.0.78:7850, Threads Pool: 6 |
+    SMTP           |Not declared|                                                                     |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,000 bytes         |
+    Query Pool     |Running     |Threads Pool: 3   
+</pre>
+
+
+
 ## Organizing node status in a database table
 
 Users can use the scheduler to continuously call for statistics and organize the statistics in a database table.  
