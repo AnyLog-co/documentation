@@ -25,6 +25,7 @@ Examples:
 <pre>
 reset event log
 reset error log
+reset streaming log
 reset query log
 </pre>
 
