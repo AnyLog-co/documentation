@@ -152,8 +152,7 @@ Options:
 | get publisher | Information on the Publisher processes. |
 | get distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | get consumer | With HA enabled, information on pulling source files from cluster members. |
-| get streaming | Information on REST API calls from external applications. |
-| get streaming | Information on streaming data from REST and MQTT calls. |
+| [get streaming](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming) | Information on streaming data from REST and MQTT calls. |
 | get cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
 | get tsd info [table name] | Information on the synchronization status between the cluster members. |
 | [get rest calls](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls) | Statistical information on the REST calls. |

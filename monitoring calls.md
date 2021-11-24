@@ -45,7 +45,7 @@ anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11
 
 ## Get Streaming
 
-Provide statistics on how data provided via REST APIs is distributed to the different tables that are hosted by the node.
+Information on data provided via REST APIs and message brokers is distributed to the different tables that are hosted by the node.
 
 Usage: 
 <pre>
@@ -53,8 +53,20 @@ get streaming
 get streaming format = json
 </pre>
 
+The reply has 2 parts showing configurations and statistics.
 
-| Attribute Value | Details  |
+***Part A attributes:***
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Default time | The threshold time to flush the buffers (the default value for tables that are not assigned with time) |
+| Default volume | The threshold volume to flush the buffers (the default value for tables that are not assigned with volume)|
+| Default Immediate | If Immediate write is set as the default value for all tables |
+| Buffered Rows | The total number of rows placed in the streaming buffers |
+| Flushed Rows | The total number of rows added to databases |
+
+***Part B attributes:***
+
+| Attribute name | Details  |
 | ------------- | ------------| 
 | DBMS-Table | The Database and table associated with the data |
 | File Put | Counter for PUT calls to add file data |
