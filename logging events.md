@@ -44,7 +44,8 @@ get event log where format = json and keys = SQL Error
 
 ## The Error Log
 
-The error log contains all error messages. the following example retrieve the error log instances:  
+The error log contains all error messages.  
+The following examples retrieve the error log instances:  
 1. Return all error instances:
 <pre>
 get error log
@@ -54,8 +55,28 @@ get error log
 get error log where format = json and keys = rest
 </pre>
 
-## The connector Log
+## The interface log
 
+The streaming log collects the HTTP calls from external applications that interact with the node.  
+ These calls include the REST calls issued to the node.
+This log is optional and needs to be activated in order to collect the query information.  
+The following command activates the log:
+<pre>
+set streaming log on
+</pre>
+The following command disables the log:
+<pre>
+set streaming log off
+</pre>
+The following examples retrieve the streaming log instances:  
+1. Return all streaming instances:
+<pre>
+get error log
+</pre>
+2. Return streaming instances containing the keywords "put". The reply format is JSON.
+<pre>
+get error log where format = json and keys = put
+</pre>
 
 
 ## The Query Log
