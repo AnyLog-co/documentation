@@ -68,8 +68,8 @@ Options:
 | Option        | Explanation  |
 | ------------- | ------------| 
 | set query mode  | Setting execution instructions to the issued queries. |
-| set query log  | Initiate a log to record the executed queries. |
-| set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
+| [set query log on/off](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) | Enable/Disable a log to record the executed queries. |
+| [set query log profile [n] seconds](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log)  | Applying the Query Log to queries with execution time higher than threshold.  |
 | set rest log on/off | Enable/Disable a log to record the processed REST commands. The log is retrieved using the 'get rest log' command. |
 | set debug [on/off]  | Displays the executed commands processed in scripts. |
 | set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
