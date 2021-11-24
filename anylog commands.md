@@ -145,7 +145,7 @@ Options:
 | [get file log](#get-logged-instances)  | Records the last data files processed by the node. |
 | [get rest log](#get-logged-instances)  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
 | [get query log](#get-logged-instances)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
-| get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
+| [get processes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)| The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
 | get operator | Information on the Operator processes. |
