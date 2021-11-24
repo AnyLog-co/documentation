@@ -43,3 +43,18 @@ anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11
 </pre>
 
 
+## Get Streaming
+
+Provide statistics on how data provided via REST APIs is distributed to the different tables that are hosted by the node.
+
+| Attribute Value | Details  |
+| ------------- | ------------| 
+| DBMS-Table | The Database and table associated with the data |
+| File Put | Counter for PUT calls to add file data |
+| File Rows | Counter for rows within the files added |
+| Streaming Put | Counter of PUT calls to add rows to the streaming buffers |
+| Streaming Rows | Counter for rows added to the streaming buffers |
+| Immediate | Counter for rows added to the databases without buffer wait |
+| Last Process | Last process return value |
+
+
