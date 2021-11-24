@@ -1,5 +1,29 @@
 # Monitoring calls from external applications
 
+## REST server configuration
+The command ***get rest server info*** provides the info on how the REST server is configured.
+
+Usage: 
+<pre>
+get rest server info
+</pre>
+
+Explanation output:
+
+| Attribute Value | Details  |
+| ------------- | ------------| 
+| buff_size | Internal buffer for nodes communications. | 
+| ca_public_key | The Certificate Authority public key. |
+| connection | The IP and Port to connect to external applications vis HTTP requests |
+| is_ssl | Is connection using SSL|
+| lib_open_ssl | Flag indicating if Open SSL libraries are available on the node |
+|node_cr | The Certificate Request issued to the node|
+|node_private_key| The private key issued to the node | 
+|streaming_log | Determine if REST calls are added to the REST Log |
+|timeout | Max wait time in seconds for a REST call |
+|trace | Flag indicating if REST calls are traced for debug |
+|workers_count | The max number of concurrent threads executing REST calls |
+
 ## Get REST Calls
 
 The ***get rest calls*** command returns statistics on the REST calls issued and their execution results.
