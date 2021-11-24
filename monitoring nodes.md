@@ -144,8 +144,9 @@ Reply:
 
 ## The "get processes" command
 
-The ***get processes command*** retrieves the list of background processes and their current status.  
-It allows to review the main configuration choices of the node usinf a single call.  
+The ***get processes command*** lists state and configuration choices using a single call:     
+a) The list of background processes and their current status.  
+b) The main configuration choices selected for the node.  
 Usage:
 <pre>
 get processes
