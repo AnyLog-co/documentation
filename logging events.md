@@ -55,7 +55,7 @@ get error log
 get error log where format = json and keys = rest
 </pre>
 
-## The interface log
+## The Streaming Log
 
 The streaming log collects the HTTP calls from external applications that interact with the node.  
  These calls include the REST calls issued to the node.
