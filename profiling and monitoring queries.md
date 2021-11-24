@@ -11,9 +11,6 @@ c. a process to identify the SQL used on each participating node.
 In order to get statistical information, use the following command:  
 On the AnyLog command prompt:  
 ```get queries time```  
-From a REST client send a REST message and place in the headers the following keys and values:  
-```type : info```  
-```details : get queries time```
 
 ## Identifying slow queries
 
@@ -21,14 +18,13 @@ Slow queries can be redirected to the query log with the following AnyLog comman
 
 ```set query log profile [n] seconds```   
 
-The  ***set query log*** records all queries in the query log whereas adding ***profile [n] seconds***
+The  ***set query log on*** records all queries in the query log whereas adding ***profile [n] seconds***
 places in the query log only queries with execution time greater or equal to [n] seconds.
 
 To view the slow query log use the following command on the AnyLog command prompt:  
 ```get query log```  
-From a REST client send a REST message and place in the headers the following keys and values:  
-```type : info```  
-```details : get query log```
+
+more details are available at [The Query Log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) section.
 
 ### Command options for profiling and monitoring queries
 

@@ -140,11 +140,11 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| [get event log](#get-logged-instances)  | Records the Last commands processed by the node. | 
-| [get error log](#get-logged-instances)  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| [get event log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-event-log)  | Records the Last commands processed by the node. | 
+| [get error log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-error-log)  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | [get file log](#get-logged-instances)  | Records the last data files processed by the node. |
 | [get rest log](#get-logged-instances)  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
-| [get query log](#get-logged-instances)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| [get query log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
 | [get processes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)| The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
