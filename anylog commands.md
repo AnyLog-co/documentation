@@ -233,35 +233,6 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
 
-## Get logged instances
-
-Each node maintains buffers to record events and errors such that users and applications are able to retrieve the recent events and errors as they accrue.    
-The command format: 
-<pre>
-get [log type] log where format = [format type] and keys = key1 key2 ...
-</pre>
-
-### Command options
-
-  
-* ***log type*** - options are: ***event, error, file, query, rest***   
-
-The ***where*** condition is optional and details the following:
-* ***format*** - the format of the output, the valid values are ***table*** or ***json***, ***table*** is the default value.  
-* ***key*** - if added, allows to specify one or more keywords to retieve only logged events containing the keywords.
-
-Examples:
-
-<pre>
-get event log where format = json and keys = SQL Error
-</pre>
-Returns log instances containing the keywords "SQL" or "Error". The reply format is JSON.
-
-<pre>
-get query log where keys = "timestamp"
-</pre>
-If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
-
 ## Get pools info
 
 These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
