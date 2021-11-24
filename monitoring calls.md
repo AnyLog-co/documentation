@@ -47,6 +47,13 @@ anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11
 
 Provide statistics on how data provided via REST APIs is distributed to the different tables that are hosted by the node.
 
+Usage: 
+<pre>
+get streaming
+get streaming format = json
+</pre>
+
+
 | Attribute Value | Details  |
 | ------------- | ------------| 
 | DBMS-Table | The Database and table associated with the data |
