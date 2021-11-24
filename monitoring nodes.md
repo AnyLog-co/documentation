@@ -176,7 +176,7 @@ Example reply:
 
 Each node is using a dictionary to map keys to values.  
 Some mappings represent default assignments, and some mappings are declared using scripts or on the CLI.  
-The ***get dictionary*** command lists the key values pairs.
+The ***get dictionary*** command lists the key values pairs.  
 Usage:
 <pre>
 get dictionary
