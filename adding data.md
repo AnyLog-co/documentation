@@ -356,21 +356,21 @@ pushing the data to the mapper.
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
    
 
-***Option C: Data transferred using POST ***
+***Option C: Data transferred using POST***    
 The data is transferred using REST POST command. The headers include a topic (or if not provided, the default topic is used) 
 and the AnyLog mapper transforms the received data to the destination format.
 Details are available at the section [Using a Post command](#using-a-post-command).
 
-***Option D: Data transferred using PUT ***  
+***Option D: Data transferred using PUT***    
 The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.
 Details are available at the section [Using a PUT command](#using-a-put-command).
 
-***Option E: Adding JSON file to the watch directory *** 
+***Option E: Adding JSON file to the watch directory***   
 The JSON file is in a format representative of the table's schema and the file name follows the naming convention.
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
 File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
 
-***Option F: Adding SQL file to the watch directory ***
+***Option F: Adding SQL file to the watch directory***  
 The SQL file is in a format representative of the table's schema and the file name follows the naming convention.
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
 
