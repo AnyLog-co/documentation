@@ -210,7 +210,7 @@ get streaming
 
 ### Using a POST command
 
-With the post command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
+With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key ***topic***. If a topic value is not provided, the default topic is used.  
 The default topic is the first topic described in the command ```run mqtt client ... ```.
 
@@ -351,15 +351,15 @@ Details are available at the [message broker section - Subscribing to a third pa
 ***Option B: Data published to AnyLog as a Broker***
 
 An AnyLog node is configured as a message broker and data is published to the AnyLog Node.  
-AnyLog client is registered to the broker, and similalrly to an external broker, pulls the data from the broker and
-push to the mapper.  
+AnyLog client is registered to the broker, and similarly to an external broker, pulls the data from the broker and
+pushes to the mapper.  
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
    
 
 ***Option C: Data transferred using POST***    
 The data is transferred using REST POST command. The headers include a topic (or if not provided, the default topic is used) 
 and the AnyLog mapper transforms the received data to the destination format.  
-Details are available at the section [Using a Post command](#using-a-post-command).
+Details are available at the section [Using a POST command](#using-a-post-command).
 
 ***Option D: Data transferred using PUT***    
 The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.  
