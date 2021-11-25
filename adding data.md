@@ -10,6 +10,7 @@ There are multiple ways to add data to Operators in the network:
 * [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients.   
     If an AnyLog node is configured as a message broker, clients are able to publish data on the AnyLog node and map the published data to an existing schema. 
 
+Note: Below is [The Southbound Connectors Diagram](#the-southbound-connectors-diagram).
 
 ## The node type
 An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
