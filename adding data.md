@@ -265,3 +265,45 @@ Details are available at the [message broker section - Subscribing to a third pa
 ## Configuring the AnyLog node as a message broker
 
 Details are available at the [message broker section - Configuring an AnyLog node as a message broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+
+
+## The Southbound Connectors Diagram
+
+<pre>
+                                                       --------------------------
+  Option A:                                            |                        |
+  Data published to external MQTT Broker               |  External MQTT Broker  |
+  ------------------------------------------------>    |                        |
+                                                       --------------------------
+                                                                           |
+ ==========================================================================================
+  AnyLog                                                                   |
+                                                                           V
+                                         -------------------            -------------------
+  Option B:                              |                 |            |                 |
+  Data published to AnyLog Broker        |  AnyLog Broker  |  ------>   |  Broker Client  |
+  ---------------------------------->    |                 |            |                 |
+                                         -------------------            -------------------
+                                                                           |
+                                                                           |
+                                                                           V
+                                                               -----------------
+  Option C:                                                    |  Client Data  |
+  Data transferred using POST                                  |  Mapper       |
+  -------------------------------------------------------->    |  f(Topic)     |
+                                                               -----------------
+                                                                           |
+                                                                           |
+                                                                           V
+                                                               -----------------
+  Option D:                                                    |               |
+  Data transferred using PUT (without mapping)                 |  Data Buffers |
+  -------------------------------------------------------->    |               |
+                                                               -----------------
+
+
+
+
+
+
+</pre>
