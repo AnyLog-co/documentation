@@ -26,7 +26,7 @@ To view the slow query log use the following command on the AnyLog command promp
 
 more details are available at [The Query Log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) section.
 
-### Command options for profiling and monitoring queries
+## Command options for profiling and monitoring queries
 
 Queries are executed in a context of jobs. A job is a process that sends a message to a peer in the network and is listed in a structure
 that maintains information on the status of the message and the command execution status.
@@ -39,7 +39,7 @@ The command ***query*** provides information on the last executed queries and th
 2. Explain - Provides the SQL statement used on the nodes that participate in the query process.
  
 
-```query status all``` - The status information on the last executed querys<br/>
+```query status all``` - The status information on the last executed query<br/>
 ```query status``` - The status information on the most recent executed query<br/>
 ```query status n``` - The status information on a particular query whereas n is the id of the job<br/>
 
