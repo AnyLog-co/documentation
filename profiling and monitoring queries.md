@@ -63,6 +63,3 @@ Example:
 <pre>
  get query execution where node = 10.0.0.78 and job = 12
 </pre> 
-
-
-

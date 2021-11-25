@@ -14,7 +14,8 @@ Notes:
 
 ## Monitoring data commands
 
-* The command ***get rows count*** provides the list of tables in databases and the number of rows in each table.
+* The command ***get rows count*** provides the list of tables in databases, and the number of rows in each table.  
+Usage:
 <pre>
 get rows count where dbms = [dbms name] and table = [table name] and format = [json] and group = [partition/table]
 </pre>
@@ -33,14 +34,17 @@ get rows count where dbms = aiops and table = lic1_fout
 get rows count where dbms = aiops and table = lic1_fout and group = table
 </pre>
 
-* The command ***get operator*** provides details on ingestion of data by an Operator node.
+* The command ***get operator*** provides details on ingestion of data by an Operator node.  
 
+Usage:
 <pre>
 get operator
 get operator stat format = json
 </pre>
 
-* The command ***get data nodes*** lists the Operator nodes in the network and the tables supported on each node.
+* The command ***get data nodes*** lists the Operator nodes in the network and the tables supported on each node.  
+
+Usage:
 <pre>
 get data nodes
 </pre>
