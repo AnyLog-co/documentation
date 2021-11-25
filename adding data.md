@@ -292,18 +292,44 @@ Details are available at the [message broker section - Configuring an AnyLog nod
   Data transferred using POST                                  |  Mapper       |
   -------------------------------------------------------->    |  f(Topic)     |
                                                                -----------------
-                                                                           |
-                                                                           |
-                                                                           V
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option D:                                                    |               |        |  (Optional)   |
+  Data transferred using PUT (without mapping)                 |  Data Buffers |   -->  |  Immediate    |
+  -------------------------------------------------------->    |               |        |  DBMS update  |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option E:                                                    |               |        |  (Optional)   |
+  Adding Json file to the watch directory                      |  JSON Files   |   -->  |  Archive      |
+  -------------------------------------------------------->    |               |        |  JSON files   |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option F:                                                    |               |        |  (Optional)   |
+  Adding Json file to the watch directory                      |  SQL Files    |   -->  |  Archive      |
+  -------------------------------------------------------->    |               |        |  SQL files    |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               ----------------- 
+                                                               |               |
+                                                               |  Update DBMS  |
+                                                               |               |
                                                                -----------------
-  Option D:                                                    |               |
-  Data transferred using PUT (without mapping)                 |  Data Buffers |
-  -------------------------------------------------------->    |               |
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               ----------------- 
+                                                               |               |
+                                                               |  Update TSD   |
+                                                               |               |
                                                                -----------------
-
-
-
-
-
-
 </pre>
