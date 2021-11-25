@@ -157,8 +157,7 @@ Options:
 | get tsd info [table name] | Information on the synchronization status between the cluster members. |
 | [get rest calls](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls) | Statistical information on the REST calls. |
 | [get rest server info](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#rest-server-configuration) | Information on the REST server configuration. |
-| get msg clients | Information on clients subscribed to topics. |
-| get msg client [n]| Information on a particular client, ***n*** is the client ID. |
+| [get msg clients](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients) | Information on clients subscribed to topics. |
 | get msg brokers | Information on message brokers and the topics subscribed with each broker. |
 | get broker | Information on the Message Broker. |
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 

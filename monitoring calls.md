@@ -33,7 +33,7 @@ Usage:
 get rest calls
 </pre>
 
-Example reply:
+###Example reply:
 <pre>
 Statistics
 Caller Call Processed Errors Last Error              First Call          Last Call           Last Caller
@@ -121,3 +121,29 @@ Details of the topic and the ,apping instructions between the source data and th
 ***Section D attributes:***
 
 The locations of the local directories that are used to organize the data for the database ingestion. 
+
+###Example reply:
+<pre>
+Subscription: 0001
+User:         unused
+Broker:       rest
+Connection:   Connected to local Message Server
+
+     Messages    Success     Errors      Last message time    Last error time      Last Error
+     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
+            194         194           0  2021-11-24 13:29:08
+     
+     Subscribed Topics:
+     Topic QOS DBMS       Table       Column name, type, bring function           
+     -----|---|----------|-----------|-------------------------------------------|
+     aiops|  0|['[dbms]']|['[table]']|('timestamp', 'timestamp', ['[timestamp]'])|
+          |   |          |           |('value', 'float', ['[value]'])            |
+
+     
+     Directories Used:
+     Directory Name Location                          
+     --------------|---------------------------------|
+     Prep Dir      |D:\Node\AnyLog-Network\data\prep |
+     Watch Dir     |D:\Node\AnyLog-Network\data\watch|
+     Error Dir     |D:\Node\AnyLog-Network\data\error|
+</pre>
