@@ -147,3 +147,82 @@ Connection:   Connected to local Message Server
      Watch Dir     |D:\Node\AnyLog-Network\data\watch|
      Error Dir     |D:\Node\AnyLog-Network\data\error|
 </pre>
+
+## Get Operator
+
+The ***get operator*** command provides information on data ingested to the local databases.  
+Data is mapped from a JSON format to a SQL format and added to the local database, the command provides information on the process of
+transforming the JSON to SQL and the ingestion process.
+
+Usage: 
+<pre>
+get operator
+get operator format = json
+</pre>
+
+The reply has 4 sections showing configurations and statistics.
+
+***Section A attributes:***
+
+Operator information:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Status | Indicate if operator processes are enabled |
+| Time | The Operator activity time |
+| Cluster | The cluster ID assigned to the operator |
+| Member | A unique member ID assigned to the operator as member of the cluster |
+
+***Section B attributes:***
+
+JSON Data information:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| DBMS | The name of the dbms associated with data |
+| Table | The name of the table associated with data |
+| Files | The number of JSON files processed |
+| Immediate | The number of files processed with immediate flag |
+| Last Process | The time of the last file processed |
+
+
+***Section C attributes:***
+
+SQL Data information:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| DBMS | The name of the dbms associated with data |
+| Table | The name of the table associated with data |
+| Files | The number of SQL files processed |
+| Immediate | The number of files processed with immediate flag |
+| Last Process | The time of the last file processed |
+
+***Section D attributes:***
+
+Files with failed processes identifying the table and the error.
+
+###Example reply:
+<pre>
+Status:     Active
+Time:       0:8:50 (H:M:S)
+Cluster:    7a00b26006a6ab7b8af4c400a5c47f2a
+Member:     61
+Statistics JSON files:
+DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
+---------------------- ---------------------- ---------- ---------- --------------------
+aiops                  ai_mv_2                         1          0 2021-11-24 16:41:49
+
+Statistics SQL files:
+DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
+---------------------- ---------------------- ---------- ---------- --------------------
+aiops                  ai_mv_2                         1          0 2021-11-24 16:41:49
+
+Errors summary
+Error Type           Counter DBMS Name Table Name Last Error Last Error Text
+--------------------|-------|---------|----------|----------|---------------|
+Duplicate JSON Files|      0|         |          |         0|               |
+JSON Files Errors   |      0|         |          |         0|               |
+SQL Files Errors    |      0|         |          |         0|               |
+</pre>
+
