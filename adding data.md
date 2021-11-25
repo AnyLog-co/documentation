@@ -310,7 +310,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        V
                                                                -----------------        -----------------
   Option E:                                                    |               |        |  (Optional)   |
-  Adding Json file to the watch directory                      |  JSON Files   |   -->  |  Archive      |
+  Adding JSON files to the watch directory                     |  JSON Files   |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  JSON files   |
                                                                -----------------        -----------------
                                                                        |
@@ -318,7 +318,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        V
                                                                -----------------        -----------------
   Option F:                                                    |               |        |  (Optional)   |
-  Adding Json file to the watch directory                      |  SQL Files    |   -->  |  Archive      |
+  Adding SQL files to the watch directory                      |  SQL Files    |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  SQL files    |
                                                                -----------------        -----------------
                                                                        |
@@ -343,34 +343,34 @@ The diagram describes the different southbound connectors options and the data f
 
 ***Option A: Data published to external MQTT Broker***  
 
-Data is published to an MQTT broker. AnyLog client is registered to the broker and pulling the data from the broker and
-pushing the data to the mapper.
+Data is published to an MQTT broker. AnyLog client is registered to the broker and does the following:  
+a) pulls the data from the broker and b) pushing the data to the mapper.  
 Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
 
 
 ***Option B: Data published to AnyLog as a Broker***
 
-An AnyLog node is configured as a message broker and data is published to the AnyLog Node.
-AnyLog client is registered to the broker and pulling the data from the broker and
-pushing the data to the mapper.
+An AnyLog node is configured as a message broker and data is published to the AnyLog Node.  
+AnyLog client is registered to the broker, and similalrly to an external broker, pulls the data from the broker and
+push to the mapper.  
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
    
 
 ***Option C: Data transferred using POST***    
 The data is transferred using REST POST command. The headers include a topic (or if not provided, the default topic is used) 
-and the AnyLog mapper transforms the received data to the destination format.
+and the AnyLog mapper transforms the received data to the destination format.  
 Details are available at the section [Using a Post command](#using-a-post-command).
 
 ***Option D: Data transferred using PUT***    
-The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.
+The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.  
 Details are available at the section [Using a PUT command](#using-a-put-command).
 
-***Option E: Adding JSON file to the watch directory***   
-The JSON file is in a format representative of the table's schema and the file name follows the naming convention.
+***Option E: Adding JSON files to the watch directory***   
+The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
 File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
 
-***Option F: Adding SQL file to the watch directory***  
-The SQL file is in a format representative of the table's schema and the file name follows the naming convention.
+***Option F: Adding SQL files to the watch directory***  
+The SQL files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
 
