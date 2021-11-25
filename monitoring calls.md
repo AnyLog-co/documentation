@@ -53,9 +53,9 @@ get streaming
 get streaming format = json
 </pre>
 
-The reply has 2 parts showing configurations and statistics.
+The reply has 2 sections showing configurations and statistics.
 
-***Part A attributes:***
+***Section A attributes:***
 | Attribute name | Details  |
 | ------------- | ------------| 
 | Default time | The threshold time to flush the buffers (the default value for tables that are not assigned with time) |
@@ -64,7 +64,7 @@ The reply has 2 parts showing configurations and statistics.
 | Buffered Rows | The total number of rows placed in the streaming buffers |
 | Flushed Rows | The total number of rows added to databases |
 
-***Part B attributes:***
+***Section B attributes:***
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -77,3 +77,47 @@ The reply has 2 parts showing configurations and statistics.
 | Last Process | Last process return value |
 
 
+# Get MSG Clients
+
+The ***get msg clients*** command provides statistics and details on the mapping of data to the tables structures.  
+The mapping is done using the command ***run mqtt client***, details are available at the [AnyLog as a broker receiving REST commands](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
+
+Usage: 
+<pre>
+get msg clients
+get msg client N
+</pre>
+N represents the subscription ID which is assigned for each ***run mqtt client*** call.
+if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.   
+
+The reply has 4 sections showing configurations and statistics.  
+
+***Section A attributes:***
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Subscription | The subscription ID |
+| User | The ID of the user connecting to the broker (if the data is published on a broker), or ***unused*** if data is published via REST |
+| Broker | The URL of the broker, or ***rest*** if data is published via REST  |
+| Connection | The type of connection  |
+
+***Section B attributes:***
+
+Statistics on the mapping of data using the subscription.
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Messages | The number of messages received |
+| Success | The number of successful mapping |
+| Errors | The number of failed mapping | 
+| Last message time | The data and time of the last message received | 
+| Last error time | The data and time of the last mapping error identified | 
+| Last error | The details of the last error recorded | 
+
+***Section C attributes:***
+
+Details of the topic and the ,apping instructions between the source data and the table structure.
+
+***Section D attributes:***
+
+The locations of the local directories that are used to organize the data for the database ingestion. 
