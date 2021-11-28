@@ -207,6 +207,7 @@ The command provides information on the REST API usage and status including the 
 <pre>
 get streaming
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
 
 
 ### Using a POST command
@@ -352,6 +353,7 @@ The following command provides status and statistics on the mapping of published
 <pre>
 get msg client
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
 
 ***Option B: Data published to AnyLog as a Broker***  
 
@@ -369,6 +371,7 @@ The following command provides status and statistics on the mapping of published
 <pre>
 get msg client
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
 
 ***Option C: Data transferred using POST***    
 
@@ -380,11 +383,13 @@ The following command provides status and statistics on the messages by HTTP POS
 <pre>
 get rest calls
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls).
 
 The following command provides status and statistics on the mapping of POST calls to the table's schema:
 <pre>
 get msg client
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
 
 ***Option D: Data transferred using PUT***    
 
@@ -395,17 +400,28 @@ The following command provides status and statistics on the messages by HTTP PUT
 <pre>
 get rest calls
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls). 
+
+***Monitoring the data passing through the internal buffers***
+
+The following command provides status and statistics on the internal buffers:
+<pre>
+get streaming
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
+
 
 ***Option E: Adding JSON files to the watch directory***   
 
 The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
-File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
+File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md).
 
 The following command provides status and statistics on the processing of the JSON files:
 <pre>
 get operator
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
 
 ***Option F: Adding SQL files to the watch directory***   
 
@@ -416,3 +432,4 @@ The following command provides status and statistics on the processing of the SQ
 <pre>
 get operator
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
