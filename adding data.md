@@ -362,12 +362,12 @@ AnyLog client is registered to the broker, and similarly to an external broker, 
 pushes to the mapper.  
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
 
-The following command provides status and statistics on the messages published at the message broker process:
+The following command provides status and statistics on messages published on the message broker process:
 <pre>
  get broker
 </pre>
 
-The following command provides status and statistics on the mapping of published messages on the local broker to the table's schema:
+The following command provides status and statistics on the mapping (of published messages on the local broker) to the table's schema:
 <pre>
 get msg client
 </pre>
@@ -385,7 +385,7 @@ get rest calls
 </pre>
 Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls).
 
-The following command provides status and statistics on the mapping of POST calls to the table's schema:
+The following command provides status and statistics on the mapping (of POST calls) to the table's schema:
 <pre>
 get msg client
 </pre>
