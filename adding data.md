@@ -387,6 +387,7 @@ get msg client
 </pre>
 
 ***Option D: Data transferred using PUT***    
+
 The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.  
 Details are available at the section [Using a PUT command](#using-a-put-command).
 
@@ -396,6 +397,7 @@ get rest calls
 </pre>
 
 ***Option E: Adding JSON files to the watch directory***   
+
 The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
 File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
@@ -405,7 +407,8 @@ The following command provides status and statistics on the processing of the JS
 get operator
 </pre>
 
-***Option F: Adding SQL files to the watch directory***  
+***Option F: Adding SQL files to the watch directory***   
+
 The SQL files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
 
