@@ -348,30 +348,68 @@ Data is published to an MQTT broker. AnyLog client is registered to the broker a
 a) pulls the data from the broker and b) pushing the data to the mapper.  
 Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
 
+The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:
+<pre>
+get msg client
+</pre>
 
-***Option B: Data published to AnyLog as a Broker***
+***Option B: Data published to AnyLog as a Broker***  
 
-An AnyLog node is configured as a message broker and data is published to the AnyLog Node.  
+An AnyLog node is configured as a local message broker and data is published to the AnyLog Node.  
 AnyLog client is registered to the broker, and similarly to an external broker, pulls the data from the broker and
 pushes to the mapper.  
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
-   
+
+The following command provides status and statistics on the messages published at the message broker process:
+<pre>
+ get broker
+</pre>
+
+The following command provides status and statistics on the mapping of published messages on the local broker to the table's schema:
+<pre>
+get msg client
+</pre>
 
 ***Option C: Data transferred using POST***    
+
 The data is transferred using REST POST command. The headers include a topic (or if not provided, the default topic is used) 
 and the AnyLog mapper transforms the received data to the destination format.  
 Details are available at the section [Using a POST command](#using-a-post-command).
 
+The following command provides status and statistics on the messages by HTTP POST:
+<pre>
+get rest calls
+</pre>
+
+The following command provides status and statistics on the mapping of POST calls to the table's schema:
+<pre>
+get msg client
+</pre>
+
 ***Option D: Data transferred using PUT***    
 The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.  
 Details are available at the section [Using a PUT command](#using-a-put-command).
+
+The following command provides status and statistics on the messages by HTTP PUT:
+<pre>
+get rest calls
+</pre>
 
 ***Option E: Adding JSON files to the watch directory***   
 The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
 File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md)
 
+The following command provides status and statistics on the processing of the JSON files:
+<pre>
+get operator
+</pre>
+
 ***Option F: Adding SQL files to the watch directory***  
 The SQL files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
 
+The following command provides status and statistics on the processing of the SQL files:
+<pre>
+get operator
+</pre>
