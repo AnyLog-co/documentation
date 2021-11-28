@@ -339,14 +339,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                |  TSD Update   |
                                                                |               |
                                                                -----------------
-                                                                       |
-                                                                       |
-                                                                       V
-                                                               ----------------- 
-                                                               |  (Optional)   |
-                                                               |    Archive    |
-                                                               |     Data      |
-                                                               -----------------
+ 
 </pre>
 
 The diagram describes the different southbound connectors options and the data flow.
