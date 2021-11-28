@@ -335,18 +335,26 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                ----------------- 
-                                                               |               |
+                                                               |  (Optional)   |
                                                                |  TSD Update   |
                                                                |               |
+                                                               -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               ----------------- 
+                                                               |  (Optional)   |
+                                                               |    Archive    |
+                                                               |     Data      |
                                                                -----------------
 </pre>
 
 The diagram describes the different southbound connectors options and the data flow.
 
-***Option A: Data published to external MQTT Broker***  
+***Option A: Data published to an external MQTT Broker***  
 
-Data is published to an MQTT broker. AnyLog client is registered to the broker and does the following:  
-a) pulls the data from the broker and b) pushing the data to the mapper.  
+Data is published to an external MQTT broker. AnyLog client is registered to the broker and does the following:  
+a) pulls the data from the broker and b) puses the data to the mapper.  
 Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
 
 The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:
@@ -362,12 +370,12 @@ AnyLog client is registered to the broker, and similarly to an external broker, 
 pushes to the mapper.  
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
 
-The following command provides status and statistics on messages published on the message broker process:
+The following command provides status and statistics on data published on the AnyLog message broker process:
 <pre>
- get broker
+get broker
 </pre>
 
-The following command provides status and statistics on the mapping (of published messages on the local broker) to the table's schema:
+The following command provides status and statistics on the mapping (of published data on the local broker) to the table's schema:
 <pre>
 get msg client
 </pre>
@@ -375,11 +383,11 @@ Command details are available [here](https://github.com/AnyLog-co/documentation/
 
 ***Option C: Data transferred using POST***    
 
-The data is transferred using REST POST command. The headers include a topic (or if not provided, the default topic is used) 
+The data is transferred using REST POST messages. The headers include a topic (or if not provided, the default topic is used) 
 and the AnyLog mapper transforms the received data to the destination format.  
 Details are available at the section [Using a POST command](#using-a-post-command).
 
-The following command provides status and statistics on the messages by HTTP POST:
+The following command provides status and statistics on HTTP POST messages:
 <pre>
 get rest calls
 </pre>
@@ -393,10 +401,10 @@ Command details are available [here](https://github.com/AnyLog-co/documentation/
 
 ***Option D: Data transferred using PUT***    
 
-The data is transferred using REST PUT command. The data is provided in a format representative of the table's schema.  
+The data is transferred using REST PUT messages. The data is provided in a format representative of the table's schema.  
 Details are available at the section [Using a PUT command](#using-a-put-command).
 
-The following command provides status and statistics on the messages by HTTP PUT:
+The following command provides status and statistics on HTTP PUT messages:
 <pre>
 get rest calls
 </pre>
