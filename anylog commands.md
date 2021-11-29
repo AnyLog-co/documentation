@@ -202,6 +202,7 @@ Options:
 | get data nodes | Details the Operators that host each table's data. |
 | [get rows count](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands) | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
+| get timezone info | Get the timezone on the local machine. |
 
 #### Monitoring node status options:
 
