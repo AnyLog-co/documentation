@@ -163,6 +163,24 @@ file compress source_file.dat new_file.gz
 file decompress new_file,gz source_file.dat
 </pre>
 
+Compression can be applied to all files in a directory - if file name is asterisk (*), all files that match the type are compressed.
+The compressed file names are the same as the source file names with ***.gz*** extension.
+Example:
+<pre>
+src_dir = D:\Node\AnyLog-Network\data\prep\ping_sensor
+file compress !src_dir\*.json
+</pre>
+
+Decompression can be applied to all files in a directory - if file name is asterisk (*), all files that match the type are decompressed.  
+if the file type ends with ***gz*** the uncompressed file name removes the ***gz*** extension. Otherwize ***.dat*** type is added to the file name.
+
+Example:
+<pre>
+src_dir = D:\Node\AnyLog-Network\data\prep\ping_sensor
+file decompress !src_dir\*.gz
+</pre>
+
+
 
 ## Test if a file exists
 Usage:
