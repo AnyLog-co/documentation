@@ -52,7 +52,7 @@ Assigning a value to a key is done with the following calls:
 <pre>
 [key] = [value]
 </pre>
-or use the set command
+Or use the set command:
 <pre>
 set [key] = [value]
 </pre>
@@ -66,7 +66,7 @@ Use the following command to delete an assignment:
 <pre>
 [key] = ""
 </pre>
-or
+Or
 <pre>
 set [key] = ""
 </pre>
@@ -76,7 +76,7 @@ To retrieve the value assigned to a key use exclamation point prefixed to the ke
 <pre>
 ![key]
 </pre>
-or use the get command:
+Or use the get command:
 <pre>
 get ![key]
 </pre>
@@ -86,7 +86,7 @@ The following example returns the path string assigned to the key ***dbms_dir***
 !dbms_dir
 </pre>
 
-To retrieve all assigned values use the command:
+The following command retrieves all keys and values from the dictionary:
 <pre>
 get dictionary
 </pre>
