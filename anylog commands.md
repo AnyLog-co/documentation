@@ -46,8 +46,8 @@ Policies impact one or more nodes vs. scripts which are private and maintained o
 
 Every node maintains a dictionary that associates keys with values.   
 When a node is initialized, some keys are preassigned with values. Users and processes can assign new values
-to new or existing keys. 
-Users and processes can use the keys as representatives of the values by prefixing the key with an exclamation point.  
+to new or existing keys.  
+Users and processes can use the keys as representatives of the values by prefixing the key with an exclamation point.   
 Assigning a value to a key is done with the following calls:
 <pre>
 [key] = [value]
