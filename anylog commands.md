@@ -42,6 +42,56 @@ When the policy is called, the commands associated with the policy are executed.
 Policies allows to initiate and modify processes on nodes by publishing processes on the blockchain.   
 Policies impact one or more nodes vs. scripts which are private and maintained on the local drive of each node. 
 
+# The node dictionary
+
+Every node maintains a dictionary that associates keys with values.   
+When a node is initialized, some keys are preassigned with values. Users and processes can assign new values
+to new or existing keys. 
+Users and processes can use the keys as representatives of the values by prefixing the key with an exclamation point.  
+Assigning a value to a key is done with the following calls:
+<pre>
+[key] = [value]
+</pre>
+or use the set command
+<pre>
+set [key] = [value]
+</pre>
+
+The following example assigned a path to the key dbms_dir:
+<pre>
+dbms_dir = D:\AnyLog-Code\AnyLog-Network\data\dbms
+</pre>
+
+Use the following command to delete an assignment:
+<pre>
+[key] = ""
+</pre>
+or
+<pre>
+set [key] = ""
+</pre>
+
+
+To retrieve the value assigned to a key use exclamation point prefixed to the key name.
+<pre>
+![key]
+</pre>
+or use the get command:
+<pre>
+get ![key]
+</pre>
+
+The following example returns the path string assigned to the key ***dbms_dir***:
+<pre>
+!dbms_dir
+</pre>
+
+To retrieve all assigned values use the command:
+<pre>
+get dictionary
+</pre>
+
+
 # List of Commands:
 | Commands        | 
 | ------------- |
@@ -86,17 +136,6 @@ Options:
 | set reply ip = [ip/none]  | Set the IP address that for a reply message. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 
-#### Set variable
-
-To see the value assigned to a variable use exclamation point prefixed to the variable name.
-<pre>
-![variable name]
-</pre>
-
-To see all assigned values use the command:
-<pre>
-get dictionary
-</pre>
 
 #### Set query mode
 
