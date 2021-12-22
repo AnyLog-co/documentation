@@ -10,6 +10,7 @@ There are multiple ways to add data to Operators in the network:
 * [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients.   
     If an AnyLog node is configured as a message broker, clients are able to publish data on the AnyLog node and map the published data to an existing schema. 
 
+Note: Below is [The Southbound Connectors Diagram](#the-southbound-connectors-diagram).
 
 ## The node type
 An AnyLog node can be configured in many ways. A node that receives streams data from devices can be configured as a Publisher node or an Operator Node.
@@ -137,57 +138,6 @@ curl --location --request PUT '10.0.0.78:2049' \
 </pre>
 
 
-### Using a POST command
-
-**cURL Example**: 
-<pre>
-curl --location --request POST '192.168.50.159:2051' \
---header 'User-Agent: AnyLog/1.23' \
---header 'command: data' \
---header 'Content-Type: text/plain' \
---data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
- {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
- {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
-</pre>
-
-**Python Example**: 
-<pre> 
-import json 
-import requests
-
-# REST connection information (IP + Port) 
-conn = '192.168.50.159:2051' 
-
-# Header for POST data 
-headers = {
-    'command': 'data',
-    'User-Agent': 'AnyLog/1.23',
-    'Content-Type': 'text/plain'
-}
-
-# data to POST 
-data = [
-    {"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
-    {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
-    {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}
-]
-
-# Convert to JSON 
-jdata = json.dumps(data) 
-
-# POST proces 
-try:
-    r = requests.post('http://%s' % conn, headers=headers, data=jdata)
-except Exception as e: 
-    print('Failed to POST data to %s (Error: %s)' % (conn, e))
-else: 
-    if r.status_code != 200: 
-        print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
-    else:
-        print('Success') 
-</pre> 
-
-
 ### The Data Format
 
 To process a PUT or POST requests with new data, the data is organized in the message body as strings with the new line character separating between the JSON instances.
@@ -257,6 +207,63 @@ The command provides information on the REST API usage and status including the 
 <pre>
 get streaming
 </pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
+
+
+### Using a POST command
+
+With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
+in the headers as the value for the key ***topic***. If a topic value is not provided, the default topic is used.  
+The default topic is the first topic described in the command ```run mqtt client ... ```.
+
+**cURL Example**: 
+<pre>
+curl --location --request POST '192.168.50.159:2051' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: data' \
+--header 'Content-Type: text/plain' \
+--data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
+ {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
+ {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
+</pre>
+
+**Python Example**: 
+<pre> 
+import json 
+import requests
+
+# REST connection information (IP + Port) 
+conn = '192.168.50.159:2051' 
+
+# Header for POST data 
+headers = {
+    'command': 'data',
+    'User-Agent': 'AnyLog/1.23',
+    'Content-Type': 'text/plain'
+}
+
+# data to POST 
+data = [
+    {"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
+    {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
+    {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}
+]
+
+# Convert to JSON 
+jdata = json.dumps(data) 
+
+# POST proces 
+try:
+    r = requests.post('http://%s' % conn, headers=headers, data=jdata)
+except Exception as e: 
+    print('Failed to POST data to %s (Error: %s)' % (conn, e))
+else: 
+    if r.status_code != 200: 
+        print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
+    else:
+        print('Success') 
+</pre> 
+
 
 ## Subscribing to a third party message broker
 
@@ -265,3 +272,165 @@ Details are available at the [message broker section - Subscribing to a third pa
 ## Configuring the AnyLog node as a message broker
 
 Details are available at the [message broker section - Configuring an AnyLog node as a message broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+
+
+## The Southbound Connectors Diagram
+
+<pre>
+                                                       --------------------------
+  Option A:                                            |                        |
+  Data published to external MQTT Broker               |  External MQTT Broker  |
+  ------------------------------------------------>    |                        |
+                                                       --------------------------
+                                                                           |
+ ==========================================================================================
+  AnyLog                                                                   |
+                                                                           V
+                                         -------------------            -------------------
+  Option B:                              |                 |            |                 |
+  Data published to AnyLog Broker        |  AnyLog Broker  |  ------>   |  Broker Client  |
+  ---------------------------------->    |                 |            |                 |
+                                         -------------------            -------------------
+                                                                           |
+                                                                           |
+                                                                           V
+                                                               -----------------
+  Option C:                                                    |  Client Data  |
+  Data transferred using POST                                  |  Mapper       |
+  -------------------------------------------------------->    |  f(Topic)     |
+                                                               -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option D:                                                    |               |        |  (Optional)   |
+  Data transferred using PUT (without mapping)                 |  Data Buffers |   -->  |  Immediate    |
+  -------------------------------------------------------->    |               |        |  DBMS update  |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option E:                                                    |               |        |  (Optional)   |
+  Adding JSON files to the watch directory                     |  JSON Files   |   -->  |  Archive      |
+  -------------------------------------------------------->    |               |        |  JSON files   |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               -----------------        -----------------
+  Option F:                                                    |               |        |  (Optional)   |
+  Adding SQL files to the watch directory                      |  SQL Files    |   -->  |  Archive      |
+  -------------------------------------------------------->    |               |        |  SQL files    |
+                                                               -----------------        -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               ----------------- 
+                                                               |               |
+                                                               |  DBMS Update  |
+                                                               |               |
+                                                               -----------------
+                                                                       |
+                                                                       |
+                                                                       V
+                                                               ----------------- 
+                                                               |  (Optional)   |
+                                                               |  TSD Update   |
+                                                               |               |
+                                                               -----------------
+ 
+</pre>
+
+The diagram describes the different southbound connectors options and the data flow.
+
+***Option A: Data published to an external MQTT Broker***  
+
+Data is published to an external MQTT broker. AnyLog client is registered to the broker and does the following:  
+a) pulls the data from the broker and b) puses the data to the mapper.  
+Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
+
+The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:
+<pre>
+get msg client
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
+
+***Option B: Data published to AnyLog as a Broker***  
+
+An AnyLog node is configured as a local message broker and data is published to the AnyLog Node.  
+AnyLog client is registered to the broker, and similarly to an external broker, pulls the data from the broker and
+pushes to the mapper.  
+Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
+
+The following command provides status and statistics on data published on the AnyLog message broker process:
+<pre>
+get broker
+</pre>
+
+The following command provides status and statistics on the mapping (of published data on the local broker) to the table's schema:
+<pre>
+get msg client
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
+
+***Option C: Data transferred using POST***    
+
+The data is transferred using REST POST messages. The headers include a topic (or if not provided, the default topic is used) 
+and the AnyLog mapper transforms the received data to the destination format.  
+Details are available at the section [Using a POST command](#using-a-post-command).
+
+The following command provides status and statistics on HTTP POST messages:
+<pre>
+get rest calls
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls).
+
+The following command provides status and statistics on the mapping (of POST calls) to the table's schema:
+<pre>
+get msg client
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
+
+***Option D: Data transferred using PUT***    
+
+The data is transferred using REST PUT messages. The data is provided in a format representative of the table's schema.  
+Details are available at the section [Using a PUT command](#using-a-put-command).
+
+The following command provides status and statistics on HTTP PUT messages:
+<pre>
+get rest calls
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls). 
+
+***Monitoring the data passing through the internal buffers***
+
+The following command provides status and statistics on the internal buffers:
+<pre>
+get streaming
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
+
+
+***Option E: Adding JSON files to the watch directory***   
+
+The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
+Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
+File naming convention is detailed at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md).
+
+The following command provides status and statistics on the processing of the JSON files:
+<pre>
+get operator
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
+
+***Option F: Adding SQL files to the watch directory***   
+
+The SQL files are in a format representative of the table's schema and the file names follow the naming convention.  
+Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
+
+The following command provides status and statistics on the processing of the SQL files:
+<pre>
+get operator
+</pre>
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).

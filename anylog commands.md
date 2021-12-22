@@ -42,6 +42,56 @@ When the policy is called, the commands associated with the policy are executed.
 Policies allows to initiate and modify processes on nodes by publishing processes on the blockchain.   
 Policies impact one or more nodes vs. scripts which are private and maintained on the local drive of each node. 
 
+# The node dictionary
+
+Every node maintains a dictionary that associates keys with values.   
+When a node is initialized, some keys are preassigned with values. Users and processes can assign new values
+to new or existing keys.  
+Users and processes can use the keys as representatives of the values by prefixing the key with an exclamation point.   
+Assigning a value to a key is done with the following calls:
+<pre>
+[key] = [value]
+</pre>
+Or use the set command:
+<pre>
+set [key] = [value]
+</pre>
+
+The following example assigned a path to the key dbms_dir:
+<pre>
+dbms_dir = D:\AnyLog-Code\AnyLog-Network\data\dbms
+</pre>
+
+Use the following command to delete an assignment:
+<pre>
+[key] = ""
+</pre>
+Or
+<pre>
+set [key] = ""
+</pre>
+
+
+To retrieve the value assigned to a key use exclamation point prefixed to the key name.
+<pre>
+![key]
+</pre>
+Or use the get command:
+<pre>
+get ![key]
+</pre>
+
+The following example returns the path string assigned to the key ***dbms_dir***:
+<pre>
+!dbms_dir
+</pre>
+
+The following command retrieves all keys and values from the dictionary:
+<pre>
+get dictionary
+</pre>
+
+
 # List of Commands:
 | Commands        | 
 | ------------- |
@@ -68,8 +118,8 @@ Options:
 | Option        | Explanation  |
 | ------------- | ------------| 
 | set query mode  | Setting execution instructions to the issued queries. |
-| set query log  | Initiate a log to record the executed queries. |
-| set query log profile [n] seconds  | Applying the Query Log to queries with execution time higher than threshold.  |
+| [set query log on/off](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) | Enable/Disable a log to record the executed queries. |
+| [set query log profile [n] seconds](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log)  | Applying the Query Log to queries with execution time higher than threshold.  |
 | set rest log on/off | Enable/Disable a log to record the processed REST commands. The log is retrieved using the 'get rest log' command. |
 | set debug [on/off]  | Displays the executed commands processed in scripts. |
 | set mqtt debug [on/off]  | Displays the MQTT messages and their processing status. |
@@ -86,17 +136,6 @@ Options:
 | set reply ip = [ip/none]  | Set the IP address that for a reply message. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 
-#### Set variable
-
-To see the value assigned to a variable use exclamation point prefixed to the variable name.
-<pre>
-![variable name]
-</pre>
-
-To see all assigned values use the command:
-<pre>
-get dictionary
-</pre>
 
 #### Set query mode
 
@@ -140,31 +179,30 @@ Options:
 
 | Option        | Information provided  |
 | ------------- | ------------| 
-| [get event log](#get-logged-instances)  | Records the Last commands processed by the node. | 
-| [get error log](#get-logged-instances)  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| [get event log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-event-log)  | Records the Last commands processed by the node. | 
+| [get error log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-error-log)  | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | [get file log](#get-logged-instances)  | Records the last data files processed by the node. |
 | [get rest log](#get-logged-instances)  | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
-| [get query log](#get-logged-instances)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
-| get processes | The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
+| [get query log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log)  | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| [get processes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)| The list of background processes. More details are available in [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md).|
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
-| get operator | Information on the Operator processes. |
+| [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator) | Information on the Operator processes. |
 | get publisher | Information on the Publisher processes. |
 | get distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | get consumer | With HA enabled, information on pulling source files from cluster members. |
-| get streaming | Information on REST API calls from external applications. |
-| get streaming | Information on streaming data from REST and MQTT calls. |
+| [get streaming](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming) | Information on streaming data from REST and MQTT calls. |
 | get cluster info | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
 | get tsd info [table name] | Information on the synchronization status between the cluster members. |
-| get rest server info | Information on the way the REST server is configured. |
-| get msg clients | Information on clients subscribed to topics. |
-| get msg client [n]| Information on a particular client, ***n*** is the client ID. |
+| [get rest calls](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-rest-calls) | Statistical information on the REST calls. |
+| [get rest server info](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#rest-server-configuration) | Information on the REST server configuration. |
+| [get msg clients](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients) | Information on clients subscribed to topics. |
 | get msg brokers | Information on message brokers and the topics subscribed with each broker. |
 | get broker | Information on the Message Broker. |
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
 | get connections | The list of TCP and REST connections supported by the node. |
 | get platforms | The list connected blockchain platforms. |
-| get dictionary | The list of the variable names and their assigned values. |
+| [get dictionary](blob/master/monitoring%20nodes.md#the-get-dictionary-command) | The list of the variable names and their assigned values. |
 | get databases  | The list of databases managed on the local node. |
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
@@ -201,8 +239,9 @@ Options:
 | get size [dir name] [YYYY-MM-DD] | List the size of a directory including sub-directories. |
 | get access [path and file name or directory name] | Get the access rights to the provided file or directory. |
 | get data nodes | Details the Operators that host each table's data. |
-| get rows count | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
+| [get rows count](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands) | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
+| get timezone info | Get the timezone on the local machine. |
 
 #### Monitoring node status options:
 
@@ -232,35 +271,6 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get authentication | Returns ON or OFF depending on the current status. |
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
-
-## Get logged instances
-
-Each node maintains buffers to record events and errors such that users and applications are able to retrieve the recent events and errors as they accrue.    
-The command format: 
-<pre>
-get [log type] log where format = [format type] and keys = key1 key2 ...
-</pre>
-
-### Command options
-
-  
-* ***log type*** - options are: ***event, error, file, query, rest***   
-
-The ***where*** condition is optional and details the following:
-* ***format*** - the format of the output, the valid values are ***table*** or ***json***, ***table*** is the default value.  
-* ***key*** - if added, allows to specify one or more keywords to retieve only logged events containing the keywords.
-
-Examples:
-
-<pre>
-get event log where format = json and keys = SQL Error
-</pre>
-Returns log instances containing the keywords "SQL" or "Error". The reply format is JSON.
-
-<pre>
-get query log where keys = "timestamp"
-</pre>
-If query log is enabled, only queries with "timestamp" in the SQL text will be returned.
 
 ## Get pools info
 

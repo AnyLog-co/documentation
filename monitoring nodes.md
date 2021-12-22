@@ -14,7 +14,8 @@ Notes:
 
 ## Monitoring data commands
 
-* The command ***get rows count*** provides the list of tables in databases and the number of rows in each table.
+* The command ***get rows count*** provides the list of tables in databases, and the number of rows in each table.  
+Usage:
 <pre>
 get rows count where dbms = [dbms name] and table = [table name] and format = [json] and group = [partition/table]
 </pre>
@@ -33,14 +34,17 @@ get rows count where dbms = aiops and table = lic1_fout
 get rows count where dbms = aiops and table = lic1_fout and group = table
 </pre>
 
-* The command ***get operator*** provides details on ingestion of data by an Operator node.
+* The command ***get operator*** provides details on ingestion of data by an Operator node.  
 
+Usage:
 <pre>
 get operator
 get operator stat format = json
 </pre>
 
-* The command ***get data nodes*** lists the Operator nodes in the network and the tables supported on each node.
+* The command ***get data nodes*** lists the Operator nodes in the network and the tables supported on each node.  
+
+Usage:
 <pre>
 get data nodes
 </pre>
@@ -140,6 +144,48 @@ Reply:
  'disk_free' : '990713614336',
  'disk_percentage' : '99.05'}
 </pre>
+
+
+## The "get processes" command
+
+The ***get processes command*** lists state and configuration choices using a single call:     
+a) The list of background processes and their current status.  
+b) The main configuration choices selected for the node.  
+Usage:
+<pre>
+get processes
+</pre>
+
+Example reply:
+<pre>
+    Process         Status       Details
+    ---------------|------------|---------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 24.23.250.144:7848 and 10.0.0.78:7848, Threads Pool: 6 |
+    REST           |Running     |Listening on: 10.0.0.78:7849, Threads Pool: 5, Timeout: 20, SSL: None|
+    Operator       |Running     |Cluster Member: True, Using Master: 10.0.0.25:2548                   |
+    Publisher      |Not declared|                                                                     |
+    Blockchain Sync|Running     |Failed to connect to master using: 10.0.0.25:2548                    |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)]                                  |
+    Distributor    |Running     |                                                                     |
+    Consumer       |Running     |No peer Operators supporting the cluster                             |
+    MQTT           |Running     |                                                                     |
+    Message Broker |Running     |Listening on: 24.23.250.144:7850 and 10.0.0.78:7850, Threads Pool: 6 |
+    SMTP           |Not declared|                                                                     |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,000 bytes         |
+    Query Pool     |Running     |Threads Pool: 3   
+</pre>
+
+
+## The "get dictionary" command
+
+Each node is using a dictionary to map keys to values.  
+Some mappings represent default assignments, and some mappings are declared using scripts or on the CLI.  
+The ***get dictionary*** command lists the key values pairs.  
+Usage:
+<pre>
+get dictionary
+</pre>
+
 
 ## Organizing node status in a database table
 
