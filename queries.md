@@ -30,12 +30,12 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 ### Timezones
 Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
 in addition, tomezone can be expressed using the following keys:  
-* utc - UTC timezone
+* utc - UTC timezone.
 * local - The local timezone on the AnyLog node that is processing the query.
-* pt - Pacific Time (same as "America/Los_Angeles")
-* mt - Mountain Time (same as "America/Denver")
-* ct - Central Time (same as America/Chicago")
-* et - Eastern Time (same as "America/New_York")
+* pt - Pacific Time (same as "America/Los_Angeles").
+* mt - Mountain Time (same as "America/Denver").
+* ct - Central Time (same as America/Chicago").
+* et - Eastern Time (same as "America/New_York").
 
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
