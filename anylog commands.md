@@ -221,8 +221,7 @@ Options:
 | get database size [database name] | The size of the named database in bytes. |
 | get node id | Returns a unique identifier of the node. |
 | get hardware id | Returns a unique identfier of the hardware. |
-| get servers for dbms [dbms name] and table [table name] | The list of IPs and Ports of the servers supporting the table. |
-| get servers for dbms [dbms name] | The list of IPs and Ports of the servers supporting the dbms. |
+| [get servers](#get-servers) | Retrurn info on the the servers supporting the table. |
 | get tables for dbms [dbms name] | The list of tables of the named database and where the table is declared (local database and/or blockchain) |
 | get table [exist status/local status/blockchain status/rows count/complete status] where name = table_name and dbms = dbms_name | Returns information on the specified table |
 | get views for dbms [dbms name] | The list of views of the named database. |
@@ -271,6 +270,25 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get authentication | Returns ON or OFF depending on the current status. |
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
+
+## Get servers
+The ***get servers*** command returns information on the Operators hosting data.
+Usage:
+<pre>
+get servers where company = [company name] and dbms = [dbms name] and table = [table name] bring [key string]
+</pre>
+The ***where*** condition and the ***bring*** keywords are optional.  
+If the ***where*** condition is used, the process is satisfied with Operators associated with the company, dbms and table values provided.  
+If a value for a company, dbms or table is not provided - an asterisk value is assumed ('*') such that all values satisfy the call.  
+Examples:
+<pre>
+get servers
+get servers where dbms = lsl_demo and table = ping_sensor
+get servers where company = anylog and dbms = lsl_demo and table = ping_sensor
+get servers where company = anylog bring [operator][ip] : [operator][port] --- [operator][id]
+</pre>
+Examples of the bring command are available in the section [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
+
 
 ## Get pools info
 
