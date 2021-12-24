@@ -27,6 +27,16 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | file | file name | file name for the output data |  |
 | table | table name | table name for the output data | random table names are assigned to each executing query |
 
+### Timezones
+Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
+in addition, tomezone can be expressed using the following keys:  
+* utc - UTC timezone
+* local - The local timezone on the AnyLog node that is processing the query.
+* pt - Pacific Time (same as "America/Los_Angeles")
+* mt - Mountain Time (same as "America/Denver")
+* ct - Central Time (same as America/Chicago")
+* et - Eastern Time (same as "America/New_York")
+
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
 Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.     
@@ -125,20 +135,21 @@ run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time
 </pre>
 
 
-## Datetime command
-Using the commmand ***datetime*** users can translate a date-time function to the date-time string.  
+## Get datetime command
+Using the commmand ***get datetime*** users can translate a date-time function to the date-time string.  
 Usage:
 <pre>
-datetime [utc] [date-time function]
+get datetime timezone [date-time function]
 </pre>
-***[utc]*** is an optional string to convert the function to UTC time
+
 ***[date-time function] is the function used to derive the date-time string.
 
 #### Examples:
 <pre>
-datetime now() + 3 days
-datetime utc date() + 2 days
-datetime timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+get datetime local now() + 3 days
+get datetime utc date() + 2 days
+get datetime local timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+get datetime Asia/Shanghai timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
 </pre>
 
   
