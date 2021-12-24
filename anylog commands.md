@@ -281,7 +281,7 @@ The ***where*** condition and the ***bring*** keywords are optional.
 If the ***where*** condition is used, the process is satisfied with Operators associated with the company, dbms and table values provided.  
 If a value for a company, dbms or table is not provided - an asterisk value is assumed ('*') such that all values satisfy the call.  
 The bring command determines the values retrieved from the policies and formatting options.  
-If ***bring*** is omitted, the IP and Port of the servers are retrieved.
+If ***bring*** is omitted, the IP and Port of the servers are retrieved.  
 Details on the bring command are available in the section [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).
 Examples:
 <pre>
