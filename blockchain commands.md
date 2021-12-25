@@ -55,6 +55,7 @@ Maintaining a master node in the network is optional.
 
 | ===========Command============ | ===============Details=============== |
 | ------------------------------------ | ------------| 
+| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | Add a new policy to the ledger in one or more blockchain platform. |
 | blockchain connect to [platform name] where [connection parameters] | Connect to a blockchain platform. | 
 | blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
 | blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
@@ -79,7 +80,30 @@ Maintaining a master node in the network is optional.
 | blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
 | blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
 | blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
-| blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |  
+| blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
+
+### The blockchain insert command
+The ***blockchain insert*** command adds a policy to the blockchain ledger.
+Usage:
+<pre>
+blockchain insert where policy = [policy] and blockchain = [platform] and local = [true/false] and master = [IP:Port]
+</pre>
+
+Command details:
+
+| Key             | Value |
+| --------------- | ------------| 
+| policy          | A json policy that is added to the ledger  |
+| platform        | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)). |
+| local           | A true/false value to determine an update to the local copy of the ledger  |
+| master          | The IP and Port value of a master node (configuring a master node is detailed in [this doc](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md#using-a-master-node).) |
+
+Using the ***blockchain insert*** command, all the specified ledgers are updated. The common configuration would include the local ledger and 
+either a blockchain platform (like Ethereum) or a master node.  
+When the policy is updated on the local ledger, the policy is updated with the key: "ledger" and a value "local" to indicate that 
+the policy is not yet confirmed on the global ledger (the blockchain platform or a master node).   
+When the local ledger is synchronized with the global ledger, the status of the key "ledger" is changed from "local" to "global".
+
 
 ### Updating a Master Node
 Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
