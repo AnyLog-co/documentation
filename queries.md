@@ -152,7 +152,7 @@ Usage:
 get datetime timezone [date-time function]
 </pre>
 
-***[date-time function] is the function used to derive the date-time string.
+***[date-time function]*** is the function used to derive the date-time string.
 
 #### Examples:
 <pre>
