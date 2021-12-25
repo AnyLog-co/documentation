@@ -108,7 +108,7 @@ When the local ledger is synchronized with the global ledger, the status of the 
 Examples:
 <pre>
 blockchain insert where policy = !policy and local = true and master = !master_node
- blockchain insert where policy = !policy and local = true and blockchain = ethereum
+blockchain insert where policy = !policy and local = true and blockchain = ethereum
 </pre>
 
 
