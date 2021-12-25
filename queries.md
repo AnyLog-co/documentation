@@ -37,6 +37,16 @@ in addition, timezone can be expressed using the following keys:
 * ct - Central Time (same as America/Chicago")
 * et - Eastern Time (same as "America/New_York")
 
+The default timezone is local. Therefore, when queries are executed and timezone is not specified, results are returned using the timezone 
+of the AnyLog node executing the query.   
+If the query is provided by a REST call, the node that executes the query is the node receiving the REST call (and the local timezone is determined by this node).  
+Users can determine the local timezone on a node using the command:
+<pre> 
+get timezone info
+</pre> 
+Users can validate a timezone using the command [get datetime](#get-datetime-command).
+
+
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
 Executing a query against all the nodes in the network with the relevant data is by adding the ***run client ()*** as a command prefix.     
@@ -146,6 +156,8 @@ get datetime timezone [date-time function]
 
 #### Examples:
 <pre>
+get datetime et now()
+get datetime Europe/London now()
 get datetime local now() + 3 days
 get datetime utc date() + 2 days
 get datetime local timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
