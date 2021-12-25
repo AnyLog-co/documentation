@@ -83,7 +83,8 @@ Maintaining a master node in the network is optional.
 | blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
 
 ### The blockchain insert command
-The ***blockchain insert*** command adds a policy to the blockchain ledger.
+The ***blockchain insert*** command adds a policy to the blockchain ledger.  
+
 Usage:
 <pre>
 blockchain insert where policy = [policy] and blockchain = [platform] and local = [true/false] and master = [IP:Port]
@@ -103,6 +104,11 @@ either a blockchain platform (like Ethereum) or a master node.
 When the policy is updated on the local ledger, the policy is updated with the key: "ledger" and a value "local" to indicate that 
 the policy is not yet confirmed on the global ledger (the blockchain platform or a master node).   
 When the local ledger is synchronized with the global ledger, the status of the key "ledger" is changed from "local" to "global".
+
+Examples:
+<pre>
+blockchain insert where policy = !policy and local = true and master = !master_node
+</pre>
 
 
 ### Updating a Master Node
