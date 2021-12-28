@@ -93,7 +93,7 @@ updated with a date and time of the update and a [unique ID](#the-policy-id).
 AnyLog offers commands to query policies.  
 Queries are processed on the local copy of the ledger and are not dependent on the availability or latency of the global ledger.  
 Queries detail filter criteria to return the needed policies in JSON format and can be augmented by formatting instructions.   
-AAlternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
+Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command ***from*** and is explained [below](#the-from-json-object-bring-command).
 
@@ -185,7 +185,18 @@ Retrieve blockchain data from the local database on the AnyLog command line can 
 Example: ```sql blockchain text "select * from ledger"```
 
 ### Retrieving the Metadata from a Master Node
-Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
+Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) 
+and copying the data to the desired location on the client node (using ***file get*** command).  
+Example:
+<pre>
+mater_node = 127.45.35.12:2048
+run client (!master_node) blockchain pull to json
+run client (!master_node) file get !!blockchain_file !blockchain_file
+</pre>
+Notes:
+* blockchain_file is configured to the path and file name of the ledger
+* The double exclamation points (!!) determine to derive the value of the key ```blockchain_file``` on the node at 127.45.35.12.
+* Details on the ***file get*** command are available [here](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node).
 
 ### Removing policies from a master node
 Deleting a policy from a master node is with the command:
