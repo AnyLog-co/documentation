@@ -29,24 +29,54 @@ When new policies are added to the ledger, they need to update the global metada
 the local copy with the global copy, evey update will appear on the local copy of every member node.  
 Synchronization is enabled with the ***run blockchain sync*** command. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
+## The Policy ID
+When a Policy is added to the metadata, one of the fields describing the object is an ID field.  
+The ID value can be provided by the user or generated dynamically when the policy is added to the ledger.  
+If the value is auto-generated, it is based on the MD5 Hash value of the object. 
+
+### A Master Node
+A master node is a node that maintains a complete copy of the metadata in a local database.  
+Maintaining a master node in the network is optional.
+
+## The Storage of the Metadata
+The metadata is stored ias follows:  
+a.	In a JSON file on each node – the JSON file on each node needs to maintain only the metadata that is needed for the operation of the node.
+b.	In a local database in the node – the local database only needs to maintain the metadata that is needed for the operation of the node. The existence of the local database is optional.
+c.	In a ledger of blockchain platform – the ledger maintains the complete set of metadata information.  
+
+If the network is configured with a master node, the master node maintains the complete set of metadata information in a local database.
+
+## Maintaining the global copy on a blockchain platform
+
+Using a blockchain platform requires the following configurations:
+1. Connecting to the blockchain platform. The following command connects to the blockchain platform:
+<pre>
+blockchain connect to [platform name] where [connection parameters]
+</pre>
+Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#connecting-to-ethereum).
+2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.
+3. [Configuring synchronization](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20configuration.md) against the blockchain platform.
+
 ## Adding policies
 
 AnyLog offers a set of commands to add new policies to the ledger.
 The generic command is ***blockchain insert***. This command is used to update both - the global copy and the local copy.  
 If only the global copy is updated, it may take a few seconds for the update to be reflected on the local copy. The 
-***blockchain insert*** command makes the new policy immediately available on the nodes that triggers the update.
-Policies that are added using the ***blockchain insert*** command will also persist locally, such that if during the time of 
+***blockchain insert*** command makes the new policy immediately available on the nodes that triggers the update.  
+Policies that are added using the ***blockchain insert*** command will also persist locally (if the command directs to update the local copy), such that if during the time of 
 the update, the global ledger is not accessible, when the network reconnects, the new policies will be delivered to the global ledger.
 
 Below are the list of commands to add new policies to the ledger:
 
-
 | Command                              | Platform Updated | Details |
 | ------------------------------------ | ------------ | ------------ | 
 | [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | all that are specified | Add a new policy to the ledger in one or more blockchain platform. |
-| blockchain add [JSON data]           | Local Copy |Add a JSON object to the local JSON file. |
-| blockchain push [JSON data]          | DBMS |Add a JSON object to the local database. |
-| blockchain commit [JSON data]       | Blockchain Platform (i.e. Ethereum) |  – Add a JSON object to a blockchain platform. |  
+| blockchain add [policy]           | Local Copy |Add a JSON object to the local JSON file. |
+| blockchain push [policy]          | DBMS |Add a JSON object to the local database. |
+| blockchain commit [policy]       | Blockchain Platform (i.e. Ethereum) |  – Add a JSON object to a blockchain platform. |  
+
+When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
+updated with a date and time of the update and a [unique ID](#the-policy-id).
 
 ## Query policies
 
@@ -71,62 +101,20 @@ The ***blockchain get*** command retrieves one the policies that satisfy the sea
 Details: 
 <pre>
 blockchain get [policy type] - Retrieve a list of all the requested policies of the specified type.
-blockchain get [object] where [key] = [value] - Retrieve a list of all the requested objects that contain the specidied value.
-blockchain get [object] where [key] with [value] - Retrieve a list of all the requested objects that contain a list of values including the specidied value.
+blockchain get [policy type] where [key] = [value] - Retrieve a list of all the requested objects that contain the specidied value.
+blockchain get [policy type] where [key] with [value] - Retrieve a list of all the requested objects that contain a list of values including the specidied value.
 </pre>
 
 Examples:
 <pre>
 blockchain get *
 blockchain get operator where dbms = lsl_demo
+blockchain get operator where ip = 24.23.250.144
 blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
 </pre>
 
 
-## The Objects IDs
-
-When a JSON object is added to the metadata, one of the fields describing the object is an ID field.  
-The ID value can be provided by the user or generated dynamically when the object is added to the blockchain data.  
-If the value is auto-generated, it is based on the MD5 Hash value of the object. 
-
-## The Storage of the Metadata
-The metadata is stored in 3 places:  
-a.	In a JSON file on each node – the JSON file on each node needs to maintain only the metadata that is needed for the operation of the node.   
-b.	In a local database in the node – the local database only needs to maintain the metadata that is needed for the operation of the node. The existence of the local database is optional.  
-c.	In a blockchain – the blockchain maintains the complete set of metadata information.  
-
-### A Master Node
-A master node is a node that maintains a complete copy of the metadata in a local database.  
-Maintaining a master node in the network is optional.
-
-## The blockchain commands:
-
-| ===========Command============ | ===============Details=============== |
-| ------------------------------------ | ------------| 
-| blockchain connect to [platform name] where [connection parameters] | Connect to a blockchain platform. | 
-| blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
-| blockchain pull to sql [optional output file]  | Retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements. |
-| blockchain pull to json [optional output file]| Retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file. |
-| blockchain pull to stdout| Retrieve the blockchain data from the local database to stdout. |
-| blockchain update file [path and file name]| Copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy. |    
-| blockchain update dbms [path and file name] [ignore message]| Add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix. |  
-| blockchain checkout| Retrieve the blockchain data from the blockchain platform to a JSON file. |  
-| blockchain create table| Create a local table (called ***ledger***) on the local database that maintains metadata information. |  
-| blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
-| blockchain drop policy [JSON data]| Remove the policy specified by the JSON data from the local database that maintains metadata information. |
-| blockchain drop by host [ip]| Remove all policies that were added from the provided IP. |        
-| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |        
-| blockchain delete local file| Delete the local JSON file with the blockchain data. |  
-| blockchain test| Test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. | 
-| blockchain get id [json data]| Return the hash value of the JSON data. |  
-| blockchain test id| Return True if the id exists in the local blockchain file. Otherwise returns False. |
-| blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
-| blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
-| blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
-| blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
-| blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
-
-### The blockchain insert command
+## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger.  
 
 Usage:
@@ -159,9 +147,22 @@ blockchain insert where policy = !policy and local = true and master = !master_n
 blockchain insert where policy = !policy and local = true and blockchain = ethereum
 </pre>
 
+## Using a local database to host the ledger
 
-### Updating a Master Node
-Updating the Master Node is Done by a blockchain push request that is send to the Master Node (using ***run client*** command).  
+A Master Node maintains the ledger in a local database. In addition, any node can keep the local copy of the ledger in a local database.
+The following are commands that interact with a database that hosts the ledger:
+
+ ===========Command============ | ===============Details=============== |
+| ------------------------------------ | ------------| 
+| blockchain pull to sql [optional output file]  | Retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements. |
+| blockchain pull to json [optional output file]| Retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file. |
+| blockchain pull to stdout| Retrieve the blockchain data from the local database to stdout. |
+| blockchain update dbms [path and file name] [ignore message]| Add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix. |  
+| blockchain create table| Create a local table (called ***ledger***) on the local database that maintains metadata information. |  
+| blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
+| blockchain drop policy [JSON data]| Remove the policy specified by the JSON data from the local database that maintains metadata information. |
+| blockchain drop by host [ip]| Remove all policies that were added from the provided IP. |        
+| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |        
 
 ### Retrieving the Metadata from a Master Node
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
@@ -202,6 +203,22 @@ Queries are done in 2 steps:
 
 Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
 Example: ```sql blockchain text "select * from ledger"```
+
+## Other blockchain commands:
+
+| ===========Command============ | ===============Details=============== |
+| ------------------------------------ | ------------| 
+| blockchain update file [path and file name]| Copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy. |    
+| blockchain checkout| Retrieve the blockchain data from the blockchain platform to a JSON file. |  
+| blockchain delete local file| Delete the local JSON file with the blockchain data. |  
+| blockchain test| Test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. | 
+| blockchain get id [json data]| Return the hash value of the JSON data. |  
+| blockchain test id| Return True if the id exists in the local blockchain file. Otherwise returns False. |
+| blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
+| blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
+| blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
+| blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
+| blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
 
 #### bring options
 The blockchain ***get*** command can be extended to retrieve predefined sections from the metadata. This option is detailed below.
