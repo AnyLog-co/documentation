@@ -141,9 +141,6 @@ Command details:
 Using the ***blockchain insert*** command, all the specified ledgers are updated. The common configuration would include the local ledger and 
 either a blockchain platform (like Ethereum) or a master node.  
 
-The ***blockchain insert*** command requires a ***policy*** information and one or more ledgers to update. In most cases, the insert would
-include the local update and either a platform (like Ethereum) or a master.
-
 When the policy is updated on the local ledger, the policy is updated with the key: "ledger" and a value "local" to indicate that 
 the policy is not yet confirmed on the global ledger (the blockchain platform or a master node).   
 When the local ledger is synchronized with the global ledger, the status of the key "ledger" is changed from "local" to "global".
