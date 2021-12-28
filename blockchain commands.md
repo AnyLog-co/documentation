@@ -121,7 +121,7 @@ blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data 
 
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
-This command can update both - the local copy and the global copy of the ledger. In addition, it facilitates a process that will validate that all the updates
+This command can update both - the local copy and the global copy of the ledger. In addition, it facilitates a process that validates that all the updates
 are represented on the global copy (as during the issue of the insert command, the global copy may not be accessible).  
 
 Usage:
