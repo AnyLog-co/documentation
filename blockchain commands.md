@@ -67,7 +67,7 @@ Using a blockchain platform requires the following :
 AnyLog offers a set of commands to add new policies to the ledger.
 The generic command is ***blockchain insert***. This command is used to update both - the global copy and the local copy.  
 If only the global copy is updated, it may take a few seconds for the update to be reflected on the local copy. The 
-***blockchain insert*** command makes the new policy immediately available on the nodes that triggers the update.  
+***blockchain insert*** command makes the new policy immediately available on the node that triggered the update.  
 Policies that are added using the ***blockchain insert*** command will also persist locally (if the command directs to update the local copy), such that if during the time of 
 the update, the global ledger is not accessible, when the network reconnects, the new policies will be delivered to the global ledger.
 
@@ -75,10 +75,10 @@ Below are the list of commands to add new policies to the ledger:
 
 | Command                              | Platform Updated | Details |
 | ------------------------------------ | ------------ | ------------ | 
-| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | all that are specified | Add a new policy to the ledger in one or more blockchain platform. |
-| blockchain add [policy]           | Local Copy |Add a JSON object to the local JSON file. |
-| blockchain push [policy]          | DBMS |Add a JSON object to the local database. |
-| blockchain commit [policy]       | Blockchain Platform (i.e. Ethereum) |  – Add a JSON object to a blockchain platform. |  
+| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | All that are specified | Add a new policy to the ledger in one or more blockchain platform. |
+| blockchain add [policy]           | Local Copy |Add a Policy to the local ledger file. |
+| blockchain push [policy]          | DBMS |Add a Policy to the local database. |
+| blockchain commit [policy]       | Blockchain Platform (i.e. Ethereum) |  – Add a Policy to a blockchain platform. |  
 
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
@@ -120,7 +120,9 @@ blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data 
 
 
 ## The blockchain insert command
-The ***blockchain insert*** command adds a policy to the blockchain ledger.  
+The ***blockchain insert*** command adds a policy to the blockchain ledger. 
+This command can update both - the local copy and the global copy of the ledger. In addition, it facilitates a process that will validate that all the updates
+are represented on the global copy (as during the issue of the insert command, the global copy may not be accessible).  
 
 Usage:
 <pre>
