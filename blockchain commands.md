@@ -47,15 +47,18 @@ c.	In a ledger of blockchain platform – the ledger maintains the complete set 
 
 If the network is configured with a master node, the master node maintains the complete set of metadata information in a local database.
 
+Note: a node operates in the same manner regardless if the global ledger is maintained in a blockchain platform or a master node.  
+The difference is only in the configuration that determine the location of the the global ledger.
+
 ## Maintaining the global copy on a blockchain platform
 
-Using a blockchain platform requires the following configurations:
+Using a blockchain platform requires configurations that detail the platform. However, a :
 1. Connecting to the blockchain platform. The following command connects to the blockchain platform:
 <pre>
 blockchain connect to [platform name] where [connection parameters]
 </pre>
-Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#connecting-to-ethereum).
-2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.
+Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#connecting-to-ethereum).  
+2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.  
 3. [Configuring synchronization](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20configuration.md) against the blockchain platform.
 
 ## Adding policies
