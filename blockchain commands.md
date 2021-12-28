@@ -2,38 +2,86 @@
 # Blockchain commands
 
 ## The metadata
-AnyLog maintains the metadata in the blockchain. The metadata is organized as a collection of objects and each object is described by a JSON structure.  
-The objects are hierarchical. The top layer represents the type of the object and the lower levels provide a description of the object.  
+AnyLog maintains the metadata in a ledger. The metadata is organized as a collection of objects, called policies.
+A policy is a JSON structure with a single key at the root. The root key is called the Policy Type.
 
-Example of object types: database, table, operator, device.  
-The following example describes an operator (this type of representation is referenced as ***json data***):
+Example of policy types: database, table, operator, device.  
+The following Policy describes an Operator (an Operator is a node that hosts data):
 ```
-{"operator" : {	
-   "id" : "0xodef4362a4E72E4D2F489773ffaEBF687952FC56441",
-   "URL" : "www.sunnyvaledatacenter.com",
-   "ip" : “128.132.43.73”,
-   "port" : “3028”,
-   "SLA" : "5",
-   "price per MB" : "0.004",
-   "price per row" : "0.00001"
-   }
-}
+ {'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
+                'ip' : '24.23.250.144',
+                'port' : 7848,
+                'id' : 'f3a3c56fcfb78aecc110eb911f35851c',
+                'date' : '2021-12-28T04:10:14.210574Z',
+                'member' : 91,
+                'ledger' : 'global'}}
 ```
+Policies are written to the ledger and are available to all the members of the network.  
+The ledger can be hosted on a blockchain platform (like Ethereum) or contained in a master node. 
+Regardless of where the blockchain is hosted, every node maintains a local copy of the ledger such that when the node needs
+metadata - it can be satisfied from the local copy with no dependency on network connectivity or the blockchain latency.
+The local copy on a node is organized in a json file, The path to the file is stored by the ```blockchain_file``` variable.
+Use the following command to see the value assigned to the variable: ```!blockchain_file```.
+Optionaly, the local ledger can be hosted in a local database. If a master node is used, the master node is configured such 
+that the ledger is stored on a local database.
 
-When a node needs to consider an object, the search is provided with the object type and optionally some attributes and values pairs that describe the object. The search returns all the objects that satisfy the search criteria.  
-The following is an example of how a search is described to find all the Operators with SLA equal to 5 and 0.004 as the price for MB of storage (this type of representation is referenced as [json search]).  
+When new policies are added to the ledger, they need to update the global metadata layer (the global copy). As every node continuously synchronizes 
+the local copy with the global copy, evey update will appear on the local copy of every member node.  
+Synchronization is enabled with the ***run blockchain sync*** command. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
 
-```
-{"operator" : {   
-    "SLA" : "5",    
-    "price per MB" : "0.004"
-    }
-}
-```
+## Adding policies
 
-If a node is interested in some specific attribute values from the derived objects, a second search can be issued against the derived objects to retrieve the values of interest.  
+AnyLog offers a set of commands to add new policies to the ledger.
+The generic command is ***blockchain insert***. This command is used to update both - the global copy and the local copy.  
+If only the global copy is updated, it may take a few seconds for the update to be reflected on the local copy. The 
+***blockchain insert*** command makes the new policy immediately available on the nodes that triggers the update.
+Policies that are added using the ***blockchain insert*** command will also persist locally, such that if during the time of 
+the update, the global ledger is not accessible, when the network reconnects, the new policies will be delivered to the global ledger.
+
+Below are the list of commands to add new policies to the ledger:
+
+
+| Command                              | Platform Updated | Details |
+| ------------------------------------ | ------------ | ------------ | 
+| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | all that are specified | Add a new policy to the ledger in one or more blockchain platform. |
+| blockchain add [JSON data]           | Local Copy |Add a JSON object to the local JSON file. |
+| blockchain push [JSON data]          | DBMS |Add a JSON object to the local database. |
+| blockchain commit [JSON data]       | Blockchain Platform (i.e. Ethereum) |  – Add a JSON object to a blockchain platform. |  
+
+## Query policies
+
+AnyLog offers commands to query policies.  
+Queries are processed on the local copy of the ledger and are not dependent on the availability or latency of the global ledger.  
+Queries detail filter criteria to return the needed policies in JSON format and can be augmented by formatting instructions.   
+ALternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
-The second serach is using the command ***from*** and is explained later in this document.
+The second search is using the command ***from*** and is explained [below](#the-from-json-object-bring-command).
+
+Usage:
+<pre>
+blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
+</pre>
+
+Explanation:
+The ***blockchain get*** command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
+* policy type - the key at the root of the JSON representing the policy.
+* attribute name value pairs - a list that describes key and value pairs that filter the search.
+* bring command variables = determined the formatting of the retrieved data.  
+
+Details: 
+<pre>
+blockchain get [policy type] - Retrieve a list of all the requested policies of the specified type.
+blockchain get [object] where [key] = [value] - Retrieve a list of all the requested objects that contain the specidied value.
+blockchain get [object] where [key] with [value] - Retrieve a list of all the requested objects that contain a list of values including the specidied value.
+</pre>
+
+Examples:
+<pre>
+blockchain get *
+blockchain get operator where dbms = lsl_demo
+blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
+</pre>
+
 
 ## The Objects IDs
 
@@ -56,16 +104,12 @@ Maintaining a master node in the network is optional.
 | ===========Command============ | ===============Details=============== |
 | ------------------------------------ | ------------| 
 | blockchain connect to [platform name] where [connection parameters] | Connect to a blockchain platform. | 
-| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | Add a new policy to the ledger in one or more blockchain platform. |
-| blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
 | blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
-| blockchain push [JSON data]          | Add a JSON object to the local database. |
 | blockchain pull to sql [optional output file]  | Retrieve the blockchain data from the local database to a SQL file that organizes the metadata as insert statements. |
 | blockchain pull to json [optional output file]| Retrieve the blockchain data from the local database to a JSON file that can be used as the local JSON file. |
 | blockchain pull to stdout| Retrieve the blockchain data from the local database to stdout. |
 | blockchain update file [path and file name]| Copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy. |    
 | blockchain update dbms [path and file name] [ignore message]| Add the policies in the named file (or in the blockchain file, if a named file is not provided) to the local dbms that maintains the blockchain data. The command outputs a summary on the number of new policies added to the database. To avoid the message printout and messages of duplicate policies to the error log, add ***ignore message*** as a command prefix. |  
-| blockchain commit [JSON data]|  – Add a JSON object to a blockchain platform. |  
 | blockchain checkout| Retrieve the blockchain data from the blockchain platform to a JSON file. |  
 | blockchain create table| Create a local table (called ***ledger***) on the local database that maintains metadata information. |  
 | blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
