@@ -34,14 +34,15 @@ When a Policy is added to the metadata, one of the fields describing the object 
 The ID value can be provided by the user or generated dynamically when the policy is added to the ledger.  
 If the value is auto-generated, it is based on the MD5 Hash value of the object. 
 
-### A Master Node
+## A Master Node
 A master node is a node that maintains a complete copy of the metadata in a local database.  
 Maintaining a master node in the network is optional.
 
 ## The Storage of the Metadata
 The metadata is stored ias follows:  
 a.	In a JSON file on each node – the JSON file on each node needs to maintain only the metadata that is needed for the operation of the node.
-b.	In a local database in the node – the local database only needs to maintain the metadata that is needed for the operation of the node. The existence of the local database is optional.
+b.	In a local database in the node – the local database only needs to maintain the metadata that is needed for the operation of the node. 
+The existence of the local database is optional.  
 c.	In a ledger of blockchain platform – the ledger maintains the complete set of metadata information.  
 
 If the network is configured with a master node, the master node maintains the complete set of metadata information in a local database.
