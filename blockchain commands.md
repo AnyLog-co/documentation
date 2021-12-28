@@ -194,9 +194,10 @@ run client (!master_node) blockchain pull to json
 run client (!master_node) file get !!blockchain_file !blockchain_file
 </pre>
 Notes:
-* blockchain_file is configured to the path and file name of the ledger
+* blockchain_file is configured to the path and file name of the ledger.
 * The double exclamation points (!!) determine to derive the value of the key ```blockchain_file``` on the node at 127.45.35.12.
 * Details on the ***file get*** command are available [here](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node).
+* With synchronization enabled, this process is done continuously as configured and is not required to be triggered by the user. 
 
 ### Removing policies from a master node
 Deleting a policy from a master node is with the command:
