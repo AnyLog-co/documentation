@@ -52,14 +52,14 @@ The difference is only in the configuration that determine the location of the t
 
 ## Maintaining the global copy on a blockchain platform
 
-Using a blockchain platform requires configurations that detail the platform. However, a :
+Using a blockchain platform requires the following :
 1. Connecting to the blockchain platform. The following command connects to the blockchain platform:
 <pre>
 blockchain connect to [platform name] where [connection parameters]
 </pre>
 Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#connecting-to-ethereum).  
-2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.  
-3. [Configuring synchronization](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20configuration.md) against the blockchain platform.
+2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.    
+3. [Configuring synchronization](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20configuration.md) against the blockchain platform.  
 
 ## Adding policies
 
