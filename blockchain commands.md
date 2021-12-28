@@ -55,8 +55,8 @@ Maintaining a master node in the network is optional.
 
 | ===========Command============ | ===============Details=============== |
 | ------------------------------------ | ------------| 
-| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | Add a new policy to the ledger in one or more blockchain platform. |
 | blockchain connect to [platform name] where [connection parameters] | Connect to a blockchain platform. | 
+| [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | Add a new policy to the ledger in one or more blockchain platform. |
 | blockchain add [JSON data]           | Add a JSON object to the local JSON file. |
 | blockchain get [JSON search]         | Retrieve from the JSON file all objects that satisfy the search criteria.   |
 | blockchain push [JSON data]          | Add a JSON object to the local database. |
@@ -101,6 +101,10 @@ Command details:
 
 Using the ***blockchain insert*** command, all the specified ledgers are updated. The common configuration would include the local ledger and 
 either a blockchain platform (like Ethereum) or a master node.  
+
+The ***blockchain insert*** command requires a ***policy*** information and one or more ledgers to update. In most cases, the insert would
+include the local update and either a platform (like Ethereum) or a master.
+
 When the policy is updated on the local ledger, the policy is updated with the key: "ledger" and a value "local" to indicate that 
 the policy is not yet confirmed on the global ledger (the blockchain platform or a master node).   
 When the local ledger is synchronized with the global ledger, the status of the key "ledger" is changed from "local" to "global".

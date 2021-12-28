@@ -115,10 +115,9 @@ run client !master_node get connections  # will show the config on the master
     }
 } >
 
-run client !master_node blockchain push !cluster
-run blockchain sync   # Force blockchain sync now
-blockchain wait where command = "blockchain get cluster where name = cluster_1" # wait for the local update
+blockchain insert where policy = !cluster and local = true and master = !master_node
 </pre>
+Note: Details in the ***blockchain insert*** commands are available [here](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-blockchain-insert-command). 
 
 ### Create a policy representing the Operator and publish on the blockchain
 
@@ -136,9 +135,7 @@ Define and add the policy
     "ip" : !operator_ip,
     "port" : !operator_port.int    }
 } >
-run client !master_node blockchain push !operator
-run blockchain sync   # Force blockchain sync now
-blockchain wait where command = "blockchain get operator where cluster = !cluster_id" # wait for the local update
+blockchain insert where policy = !operator and local = true and master = !master_node
 </pre>
 
 View the blockchain data
