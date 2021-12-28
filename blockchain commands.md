@@ -34,6 +34,11 @@ When a Policy is added to the metadata, one of the fields describing the object 
 The ID value can be provided by the user or generated dynamically when the policy is added to the ledger.  
 If the value is auto-generated, it is based on the MD5 Hash value of the object. 
 
+### Interacting with the blockchain data
+For a node to be active, it needs to maintain a local copy of the ledger in a local JSON file.
+The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
+A user can validate the availability and the structure of the blockchain using the command: ```blockchain test```.
+
 ## A Master Node
 A master node is a node that maintains a complete copy of the metadata in a local database.  
 Maintaining a master node in the network is optional.
@@ -88,7 +93,7 @@ updated with a date and time of the update and a [unique ID](#the-policy-id).
 AnyLog offers commands to query policies.  
 Queries are processed on the local copy of the ledger and are not dependent on the availability or latency of the global ledger.  
 Queries detail filter criteria to return the needed policies in JSON format and can be augmented by formatting instructions.   
-ALternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
+AAlternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command ***from*** and is explained [below](#the-from-json-object-bring-command).
 
@@ -118,6 +123,12 @@ blockchain get operator where ip = 24.23.250.144
 blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
 </pre>
 
+### Queries over the Metadata
+Metadata queries evaluate the data in the local JSON file.  
+Queries are done in 2 steps:
+* Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
+* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
+ 
 
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
@@ -166,7 +177,12 @@ The following are commands that interact with a database that hosts the ledger:
 | blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
 | blockchain drop policy [JSON data]| Remove the policy specified by the JSON data from the local database that maintains metadata information. |
 | blockchain drop by host [ip]| Remove all policies that were added from the provided IP. |        
-| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |        
+| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |     
+
+### Retrieve blockchain data from the local database
+
+Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
+Example: ```sql blockchain text "select * from ledger"```
 
 ### Retrieving the Metadata from a Master Node
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is send to the Master Node (using “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
@@ -182,7 +198,8 @@ If JSON data is a list of multiple policies, a where condition is required. For 
 blockchain drop policy !operator where ip = 10.0.0.25
 </pre>
 
-### Reflecting blockchain updates on a the local copy of the metadata
+### Reflecting blockchain updates on the local copy of the metadata
+
 When a process on a node updates a policy on a remote blockchain platform (or on a master node), the process can wait for 
 the update to be reflected on the local copy using the ***blockchain wait for ...*** command:
 <pre>
@@ -192,21 +209,7 @@ is_updated = blockchain wait for !policy  # Force sync and validate that the upd
 </pre>
 The wait command forces synchronization with the blockchain platform and validates that the update is reflected on the local file.
 
-### Interacting with the blockchain data
-For a node to be active, it needs to maintain a local copy of the blockchain data in a local JSON file.
-The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
-A user can validate the availability and the structure of the blockchain using the command: ```blockchain test```.
-
-### Queries over the Metadata
-Metadata queries evaluate the data in the local JSON file.  
-Queries are done in 2 steps:
-* Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
-* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
- 
-### Retrieve blockchain data from the local database
-
-Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
-Example: ```sql blockchain text "select * from ledger"```
+Note: This process is redundant if the update of the new policies was done using the [blockchain insert](#the-blockchain-insert-command) command.
 
 ## Other blockchain commands:
 
@@ -224,8 +227,6 @@ Example: ```sql blockchain text "select * from ledger"```
 | blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
 | blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
 
-#### bring options
-The blockchain ***get*** command can be extended to retrieve predefined sections from the metadata. This option is detailed below.
 
 ## The 'From JSON Object Bring' command
 
