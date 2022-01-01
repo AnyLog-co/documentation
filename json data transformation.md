@@ -38,10 +38,10 @@ from [JSON object] bring [list of keys and formatting instructions]
 
 Example:
 <pre>
-<policy = {'cluster' : {'company' : 'anylog',
+policy = {'cluster' : {'company' : 'anylog',
                'name' : 'cluster_1',
                'status' : 'active',
-               'ledger' : 'global'}}>
+               'ledger' : 'global'}}
 
 from !policy bring [cluster][name] " : " [cluster][status]
 </pre>
