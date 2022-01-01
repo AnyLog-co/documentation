@@ -8,6 +8,50 @@ at the [Blockchain commands](https://github.com/AnyLog-co/documentation/blob/mas
 * Map source JSON data to a target structure - Details are available at the section [Bring Command](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#bring-command)
 at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) documentation.
 
+
+## Creating JSON Objects and Policies
+
+JSON Objects are a commonly used data structure in the AnyLog processes. In particular, Policies stored in the metadata 
+layer are JSON Objects with a single key at the root layer. The key at the root is considered as the Policy Type.  
+
+Below is an example of script creating a Policy of Type Operator assigned to a variable called new_operator:
+
+<pre>
+operator_name = opr_375
+operator_port = 2048
+
+< new_operator = {'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
+                        'name' : !operator_name
+                        'ip' : !external_ip,
+                        'port' : !operator_port}} >
+
+
+</pre>
+
+Note:
+The less than and greater than signs that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
+
+The following command returns the value of new_operator on the AnyLog CLI:
+<pre>
+!new_operator
+</pre>
+The following command returns the value of new_operator using REST call:
+<pre>
+get !new_operator
+</pre>
+
+### Validating the JSON object structure
+The command ***json*** returns a string representative of the JSON structure. If the validate structure is not in JSON, an empty string is returned.  
+Usage:
+<pre>
+json [JSON object]
+</pre>
+Example:
+<pre>
+json !new_operator
+</pre>
+ 
+
 ## The 'From JSON Object Bring' command
 
 The Bring command retrieves values from a JSON object and formats the retrieved data.
