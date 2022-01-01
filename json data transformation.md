@@ -42,16 +42,21 @@ get !new_operator
 </pre>
 
 ### Validating the JSON object structure
-The command ***json*** returns a string representative of the JSON structure. If the validated structure is not in JSON, an empty string is returned.  
+The command ***json*** is used to validate the correct format of a JSON object: 
 Usage:
 <pre>
-json [JSON object]
+json [JSON object] [test]
 </pre>
+Returns a string representative of the JSON structure. If the validated structure is not in JSON, an empty string is returned.  
 Example:
 <pre>
 json !new_operator
 </pre>
- 
+The keyword ***test*** is optional. If added, the command returns True if the structure is correct and false if the test structure is not in JSON format.
+Example:
+<pre>
+json !new_operator test
+</pre>
 
 ## The 'From JSON Object Bring' command
 
