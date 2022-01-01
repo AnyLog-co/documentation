@@ -21,7 +21,7 @@ operator_name = opr_375
 operator_port = 2048
 
 < new_operator = {'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
-                        'name' : !operator_name
+                        'name' : !operator_name,
                         'ip' : !external_ip,
                         'port' : !operator_port}} >
 
