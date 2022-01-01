@@ -29,19 +29,20 @@ operator_port = 2048
 </pre>
 
 Note:
-The less than and greater than signs that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
+* The less than and greater than signs that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
+* A value associated to ***external_ip*** is set by default when AnyLog node is initiated. 
 
 The following command returns the value of new_operator on the AnyLog CLI:
 <pre>
 !new_operator
 </pre>
-The following command returns the value of new_operator using REST call:
+The following command returns the value of new_operator using a REST call:
 <pre>
 get !new_operator
 </pre>
 
 ### Validating the JSON object structure
-The command ***json*** returns a string representative of the JSON structure. If the validate structure is not in JSON, an empty string is returned.  
+The command ***json*** returns a string representative of the JSON structure. If the validated structure is not in JSON, an empty string is returned.  
 Usage:
 <pre>
 json [JSON object]
