@@ -3,8 +3,10 @@
 Using command line instructions, users can transform JSON data to a target structure.  
 These instructions are used whenever JSON data needs to be transformed to a target structure.  
 Examples of usage:
-* Retrieve needed values from policies.
-* Map source JSON data to a target structure.   
+* Retrieve needed values from JSON objects.
+* Retrieve needed values from the ledger policies. Details ate available at the [Blockchain Commands](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md) documentation. 
+* Map source JSON data to a target structure - Details are available at the section [Bring Command](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#bring-command)
+at the [Using Message Broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) documentation.
 
 ## The 'From JSON Object Bring' command
 
