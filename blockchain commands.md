@@ -97,6 +97,10 @@ Alternatively, the process can be split to a process that retrieves the needed p
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command ***from*** and is explained [below](#the-from-json-object-bring-command).
 
+Queries are done in 2 steps:
+* Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
+* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
+ 
 Usage:
 <pre>
 blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
@@ -123,12 +127,11 @@ blockchain get operator where ip = 24.23.250.144
 blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
 </pre>
 
-### Queries over the Metadata
-Metadata queries evaluate the data in the local JSON file.  
-Queries are done in 2 steps:
-* Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
-* Using the command ```bring``` - pulling and formatting the values from the retrieved JSON objects.
- 
+### Formating retrieved data 
+
+The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
+See details and examples in the [JSON data transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation) section.
+
 
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
@@ -240,5 +243,3 @@ Note: This process is redundant if the update of the new policies was done using
 | blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
 
 
-The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
-See details and examples in the [JSON data transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation) section.
