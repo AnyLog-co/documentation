@@ -21,8 +21,6 @@ Special separators:
 | separator = \n | A new line character is added at the end of the data returned from each JSON object  |
 | separator = \t | A tab is added at the end of the data returned from each JSON object  |
   
-
-* 
 * The keyword bring can be suffixed with the following keywords:     
     * ```bring.unique``` - returns unique values.  
     * ```bring.first``` - returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.

@@ -241,4 +241,4 @@ Note: This process is redundant if the update of the new policies was done using
 
 
 The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
-See details and examples in the [JSON data transformation]() section.
+See details and examples in the [JSON data transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation) section.
