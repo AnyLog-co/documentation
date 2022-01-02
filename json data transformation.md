@@ -86,8 +86,8 @@ Special separators:
     * ```bring.first``` - returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.
     * ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
     * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
+    * ```bring.count``` - returns the number of entries that satisfy the result.
     
-
 
 ### Retrieving data from a JSON object
 Usage:
@@ -143,3 +143,7 @@ blockchain get table bring.unique.json ['table']['dbms']
 blockchain get operator bring.json [operator][ip] [operator][port]
 </pre>
 
+* The following example returns the number of policies of type 'table'.
+<pre>
+blockchain get table bring.count
+</pre>
