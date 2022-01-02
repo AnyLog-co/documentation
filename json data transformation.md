@@ -4,9 +4,9 @@ Using command line instructions, users can transform JSON data to target structu
 Examples of usage:
 * Retrieve needed values from JSON objects.
 * Retrieve needed values from the ledger policies. Details ate available at the [Query policies](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies) 
-at the [Blockchain commands](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#blockchain-commands) documentation. 
-* Map source JSON data to a target structure - Details are available at the section [Bring Command](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#bring-command)
-at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) documentation.
+section in the [Blockchain commands](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#blockchain-commands) documentation. 
+* Map source JSON data to a target structure - Details are available at the [Bring Command](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#bring-command)
+section in the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) documentation.
 
 
 ## Creating JSON Objects and Policies
@@ -29,10 +29,10 @@ operator_port = 2048
 </pre>
 
 Note:
-* The less than and greater than signs that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
+* The less than and greater than signs (< ... >) that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
 * A value associated to ***external_ip*** is set by default when AnyLog node is initiated. 
 
-The following command returns the value of new_operator on the AnyLog CLI:
+The following command returns the value assigned to the variable new_operator on the AnyLog CLI:
 <pre>
 !new_operator
 </pre>
@@ -43,7 +43,7 @@ get !new_operator
 
 ## Transforming JSON representatives to JSON Objects
 
-The command ***json*** returns a JSON object or validates a correct JSON structure whereas variable names are replaced by their assigned value.     
+The command ***json*** returns a JSON object or validates a correct JSON structure whereas variable names are replaced by their assigned values.     
 Usage:
 <pre>
 json [JSON object] [test]
@@ -140,6 +140,6 @@ blockchain get table bring.unique.json ['table']['dbms']
 
 * The following example returns the list of IPs and Ports of the Operators as a list of JSON objects.
 <pre>
-blockchain get operator bring.json ['operator']['ip'] [operator']['port']
+blockchain get operator bring.json [operator][ip] [operator][port]
 </pre>
 
