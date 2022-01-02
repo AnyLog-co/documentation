@@ -41,20 +41,26 @@ The following command returns the value of new_operator using a REST call:
 get !new_operator
 </pre>
 
-### Validating the JSON object structure
-The command ***json*** is used to validate the correct format of a JSON object.  
-It returns a string representative of the JSON structure. If the validated structure is not in JSON, an empty string is returned.    
+## Transforming JSON representatives to JSON Objects
+
+The command ***json*** returns a JSON object whereas variable names are replaced by their assigned value.
 Usage:
 <pre>
 json [JSON object] [test]
 </pre>
  
-Example:
+Example (referencing the [script in the example above](#creating-json-objects-and-policies)):
 <pre>
 json !new_operator
 </pre>
+Retutns:
+<pre>
+{'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a', 'name' : "opr_375", 'ip' : "24.23.250.144", 'port' : "2048"}}
+</pre>
+ 
 
-The keyword ***test*** is optional. If added, the command returns True if the structure is correct and false if the test structure is not in JSON format.
+### Validating the JSON object structure
+The keyword ***test*** is optional. If added, the command returns ***true*** if the structure is correct and ***false*** if the test structure is not in JSON format.
 Example:
 <pre>
 json !new_operator test
