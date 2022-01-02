@@ -43,7 +43,7 @@ get !new_operator
 
 ## Transforming JSON representatives to JSON Objects
 
-The command ***json*** returns a JSON object whereas variable names are replaced by their assigned value.
+The command ***json*** returns a JSON object or validates a correct JSON structure whereas variable names are replaced by their assigned value.     
 Usage:
 <pre>
 json [JSON object] [test]
