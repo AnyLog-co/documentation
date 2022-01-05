@@ -11,7 +11,7 @@ users and applications can query the metadata to determine the databases, tables
 
 ### The get databases command
 
-The following command lists the databases supported:
+The following command lists the declared databases:
 <pre> 
 get databases
 </pre>  
