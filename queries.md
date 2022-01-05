@@ -65,6 +65,18 @@ get table partitions names where dbms = aiops and name = lic1_sp
 get table complete status where name = ping_sensor and dbms = anylog
 </pre>
 
+### The get columns command 
+
+The ***get columns*** command provides the list of columns names and data types for the named table.
+Usage:
+<pre> 
+get columns where dbms = [dbms name] and table = [table name]
+</pre>  
+Example: 
+<pre>
+get columns where dbms = aiops and table = ping_sensor
+</pre>
+
 
 ## Queries over the data
 Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
