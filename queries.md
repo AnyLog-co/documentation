@@ -11,7 +11,7 @@ users and applications can query the metadata to determine the databases, tables
 
 ### The get databases command
 
-The ***get databases*** command lists the declared databases.
+The ***get databases*** command lists the declared databases.  
 Usage:
 <pre> 
 get databases
