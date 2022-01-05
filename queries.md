@@ -29,7 +29,7 @@ Details:
 * [dbms name] - The logical name of the database maintaining the tables.
 * [format type] - An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
 
-The output presents, every table assigned to the named database and indicates if the table is defined on the local node
+The output presents every table assigned to the named database and indicates if the table is defined on the local node
 (in the physical database) and if defined on the global metadata (i.e. blockchain) platform.
 
 If database name is asterisk  (*) - all tables declared on the node and on the global metadata are listed.
@@ -46,7 +46,7 @@ get tables where dbms = aiops and format = json
 The ***get table*** command provides status info on the named table.  
 Usage:
 <pre> 
-get table [info type] where name = table_name and dbms = dbms_name
+get table [info type] where name = [table name] and dbms = [dbms name]
 </pre>  
 
 Details:
@@ -68,7 +68,7 @@ get table complete status where name = ping_sensor and dbms = anylog
 
 ### The get columns command 
 
-The ***get columns*** command provides the list of columns names and data types for the named table.
+The ***get columns*** command provides the list of columns names and data types for the named table.  
 Usage:
 <pre> 
 get columns where dbms = [dbms name] and table = [table name]
@@ -81,7 +81,7 @@ get columns where dbms = aiops and table = ping_sensor
 
 ### The get rows count command 
 The ***get rows count*** command provides the number of rows in every table on the connected node.  
-Note: to determine the number of rows for a particular table in all nodes, issue a ***select count(*)*** command.
+Note: to determine the number of rows for a particular table in all nodes, issue a ***select count(*)*** command.  
 Usage:
 <pre> 
 get rows count where dbms = [dbms name] and table = [table name] and format = [format type] and group =[group type]
