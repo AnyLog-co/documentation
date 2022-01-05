@@ -78,6 +78,30 @@ get columns where dbms = aiops and table = ping_sensor
 </pre>
 
 
+### The get rows count command 
+The ***get rows count*** command provides the number of rows in every table on the connected node.  
+Note: to determine the number of rows for a particular table in all nodes, issue a ***select count(*)*** command.
+Usage:
+<pre> 
+get rows count where dbms = [dbms name] and table = [table name] and format = [format type] and group =[group type]
+</pre>  
+
+Details:
+* [dbms name] - the name of the database that hosts the tablle of interest.
+* [table name] - the name of the table of interest.
+* [format type] -An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
+* [group type] -An optional parameter to specify if rows are returned per partition or aggregated as a single value for each table.
+The group options are ***partition*** (default) ***table***.
+  
+Examples: 
+<pre>
+get rows count
+get rows count where dbms = my_dbms and group = table
+get rows count where dbms = my_dbms
+get rows count where dbms = my_dbms and table = my_table
+</pre>
+
+
 ## Queries over the data
 Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
 The command ***sql*** directs the node to process a query. The command format is detailed below: 
