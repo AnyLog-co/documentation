@@ -26,13 +26,13 @@ get tables where dbms = [dbms name] and format = [format type]
 </pre>  
 
 Details:  
-* [dbms name] - The logical name of the database maintaining the queries.
+* [dbms name] - The logical name of the database maintaining the tables.
 * [format type] - An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
 
 The output presents, every table assigned to the named database and indicates if the table is defined on the local node
 (in the physical database) and if defined on the global metadata (i.e. blockchain) platform.
 
-If database name is asterisk  (*) - all tables in all databases are listed.
+If database name is asterisk  (*) - all tables declared on the node and on the global metadata are listed.
 
 Examples:
 <pre> 
