@@ -18,13 +18,13 @@ get databases
 
 ### The get tables command
 
-The flowing command lists the tables maintained by the named database:
+The flowing command lists the tables maintained by the named database:  
 Usage:
 <pre> 
 get tables where dbms = [dbms name] and format = [format type]
 </pre>  
 
-Details:
+Details:  
 * [dbms name] - The logical name of the database maintaining the queries.
 * [format type] - An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
 
@@ -40,7 +40,30 @@ get tables where dbms = *
 get tables where dbms = aiops and format = json
 </pre>  
 
+### The get table command (get table status)
 
+The ***get table*** command provides status info on the named table.  
+Usage:
+<pre> 
+get table [info type] where name = table_name and dbms = dbms_name
+</pre>  
+
+Details:
+
+| Info Type     | Explanation  |
+| ------------- | --------------- |
+| exist status  | Returns True/False values indicating if the table is declared on a local database and on the global metadata layer | 
+| local status  | Returns True/False value indicating if the table is declared on a local database |
+| Blockchain status  | Returns True/False value indicating if the table is declared on the global metadata layer |
+| rows count  | Returns the number of rows in the table |
+| complete status  | Returns all the available table info |
+
+Examples: 
+<pre>
+get table local status where dbms = aiops and name = lic1_s
+get table partitions names where dbms = aiops and name = lic1_sp
+get table complete status where name = ping_sensor and dbms = anylog
+</pre>
 
 
 ## Queries over the data
