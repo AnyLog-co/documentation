@@ -81,10 +81,10 @@ get columns where dbms = aiops and table = ping_sensor
 
 ### The get rows count command 
 The ***get rows count*** command provides the number of rows in every table on the connected node.  
-Note: to determine the number of rows for a particular table in all nodes, issue a ***select count(*)*** command.  
+Note: to determine the number of rows for a particular table in all nodes, issue a ***select count*** command.  
 Usage:
 <pre> 
-get rows count where dbms = [dbms name] and table = [table name] and format = [format type] and group =[group type]
+get rows count where dbms = [dbms name] and table = [table name] and format = [format type] and group = [group type]
 </pre>  
 
 Details:
@@ -101,6 +101,13 @@ get rows count where dbms = my_dbms and group = table
 get rows count where dbms = my_dbms
 get rows count where dbms = my_dbms and table = my_table
 </pre>
+
+### The get partitions command 
+The ***get partitions*** command details the partition definition for each partitioned table.  
+Usage:
+<pre> 
+get partitions
+</pre>  
 
 
 ## Queries over the data
