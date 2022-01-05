@@ -2,7 +2,7 @@
 
 The AnyLog network persists data on a collections of nodes. The network protocol is able to present the distributed data 
 as a single collection of data and users and application can view and query the data without knowing the physical location of the data, 
-as if the data is hosted in a single machine,
+as if the data is hosted in a single machine.  
 In addition users and application can request to query data from a single particular node or from a list of nodes.
 
 ## The metadata
