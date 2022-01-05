@@ -11,14 +11,15 @@ users and applications can query the metadata to determine the databases, tables
 
 ### The get databases command
 
-The following command lists the declared databases:
+The ***get databases*** command lists the declared databases.
+Usage:
 <pre> 
 get databases
 </pre>  
 
 ### The get tables command
 
-The flowing command lists the tables maintained by the named database:  
+The ***get tables*** command lists the tables maintained by the named database.    
 Usage:
 <pre> 
 get tables where dbms = [dbms name] and format = [format type]
