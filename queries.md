@@ -1,5 +1,49 @@
 # Queries 
 
+The AnyLog network persists data on a collections of nodes. The network protocol is able to present the distributed data 
+as a single collection of data and users and application can view and query the data without knowing the physical location of the data, 
+as if the data is hosted in a single machine,
+In addition users and application can request to query data from a single particular node or from a list of nodes.
+
+## The metadata
+The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
+users and applications can query the metadata to determine the databases, tables and columns for each table.
+
+### The get databases command
+
+The following command lists the databases supported:
+<pre> 
+get databases
+</pre>  
+
+### The get tables command
+
+The flowing command lists the tables maintained by the named database:
+Usage:
+<pre> 
+get tables where dbms = [dbms name] and format = [format type]
+</pre>  
+
+Details:
+* [dbms name] - The logical name of the database maintaining the queries.
+* [format type] - An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
+
+The output presents, every table assigned to the named database and indicates if the table is defined on the local node
+(in the physical database) and if defined on the global metadata (i.e. blockchain) platform.
+
+If database name is asterisk  (*) - all tables in all databases are listed.
+
+Examples:
+<pre> 
+get tables where dbms = dmci
+get tables where dbms = *
+get tables where dbms = aiops and format = json
+</pre>  
+
+
+
+
+## Queries over the data
 Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
 The command ***sql*** directs the node to process a query. The command format is detailed below: 
 <pre> 
