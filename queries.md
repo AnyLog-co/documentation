@@ -71,11 +71,13 @@ get table complete status where name = ping_sensor and dbms = anylog
 The ***get columns*** command provides the list of columns names and data types for the named table.  
 Usage:
 <pre> 
-get columns where dbms = [dbms name] and table = [table name]
+get columns where dbms = [dbms name] and table = [table name] and format = [output format]
 </pre>  
-Example: 
+The format determines the output format. The format options are ***table*** (the default value) and ***json***. 
+Examples: 
 <pre>
 get columns where dbms = aiops and table = ping_sensor
+get columns where dbms = aiops and table = ping_sensor and format = json
 </pre>
 
 
