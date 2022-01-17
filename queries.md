@@ -139,6 +139,9 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | dest | stdout / rest / dbms / file | destination of result set | stdout |
 | file | file name | file name for the output data |  |
 | table | table name | table name for the output data | random table names are assigned to each executing query |
+| stat | True/False | True value includes statistics to the query output. | True |
+| test | True/False | Enables a test structure to the output. | False |
+| validate | file name | A file name that is used in a test process to determine the processing result. |  |
 
 ### Timezones
 Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
@@ -159,6 +162,16 @@ get timezone info
 </pre> 
 Users can validate a timezone using the command [get datetime](#get-datetime-command).
 
+### Output format
+The key ***format*** determines the output format.
+The following chart summarizes the optional values:
+
+| value  | Explanation |
+| ---- | ------------------------------------------------------------------------ |
+| json | The default value - a json structure whereas the output data is assigned to the key "Query" and if statistics is enabled, it is assigned to the key "Statistics".  |
+| json:output | The output is organized in rows whereas each row is a JSON structure - this format is identical to the data load structure. |
+| json:list | The output is organized in a list, every entry in the list represents a row.  |
+| table | The output is organized as a table.  |
 
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
