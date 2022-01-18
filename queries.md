@@ -128,7 +128,7 @@ with the tables' data receive and process the query. Users can detail specific n
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed as key = value pairs.
-With multiple option, the keyword ***and*** seperates between each key value pair.
+With multiple option, the keyword ***and*** separates between each key value pair.
 
 | key  | Values Options  | Details     | Default Value |
 | ---- | --------------- | ------------| --------------|
