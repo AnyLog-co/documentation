@@ -61,7 +61,7 @@ Usage:
 <pre>
 analyze output where file = [file path and name] and source = [file path and name] and option = time
 </pre> 
-file - the path and file name to the query output that is being tested.   
-source - the path and file name to the source output that is trusted.  
-option (optional key - value pair) - if time is added, the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
+***file*** - the path and file name to the query output that is being tested.   
+***source*** - the path and file name to the source output that is trusted.  
+***option*** (optional key - value pair) - if time is added, the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
 
