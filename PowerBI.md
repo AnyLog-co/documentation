@@ -72,6 +72,6 @@ This will show the different JSON keys that’ll be converted to table columns
 
 9. From this point you should be able to draw tables & graphs with the data
 ![Sample Graphs](imgs/powerbi_img9.png)
-The following shows 2 images - each done with its own table
+The following shows 2 images (each image is assigned to a query)
    * The table shows number of rows per table in the database
-   * The graph show min/max/avg for a specific table per year (2021-2022)  
+   * The graph show min/max/avg for a specific table per year (2021-2022). To avoid huge data sets returned, we use the build-in AnyLog `increment` function.
