@@ -54,4 +54,14 @@ Any 2 files in test format can be compared such that:
 * Differences in footer - slower execution time is considered if ***time*** option is enabled.
 
 
+## The analyze output command
+
+The ***analyze output*** command compares 2 test files to determine if a query was successfully processed.  
+Usage:
+<pre>
+analyze output where file = [file path and name] and source = [file path and name] and option = time
+</pre> 
+file - the path and file name to the query output that is being tested.   
+source - the path and file name to the source output that is trusted.  
+option (optional key - value pair) - if time is added, the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
 
