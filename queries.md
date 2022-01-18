@@ -133,12 +133,15 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | key  | Values Options  | Details     | Default Value |
 | ---- | --------------- | ------------| --------------|
 | format | json / table | The format of the result set | JSON |
-| timezone | utc / local | timezone used for time values in the result set | local |
-| include | dbms.table | allows to treat remote tables with a different name as the table being queried | ignored |
-| drop | True/False | drop local output table when new query starts | True |
-| dest | stdout / rest / dbms / file | destination of result set | stdout |
-| file | file name | file name for the output data |  |
-| table | table name | table name for the output data | random table names are assigned to each executing query |
+| timezone | utc / local | Timezone used for time values in the result set | local |
+| include | dbms.table | Allows to treat remote tables with a different name as the table being queried | ignored |
+| drop | True/False | Drops the local output table with the issued query | True |
+| dest | stdout / rest / dbms / file | destination of the query result set | stdout |
+| file | file name | File name for the output data |  |
+| table | table name | Table name for the output data | random table names are assigned to each executing query |
+| stat | True/False | Adds processing statistics to the query output | True |
+| test | True/False | The output is organized as a test output | False |
+| validate | file name | A file name that is used in a test process to determine the processing result |  |
 
 ### Timezones
 Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
@@ -159,6 +162,16 @@ get timezone info
 </pre> 
 Users can validate a timezone using the command [get datetime](#get-datetime-command).
 
+### Output format
+The key ***format*** determines the output format.
+The following chart summarizes the optional values:
+
+| value  | Explanation |
+| ---- | ------------------------------------------------------------------------ |
+| json | The default value - a json structure whereas the output data is assigned to the key "Query" and if statistics is enabled, it is assigned to the key "Statistics".  |
+| json:output | The output is organized in rows whereas each row is a JSON structure - this format is identical to the data load structure. |
+| json:list | The output is organized in a list, every entry in the list represents a row (use this format with PowerBI).  |
+| table | The output is organized as a table.  |
 
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
