@@ -8,7 +8,9 @@ The testing process allows to do the following:
 * Organize the output of each query in a special format called ***test format***
 * Consider query output (over a given data set) as the ***expected output***.   
 * Compare the output of a query to its expected output.
-* Reset data on a given network setup and load test data. 
+* Reset data on a given network setup and load test data.
+* Group test cases in test suites such that the tests is the suite can be executed by a single call.
+* Update a database with test results allowing monitoring and alerts based on tests results.
 
 ## The test format
 
