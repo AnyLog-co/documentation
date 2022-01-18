@@ -4,7 +4,7 @@ The following provides insight as to how to generate graphs and images using [Mi
 The same process can be done with _Excel_ and other Microsoft tools. 
 
 ## Sample REST request
-In order to support PowerBI you'll need return data as a list of JSON values without the statistical information.
+In order to support PowerBI, return data as a list of JSON values without the statistical information.
 
 
 **Sample cURL request**
@@ -15,7 +15,7 @@ In order to support PowerBI you'll need return data as a list of JSON values wit
     -H "destination: network" -w "\n"
 ```
 
-**Sample Output** - you'll notice the data is returned as a list of JSON objects
+**Sample Output** (the data is returned as a list of JSON objects).
 ```json
 [
     {"timestamp": "2021-12-17", "min": 16.07562231854013, "avg": 16.07562231854013, "max": 16.07562231854013},
