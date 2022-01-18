@@ -141,7 +141,8 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | table | table name | Table name for the output data | random table names are assigned to each executing query |
 | stat | True/False | Adds processing statistics to the query output | True |
 | test | True/False | The output is organized as a test output | False |
-| validate | file name | A file name that is used in a test process to determine the processing result |  |
+| source | file name | A file name that is used in a test process to determine the processing result |  |
+| title | a query title | Added to the test information in the test header |  |
 
 ### Timezones
 Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
