@@ -4,19 +4,19 @@ As there are multiple deployments options for the nodes in the network, AnyLog i
 to set test scenarios that are executed and compared to expected results.  
 
 The testing process allows to do the following:
-* Execute one or more test queries
+* Execute one or more test queries.
 * Organize the output of each query in a special format called ***test format***
-* Consider output as expected output.   
+* Consider query output (over a given data set) as the ***expected output***.   
 * Compare the output of a query to its expected output.
 * Reset data on a given network setup and load test data. 
 
 ## The test format
 
-When a query is executed, the query params can direct the query result to an output file that is organized in a ***test format***.
+When a query is executed, the query params can direct the query result to an output file that is organized in a ***test format***.  
 The test format has 3 sections:  
-***Header*** - this is an informative section that includes a title, the date and time if the run and the query syntax.  
+***Header*** - this is an informative section that includes a title, the date and time of the run and the query syntax.  
 ***body*** - the query output.  
-***footer*** - statistical results including the execution run and the number of rows returned by the query.  
+***footer*** - statistical results including the execution time and the number of rows returned by the query.  
 
 The example below demonstrates a query output in a test format:
 <pre> 
@@ -51,5 +51,7 @@ Run Time: 00:00:03
 Any 2 files in test format can be compared such that:
 * Differences in the headers are ignored.
 * Differences in the body trigger a failure with a message on the reason and location (line number) of the failure.
-* Differences in time - Slower execution time is considered if ***time*** option is enabled.
+* Differences in footer - slower execution time is considered if ***time*** option is enabled.
+
+
 
