@@ -1,5 +1,118 @@
 # Queries 
 
+The AnyLog network persists data on a collections of nodes. The network protocol is able to present the distributed data 
+as a single collection of data and users and application can view and query the data without knowing the physical location of the data, 
+as if the data is hosted in a single machine.  
+In addition users and application can request to query data from a single particular node or from a list of nodes.
+
+## The metadata
+The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
+users and applications can query the metadata to determine the databases, tables and columns for each table.
+
+### The get databases command
+
+The ***get databases*** command lists the declared databases.  
+Usage:
+<pre> 
+get databases
+</pre>  
+
+### The get tables command
+
+The ***get tables*** command lists the tables maintained by the named database.    
+Usage:
+<pre> 
+get tables where dbms = [dbms name] and format = [format type]
+</pre>  
+
+Details:  
+* [dbms name] - The logical name of the database maintaining the tables.
+* [format type] - An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
+
+The output presents every table assigned to the named database and indicates if the table is defined on the local node
+(in the physical database) and if defined on the global metadata (i.e. blockchain) platform.
+
+If database name is asterisk  (*) - all tables declared on the node and on the global metadata are listed.
+
+Examples:
+<pre> 
+get tables where dbms = dmci
+get tables where dbms = *
+get tables where dbms = aiops and format = json
+</pre>  
+
+### The get table command (get table status)
+
+The ***get table*** command provides status info on the named table.  
+Usage:
+<pre> 
+get table [info type] where name = [table name] and dbms = [dbms name]
+</pre>  
+
+Details:
+
+| Info Type     | Explanation  |
+| ------------- | --------------- |
+| exist status  | Returns True/False values indicating if the table is declared on a local database and on the global metadata layer | 
+| local status  | Returns True/False value indicating if the table is declared on a local database |
+| Blockchain status  | Returns True/False value indicating if the table is declared on the global metadata layer |
+| rows count  | Returns the number of rows in the table |
+| complete status  | Returns all the available table info |
+
+Examples: 
+<pre>
+get table local status where dbms = aiops and name = lic1_s
+get table partitions names where dbms = aiops and name = lic1_sp
+get table complete status where name = ping_sensor and dbms = anylog
+</pre>
+
+### The get columns command 
+
+The ***get columns*** command provides the list of columns names and data types for the named table.  
+Usage:
+<pre> 
+get columns where dbms = [dbms name] and table = [table name] and format = [output format]
+</pre>  
+The format determines the output format. The format options are ***table*** (the default value) and ***json***. 
+Examples: 
+<pre>
+get columns where dbms = aiops and table = ping_sensor
+get columns where dbms = aiops and table = ping_sensor and format = json
+</pre>
+
+
+### The get rows count command 
+The ***get rows count*** command provides the number of rows in every table on the connected node.  
+Note: to determine the number of rows for a particular table in all nodes, issue a ***select count*** command.  
+Usage:
+<pre> 
+get rows count where dbms = [dbms name] and table = [table name] and format = [format type] and group = [group type]
+</pre>  
+
+Details:
+* [dbms name] - the name of the database that hosts the tablle of interest.
+* [table name] - the name of the table of interest.
+* [format type] -An optional parameter to specify the format of the reply info. The format options are ***table*** (default) and ***json***.
+* [group type] -An optional parameter to specify if rows are returned per partition or aggregated as a single value for each table.
+The group options are ***partition*** (default) ***table***.
+  
+Examples: 
+<pre>
+get rows count
+get rows count where dbms = my_dbms and group = table
+get rows count where dbms = my_dbms
+get rows count where dbms = my_dbms and table = my_table
+</pre>
+
+### The get partitions command 
+The ***get partitions*** command details the partition definition for each partitioned table.  
+Usage:
+<pre> 
+get partitions
+</pre>  
+
+
+## Queries over the data
 Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
 The command ***sql*** directs the node to process a query. The command format is detailed below: 
 <pre> 
@@ -26,6 +139,26 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | dest | stdout / rest / dbms / file | destination of result set | stdout |
 | file | file name | file name for the output data |  |
 | table | table name | table name for the output data | random table names are assigned to each executing query |
+
+### Timezones
+Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   
+in addition, timezone can be expressed using the following keys:  
+* utc - UTC timezone
+* local - The local timezone on the AnyLog node that is processing the query
+* pt - Pacific Time (same as "America/Los_Angeles")
+* mt - Mountain Time (same as "America/Denver")
+* ct - Central Time (same as America/Chicago")
+* et - Eastern Time (same as "America/New_York")
+
+The default timezone is local. Therefore, when queries are executed and timezone is not specified, results are returned using the timezone 
+of the AnyLog node executing the query.   
+If the query is provided by a REST call, the node that executes the query is the node receiving the REST call (and the local timezone is determined by this node).  
+Users can determine the local timezone on a node using the command:
+<pre> 
+get timezone info
+</pre> 
+Users can validate a timezone using the command [get datetime](#get-datetime-command).
+
 
 ### Network processing
 Without the ***run client*** directive, the query will be executed on the local node.  
@@ -125,20 +258,23 @@ run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time
 </pre>
 
 
-## Datetime command
-Using the commmand ***datetime*** users can translate a date-time function to the date-time string.  
+## Get datetime command
+Using the commmand ***get datetime*** users can translate a date-time function to the date-time string.  
 Usage:
 <pre>
-datetime [utc] [date-time function]
+get datetime timezone [date-time function]
 </pre>
-***[utc]*** is an optional string to convert the function to UTC time
-***[date-time function] is the function used to derive the date-time string.
+
+***[date-time function]*** is the function used to derive the date-time string.
 
 #### Examples:
 <pre>
-datetime now() + 3 days
-datetime utc date() + 2 days
-datetime timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+get datetime et now()
+get datetime Europe/London now()
+get datetime local now() + 3 days
+get datetime utc date() + 2 days
+get datetime local timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
+get datetime Asia/Shanghai timestamp('now','start of month','+1 month','-1 day', '-2 hours', '+2 minutes')
 </pre>
 
   

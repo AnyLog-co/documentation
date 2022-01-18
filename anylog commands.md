@@ -135,6 +135,7 @@ Options:
 | set traceback [on/off]  | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|
 | set reply ip = [ip/none]  | Set the IP address that for a reply message. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
+| set rest timeout [time and time-unit]  |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 
 
 #### Set query mode
@@ -221,8 +222,7 @@ Options:
 | get database size [database name] | The size of the named database in bytes. |
 | get node id | Returns a unique identifier of the node. |
 | get hardware id | Returns a unique identfier of the hardware. |
-| get servers for dbms [dbms name] and table [table name] | The list of IPs and Ports of the servers supporting the table. |
-| get servers for dbms [dbms name] | The list of IPs and Ports of the servers supporting the dbms. |
+| [get servers](#get-servers) | Retrurn info on the the servers supporting the table. |
 | get tables for dbms [dbms name] | The list of tables of the named database and where the table is declared (local database and/or blockchain) |
 | get table [exist status/local status/blockchain status/rows count/complete status] where name = table_name and dbms = dbms_name | Returns information on the specified table |
 | get views for dbms [dbms name] | The list of views of the named database. |
@@ -242,6 +242,7 @@ Options:
 | [get rows count](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands) | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
 | get timezone info | Get the timezone on the local machine. |
+| get datetime [date-time function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#get-datetime-command) | Translate a date-time function to the date-time string. |
 
 #### Monitoring node status options:
 
@@ -271,6 +272,27 @@ Additional information is available at [monitoring nodes](https://github.com/Any
 | get authentication | Returns ON or OFF depending on the current status. |
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
+
+## Get servers
+The ***get servers*** command returns information on the Operators hosting data.  
+Usage:
+<pre>
+get servers where company = [company name] and dbms = [dbms name] and table = [table name] bring [key string]
+</pre>
+The ***where*** condition and the ***bring*** keywords are optional.  
+If the ***where*** condition is used, the process is satisfied with Operators associated with the company, dbms and table values provided.  
+If a value for a company, dbms or table is not provided - an asterisk value is assumed ('*') such that all values satisfy the call.  
+The bring command determines the values retrieved from the policies and formatting options.  
+If ***bring*** is omitted, the IP and Port of the servers are retrieved.  
+Details on the bring command are available in the section [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).   
+Examples:
+<pre>
+get servers
+get servers where dbms = lsl_demo and table = ping_sensor
+get servers where company = anylog and dbms = lsl_demo and table = ping_sensor
+get servers where company = anylog bring [operator][ip] : [operator][port] --- [operator][id]
+</pre>
+
 
 ## Get pools info
 

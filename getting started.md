@@ -97,6 +97,7 @@ Directory Structure   Explabnation
        -->error       [JSON files placed on this directory are processed by the node]
        -->pem         [Directory containing network Certificates]
        -->prep        [Directory for system intermediate data]
+       -->test        [Directory location for output data of test queries] 
        -->watch       [Directory monitored by the system, data files placed in the directory are being processed] 
     -->source         [The root directory for source or executable files]
     -->scripts        [System scripts to install and configure the AnyLog node]

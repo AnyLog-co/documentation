@@ -1,4 +1,4 @@
-# How too use Postman as the query interface
+# How to use Postman as the query interface
 Postman is an API platform for building and using APIs. 
 For AnyLog purposes, you can run queries through Postman with either SSL enabled or not. 
 You can download Postman here: https://www.postman.com/downloads/.

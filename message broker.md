@@ -17,7 +17,7 @@ When a new message is added to the broker and associated with the subscribed top
 On the AnyLog instance, messages are mapped to JSON structures and aggregated to files that are treated according to the configuration of the node. For example, the data can be ingested to a local database or send to a different node.    
 The message data on the AnyLog instance is treated as ***streaming data***, this process is explained at [File Mode and Ssreaming Mode](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode).
 
-***The command structure***
+## The command structure
 <pre>
 run mqtt client where [list of options]
 </pre>
@@ -35,7 +35,7 @@ The subscription details of each topic are enclosed in the parenthesis and inclu
 3. Topic Params - Include the topic name and the rules of how to map the message such that it can be processed by the AnyLog node.  
   
 
-***The connection params***  
+## The connection params  
 
 To connect to a broker, the broker URL is mandatory and the rest depends on the type of broker and the way the broker is configured.  
   
@@ -50,7 +50,7 @@ To connect to a broker, the broker URL is mandatory and the rest depends on the 
 | location  | A name identifying the service location. |
 | private_key  | A private key to authenticate requests. |
 
-***The Config params***
+## The Config params
 
 The Config Params provide configuration parameters and can modify the default settings.
   
@@ -63,7 +63,8 @@ The Config Params provide configuration parameters and can modify the default se
 | watch_dir  | The location of the watch directory. |
 | err_dir  |The location of the error directory. |
 
-***The topic params***  
+## The topic params
+
 The topic params are specified within parenthesis and determine the topic name and how to process the message data.  
 The interpretation of the data associated with the topic needs to extract the following:    
 The name of the dbms that contains the data, the name of the table that contains the data and the data itself.  
@@ -77,16 +78,17 @@ The following params are provided for each topic:
 | table  | The name of the table to contain the data or a ***'bring' command*** to extract the table name. |
 | column.name.type  | The column name and column type that is associated with the data extracted from the message. The column is associated with the ***'bring' command*** that details the rule to extract the column data. |
 
-***QoS*** - The Quality of Service:      
+## QoS - The Quality of Service:      
 0 - No guarantee of delivery. The recipient does not acknowledge receipt of the message. The ) value serves as the default value.
 1 - Guarantees that a message is delivered at least one time to the receiver, but the same message may be delivered multiple times.  
 2 - The highest level of service. Guarantees that each message is received only once by the client.
 
-***Bring Command***  
+## Bring Command
+  
 The ***bring command*** is an AnyLog command that extracts data from a JSON structure.   
 The message data is structured in JSON and the ***bring command*** is applied to the message to retrieve the needed data.  
 The ***bring command*** is used in the same way it is being used in the blockchain commands.    
-The command usage is explained at: [The 'From JSON Object Bring' command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-from-json-object-bring-command).  
+The command usage is explained at: [JSON Data Transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation).  
 
 ***Mapping the message data***  
 Values pulled from the message determine the database, table, columns and the columns values to update. 
@@ -150,7 +152,7 @@ column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
 
 A complete example is provided [below](#example).
 
-### Processing messages and terminating a subscription
+## Processing messages and terminating a subscription
 
 ***Processing Messages***  
 * Messages are assumed to be in JSON format and when pushed to an AnyLog node, are transformed to a new JSON structure that can be processed to be included by a target table.  
