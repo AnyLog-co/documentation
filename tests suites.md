@@ -56,7 +56,7 @@ Any 2 files in test format can be compared such that:
 
 ## The analyze output command
 
-The ***analyze output*** command compares 2 test files to determine if a query was successfully processed.  
+The ***analyze output*** command compares 2 test files, each represents the result set of a query, to determine if a query was successfully processed.  
 
 Usage:
 <pre>
@@ -65,7 +65,7 @@ analyze output where file = [file path and name] and source = [file path and nam
 
 ***file*** - the path and file name to the query output that is being tested.   
 ***source*** - the path and file name to the source output that is trusted.  
-***option*** (optional key - value pair) - if time is added, the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
+***option*** (optional key - value pairs) - if ***time*** is added (option = time), the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
 
 Example:
 <pre>
@@ -76,13 +76,13 @@ analyze output where file = !test_dir/test_file3.out and source = !test_dir/test
 
 Using the query options, the query output can be directed to a file in a test format.  
 The query options explained detailed in the [query options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) section.  
-The following key-value pairs provided in the query option section are used to direct the query to a file in a test format:
+The following key-value pairs provided in the query options section are used to direct the query to a file in a test format:
 
 | key    | value           | Details                          | Default Value |
 | ------ | --------------- | -------------------------------- | --------------|
 | file   | path and file name | the file with the output data |               |
 | test   | True / False       | enable test format            | False         |
-| title  | ant data string    | added to the header section   | None          |
+| title  | any data string    | added to the header section   | None          |
 
 The following example generates an output file, named query_1.out, in the folder with a name assigned to "test_dir".  
 The output file is in a ***test format*** similar to the example in section [The test format](#the-test-format).
@@ -108,7 +108,7 @@ sql lsl_demo format=json and stat=true and test = true and file = !test_dir\* an
 </pre> 
 
 Notes:
-* The file name is asterisk, therefore the systemm will generate a unique file name to the query output (in the folder assigned to "test_dir").
+* If file name is asterisk, the system will generate a unique file name to the query output (in the folder assigned to "test_dir").
 * If the comparison finds identical results, the created file is deleted. Otherwise the created file remains at the designated folder.
 * If option (with the value ***time***) is not provided, the comparison will ignore the execution time.
 
