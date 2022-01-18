@@ -1,4 +1,4 @@
-# PSQL Connector
+# PSQL Connector & Tableau Visualization
   
 For software that doesn't support REST requests, but does support PostgreSQL connector graphs can be generated through 
 the `system_query` database.
@@ -85,10 +85,24 @@ Disclaimer: [Full list of SQL options](queries.md#query-options)
 
 | Data | Data Source |
 | --- | --- |
-| ![data](imgs/tableau_img1.png) | ![data source](imgs/tableau_img2.png) |
+| ![data](imgs/tableau_img2a.png) | ![data source](imgs/tableau_img2b.png) |
 
 3. Fill-out the information to connect to database & Press "Ok"
 ![connection information](imgs/tableau_img3.png)
 
-4. 
+4. Double-click on the table you want to use (in this case `new_table`) and goto worksheet
+![prep worksheet data](imgs/tableau_img4.png)
 
+
+## Generating Graphs
+
+The `system_query` database gathers (query) results from the different AnyLog instances to generate a unified dataset for 
+the user. As such, generating graphs from the final results is a bit complicated. 
+   * Min 2 - is column `MIN(timestamp)`
+   * Min 3 - is column `MIN(value)`
+   * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column `AVG(value)`
+   * MAX 5 - is column `MAX(value)`
+![column explanation](imgs/tableau_img5.png)
+
+To generate a graph, use "Min 2" as _Columns_ and all others for _Rows_
+![generated image](imgs/tableau_img6.png)
