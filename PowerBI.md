@@ -57,10 +57,8 @@ Once the form is filled out press "OK"
 6. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
 
-| List of Records | List of JSON Keys |
-| --- | --- |
 | ![list of records](imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](imgs/powerbi_img6b.png) |
-
+| --- | --- |
 
 7. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
 ![set data-type](imgs/powerbi_img7.png)
@@ -75,7 +73,7 @@ This will show the different JSON keys that’ll be converted to table columns
 The following shows 3 diagrams, each is assigned to its own query
    * The table shows number of rows per table in the database
    * The bar graph shows _MIN_, _MAX_, _AVG_ and _Row Count_ difference between 2021 and 2022. 
-   * The line graph uses [increments](queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
+   * The line graph uses [increments function](queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
 
 
 ## Using Excel and other Microsft Office tools to view data
@@ -95,9 +93,9 @@ Once the form is filled out press "OK"
 5. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
 
-| List of Records | List of JSON Keys |
-| --- | --- |
 | ![list of records](imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](imgs/powerbi_img6b.png) |
+| --- | --- |
+
 
 6. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
 ![set data-type](imgs/powerbi_img7.png)
@@ -108,7 +106,8 @@ This will show the different JSON keys that’ll be converted to table columns
 
 
 8. From this point you should be able to draw tables & graphs with the data 
-![sample table](imgs/excel_img3.png) 
+![sample table](imgs/excel_img3.png)
+The diagram uses a single query with [period function](queries.md#the-period-function) to generate both the table and graph
 
 
 ## Error Handling 

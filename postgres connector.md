@@ -83,12 +83,12 @@ Disclaimer: [Full list of SQL options](queries.md#query-options)
 1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
 2. Under _Data_ --> _Data Sources_ select PostgreSQL connector type 
 
-| Data | Data Source |
-| --- | --- |
 | ![data](imgs/tableau_img2a.png) | ![data source](imgs/tableau_img2b.png) |
+| --- | --- |
 
 3. Fill-out the information to connect to database & Press "Ok"
 ![connection information](imgs/tableau_img3.png)
+
 
 4. Double-click on the table you want to use (in this case `new_table`) and goto worksheet
 ![prep worksheet data](imgs/tableau_img4.png)
