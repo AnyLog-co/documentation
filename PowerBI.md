@@ -102,8 +102,10 @@ This will show the different JSON keys that’ll be converted to table columns
 6. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
 ![set data-type](imgs/powerbi_img7.png)
 
+
 7. Once updated press Close & Apply
 ![Close & Apply](imgs/powerbi_img8.png)
+
 
 8. From this point you should be able to draw tables & graphs with the data 
 ![sample table](imgs/excel_img3.png) 
