@@ -34,83 +34,83 @@ In order to support PowerBI, return data as a list of JSON values without the st
 ## Using PowerBI
 
 1. Under _Get Data_ open _Web_
-![location of "Web" data source](imgs/powerbi_img1.png)
+![location of "Web" data source](../imgs/powerbi_img1.png)
 
 
 2. In the Advanced option fill-out the _URL_, and _HEADER_ Parameters with "command", "User-Agent" and "destination".
 Once the form is filled out press "OK"
-!["Web" data source request form](imgs/powerbi_img2.png)
+!["Web" data source request form](../imgs/powerbi_img2.png)
 
 
 3. Right-click and & select JSON
-![Set results type](imgs/powerbi_img3.png)
+![Set results type](../imgs/powerbi_img3.png)
 
 
 4. Right-click on **List** & select _To Table_
-![convert list of (raw) results into table format](imgs/powerbi_img4.png)
+![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
 
 
 5. Keep defaults (None) and press "OK"
-![value conversion form](imgs/powerbi_img5.png)
+![value conversion form](../imgs/powerbi_img5.png)
 
 
 6. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
 
-| ![list of records](imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](imgs/powerbi_img6b.png) |
+| ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
 | --- | --- |
 
 7. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
-![set data-type](imgs/powerbi_img7.png)
+![set data-type](../imgs/powerbi_img7.png)
 
 
 8. Once updated press Close & Apply
-![Close & Apply](imgs/powerbi_img8.png)
+![Close & Apply](../imgs/powerbi_img8.png)
 
 
 9. From this point you should be able to draw tables & graphs with the data
-![Sample Graphs](imgs/powerbi_img9.png)
+![Sample Graphs](../imgs/powerbi_img9.png)
 The following shows 3 diagrams, each is assigned to its own query
    * The table shows number of rows per table in the database
    * The bar graph shows _MIN_, _MAX_, _AVG_ and _Row Count_ difference between 2021 and 2022. 
-   * The line graph uses [increments function](queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
+   * The line graph uses [increments function](../queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
 
 
 ## Using Excel and other Microsft Office tools to view data
 1. Under the _Data_ tab select the "Web" Data Source
-![select data source](imgs/excel_img1.png)
+![select data source](../imgs/excel_img1.png)
 
 2. In the Advanced option fill-out the _URL_, and _HEADER_ Parameters with "command", "User-Agent" and "destination".
 Once the form is filled out press "OK"
-![data source form](imgs/excel_img2.png)
+![data source form](../imgs/excel_img2.png)
 
 3. Right-click on **List** & select _To Table_
-![convert list of (raw) results into table format](imgs/powerbi_img4.png)
+![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
 
 4. Keep defaults (None) and press "OK"
-![value conversion form](imgs/powerbi_img5.png)
+![value conversion form](../imgs/powerbi_img5.png)
 
 5. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
 
-| ![list of records](imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](imgs/powerbi_img6b.png) |
+| ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
 | --- | --- |
 
 
 6. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
-![set data-type](imgs/powerbi_img7.png)
+![set data-type](../imgs/powerbi_img7.png)
 
 
 7. Once updated press Close & Apply
-![Close & Apply](imgs/powerbi_img8.png)
+![Close & Apply](../imgs/powerbi_img8.png)
 
 
 8. From this point you should be able to draw tables & graphs with the data 
-![sample table](imgs/excel_img3.png)
-The diagram uses a single query with [period function](queries.md#the-period-function) to generate both the table and graph
+![sample table](../imgs/excel_img3.png)
+The diagram uses a single query with [period function](../queries.md#the-period-function) to generate both the table and graph
 
 
 ## Error Handling 
 When converting raw content into _Text_, [PowerQuery Editor](https://docs.microsoft.com/en-us/power-query/power-query-ui)
-will show results. However, it will not separate the JSON keys into seperate columns
-![text output](imgs/error_img1.png)
+will show results. However, it will not separate the JSON keys into separate columns
+![text output](../imgs/error_img1.png)

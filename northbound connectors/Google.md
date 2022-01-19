@@ -5,8 +5,8 @@ which provides the ability to import data via REST, Database, Social Media and o
 
 ## Install 
 
-1. Under _Extensions_ goto _Add-ons_ --> _Get add-ons_
-![extensions --> add-ons](../imgs/googledrive_install_step1.png)
+1. Under _Extensions_ goto _Add-ons_ → _Get add-ons_
+![extensions → add-ons](../imgs/googledrive_install_step1.png)
 
 
 2. In the search bar look for "Two Minute Reports" & double click it
