@@ -114,7 +114,7 @@ Notes:
 * If the comparison finds identical results, the created file is deleted. Otherwise the created file remains at the designated folder.
 * If option (with the value ***time***) is not provided, the comparison will ignore the execution time.
 
-## Retrieving a query from a file (in a test format) and executing the query
+## The repeat process command
 
 If an output file of a query is organized in a ***test format*** (hereon source file), the header section includes the query information.  
 The command ***repeat process*** retrieves the query and the needed information from the header, executes the query and
