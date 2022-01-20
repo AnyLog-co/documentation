@@ -20,8 +20,7 @@ AnyLog has 3 major versions, each version is built on both Ubuntu:20.04 with pyt
 | predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull oshadmon/anylog:predevelop-alpine` | 460MB| 
 | testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull oshadmon/anylog:testing` |
 
-For _develop_ and _predevelop_ builds users could also specify `preset` which downloads an AnyLog image with preset network configurations and gets deployed as a node of type REST.  
-`preset` deployment uses the following environment variables
+For _develop_ and _predevelop_ builds users could also specify `preset` which downloads an AnyLog image with preset network configurations and gets deployed as a node of type REST. `preset` deployment uses the following environment variables:
 ```dockerfile 
 ENV NODE_TYPE=rest
 ENV ANYLOG_SERVER_PORT=2048
@@ -60,15 +59,24 @@ docker volume inspect al-operator2-data
 ## Sample Docker Calls
 Based on the `NODE_TYPE` environment variable the code is aware the kind of AnyLog node type to be deployed. An explanation of the base node types can be found in _[Getting Started](getting%20started.md#type-of-instances)_ 
 
-* [Empty Node](examples/Docker%20Calls/empty_node.sh) - node that doesn't contain anything, user should manually access it to deploy commands (`NODE_TYPE=none`)
-* [REST Node](examples/Docker%20Calls/rest_node.sh) - node that connects to TCP, REST and Message Broker (if set) as well as an optional authentication configurations (`NODE_TYPE=none`)
-* [Master Node](examples/Docker%20Calls/master_node.sh) - node that maintains a complete copy of the metadata and receives updates when the metadata is updated (`NODE_TYPE=master`)
-* [Operator Node](examples/Docker%20Calls/operator_node.sh) - node that hosts the data and satisfies queries (`NODE_TYPE=operator`)
-* [Publisher Node](examples/Docker%20Calls/publisher_node.sh) - node that receives data from a data source (i.e. devices, applications) and distributes the data to Operators (`NODE_TYPE=publisher`)
-* [Query Node](examples/Docker%20Calls/query_node.sh) - node that orchestrates a query process (`NODE_TYPE=query`)
-* [Single Node](examples/Docker%20Calls/single_node.sh) - node that consists of both master process and operator processes in a single AnyLog instance (`NODE_TYPE=single-node`)
-* [Single Publisher Node](examples/Docker%20Calls/single_publisher_node.sh) - node that consists of both master process and publisher processes in a single AnyLog instance (`NODE_TYPE=single-publisher-node`)
-* [Hidden Query Node](examples/Docker%20Calls/hidden_query.sh) - A node that's able to query against the network but isn't declared on the blockchain (`NODE_TYPE=hidden-query`)
+* [Empty Node](examples/Docker%20Calls/empty_node.sh) - node that doesn't contain anything, user should manually access it to deploy commands 
+  * Env Params: `NODE_TYPE=none`
+* [REST Node](examples/Docker%20Calls/rest_node.sh) - node that connects to TCP, REST and Message Broker (if set) as well as an optional authentication configurations 
+  * Env Params: `NODE_TYPE=none`
+* [Master Node](examples/Docker%20Calls/master_node.sh) - node that maintains a complete copy of the metadata and receives updates when the metadata is updated 
+  * Env Params: `NODE_TYPE=master`
+* [Operator Node](examples/Docker%20Calls/operator_node.sh) - node that hosts the data and satisfies queries
+  * Env Params: `NODE_TYPE=operator`
+* [Publisher Node](examples/Docker%20Calls/publisher_node.sh) - node that receives data from a data source (i.e. devices, applications) and distributes the data to Operators 
+  * Env Params: `NODE_TYPE=publisher`
+* [Query Node](examples/Docker%20Calls/query_node.sh) - node that orchestrates a query process 
+  * Env Params: `NODE_TYPE=query`
+* [Single Node](examples/Docker%20Calls/single_node.sh) - node that consists of both master process and operator processes in a single AnyLog instance 
+  * Env Params: `NODE_TYPE=single-node`
+* [Single Publisher Node](examples/Docker%20Calls/single_publisher_node.sh) - node that consists of both master process and publisher processes in a single AnyLog instance 
+  * Env Params: `NODE_TYPE=single-publisher-node`
+* [Hidden Query Node](examples/Docker%20Calls/hidden_query.sh) - A node that's able to query against the network but isn't declared on the blockchain 
+  * Env Params: `NODE_TYPE=hidden-query`
 
 **Generic Docker Command** - parameters that are not required are set in [square brackets]
 ```shell
