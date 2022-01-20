@@ -136,7 +136,7 @@ With multiple option, the keyword ***and*** separates between each key value pai
 | timezone | utc / local | Timezone used for time values in the result set | local |
 | include | dbms.table | Allows to treat remote tables with a different name as the table being queried | ignored |
 | drop | True/False | Drops the local output table with the issued query | True |
-| dest | stdout / rest / dbms / file | destination of the query result set | stdout |
+| dest | stdout / rest / dbms / file | Destination of the query result set | stdout |
 | file | file name | File name for the output data |  |
 | table | table name | Table name for the output data | random table names are assigned to each executing query |
 | stat | True/False | Adds processing statistics to the query output | True |
