@@ -4,12 +4,12 @@ As there are multiple deployments options for the nodes in the network, AnyLog i
 to set test scenarios that are executed and compared to expected results.  
 
 The testing process allows to do the following:
-* Assign a query to test process to validate correct execution result (hereon ***tested query***).
-* Output of each tested query is organized in a special format called ***test format***.
-* Output of a tested query can be considered as ***expected output*** (over the ***test data set***).   
-* Output of a new run of a tested query (over the test data set) can be compared against the expected output.
-* Reset data on a given network setup, and load of test data set.
-* Group test queries as ***test suites*** such that the tests is the suite can be executed by a single call.
+* Assign a query to a ***test case*** to validate correct execution result.
+* Output of each ***test case*** is organized in a special format called ***test format***.
+* Output of a ***test case*** can be considered as ***expected output*** (over the ***test data set***).   
+* Output of a new run of a ***test case*** (over the test data set) can be compared against the expected output.
+* Reset data on a given network setup, and load test data set.
+* Group test queries in a ***test suite*** such that the tests is the suite can be executed by a single call.
 * Update a database with test results allowing monitoring and alerts based on tests results.
 
 ## The test format
