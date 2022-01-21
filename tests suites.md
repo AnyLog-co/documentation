@@ -61,7 +61,7 @@ Any 2 files in test format can be compared such that:
 ## The analyze output command
 
 The ***analyze output*** command compares 2 test files, each represents the result set of a ***test case***, 
-o determine if the test case was executed successfully.  
+to determine if the test case was executed successfully.  
 
 Usage:
 <pre>
