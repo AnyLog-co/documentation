@@ -73,8 +73,8 @@ Based on the `NODE_TYPE` environment variable the code is aware the kind of AnyL
   * Env Params: `NODE_TYPE=query`
 * [Single Node](examples/Docker%20Calls/single_node.sh) - node that consists of both master process and operator processes in a single AnyLog instance 
   * Env Params: `NODE_TYPE=single-node`
-* [Single Publisher Node](examples/Docker%20Calls/single_publisher_node.sh) - node that consists of both master process and publisher processes in a single AnyLog instance 
-  * Env Params: `NODE_TYPE=single-publisher-node`
+* [Single Node Publisher](examples/Docker%20Calls/single_node_publisher.sh) - node that consists of both master process and publisher process in a single AnyLog instance 
+  * Env Params: `NODE_TYPE=single-node-publisher`
 * [Hidden Query Node](examples/Docker%20Calls/hidden_query.sh) - A node that's able to query against the network but isn't declared on the blockchain 
   * Env Params: `NODE_TYPE=hidden-query`
 
