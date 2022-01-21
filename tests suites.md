@@ -132,22 +132,21 @@ Usage:
 test case where source = [file path and name] and inform = [destination for messages]
 </pre> 
 
-The ***inform*** values:  
-These value determine the destination of the test cases.  
+The values assigned to the ***inform*** keys determine where the test results are aggregated.    
 Multiple inform values are allowed.  
 
 | value    |  Details                          |
 | ------ | -------------------------------------|
 | stdout | the stdout of the machine executing the query |
-| ip:port.stdout | the stdout of a target machine with the IP and port |
-| ip:port.dbms.dbms_name.table_name | As time series data to the target DBMS on the target node  |
+| stdout@ip:port | the stdout of a target machine with the IP and port |
+| dbms.dbms_name.table_name@1p:port | As time series data to the target table on the target node  |
 
 
 The following example reads the query and query information from the source file "output_test.out", execute the query and 
 compares the output of the execution to the source file.  
-The test results are delivered to the the screen as well as to a remote operator node and update the table "testing" in the database "qa". 
+The test results are delivered to the screen as well as to a remote operator node and update the table "testing" in the database "qa". 
 <pre>
-test case where source = !test_dir/output_test.out and inform = stdout and inform = !qa_node:qa.testing
+test case where source = !test_dir/output_test.out and inform = stdout and inform = dbms.qa.testing@!qa_node
 </pre> 
 
 
@@ -172,9 +171,9 @@ test suite where source = [file path and name] and inform = [destination for mes
 * Source file name and file type can be prefixed with asterisk to consider only files with the name prefix ot type prefix.  
 * If subdir is set to true, the files in the subdirectories are considered in the process.
 
-The following examples considers designated files as ***test case*** files: 
+The following examples process the ***test cases*** files identified by the key ***source***: 
 <pre>
-test suite where source = !test_dir/test_*.out and and inform = !qa_node:qa.testing
+test suite where source = !test_dir/test_*.out and and inform = dbms.qa.testing@!dest_node
 test suite where source = !test_dir/test_*.o* and dest = stdout and subdir = true
 </pre> 
 
