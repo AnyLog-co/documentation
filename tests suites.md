@@ -129,14 +129,27 @@ compares the output to the source file.
 
 Usage:
 <pre>
-test case where source = [file path and name] and dest = [destination for messages]
+test case where source = [file path and name] and inform = [destination for messages]
 </pre> 
 
+The ***inform*** values:  
+These value determine the destination of the test cases.  
+Multiple inform values are allowed.  
+
+| value    |  Details                          |
+| ------ | -------------------------------------|
+| stdout | the stdout of the machine executing the query |
+| ip:port.stdout | the stdout of a target machine with the IP and port |
+| ip:port.dbms.dbms_name.table_name | As time series data to the target DBMS on the target node  |
+
+
 The following example reads the query and query information from the source file "output_test.out", execute the query and 
-compares the output of the execution to the source file.
+compares the output of the execution to the source file.  
+The test results are delivered to the the screen as well as to a remote operator node and update the table "testing" in the database "qa". 
 <pre>
-test case where source = !test_dir/output_test.out and dest = stdout
+test case where source = !test_dir/output_test.out and inform = stdout and inform = !qa_node:qa.testing
 </pre> 
+
 
 The example below shows the output of a test failure. The output identifies the reason for the failure:
 <pre>
@@ -154,15 +167,15 @@ Users can organize multiple test-cases in folders and sub-folders and test all t
 
 Usage:
 <pre>
-test suite where source = [file path and name] and dest = [destination for messages] and subdir = [true/false]
+test suite where source = [file path and name] and inform = [destination for messages] and subdir = [true/false]
 </pre> 
 * Source file name and file type can be prefixed with asterisk to consider only files with the name prefix ot type prefix.  
 * If subdir is set to true, the files in the subdirectories are considered in the process.
 
 The following examples considers designated files as ***test case*** files: 
 <pre>
-test case where source = !test_dir/*.out and dest = stdout
-test case where source = !test_dir/*.o* and dest = stdout and subdir = true
+test suite where source = !test_dir/test_*.out and and inform = !qa_node:qa.testing
+test suite where source = !test_dir/test_*.o* and dest = stdout and subdir = true
 </pre> 
 
 
