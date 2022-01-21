@@ -129,8 +129,10 @@ compares the output to the source file.
 
 Usage:
 <pre>
-test case where source = [file path and name] and inform = [destination for messages]
+test case where source = [file path and name] and inform = [destination for messages] and time = [true/false]
 </pre> 
+
+The value assigned to the ***time key*** determines if the comparison considers execution time.  
 
 The values assigned to the ***inform*** keys determine where the test results are aggregated.    
 Multiple inform values are allowed.  
@@ -139,7 +141,7 @@ Multiple inform values are allowed.
 | ------ | -------------------------------------|
 | stdout | the stdout of the machine executing the query |
 | stdout@ip:port | the stdout of a target machine with the IP and port |
-| dbms.dbms_name.table_name@1p:port | As time series data to the target table on the target node  |
+| dbms.dbms_name.table_name@ip:port | As time series data at the target table at the target node  |
 
 
 The following example reads the query and query information from the source file "output_test.out", execute the query and 
@@ -166,10 +168,11 @@ Users can organize multiple test-cases in folders and sub-folders and test all t
 
 Usage:
 <pre>
-test suite where source = [file path and name] and inform = [destination for messages] and subdir = [true/false]
+test suite where source = [file path and name] and inform = [destination for messages] and subdir = [true/false] and time = [true/false]
 </pre> 
 * Source file name and file type can be prefixed with asterisk to consider only files with the name prefix ot type prefix.  
 * If subdir is set to true, the files in the subdirectories are considered in the process.
+* The value assigned to the ***time key*** determines if the comparison considers execution time.  
 
 The following examples process the ***test cases*** files identified by the key ***source***: 
 <pre>
