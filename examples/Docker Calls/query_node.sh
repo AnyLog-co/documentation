@@ -15,4 +15,4 @@ docker run --network host --name al-query-node --rm \
     -v al-aiops-query-data:/app/AnyLog-Network/data:rw \
     -v al-aiops-query-local-scripts:/app/AnyLog-Network/local_scripts:rw \
     -v al-aiops-query-scripts:/app/AnyLog-Network/scripts:rw \
-    -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
+    -d -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop

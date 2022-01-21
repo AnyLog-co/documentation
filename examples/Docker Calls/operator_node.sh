@@ -37,4 +37,4 @@ docker run --network host --name al-operator-node --rm \
     -v al-operator-node-data:/app/AnyLog-Network/data:rw \
     -v al-operator-node-local-scripts:/app/AnyLog-Network/local_scripts:rw \
     -v al-operator-node-scripts:/app/AnyLog-Network/scripts:rw \
-    -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
+    -d -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop

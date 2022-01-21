@@ -20,4 +20,4 @@ docker run --network host --name al-master-node --rm \
     -v al-master-data:/app/AnyLog-Network/data:rw \
     -v al-master-local-scripts:/app/AnyLog-Network/local_scripts:rw \
     -v al-master-scripts:/app/AnyLog-Network/scripts:rw \
-    -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
+    -d -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop

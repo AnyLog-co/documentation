@@ -28,4 +28,4 @@ docker run --network host --name al-publisher-node --rm \
     -v al-aiops-publisher-data:/app/AnyLog-Network/data:rw \
     -v al-aiops-publisher-local-scripts:/app/AnyLog-Network/local_scripts:rw \
     -v al-aiops-publisher-scripts:/app/AnyLog-Network/scripts:rw \
-    -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
+    -d -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
