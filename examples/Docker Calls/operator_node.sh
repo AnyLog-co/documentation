@@ -1,7 +1,6 @@
 # deployment of an Operator Node with MQTT client against REST (POST)
 docker run --network host --name al-operator-node --rm \
     -e NODE_TYPE=operator \
-    -e ANYLOG_ROOT_DIR=/app \
     -e ANYLOG_SERVER_PORT=2148 \
     -e ANYLOG_REST_PORT=2149 \
     -e MASTER_NODE=10.0.0.212:2048 \

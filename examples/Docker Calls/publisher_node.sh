@@ -1,7 +1,6 @@
 # deployment of a Publisher Node with MQTT client against CloudMQTT & preset node location
 docker run --network host --name al-publisher-node --rm \
     -e NODE_TYPE=publisher \
-    -e ANYLOG_ROOT_DIR=/app \
     -e ANYLOG_SERVER_PORT=2248 \
     -e ANYLOG_REST_PORT=2249 \
     -e MASTER_NODE=10.0.0.212:2048 \
