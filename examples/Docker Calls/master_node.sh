@@ -1,6 +1,7 @@
 # deployment for a Master that consists of manually set external & local IP, as well as authentication enabled
 docker run --network host --name al-master-node --rm \
     -e NODE_TYPE=master \
+    -e NODE_NAME=al-master-node
     -e EXTERNAL_IP=10.0.0.212 \
     -e LOCAL_IP=10.0.0.212 \
     -e AUTHENTICATION=true \
