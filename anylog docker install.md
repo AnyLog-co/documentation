@@ -20,7 +20,7 @@ AnyLog has 3 major versions, each version is built on both Ubuntu:20.04 with pyt
 | predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull oshadmon/anylog:predevelop-alpine` | 460MB| 
 | testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull oshadmon/anylog:testing` |
 
-For _develop_ and _predevelop_ builds users could also specify `preset` which downloads an AnyLog image with preset network configurations and gets deployed as a node of type REST. `preset` deployment uses the following environment variables:
+For _develop_ and _predevelop_ builds users could also specify `preset` which downloads an AnyLog image with preset TCP/REST network configurations and gets deployed as a node of type REST. `preset` deployment uses the following environment variables:
 ```dockerfile 
 ENV NODE_TYPE=rest
 ENV ANYLOG_SERVER_PORT=2048
