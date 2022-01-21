@@ -82,21 +82,24 @@ analyze output where file = !test_dir/test_file3.out and source = !test_dir/test
 
 Using the query options, the query output can be directed to a file in a test format.  
 The query options explained detailed in the [query options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) section.  
-The following key-value pairs provided in the query options section are used to direct the query to a file in a test format:
+The following key-value pairs (added to the query in the query options section) are used to direct the query to a file in a test format:
 
-| key    | value           | Details                          | Default Value |
-| ------ | --------------- | -------------------------------- | --------------|
-| file   | path and file name | the file with the output data |               |
-| test   | True / False       | enable test format            | False         |
-| title  | any data string    | added to the header section   | None          |
+| key    | value           | Details                               | Default Value |
+| ------ | --------------- | ------------------------------------- | --------------|
+| test   | True / False       | enable test format                  | False         |
+| title  | any data string    | added to the header section         | None          |
+| file   | path and file name | the file to include the output data |               |
+
+Note: If file name is prefixed with asterisk, the system will make the file output file name unique.
 
 The following example generates an output file, named query_1.out, in the folder with a name assigned to "test_dir".  
 The output file is in a ***test format*** similar to the example in section [The test format](#the-test-format).
+The asterisk on the file name will extend the name created to make the output name unique. 
 <pre>
-sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_1.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
+sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_*.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
 </pre> 
 
-## Executing a query and returning the comparison to the trusted output
+## Executing a query and comparing the output to the trusted output
 
 Using the query options, the query output can be compared to expected output.  
 To enable execution of a query and compare the query output to expected results, include the key-value pairs that enable the output
@@ -110,7 +113,7 @@ to a file in a test format and include the following:
 Example:
 
 <pre>
-sql lsl_demo format=json and stat=true and test = true and file = !test_dir\* and source= !test_dir\query_1.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
+sql lsl_demo format=json and stat=true and test = true and file = !test_dir\test_*.test and source = !test_dir\query_1.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
 </pre> 
 
 Notes:
