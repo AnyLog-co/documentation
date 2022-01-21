@@ -14,10 +14,11 @@ The testing process allows to do the following:
 
 ## The test format
 
-When a query is executed, the query params can direct the query result to an output file that is organized in a ***test format***.  
+When a query is executed, the query params can make the query a ***test case*** and direct the query result to an output
+file that is organized in a ***test format***.    
 The test format has 3 sections:  
-***Header*** - this is an informative section that includes a title, the date and time of the run and the query syntax.  
-***body*** - the query output.  
+***Header*** - an informative section that includes a title, the date and time of the run and the query syntax.  
+***body*** - the ***test case*** output.  
 ***footer*** - statistical results including the execution time and the number of rows returned by the query.  
 
 The example below demonstrates a query output in a test format:
@@ -58,7 +59,8 @@ Any 2 files in test format can be compared such that:
 
 ## The analyze output command
 
-The ***analyze output*** command compares 2 test files, each represents the result set of a query, to determine if a query was successfully processed.  
+The ***analyze output*** command compares 2 test files, each represents the result set of a ***test case***, 
+o determine if the test case was executed successfully.  
 
 Usage:
 <pre>
@@ -67,7 +69,8 @@ analyze output where file = [file path and name] and source = [file path and nam
 
 ***file*** - the path and file name to the query output that is being tested.   
 ***source*** - the path and file name to the source output that is trusted.  
-***option*** (optional key - value pairs) - if ***time*** is added (option = time), the comparison will trigger a failure is the execution time is higher than the recorded time in the source file.
+***option*** (optional key - value pairs) - if ***time*** is added (option = time), the comparison will trigger a failure 
+if the execution time is higher than the recorded time in the source file.  
 
 Example:
 <pre>
