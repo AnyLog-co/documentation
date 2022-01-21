@@ -10,6 +10,7 @@ The testing process allows to do the following:
 * Output of a new run of a ***test case*** (over the test data set) can be compared against the expected output.
 * Reset data on a given network setup, and load test data set.
 * Group test queries in a ***test suite*** such that the tests is the suite can be executed by a single call.
+* Include test cases and test suites in the scheduler such that these tests are executed periodically.
 * Update a database with test results allowing monitoring and alerts based on tests results.
 
 ## The test format
