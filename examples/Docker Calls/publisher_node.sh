@@ -1,0 +1,32 @@
+# deployment of a Publisher Node with MQTT client against CloudMQTT & preset node location
+docker run --network host --name al-publisher-node --rm \
+    -e NODE_TYPE=publisher \
+    -e ANYLOG_ROOT_DIR=/app \
+    -e ANYLOG_SERVER_PORT=2248 \
+    -e ANYLOG_REST_PORT=2249 \
+    -e MASTER_NODE=10.0.0.212:2048 \
+    -e DB_TYPE=psql \
+    -e DB_USER=anylog@127.0.0.1:demo \
+    -e DB_PORT=5432 \
+    -e LOCATION="0.0, 0.0" \
+    -e SYNC_TIME="30 second" \
+    -e COMPANY_NAME=AnyLog \
+    -e NODE_NAME=anylog-publisher \
+    -e MQTT_ENABLE=true \
+    -e BROKER=driver.cloudmqtt.com \
+    -e MQTT_PORT=18785 \
+    -e MQTT_USER=ibglowct \
+    -e MQTT_PASSWORD=MSY4e009J7ts \
+    -e MQTT_LOG=false \
+    -e MQTT_TOPIC_NAME=anylogedgex \
+    -e MQTT_TOPIC_DBMS=anylog \
+    -e MQTT_TOPIC_TABLE="bring [device]" \
+    -e MQTT_COLUMN_TIMESTAMP=now \
+    -e MQTT_COLUMN_VALUE_TYPE=float \
+    -e MQTT_COLUMN_VALUE="bring [readings][][value]" \
+    -v al-aiops-publisher-anylog:/app/AnyLog-Network/anylog:rw \
+    -v al-aiops-publisher-blockchain:/app/AnyLog-Network/blockchain:rw \
+    -v al-aiops-publisher-data:/app/AnyLog-Network/data:rw \
+    -v al-aiops-publisher-local-scripts:/app/AnyLog-Network/local_scripts:rw \
+    -v al-aiops-publisher-scripts:/app/AnyLog-Network/scripts:rw \
+    -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
