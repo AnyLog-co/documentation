@@ -138,6 +138,15 @@ compares the output of the execution to the source file.
 test case where source = !test_dir/output_test.out and dest = stdout
 </pre> 
 
+The example below shows the output of a test failure. The output identifies the reason for the failure:
+<pre>
+    {"result"   : "Failed", 
+    "Title"     : "List Unique Values", 
+    "Reason"    : "The value for the key 'timestamp' in line 11 is different: '2019-10-11 10:15:53.150009' vs. '2019-10-11 10:15:53.15000", 
+    "File"      : "D:\Node\AnyLog-Network\data\test\run_of_test_1642789228.out", 
+    "Trusted"   : "D:\Node\AnyLog-Network\data\test\test_1642789228.out"
+</pre> 
+
 ## The test suite command
 
 The command ***test suite*** operates like ***test case*** on all the source files in a given directory.
