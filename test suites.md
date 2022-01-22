@@ -97,9 +97,9 @@ The following key-value pairs (added to the query in the query options section) 
 
 Note: If file name is prefixed with asterisk, the system will extend the output file name with a string making the file name unique.
 
-The following example generates an output file, named query_1.out, in the folder with a name assigned to "test_dir".  
-The output file is in a ***test format*** similar to the example in section [The test format](#the-test-format).
-The asterisk on the file name will extend the name created to make the output name unique. 
+The following example generates an output file in the folder with a name assigned to "test_dir".  
+The asterisk on the file name extends the name created to make the output name unique.
+The output file is in a ***test format*** similar to the example in section [the test format](#the-test-format) above.
 <pre>
 sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_*.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
 </pre> 
@@ -113,7 +113,7 @@ to a file in a test format and include the following:
 | key    | value           | Details                          | Default Value |
 | ------ | --------------- | -------------------------------- | --------------|
 | source   | path and file name | the file with the expected results |        |
-| option   | time       | enable time comparison       | None          |
+| option   | time       | enable time comparison       | False          |
 
 Example:
 
@@ -128,9 +128,8 @@ Notes:
 
 ## The test case command
 
-If an output file of a query is organized in a ***test format*** (hereon source file), the header section includes the query information.  
-The command ***test case*** retrieves the query and the needed information from the header, executes the query and
-compares the output to the source file.  
+The command ***test case*** retrieves the query and the needed information from the header of a source file (organized in a ***test format***), 
+executes the query and compares the output to the source file.  
 
 Usage:
 <pre>
