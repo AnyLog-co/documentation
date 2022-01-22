@@ -1,7 +1,9 @@
 # The Test Suite
 
-Nodes in the network can consider queries and their outputs as test cases and associate the test cases with test suites.   
-This setup allows testing of different deployments of the AnyLog Network in a simple way which is integrated with the AnyLog CLI.  
+Nodes in the network can consider queries and their outputs as test cases and group the test cases in test suites.   
+This setup allows testing of processes of different deployments of the AnyLog Network in a simple and unified way.  
+Using this setup a single command can trigger one or more tests on one or more nodes, whereas the results of the tests 
+from all the participating nodes can be stored in a database and queried from a single point (like time series data that is managed by the network).    
 In addition, users can leverage the functionality to test processes which are external to AnyLog and require comparisons of 
 execution outputs to expected outputs.   
 
