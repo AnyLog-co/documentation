@@ -1,10 +1,12 @@
 # The Test Suite
 
-As there are multiple deployments options for the nodes in the network, AnyLog is integrated with a test suite allowing
-to set test scenarios that are executed and compared to expected results.  
+Nodes in the network can consider queries and their outputs as test cases and associate the test cases with test suites.   
+This setup allows testing of different deployments of the AnyLog Network in a simple way which is integrated with the AnyLog CLI.
+In addition, users can leverage the functionality to test processes which are external to AnyLog and require comparisons of 
+execution outputs to expected outputs.   
 
 The testing process allows to do the following:
-* Assign a query to a ***test case*** to validate correct execution result.
+* Assign a query to a ***test case*** to validate correct execution output.
 * Output of each ***test case*** is organized in a special format called ***test format***.
 * Output of a ***test case*** can be considered as ***expected output*** (over the ***test data set***).   
 * Output of a new run of a ***test case*** (over the test data set) can be compared against the expected output.
