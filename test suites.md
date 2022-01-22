@@ -92,10 +92,10 @@ The following key-value pairs (added to the query in the query options section) 
 | key    | value           | Details                               | Default Value |
 | ------ | --------------- | ------------------------------------- | --------------|
 | test   | True / False       | enable test format                  | False         |
-| title  | any data string    | added to the header section         | None          |
+| title  | any data string    | added to the header section         |               |
 | file   | path and file name | the file to include the output data |               |
 
-Note: If file name is prefixed with asterisk, the system will make the file output file name unique.
+Note: If file name is prefixed with asterisk, the system will extend the output file name with a string making the file name unique.
 
 The following example generates an output file, named query_1.out, in the folder with a name assigned to "test_dir".  
 The output file is in a ***test format*** similar to the example in section [The test format](#the-test-format).
