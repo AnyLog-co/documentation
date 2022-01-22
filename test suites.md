@@ -7,7 +7,7 @@ from all the participating nodes can be stored in a database and queried from a 
 In addition, users can leverage the functionality to test processes which are external to AnyLog and require comparisons of 
 execution outputs to expected outputs.   
 
-The testing process allows to do the following:
+The testing processes provide the following:
 * Assign a query to a ***test case*** to validate correct execution output.
 * Output of each ***test case*** is organized in a special format called ***test format***.
 * Output of a ***test case*** can be considered as ***expected output*** (over the ***test data set***).   
