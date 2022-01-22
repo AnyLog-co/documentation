@@ -136,24 +136,24 @@ Usage:
 test case where source = [file path and name] and inform = [destination for messages] and time = [true/false]
 </pre> 
 
-The value assigned to the ***time key*** determines if the comparison considers execution time.  
+The value assigned to the ***time*** key determines if the comparison considers execution time.  
 
-The values assigned to the ***inform*** keys determine where the test results are aggregated.    
-Multiple inform values are allowed.  
-
+The values assigned to the ***inform*** key determine where the test results are aggregated. The optional values are detailed in the chart below:    
+  
 | value    |  Details                          |
 | ------ | -------------------------------------|
 | stdout | the stdout of the machine executing the query |
-| stdout@ip:port | the stdout of a target machine with the IP and port |
+| stdout@ip:port | the stdout of a target node with the IP and port |
 | dbms.dbms_name.table_name@ip:port | As time series data at the target table at the target node  |
 
 Note: 
-1. The IP and Port to message stdout of a different node is the TCP port published by the node.
+1. The IP and Port to message the output of a different node is the TCP port published by the node.
 2. The IP and Port to update the database of a different node is the REST port published by the node.
+3. Multiple inform values are allowed.
 
 The following example reads the query and query information from the source file "output_test.out", execute the query and 
 compares the output of the execution to the source file.  
-The test results are delivered to the screen as well as to a remote operator node and update the table "testing" in the database "qa". 
+The test results are delivered to the screen as well as to a remote operator node to update the table "testing" in the database "qa". 
 <pre>
 test case where source = !test_dir/output_test.out and inform = stdout and inform = dbms.qa.testing@!qa_node
 </pre> 
@@ -179,7 +179,7 @@ test suite where source = [file path and name] and inform = [destination for mes
 </pre> 
 * Source file name and file type can be prefixed with asterisk to consider only files with the name prefix ot type prefix.  
 * If subdir is set to true, the files in the subdirectories are considered in the process.
-* The value assigned to the ***time key*** determines if the comparison considers execution time.  
+* The value assigned to the ***time*** key determines if the comparison considers execution time.  
 
 The following examples process the ***test cases*** files identified by the key ***source***: 
 <pre>
