@@ -75,7 +75,7 @@ analyze output where file = [file path and name] and source = [file path and nam
 ***file*** - the path and file name to the query output that is being tested.   
 ***source*** - the path and file name to the source output that is trusted.  
 ***option*** (optional key - value pairs) - if ***time*** is added (option = time), the comparison will trigger a failure 
-if the execution time is higher than the recorded time in the source file.  
+if the execution time is slower than the recorded time in the source file.  
 
 Example:
 <pre>
@@ -84,8 +84,9 @@ analyze output where file = !test_dir/test_file3.out and source = !test_dir/test
 
 ## Directing a query output to a file and organizing the output in a test format
 
-Using the query options, the query output can be directed to a file and organized in a test format.  
-The query options are detailed in the [Query](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) document.    
+Using the [query options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options), 
+the query output can be directed to a file and organized as a test format.  
+   
 The following key-value pairs (added to the query in the query options section) are used to direct the query to a file in a test format:
 
 | key    | value           | Details                               | Default Value |
