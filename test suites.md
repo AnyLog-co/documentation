@@ -1,7 +1,7 @@
 # The Test Suite
 
 Nodes in the network can consider queries and their outputs as test cases and associate the test cases with test suites.   
-This setup allows testing of different deployments of the AnyLog Network in a simple way which is integrated with the AnyLog CLI.
+This setup allows testing of different deployments of the AnyLog Network in a simple way which is integrated with the AnyLog CLI.  
 In addition, users can leverage the functionality to test processes which are external to AnyLog and require comparisons of 
 execution outputs to expected outputs.   
 
@@ -20,7 +20,7 @@ The testing process allows to do the following:
 When a query is executed, the query params can make the query a ***test case*** and direct the query result to an output
 file that is organized in a ***test format***.    
 The test format has 3 sections:  
-***Header*** - an informative section that includes a title, the date and time of the run and the query syntax.  
+***Header*** - an informative section that includes a title, the date and time of the run, the query syntax, dbms used and output format of the returned rows.    
 ***body*** - the ***test case*** output.  
 ***footer*** - statistical results including the execution time and the number of rows returned by the query.  
 
@@ -28,9 +28,11 @@ The example below demonstrates a query output in a test format:
 <pre> 
 
 ==========================================================================
-Title:    Report Title
+Title:    List Unique Values
+Date:     2022-01-21 10:20:28.681237
 Command:  select distinct(value) as value from ping_sensor order by value 
-Date:     2022-01-17 19:36:15.559307
+DBMS:     lsl_demo
+Format:   json:output
 ==========================================================================
 {"value": 2}
 {"value": 21}
@@ -77,13 +79,13 @@ if the execution time is higher than the recorded time in the source file.
 
 Example:
 <pre>
-analyze output where file = !test_dir/test_file3.out and source = !test_dir/test_file2.out and include = time
+analyze output where file = !test_dir/test_file3.out and source = !test_dir/test_file2.out and option = time
 </pre> 
 
 ## Directing a query output to a file and organizing the output in a test format
 
-Using the query options, the query output can be directed to a file in a test format.  
-The query options explained detailed in the [query options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) section.  
+Using the query options, the query output can be directed to a file and organized in a test format.  
+The query options are detailed in the [Query](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) document.    
 The following key-value pairs (added to the query in the query options section) are used to direct the query to a file in a test format:
 
 | key    | value           | Details                               | Default Value |
