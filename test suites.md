@@ -20,9 +20,9 @@ The testing process allows to do the following:
 When a query is executed, the query params can make the query a ***test case*** and direct the query result to an output
 file that is organized in a ***test format***.    
 The test format has 3 sections:  
-***Header*** - an informative section that includes a title, the date and time of the run, the query syntax, dbms used and output format of the returned rows.    
-***body*** - the ***test case*** output.  
-***footer*** - statistical results including the execution time and the number of rows returned by the query.  
+* ***Header*** - an informative section that includes a title, the date and time of the run, the query syntax, dbms used and output format of the returned rows.    
+* ***body*** - the ***test case*** output.  
+* ***footer*** - statistical results including the execution time and the number of rows returned by the query.  
 
 The example below demonstrates a query output in a test format:
 <pre> 
