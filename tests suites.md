@@ -143,6 +143,9 @@ Multiple inform values are allowed.
 | stdout@ip:port | the stdout of a target machine with the IP and port |
 | dbms.dbms_name.table_name@ip:port | As time series data at the target table at the target node  |
 
+Note: 
+1. The IP and Port to message stdout of a different node is the TCP port published by the node.
+2. The IP and Port to update the database of a different node is the REST port published by the node.
 
 The following example reads the query and query information from the source file "output_test.out", execute the query and 
 compares the output of the execution to the source file.  
