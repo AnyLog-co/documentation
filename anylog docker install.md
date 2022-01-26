@@ -164,6 +164,6 @@ docker inspect al-${CONTAINER_NAME}-local_scripts
 sudo vim /var/lib/docker/volumes/al-${CONTAINER_NAME}-local-scripts/_data/local_script.al
 ```
 
-4. Execute `docker run` ([as shown above](anylog%20docker%20install.md?plain=1#L81)) - make sure volume names are consistent. 
+4. Execute `docker run` ([as shown above](anylog%20docker%20install.md#L81)) - make sure volume names are consistent. 
  
 Once the "default script" selected to run (based on `NODE_TYPE`) will complete, `local_script.al` gets executed.  
