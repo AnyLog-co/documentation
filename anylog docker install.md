@@ -40,7 +40,7 @@ Details regarding data structure can be found in _[Getting Started](getting%20st
 * scripts (`al-${NODE_NAME}-scripts:/app/AnyLog-Network/scripts:rw`) - contains shell scripts used to deploy AnyLog
 
 To manually access these directories use `docker inspect` command
-```shell
+```bash
 docker volume inspect al-operator2-data 
 [
     {
@@ -56,7 +56,7 @@ docker volume inspect al-operator2-data
 ```
 
 
-## Sample Docker Calls
+## Sample Docker Call
 Based on the `NODE_TYPE` environment variable the code is aware the kind of AnyLog node type to be deployed. An explanation of the base node types can be found in _[Getting Started](getting%20started.md#type-of-instances)_ 
 
 * [Empty Node](examples/Docker%20Calls/empty_node.sh) - node that doesn't contain anything, user should manually access it to deploy commands 
@@ -79,7 +79,7 @@ Based on the `NODE_TYPE` environment variable the code is aware the kind of AnyL
   * Env Params: `NODE_TYPE=hidden-query`
 
 **Generic Docker Command** - parameters that are not required are set in [square brackets]
-```shell
+```bash
 docker run --network host --name ${CONTAINER_NAME} \
     -e NODE_TYPE=${NODE_TYPE} \ # Node type 
     -e COMPANY_NAME=${COMPANY_NAME} \ # company name 
@@ -119,15 +119,51 @@ docker run --network host --name ${CONTAINER_NAME} \
     [-e MQTT_COLUMN_TIMESTAMP=${TIMESTAMP_COLUMN} \] # timestamp column topic value - required only if MQTT is enabled
     [-e MQTT_COLUMN_VALUE_TYPE=${COLUMN_VALUE_TYPE} \] # column value type topic value - required only if MQTT is enabled
     [-e MQTT_COLUMN_VALUE=${COLUMN_VALUE_NAME} \] # value column name topic value - required only if MQTT is enabled
-    -v al-aiops-single-node-anylog:/app/AnyLog-Network/anylog:rw \
-    -v al-aiops-single-node-blockchain:/app/AnyLog-Network/blockchain:rw \
-    -v al-aiops-single-node-data:/app/AnyLog-Network/data:rw \
-    -v al-aiops-single-node-local-scripts:/app/AnyLog-Network/local_scripts:rw \
-    -v al-aiops-single-node-scripts:/app/AnyLog-Network/scripts:rw \
+    -v al-{CONTAINER_NAME}-anylog:/app/AnyLog-Network/anylog:rw \
+    -v al-{CONTAINER_NAME-blockchain:/app/AnyLog-Network/blockchain:rw \
+    -v al-{CONTAINER_NAME}-data:/app/AnyLog-Network/data:rw \
+    -v al-{CONTAINER_NAME}-local-scripts:/app/AnyLog-Network/local_scripts:rw \
+    -v al-{CONTAINER_NAME}-scripts:/app/AnyLog-Network/scripts:rw \
     -d -it --detach-keys="ctrl-d" --rm oshadmon/anylog:${BUILD}
 ```
 
+## Preparing & Executing Personalized Scripts
 
+In addition to the default deployment scripts, can enhance their AnyLog deployment by embedding personalized processes 
+to be executed as part of the deployment process. 
 
+1. Execute `docker create` for the new AnyLog instance you'd like to run
+```bash
+docker create --name ${CONTAINER_NAME} \
+    -v al-{CONTAINER_NAME}-anylog:/app/AnyLog-Network/anylog:rw \
+    -v al-{CONTAINER_NAME-blockchain:/app/AnyLog-Network/blockchain:rw \
+    -v al-{CONTAINER_NAME}-data:/app/AnyLog-Network/data:rw \
+    -v al-{CONTAINER_NAME}-local-scripts:/app/AnyLog-Network/local_scripts:rw \
+    -v al-{CONTAINER_NAME}-scripts:/app/AnyLog-Network/scripts:rw \
+    --rm oshadmon/anylog:${BUILD}
+```
 
+2. Get the path for `AnyLog-Network/local_scripts` 
+```bash
+docker inspect al-${CONTAINER_NAME}-local_scripts
+[
+    {
+        "CreatedAt": "2022-01-26T21:46:52Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/al-${CONTAINER_NAME}-local-scripts/_data",
+        "Name": "al-single-node-local-scripts",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+3. Open `local_script.al`, in which you can write AnyLog code to be deployed, and update with new content
+```shell
+sudo vim /var/lib/docker/volumes/al-${CONTAINER_NAME}-local-scripts/_data/local_script.al
+```
+
+4. Execute `docker run` ([as shown above](anylog%20docker%20install.md?plain=1#L81)) - make sure volume names are consistent. 
  
+Once the "default script" selected to run (based on `NODE_TYPE`) will complete, `local_script.al` gets executed.  
