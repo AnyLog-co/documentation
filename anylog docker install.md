@@ -78,7 +78,8 @@ Based on the `NODE_TYPE` environment variable the code is aware the kind of AnyL
 * [Hidden Query Node](examples/Docker%20Calls/hidden_query.sh) - A node that's able to query against the network but isn't declared on the blockchain 
   * Env Params: `NODE_TYPE=hidden-query`
 
-**Generic Docker Command** - parameters that are not required are set in [square brackets]
+### Generic Docker Command 
+parameters that are not required are set in [square brackets]
 ```bash
 docker run --network host --name ${CONTAINER_NAME} \
     -e NODE_TYPE=${NODE_TYPE} \ # Node type 
@@ -164,6 +165,6 @@ docker inspect al-${CONTAINER_NAME}-local_scripts
 sudo vim /var/lib/docker/volumes/al-${CONTAINER_NAME}-local-scripts/_data/local_script.al
 ```
 
-4. Execute `docker run` ([as shown above](anylog%20docker%20install.md#L81)) - make sure volume names are consistent. 
+4. Execute `docker run` ([as shown above](#Generic Docker Command)) - make sure volume names are consistent. 
  
 Once the "default script" selected to run (based on `NODE_TYPE`) will complete, `local_script.al` gets executed.  
