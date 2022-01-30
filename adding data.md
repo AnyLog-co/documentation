@@ -347,7 +347,7 @@ The diagram describes the different southbound connectors options and the data f
 ***Option A: Data published to an external Broker***  
 
 Data is published to an external broker. 
-Example of brokers are: MQTT broker and Kafka.
+Example of brokers are: MQTT broker and Kafka.  
 AnyLog client is registered to the broker and does the following:  
 a) pulls the data from the broker and b) transfers the data to the mapper.  
 Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
