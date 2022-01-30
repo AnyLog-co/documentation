@@ -7,7 +7,7 @@ Using REST, users can execute AnyLog commands over HTTP on any node in the netwo
 
 ## Prerequisites
 
-* A rest client software like [Curl](https://man7.org/linux/man-pages/man1/curl.1.html) or [Potman](https://www.postman.com/).
+* A REST client software like [Curl](https://man7.org/linux/man-pages/man1/curl.1.html) or [Potman](https://www.postman.com/).
 * An AnyLog Node that provides a REST connection.
 To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
 ```run rest server [ip] [port] [max time]```  
