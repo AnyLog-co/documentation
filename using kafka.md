@@ -3,10 +3,10 @@
 ## Overview
 
 Nodes in the AnyLog network can interact with Kafka in 2 ways:
-* Kafka is treated as the destination for data. A query result set is send to the Kafka platform. In Kafka's terminology,
-  AnyLog is a Data Producer.
-* Kafka is treated as a data source, similar to a message broker that transfers data to the network nodes. In Kafka's terminology,
-  AnyLog is a Data Consumer.
+* Kafka is treated as the destination for data whereas a query result set is send to a Kafka instance.   
+  In Kafka's terminology, AnyLog is a Data Producer.
+* Kafka is treated as a data source, similar to a message broker that transfers data to the network nodes.  
+  In Kafka's terminology, AnyLog is a Data Consumer.
   
 ## Prerequisites
 
@@ -15,8 +15,8 @@ Nodes in the AnyLog network can interact with Kafka in 2 ways:
 
 ## AnyLog serves as a Data Producer 
 
-A query issued to the network can be directed to Kafka. The Kafka instance is identified by an IP and port, and the query result set 
-is associated with a topic.  
+A query issued to the network can direct the result set to a Kafka instance.  
+The Kafka instance is identified by an IP and port, and the query result set is associated with a topic.  
 
 The following command, issued on the AnyLog CLI, sends 10 row from a table managed by nodes in the network to a Kafka instance:
 
@@ -26,7 +26,7 @@ run client () sql lsl_demo format = json:output and stat = false and dest = kafk
 
 Note:
 * The format directive ***json:output*** organizes each set of timestamp and value (that are returned by the query) in JSON.
-* The destination is identified by tje key ***kafka*** followed by the Kafka configured IP and Port (dest = kafka@198.74.50.131:9092).
+* The destination is identified by the key ***kafka*** followed by the Kafka configured IP and Port (dest = kafka@198.74.50.131:9092).
 * The Kafka topic that is associated with the data in the example above is ***ping_data***
 
 ## AnyLog serves as a Data Consumer
