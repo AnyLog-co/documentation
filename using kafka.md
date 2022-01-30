@@ -21,7 +21,7 @@ The Kafka instance is identified by an IP and port, and the query result set is 
 The following command, issued on the AnyLog CLI, sends 10 row from a table managed by nodes in the network to a Kafka instance:
 
 <pre>
-run client () sql lsl_demo format = json:output and stat = false and dest = kafka@198.74.50.131:9092 and topic = ping_data "select timestamp, value from ping_sensor limit 10"
+run client () sql litsanleandro format = json:output and stat  = false and dest = kafka@198.74.50.131:9092 and topic = ping_data "select device_name, timestamp, value, from ping_sensor where timestamp > now() - 1 day limit 10"
 </pre>
 
 Note:
