@@ -44,9 +44,11 @@ run kafka consumer where ip = [ip] and port = [port]] and reset = [latest/earlie
 
 Command options:
 
-| Key        | Value  |
-| ---------- | -------| 
-| ip         | The Kafka broker IP |
-| Port       | The Kafks broker port. |
-| reset      | Determines the offset policy. Optional values are ***earliest*** or ***latest***|
+| Key        | Value  | Default  |
+| ---------- | -------| ------- |
+| ip         | The Kafka broker IP |  |
+| Port       | The Kafks broker port. | |
+| reset      | Determines the offset policy. Optional values are ***latest*** or ***earliest***| latest |
+| topic      | One or more topics with mapping instructions. Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params). | latest |
+
 
