@@ -31,7 +31,8 @@ Note:
 
 ## AnyLog serves as a Data Consumer
 
-Each node in the AnyLog Network can be configured as a data consumer. 
+Each node in the AnyLog Network can be configured as a data consumer.  
+The flow of data from a Kafka instance to the network is detailed in the [The Southbound Connectors Diagram](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#the-southbound-connectors-diagram).
 
 The command ***run kafka consumer*** initiates a process that serves as a client that subscribes to one or more topics 
 and consume published messages by pulling data from the Kafka instance.
@@ -49,6 +50,29 @@ Command options:
 | ip         | The Kafka broker IP |  |
 | Port       | The Kafks broker port. | |
 | reset      | Determines the offset policy. Optional values are ***latest*** or ***earliest***| latest |
-| topic      | One or more topics with mapping instructions. Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params). | latest |
+| topic      | One or more topics with mapping instructions.| |
+
+Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
+
+Example:
+<pre>
+run kafka consumer where ip = 198.74.50.131 and port = 9092 and offset = latest and topic = (name = ping_data and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")
+</pre>
 
 
+### Related command
+
+Use the following command to view if a Kafka consumer process is enabled:
+<pre>
+get processes
+</pre>
+
+Use the following command to view data consumed from a Kafka instances:
+<pre>
+get msg client
+</pre>
+
+Use the following command to view data mapping status:
+<pre>
+get streaming
+</pre>
