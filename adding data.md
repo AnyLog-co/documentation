@@ -279,7 +279,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
 <pre>
                                                        --------------------------       --------------------------
   Option A:                                            |                        |       |                        |   
-  Data published to external Broker                    |  External MQTT Broker  |       |          Kafka         |   
+  Data published to external Broker                    |       MQTT Broker      |       |          Kafka         |   
   ------------------------------------------------>    |                        |       |                        |   
                                                        --------------------------       --------------------------
                                                                            |                   |
