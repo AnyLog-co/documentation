@@ -38,7 +38,7 @@ and consume published messages by pulling data from the Kafka instance.
 Usage:
 
 <pre>
-run kafka consumer where ip = [ip] and port = [port]] and reset = [latest/earliest] and topic = [topic and mapping instructions]
+run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earliest] and topic = [topic and mapping instructions]
 </pre>
 
 Command options:
