@@ -3,9 +3,9 @@
 ## Overview
 
 Nodes in the AnyLog network can interact with Kafka in 2 ways:
-* Kafka is treated as the destination for data whereas a query result set is send to a Kafka instance.   
+* Kafka is treated as the destination for data - a query result set is send to a Kafka instance.   
   In Kafka's terminology, AnyLog is a Data Producer.
-* Kafka is treated as a data source, similar to a message broker that transfers data to the network nodes.  
+* Kafka is treated as a data source, similar to a [message broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) that transfers data to the network nodes.  
   In Kafka's terminology, AnyLog is a Data Consumer.
   
 ## Prerequisites
@@ -48,7 +48,7 @@ Command options:
 | Key        | Value  | Default  |
 | ---------- | -------| ------- |
 | ip         | The Kafka broker IP. |  |
-| Port       | The Kafks broker port. | |
+| Port       | The Kafka broker port. | |
 | reset      | Determines the offset policy. Optional values are ***latest*** or ***earliest***.| latest |
 | topic      | One or more topics with mapping instructions.| |
 
