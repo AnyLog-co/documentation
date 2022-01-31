@@ -58,7 +58,7 @@ run kafka consumer where ip = 198.74.50.131 and port = 9092 and offset = latest 
 </pre>
 
 
-### Related command
+### Related commands
 
 Use the following command to view if a Kafka consumer process is enabled:
 <pre>
