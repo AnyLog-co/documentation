@@ -2,7 +2,7 @@
 
 ## Overview
 
-Nodes in the AnyLog network can interact with Kafka in 2 ways:
+Nodes in the AnyLog Network interact with Kafka in 2 ways:
 * AnyLog serves as a Data Producer to Kafka - any result set of a query can be directed to a Kafka instance.   
 * AnyLog is a Data Consumer - Kafka serves as a [message broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) that transfers data to the network nodes.  
   
