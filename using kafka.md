@@ -47,9 +47,9 @@ Command options:
 
 | Key        | Value  | Default  |
 | ---------- | -------| ------- |
-| ip         | The Kafka broker IP |  |
+| ip         | The Kafka broker IP. |  |
 | Port       | The Kafks broker port. | |
-| reset      | Determines the offset policy. Optional values are ***latest*** or ***earliest***| latest |
+| reset      | Determines the offset policy. Optional values are ***latest*** or ***earliest***.| latest |
 | topic      | One or more topics with mapping instructions.| |
 
 Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
