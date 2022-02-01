@@ -75,10 +75,10 @@ Use the following command to view data mapping status:
 <pre>
 get streaming
 </pre>
-Command details are available [here]](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
 
 Use the following command to view data ingestion status:
 <pre>
 get operator
 </pre>
-Command details are available [here]](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
+Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
