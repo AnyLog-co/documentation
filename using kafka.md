@@ -60,25 +60,9 @@ run kafka consumer where ip = 198.74.50.131 and port = 9092 and offset = latest 
 
 ### Related commands
 
-Use the following command to view if a Kafka consumer process is enabled:
-<pre>
-get processes
-</pre>
-
-Use the following command to view data consumed from a Kafka instances:
-<pre>
-get msg client
-</pre>
-Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
-
-Use the following command to view data mapping status:
-<pre>
-get streaming
-</pre>
-Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming).
-
-Use the following command to view data ingestion status:
-<pre>
-get operator
-</pre>
-Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator).
+| Command        | Info provided  |
+| ---------- | -------|
+| [get processes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)    | Background processes to determine if Kafka is enabled |
+| [get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)   | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
+| [get streaming](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming)   | Data consumed from brokers associated to dbms tables |
+| [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator)   | Statistics on ingestion of data to database tables |
