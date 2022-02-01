@@ -67,10 +67,15 @@ get processes
 
 Use the following command to view data consumed from a Kafka instances:
 <pre>
-get msg client
+[get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)
 </pre>
 
 Use the following command to view data mapping status:
 <pre>
-get streaming
+[get streaming](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming)
+</pre>
+
+Use the following command to view data ingestion status:
+<pre>
+[get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator)
 </pre>
