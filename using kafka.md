@@ -67,7 +67,7 @@ get processes
 
 Use the following command to view data consumed from a Kafka instances:
 <pre>
-get msg client
+[get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)
 </pre>
 Command details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients).
 
