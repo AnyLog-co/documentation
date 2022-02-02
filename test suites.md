@@ -23,8 +23,8 @@ When a query is executed, the query params can make the query a ***test case*** 
 file that is organized in a ***test format***.    
 The test format has 3 sections:  
 * ***Header*** - an informative section that includes a title, the date and time of the run, the query syntax, dbms used and output format of the returned rows.    
-* ***body*** - the ***test case*** output.  
-* ***footer*** - statistical results including the execution time and the number of rows returned by the query.  
+* ***Body*** - the ***test case*** output.  
+* ***Footer*** - statistical results including the execution time and the number of rows returned by the query.  
 
 The example below demonstrates a query output in a test format:
 <pre> 
