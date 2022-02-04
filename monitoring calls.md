@@ -45,7 +45,11 @@ anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11
 
 ## Get Streaming
 
-Information on data provided via REST APIs and message brokers is distributed to the different tables that are hosted by the node.
+Data provided via REST APIs and message brokers passes to processing through internal buffers.
+The buffers are associated with database tables and the ***get streaming*** command provides information on the data 
+that passes through these buffers.
+
+The command returns the data in a text format. Adding the key-value pair ***format = json*** returns the info in a JSON structure.
 
 Usage: 
 <pre>
@@ -53,7 +57,7 @@ get streaming
 get streaming format = json
 </pre>
 
-The reply has 2 sections showing configurations and statistics.
+The non JSON reply has 2 sections showing configurations and statistics.
 
 ***Section A attributes:***
 | Attribute name | Details  |
@@ -154,13 +158,15 @@ The ***get operator*** command provides information on data ingested to the loca
 Data is mapped from a JSON format to a SQL format and added to the local database, the command provides information on the process of
 transforming the JSON to SQL and the ingestion process.
 
+The command returns the data in a text format. Adding the key-value pair ***format = json*** returns the info in a JSON structure.
+
 Usage: 
 <pre>
 get operator
 get operator format = json
 </pre>
 
-The reply has 4 sections showing configurations and statistics.
+The non JSON reply has 4 sections showing configurations and statistics.
 
 ***Section A attributes:***
 

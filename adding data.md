@@ -277,25 +277,25 @@ Details are available at the [message broker section - Configuring an AnyLog nod
 ## The Southbound Connectors Diagram
 
 <pre>
-                                                       --------------------------
-  Option A:                                            |                        |
-  Data published to external MQTT Broker               |  External MQTT Broker  |
-  ------------------------------------------------>    |                        |
-                                                       --------------------------
-                                                                           |
- ==========================================================================================
-  AnyLog                                                                   |
-                                                                           V
-                                         -------------------            -------------------
-  Option B:                              |                 |            |                 |
-  Data published to AnyLog Broker        |  AnyLog Broker  |  ------>   |  Broker Client  |
-  ---------------------------------->    |                 |            |                 |
-                                         -------------------            -------------------
+                                                       --------------------------       --------------------------
+  Option A:                                            |                        |       |                        |   
+  Data published to external Broker                    |       MQTT Broker      |       |          Kafka         |   
+  ------------------------------------------------>    |                        |       |                        |   
+                                                       --------------------------       --------------------------
+                                                                           |                   |
+ ================================================================================================================
+  AnyLog                                                                   |                   |
+                                                                           V                   V
+                                         -------------------            --------------------------
+  Option C:                              |                 |            |                        |
+  Data published to AnyLog Broker        |  AnyLog Broker  |  ------>   |      Broker Client     |
+  ---------------------------------->    |                 |            |                        |
+                                         -------------------            --------------------------
                                                                            |
                                                                            |
                                                                            V
                                                                -----------------
-  Option C:                                                    |  Client Data  |
+  Option D:                                                    |  Client Data  |
   Data transferred using POST                                  |  Mapper       |
   -------------------------------------------------------->    |  f(Topic)     |
                                                                -----------------
@@ -303,7 +303,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option D:                                                    |               |        |  (Optional)   |
+  Option E:                                                    |               |        |  (Optional)   |
   Data transferred using PUT (without mapping)                 |  Data Buffers |   -->  |  Immediate    |
   -------------------------------------------------------->    |               |        |  DBMS update  |
                                                                -----------------        -----------------
@@ -311,7 +311,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option E:                                                    |               |        |  (Optional)   |
+  Option F:                                                    |               |        |  (Optional)   |
   Adding JSON files to the watch directory                     |  JSON Files   |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  JSON files   |
                                                                -----------------        -----------------
@@ -319,7 +319,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option F:                                                    |               |        |  (Optional)   |
+  Option G:                                                    |               |        |  (Optional)   |
   Adding SQL files to the watch directory                      |  SQL Files    |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  SQL files    |
                                                                -----------------        -----------------
@@ -344,10 +344,12 @@ Details are available at the [message broker section - Configuring an AnyLog nod
 
 The diagram describes the different southbound connectors options and the data flow.
 
-***Option A: Data published to an external MQTT Broker***  
+***Option A: Data published to an external Broker***  
 
-Data is published to an external MQTT broker. AnyLog client is registered to the broker and does the following:  
-a) pulls the data from the broker and b) puses the data to the mapper.  
+Data is published to an external broker. 
+Example of brokers are: MQTT broker and Kafka.  
+AnyLog client is registered to the broker and does the following:  
+a) pulls the data from the broker and b) transfers the data to the mapper.  
 Details are available at the [message broker section - Subscribing to a third party broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker).
 
 The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:

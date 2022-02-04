@@ -128,7 +128,7 @@ with the tables' data receive and process the query. Users can detail specific n
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed as key = value pairs.
-With multiple option, the keyword ***and*** seperates between each key value pair.
+With multiple option, the keyword ***and*** separates between each key value pair.
 
 | key  | Values Options  | Details     | Default Value |
 | ---- | --------------- | ------------| --------------|
@@ -136,12 +136,13 @@ With multiple option, the keyword ***and*** seperates between each key value pai
 | timezone | utc / local | Timezone used for time values in the result set | local |
 | include | dbms.table | Allows to treat remote tables with a different name as the table being queried | ignored |
 | drop | True/False | Drops the local output table with the issued query | True |
-| dest | stdout / rest / dbms / file | destination of the query result set | stdout |
+| dest | stdout / rest / dbms / file | Destination of the query result set | stdout |
 | file | file name | File name for the output data |  |
 | table | table name | Table name for the output data | random table names are assigned to each executing query |
 | stat | True/False | Adds processing statistics to the query output | True |
 | test | True/False | The output is organized as a test output | False |
-| validate | file name | A file name that is used in a test process to determine the processing result |  |
+| source | file name | A file name that is used in a test process to determine the processing result |  |
+| title | a query title | Added to the test information in the test header |  |
 
 ### Timezones
 Timezones can be a timezone from the [list of tz database timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).   

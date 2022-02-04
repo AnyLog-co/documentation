@@ -355,7 +355,7 @@ section in the [Background Processes](https://github.com/AnyLog-co/documentation
 
 ## Subscription to topics published on the AnyLog node
 Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the  [Subscribing to a third party broker](#subscribing0-to-a-third-party-broker) 
+This process is identical to the  [Subscribing to a third party broker](#subscribing-to-a-third-party-broker) 
   whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
 
 usage:
