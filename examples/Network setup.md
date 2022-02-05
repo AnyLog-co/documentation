@@ -16,7 +16,7 @@ Note:
     <pre>
     !anylog_path/AnyLog-Network/demo/operator1.al
     </pre>
-* If AnyLog is installed without a package that creates the enviornment (like Docker), the default directories can be created using the command:
+* If AnyLog is installed without a package that creates the environment (like Docker), the default directories can be created using the command:
     <pre>
     create work directories
     </pre>
