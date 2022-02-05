@@ -31,6 +31,13 @@ Note:
 4. Run queries from the Query node
 * The commands detailed in this doc include the commands to reset an existing setup to delete existing metadata and data files.
 
+## Declaring multiple nodes on the same physical or virtual machine
+
+If the nodes are not isolated, associate a different path to each node.
+For example:
+<pre>
+set anylog home D:\Node
+</pre>
 
 ## Configure the Master Node
 <pre>
@@ -158,8 +165,8 @@ connect dbms psql anylog@127.0.0.1:demo 5432 system_query # Use SQLite as system
 run blockchain sync where source = master and time = 30 seconds and dest = file and connection = !master_node # Sync the blockchain data
 </pre>
 
-## Push data to the network
-There many ways and interfaces to add data to the network. The simplest is to add a JSON file to the watch directory.  
+## Push data to the network (on the Operator Node)
+There many ways and interfaces to add data to the network. The simplest is to add a JSON file to the watch directory of the Operator Node.  
 View the location of the watch directory using the command: 
 <pre>
 !watch_dir
