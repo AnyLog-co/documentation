@@ -86,10 +86,8 @@ run operator where create_table = true and update_tsd_info = true and archive = 
 
 <pre>
 time file drop all
-create table tsd_info where dbms = almgm
-drop table ping_sensor where dbms = lsl_demo
-drop table ping_sensor where dbms = anylog
-drop table new_sensor where dbms = lsl_demo
+create table tsd_info where dbms = almgm  # Drop AnyLog Table  
+drop table ping_sensor where dbms = lsl_demo # Drop User table
 blockchain delete local file
 </pre>
 
