@@ -67,9 +67,10 @@ master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MAST
 run tcp server !external_ip !operator_tcp_port !ip !operator_tcp_port # The connection to the network nodes
 run rest server !ip !operator_rest_port # Enable REST calls
 
-connect dbms psql anylog@127.0.0.1:demo 5432 system_query # Use SQLite as system dbms
-connect dbms psql anylog@127.0.0.1:demo 5432  lsl_demo  # use Postgres for lsl_demo tables
-connect dbms sqlite anylog@127.0.0.1:demo 5432 almgm # Local management database
+connect dbms psql anylog@127.0.0.1:demo 5432 system_query # For AnyLog use: Use SQLite as system dbms
+connect dbms sqlite anylog@127.0.0.1:demo 5432 almgm # For AnyLog use: Local management database
+
+connect dbms psql anylog@127.0.0.1:demo 5432  lsl_demo  # For the user data: use Postgres for lsl_demo tables
 
 partition lsl_demo ping_sensor using timestamp by 7 days  # Partition the data of the lsl_demo dbms by time
 
