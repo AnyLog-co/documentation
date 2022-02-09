@@ -296,7 +296,7 @@ get servers where company = anylog bring [operator][ip] : [operator][port] --- [
 
 ## Get pools info
 
-These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
+These commands return the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
 For example:
 <pre>
 get workers pool
