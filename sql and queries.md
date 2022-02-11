@@ -1,9 +1,28 @@
-# Queries 
+# SQL and queries
 
-The AnyLog network persists data on a collections of nodes. The network protocol is able to present the distributed data 
+Nodes in the network maintain data in a local database. The network protocol is able to present the distributed data 
 as a single collection of data and users and application can view and query the data without knowing the physical location of the data, 
 as if the data is hosted in a single machine.  
-In addition users and application can request to query data from a single particular node or from a list of nodes.
+In addition, users and application can request to query data from a single particular node or from a list of nodes.
+
+This chapter covers the following topics:
+* [Configuring a local database](#configuring-a-local-database) on a node
+* Issuing a SQL command to the local database  
+* The metadata layer
+* Query of data using the network protocol
+
+#Configuring a local database
+
+Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
+are [PosrgreSQL](https://www.postgresql.org/) and [SQLite](https://www.sqlite.org/).   
+Users determine which database to use - a node operates indifferently regardless of the physical database selected.  
+When a logical database is created, users name the physical database that is assigned to the logical database. The association
+will host the database tables in the physical database associated with the logical database.  
+Usually, users will leverage SQLite with nodes that are low in compute power and PostgreSQL with stronger nodes.  
+Users can leverage multiple physical databases for different logical databases within the same nodes.
+In addition, different nodes in the network can use different physical databases for the same logical database.
+
+
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
