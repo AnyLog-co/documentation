@@ -20,7 +20,7 @@ Note: Issuing a query to multiple nodes is explained in the [Query nodes in the 
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
 are [PosrgreSQL](https://www.postgresql.org/) and [SQLite](https://www.sqlite.org/).   
-Users determine which database to use - a node operates indifferently regardless of the physical database selected.  
+Users determine which physical database to use and a node operates indifferently regardless of the physical database selected.  
 When a logical database is created, users name the physical database that is assigned to the logical database. The association
 will host the database tables in the physical database associated with the logical database.  
 Usually, users will leverage SQLite with nodes that are low in compute power and PostgreSQL with stronger nodes.  
@@ -28,8 +28,9 @@ Users can leverage multiple physical databases for different logical databases w
 In addition, different nodes in the network can use different physical databases for the same logical database.
 
 ## Connecting to a local database
-The command ***connect dbms*** associate a logical database to a physical database. In addition, the command parameters 
-provide the connection information to the physical database. Note that different databases require different connection info.
+The command ***connect dbms*** associate a logical database to a physical database. The command parameters 
+provide the connection information to the physical database.  
+Note that different databases require different connection info.
 
 Usage:
 <pre> 
@@ -47,7 +48,7 @@ Explanation:
 * [connection] - Database connection string.
 
 ***Note 1***: For SQLite, the logical name of the database can include the path to maintain the data. Otherwise, 
-the database data is maintained, for each table of the database, in the default location defined by !dbms_dir.    
+the database data is maintained, for each table in the database, in the default location defined by !dbms_dir.    
 ***Note 2***: If 'memory' is set to ***true***, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgreSQL).
 
 Examples:
@@ -55,6 +56,65 @@ Examples:
 connect dbms test where type = sqlite
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 </pre>
+
+## Creating tables
+
+User tables are created dynamically based on the structure of the ingested data.
+As ingested data is in JSON, the node hosting the data is able to determine if a schema for the ingested data exists.
+If the schema does not exit, the nodes creates a new schema and publishes the schema on the global metadata layer such
+that other nodes with the same data will share the same schema.
+
+## System databases and system tables
+
+Depending on the role of the node, the node may host system databases and tables.
+These needs to be created once and associated with a physical database.
+
+COnfigure the following on the participating nodes:
+* On a query node, ***system_query*** is a database that is used to unify data returned to the application. Associate the 
+***system_query*** database with SQLite or PostgreSQL as in the example below:
+  
+<pre> 
+connect dbms system_query where type = sqlite
+</pre>
+or
+<pre> 
+connect dbms system_query where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+</pre> 
+
+There is no need to declare tables in the ***system_query*** databases as tables are created dynamically. 
+
+* On an operator node, ***mgm*** is an optional internal management database that tracks data ingestion.  Associate the 
+***mgm*** database with SQLite or PostgreSQL as in the example below:
+
+<pre> 
+connect dbms mgm where type = sqlite
+</pre>
+or
+<pre> 
+connect dbms mgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+</pre>
+
+The following command creates the ***tsd_info*** table in the mgm database:
+<pre> 
+create table tsd_info where dbms = almgm
+</pre>
+
+* On a master node (if used), ***blockchain*** is an optional internal database that manage the metadata.  Associate the 
+***blockchain*** database with SQLite or PostgreSQL as in the example below:
+
+<pre> 
+connect dbms blockchain where type = sqlite
+</pre>
+or 
+<pre> 
+connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+</pre>
+
+The following command creates the ***ledger*** table in the blockchain database:
+<pre> 
+create table ledger where dbms = blockchain
+</pre>
+
 
 ## The get databases command
 
