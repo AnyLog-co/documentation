@@ -11,7 +11,7 @@ This chapter covers the following topics:
 * The metadata layer
 * Query of data using the network protocol
 
-#Configuring a local database
+# Configuring a local database
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
 are [PosrgreSQL](https://www.postgresql.org/) and [SQLite](https://www.sqlite.org/).   
@@ -22,6 +22,33 @@ Usually, users will leverage SQLite with nodes that are low in compute power and
 Users can leverage multiple physical databases for different logical databases within the same nodes.
 In addition, different nodes in the network can use different physical databases for the same logical database.
 
+## Connecting to a local database
+The command ***connect dbms*** associate a logical database to a physical database. In addition, the command parameters 
+provide the connection information to the physical database. Note that different databases require different connection info.
+
+Usage:
+<pre> 
+connect dbms [db name] where type = [db type] and user = [db user] and password = [db passwd] and ip = [db ip] and port = [db port] and memory = [true/false] and connection = [db string]
+</pre>  
+
+Explanation:
+
+[db name] - The logical name of the database.
+[db_type] - The physical database - One of the supported databases such as psql, sqlite, pi.
+[db user] - A username recognized by the database.
+[db passwd] - The user dbms password. 
+[db port] - The database port.
+[memory] - a bool value to determine memory resident data (if supported by the database).
+[connection] - Database connection string.
+
+Note 1: For databases, like SQLite, dbms name can include the path to maintain the data. Otherwise, the default location defined by !dbms_dir is used.  
+Note 2: If 'memory' is specified, the database tables are created in RAM (this option is supported by SQLite but not with PostgreSQL).
+
+Examples:
+<pre> 
+connect dbms test where type = sqlite
+connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
+</pre>
 
 
 ## The metadata
