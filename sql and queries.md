@@ -7,7 +7,7 @@ In addition, users and application can request to query data from a single parti
 
 This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
-* Issuing a SQL command to the local database  
+* Issuing a [SQL command](#sql-commands)  
 * The metadata layer
 * Query of data using the network protocol
 
@@ -50,6 +50,9 @@ Examples:
 connect dbms test where type = sqlite
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 </pre>
+
+
+# SQL Commands
 
 
 ## The metadata
