@@ -59,7 +59,37 @@ Usage:
 get databases
 </pre>  
 
-The command provides the list of logical databases and the physical database supporting each logical database.
+The command provides the list of logical databases and the physical database supporting each logical database.  
+Example output:
+<pre>
+List of DBMS connections
+Logical DBMS         Database Type IP:Port                        Storage
+-------------------- ------------- ------------------------------ -------------------------
+aiops                psql          127.0.0.1:5432                 Persistent
+al_smoke_test        psql          127.0.0.1:5432                 Persistent
+almgm                psql          127.0.0.1:5432                 Persistent
+blockchain           psql          127.0.0.1:5432                 Persistent
+dmci                 sqlite        Local                          D:\Node\AnyLog-Network\data\dbms\dmci.dbms
+edgex                psql          127.0.0.1:5432                 Persistent
+lsl_demo             psql          127.0.0.1:5432                 Persistent
+monitor              sqlite        Local                          D:\Node\AnyLog-Network\data\dbms\monitor.dbms
+orics                psql          127.0.0.1:5432                 Persistent
+system_query         psql          127.0.0.1:5432                 Persistent
+</pre>
+
+## The get database size command
+
+The ***get database size*** command returns the size og the database in bytes.  
+Usage:
+<pre> 
+get database size [logical dbms name]
+</pre>  
+
+Example:
+<pre> 
+get database size lsl_demo
+</pre>  
+
 
 # SQL Commands
 
