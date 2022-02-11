@@ -33,13 +33,13 @@ connect dbms [db name] where type = [db type] and user = [db user] and password 
 
 Explanation:
 
-[db name] - The logical name of the database.
-[db_type] - The physical database - One of the supported databases such as psql, sqlite, pi.
-[db user] - A username recognized by the database.
-[db passwd] - The user dbms password. 
-[db port] - The database port.
-[memory] - a bool value to determine memory resident data (if supported by the database).
-[connection] - Database connection string.
+* [db name] - The logical name of the database.
+* [db_type] - The physical database - One of the supported databases such as psql, sqlite, pi.
+* [db user] - A username recognized by the database.
+* [db passwd] - The user dbms password. 
+* [db port] - The database port.
+* [memory] - a bool value to determine memory resident data (if supported by the database).
+* [connection] - Database connection string.
 
 Note 1: For databases, like SQLite, dbms name can include the path to maintain the data. Otherwise, the default location defined by !dbms_dir is used.  
 Note 2: If 'memory' is specified, the database tables are created in RAM (this option is supported by SQLite but not with PostgreSQL).
