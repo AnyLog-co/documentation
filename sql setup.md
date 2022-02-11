@@ -1,4 +1,6 @@
-# SQL and queries
+# SQL setup, management and configuration
+
+## Overview
 
 Nodes in the network maintain data in a local database. The network protocol is able to present the distributed data 
 as a single collection of data and users and application can view and query the data without knowing the physical location of the data, 
@@ -9,7 +11,8 @@ This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
 * Issuing a [SQL command](#sql-commands)  
 * The metadata layer
-* Query of data using the network protocol
+* SQL command and query of local data
+* Monitoring the tables in a local database
 
 # Configuring a local database
 
@@ -89,7 +92,6 @@ Example:
 <pre> 
 get database size lsl_demo
 </pre>  
-
 
 # SQL Commands
 
