@@ -41,8 +41,9 @@ Explanation:
 * [memory] - a bool value to determine memory resident data (if supported by the database).
 * [connection] - Database connection string.
 
-Note 1: For databases, like SQLite, dbms name can include the path to maintain the data. Otherwise, the default location defined by !dbms_dir is used.  
-Note 2: If 'memory' is specified, the database tables are created in RAM (this option is supported by SQLite but not with PostgreSQL).
+***Note 1***: For SQLite, the logical name of the database can include the path to maintain the data. Otherwise, 
+the database data is maintained, for each table of the database, in the default location defined by !dbms_dir.    
+***Note 2***: If 'memory' is set to ***true***, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgreSQL).
 
 Examples:
 <pre> 
