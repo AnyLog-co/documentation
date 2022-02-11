@@ -51,6 +51,15 @@ connect dbms test where type = sqlite
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 </pre>
 
+## The get databases command
+
+The ***get databases*** command lists the declared databases.  
+Usage:
+<pre> 
+get databases
+</pre>  
+
+The command provides the list of logical databases and the physical database supporting each logical database.
 
 # SQL Commands
 
@@ -59,13 +68,6 @@ connect dbms sensor_data where type = psql and user = anylog and password = demo
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
 users and applications can query the metadata to determine the databases, tables and columns for each table.
 
-### The get databases command
-
-The ***get databases*** command lists the declared databases.  
-Usage:
-<pre> 
-get databases
-</pre>  
 
 ### The get tables command
 
