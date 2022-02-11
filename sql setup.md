@@ -135,7 +135,7 @@ run client () sql [dbms name] [query options] [select statement]
 Note 1: The SQL queries that are supported by the network protocol are detailed below.
 Note 2: The network protocol also supports pre-defined functions.
 
-Details on how to query multiple nodes are available in the section [] 
+Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](https://github.com/AnyLog-co/documentation/blob/master/queries.md#executing-queries-against-the-nodes-in-the-network).
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 

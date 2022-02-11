@@ -1,6 +1,6 @@
-# Executing queries against the nodes in the network
-* ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
-with the tables' data receive and process the query. Users can detail specific nodes of interest by providing their IP and Ports.  
+# Query nodes in the network
+The ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
+with the tables' data receive and process the query. Users can detail specific nodes of interest in providing their IP and Ports.  
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed as key = value pairs.
@@ -149,7 +149,7 @@ run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time
 
 
 ## Get datetime command
-Using the commmand ***get datetime*** users can translate a date-time function to the date-time string.  
+Using the command ***get datetime*** users can translate a date-time function to the date-time string.  
 Usage:
 <pre>
 get datetime timezone [date-time function]
