@@ -9,10 +9,12 @@ In addition, users and application can request to query data from a single parti
 
 This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
-* Issuing a [SQL command](#sql-commands)  
+* Issuing a [SQL command](#sql-commands) to the local database
+* Issuing a [SQL query](#sql-commands) to the local database
 * The metadata layer
-* SQL command and query of local data
 * Monitoring the tables in a local database
+
+Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](https://github.com/AnyLog-co/documentation/blob/master/queries.md#executing-queries-against-the-nodes-in-the-network) section.
 
 # Configuring a local database
 
