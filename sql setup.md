@@ -69,51 +69,48 @@ that other nodes with the same data will share the same schema.
 Depending on the role of the node, the node may host system databases and tables.
 These needs to be created once and associated with a physical database.
 
-COnfigure the following on the participating nodes:
+Configure the following on the participating nodes:
 * On a query node, ***system_query*** is a database that is used to unify data returned to the application. Associate the 
 ***system_query*** database with SQLite or PostgreSQL as in the example below:
-  
-<pre> 
-connect dbms system_query where type = sqlite
-</pre>
-or
-<pre> 
-connect dbms system_query where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-</pre> 
+  <pre>
+  connect dbms system_query where type = sqlite
+  </pre>
+  or
+  <pre> 
+  connect dbms system_query where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+  </pre> 
 
 There is no need to declare tables in the ***system_query*** databases as tables are created dynamically. 
 
 * On an operator node, ***mgm*** is an optional internal management database that tracks data ingestion.  Associate the 
 ***mgm*** database with SQLite or PostgreSQL as in the example below:
+  <pre> 
+  connect dbms mgm where type = sqlite
+  </pre>
+  or
+  <pre> 
+  connect dbms mgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+  </pre>
 
-<pre> 
-connect dbms mgm where type = sqlite
-</pre>
-or
-<pre> 
-connect dbms mgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-</pre>
-
-The following command creates the ***tsd_info*** table in the mgm database:
-<pre> 
-create table tsd_info where dbms = almgm
-</pre>
+  The following command creates the ***tsd_info*** table in the mgm database:
+  <pre> 
+  create table tsd_info where dbms = almgm
+  </pre>
 
 * On a master node (if used), ***blockchain*** is an optional internal database that manage the metadata.  Associate the 
 ***blockchain*** database with SQLite or PostgreSQL as in the example below:
+  <pre> 
+  connect dbms blockchain where type = sqlite
+  </pre>
+  or 
+  <pre> 
+  connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+  </pre>
 
-<pre> 
-connect dbms blockchain where type = sqlite
-</pre>
-or 
-<pre> 
-connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-</pre>
-
-The following command creates the ***ledger*** table in the blockchain database:
-<pre> 
-create table ledger where dbms = blockchain
-</pre>
+  The following command creates the ***ledger*** table in the blockchain database:
+  <pre> 
+  create table ledger where dbms = blockchain
+  </pre>
 
 
 ## The get databases command
