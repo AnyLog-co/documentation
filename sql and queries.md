@@ -93,11 +93,52 @@ get database size lsl_demo
 
 # SQL Commands
 
+SQL commands are issued in 2 ways:
+1) To the local database of a particular node. This option is relevant to all [SQL DDL commands and DML commands](https://en.wikipedia.org/wiki/Data_manipulation_language).  
+2) Issue queries (DML commands) through the network protocol. This approach allows to treat the data hosted on different nodes
+of the network as a single collection of data.
+   
+## Issueing a SQL command to a node in the network
+SQL command are issued against a node in the network.
+Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
+The command ***sql*** directs the node to process a sql command on a local node. The command format is detailed below: 
+<pre> 
+sql [dbms name] [query options] [sql command or select statement]
+</pre>  
+* ***[dbms name]*** is the logical DBMS containing the data.
+* ***[query option]*** include formatting instructions and output directions ([and are detailed below](#query-options)).
+* ***[SQL command]*** a SQL command including a SQL query.
+
+Example issuing a Query on a local node:
+<pre> 
+sql lsl_demo "drop table lsl_demo"
+</pre>  
+
+Example issuing a SQL command on a local node:
+<pre> 
+sql dmci "select count(*) from cos_data"
+</pre>  
+
+
+## Issuing a query to the network
+
+This option allows to treat the multiple nodes as a single machine that host a unified collection of data.  
+This option is enabled by adding ***run client ()*** to the command prefix. The added prefix means that the node issuing
+the command only serves as a client to the network nodes that host the relevant data.     
+If the parenthesis are left empty - the network protocol identifies the destination nodes. Alternatively, users can specify one
+or more destination nodes (by listing their IPs and Ports), in this case the listed nodes would be treated as the nodes that host the data.
+ 
+Usage:
+<pre> 
+run client () sql [dbms name] [query options] [select statement]
+</pre>  
+
+Note 1: The SQL queries that are supported by the network protocol are detailed below.
+Note 2: The network protocol also supports pre-defined functions (see details below).
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
 users and applications can query the metadata to determine the databases, tables and columns for each table.
-
 
 ### The get tables command
 
@@ -194,15 +235,6 @@ get partitions
 </pre>  
 
 
-## Queries over the data
-Queries can be executed against data maintained on the local node and on data maintained by nodes in the network.    
-The command ***sql*** directs the node to process a query. The command format is detailed below: 
-<pre> 
-sql [dbms name] [query options] [select statement]
-</pre>  
-* ***[dbms name]*** is the logical DBMS containing the data.
-* ***[query options]*** include formatting instructions and output directions.
-* ***[select statement]*** is a query using a supported format.
 
 ### Executing queries against the nodes in the network
 * ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
