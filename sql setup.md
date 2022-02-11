@@ -74,39 +74,27 @@ Configure the following on the participating nodes:
 ***system_query*** database with SQLite or PostgreSQL as in the example below:
   <pre>
   connect dbms system_query where type = sqlite
-  </pre>
   or
-  <pre> 
   connect dbms system_query where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-  </pre> 
+  </pre>
 
-There is no need to declare tables in the ***system_query*** databases as tables are created dynamically. 
+  There is no need to declare tables in the ***system_query*** databases as tables are created dynamically. 
 
 * On an operator node, ***mgm*** is an optional internal management database that tracks data ingestion.  Associate the 
 ***mgm*** database with SQLite or PostgreSQL as in the example below:
   <pre> 
   connect dbms mgm where type = sqlite
-  </pre>
   or
-  <pre> 
   connect dbms mgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-  </pre>
-
-  The following command creates the ***tsd_info*** table in the mgm database:
-  <pre> 
-  create table tsd_info where dbms = almgm
   </pre>
 
 * On a master node (if used), ***blockchain*** is an optional internal database that manage the metadata.  Associate the 
 ***blockchain*** database with SQLite or PostgreSQL as in the example below:
   <pre> 
   connect dbms blockchain where type = sqlite
-  </pre>
-  or 
-  <pre> 
+  or
   connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-  </pre>
-
+  
   The following command creates the ***ledger*** table in the blockchain database:
   <pre> 
   create table ledger where dbms = blockchain
