@@ -234,8 +234,6 @@ Usage:
 get partitions
 </pre>  
 
-
-
 ### Executing queries against the nodes in the network
 * ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. If the parenthesis are left empty, all the nodes 
 with the tables' data receive and process the query. Users can detail specific nodes of interest by providing their IP and Ports.  
