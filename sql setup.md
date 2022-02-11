@@ -12,7 +12,7 @@ This chapter covers the following topics:
 * [System databases and systen tables](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#system-databases-and-system-tables) configured on nodes. 
 * Issuing a [SQL command](#sql-commands) to the local database
 * Issuing a [SQL query](#sql-commands) to the local database
-* The metadata layer
+* The [metadata layer](#the-metadata)
 * Monitoring the tables in a local database
 
 Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](https://github.com/AnyLog-co/documentation/blob/master/queries.md#executing-queries-against-the-nodes-in-the-network) section.
@@ -155,22 +155,22 @@ The command ***sql*** directs the node to process a sql command on a local node.
 sql [dbms name] [query options] [sql command or select statement]
 </pre>  
 * ***[dbms name]*** is the logical DBMS containing the data.
-* ***[query option]*** include formatting instructions and output directions ([and are detailed below](#query-options)).
+* ***[query option]*** are formatting instructions and output directions ([and are detailed below](#query-options)).
 * ***[SQL command]*** a SQL command including a SQL query.
 
-Example issuing a Query on a local node:
+Example issuing a SQL command on a local node:
 <pre> 
 sql lsl_demo "drop table lsl_demo"
 </pre>  
 
-Example issuing a SQL command on a local node:
+Example issuing a query on a local node:
 <pre> 
-sql dmci "select count(*) from cos_data"
+sql dmci format = table "select count(*) from cos_data"
 </pre>  
 
 ## Issuing a query to the network
 
-This option allows to treat the multiple nodes as a single machine that host a unified collection of data.  
+This option allows to treat the multiple nodes as a single machine that hosts a unified collection of data.  
 This option is enabled by adding ***run client ()*** to the command prefix. The added prefix means that the node issuing
 the command only serves as a client to the network nodes that host the relevant data.     
 If the parenthesis are left empty - the network protocol identifies the destination nodes. Alternatively, users can specify one
@@ -181,7 +181,7 @@ Usage:
 run client () sql [dbms name] [query options] [select statement]
 </pre>  
 
-Note 1: The SQL queries that are supported by the network protocol are detailed below.
+Note 1: The SQL queries that are supported by the network protocol are limited to a subset of queries.
 Note 2: The network protocol also supports pre-defined functions.
 
 Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](https://github.com/AnyLog-co/documentation/blob/master/queries.md#executing-queries-against-the-nodes-in-the-network).
