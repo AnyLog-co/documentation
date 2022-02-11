@@ -9,6 +9,7 @@ In addition, users and application can request to query data from a single parti
 
 This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
+* [System databases and systen tables](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#system-databases-and-system-tables) configured on nodes. 
 * Issuing a [SQL command](#sql-commands) to the local database
 * Issuing a [SQL query](#sql-commands) to the local database
 * The metadata layer
