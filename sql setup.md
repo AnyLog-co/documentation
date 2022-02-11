@@ -77,7 +77,6 @@ Configure the following on the participating nodes:
   or
   connect dbms system_query where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
   </pre>
-
   There is no need to declare tables in the ***system_query*** databases as tables are created dynamically. 
 
 * On an operator node, ***mgm*** is an optional internal management database that tracks data ingestion.  Associate the 
@@ -94,7 +93,7 @@ Configure the following on the participating nodes:
   connect dbms blockchain where type = sqlite
   or
   connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-  
+  </pre>
   The following command creates the ***ledger*** table in the blockchain database:
   <pre> 
   create table ledger where dbms = blockchain
