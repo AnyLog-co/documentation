@@ -58,6 +58,20 @@ connect dbms test where type = sqlite
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 </pre>
 
+## Disconnecting from a database
+
+Users can issue the ***disconnect dbms*** command to disconnect from a connected database.
+This command is usefull to switch between different physical databases that are serving the same logical database.  
+Usage:
+<pre> 
+disconnect dbms [dbms name]
+</pre>
+Example:
+<pre> 
+disconnect dbms test
+</pre>
+
+
 ## Creating tables
 
 User tables are created dynamically based on the structure of the ingested data.
