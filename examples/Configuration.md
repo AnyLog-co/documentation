@@ -33,8 +33,8 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
-* In tne config section update the REST IP and Port that accept REST calls.
-* If authentication is enabled, add user name and password in the appropriate fields.
+* In tne config section update the REST IP and Port of the destination node (the REST IP and Port associated by the node).
+* If authentication is enabled, add username and password in the appropriate fields.
 * Select one of the following files from the pull-down menu:
   Autoexec
   Operator
@@ -43,12 +43,12 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
   Master
   Standalone
 * Select ***Load*** to retrieve the config file associated with the selected option.
-* Note: Autoexec is the config file currently used. The othe options are default options for each role.
+* Note: Autoexec is the config file currently used. The other options are default options for a target role.
 * Make changes as needed.
-* To update the changes, select ***Save*** to save the changes.
-* Note: ***Changes are saved to the Autoexec file*** regardless the file selected with the Load.
+* To update the changes, select ***Save***.
+* Note: ***Changes are saved to the Autoexec file*** regardless the file selected with the ***Load***.
 
-Restart the AnyLog Node - if the node is initiated as in the example below, the new ***Autoexec*** file will determine the configuration.
+Restart the AnyLog Node - if the node is initiated as in the [example above](#starting-a-node-with-a-configuration-file), the updated ***Autoexec*** file will determine the configuration.
 
   
 
