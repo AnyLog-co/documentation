@@ -5,7 +5,7 @@ This document provides configuration examples.
 ## Starting a node with a configuration file
 
 When an AnyLog node is initiated, it can be called with a command line parameters. The command line parameters 
-are one or more AnyLog command (with multiple commands, each command is enclosed by quotation mark and seperated by the keyword ***and***).
+are one or more AnyLog commands (with multiple commands, each command is enclosed by quotation mark and seperated by the keyword ***and***).  
 Usage:
 <pre>
 python3 user_cmd.py "command 1" and "command 2" ... and "command n"
@@ -13,11 +13,10 @@ python3 user_cmd.py "command 1" and "command 2" ... and "command n"
 
 
 The command ***process*** followed by a path and a file name will process all the commands in the specified file.  
-The following example starts an AnyLog node, configures the TCP connection and the REST connections and configures the node
-according to the commands listed in a file called ***autoexec.al***.
+The following example starts an AnyLog node and configures the node according to the commands listed in a file called ***autoexec.al***.
 
 <pre>
-python3 user_cmd.py process "!local_scripts\autoexec.al"
+python3 user_cmd.py "process !local_scripts\autoexec.al"
 </pre>
 
 ## Updating the configuration file
