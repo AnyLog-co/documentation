@@ -29,7 +29,7 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection.
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)) section.
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  

@@ -9,8 +9,8 @@ Python examples are available with the following links:
 * [POST](data/post_data.py) 
 * [MQTT](data/mqtt_data.py)
 
-An AnyLog instance that's receiving data through either _MQTT_ or _POST_ should have a running 
-[message client](../../message%20broker.md) process running on it.
+Note that adding data using POST or considering AnyLog as a message broker requires that the AnyLog node receiving the data enables 
+the [message client](../../message%20broker.md) functionality. 
 
 Note that AnyLog can run not just as a client subscribed to a broker (and a topic), but also as a 
 [message broker](../../background%20processes.md#message-broker) - allowing external applications to treat AnyLog as an MQTT broker.   
