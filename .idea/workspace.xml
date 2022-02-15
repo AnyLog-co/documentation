@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc4f054-a086-4de8-becb-f426e752a953" name="Default Changelist" comment="Changes to documentation">
-      <change beforePath="$PROJECT_DIR$/examples/Configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Configuration.md" afterDir="false" />
-    </list>
+    <list default="true" id="6dc4f054-a086-4de8-becb-f426e752a953" name="Default Changelist" comment="Changes to documentation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +152,7 @@
       <workItem from="1644538859773" duration="3317000" />
       <workItem from="1644542691734" duration="4514000" />
       <workItem from="1644611340631" duration="8844000" />
-      <workItem from="1644874624127" duration="7159000" />
+      <workItem from="1644874624127" duration="7972000" />
     </task>
     <task id="LOCAL-00001" summary="Changes to documentation">
       <created>1600200429589</created>
