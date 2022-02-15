@@ -46,7 +46,7 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
   </pre>
 * Select ***Load*** to retrieve the config file associated with the selected option.
 * Note: Autoexec is the config file currently used. The other options are default options for a target role.
-* Make changes as needed.
+* Update the config file as needed.
 * To update the changes, select ***Save***.
 * Note: ***Changes are saved to the Autoexec file*** regardless the file selected with the ***Load***.
 
