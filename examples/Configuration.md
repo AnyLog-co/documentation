@@ -63,7 +63,7 @@ Multiple options are available to backup, archive and remove old data.
 
 Declare a second operator node associated with an existing cluster. The second node will be dynamically updated with the
 data assigned to the cluster.  
-This process is detailed in the [High Availability (HA)](https://github.com/AnyLog-co/documentation/blob/master/high%20availability.md#high-availability-ha) section.
+This process is detailed in the [High Availability (HA)](../high%20availability.md#high-availability-ha) section.
 
 #### Archival of data
 
@@ -76,7 +76,7 @@ Details are availabel in [Placing data in the WATCH directory](https://github.co
 #### Partitioning of data
 
 A table that is managed by AnyLog can be partitioned by time.  
-The ***Partition Command*** id detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).  
+The ***Partition Command*** id detailed [here](../anylog%20commands.md#partition-command).  
 Partitions can be dropped by naming the partitions, or by requesting to drop the oldest partition, or by a request to
 keep N number of partition, or to drop old partitions as long as disk space is lower than threshold.  
 The ***Drop Partition*** command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command)
@@ -85,12 +85,12 @@ These processes can be placed on the AnyLog scheduler to be repeated periodicall
 For example, a table is partitioned by day and the scheduler is executed daily to remove the oldest partition if disk space 
 is under a threshold.
 
-Configuring the scheduler is detailed in the [Monitoring Nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes) section.
+Configuring the scheduler is detailed in the [Monitoring Nodes](../monitoring%20nodes.md#monitoring-nodes) section.
 
 #### Backup Partition
 
 Users can leverage the [archival directory](#archival-of-data) for the data backup.  
-Alternatively, uses can actively archive a partition using the [backup table](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) 
+Alternatively, uses can actively archive a partition using the [backup table](../anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
 
