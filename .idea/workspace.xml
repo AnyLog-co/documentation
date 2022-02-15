@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dc4f054-a086-4de8-becb-f426e752a953" name="Default Changelist" comment="Changes to documentation">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adding data.md" beforeDir="false" afterPath="$PROJECT_DIR$/adding data.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anylog commands.md" beforeDir="false" afterPath="$PROJECT_DIR$/anylog commands.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/Configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Configuration.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +155,7 @@
       <workItem from="1644538859773" duration="3317000" />
       <workItem from="1644542691734" duration="4514000" />
       <workItem from="1644611340631" duration="8844000" />
-      <workItem from="1644874624127" duration="6191000" />
+      <workItem from="1644874624127" duration="6833000" />
     </task>
     <task id="LOCAL-00001" summary="Changes to documentation">
       <created>1600200429589</created>
