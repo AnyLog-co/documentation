@@ -29,22 +29,24 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection.
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) section).
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
-* In tne config section update the REST IP and Port of the destination node (the REST IP and Port associated by the node).
+* In tne config section update the REST IP and Port of the destination node (the REST IP and Port assigned by the node).
 * If authentication is enabled, add username and password in the appropriate fields.
 * Select one of the following files from the pull-down menu:
+  <pre>
   Autoexec
   Operator
   Publisher
   Query
   Master
   Standalone
+  </pre>
 * Select ***Load*** to retrieve the config file associated with the selected option.
 * Note: Autoexec is the config file currently used. The other options are default options for a target role.
-* Make changes as needed.
+* Update the config file as needed.
 * To update the changes, select ***Save***.
 * Note: ***Changes are saved to the Autoexec file*** regardless the file selected with the ***Load***.
 

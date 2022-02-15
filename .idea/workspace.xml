@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="6dc4f054-a086-4de8-becb-f426e752a953" name="Default Changelist" comment="Changes to documentation" />
+=======
+    <list default="true" id="130aeac0-f923-4db4-b60a-b905ad58b11f" name="Default Changelist" comment="New details">
+      <change beforePath="$PROJECT_DIR$/examples/Configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Configuration.md" afterDir="false" />
+    </list>
+>>>>>>> 9dbc4fd2dd54ebe6609a4f6030a1876a3718d0ec
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +43,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1fkDhusA0ZYC8QF2pAf47R3dTYt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -54,7 +61,10 @@
       </console-settings>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6dc4f054-a086-4de8-becb-f426e752a953" name="Default Changelist" comment="" />
