@@ -21,7 +21,7 @@ If a node is configured as an Operator, it will add each file received to a loca
 ## Placing data in the WATCH directory
 
 This option allows adding data by placing new data in a Watch Directory.  
-A Watch Directory is a disk directory designated to new data. Operators monitor data placed in a watch directory such that when new data is identified, the data processing functionality is triggered.   
+A Watch Directory is a disk directory designated to new data. Operator nodes monitor data placed in a watch directory such that when new data is identified, the data processing functionality is triggered.   
 Operator nodes are configured such that any file (of the type JSON or SQL) that is placed on a WATCH directory is being processed.  
 The default processing is as follows:  
 1. The file is read by the operator.

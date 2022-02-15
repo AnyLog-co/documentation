@@ -51,6 +51,33 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 Restart the AnyLog Node - if the node is initiated as in the [example above](#starting-a-node-with-a-configuration-file), the updated ***Autoexec*** file will determine the configuration.
 
   
+## Configuring data removal and archival
+
+### Configuring Backup, archive and removal of data
+
+Multiple options are available to backup, archive and remove old data.
+
+#### Setting a standby node
+
+Declare a second operator node associated to an existing cluster. The second node will dynamically be updated with the
+data assigned to the cluster.  
+This process is detailed in the [High Availability (HA)](https://github.com/AnyLog-co/documentation/blob/master/high%20availability.md#high-availability-ha)section.
+
+#### Archival of data
+
+If an Opertaor node is configured with archive option enabled, data that is streaming to the local database is organized in 
+files, compressed, and stored in the archival directory.
+If needed, these files can be copied to an AnyLog ***watch*** directory to be ingested to a new database.
+Details are availabel in [Placing data in the WATCH directory](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#placing-data-in-the-watch-directory) section.
+
+#### Partitioning of data
+
+A table that is managed by AnyLog can be partitioned by time.  
+The ***Partition Command*** id detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).  
+Partitions can be dropped by naming the partitions, or by requesting to drop the oldest partition, or by a request to
+keep N number of partition, or to drop old partitions as long as disk space is lower than threshold.  
+The ***Drop Partition*** command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command)
+
 
 
 

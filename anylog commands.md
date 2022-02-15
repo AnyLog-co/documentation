@@ -520,17 +520,17 @@ drop partition [partition name] where dbms = [dbms name] and table = [table name
   
 Explanation:  
 Drops a partition in the named database and table.  
-[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.  
-[keep] is optional. If a value is provided, the oldest partitions will be dropped to keep the number of partitions as the value provided.
-If table name is asterisk (*), a partition from every table from the specified database is dropped.
-If partition name is asterisk (*), all the partitions are dropped.  
+* [partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.    
+* [keep] is optional. If a value is provided, the oldest partitions will be dropped to keep the number of partitions as the value provided.  
+* If table name is asterisk (*), a partition from every table from the specified database is dropped.  
+* If partition name is asterisk (*), all the partitions are dropped.  
 
 Examples:
 <pre>
 drop partition par_readings_2019_08_02_d07_timestamp where dbms = purpleair and table = readings
 drop partition where dbms = purpleair and table = readings
 drop partition * where dbms = purpleair and table = readings
-drop partition where dbms = aiops and table = cx_482f2efic11_fb_factualvalue and keep = 5
+drop partition where dbms = aiops and table = factualvalue and keep = 5
 </pre>
 
 
