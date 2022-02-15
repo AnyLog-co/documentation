@@ -53,21 +53,21 @@ Restart the AnyLog Node - if the node is initiated as in the [example above](#st
   
 ## Configuring data removal and archival
 
-### Configuring Backup, archive and removal of data
+### Configuring Backup, Archive and Removal of data
 
 Multiple options are available to backup, archive and remove old data.
 
 #### Setting a standby node
 
-Declare a second operator node associated to an existing cluster. The second node will dynamically be updated with the
+Declare a second operator node associated with an existing cluster. The second node will be dynamically updated with the
 data assigned to the cluster.  
-This process is detailed in the [High Availability (HA)](https://github.com/AnyLog-co/documentation/blob/master/high%20availability.md#high-availability-ha)section.
+This process is detailed in the [High Availability (HA)](https://github.com/AnyLog-co/documentation/blob/master/high%20availability.md#high-availability-ha) section.
 
 #### Archival of data
 
 If an Opertaor node is configured with archive option enabled, data that is streaming to the local database is organized in 
-files, compressed, and stored in the archival directory by ingestion date.
-The default archival directory is ```AnyLog-Network\data\archive```
+files, compressed, and stored in the archival directory by ingestion date.  
+The default archival directory is ```AnyLog-Network\data\archive```  
 If needed, these files can be copied to an AnyLog ***watch*** directory to be ingested to a new database.
 Details are availabel in [Placing data in the WATCH directory](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#placing-data-in-the-watch-directory) section.
 
@@ -79,7 +79,7 @@ Partitions can be dropped by naming the partitions, or by requesting to drop the
 keep N number of partition, or to drop old partitions as long as disk space is lower than threshold.  
 The ***Drop Partition*** command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command)
 
-These processes can be placed on the ANyLog scheduler to be repeated periodically. 
+These processes can be placed on the AnyLog scheduler to be repeated periodically.  
 For example, a table is partitioned by day and the scheduler is executed daily to remove the oldest partition if disk space 
 is under a threshold.
 
@@ -88,7 +88,7 @@ Configuring the scheduler is detailed in the [Monitoring Nodes](https://github.c
 ### Backup Partition
 
 Users can leverage the [archival directory](#archival-of-data) for the data backup.  
-Alternatively uses can actively archive a partition using the [backup table](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) 
+Alternatively, uses can actively archive a partition using the [backup table](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
 
