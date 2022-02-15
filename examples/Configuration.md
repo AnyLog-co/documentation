@@ -85,7 +85,7 @@ is under a threshold.
 
 Configuring the scheduler is detailed in the [Monitoring Nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes) section.
 
-### Backup Partition
+#### Backup Partition
 
 Users can leverage the [archival directory](#archival-of-data) for the data backup.  
 Alternatively, uses can actively archive a partition using the [backup table](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#backup-command) 
