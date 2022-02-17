@@ -93,5 +93,18 @@ Users can leverage the [archival directory](#archival-of-data) for the data back
 Alternatively, uses can actively archive a partition using the [backup table](../anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
+## Example Configuration File
+
+This is an example configuration file with commonly used configuration options and explanations to the selected options.  
+
+
+Configuring the local database.
+The local database is used to store the user data and in some cases system data.
+Each line associates a logical database with a physical database.  
+Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.
+  
+
+
+
 
 
