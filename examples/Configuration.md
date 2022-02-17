@@ -96,15 +96,67 @@ command (and specify the needed partition).
 ## Example Configuration File
 
 This is an example configuration file with commonly used configuration options and explanations to the selected options.  
+#### Disable authentication
+If the nodes are trusted, behind a firewall, authentication can be disabled.  
+If authentication is enabled, there are different layers that can be leveraged: passwords, signature of messages, and certificates.  
+Details are available in the [Users Authentication](../authentication.md#users-authentication) section.
+
+<pre>
+
+</pre>
 
 
-Configuring the local database.
-The local database is used to store the user data and in some cases system data.
+#### Making the node a member of the AnyLog Network
+The nodes is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
+Details are available in the [TCP Server process](../background%20processes.md#rest-requests) section.  
+
+<pre>
+
+</pre>
+  
+#### Enabling REST request
+3rd party applications communicate with members of the network using REST requests.  
+The nodes is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
+Details are available in the [REST requests](../background%20processes.md#rest-requests) section.
+
+<pre>
+
+</pre>
+
+
+#### Configuring the local database
+The local database is used to store the user data and in some cases system data.  
 Each line associates a logical database with a physical database.  
 Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.
   
 
+<pre>
 
+</pre>
 
+#### Metadata
+The nodes are configured to periodically retrieve the metadata (from a blockchain platform or a master node) and host it locally.   
+Details are available in the [Blockchain Synchronizer](../background%20processes.md#blockchain-synchronizer) section.
+
+<pre>
+
+</pre>
+
+#### Data Partitioning
+Data that is hosted in the local database can be partioned by date.     
+Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.
+
+<pre>
+
+</pre>
+
+#### Removal of old data
+Using the scheduler, a process is triggered periodically and removes old partitions.
+The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
+In the example below, the command is placed on the scheduler to be executed daily.
+ 
+<pre>
+
+</pre>
 
 
