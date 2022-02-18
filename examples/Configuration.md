@@ -109,15 +109,20 @@ set authentication off
 </pre>
 
 
-#### Associate values to variable names
+#### Assign values to variable names
 Every node maintains a local dictionary with key value names. Users can associate values to variable names as needed.  
 The command ```get dictionary``` shows the variables and their assigned values.  
 The command get ```get ![variable name]``` returns the variable value (or, on the CLI the variable name prefixed by exclamation point returns the variable value, i.e. !ip).
 <pre>
+
+# Generic Variables
+
 anylog_root_dir=C:\                 # associate the path to the root folder to a variable (NOTE C:\ is the windows version). 
 hostname = get hostname             # assign the hostname of the local machine to the key hostname
 node_name = anylog-node             # provide a name (preferably unique) to the node. Note, the name would appear on the CLI (i.e.: AL anylog-node > ) 
 company_name = "New Company"        # The node owner (company name)
+
+# IP / Port Variables
 
 #external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise define the external IP. 
 #ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise define the local IP. 
@@ -125,6 +130,17 @@ anylog_server_port=2148             # The port to use for messages from nodes me
 anylog_rest_port=2149               # The port to use for messages from 3rd parties applications.
 master_node = !ip + ":" + !anylog_server_port  # This is declaration for a STANDALONE configuration. Otherwise assign the IP and Port of the master node.
 sync_time="30 seconds"              # Synchronize the metadata (from a master node or blockchain) every 30 seconds.
+
+# DBMS Variables
+
+db_user=postgres                    # Use PostgreSQL as a local database (users can use SQLite or both)
+db_passwd=postgres
+db_ip=!ip
+db_port=5432
+default_dbms=test
+
+
+
 </pre>
 
 
