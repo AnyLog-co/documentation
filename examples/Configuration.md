@@ -203,12 +203,12 @@ The sections below configure the system databases and an example of a user datab
 
 #### Connect System Database(s) and init system tables.
 
-In this example, there are 2 system databases that are enabled:
+In this example, there are 3 system databases that are enabled:
 
 1) As the node serves as the Master (the ***standalone*** configuration) - The metadata is hosted in a table called ***ledger*** and the dbms name is ***blockchain***.      
-Below, postgreSQL is assigned to maintain the blockchain database and the table ***ledger*** is created (if it does not exist in the database).
+Below, postgreSQL is assigned to maintain the ***blockchain*** database and the table ***ledger*** is created (if it does not exist in the database).
 
-2) As the node serves as an Operator - information about the ingested data is hosted in a set of tables in a database called ***almgm***.  
+2) As the node serves as an Operator - information about the ingested data is hosted in a table called ***tsd_info*** in a database called ***almgm***.  
 Below, postgreSQL is assigned to maintain the almgm database  and the table ***tsd_info*** is created (if it does not exist in the database).
 
 3) As the node serves as a query node -  SQLite service the ***system_query*** database. This database is used in the query process.
