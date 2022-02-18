@@ -214,10 +214,31 @@ AnyLog commands can be placed on the scheduler and be executed periodically.
 The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
 
 <pre>
-run scheduler 1         # Note: users can define multiple scheduler - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
+run scheduler 1         # Note: users can define multiple schedulers - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
 </pre>
 
-#### Connect Database(s)
+#### Connect System Database(s) and init system tables.
+
+In this example, there are 2 system databases that are enabled:
+
+1) As the node serves as the Master (the ***standalone*** configuration) - The metadata is hosted in a table called ***ledger*** and the dbms name is ***blockchain***.      
+Below, postgreSQL is assigned to maintain the blockchain database and the table ***ledger*** is created (if it does not exist in the database).
+
+2) As the node serves as an Operator - information about the ingested data is hosted in a set of tables in a database called ***almgm***.  
+Below, postgreSQL is assigned to maintain the almgm database.
+  
+<pre>
+connect dbms blockchain where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
+
+is_table = info table blockchain ledger exists # Determine if the ***ledger*** table exists
+if not !is_table then create table ledger where dbms=blockchain  # Create the ***ledger*** table if ledger table is not in the database/
+
+connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port # Init the test dbms (for user data)
+
+
+</pre>
+
+
 
 
 
