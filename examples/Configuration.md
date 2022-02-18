@@ -120,14 +120,15 @@ The command get ```get ![variable name]``` returns the variable value (or, on th
 # Generic Variables
 
 anylog_root_dir=C:\                 # associate the path to the root folder to a variable (NOTE C:\ is the windows version). 
-hostname = get hostname             # assign the hostname of the local machine to the key hostname
-node_name = anylog-node             # provide a name (preferably unique) to the node. Note, the name would appear on the CLI (i.e.: AL anylog-node > ) 
+hostname = get hostname             # assign the hostname of the local machine to the key hostname.
+node_name = anylog-node             # provide a name (preferably unique) to the node. Note, the name would appear on the
+                                    # CLI (i.e.: AL anylog-node > ) 
 company_name = "New Company"        # The node owner (company name)
 
 # IP / Port Variables
 
-#external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise define the external IP. 
-#ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise define the local IP. 
+#external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise uncomment & define the external IP. 
+#ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise uncomment & define the local IP. 
 anylog_server_port=2148             # The port to use for messages from nodes members of the network.
 anylog_rest_port=2149               # The port to use for messages from 3rd parties applications.
 master_node = !ip + ":" + !anylog_server_port  # This is declaration for a STANDALONE configuration. Otherwise assign the IP and Port of the master node.
@@ -147,13 +148,6 @@ cluster_name = new-cluster
 partition_column = timestamp
 partition_interval = "1 month"
 partition_keep = 6
-
-# Data Monitoring Variables
-
-data_monitoring_table = *
-data_monitoring_interval_value = 10
-data_monitor_interval = "1 minute"
-data_monitor_column = value
 
 </pre>
 
