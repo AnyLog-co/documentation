@@ -137,9 +137,21 @@ db_user=postgres                    # Use PostgreSQL as a local database (users 
 db_passwd=postgres
 db_ip=!ip
 db_port=5432
-default_dbms=test
+default_dbms=test                   # !default_dbms will show the value test, to enable the database, the command ```connect dbms``` needs to be called (see below).
 
+# Cluster and Partition Variables
 
+cluster_name = new-cluster
+partition_column = timestamp
+partition_interval = "1 month"
+partition_keep = 6
+
+# Data Monitoring Variables
+
+data_monitoring_table = *
+data_monitoring_interval_value = 10
+data_monitor_interval = "1 minute"
+data_monitor_column = value
 
 </pre>
 
@@ -165,7 +177,7 @@ The nodes is configured to initiate a listener on a dedicated IP and Port to rec
 Details are available in the [TCP Server process](../background%20processes.md#rest-requests) section.  
 
 <pre>
-
+run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 </pre>
   
 #### Enabling REST request
@@ -174,7 +186,7 @@ The nodes is configured to initiate a listener on a dedicated IP and Port to rec
 Details are available in the [REST requests](../background%20processes.md#rest-requests) section.
 
 <pre>
-
+run rest server !ip !anylog_rest_port
 </pre>
 
 
@@ -193,7 +205,7 @@ The nodes are configured to periodically retrieve the metadata (from a blockchai
 Details are available in the [Blockchain Synchronizer](../background%20processes.md#blockchain-synchronizer) section.
 
 <pre>
-
+run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node
 </pre>
 
 
@@ -202,8 +214,10 @@ AnyLog commands can be placed on the scheduler and be executed periodically.
 The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
 
 <pre>
-run scheduler 1
+run scheduler 1         # Note: users can define multiple scheduler - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
 </pre>
+
+#### Connect Database(s)
 
 
 
