@@ -170,7 +170,7 @@ create work directories
 
 
 #### Making the node a member of the AnyLog Network
-The nodes is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
+The node is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
 Details are available in the [TCP Server process](../background%20processes.md#rest-requests) section.  
 
 <pre>
@@ -178,8 +178,8 @@ run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 </pre>
   
 #### Enabling REST requests
-3rd party applications communicate with members of the network using REST requests.  
-The nodes is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
+3rd parties applications communicate with members of the network using REST requests.  
+The node is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
 Details are available in the [REST requests](../background%20processes.md#rest-requests) section.
 
 <pre>
@@ -199,7 +199,8 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
 #### Configuring the local database
 The local database is used to store the user data and in some cases system data.  
 Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.  
-The sections below configure the system databases and an example of a user database.
+The sections below configure the system databases and an example of a user database.  
+The command ```get databases``` returns the list of connected databases.
 
 #### Connect System Database(s) and init system tables.
 
@@ -229,7 +230,7 @@ connect dbms system_query where type=sqlite                         # used in th
 
 #### Connect User Database(s)
 Declare all the logical databases that are used to maintain the user's data and associate each logical database to PostgreSQL or SQLite.  
-Note: The key ***default_dbms*** was assigned with the value ***test***. Change the assignment to the logical database name that will be used.
+Note: In this example, the key ***default_dbms*** was assigned with the value ***test***. Change the assignment to the logical database name that will be used.
 
 <pre>
 connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
