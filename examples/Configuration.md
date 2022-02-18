@@ -333,7 +333,9 @@ In the example below, the command ```drop partition where ...``` is placed on th
 schedule time = 1 day and name = "Remove Old Partitions" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep
 </pre>
 
-Note: [This example](..//alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
+Notes: 
+1) [This example](..//alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
+2) ```get scheduler 1``` returns the tasks assigned to scheduler #1.
 
 
 #### Configure data processing functionality
