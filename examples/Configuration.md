@@ -236,6 +236,7 @@ Note: In this example, the key ***default_dbms*** was assigned with the value **
 connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
 </pre>
 
+
 #### Declare the policies associated with the node in the metadata layer
 
 Notes: 
