@@ -97,7 +97,9 @@ command (and specify the needed partition).
 # Example Configuration File
 
 This is an example configuration file with commonly used configuration options and explanations to the selected options.     
-Note that the Hash Sign indicates start of a comment and the text that follows is ignored.
+Notes:
+ 1) The example below declares a ***standalone node***. A standalone node has the roles of a Master Node, an Operator Node and q Query Node. 
+ 2) The Hash Sign indicates start of a comment and the text that follows is ignored.
 
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
@@ -225,21 +227,82 @@ In this example, there are 2 system databases that are enabled:
 Below, postgreSQL is assigned to maintain the blockchain database and the table ***ledger*** is created (if it does not exist in the database).
 
 2) As the node serves as an Operator - information about the ingested data is hosted in a set of tables in a database called ***almgm***.  
-Below, postgreSQL is assigned to maintain the almgm database.
+Below, postgreSQL is assigned to maintain the almgm database  and the table ***tsd_info*** is created (if it does not exist in the database).
+
+3) As the node serves as a query node -  SQLite service the ***system_query*** database. This database is used in the query process.
   
 <pre>
 connect dbms blockchain where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
 
-is_table = info table blockchain ledger exists # Determine if the ***ledger*** table exists
-if not !is_table then create table ledger where dbms=blockchain  # Create the ***ledger*** table if ledger table is not in the database/
+is_table = info table blockchain ledger exists                      # Determine if the ***ledger*** table exists
+if not !is_table then create table ledger where dbms=blockchain     # Create the ***ledger*** table if ledger table was not created
 
 connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port # Init the test dbms (for user data)
+is_table = info table almgm tsd_info exists                         # Determine if the ***tsd_info*** table exists
+if !is_table == false then create table tsd_info where dbms=almgm   # Create the ***tsd_info*** table if tsd_info table was not created
 
+connect dbms system_query where type=sqlite
 
 </pre>
 
+#### Declare the node in the metadata layer
 
+Notes: 
+1) ***These policies are declared once*** and the below policies declarations can be moved to a dedicated script file that is called once when the node is installed.
+2) Details on blockchain commands are available in the [blockchain commands](./blockchain%20commands.md#blockchain-commands) section. 
 
+In a ***standalone*** contiguration the node serves multiple roles. We use a seperate policy for each role.  
+If only one role is configured, only the policy that determines the configured role is needed.
+ 
+Get the longitude and latitude of the node (this is an optional step). This info can be added to the policy.
+
+<pre>
+info = rest get where url = https://ipinfo.io/json
+if !info then loc = from !info bring [loc]
+else loc = "0.0, 0.0"
+</pre>
+
+***Declare the policy representing Master node*** (if the master policy is not available).  
+Use the command ***blockchain get master*** (on the CLI or Remote-CLI) to view the Master Policy. 
+
+<pre>
+policy = blockchain get master where name=!node_name and company=!company_name and ip=!external_ip and port=!anylog_server_port
+if not !policy then
+do new_policy = {"master" : {"hostname": !hostname, "name": !node_name, "ip" : !external_ip, "local_ip": !ip, "company": !company_name, "port" : !anylog_server_port.int, "rest_port": !anylog_rest_port.int, "loc": !loc}}
+do blockchain prepare policy !new_policy
+do blockchain insert where policy=!new_policy and local=true and master=!master_node
+</pre>
+
+***Declare the policy representing the cluster*** (if not available).  
+Note: In the cntext of the network, a cluster represents the group of tables that are managed by an Operator.
+If a second Operator is associated with the same cluster, it will maintain a copy of the data.  
+If a second operator is assigned to a new cluster, but the cluster is associated with a table that is associted to the first cluster, 
+the data will be partitioned to the 2 clusters. 
+
+<pre>
+
+policy = blockchain get cluster where name=!cluster_name and company=!company_name bring.first
+do new_policy = {"cluster": {"company": !company_name, "dbms": !default_dbms, "name": !cluster_name, "master": !master_node}}
+do blockchain prepare policy !new_policy
+do blockchain insert where policy=!new_policy and local=true and master=!master_node
+do policy =  blockchain get cluster where name = !cluster_name and company=!company_name bring.first
+
+cluster_id = from !policy bring [cluster][id]  # The key cluster_id is assigned with the ID of the cluster policy.
+
+</pre>
+
+***Declare the policy representing the Operator node*** (if not available).
+
+<pre>
+
+new_policy = {"operator": {"hostname": !hostname, "name": !node_name, "company": !company_name, "local_ip": !ip, "ip": !external_ip, "port" : !anylog_server_port.int, "rest_port": !anylog_rest_port.int, "loc": !loc, "cluster": !cluster_id}}
+if not !cluster_id then new_policy = {"operator": {"hostname": !hostname, "name": !node_name, "company": !company_name, "local_ip" : !ip, "ip": !external_ip, "port" : !anylog_server_port.int, "rest_port": !anylog_rest_port.int, "dbms": !default_dbms, "loc": !loc}}
+policy = blockchain get operator where name=!node_name and company=!company_name and ip=!external_ip and port=!anylog_server_port and cluster = !cluster_id
+if not !policy then
+do blockchain prepare policy !new_policy
+do blockchain insert where policy=!new_policy and local=true and master=!master_node
+
+</pre>
 
 
 #### Data Partitioning
