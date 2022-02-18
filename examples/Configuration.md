@@ -155,14 +155,15 @@ partition_keep = 6
 #### Declare the root folder for the AnyLog files
 AnyLog maintains scripts, configurations and data in different folders.  
 The default folders structure is detailed in the a [local directory structure](../getting%20started.md#local-directory-structure) section.
-The command below determines the path to the root folder (to the AnyLog-Network folder).  
+The command below declares the path to the root folder (to the AnyLog-Network folder).  
   
 <pre>
 set anylog home !anylog_root_dir    # Declare the location of the AnyLog root folder. Note that anylog_root_dir was associated with a value above (anylog_root_dir=C:\).
 </pre>
 
 #### Create the AnyLog Directories
-The command below will create the AnyLog folders (under the AnyLog root folder) if the folders do not exists.
+The command below will create the AnyLog folders (under the AnyLog root folder) if the folders do not exists.  
+The command needs to be issued once (unless the root folder location is changed), and can be placed in a different script file. 
 <pre>
 create work directories
 </pre>
@@ -176,7 +177,7 @@ Details are available in the [TCP Server process](../background%20processes.md#r
 run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 </pre>
   
-#### Enabling REST request
+#### Enabling REST requests
 3rd party applications communicate with members of the network using REST requests.  
 The nodes is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
 Details are available in the [REST requests](../background%20processes.md#rest-requests) section.
@@ -185,16 +186,6 @@ Details are available in the [REST requests](../background%20processes.md#rest-r
 run rest server !ip !anylog_rest_port
 </pre>
 
-
-#### Configuring the local database
-The local database is used to store the user data and in some cases system data.  
-Each line associates a logical database with a physical database.  
-Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.
-  
-
-<pre>
-
-</pre>
 
 #### Metadata
 The nodes are configured to periodically retrieve the metadata (from a blockchain platform or a master node) and host it locally.   
@@ -205,13 +196,10 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
 </pre>
 
 
-#### Initiating the scheduler
-AnyLog commands can be placed on the scheduler and be executed periodically.  
-The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
-
-<pre>
-run scheduler 1         # Note: users can define multiple schedulers - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
-</pre>
+#### Configuring the local database
+The local database is used to store the user data and in some cases system data.  
+Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.  
+The sections below configure the system databases and an example of a user database.
 
 #### Connect System Database(s) and init system tables.
 
@@ -306,6 +294,13 @@ do blockchain insert where policy=!new_policy and local=true and master=!master_
 
 </pre>
 
+#### Initiating the scheduler
+AnyLog commands can be placed on the scheduler and be executed periodically.  
+The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
+
+<pre>
+run scheduler 1         # Note: users can define multiple schedulers - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
+</pre>
 
 #### Data Partitioning
 Data that is hosted in the local database can be partioned by date.     
