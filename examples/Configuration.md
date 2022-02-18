@@ -323,6 +323,19 @@ drop partition where dbms=!default_dbms and table =!table_name and keep=!partiti
 </pre>
 
 
+#### Removal of old data
+Using the scheduler, a process is triggered periodically and removes old partitions.
+The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
+Setting scheduled tasks is explained in the [Adding tasks to the scheduler](../alerts%20and%20monitoring.md#adding-tasks-to-the-scheduler) section.
+In the example below, the command ```drop partition where ...``` is placed on the scheduler to be executed daily.
+
+<pre>
+schedule time = 1 day and name = "Remove Old Partitions" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep
+</pre>
+
+Note: [This example](..//alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
+
+
 #### Configure data processing functionality
 Note: Details on the streamer process are available in the [Streamer Process](../background%20processes.md#streamer-process) section.
 
@@ -352,21 +365,11 @@ run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=a
 
 </pre>
 
-
- 
-
-#### Removal of old data
-Using the scheduler, a process is triggered periodically and removes old partitions.
-The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
-In the example below, the command is placed on the scheduler to be executed daily.
+#### Start the Operator processes
+These are the processes that based on the ingested data, create the schemas and update the databases.    
+Details are available in the [Operator Process](background%20processes.md#operator-process) section.
  
 <pre>
-
-</pre>
-
-
-
-<pre>
-
+run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node
 </pre>
 
