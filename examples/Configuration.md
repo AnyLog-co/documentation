@@ -209,7 +209,7 @@ In this example, there are 3 system databases that are enabled:
 Below, postgreSQL is assigned to maintain the ***blockchain*** database and the table ***ledger*** is created (if it does not exist in the database).
 
 2) As the node serves as an Operator - information about the ingested data is hosted in a table called ***tsd_info*** in a database called ***almgm***.  
-Below, postgreSQL is assigned to maintain the almgm database  and the table ***tsd_info*** is created (if it does not exist in the database).
+Below, postgreSQL is assigned to maintain the ***almgm*** database  and the table ***tsd_info*** is created (if it does not exist in the database).
 
 3) As the node serves as a query node -  SQLite service the ***system_query*** database. This database is used in the query process.
   
@@ -228,7 +228,7 @@ connect dbms system_query where type=sqlite                         # used in th
 </pre>
 
 #### Connect User Database(s)
-Declare all the logical databases that are used to maintain the user's data and associate each logical database to PostgreSQL or SQLite.
+Declare all the logical databases that are used to maintain the user's data and associate each logical database to PostgreSQL or SQLite.  
 Note: The key ***default_dbms*** was assigned with the value ***test***. Change the assignment to the logical database name that will be used.
 
 <pre>
@@ -253,7 +253,7 @@ else loc = "0.0, 0.0"
 </pre>
 
 ***Declare the policy representing Master node*** (if the master policy is not available).  
-Use the command ***blockchain get master*** (on the CLI or Remote-CLI) to view the Master Policy. 
+Use the command ```blockchain get master``` (on the CLI or Remote-CLI) to view the Master Policy. 
 
 <pre>
 policy = blockchain get master where name=!node_name and company=!company_name and ip=!external_ip and port=!anylog_server_port
@@ -267,7 +267,8 @@ do blockchain insert where policy=!new_policy and local=true and master=!master_
 Note: In the cntext of the network, a cluster represents the group of tables that are managed by an Operator.
 If a second Operator is associated with the same cluster, it will maintain a copy of the data.  
 If a second operator is assigned to a new cluster, but the cluster is associated with a table that is associted to the first cluster, 
-the data will be partitioned to the 2 clusters. 
+the data will be partitioned to the 2 clusters.    
+Use the command ```blockchain get cluster``` (on the CLI or Remote-CLI) to view the cluster policies in use.
 
 <pre>
 
@@ -281,7 +282,8 @@ cluster_id = from !policy bring [cluster][id]  # The key cluster_id is assigned 
 
 </pre>
 
-***Declare the policy representing the Operator node*** (if not available).
+***Declare the policy representing the Operator node*** (if not available).  
+Use the command ```blockchain get operator``` (on the CLI or Remote-CLI) to view the operator policies in use.
 
 <pre>
 
@@ -304,11 +306,12 @@ run scheduler 1         # Note: users can define multiple schedulers - 1 indicat
 
 #### Data Partitioning
 Data that is hosted in the local database can be partioned by date.     
-Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.
+Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.  
+Note: The example below sets partition to all the tables in the database. It assumes same column name for the date column.  
+Partition can be declared at table level.
 
 <pre>
-partition !default_dbms !table_name using !partition_column by !partition_interval
-drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep
+partition !default_dbms * using !partition_column by !partition_interval
 </pre>
 
 
