@@ -93,16 +93,54 @@ Users can leverage the [archival directory](#archival-of-data) for the data back
 Alternatively, uses can actively archive a partition using the [backup table](../anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
-## Example Configuration File
 
-This is an example configuration file with commonly used configuration options and explanations to the selected options.  
+# Example Configuration File
+
+This is an example configuration file with commonly used configuration options and explanations to the selected options.     
+Note that the Hash Sign indicates start of a comment and the text that follows is ignored.
+
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
 If authentication is enabled, there are different layers that can be leveraged: passwords, signature of messages, and certificates.  
 Details are available in the [Users Authentication](../authentication.md#users-authentication) section.
 
 <pre>
+set authentication off
+</pre>
 
+
+#### Associate values to variable names
+Every node maintains a local dictionary with key value names. Users can associate values to variable names as needed.  
+The command ```get dictionary``` shows the variables and their assigned values.  
+The command get ```get ![variable name]``` returns the variable value (or, on the CLI the variable name prefixed by exclamation point returns the variable value, i.e. !ip).
+<pre>
+anylog_root_dir=C:\                 # associate the path to the root folder to a variable (NOTE C:\ is the windows version). 
+hostname = get hostname             # assign the hostname of the local machine to the key hostname
+node_name = anylog-node             # provide a name (preferably unique) to the node. Note, the name would appear on the CLI (i.e.: AL anylog-node > ) 
+company_name = "New Company"        # The node owner (company name)
+
+#external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise define the external IP. 
+#ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise define the local IP. 
+anylog_server_port=2148             # The port to use for messages from nodes members of the network.
+anylog_rest_port=2149               # The port to use for messages from 3rd parties applications.
+master_node = !ip + ":" + !anylog_server_port  # This is declaration for a STANDALONE configuration. Otherwise assign the IP and Port of the master node.
+sync_time="30 seconds"              # Synchronize the metadata (from a master node or blockchain) every 30 seconds.
+</pre>
+
+
+#### Declare the root folder for the AnyLog files
+AnyLog maintains scripts, configurations and data in different folders.  
+The default folders structure is detailed in the a [local directory structure](../getting%20started.md#local-directory-structure) section.
+The command below determines the path to the root folder (to the AnyLog-Network folder).  
+  
+<pre>
+set anylog home !anylog_root_dir    # Declare the location of the AnyLog root folder. Note that anylog_root_dir was associated with a value above (anylog_root_dir=C:\).
+</pre>
+
+#### Create the AnyLog Directories
+The command below will create the AnyLog folders (under the AnyLog root folder) if the folders do not exists.
+<pre>
+create work directories
 </pre>
 
 
@@ -141,6 +179,17 @@ Details are available in the [Blockchain Synchronizer](../background%20processes
 <pre>
 
 </pre>
+
+
+#### Initiating the scheduler
+AnyLog commands can be placed on the scheduler and be executed periodically.  
+The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
+
+<pre>
+run scheduler 1
+</pre>
+
+
 
 #### Data Partitioning
 Data that is hosted in the local database can be partioned by date.     
