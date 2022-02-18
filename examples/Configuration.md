@@ -308,7 +308,7 @@ run scheduler 1         # Note: users can define multiple schedulers - 1 indicat
 Data that is hosted in the local database can be partioned by date.     
 Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.  
 Note: The example below sets partition to all the tables in the database. It assumes same column name for the date column.  
-Partition can be declared at table level.
+However, if column names are different or partition interval is different - partition can be declared at a table level.
 
 <pre>
 partition !default_dbms * using !partition_column by !partition_interval
@@ -318,7 +318,7 @@ partition !default_dbms * using !partition_column by !partition_interval
 #### Removal of old data
 Using the scheduler, a process is triggered periodically and removes old partitions.
 The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
-Setting scheduled tasks is explained in the [Adding tasks to the scheduler](../alerts%20and%20monitoring.md#adding-tasks-to-the-scheduler) section.
+Setting scheduled tasks is explained in the [Adding tasks to the scheduler](../alerts%20and%20monitoring.md#adding-tasks-to-the-scheduler) section.  
 In the example below, the command ```drop partition where ...``` is placed on the scheduler to be executed daily.
 
 <pre>
