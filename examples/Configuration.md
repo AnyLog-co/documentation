@@ -96,10 +96,10 @@ command (and specify the needed partition).
 
 # Example Configuration File
 
-This is an example configuration file with commonly used configuration options and explanations to the selected options.     
+The example below demonstrates a configuration file with commonly used configuration options.     
 Notes:
- 1) The example below declares a ***standalone node***. A standalone node has the roles of a Master Node, an Operator Node and q Query Node. 
- 2) The Hash Sign indicates start of a comment and the text that follows is ignored.
+ 1) The example below declares a ***standalone node***. A standalone node has the roles of a Master Node, an Operator Node and a Query Node. 
+ 2) The Hash Sign (#) indicates start of a comment and the text that follows is ignored.
 
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
@@ -112,9 +112,9 @@ set authentication off
 
 
 #### Assign values to variable names
-Every node maintains a local dictionary with key value names. Users can associate values to variable names as needed.  
+Every node maintains a local dictionary with key value pairs. Users can associate values to variable names as needed.  
 The command ```get dictionary``` shows the variables and their assigned values.  
-The command get ```get ![variable name]``` returns the variable value (or, on the CLI the variable name prefixed by exclamation point returns the variable value, i.e. !ip).
+The command get ```get ![variable name]``` returns the variable value (or, on the CLI the variable name prefixed by exclamation point returns the variable value, i.e. ```!ip```).
 <pre>
 
 # Generic Variables
