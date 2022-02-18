@@ -237,12 +237,20 @@ connect dbms blockchain where type=psql and user = !db_user and password = !db_p
 is_table = info table blockchain ledger exists                      # Determine if the ***ledger*** table exists
 if not !is_table then create table ledger where dbms=blockchain     # Create the ***ledger*** table if ledger table was not created
 
-connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port # Init the test dbms (for user data)
+connect dbms almgm where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port # Init the test dbms (for user data)
 is_table = info table almgm tsd_info exists                         # Determine if the ***tsd_info*** table exists
 if !is_table == false then create table tsd_info where dbms=almgm   # Create the ***tsd_info*** table if tsd_info table was not created
 
-connect dbms system_query where type=sqlite
+connect dbms system_query where type=sqlite                         # used in the query process.
 
+</pre>
+
+#### Connect User Database(s)
+Declare all the logical databases that are used to maintain the user's data and associate each logical database to PostgreSQL or SQLite.
+Note: The key ***default_dbms*** was assigned with the value ***test***. Change the assignment to the logical database name that will be used.
+
+<pre>
+connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
 </pre>
 
 #### Declare the node in the metadata layer
@@ -310,8 +318,42 @@ Data that is hosted in the local database can be partioned by date.
 Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.
 
 <pre>
+partition !default_dbms !table_name using !partition_column by !partition_interval
+drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep
+</pre>
+
+
+#### Configure data processing functionality
+Note: Details on the streamer process are available in the [Streamer Process](../background%20processes.md#streamer-process) section.
+
+<pre>
+set buffer threshold where write_immediate = true   # When data is ingested, the local database is updated with no wait time.
+run streamer                                        # Enable a dedicated thread to managing the ingested data
+</pre>
+
+#### Configure a process to map source data to the table structure
+Allowing data to be treated based on a topic declaration - as if the AnyLog node is an MQTT broker.  
+Details on the mapping process are available in the [Using Post Command](../adding%20data.md#using-a-post-command) section 
+and the [Subscribing to REST calls](../using%20rest.md#subscribing-to-rest-calls) section.
+
+
+<pre>
+broker=rest
+mqtt_log = false
+mqtt_topic_name=aiops
+mqtt_topic_dbms="bring [dbms]"
+mqtt_topic_table="bring [table]"
+mqtt_column_timestamp="bring [ts]"
+mqtt_column_value="bring [value]"
+mqtt_column_value_type=float
+
+
+run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))
 
 </pre>
+
+
+ 
 
 #### Removal of old data
 Using the scheduler, a process is triggered periodically and removes old partitions.
@@ -322,4 +364,9 @@ In the example below, the command is placed on the scheduler to be executed dail
 
 </pre>
 
+
+
+<pre>
+
+</pre>
 
