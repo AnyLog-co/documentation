@@ -408,12 +408,12 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"name" : "IP / Port Variables",
 			"description" : "Init params on start",
 			"setting" : {
-                  "external_ip" : "<external_ip>",
-                  "ip" : "<local_ip>",
-                  "anylog_server_port " : "<port>",
-                  "anylog_rest_port" : "<port>",
-                  "master_node" : "<ip:port>",
-                  "sync_time" : "<30 seconds>"
+				"external_ip" : "<external_ip>",
+				"ip" : "<local_ip>",
+				"anylog_server_port " : "<port>",
+				"anylog_rest_port" : "<port>",
+				"master_node" : "<ip:port>",
+				"sync_time" : "<30 seconds>"
             }
 		},
 		{
@@ -422,9 +422,9 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"setting" : {
 				"db_user" : "postgres",
 				"db_passwd" : "postgres",
-                "db_ip" : "!ip",
-                "db_port" : 5432,
-                "default_dbms" : "my_company"
+				"db_ip" : "!ip",
+				"db_port" : 5432,
+				"default_dbms" : "my_company"
             }
 		},
 		{
@@ -433,9 +433,9 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"setting" : {
 				"cluster_name" : "cluster_1",
 				"partition_column" : "timestamp",
-                "partition_interval" : "1 month",
-                "db_port" : 5432,
-                "partition_keep" : 6
+				"partition_interval" : "1 month",
+				"db_port" : 5432,
+				"partition_keep" : 6
             }
 		},
         {
@@ -486,12 +486,12 @@ set script autoexec.json [script data]    # Use POST in the REST call
             "setting" : {
 				"broker" : "rest",
 				"mqtt_log " : false,
-                "mqtt_topic_name" : "my_company",
-                "mqtt_topic_dbms" : "bring [dbms]",
-                "mqtt_topic_table" : "bring [table]",
-                "mqtt_column_timestamp" : "bring [ts]",
-                "mqtt_column_value" : "bring [value]",
-                "mqtt_column_value_type" : "float"
+				"mqtt_topic_name" : "my_company",
+				"mqtt_topic_dbms" : "bring [dbms]",
+				"mqtt_topic_table" : "bring [table]",
+				"mqtt_column_timestamp" : "bring [ts]",
+				"mqtt_column_value" : "bring [value]",
+				"mqtt_column_value_type" : "float"
             },
             "commands" : [
                 "run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))"
