@@ -438,7 +438,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"partition_keep" : 6
 			}
 		},
-        {
+		{
 			"name" : "Initiation commands",
 			"description" : "Commands executed when node is starting",
             "commands" : [
@@ -448,7 +448,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
                 "run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node"
             ]
         },
-        {
+		{
 			"name" : "Initiation of System Databases",
 			"description" : "Commands executed when node is starting to enable system databases",
             "commands" : [
@@ -457,14 +457,14 @@ set script autoexec.json [script data]    # Use POST in the REST call
                 "connect dbms system_query where type=sqlite "
             ]
         },
-        {
+		{
 			"name" : "Initiation of User Databases",
 			"description" : "Commands executed when node is starting to enable user databases",
             "commands" : [
                 "connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port\n"
             ]
         },
-        {
+		{
 			"name" : "Initiation of Scheduler and data partition",
 			"description" : "Start the scheduler and test data removal daily",
             "commands" : [
@@ -473,14 +473,14 @@ set script autoexec.json [script data]    # Use POST in the REST call
                 "schedule time = 1 day and name = \"Remove Old Partitions\" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep"
             ]
         },
-        {
+		{
 			"name" : "Configure data processing functionality",
             "commands" : [
                 "set buffer threshold where write_immediate = true",
                 "run streamer"
             ]
         },
-      {
+		{
 			"name" : "Broker functionality",
 			"description" : "Configure a process to map source data to the table structure",
             "setting" : {
@@ -498,7 +498,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
             ]
       },
 
-      {
+		{
 			"name" : "Start the operator process",
             "commands" : [
                 "run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node"
