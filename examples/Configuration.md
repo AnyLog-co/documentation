@@ -456,7 +456,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"connect dbms almgm where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port",
 				"connect dbms system_query where type=sqlite "
 			]
-        },
+		},
 		{
 			"name" : "Initiation of User Databases",
 			"description" : "Commands executed when node is starting to enable user databases",
