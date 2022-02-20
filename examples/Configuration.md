@@ -387,7 +387,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 
 ## Example - JSON configuration file
 
-```javascript
+```
 {
 	"config" : [
 
@@ -397,12 +397,12 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"setting" : {
 				"anylog_root_dir" : "C:",
 				"node_name" : "<node name>", 
-                "company_name " : "<Company name>"
+				"company_name " : "<Company name>"
 			},
-            "commands" : [
-            "hostname = get hostname"
+			"commands" : [
+			"hostname = get hostname"
             ]
-        },
+		},
 
 		{
             "name" : "IP / Port Variables",
