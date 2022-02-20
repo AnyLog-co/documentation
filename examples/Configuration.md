@@ -399,9 +399,9 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"node_name" : "<node name>", 
                 "company_name " : "<Company name>"
 			},
-          "commands" : [
+            "commands" : [
               "hostname = get hostname"
-          ]
+            ]
 
 		},
 
@@ -494,7 +494,6 @@ set script autoexec.json [script data]    # Use POST in the REST call
                 "mqtt_column_value" : "bring [value]",
                 "mqtt_column_value_type" : "float"
             },
-
             "commands" : [
                 "run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))"
             ]
