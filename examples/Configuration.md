@@ -379,10 +379,10 @@ The following example starts an AnyLog node and configures the node according to
 python3 user_cmd.py "process !local_scripts\autoexec.json"
 </pre>
 
-The following commands write and retrieve a JSON configuration file to and from the directory assigned to the key ***local_scripts***.
+The following REST commands write and retrieve a JSON configuration file to and from the directory assigned to the key ***local_scripts***.
 <pre>
-get script autoexec.json
-set script autoexec.json [script data]
+get script autoexec.json                  # Use GET in the REST call
+set script autoexec.json [script data]    # Use POST in the REST call
 </pre>
 
 ## Example - JSON configuration file
