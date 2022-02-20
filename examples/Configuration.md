@@ -401,11 +401,11 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			},
 			"commands" : [
 			"hostname = get hostname"
-            ]
+			]
 		},
 
 		{
-            "name" : "IP / Port Variables",
+			"name" : "IP / Port Variables",
 			"description" : "Init params on start",
 			"setting" : {
                   "external_ip" : "<external_ip>",
@@ -417,7 +417,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
             }
 		},
 		{
-            "name" : "DBMS Variables",
+			"name" : "DBMS Variables",
 			"description" : "Init DBMS params on start",
 			"setting" : {
 				"db_user" : "postgres",
@@ -428,7 +428,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
             }
 		},
 		{
-            "name" : "Cluster and Partition Variables",
+			"name" : "Cluster and Partition Variables",
 			"description" : "Init Cluster params on start",
 			"setting" : {
 				"cluster_name" : "cluster_1",
@@ -439,7 +439,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
             }
 		},
         {
-            "name" : "Initiation commands",
+			"name" : "Initiation commands",
 			"description" : "Commands executed when node is starting",
             "commands" : [
                 "set anylog home !anylog_root_dir",
@@ -449,7 +449,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
             ]
         },
         {
-            "name" : "Initiation of System Databases",
+			"name" : "Initiation of System Databases",
 			"description" : "Commands executed when node is starting to enable system databases",
             "commands" : [
                 "connect dbms blockchain where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port",
@@ -458,14 +458,14 @@ set script autoexec.json [script data]    # Use POST in the REST call
             ]
         },
         {
-            "name" : "Initiation of User Databases",
+			"name" : "Initiation of User Databases",
 			"description" : "Commands executed when node is starting to enable user databases",
             "commands" : [
                 "connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port\n"
             ]
         },
         {
-            "name" : "Initiation of Scheduler and data partition",
+			"name" : "Initiation of Scheduler and data partition",
 			"description" : "Start the scheduler and test data removal daily",
             "commands" : [
                 "partition !default_dbms * using !partition_column by !partition_interval",
@@ -474,14 +474,14 @@ set script autoexec.json [script data]    # Use POST in the REST call
             ]
         },
         {
-            "name" : "Configure data processing functionality",
+			"name" : "Configure data processing functionality",
             "commands" : [
                 "set buffer threshold where write_immediate = true",
                 "run streamer"
             ]
         },
       {
-            "name" : "Broker functionality",
+			"name" : "Broker functionality",
 			"description" : "Configure a process to map source data to the table structure",
             "setting" : {
 				"broker" : "rest",
@@ -499,7 +499,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
       },
 
       {
-            "name" : "Start the operator process",
+			"name" : "Start the operator process",
             "commands" : [
                 "run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node"
             ]
