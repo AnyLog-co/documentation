@@ -387,7 +387,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 
 ## Example - JSON configuration file
 
-```
+```json
 {
 	"config" : [
 
