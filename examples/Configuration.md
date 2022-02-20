@@ -349,7 +349,7 @@ and the [Subscribing to REST calls](../using%20rest.md#subscribing-to-rest-calls
 <pre>
 broker=rest
 mqtt_log = false
-mqtt_topic_name=aiops
+mqtt_topic_name=my_company
 mqtt_topic_dbms="bring [dbms]"
 mqtt_topic_table="bring [table]"
 mqtt_column_timestamp="bring [ts]"
@@ -372,8 +372,7 @@ run operator where create_table=true and update_tsd_info=true and archive=true a
 # Configuring a node with a JSON file
 
 Users can write a JSON file (in the format described below) to configure a node.    
-The JSON configuration file needs to have ***json*** as the file type.  
-The command ***process*** followed by a path and a file name will process all the commands in the specified JSON file.  
+The JSON configuration file name needs to include ***json*** as the file type.    
 The following example starts an AnyLog node and configures the node according to the commands listed in a file called ***autoexec.json***.
 
 <pre>
@@ -384,6 +383,131 @@ The following commands write and retrieve a JSON configuration file to and from 
 <pre>
 get script autoexec.json
 set script autoexec.json [script data]
+</pre>
+
+## Example - JSON configuration file
+
+<pre>
+{
+	"config" : [
+
+		{
+			"name" : "Generic Variables",
+			"description" : "Init params on start",
+			"setting" : {
+				"anylog_root_dir" : "C:",
+				"node_name" : "<node name>",
+                "company_name " : "<Company name>"
+			},
+          "commands" : [
+              "hostname = get hostname"
+          ]
+
+		},
+
+		{
+            "name" : "IP / Port Variables",
+			"description" : "Init params on start",
+			"setting" : {
+				"external_ip" : "<external_ip>",
+				"ip" : "<local_ip>",
+                "anylog_server_port " : "<port>",
+                "anylog_rest_port" : "<port>",
+                "master_node" : "<ip:port>",
+                "sync_time" : "<30 seconds>"
+            }
+		},
+		{
+            "name" : "DBMS Variables",
+			"description" : "Init DBMS params on start",
+			"setting" : {
+				"db_user" : "postgres",
+				"db_passwd" : "postgres",
+                "db_ip" : "!ip",
+                "db_port" : 5432,
+                "default_dbms" : "my_company"
+            }
+		},
+		{
+            "name" : "Cluster and Partition Variables",
+			"description" : "Init Cluster params on start",
+			"setting" : {
+				"cluster_name" : "cluster_1",
+				"partition_column" : "timestamp",
+                "partition_interval" : "1 month",
+                "db_port" : 5432,
+                "partition_keep" : 6
+            }
+		},
+        {
+            "name" : "Initiation commands",
+			"description" : "Commands executed when node is starting",
+            "commands" : [
+                "set anylog home !anylog_root_dir",
+                "run tcp server !external_ip !anylog_server_port !ip !anylog_server_port",
+                "run rest server !ip !anylog_rest_port",
+                "run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node"
+            ]
+        },
+        {
+            "name" : "Initiation of System Databases",
+			"description" : "Commands executed when node is starting to enable system databases",
+            "commands" : [
+                "connect dbms blockchain where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port",
+                "connect dbms almgm where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port",
+                "connect dbms system_query where type=sqlite "
+            ]
+        },
+        {
+            "name" : "Initiation of User Databases",
+			"description" : "Commands executed when node is starting to enable user databases",
+            "commands" : [
+                "connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port\n"
+            ]
+        },
+        {
+            "name" : "Initiation of Scheduler and data partition",
+			"description" : "Start the scheduler and test data removal daily",
+            "commands" : [
+                "partition !default_dbms * using !partition_column by !partition_interval",
+                "run scheduler 1",
+                "schedule time = 1 day and name = \"Remove Old Partitions\" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep"
+            ]
+        },
+        {
+            "name" : "Configure data processing functionality",
+            "commands" : [
+                "set buffer threshold where write_immediate = true",
+                "run streamer"
+            ]
+        },
+      {
+            "name" : "Broker functionality",
+			"description" : "Configure a process to map source data to the table structure",
+            "setting" : {
+				"broker" : "rest",
+				"mqtt_log " : false,
+                "mqtt_topic_name" : "my_company",
+                "mqtt_topic_dbms" : "bring [dbms]",
+                "mqtt_topic_table" : "bring [table]",
+                "mqtt_column_timestamp" : "bring [ts]",
+                "mqtt_column_value" : "bring [value]",
+                "mqtt_column_value_type" : "float"
+            },
+
+            "commands" : [
+                "run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))"
+            ]
+      },
+
+      {
+            "name" : "Start the operator process",
+            "commands" : [
+                "run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node"
+            ]
+        }
+    ]
+}
 </pre>
 
 
