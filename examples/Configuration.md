@@ -396,7 +396,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"description" : "Init params on start",
 			"setting" : {
 				"anylog_root_dir" : "C:",
-				"node_name" : "<node name>",
+				"node_name" : "<node name>", 
                 "company_name " : "<Company name>"
 			},
           "commands" : [
