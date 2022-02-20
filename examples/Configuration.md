@@ -373,7 +373,7 @@ run operator where create_table=true and update_tsd_info=true and archive=true a
 
 Users can write a JSON file (in the format described below) to configure a node.    
 The JSON configuration file name needs to include ***json*** as the file type.    
-The following example starts an AnyLog node and configures the node according to the commands listed in a file called ***autoexec.json***.
+The following example starts an AnyLog node and configures the node according to the commands listed in a JSON file called ***autoexec.json***.
 
 <pre>
 python3 user_cmd.py "process !local_scripts\autoexec.json"
