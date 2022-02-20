@@ -462,7 +462,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"description" : "Commands executed when node is starting to enable user databases",
 			"commands" : [
 				"connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port\n"
-            ]
+			]
 		},
 		{
 			"name" : "Initiation of Scheduler and data partition",
