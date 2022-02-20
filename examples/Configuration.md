@@ -483,7 +483,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 		{
 			"name" : "Broker functionality",
 			"description" : "Configure a process to map source data to the table structure",
-            "setting" : {
+			"setting" : {
 				"broker" : "rest",
 				"mqtt_log " : false,
 				"mqtt_topic_name" : "my_company",
