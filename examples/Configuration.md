@@ -414,7 +414,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"anylog_rest_port" : "<port>",
 				"master_node" : "<ip:port>",
 				"sync_time" : "<30 seconds>"
-            }
+			}
 		},
 		{
 			"name" : "DBMS Variables",
@@ -425,7 +425,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"db_ip" : "!ip",
 				"db_port" : 5432,
 				"default_dbms" : "my_company"
-            }
+			}
 		},
 		{
 			"name" : "Cluster and Partition Variables",
@@ -436,7 +436,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"partition_interval" : "1 month",
 				"db_port" : 5432,
 				"partition_keep" : 6
-            }
+			}
 		},
         {
 			"name" : "Initiation commands",
@@ -492,7 +492,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"mqtt_column_timestamp" : "bring [ts]",
 				"mqtt_column_value" : "bring [value]",
 				"mqtt_column_value_type" : "float"
-            },
+			},
             "commands" : [
                 "run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))"
             ]
