@@ -387,7 +387,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 
 ## Example - JSON configuration file
 
-```json
+```
 {
 	"config" : [
 
@@ -400,21 +400,20 @@ set script autoexec.json [script data]    # Use POST in the REST call
                 "company_name " : "<Company name>"
 			},
             "commands" : [
-              "hostname = get hostname"
+            "hostname = get hostname"
             ]
-
-		},
+        },
 
 		{
             "name" : "IP / Port Variables",
 			"description" : "Init params on start",
 			"setting" : {
-				"external_ip" : "<external_ip>",
-				"ip" : "<local_ip>",
-                "anylog_server_port " : "<port>",
-                "anylog_rest_port" : "<port>",
-                "master_node" : "<ip:port>",
-                "sync_time" : "<30 seconds>"
+                  "external_ip" : "<external_ip>",
+                  "ip" : "<local_ip>",
+                  "anylog_server_port " : "<port>",
+                  "anylog_rest_port" : "<port>",
+                  "master_node" : "<ip:port>",
+                  "sync_time" : "<30 seconds>"
             }
 		},
 		{
