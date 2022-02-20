@@ -369,3 +369,21 @@ Details are available in the [Operator Process](background%20processes.md#operat
 run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node
 </pre>
 
+# Configuring a node with a JSON file
+
+Users can write a JSON file (in the format described below) to configure a node.    
+The JSON configuration file needs to have ***json*** as the file type.  
+The command ***process*** followed by a path and a file name will process all the commands in the specified JSON file.  
+The following example starts an AnyLog node and configures the node according to the commands listed in a file called ***autoexec.json***.
+
+<pre>
+python3 user_cmd.py "process !local_scripts\autoexec.json"
+</pre>
+
+The following commands write and retrieve a JSON configuration file to and from the directory assigned to the key ***local_scripts***.
+<pre>
+get script autoexec.json
+set script autoexec.json [script data]
+</pre>
+
+
