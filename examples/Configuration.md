@@ -447,7 +447,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"run rest server !ip !anylog_rest_port",
 				"run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node"
 			]
-        },
+		},
 		{
 			"name" : "Initiation of System Databases",
 			"description" : "Commands executed when node is starting to enable system databases",
@@ -463,7 +463,7 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"commands" : [
 				"connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port\n"
             ]
-        },
+		},
 		{
 			"name" : "Initiation of Scheduler and data partition",
 			"description" : "Start the scheduler and test data removal daily",
@@ -472,14 +472,14 @@ set script autoexec.json [script data]    # Use POST in the REST call
 				"run scheduler 1",
 				"schedule time = 1 day and name = \"Remove Old Partitions\" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep"
 			]
-        },
+		},
 		{
 			"name" : "Configure data processing functionality",
 			"commands" : [
 				"set buffer threshold where write_immediate = true",
 				"run streamer"
 			]
-        },
+		},
 		{
 			"name" : "Broker functionality",
 			"description" : "Configure a process to map source data to the table structure",
@@ -496,14 +496,13 @@ set script autoexec.json [script data]    # Use POST in the REST call
 			"commands" : [
 				"run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))"
 			]
-      },
-
+		},
 		{
 			"name" : "Start the operator process",
 			"commands" : [
 				"run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node"
 			]
-        }
+		}
     ]
 }
 ```
