@@ -16,7 +16,7 @@ Note:
     <pre>
     !anylog_path/AnyLog-Network/demo/operator1.al
     </pre>
-* If AnyLog is installed without a package that creates the enviornment (like Docker), the default directories can be created using the command:
+* If AnyLog is installed without a package that creates the environment (like Docker), the default directories can be created using the command:
     <pre>
     create work directories
     </pre>
@@ -31,6 +31,13 @@ Note:
 4. Run queries from the Query node
 * The commands detailed in this doc include the commands to reset an existing setup to delete existing metadata and data files.
 
+## Declaring multiple nodes on the same physical or virtual machine
+
+If the nodes are not isolated, associate a different path to each node.
+For example:
+<pre>
+set anylog home D:\Node
+</pre>
 
 ## Configure the Master Node
 <pre>
@@ -67,9 +74,10 @@ master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MAST
 run tcp server !external_ip !operator_tcp_port !ip !operator_tcp_port # The connection to the network nodes
 run rest server !ip !operator_rest_port # Enable REST calls
 
-connect dbms psql anylog@127.0.0.1:demo 5432 system_query # Use SQLite as system dbms
-connect dbms psql anylog@127.0.0.1:demo 5432  lsl_demo  # use Postgres for lsl_demo tables
-connect dbms sqlite anylog@127.0.0.1:demo 5432 almgm # Local management database
+connect dbms psql anylog@127.0.0.1:demo 5432 system_query # For AnyLog use: Use SQLite as system dbms
+connect dbms sqlite anylog@127.0.0.1:demo 5432 almgm # For AnyLog use: Local management database
+
+connect dbms psql anylog@127.0.0.1:demo 5432  lsl_demo  # For the user data: use Postgres for lsl_demo tables
 
 partition lsl_demo ping_sensor using timestamp by 7 days  # Partition the data of the lsl_demo dbms by time
 
@@ -85,10 +93,8 @@ run operator where create_table = true and update_tsd_info = true and archive = 
 
 <pre>
 time file drop all
-create table tsd_info where dbms = almgm
-drop table ping_sensor where dbms = lsl_demo
-drop table ping_sensor where dbms = anylog
-drop table new_sensor where dbms = lsl_demo
+create table tsd_info where dbms = almgm  # Drop AnyLog Table  
+drop table ping_sensor where dbms = lsl_demo # Drop User table
 blockchain delete local file
 </pre>
 
@@ -159,8 +165,8 @@ connect dbms psql anylog@127.0.0.1:demo 5432 system_query # Use SQLite as system
 run blockchain sync where source = master and time = 30 seconds and dest = file and connection = !master_node # Sync the blockchain data
 </pre>
 
-## Push data to the network
-There many ways and interfaces to add data to the network. The simplest is to add a JSON file to the watch directory.  
+## Push data to the network (on the Operator Node)
+There many ways and interfaces to add data to the network. The simplest is to add a JSON file to the watch directory of the Operator Node.  
 View the location of the watch directory using the command: 
 <pre>
 !watch_dir

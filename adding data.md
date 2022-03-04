@@ -21,7 +21,7 @@ If a node is configured as an Operator, it will add each file received to a loca
 ## Placing data in the WATCH directory
 
 This option allows adding data by placing new data in a Watch Directory.  
-A Watch Directory is a disk directory designated to new data. Operators monitor data placed in a watch directory such that when new data is identified, the data processing functionality is triggered.   
+A Watch Directory is a disk directory designated to new data. Operator nodes monitor data placed in a watch directory such that when new data is identified, the data processing functionality is triggered.   
 Operator nodes are configured such that any file (of the type JSON or SQL) that is placed on a WATCH directory is being processed.  
 The default processing is as follows:  
 1. The file is read by the operator.
@@ -214,7 +214,8 @@ Command details are available [here](https://github.com/AnyLog-co/documentation/
 
 With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key ***topic***. If a topic value is not provided, the default topic is used.  
-The default topic is the first topic described in the command ```run mqtt client ... ```.
+The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
+in the [Subscribing to REST calls](./using%20rest.md#subscribing-to-rest-calls) section.
 
 **cURL Example**: 
 <pre>

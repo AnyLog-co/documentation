@@ -296,7 +296,7 @@ get servers where company = anylog bring [operator][ip] : [operator][port] --- [
 
 ## Get pools info
 
-These commands returns the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
+These commands return the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
 For example:
 <pre>
 get workers pool
@@ -405,22 +405,8 @@ The ***sqlite*** keyword can be replaced with ***psql*** to leverage PostgreSQL 
 
 ### Options
 
-Options are provided in the format ```key = value``` and multiple options are seperated by the```and``` keyword.  
-
-| Key        | Value  |
-| ---------- | -------| 
-| include    | Adding data from a different database and table to the query result. The value is specified as ***dbms.table***. |
-| table      | A designated table to maintain the query results. |
-| dest       | Output destination like stdout (default), rest, file, none (to only updates results dbms).  |
-| max_time   | Cap the query execution time.  |
-| drop       | True/False - drop the output table when query starts (default is True).  |
-| file       | With key and value: ```dest = file```, file path and name to accumulate the result set.  |
-| format     | Output format, the default being JSON. Options: json, table |
-| timezone   | Time is stored in UTC and queried and presented using local timezone. Use ***utc*** to avoid mapping to local timezone. |
-|            | If date/time columns are entered in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601), the values are converted to local timezone.|
-|            | To force conversion (if ISO 8601 format is not used) use ***timezone = local***.| 
-| include    | Specify tables (dbms.table) that are treated as the table being queried. Example: include=(fic12,valve_pos,lic1_sp,fic13,err,lic1,ai_mv) |
-| extend     | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  |
+Options are provided in the format ```key = value``` and multiple options are seperated by the```and``` keyword. 
+detaile are provided in the [Query options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) section.
 
 ### Example
 <pre>  
@@ -534,17 +520,17 @@ drop partition [partition name] where dbms = [dbms name] and table = [table name
   
 Explanation:  
 Drops a partition in the named database and table.  
-[partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.  
-[keep] is optional. If a value is provided, the oldest partitions will be dropped to keep the number of partitions as the value provided.
-If table name is asterisk (*), a partition from every table from the specified database is dropped.
-If partition name is asterisk (*), all the partitions are dropped.  
+* [partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped and if the table has only one partition, an error value is returned.    
+* [keep] is optional. If a value is provided, the oldest partitions will be dropped to keep the number of partitions as the value provided.  
+* If table name is asterisk (*), a partition from every table from the specified database is dropped.  
+* If partition name is asterisk (*), all the partitions are dropped.  
 
 Examples:
 <pre>
 drop partition par_readings_2019_08_02_d07_timestamp where dbms = purpleair and table = readings
 drop partition where dbms = purpleair and table = readings
 drop partition * where dbms = purpleair and table = readings
-drop partition where dbms = aiops and table = cx_482f2efic11_fb_factualvalue and keep = 5
+drop partition where dbms = aiops and table = factualvalue and keep = 5
 </pre>
 
 
