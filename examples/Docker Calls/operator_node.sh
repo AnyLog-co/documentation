@@ -1,0 +1,40 @@
+# deployment of an Operator Node with MQTT client against REST (POST)
+docker run --network host --name al-operator-node --rm \
+    -e NODE_TYPE=operator \
+    -e ANYLOG_SERVER_PORT=2148 \
+    -e ANYLOG_REST_PORT=2149 \
+    -e MASTER_NODE=10.0.0.212:2048 \
+    -e DB_TYPE=psql \
+    -e DB_USER=anylog@127.0.0.1:demo \
+    -e DB_PORT=5432 \
+    -e DEFAULT_DBMS=aiops \
+    -e SYNC_TIME="30 second" \
+    -e COMPANY_NAME=AnyLog \
+    -e CLUSTER_NAME=anylog-cluster \
+    -e NODE_NAME=anylog-operator \
+    -e ENABLE_PARTITION=true \
+    -e PARTITION_COLUMN=timestamp \
+    -e DROP_PARTITION=true \
+    -e PARTITION_KEEP=30 \
+    -e PARTITION_INTERVAL="7 day" \
+    -e ENABLE_DATA_MONITOR=true \
+    -e TABLE_NAME=* \
+    -e INTERVAL_VALUE=10 \
+    -e DATA_MONITOR_INTERVAL="1 minute" \
+    -e DATA_MONITOR_COLUMN="value" \
+    -e MQTT_ENABLE=true \
+    -e BROKER=rest \
+    -e MQTT_PORT=2051 \
+    -e MQTT_LOG=false \
+    -e MQTT_TOPIC_NAME=new_topic \
+    -e MQTT_TOPIC_DBMS="bring [dbms]"  \
+    -e MQTT_TOPIC_TABLE="bring [table]" \
+    -e MQTT_COLUMN_TIMESTAMP="bring [timestamp]" \
+    -e MQTT_COLUMN_VALUE_TYPE=float \
+    -e MQTT_COLUMN_VALUE="bring [value]" \
+    -v al-operator-node-anylog:/app/AnyLog-Network/anylog:rw \
+    -v al-operator-node-blockchain:/app/AnyLog-Network/blockchain:rw \
+    -v al-operator-node-data:/app/AnyLog-Network/data:rw \
+    -v al-operator-node-local-scripts:/app/AnyLog-Network/local_scripts:rw \
+    -v al-operator-node-scripts:/app/AnyLog-Network/scripts:rw \
+    -d -it --detach-keys="ctrl-d" oshadmon/anylog:predevelop
