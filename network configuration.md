@@ -61,18 +61,22 @@ b) Request peers to determine the reply address from the message socket.
 
 ### Setting a different IP address for replies 
 Using the ***set reply ip*** command, user can direct a node sending a message, to receive the reply on a different IP address.    
+Using the ***set reply ip and port*** command, user can direct a node sending a message, to receive the reply on a different IP and port address.  
+
 Usage:
 <pre>
 set reply ip = [ip]
+set reply ip and port = [IP:Port]
 </pre>
 
 Examples:
 <pre>
 set reply ip = !external_ip
 set reply ip = 24.23.250.144
+set reply ip and port = 24.23.250.144:4078
 </pre>
 
-The value assigned to the ***reply ip*** can be retrieved using the folowing command:
+The value assigned to the ***reply ip*** can be retrieved using the following command:
 <pre>
 get reply ip
 </pre>
