@@ -72,7 +72,7 @@ In the example below we create the table and update the configuration from the A
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
 # Create the table struct
-sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null")"
+sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null)"
 </pre>
 
 The following command issued as a command argument issued on the OS command line when AnyLog is initiated or on the AnyLog CLI 
