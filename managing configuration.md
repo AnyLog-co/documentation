@@ -19,6 +19,14 @@ Issuing REST calls to an AnyLog node is explained in the [Using REST](.//using%2
 ## Using a script file, JSON file, or a table to configure AnyLog command
 
 * The command ***process*** followed by a path and a file name will process all the commands in the specified file.
+  Usage:
+  <pre>
+  process [path and file name]
+  </pre>
+  Example:
+  <pre>
+  process !anylog_path/AnyLog-Network/demo/ha_operator1.al
+  </pre>
 * The command [process from dbms](#configuration-from-a-database-table) followed by the DBMS and table details will process the commands contained in
   the table.  
 
@@ -27,7 +35,7 @@ Issuing REST calls to an AnyLog node is explained in the [Using REST](.//using%2
 Anylog commands can be issued as command line arguments on the OS command line (or on the AnyLog CLI).  
 The following command will process the AnyLog commands contained in the script file when AnyLog node is initiated:  
 <pre>
-AnyLog process !anylog_path/AnyLog-Network/demo/ha_operator1.al
+anyLog process !anylog_path/AnyLog-Network/demo/ha_operator1.al
 </pre>
 
 Without a script file, with multiple commands, enclose each command with quotation marks and separate each command with the keyword ```and```.  
