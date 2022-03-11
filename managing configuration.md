@@ -73,6 +73,9 @@ In the example below we create the table and update the configuration from the A
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
 # Create the table struct
 sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null)"
+# Insert value that will generate the AnyLog config commands
+sql config_dbms "insert into my_config (al_command, al_value) values ("anylog_server_port=<>", "2148")
+sql config_dbms "insert into my_config (al_command, al_value) values ("sync_time= \"<>\"", "30 seconds")
 </pre>
 
 The following command issued as a command argument issued on the OS command line when AnyLog is initiated or on the AnyLog CLI 
