@@ -19,7 +19,7 @@ Issuing REST calls to an AnyLog node is explained in the [Using REST](.//using%2
 ## Using a script file, JSON file, or a table to configure AnyLog command
 
 * The command ***process*** followed by a path and a file name will process all the commands in the specified file.
-* The command [process from dbms](#the-process-from-dbms-command) followed by the DBMS and table details will process the commands contained in
+* The command [process from dbms](#configuration-from-a-database-table) followed by the DBMS and table details will process the commands contained in
   the table.  
 
 ## Issuing AnyLog commands as command lime arguments when AnyLog is initiated
@@ -54,3 +54,14 @@ Command options:
 | value      | The field name with the value to associate with the command| |
 | command    | The command to execute| |
 | condition  | The ***where*** condition to use when the commands are retrieved | optional |
+
+Example:
+
+A table in a database needs to be available with the configuration commands. The update of the table can be done by any application.  
+
+In the example below we create the table and update the configuration from the AnyLog CLI:
+
+<pre>
+connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
+sql config_dbms "create table config (command_id serial primary key not null, al_value varchar, al_command varchar not null")"  
+</pre>
