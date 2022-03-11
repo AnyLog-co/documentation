@@ -42,17 +42,17 @@ The ***process from dbms*** command will retrieve the AnyLog commands contained 
 
 Usage:
 <pre>
-process from dbms where name = [dbms name] and table = [table name] and value = [value field name] and command = [command to execute] and condition = [where condition]
+process from table where name = [table name] and dbms = [dbms name] and value = [value field name] and command = [command to execute] and condition = [where condition]
 </pre>
 
 Command options:
 
 | Key        | Value  | Comments  |
 | ---------- | -------| ------- |
-| name       | The DBMS name containing the table |  |
-| table      | The name of the table containing the AnyLog commands | |
-| value      | The field name with the value to associate with the command| |
-| command    | The command to execute| |
+| name      | The name of the table containing the AnyLog commands | |
+| dbms       | The DBMS name containing the table |  |
+| value      | The field name with the value to associate with the command (the designated value)|  |
+| command    | The command to execute| If the command string contains the ***%s*** sign, it will be assigned with the row's designated value |
 | condition  | The ***where*** condition to use when the commands are retrieved | optional |
 
 Example:
@@ -64,6 +64,13 @@ In the example below we create the table and update the configuration from the A
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
 # Create the table struct
-sql config_dbms "create table config (command_id serial primary key not null, al_value varchar, al_command varchar not null")"
-
+sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null")"
 </pre>
+
+The following command issued as a command argument issued on the OS command line when AnyLog is initiated or on the AnyLog CLI 
+will process the commands in the table.
+
+<pre>
+process from table where name = my_config and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
+</pre>
+
