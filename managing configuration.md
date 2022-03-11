@@ -36,7 +36,7 @@ Example:
 AnyLog process "run tcp server !external_ip !node_1_port !ip !node_1_port" and "run rest server !ip 7849"
 </pre>
 
-## The process from dbms command
+## Configuration from a database table
 
 The ***process from dbms*** command will retrieve the AnyLog commands contained in the table and process each command:
 
