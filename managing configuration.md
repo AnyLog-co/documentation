@@ -18,7 +18,7 @@ Issuing REST calls to an AnyLog node is explained in the [Using REST](.//using%2
 
 ## Using a script file, JSON file, or a table to configure AnyLog command
 
-* The command ***process*** followed by a path and a file name will process all the commands in the specified file.
+* The command ***process*** followed by a path and a file name will process all the commands in the specified file.  
   Usage:
   <pre>
   process [path and file name]
