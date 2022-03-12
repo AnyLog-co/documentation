@@ -2,7 +2,8 @@
 
 Node configuration includes the update of the local dictionary, and the initiation of processes:  
 1) Updating the local dictionary - Updating the local dictionary of a node with the values that are needed by the node processes.
-2) Initiating processes - Initiating the processes that determine how the node operates.
+2) Initiating processes - Initiating the processes that determine how the node operates. (Detailed explanations of the 
+   processes are available in the [Background Processes](.//background%20processes.md#background-processes) section).
 
 The AnyLog configuration can be done in different ways:  
 a) Dynamically issuing REST calls (with AnyLog commands) from an application.  
