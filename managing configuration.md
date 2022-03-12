@@ -98,7 +98,7 @@ The AnyLog instance is initiated with command line arguments as follows:
 anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
 </pre>
 
-```dbms_config``` is a script file inside the folder ```!anylog_path/AnyLog-Network/demo/```.
+```dbms_config``` is a script file inside the folder ```!anylog_path/AnyLog-Network/demo/```.  
 The Config file includes the following commands:
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms
