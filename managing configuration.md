@@ -55,9 +55,9 @@ Command options:
 | ---------- | -------| ------- |
 | name      | The name of the table containing the AnyLog commands | |
 | dbms       | The DBMS name containing the table |  |
-| value      | The field name with the value to associate with the command (the designated value)|  |
-| command    | The command to execute| If the command string contains the ***%s*** sign, it will be assigned with the row's designated value |
-| condition  | The ***where*** condition to use when the commands are retrieved | optional |
+| value      | The field name with the value to associate with the command (the designated value)| Optional key-value  |
+| command    | The command to execute| If the command string contains the ***<>*** sign, it will be assigned with the row's designated value (the ***<>*** sign is similar to ***%s*** in C/Python) |
+| condition  | The ***where*** condition to use when the commands are retrieved | Optional key-value |
 
 Example:
 
