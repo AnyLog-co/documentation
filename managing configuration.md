@@ -92,3 +92,22 @@ The command can be issued as a command argument on the OS command line when AnyL
 process from table where name = my_config and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
 </pre>
 
+### The setup with database configuration
+* Using the AnyLog commands, an AnyLog node is configured.   
+* An application updates multiple database tables with AnyLog commands.    
+* On startup, the AnyLog instance connects to the database and executes the commands in the tables.  
+
+The AnyLog instance is initiated with command line arguments as follows:
+<pre>
+anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
+</pre>
+
+```dbms_config``` is a script file inside the folder ```!anylog_path/AnyLog-Network/demo/```.
+The Config file includes the following commands:
+<pre>
+connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
+process from table where name = my_config_1 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
+process from table where name = my_config_2 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
+</pre>
+
+Using this setup, an application can manage the AnyLog config script by updating and adding rows in the configuration tables.
