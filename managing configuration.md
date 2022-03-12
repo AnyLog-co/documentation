@@ -67,19 +67,26 @@ Example:
 
 A table in a database needs to be available with the configuration commands. The update of the table can be done by any application.  
 
-In the example below we create the table and update the configuration from the AnyLog CLI:
+In the example below we create the table and update the configuration from the AnyLog CLI:  
 
+Step A: Connect to the database containing the config table:
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
+</pre>
+
+Step B: Create the config table and update the AnyLog configuration commands.  
+Note this step can be done once (or whenever configurations are updated) and can be done from an application.
+<pre>
 # Create the table struct
 sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null)"
+
 # Insert value that will generate the AnyLog config commands
 sql config_dbms "insert into my_config (al_command, al_value) values ('anylog_server_port=<>', '2148')"
 sql config_dbms "insert into my_config (al_command, al_value) values ('sync_time=<>', '30 seconds')"
 </pre>
 
-The following command issued as a command argument issued on the OS command line when AnyLog is initiated or on the AnyLog CLI 
-will process the commands in the table.
+Step C: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
+The command can be issued as a command argument on the OS command line when AnyLog is initiated or on the AnyLog CLI or using REST. 
 
 <pre>
 process from table where name = my_config and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
