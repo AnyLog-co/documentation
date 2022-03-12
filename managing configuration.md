@@ -69,13 +69,13 @@ A table in a database needs to be available with the configuration commands. The
 
 In the example below we create the table and update the configuration from the AnyLog CLI:  
 
-Step A: Connect to the database containing the config table:
+***Step A***: Connect to the database containing the config table:
 <pre>
 connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
 </pre>
 
-Step B: Create the config table and update the AnyLog configuration commands.  
-Note this step can be done once (or whenever configurations are updated) and can be done from an application.
+***Step B***: Create the config table and update the AnyLog configuration commands.  
+Note: this step can be done once (or whenever configurations are updated) and can be done from an application.
 <pre>
 # Create the table struct
 sql config_dbms "create table my_config (command_id serial primary key not null, al_value varchar, al_command varchar not null)"
@@ -85,7 +85,7 @@ sql config_dbms "insert into my_config (al_command, al_value) values ('anylog_se
 sql config_dbms "insert into my_config (al_command, al_value) values ('sync_time=<>', '30 seconds')"
 </pre>
 
-Step C: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
+***Step C***: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
 The command can be issued as a command argument on the OS command line when AnyLog is initiated or on the AnyLog CLI or using REST. 
 
 <pre>
@@ -105,7 +105,7 @@ anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
 ```dbms_config``` is a script file inside the folder ```!anylog_path/AnyLog-Network/demo/```.
 The Config file includes the following commands:
 <pre>
-connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
+connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms
 process from table where name = my_config_1 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
 process from table where name = my_config_2 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
 </pre>
