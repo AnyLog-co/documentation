@@ -8,7 +8,7 @@ Node configuration includes the update of the local dictionary, and the initiati
 The AnyLog configuration can be done in different ways:  
 * Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](.//using%20rest.md#using-rest) section).  
 * By a script file that contains AnyLog commands. The advantage in a script file is that it can be organized
-as a program with ***if*** conditions and ***goto*** statements.  
+as a program with ***if*** conditions and ***goto*** statements (details are available in the [Configuration Example](.//examples/Configuration.md#configuration-examples) section.)
 * By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](.//examples/Configuration.md#configuring-a-node-with-a-json-file) section).
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
