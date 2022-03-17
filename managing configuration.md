@@ -37,7 +37,7 @@ anyLog process !anylog_path/AnyLog-Network/demo/ha_operator1.al
 Without a script file, with multiple commands, enclose each command with quotation marks and separate each command with the keyword ```and```.  
 Example:
 <pre>
-AnyLog process "run tcp server !external_ip !node_1_port !ip !node_1_port" and "run rest server !ip 7849"
+anyLog process "run tcp server !external_ip !node_1_port !ip !node_1_port" and "run rest server !ip 7849"
 </pre>
 
 ## Configuration from a database table
@@ -67,7 +67,7 @@ In the example below we create the table and update the configuration from the A
 
 ***Step A***: Connect to the database containing the config table:
 <pre>
-connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms   # Create/connect to the database containing the config info
+connect dbms config_dbms where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 </pre>
 
 ***Step B***: Create the config table and update the AnyLog configuration commands.  
@@ -79,6 +79,12 @@ sql config_dbms "create table my_config (command_id serial primary key not null,
 # Insert value that will generate the AnyLog config commands
 sql config_dbms "insert into my_config (al_command, al_value) values ('anylog_server_port=<>', '2148')"
 sql config_dbms "insert into my_config (al_command, al_value) values ('sync_time=<>', '30 seconds')"
+</pre>
+
+Use the following command to view the config data:
+
+<pre>
+sql config_dbms format = table "select * from my_config"
 </pre>
 
 ***Step C***: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
@@ -101,7 +107,7 @@ anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
 ```dbms_config``` is a script file inside the folder ```!anylog_path/AnyLog-Network/demo/```.  
 The Config file includes the following commands:
 <pre>
-connect dbms psql anylog@127.0.0.1:demo 5432 config_dbms
+connect dbms config_dbms where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 process from table where name = my_config_1 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
 process from table where name = my_config_2 and dbms = config_dbms and value = al_value and command = al_command and condition = "order by command_id"
 </pre>
