@@ -106,6 +106,13 @@ Directory Structure   Explabnation
     -->local_scripts  [Users scripts]
 </pre>
 
+Note: The following command creates the work folders if they do not exists:
+<pre>
+create work directories
+</pre>
+The command needs to be issued only once on the physical or virtual machine.
+
+  
 ## Basic operations
 
 ### Starting AnyLog from the Linux CLI
