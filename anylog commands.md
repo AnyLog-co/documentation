@@ -117,7 +117,7 @@ Options:
 
 | Option        | Explanation  |
 | ------------- | ------------| 
-| set query mode  | Setting execution instructions to the issued queries. |
+| [set query mode](#set-query-mode)  | Setting execution instructions to the issued queries. |
 | [set query log on/off](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) | Enable/Disable a log to record the executed queries. |
 | [set query log profile [n] seconds](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log)  | Applying the Query Log to queries with execution time higher than threshold.  |
 | set rest log on/off | Enable/Disable a log to record the processed REST commands. The log is retrieved using the 'get rest log' command. |
@@ -136,11 +136,12 @@ Options:
 | set reply ip = [ip/none]  | Set the IP address that for a reply message. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]  |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
+| [set data distribution](#set-data-distribution) where ... |  Define how data is distributed to the storage nodes. |
 
 
 #### Set query mode
 
-The query mode sets a cap on query exection at the Operator Node by setting a limit on execution time or data volume transferred or both.
+The query mode sets a cap on query execution at the Operator Node by setting a limit on execution time or data volume transferred or both.
   
 Params options can be the following:
 
@@ -155,7 +156,37 @@ Params options can be the following:
 |             | use \'any\' to return the query results using the available data after timeout. |
 |             | The default value is \'all\'. |
 
+#### Set data distribution
 
+Define the destination of data based on the database and table assigned to the data.   
+Force a publisher to a defined distribution of the data.  
+Usage:
+<pre>
+set data distribution where dbms = [dbms_name] and table = [table_name] and dest = [ip:port]
+</pre>
+dbms - the fdatabase associated with the data  
+table - the table associated with the data  
+dest - the destination ip and port  
+
+Example:
+<pre>
+set data distribution where dbms = lsl_demo and table = * and dest = 10.12.32.148:2048 and dest = 10.181.231.18:2048
+</pre>
+
+Removal of an existing distribution is by adding the keyword and value: removal = true.
+Usage:
+<pre>
+set data distribution where dbms = [dbms_name] and table = [table_name] and remove = true
+</pre>
+Example:
+<pre>
+set data distribution where dbms = lsl_demo and table = ping_sensor and remove = true
+</pre>
+
+View the distribution definitions using the command:
+<pre>
+get  data distribution
+</pre>
 
 ## Reset Command
 
