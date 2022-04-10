@@ -164,16 +164,16 @@ Usage:
 <pre>
 set data distribution where dbms = [dbms_name] and table = [table_name] and dest = [ip:port]
 </pre>
-dbms - the fdatabase associated with the data  
+dbms - the database associated with the data  
 table - the table associated with the data  
-dest - the destination ip and port  
+dest - the destination ip and port (one or more)  
 
 Example:
 <pre>
 set data distribution where dbms = lsl_demo and table = * and dest = 10.12.32.148:2048 and dest = 10.181.231.18:2048
 </pre>
 
-Removal of an existing distribution is by adding the keyword and value: removal = true.
+Removal of an existing distribution is by adding the keyword and value: ```remove = true```.  
 Usage:
 <pre>
 set data distribution where dbms = [dbms_name] and table = [table_name] and remove = true
