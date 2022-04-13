@@ -1,6 +1,3 @@
-"""set data distribution where dbms = lsl_demo and table = ping_sensor and dest = 10.12.32.148:2048
-set data distribution where dbms = lsl_demo and table = * and dest = 10.12.32.148:2048 and dest = 10.181.231.18:2048"""
-
 import argparse
 import requests
 
@@ -79,6 +76,7 @@ def set_distribution(conn:str, db_name:str, table:str, operators:str)->bool:
 
 def main():
     """
+    The following provides an example of deploying data distributor via REST
     :positional arguments:
         conn                  publisher REST connection information
         db_name               logical database to set distribution for
