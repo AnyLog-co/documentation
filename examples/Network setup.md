@@ -14,7 +14,7 @@ Note:
     </pre>
     Or, on the AnyLog CLI issue the following command:
     <pre>
-    !anylog_path/AnyLog-Network/demo/operator1.al
+    process !anylog_path/AnyLog-Network/demo/operator1.al
     </pre>
 * If AnyLog is installed without a package that creates the environment (like Docker), the default directories can be created using the command:
     <pre>
