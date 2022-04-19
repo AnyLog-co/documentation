@@ -59,7 +59,7 @@ Destinations can be provided as IP:Port or as a list containing multiple IP:Port
 
 Note: To message a node on the local network, use the local IP and Port. To message a node which is outside the local network, use the external IP and Port.
   
-Status command
+***Status command***
 <pre>
 run client 10.0.0.78:7848 get status
 </pre>
@@ -75,7 +75,7 @@ View processes enabled:
 get processes
 </pre>
 
-Run generic test:
+***Run generic test***
 <pre>
 test node
 </pre>
