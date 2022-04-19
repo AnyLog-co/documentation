@@ -1,12 +1,27 @@
 # Connecting nodes
 
 Nodes in the network are connected to peer nodes in the network and to 3rd parties applications.   
-Connection means that the nodes are waiting for messages from peer nodes and applications. When messages are received, 
-the nodes may process the requests included in the messages (assuming proper permissions), and if needed, send a reply. 
+A connected node means that the node has a listener processes waiting for messages from peer nodes and applications. When messages are received, 
+the node process the requests included in the messages (assuming proper permissions), and if needed, send a reply.
+This document reviews how the listeners processes are configured. The table below summarizes the listeners types:
+  
+| Listener Name  | Functionality | Protocol/API |
+| ------------- | ---- | --- |
+| TCP | A listener on a dedicated IP and Port to receive messages from peer nodes.  | AnyLog |
+| REST | A listener on a dedicated IP and Port to receive messages from 3rd parties applications.  | REST |
+| Messaging | A listener on a dedicated IP and Port to data published on the AnyLog node as a message broker.  | [MQTT](https://mqtt.org/)  |
+
+Messages transferred to the TCP or REST listeners can be of the following:
+* A query to retrieve data
+* An AnyLog command to retrieve a state in a node. For example, to retrieve disk space availability or find how much data was ingested in the last hour.  
+* An AnyLog command to enable a process. For example, to enable a process that will monitor data values received from a sensor.
+* An AnyLog command that will retrieve or update policies on the shared metadata layer. For example, to retieve the list of participating nodes that manage the sensor data.
+
+The Messaging listener is enabled such that data can be published on an AnyLog node and assigned to a topic like an MQTT broker.
 
 ***Note: The IP and Ports declared for communication between members and applications needs to be open. Remove firewall restrictions as needed.***
 
-## Communicating with peer nodes
+## The TCP listener - Communicating with peer nodes
 
 When a node operates, it communicates with peer members of the network.    
 When a node starts, it is configured to listen on a socket associated with an Internet Protocol (IP) address and a port number.  
@@ -17,14 +32,14 @@ A local or internal IP address is used inside a private network to locate the co
 If both are used, then a router needs to be configured with [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding) to redirect messages from the external IP and port 
 to the local IP and port.
 
-## Communicating with 3rd parties applications
+## The REST listener - Communicating with 3rd parties applications
 
 When a node operates, it can be configured to communicate with 3rd party applications using [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).  
 The command that initiate the listener is: ```run rest server``` and is detailed [here](../background%20processes.md#rest-requests).  
 
-## Publishing data
+## The Messaging Listener - Publishing data on an AnyLog node
 
-A node can be configured such that applications can treat the node as a [message broker](https://en.wikipedia.org/wiki/Message_broker) allowing data to be published on the node.  
+A node can be configured such that applications can treat the node as a [message broker](https://en.wikipedia.org/wiki/Message_broker) allowing data to be published (and assigned to a topic) on the node.  
 Details of the configurations are available [here](../message%20broker.md#using-a-message-broker).
 
 ## Test peer connection
