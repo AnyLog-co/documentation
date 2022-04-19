@@ -19,7 +19,7 @@ Messages transferred to the TCP or REST listeners can be of the following:
 
 The Messaging listener is enabled such that data can be published on an AnyLog node and assigned to a topic like an MQTT broker.
 
-***Note: The IP and Ports declared for communication between members and applications needs to be open. Remove firewall restrictions as needed.***
+***Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***
 
 ## The TCP listener - Communicating with peer nodes
 
