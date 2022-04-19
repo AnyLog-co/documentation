@@ -70,7 +70,12 @@ Example reply:
 </pre>
 Note that the IP and Port can specify a different member node, which will return a reply if active. 
 
-View processes enabled:
+***get connections***
+<pre>
+get connections
+</pre>
+
+***View processes enabled***
 <pre>
 get processes
 </pre>
@@ -85,6 +90,7 @@ test node
 The commands below can be issued using REST. The examples are done using [cURL](https://curl.se/docs/).  
 ***Note: direct the call to the IP and Port declared using the ```run rest server``` command.***
 
+***Status command***  
 The command ```get status``` returns the node status.
 
 <pre>
