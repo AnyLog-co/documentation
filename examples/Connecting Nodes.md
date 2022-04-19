@@ -29,8 +29,14 @@ Details of the configurations are available [here](../message%20broker.md#using-
 
 ## Test peer connection
 Use the AnyLog Command Line Interface (CLI) to test the connection.  
-***Note: direct the call to the IP and Port declared using the ```run tcp server``` command.***
+***Note: direct the call to the IP and Port declared using the ```run tcp server``` command.***  
 
+To enter the AnyLog CLI (assuming Docker install, ```anylog-node``` is the name of the container):
+<pre>
+docker attach --detach-keys="ctrl-d" anylog-node
+</pre>
+
+Status command
 <pre>
 run client 10.0.0.78:7848 get status
 </pre>
@@ -39,9 +45,18 @@ Example reply:
 <pre>
 'test-machine@24.23.250.144:7848 running'
 </pre>
-
-
 Note that the IP and Port can specify a different member node, which will return a reply if active. 
+
+View processes enabled:
+<pre>
+get processes
+</pre>
+
+Run generic test:
+<pre>
+test node
+</pre>
+
 
 ## Test REST connection 
 The commands below can be issued using REST. The examples are done using [cURL](https://curl.se/docs/).  
@@ -72,3 +87,30 @@ TCP      |24.23.250.144:7848|10.0.0.78:7848|
 REST     |10.0.0.78:7849    |10.0.0.78:7849|
 Messaging|24.23.250.144:7850|10.0.0.78:7850|
 </pre>
+
+
+The command ```get processes``` returns the processes enabled.
+<pre>
+curl -X GET 10.0.0.78:7849 -H "command: get processes" -H "User-Agent: AnyLog/1.23" 
+</pre>
+
+Example reply:
+<pre>
+   Process         Status       Details
+    ---------------|------------|---------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 24.23.250.144:7848 and 10.0.0.78:7848, Threads Pool: 6 |
+    REST           |Running     |Listening on: 10.0.0.78:7849, Threads Pool: 5, Timeout: 20, SSL: None|
+    Operator       |Running     |Cluster Member: True, Using Master: 45.33.41.185:2048                |
+    Publisher      |Not declared|                                                                     |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 45.33.41.185:2048           |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                       |
+    Distributor    |Running     |                                                                     |
+    Consumer       |Not declared|                                                                     |
+    MQTT           |Not declared|                                                                     |
+    Message Broker |Running     |Listening on: 24.23.250.144:7850 and 10.0.0.78:7850, Threads Pool: 4 |
+    SMTP           |Not declared|                                                                     |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,000 bytes         |
+    Query Pool     |Running     |Threads Pool: 3                                                      |
+    Kafka Consumer |Not declared|                                                                     |
+</pre>
+
