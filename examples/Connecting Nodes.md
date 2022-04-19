@@ -8,7 +8,7 @@ This document reviews how the listeners processes are configured. The table belo
 | Listener Name  | Functionality | Protocol/API |
 | ------------- | ---- | --- |
 | TCP | A listener on a dedicated IP and Port to receive messages from peer nodes.  | AnyLog |
-| REST | A listener on a dedicated IP and Port to receive messages from 3rd parties applications.  | REST |
+| REST | A listener on a dedicated IP and Port to receive messages from 3rd parties applications.  | [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) |
 | Messaging | A listener on a dedicated IP and Port to data published on the AnyLog node as a message broker.  | [MQTT](https://mqtt.org/)  |
 
 Messages transferred to the TCP or REST listeners can be of the following:
