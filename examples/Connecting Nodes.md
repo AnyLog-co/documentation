@@ -4,7 +4,7 @@ Nodes in the network are connected to peer nodes in the network and to 3rd parti
 Connection means that the nodes are waiting for messages from peer nodes and applications. When messages are received, 
 the nodes may process the requests included in the messages (assuming proper permissions), and if needed, send a reply. 
 
-***Note: The IP and Ports*** declared for communication between members and applications needs to be open. Remove firewall restrictions as needed.***
+***Note: The IP and Ports declared for communication between members and applications needs to be open. Remove firewall restrictions as needed.***
 
 ## Communicating with peer nodes
 
