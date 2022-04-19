@@ -15,9 +15,9 @@ Messages transferred to the TCP or REST listeners can be of the following:
 * A query to retrieve data
 * An AnyLog command to retrieve a state in a node. For example, to retrieve disk space availability or find how much data was ingested in the last hour.  
 * An AnyLog command to enable a process. For example, to enable a process that will monitor data values received from a sensor.
-* An AnyLog command that will retrieve or update policies on the shared metadata layer. For example, to retieve the list of participating nodes that manage the sensor data.
+* An AnyLog command that will retrieve or update policies on the shared metadata layer. For example, to retrieve the list of participating nodes that manage the sensor data.
 
-The Messaging listener is enabled such that data can be published on an AnyLog node and assigned to a topic like an MQTT broker.
+The Messaging listener is enabled such that data can be published on an AnyLog Node like an MQTT broker (and assigned to a topic).
 
 ***Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***
 
