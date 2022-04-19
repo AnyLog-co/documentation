@@ -51,6 +51,13 @@ To enter the AnyLog CLI (assuming Docker install, ```anylog-node``` is the name 
 docker attach --detach-keys="ctrl-d" anylog-node
 </pre>
 
+Note: Messages (i.e. AnyLog commands) that are prefixed with ***run client*** followed by one or more destinations, will be delivered to the destinations
+using the AnyLog protocol. The TCP listener configured on each destination node will receive the message, and if needed, a reply message is returned.  
+To validate active and properly configured listener, a node can set the local IP and Port as the destination (note that
+local processing of an AnyLog command does not require to pass the request to the listener as an AnyLog command issued on the CLI is processed locally).  
+Destinations can be provided as IP:Port or as a list within parenthesis separated by a comma.
+  
+
 Status command
 <pre>
 run client 10.0.0.78:7848 get status
