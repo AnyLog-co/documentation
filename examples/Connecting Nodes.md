@@ -2,7 +2,7 @@
 
 Nodes in the network are connected to peer nodes in the network and to 3rd parties applications.   
 A connected node means that the node is configured with one or more listeners waiting for messages from peer nodes and applications. When messages are received, 
-the node process the requests included in the messages (assuming proper permissions), and if needed, a reply message is send.  
+the node processes the requests included in the messages (assuming proper permissions), and if needed, sends a reply message.  
 This document reviews how the listeners processes are configured. The table below summarizes the listeners types:
   
 | Listener Name  | Functionality | Protocol/API |
