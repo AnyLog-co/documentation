@@ -54,7 +54,7 @@ docker attach --detach-keys="ctrl-d" anylog-node
 Note: Messages (i.e. AnyLog commands) that are prefixed with ***run client*** followed by one or more destinations, will be delivered to the destination
 nodes using the AnyLog protocol. The TCP listener configured on each destination node will receive the message, and if needed, a reply message is returned.  
 To validate active and properly configured listener, a node can send a message to its local IP and Port by setting the local IP and Port as the destination (note that
-local processing of an AnyLog command issued on the CLI without the ***run client*** prefix ignores the listener and processed locally).  
+local processing of an AnyLog command issued on the CLI without the ***run client*** prefix is processed locally, however, without the listener process).  
 Destinations can be provided as IP:Port or as a list containing multiple IP:Port within parenthesis separated by a comma.
 
 Note: To message a node on the local network, use the local IP and Port. To message a node which is outside the local network, use the external IP and Port.
