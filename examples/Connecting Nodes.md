@@ -70,7 +70,7 @@ Example reply:
 </pre>
 Note that the IP and Port can specify a different member node, which will return a reply if active. 
 
-***get connections***
+***View the connection information***
 <pre>
 get connections
 </pre>
