@@ -68,9 +68,16 @@ run tcp server !external_ip 20048 !ip 20048
 </pre>
 
 If a local IP and Port is specified, the listener process will use the local IP and Port and the 
-router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).
+router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).  
 
-Additional information is available in the [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#network-configuration) section.   
+To reconfigure the TCP server process, terminate the existing configuration using the command:
+<pre>
+exit tcp
+</pre>
+
+Additional information is available in the following sections:
+* [network configuration](../network%20configuration.md#network-configuration)
+* [Connecting Nodes](./examples/Connecting%20Nodes.md)   
  
 ## REST requests
 
@@ -107,8 +114,16 @@ Notes:
     trace level = 2 run rest server 
     </pre>
 
-Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
 
+To reconfigure the REST server process, terminate the existing configuration using the command:
+<pre>
+exit rest
+</pre>
+
+Additional information is available in the following sections:
+* [network configuration](../network%20configuration.md#network-configuration)
+* [Connecting Nodes](./examples/Connecting%20Nodes.md)   
+ 
 ## Operator Process
 
 A process that places users data local databases. The Operator identifies JSON files, transforms the files to a structure 
