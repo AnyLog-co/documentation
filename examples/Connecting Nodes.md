@@ -50,6 +50,10 @@ To enter the AnyLog CLI (assuming Docker install, ```anylog-node``` is the name 
 <pre>
 docker attach --detach-keys="ctrl-d" anylog-node
 </pre>
+To exit the AnyLog CLI without terminating the node:
+<pre>
+"ctrl-d"
+</pre>
 
 Note: Messages (i.e. AnyLog commands) that are prefixed with ***run client*** followed by one or more destinations, will be delivered to the destination
 nodes using the AnyLog protocol. The TCP listener configured on each destination node will receive the message, and if needed, a reply message is returned.  
