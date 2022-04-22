@@ -76,7 +76,7 @@ exit tcp
 </pre>
 
 Additional information is available in the following sections:
-* [network configuration](../network%20configuration.md#network-configuration)
+* [network configuration](./network%20configuration.md#network-configuration)
 * [Connecting Nodes](./examples/Connecting%20Nodes.md)   
  
 ## REST requests
@@ -121,7 +121,7 @@ exit rest
 </pre>
 
 Additional information is available in the following sections:
-* [network configuration](../network%20configuration.md#network-configuration)
+* [network configuration](./network%20configuration.md#network-configuration)
 * [Connecting Nodes](./examples/Connecting%20Nodes.md)   
  
 ## Operator Process
