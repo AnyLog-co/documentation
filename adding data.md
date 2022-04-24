@@ -288,7 +288,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
   AnyLog                                                                   |                   |
                                                                            V                   V
                                          -------------------            --------------------------
-  Option C:                              |                 |            |                        |
+  Option B:                              |                 |            |                        |
   Data published to AnyLog Broker        |  AnyLog Broker  |  ------>   |      Broker Client     |
   ---------------------------------->    |                 |            |                        |
                                          -------------------            --------------------------
@@ -296,7 +296,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                            |
                                                                            V
                                                                -----------------
-  Option D:                                                    |  Client Data  |
+  Option C:                                                    |  Client Data  |
   Data transferred using POST                                  |  Mapper       |
   -------------------------------------------------------->    |  f(Topic)     |
                                                                -----------------
@@ -304,7 +304,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option E:                                                    |               |        |  (Optional)   |
+  Option D:                                                    |               |        |  (Optional)   |
   Data transferred using PUT (without mapping)                 |  Data Buffers |   -->  |  Immediate    |
   -------------------------------------------------------->    |               |        |  DBMS update  |
                                                                -----------------        -----------------
@@ -312,7 +312,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option F:                                                    |               |        |  (Optional)   |
+  Option E:                                                    |               |        |  (Optional)   |
   Adding JSON files to the watch directory                     |  JSON Files   |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  JSON files   |
                                                                -----------------        -----------------
@@ -320,7 +320,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                        |
                                                                        V
                                                                -----------------        -----------------
-  Option G:                                                    |               |        |  (Optional)   |
+  Option F:                                                    |               |        |  (Optional)   |
   Adding SQL files to the watch directory                      |  SQL Files    |   -->  |  Archive      |
   -------------------------------------------------------->    |               |        |  SQL files    |
                                                                -----------------        -----------------
