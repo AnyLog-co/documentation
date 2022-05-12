@@ -97,7 +97,7 @@ values associated withe the keys and the string values are added to the retrieve
 
 * If the bring values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.  
 For example ```bring [operator][name]``` will pull the name value from an Operator policy.  
-* If an asterisk sign is used. it is replaced with the policy type. For example, in an Operator policy, ```[*][name]``` is the same as  ```[operator][name]```.    
+* If an asterisk sign is used, it is replaced with the policy type. For example, in an Operator policy, ```[*][name]``` is the same as  ```[operator][name]```.    
 * Empty brackets ```[]``` designate the policy type.
   
 ### Examples:
@@ -113,7 +113,7 @@ For example ```bring [operator][name]``` will pull the name value from an Operat
 <pre>
  blockchain get (master,operator,query) bring.json.null [*][name] [*][ip] [*][address]
 </pre>
-In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value. 
+In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.   
 4) Return policy info in a sorted table structure:   
 <pre>
 blockchain get * bring.table.sort [] [*][name] [*][ip]
