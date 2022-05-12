@@ -113,11 +113,11 @@ For example ```bring [operator][name]``` will pull the name value from an Operat
 <pre>
  blockchain get (master,operator,query) bring.json.null [*][name] [*][ip] [*][address]
 </pre>
-  In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.   
 4) Return policy info in a sorted table structure:   
 <pre>
 blockchain get * bring.table.sort [] [*][name] [*][ip]
 </pre>
+Note: In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.   
 
 ### Retrieving data from a JSON object
 Usage:
