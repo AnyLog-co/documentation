@@ -95,10 +95,10 @@ values associated withe the keys and the string values are added to the retrieve
     
 ### Special bring values
 
-If the bring values are wrapped in square brackets, it designates keys into the policy considered.
+* If the bring values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.  
 For example ```bring [operator][name]``` will pull the name value from an Operator policy.  
-If an asterisk sign is used. it is replaced with the policy type. For example, in an Operator policy, ```[operator][name]``` is the same as  ```[*][name]```.  
-Empty brackets ```[]``` designate the policy type.
+* If an asterisk sign is used. it is replaced with the policy type. For example, in an Operator policy, ```[operator][name]``` is the same as  ```[*][name]```.  
+* Empty brackets ```[]``` designate the policy type.
   
 ### Examples:
 1) Return policy info in a table structure:
