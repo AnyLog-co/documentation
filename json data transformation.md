@@ -88,7 +88,7 @@ Special separators:
     * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
     * ```bring.table``` - returns the requested keys and values in a table format. The bring command determines the table columns.
     * ```bring.count``` - returns the number of entries that satisfy the result.
-    * ```bring.null``` - includes null values in the returned json.
+    * ```bring.null``` - includes null values in the returned JSON.
   
 Examples:
 1) Return policy info in a table structure:
