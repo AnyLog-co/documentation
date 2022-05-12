@@ -81,13 +81,14 @@ Special separators:
 | separator = \n | A new line character is added at the end of the data returned from each JSON object  |
 | separator = \t | A tab is added at the end of the data returned from each JSON object  |
   
-* The keyword bring can be suffixed with the following keywords:     
+* The keyword bring can be suffixed with one or more of the following keywords (see example #3 below with multiple keywords):     
     * ```bring.unique``` - returns unique values.  
     * ```bring.first``` - returns the value from the JSON object with the earliest date. If a date is missing from the objects, the first object in the ledger file is returned.
     * ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
     * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
     * ```bring.table``` - returns the requested keys and values in a table format. The bring command determines the table columns.
     * ```bring.count``` - returns the number of entries that satisfy the result.
+    * ```bring.null``` - includes null values in the returned json.
   
 Examples:
 1) Return policy info in a table structure:
@@ -98,7 +99,11 @@ Examples:
 <pre>
  blockchain get (master,operator,query) bring.json [*][name] [*][ip]
 </pre>
-    
+3) Return policy info in a JSON structure and include null values:
+<pre>
+ blockchain get (master,operator,query) bring.json.null [*][name] [*][ip] [*][address]
+</pre>
+In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.     
 
 ### Retrieving data from a JSON object
 Usage:
