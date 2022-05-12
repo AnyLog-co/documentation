@@ -74,12 +74,14 @@ The bring is followed by a list of keys and string values. The keys are applied 
 values associated withe the keys and the string values are added to the retrieved data. 
    
 * The formatting instruction may use the keyword ***separator*** to provide a suffix to the output string returned from each object.  
-Special separators:
+### Special separators:
 
 | separator  | Explanation |
 | ---- | ------------|
 | separator = \n | A new line character is added at the end of the data returned from each JSON object  |
 | separator = \t | A tab is added at the end of the data returned from each JSON object  |
+
+### The bring keyword
   
 * The keyword bring can be suffixed with one or more of the following keywords (see example #3 below with multiple keywords):     
     * ```bring.unique``` - returns unique values.  
@@ -89,8 +91,16 @@ Special separators:
     * ```bring.table``` - returns the requested keys and values in a table format. The bring command determines the table columns.
     * ```bring.count``` - returns the number of entries that satisfy the result.
     * ```bring.null``` - includes null values in the returned JSON.
+    * ```bring.table.sort``` - returns the values in a sorted table format.
+    
+### Special bring values
+
+If the bring values are wrapped in square brackets, it designates keys into the policy considered.
+For example ```bring [operator][name]``` will pull the name value from an Operator policy.  
+If an asterisk sign is used. it is replaced with the policy type. For example, in an Operator policy, ```[operator][name]``` is the same as  ```[*][name]```.  
+Empty brackets ```[]``` designate the policy type.
   
-Examples:
+### Examples:
 1) Return policy info in a table structure:
 <pre>
  blockchain get (master,operator,query) bring.table [*][name] [*][ip]
@@ -103,7 +113,11 @@ Examples:
 <pre>
  blockchain get (master,operator,query) bring.json.null [*][name] [*][ip] [*][address]
 </pre>
-In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.     
+In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value. 
+4) Return policy info in a sorted table structure:   
+<pre>
+blockchain get * bring.table.sort [] [*][name] [*][ip]
+</pre>
 
 ### Retrieving data from a JSON object
 Usage:
