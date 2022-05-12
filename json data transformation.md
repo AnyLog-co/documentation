@@ -90,11 +90,11 @@ Special separators:
     * ```bring.count``` - returns the number of entries that satisfy the result.
   
 Examples:
-1) Returns policy info in a table structure:
+1) Return policy info in a table structure:
 <pre>
  blockchain get (master,operator,query) bring.table [*][name] [*][ip]
 </pre>
-2) Returns policy info in a JSON structure:
+2) Return policy info in a JSON structure:
 <pre>
  blockchain get (master,operator,query) bring.json [*][name] [*][ip]
 </pre>
