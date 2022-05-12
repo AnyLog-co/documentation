@@ -94,7 +94,7 @@ Examples:
 <pre>
  blockchain get (master,operator,query) bring.table [*][name] [*][ip]
 </pre>
-1) Returns policy info in a JSON structure:
+2) Returns policy info in a JSON structure:
 <pre>
  blockchain get (master,operator,query) bring.json [*][name] [*][ip]
 </pre>
