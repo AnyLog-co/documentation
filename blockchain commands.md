@@ -170,8 +170,8 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 The local representation of the blockchain file is updated continuously if the [blockchain synchronization](./background%20processes.md#blockchain-synchronizer) 
 process is enabled.  
 If the blockchain sync process is disabled and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
-will force the node to use the updated local file.
-For example, a new node is initiated, ***blockchain sync*** is not enabled, and a local file is copied from a member node as follows:
+will force the node to use the updated local file.  
+For example, ***blockchain sync*** is not enabled, and a local file is copied from a member node as follows:
 <pre>
 run client 10.0.0.25:2548 file get !!blockchain_file !blockchain_file
 </pre>
@@ -252,7 +252,6 @@ Note: This process is redundant if the update of the new policies was done using
 | blockchain test| Test the structure of the local JSON file. Returns True if the file structure is valid. Otherwise, returns False. | 
 | blockchain get id [json data]| Return the hash value of the JSON data. |  
 | blockchain test id| Return True if the id exists in the local blockchain file. Otherwise returns False. |
-| blockchain load metadata [conditions]| Update the local metadata from policies published on the blockchain. |  
 | blockchain query metadata [conditions]| Provide a diagram representation of the local metadata. | 
 | blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
 | blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
