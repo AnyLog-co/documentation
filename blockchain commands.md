@@ -168,8 +168,17 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 
 ## Copying policies representing the metadata to the local ledger
 The local representation of the blockchain file is updated continuously if the [blockchain synchronization](./background%20processes.md#blockchain-synchronizer) 
-process is enabled.
-
+process is enabled.  
+If the blockchain sync process is disabled and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
+will force the node to use the updated local file.
+For example, a new node is initiated, ***blockchain sync*** is not enabled, and a local file is copied from a member node as follows:
+<pre>
+run client 10.0.0.25:2548 file get !!blockchain_file !blockchain_file
+</pre>
+The following command will force the node to replace the metadata representation with the local file:
+<pre>
+blockchain load metadata
+</pre>
 
 
 ## Using a local database to host the ledger
