@@ -165,6 +165,13 @@ blockchain insert where policy = !policy and local = true and master = !master_n
 blockchain insert where policy = !policy and local = true and blockchain = ethereum
 </pre>
 
+
+## Copying policies representing the metadata to the local ledger
+The local representation of the blockchain file is updated continuously if the [blockchain synchronization](./background%20processes.md#blockchain-synchronizer) 
+process is enabled.
+
+
+
 ## Using a local database to host the ledger
 
 A Master Node maintains the ledger in a local database. In addition, any node can keep the local copy of the ledger in a local database.
