@@ -150,14 +150,16 @@ Options are optional and determine the information of interest, expressed as a w
 | ---------- | -------| -------| 
 | limit    | Setting a limit on the number of rows retrieved from the table, 0 value sets no limit. | 100 |
 | table    | The name of the table to use. | tsd_info |
-| hash    | retrieve a key with the specified hash value. | |
-| start_date | retrieve entries with a date greater or equal to the start_date. | |
-| end_date | retrieve entries with a date earlier than the end_date. | |
+| hash    | Retrieve a key with the specified hash value. | |
+| start_date | Retrieve entries with a date greater or equal to the start_date. | |
+| end_date | Retrieve entries with a date earlier than the end_date. | |
+| format | Output format - ***table*** or ***json***  | table |
   
 Examples:  
 <pre> 
 time file get
 time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
+time file get where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75f7 and format = json
 time file get where start_date = -3d and end_date = -2d
 </pre>
 
