@@ -639,23 +639,38 @@ if ([condition a]) and/or ([condition b]) then [command]
 else [command]
 </pre>
 
-By default, comparison treats all values as strings, if data type is specified, the comparison is treating the comp[ared values by their
+Note:  
+* By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
 The supported data types are ***int*** and ***float***.
+  
+* The returned value of a comparison can be assigned to a variable such as: a = if not !a
+ 
 
 Examples:
 
+<pre>
+if not !json_data then process !script_create_table
+</pre>
+<pre>
+if !old_value == "128" then print values are equal
+</pre>
+if !old_value
+<pre>
+if int !number < !value then echo true
+</pre>
 <pre>
 if not !a then a = "new value"
 else message = "The dictionary value for a is: " + !a
 else print !message
 </pre>
-
 <pre>
 if (!a and !b == 123) or (!c and !d) then print "with value"
 else print "no value"
 </pre>
-
 <pre>
 if int !a == 5 then print "Comparison as integers succeeded"
+</pre>
+<pre>
+a = if not !a
 </pre>
