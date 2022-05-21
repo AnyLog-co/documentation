@@ -642,7 +642,7 @@ else [command]
 Note:  
 * By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
-The supported data types are ***int*** and ***float***.
+The supported data types are ***str*** (the default), ***int*** and ***float***.
   
 * The returned value of a comparison can be assigned to a variable such as: a = if not !a
  
