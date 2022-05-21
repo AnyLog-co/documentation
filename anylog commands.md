@@ -655,10 +655,10 @@ if not !json_data then process !script_create_table
 <pre>
 if !old_value == "128" then print values are equal
 </pre>
-if !old_value
 <pre>
 if int !number < !value then echo true
 </pre>
+if !old_value
 <pre>
 if not !a then a = "new value"
 else message = "The dictionary value for a is: " + !a
