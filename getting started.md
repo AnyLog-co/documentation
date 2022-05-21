@@ -187,11 +187,14 @@ or using the get command:
 get !dbms_name
 </pre>
 
-
 * Retrieve all the assigned values:
 <pre>
 get dictionary
 </pre>
+
+The values assigned to key can be tested using an ***if statement*** to trigger conditional execution of ANyLog commands.  
+Details are available in thr [Conditional Execution](anylog%20commands.md#conditional-execution) section. 
+
 
 ### Retrieving environment variables
 
