@@ -626,8 +626,8 @@ AnyLog supports the following conditions:
 | !=    | Not Equal               |            |
 | <     | Less than               |            |
 | <=    | Less than or equal to   |            |
-| ==    | Greater than            |            |
-| ==    | Greater than or equal to |            |
+| >     | Greater than            |            |
+| >=    | Greater than or equal to |            |
 |       | is defined             | No sign - Returns True if the variable is defined in the local dictionary |
 | not   | is not defined         | Returns True if the variable is not defined in the local dictionary |
 
@@ -642,7 +642,8 @@ else [command]
 Note:  
 * By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
-The supported data types are ***str*** (the default), ***int*** and ***float***. for example: ```if float !a == 1.234```.
+The supported data types are ***str*** (the default), ***int*** and ***float***.
+Data types are specified by adding a dot and a data type to the variable considered. For example: ```if !a.float == 1.234```.
   
 * The result of an if statement can be assigned to a variable, for example: ```a = if not !a```.
   
@@ -654,10 +655,10 @@ Examples:
 if not !json_data then process !script_create_table
 </pre>
 <pre>
-if !old_value == "128" then print values are equal
+if !old_value.int == 128 then print values are equal
 </pre>
 <pre>
-if int !number < !value then echo true
+if !number.int < !value then echo true
 </pre>
 <pre>
 if not !old_value then old_value = 5
