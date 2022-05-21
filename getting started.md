@@ -172,7 +172,7 @@ The keys and values are organized in a dictionary and can be processed using the
  master_node = 126.32.47.29:2048
  </pre>
  
-If the value string is identical to a command name, setting a value returns an error and the user can enforce the value using the command ***set***.    
+If the value string is identical to a command name, setting a value returns an error, and the user can enforce the value using the command ***set***.    
 Example:
 <pre>
 set dbms_name = test
@@ -182,6 +182,11 @@ set dbms_name = test
 <pre>
 !dbms_name
 </pre>
+or using the get command:
+<pre>
+get !dbms_name
+</pre>
+
 
 * Retrieve all the assigned values:
 <pre>
