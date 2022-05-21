@@ -658,7 +658,9 @@ if !old_value == "128" then print values are equal
 <pre>
 if int !number < !value then echo true
 </pre>
+<pre>
 if !old_value
+</pre>
 <pre>
 if not !a then a = "new value"
 else message = "The dictionary value for a is: " + !a
