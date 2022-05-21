@@ -659,7 +659,7 @@ if !old_value == "128" then print values are equal
 if int !number < !value then echo true
 </pre>
 <pre>
-if !old_value
+if not !old_value then old_value = 5
 </pre>
 <pre>
 if not !a then a = "new value"
