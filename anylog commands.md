@@ -611,7 +611,7 @@ if [condition] then [command A]
 else [command B]
 </pre>
 
-* [condition] - a statement that will be evaluated
+* [condition] - an expression that will be evaluated
 * [command] - any of the AnyLog commands
 
 The condition is an expression that is validated, a true result triggers the execution of the command following the  ***then*** keyword.  
@@ -648,6 +648,8 @@ Data types are specified by adding a dot and a data type to the variable conside
 * The result of an if statement can be assigned to a variable, for example: ```a = if not !a```.
   
 * Users can test if statements on the AnyLog CLI by executing the if statement, for example: ```if not !a```.
+
+* Nested parenthesis are not supported.
 
 Examples:
 
