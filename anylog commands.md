@@ -599,3 +599,63 @@ Example:
 <pre>
 test table ping_sensor where dbms = lsl_demo
 </pre>
+
+
+# Conditional execution
+
+AnyLog supports conditional executions using ***if and else*** statements. 
+An ***if and else*** statements are with the following structure:
+
+<pre>
+if [condition] then [command A]
+else [command B]
+</pre>
+
+* [condition] - a statement that will be evaluated
+* [command] - any of the AnyLog commands
+
+The condition is an expression that is validated, a true result triggers the execution of the command following the  ***then*** keyword.  
+A false result triggers the execution of the commands following the ***else*** keyword. Multiple ***else*** statements are allowed.
+
+AnyLog supports the following conditions:
+
+
+| Sign  | Details                 | Comments     |
+| ----- | ------------------------| ---------- | 
+| ==    | Equal                   |            |
+| !=    | Not Equal               |            |
+| <     | Less than               |            |
+| <=    | Less than or equal to   |            |
+| ==    | Greater than            |            |
+| ==    | Greater than or equal to |            |
+|       | is defined             | No sign - Returns True if the variable is defined in the local dictionary |
+| not   | is not defined         | Returns True if the variable is not defined in the local dictionary |
+
+Multiple conditions within parenthesis are allowed with an ***and*** or ***or*** keyword separation.  
+The allowed structure is the following:
+
+<pre>
+if ([condition a]) and/or ([condition b]) then [command]
+else [command]
+</pre>
+
+By default, comparison treats all values as strings, if data type is specified, the comparison is treating the comp[ared values by their
+data types.  
+The supported data types are ***int*** and ***float***.
+
+Examples:
+
+<pre>
+if not !a then a = "new value"
+else message = "The dictionary value for a is: " + !a
+else print !message
+</pre>
+
+<pre>
+if (!a and !b == 123) or (!c and !d) then print "with value"
+else print "no value"
+</pre>
+
+<pre>
+if int !a == 5 then print "Comparison as integers succeeded"
+</pre>
