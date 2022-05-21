@@ -642,14 +642,15 @@ else [command]
 Note:  
 * By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
-The supported data types are ***str*** (the default), ***int*** and ***float***.
+The supported data types are ***str*** (the default), ***int*** and ***float***. for example: ```if float !a == 1.234```.
   
-* The returned value of a comparison can be assigned to a variable such as: a = if not !a
- 
+* The result of an if statement can be assigned to a variable, for example: ```a = if not !a```.
+  
+* Users can test if statements on the AnyLog CLI by executing the if statement, for example: ```if not !a```.
 
 Examples:
 
-<pre>
+<pre> 
 if not !json_data then process !script_create_table
 </pre>
 <pre>
