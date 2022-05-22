@@ -675,7 +675,7 @@ if (!a and !b == 123) or (!c and !d) then print "with value"
 else print "no value"
 </pre>
 <pre>
-if int !a == 5 then print "Comparison as integers succeeded"
+if !a.int == 5 then print "Comparison as integers succeeded"
 </pre>
 <pre>
 if !a then print with value
