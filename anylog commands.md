@@ -235,7 +235,7 @@ Options:
 | get connections | The list of TCP and REST connections supported by the node. |
 | get platforms | The list connected blockchain platforms. |
 | [get dictionary](blob/master/monitoring%20nodes.md#the-get-dictionary-command) | The list of the variable names and their assigned values. |
-| [get env var](blob/master/monitoring%20nodes.md#the-get-env-var) | The environment variables keys and values. |
+| [get env var](/blob/master/monitoring%20nodes.md#the-get-env-var-command) | The environment variables keys and values. |
 | get databases  | The list of databases managed on the local node. |
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
