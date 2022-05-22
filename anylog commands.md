@@ -678,5 +678,13 @@ else print "no value"
 if int !a == 5 then print "Comparison as integers succeeded"
 </pre>
 <pre>
+if !a then print with value
+else print "without value"
+</pre>
+<pre>
+if not !a then print "without value"
+else print "with value"
+</pre>
+<pre>
 a = if not !a
 </pre>
