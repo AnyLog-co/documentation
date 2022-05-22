@@ -185,6 +185,33 @@ Usage:
 <pre>
 get dictionary
 </pre>
+Use the following command to retrieve the keys and values in JSON format:
+<pre>
+get dictionary where format = json
+</pre>
+
+The following command retrieves a single value:
+<pre>
+!key
+</pre>
+
+
+## The "get env var" command
+
+The ***get env var*** command lists the environment variables key values pairs.  
+Usage:
+<pre>
+get env var
+</pre>
+Use the following command to retrieve the keys and values in JSON format:
+<pre>
+get env var where format = json
+</pre>
+
+The following command retrieves a single value:
+<pre>
+$key
+</pre>
 
 
 ## Organizing node status in a database table
