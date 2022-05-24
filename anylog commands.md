@@ -692,7 +692,7 @@ a = if not !a
 
 ## Multiple do - then instruction
 
-Conditional executions can make multiple commands dependent on a condition.   
+Conditional execution can make multiple commands dependent on a condition.   
 The commands that are executed if the condition returns ***true*** are prefixed by the ***do*** keyword.    
 The commands that are executed if the condition returns ***false*** are prefixed by the ***else*** keyword.    
   
