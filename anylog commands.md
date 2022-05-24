@@ -689,3 +689,33 @@ else print "with value"
 <pre>
 a = if not !a
 </pre>
+
+## Multiple do - then instruction
+
+Conditional executions can make multiple commands dependent on a condition.   
+The commands that are executed if the condition returns ***true*** are prefixed by the ***do*** keyword.    
+The commands that are executed if the condition returns ***false*** are prefixed by the ***else*** keyword.    
+  
+Usage:
+<pre>
+if [condition] then 
+do [command A]
+do [command B]
+do [command C]
+else [command d]
+else [command f]
+else [command f]
+</pre>
+
+Example:
+
+<pre>
+if (!external_ip and !node_1_port and !ip and !node_1_port) then 
+do run tcp server !external_ip !node_1_port !ip !node_1_port
+do print "Node connected to the AnyLog Network" 
+do get connections
+else print "Missing configurations for IP and Port to connect to the AnyLog Network"
+else email to my_name@my_company.co where subject = "anylog node" and message = "not connected"
+</pre>
+
+
