@@ -89,8 +89,8 @@ get ip list
 The ***get node info*** command retrieves additional info and statistics on the current operation of the node.  
 The command maps to a psutil call as detailed below.
 Values can be returned to the user or to an [aggregator node](#organizing-nodes-status-in-an-aggregator-node) 
-or [sored on a local database](#organizing-node-status-in-a-database-table).
-psutil functions are detailed [here](https://psutil.readthedocs.io/en/latest/).
+or [sored on a local database](#organizing-node-status-in-a-database-table).  
+The psutil functions are detailed [here](https://psutil.readthedocs.io/en/latest/).
  
 Usage:
 <pre>
