@@ -332,7 +332,7 @@ In the examples below, the monitoring commands are assigned to the scheduler for
 
 Configuring topic ***nodes***
 <pre>
-schedule name = node_status and time = 15 seconds task node_status = get status format = json
+schedule name = node_status and time = 15 seconds task node_status = get status where format = json
 schedule name = monitor_node and time = 15 seconds task run client 23.239.12.151:2048 monitor Nodes where info = !node_status"
 </pre>
 

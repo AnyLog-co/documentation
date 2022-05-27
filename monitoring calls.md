@@ -54,7 +54,7 @@ The command returns the data in a text format. Adding the key-value pair ***form
 Usage: 
 <pre>
 get streaming
-get streaming format = json
+get streaming where format = json
 </pre>
 
 The non JSON reply has 2 sections showing configurations and statistics.
