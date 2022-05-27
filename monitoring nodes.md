@@ -103,7 +103,7 @@ Options are one of the following keys:
 | ------------- | ------------| 
 | cpu_percent  | A number representing the current system-wide CPU utilization as a percentage. | 
 | cpu_times  | System CPU times, every attribute represents the seconds the CPU has spent in the given mode. |
-| cpu_times_percent  | utilization percentages for each specific CPU. |
+| cpu_times_percent  | Utilization percentages for each CPU. |
 | getloadavg  | Return the average system load over the last 1, 5 and 15 minutes. |
 | swap_memory  | Swap memory statistics. |
 | disk_io_counters  | System disk I/O statistics. |
