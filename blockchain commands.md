@@ -178,7 +178,7 @@ The structure of the command is as follows:
 <pre>
 run client (blockchain get ...) anylog command
 </pre>
-and the ***blockchain get*** includes a ***bring*** directive to construct the command destination a list of comma separated IPs and Ports,
+The ***blockchain get*** includes a ***bring*** directive to construct the command destination a list of comma separated IPs and Ports,
  
 The following example sends a network status command to all Operator and Query nodes in San Francisco or San Jose. 
 Note that in the example below, rather tnan placing the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command,
