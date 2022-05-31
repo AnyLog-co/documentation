@@ -103,18 +103,46 @@ Queries are done in 2 steps:
  
 Usage:
 <pre>
-blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
+blockchain get [policy type] [where] [where conditions] [bring] [bring command variables]
 </pre>
 
 Explanation:
 The ***blockchain get*** command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
 * policy type - the key at the root of the JSON representing the policy.
-* attribute name value pairs - a list that describes key and value pairs that filter the search.
-* bring command variables = determined the formatting of the retrieved data.  
+* where conditions - reference the policy values that are evaluated to determine if the policy is selected.
+* bring command - determined the retrieved data and formatting options.  
+
+### Selecting the policy type
+
+AnyLog policies have a single attribute at the root of the policy. The root attribute name is the policy type.
+For example, in the [Metadata Section](#the-metadata), the policy type is ***operator***.  
+The following command selects all policies of a particular type:
+<pre>
+blockchain get [policy type]
+</pre>
+The following example selects all policies of a type ***operator***:
+<pre>
+blockchain get operator
+</pre>
+
+Selecting multiple types is allowed by separating policies using a comma and placing the policies types in parentheses.    
+The following example selects all policies of a type ***operator*** and type ***publisher***:
+<pre>
+blockchain get (operator, publisher).
+</pre>
+Selecting all policies is allowed as in the following example:
+<pre>
+blockchain get *
+</pre>
+
+### The where condition
+
+The where condition is provided in one of 2 ways:  
+* As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) seperated by the ***and*** keyword. 
+* As a ***conditional execution***, conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
 Details: 
 <pre>
-blockchain get [policy type] - Retrieve a list of all the requested policies of the specified type.
 blockchain get [policy type] where [key] = [value] - Retrieve a list of all the requested objects that contain the specidied value.
 blockchain get [policy type] where [key] with [value] - Retrieve a list of all the requested objects that contain a list of values including the specidied value.
 </pre>
