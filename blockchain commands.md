@@ -178,10 +178,10 @@ The structure of the command is as follows:
 <pre>
 run client (blockchain get ...) anylog command
 </pre>
-The ***blockchain get*** includes a ***bring*** directive to construct the command destination a list of comma separated IPs and Ports,
+The ***blockchain get*** includes a ***bring*** directive to construct the command destination as a list of comma separated IPs and Ports.
  
 The following example sends a network status command to all Operator and Query nodes in San Francisco or San Jose. 
-Note that in the example below, rather tnan placing the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command,
+Note that in the example below, rather than placing the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command,
 it is places in a dictionary variable which is referenced in the parenthesis to determine the destination. However, both methods are supported.
 <pre>
 destinations = blockchain get (operator, query) where [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose") bring [*][ip] : [*][port] separator = ,
