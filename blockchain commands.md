@@ -95,7 +95,8 @@ Queries are processed on the local copy of the ledger and are not dependent on t
 Queries detail filter criteria to return the needed policies in JSON format and can be augmented by formatting instructions.   
 Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
-The second search is using the command ***from*** and is explained [below](#the-from-json-object-bring-command).
+The second search is using the command ***from*** and is explained at the
+section called: [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
 
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
@@ -103,18 +104,18 @@ Queries are done in 2 steps:
  
 Usage:
 <pre>
-blockchain get [policy type] [where] [where conditions] [bring] [bring command variables]
+blockchain get [policy type] [where] [where conditions] [bring] [bring command instructions]
 </pre>
 
 Explanation:
 The ***blockchain get*** command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
-* policy type - the key at the root of the JSON representing the policy.
-* where conditions - reference the policy values that are evaluated to determine if the policy is selected.
-* bring command - determined the retrieved data and formatting options.  
+* ***policy type*** - the key at the root of the JSON representing the policy.
+* ***where conditions*** - reference the policy values that are evaluated to determine if the policy is selected.
+* ***bring command*** - determined the retrieved data and formatting options.  
 
 ### Selecting the policy type
 
-AnyLog policies have a single attribute at the root of the policy. The root attribute name is the policy type.
+AnyLog policies have a single attribute at the root of the policy. The root attribute name is the policy type.  
 For example, in the [Metadata Section](#the-metadata), the policy type is ***operator***.  
 The following command selects all policies of a particular type:
 <pre>
@@ -128,7 +129,7 @@ blockchain get operator
 Selecting multiple types is allowed by separating policies using a comma and placing the policies types in parentheses.    
 The following example selects all policies of a type ***operator*** and type ***publisher***:
 <pre>
-blockchain get (operator, publisher).
+blockchain get (operator, publisher)
 </pre>
 Selecting all policies is allowed as in the following example:
 <pre>
