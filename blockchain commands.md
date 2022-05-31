@@ -142,21 +142,15 @@ The where condition is provided in one of 2 ways:
 * As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) seperated by the ***and*** keyword. 
 * As a ***conditional execution***, conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
-Details: 
-<pre>
-blockchain get [policy type] where [key] = [value] - Retrieve a list of all the requested objects that contain the specidied value.
-blockchain get [policy type] where [key] with [value] - Retrieve a list of all the requested objects that contain a list of values including the specidied value.
-</pre>
-
 Examples:
 <pre>
-blockchain get *
 blockchain get operator where dbms = lsl_demo
-blockchain get operator where ip = 24.23.250.144
+blockchain get operator where dbms = lsl_demo and ip = 24.23.250.144
 blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
+blockchain get operator where [name] == operator11 or [name] ==  operator1 bring [*][name]
 </pre>
 
-### Formating retrieved data 
+### Formatting retrieved data 
 
 The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
 See details and examples in the [JSON data transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation) section.
@@ -198,7 +192,7 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 ## Copying policies representing the metadata to the local ledger
 The local representation of the blockchain file is updated continuously if the [blockchain synchronization](./background%20processes.md#blockchain-synchronizer) 
 process is enabled.  
-If the blockchain sync process is disabled and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
+If the blockchain sync process is disabled, and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
 will force the node to use the updated local file.  
 For example, ***blockchain sync*** is not enabled, and a local file is copied from a member node as follows:
 <pre>
