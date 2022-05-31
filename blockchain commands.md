@@ -170,7 +170,25 @@ blockchain get operator where [name] == operator11 or [name] ==  operator1 bring
 The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
 See details and examples in the [JSON data transformation](https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation) section.
 
+### Setting command destination from policies
 
+A common usage of policies is to determine the destination of a command or a query (in case of a query, to overwrite the network protocol's destination).    
+The process evaluates policies by some criteria and sets a command destination to the IPs and ports detailed in the policies that satisfies the criteria.   
+The structure of the command is as follows:
+<pre>
+run client (blockchain get ...) anylog command
+</pre>
+and the ***blockchain get*** includes a ***bring*** directive to construct the command destination a list of comma separated IPs and Ports,
+ 
+The following example sends a network status command to all Operator and Query nodes in San Francisco or San Jose. 
+Note that in the example below, rather tnan placing the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command,
+it is places in a dictionary variable which is referenced in the parenthesis to determine the destination. However, both methods are supported.
+<pre>
+destinations = blockchain get (operator, query) where [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose") bring [*][ip] : [*][port] separator = ,
+run client (!destinations) get node info net_io_counters 
+</pre>
+
+    
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
 This command can update both - the local copy and the global copy of the ledger. In addition, it facilitates a process that validates that all the updates
