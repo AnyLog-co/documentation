@@ -155,7 +155,7 @@ The list of attribute name (key) value pairs in the where conditions is provided
      <pre>
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
     </pre>
- tional execution is detailed [here](anylog%20commands.md#conditional-execution). 
+ Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
 Examples:
 <pre>
