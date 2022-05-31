@@ -55,6 +55,7 @@ the database data is maintained, for each table in the database, in the default 
 Examples:
 <pre> 
 connect dbms test where type = sqlite
+connect dbms system_query where type = sqlite and memory = true
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 </pre>
 
