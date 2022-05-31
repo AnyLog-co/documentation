@@ -9,6 +9,8 @@ Example of policy types: database, table, operator, device.
 The following Policy describes an Operator (an Operator is a node that hosts data):
 ```
  {'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
+                'country' : 'USA',
+                'city' : 'San Francisco',
                 'ip' : '24.23.250.144',
                 'port' : 7848,
                 'id' : 'f3a3c56fcfb78aecc110eb911f35851c',
@@ -139,8 +141,21 @@ blockchain get *
 ### The where condition
 
 The where condition is provided in one of 2 ways:  
-* As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) seperated by the ***and*** keyword. 
-* As a ***conditional execution***, conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
+* As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) separated by the ***and*** keyword.   
+The list of attribute name (key) value pairs in the where conditions is provided as follows:
+    <pre>
+    key1 = value1 and key2 = value2 and key3 = value3 and ... keyN = valueN
+    </pre>
+    A key represents the path in the policy to the tested value, for example ***[operator][name]*** is the path to the name value in the operator policy.  
+    Note that the root name in the path does not have to be enclosed with square brackets: ***[operator][name]*** is equivalent to ***operator[name]***.
+
+* As a ***conditional execution*** whereas policy values are evaluated to determine if these values satisfy the search criteria.  
+ Attribute name value pairs are referenced using squere brackets, for example ***[operator][name]*** will pull the name from the Operator policy.  
+ The following example evaluates attribute values of the policy example in the [Metadata Section](#the-metadata):
+     <pre>
+    [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
+    </pre>
+ tional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
 Examples:
 <pre>
