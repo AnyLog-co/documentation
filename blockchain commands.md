@@ -188,12 +188,12 @@ The second command sends a request to get the network status from the destinatio
 The second example details the destination using the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command.
 
 <pre>
-destinations = blockchain get operator where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,
+destinations = blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,
 run client (!destinations) get node info net_io_counters 
 </pre>
 
 <pre>
-run client (blockchain get operator where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,) get node info net_io_counters 
+run client (blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,) get node info net_io_counters 
 </pre>
     
 ## The blockchain insert command
