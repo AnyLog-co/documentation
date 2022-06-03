@@ -631,6 +631,7 @@ AnyLog supports the following conditions:
 | >=    | Greater than or equal to |            |
 |       | is defined             | No sign - Returns True if the variable is defined in the local dictionary |
 | not   | is not defined         | Returns True if the variable is not defined in the local dictionary |
+| contains  | includes the provided substring using insensitive comparison | if X contains Y - returns True if X and Y are strings and Y is a substring of X  |
 
 Multiple conditions within parenthesis are allowed with an ***and*** or ***or*** keyword separation.  
 The allowed structure is the following:
@@ -689,6 +690,10 @@ else print "with value"
 <pre>
 a = if not !a
 </pre>
+<pre>
+if !company_name includes "anylog"
+</pre>
+
 
 ## Multiple do - then instruction
 
