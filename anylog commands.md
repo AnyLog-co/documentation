@@ -645,7 +645,7 @@ Note:
 * By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
 The supported data types are ***str*** (the default), ***int*** and ***float***.
-Data types are specified by adding a dot and a data type to the variable considered. For example: ```if !a.float == 1.234```.
+Data types are specified by adding a dot, and a data type to the variable considered. For example: ```if !a.float == 1.234```.
   
 * The result of an if statement can be assigned to a variable, for example: ```a = if not !a```.
   
