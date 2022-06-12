@@ -133,6 +133,13 @@ There are 2 ways to detail the association:
     <pre>
     column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
     </pre> 
+    
+By default, an error is returns if the bring command does not return a value.  
+The keyword ***optional*** assigned to ***true*** designates that if the bring command fails, the process continues without returning an error.  
+Example:
+    <pre>
+    column.info=(type=str and value="bring [info]" and optional=true)
+    </pre> 
 
 ***Examples - associating published data with the needed schema***
 
