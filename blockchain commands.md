@@ -282,15 +282,29 @@ Notes:
 * With synchronization enabled, this process is done continuously as configured and is not required to be triggered by the user. 
 
 ### Removing policies from a master node
-Deleting a policy from a master node is with the command:
-<pre>
-blockchain drop policy [JSON data]
-</pre>
-JSON data is the policy to drop.
-If JSON data is a list of multiple policies, a where condition is required. For example:  
-<pre>
-blockchain drop policy !operator where ip = 10.0.0.25
-</pre>
+Policies are deleted using the ***blockchain drop policy*** command.     
+The command can be issued in one of the following forms:  
+ * Specifying the policy ID
+    <pre>
+    blockchain drop policy where id = [policy id]
+    </pre>
+   For example:
+    <pre>
+    blockchain drop policy where id = b90b40ff46ea7244a49357a46901e114
+   </pre>
+* specifying the policy data 
+    <pre>
+    blockchain drop policy [JSON data]
+    </pre>
+  JSON data is the policy to drop and can be expressed as a variable. 
+  For example:
+    <pre>
+    blockchain drop policy !operator
+    </pre>
+ If the variable is a list to multiple policies, a where condition is required, for example:
+    <pre>
+    blockchain drop policy !operator where ip = 10.0.0.25
+    </pre>
 
 ### Reflecting blockchain updates on the local copy of the metadata
 
