@@ -288,12 +288,18 @@ Policies are dropped on the master node and if issued on a member node, the comm
 The ***blockchain drop policy*** command can be issued in one of the following forms:  
  * Specifying the policy ID
     <pre>
-    blockchain drop policy where id = [policy id]
+    blockchain drop policy where id = [one or more policy ids]
     </pre>
-   For example:
+   For examples:
     <pre>
     blockchain drop policy where id = b90b40ff46ea7244a49357a46901e114
+    blockchain drop policy where id = b90b40ff46ea7244a49357a46901e114, 4a0c16ff565c6dfc05eb5a1aca4bf825 
+    blockchain drop policy where id = !id_string  # id_string is a comma seperated ids
    </pre>
+* specifying the IP-Port list as a ***blockchain get*** command: 
+    <pre>
+    blockchain drop policy where id = blockchain get (cluster, operator) where [company] contains ibm bring [*][id] separator = ,
+    </pre>
 * specifying the policy data 
     <pre>
     blockchain drop policy [JSON data]
