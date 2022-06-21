@@ -126,9 +126,8 @@ Additional information is available in the following sections:
  
 ## Operator Process
 
-A process that adds users data local databases. The Operator identifies JSON files, transforms the files to a structure 
-that can be assigned to data tables and inserts the data local databases.    
-Files ingested are recorded such that it is possible to trace the source data and source device of data readings.
+A process that adds users data to local databases. The Operator identifies JSON files, transforms the JSON files to SQL files 
+and inserts the data to local databases.    
 
 #### Overview
 Files with new data are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every
