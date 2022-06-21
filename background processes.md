@@ -126,13 +126,15 @@ Additional information is available in the following sections:
  
 ## Operator Process
 
-A process that places users data local databases. The Operator identifies JSON files, transforms the files to a structure 
+A process that adds users data local databases. The Operator identifies JSON files, transforms the files to a structure 
 that can be assigned to data tables and inserts the data local databases.    
 Files ingested are recorded such that it is possible to trace the source data and source device of data readings.
 
 #### Overview
-Files with new data are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every file that is copied to the directory is being processed.  
-Processing is determined by the type of the file and by ***Instructions*** if the file is associated with policies that modify the default processing.    
+Files with new data are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every
+file that is copied to the directory is being processed.  
+Processing is determined by the type of the file and by ***Instructions*** if the file is associated with policies that 
+modify the default processing.    
 The processing is by mapping the data in each JSON file to SQL Insert Statements that update a local database.
 
 #### The mapping process
@@ -143,11 +145,59 @@ Mapping instructions are detailed in the [mapping data to tables section.](https
 
 #### Recording file ingested
 This is an optional process to recod the details of the ingested files.
-When JSON files are processed, a local table named **tsd_info** assigned to a database named **almgm** is updated to reflect the list of files processed.  
-Interaction with the data maintained by **tsd_info** is by the command ```time file```.  The command provides the functionality to create the table and retrieve the data maintained in the table.  
-The information maintained by **tsd_info** is leveraged to trace source data, source devices, and to support the High Availability (HA) processes.
+When JSON files are processed, a local table named **tsd_info** assigned to a database named **almgm** is updated to 
+reflect the list of files processed.  
+Interaction with the data maintained by **tsd_info** is by the command ```time file```.  
+The command provides the functionality to create the table and retrieve the data maintained in the table.    
+The information maintained by **tsd_info** is leveraged to trace source data, source devices, and to support the
+High Availability (HA) processes. Info on the ```time file``` is available at the 
+[managing data files](managing data files) section.
 
-Usage:
+#### The Operator policy
+Every Operator Node is assigned with a policy that provides the operator info and associates the operator with a Cluster policy (see below).      
+The following is an example of an operator policy:
+<pre>
+ {'operator' : {'hostname' : 'operator1',
+                'name' : 'cluster1-operator1',
+                'ip' : '155.248.209.193',
+                'local_ip' : '10.0.0.173',
+                'company' : 'AnyLog',
+                'port' : 32148,
+                'rest_port' : 32149,
+                'cluster' : '06f093559c851c6d4c3e950ebc9c5499',
+                'loc' : '37.3378,-121.8908',
+                'country' : 'US',
+                'state' : 'California',
+                'city' : 'San Jose',
+                'id' : 'd93487bec012c8847bca734bcc31a3a6',
+                'date' : '2022-06-06T01:36:02.312181Z',
+                'member' : 201,
+                'ledger' : 'global'}}]
+</pre>
+
+The ***cluster*** key represents an ID of a cluster policy. One or more Operators can be assigned to the same cluster.  
+With proper configurations, when data is streamed to an Operator, it will be replicated to all the Operators that share the same cluster.  
+
+#### The Cluster policy
+
+The Cluster policy groups all the Operators that host the same data. In addition, it assigns tables to the cluster such that:  
+data associated with the tables can be hosted on an Operator assigned to the cluster, and if multiple Operators are assigned 
+to the cluster, the data will be replicated to each Operator.  
+The same table can be assigned to multiple cluster, in that case the table's data can be partitioned between the cluster.
+The following is an example of a clutter policy:
+<pre>
+[{'cluster' : {'company' : 'AnyLog',
+               'dbms' : 'AnyLog',
+               'name' : 'cluster1',
+               'id' : '06f093559c851c6d4c3e950ebc9c5499',
+               'date' : '2022-06-06T01:36:02.304757Z',
+               'status' : 'active',
+               'ledger' : 'global'}}]
+</pre>
+
+Note that the ***id*** in the cluster policy is the same id referenced by the key ***cluster*** in the [operator policy](#the-operator-policy).
+
+#### Declaring an Operator:
 <pre>
 run operator where [option] = [value] and [option] = [value] ...
 </pre>
@@ -159,6 +209,7 @@ Options:
 
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
+| policy  | The ID of the Operator policy.  |  |
 | watch_dir  | The directory monitored by the Operator. Files placed on the Watch directory are processed by the Operator.  | !watch_dir  |
 | bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
 | error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
@@ -176,14 +227,14 @@ Options:
 
 Example:  
 <pre>
-run operator where create_table = true and update_tsd_info = true and distributor = true
+run operator where policy = !operator_policy and create_table = true and update_tsd_info = true and archive = true and distributor = true and master_node = !master_node
 </pre>
 
 To check the status of the Operator process, use the following command:
 <pre>
 get operator
 </pre>
-
+Additional info on the ***get operator*** command is available [here](./monitoring%20calls.md#get-operator)
 
 ## Publisher Process
 
