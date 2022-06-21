@@ -179,9 +179,9 @@ With proper configurations, when data is streamed to an Operator, it will be rep
 #### The Cluster policy
 
 The Cluster policy groups all the Operators that host the same data. In addition, it assigns tables to the cluster such that:  
-data associated with the tables can be hosted on an Operator assigned to the cluster, and if multiple Operators are assigned 
+Data associated with the tables can be hosted on an Operator assigned to the cluster, and if multiple Operators are assigned 
 to the cluster, the data will be replicated to each Operator.  
-The same table can be assigned to multiple cluster, in that case the table's data can be partitioned between the cluster.
+The same table can be assigned to multiple clusters, in that case, the table's data can be partitioned between the clusters.  
 The following is an example of a clutter policy:
 <pre>
 [{'cluster' : {'company' : 'AnyLog',
