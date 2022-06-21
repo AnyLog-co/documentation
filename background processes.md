@@ -132,12 +132,12 @@ and inserts the data to local databases.
 #### Overview
 Files with new data are placed in a ***Watch Directory***. The Watch Directory is a designated directory such that every
 file that is copied to the directory is being processed.  
-Processing maps the JSON's key value pairs to column name and column value of the associate table.
+Processing maps the JSON's key value pairs to column names and column values of the associate table.
 Users can modify the processing by associating ***Instructions Policies*** to the processed files.
 
 #### The mapping process
 The JSON file name follows a convention that uniquely identifies the file and determines the processes that assign the JSON data to a table.  
-The file naming convention is detailed at the [metadata section.](https://github.com/AnyLog-co/documentation/blob/master/metadata.md#file-names)
+The file naming convention is detailed at the [The file naming convention](./managing%20data%20files%20status.md#the-file-naming-convention) section.
 From the file name, the logical database and table names are determined. In addition, the file name optionaly includes the ID of the Mapping Instructions.  
 Mapping instructions are detailed in the [mapping data to tables section.](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md)  
 
