@@ -149,7 +149,7 @@ Interaction with the data maintained by **tsd_info** is by the command ```time f
 The command provides the functionality to create the table and retrieve the data maintained in the table.    
 The information maintained by **tsd_info** is leveraged to trace source data, source devices, and to support the
 High Availability (HA) processes. Info on the ```time file``` is available at the 
-[managing data files](managing data files) section.
+[Time File commands](managing%20data%20files%20status.md#time-file-commands) section.
 
 #### The Operator policy
 Every Operator Node is assigned with a policy that provides the operator info and associates the operator with a Cluster policy (see below).      
