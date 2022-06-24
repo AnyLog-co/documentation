@@ -233,7 +233,7 @@ Options:
 | get broker | Information on the Message Broker. |
 | [get status](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-status-command)  | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
 | get connections | The list of TCP and REST connections supported by the node. |
-| get machine connections | The system-wide socket connection. |
+| get machine connections | The system-wide socket connection. Users can detail specific port: ```get machine connections where port = [port]```|
 | get platforms | The list connected blockchain platforms. |
 | [get dictionary](monitoring%20nodes.md#the-get-dictionary-command) | The list of the variable names and their assigned values. |
 | [get env var](monitoring%20nodes.md#the-get-env-var-command) | The environment variables keys and values. |

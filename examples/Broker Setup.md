@@ -33,7 +33,7 @@ Use the following command to see messages received by the broker:
 get broker
 </pre>
 
-Helper commands would be:
+### Helper commands would be:
 
 Get the list of available IPs on the node:
 <pre>
@@ -46,4 +46,28 @@ machine including the PID of the process which opened the socket:
 get machine connections
 </pre>
 
+The following command details the process using port 7850:
+<pre>
+get machine connections where port = 7850
+</pre>
 
+## Example - Subscribing to messages
+
+When data is published on a broker, it is assigned to a topic.  
+An AnyLog node can subscribe to messages published on a third party broker or, if the same node is configured as a broker,
+to messages published on the AnyLog node.  
+Subscription is with the command ```run mqtt client``` and such that:  
+* If the node is subscribing to a third part broker, the IP and Port of the third party broker are provided.
+* If the same node acts as a broker, the broker IP is declared as ***local***, and the process determines that the data is published on the local node.
+
+The following command subscribes to local messages:
+<pre>
+run mqtt client where broker=local and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [reading][][value]')
+</pre>
+In the example below, if the node message broker process is listening on 10.0.0.78:7850, the ***run mqtt client*** command will subscribe
+to the data published on the local node and is equivalent to the setup where broker is set to ***locaal***.
+<pre>
+run mqtt client where broker=10.0.0.78 and port=7850 and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [reading][][value]')
+</pre>
+
+## Example - Publishing data
