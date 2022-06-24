@@ -7,10 +7,9 @@ This document demonstrates the following:
 4) Ingest the data to a local database.
 
 Additional information:
-* Subscribing to a third party message broker and configuring ANyLog as a message broker
-  is detailed in the [using a Message Broker Documentation](../message%20broker.md#using-a-message-broker).
-  
-* Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
+* Subscribing to a third party message broker and configuring AnyLog as a message broker
+  is detailed at the [Using a Message Broker](../message%20broker.md#using-a-message-broker).
+* Adding data is detailed at [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
 * Configuring a node as a message broker is detailed at the [Message Broker](..//background%20processes.md#message-broker) 
   section.
 
@@ -18,5 +17,32 @@ Note: Setting AnyLog as a Message Broker is referenced as Option B in [The South
 
 
 ## Example - Setting a node as a broker
+
+The following example configures a broker process that listens to incoming messages on designated IPs and Ports.
+<pre>
+run message broker !external_ip 7850 !ip 7850
+</pre>
+
+Use the following command to validate that the process is properly configured and bound:
+<pre>
+get connections
+</pre>
+
+Use the following command to see messages received by the broker:
+<pre>
+get broker
+</pre>
+
+Helper commands would be:
+
+Get the list of IPs on the node:
+<pre>
+get ip list
+</pre>
+
+Get the list of active connections on the machine:
+<pre>
+get machine connections
+</pre>
 
 
