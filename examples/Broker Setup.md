@@ -62,12 +62,56 @@ Subscription is with the command ```run mqtt client``` and such that:
 
 The following command subscribes to local messages:
 <pre>
-run mqtt client where broker=local and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [reading][][value]')
+run mqtt client where broker=local and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')
 </pre>
 In the example below, if the node message broker process is listening on 10.0.0.78:7850, the ***run mqtt client*** command will subscribe
-to the data published on the local node and is equivalent to the setup where broker is set to ***locaal***.
+to the data published on the local node and is equivalent to the setup where the broker is set to ***local***.
 <pre>
-run mqtt client where broker=10.0.0.78 and port=7850 and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [reading][][value]')
+run mqtt client where broker=10.0.0.78 and port=7850 and log=false and topic=(name=mqtt-test and dbms=edgex and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')
+</pre>
+
+The following command details the clients subscribed and information on the messages processed by each client:
+<pre>
+get msg client
 </pre>
 
 ## Example - Publishing data
+
+With the configuration detailed above, data can be pushed to the broker, and if assigned to the topic ***mqtt-test*** 
+will be processed as detailed in the ***run mqtt client*** command.
+
+Using the following setup and command, data can be published without a third part publisher:
+<pre>
+<message={"id":"ec798767-617c-467c-984f-ba5fddd474f1",
+	"device":"Random-Integer-Generator01",
+	"created":1625862443151,
+	"origin":1625862443149315045,
+	"readings":[{	"id":"4b553911-e41f-4146-a863-a8e5a9ad1cfc",
+			"origin":1625862443149271124,
+			"device":"Random-Integer-Generator01",
+			"name":"RandomValue_Int32",
+			"value":"-998060882",
+			"valueType":"Int32"}]}>
+</pre>
+Notes: 
+* The assignment of the JSON data to the key ***message*** is contained within angle brackets (***<...>***) 
+to allow, on the AnyLog CLI, processing of info provided on multiple lines, as a single line. Therefore, users can 
+cut and paste the assignment above to the AnyLog CLI.
+* The assignment is ignored with missing brackets.
+* The following command validates JSON structure:
+  <pre>
+  json !message test
+  </pre>
+
+The following command publishes data on a broker and assines the published data to a topic:
+<pre>
+mqtt publish where broker=!ip and port=7850 and topic=mqtt-test and message=!message 
+</pre>
+
+
+
+  
+
+
+
+
