@@ -97,25 +97,25 @@ Notes:
 * The assignment of the JSON data to the key ***message*** is contained within angle brackets (***<...>***) 
 to allow, on the AnyLog CLI, processing of info provided on multiple lines, as a single line. Therefore, users can 
 cut and paste the assignment above to the AnyLog CLI.
-* The assignment is ignored with missing brackets.
+* Assignments of JSON data to keys are ignored with missing brackets in the JSON structures.
 * The following command validates JSON structure:
   <pre>
   json !message test
   </pre>
 
-The following command publishes data on a broker and assines the published data to a topic:
+The following command publishes data on a broker and assines the published data to the ***mqtt-test*** topic:
 <pre>
 mqtt publish where broker=!ip and port=7850 and topic=mqtt-test and message=!message 
 </pre>
 
 Using the ***mqtt publish*** command, the data is received by the node as a broker (on the configured IP and Port in the ***run broker*** commmand).  
-The data is processed by the mapping instructions associated with the ***topic*** declared in the ***run msg client*** command.
+The data is processed by the mapping instructions associated with the ***topic*** declared in the ***run msg client*** command.  
 In the above example, the mapping instructions are:
 <pre>
 (name=mqtt-test and dbms=my_dbms and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')
 </pre>
 
-Use the following commands to monitor the data flow from the broker provess to the client mapping process:
+Use the following commands to monitor the data flow from the broker process to the client mapping process:
 <pre>
 get msg broker
 get msg client
@@ -123,16 +123,22 @@ get msg client
 
 ## Example - Validating data storage in a local database
 
+Validate that the logical database (***my_dbms*** in this example) is assigned to a physical database using the following command:
+<pre>
+get databases
+</pre>
+
 The streaming data is pushed to buffers representing the local tables.  
 Use the following command to view the status of the buffers:
 <pre>
 get streaming
 </pre>
 
-When the buffers are flushed (depending on configuration options) data is added to the local database and can be queried.  
+When the buffers are flushed (depending on configuration options), data is added to the local database and can be queried.  
 For example:
 <pre>
-sql my_dbms format=table and extend=(+ip, +node_name) "select count(*) from rand_data" 
+run client () sql my_dbms format=table "select timestamp, value from rand_data"
+run client () sql my_dbms format=table and extend=(+ip, +node_name) "select count(*) from rand_data" 
 </pre>
 
 
