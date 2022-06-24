@@ -11,8 +11,12 @@ Additional information:
   is detailed in the [using a Message Broker Documentation](../message%20broker.md#using-a-message-broker).
   
 * Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
+* Configuring a node as a message broker is detailed at the [Message Broker](..//background%20processes.md#message-broker) 
+  section.
 
 Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](../adding%20data.md#the-southbound-connectors-diagram).
 
+
+## Example - Setting a node as a broker
 
 
