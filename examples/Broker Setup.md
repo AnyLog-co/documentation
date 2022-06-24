@@ -8,10 +8,9 @@ This document demonstrates the following:
 
 Additional information:
 * Subscribing to a third party message broker and configuring AnyLog as a message broker
-  is detailed at the [Using a Message Broker](../message%20broker.md#using-a-message-broker).
-* Adding data is detailed at [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
-* Configuring a node as a message broker is detailed at the [Message Broker](..//background%20processes.md#message-broker) 
-  section.
+  is detailed in the [Using a Message Broker](../message%20broker.md#using-a-message-broker).
+* Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
+* Configuring a node as a message broker is detailed in [Message Broker](..//background%20processes.md#message-broker).
 
 Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](../adding%20data.md#the-southbound-connectors-diagram).
 
@@ -22,6 +21,7 @@ The following example configures a broker process that listens to incoming messa
 <pre>
 run message broker !external_ip 7850 !ip 7850
 </pre>
+Note: the first IP and port pair bind to an external network, and the second to a local network (if applicable). 
 
 Use the following command to validate that the process is properly configured and bound:
 <pre>
@@ -41,7 +41,7 @@ get ip list
 </pre>
 
 If the broker process fails to bind, the following command returns the list of active connections on the 
-machine including the PID of the process which opened the socket:
+machine including the ID of the process which opened the socket:
 <pre>
 get machine connections
 </pre>
@@ -81,7 +81,7 @@ With the configuration detailed above, data can be pushed to the broker, and if 
 will be processed as detailed in the ***run mqtt client*** command.
 
 Using the following setup and command, data can be published without a third part publisher:
-<pre>
+```
 <message={"id":"ec798767-617c-467c-984f-ba5fddd474f1",
 	"device":"Random-Integer-Generator01",
 	"created":1625862443151,
@@ -92,7 +92,7 @@ Using the following setup and command, data can be published without a third par
 			"name":"RandomValue_Int32",
 			"value":"-998060882",
 			"valueType":"Int32"}]}>
-</pre>
+```
 Notes: 
 * The assignment of the JSON data to the key ***message*** is contained within angle brackets (***<...>***) 
 to allow, on the AnyLog CLI, processing of info provided on multiple lines, as a single line. Therefore, users can 
