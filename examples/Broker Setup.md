@@ -35,12 +35,13 @@ get broker
 
 Helper commands would be:
 
-Get the list of IPs on the node:
+Get the list of available IPs on the node:
 <pre>
 get ip list
 </pre>
 
-Get the list of active connections on the machine:
+If the broker process fails to bind, the following command returns the list of active connections on the 
+machine including the PID of the process which opened the socket:
 <pre>
 get machine connections
 </pre>
