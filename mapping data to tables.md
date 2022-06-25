@@ -85,12 +85,12 @@ In the second example, the schema is determined by a user, and the data is mappe
 
 Using a REST GET command from the AnyLog Command line: 
  
- <pre> 
-[file=!prep_dir/london.readings.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
- </pre> 
+<pre> 
+[file=!prep_dir/london.readings.json, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
+</pre> 
 Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
- The example above downloads a JSON file from PurpleAir that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
+The example above downloads a JSON file from PurpleAir that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
  
  The informtion in the brackets provides the download destination:  
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
