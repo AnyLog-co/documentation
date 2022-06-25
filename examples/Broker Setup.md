@@ -39,7 +39,7 @@ Use the following command to monitor messages per topic by brokers:
 get msg broker
 </pre>
 
-### Helper commands would be:
+### Helper commands:
 
 Get the list of available IPs on the node:
 <pre>
