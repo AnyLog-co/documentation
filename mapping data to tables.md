@@ -76,17 +76,19 @@ In the second example, the schema is determined by a user, and the data is mappe
 ## Prerequisite
 
 1) An AnyLog Operator node.  
+   Details on Operator configurations are available in the section [background processes](background%20processes.md#operator-process).
 2) Define a physical database (i.e.: PostgreSQL or SQLite) to the logical database name (london). 
+   Details on database configurations are available in the section [Connecting to a local database](sql%20setup.md#connecting-to-a-local-database).
 
-Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
-
+   
 ## Downloading the data
 
 Using a REST GET command from the AnyLog Command line: 
  
  <pre> 
-[file=!prep_dir/purpleair.readings.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
+[file=!prep_dir/london.readings.json, key=results, show= true] = rest get where url = https://www.purpleair.com/json
  </pre> 
+Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
  The example above downloads a JSON file from PurpleAir that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
  
