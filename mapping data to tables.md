@@ -101,48 +101,30 @@ The example above downloads a JSON file from PurpleAir that includes a list of r
 
 ```
 <instruct = {"mapping" : {
-   "id" : "london_mapping",
-   "dbms" : "lsl_demo",
-   "table" : "london",
-   "script" : {
-      "type" : "inclusive"
-   },
-   "attributes" : {
-       "GMT" : {
-         "name" : "gmt",
-         "type" : "CHAR(5)",
-         "default" : "''"      
-       },
-       "London Mean Background Nitric Oxide (ug/m3)" : {
-            "name" : "Nitric",
-            "type" : "decimal",
-            "default" : 0     
-       },
-       "London Mean Background Oxides of Nitrogen (ug/m3)" : {
-            "name" : "Nitrogen",
-            "type" : "decimal",
-            "default" : 0     
-       },
-        
-      "device_number" : {
-         "name" : "device",
-         "type" : "CHAR(30)",
-         "default" : "''"
-      },
-      "device_name" : [
-         "if value.upper()[:2] == 'VM' then value = 'Basic Network Element'",
-         "if value.upper().startswith('F') then value = 'FSP3000'",
-         "if value.upper() == 'ADVA FSP3000R7' then value = 'FSP3000'",
-         "if value.upper() == 'ADVA ALM OTDR' then value = 'OTDR'",
-         "if value.upper().find('APC') != -1 then value = 'OTDR'",
-         "if value.startswith('Ubiquiti') then value = 'Ubiquity 10G Switch'",
-         "if value.endsswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
-         "if value.startwith('ULoco') then value = 'ULoco Dev'",
-         "if value.startswith('Catalyst') then value = 'ULoco Dev'",
-         "if value.upper().startswith('CATALYST') then value = 'ULoco Dev'"
-         ]
-      }
-   }
+               "id" : "london_mapping",
+               "dbms" : "lsl_demo",
+               "table" : "london",
+               "schema" : {
+                            "gmt" : {
+                                "type" : "CHAR(5)",
+                                "default" : "''",      
+                                "source" : 0
+                            },
+                           "nitric" : {
+                                "type" : "decimal",
+                                "default" : 0,
+                                "source" : 1 
+                            },
+                           "Nitrogen" : {
+                                "type" : "decimal",
+                                "default" : 0,
+                                "source" : 2    
+                            }
+                        },
+               "script" : {
+                  "type" : "inclusive"
+               }
+            }
 }> 
 ``` 
 Note: In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated,
