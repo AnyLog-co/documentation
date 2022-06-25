@@ -1,12 +1,11 @@
 # Mapping Data
 
-Mapping is transformation instructions that are applied to JSON files in the process of generating SQL files which are consistent with the tables structures.
-The SQL files are files containing Insert statements that are loaded by a local database to add new data.  
+Mapping is transformation instructions that are applied to JSON data structures in the process of mapping the JSON data to tables.
 The default process treats every attribute name in the JSON file as a column name in the table.
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the needed formats of the data.
 
-The mapping of JSON data to tables structure is declared by ***instructions*** that are saved in the blockchain and are identified by a unique ID.  
-When JSON files are processed, the files can be assigned to a set of ***instructions*** that define the mapping logic.
+The mapping are defined in policies of types ***instructions*** that are saved in the shared metadata layer.  
+When JSON structures are processed, the data is transformed using a set of ***instructions*** that defines the mapping logic.
 
 ### The mapping Instructions
 The mapping is declared in a JSON structure. The name of the structure is ***instructions*** and it contains information on the transformation of the data.  
@@ -65,57 +64,19 @@ Script Definitions:
 }> 
 ``` 
 
-# PurpleAir Example
+# London Air Example
 
-PurpleAir (https://www2.purpleair.com/) provides air quality monitoring solutions. It offers a REST API to download air quality measurements from differenn areas in the world.    
-The 2 examples below download the data and update a local database of an Operator.
-In the first example, the schema is determined by the PurpleAir data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
-In the second example, the schema is determined by a user and the PurpleAir data is mapped to the schema as defined by the user.    
+Datahub (https://datahub.io/docs/about) allows organizations to publish, deploy and share their data.
+It offers a REST API to download air quality measurements from different areas in the world.   
+In this doc, we download the London air quality data from datahub and provide 2 examples:  
+In the first example, the schema is determined by the data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
+In the second example, the schema is determined by a user, and the data is mapped to the schema as defined by the user.    
 
 
 ## Prerequisite
 
-1) An AnyLog node member in the network:  
-    Use the following command to connect a node to the network using default IP and port 2048:  
-    <pre> 
-    run tcp server !ip 2048
-    </pre>
-    Update the operator as a member of the network supporting PurpleAir data.  
-    Declare the operator (Note that the the instruction between the ***<...>*** signs below are treated on the AnyLog command line as a continues string): 
-    <pre> 
-    < operator = {"operator" : {
-            "dbms" : "purpleair",
-            "table" : "*",
-            "ip" : !ip,
-            "port" : "2048"
-        }
-    } >
-    </pre>
-    Update the blockchain:  
-    <pre>
-    blockchain add !operator
-    </pre>
-2) Configure the node as an Operator by issuing the following command on the AnyLog command line:
-    
-    <pre> 
-    run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and compress_sql = true and compress_json = true
-    </pre>
-
-The above command configures the node as an Operator. Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST.  
-These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
-The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the command line.  
-
-When data is copied to the watch directory, the name of the file can determine the metadata. If the file name is: purpleair.readings.json    
-***dbms_name = file_name[0]*** will treat the first section of the file name (purpleair) as the logical database name.  
-***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
-
-The actual storage can be in Postgress or SQLite. To assign a physical database to the logical database use the following command:
-
-<pre> 
-connect dbms sqlite !db_user !db_port purpleair
-</pre>
-
-To use Postgress, replace ***sqlite*** with ***psql*** and to see active databases on this node use the command ```show databases```.
+1) An AnyLog Operator node.  
+2) Define a physical database (i.e.: PostgreSQL or SQLite) to the logical database name (london). 
 
 Details on Operator configurations are available in the section [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
@@ -133,15 +94,25 @@ Using a REST GET command from the AnyLog Command line:
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
  ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
  ***show*** provides a visual status bar that monitors the write to file process.
- 
- #### Example 1:
+
+## Adding the data
+Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST or assigning
+a broker role to the node and publishing the data. These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
+
+The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
+
+When data is copied to the watch directory, the file name serves as the metadata. If the file name is: london.readings.json    
+***dbms_name = file_name[0]*** will treat the first section of the file name (london) as the logical database name.  
+***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
+
+#### Example 1:
  
  Copy the data to the ***watch*** directory. 
- The logical database ***purpleair*** will be updated to include the table ***readings*** with the PurpleAir Data.
+ The logical database ***london*** will be updated to include the table ***readings***.
  
- To view the status of the Operator:
+To view the status of the Operator:
 <pre>
- show operator
+ get operator
 </pre> 
  To view the list of tables on a local database:
 <pre>
