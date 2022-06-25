@@ -8,11 +8,12 @@ This document demonstrates the following:
 
 Additional information:
 * Subscribing to a third party message broker and configuring AnyLog as a message broker
-  is detailed in the [Using a Message Broker](../message%20broker.md#using-a-message-broker).
+  is detailed in [Using a Message Broker](../message%20broker.md#using-a-message-broker).
 * Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
 * Configuring a node as a message broker is detailed in [Message Broker](..//background%20processes.md#message-broker).
 
 Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](../adding%20data.md#the-southbound-connectors-diagram).
+Note
 
 
 ## Example - Setting a node as a broker
@@ -21,16 +22,21 @@ The following example configures a broker process that listens to incoming messa
 <pre>
 run message broker !external_ip 7850 !ip 7850
 </pre>
-Note: the first IP and port pair bind to an external network, and the second to a local network (if applicable). 
+Note: the first IP and port pair bind to an external network, and the second pair (optional) binds to a local network (if applicable). 
 
 Use the following command to validate that the process is properly configured and bound:
 <pre>
 get connections
 </pre>
 
-Use the following command to see messages received by the broker:
+Use the following command to monitor messages received by the broker:
 <pre>
 get broker
+</pre>
+
+Use the following command to monitor messages per topic by brokers:
+<pre>
+get msg broker
 </pre>
 
 ### Helper commands would be:
@@ -64,8 +70,10 @@ The following command subscribes to local messages:
 <pre>
 run mqtt client where broker=local and log=false and topic=(name=mqtt-test and dbms=my_dbms and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')
 </pre>
-In the example below, if the node message broker process is listening on 10.0.0.78:7850, the ***run mqtt client*** command will subscribe
-to the data published on the local node and is equivalent to the setup where the broker is set to ***local***.
+
+Note: if the  ***run mqtt client*** command refernces the local broker (same IP and Port as the IP and Port used in the ***run message broker*** copmmand),
+the IP and Port are set to ***local***. 
+The example below is equivalent to the example above where the broker is set to ***local*** (the IP and Port assigned to the broker process are: 10.0.0.78:7850).
 <pre>
 run mqtt client where broker=10.0.0.78 and port=7850 and log=false and topic=(name=mqtt-test and dbms=my_dbms and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')
 </pre>
@@ -74,6 +82,11 @@ The following command details the clients subscribed and information on the mess
 <pre>
 get msg client
 </pre>
+The following command details the subscription for each broker:
+<pre>
+get msg broker
+</pre>
+
 
 ## Example - Publishing data
 
@@ -117,6 +130,7 @@ In the above example, the mapping instructions are:
 
 Use the following commands to monitor the data flow from the broker process to the client mapping process:
 <pre>
+get broker
 get msg broker
 get msg client
 </pre>
