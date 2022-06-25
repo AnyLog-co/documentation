@@ -154,6 +154,12 @@ Use the following command to view the status of the buffers:
 get streaming
 </pre>
 
+Use the following command to view the tables created:
+<pre>
+get tables where dbms=*
+get columns where dbms=my_dbms and table=rand_data
+</pre>
+
 When the buffers are flushed (depending on configuration options), data is added to the local database and can be queried.  
 For example:
 <pre>
