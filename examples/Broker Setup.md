@@ -90,7 +90,7 @@ get msg broker
 
 ## Example - Publishing data
 
-With the configuration detailed above, data can be pushed to the broker, and if assigned to the topic ***mqtt-test*** 
+With the configuration detailed above, data can be pushed to the broker, and if assigned to the topic ***mqtt-test***,
 will be processed as detailed in the ***run mqtt client*** command.
 
 Using the following setup and command, data can be published without a third part publisher:
