@@ -142,6 +142,12 @@ Validate that the logical database (***my_dbms*** in this example) is assigned t
 get databases
 </pre>
 
+Validate that the node is configured as an Operator. The following commands track the Operator configuration:
+<pre>
+get processes
+get operator
+</pre>
+
 The streaming data is pushed to buffers representing the local tables.  
 Use the following command to view the status of the buffers:
 <pre>
