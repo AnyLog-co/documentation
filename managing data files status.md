@@ -31,7 +31,7 @@ File name is structured as follows:
 | table name | The name of the table to include the data.  | 
 | data source | The ID of the data source generating the data. | 
 | hash value | The hash value of the file. | 
-| instructions | The ID of the policy that mapps the file data to a table structure (or '0' if no associated policy). | 
+| instructions | The ID of the policy that maps the file data to a table structure (or '0' if no associated policy). | 
 | TSD member | If the file was send by a cluster member, the member ID sending the data. | 
 | TSD ID | The ID of the file in the TSD table. | 
 | TSD date | A 12 bytes key in the format: YYMMDDHHMMSS representing the date and time the file was processed. | 

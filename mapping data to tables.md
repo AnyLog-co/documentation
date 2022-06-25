@@ -86,31 +86,91 @@ In the second example, the schema is determined by a user, and the data is mappe
 Using a REST GET command from the AnyLog Command line: 
  
 <pre> 
-[file=!prep_dir/london.readings.json, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
+[file=!prep_dir/london.readings.json.0.0.london_mapping, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
 </pre> 
 Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
 The example above downloads a JSON file from PurpleAir that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
  
- The informtion in the brackets provides the download destination:  
+ The information in the brackets provides the download destination:  
  ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
  ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
  ***show*** provides a visual status bar that monitors the write to file process.
+
+## Creating the mapping instructions
+
+```
+<instruct = {"mapping" : {
+   "id" : "london_mapping",
+   "dbms" : "lsl_demo",
+   "table" : "london",
+   "script" : {
+      "type" : "inclusive"
+   },
+   "attributes" : {
+       "GMT" : {
+         "name" : "gmt",
+         "type" : "CHAR(5)",
+         "default" : "''"      
+       },
+       "London Mean Background Nitric Oxide (ug/m3)" : {
+            "name" : "Nitric",
+            "type" : "decimal",
+            "default" : 0     
+       },
+       "London Mean Background Oxides of Nitrogen (ug/m3)" : {
+            "name" : "Nitrogen",
+            "type" : "decimal",
+            "default" : 0     
+       },
+        
+      "device_number" : {
+         "name" : "device",
+         "type" : "CHAR(30)",
+         "default" : "''"
+      },
+      "device_name" : [
+         "if value.upper()[:2] == 'VM' then value = 'Basic Network Element'",
+         "if value.upper().startswith('F') then value = 'FSP3000'",
+         "if value.upper() == 'ADVA FSP3000R7' then value = 'FSP3000'",
+         "if value.upper() == 'ADVA ALM OTDR' then value = 'OTDR'",
+         "if value.upper().find('APC') != -1 then value = 'OTDR'",
+         "if value.startswith('Ubiquiti') then value = 'Ubiquity 10G Switch'",
+         "if value.endsswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
+         "if value.startwith('ULoco') then value = 'ULoco Dev'",
+         "if value.startswith('Catalyst') then value = 'ULoco Dev'",
+         "if value.upper().startswith('CATALYST') then value = 'ULoco Dev'"
+         ]
+      }
+   }
+}> 
+``` 
+Note: In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated,
+a unique ID is generated.
+
+Add the policy to the blockchain:
+<pre>
+blockchain insert where policy = !instruct and local = true and master = !master_node
+</pre> 
 
 ## Adding the data
 Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST or assigning
 a broker role to the node and publishing the data. These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
 
+#### Example 1:
+
 The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
 
-When data is copied to the watch directory, the file name serves as the metadata. If the file name is: london.readings.json    
+When data is copied to the watch directory, the file name serves as the metadata. If the file name is: london.readings.json.0.0.    
 ***dbms_name = file_name[0]*** will treat the first section of the file name (london) as the logical database name.  
 ***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
+***data_source = file_name[2]*** will treat the third section of the file name (readings) as the representative of the data source.
+***hash_value = file_name[3]*** will treat the fourth section of the file name (readings) as the hash value of the file.
+***instructions = file_name[4]*** will treat the fifth section of the file name (readings) as the mapping instructions policy id.london_mapping
 
-#### Example 1:
  
- Copy the data to the ***watch*** directory. 
- The logical database ***london*** will be updated to include the table ***readings***.
+ Copy the data to the ***watch*** directory.  
+ The logical database ***london*** will be updated to include the table ***readings*** and the mapping instructions will process the data.
  
 To view the status of the Operator:
 <pre>
