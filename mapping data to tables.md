@@ -108,17 +108,17 @@ The example above downloads a JSON file from PurpleAir that includes a list of r
                             "gmt" : {
                                 "type" : "CHAR(5)",
                                 "default" : "''",      
-                                "source" : 0
+                                "source_name" : "GMT"
                             },
                            "nitric" : {
                                 "type" : "decimal",
                                 "default" : 0,
-                                "source" : 1 
+                                "source_name" : "London Mean Background Nitric Oxide (ug/m3)" 
                             },
                            "Nitrogen" : {
                                 "type" : "decimal",
                                 "default" : 0,
-                                "source" : 2    
+                                "source_name" : "London Mean Background Nitrogen Dioxide (ug/m3)"    
                             }
                         },
                "script" : {
