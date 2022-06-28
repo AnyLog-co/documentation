@@ -115,7 +115,7 @@ The example above downloads a JSON file from PurpleAir that includes a list of r
                                 "default" : 0,
                                 "source_name" : "London Mean Background Nitric Oxide (ug/m3)" 
                             },
-                           "Nitrogen" : {
+                           "nitrogen" : {
                                 "type" : "decimal",
                                 "default" : 0,
                                 "source_name" : "London Mean Background Nitrogen Dioxide (ug/m3)"    
@@ -127,8 +127,10 @@ The example above downloads a JSON file from PurpleAir that includes a list of r
             }
 }> 
 ``` 
-Note: In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated,
-a unique ID is generated.
+Notes: 
+* In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated, a unique ID is generated.
+* For simplicity, the example is mapping 3 attributes from each reading (gmt, nitric, Nitrogen), users can update the mapping policy to include all attributes.
+
 
 Add the policy to the blockchain:
 <pre>
@@ -139,7 +141,7 @@ blockchain insert where policy = !instruct and local = true and master = !master
 Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST or assigning
 a broker role to the node and publishing the data. These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
 
-#### Example 1:
+#### Example:
 
 The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
 
@@ -160,105 +162,20 @@ To view the status of the Operator:
 </pre> 
  To view the list of tables on a local database:
 <pre>
- info dbms purpleair tables
+ get tables where dbms = london
 </pre> 
 To view the list of columns in a table:
 <pre>
- info table purpleair readings columns
+get columns where dbms = london and table = readings
 </pre> 
-To view a sample of the data on the local database:
+Examples data queries
 <pre>
- sql purpleair "select * from readings limit 10"
+run client () sql london format = table "select count(*) from readings"
+run client () sql london format = table "select gmt, Nitrogen, nitric from readings limit 100"
 </pre>
 
  
- #### Example 2:
- 
- To determine the schema add an Instructions Policy to the blockchain as follows:
- * Assign the policy to a variable. Note that the the instructions between the ***<...>*** signs are treated on the AnyLog command line as a continues string.
-<pre> 
-< instruct = {"instructions" : {
-"dbms" : "purpleair",
-"table" : "readings",
-
-"schema"     : {
-
-            "device_id" : {
-                "type" : "int",
-                "source_name" : "ID",
-                "default" : 0
-            },
-            "loc" : {
-                 "type" : "str",
-                 "source_name" : ["[lat]",",","[lon]"]
-            },
-            "timestamp" : {
-                "type" : "timestamp",
-                "source_name" : "lastseen"
-            },
-            "humidity" : {
-                "type" : "int",
-                "source_name" : "humidity"
-            },
-            "temperature" : {
-                "type" : "int",
-                "source_name" : "temp_f"
-            },
-            "pressure" : {
-                "type" : "int",
-                "source_name" : "pressure"
-            }
-    }
-}
-} >
-</pre>
-
- The policy declares a schema for the table ***readings*** in the ***purpleair*** database.  
- The keys inside the schema determine the column names, the source name determine the attribute name in the PurpleAir JSON file.  
- The key ***loc*** represents the coordinates of the sensor provided the readings and the value in the table is declared as a concatenation of the values with attribute names ***lat*** and ***lon*** separated by a comma.
-    
- To add the Policy to the blockchain use the command:
-
-<pre>
-blockchain add !instruct
-</pre>
-
-Notes:
-
-1) Drop the existing readings schema (if exists) using the command:
-    <pre>
-    drop table readings where dbms = purpleair
-    </pre>
-
-2) This command only updates the local copy of the blockchain. To update a master node, use the command:  
-    <pre>
-    run client (!master_node) blockchain push !instruct
-    </pre>
-    and wait for the local copy of the blockchain to be updated.
-
-3) When the policy is added to the blockchain, the Policy is updated with a unique ID. To view the Policy as updated on the blockchain use the command:
-    <pre>
-    blockchain get instructions
-    </pre>
-
-    The ID provides a unique identifier to the policy. To assign the policy to the PurpleAir data change the filename to include the policy ID to be as follows:  
-    ***purpleair.readings.0.0.1eb8c6aae8898cb59905219b4056b619.json***  
-    The Policy ID is placed in the 5th segment of the file name and therefore when the Operator process is initiated, the script includes: "instructions = file_name[4]"
-
-4) Configure the operator to consider instructions identified on file names as follows:  
-    a) Terminate current Operator configuration using the command line:
-    <pre>
-    exit opoerator
-    </pre>
-    b) Provide configuration to treat the instructions when data is loaded using the following command:
-    <pre>
-    run operator where create_table = true and dbms_name = file_name[0] and table_name = file_name[1] and instructions = file_name[4] and compress_sql = true and compress_json = true
-    </pre>
-
-Copy the file ***purpleair.readings.0.id.json*** to the ***watch*** directory. 
-The logical database ***purpleair*** will be updated to include the table ***readings*** with the defined schema and PurpleAir Data.
- 
-
+# PLC data example
 
 
  
