@@ -192,7 +192,7 @@ In this example, data published is split into 2 tables.
 ```
 <mapping1 = {"mapping" : {
 
-               "code" : "if bring [device] == "Random-Integer-Generator01"
+               "code" : "if bring [device] == 'Random-Integer-Generator01'",
 
                "id" : "rnd_val",
                
@@ -202,19 +202,27 @@ In this example, data published is split into 2 tables.
                "schema" : {
                             "timestamp" : {
                                 "bring" : "[created]",
-                                "default" : "''",      
+                                "default" : "''"     
                             },
                            "value" : {
-                                "bring" : "[readings][value]",
+                                "bring" : "[readings][value]"
                             }
                            
                         }
             }
 }> 
+```
 
+Add the policy to the blockchain:
+<pre>
+blockchain insert where policy = !mapping1 and local = true and master = !master_node
+</pre> 
+
+
+```
 <mapping2 = {"mapping" : {
 
-               "condition" : "if bring [device] == "Modbus TCP test device"
+               "condition" : "if bring [device] == 'Modbus TCP test device'",
 
                "id" : "device",
                
@@ -224,29 +232,37 @@ In this example, data published is split into 2 tables.
                "schema" : {
                             "timestamp" : {
                                 "value" : "bring [created]",
-                                "type" : "timestamp",    
+                                "type" : "timestamp"   
                             },
                             
                            "Temperature" : {
-                                "condition" : "if bring [readings][name] == "Temerature"
+                                "condition" : "if bring [readings][name] == 'Temerature'",
                                 "value" : "bring [readings][value]",
-                                "type" : "decimal",
+                                "type" : "decimal"
                             },
                            "mode" : {
-                                "condition" : "if bring [readings][name] == "OperationMode"
+                                "condition" : "if bring [readings][name] == 'OperationMode'",
                                 "value" : "bring [readings][value]",
-                                "type" : "string",
+                                "type" : "string"
                             },
                           "speed" : {
-                                "condition" : "if bring [readings][name] == "FanSpeed"
+                                "condition" : "if bring [readings][name] == 'FanSpeed'",
                                 "value" : "bring [readings][value]",
-                                "type" : "string",
+                                "type" : "string"
                             }
                         }
             }
 }> 
 ``` 
+Add the policy to the blockchain:
+<pre>
+blockchain insert where policy = !mapping2 and local = true and master = !master_node
+</pre> 
 
+## Associate the policies to a topic
+<pre>
+run mqtt client where broker=local and port=2050 and log=false and topic=( name=anylog_test and policy = rnd_val and policy = device )
+</pre> 
 ## Sample data
 ```
 <sample_data = [{
