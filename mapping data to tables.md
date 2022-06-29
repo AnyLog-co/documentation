@@ -263,6 +263,13 @@ blockchain insert where policy = !mapping2 and local = true and master = !master
 <pre>
 run mqtt client where broker=local and port=2050 and log=false and topic=( name=anylog_test and policy = rnd_val and policy = device )
 </pre> 
+
+## Validate the assigned policies
+<pre>
+get msg client
+</pre> 
+
+
 ## Sample data
 ```
 <sample_data = [{
