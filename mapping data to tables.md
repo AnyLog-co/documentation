@@ -284,6 +284,11 @@ Publish the data using the below command
 mqtt publish where broker=local and topic=anylog_test and message=!sample_data 
 </pre>
 
+<pre>
+mqtt publish where broker=10.0.0.78 and port = 7850 and topic=anylog_test and message=!sample_data 
+</pre>
+
+
 
 ## Sample data
 ```
