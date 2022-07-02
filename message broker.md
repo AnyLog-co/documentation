@@ -214,6 +214,13 @@ Users can see the list of brokers and the subscribed users and topics in each br
 get msg brokers
 </pre>
 
+### View summary of AnyLog processes as a local broker
+Users can see the summary of messages processed on ANyLog as a broker using the following command:
+<pre>
+get broker
+</pre>
+
+
 ### Example
 The example below connects to a broker to pull data assigned to a topic.
 <pre>
@@ -384,6 +391,11 @@ run message broker !external_ip 7850 !ip 7850 6
 run mqtt client where broker = local and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
 </pre>
 Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
+
+Use the following command to view messages processed on AnyLog as a broker:
+<pre>
+get broker
+</pre>
 
 ### Publish a message on the AnyLog node 
 ***Define a message***  

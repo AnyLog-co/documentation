@@ -192,7 +192,7 @@ In this example, data published is split into 2 tables.
 ```
 <mapping1 = {"mapping" : {
 
-               "code" : "if bring [device] == 'Random-Integer-Generator01'",
+               "condition" : "if [device] == 'Random-Integer-Generator01'",
 
                "id" : "rnd_val",
                
@@ -202,10 +202,12 @@ In this example, data published is split into 2 tables.
                "schema" : {
                             "timestamp" : {
                                 "bring" : "[created]",
+                                "type" : "timestamp",   
                                 "default" : "''"     
                             },
                            "value" : {
-                                "bring" : "[readings][value]"
+                                "bring" : "[readings][value]",
+                                "type" : "decimal"
                             }
                            
                         }
@@ -222,7 +224,7 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
 ```
 <mapping2 = {"mapping" : {
 
-               "condition" : "if bring [device] == 'Modbus TCP test device'",
+               "condition" : "if [device] == 'Modbus TCP test device'",
 
                "id" : "device",
                
@@ -231,23 +233,23 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
                
                "schema" : {
                             "timestamp" : {
-                                "value" : "bring [created]",
+                                "bring" : "[created]",
                                 "type" : "timestamp"   
                             },
                             
                            "Temperature" : {
-                                "condition" : "if bring [readings][name] == 'Temerature'",
-                                "value" : "bring [readings][value]",
+                                "condition" : "if [readings][name] == 'Temerature'",
+                                "bring" : "[readings][value]",
                                 "type" : "decimal"
                             },
                            "mode" : {
-                                "condition" : "if bring [readings][name] == 'OperationMode'",
-                                "value" : "bring [readings][value]",
+                                "condition" : "if [readings][name] == 'OperationMode'",
+                                "bring" : "[readings][value]",
                                 "type" : "string"
                             },
                           "speed" : {
-                                "condition" : "if bring [readings][name] == 'FanSpeed'",
-                                "value" : "bring [readings][value]",
+                                "condition" : "if [readings][name] == 'FanSpeed'",
+                                "bring" : "[readings][value]",
                                 "type" : "string"
                             }
                         }
@@ -288,6 +290,10 @@ mqtt publish where broker=local and topic=anylog_test and message=!sample_data
 mqtt publish where broker=10.0.0.78 and port = 7850 and topic=anylog_test and message=!sample_data 
 </pre>
 
+View the messages processed by the broker using the following command:
+<pre>
+get broker 
+</pre>
 
 
 ## Sample data
