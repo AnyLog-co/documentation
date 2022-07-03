@@ -198,6 +198,7 @@ In this example, data published is split into 2 tables.
                
                "dbms" : "edgex",
                "table" : "rnd_val",
+                "readings" : "readings",
                
                "schema" : {
                             "timestamp" : {
@@ -206,7 +207,7 @@ In this example, data published is split into 2 tables.
                                 "default" : "''"     
                             },
                            "value" : {
-                                "bring" : "[readings][value]",
+                                "bring" : "[value]",
                                 "type" : "decimal"
                             }
                            
@@ -230,7 +231,8 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
                
                "dbms" : "edgex",
                "table" : "device",
-               
+               "readings" : "readings",
+
                "schema" : {
                             "timestamp" : {
                                 "bring" : "[created]",
@@ -238,18 +240,18 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
                             },
                             
                            "Temperature" : {
-                                "condition" : "if [readings][name] == 'Temerature'",
-                                "bring" : "[readings][value]",
+                                "condition" : "if [name] == Temperature",
+                                "bring" : "[value]",
                                 "type" : "decimal"
                             },
                            "mode" : {
-                                "condition" : "if [readings][name] == 'OperationMode'",
-                                "bring" : "[readings][value]",
+                                "condition" : "if [name] == OperationMode",
+                                "bring" : "[value]",
                                 "type" : "string"
                             },
                           "speed" : {
-                                "condition" : "if [readings][name] == 'FanSpeed'",
-                                "bring" : "[readings][value]",
+                                "condition" : "if [name] == FanSpeed",
+                                "bring" : "[value]",
                                 "type" : "string"
                             }
                         }
