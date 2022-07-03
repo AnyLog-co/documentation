@@ -1,13 +1,13 @@
 # Mapping Data
 
-Mapping is the transformation process that is applied to the source JSON data to generate a destination JSON structure such that the 
-data can fit to relational tables.
-The default process treats every attribute name in the JSON file as a column name in the table.
+This document considers the mapping process as a transformation process applied to the source data (provided in JSON format)
+to generate a destination JSON structure such that the generated data can fit to relational tables.  
+The goal of the process is to make the data consistent with a destination table.  
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
-needed data types and formats of the data.
+needed data types and formats that are required in the destination table.
 
 The mappings are defined in policies of types ***mapping*** that are saved in the shared metadata layer.  
-When JSON structures are processed, the data is transformed using a set of ***mapping*** policies that defines the mapping logic.
+When source JSON structures are processed, the data is transformed using a set of ***mapping*** policies that defines the mapping logic.
 
 ## The mapping policy
 The mapping is declared as a JSON structure with ***mapping*** as a root key and information on the transformation of the data.
