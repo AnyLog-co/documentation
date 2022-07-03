@@ -1,68 +1,57 @@
 # Mapping Data
 
-Mapping is transformation instructions that are applied to JSON data structures in the process of mapping the JSON data to tables.
+Mapping is the transformation process that is applied to the source JSON data to generate a destination JSON structure such that the 
+data can fit to relational tables.
 The default process treats every attribute name in the JSON file as a column name in the table.
-The mapping process can modify the attributes names and values to be consistent with the tables structures and with the needed formats of the data.
+The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
+needed data types and formats of the data.
 
-The mapping are defined in policies of types ***instructions*** that are saved in the shared metadata layer.  
-When JSON structures are processed, the data is transformed using a set of ***instructions*** that defines the mapping logic.
+The mappings are defined in policies of types ***mapping*** that are saved in the shared metadata layer.  
+When JSON structures are processed, the data is transformed using a set of ***mapping*** policies that defines the mapping logic.
 
-### The mapping Instructions
-The mapping is declared in a JSON structure. The name of the structure is ***instructions*** and it contains information on the transformation of the data.  
-The ***default transformation*** compares all the attributes names in the JSON file to the table columns. If an attribute name and a column name are the same, the data from the JSON file is assigned to the table's column. 
-If an attribute name is not represented as a column, the attribute value is ignored.
+## The mapping policy
+The mapping is declared as a JSON structure with ***mapping*** as a root key and information on the transformation of the data.
 
-#### Sections in the mapping Instructions
+The source data is assumed to be in a JSON format. The sensor readings are represented in obe of 2 ways:
+1. As key value pairs in the source JSON.
+2. As a list of dictionaries. Each dictionary in the list contains the readings as key value pairs. 
 
-* Generic Info - optional information to identify and classify the instructions.  
-For example, database name and table name that are the target of the transformation. 
-The name or type of the sensor that generates the data and any other type of information that is needed to serve as an identifier of the instructions.
+The policy sections are in the form of key-value pairs. The key determines the type of information, and the value provides the details.  
+The chart below describes the section of the policy.
 
-* A Unique ID - provided by the user defining the instructions, or if an ID is not declared, the system will generate a unique ID based on the has value of the Instructions.
+| Key           | Data Type | Mandatory | Details |
+| ------------- | --------- | --------- | ----------------------|
+| id            | String  |   Yes     | The policy ID, users can provide a unique ID or when the policy is updated, an ID representing the Hash value is added. |
+| condition     | String  |   No      | An ***if statement*** that determines if the mapping policy needs to be processed  |
+| dbms          | String  |   Yes     | The database name   |
+| table         | String  |   Yes     | The table name   |
+| readings      | String  |   No     | A key to a list of readings in the source JSON   |
+| schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions   |
 
-* Script - a section providing transformation instructions which are not specific to a particular attribute.  
-Script Definitions:  
- ```type:inclusive``` - mapping instructions that are added to the ***default transformation***.  
- ```type:exclusive``` - mapping instructions that replace the ***default transformation***.
- 
- * Attributes - a section providing mapping instructions for named attributes.  
- Mapping assigned to an attribute name can be one or more of the following:
- 
-    * ***name*** - a column name in the table which is different than the attribute name.
-    * ***type*** - use the specified type to validate the data type of the attribute value.
-    * ***default*** - a default value if the attribute value is missing or the value is not convertable to the declared type.
-    * ***if then statements*** a list of python based rules that can be validated and operated on the attribute name or attribute value during the transformation process.
-    
-#### Example
-```
-<instruct = {"instructions" : {
-   "dbms" : "lsl_demo",
-   "table" : "ping_sensor",
-   "script" : {
-      "type" : "inclusive"
-   },
-   "attributes" : {
-      "device_number" : {
-         "name" : "device",
-         "type" : "CHAR(30)",
-         "default" : "''"
-      },
-      "device_name" : [
-         "if value.upper()[:2] == 'VM' then value = 'Basic Network Element'",
-         "if value.upper().startswith('F') then value = 'FSP3000'",
-         "if value.upper() == 'ADVA FSP3000R7' then value = 'FSP3000'",
-         "if value.upper() == 'ADVA ALM OTDR' then value = 'OTDR'",
-         "if value.upper().find('APC') != -1 then value = 'OTDR'",
-         "if value.startswith('Ubiquiti') then value = 'Ubiquity 10G Switch'",
-         "if value.endsswith('Ubiquity') then value = 'Ubiquity 10G Switch'",
-         "if value.startwith('ULoco') then value = 'ULoco Dev'",
-         "if value.startswith('Catalyst') then value = 'ULoco Dev'",
-         "if value.upper().startswith('CATALYST') then value = 'ULoco Dev'"
-         ]
-      }
-   }
-}> 
-``` 
+Note: The ***if statement*** is detailed in the section [Conditional Execution](anylog%20commands.md#conditional-execution).   
+
+### The schema section
+The schema is a dictionary whereas the target columns are the keys and each value is a dictionary representing the column's properties including the mapping instructions.  
+The ***schema*** sections are detailed in the chart below:
+
+| Key           | Data Type | Mandatory | Details |
+| ------------- | --------- | --------- | ----------------------|
+| condition     | String    |   No      | An ***if statement*** that determines if the column needs to be processed  |
+| bring         | String    |   No      | the ***bring*** command to extract the data from the source JSON (or from each entry in the readings list) |
+| type          | String    |   yes     | the column data type |
+| default       | String    |   No     | A default value if the bring command does not return a value from the source data or the ***bring*** key is not specified. |
+
+Note: An error is returned if both - the ***bring*** and ***default*** keys are not provided.
+
+## Data type supported
+
+* string
+* integer
+* float
+* char
+* timestamp
+* bool
+* varchar
 
 # London Air Example
 
