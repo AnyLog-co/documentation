@@ -4,7 +4,7 @@ This document considers the mapping process as a transformation process applied 
 to generate a destination JSON structure such that the generated data can fit to relational tables.  
 The goal of the process is to make the data consistent with a destination table.  
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
-needed data types and formats that are required in the destination table.
+needed data types and formats that are required in the destination tables.
 
 The mappings are defined in policies of types ***mapping*** that are saved in the shared metadata layer.  
 When source JSON structures are processed, the data is transformed using a set of ***mapping*** policies that defines the mapping logic.
@@ -12,16 +12,19 @@ When source JSON structures are processed, the data is transformed using a set o
 ## The mapping policy
 The mapping is declared as a JSON structure with ***mapping*** as a root key and information on the transformation of the data.
 
-The source data is assumed to be in a JSON format. The sensor readings are represented in obe of 2 ways:
+Pulling the needed values from the source data is done using the ****bring command***. Details of the ****bring command***
+are available in the [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command) section.
+
+The source data is assumed to be in a JSON format. The sensor readings are represented in one of 2 ways:
 1. As key value pairs in the source JSON.
 2. As a list of dictionaries. Each dictionary in the list contains the readings as key value pairs. 
 
 The policy sections are in the form of key-value pairs. The key determines the type of information, and the value provides the details.  
-The chart below describes the section of the policy.
+The chart below describes the sections of the policy.
 
 | Key           | Data Type | Mandatory | Details |
 | ------------- | --------- | --------- | ----------------------|
-| id            | String  |   Yes     | The policy ID, users can provide a unique ID or when the policy is updated, an ID representing the Hash value is added. |
+| id            | String  |   Yes     | The policy ID, users can provide a unique ID or when the policy is updated, an ID representing the Hash value is added |
 | condition     | String  |   No      | An ***if statement*** that determines if the mapping policy needs to be processed  |
 | dbms          | String  |   Yes     | The database name   |
 | table         | String  |   Yes     | The table name   |
