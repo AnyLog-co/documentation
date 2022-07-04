@@ -227,7 +227,8 @@ Users can see the summary of messages processed on ANyLog as a broker using the 
 <pre>
 get broker
 </pre>
-
+Note: this command only provides statistics on data published using the broker IP and Port. 
+Data that is published using "local", is not included in the ***get broker*** command statistics.
 
 ### Example
 The example below connects to a broker to pull data assigned to a topic.
