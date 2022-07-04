@@ -100,17 +100,17 @@ The example above downloads a JSON file from Datahub that includes a list of rec
                             "gmt" : {
                                 "type" : "CHAR(5)",
                                 "default" : "''",      
-                                "source_name" : "GMT"
+                                "bring" : "[GMT]"
                             },
                            "nitric" : {
                                 "type" : "decimal",
                                 "default" : 0,
-                                "source_name" : "London Mean Background Nitric Oxide (ug/m3)" 
+                                "bring" : "['London Mean Background Nitric Oxide (ug/m3)']" 
                             },
                            "nitrogen" : {
                                 "type" : "decimal",
                                 "default" : 0,
-                                "source_name" : "London Mean Background Nitrogen Dioxide (ug/m3)"    
+                                "bring" : "['London Mean Background Nitrogen Dioxide (ug/m3)']"    
                             }
                         }
 
