@@ -244,6 +244,13 @@ Users can publish a message to a particular topic in a broker using the followin
 mqtt publish where broker = [url] and port = [port value] and user = [user name]  and password = [password name] and topic = [topic] and qos = [value] and message = [published message]
 </pre>
 
+When the broker and the publishing node are the same node, users can define the broker as ***local*** and transfer the data 
+to the broker directly avoiding the networking overhead. The example below transfers data when the publisher and broker are 
+on the same node:
+<pre>
+mqtt publish where broker = local and topic = [topic] and qos = [value] and message = [published message]
+</pre>
+
 Example:  
 Publishing "Hellow World" to a broker:
 <pre>
