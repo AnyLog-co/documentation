@@ -260,14 +260,15 @@ mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = m
 ## Debugging
 
 Debug provides the means to track the processing of messages by enabling the following:
-* Display of the MQTT processing and calls.
+* Display of the MQTT processing and calls (for third party brokers).
 * Display of the messages being processed.
 * Flushing source messages.
 * Updating a log file with messages that were not successfully processed.
 * Subscribing to all topics.
 
 #### Display of the MQTT processing and calls
-Users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
+When pulling data from third parties brokers, users are able to enable the MQTT ***on_log()*** callback and display the MQTT log.  
+This option has no impact if AnyLog node is the broker.
 Enabling the on_log() callback is done on the  ***run mqtt client*** call with the ```log = true``` option.  
 Example:
 <pre>
