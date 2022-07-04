@@ -284,6 +284,11 @@ mqtt publish where broker=local and topic=anylog_test and message=!sample_data
 mqtt publish where broker=10.0.0.78 and port = 7850 and topic=anylog_test and message=!sample_data 
 </pre>
 
+View the messages processed by the client (per topic) using the following command:
+<pre>
+get msg client statistics
+</pre>
+
 View the messages processed by the broker using the following command:
 <pre>
 get broker 
