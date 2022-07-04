@@ -195,13 +195,21 @@ exit mqtt [n]
 
 ### View client status
   
-* To view status of all clients use the following command:
+* To view status and configuration of all clients use the following command:
 <pre>
 get msg clients
 </pre>    
-* To view the status of a particular client use the command (***n*** is the client ID): 
+* To view the status and configuration of a particular client use the command (***n*** is the client ID): 
 <pre>
 get msg client [n]
+</pre>
+* To view statistics per topic of all clients use the following command:
+<pre>
+get msg clients statistics
+</pre>    
+* To view statistics per each topic of a particular client use the command (***n*** is the client ID): 
+<pre>
+get msg client statistics [n]
 </pre>
 * To view the streaming data status, use the following command:
 <pre>
