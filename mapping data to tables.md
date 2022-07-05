@@ -69,10 +69,7 @@ Note: An error is returned if both - the ***bring*** and ***default*** keys are 
 
 Datahub (https://datahub.io/docs/about) allows organizations to publish, deploy and share their data.
 It offers a REST API to download air quality measurements from different areas in the world.   
-In this doc, we download the London air quality data from datahub and provide 2 examples:  
-In the first example, the schema is determined by the data - attributes names are mapped to column names and the data types are determined by evaluating the data.    
-In the second example, the schema is determined by a user, and the data is mapped to the schema as defined by the user.    
-
+In this doc, we download the London air quality data from datahub and provide a mapping example using a mapping policy.
 
 ## Prerequisite
 
@@ -80,7 +77,6 @@ In the second example, the schema is determined by a user, and the data is mappe
    Details on Operator configurations are available in the section [background processes](background%20processes.md#operator-process).
 2) Define a physical database (i.e.: PostgreSQL or SQLite) to the logical database name (london). 
    Details on database configurations are available in the section [Connecting to a local database](sql%20setup.md#connecting-to-a-local-database).
-
    
 ## Downloading the data
 
@@ -132,8 +128,7 @@ Notes:
 ``` 
 Notes: 
 * In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated, a unique ID is generated.
-* For simplicity, the example is mapping 3 attributes from each reading (gmt, nitric, Nitrogen), users can update the mapping policy to include all attributes.
-
+* For simplicity, the example is mapping 3 attributes from each reading (gmt, nitric, nitrogen), users can update the mapping policy to include all attributes.
 
 Add the policy to the blockchain:
 <pre>
