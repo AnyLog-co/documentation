@@ -16,11 +16,11 @@ The source data is assumed to be in a JSON format. The sensor readings are repre
    is provided in the [sample data](#sample-data) below.
 
 ## The mapping policy
-The mapping is declared as a JSON structure with ***mapping*** as a root key and information on the transformation of the data.
+The mapping is declared as a JSON structure with ***mapping*** as a root key leading to information on the transformation of the data.
+Examples of mapping policies are provided [below](#creating-the-mapping-instructions). 
 
 Pulling the needed values from the source data is done using the ***bring command***. A ***bring command*** 
 includes keys and transformation logic that is applied to the source JSON data to construct the destination format. 
-
 Details of the ***bring command*** are available in the [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command) section.  
 The ***bring commands*** are associated with source data in the following ways:
 1) The ***run mqtt client*** command associates the source data published with a topic to a ***bring command*** that provides the mapping logic. 
