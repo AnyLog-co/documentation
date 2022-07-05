@@ -141,14 +141,14 @@ a broker role to the node and publishing the data. These methods are explained i
 
 #### Example:
 
-The examples below copy the data to the ***watch*** directory. To see the value assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
+The examples below copy the data to the ***watch*** directory. To see the path assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
 
-When data is copied to the watch directory, the file name serves as the metadata. If the file name is: london.readings.json.0.0.    
+When data is copied to the watch directory, the file name serves as the metadata. If the file name is: ***london.readings.json.0.0.london_mapping.json***    
 ***dbms_name = file_name[0]*** will treat the first section of the file name (london) as the logical database name.  
 ***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
-***data_source = file_name[2]*** will treat the third section of the file name (readings) as the representative of the data source.
-***hash_value = file_name[3]*** will treat the fourth section of the file name (readings) as the hash value of the file.
-***instructions = file_name[4]*** will treat the fifth section of the file name (readings) as the mapping instructions policy id.london_mapping
+***data_source = file_name[2]*** will treat the third section of the file name (0) as the representative of the data source.  
+***hash_value = file_name[3]*** will treat the fourth section of the file name (0) as the hash value of the file. This section will be updated in the process.    
+***instructions = file_name[4]*** will treat the fifth section of the file name (readings) as the mapping instructions policy id.london_mapping  
 
  
  Copy the data to the ***watch*** directory.  
