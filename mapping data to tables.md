@@ -84,19 +84,23 @@ In the second example, the schema is determined by a user, and the data is mappe
    
 ## Downloading the data
 
-Using a REST GET command from the AnyLog Command line: 
+Using a REST GET command from the AnyLog CLI: 
  
 <pre> 
 [file=!prep_dir/london.readings.json.0.0.london_mapping, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
 </pre> 
-Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
+The example above downloads a JSON file from Datahub that includes a list of recent readings.      
+
+Notes:
+ * The information in the brackets provides the download destination:  
+    ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
+    ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
+    ***show*** provides a visual status bar that monitors the write to file process.
+
+ * More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
+
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
-The example above downloads a JSON file from Datahub that includes a list of recent readings. More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
- 
- The information in the brackets provides the download destination:  
- ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
- ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
- ***show*** provides a visual status bar that monitors the write to file process.
 
 ## Creating the mapping instructions
 
