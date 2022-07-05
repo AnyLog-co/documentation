@@ -147,8 +147,9 @@ When data is copied to the watch directory, the file name serves as the metadata
 ***dbms_name = file_name[0]*** will treat the first section of the file name (london) as the logical database name.  
 ***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
 ***data_source = file_name[2]*** will treat the third section of the file name (0) as the representative of the data source.  
-***hash_value = file_name[3]*** will treat the fourth section of the file name (0) as the hash value of the file. This section will be updated in the process.    
-***instructions = file_name[4]*** will treat the fifth section of the file name (readings) as the mapping instructions policy id.london_mapping  
+***hash_value = file_name[3]*** will treat the fourth section of the file name (0) as the hash value of the file. This section will be updated in the process.      
+***instructions = file_name[4]*** will treat the fifth section of the file name (london_mapping) as the mapping instructions policy id.london_mapping.   
+***file type*** - JSON.  
 
  
  Copy the data to the ***watch*** directory.  
