@@ -1,17 +1,17 @@
 # Mapping Data
 
-This document considers the mapping process as a transformation process applied to the source data (provided in JSON format),
+This document considers the mapping process as a transformation process applied to the source data (provided in a JSON format),
 to generate a destination JSON structure, such that the generated data can fit to relational tables.  
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
 needed data types and formats that are required in the destination tables.
 
 The mappings are defined in policies of types ***mapping*** that are saved in the shared metadata layer.  
-When source JSON structures are processed, the data is transformed using a set of ***mapping*** policies that defines the mapping logic.
+When source JSON structures are processed, the data is transformed using a set of ***mapping policies*** that defines the mapping logic.
 
 ## The Source Data
 The source data is assumed to be in a JSON format. The sensor readings are represented in one of 2 ways:
 1. As key value pairs in the source JSON. An example is the London Air Quality Data which can be downloaded using the 
-   instructions [below](downloading-the-data).
+   instructions [below](#downloading-the-data).
 2. As a list of dictionaries. Each dictionary in the list contains the readings as key value pairs. Example of a list of readings
    is provided in the [sample data](#sample-data) below.
 
@@ -27,9 +27,7 @@ The ***bring commands*** are associated with source data in the following ways:
    This option is detailed [here](message%20broker.md#the-command-structure).
 2) The ***run mqtt client*** command associates the source data published with a topic to a ***mapping policy***. The 
    mapping policy provides the destination schema and the mapping instruction. This option is detailed in this document.
-
-
-
+   
 The policy sections are in the form of key-value pairs. The key determines the type of information, and the value provides the details.  
 The chart below describes the sections of the policy.
 
