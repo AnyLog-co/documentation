@@ -264,17 +264,17 @@ Add the policy to the blockchain:
 blockchain insert where policy = !mapping2 and local = true and master = !master_node
 </pre> 
 
-## Associate the policies to a topic
+### Associate the policies to a topic
 <pre>
 run mqtt client where broker=local and log=false and topic=( name=anylog_test and policy = rnd_val and policy = device )
 </pre> 
 
-## Validate the assigned policies
+### Validate the assigned policies
 <pre>
 get msg client
 </pre> 
 
-## Publish the sample data
+### Publish the sample data
 
 Cut and paste the sample data example [below](#sample-data) to the AnyLog CLI.
 
@@ -283,12 +283,12 @@ The following command on the CLI shows the assigned data to the key ***sample_da
 !sample_data
 </pre>
 
-Publish the data using the below command
-
+Publish the data using one of the below commands:  
+1) Avoiding the network API (better performance than using the network call):
 <pre>
 mqtt publish where broker=local and topic=anylog_test and message=!sample_data 
 </pre>
-
+2) Using the network API:
 <pre>
 mqtt publish where broker=10.0.0.78 and port = 7850 and topic=anylog_test and message=!sample_data 
 </pre>
