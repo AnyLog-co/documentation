@@ -8,7 +8,7 @@ The following example mapps data with images to storage such that:
 Example data:
 
 ```
-{
+<sample_data = {
    "apiVersion" : "v2",
    "deviceName" : "Camera001",
    "id" : "8311655d-d11a-4a15-98e7-1b577785fe3e",
@@ -27,8 +27,9 @@ Example data:
       }
    ],
    "sourceName" : "OnvifSnapshot"
-}
+}>
 ```
+
 
 Example Policy:
 
@@ -68,8 +69,29 @@ Example Policy:
 }> 
 ```
 
-Add the policy to the blockchain:
+### Add the policy to the blockchain:
 <pre>
 blockchain insert where policy = !mapping_policy and local = true and master = !master_node
 </pre> 
 
+
+### Associate the policies to a topic
+<pre>
+run mqtt client where broker=local and log=false and topic=( name=images and policy =  image_mapping)
+</pre> 
+
+Publish the data:  
+<pre>
+mqtt publish where broker=local and topic=images and message=!sample_data 
+</pre>
+
+
+View the messages processed by the client (per topic) using the following command:
+<pre>
+get msg client statistics
+</pre>
+
+View the messages processed by the broker using the following command:
+<pre>
+get broker 
+</pre>
