@@ -33,7 +33,7 @@ Example data:
 Example Policy:
 
 ```
-<mapping1 = {"mapping" : {
+<mapping_policy = {"mapping" : {
     
         "id" : "image_mapping",
         
@@ -52,15 +52,15 @@ Example Policy:
                                 "bring" : "[binaryValue]",
                                 "type" : "blob",
                                 "storage" : "folder,mongodb"
-                            }
+                            },
                             "profilename" : {
                                 "bring" : "[profileName]",
                                 "type" : "string",
                                 "storage" : "folder,mongodb"
-                            }
+                            },
                             "valueType" : {
                             "bring" : "[valueType]",
-                            "type" : "string",
+                            "type" : "string"
                             }
                               
                      }
@@ -70,6 +70,6 @@ Example Policy:
 
 Add the policy to the blockchain:
 <pre>
-blockchain insert where policy = !mapping1 and local = true and master = !master_node
+blockchain insert where policy = !mapping_policy and local = true and master = !master_node
 </pre> 
 
