@@ -84,19 +84,19 @@ get disk [options] [path]
 get ip list
 </pre>
 
-## The "get process info" command
-The ***get process info*** command retrieves cpu and memory info for each process on the local machine.  
+## The "get os process" command
+The ***get os process*** command retrieves cpu and memory info for each process on the local machine.  
 Usage:
 <pre>
-get process info
-get process info anylog
-get process info [pid]
-get process info all
+get os process
+get os process anylog
+get os process [pid]
+get os process all
 </pre>
 
-* The command ***get process info*** is identical to ***get process info anylog*** and provides info on the AnyLog process.
-* The command ***get process info [pid]*** provides info on the process with the provided pid.
-* The command ***get process info all*** provides info on all processes. As CPU measurement is using a second interval,
+* The command ***get os process*** is identical to ***get os process anylog*** and provides info on the AnyLog process.
+* The command ***get os process [pid]*** provides info on the process with the provided pid.
+* The command ***get os process all*** provides info on all processes. As CPU measurement is using a second interval,
 on the AnyLog CLI, a bar displays the command progress.
 
 
