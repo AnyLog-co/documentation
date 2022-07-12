@@ -84,6 +84,22 @@ get disk [options] [path]
 get ip list
 </pre>
 
+## The "get process info" command
+The ***get process info*** command retrieves cpu and memory info for each process on the local machine.  
+Usage:
+<pre>
+get process info
+get process info anylog
+get process info [pid]
+get process info all
+</pre>
+
+* The command ***get process info*** is identical to ***get process info anylog*** and provides info on the AyyLog process.
+* The command ***get process info [pid]*** provides info on the process with the provided pid.
+* The command ***get process info all*** provides info on all processes. As CPU measurement is using a second interval,
+on the AnyLog CLI, a bar displays the command progress.
+
+
 ## The "get node info" command
 
 The ***get node info*** command retrieves additional info and statistics on the current operation of the node.  

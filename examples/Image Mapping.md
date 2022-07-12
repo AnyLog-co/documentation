@@ -41,6 +41,10 @@ Example Policy:
         "dbms" : "edgex",
         "table" : "image",
         
+        "blob_location" : "!blob_dir",
+        "blob_dbms" : True,
+        "blob_folders" : True,
+        
         "readings" : "readings",
         
                     "schema" : {
@@ -52,12 +56,12 @@ Example Policy:
                             "image" : {
                                 "bring" : "[binaryValue]",
                                 "type" : "blob",
-                                "storage" : "folder,mongodb"
+                                
                             },
                             "profilename" : {
                                 "bring" : "[profileName]",
                                 "type" : "string",
-                                "storage" : "folder,mongodb"
+                                "hash" : true
                             },
                             "valueType" : {
                             "bring" : "[valueType]",
