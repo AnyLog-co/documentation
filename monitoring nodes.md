@@ -94,7 +94,7 @@ get process info [pid]
 get process info all
 </pre>
 
-* The command ***get process info*** is identical to ***get process info anylog*** and provides info on the AyyLog process.
+* The command ***get process info*** is identical to ***get process info anylog*** and provides info on the AnyLog process.
 * The command ***get process info [pid]*** provides info on the process with the provided pid.
 * The command ***get process info all*** provides info on all processes. As CPU measurement is using a second interval,
 on the AnyLog CLI, a bar displays the command progress.
