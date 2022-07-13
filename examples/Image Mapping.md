@@ -34,54 +34,59 @@ Example data:
 Example Policy:
 
 ```
-<mapping_policy = {"mapping" : {
+<mapping_policy = {mapping : {
     
-        "id" : "image_mapping",
+        "id" : "id_image_mapping",
         
         "dbms" : "edgex",
         "table" : "image",
         
-        "blob_location" : "!blob_dir",
-        "blob_dbms" : True,
-        "blob_folders" : True,
+        "storage" : {
+                        "dbms" : true,
+                        "disk" : true       
+                    },
+                    
+        "source" : {
+                        "bring" : "[deviceName]",
+                        "default" : "12"       
+                  },
         
         "readings" : "readings",
         
-                    "schema" : {
-                            "timestamp" : {
-                                
-                                "type" : "timestamp",   
-                                "default" : "now()"     
-                            },
-                            "image" : {
-                                "bring" : "[binaryValue]",
-                                "type" : "blob",
-                                
-                            },
-                            "profilename" : {
-                                "bring" : "[profileName]",
-                                "type" : "string",
-                                "hash" : true
-                            },
-                            "valueType" : {
-                            "bring" : "[valueType]",
-                            "type" : "string"
-                            }
-                              
-                     }
+                "schema" : {
+                        "timestamp" : {
+                            
+                            "type" : "timestamp",   
+                            "default" : "now()"     
+                        },
+                        "image" : {
+                            "bring" : "[binaryValue]",
+                            "type" : "blob"
+                            
+                        },
+                        "profilename" : {
+                            "bring" : "[profileName]",
+                            "type" : "string",
+                            "hash" : true
+                        },
+                        "valueType" : {
+                        "bring" : "[valueType]",
+                        "type" : "string"
+                        }
+                 }
         }
 }> 
 ```
 
 ### Add the policy to the blockchain:
 <pre>
-blockchain insert where policy = !mapping_policy and local = true and master = !master_node
+blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
 </pre> 
 
 
 ### Associate the policies to a topic
 <pre>
-run mqtt client where broker=local and log=false and topic=( name=images and policy =  image_mapping)
+run mqtt client where broker=local and log=false and topic=( name=images and policy =  id_image_mapping)
 </pre> 
 
 Publish the data:  
