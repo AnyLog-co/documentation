@@ -34,7 +34,7 @@ Example data:
 Example Policy:
 
 ```
-<mapping_policy = {mapping : {
+<mapping_policy = {"mapping" : {
     
         "id" : "id_image_mapping",
         
@@ -61,7 +61,8 @@ Example Policy:
                         },
                         "image" : {
                             "bring" : "[binaryValue]",
-                            "type" : "blob"
+                            "type" : "blob",
+                            "hash" : true
                             
                         },
                         "profilename" : {
