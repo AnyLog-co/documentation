@@ -59,7 +59,41 @@ A user can configure a node to use a different reply address in one of the follo
 a) Request peers to reply using a different address.  
 b) Request peers to determine the reply address from the message socket.
 
-### Setting a different IP address for replies 
+## Self messaging
+
+Nodes on the same network use their configured Local IP address.  
+In some setups (i.e., Kubernetes), a self message does not work as it is needed to assign a different address for self-messaging.  
+Using the ***set self ip*** command, a self message is directed to use a different IP address than the configured address.
+In this case, the port remains the same as the port configured for the local address (using the ***run tcp server*** command).
+Therefore, this command needs to be set only if the TCP server is configured.  
+Using the ***set self ip and port*** command, a self message is directed to use a different address than the configured address.   
+
+The ***dynamic*** keyword can be used to identify the machine's local IP a as the IP to use.
+
+usage:
+<pre>
+set self ip = [ip]
+set self ip and port = [IP:Port]
+</pre>
+
+Examples:
+<pre>
+set self ip = dynamic
+set self ip = 10.0.0.178
+set reply ip and port = 10.0.0.178:4078
+set reply ip and port = dynamic:4078
+set reply ip and port = !self_ip:!self_port
+</pre>
+
+### Reset self messaging
+Calling reset will disable the use of self IP.
+Usage:
+<pre>
+reset self ip
+</pre>
+
+
+## Setting a different IP address for replies 
 Using the ***set reply ip*** command, user can direct a node sending a message, to receive the reply on a different IP address.    
 Using the ***set reply ip and port*** command, user can direct a node sending a message, to receive the reply on a different IP and port address.  
 

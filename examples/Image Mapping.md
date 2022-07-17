@@ -59,11 +59,11 @@ Example Policy:
                             "type" : "timestamp",   
                             "default" : "now()"     
                         },
-                        "image" : {
+                        
+                        "blob" : {
                             "bring" : "[binaryValue]",
-                            "type" : "blob",
+                            "type" : "bin",
                             "hash" : true
-                            
                         },
                         "profilename" : {
                             "bring" : "[profileName]",
@@ -105,3 +105,28 @@ View the messages processed by the broker using the following command:
 <pre>
 get broker 
 </pre>
+
+
+
+## Sample bwatch directory file
+
+```
+{ "blobs" : {
+		"dbms" : "video",
+		"table" : "releases",
+		"location" : "!video_dir",
+
+		"list" : [ 
+			{  
+			  "info" : {
+				"timestamp": "2022-05-30 16:07:15.07616",
+				"title": "Big Buck Bunny",
+				"minutes": 10,
+				"name": "Test Video1",
+				"file": "Big_Buck_Bunny.mp4"
+				}
+			},
+		]
+	}
+}
+```

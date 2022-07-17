@@ -133,7 +133,8 @@ Options:
 | set private password = [password] [in file] | Provide the password of the private key with an optional command text [in file] to keep encrypted copy on the filesystem. See also [Using passwords](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-passwords).|
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|
-| set reply ip = [ip/none]  | Set the IP address that for a reply message. |
+| set reply ip = [ip]  | Set the IP address that for a reply message. |
+| set self ip = [ip]  | Set the IP address when the sender and reciver are the same node. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]  |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 | [set data distribution](#set-data-distribution) where ... |  Define how data is distributed to the storage nodes. |
@@ -200,7 +201,8 @@ Options:
 | reset query timer | Reset the query timer. | 
 | reset echo queue  | Reset the queue. |
 | reset echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
-| reset reply IP | Assign the reply IP to be the Source IP. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
+| reset reply IP | Identify a reply IP to be used by the replying node. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
+| reset self IP | Identify an IP to be used when sender and reciever are the same node. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
 
 
 ## Get Command
