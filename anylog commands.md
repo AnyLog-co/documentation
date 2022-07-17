@@ -134,7 +134,7 @@ Options:
 | set anylog home [absolute path]  | Declare a path to the AnyLog data files. |
 | set traceback [on/off]  | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|
 | set reply ip = [ip]  | Set the IP address that for a reply message. |
-| set self ip = [ip]  | Set the IP address when the sender and reciver are the same node. |
+| [set self ip = [ip]](network%20configuration.md#self-messaging)  | Set the IP address when the sender and receiver are the same node. |
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]  |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 | [set data distribution](#set-data-distribution) where ... |  Define how data is distributed to the storage nodes. |
