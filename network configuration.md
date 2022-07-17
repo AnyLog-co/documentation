@@ -61,7 +61,7 @@ b) Request peers to determine the reply address from the message socket.
 
 ## Self messaging
 
-Nodes on the same network use their configured Local IP address.  
+For self messaging, nodes use their configured Local IP address.  
 In some setups (i.e., Kubernetes), a self message does not work as it is needed to assign a different address for self-messaging.  
 Using the ***set self ip*** command, a self message is directed to use a different IP address than the configured address.
 In this case, the port remains the same as the port configured for the local address (using the ***run tcp server*** command).
