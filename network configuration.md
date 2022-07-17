@@ -86,7 +86,7 @@ set reply ip and port = !self_ip:!self_port
 </pre>
 
 ### Reset self messaging
-Calling reset will disable the use of self IP.
+Calling reset will disable the use of self IP.  
 Usage:
 <pre>
 reset self ip
