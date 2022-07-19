@@ -130,3 +130,26 @@ get broker
 	}
 }
 ```
+Get a list of files:
+<pre>
+get files where dbms = blobs_edgex and table = image and limit = 100
+</pre>
+
+
+get rows count
+
+get rows count where dbms = blobs_edgex and table = image
+
+
+Retrieve a file:
+<pre>
+ file retrieve where dbms = blobs_edgex and name = edgex.image.camera001.07da45a366e5778fc7d34bf231bddcfa.id_image_mapping.bin and dest = my_file
+ file retrieve where dbms = blobs_edgex and name = edgex.image.camera001.07da45a366e5778fc7d34bf231bddcfa.id_image_mapping.bin and dest = my_file
+</pre>
+Drop a database:
+<pre>
+disconnect dbms blobs_edgex
+drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
+</pre>
+
+
