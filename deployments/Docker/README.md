@@ -12,7 +12,9 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Query – A node that coordinates the query process. 
 
 **Deployment Diagram**: 
+
 ![deployment diagram](../../imgs/deployment_diagram.png)
+
 
 ## Prerequisites
 Our [deployment repository](https://github.com/AnyLog-co/deployments/) provides the scripts and YAML files needed to 
