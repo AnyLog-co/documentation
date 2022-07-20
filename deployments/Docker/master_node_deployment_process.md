@@ -26,3 +26,37 @@ create table ledger where dbms=blockchain
 
 4. (Optional) Connect to system_query – _Note: the configurations set the system_query logical database to run directly against 
 the memory. This allows queries to run faster._
+```anylog
+connect dbms sqlite system_query where memory=true
+```
+
+5. Set scheduler & blockchaim sync
+```anylog
+# init scheduler processes 
+run scheduler 1 
+
+# init blockchain sync
+run blockchain sync where source=master and time=!sync_time and dest=file and connection=!ledger_conn
+```
+
+6. Declare the Master in the metadata (Master Node Policy)
+```anylog
+# declaration of policy
+<new_policy={"master": {
+   "hostname": !hostname, 
+   "name": !node_name, 
+   "ip" : !external_ip, 
+   "local_ip": !ip, 
+   "company": !company_name, 
+   "port" : !anylog_server_port.int, 
+   "rest_port": !anylog_rest_port.int, 
+   "loc": !loc
+}}>
+
+# check if policy exists & if not declare it 
+policy = blockchain get master where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port 
+
+if not !policy then 
+do blockchain prepare policy !new_policy
+do blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+```
