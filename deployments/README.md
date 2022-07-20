@@ -40,8 +40,8 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 * [Install Operator Node I]()
 * [Install Operator Node II]()
 * [Install Query Node]()
-* [Install Grafana](Docker/AnyLog_Support_Tools.md#Grafana)
-* [Install Remote CLI](Docker/AnyLog_Support_Tools.md#Remote%20CLI)
+* [Install Grafana](Docker/AnyLog_Support_Tools.md#grafana)
+* [Install Remote CLI](Docker/AnyLog_Support_Tools.md#remote-cli)
 * [Setting Up EdgeX](Docker/EdgeX.md)
 
 **[Kubernetes](Kubernetes)**
