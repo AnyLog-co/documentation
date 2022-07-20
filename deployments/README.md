@@ -27,7 +27,7 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * [Install Query Node]()
 * [Install Grafana]()
 * [Install Remote CLI]()
-* [Setting Up EdgeX]()
+* [Setting Up EdgeX](Docker/EdgeX.md)
 
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment]()
