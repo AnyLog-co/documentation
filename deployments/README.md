@@ -36,7 +36,8 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 **[Docker](Docker)**
 * [Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
 * [Install PostgreSQL](Docker/Postgres.md)
-* [Install Master Node]()
+* [Install Master Node](Docker/master_node.md)
+  * [Deployment Process](Docker/master_node_deployment_process.md)
 * [Install Operator Node I]()
 * [Install Operator Node II]()
 * [Install Query Node]()
