@@ -18,9 +18,24 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 
 
 ## Table of Contents
+AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _python:3.9-alpine_. 
+* develop - is a stable release that's been used as part of our Test Network for a number of weeks, and gets updated every 4-6 weeks.
+* predevelop - is our beta release, which is being used by our Test Network for testing purposes.
+* testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. Usually the image will be Ubuntu based, unless stated otherwise.
+
+
+| Build | Base Image | CPU Architecture | Pull Command | Size | 
+|---|---|---|---|---|
+| develop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop` | 664MB | 
+| develop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop-alpine` | 460MB| 
+| predevelop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop` | ~245MB | 
+| predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~178MB | 
+| testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing` |
+
+
 **[Docker](Docker)**
 * [Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
-* (Optional) [Install PostgreSQL](Docker/Postgres.md)
+* [Install PostgreSQL](Docker/Postgres.md)
 * [Install Master Node]()
 * [Install Operator Node I]()
 * [Install Operator Node II]()
@@ -32,7 +47,7 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment]()
 * [Understanding Kubernetes Networking for AnyLog]()
-* (Optional) [Install PostgreSQL]()
+* [Install PostgreSQL]()
 * [Install Master Node]()
 * [Install Operator Node I]()
 * [Install Operator Node II]()

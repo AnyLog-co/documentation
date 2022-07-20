@@ -5,7 +5,7 @@ changes are set to **BOLD**.
 ### Steps 
 1. Download our code for Linux Foundation Edge products
 ```shell
-git clone https://github.com/AnyLog-co/lf-code
+git clone https://github.com/AnyLog-co/lfedge-code
 ```
 
 2. Update the [.env](https://github.com/AnyLog-co/lfedge-code/blob/main/edgex/.env) file in the lfedge-code/edgex 
@@ -72,9 +72,9 @@ to support the changes made in the `.env` file.
 #         WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PUBLISHER:
          WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_USER: ${MQTT_USER}
          WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_ADDRESSABLE_PASSWORD: ${MQTT_PASSWORD}
-         # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_QOS: ["your quality or service"]
-         # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_KEY: [your Key]  
-         # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_CERT: [your Certificate]
+#         WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_QOS: ["your quality or service"]
+#         WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_KEY: [your Key]  
+#         WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_CERT: [your Certificate]
 ```
 
 4. Deploy EdgeX
