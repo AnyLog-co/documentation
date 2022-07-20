@@ -21,9 +21,17 @@ Our [deployment repository](https://github.com/AnyLog-co/deployments/) provides 
 deploy AnyLog (and other related tools - such as _PostgreSQL_ and _Grafana_) as either docker or helm package. In 
 addition, the repository contains a shortened version of the shared directions depending on the deployment type.
 
-1. 4 Physical or Virtual machines.
-2. Each machine with docker & docker-compose installed and logged in. 
-    * Docker Password: **XXXX-XXXX-XXXX-XXXX**
+0. 4 Physical or Virtual machines
+
+
+1. Clone [AnyLog Deployment Scripts](https://github.com/AnyLog-co/deployments) 
+```commandline
+git clone https://github.com/AnyLog-co/deployments 
+```
+
+2. Install Docker & docker-compose using either the deployment scripts or manually. 
+   * Single Command: `bash deployments/configurations/scripts/docker_install.sh`
+   * Full process: 
 ```commandline
 # directions to install docker & docker-compose on Ubuntu 
 
@@ -41,7 +49,11 @@ USER=`whoami`
 sudo groupadd docker 
 sudo usermod -aG docker ${USER} 
 newgrp docker
+```
 
+3. Log into AnyLog docker in order to Download the image
+   * Docker Password: **XXXX-XXXX-XXXX-XXXX**
+```commandline
 # log into docker for access to AnyLog
 docker login -u anyloguser -p ${DOCKER_PASSWORD}
 ```
