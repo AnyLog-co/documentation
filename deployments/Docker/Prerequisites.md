@@ -1,4 +1,4 @@
-Prerequisites
+# Prerequisites
 Our [deployment repository](https://github.com/AnyLog-co/deployments/) provides the scripts and YAML files needed to 
 deploy AnyLog (and other related tools - such as _PostgreSQL_ and _Grafana_) as either docker or helm package. In 
 addition, the repository contains a shortened version of the shared directions depending on the deployment type.
