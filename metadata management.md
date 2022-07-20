@@ -2,7 +2,7 @@
 
 ## Overview
 
-A node in the network interacts with 2 layers of metadata:
+A node in the network interacts with 2 layers of metadata: test
 * With a local metadata layer. The local metadata layer includes the local databases, tables and views 
   that are used by the node to organize the data locally such that the data is unified with data on peer nodes and is 
   accessible to permitted members of the network.  
