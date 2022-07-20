@@ -1,22 +1,4 @@
-## AnyLog Deployment
-
-This document describes how to deploy and configure an AnyLog Network. The example provides directions to: 
-* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master) 
-* Configure EdgeX as a data source  
-* Configure Grafana to visualize the data 
-
-## Deployment
-**Note Types**:
-* Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
-* Operator – A node that hosts the data. For this deployment we will have 2 Operator nodes.
-* Query – A node that coordinates the query process. 
-
-**Deployment Diagram**: 
-
-![deployment diagram](../../imgs/deployment_diagram.png)
-
-
-## Prerequisites
+Prerequisites
 Our [deployment repository](https://github.com/AnyLog-co/deployments/) provides the scripts and YAML files needed to 
 deploy AnyLog (and other related tools - such as _PostgreSQL_ and _Grafana_) as either docker or helm package. In 
 addition, the repository contains a shortened version of the shared directions depending on the deployment type.
@@ -51,7 +33,8 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
-3. Log into AnyLog docker in order to Download the image
+3. Log into AnyLog docker in order to Download the image. If you do not have login credentials for our Docker hub, feel 
+free to <a href="mailto:info@anylog.co?subject=Request Docker access">send us a message</a>.    
    * Docker Password: **XXXX-XXXX-XXXX-XXXX**
 ```commandline
 # log into docker for access to AnyLog
