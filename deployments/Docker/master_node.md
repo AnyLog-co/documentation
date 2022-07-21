@@ -94,6 +94,7 @@ volumes:
 3. Deploy anylog-master via docker 
 ```shell
 cd deployments/docker-compose/anylog-node 
+bash docker-volume.sh
 docker-compose up -d 
 ```
 

@@ -57,11 +57,14 @@ ENV ANYLOG_REST_PORT=2049
 * [Install Operator Node II](Docker/operator2_node.md)
   * [Deployment Process](Docker/operator_node_deployment_process.md)
 * [Install Query Node](Docker/query_node.md)
-  *  [Deployment Process](Docker/query_node_deployment_process.md)
+  * [Deployment Process](Docker/query_node_deployment_process.md)
+* [Install Publisher Node](Docker/publisher_node.md)
+  *  [Deployment Process](Docker/publisher_node_deployment_process.md)
 * [Install Grafana](Docker/AnyLog_Support_Tools.md#grafana)
 * [Install Remote CLI](Docker/AnyLog_Support_Tools.md#remote-cli)
 * [Setting Up EdgeX](Docker/EdgeX.md)
-
+* [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
+* 
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment](Kubernetes/Prerequisites.md)
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
