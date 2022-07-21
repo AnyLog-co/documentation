@@ -32,7 +32,7 @@ DB_TYPE=sqlite
 #DB_PORT=5432
 #DEFAULT_DBMS=test
 # whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=false
+DEPLOY_SYSTEM_QUERY=true
 # when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
 MEMORY=true
 

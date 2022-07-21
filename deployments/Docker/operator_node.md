@@ -37,7 +37,7 @@ DB_PASSWD=passwd
 DB_PORT=5432
 DEFAULT_DBMS=test
 # whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=false
+DEPLOY_SYSTEM_QUERY=true
 # when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
 MEMORY=true
 
@@ -142,7 +142,7 @@ curl -X GET ${OPERATOR_NODE_IP}:${OPERATOR_NODE_PORT} -H "command: get status" -
 ```
 * Expected `get processes` behavior
 ```shell
-curl -X GET ${OPERATOR_NODE_IP}:${OPERATOR_NODE_PORT} -H "command: get processes" -H "User-Agent: AnyLog/1.23"  #| jq 
+curl -X GET ${OPERATOR_NODE_IP}:${OPERATOR_NODE_PORT} -H "command: get processes" -H "User-Agent: AnyLog/1.23"  
     Process         Status       Details                                                                    
     ---------------|------------|--------------------------------------------------------------------------|
     TCP            |Running     |Listening on: 139.162.56.87:32148, Threads Pool: 6                        |
