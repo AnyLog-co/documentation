@@ -127,5 +127,6 @@ set buffer threshold where write_immediate = true
 
 run data distributor  # Optional
 
-run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and LEDGER_CONN=!ledger_conn
+operator_id = blockchain get operator where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port bring [operator][id] 
+run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master=!ledger_conn and policy=!operator_id
 ```
