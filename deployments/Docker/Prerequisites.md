@@ -3,6 +3,9 @@ Our [deployment repository](https://github.com/AnyLog-co/deployments/) provides 
 deploy AnyLog (and other related tools - such as _PostgreSQL_ and _Grafana_) as either docker or helm package. In 
 addition, the repository contains a shortened version of the shared directions depending on the deployment type.
 
+This section will walk you through preparing to deploy AnyLog using _Docker_ and _docker-compose_. Directions for
+deploying via _Helm_ and _Kubernetes_ can be found [here](../Kubernetes)
+
 0. 4 Physical or Virtual machines
 
 
