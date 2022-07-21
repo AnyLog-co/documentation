@@ -51,7 +51,7 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment]()
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
-  * [Install & Configure Nginx]()
+  * [Install & Configure Nginx](Kubernetes/nginx.md)
 * [Install PostgreSQL]()
 * [Install Master Node]()
 * [Install Operator Node I]()
