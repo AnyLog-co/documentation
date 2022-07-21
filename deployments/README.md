@@ -64,7 +64,7 @@ ENV ANYLOG_REST_PORT=2049
 * [Install Remote CLI](Docker/AnyLog_Support_Tools.md#remote-cli)
 * [Setting Up EdgeX](Docker/EdgeX.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
-* 
+
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment](Kubernetes/Prerequisites.md)
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
