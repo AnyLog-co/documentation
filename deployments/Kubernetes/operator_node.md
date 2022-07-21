@@ -3,7 +3,7 @@ A node that hosts the data. This operator will receive data directly from EdgeX 
 
 To understand the steps taken to deploy a operator node, please review the [deployment process](operator_node_deployment_process.md). 
 
-Directions for configuring EdgeX send data to a local AnyLog broker can be found [here](EdgeX.md).
+Directions for configuring EdgeX send data to a local AnyLog broker can be found [here](../Docker/EdgeX.md).
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
@@ -11,128 +11,144 @@ Directions for configuring EdgeX send data to a local AnyLog broker can be found
 
 1. In [deployments/anylog-node/envs/anylog_operator.env]() update configurations. Please note, the `LEDGER_CONN` value 
 is configured against our testnet / demo master node.  
-```dotenv
+```YAML
 #-----------------------------------------------------------------------------------------------------------------------
-# The following is intended to deploy an Operator node.
-# If database Postgres (as configured) isn't enabled the code will automatically switch to SQLite
-# Please make sure to update the MASTER_NODE to that of the active master_node IP:TCP_PORT
+# The following are the general values used to deploy an AnyLog instance of type: Operator | AnyLog version: predevelop
 #-----------------------------------------------------------------------------------------------------------------------
-NODE_TYPE=operator
-NODE_NAME=anylog-operator-node1
-COMPANY_NAME=AnyLog
-#EXTERNAL_IP=<EXTERNAL IP>
-#LOCAL_IP=<LOCAL IP>
-ANYLOG_SERVER_PORT=32148
-ANYLOG_REST_PORT=32149
-ANYLOG_BROKER_PORT=32150
-LEDGER_CONN=45.79.74.39:32049
-# blockchain sync time
-SYNC_TIME=30 second
+general:
+ namespace: default
+ app_name: anylog
+ pod_name: anylog-operator-pod
+ deployment_name: anylog-operator-app
+ service_name: anylog-operator-svs
+ configmap_name: anylog-operator-configs
+ # nodeSelector - Allows running Kubernetes remotely. If commented out, code will ignore it
+ #nodeSelector: ""
+ replicas: 1
 
-# User should update DB_USER credentials
-DB_TYPE=psql
-DB_IP=127.0.0.1
-DB_USER=admin
-DB_PASSWD=passwd
-DB_PORT=5432
-DEFAULT_DBMS=test
-# whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=true
-# when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
-MEMORY=true
+image:
+ secretName: imagepullsecret
+ repository: anylogco/anylog-network
+ tag: predevelop
+ pullPolicy: Always
 
-# Operator specific parameters
-# for operator - If you'd like to reset the blockchain but keep the original Member ID then uncomment "Member" and set to the desired member_id (int)
-#MEMBER=<MEMBER_ID>
-CLUSTER_NAME=new-cluster
-ENABLE_PARTITION=true
-PARTITION_COLUMN=timestamp
-PARTITION_INTERVAL=day
-PARTITION_KEEP=7
-TABLE_NAME=*
+configs:
+ basic:
+   node_type: operator
+   node_name: anylog-operator-node
+   company_name: New Company
+   # if location is not set, will use `https://ipinfo.io/json` to get coordinates
+   location: ""
+   country: ""
+   state: ""
+   city: ""
 
-# Operator params
-# run operator where create_table=!create_table and update_tsd_info=!update_tsd_info and archive=!archive and distributor=!distributor and master_node=!master_node and policy=!policy_id
-CREATE_TABLE=true
-UPDATE_TSD_INFO=true
-ARCHIVE=true
-DISTRIBUTOR=true
-COMPRESS_FILE=true
+ networking:
+   server: 32148
+   rest: 32149
+   # Optional broker port
+   broker: 32150
+   # master node is not needed for REST node
+   # Optional external & local IP instead of the default values
+   external_ip: ""
+   local_ip: ""
+   # Proxy IP used by Nginx or other loadbalancer
+   k8s_proxy_ip: 139.162.56.87
 
-WRITE_IMMEDIATE=true
-THRESHOLD_TIME=60 seconds
-THRESHOLD_VOLUME=10KB
+ authentication:
+   enable: false
+   type: ""
+   user: ""
+   password: ""
 
-# An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
-TCP_THREAD_POOL=6
-# Amount of time (in seconds) until REST timesout
-REST_TIMEOUT=30
-# The number of concurrent threads supporting HTTP requests.
-REST_THREADS=5
-QUERY_POOL=3
+ blockchain:
+   # The ledger conn is right now configured against our test / demo network - please update to utilize against your own network. 
+   ledger_conn: 45.79.74.39:32048
+   sync_time: 30 seconds
+   source: master
+   destination: file
 
-# MQTT parameters - the default recieves data from a remote MQTT broker
-MQTT_ENABLE=true
-BROKER=local
-MQTT_PORT=32150
-#MQTT_USER=ibglowct
-#MQTT_PASSWORD=MSY4e009J7ts
-MQTT_LOG=false
-MQTT_TOPIC_NAME=anylogedgex
-MQTT_TOPIC_DBMS=test
-# original value was "bring [device]" (Random-Integer-Generator01). howerver, due to a PSQL table name limit size is 65 chars, it's manually changeds to: rand_int 
-MQTT_TOPIC_TABLE=rand_data
-MQTT_COLUMN_TIMESTAMP=now
-MQTT_COLUMN_VALUE_TYPE=float
-MQTT_COLUMN_VALUE="bring [readings][][value]"
+ database:
+   type: psql
+   ip: postgres-svs
+   port: 5432
+   user: admin
+   password: demo
+   # whether to have the node support system_query (ie querying data).
+   deploy_system_query: true
+   # whether to have system_query database to run against memory directly
+   memory: true
 
-DEPLOY_LOCAL_SCRIPT=true
+ operator:
+   # set member ID for operator - should only be used when readding operator to blockchain but keep (file) configs consistent
+   member: ""
+   cluster_name: new-cluster
+   create_table: true
+   update_tsd: true
+   archive: true
+   distributor: true
+   db_name: test
+   partition:
+       enable: true
+       table: "*"
+       column: timestamp
+       interval: 14 days
+       keep: 6
+       sync: 1 day
+
+# MQTT configured against CloudMQTT broker to get random data from generated using EdgeX. 
+ mqtt:
+   enable: true
+   broker: driver.cloudmqtt.com
+   port: 32150
+#   user: ibglowct
+#   password: MSY4e009J7ts
+   log: false
+   topic:
+     name: anylogedgex
+     db_name: test
+     table: plc_device
+     timestamp: now
+     value_type: float
+     value: bring [readings][][value]
+
+ settings:
+   # whether to deploy a local script that extends the default startup script
+   deploy_local_script: false
+   # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
+   tcp_thread_pool: 6
+   # Amount of time (in seconds) until REST timeout
+   rest_timeout: 30
+   # The number of concurrent threads supporting HTTP requests.
+   rest_threads: 5
+   # Sets the number of threads supporting queries (the default is 3).
+   operator_pool: 3
+   write_immediate: true
+   threshold_time : 60 seconds
+   threshold_volume: 10KB
+
+
 ```
-
-2. Update the configurations in [.env]() file
-```dotenv
-CONTAINER_NAME=al-operator-node1
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_operator.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the docker-compose file.     
-Please copy and paste the following instead of the current content in docker-compose. 
-```yaml
-version: "2.2"
-services:
-  anylog-operator-node1:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-operator-node1-anylog:/app/AnyLog-Network/anylog
-      - anylog-operator-node1-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-operator-node1-data:/app/AnyLog-Network/data
-      - anylog-operator-node1-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-operator-node1-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-operator-node1-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-operator-node1-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-operator-node1-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
-```
-
-3. Deploy anylog-operator via docker 
+2. Deploy AnyLog Operator
 ```shell
-cd deployments/docker-compose/anylog-node 
-docker-compose up -d 
+helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_operator.yaml --name-template anylog-operator1
+```
+
+3. Attaching to node 
+```shell
+# get pod name 
+kubectl get pod
+
+<< comment 
+NAME                                   READY   STATUS    RESTARTS   AGE
+anylog-operator-app-784549f88d-pkr     1/1     Running   0          11m
+
+>>
+
+# attach to node 
+kubectl attach -it anylog-operator-app-784549f88d-pkr
+
+# to detach: ctrl-p + ctrl-q
 ```
 
 ### Validate Node 

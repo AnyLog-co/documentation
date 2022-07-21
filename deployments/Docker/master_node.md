@@ -23,10 +23,10 @@ LEDGER_CONN=127.0.0.1:32048
 SYNC_TIME=30 second
 
 # if location is not set, will use `https://ipinfo.io/json` to get coordinates
-LOCATION: ""
-COUNTRY: ""
-STATE: ""
-CITY: ""
+LOCATION=""
+COUNTRY=""
+STATE=""
+CITY=""
 
 # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
 TCP_THREAD_POOL=6

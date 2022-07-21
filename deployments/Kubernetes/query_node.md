@@ -7,90 +7,110 @@ To understand the steps taken to deploy a query node, please review the [deploym
 ## Deployment Steps
 1. In [deployments/anylog-node/envs/anylog_query.env]() update configurations. Please note, the `LEDGER_CONN` value 
 is configured against our testnet / demo master node.  
-```dotenv
-#-----------------------------------------------------------------------------------------------------------------------
-# The following is intended to deploy a query node
-# If database Postgres (as configured) isn't enabled the code will automatically switch to SQLite
-# Please make sure to update the MASTER_NODE to that of the active master_node IP:TCP_PORT
-#-----------------------------------------------------------------------------------------------------------------------
-NODE_TYPE=query
-NODE_NAME=query-node
-COMPANY_NAME=New Company
-#EXTERNAL_IP=<EXTERNAL IP>
-#LOCAL_IP=<LOCAL IP>
-ANYLOG_SERVER_PORT=32348
-ANYLOG_REST_PORT=32349
-LEDGER_CONN=45.33.41.185:32048
-# blockchain sync time
-SYNC_TIME=30 second
-
-# An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
-TCP_THREAD_POOL=6
-# Amount of time (in seconds) until REST timesout
-REST_TIMEOUT=30
-# The number of concurrent threads supporting HTTP requests.
-REST_THREADS=10
-QUERY_POOL=8
-
-# User should update DB_USER credentials
-DB_TYPE=sqlite
-#DB_IP=127.0.0.1
-#DB_USER=admin
-#DB_PASSWD=passwd
-#DB_PORT=5432
-# whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=true
-# when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
-MEMORY=true
-
-MQTT_ENABLE=false
-DEPLOY_LOCAL_SCRIPT=false
-```
-
-2. Update the configurations in [.env]() file
-```dotenv
-CONTAINER_NAME=al-query-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_query.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the docker-compose file.     
-Please copy and paste the following instead of the current content in docker-compose. 
 ```yaml
-version: "2.2"
-services:
-  anylog-query-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-query-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-query-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-query-node-data:/app/AnyLog-Network/data
-      - anylog-query-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-query-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-query-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-query-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-query-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
+
+#----------------------------------------------------------------------------------
+# The following are the general values used to deploy an AnyLog instance of type: REST | AnyLog version: predevelop
+#----------------------------------------------------------------------------------
+general:
+ namespace: default
+ app_name: anylog
+ pod_name: anylog-query-pod
+ deployment_name: anylog-query-app
+ service_name: anylog-query-svs
+ configmap_name: anylog-query-configs
+ # nodeSelector - Allows running Kubernetes remotely. If commented out, code will ignore it
+ #nodeSelector: ""
+ replicas: 1
+
+image:
+ secretName: imagepullsecret
+ repository: anylogco/anylog-network
+ tag: predevelop
+ pullPolicy: Always
+
+configs:
+ basic:
+   node_type: query
+   node_name: anylog-query-node
+   company_name: "Company Name"
+   # if location is not set, will use `https://ipinfo.io/json` to get coordinates
+   location: ""
+
+ networking:
+   server: 32348
+   rest: 32349
+   # Optional broker port
+   broker: ""
+   # master node is not needed for REST node
+   # Optional external & local IP instead of the default values
+   external_ip: ""
+   local_ip: ""
+
+   # Proxy IP used by Nginx or other loadbalancer
+   k8s_proxy_ip: 23.239.12.151
+
+ authentication:
+   enable: false
+   type: ""
+   user: ""
+   # if location is not set, will use `https://ipinfo.io/json` to get coordinates
+   location: ""
+   country: ""
+   state: ""
+   city: ""
+
+
+ blockchain:
+   # The ledger conn is right now configured against our test / demo network - please update to utilize against your own network. 
+   ledger_conn: 45.79.74.39:32048
+   sync_time: 30 seconds
+   source: master
+   destination: file
+
+ database:
+   type: sqlite
+   # whether to have the node support system_query (ie querying data).
+   deploy_system_query: true
+   # whether to have system_query database to run against memory directly
+   memory: true
+
+ settings:
+   # whether to deploy a local script that extends the default startup script
+   deploy_local_script: "false"
+   # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
+   tcp_thread_pool: 6
+   # Amount of time (in seconds) until REST timeout
+   rest_timeout: 30
+   # The number of concurrent threads supporting HTTP requests.
+   rest_threads: 5
+   # Sets the number of threads supporting queries (the default is 3).
+   query_pool: 3
+   write_immediate: true
+   threshold_time : 60 seconds
+   threshold_volume: 10KB
 ```
 
-3. Deploy anylog-query via docker 
+2. Deploy anylog-query via docker 
 ```shell
-cd deployments/docker-compose/anylog-node 
-docker-compose up -d 
+helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_query.yaml --name-template anylog-query
+```
+
+3. Attaching to node 
+```shell
+# get pod name 
+kubectl get pod
+
+<< comment 
+NAME                                   READY   STATUS    RESTARTS   AGE
+anylog-query-app-784549f88d-arp9kr     1/1     Running   0          11m
+
+>>
+
+# attach to node 
+kubectl attach -it anylog-query-app-784549f88d-arp9kr
+
+# to detach: ctrl-p + ctrl-q
 ```
 
 ### Validate Node 

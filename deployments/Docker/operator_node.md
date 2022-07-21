@@ -29,6 +29,12 @@ LEDGER_CONN=45.79.74.39:32049
 # blockchain sync time
 SYNC_TIME=30 second
 
+# if location is not set, will use `https://ipinfo.io/json` to get coordinates
+LOCATION=""
+COUNTRY=""
+STATE=""
+CITY=""
+
 # User should update DB_USER credentials
 DB_TYPE=psql
 DB_IP=127.0.0.1

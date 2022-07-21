@@ -5,96 +5,112 @@ To understand the steps taken to deploy a master node, please review the [deploy
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
-1. In [deployments/anylog-node/envs/anylog_master.env]() update configurations
-```dotenv
+
+2. In [deployments/anylog-node/envs/anylog_master.env]() update configurations
+```YAML
 #-----------------------------------------------------------------------------------------------------------------------
-# The following is intended to deploy Master node
-# If database Postgres (as configured) isn't enabled the code will automatically switch to SQLite
+# The following are the general values used to deploy an AnyLog instance of type: Master | AnyLog version: predevelop
 #-----------------------------------------------------------------------------------------------------------------------
-NODE_TYPE=ledger
-NODE_NAME=master-node
-COMPANY_NAME=New Company
-#EXTERNAL_IP=<EXTERNAL IP>
-#LOCAL_IP=<LOCAL IP>
-ANYLOG_SERVER_PORT=32048
-ANYLOG_REST_PORT=32049
-LEDGER_CONN=127.0.0.1:32048
-# blockchain sync time
-SYNC_TIME=30 second
+general:
+ namespace: default
+ app_name: anylog
+ # pod name is used as a hostname for the pod
+ pod_name: anylog-master-pod
+ deployment_name: anylog-master-app
+ service_name: anylog-master-svs
+ configmap_name: anylog-master-configs
+ # nodeSelector - Allows running Kubernetes remotely. If commented out, code will ignore it
+ #nodeSelector: ""
+ replicas: 1
 
-# if location is not set, will use `https://ipinfo.io/json` to get coordinates
-LOCATION: ""
-COUNTRY: ""
-STATE: ""
-CITY: ""
+image:
+ secretName: imagepullsecret
+ repository: anylogco/anylog-network
+ tag: predevelop
+ pullPolicy: Always
 
-# An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
-TCP_THREAD_POOL=6
-# Amount of time (in seconds) until REST timesout
-REST_TIMEOUT=30
-# The number of concurrent threads supporting HTTP requests.
-REST_THREADS=5
-# Sets the number of threads supporting queries (the default is 3).
-QUERY_POOL=3
+configs:
+ basic:
+   node_type: ledger
+   node_name: anylog-master-node
+   company_name: New Company
+   # if location is not set, will use `https://ipinfo.io/json` to get coordinates
+   location: ""
+   country: ""
+   state: ""
+   city: ""
 
-# User should update DB_USER credentials
-DB_TYPE=psql
-DB_IP=127.0.0.1
-DB_USER=admin
-DB_PASSWD=passwd
-DB_PORT=5432
-# whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=false
-# when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
-MEMORY=true
+ networking:
+   server: 32048
+   rest: 32049
+   # Optional broker port
+   broker: ""
+   # master node is not needed for REST node
+   # Optional external & local IP instead of the default values
+   external_ip: ""
+   local_ip: ""
+   # Proxy IP used by Nginx or other loadbalancer. We've tested with Nginx, setting the value to the local IP of the machine
+   K8s_proxy_ip: 45.79.74.39
 
-DEPLOY_LOCAL_SCRIPT=false
+ authentication:
+   enable: false
+   type: ""
+   user: ""
+   password: ""
+
+ blockchain:
+   ledger_conn: 127.0.0.1:32048
+   sync_time: 30 seconds
+   source: master
+   destination: file
+
+ database:
+   type: psql
+   ip: postgres-svs
+   port: 5432
+   user: admin
+   password: demo
+   # whether to have the node support system_query (ie querying data).
+   deploy_system_query: false
+   # whether to have system_query database to run against memory directly
+   memory: true
+
+ settings:
+   # whether to deploy a local script that extends the default startup script
+   deploy_local_script: "false"
+   # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
+   tcp_thread_pool: 6
+   # Amount of time (in seconds) until REST timeout
+   rest_timeout: 30
+   # The number of concurrent threads supporting HTTP requests.
+   rest_threads: 5
+   # Sets the number of threads supporting queries (the default is 3).
+   query_pool: 3
+   write_immediate: true
+   threshold_time : 60 seconds
+   threshold_volume: 10KB
 ```
 
-2. Update the configurations in [.env]() file
-```dotenv
-CONTAINER_NAME=al-master-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_master.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the docker-compose file.     
-Please copy and paste the following instead of the current content in docker-compose. 
-```yaml
-version: "2.2"
-services:
-  anylog-master-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-master-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-master-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-master-node-data:/app/AnyLog-Network/data
-      - anylog-master-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-master-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-master-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-master-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-master-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
-```
-
-3. Deploy anylog-master via docker 
+2. Deploy AnyLog Master
 ```shell
-cd deployments/docker-compose/anylog-node 
-docker-compose up -d 
+helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_master.yaml --name-template anylog-master
+```
+
+3. Attaching to Pod
+```shell
+
+# get pod name 
+kubectl get pod
+
+<< comment 
+NAME                                   READY   STATUS    RESTARTS   AGE
+anylog-master-app-768549f86d-2vpkr     1/1     Running   0          11m
+>>
+
+# attach to node 
+kubectl attach -it anylog-master-app-768549f86d-2vpkr
+
+# to detach: ctrl-p + ctrl-q
 ```
 
 ### Validate Node 

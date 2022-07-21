@@ -24,6 +24,12 @@ LEDGER_CONN=45.33.41.185:32048
 # blockchain sync time
 SYNC_TIME=30 second
 
+# if location is not set, will use `https://ipinfo.io/json` to get coordinates
+LOCATION=""
+COUNTRY=""
+STATE=""
+CITY=""
+
 # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
 TCP_THREAD_POOL=6
 # Amount of time (in seconds) until REST timesout
