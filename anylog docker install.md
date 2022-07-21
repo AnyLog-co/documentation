@@ -1,6 +1,6 @@
 # AnyLog on Docker 
 
-AnyLog can be run either directly on a physical machine, or as a Docker container. test
+AnyLog can be run either directly on a physical machine, or as a Docker container.
 Steps to install docker can be found here: https://docs.docker.com/engine/install/ 
 
 Since our Docker repository is private, please <a href="mailto:info@anylog.co?subject=Request Docker access">contact us</a> for access.
