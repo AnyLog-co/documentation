@@ -19,8 +19,9 @@ deploying via _Docker_ can be found [here](../Docker)
 git clone https://github.com/AnyLog-co/deployments 
 ```
 
-2. Each machine with docker, Helm and Kubernetes deployment tool. For simplicity, the example uses Minikube via docker, 
-but other Kubernetes deployment  tools will work as well.  
+2. Each machine with docker, [Helm](https://helm.sh/docs/intro/install/) and [Kubernetes deployment tool](https://kubernetes.io/docs/tasks/tools/). 
+For simplicity, the example uses [Minikube](https://minikube.sigs.k8s.io/docs/start/) via docker, but other Kubernetes 
+deployment  tools will work as well.  
    * Single Command: `bash deployments/configurations/scripts/docker_install.sh`
    * Script: 
 ```shell
@@ -51,9 +52,6 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 sudo apt-get update
 sudo apt-get install -y kubectl
 
-
-
-
 # download minikube - replace amd64 with arm64 for RPI4
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
@@ -61,15 +59,19 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 # install helm 
-sudo snap instal helm --clasic 76767676
+sudo snap instal helm --clasic 
+
 # update / upgrade env
 for CMD in update upgrade update 
 do 
     sudo apt-get -y ${CMD} 
 done
+
+# start minikube
+minikube start 
 ```
 
-3. Log into AnyLog docker in order to Download the image. If you do not have login credentials for our Docker hub, feel 
+3. Log into AnyLog docker in order to download the image. If you do not have login credentials for our Docker hub, feel 
 free to <a href="mailto:info@anylog.co?subject=Request Docker access">send us a message</a>.    
    * Docker Password: **XXXX-XXXX-XXXX-XXXX**
    * Single Command: `bash deployments/helm/credentials.sh ${DOCKER_PASSWORD}`
