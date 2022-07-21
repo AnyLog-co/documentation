@@ -58,7 +58,6 @@ anylog-master-node@67.169.66.209:32048 running
    rest: 32049
    # Optional broker port
    broker: 32050
-   # master node is not needed for REST node
    # Optional external & local IP instead of the default values
    external_ip: ""
    local_ip: ""
