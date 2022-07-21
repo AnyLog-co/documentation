@@ -2,7 +2,7 @@
 
 Kubernetes Orchestrator generates a unique virtual IP each time a node is deployed. Due to the changing virtual IP AnyLog
 would have issues supporting communication between nodes on the same physical network; especially if the external IP 
-isn't open to the public. To resolve this issue we recomand using [Nginx](https://www.nginx.com/) or other proxy service.     
+isn't open to the public. To resolve this issue we recommend using [Nginx](https://www.nginx.com/) or other proxy service.     
 
 Directions to install Nginx can be found [here]()  
 
