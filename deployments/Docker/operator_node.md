@@ -138,6 +138,7 @@ volumes:
 3. Deploy anylog-operator via docker 
 ```shell
 cd deployments/docker-compose/anylog-node 
+bash docker-volume.sh
 docker-compose up -d 
 ```
 
