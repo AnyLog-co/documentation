@@ -6,7 +6,7 @@ addition, the repository contains a shortened version of the shared directions d
 This section will walk you through preparing to deploy AnyLog using _Helm_ and _Kubernetes_ tools. Directions for
 deploying via _Docker_ can be found [here](../Docker) 
 
-0. 4 Physical or Virtual machines -- unlike docker, Kubernetes has the following [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#:~:text=Before%20you%20begin%201%20A%20compatible%20Linux%20host.,on%20your%20machines.%20...%207%20Swap%20disabled.%20): 
+0. 4 Physical or Virtual machines -- unlike Docker, Kubernetes has the following [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#:~:text=Before%20you%20begin%201%20A%20compatible%20Linux%20host.,on%20your%20machines.%20...%207%20Swap%20disabled.%20): 
    * \>= 2GB of RAM per machine
    * \>=2 CPUs 
    * network connectivity between all machines in the cluster (public or private)
