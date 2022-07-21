@@ -67,7 +67,7 @@ docker volume inspect anylog-node-local-scripts
 ```
 
 3. Once you know the _Mountpoint_, you can access the content within that volume. Note - Depending on the permissions, 
-you may need to do a `sudo`,
+you may need to do a `sudo` command.
 ```shell
 sudo tree /var/lib/docker/volumes/anylog-node-local-scripts/_data
 << COMMENT
