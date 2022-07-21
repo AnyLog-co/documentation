@@ -36,7 +36,7 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
-3. Log into AnyLog docker in order to Download the image. If you do not have login credentials for our Docker hub, feel 
+3. Log into AnyLog docker in order to download the image. If you do not have login credentials for our Docker hub, feel 
 free to <a href="mailto:info@anylog.co?subject=Request Docker access">send us a message</a>.    
    * Docker Password: **XXXX-XXXX-XXXX-XXXX**
 ```commandline
