@@ -8,6 +8,8 @@ For directions to start a master node please visit the [master node](master_node
    * hostname 
    * Local & external IP 
    * ENV parameters from configuration into AnyLog parameters
+
+   
 2. Connect to TCP & REST 
 ```anylog
 run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
@@ -24,13 +26,13 @@ connect dbms !db_type !db_conn !db_port blockchain
 create table ledger where dbms=blockchain
 ```
 
-4. (Optional) Connect to system_query – _Note: the configurations set the system_query logical database to run directly against 
-the memory. This allows queries to run faster._
+4. (Optional) Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
+database to run directly against the memory. This allows queries to run faster.</font> 
 ```anylog
 connect dbms sqlite system_query where memory=true
 ```
 
-5. Set scheduler & blockchaim sync
+5. Set scheduler & blockchain sync
 ```anylog
 # init scheduler processes 
 run scheduler 1 
@@ -50,7 +52,10 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
    "company": !company_name, 
    "port" : !anylog_server_port.int, 
    "rest_port": !anylog_rest_port.int, 
-   "loc": !loc
+   "loc": !loc,
+   "country": !country,
+   "state": !state, 
+   "city": !city
 }}>
 
 # check if policy exists & if not declare it 

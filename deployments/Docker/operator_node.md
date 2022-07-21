@@ -1,7 +1,7 @@
 # Operator Node
 A node that hosts the data. This operator will receive data directly from EdgeX via MQTT. 
 
-To understand the steps taken to deploy a master node, please review the [deployment process](master_node_deployment_process.md). 
+To understand the steps taken to deploy a operator node, please review the [deployment process](operator_node_deployment_process.md). 
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
