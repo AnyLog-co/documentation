@@ -1,5 +1,6 @@
 # Query Node
-A node that coordinates the query process
+A node that coordinates the query process. This node is ideal for communicating with [North Bound](../../northbound%20connectors) 
+connectors, as heavy in terms of I/O against other nodes, unless requested by a user or application. 
 
 To understand the steps taken to deploy a query node, please review the [deployment process](query_node_deployment_process.md). 
 
