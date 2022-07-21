@@ -27,8 +27,10 @@ The following chart summarizes the setup:
 
 In the example below, we have 3 IPs: 
 * `67.169.66.209` is our External IP (AnyLog variable `!external_ip`), used to communicate with nodes outside the network
-* `10.0.0.209` the (local) IP of the machine (AnyLog variable `!k8s_proxy_ip`), used to communicate with nodes within the same (physical) network. Note - the user needs to set this value in the configurations in order to use Nginx / have consistent IPs 
-* `172.17.0.3` is the virtual IP (AnyLog variable `!ip`) and is generated each time the pod is deployed. This IP is only used for initiating the REST connection.
+* `10.0.0.209` the (local) IP of the machine (AnyLog variable `!k8s_proxy_ip`), used to communicate with nodes within the 
+same (physical) network. Note - the user needs to set this value in the configurations in order to use Nginx / have consistent IPs 
+* `172.17.0.3` is the virtual IP (AnyLog variable `!ip`) and is generated each time the pod is deployed. This IP is only 
+used for initiating the REST connection.
 
 ```commandline
 # Sample Connections 
