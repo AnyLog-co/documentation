@@ -5,7 +5,7 @@ To understand the steps taken to deploy a master node, please review the [deploy
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
-1. In [deployments/anylog-master-node/envs/anylog_master.env]() update configurations
+1. In [deployments/anylog-node/envs/anylog_master.env]() update configurations
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy Master node
