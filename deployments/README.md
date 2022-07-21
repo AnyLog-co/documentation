@@ -66,9 +66,12 @@ ENV ANYLOG_REST_PORT=2049
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
   * [Install & Configure Nginx](Kubernetes/nginx.md)
 * [Install PostgreSQL](Kubernetes/Postgres.md)
-* [Install Master Node]()
-* [Install Operator Node I]()
-* [Install Operator Node II]()
-* [Install Query Node]()
-
+* [Install Master Node](Kubernetes/master_node.md)
+  * [Deployment Process](Kubernetes/master_node_deployment_process.md)
+* [Install Operator Node I](Kubernetes/operator_node.md)
+  * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
+* [Install Operator Node II](Kubernetes/operator2_node.md)
+  * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
+* [Install Query Node](Kubernetes/query_node.md)
+  *  [Deployment Process](Kubernetes/query_node_deployment_process.md)
 
