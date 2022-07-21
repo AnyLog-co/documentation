@@ -82,3 +82,14 @@ anylog-master-node@67.169.66.209:32048 running
 }} 
 ``` 
 
+
+## Testing
+The following are networking combinations we've tested using Kubernetes with Nginx, and verified they are able to 
+communicate with one another. 
+* Everything on a single Kubernetes cluster, on a single machine. 
+* On the same physical network, have an AnyLog node running through Kubernetes cluster & another AnyLog node, on a 
+different machine, not using Kubernetes.
+* On 2 different physical networks have AnyLog running. One of the AnyLog  nodes running using Kubernetes, while the
+other not using Kubernetes. 
+* On a single network, have 2 AnyLog instances, both running through Kubernetes, but each on its own machine
+* On 2 different physical networks have AnyLog running through Kubernetes. 
