@@ -52,6 +52,7 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
 
 7. Check if cluster exists & if not create it 
 ```anylog
+# declartion of policy
 <new_policy={"cluster": {
     "company": !company_name, 
     "dbms": !default_dbms, 
@@ -59,10 +60,10 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
     "master": !ledger_conn
 }}> 
 
-# check if cluster policy exists 
+# check if policy exists 
 policy = blockchain get cluster where name=!cluster_name and company=!company_name bring.first
 
-# declare policy if cluster DNE
+# declare policy if DNE
 if not !policy  
 do blockchain prepare policy !new_policy
 do blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
@@ -70,8 +71,10 @@ do blockchain insert where policy=!new_policy and local=true and master=!ledger_
 
 8. Declare Operator Node on the metadata layer
 ```anylog
-cluster_id = blockchain get cluster where name=!cluster_name bring.first [cluster][id]
+# get ID of cluster policy 
+cluster_id = blockchain get cluster where name=!cluster_name and company=!company_name bring.first [cluster][id]
 
+# declartion of policy
 <new_policy={"operator": {
     "hostname": !hostname, 
     "name": !node_name, 
@@ -86,8 +89,10 @@ cluster_id = blockchain get cluster where name=!cluster_name bring.first [cluste
     "state": !state, 
     "city": !city
 }}> 
-
+# check if policy exists
 policy = blockchain get operator where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port
+
+# declare policy if DNE
 if not !policy then
 do blockchain prepare policy !new_policy
 do blockchain insert where policy=!new_policy and local=true and

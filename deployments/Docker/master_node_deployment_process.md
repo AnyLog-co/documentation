@@ -58,9 +58,10 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
    "city": !city
 }}>
 
-# check if policy exists & if not declare it 
+# check if policy exists  
 policy = blockchain get master where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port 
 
+# declare policy if DNE
 if not !policy then 
 do blockchain prepare policy !new_policy
 do blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
