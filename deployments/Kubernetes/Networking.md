@@ -62,7 +62,7 @@ anylog-master-node@67.169.66.209:32048 running
    # Optional external & local IP instead of the default values
    external_ip: ""
    local_ip: ""
-   # Proxy IP used by Nginx or other loadbalancer. We've tested with Nginx, setting the value to the local IP of the machine
+   # Proxy IP used by Nginx or other proxy service.
    k8s_proxy_ip: 10.0.0.209
 ```
 
