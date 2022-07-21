@@ -22,7 +22,7 @@ spec:
  host_path: /opt/postgres-data
 ```
 
-2. Update Postgres deployment configurations in `deployments/configurations/helm/postgres_volume.yaml` as you see fit
+2. Update Postgres deployment configurations in `deployments/configurations/helm/postgres.yaml` as you see fit
 ```yaml
 # deployments/configurations/helm/postgres.yaml 
 general:
