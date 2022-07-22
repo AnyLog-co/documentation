@@ -60,7 +60,7 @@ Example Policy:
                             "default" : "now()"     
                         },
                         
-                        "blob" : {
+                        "file" : {
                             "bring" : "[binaryValue]",
                             "type" : "bin",
                             "hash" : true
@@ -68,7 +68,6 @@ Example Policy:
                         "profilename" : {
                             "bring" : "[profileName]",
                             "type" : "string",
-                            "hash" : true
                         },
                         "valueType" : {
                         "bring" : "[valueType]",
@@ -144,7 +143,8 @@ get rows count where dbms = blobs_edgex and table = image
 Retrieve a file:
 <pre>
  file retrieve where dbms = blobs_edgex and name = edgex.image.camera001.07da45a366e5778fc7d34bf231bddcfa.id_image_mapping.bin and dest = my_file
- file retrieve where dbms = blobs_edgex and name = edgex.image.camera001.07da45a366e5778fc7d34bf231bddcfa.id_image_mapping.bin and dest = my_file
+ file retrieve where dbms = blobs_edgex and table = image and dest = my_file
+ file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
 </pre>
 Drop a database:
 <pre>
@@ -153,3 +153,23 @@ drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 </pre>
 
 
+## Drop SQL DBMS and Blobs DBMS
+
+ run client () sql edgex format = table select * from image
+get rows count where dbms = blobs_edgex and table = image
+
+RESTART
+
+process D:/AnyLog-Code/AnyLog-Network/demo/image_mapping.al
+
+DELETE ALL
+
+time file drop all
+run client !master_node blockchain drop policy where id = 286f9c3578261eccfd113e33adab1795
+disconnect dbms edgex
+drop dbms edgex from psql where ip = 127.0.0.1 and port = 5432
+disconnect dbms blobs_edgex
+drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
+
+
+create table tsd_info where dbms = almgm
