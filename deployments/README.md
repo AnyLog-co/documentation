@@ -11,8 +11,8 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
 * Operator – A node that hosts the data. For this deployment we will have 2 Operator nodes.
 * Query – A node that coordinates the query process. 
-* Publisher - A node that supports distribution of data from device(s) to operator nodes. (This node is not part of the
-deployment diagram, however, is often times used in large scale projects.)
+* Publisher - A node that supports distribution of data from device(s) to operator nodes. This node is not part of the
+deployment diagram. However, is often used in large scale projects. 
 
 **Deployment Diagram**:
 
