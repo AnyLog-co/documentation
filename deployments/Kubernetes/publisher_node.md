@@ -5,120 +5,132 @@ message broker, however the MQTT client is running against the local REST node f
 To understand the steps taken to deploy a query node, please review the [deployment process](publisher_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_publisher.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_publisher.env) 
+1. In [deployments/helm/sample-configurations/anylog_publisher.yml](https://github.com/AnyLog-co/deployments/blob/master/helm/sample-configurations/anylog_publisher.yaml) 
 update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```YAML
-#-----------------------------------------------------------------------------------------------------------------------
-# The following is intended to deploy a publisher node
-# If database Postgres (as configured) isn't enabled the code will automatically switch to SQLite
-# Please make sure to update the MASTER_NODE to that of the active master_node IP:TCP_PORT
-#-----------------------------------------------------------------------------------------------------------------------
-NODE_TYPE=publisher
-NODE_NAME=publisher-node
-COMPANY_NAME=New Company
-#EXTERNAL_IP=<EXTERNAL IP>
-#LOCAL_IP=<LOCAL IP>
-ANYLOG_SERVER_PORT=32248
-ANYLOG_REST_PORT=32249
-ANYLOG_BROKER_PORT=32250
-LEDGER_CONN=45.33.41.185:32048
-# blockchain sync time
-SYNC_TIME=30 second
+#----------------------------------------------------------------------------------------------------------------------
+# The following are the general values used to deploy an AnyLog instance of type: Publisher | AnyLog version: develop
+#----------------------------------------------------------------------------------------------------------------------
+general:
+  namespace: default
+  app_name: anylog
+  deployment_name: anylog-publisher-app
+  service_name: anylog-publisher-svs
+  configmap_name: anylog-publisher-configs
+  # nodeSelector - Allows running Kubernetes remotely. If commented out, code will ignore it
+  #nodeSelector: ""
+  replicas: 1
+  
+image:
+  secretName: imagepullsecret
+  repository: anylogco/anylog-network
+  tag: predevelop
+  pullPolicy: Always
 
-# if location is not set, will use `https://ipinfo.io/json` to get coordinates
-LOCATION=""
-COUNTRY=""
-STATE=""
-CITY=""
+configs:
+  basic:
+    node_type: publisher
+    node_name: anylog-publisher-node
+    company_name: Company Name
+    # if location is not set, will use `https://ipinfo.io/json` to get coordinates
+    location: ""
+    country: ""
+    state: ""
+    city: ""
 
-# Publisher specific params 
-COMPRESS_JSON=true 
-MOVE_JSON=true
-DBMS_FILE_LOCATION=file_name[0]
-TABLE_FILE_LOCATION: file_name[1]
+  networking:
+    server: 32248
+    rest: 32249
+    # Optional broker port
+    broker: 32250
+    # master node is not needed for REST node
+    # Optional external & local IP instead of the default values
+    external_ip: ""
+    local_ip: ""
+    # Proxy IP used by Nginx or other loadbalancer
+    k8s_proxy_ip: 172.104.180.110
 
-# An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
-TCP_THREAD_POOL=6
-# Amount of time (in seconds) until REST timesout
-REST_TIMEOUT=30
-# The number of concurrent threads supporting HTTP requests.
-REST_THREADS=10
-QUERY_POOL=8
+  authentication:
+    enable: false
+    type: ""
+    user: ""
+    password: ""
 
-# User should update DB_USER credentials
-DB_TYPE=sqlite
-#DB_IP=127.0.0.1
-#DB_USER=admin
-#DB_PASSWD=passwd
-#DB_PORT=5432
-# whether to have the node support system_query (ie querying data).
-DEPLOY_SYSTEM_QUERY=false
-# when memory is set to true, then the system_query database will automatically run using SQLite in memory. otherwise it'll use the default configs
-MEMORY=flase
+  blockchain:
+    ledger_conn: 45.79.74.39:32048
+    sync_time: 30 seconds
+    source: master
+    destination: file
 
-MQTT_ENABLE=true
-BROKER=rest
-MQTT_PORT=32249
-#MQTT_USER=ibglowct
-#MQTT_PASSWORD=MSY4e009J7ts
-MQTT_LOG=false
-MQTT_TOPIC_NAME=anylogrest
-MQTT_TOPIC_DBMS="bring [dbms]" 
-# original value was "bring [device]" (Random-Integer-Generator01). howerver, due to a PSQL table name limit size is 65 chars, it's manually changeds to: rand_int 
-MQTT_TOPIC_TABLE="bring [table]" 
-MQTT_COLUMN_TIMESTAMP="bring [timestamp]" 
-MQTT_COLUMN_VALUE_TYPE=float
-MQTT_COLUMN_VALUE="bring [value]"
+  database:
+    type: sqlite
+    #ip: postgres-svs
+    #port: 5432
+    #user: admin
+    #password: demo
+    # whether to have the node support system_query (ie querying data).
+    deploy_system_query: false
+    # whether to have system_publisher database to run against memory directly
+    memory: true
 
-DEPLOY_LOCAL_SCRIPT=false
+  publisher:
+    compress: true
+    move: true
+    db_location: file_name[0]
+    table_location: file_name[1]
+
+  mqtt:
+    enable: true
+    broker: rest
+    port: 32249
+#    user: ibglowct
+#    password: MSY4e009J7ts
+    log: false
+    topic:
+      name: anylogrest
+      db_name: "bring [dbms]"
+      table: "bring [table]"
+      timestamp: "bring [timestamp]"
+      value_type: float
+      value: "bring [value]"
+
+  settings:
+    # whether to deploy a local script that extends the default startup script
+    deploy_local_script: "false"
+    # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
+    tcp_thread_pool: 6
+    # Amount of time (in seconds) until REST timeout
+    rest_timeout: 30
+    # The number of concurrent threads supporting HTTP requests.
+    rest_threads: 5
+    # Sets the number of threads supporting queries (the default is 3).
+    publisher_pool: 3
+    write_immediate: true
+    threshold_time : 60 seconds
+    threshold_volume: 10KB
 ```
-
-2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
-```dotenv
-CONTAINER_NAME=al-publisher-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_publisher.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml)      
-file. Please copy and paste the following instead of the current content in docker-compose. 
-```yaml
-version: "2.2"
-services:
-  anylog-publisher-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-publisher-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-publisher-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-publisher-node-data:/app/AnyLog-Network/data
-      - anylog-publisher-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-publisher-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-publisher-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-publisher-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-publisher-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
-```
-
-3. Deploy anylog-publisher via docker 
+2. Deploy AnyLog Publisher 
 ```shell
-cd deployments/docker-compose/anylog-node
-bash docker-volume.sh 
-docker-compose up -d 
+helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_publisher.yaml --name-template anylog-publisher
 ```
+
+3. Attaching to node 
+```shell
+# get pod name 
+kubectl get pod
+
+<< comment 
+NAME                                   READY   STATUS    RESTARTS   AGE
+anylog-publisher-app-788549f88d-krp9kr     1/1     Running   0      11m
+
+>>
+
+# attach to node 
+kubectl attach -it anylog-publisher-app-788549f88d-krp9kr
+
+# to detach: ctrl-p + ctrl-q
+```
+
 
 
 ### Validate Node 

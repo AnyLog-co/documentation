@@ -72,4 +72,5 @@ running in the background, but already having the default network configurations
   * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
 * [Install Query Node](Kubernetes/query_node.md)
   *  [Deployment Process](Kubernetes/query_node_deployment_process.md)
-
+* [Install Publisher Node](Kubernetes/publisher_node.md)
+  *  [Deployment Process](Kubernetes/publisher_node_deployment_process.md)

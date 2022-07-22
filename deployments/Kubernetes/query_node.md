@@ -89,7 +89,7 @@ configs:
    threshold_volume: 10KB
 ```
 
-2. Deploy anylog-query via docker 
+2. Deploy AnyLog Query 
 ```shell
 helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_query.yaml --name-template anylog-query
 ```
