@@ -105,7 +105,7 @@ sudo tree /var/lib/docker/volumes/anylog-node-local-scripts/_data
 ```
 
 ## Executing Script
-Personalized scripts are executed using the `process`, they can be done as part of the deployment process (after the 
+Personalized scripts are executed using the `process` command, they can be done as part of the deployment process (after the 
 first time), or manually. For this example we'll be executing `sample_code/edegex.al` which is the same as the EdgeX 
 we've been doing throughout the documentation, but using (metadata) policies to declare the _MQTT client_, rather than
 parameters and variables. 
