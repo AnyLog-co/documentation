@@ -33,17 +33,11 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 | predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~178MB | 
 | testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing` |
 
-By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP, REST options 
+By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
 are running, but no other process is enabled. This allows for users to play with the system with no other services 
 running in the background, but already having the default network configurations. The deployment command is: 
 `docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop`  
 
-```dockerfile
-# default parameters 
-ENV NODE_TYPE=rest
-ENV ANYLOG_SERVER_PORT=2048
-ENV ANYLOG_REST_PORT=2049
-```
 
 
 ## Table of Content
