@@ -9,8 +9,8 @@ Directions for configuring EdgeX send data to a local AnyLog broker can be found
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
 
 
-1. In [deployments/anylog-node/envs/anylog_operator.env]() update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/helm/sample-configurations/anylog_operator.yaml](https://github.com/AnyLog-co/deployments/blob/master/helm/sample-configurations/anylog_operator.yml) 
+update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```YAML
 #-----------------------------------------------------------------------------------------------------------------------
 # The following are the general values used to deploy an AnyLog instance of type: Operator | AnyLog version: predevelop
@@ -131,7 +131,7 @@ configs:
 ```
 2. Deploy AnyLog Operator
 ```shell
-helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_operator.yaml --name-template anylog-operator1
+helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_operator.yml --name-template anylog-operator1
 ```
 
 3. Attaching to node 

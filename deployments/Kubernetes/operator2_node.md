@@ -4,13 +4,12 @@ A node that hosts the data. This operator will receive data directly from EdgeX 
 To understand the steps taken to deploy a operator node, please review the [deployment process](operator_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_operator2.env]() update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/helm/sample-configurations/anylog_operator2.env](https://github.com/AnyLog-co/deployments/blob/master/helm/sample-configurations/anylog_operator2.yml) 
+update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```yaml
-
-#----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 # The following are the general values used to deploy an AnyLog instance of type: Operator | AnyLog version: predevelop
-#----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 general:
  namespace: default
  app_name: anylog
@@ -121,7 +120,7 @@ configs:
 ```
 2. Deploy AnyLog Operator
 ```shell
-helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_operator.yaml --name-template anylog-operator1
+helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_operator2.yml --name-template anylog-operator2
 ```
 
 3. Attaching to node 
@@ -151,8 +150,8 @@ curl -X GET ${OPERATOR_NODE2_IP}:${OPERATOR_NODE2_PORT} -H "command: get status"
 curl -X GET ${OPERATOR_NODE2_IP}:${OPERATOR_NODE2_PORT} -H "command: get processes" -H "User-Agent: AnyLog/1.23"  
     Process         Status       Details                                                                     
     ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 172.105.86.168:32148, Threads Pool: 6                        |
-    REST           |Running     |Listening on: 172.105.86.168:32149, Threads Pool: 5, Timeout: 30, SSL: None|
+    TCP            |Running     |Listening on: 172.105.86.168:32158, Threads Pool: 6                        |
+    REST           |Running     |Listening on: 172.105.86.168:32159, Threads Pool: 5, Timeout: 30, SSL: None|
     Operator       |Running     |Cluster Member: True, Using Master: 45.79.74.39:32048                      |
     Publisher      |Not declared|                                                                           |
     Blockchain Sync|Running     |Sync every 30 seconds with master using: 45.79.74.39:32048                 |

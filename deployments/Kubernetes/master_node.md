@@ -6,7 +6,8 @@ To understand the steps taken to deploy a master node, please review the [deploy
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
 
-2. In [deployments/anylog-node/envs/anylog_master.env]() update configurations
+1. In [deployments/helm/sample-configurations/anylog_master.yaml](https://github.com/AnyLog-co/deployments/blob/master/helm/sample-configurations/anylog_master.yml) 
+update configurations. The `LEDGER_CONN` for Master  node should be itself (`127.0.0.1`)   
 ```YAML
 #-----------------------------------------------------------------------------------------------------------------------
 # The following are the general values used to deploy an AnyLog instance of type: Master | AnyLog version: predevelop
@@ -93,7 +94,7 @@ configs:
 
 2. Deploy AnyLog Master
 ```shell
-helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_master.yaml --name-template anylog-master
+helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_master.yaml --name-template anylog-master
 ```
 
 3. Attaching to Pod

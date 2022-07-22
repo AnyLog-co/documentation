@@ -5,13 +5,12 @@ connectors, as heavy in terms of I/O against other nodes, unless requested by a 
 To understand the steps taken to deploy a query node, please review the [deployment process](query_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_query.env]() update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/helm/sample-configurations/anylog_query.yaml](https://github.com/AnyLog-co/deployments/blob/master/helm/sample-configurations/anylog_query.yml) 
+update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```yaml
-
-#----------------------------------------------------------------------------------
-# The following are the general values used to deploy an AnyLog instance of type: REST | AnyLog version: predevelop
-#----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
+# The following are the general values used to deploy an AnyLog instance of type: Query | AnyLog version: predevelop
+#-----------------------------------------------------------------------------------------------------------------------
 general:
  namespace: default
  app_name: anylog
@@ -46,7 +45,6 @@ configs:
    # Optional external & local IP instead of the default values
    external_ip: ""
    local_ip: ""
-
    # Proxy IP used by Nginx or other loadbalancer
    k8s_proxy_ip: 23.239.12.151
 
@@ -62,7 +60,7 @@ configs:
 
 
  blockchain:
-   # The ledger conn is right now configured against our test / demo network - please update to utilize against your own network. 
+   # The ledger conn is right now configured against our test / demo network - please update to utilize against your own network.
    ledger_conn: 45.79.74.39:32048
    sync_time: 30 seconds
    source: master
@@ -93,7 +91,7 @@ configs:
 
 2. Deploy anylog-query via docker 
 ```shell
-helm install ~/deployments/packages/anylog-node-1.22.3.tgz --values ~/deployments/configurations/helm/anylog_query.yaml --name-template anylog-query
+helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_query.yaml --name-template anylog-query
 ```
 
 3. Attaching to node 
