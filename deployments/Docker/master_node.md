@@ -5,7 +5,7 @@ To understand the steps taken to deploy a master node, please review the [deploy
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
-1. In [deployments/anylog-node/envs/anylog_master.env]() update configurations
+1. In [deployments/anylog-node/envs/anylog_master.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_master.env) update configurations
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy Master node
@@ -51,15 +51,15 @@ MEMORY=true
 DEPLOY_LOCAL_SCRIPT=false
 ```
 
-2. Update the configurations in [.env]() file
+2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
 ```dotenv
 CONTAINER_NAME=al-master-node
 IMAGE=anylogco/anylog-network
 VERSION=predevelop
 ENV_FILE=envs/anylog_master.env
 ```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the docker-compose file.     
-Please copy and paste the following instead of the current content in docker-compose. 
+2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml) 
+file. Please copy and paste the following instead of the current content in docker-compose. 
 ```yaml
 version: "2.2"
 services:

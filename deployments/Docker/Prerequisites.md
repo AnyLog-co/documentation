@@ -34,6 +34,12 @@ USER=`whoami`
 sudo groupadd docker 
 sudo usermod -aG docker ${USER} 
 newgrp docker
+
+# update / upgrade env
+for CMD in update upgrade update
+do
+    sudo apt-get -y ${CMD}
+done
 ```
 
 3. Log into AnyLog docker in order to download the image. If you do not have login credentials for our Docker hub, feel 

@@ -5,11 +5,11 @@ message broker, however the MQTT client is running against the local REST node f
 To understand the steps taken to deploy a query node, please review the [deployment process](publisher_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_publisher.env]() update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/anylog-node/envs/anylog_publisher.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_publisher.env) 
+update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
-# The following is intended to deploy a query node
+# The following is intended to deploy a publisher node
 # If database Postgres (as configured) isn't enabled the code will automatically switch to SQLite
 # Please make sure to update the MASTER_NODE to that of the active master_node IP:TCP_PORT
 #-----------------------------------------------------------------------------------------------------------------------
@@ -30,6 +30,12 @@ LOCATION=""
 COUNTRY=""
 STATE=""
 CITY=""
+
+# Publisher specific params 
+COMPRESS_JSON=true 
+MOVE_JSON=true
+DBMS_FILE_LOCATION=file_name[0]
+TABLE_FILE_LOCATION: file_name[1]
 
 # An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port.
 TCP_THREAD_POOL=6
@@ -67,15 +73,15 @@ MQTT_COLUMN_VALUE="bring [value]"
 DEPLOY_LOCAL_SCRIPT=false
 ```
 
-2. Update the configurations in [.env]() file
+2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
 ```dotenv
 CONTAINER_NAME=al-publisher-node
 IMAGE=anylogco/anylog-network
 VERSION=predevelop
 ENV_FILE=envs/anylog_publisher.env
 ```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the docker-compose file.     
-Please copy and paste the following instead of the current content in docker-compose. 
+2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml)      
+file. Please copy and paste the following instead of the current content in docker-compose. 
 ```yaml
 version: "2.2"
 services:
@@ -107,14 +113,13 @@ volumes:
       name: ${CONTAINER_NAME}-local-scripts
 ```
 
-3. Deploy anylog-query via docker 
+3. Deploy anylog-publisher via docker 
 ```shell
 cd deployments/docker-compose/anylog-node
 bash docker-volume.sh 
 docker-compose up -d 
 ```
 
-Once volumes are created - 
 
 ### Validate Node 
 * Get Status
