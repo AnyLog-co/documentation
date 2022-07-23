@@ -1,6 +1,6 @@
 # Image Mapping
 
-The following example mapps data with images to storage such that:
+The following example maps data with images to storage such that:
 
 1) The local database is updated with the relevant info describint the image.
 2) The image is saved in a dedicated folder or/and in a dedicated database.
@@ -109,6 +109,19 @@ get broker
 
 ## Sample bwatch directory file
 
+File neame structure:
+dbms.table.source.hash.policy.bin
+
+```
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "Big_Buck_Bunny.mp4", "profilename": "camera", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample.mp4", "profilename": "video", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample-5s.mp4", "profilename": "camera", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "test_file.mp4", "profilename": "camera2", "valueType": "Binary"}
+
+```
+
+
+
 ```
 { "blobs" : {
 		"dbms" : "video",
@@ -128,24 +141,44 @@ get broker
 		]
 	}
 }
+
+
+
 ```
+connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
+
 Get a list of files:
 <pre>
 get files where dbms = blobs_edgex and table = image and limit = 100
+get files where 
 </pre>
+get files where dbms = blobs_edgex and table = video and limit = 100
+
+get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
 
 
 get rows count
 
 get rows count where dbms = blobs_edgex and table = image
-
+get rows count where dbms = blobs_edgex and table = video
 
 Retrieve a file:
 <pre>
- file retrieve where dbms = blobs_edgex and name = edgex.image.camera001.07da45a366e5778fc7d34bf231bddcfa.id_image_mapping.bin and dest = my_file
- file retrieve where dbms = blobs_edgex and table = image and dest = my_file
- file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
+  file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
 </pre>
+
+Delete a file:
+<pre>
+  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
+  ile remove where dbms = blobs_edgex and table  = image
+  file remove where dbms = blobs_edgex and date  = 220723
+</pre>
+
+  file retrieve where dbms = blobs_edgex and id = sample-5s.mp4 and dest = !prep_dir
+
+file delete
+
+
 Drop a database:
 <pre>
 disconnect dbms blobs_edgex
