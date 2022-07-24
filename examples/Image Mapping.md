@@ -206,3 +206,8 @@ drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 
 
 create table tsd_info where dbms = almgm
+
+
+# Copy to a different machine
+
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
