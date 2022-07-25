@@ -211,3 +211,7 @@ create table tsd_info where dbms = almgm
 # Copy to a different machine
 
 run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+
+# Query REST
+
+sql edgex extend=   (@ip, @port) and format  = json and timezone = utc  select  * from image  > selection (file)
