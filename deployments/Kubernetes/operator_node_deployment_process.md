@@ -12,19 +12,19 @@ For directions to start an operator node please visit the [operator node](operat
   
 2. Connect to TCP, REST and Message broker (if configured) 
 ```anylog
-run tcp server !external_ip !anylog_server_port !k8s_proxy_ip !anylog_server_port
+run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 run rest server !ip !anylog_rest_port
 
 # Connect to message broker if configured
-run message broker !external_ip !anylog_server_port !k8s_proxy_ip !anylog_server_port
+run message broker !external_ip !anylog_server_port !ip !anylog_server_port
 ```
 
 3. Connect to databases almgm and create tsd_info table – <font color="red">`almgm.tsd_info` contains all metadata 
 information about files injested. Other tables in almgm contain information regarding data ingested in peer  nodes in 
 the same  cluster.</font>
 ```anylog
-# connect to almgm logical database 
-connect dbms !db_type !db_conn !db_port almgm
+# connect to almgm logical database - for SQLite there's only a need to specify the database type 
+connect dbms almgm where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_password
 
 # create tsd_info table 
 create table tsd_info where dbms=almgm 
@@ -32,13 +32,16 @@ create table tsd_info where dbms=almgm
 
 4. Connect to the operator database - this is where device data is ultimately stored
 ```anylog
-connect dbms !db_type !db_conn !db_port test
+# for SQLite there's only a need to specify the database type 
+connect dbms test where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_password
+ 
 ```
 
 5. (Optional) Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
 database to run directly against the memory. This allows queries to run faster.</font> 
 ```anylog
-connect dbms sqlite system_query where memory=true
+# for SQLite there's only a need to specify the database type 
+connect dbms system_query where type=!db_type and memory=!memory
 ```
 
 6. Set scheduler 1 & blockchain sync
@@ -79,7 +82,7 @@ cluster_id = blockchain get cluster where name=!cluster_name and company=!compan
     "hostname": !hostname, 
     "name": !node_name, 
     "company": !company_name, 
-    "local_ip": !k8s_proxy_ip, 
+    "local_ip": !ip, 
     "ip": !external_ip, 
     "port" : !anylog_server_port.int, 
     "rest_port": !anylog_rest_port.int,
@@ -90,7 +93,7 @@ cluster_id = blockchain get cluster where name=!cluster_name and company=!compan
     "city": !city
 }}> 
 # check if policy exists
-policy = blockchain get operator where ip = !external_ip and local_ip = !k8s_proxy_ip and company=!company_name and port=!anylog_server_port
+policy = blockchain get operator where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port
 
 # declare policy if DNE
 if not !policy then
@@ -127,6 +130,6 @@ set buffer threshold where write_immediate = true
 
 run data distributor  # Optional
 
-operator_id = blockchain get operator where ip = !external_ip and local_ip = !k8s_proxy_ip and company=!company_name and port=!anylog_server_port bring [operator][id] 
+operator_id = blockchain get operator where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port bring [operator][id] 
 run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master=!ledger_conn and policy=!operator_id
 ```

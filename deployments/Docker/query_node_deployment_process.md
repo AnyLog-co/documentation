@@ -19,7 +19,8 @@ run rest server !ip !anylog_rest_port
 3. Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
 database to run directly against the memory. This allows queries to run faster.</font> 
 ```anylog
-connect dbms sqlite system_query where memory=true
+# for SQLite there's only a need to specify the database type 
+connect dbms system_query where type=!db_type and memory=!memory
 ```
 
 4. Set scheduler & blockchain sync

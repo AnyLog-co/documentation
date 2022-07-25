@@ -19,8 +19,9 @@ run rest server !ip !anylog_rest_port
 3. Connect to blockchain database & create ledger table – Note: blockchain.ledger contains the metadata policies. 
 For example, the different node types connected to the network & data tables associated with each node.
 ```anylog
-# connect to logical database 
-connect dbms !db_type !db_conn !db_port blockchain
+# connect to logical database - for SQLite there's only a need to specify the database type 
+connect dbms blockchain where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_password 
+
 
 # create ledger table  
 create table ledger where dbms=blockchain
@@ -29,7 +30,8 @@ create table ledger where dbms=blockchain
 4. (Optional) Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
 database to run directly against the memory. This allows queries to run faster.</font> 
 ```anylog
-connect dbms sqlite system_query where memory=true
+# for SQLite there's only a need to specify the database type 
+connect dbms system_query where type=!db_type and memory=!memory
 ```
 
 5. Set scheduler & blockchain sync

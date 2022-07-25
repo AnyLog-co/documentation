@@ -84,3 +84,5 @@ kubectl create secret docker-registry imagepullsecret \
   --docker-password=${DOCKER_PASSWORD} \
   --docker-email=anyloguser@anylog.co
 ```
+
+If the docker request link doesn't work, please email us at [info@anylog.co](mailto:info@anylog.co). 

@@ -23,8 +23,8 @@ run message broker !external_ip !anylog_server_port !ip !anylog_server_port
 information about files injested. Other tables in almgm contain information regarding data ingested in peer  nodes in 
 the same  cluster.</font>
 ```anylog
-# connect to almgm logical database 
-connect dbms !db_type !db_conn !db_port almgm
+# connect to almgm logical database - for SQLite there's only a need to specify the database type 
+connect dbms almgm where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_password
 
 # create tsd_info table 
 create table tsd_info where dbms=almgm 
@@ -33,7 +33,8 @@ create table tsd_info where dbms=almgm
 4. (Optional) Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
 database to run directly against the memory. This allows queries to run faster.</font> 
 ```anylog
-connect dbms sqlite system_query where memory=true
+# for SQLite there's only a need to specify the database type 
+connect dbms system_query where type=!db_type and memory=!memory
 ```
 
 5. Set scheduler 1 & blockchain sync

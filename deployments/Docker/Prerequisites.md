@@ -49,3 +49,5 @@ free to <a href="mailto:info@anylog.co?subject=Request Docker access">send us a 
 # log into docker for access to AnyLog
 docker login -u anyloguser -p ${DOCKER_PASSWORD}
 ```
+
+If the docker request link doesn't work, please email us at [info@anylog.co](mailto:info@anylog.co).    
