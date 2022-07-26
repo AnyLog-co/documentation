@@ -15,7 +15,7 @@ git clone https://github.com/AnyLog-co/deployments
 ```
 
 2. Install Docker & docker-compose using either the deployment scripts or manually. 
-   * Single Command: `bash deployments/configurations/scripts/docker_install.sh`
+   * Single Command: `bash deployments/docker-compose/docker_install.sh`
    * Full process: 
 ```commandline
 # directions to install docker & docker-compose on Ubuntu 

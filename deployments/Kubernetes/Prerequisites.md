@@ -22,7 +22,7 @@ git clone https://github.com/AnyLog-co/deployments
 2. Each machine with docker, [Helm](https://helm.sh/docs/intro/install/) and [Kubernetes deployment tool](https://kubernetes.io/docs/tasks/tools/). 
 For simplicity, the example uses [Minikube](https://minikube.sigs.k8s.io/docs/start/) via docker, but other Kubernetes 
 deployment  tools will work as well.  
-   * Single Command: `bash deployments/configurations/scripts/docker_install.sh`
+   * Single Command: `bash deployments/helm/kube_install.sh`
    * Script: 
 ```shell
 
