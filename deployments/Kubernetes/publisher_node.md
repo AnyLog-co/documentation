@@ -114,7 +114,41 @@ configs:
 helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_publisher.yaml --name-template anylog-publisher
 ```
 
-3. Attaching to node 
+3. Updating [nginx](nginx.md) files to support REST & MQTT communication remotely & restart the service
+
+   i. To Support TCP - add following content in `/etc/nginx/nginx.conf`
+   
+   ```editorconfig
+   stream {
+       # AnyLog TCP Connection - repeat the next two steps for each node
+       upstream anylog_publisher {
+           server ${KUBE_APISERVER_IP}:32248;
+       }
+       server {
+           listen 32248 so_keepalive=on;
+           proxy_pass anylog_publisher;
+       }
+   }
+   ```
+   ii. To support REST - add the following content in `/etc/nginx/sites-enabled/anylog.conf`
+   ```editorconfig
+   server {
+     listen 32249;
+     server_name _;
+     location / {
+       proxy_set_header Host            $host;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_pass http://192.168.49.2:32249;
+     }
+   }
+   ```
+   iii. Restart nginx service
+   ```shell
+   sudo service nginx reload
+   sudo service nginx restart 
+   ```
+   
+4. Attaching to node 
 ```shell
 # get pod name 
 kubectl get pod
