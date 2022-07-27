@@ -5,7 +5,7 @@ To understand the steps taken to deploy a master node, please review the [deploy
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
-1. In [deployments/anylog-node/envs/anylog_master.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_master.env) update configurations
+1. In [deployments/docker-compose/anylog-master/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/anylog_configs.env) update configurations
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy Master node
@@ -51,51 +51,25 @@ MEMORY=true
 DEPLOY_LOCAL_SCRIPT=false
 ```
 
-2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
-```dotenv
-CONTAINER_NAME=al-master-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_master.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml) 
-file. Please copy and paste the following instead of the current content in docker-compose. 
+2. (Optional) By default the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/docker-compose.yml)  
+file is configured to run develop build. In order to run a different build, update _line 4_ with the desired version. 
 ```yaml
-version: "2.2"
-services:
-  anylog-master-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-master-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-master-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-master-node-data:/app/AnyLog-Network/data
-      - anylog-master-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-master-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-master-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-master-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-master-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
+# current config: 
+image: anylogco/anylog-network:develop
+
+# update to predevelop
+image: anylogco/anylog-network:predevelop
 ```
 
 3. Deploy anylog-master via docker 
 ```shell
-cd deployments/docker-compose/anylog-node 
-bash docker-volume.sh
+cd deployments/docker-compose/anylog-master
+
+# to start node with the latest code
 docker-compose up -d 
+
+# to start a node with existing build 
+docker-compose up -d --no-build
 ```
 
 ### Validate Node 
@@ -125,7 +99,7 @@ curl -X GET ${MASTER_NODE_IP}:${MASTER_NODE_PORT} -H "command: get processes" -H
 ```
 * Attach / detach to node 
 ```shell
-docker attach --detach-keys="ctrl-d" al-master-node
+docker attach --detach-keys="ctrl-d" anylog-master-node
 
 # to detach press: ctrl-d
 ```
