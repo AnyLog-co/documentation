@@ -42,20 +42,29 @@ When applied on the data the following proceeses generate the info of interest:
    an ID will be dynamically added when the policy is added to the ledger.
 2. The DBMS and Table are provided as "edgex" and "image" respectively.
 3. The Source represents the source of the data, it will be provided by the ***bring*** function applied to the "deviceName"
-   attribute in the data to retrieve the value - "Camera001". If the source data does not have a "deviceName" attribute,
-   it will use the default value ("12). If a "deviceName" attribute is missing, it will use the value "0" to represent the data source.
+   attribute in the data to retrieve the value - "Camera001". 
+   If the source data does not have a "deviceName" attribute, it will use the default value ("12). 
+   If a "deviceName" attribute is missing, it will use the value "0" to represent the data source.
 4. The "readings" attributes mapps to the name of the readings attribute in the data. If a "readings" attribute is missing,
    it is assumed that the data does not contain the readings under a special key.
 5. In this example the data readings appear as a list under the "readings" keyword such that:  
-    a. Timestamp is configured to using the default (now()).
-    b. Profilename is derivrd from the "profilename" attribute.
-    c. ValueType is derivrd from the "valueType" attribute.
-    d. The ***file*** attribute describes the file info as follows:
+    a. Timestamp value is generated from the function now().  
+    b. Profilename is derived from the "profilename" attribute.  
+    c. ValueType is derivrd from the "valueType" attribute.  
+    d. The ***file*** attribute describes the file info as follows:  
     * It is a blob type of info.
-    * It is derived from the binaryValue attribute.
+    * It is derived from the "binaryValue" attribute.
     * It will be placed in a file with an extension "png".
     * It is uniquely reprented by the Hash value (based on md5 hashing).
     
+This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:  
+a. Timestamp - the current time   
+b. Profilename - taken from the readings 
+c. ValueType - taken from the readings
+d. file - the hash value of the image
+
+And an image stored in a blobs database - a table ***image*** assigned to a database ***blobs_edgex***. 
+
 
 ```
 <mapping_policy = {"mapping" : {
@@ -98,6 +107,8 @@ When applied on the data the following proceeses generate the info of interest:
         }
 }> 
 ```
+
+## AnyLog commands:
 
 ### Add the policy to the blockchain:
 <pre>
