@@ -57,13 +57,14 @@ When applied on the data the following proceeses generate the info of interest:
     * It will be placed in a file with an extension "png".
     * It is uniquely reprented by the Hash value (based on md5 hashing).
     
-This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:  
+This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:    
 a. Timestamp - the current time   
-b. Profilename - taken from the readings 
-c. ValueType - taken from the readings
-d. file - the hash value of the image
+b. Profilename - taken from the readings  
+c. ValueType - taken from the readings  
+d. file - the hash value of the image  
 
-And an image stored in a blobs database - a table ***image*** assigned to a database ***blobs_edgex***. 
+The image (from the attribute "binaryValue") is stored in an object database assigned to a table ***image***
+and a database ***blobs_edgex***. 
 
 
 ```
