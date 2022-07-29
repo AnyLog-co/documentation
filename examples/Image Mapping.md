@@ -48,9 +48,9 @@ When applied on the data the following proceeses generate the info of interest:
 4. The "readings" attributes mapps to the name of the readings attribute in the data. If a "readings" attribute is missing,
    it is assumed that the data does not contain the readings under a special key.
 5. In this example the data readings appear as a list under the "readings" keyword such that:  
-    a. Timestamp value is generated from the function now().  
-    b. Profilename is derived from the "profilename" attribute.  
-    c. ValueType is derivrd from the "valueType" attribute.  
+    a. ***Timestamp*** value is generated from the function now().  
+    b. ***Profilename*** is derived from the "profilename" attribute.  
+    c. ***ValueType*** is derivrd from the "valueType" attribute.  
     d. The ***file*** attribute describes the file info as follows:  
     * It is a blob type of info.
     * It is derived from the "binaryValue" attribute.
@@ -111,22 +111,37 @@ and a database ***blobs_edgex***.
 
 ## AnyLog commands:
 
-### Add the policy to the blockchain:
+### Declare the blobs dbms
+<pre> 
+connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
+</pre> 
+
+
+### Add the policy to the blockchain
+Use the following command to update the metadata with the policy of the example above:  
+
 <pre>
 blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
 </pre> 
 
-
 ### Associate the policies to a topic
+
+The command below associates data published to a topic called ***images*** with the policy above such that:  
+When the data is published, the data is mapped according to the mapping policy.
+
 <pre>
 run mqtt client where broker=local and log=false and topic=( name=images and policy =  id_image_mapping)
 </pre> 
 
-Publish the data:  
+### Publish the data
+The command below publishes the data to the ***images*** topic.
+
 <pre>
 mqtt publish where broker=local and topic=images and message=!sample_data 
 </pre>
 
+
+### Monitor the process:
 
 View the messages processed by the client (per topic) using the following command:
 <pre>
@@ -138,90 +153,51 @@ View the messages processed by the broker using the following command:
 get broker 
 </pre>
 
+### Get the list of files stores in the blobs database
 
-
-## Sample bwatch directory file
-
-File neame structure:
-dbms.table.source.hash.policy.bin
-
-```
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "Big_Buck_Bunny.mp4", "profilename": "camera", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample.mp4", "profilename": "video", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample-5s.mp4", "profilename": "camera", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "test_file.mp4", "profilename": "camera2", "valueType": "Binary"}
-
-```
-
-
-
-```
-{ "blobs" : {
-		"dbms" : "video",
-		"table" : "releases",
-		"location" : "!video_dir",
-
-		"list" : [ 
-			{  
-			  "info" : {
-				"timestamp": "2022-05-30 16:07:15.07616",
-				"title": "Big Buck Bunny",
-				"minutes": 10,
-				"name": "Test Video1",
-				"file": "Big_Buck_Bunny.mp4"
-				}
-			},
-		]
-	}
-}
-
-
-
-```
-connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
-
-Get a list of files:
+View all the files assigned to a table:
 <pre>
 get files where dbms = blobs_edgex and table = image and limit = 100
-get files where 
 </pre>
-get files where dbms = blobs_edgex and table = video and limit = 100
 
+View all the files assigned to a table in a particular date:
+<pre>
 get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
+</pre>
 
-
-get rows count
-
+### get rows count
+<pre>
 get rows count where dbms = blobs_edgex and table = image
-get rows count where dbms = blobs_edgex and table = video
+</pre>
 
-Retrieve a file:
+
+### Retrieve a file
 <pre>
   file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
 </pre>
 
-Delete a file:
+### Delete a file or a group of files
 <pre>
   file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
   ile remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and date  = 220723
 </pre>
 
-  file retrieve where dbms = blobs_edgex and id = sample-5s.mp4 and dest = !prep_dir
+  
 
-file delete
-
-
-Drop a database:
+### Drop a database:
 <pre>
 disconnect dbms blobs_edgex
 drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 </pre>
 
+# Copy to a blob file from a different node
+<pre>
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+</pre>
 
-## Drop SQL DBMS and Blobs DBMS
 
- run client () sql edgex format = table select * from image
+run client () sql edgex format = table select * from image
 get rows count where dbms = blobs_edgex and table = image
 
 RESTART
@@ -249,3 +225,16 @@ run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !
 # Query REST
 
 sql edgex extend=   (@ip, @port) and format  = json and timezone = utc  select  * from image  > selection (file)
+
+## Sample bwatch directory file
+
+File neame structure:
+dbms.table.source.hash.policy.bin
+
+```
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "Big_Buck_Bunny.mp4", "profilename": "camera", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample.mp4", "profilename": "video", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample-5s.mp4", "profilename": "camera", "valueType": "Binary"}
+{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "test_file.mp4", "profilename": "camera2", "valueType": "Binary"}
+
+```
