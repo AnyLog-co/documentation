@@ -36,26 +36,27 @@ The data reading below includes a JPEG image (assigned to the binaryValue attrib
 ## Example Policy
 
 The policy below can be applied to the data above to retrieve the columns of interest.  
-When applied on the data the following proceeses generate the info of interest:
+When the policy is applied (on the data) the following processes generate the info of interest:
 
 1. The ID of the policy is named to be "id_image_mapping" - if an ID is not included in the policy, 
    an ID will be dynamically added when the policy is added to the ledger.
-2. The DBMS and Table are provided as "edgex" and "image" respectively.
-3. The Source represents the source of the data, it will be provided by the ***bring*** function applied to the "deviceName"
-   attribute in the data to retrieve the value - "Camera001". 
+2. The DBMS and Table are provided in the policy as "edgex" and "image" respectively.
+3. The Source attribute in the policy represents the source of the data, it will be provided by the ***bring*** function applied to the "deviceName"
+   attribute in the data (to retrieve the value - "Camera001"). 
    If the source data does not have a "deviceName" attribute, it will use the default value ("12). 
-   If a "deviceName" attribute is missing, it will use the value "0" to represent the data source.
-4. The "readings" attributes mapps to the name of the readings attribute in the data. If a "readings" attribute is missing,
-   it is assumed that the data does not contain the readings under a special key.
-5. In this example the data readings appear as a list under the "readings" keyword such that:  
+   If a "deviceName" attribute is missing, it will use the value "0" to represent that data source is not represented.  
+4. The "readings" attributes in the policy maps to the name of the readings attribute in the data. If a "readings" attribute is missing,
+   it is assumed that the data does not contain the readings under a special attribute.
+5. In the data example above, the data readings appear as a list under the "readings" attribute. Therefore, the 
+   policy below identifies the "readings" attribute and identifies the needed info such that:  
     a. ***Timestamp*** value is generated from the function now().  
-    b. ***Profilename*** is derived from the "profilename" attribute.  
-    c. ***ValueType*** is derivrd from the "valueType" attribute.  
+    b. ***Profilename*** is derived from the "profilename" attribute (within the readings attribute).  
+    c. ***ValueType*** is derivrd from the "valueType" attribute (within the readings attribute).  
     d. The ***file*** attribute describes the file info as follows:  
     * It is a blob type of info.
     * It is derived from the "binaryValue" attribute.
     * It will be placed in a file with an extension "png".
-    * It is uniquely reprented by the Hash value (based on md5 hashing).
+    * It is uniquely identified by the Hash value (based on md5 hashing).
     
 This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:    
 a. Timestamp - the current time   
@@ -184,57 +185,16 @@ get rows count where dbms = blobs_edgex and table = image
 </pre>
 
   
-
 ### Drop a database:
 <pre>
 disconnect dbms blobs_edgex
 drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 </pre>
 
-# Copy to a blob file from a different node
+# Retrieve a blob file from a different node
+The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
+using the following command:
 <pre>
 run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
 </pre>
 
-
-run client () sql edgex format = table select * from image
-get rows count where dbms = blobs_edgex and table = image
-
-RESTART
-
-process D:/AnyLog-Code/AnyLog-Network/demo/image_mapping.al
-
-DELETE ALL
-
-time file drop all
-run client !master_node blockchain drop policy where id = 286f9c3578261eccfd113e33adab1795
-disconnect dbms edgex
-drop dbms edgex from psql where ip = 127.0.0.1 and port = 5432
-disconnect dbms blobs_edgex
-drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
-disconnect dbms edgex
-drop dbms edgex from psql where user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-
-create table tsd_info where dbms = almgm
-
-
-# Copy to a different machine
-
-run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
-
-# Query REST
-
-sql edgex extend=   (@ip, @port) and format  = json and timezone = utc  select  * from image  > selection (file)
-
-## Sample bwatch directory file
-
-File neame structure:
-dbms.table.source.hash.policy.bin
-
-```
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "Big_Buck_Bunny.mp4", "profilename": "camera", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample.mp4", "profilename": "video", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "sample-5s.mp4", "profilename": "camera", "valueType": "Binary"}
-{"timestamp": "2022-07-22T02:01:36.435290Z", "file": "test_file.mp4", "profilename": "camera2", "valueType": "Binary"}
-
-```
