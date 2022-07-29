@@ -59,10 +59,10 @@ When the policy is applied (on the data) the following processes generate the in
     * It is uniquely identified by the Hash value (based on md5 hashing).
     
 This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:    
-a. Timestamp - the current time   
-b. Profilename - taken from the readings  
-c. ValueType - taken from the readings  
-d. file - the hash value of the image  
+a. ***Timestamp*** - the current time   
+b. ***Profilename*** - taken from the readings  
+c. ***ValueType*** - taken from the readings  
+d. ***file*** - the hash value of the image  
 
 The image (from the attribute "binaryValue") is stored in an object database assigned to a table ***image***
 and a database ***blobs_edgex***. 
@@ -191,7 +191,7 @@ disconnect dbms blobs_edgex
 drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 </pre>
 
-# Retrieve a blob file from a different node
+### Retrieve a blob file from a different node
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
 <pre>
