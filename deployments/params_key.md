@@ -206,7 +206,7 @@ The following table provides insight into the different (ENV) configuration opti
         <td>ledger_conn</td>
         <td>Ledger connection information, for a blockchain sync. In certain documents, the variable is called <code>!master_node</code></td>
         <td></td>
-        <td><code>!local_ip:!anylog_server_port</code></td>
+        <td><code>!ip:!anylog_server_port</code></td>
     </tr>
     <tr>
         <td></td>
