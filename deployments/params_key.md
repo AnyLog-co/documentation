@@ -1,4 +1,4 @@
-The following table provides insight into the different (ENV) configuration options used by [start_node.al](https://github.com/AnyLog-co/AnyLog-Network/tree/develop/scripts/start_node.al).  
+The following table provides insight into the different (ENV) configuration options.  
 
 <table>
     <tr>
