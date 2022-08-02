@@ -5,8 +5,8 @@ connectors, as heavy in terms of I/O against other nodes, unless requested by a 
 To understand the steps taken to deploy a query node, please review the [deployment process](query_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_query.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_publisher.env) update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/docker-compose/anylog-query/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-query/anylog_configs.env) 
+update configurations Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy a query node
@@ -51,53 +51,29 @@ MEMORY=true
 
 DEPLOY_LOCAL_SCRIPT=false
 ```
+**Disclaimer**: The `LEDGER_CONN` parameter is sometimes called `!master_node` in other parts of the documentation.
 
-2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
-```dotenv
-CONTAINER_NAME=al-query-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_query.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml) 
-file. Please copy and paste the following instead of the current content in docker-compose. 
+2. (Optional) By default the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/docker-compose.yml)  
+file is configured to run develop build. In order to run a different build, update _line 4_ with the desired version. 
 ```yaml
-version: "2.2"
-services:
-  anylog-query-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-query-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-query-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-query-node-data:/app/AnyLog-Network/data
-      - anylog-query-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-query-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-query-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-query-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-query-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
+# current config: 
+image: anylogco/anylog-network:develop
+
+# update to predevelop
+image: anylogco/anylog-network:predevelop
 ```
 
-3. Deploy anylog-query via docker 
+3. Deploy anylog-query via Docker 
 ```shell
-cd deployments/docker-compose/anylog-node
-bash docker-volume.sh 
+cd deployments/docker-compose/anylog-query
+
+# to start node with the latest code
 docker-compose up -d 
+
+# to start a node with existing build 
+docker-compose up -d --no-build
 ```
+
 
 ### Validate Node 
 * Get Status

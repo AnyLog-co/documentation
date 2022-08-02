@@ -5,7 +5,8 @@ To understand the steps taken to deploy a master node, please review the [deploy
 
 ## Deployment Steps 
 0. The sample deployment uses [PostgreSQL](Postgres.md). Please make sure  PostgreSQL is installed.
-1. In [deployments/docker-compose/anylog-master/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/anylog_configs.env) update configurations
+1. In [deployments/docker-compose/anylog-master/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/anylog_configs.env) 
+update configurations
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy Master node
@@ -50,6 +51,7 @@ MEMORY=true
 
 DEPLOY_LOCAL_SCRIPT=false
 ```
+**Disclaimer**: The `LEDGER_CONN` parameter is sometimes called `!master_node` in other parts of the documentation.
 
 2. (Optional) By default the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/docker-compose.yml)  
 file is configured to run develop build. In order to run a different build, update _line 4_ with the desired version. 
@@ -61,7 +63,7 @@ image: anylogco/anylog-network:develop
 image: anylogco/anylog-network:predevelop
 ```
 
-3. Deploy anylog-master via docker 
+3. Deploy anylog-master via Docker 
 ```shell
 cd deployments/docker-compose/anylog-master
 

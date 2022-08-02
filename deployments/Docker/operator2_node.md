@@ -4,8 +4,8 @@ A node that hosts the data. This operator will receive data directly from EdgeX 
 To understand the steps taken to deploy a operator node, please review the [deployment process](operator_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_operator2.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_operator2.env) update configurations. Please note, the `LEDGER_CONN` value 
-is configured against our testnet / demo master node.  
+1. In [deployments/docker-compose/anylog-operator2/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-operator2/anylog_configs.env) 
+update configurations Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy an Operator node.
@@ -89,52 +89,27 @@ MQTT_COLUMN_VALUE="bring [readings][][value]"
 
 DEPLOY_LOCAL_SCRIPT=false
 ```
+**Disclaimer**: The `LEDGER_CONN` parameter is sometimes called `!master_node` in other parts of the documentation.
 
-2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
-```dotenv
-CONTAINER_NAME=al-operator-node1
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_operator2.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml) 
-file. Please copy and paste the following instead of the current content in docker-compose. 
+2. (Optional) By default the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/docker-compose.yml)  
+file is configured to run develop build. In order to run a different build, update _line 4_ with the desired version. 
 ```yaml
-version: "2.2"
-services:
-  anylog-operator-node2:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-operator-node2-anylog:/app/AnyLog-Network/anylog
-      - anylog-operator-node2-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-operator-node2-data:/app/AnyLog-Network/data
-      - anylog-operator-node2-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-operator-node2-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-operator-node2-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-operator-node2-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-operator-node2-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
+# current config: 
+image: anylogco/anylog-network:develop
+
+# update to predevelop
+image: anylogco/anylog-network:predevelop
 ```
 
-3. Deploy anylog-operator via docker 
+3. Deploy anylog-operator via Docker 
 ```shell
-cd deployments/docker-compose/anylog-node
-bash docker-volume.sh 
+cd deployments/docker-compose/anylog-operator2
+
+# to start node with the latest code
 docker-compose up -d 
+
+# to start a node with existing build 
+docker-compose up -d --no-build
 ```
 
 ### Validate Node 

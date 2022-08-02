@@ -5,8 +5,8 @@ message broker, however the MQTT client is running against the local REST node f
 To understand the steps taken to deploy a query node, please review the [deployment process](publisher_node_deployment_process.md). 
 
 ## Deployment Steps
-1. In [deployments/anylog-node/envs/anylog_publisher.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/envs/anylog_publisher.env) 
-update configurations. Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
+1. In [deployments/docker-compose/anylog-publisher/anylog_configs.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-publisher/anylog_configs.env) 
+update configurations Please note, the `LEDGER_CONN` value is configured against our testnet / demo master node.  
 ```dotenv
 #-----------------------------------------------------------------------------------------------------------------------
 # The following is intended to deploy a publisher node
@@ -72,52 +72,27 @@ MQTT_COLUMN_VALUE="bring [value]"
 
 DEPLOY_LOCAL_SCRIPT=false
 ```
+**Disclaimer**: The `LEDGER_CONN` parameter is sometimes called `!master_node` in other parts of the documentation.
 
-2. Update the configurations in [.env](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/.env) file
-```dotenv
-CONTAINER_NAME=al-publisher-node
-IMAGE=anylogco/anylog-network
-VERSION=predevelop
-ENV_FILE=envs/anylog_publisher.env
-```
-2b. If you're deploying all the nodes on a single machine / VM, then there needs to be a change in the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-node/docker-compose.yml)      
-file. Please copy and paste the following instead of the current content in docker-compose. 
+2. (Optional) By default the [docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/docker-compose.yml)  
+file is configured to run develop build. In order to run a different build, update _line 4_ with the desired version. 
 ```yaml
-version: "2.2"
-services:
-  anylog-publisher-node:
-    image: ${REPOSITORY}:${TAG}
-    env_file:
-      - ${ENV_FILE}
-    container_name: ${CONTAINER_NAME}
-    stdin_open: true
-    tty: true
-    network_mode: "host" 
-    volumes:
-      - anylog-publisher-node-anylog:/app/AnyLog-Network/anylog
-      - anylog-publisher-node-blockchain:/app/AnyLog-Network/blockchain
-      - anylog-publisher-node-data:/app/AnyLog-Network/data
-      - anylog-publisher-node-local-scripts:/app/AnyLog-Network/scripts
-volumes:
-  anylog-publisher-node-anylog:
-      external:
-        name: ${CONTAINER_NAME}-anylog
-  anylog-publisher-node-blockchain:
-    external:
-      name: ${CONTAINER_NAME}-blockchain
-  anylog-publisher-node-data:
-    external:
-      name: ${CONTAINER_NAME}-data
-  anylog-publisher-node-local-scripts:
-    external:
-      name: ${CONTAINER_NAME}-local-scripts
+# current config: 
+image: anylogco/anylog-network:develop
+
+# update to predevelop
+image: anylogco/anylog-network:predevelop
 ```
 
-3. Deploy anylog-publisher via docker 
+3. Deploy anylog-publisher via Docker 
 ```shell
-cd deployments/docker-compose/anylog-node
-bash docker-volume.sh 
+cd deployments/docker-compose/anylog-publisher
+
+# to start node with the latest code
 docker-compose up -d 
+
+# to start a node with existing build 
+docker-compose up -d --no-build
 ```
 
 
