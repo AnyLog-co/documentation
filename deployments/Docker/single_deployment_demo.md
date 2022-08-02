@@ -54,8 +54,7 @@ docker-compose up -d
 _Operator1_ utilizes a local MQTT client. In our demonstration, we utilize a local EdgeX instance.  
 Directions for deploying a local EdgeX instance can be found [here](EdgeX.md)  
 
-## Validate Deployment 
-### AnyLog & Postgres
+## Validate Deployment
 * Attaching to an AnyLog node 
 ```shell
 # master 
