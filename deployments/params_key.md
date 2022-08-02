@@ -31,12 +31,13 @@ The following table provides insight into the different (ENV) configuration opti
         <td>Type of AnyLog node to deploy</td>
         <td>
             <ul>
-                <li><code>rest</code></li>
-                <li><code>ledger</code></li>
-                <li><code>operator</code></li>
-                <li><code>master</code></li>
-                <li><code>standalone</code></li>
-                <li><code>standalone-publisher</code></li>
+                <li><code>rest</code> -- A node that's running only TCP & REST, thus can act a testbed for playing/understanding AnyLog</li>
+                <li><code>master</code> -- An alternative to blockchain, utilizing a local database to act as blockchain</li>
+                <li><code>operator</code> -- Node where data will ultimatly be stored</li>
+                <li><code>publisher</code> -- Node used to distribute data among opertor nodes</li>
+                <li><code>query</code> -- Node dedicated to querying data</li>
+                <li><code>standalone</code> -- A combination of _master_ & _operator_ on a single AnyLog node</li>
+                <li><code>standalone-publisher</code> -- A combination of _master_ & _publisher_ on a single AnyLog node</li>
             </ul>
         </td>
         <td>rest</td>
@@ -299,6 +300,14 @@ The following table provides insight into the different (ENV) configuration opti
     </tr>
     <tr>
         <td></td>
+        <td>DEPLOY_SYSTEM_QUERY</td>
+        <td>deploy_system_query</td>
+        <td>Whether or not to enable the <code>system_query</code> database for allowing to query data on other nodes on the enabled node</td>
+        <td></td>
+        <td>false for all except _Query_</td>
+    </tr>
+    <tr>
+        <td></td>
         <td>MEMORY</td>
         <td>memory</td>
         <td>Run <i>system_query</i> logical database against SQLite in Memory</td>
@@ -525,4 +534,12 @@ The following table provides insight into the different (ENV) configuration opti
         <td>3</td>
     </tr>
 </table>
+
+**Keys**
+* ENV Param - Docker / Kubernetes environment parameter name 
+* AnyLog Param - AnyLog parameter correlated to the ENV parameter 
+* Description -  Description of the parameter 
+* Options - ENV param options 
+* Default - Default value in AnyLog 
+
  
