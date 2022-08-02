@@ -7,8 +7,8 @@ The docker-compose will deploy the following services:
 * AnyLog Operator I  - receive data through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code) 
 * AnyLog Operator II - receive EdgeX data through a third-party MQTT broker 
 * AnyLog Query 
-* [Remote-CLI](https://github.com/AnyLog-co/documentation/blob/os-dev/northbound%20connectors/remote_cli.md) 
-* [Grafana](https://github.com/AnyLog-co/documentation/blob/os-dev/northbound%20connectors/using%20grafana.md) 
+* [Remote-CLI](../../northbound%20connectors/remote_cli.md) 
+* [Grafana](../../northbound%20connectors/using%20grafana.md) 
 
 ## Deployment Process
 Download [deployments](https://github.com/AnyLog-co/deployments) and [lfedge-code](https://github.com/AnyLog-co/lfedge-code). 
