@@ -36,8 +36,8 @@ The following table provides insight into the different (ENV) configuration opti
                 <li><code>operator</code> -- Node where data will ultimatly be stored</li>
                 <li><code>publisher</code> -- Node used to distribute data among opertor nodes</li>
                 <li><code>query</code> -- Node dedicated to querying data</li>
-                <li><code>standalone</code> -- A combination of _master_ & _operator_ on a single AnyLog node</li>
-                <li><code>standalone-publisher</code> -- A combination of _master_ & _publisher_ on a single AnyLog node</li>
+                <li><code>standalone</code> -- A combination of <i>master</i> & <i>operator</i> on a single AnyLog node</li>
+                <li><code>standalone-publisher</code> -- A combination of <i>master</i> & <i>publisher</i> on a single AnyLog node</li>
             </ul>
         </td>
         <td>rest</td>
@@ -304,7 +304,7 @@ The following table provides insight into the different (ENV) configuration opti
         <td>deploy_system_query</td>
         <td>Whether or not to enable the <code>system_query</code> database for allowing to query data on other nodes on the enabled node</td>
         <td></td>
-        <td>false for all except _Query_</td>
+        <td>false for all except <i>Query Node</i></td>
     </tr>
     <tr>
         <td></td>
