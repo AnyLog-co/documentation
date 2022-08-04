@@ -162,10 +162,10 @@ The casting options are detailed in the table below:
 
 | Cast  | details |
 | ---- | -----------------|
-| float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point |
+| float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point. |
 | int | Cast to an ***int***. |
-| ljust(x) | Cast to a ***left-justified string*** with a given x bytes width  |
-| rjust(x) | Cast to a ***right-justified*** string with a given x bytes width  |
+| ljust(x) | Cast to a ***left-justified string*** with a given x bytes width.  |
+| rjust(x) | Cast to a ***right-justified*** string with a given x bytes width.  |
 
 
 ## Get datetime command
