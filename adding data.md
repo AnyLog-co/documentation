@@ -220,8 +220,10 @@ in the headers as the value for the key ***topic***. If a topic value is not pro
 The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
 in the [Subscribing to REST calls](./using%20rest.md#subscribing-to-rest-calls) section.
 
-**MQTT Call**
-For the following sample _POST_ the `run mqtt client` is as follows: 
+**MQTT Call**: 
+
+In order to view the data sent via POST, the user needs to first specify the `run mqtt client` command. The following 
+example is correlated to the sample POST commands.  
 ```
 <run mqtt client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
   name=new_data and 
