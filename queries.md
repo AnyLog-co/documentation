@@ -151,9 +151,9 @@ run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time
 </pre>
 
 ## Cast Data
-Cast allows to map the projected data to a different format.
-Casting is applied by adjacent double semicolons (::) to the projected column name.
-For example, the SQL statement below will project the value in the column speeed as a float rounded to 2 digits after the decimal poit:
+Cast allows to map the projected data to a different format.  
+Casting is applied by adjacent double semicolons (::) to the projected column name.  
+For example, the SQL statement below projects the value in the column ***speed*** as a float rounded to 2 digits after the decimal point:
 <pre>
 run client () sql lsl_demo "select reading_time, speed::float(2) from performance where reading_time >= now() -3d;"
 </pre>
@@ -162,10 +162,10 @@ The casting options are detailed in the table below:
 
 | Cast  | details |
 | ---- | -----------------|
-| float(x) | Cast to float. X represents rounding to x digits after the decimal point |
-| int | Cast int |
-| ljust(x) | Cast to a left-justified string with a given x bytes width  |
-| rjust(x) | Cast to a right-justified string with a given x bytes width  |
+| float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point |
+| int | Cast to an ***int***. |
+| ljust(x) | Cast to a ***left-justified string*** with a given x bytes width  |
+| rjust(x) | Cast to a ***right-justified*** string with a given x bytes width  |
 
 
 ## Get datetime command
