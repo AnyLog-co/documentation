@@ -125,17 +125,20 @@ The JSON data is transferred using the data-raw part of the REST call and can in
 
 ##### Example using Curl:
 
-<pre>
-curl --location --request PUT '10.0.0.78:2049' \
---header 'User-Agent: AnyLog/1.23' \
+```shell
+curl --location --request PUT '10.0.0.226:32149' \
 --header 'type: json' \
---header 'dbms: lsl_demo' \
---header 'table: ping_sensor' \
+--header 'dbms: test' \
+--header 'table: table1' \
 --header 'Content-Type: text/plain' \
---data-raw '{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}
-{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}
-{"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}
-</pre>
+--header 'User-Agent: AnyLog/1.23' \
+-w "\n" \ 
+--data-raw '[{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}, 
+             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}, 
+             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
+
+# Expected output: {"AnyLog.status":"Success", "AnyLog.hash": "0dd6b959e48c64818bf4748e4ae0c8cb" }   
+```
 
 
 ### The Data Format
@@ -217,19 +220,31 @@ in the headers as the value for the key ***topic***. If a topic value is not pro
 The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
 in the [Subscribing to REST calls](./using%20rest.md#subscribing-to-rest-calls) section.
 
+**MQTT Call**
+For the following sample _POST_ the `run mqtt client` is as follows: 
+```
+<run mqtt client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
+  name=new_data and 
+  dbms=bring [dbms] and 
+  table=bring [table] and 
+  column.timestam.timestamp=bring [timestamp] and 
+  column.value=(type=int and value=bring[value])
+ )>  
+```
 **cURL Example**: 
-<pre>
-curl --location --request POST '192.168.50.159:2051' \
---header 'User-Agent: AnyLog/1.23' \
+```
+curl --location --request POST '10.0.0.226:32149' \
 --header 'command: data' \
+--header 'topic: new_data' \
+--header 'User-Agent: AnyLog/1.23' \
 --header 'Content-Type: text/plain' \
 --data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
  {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
  {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
-</pre>
+```
 
 **Python Example**: 
-<pre> 
+```python
 import json 
 import requests
 
@@ -239,6 +254,7 @@ conn = '192.168.50.159:2051'
 # Header for POST data 
 headers = {
     'command': 'data',
+    'topic': 'new_data',
     'User-Agent': 'AnyLog/1.23',
     'Content-Type': 'text/plain'
 }
@@ -263,7 +279,7 @@ else:
         print('Failed to POST data to %s due to network error: %s' % (conn, r.status_code))
     else:
         print('Success') 
-</pre> 
+```
 
 
 ## Subscribing to a third party message broker
