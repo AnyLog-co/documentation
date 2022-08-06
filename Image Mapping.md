@@ -1,6 +1,6 @@
 # Image Mapping
 
-An AnyLog Operator node can host images locally on the node and transfer the images to a destination node upon request.    
+An AnyLog Operator node can host images (or any type of ***blob*** data like videos, photos, voice etc.) locally on the node and transfer the images to a destination node upon request.    
 The process of managing images is similar to the process of managing streaming data with an additional process to store the image locally.  
 Logically, the image is considered as a column in the database that hosts the data.  
 Physically, the table column includes an identifier of the image, and the image is hosted separately using one (or both) 
@@ -35,7 +35,7 @@ A streaming process that includes an image is shown in the following diagram:
 
 ```
 
-## Transforming source data to destination format
+## Transforming source data to a destination format
 
 The data flow is as follows (and see the diagram above):
 1) Data is published to a broker.
@@ -44,7 +44,33 @@ The data flow is as follows (and see the diagram above):
 4) The policy provides the instructions of the data transformation including how to extract the image data.
 5) The transformation of the source data generates a data structure that updates the relational store and extracts the image data.
 6) The image data is maintained as a file on the operating system or stored in a dedicated database like MongoDB (or both).
+
+## The Blobs database
+The separation of the blob data to a different physical database is to address efficiency as relational databases are not efficient in blob storage.  
+However, each blob data is logically part of the data that is stored in the relational database.  
+Therefore, rows in the relational database represent the blobs using a column that includes and identifier to the blob data.  
+The identifier can be provided by a user (as long as the name is unique), like an image name, or provided by the system, in that case the identifier is the 
+hash value of the blob. 
+As each blob data is associated with a row in a table of the relational database, we maintain a similar representation in the blob database:
+1) The logical database name in the blobs' database is the same as the logical database name in the relational table with a prefix extension of: ***blobs_***.  
+   For example: if the database name is "my_dbms", the blobs database name will be "blobs_my_dbms"
+2) The logical table name is maintain with the blobs' data such that each blob is associated with a table name which is the same as the relational table name.
+
    
+## Blobs storage commands
+
+The following commands allow to store, retrieve and monitor blob data:
+
+### Declare the blobs dbms
+
+Using a database for blob storage requires associating the logical database name with a physical storage.  
+The command ***connect dbms*** is used to associate the logical database name with a physical database.
+
+
+<pre> 
+connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
+</pre> 
+
 
 
 
