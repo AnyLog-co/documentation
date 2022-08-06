@@ -108,14 +108,19 @@ get files where dbms = blobs_edgex and table = image and limit = 100
 
 View all the files assigned to a table in a particular date:
 <pre>
-get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
+get files where dbms = blobs_edgex and table = video and date = 220723 and limit = 100
+get files where dbms = blobs_edgex and date = 220723  limit = 100
 </pre>
 
 ### get rows count
+
+List the number of blobs per each table in the database.  
+Example:
 <pre>
 get rows count where dbms = blobs_edgex and table = image
 </pre>
 
+Additional information is available at the [get rows count command](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-rows-count-command) section.
 
 
 
