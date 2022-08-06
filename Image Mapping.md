@@ -64,13 +64,108 @@ The following commands allow to store, retrieve and monitor blob data:
 ### Declare the blobs dbms
 
 Using a database for blob storage requires associating the logical database name with a physical storage.  
-The command ***connect dbms*** is used to associate the logical database name with a physical database.
+The command ***connect dbms*** is used to associate the logical database name with a physical database.  
+The default choice for a logical name would be as the logical database name in the relational dbms that is referencing the blob data
+- see details [above](#the-blobs-database).  
+
+Usage:
+<pre> 
+connect dbms [logical name prefixed with ***blobs_***] where type = [physical database name] and ip = [ip] and port = [port] and user = [use name] and password = [password]
+</pre> 
+
+Example:
+<pre> 
+connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
+</pre> 
 
 
+-----
+
+### Declare the blobs dbms
 <pre> 
 connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
 </pre> 
 
+
+### Add the policy to the blockchain
+Use the following command to update the metadata with the policy of the example above:  
+
+<pre>
+blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
+</pre> 
+
+### Associate the policies to a topic
+
+The command below associates data published to a topic called ***images*** with the policy above such that:  
+When the data is published, the data is mapped according to the mapping policy.
+
+<pre>
+run mqtt client where broker=local and log=false and topic=( name=images and policy =  id_image_mapping)
+</pre> 
+
+### Publish the data
+The command below publishes the data to the ***images*** topic.
+
+<pre>
+mqtt publish where broker=local and topic=images and message=!sample_data 
+</pre>
+
+
+### Monitor the process:
+
+View the messages processed by the client (per topic) using the following command:
+<pre>
+get msg client statistics
+</pre>
+
+View the messages processed by the broker using the following command:
+<pre>
+get broker 
+</pre>
+
+### Get the list of files stores in the blobs database
+
+View all the files assigned to a table:
+<pre>
+get files where dbms = blobs_edgex and table = image and limit = 100
+</pre>
+
+View all the files assigned to a table in a particular date:
+<pre>
+get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
+</pre>
+
+### get rows count
+<pre>
+get rows count where dbms = blobs_edgex and table = image
+</pre>
+
+
+### Retrieve a file
+<pre>
+  file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
+</pre>
+
+### Delete a file or a group of files
+<pre>
+  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
+  ile remove where dbms = blobs_edgex and table  = image
+  file remove where dbms = blobs_edgex and date  = 220723
+</pre>
+
+  
+### Drop a database:
+<pre>
+disconnect dbms blobs_edgex
+drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
+</pre>
+
+### Retrieve a blob file from a different node
+The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
+using the following command:
+<pre>
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+</pre>
 
 
 
