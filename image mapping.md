@@ -78,7 +78,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 </pre> 
 
-Additional information is available at the [Connecting to a local database](#sql%20setup.md#connecting-to-a-local-database) section.
+Additional information is available at the [Connecting to a local database](./sql%20setup.md#connecting-to-a-local-database) section.
 
 -----
 
