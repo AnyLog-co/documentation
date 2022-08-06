@@ -55,7 +55,14 @@ As each blob data is associated with a row in a table of the relational database
 1) The logical database name in the blobs' database is the same as the logical database name in the relational table with a prefix extension of: ***blobs_***.  
    For example: if the database name is "my_dbms", the blobs database name will be "blobs_my_dbms"
 2) The logical table name is maintain with the blobs' data such that each blob is associated with a table name which is the same as the relational table name.
-
+Each blob data is associated with a key representing the date the file was added to the database.
+The date key is in the format: YYMMDD representing the date in the UTC time zone.
+   
+This approcah associates the following to each file:
+1) A unique Hash Value (or a file name)
+2) A database name
+3) A table name
+4) A time Key
    
 ## Blobs storage commands
 
@@ -80,12 +87,41 @@ connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 
 Additional information is available at the [Configuring a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#configuring-a-local-database) section.
 
+### Dropping the blobs database
+
+Dropping a database is a 2 step process.
+1) Disconnect from the database.
+2) Drop the database. The drop will delete all files stored in the logical database.  
+
+Example:
+<pre>
+disconnect dbms blobs_lsl
+drop dbms blobs_lsl from mongo where ip = localhost and port = 27017
+</pre>
+
+### Get the list of files stores in the blobs database
+
+View all the files assigned to a table:
+<pre>
+get files where dbms = blobs_edgex and table = image and limit = 100
+</pre>
+
+View all the files assigned to a table in a particular date:
+<pre>
+get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
+</pre>
+
+### get rows count
+<pre>
+get rows count where dbms = blobs_edgex and table = image
+</pre>
+
+
+
+
 -----
 
-### Declare the blobs dbms
-<pre> 
-connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
-</pre> 
+
 
 
 ### Add the policy to the blockchain
@@ -124,22 +160,6 @@ View the messages processed by the broker using the following command:
 get broker 
 </pre>
 
-### Get the list of files stores in the blobs database
-
-View all the files assigned to a table:
-<pre>
-get files where dbms = blobs_edgex and table = image and limit = 100
-</pre>
-
-View all the files assigned to a table in a particular date:
-<pre>
-get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
-</pre>
-
-### get rows count
-<pre>
-get rows count where dbms = blobs_edgex and table = image
-</pre>
 
 
 ### Retrieve a file
