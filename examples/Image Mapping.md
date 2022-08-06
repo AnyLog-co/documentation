@@ -1,10 +1,46 @@
 # Image Mapping
 
-The following example maps data with images and videos to storage such that:
+An AnyLog Operator node can host images locally on the node and transfer the images to a destination node upon request.    
+The process of managing images is similar to the process of managing streaming data with an additional process to store the image locally.  
+Logically, the image is considered as a column in the database that hosts the data.  
+Physically, the table column includes an identifier of the image, and the image is hosted separately using one (or both) 
+of the following options:
+1) in a dedicated database (using MongoDB as a default database).
+2) in a dedicated folder.
 
-1) A local database is updated with the relevant info describing the image.
-   
-2) The image is saved in a dedicated folder or/and in a dedicated database.
+A streaming process that includes an image is shown in the following diagram:
+```
+                                         -------------------            --------------------------
+                                         |    AnyLog or    |            |                        |
+  Data published to a Broker             |    External     |  ------>   |      AnyLog Client     |
+  ---------------------------------->    |    Broker       |            |                        |
+                                         -------------------            --------------------------
+                                                                           |
+                                                                           |
+                                                                           V
+                                                               -----------------        -----------------
+                                                               |  Client Data  |        |  Extract      |
+                                                               |  Mapper       |   -->  |  Image        |
+                                                               |  f(Topic)     |        |               |
+                                                               -----------------        -----------------
+                                                                       |                       |
+                                                                       |                       |
+                                                                       V                       V
+                                                               -----------------        -----------------
+  Option D:                                                    |               |        |  Image        |
+  Data transferred using PUT (without mapping)                 |Relational DBMS|  <-->  |  Storage      |
+  -------------------------------------------------------->    |               |        |               |
+                                                               -----------------        -----------------
+         
+
+```
+
+## Transforming source data to destination format
+
+
+
+
+
 
 ## Example data: 
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
@@ -94,6 +130,7 @@ and a database ***blobs_edgex***.
                             "blob" : true,
                             "bring" : "[binaryValue]",
                             "extension" : "png",
+                            "apply" : "base64decoding",
                             "hash" : "md5",
                             "type" : "varchar"
                         },
