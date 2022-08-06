@@ -37,8 +37,14 @@ A streaming process that includes an image is shown in the following diagram:
 
 ## Transforming source data to destination format
 
-
-
+The data flow is as follows (and see the diagram above):
+1) Data is published to a broker.
+2) An AnyLog client process is subscribing to the broker (and a topic).
+3) The subscription process (***run mqtt client*** command) associates a policy to the subscription.
+4) The policy provides the instructions of the data transformation including how to extract the image data.
+5) The transformation of the source data generates a data structure that updates the relational store and extracts the image data.
+6) The image data is maintained as a file on the operating system or stored in a dedicated database like MongoDB (or both).
+   
 
 
 
