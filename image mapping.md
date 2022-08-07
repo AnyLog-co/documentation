@@ -169,6 +169,17 @@ Examples:
 </pre>
 
 
+### Insert a file to a local database
+
+A file can be added and assigned to a table in a blobs database using the following command:
+<pre>
+file store where dbms = [dbms_name] and table = [table name] and id = [unique file name] and file = [path and file name]
+</pre>
+Example:
+<pre>
+file store where dbms = blobs_edgex and table = video and id = my_video and file = !prep_dir/9439d99e6b0157b11bc6775f8b0e2490.bin
+</pre>
+
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
