@@ -222,6 +222,7 @@ Options:
 | get members status | Get status of members nodes that are messaged by this node. |
 | get synchronizer | Information on the blockchain synchronize process. |
 | [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator) | Information on the Operator processes. |
+| [get blobs archiver](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver) | Information on the Blobs Archiving processes. |
 | get publisher | Information on the Publisher processes. |
 | get distributor | With HA enabled, information on the distributions of source files to cluster members. |
 | get consumer | With HA enabled, information on pulling source files from cluster members. |
