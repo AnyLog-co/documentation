@@ -405,10 +405,11 @@ View the messages processed by the client (per topic) using the following comman
 get msg client statistics
 </pre>
 
-View the messages processed by the broker using the following command:
+View the data moved from the client process to the streaming buffers using the following command:
 <pre>
-get broker 
+get streaming
 </pre>
+
 
 ### Get the list of files stores in the blobs database
 
