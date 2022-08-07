@@ -138,8 +138,8 @@ If a group of files is retrieved, the destination can only be a folder.
    
 Usage:
 <pre>
-file retrieve where dbms = [dbms name] and id [file id] and dest = [destination folder and optionally a file name]
-file retrieve where dbms = [dbms name] and table [table name] and date = [date key] and dest = [destination folder]
+file retrieve where dbms = [dbms name] and id = [file id] and dest = [destination folder and optionally a file name]
+file retrieve where dbms = [dbms name] and table = [table name] and date = [date key] and dest = [destination folder]
 </pre>
 
 Examples:  
@@ -149,11 +149,35 @@ file retrieve where dbms = blobs_edgex and dest = !blobs_dir
 </pre>
 
 ### Delete a file or a group of files
+
+Files are removed from storage using the ***file remove*** command.  
+A single fle is removed by identifying the database name and the file unique ID.  
+A group of files are removed by identifying the database name and either or both - a table name and a date key (YYMMDD in UTC format).  
+Usage:
+<pre>
+  file remove where dbms = [dbms name] and id = [file id]
+  file remove where dbms = [dbms name] and table = [table_name]
+  file remove where dbms = [dbms name] and date = [date key]
+  file remove where dbms = [dbms name] and date = [date key] and table = [table_name]
+</pre>
+
+Examples:
 <pre>
   file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
   ile remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and date  = 220723
 </pre>
+
+
+### Retrieve a blob file from a different node
+
+The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
+using the following command:
+<pre>
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+</pre>
+
+
 
 
 -----
