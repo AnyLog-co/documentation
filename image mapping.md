@@ -171,84 +171,27 @@ Examples:
 
 ### Retrieve a blob file from a different node
 
+A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
+The command [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
+is used to copy files from a remote node to the local node.   
+If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
+
+This process is frequently used to augment a SQL query, if the rows returned include the remote machines and the file IDs,
+the query process can complete the query by a call to retrieve files from the remote machines.
+
+Usage:
+<pre>
+run client [Remote node IP and Port] file get (dbms = [dbms name] and id = [file ID]) [destination folder]
+</pre>
+
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
 <pre>
-run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !tmp_dir
 </pre>
-
-
 
 
 -----
-
-
-
-
-### Add the policy to the blockchain
-Use the following command to update the metadata with the policy of the example above:  
-
-<pre>
-blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
-</pre> 
-
-### Associate the policies to a topic
-
-The command below associates data published to a topic called ***images*** with the policy above such that:  
-When the data is published, the data is mapped according to the mapping policy.
-
-<pre>
-run mqtt client where broker=local and log=false and topic=( name=images and policy =  id_image_mapping)
-</pre> 
-
-### Publish the data
-The command below publishes the data to the ***images*** topic.
-
-<pre>
-mqtt publish where broker=local and topic=images and message=!sample_data 
-</pre>
-
-
-### Monitor the process:
-
-View the messages processed by the client (per topic) using the following command:
-<pre>
-get msg client statistics
-</pre>
-
-View the messages processed by the broker using the following command:
-<pre>
-get broker 
-</pre>
-
-
-
-### Retrieve a file
-<pre>
-  file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
-</pre>
-
-### Delete a file or a group of files
-<pre>
-  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
-  ile remove where dbms = blobs_edgex and table  = image
-  file remove where dbms = blobs_edgex and date  = 220723
-</pre>
-
-  
-### Drop a database:
-<pre>
-disconnect dbms blobs_edgex
-drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
-</pre>
-
-### Retrieve a blob file from a different node
-The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
-using the following command:
-<pre>
-run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
-</pre>
-
 
 
 ## Example data: 
