@@ -438,6 +438,12 @@ Example:
 run blobs archiver where dbms = true and folder = true and compress = false
 </pre>
 
+To check the status of the Blobs Archiver process, use the following command:
+<pre>
+get blobs archiver
+</pre>
+
+
 ## MQTT Client
 
 The ***MQTT Client*** process provides a mechanism to subscribe to topics of a MQTT broker. When  messages are received,
