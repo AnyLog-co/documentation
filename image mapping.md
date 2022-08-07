@@ -215,7 +215,9 @@ query returns the location and identifier of the images that are associated with
 is sufficient to retrieve the needed images from the remote nodes.
 be retrieved from the remote node.
 
-Note: In the examples below, AnyLog Commands and Data Assignments are sometimes enclosed within 
+Note: In the examples below, AnyLog Commands and Data Assignments are sometimes enclosed within angle brackets (“less than” or “greater than”) -
+it allows to cut and paste the commands to the AnyLog CLI and process the commands as a code block.
+
 ## Prerequisite
 
 1) An operational AnyLog Network
@@ -233,7 +235,7 @@ Note: In the examples below, AnyLog Commands and Data Assignments are sometimes 
       </pre>
       Details on configuration of the Blobs Archiver process are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
     
-## Example data: 
+## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
 
 ```
@@ -338,19 +340,39 @@ and a database ***blobs_edgex***.
 }> 
 ```
 
-## AnyLog commands:
+## The Demo Process
 
-### Declare the blobs dbms
+Follow the following commands to configure the needed setup and process the data:
+
+### Declare the participating databases
+The [data example](#example-data) was generated from an [Edgex](https://www.edgexfoundry.org/) based platform.  
+The example names the logical database as follows:  
+* ***edgex*** - to represent the streaming data in a potgreSQL database.
+* ***blobs_edgex*** - to represent the image (blob) data in a MongoDB database.
+
 <pre> 
-connect dbms blobs_edgex2 where type = mongo and ip = localhost and port = 27017
+connect dbms edgex where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+</pre> 
+<pre> 
+connect dbms blobs_edgex where type = mongo and ip = localhost and port = 27017
 </pre> 
 
+***Note: To maintain the association between the blobs and the relational data, the logical database name in the blobs
+database is the same as the logical database name in the relational table with a prefix extension of: blobs.***
 
-### Add the policy to the blockchain
+### Add the policy to the metadata
+Cut and paste the policy definition above to the AnyLog CLI such that ***mapping_policy*** is assigned with the policy info.  
+The following command will display the policy info:
+<pre>
+!mapping_policy
+</pre> 
 Use the following command to update the metadata with the policy of the example above:  
-
 <pre>
 blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
+</pre> 
+Use the following command to view the update of the metadata with the new policy:
+<pre>
+blockchain get mapping where id = id_image_mapping
 </pre> 
 
 ### Associate the policies to a topic
