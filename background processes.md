@@ -416,13 +416,13 @@ To check the status of the Consumer process, use the following command:
 get consumer
 </pre>
 
-## The Data Archiver
+## The Blobs Archiver
 
 The data archiver is a process that manage blobs data by pushing the blobs (like image, video and sound) to a dedicated 
 blobs database or to a dedicated folder (or both).  
 Usage:
 <pre>
-run data archiver where bwatch_dir = [data directory location] and blobs_dir = [data directory location] and dbms = [true/false] and file = [true/false] and compress = [true/false]
+run blobs archiver where bwatch_dir = [data directory location] and blobs_dir = [data directory location] and dbms = [true/false] and file = [true/false] and compress = [true/false]
 </pre>
 
 | parameter        | Details   | Default |
@@ -435,7 +435,7 @@ run data archiver where bwatch_dir = [data directory location] and blobs_dir = [
 
 Example:
 <pre>
-run data archiver where dbms = true and folder = true and compress = false
+run blobs archiver where dbms = true and folder = true and compress = false
 </pre>
 
 ## MQTT Client
