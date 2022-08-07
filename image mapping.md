@@ -384,8 +384,8 @@ run mqtt client where broker=local and log=false and topic=( name=images and pol
 </pre> 
 
 ### Publish the data
-To test the setup above, the configured node can publish the data to the broker.
-The data example contain some image characters that are modified when are pasted on the AnyLog CLI.
+To test the setup above, the configured node can publish the data to the broker.  
+The data example contain some image characters that are modified when are pasted on the AnyLog CLI.  
 To publish, cut and paste the [data example](#example-data) to a file (i.e.: image_setup.al in the prep directory) and assign the data using the command:
 <pre>
 process !prep_dir/image_setup.al 
@@ -404,6 +404,9 @@ mqtt publish where broker=local and topic=images and message=!sample_data
 
 
 ### Monitor the process:
+The streaming data is passed through the following processes:  
+The client subscription -->
+
 
 View the messages processed by the client (per topic) using the following command:
 <pre>
