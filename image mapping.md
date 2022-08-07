@@ -375,7 +375,7 @@ Use the following command to view the update of the metadata with the new policy
 blockchain get mapping where id = id_image_mapping
 </pre> 
 
-### Subscribe to a the published data 
+### Subscribe to the published data 
 The new data will be published to a topic called images and the command below associates data published to the 
 ***images*** topic with the policy above such that when the data is published, the data is mapped according to the mapping policy.
 
@@ -384,14 +384,19 @@ run mqtt client where broker=local and log=false and topic=( name=images and pol
 </pre> 
 
 ### Publish the data
-To test the setup above, the configured node can publish the data to the broker.  
-To publish, cut and paste the [data example](#example-data) to the AnyLog CLI.  
+To test the setup above, the configured node can publish the data to the broker.
+The data example contain some image characters that are modified when are pasted on the AnyLog CLI.
+To publish, cut and paste the [data example](#example-data) to a file (i.e.: image_setup.al in the prep directory) and assign the data using the command:
+<pre>
+process !prep_dir/image_setup.al 
+</pre> 
+
 The following command will display the sample data:
 <pre>
 !sample_data 
 </pre> 
 
-The command below publishes the data to the ***images*** topic.
+The command below publishes the data to the ***images*** topic and trigger the processing:
 
 <pre>
 mqtt publish where broker=local and topic=images and message=!sample_data 
@@ -409,6 +414,7 @@ View the data moved from the client process to the streaming buffers using the f
 <pre>
 get streaming
 </pre>
+Note: the data will be processed on pushed to files depending on how the streaming buffers and their thresholds are configured. 
 
 
 ### Get the list of files stores in the blobs database
