@@ -123,6 +123,38 @@ get rows count where dbms = blobs_edgex and table = image
 Additional information is available at the [get rows count command](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-rows-count-command) section.
 
 
+### Retrieve a file or files
+
+Retrieving a blob file or files is by providing a search criteria and a destination folder to the retrieved files.  
+Since file names are unique within a database, a specific file can be retrieved by specifying the database name and the 
+file unique ID (file name or hash value).  
+If a file is retrieved using the file unique ID, the destination can be specified as a folder, in that case the file name 
+remains, or as a path and a file name, in that case the file will be written to the folder with the new assigned name.
+A group of files can be retrieved by a combination of the following search criteria:
+1) A database name
+2) A table name
+3) A time Key (UTC time in YYMMDD format)
+If a group of files is retrieved, the destination can only be a folder.
+   
+Usage:
+<pre>
+file retrieve where dbms = [dbms name] and id [file id] and dest = [destination folder and optionally a file name]
+file retrieve where dbms = [dbms name] and table [table name] and date = [date key] and dest = [destination folder]
+</pre>
+
+Examples:  
+<pre>
+file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490.png and dest = !blobs_dir/test_video.mp4
+file retrieve where dbms = blobs_edgex and dest = !blobs_dir
+</pre>
+
+### Delete a file or a group of files
+<pre>
+  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
+  ile remove where dbms = blobs_edgex and table  = image
+  file remove where dbms = blobs_edgex and date  = 220723
+</pre>
+
 
 -----
 
