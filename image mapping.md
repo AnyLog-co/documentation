@@ -215,6 +215,25 @@ query returns the location and identifier of the images that are associated with
 is sufficient to retrieve the needed images from the remote nodes.
 be retrieved from the remote node.
 
+
+## Prerequisite
+
+1) An operational AnyLog Network
+2) An Operator node configured with the following functionalities:
+    * As a message broker - the new data is published on AnyLog node as a Broker.  
+      Example:  
+      <pre>
+      run message broker !external_ip 7850 !ip 7850 6
+      </pre>
+      Details on configuration of AnyLog as a broker are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+    * As a Blobs Archiver - this process loads the images into the blobs database.  
+      Example:    
+      <pre>
+      run blobs archiver where dbms = true and folder = true and compress = False
+      </pre>
+      Details on configuration of the Blobs Archiver process are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
+    
+    
 ## Example data: 
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
 
