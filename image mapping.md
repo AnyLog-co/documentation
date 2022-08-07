@@ -171,6 +171,9 @@ Examples:
 
 ### Insert a file to a local database
 
+Files can be added to the database and assigned to a table. When the file is added to the database, the hash 
+value of the file is calculated and added as a second type of unique identifier (per table).
+
 A file can be added and assigned to a table in a blobs database using the following command:
 <pre>
 file store where dbms = [dbms_name] and table = [table name] and id = [unique file name] and file = [path and file name]
@@ -201,9 +204,16 @@ using the following command:
 run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !tmp_dir
 </pre>
 
+# Example - processing data with images
 
------
-
+The following example demonstrates data published on an AnyLog node that acts as a broker.  
+The data includes an image and information relating to the image.  
+A policy is assigned to the topic, and the incoming data updates the streaming data database (PostgreSQL) and 
+a blobs storage database (MongoDB).  
+The rows in the streaming database reference the blobs database such that, given a query to a remote node (that stores the data), the
+query returns the location and identifier of the images that are associated with the returned data.  This information 
+is sufficient to retrieve the needed images from the remote nodes.
+be retrieved from the remote node.
 
 ## Example data: 
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
