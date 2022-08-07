@@ -427,11 +427,11 @@ run data archiver where bwatch_dir = [data directory location] and blobs_dir = [
 
 | parameter        | Details   | Default |
 | ------------- | ------------- | ------ |
-| bwatch_dir  | A directory where the JSON data with reference to the blob data are placed  | The value assigned to !bwatch_dir |
-| blob_dir  | A directory where blob data is placed before archived  | The value assigned to !blobs_dir |
+| bwatch_dir  | A directory where the JSON data files with reference to the blobs data are placed  | The value assigned to !bwatch_dir |
+| blob_dir  | A directory where blobs data is placed before archived  | The value assigned to !blobs_dir |
 | dbms   | A boolean value to determine if blobs database is used | true |
-| folder  | A boolean value to determine if file is to archived in a folder as f(date)  | false |
-| compress  | A boolean value to determine if the file is to be compressed | False |
+| folder  | A boolean value to determine if file is saved in a folder as f(date) | false |
+| compress  | A boolean value to determine if compression is applied | false |
 
 Example:
 <pre>
