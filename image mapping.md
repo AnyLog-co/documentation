@@ -266,16 +266,16 @@ When the policy is applied (on the data) the following processes generate the in
     * It is derived from the "binaryValue" attribute.
     * It will be placed in a file with an extension "png".
     * It is uniquely identified by the Hash value (based on md5 hashing).
+    * When stored, it will be decoded using base 64 decoding (see details [here](https://en.wikipedia.org/wiki/Base64).)
     
 This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:    
 a. ***Timestamp*** - the current time   
 b. ***Profilename*** - taken from the readings  
 c. ***ValueType*** - taken from the readings  
-d. ***file*** - the hash value of the image  
+d. ***file*** - the hash value of the image including the file type (i.e.: 9439d99e6b0157b11bc6775f8b0e2490.png) is stored in a varchar column.
 
-The image (from the attribute "binaryValue") is stored in an object database assigned to a table ***image***
-and a database ***blobs_edgex***. 
-
+Based on the configuration of the Archiver Process, the image (from the attribute "binaryValue") is stored in an object database assigned to a table ***image***
+and a database ***blobs_edgex***.  
 
 ```
 <mapping_policy = {"mapping" : {
