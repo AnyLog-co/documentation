@@ -8,16 +8,29 @@ Operations supported:
 
 | Operation  | ---- | 
 | ------------- | ---- |
-| [file copy](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#copy-files-between-nodes-in-the-network) | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node) | Copy a file or files from a remote node to the local node. |
-| [file move](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#move-a-file) | Move a file to a different location on the local node. |
-| [file compress](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#compress-and-decompress-a-file) | Compress a file. |
 | [file decompress](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#compress-and-decompress-a-file) | Decompress a file. |
-| [file test](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#test-if-a-file-exists) | Test if a file exists. |
-| [file hash](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file. |
+| [file compress](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#compress-and-decompress-a-file) | Compress a file. |
+| [file copy](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#copy-files-between-nodes-in-the-network) | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
 | [file delete](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#delete-a-file) | Delete a file. |
+| file deliver | Copy archived data from a remote node. |
+| [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node) | Copy a file or files from a remote node to the local node. |
+| [file hash](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file. |
+| [file move](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#move-a-file) | Move a file to a different location on the local node. |
+| [file test](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#test-if-a-file-exists) | Test if a file exists. |
+
+List files or directories:
+| Operation  | ---- | 
+| ------------- | ---- |
 | [get files](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
 | [get directories](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
+
+Operations on files stored in a dedicated database (details are available in the [Image Mapping](https://github.com/AnyLog-co/documentation/blob/master/image%20mapping.md#image-mapping) document):
+
+| Operation  | ---- | 
+| ------------- | ---- |
+| [file remove](https://github.com/AnyLog-co/documentation/blob/master/image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
+| [file retrieve](https://github.com/AnyLog-co/documentation/blob/master/image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
+| [file Store](https://github.com/AnyLog-co/documentation/blob/master/image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
 
 ## Files names
 
