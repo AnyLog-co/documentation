@@ -375,16 +375,22 @@ Use the following command to view the update of the metadata with the new policy
 blockchain get mapping where id = id_image_mapping
 </pre> 
 
-### Associate the policies to a topic
-
-The command below associates data published to a topic called ***images*** with the policy above such that:  
-When the data is published, the data is mapped according to the mapping policy.
+### Subscribe to a the published data 
+The new data will be published to a topic called images and the command below associates data published to the 
+***images*** topic with the policy above such that when the data is published, the data is mapped according to the mapping policy.
 
 <pre>
-run mqtt client where broker=local and log=false and topic=( name=images and policy =  id_image_mapping)
+run mqtt client where broker=local and log=false and topic=( name=images and policy = id_image_mapping)
 </pre> 
 
 ### Publish the data
+To test the setup above, the configured node can publish the data to the broker.  
+To publish, cut and paste the [data example](#example-data) to the AnyLog CLI.  
+The following command will display the sample data:
+<pre>
+!sample_data 
+</pre> 
+
 The command below publishes the data to the ***images*** topic.
 
 <pre>
