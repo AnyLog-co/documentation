@@ -215,7 +215,7 @@ query returns the location and identifier of the images that are associated with
 is sufficient to retrieve the needed images from the remote nodes.
 be retrieved from the remote node.
 
-
+Note: In the examples below, AnyLog Commands and Data Assignments are sometimes enclosed within 
 ## Prerequisite
 
 1) An operational AnyLog Network
@@ -232,7 +232,6 @@ be retrieved from the remote node.
       run blobs archiver where dbms = true and folder = true and compress = False
       </pre>
       Details on configuration of the Blobs Archiver process are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
-    
     
 ## Example data: 
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
