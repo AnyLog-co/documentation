@@ -72,13 +72,23 @@ The non JSON reply has 2 sections showing configurations and statistics.
 
 | Attribute name | Details  |
 | ------------- | ------------| 
-| DBMS-Table | The Database and table associated with the data |
-| File Put | Counter for PUT calls to add file data |
-| File Rows | Counter for rows within the files added |
-| Streaming Put | Counter of PUT calls to add rows to the streaming buffers |
-| Streaming Rows | Counter for rows added to the streaming buffers |
-| Immediate | Counter for rows added to the databases without buffer wait |
+| DBMS-Table | The Database and table associated with the info |
+| Put Files | Counter of the number of calls to add data (in files) using PUT request |
+| Put Rows | Counter for the number of rows added using PUT requests |
+| Streaming Calls | Counter of calls to add rows to the streaming buffers (using POST or a message broker) |
+| Streaming Rows | Counter for rows added to the streaming buffers  (using POST or a message broker) |
+| Cached Rows | Counter for rows in the buffers (that needs to be flushed) |
+| Immediate | Counter for rows added to the databases without buffer wait (immediate flag is on) |
+| Threshold Volume | The buffer volume threshold in KB |
+| Buffer Fill | The percentage of the buffer which is with data (that needs to be flushed) |
+| Time Threshold | The time threshold in seconds |
+| Time Left | The remaining time to flush the cached data |
 | Last Process | Last process return value |
+
+                            Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process
+DBMS-Table                  files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS
+---------------------------|------|-----|-|---------|---------|------|----------|-----------|--------|----------|---------|------------|
+anylog.cutter_23_1234567890|     0|    0| |        1|        1|     0|         0|         10|     0.0|        60|       60|00:05:48    |
 
 
 # Get MSG Clients
