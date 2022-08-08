@@ -27,9 +27,9 @@ A streaming process that includes an image is shown in the following diagram:
                                                                        |                       |
                                                                        V                       V
                                                                -----------------        -----------------
-  Option D:                                                    |               |        |  Image        |
-  Data transferred using PUT (without mapping)                 |Relational DBMS|  <-->  |  Storage      |
-  -------------------------------------------------------->    |               |        |               |
+                                                               |               |        |  Image        |
+                                                               |Relational DBMS|  <-->  |  Storage      |
+                                                               |               |        |               |
                                                                -----------------        -----------------
          
 
@@ -40,23 +40,23 @@ A streaming process that includes an image is shown in the following diagram:
 The data flow is as follows (and see the diagram above):
 1) Data is published to a broker.
 2) An AnyLog client process is subscribing to the broker (and a topic).
-3) The subscription process (***run mqtt client*** command) associates a policy to the subscription.
+3) The subscription process (enablrd using ***run mqtt client*** command) associates a policy to the subscription.
 4) The policy provides the instructions of the data transformation including how to extract the image data.
 5) The transformation of the source data generates a data structure that updates the relational store and extracts the image data.
 6) The image data is maintained as a file on the operating system or stored in a dedicated database like MongoDB (or both).
 
 ## The Blobs database
-The separation of the blob data to a different physical database is to address efficiency as relational databases are not efficient in blob storage.  
+The separation of the blob data to a different physical database is addressing efficiency considerations as relational databases are not efficient in blob storage.  
 However, each blob data is logically part of the data that is stored in the relational database.  
-Therefore, rows in the relational database represent the blobs using a column that includes and identifier to the blob data.  
-The identifier can be provided by a user (as long as the name is unique), like an image name, or provided by the system, in that case the identifier is the 
-hash value of the blob. 
+Therefore, rows in the relational database represent the blobs using a column that includes an identifier to the blob data.  
+The identifier can be provided by a user (i.e. a unique file name), like an image name, or provided by the system, in that case the identifier is the 
+hash value of the blob.  
 As each blob data is associated with a row in a table of the relational database, we maintain a similar representation in the blob database:
 1) The logical database name in the blobs' database is the same as the logical database name in the relational table with a prefix extension of: ***blobs_***.  
    For example: if the database name is "my_dbms", the blobs database name will be "blobs_my_dbms"
-2) The logical table name is maintain with the blobs' data such that each blob is associated with a table name which is the same as the relational table name.
-Each blob data is associated with a key representing the date the file was added to the database.
-The date key is in the format: YYMMDD representing the date in the UTC time zone.
+2) The logical table name is maintain with the blobs data such that each blob is associated with a table name which is the same as the relational table name.  
+Each blob data is associated with a key representing the date the file was added to the database.  
+The date key is in the format: YYMMDD representing the date in the UTC time zone.  
    
 This approcah associates the following to each file:
 1) A unique Hash Value (or a file name)
@@ -77,7 +77,7 @@ The default choice for a logical name would be as the logical database name in t
 
 Usage:
 <pre> 
-connect dbms [logical name prefixed with ***blobs_***] where type = [physical database name] and ip = [ip] and port = [port] and user = [use name] and password = [password]
+connect dbms [logical name prefixed with blobs_] where type = [physical database name] and ip = [ip] and port = [port] and user = [use name] and password = [password]
 </pre> 
 
 Example:
@@ -85,7 +85,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 </pre> 
 
-Additional information is available at the [Configuring a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#configuring-a-local-database) section.
+Additional information is available at the [configuring a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -101,12 +101,12 @@ drop dbms blobs_lsl from mongo where ip = localhost and port = 27017
 
 ### Get the list of files stores in the blobs database
 
-View all the files assigned to a table:
+Use the following example to view all the files assigned to a table:
 <pre>
 get files where dbms = blobs_edgex and table = image and limit = 100
 </pre>
 
-View all the files assigned to a table in a particular date:
+Use the following example to View all the files assigned to a table in a particular date:
 <pre>
 get files where dbms = blobs_edgex and table = video and date = 220723 and limit = 100
 get files where dbms = blobs_edgex and date = 220723  limit = 100
@@ -114,7 +114,7 @@ get files where dbms = blobs_edgex and date = 220723  limit = 100
 
 ### get rows count
 
-List the number of blobs per each table in the database.  
+Use the following example to list the number of blobs per each table in the database.  
 Example:
 <pre>
 get rows count where dbms = blobs_edgex and table = image
@@ -151,7 +151,7 @@ file retrieve where dbms = blobs_edgex and dest = !blobs_dir
 ### Delete a file or a group of files
 
 Files are removed from storage using the ***file remove*** command.  
-A single fle is removed by identifying the database name and the file unique ID.  
+A single fle is removed by identifying the database name and the file unique ID.   
 A group of files are removed by identifying the database name and either or both - a table name and a date key (YYMMDD in UTC format).  
 Usage:
 <pre>
