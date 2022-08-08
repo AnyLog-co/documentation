@@ -85,11 +85,6 @@ The non JSON reply has 2 sections showing configurations and statistics.
 | Time Left | The remaining time to flush the cached data |
 | Last Process | Last process return value |
 
-                            Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process
-DBMS-Table                  files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS
----------------------------|------|-----|-|---------|---------|------|----------|-----------|--------|----------|---------|------------|
-anylog.cutter_23_1234567890|     0|    0| |        1|        1|     0|         0|         10|     0.0|        60|       60|00:05:48    |
-
 
 # Get MSG Clients
 
