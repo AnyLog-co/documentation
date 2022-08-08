@@ -405,19 +405,32 @@ mqtt publish where broker=local and topic=images and message=!sample_data
 
 ### Monitor the process:
 The streaming data is passed through the following processes:  
-The client subscription -->
+* The client subscription receives the published data, and transforms the data according to the policy assigned to the topic.
+* From the client process, the data is pushed to the streaming buffers.
+* From the streaming buffers, the data is transferred to the Blobs Archiver that adds the image to the blobs database.
+* From the Blobs Archiver the data is pushed to the Operator process that inserts the streaming data to the local streaming database. 
 
+These processes are monitored using the following commands:
 
-View the messages processed by the client (per topic) using the following command:
+Monitor the messages processed by the client (per topic):
 <pre>
-get msg client statistics
+get msg client
 </pre>
 
-View the data moved from the client process to the streaming buffers using the following command:
+Monitor the streaming buffers:
 <pre>
 get streaming
 </pre>
-Note: the data will be processed on pushed to files depending on how the streaming buffers and their thresholds are configured. 
+
+Monitor the Blobs Archiver:
+<pre>
+get blobs archiver
+</pre>
+
+Monitor the Operator:
+<pre>
+get operator
+</pre>
 
 
 ### Get the list of files stores in the blobs database
@@ -429,7 +442,7 @@ get files where dbms = blobs_edgex and table = image and limit = 100
 
 View all the files assigned to a table in a particular date:
 <pre>
-get files where dbms = blobs_edgex and date = 220723  and table = video and limit = 100
+get files where dbms = blobs_edgex and date = 220807  and table = image and limit = 100
 </pre>
 
 ### get rows count
@@ -437,19 +450,17 @@ get files where dbms = blobs_edgex and date = 220723  and table = video and limi
 get rows count where dbms = blobs_edgex and table = image
 </pre>
 
-
 ### Retrieve a file
 <pre>
-  file retrieve where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490 and dest = !prep_dir
+  file retrieve where dbms = blobs_edgex and id = 07da45a366e5778fc7d34bf231bddcfa.png and dest = !prep_dir
 </pre>
 
 ### Delete a file or a group of files
 <pre>
-  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
+  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490.png
   ile remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and date  = 220723
 </pre>
-
   
 ### Drop a database:
 <pre>
