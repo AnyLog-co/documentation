@@ -138,6 +138,7 @@ Options:
 | set consumer mode = [mode]  | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]  |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 | [set data distribution](#set-data-distribution) where ... |  Define how data is distributed to the storage nodes. |
+| [set streaming condition](https://github.com/AnyLog-co/documentation/blob/master/streaming%20conditions.md#condition-declaration)|  Declare a condition on streaming data. |
 
 
 #### Set query mode
@@ -203,6 +204,7 @@ Options:
 | reset echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
 | reset reply IP | Identify a reply IP to be used by the replying node. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
 | reset self IP | Identify an IP to be used when sender and receiver are the same node. Details are available at [Network Configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#reset-self-messaging).|
+| reset streaming conditions | Remove one or more streaming conditions. Details are available at [Reset Streaming Condition](https://github.com/AnyLog-co/documentation/blob/master/streaming%20conditions.md#reset-streaming-condition).|
 
 
 ## Get Command
@@ -279,6 +281,7 @@ Options:
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
 | get timezone info | Get the timezone on the local machine. |
 | get datetime [date-time function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#get-datetime-command) | Translate a date-time function to the date-time string. |
+| [get streaming conditions](https://github.com/AnyLog-co/documentation/blob/master/streaming%20conditions.md#condition-declaration) | List the conditions assigned to streaming data. |
 
 #### Monitoring node status options:
 
