@@ -8,6 +8,8 @@ The streaming Conditions functionality allows to do the following:
 * Declare conditions to evaluate data ingested in the node and trigger a process if the conditions are satisfied
 * View the declared conditions on each node
 * Remove conditions
+
+Note: Alerts and Monitoring assigned to the scheduler are detailed in the [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section. 
  
 ## Condition Declaration
 
