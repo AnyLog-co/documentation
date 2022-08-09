@@ -49,5 +49,19 @@ get streaming conditions where dbms = test
 get streaming conditions where dbms = test and table = rand_data
 </pre>
 
+## Reset Streaming Condition
+Reset allows to remove one or more streaming conditions.
+Usage:
+<pre>
+reset streaming conditions where dbms = [dbms name] and table = [table name] and id = [condition id]
+</pre>
+The condition ID is the condition sequence number.
+Notes: 
+* Use the ***get streaming conditions*** command to view the ID assigned to each condition.
+* Multiple IDs are allowed
+* If database is not specified, all conditions are removed.
+* If table is not specified, all conditions of the database are removed.
+
+All the examples below are valid conditions
 
 
