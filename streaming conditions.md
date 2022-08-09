@@ -4,7 +4,7 @@
 Streaming conditions are conditions that are applied on streaming data in each node.  
 Setting Streaming Conditions triggers alerts and processes based on data values streamed into the nodes.
 
-The streaming Conditions functionality allows to do the following:
+The Streaming Conditions functionality allows to do the following:
 * Declare conditions to evaluate data ingested in the node and trigger a process if the conditions are satisfied
 * View the declared conditions on each node
 * Remove conditions
@@ -14,8 +14,8 @@ Note: Alerts and Monitoring assigned to the scheduler are detailed in the [Alert
 ## Condition Declaration
 
 Conditions are associated to data by referencing the database and table name assigned to the data.  
-When new data is associated with the table and database - the relevant condition are evaluated against the new data,
-and if the condition is satisfied, the command that depends on the condition is processed.  
+When new data is associated with the table and database - the relevant conditions are evaluated against the new data,
+and if a condition is satisfied, the command that depends on the condition is processed.  
 
 Usage:
 <pre>
@@ -36,15 +36,15 @@ In the example above, an SMS message is send if the data value is greater than 1
 
 ## View declared conditions
 
-The following command returns the declared conditions:
+The following command returns the declared conditions:  
 Usage:
 <pre>
 get streaming conditions where dbms = [dbms name] and table = [table name]
 </pre>
 
-If dbms is not specified, all conditions are returned.  
-If table is not specified, all conditions of the specified database are returned.    
-ALl example below are valid:
+If a DBMS name is not specified, all conditions are returned.  
+If a table name is not specified, all conditions of the specified database are returned.    
+All examples below are valid:
 <pre>
 get streaming conditions
 get streaming conditions where dbms = test
@@ -52,7 +52,7 @@ get streaming conditions where dbms = test and table = rand_data
 </pre>
 
 ## Reset Streaming Condition
-Reset allows to remove one or more streaming conditions.
+Reset allows to remove one or more Streaming Conditions.
 Usage:
 <pre>
 reset streaming conditions where dbms = [dbms name] and table = [table name] and id = [condition id]
@@ -61,10 +61,10 @@ The condition ID is the condition sequence number.
 Notes: 
 * Use the ***get streaming conditions*** command to view the ID assigned to each condition.
 * Multiple IDs are allowed
-* If database name is not specified, all conditions are removed.
-* If table name is not specified, all conditions of the database are removed.
+* If a DBMS name is not specified, all conditions are removed.
+* If a table name is not specified, all conditions of the database are removed.
 
-All the examples below are valid conditions
+All examples below are valid:
 <pre>
 reset streaming conditions
 reset streaming conditions where dbms = test
