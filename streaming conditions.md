@@ -59,9 +59,15 @@ The condition ID is the condition sequence number.
 Notes: 
 * Use the ***get streaming conditions*** command to view the ID assigned to each condition.
 * Multiple IDs are allowed
-* If database is not specified, all conditions are removed.
-* If table is not specified, all conditions of the database are removed.
+* If database name is not specified, all conditions are removed.
+* If table name is not specified, all conditions of the database are removed.
 
 All the examples below are valid conditions
+<pre>
+reset streaming conditions
+reset streaming conditions where dbms = test
+reset streaming conditions where dbms = test and table = rand_data
+reset streaming conditions where dbms = test and table = rand_data and id = 2 and id = 4
+</pre>
 
 
