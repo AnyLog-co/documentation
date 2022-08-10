@@ -151,14 +151,14 @@ file retrieve where dbms = blobs_edgex and dest = !blobs_dir
 ### Delete a file or a group of files
 
 Files are removed from storage using the ***file remove*** command.  
-A single fle is removed by identifying the database name and the file unique ID.   
-A group of files are removed by identifying the database name and either or both - a table name and a date key (YYMMDD in UTC format).  
+A single fle is removed by identifying the database name, the table name, the file unique ID (name) or the hash value.   
+A group of files are removed by identifying the database name a table name and a date key (YYMMDD in UTC format).  
 Usage:
 <pre>
-  file remove where dbms = [dbms name] and id = [file id]
+  file remove where dbms = [dbms name] and table = [table name] and hash = [hash value]
+  file remove where dbms = [dbms name] and table = [table name] and id = [file id]
   file remove where dbms = [dbms name] and table = [table_name]
-  file remove where dbms = [dbms name] and date = [date key]
-  file remove where dbms = [dbms name] and date = [date key] and table = [table_name]
+  file remove where dbms = [dbms name] and and table = [table_name] and date = [date key]
 </pre>
 
 Examples:
@@ -171,17 +171,23 @@ Examples:
 
 ### Insert a file to a local database
 
-Files can be added to the database and assigned to a table. When the file is added to the database, the hash 
-value of the file is calculated and added as a second type of unique identifier (per table).
+Files can be added to the database and assigned to a table. 
+When a file is added to the database, a file name and the hash value of the file serve as unique identifiers of the file (per table).
 
 A file can be added and assigned to a table in a blobs database using the following command:
 <pre>
-file store where dbms = [dbms_name] and table = [table name] and id = [unique file name] and file = [path and file name]
+file store where dbms = [dbms_name] and table = [table name] and id = [unique file name] and hash = [hash value] and file = [path and file name]
 </pre>
 Example:
 <pre>
-file store where dbms = blobs_edgex and table = video and id = my_video and file = !prep_dir/9439d99e6b0157b11bc6775f8b0e2490.bin
+file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/device12atpeak.bin
 </pre>
+
+Note: the following example returns the hash value of a file:
+<pre>
+file hash !prep_dir/device12atpeak.bin
+</pre>
+
 
 ### Retrieve a blob file from a different node
 
