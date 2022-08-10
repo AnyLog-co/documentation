@@ -32,7 +32,13 @@ Example:
 <pre>
 set streaming condition where dbms = test and table = rand_data  if [value] > 10 then send sms to 6508147334 where gateway = tmomail.net and subject = 'Threshold temperature' and message = 'value in table rand_data is greater than 10' 
 </pre>
-In the example above, an SMS message is send if the data value is greater than 10.
+In the example above, an SMS message is send if the data value is greater than 10.  
+
+Note: to send an email, enable the SMTP server as in the example below:
+<pre>
+run smtp client where email = anylog.iot@gmail.com and password = oeiussclzecgtkxu
+</pre>
+Details are available at the [SMTP Client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client) section.
 
 ## View declared conditions
 
