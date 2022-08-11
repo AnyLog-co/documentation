@@ -19,20 +19,26 @@ and if a condition is satisfied, the command that depends on the condition is pr
 
 Usage:
 <pre>
-set streaming condition where dbms = [dbms name] and table = [table name] if [condition] then [command]
+set streaming condition where dbms = [dbms name] and table = [table name] and limit = [execution Limit] if [condition] then [command]
 </pre>
 
 Details:
 * ***dbms name*** - the logical database name associated with the data
 * ***table name*** - the logical table name associated with the data
+* ***execution Limit*** - (optional) if a value greater than 0 is provided, the limit places a cap on the number of times the "then" command is executed. 
 * ***condition*** - a condition to validate. Details are available in the [conditional execution](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#conditional-execution) section.
 * ***command*** - an AnyLog command.
 
-Example:  
+Examples:  
 <pre>
-set streaming condition where dbms = test and table = rand_data  if [value] > 10 then send sms to 6508147334 where gateway = tmomail.net and subject = 'Threshold temperature' and message = 'value in table rand_data is greater than 10' 
+set streaming condition where dbms = test and table = rand_data and limit = 2 if [value] > 10 then sms to 6508147334 where gateway = tmomail.net and subject = 'Threshold temperature' and message = 'value in table rand_data is greater than 10' 
 </pre>
-In the example above, an SMS message is send if the data value is greater than 10.  
+In the example above, an SMS message is send if the data value is greater than 10. The SMS process is limited to 2 messages.
+<pre>
+set streaming condition where dbms = test and table = rand_data  if [value] < 3 then return ignore entry  
+</pre>
+In the example above, the readings are ignored when the value is less than 3  
+
 
 Note: to send an email, enable the SMTP server as in the example below:
 <pre>
