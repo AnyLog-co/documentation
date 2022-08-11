@@ -93,11 +93,11 @@ The mapping is done using the command ***run mqtt client***, details are availab
 
 Usage: 
 <pre>
-get msg clients
+get msg clients 
 get msg client N
 </pre>
 N represents the subscription ID which is assigned for each ***run mqtt client*** call.
-if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.   
+if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
 
 The reply has 4 sections showing configurations and statistics.  
 
@@ -129,7 +129,13 @@ Details of the topic and the ,apping instructions between the source data and th
 
 ***Section D attributes:***
 
-The locations of the local directories that are used to organize the data for the database ingestion. 
+The locations of the local directories that are used to organize the data for the database ingestion.   
+This section is provided by adding the keyword detailed to the command:
+<pre>
+get msg clients detailed 
+get msg client N detailed
+</pre>
+
 
 ###Example reply:
 <pre>
