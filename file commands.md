@@ -17,6 +17,9 @@ Operations supported:
 | [file hash](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file. |
 | [file move](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#move-a-file) | Move a file to a different location on the local node. |
 | [file test](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#test-if-a-file-exists) | Test if a file exists. |
+| [file encode](#encode-and-decode-a-file) | Apply base64 encoding. |
+| [file decode](#encode-and-decode-a-file) | Apply base64 decoding. |
+
 
 List files or directories:
 | Operation  | ---- | 
@@ -173,7 +176,7 @@ For decompression, the target path and file name are optional. If omitted, the f
 Examples:
 <pre>
 file compress source_file.dat new_file.gz
-file decompress new_file,gz source_file.dat
+file decompress new_file.gz source_file.dat
 </pre>
 
 Compression can be applied to all files in a directory - if file name is asterisk (*), all files that match the type are compressed.  
@@ -194,6 +197,23 @@ src_dir = D:\Node\AnyLog-Network\data\prep\ping_sensor
 file decompress !src_dir\*.gz
 </pre>
 
+## Encode and decode a file
+These commands allow to apply a base64 Encoding and Decoding.
+Usage:
+<pre>
+file encode [source path and file name] [target path and file name]
+file decode [path and file name of compressed file] [target path and file name]
+</pre>
+Encoding and decoding can be applied to all files in a directory - if file name is asterisk (*), all files that match the type are compressed.  
+If a destination file name is not provided, encoding adds the file type ".msg" to the source file name. Decoding adds the extension ".png". 
+Users need to modify the file type to represent the correct file format (like mp4).  
+Examples:
+<pre>
+file encode source_file.mp4 new_file.msg
+file decode new_file.msg source_file.mp4
+src_dir = D:\Node\AnyLog-Network\data\prep\ping_sensor
+file encode !src_dir\*.png
+</pre>
 
 
 ## Test if a file exists
