@@ -198,14 +198,14 @@ file decompress !src_dir\*.gz
 </pre>
 
 ## Encode and decode a file
-These commands allow to apply a base64 Encoding and Decoding.
+These commands allow to apply a base64 Encoding and Decoding.  
 Usage:
 <pre>
 file encode [source path and file name] [target path and file name]
 file decode [path and file name of compressed file] [target path and file name]
 </pre>
-Encoding and decoding can be applied to all files in a directory - if file name is asterisk (*), all files that match the type are compressed.  
-If a destination file name is not provided, encoding adds the file type ".msg" to the source file name. Decoding adds the extension ".png". 
+Encoding and decoding can be applied to all files in a directory - if a file name is asterisk (*), all files that match the type are decoded or encoded.  
+If a destination file name is not provided, encoding adds the file type ".msg" to the source file name. Decoding adds the extension ".png".   
 Users need to modify the file type to represent the correct file format (like mp4).  
 Examples:
 <pre>
