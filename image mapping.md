@@ -101,7 +101,7 @@ drop dbms blobs_lsl from mongo where ip = localhost and port = 27017
 
 ### Get the list of files stores in the blobs database
 
-The following examples retrieve list of files assigned to a table:
+The following examples retrieve list of files assigned to a table (and their file size):
 <pre>
 get files where dbms = blobs_edgex and table = image and limit = 100
 get files where dbms = blobs_edgex and table = image and limit = 100
@@ -164,9 +164,9 @@ Usage:
 
 Examples:
 <pre>
-  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490
+  file remove where dbms = blobs_edgex and table = videos and id = 9439d99e6b0157b11bc6775f8b0e2490
   ile remove where dbms = blobs_edgex and table  = image
-  file remove where dbms = blobs_edgex and date  = 220723
+  file remove where dbms = blobs_edgex and table = image and date  = 220723
 </pre>
 
 
@@ -202,13 +202,13 @@ the query process can complete the query by a call to retrieve files from the re
 
 Usage:
 <pre>
-run client [Remote node IP and Port] file get (dbms = [dbms name] and id = [file ID]) [destination folder]
+run client [Remote node IP and Port] file get (dbms = [dbms name] and table = [table name] and id = [file ID]) [destination folder]
 </pre>
 
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
 <pre>
-run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !tmp_dir
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and table = videos and id = sample-5s.mp4) !tmp_dir
 </pre>
 
 # Example - processing data with images
@@ -447,9 +447,9 @@ View all the files assigned to a table:
 get files where dbms = blobs_edgex and table = image and limit = 100
 </pre>
 
-View all the files assigned to a table in a particular date:
+View a list of up to 100 files assigned to a table in a particular date:
 <pre>
-get files where dbms = blobs_edgex and date = 220807  and table = image and limit = 100
+get files where dbms = blobs_edgex and table = image  and date = 220807 and limit = 100
 </pre>
 
 ### get rows count
@@ -459,14 +459,14 @@ get rows count where dbms = blobs_edgex and table = image
 
 ### Retrieve a file
 <pre>
-  file retrieve where dbms = blobs_edgex and id = 07da45a366e5778fc7d34bf231bddcfa.png and dest = !prep_dir
+  file retrieve where dbms = blobs_edgex and table = images and id = 07da45a366e5778fc7d34bf231bddcfa.png and dest = !prep_dir
 </pre>
 
 ### Delete a file or a group of files
 <pre>
-  file remove where dbms = blobs_edgex and id = 9439d99e6b0157b11bc6775f8b0e2490.png
+  file remove where dbms = blobs_edgex and table = videos and id = 9439d99e6b0157b11bc6775f8b0e2490.png
   ile remove where dbms = blobs_edgex and table  = image
-  file remove where dbms = blobs_edgex and date  = 220723
+  file remove where dbms = blobs_edgex and table = image and date  = 220723
 </pre>
   
 ### Drop a database:
@@ -479,6 +479,6 @@ drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
 <pre>
-run client 10.0.0.78:7848 file get (dbms = blobs_edgex and id = sample-5s.mp4) !!tmp_dir
+run client 10.0.0.78:7848 file get (dbms = blobs_edgex and table = images and id = sample-5s.mp4) !!tmp_dir
 </pre>
 
