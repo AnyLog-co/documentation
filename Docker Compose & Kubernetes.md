@@ -1,123 +1,44 @@
 # Deployment of Docker Compose & Kubernetes
 
-## Docker Compose 
-The [AnyLog docker-compose](https://github.com/AnyLog-co/docker-compose) provides support for deploying AnyLog using 
-docker-compose. There are 2 docker-compose files, one for `python:3.9-alpine` deployment and another for `Ubuntu:20.04` 
-based. Both docker-compose files contains deployment for:
+AnyLog can be deployed using either _Docker_ or _Kubernetes_. Our [deploymeents](deployments) directory provided detailed 
+directions in terms of deployment of each type; including troubleshooting, networking support, and persistent data 
+maintenance.
 
-**Required Deployments**
-* AnyLog-Network
-* Postgres v14-alpine
+In general, we recommend users begin with a single physical machine consisting of _Master_ node, 2 _Operator_ nodes and 
+a _Query_ node, as shown in the image below, using the [Demo Deployment Network](deployments/Docker/single_deployment_demo.md) 
+setup. 
 
-**Optional Deployments**
-* Remote-CLI
-* [AnyLog GUI](using%20the%20gui.md)
-* Grafana v7.5.7 
+![deployment diagram](imgs/deployment_diagram.png)
 
-### Deployment Process
-0. [Install docker and docker-compose](https://docs.docker.com/engine/install/)
-1. Select the docker-compose file and copy it into `docker-compose.yml`
-2. Configure `docker-compose.yml` with the proper IPs, ports and credentials specifically for your deployment
-3. Deploy docker-compose file
-```commandline
-docker-compose up -d 
-```
-4. To access to one of the docker processes: 
-```commandline
-docker attach --detach-keys="ctrl-d" ${CONTAINER_NAME} 
-```
 
-5. To stop containers via `docker-compose`
-```commandline
-docker-compose down 
-```
+## Node Types 
+In addition to the sample deployment, mentioned above, users can configure and deploy different types of AnyLog node(s) 
+independently. 
+* Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
+* Operator – A node that hosts the data. For this deployment we will have 2 Operator nodes.
+* Query – A node that coordinates the query process. 
+* Publisher - A node that supports distribution of data from device(s) to operator nodes. This node is not part of the
+deployment diagram. However, is often used in large scale projects. 
+* (default) REST - A node consisting **only** _TCP_ and _REST_, to act as a testbed / sandbox for playing with AnyLog 
+without external / internal processed running in the background.
 
-## Kubernetes
-AnyLog's kubernetes deployment has been tested using [minikube](https://minikube.sigs.k8s.io/docs/), and thus the steps are based on it.
+## Versions 
+AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _python:3.9-alpine_. 
+* develop - is a stable release that's been used as part of our Test Network for a number of weeks, and gets updated every 4-6 weeks.
+* predevelop - is our beta release, which is being used by our Test Network for testing purposes.
+* testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. 
+Usually, the image will be Ubuntu based, unless stated otherwise.
 
-### Requirements
-* [docker-compose](Docker%20Compose%20&%20Kubernetes.md#docker-compose)
-* [kompose](https://kompose.io/installation/) - A conversion tool for Docker Compose to container orchestrators such as Kubernetes (or OpenShift).
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) - Kubernetes command line tool
-* [minikube](https://minikube.sigs.k8s.io/docs/start/) - local Kubernetes, focusing on making it easy to learn and develop for Kubernetes.
 
-### Deployment
-1. Start minikube & Evaluate 
-```commandline
-minikube start --insecure-registry="${LOCAL_IP}:5000"
-eval $(minikube docker-env)
-```
+| Build | Base Image | CPU Architecture | Pull Command | Size | 
+|---|---|---|---|---|
+| develop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop` | 664MB | 
+| develop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop-alpine` | 460MB| 
+| predevelop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop` | ~245MB | 
+| predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~178MB | 
+| testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing` |
 
-2. Convert `docker-compose` file into Kubernetes
-```commandline
-mkdir $HOME/kube
-cd $HOME/kube
-kompose convert -f ${DOCKER_COMPOSE_PATH}
-```
-
-3. Deploy process
-```commandline
-kubectl apply -f $HOME/kube
-```
-
-4. Update anylog-node service to support remote access 
-```commandline
-kubectl edit service ${anylog-node-process-name}
-```
-
-5. Replace `ClusterIP` to `NodePort`
-```commandline
-# before 
-  ports:
-  - name: "13480"
-    nodePort: 31266
-    port: 13480
-    protocol: TCP
-    targetPort: 13480
-  - name: "13481"
-    nodePort: 31956
-    port: 13481
-    protocol: TCP
-    targetPort: 13481
-  - name: "13482"
-    nodePort: 31296
-    port: 13482
-    protocol: TCP
-    targetPort: 13482
-  selector:
-    io.kompose.service: ${SERVICE_NAME}
-  sessionAffinity: None
-  type: ClusterIP
-
-# after 
-  ports:
-  - name: "13480"
-    nodePort: 31266
-    port: 13480
-    protocol: TCP
-    targetPort: 13480
-  - name: "13481"
-    nodePort: 31956
-    port: 13481
-    protocol: TCP
-    targetPort: 13481
-  - name: "13482"
-    nodePort: 31296
-    port: 13482
-    protocol: TCP
-    targetPort: 13482
-  selector:
-    io.kompose.service: ${SERVICE_NAME}
-  sessionAffinity: None
-  type: NodePort
-```
-
-6. Generate `IP:PORT` to execute against
-```commandline
- minikube service --url ${SERVICE_NAME}
-```
-
-7. For AnyLog-GUI, Remote-CLI, Grafana and Postgres (optional) configure port-forwarding
-```commandline
-kubectl port-forward --address=${LOCAL_IP} service/${SERVICE_NAME} ${LOCAL_PORT}:${REMOTE_PORT}
-```
+By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
+are running, but no other process is enabled. This allows for users to play with the system with no other services 
+running in the background, but already having the default network configurations. The deployment command is: 
+`docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop`  
