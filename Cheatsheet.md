@@ -1,40 +1,27 @@
-# EdgeX
-The demo is using [EdgeX](https://www.edgexfoundry.org/) random data generator, with data being sent over their  
-_app-service-mqtt_. The contents that  changes are set to **BOLD**. For general information of Edgex, in terms of AnyLog,
-please review [EdgeX Usage](../../using%20edgex.md).
+# Cheatsheet 
 
-### Steps 
-1. Clone [lfedge-code](https://github.com/AnyLog-co/lfedge-code)
-```shell
-git clone https://github.com/AnyLog-co/lfedge-code 
-cd lfedge-code/edgex 
-```
+The following is intended as a "cheatsheet" or "FAQ" document containing some sample commands based on user input 
+The following provides simple commands, in generic format, to help with reviewing some basic commands needed to get start with 
+AnyLog. We recommend starting with [deployments](deployments) for detailed expliantion of how to deploy configure and 
+deploy an AnyLog network.   
 
-2. Update configurations in [.env](https://github.com/AnyLog-co/lfedge-code/blob/main/edgex/.env) file
-   1. Update the MQTT params to match the credentials in _anylgo-operator-node1_
-   ```dotenv
-    MQTT_TOPIC=anylogedgex
-    MQTT_IP_ADDRESS=139.162.200.15
-    MQTT_PORT=32150
-    MQTT_USER=""
-    MQTT_PASSWORD=""
-    ```
-   2. If you're using update the `ARCH` value in _line 27_. Sample ARCH value for ARM64: `ARCH=-arm64`
-   ```dotenv
-    # default amd64 machine 
-   ARCH=""
-    # update to arm64 machine 
-   ARCH=-arm64
-   ```
-3. Start EdgeX instance 
-```shell
-git clone https://github.com/AnyLog-co/lfedge-code 
-cd lfedge-code/edgex 
-```
+### Starting a Node 
+* How to start a node 
+* How to attach to a node
+* validate node is running 
 
-## Validate Deployment
-1. Make sure nothing crashed: `docker ps -a | grep edgex`
+### Within AnyLog 
+* get list of network connections
+* view running processes
+* get list of connected databases 
+* view data coming into Operator
+* view data coming via [`run mqtt client`](message%20broker.md)
+
+### EdgeX
+[Directions for EdgeX](deployments/Docker/EdgeX.md)
+* Validate EdgeX is running
 ```shell
+anylog@new-node:~$ docker ps -a | grep edgex 
 root@edgex-operator2:~# docker ps -a | grep edgex
 a13b169023b7   emqx/kuiper:1.1.1-alpine                                                   "/usr/bin/docker-ent…"   45 hours ago   Up 44 hours             127.0.0.1:20498->20498/tcp, 9081/tcp, 127.0.0.1:48075->48075/tcp                       edgex-kuiper
 56a3482bdfc8   edgexfoundry/docker-sys-mgmt-agent-go:1.3.1                                "/sys-mgmt-agent -cp…"   45 hours ago   Up 44 hours             127.0.0.1:48090->48090/tcp                                                             edgex-sys-mgmt-agent
@@ -51,8 +38,9 @@ ff7d350ca3ba   edgexfoundry/docker-support-scheduler-go:1.3.1                   
 fab7cbdcc29f   redis:6.0.9-alpine                                                         "docker-entrypoint.s…"   45 hours ago   Up 44 hours             127.0.0.1:6379->6379/tcp                                                               edgex-redis
 f135b724626e   nexus3.edgexfoundry.org:10003/edgex-devops/edgex-modbus-simulator:latest   "/simulator"             45 hours ago   Up 44 hours             127.0.0.1:1502->1502/tcp                                                               edgex-modbus-simulator
 ```
-2. Data is coming in: `curl http://127.0.0.1:48080/api/v1/reading 2> /dev/null`
-```json
+* View Data coming in
+```shell
+anylog@new-node:~$ curl http://127.0.0.1:48080/api/v1/reading | jq 
 [
   {
     "id": "000767a3-61bb-49e1-93ff-be4695eb5b43",
