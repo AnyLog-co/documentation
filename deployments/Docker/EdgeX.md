@@ -28,8 +28,8 @@ cd lfedge-code/edgex
    ```
 3. Start EdgeX instance 
 ```shell
-git clone https://github.com/AnyLog-co/lfedge-code 
 cd lfedge-code/edgex 
+docker-compose up -d
 ```
 
 ## Validate Deployment
