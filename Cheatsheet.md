@@ -3,7 +3,7 @@
 The following is intended as a "cheatsheet" or "FAQ" document containing some sample commands, showing basic functionality
 to validate an _AnyLog_ node and/or _EdgeX_ is running. 
 
-We recommend starting with [deployments](deployments) for detailed  explanation of how to deploy configure and AnyLog.
+We recommend starting with [deployments](deployments) for detailed  explanation of how to deploy and configure AnyLog.
 
 ### Starting a Node
 * How to start a node
