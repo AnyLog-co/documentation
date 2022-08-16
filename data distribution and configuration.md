@@ -158,7 +158,7 @@ Tables Supported:
 ## Test Cluster policies
 The command below tests the validity of the Cluster policies:
 <pre>
-blockchain test metadata
+blockchain test cluster
 </pre>
 
 ## Example Policies

@@ -22,7 +22,7 @@ Every node in the network is configured to periodically retrieve updates from th
 the metadata is organized in a local log file in a JSON format.
 
 A node operates with the global metadata as follows:  
-* The node operates against the local log file and does not require continues connection to the global metadata platform.
+* The node operates against the local log file and does not require continuous connection to the global metadata platform.
 * The node may maintain a copy of the local JSON log file in a local database.
 * The node is configured to periodically retrieve all updates from the global platform.  
 
@@ -110,7 +110,7 @@ The following command updates a master node with a new policy:
 blockchain push [policy] 
 </pre>
 
-If the update is done from a node which is not the master node, the update needs to be send as a message to the master node as in the example below:
+If the update is done from a node which is not the master node, the update needs to be sent as a message to the master node as in the example below:
 
 <pre>
 run client !master_node blockchain push !test_policy
@@ -126,12 +126,14 @@ blockchain pull to [json | sql | stdout] [file name]
 
 Examples:  
 To retrieve data from the master node:  
-* Use the command ***blockchain pull*** to log to pull the log file from the master node. The output file will be paced in the blockchain directory with the following options:
+* Use the command ***blockchain pull*** to pull the log file from the master node. The output file will be paced in the blockchain directory with the following options:
 
 | Option        | Explanation  |
 | ------------- | ------------| 
 | blockchain pull to dbms | The output file is a set of SQL insert statements to create the metadata on a local database |
 | blockchain pull to json | The output file are the JSON policies |
+| blockchain pull to stdout | The output is policies displayed on the stdout |
+
 
 * Use the command ***file get*** to copy the output file (of thhe pull command) from a node (like the master node) to a destination node.
 <pre>
@@ -169,11 +171,11 @@ The following process creates the local blockchain database:
 2. Connect the node to the local database.    
   * Example using PostgreSQL to manage the blockchain data:
   <pre>
-  connect dbms psql anylog@127.0.0.1:demo 5432 blockchain
+  connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
   </pre>
   * Example using SQLite to manage the blockchain data:   
   <pre>
-  connect dbms sqlite anylog@127.0.0.1:demo 5432 blockchain
+  connect dbms blockchain where type = sqlite
   </pre>
 
 3. Create the local ***ledger*** table.
