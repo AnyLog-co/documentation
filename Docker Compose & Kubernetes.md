@@ -44,4 +44,5 @@ no other services running in the background, but already having the default netw
 is: 
 
 ```
-docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop```  
+docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
+```
