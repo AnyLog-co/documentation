@@ -1,22 +1,121 @@
 # Cheatsheet 
 
-The following is intended as a "cheatsheet" or "FAQ" document containing some sample commands based on user input 
-The following provides simple commands, in generic format, to help with reviewing some basic commands needed to get start with 
-AnyLog. We recommend starting with [deployments](deployments) for detailed expliantion of how to deploy configure and 
-deploy an AnyLog network.   
+The following is intended as a "cheatsheet" or "FAQ" document containing some sample commands, showing basic functionality
+to validate an _AnyLog_ node and/or _EdgeX_ is running. 
 
-### Starting a Node 
-* How to start a node 
+We recommend starting with [deployments](deployments) for detailed  explanation of how to deploy configure and AnyLog.
+
+### Starting a Node
+* How to start a node
+```shell
+# docker
+anylog@new-node:~$ cd deployments/docker-compose/anylog-rest
+anylog@new-node:~$ docker-compose up -d 
+```
 * How to attach to a node
+```shell
+# docker -- ctrl-d to detach 
+docker attach --detach-keys="ctrl-d" anylog-node 
+```
 * validate node is running 
+```shell
+anylog@new-node:~$ curl -X GET ${IP}:${REST_PORT} -H "command: get status" -H "User-Agent: AnyLog/1.23"
+```
 
 ### Within AnyLog 
 * get list of network connections
+```commandline
+AL anylog-node > get connections
+Type      External Address     Local Address        
+---------|--------------------|--------------------|
+TCP      |139.162.200.15:32048|139.162.200.15:32048|
+REST     |139.162.200.15:32049|139.162.200.15:32049|
+Messaging|Not declared        |Not declared        | 
+```
 * view running processes
-* get list of connected databases 
-* view data coming into Operator
-* view data coming via [`run mqtt client`](message%20broker.md)
+```commandline
+AL anylog-node > get processes 
 
+    Process         Status       Details                                                                     
+    ---------------|------------|---------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 139.162.200.15:32048, Threads Pool: 6                        |
+    REST           |Running     |Listening on: 139.162.200.15:32049, Threads Pool: 5, Timeout: 30, SSL: None|
+    Operator       |Not declared|                                                                           |
+    Publisher      |Not declared|                                                                           |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
+    Distributor    |Not declared|                                                                           |
+    Consumer       |Not declared|                                                                           |
+    MQTT           |Not declared|                                                                           |
+    Message Broker |Not declared|No active connection                                                       |
+    SMTP           |Not declared|                                                                           |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
+    Query Pool     |Running     |Threads Pool: 3                                                            |
+    Kafka Consumer |Not declared|                                                                           |
+```
+* get list of connected databases 
+```commandline
+AL anylog-node > get databases 
+
+List of DBMS connections
+Logical DBMS         Database Type IP:Port                        Storage
+-------------------- ------------- ------------------------------ -------------------------
+blockchain           psql          127.0.0.1:5432                 Persistent
+system_query         sqlite        Local                          MEMORY
+```
+* view data coming into Operator
+```commandline
+AL anylog-node > get operator 
+
+Status:     Active
+Time:       1:37:43 (H:M:S)
+Policy:     29ebc0cf136de22b25c3036a32363f65
+Cluster:    e9c30c8935f845a8976ff0f827378b92
+Member:     113
+Statistics JSON files:
+DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
+---------------------- ---------------------- ---------- ---------- --------------------
+test                  rand_data                       4         90 2022-07-29 00:34:07
+
+Statistics SQL files:
+DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
+---------------------- ---------------------- ---------- ---------- --------------------
+test                  rand_data                       4          0 2022-07-29 00:01:05
+
+Errors summary
+Error Type           Counter DBMS Name Table Name Last Error Last Error Text 
+--------------------|-------|---------|----------|----------|---------------|
+Duplicate JSON Files|      0|         |          |         0|               |
+JSON Files Errors   |      0|         |          |         0|               |
+SQL Files Errors    |      0|         |          |         0|               |
+```
+* view data coming via [`run mqtt client`](message%20broker.md)
+```commandline
+AL anylog-node > get msg client 
+
+Subscription: 0001
+User:         unused
+Broker:       local
+Connection:   Not connected: MQTT_ERR_NO_CONN
+
+     Messages    Success     Errors      Last message time    Last error time      Last Error
+     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
+            843         843           0  2022-07-29 00:34:24
+     
+     Subscribed Topics:
+     Topic       QOS DBMS  Table     Column name Column Type Mapping Function        Optional Policies 
+     -----------|---|-----|---------|-----------|-----------|-----------------------|--------|--------|
+     anylogedgex|  0|test|rand_data|timestamp  |timestamp  |now()                  |False   |        |
+                |   |     |         |value      |float      |['[readings][][value]']|False   |        |
+
+     
+     Directories Used:
+     Directory Name Location                       
+     --------------|------------------------------|
+     Prep Dir      |/app/AnyLog-Network/data/prep |
+     Watch Dir     |/app/AnyLog-Network/data/watch|
+     Error Dir     |/app/AnyLog-Network/data/error|
+```
 ### EdgeX
 [Directions for EdgeX](deployments/Docker/EdgeX.md)
 * Validate EdgeX is running
