@@ -64,7 +64,7 @@ through a third-party broker.
 git clone https://github.com/AnyLog-co/lfedge-code
 ```
 2. Deploy Edgex with [random data generator](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesRandomDeviceService/#edgex-apis-related-to-random-integer-device-service) - by default the node is sending data into third-party CloudMQTT broker, using 
-`anylogedgex` topic. Please review [deployment directions](deployments/docker-compose/Edgex.md) to configure MQTT as 
+`anylogedgex` topic. Please review [deployment directions](deployments/Docker/EdgeX.md) to configure MQTT as 
 you see fit.  
 ```shell  
 cd lfedge-code/edgex
