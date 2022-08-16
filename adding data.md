@@ -230,8 +230,8 @@ example is correlated to the sample POST commands.
   dbms=bring [dbms] and 
   table=bring [table] and 
   column.timestam.timestamp=bring [timestamp] and 
-  column.value=(type=int and value=bring[value])
- )>  
+  column.value=(type=int and value=bring [value])
+)>  
 ```
 **cURL Example**: 
 ```
