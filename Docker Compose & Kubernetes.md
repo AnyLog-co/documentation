@@ -1,6 +1,6 @@
 # Deployment of Docker Compose & Kubernetes
 
-AnyLog can be deployed using either _Docker_ or _Kubernetes_. Our [deploymeents](deployments) directory provided detailed 
+AnyLog can be deployed using either _Docker_ or _Kubernetes_. Our [deployments](deployments) directory provided detailed 
 directions in terms of deployment of each type; including troubleshooting, networking support, and persistent data 
 maintenance.
 
@@ -44,5 +44,9 @@ no other services running in the background, but already having the default netw
 is: 
 
 ```
-docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
+docker run --network host -it --detach-keys="ctrl-d" \
+    --name anylog-node \
+    -e ANYLOG_TCP_PORT=2148 \ 
+    -e ANYLOG_REST_PORT=2149 \
+--rm anylogco/anylog-network:develop
 ```
