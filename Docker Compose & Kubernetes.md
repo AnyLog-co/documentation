@@ -41,4 +41,5 @@ Usually, the image will be Ubuntu based, unless stated otherwise.
 By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
 are running, but no other process is enabled. This allows for users to play with the system with no other services 
 running in the background, but already having the default network configurations. The deployment command is: 
-`docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop`  
+
+```docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop```  
