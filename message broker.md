@@ -223,12 +223,12 @@ get msg brokers
 </pre>
 
 ### View summary of AnyLog processes as a local broker
-Users can see the summary of messages processed on ANyLog as a broker using the following command:
+Users can see the summary of messages processed on AnyLog as a broker using the following command:
 <pre>
-get broker
+get local broker
 </pre>
 Note: this command only provides statistics on data published using the broker IP and Port. 
-Data that is published using "local", is not included in the ***get broker*** command statistics.
+Data that is published using "local", is not included in the ***get local broker*** command statistics.
 
 ### Example
 The example below connects to a broker to pull data assigned to a topic.
@@ -411,7 +411,7 @@ Note: the key value pair ***broker=local*** replace the assignment of an IP and 
 
 Use the following command to view messages processed on AnyLog as a broker:
 <pre>
-get broker
+get local broker
 </pre>
 
 ### Publish a message on the AnyLog node 

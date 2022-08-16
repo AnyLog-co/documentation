@@ -20,7 +20,7 @@ Note: Issuing a query to multiple nodes is explained in the [Query nodes in the 
 # Configuring a local database
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
-are [PosrgreSQL](https://www.postgresql.org/) and [SQLite](https://www.sqlite.org/).   
+are [PosrgreSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/) and [MongoDB](https://www.mongodb.com/) for blobs storage.   
 Users determine which physical database to use and a node operates indifferently regardless of the physical database selected.  
 When a logical database is created, users name the physical database that is assigned to the logical database. The association
 will host the database tables in the physical database associated with the logical database.  

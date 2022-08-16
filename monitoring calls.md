@@ -72,12 +72,17 @@ The non JSON reply has 2 sections showing configurations and statistics.
 
 | Attribute name | Details  |
 | ------------- | ------------| 
-| DBMS-Table | The Database and table associated with the data |
-| File Put | Counter for PUT calls to add file data |
-| File Rows | Counter for rows within the files added |
-| Streaming Put | Counter of PUT calls to add rows to the streaming buffers |
-| Streaming Rows | Counter for rows added to the streaming buffers |
-| Immediate | Counter for rows added to the databases without buffer wait |
+| DBMS-Table | The Database and table associated with the info |
+| Put Files | Counter of the number of calls to add data (in files) using PUT request |
+| Put Rows | Counter for the number of rows added using PUT requests |
+| Streaming Calls | Counter of calls to add rows to the streaming buffers (using POST or a message broker) |
+| Streaming Rows | Counter for rows added to the streaming buffers  (using POST or a message broker) |
+| Cached Rows | Counter for rows in the buffers (that needs to be flushed) |
+| Immediate | Counter for rows added to the databases without buffer wait (immediate flag is on) |
+| Threshold Volume | The buffer volume threshold in KB |
+| Buffer Fill | The percentage of the buffer which is with data (that needs to be flushed) |
+| Time Threshold | The time threshold in seconds |
+| Time Left | The remaining time to flush the cached data |
 | Last Process | Last process return value |
 
 
@@ -88,11 +93,11 @@ The mapping is done using the command ***run mqtt client***, details are availab
 
 Usage: 
 <pre>
-get msg clients
+get msg clients 
 get msg client N
 </pre>
 N represents the subscription ID which is assigned for each ***run mqtt client*** call.
-if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.   
+if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
 
 The reply has 4 sections showing configurations and statistics.  
 
@@ -124,7 +129,13 @@ Details of the topic and the ,apping instructions between the source data and th
 
 ***Section D attributes:***
 
-The locations of the local directories that are used to organize the data for the database ingestion. 
+The locations of the local directories that are used to organize the data for the database ingestion.   
+This section is provided by adding the keyword detailed to the command:
+<pre>
+get msg clients detailed 
+get msg client N detailed
+</pre>
+
 
 ###Example reply:
 <pre>
