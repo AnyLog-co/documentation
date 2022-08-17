@@ -1,5 +1,5 @@
 # Remote CLI
-The following queries were all executed through the Query node showing to show that from a single point the user can get 
+The following queries were all executed through the Query node to show that from a single point the user can get 
 not only the data, but also metadata and general machine information.
 
 * Show tables in network: 
@@ -13,11 +13,11 @@ not only the data, but also metadata and general machine information.
 ![get columns](../imgs/remote_cli_get_columns.png)
 
 * Query data in Blockchain - list all operators for company _Lit San Leandro_. There are 6 operators, but we only see 1 
- due to screen size. 
-
-`curl -X GET 23.239.12.151:32349 -H "command:blockchain get operator where dbms=lit" -H "User-Agent: AnyLog/1.23"` 
-![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png) 
-
+ due to screen size. Please note, for `where`  conditions, user(s) should know what they're looking for -- whether it's 
+a specific type of node based on a given IP address; or all the policies associated with a given owner (company).  
+  
+`curl -X GET 23.239.12.151:32349 -H 'command:blockchain get operator where company="Lit San Leandro"' -H "User-Agent: AnyLog/1.23"` 
+![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png)
 
 * Get list of data nodes (operators) and what kind of data they contain. 
 
