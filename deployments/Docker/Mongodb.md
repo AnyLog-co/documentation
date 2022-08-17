@@ -1,7 +1,7 @@
 # MongoDB Process 
 
 The [image processing document](../../image%20mapping.md) provide details into the general process of how AnyLog
-processes images and videos into mongodb and/or local folder(s). This document covers the deployment process from the
+processes images and videos into MongoDB and/or local folder(s). This document covers the deployment process from the
 AnyLog side. 
 
 ### Start MongoDB 
@@ -11,7 +11,7 @@ git clone https://github.com/AnyLog-co/deployments
 ```
 2. (Optional) Configure MongoDB 
 ```dotenv
-# deployments/docker-compose/mongodb 
+# deployments/docker-compose/mongodb
 PORT=27017
 MONGO_USER=admin
 MONGO_PASSWORD=passwd
@@ -23,7 +23,7 @@ docker-compose up -d
 ```
 4. Accessing MongoDB
 ```shell
-docker exec -it mongodb mongo
+docker exec -it MongoDB mongo
 ```
 
 ### Accessing MongoDB via AnyLog
@@ -93,7 +93,7 @@ blockchain insert where policy=!mapping_policy and local=true and master=!ledger
 ```
 
 4. Initiate `mqtt client` process with local broker 
-```shell
+```anylog
 <run mqtt client where  broker=local and port=!anylog_broker_port and log=false and topic=(
   name=anylogedgex-images and 
   policy=!policy_id
