@@ -113,16 +113,20 @@ get files where dbms = blobs_edgex and table = video and date = 220723 and limit
 get files where dbms = blobs_edgex and date = 220723  limit = 100
 </pre>
 
-### get rows count
+### get files count
 
-Use the following example to list the number of blobs per each table in the database.  
+The command returns the count of files stored in each table of the database.  
+Usage:
+<pre>
+get files count where dbms = [dbms name] and table = [table name]
+</pre>
+* DBMS name is optional - if not provided, all databases are considered.
+* Table name is optional - if not provided, all tables of the specified database are considered.
+
 Example:
 <pre>
-get rows count where dbms = blobs_edgex and table = image
+get files count where dbms = blobs_edgex and table = image
 </pre>
-
-Additional information is available at the [get rows count command](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-rows-count-command) section.
-
 
 ### Retrieve a file or files
 
