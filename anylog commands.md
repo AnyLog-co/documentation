@@ -277,7 +277,8 @@ Options:
 | get size [dir name] [YYYY-MM-DD] | List the size of a directory including sub-directories. |
 | get access [path and file name or directory name] | Get the access rights to the provided file or directory. |
 | get data nodes | Details the Operators that host each table's data. |
-| [get rows count](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands) | Details the number of rows in all or specified tables. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands).|
+| [get rows count](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-data-commands) | Details the number of rows in all or specified tables.|
+| [get files count](https://github.com/AnyLog-co/documentation/blob/master/image%20mapping.md#get-files-count) | Details the number of files stored in all or specified tables.|
 | [get query execution](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
 | get timezone info | Get the timezone on the local machine. |
 | get datetime [date-time function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#get-datetime-command) | Translate a date-time function to the date-time string. |
