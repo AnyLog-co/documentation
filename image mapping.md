@@ -101,10 +101,18 @@ drop dbms blobs_lsl from mongo where ip = localhost and port = 27017
 
 ### Get the list of files stores in the blobs database
 
+Usage:
+<pre>
+get files where dbms = [dbms name] and table = [table name] and id = [file name] and hash = [hash value] and date = [YYMMDD in UTC] and limit = [limit]
+</pre>
+Specifying the dbms is mandatory. All the other parameters are optional and serve as a filter.  
+* Limit sets a cap on the number of files listed.
+* Date is a 6 digits date in the format YYMMDD and limits the listed file by the update date. 
+
 The following examples retrieve list of files assigned to a table (and their file size):
 <pre>
 get files where dbms = blobs_edgex and table = image and limit = 100
-get files where dbms = blobs_edgex and table = image and limit = 100
+get files where dbms = blobs_edgex and table = image
 </pre>
 
 Use the following example to View all the files assigned to a table in a particular date:
