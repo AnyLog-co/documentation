@@ -169,7 +169,8 @@ The casting options are detailed in the table below:
 | rjust(x) | Cast to a ***right-justified*** string with a given x bytes width.  |
 | format(formatting type) | Apply formating instructions on the column value.  |
 
-Note: multiple casting is allowed example:
+Note: multiple casting is allowed.  
+Example:
 
 <pre>
 run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
@@ -187,7 +188,7 @@ The following chart provides formatting types options:
 | :e | Scientific format |
 | :+ | Places the plus sign to the left most position |
 
-The following examples provide number formatting with padding for int and floats:
+The following examples provide number formatting with padding for int and float:
 | Example  | details |
 | ---- | -----------------|
 | :.3f | float with digits length  |
