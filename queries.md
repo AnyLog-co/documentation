@@ -164,8 +164,61 @@ The casting options are detailed in the table below:
 | ---- | -----------------|
 | float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point. |
 | int | Cast to an ***int***. |
+| str | Cast to a ***string***. |
 | ljust(x) | Cast to a ***left-justified string*** with a given x bytes width.  |
 | rjust(x) | Cast to a ***right-justified*** string with a given x bytes width.  |
+| format(formatting type) | Apply formating instructions on the column value.  |
+
+Note: multiple casting is allowed example:
+
+<pre>
+run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
+</pre>
+The example above represents the speed as an int and formats the speed value with commas. 
+
+The following chart provides formatting types options:
+
+| Type  | details |
+| ---- | -----------------|
+| :, | Use a comma as a thousand separator |
+| :b | Binary format |
+| :x | Hex format |
+| :o | Octal format |
+| :e | Scientific format |
+| :+ | Places the plus sign to the left most position |
+
+The following examples provide number formatting with padding for int and floats:
+| Example  | details |
+| ---- | -----------------|
+| :.3f | float with digits length  |
+| :08.3f | float with padding zeros  |
+| :8d | int with padding zeros  |
+
+The following queries provides fill formatting examples:
+<pre>
+run client () sql lsl_demo format = table "select count(*)::str::format(0:*>8s)  from ping_sensor"
+
+count(*)
+--------
+******21
+</pre>
+
+<pre>
+run client () sql lsl_demo format = table "select count(*)::format(0:#<8d)  from ping_sensor"
+
+count(*)
+--------
+21######
+</pre>
+
+<pre>
+run client () sql lsl_demo format = table "select count(*)::str::format(0:*^8s) from ping_sensor"
+
+count(*)
+--------
+***21***
+</pre>
+
 
 
 ## Get datetime command
