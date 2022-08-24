@@ -29,7 +29,7 @@ The following provides directions for deploying AnyLog using the [demo cluster d
       * NODE_NAME
       * COMPANY_NAME
       * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
-   3. In [anylog_operator1.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator1.env) & [anylog_operator2.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anyolog_operator2.env) update
+   3. In [anylog_operator1.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator1.env) & [anylog_operator2.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator2.env) update
       * NODE_NAME
       * COMPANY_NAME
       * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
