@@ -65,19 +65,19 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
-| [Adding Data to Nodes in the Network](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md) | Delivering data to Operators in the network. |
-| [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md) | Delivering data to Operators using a MQTT broker. |
-| [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
-| [Queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
-| [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
-| [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/using%20grafana.md) | Integrating Grafana to visualize data. |
+| [Data Distribution and Configuration](data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
+| [Adding Data to Nodes in the Network](adding%20data.md) | Delivering data to Operators in the network. |
+| [Using MQTT Broker](mqtt.md) | Delivering data to Operators using a MQTT broker. |
+| [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
+| [Queries and info requests](queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
+| [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
+| [Using Grafana](northbound%20connectors/using%20grafana.md) | Integrating Grafana to visualize data. |
  
 ## AnyLog Install
 
-AnyLog can be installed from Docker or by downloading the codebase from github and calling an install script.
-* Docker install is detailed in the section: [AnyLog Docker Install](https://github.com/AnyLog-co/documentation/blob/master/anylog%20docker%20install.md).
-* Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](https://github.com/AnyLog-co/documentation/blob/master/starting%20an%20anylog%20instance.md).
+AnyLog can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an install script.
+* Docker install is detailed in the section: [AnyLog Docker Install](deployments/).
+* Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
 
@@ -215,7 +215,7 @@ Every node maintains 4 dynamic logs that capture different types of events:
 * The event log - registers the executed commands
 * The error log - registers the commands that failed to execute.
 * The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
-Additional information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
+Additional information is available at [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
 <pre>
@@ -233,14 +233,14 @@ reset query log
 
 ## Making a node a member of the network
 
-Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md).
+Connecting a node to the network is explained in [network configuration](network%20configuration.md).
 
 Users can associate a node to different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks or they switch between a main-net and a testnet.
 
 ### Switching between different setups
 
-Users may have multiple [directories setups](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure)
+Users may have multiple [directories setups](getting%20started.md#local-directory-structure)
 on the same node. Using the following command, users can associate a node to a different setup location:
 <pre>
 set anylog home [path to AnyLog root]
@@ -250,7 +250,7 @@ AnyLog root is the ***AnyLog-Network*** directory.
 ### Switching between different master nodes
 
 Users may need to switch between different master nodes.
-The following command makes the [blockchain synchronizer process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
+The following command makes the [blockchain synchronizer process](background%20processes.md#blockchain-synchronizer)
  connect to a different master node:
 <pre>
 blockchain switch network where master = [IP:Port]
@@ -260,7 +260,7 @@ blockchain switch network where master = [IP:Port]
 
 Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
-Additional information on the REST API to AnyLOg is available at the following section: [Using REST](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md).
+Additional information on the REST API to AnyLOg is available at the following section: [Using REST](using%20rest.md).
 
  
 ## Sending messages to peers in the network
@@ -281,7 +281,7 @@ run client (destination) command
 ***run client*** - Making the current node a client of a member node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
 ***(destination)*** - the destination nodes identified by the IP and Port assigned to their
-[TCP Server configuration](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process).
+[TCP Server configuration](background%20processes.md#the-tcp-server-process).
 Destination can be represented in any of the following ways:
 * As a comma seperated list of IP-Ports pairs. The IP and Port are seperated by space. For example: ```139.162.126.241 2048, 172.105.13.202 2048)```    
 * For a single destination node - as an IP-Port string. For example:  ```10.0.0.78:20348```  
