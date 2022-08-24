@@ -55,7 +55,7 @@ The ***schema*** sections are detailed in the chart below:
 
 Note: An error is returned if both - the ***bring*** and ***default*** keys are not provided.
 
-## Data type supported
+### Data type supported
 
 * string
 * integer
@@ -64,6 +64,19 @@ Note: An error is returned if both - the ***bring*** and ***default*** keys are 
 * timestamp
 * bool
 * varchar
+
+## Mapping blobs data
+Blob data, like images and video, can be designated to be treated efficiently.   
+The following options extend schema declarations with large objects functionality:
+
+| Key           | Data Type | Mandatory | Details |
+| ------------- | --------- | --------- | ----------------------|
+| blob          | bool      |   No      | Indicating a blob data type. The implications are that the blob data will be stored in a dedicated object data store.  |
+| extension     | String    |   No      | Added to the file name such that when the data is retrieved, the type will designate the format. For example: mp4 |
+| apply         | String    |   No      | A function that will be applied on the source data in the mapping process. for example: base64decoding |
+| hash          | String    |   No      | The hash method to apply on the blob data and serves as a unique identifier to the blob. | 
+|               |           |           | The value is stored in the relational database such that a query can return a blob identifier to allow retrieval of the blob data.  |
+
 
 # London Air Example
 
