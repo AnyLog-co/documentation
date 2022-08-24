@@ -71,10 +71,10 @@ The following options extend schema declarations with large objects functionalit
 
 | Key           | Data Type | Mandatory | Details |
 | ------------- | --------- | --------- | ----------------------|
-| blob          | bool      |   No      | Indicating a blob data type. The implications are that the blob data will be stored in a dedicated object data store.  |
+| blob          | Bool      |   No      | Indicating a blob data type. The implications are that the blob data will be stored in a dedicated object data store.  |
 | extension     | String    |   No      | Added to the file name such that when the data is retrieved, the type will designate the format. For example: mp4 |
 | apply         | String    |   No      | A function that will be applied on the source data in the mapping process. for example: base64decoding |
-| hash          | String    |   No      | The hash method to apply on the blob data and serves as a unique identifier to the blob. | 
+| hash          | String    |   No      | The hash method to apply on the blob data to generate a unique identifier to the blob. | 
 |               |           |           | The value is stored in the relational database such that a query can return a blob identifier to allow retrieval of the blob data.  |
 
 
