@@ -246,9 +246,10 @@ Options:
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
-| [get workers pool](#get-pools-info) | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
+| [get query pool](#get-pools-info) | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
 | [get tcp pool](#get-pools-info) | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
 | [get rest pool](#get-pools-info) | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
+| [get msg pool](#get-pools-info) | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
 | get threads | The list of the threads executing users scripts. |
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
