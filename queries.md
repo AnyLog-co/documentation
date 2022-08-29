@@ -162,7 +162,7 @@ The casting options are detailed in the table below:
 
 | Cast  | details |
 | ---- | -----------------|
-| float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point. |
+| float(x) | Cast to a ***float*** value. X represents rounding to x digits after the decimal point. Adding the percent sigh ***%*** before the digits adds comma separation and padding zeros|
 | int | Cast to an ***int***. |
 | str | Cast to a ***string***. |
 | ljust(x) | Cast to a ***left-justified string*** with a given x bytes width.  |
@@ -170,12 +170,17 @@ The casting options are detailed in the table below:
 | format(formatting type) | Apply formating instructions on the column value.  |
 
 Note: multiple casting is allowed.  
-Example:
-
+Examples:
 <pre>
 run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
 </pre>
 The example above represents the speed as an int and formats the speed value with commas. 
+<pre>
+run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
+</pre>
+The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
+This has the same result as formatting with the formatting string: ***:,.03f***.
+
 
 The following chart provides formatting types options:
 
