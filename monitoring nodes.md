@@ -360,3 +360,14 @@ schedule name = cpu_percent and time = 15 seconds task cpu_percent = get node in
 schedule name = get_operator_stat and time = 15 seconds task operator_stat = get operator stat format = json
 schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
 </pre>
+
+
+## Monitoring Nodes Operations
+
+Users can monitor node status throughout execution periods using the command: ***continuous***.  
+The command continuously monitors status and provides status results to the stdout.  
+
+Usage:
+
+
+
