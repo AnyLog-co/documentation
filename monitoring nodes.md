@@ -368,6 +368,32 @@ Users can monitor node status throughout execution periods using the command: **
 The command continuously monitors status and provides status results to the stdout.  
 
 Usage:
+<pre>
+continuous [list of commands]
+</pre>
 
+The allowed commands are detailed below. If the command is longer than a single word, it needs to be enclosed in quotations.
+
+
+| Command option | Details  |
+| ------------- | ------------| 
+| cpu  | CPU usage | 
+| cpu anylog  | CPU usage of AnyLog. | 
+| cpu [process name]  | CPU usage of the named process. | 
+| get operator | The operator status. |
+| get streaming | The streaming buffers status. |
+| get query pool | The query threads status. |
+| get operator pool | The operator threads status. |
+| get rest pool | The REST threads status. |
+| get tcp pool | The TCP threads status. |
+| get msg pool | The message broker threads status. |
+
+Example:
+
+<pre>
+continuous cpu "cpu anylog" "cpu postgres" “get operator”
+</pre>
+
+Continuous repeats the information every 5 seconds. If a key on the keyboard is hit, continuous terminates. 
 
 
