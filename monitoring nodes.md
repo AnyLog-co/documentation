@@ -394,6 +394,7 @@ Example:
 continuous cpu "cpu anylog" "cpu postgres" “get operator”
 </pre>
 
-Continuous repeats the information every 5 seconds. If a key on the keyboard is hit, continuous terminates. 
+Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.
+
 
 
