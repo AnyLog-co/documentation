@@ -293,12 +293,14 @@ Options:
 | get platform info | Info on the type and version of the OS, node name and type of processor. |
 | get memory info | Info on the memory of the current node. The function depends on psutil installed. |
 | get cpu info | Info on the CPU of the current node.  The function depends on psutil installed. |
+| get cpu usage | Info on current usage of each CPU.  The function depends on psutil installed. |
 | get ip list | The list of IP addresses available on the node. |
 | get cpu temperature | The CPU temperature. |
 | get os process [options] | Different statistics on the OS processes. Details are available [here](monitoring%20nodes.md#the-get-os-process-command).|
 | get node info [options] | Different statistics on the node. Details are available [here](monitoring%20nodes.md#the-get-node-info-command).|
 | get monitored | Retrieve the list of topics monitored by an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
 | get monitored [topic] | Retrieve monitored info on a specific topic from an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
+
 
 
 Additional information is available at [monitoring nodes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes).
@@ -336,26 +338,46 @@ get servers where company = anylog bring [operator][ip] : [operator][port] --- [
 </pre>
 
 
-## Get pools info
+## Get pool info
 
-These commands return the number of threads aligned to satisfy tasks and a flag indicating if each thread is busy executing a task or in a wait state for a new task.  
-For example:
+These are a group of commands that provides statistical information on groups of threads that are leveraged in different processes.  
+These commands return, for each thread in the group, its current status and usage.  
+Usage:
 <pre>
-get workers pool
+get [group name] pool where details = [true/false] and reset = [true/false]
+</pre>
+* The ***where*** condition is optional. It provides additional details on the usage of each thread
+* ***reset*** is optional. If used the pool statistics are set to 0.
+
+Group names are one of the following:
+
+| Group Name    | Usage       |
+| ------------- | ------------| 
+| query | Threads supporting queries |
+| operator | Threads supporting the operator proccesses |
+| rest | Threads supporting communications with applications |
+| tcp | Threads supporting communications with network peers |
+| msg | Threads supporting the message broker functionalities |
+
+
+Example 1:
+<pre>
+get tcp pool
 </pre>
 returns:
 <pre>
-Workers Pool with 3 workers: [0, 1, 1]
+TCP Pool with 6 threads: [1, 1, 0, 0, 0, 0]
 </pre>
-Meaning that the first thread of the 3 is in rest while 2 threads are busy.
+Meaning that the first 2 threads of the 6 are busy while 4 threads are busy.
+
+Example 2:
 <pre>
-get query pool
+get query pool where details = true
 </pre>
-returns:
-<pre>
-Query Pool with 3 workers: [0, 1, 1]
-</pre>
-Meaning that the first thread of the 3 is in rest while 2 threads are busy.
+The command lists the threads and provides, for each thread:
+* Status - 0 means currently at rest and 1 busy.
+* Calls - the number of time the thread was called.
+* Percentage - percentage of usage.
 
 
 ## REST Command
