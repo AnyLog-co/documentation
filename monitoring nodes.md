@@ -92,12 +92,14 @@ get os process
 get os process anylog
 get os process [pid]
 get os process all
+get os process list
 </pre>
 
 * The command ***get os process*** is identical to ***get os process anylog*** and provides info on the AnyLog process.
 * The command ***get os process [pid]*** provides info on the process with the provided pid.
 * The command ***get os process all*** provides info on all processes. As CPU measurement is using a second interval,
 on the AnyLog CLI, a bar displays the command progress.
+* The command ***get os process list*** lists the processes and their process IDs.
 
 
 ## The "get node info" command
