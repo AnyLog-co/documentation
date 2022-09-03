@@ -348,7 +348,7 @@ get [group name] pool where details = [true/false] and reset = [true/false]
 </pre>
 * The ***where*** condition is optional. 
 * ***details*** provides additional details on the usage of each thread.
-* ***reset*** is optional. If used the pool statistics are set to 0.
+* ***reset*** is optional. If used, the pool statistics are set to 0.
 
 Group names are one of the following:
 
