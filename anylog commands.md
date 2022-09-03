@@ -246,10 +246,11 @@ Options:
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
 | get query mode | The query param variables assigned by the command ***set query mode***. |
-| [get query pool](#get-pools-info) | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
-| [get tcp pool](#get-pools-info) | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
-| [get rest pool](#get-pools-info) | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
-| [get msg pool](#get-pools-info) | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
+| [get query pool](#get-pool-info) | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
+| [get tcp pool](#get-pool-info) | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
+| [get rest pool](#get-pool-info) | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
+| [get msg pool](#get-pool-info) | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
+| [get operator pool](#get-pool-info) | Details the number of operator threads. The number of threads is set by the command ***run operator***. |
 | get threads | The list of the threads executing users scripts. |
 | get scheduler [n]| Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname | The name assigned to the node. | 
@@ -337,7 +338,6 @@ get servers where company = anylog and dbms = lsl_demo and table = ping_sensor
 get servers where company = anylog bring [operator][ip] : [operator][port] --- [operator][id]
 </pre>
 
-
 ## Get pool info
 
 These are a group of commands that provides statistical information on groups of threads that are leveraged in different processes.  
@@ -346,7 +346,8 @@ Usage:
 <pre>
 get [group name] pool where details = [true/false] and reset = [true/false]
 </pre>
-* The ***where*** condition is optional. It provides additional details on the usage of each thread
+* The ***where*** condition is optional. 
+* ***details*** provides additional details on the usage of each thread.
 * ***reset*** is optional. If used the pool statistics are set to 0.
 
 Group names are one of the following:
