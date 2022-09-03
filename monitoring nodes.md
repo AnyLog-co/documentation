@@ -380,6 +380,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 | cpu  | CPU usage | 
 | cpu anylog  | CPU usage of AnyLog. | 
 | cpu [process name]  | CPU usage of the named process. | 
+| get cpu usage  | Usage per each CPU. |
 | get operator | The operator status. |
 | get streaming | The streaming buffers status. |
 | get query pool | The query threads status. |
