@@ -99,7 +99,7 @@ Usage:
 get operator execution where node = [node id] and job = [job id]
 </pre>
 
-[node id] is the IP of the Operator Node.  
+[node id] is the IP of the Query Node (the node that issued the query).  
 [job id] is the id of the job assigned by the Query Node (the command ***query status*** on the query node provides the job id).
 
 If ***node id*** and ***job id*** are not provided, all recently executed queries information is provided.  
