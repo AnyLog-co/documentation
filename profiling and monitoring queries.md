@@ -70,7 +70,7 @@ Job  ID Output   Run Time Operator              Par Status    Blocks Rows Comman
     |  |        |00:00:00|172.105.112.207:32148|  0|Completed|     1|   0|                                                                                                    |
     |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    |
     |  |        |00:00:00|172.105.13.202:32148 |  0|Completed|     1|   0|                                                                                                    |
-    |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    | |
+    |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    |
 </pre>
 
 The example below details the destination nodes of the query.
