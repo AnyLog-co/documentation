@@ -36,13 +36,10 @@ more details are available at [The Query Log](https://github.com/AnyLog-co/docum
 Queries are executed in a context of jobs. A job is a process that communicates with a peer or peers in the network.  
 When a job is executed, it triggers a process that maintains information on the status of the message and the execution status.
 
-The command ***query*** considers the queries commands that are sent to peers in the network.
+The command ***query*** considers the queries that are sent to peers in the network. 
 As multiple jobs are processed on each node concurrently, each job (including a query) is assigned with an ID which identifies the job.
 
-The command ***query*** provides information on the last executed queries and there are 3 types of information captured on every executed query:  
-1. Status - details the status of each query
-2. Explain - provides the SQL statement used on the nodes that participate in the query process.
-3. Destination - details the storage nodes that participated in each query.
+The command ***query*** provides information on the last executed queries.
 
 Usage:
 <pre>
@@ -58,8 +55,8 @@ Operation is one of the following:
     - If ID is provided - the information associated with the job ID is returned.
     - ALL - The information in the currently executed and recently executed queries are returned.
     
-Examples:
-The info below is returned when ***query status*** command is issued.  
+Examples:  
+The info below is returned when a ***query status*** command is issued.  
 It provides the ID of the query, the destination (Operators) nodes and the process status with each Operator node.  
 It details the execution time, and a breakdown to the processing time of each operator. 
 <pre>
@@ -76,7 +73,7 @@ Job  ID Output   Run Time Operator              Par Status    Blocks Rows Comman
     |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    | |
 </pre>
 
-The example below details the destination servers of the query.
+The example below details the destination nodes of the query.
 <pre>
 AL +> query destination
 
