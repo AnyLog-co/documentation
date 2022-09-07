@@ -33,13 +33,16 @@ more details are available at [The Query Log](https://github.com/AnyLog-co/docum
 
 ## Command options for monitoring queries
 
-Queries are executed in a context of jobs. A job is a process that communicates with a peer or peers in the network.  
-When a job is executed, it triggers a process that maintains information on the status of the message and the execution status.
+When a query is executed, it triggers a process that maintains information on the status of the query.  
+The information details, for each executed query, the nodes (Operators) that participate in the query, the amount
+of data transferred and execution time.
 
-The command ***query*** considers the queries that are sent to peers in the network. 
-As multiple jobs are processed on each node concurrently, each job (including a query) is assigned with an ID which identifies the job.
+The command that starts with the key ***query***, returns the query execution information.  
+As multiple queries are processed on each node concurrently, each query is assigned with an ID that identifies the query.
 
-The command ***query*** provides information on the last executed queries.
+The command ***query*** provides information on the last executed queries and is issued on the Query Node.  
+Use the command [get operator execution](#retrieving-the-status-of-queries-being-processed-on-an-operator-node) to monitor the 
+execution of the query on the Operator side. 
 
 Usage:
 <pre>
@@ -49,12 +52,14 @@ query [operation] [id/all]
 Operation is one of the following:
 * status - the query status
 * explain - the generated queries that are processed on each participating node.
-* destination - the list of nodes participating in each table
+* destination - the list of nodes participating in the query (and associated to the data tables that are queried).
 * id / all - these are optional parameters:
     - If not provided - the information on the last executed query is returned. 
     - If ID is provided - the information associated with the job ID is returned.
     - ALL - The information in the currently executed and recently executed queries are returned.
-    
+  
+Note: The query status information is maintained in a stack, old information is removed.
+
 Examples:  
 The info below is returned when a ***query status*** command is issued.  
 It provides the ID of the query, the destination (Operators) nodes and the process status with each Operator node.  
@@ -95,7 +100,7 @@ get operator execution where node = [node id] and job = [job id]
 </pre>
 
 [node id] is the IP of the Operator Node.  
-[job id] is the id of the query assigned by the Query Node (the command ***query status*** on the query node provides the job id).
+[job id] is the id of the job assigned by the Query Node (the command ***query status*** on the query node provides the job id).
 
 If ***node id*** and ***job id*** are not provided, all recently executed queries information is provided.  
 If only ***node id*** is provided, the query information of the specified node is provided.  
@@ -108,5 +113,5 @@ Examples:
 </pre> 
 
 Notes:
-1) The call can be compared with the ***query status*** cam executed on the Query Node. 
+1) The call provides the Operator side information complimentary to the [query status](#command-options-for-monitoring-queries) call that is executed on the Query Node. 
 2) The information is maintained in a stack, old information is removed.
