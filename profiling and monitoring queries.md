@@ -8,44 +8,85 @@ b. a process identifying slow queries.
 c. a process to identify the SQL used on each participating node.  
 
 ## Statistical information
-In order to get statistical information, use the following command:  
-On the AnyLog command prompt:  
-```get queries time```  
+In order to get statistical information, use the following command to get a summary of the execution time of queries:  
+<pre>
+get queries time
+</pre>
 
 ## Identifying slow queries
 
 Slow queries can be redirected to the query log with the following AnyLog command:  
+<pre>
+set query log profile [n] seconds
+</pre>
 
-```set query log profile [n] seconds```   
 
 The  ***set query log on*** records all queries in the query log whereas adding ***profile [n] seconds***
 places in the query log only queries with execution time greater or equal to [n] seconds.
 
-To view the slow query log use the following command on the AnyLog command prompt:  
-```get query log```  
+To view the slow query log use the following command on the AnyLog command prompt: 
+<pre>
+get query log
+</pre>
 
 more details are available at [The Query Log](https://github.com/AnyLog-co/documentation/blob/master/logging%20events.md#the-query-log) section.
 
-## Command options for profiling and monitoring queries
+## Command options for monitoring queries
 
-Queries are executed in a context of jobs. A job is a process that sends a message to a peer in the network and is listed in a structure
-that maintains information on the status of the message and the command execution status.
+Queries are executed in a context of jobs. A job is a process that communicates with a peer or peers in the network.  
+When a job is executed, it triggers a process that maintains information on the status of the message and the execution status.
 
-The command ***query*** considers the queries commands that are send to peers in the network.
-Each job (including a query) is assigned with an ID which can be used by a user to indicate the job in interest.
+The command ***query*** considers the queries commands that are sent to peers in the network.
+As multiple jobs are processed on each node concurrently, each job (including a query) is assigned with an ID which identifies the job.
 
-The command ***query*** provides information on the last executed queries and there are 2 types of information captured on every executed query:  
+The command ***query*** provides information on the last executed queries and there are 3 types of information captured on every executed query:  
 1. Status - details the status of each query
-2. Explain - Provides the SQL statement used on the nodes that participate in the query process.
+2. Explain - provides the SQL statement used on the nodes that participate in the query process.
+3. Destination - details the storage nodes that participated in each query.
+
+Usage:
+<pre>
+query [operation] [id/all] 
+</pre>
  
+Operation is one of the following:
+* status - the query status
+* explain - the generated queries that are processed on each participating node.
+* destination - the list of nodes participating in each table
+* id / all - these are optional parameters:
+    - If not provided - the information on the last executed query is returned. 
+    - If ID is provided - the information associated with the job ID is returned.
+    - ALL - The information in the currently executed and recently executed queries are returned.
+    
+Examples:
+The info below is returned when ***query status*** command is issued.  
+It provides the ID of the query, the destination (Operators) nodes and the process status with each Operator node.  
+It details the execution time, and a breakdown to the processing time of each operator. 
+<pre>
+AL > query status
 
-```query status all``` - The status information on the last executed query<br/>
-```query status``` - The status information on the most recent executed query<br/>
-```query status n``` - The status information on a particular query whereas n is the id of the job<br/>
+Job  ID Output   Run Time Operator              Par Status    Blocks Rows Command
+----|--|--------|--------|---------------------|---|---------|------|----|----------------------------------------------------------------------------------------------------|
+0009|10|['rest']|00:00:01|All                  |---|Completed|     2|   0|select  increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as m|
+    |  |        |        |                     |   |         |      |    |ax_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor wh|
+    |  |        |        |                     |   |         |      |    |ere timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC                            |
+    |  |        |00:00:00|172.105.112.207:32148|  0|Completed|     1|   0|                                                                                                    |
+    |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    |
+    |  |        |00:00:00|172.105.13.202:32148 |  0|Completed|     1|   0|                                                                                                    |
+    |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    | |
+</pre>
 
-```query explain all``` - The explain plan of the last executed querys<br/>
-```query explain``` - The explain plan on the most recent executed query<br/>
-```query explain n``` - The explain plan on a particular query<br/>
+The example below details the destination servers of the query.
+<pre>
+AL +> query destination
+
+Job Destination           DBMS          Table                Command
+---|---------------------|-------------|--------------------|----------------------------------------------------------------------------------------------------|
+  9|172.105.112.207:32148|litsanleandro|ping_sensor         |select  increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as m|
+   |                     |             |                    |ax_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor wh|
+   |                     |             |                    |ere timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC                            |
+   |172.105.13.202:32148 |litsanleandro|ping_sensor         |                                                                                                    |
+</pre>
 
 ## Retrieving the status of queries being processed on an Operator node
 
