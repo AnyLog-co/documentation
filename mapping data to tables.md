@@ -96,7 +96,7 @@ In this doc, we download the London air quality data from datahub and provide a 
 Using a REST GET command from the AnyLog CLI: 
  
 <pre> 
-[file=!prep_dir/london.readings.json.0.0.london_mapping, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
+[file=!prep_dir/london.readings.0.0.london_mapping.json, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
 </pre> 
 The example above downloads a JSON file from Datahub that includes a list of recent readings.      
 
