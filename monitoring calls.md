@@ -177,6 +177,7 @@ get operator
 get operator format = json
 </pre>
 
+
 The non JSON reply has 4 sections showing configurations and statistics.
 
 ***Section A attributes:***
@@ -242,4 +243,33 @@ Duplicate JSON Files|      0|         |          |         0|               |
 JSON Files Errors   |      0|         |          |         0|               |
 SQL Files Errors    |      0|         |          |         0|               |
 </pre>
+
+## Get Operator Summary
+
+The ***get operator summary*** command provides summary information on the operator processes.  
+Usage
+<pre>
+get operator summary
+get operator summary format = json
+</pre>
+
+The summary call returns info in a table format or in a JSON format.  
+The returned info is the following:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Status | The Operator status - Active or Not Active |
+| Operational | HH:MM:SS indicating how long the operator is operational |
+| Total Rows | The number of rows processed by the Operator (in all logical tables) |
+| Delta Rows | The number of rows processed by the Operator (in all logical tables) since the previous summary call |
+| Errors | The total number of errors (in all logical tables) |
+
+The ***get operator summary*** command can be placed on continuous display as follows: 
+<pre>
+continuous "get operator summary"
+</pre>
+
+Details are available in the
+[continuous command section](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes-operations)
+
 
