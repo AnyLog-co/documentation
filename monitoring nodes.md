@@ -384,6 +384,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 | cpu [process name]  | CPU usage of the named process. | 
 | get cpu usage  | Usage per each CPU. |
 | get operator | The operator status. |
+| get operator summary| Summary of the operator status. |
 | get streaming | The streaming buffers status. |
 | get query pool | The query threads status. |
 | get operator pool | The operator threads status. |
@@ -394,7 +395,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 Example:
 
 <pre>
-continuous cpu "cpu anylog" "cpu postgres" “get operator”
+continuous cpu "cpu anylog" "cpu postgres" “get operator summary” "cpu usage"
 </pre>
 
 Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.
