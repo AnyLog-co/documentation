@@ -395,7 +395,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 Example:
 
 <pre>
-continuous cpu "cpu anylog" "cpu postgres" “get operator summary” "cpu usage"
+continuous cpu "cpu anylog" "cpu postgres" “get operator summary” "get cpu usage"
 </pre>
 
 Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.
