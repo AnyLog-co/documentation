@@ -392,9 +392,8 @@ get distributor
 The data consumer process considers a date range, all the source data assigned to time within the date range is validated - if data is missing, it retrieves the data from the cluster member nodes.   
 Usage:  
 <pre>
-run data consumer where cluster_id = [id] and start_date = [date] and end_date = [date] and mode = [mode of operation]
+run data consumer where start_date = [date] and end_date = [date] and mode = [mode of operation]
 </pre>
-***[id]*** is the ID of the policy declaring the cluster. The default value is the cluster ID assigned to the current node.  
 ***[date]*** is provided in the following format: YY-MM-DD HH:MM:SS or by subtracting time from the current time, for example: -30d subtracts 30 days from the current date and time.      
 start_date must be provided. if end_date is not provided, the current date and time is used.   
 ***[mode of operation]*** is "active" (the default) or "suspend". Suspend mode stops the requests for data files from peers. The process resumes when mode is changed to "active".  
