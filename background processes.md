@@ -407,7 +407,7 @@ set consumer mode = active
 Example:  
 The example below will test and sync the last 3 days of data.
 <pre>
-run data consumer where cluster_id = 87bd559697640dad9bdd4c356a4f7421 and start_date = -3d
+run data consumer where start_date = -3d
 </pre>
 
 To check the status of the Consumer process, use the following command:
