@@ -189,7 +189,7 @@ When a file is added to the database, a file name and the hash value of the file
 
 A file can be added and assigned to a table in a blobs database using the following command:
 <pre>
-file store where dbms = [dbms_name] and table = [table name] and id = [unique file name] and hash = [hash value] and file = [path and file name]
+file store where dbms = [dbms_name] and table = [table name] and hash = [hash value] and file = [path and file name]
 </pre>
 Example:
 <pre>
