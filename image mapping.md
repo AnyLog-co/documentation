@@ -202,7 +202,7 @@ file hash !prep_dir/device12atpeak.bin
 </pre>
 
 ***Using Trace***  
-To trace a failure, the following command outputs the failure error on stdout:
+To trace a failure, the following command outputs the failure error to stdout:
 <pre>
 trace level = 1 file store
 </pre>
