@@ -201,6 +201,16 @@ Note: the following example returns the hash value of a file:
 file hash !prep_dir/device12atpeak.bin
 </pre>
 
+***Using Trace***  
+To trace a failure, the following command outputs the failure error on stdout:
+<pre>
+trace level = 1 file store
+</pre>
+Use the following command to disable the trace outputs:
+<pre>
+trace level = 0 file store
+</pre>
+
 
 ### Retrieve a blob file from a different node
 
