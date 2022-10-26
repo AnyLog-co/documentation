@@ -182,7 +182,7 @@ The Cluster policy groups all the Operators that host the same data. In addition
 Data associated with the tables can be hosted on an Operator assigned to the cluster, and if multiple Operators are assigned 
 to the cluster, the data will be replicated to each Operator.  
 The same table can be assigned to multiple clusters, in that case, the table's data can be partitioned between the clusters.  
-The following is an example of a clutter policy:
+The following is an example of a cluster policy:
 <pre>
 [{'cluster' : {'company' : 'AnyLog',
                'dbms' : 'AnyLog',
@@ -310,7 +310,6 @@ Options:
 run blockchain sync where source = blockchain and platform = ethereum and time = 30 seconds and dest = file
 </pre>
 
-Information on blockchain configuration is available at [blockchain](https://github.com/AnyLog-co/documentation/blob/master/blockchain.md).
 
 ### Example - synchronizing with a master-node  
 <pre>
@@ -447,7 +446,7 @@ get blobs archiver
 
 The ***MQTT Client*** process provides a mechanism to subscribe to topics of a MQTT broker. When  messages are received,
 the client retrieves the message and transforms the incoming messages to data structures that are processed by the node.    
-Details on the MQTT Client process are available at the [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) section.
+Details on the MQTT Client process are available at the [Using a Message Broker](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#using-a-message-broker) section.
 
 ## SMTP Client
 
@@ -515,6 +514,6 @@ An example of configuring AnyLog as an MQTT message broker is available at the s
 
 To check the status of the Message Broker, use the following command:
 <pre>
-get broker
+get local broker
 </pre>
 

@@ -47,7 +47,7 @@ run tcp server [ip] [port] [threads]
 ***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
 ***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
 
-Additional information is available at [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md). 
+Additional information is available at Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process). 
 
 ### The Source Address
 When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.

@@ -5,7 +5,7 @@ There are 3 ways to configure a node:
 * As a [message broker](#configuring-an-anylog-node-as-a-message-broker) - receiving published data from a client using standard APIs like MQTT.
 * As a [broker receiving REST commands](#anylog-as-a-broker-receiving-rest-commands) and mapping the data to the needed schema based on the provided topic.
 
-In both cases, user are able to do the following:
+In all cases, user are able to do the following:
 
 * Users can subscribe and retrieve data from one or more topics in a  broker.
 * Users can publish data to a topic  in a broker.
@@ -215,12 +215,6 @@ get msg client statistics [n]
 <pre>
 get streaming
 </pre>    
-
-### View registered brokers
-Users can see the list of brokers and the subscribed users and topics in each broker using the command:
-<pre>
-get msg brokers
-</pre>
 
 ### View summary of AnyLog processes as a local broker
 Users can see the summary of messages processed on AnyLog as a broker using the following command:
