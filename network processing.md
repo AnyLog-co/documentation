@@ -1,6 +1,35 @@
-# Network Configuration
+# Network Processing
 
 ## overview
+
+AnyLog is a peer-to-peer (P2P) network of nodes that facilitates data management on the distributed nodes. 
+These nodes appear to users and applications as a single machine.  
+This document describes low level details of the networking related configurations and operations allowing to treat the network nodes as a single machine.
+These networking processes are combined with a shared metadata layer that allow for the network nodes and network hosted data to appear as a 
+single machine that manages a unified collection of data.
+
+The AnyLog Network Protocol is leveraging 2 layers of messaging:
+
+* Messages between nodes which are members of the network. These messages are TCP based (called TCP messages), leverage the AnyLog messaging protocol
+  and are sent between the AnyLog instances. 
+  The TCP messages are triggered to support 2 types of functionalities: 
+  1. AnyLog functionality to maintain the completeness of the network, These messages are transparent (to the users and applications) 
+     allowing to manage the network and processes of the network. Examples of such messages are: Heart-Bit messages, Messages to sync
+     metadata, Recovery messages.
+  2. User messages - Messages to support users and application requests.
+     Users can login to a node and issue messages directed to any available peer in the network. Or users can issue 
+     meesages to nodes in the network by issueing a REST request to a single node (using a REST call) which is translated 
+     to a message exchange between nodes in the network (see the REST based messaging below).
+     Examples of such messages are: queries to data, query metadata, retrieve status of nodes in the network and copy data.
+     
+* Messages between users/applications and the network. These messages are REST based (called REST messages), and delivered 
+  to one node in the network. The AnyLog protocol on the node, when the REST message is delivered, transforms the message
+  to a TCP message that is delivered to the proper nodes and if needed, a reply is returned to the user or application 
+  using the same REST connection.
+  
+     
+
+## Network Configuration
 
 Nodes in the network are configured to receive messages from 2 sources:  
 
