@@ -156,7 +156,7 @@ Tables Supported:
 </pre>
 
 ## Test Cluster policies
-The command below tests the validity of the Cluster policies:
+The command below tests the validity of the cluster policies:
 <pre>
 blockchain test cluster
 </pre>
