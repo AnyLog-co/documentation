@@ -53,9 +53,9 @@ the network protocol can determine the relevant nodes (these would be the nodes 
 satisfy the query).
 
 A command that is prefixed with ***run client (destination)*** is executed against the relevant member nodes:    
-***run client*** means that the command is executed from a process serving as a client to network nodes.  
-***(destination)*** is the list of destination nodes (IP:Port and separated by commas) that are to process the request to follow. In case of query, the
-parenthesis can be left empty. In this case, the network protocol determines the destination nodes.
+* ***run client*** means that the command is executed from a process serving as a client to network nodes.  
+* ***(destination)*** is the list of destination nodes (IP:Port and separated by commas) that are to process the request to follow.  
+In case of query, the parenthesis can be left empty. In this case, the network protocol determines the destination nodes.
 
 The following example requests the status of a node:
 <pre>
@@ -72,8 +72,6 @@ The following example queries sensor data whereas destination nodes are determin
 <pre>
 run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
 </pre>
-
-     
 
 ## Network Configuration
 
