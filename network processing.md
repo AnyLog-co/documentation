@@ -8,25 +8,71 @@ This document describes low level details of the networking related configuratio
 These networking processes are combined with a shared metadata layer that allow for the network nodes and network hosted data to appear as a 
 single machine that manages a unified collection of data.
 
-The AnyLog Network Protocol is leveraging 2 layers of messaging:
+The AnyLog Network Protocol deploys 2 layers of messaging:
 
-* Messages between nodes which are members of the network. These messages are TCP based (called TCP messages), leverage the AnyLog messaging protocol
+* Messages between users/applications and the network. These messages are REST based (called REST messages), and delivered 
+  to one node in the network. The AnyLog protocol on the node, when the REST message is delivered, transforms the message
+  to a TCP message (see the TCP based messages section below) that is delivered to the proper nodes and if needed, 
+  a reply is returned to the user or application using the same REST connection.
+
+* Messages between nodes which are members of the network. A member node is a compute instance deployed with the AnyLog software.  
+  These messages are TCP based (therefore called TCP messages), leverage the AnyLog messaging protocol
   and are sent between the AnyLog instances. 
   The TCP messages are triggered to support 2 types of functionalities: 
   1. AnyLog functionality to maintain the completeness of the network, These messages are transparent (to the users and applications) 
-     allowing to manage the network and processes of the network. Examples of such messages are: Heart-Bit messages, Messages to sync
+     allowing to manage the network and processes of the network. Examples of such messages are: Heartbeat messages, Messages to sync
      metadata, Recovery messages.
   2. User messages - Messages to support users and application requests.
      Users can login to a node and issue messages directed to any available peer in the network. Or users can issue 
-     meesages to nodes in the network by issueing a REST request to a single node (using a REST call) which is translated 
-     to a message exchange between nodes in the network (see the REST based messaging below).
+     messages to nodes in the network using REST requests which are translated to a message exchange between nodes 
+     in the network.
+     
      Examples of such messages are: queries to data, query metadata, retrieve status of nodes in the network and copy data.
      
-* Messages between users/applications and the network. These messages are REST based (called REST messages), and delivered 
-  to one node in the network. The AnyLog protocol on the node, when the REST message is delivered, transforms the message
-  to a TCP message that is delivered to the proper nodes and if needed, a reply is returned to the user or application 
-  using the same REST connection.
   
+## The REST messages
+
+Users and applications can query data or state by sending a request to a node in the network using REST. 
+The node receiving the reply will process the request and if needed, return a reply to the caller. 
+  
+The [Querying Data](https://github.com/AnyLog-co/documentation/blob/master/examples/Querying%20Data.md#querying-data)
+section provides examples of issueing queries to retrieve data using REST.
+
+The following example is a cURL call to determine the status of a node:
+
+<pre>
+curl --location --request GET http://10.0.0.78:7849 --header "User-Agent: AnyLog/1.23" --header "command: get status"
+</pre>
+
+## The TCP messages
+
+Users can login to a node and using the node Command Line Interface (CLI) query data or query and monitor state.
+When a command is processed on the CLI, it is processed locally. However, if the command is delivered to the network,
+it will be processed on relevant member nodes. These nodes can be identified explicitly, or in the case of queries for data,
+the network protocol determines the relevant nodes (these would be the nodes that host the data that is neeed to be considered to 
+satisfy the query).
+
+A command that is prefixed with ***run client (destination)*** is executed against the relevant member nodes:    
+***run client*** means that the command is executed from a process serving as a client to network nodes.  
+***(destination)*** is the list of destination nodes (IP:Port and separated by commas) that are to process the request to follow. In case of query, the
+parenthesis can be left empty. In this case, the network protocol determines the destination nodes.
+
+The following example requests the status of a node:
+<pre>
+run client 139.162.164.95:32148 get status
+</pre>
+Note, if only one destination node is specified, the parenthesis can be ignored.
+
+The following example requests cpu usage information from 2 nodes:
+<pre>
+run client (139.162.164.95:32148, 139.162.164.95:32148) get cpu usage
+</pre>
+
+The following example queries sensor data whereas destination nodes are determined by the query protocol.  
+<pre>
+run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
+</pre>
+
      
 
 ## Network Configuration
