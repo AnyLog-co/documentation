@@ -46,10 +46,10 @@ curl --location --request GET http://10.0.0.78:7849 --header "User-Agent: AnyLog
 
 ## The TCP messages
 
-Users can login to a node and using the node Command Line Interface (CLI) query data or query and monitor state.
-When a command is processed on the CLI, it is processed locally. However, if the command is delivered to the network,
-it will be processed on relevant member nodes. These nodes can be identified explicitly, or in the case of queries for data,
-the network protocol determines the relevant nodes (these would be the nodes that host the data that is neeed to be considered to 
+Users can login to a node and using the node's Command Line Interface (CLI) and query data or query and monitor state.  
+When a command is processed on the CLI, unless specifically requested, it is processed locally. However, 
+users can request to execute each command on members nodes whereas these nodes can be identified explicitly, or in the case of queries for data,
+the network protocol can determine the relevant nodes (these would be the nodes that host the data that is need to be considered to 
 satisfy the query).
 
 A command that is prefixed with ***run client (destination)*** is executed against the relevant member nodes:    
