@@ -73,6 +73,49 @@ The following example queries sensor data whereas destination nodes are determin
 run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
 </pre>
 
+## Setting the message destinations
+
+Using ***run client (destination)*** as a command prefix, the command is delivered to the destination nodes.  
+There are a few options to the way the destination nodes are specified:
+
+* As a comma separated list of IP and Ports.  
+    Example:
+    <pre>
+    run client (139.162.164.95:32148, 139.162.164.95:32148) get cpu usage
+    </pre>
+    
+* As an empty parenthesis followed by a query. The query includes a table name and the info on the query command includes  
+    a database name. With the empty parenthesis, the network protocol determines the nodes that host the data. This process
+    is transparent to the caller.  
+    Example:
+    <pre>
+    run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
+    </pre>
+
+* Specifying the database name and the table name will deliver the command to the nodes that host the specified table.  
+    Example:
+    <pre>
+    run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
+    </pre>
+    
+* As a blockchain command that retrieves IP and Ports and formats the destination as a comma separated list.    
+   Example:
+    <pre>
+    run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
+    </pre>
+    
+    This command can be also issued as an assignment of the blockchain command to a key and referencing the key as the destination:  
+   Example:
+    <pre>
+    destination = blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]
+    run client (!destination) get disk space .
+    </pre>
+    
+    
+## Messaging reply modes
+
+    
+
 ## Network Configuration
 
 Nodes in the network are configured to receive messages from 2 sources:  
