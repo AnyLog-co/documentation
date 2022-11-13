@@ -118,8 +118,8 @@ A message can be delivered to one or more nodes. Because of the intermittent nat
 Users can configure their setup to deliver High Availability by replicating the data between nodes.
 However, user's command may be targeting specific nodes (rather than the data), and in that case a node may be unavailable.  
 When the command is send, and using a flag called ***subset flag***, users can specify to consider the returned result from the participating nodes
-and indicate which are the nodes that failed.
-If the subset is set to false (or is not specified), if a node does not return a reply, the entire command including the replies
+and indicate which are the nodes that failed.  
+If the subset is set to false (or is not specified), and a node does not return a reply, the entire command including the replies
 from the participating nodes is considered as an error.
 
 The following examples sets the subset flag to true, allowing the user to receive a replies from the participating nodes,
