@@ -123,7 +123,7 @@ If the subset is set to false (or is not specified), and a node does not return 
 from the participating nodes is considered as an error.
 
 The following examples sets the subset flag to true, allowing the user to receive a replies from the participating nodes,
-including when some nodes failed to participate.
+including when some nodes fail to participate.
 
 <pre>
 run client (subset = True) sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
