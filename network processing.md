@@ -112,9 +112,23 @@ There are a few options to the way the destination nodes are specified:
     </pre>
     
     
-## Messaging reply modes
+## Messaging reply modes - the 'subset' flag
 
-    
+A message can be delivered to one or more nodes. Because of the intermittent nature of the network, some nodes may not be accessible.  
+Users can configure their setup to deliver High Availability by replicating the data between nodes.
+However, user's command may be targeting specific nodes (rather than the data), and in that case a node may be unavailable.  
+When the command is send, and using a flag called ***subset flag***, users can specify to consider the returned result from the participating nodes.
+If the subset is set to false (or is not specified), if a node does not return a reply, the entire command inclluding the replies
+from the participating nodes is considered as an error.
+
+The following examples sets the subset flag to true, allowing the user to receive a replies from the participating nodes,
+including when some nodes failed to participate.
+
+<pre>
+run client (subset = True) sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
+run client (dbms = litsanleandro  and table = ping_sensor, subset = trure) get processes
+</pre>
+
 
 ## Network Configuration
 
