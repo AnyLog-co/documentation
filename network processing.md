@@ -84,8 +84,9 @@ There are a few options to the way the destination nodes are specified:
     run client (139.162.164.95:32148, 139.162.164.95:32148) get cpu usage
     </pre>
     
-* As an empty parenthesis followed by a query. The query includes a table name and the info on the query command includes  
-    a database name. With the empty parenthesis, the network protocol determines the nodes that host the data. This process
+* As an empty parenthesis followed by a query. The query includes 2 sections. The first starts with the keyword ***sql*** followed by
+a database name (and additional instructions on how to execute the query) and the second is the ***select*** statement that includes the table
+name. Using the command (and the metadata), the network protocol determines the nodes that host the data. This process
     is transparent to the caller.  
     Example:
     <pre>
