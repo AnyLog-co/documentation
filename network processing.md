@@ -75,7 +75,7 @@ run client () sql litsanleandro format = table "select count(*), min(value), max
 
 ## Setting the message destinations
 
-Using ***run client (destination)*** as a command prefix, the command is delivered to the destination nodes.  
+Using ***run client (destination)*** as a command prefix, delivers the command to the destination nodes.  
 There are a few options to the way the destination nodes are specified:
 
 * As a comma separated list of IP and Ports.  
@@ -99,7 +99,7 @@ There are a few options to the way the destination nodes are specified:
     </pre>
     
 * As a blockchain command that retrieves IP and Ports and formats the destination as a comma separated list.    
-   Example:
+   Example (retrieving the disk space of all Operator nodes in the US):
     <pre>
     run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
     </pre>
@@ -117,8 +117,9 @@ There are a few options to the way the destination nodes are specified:
 A message can be delivered to one or more nodes. Because of the intermittent nature of the network, some nodes may not be accessible.  
 Users can configure their setup to deliver High Availability by replicating the data between nodes.
 However, user's command may be targeting specific nodes (rather than the data), and in that case a node may be unavailable.  
-When the command is send, and using a flag called ***subset flag***, users can specify to consider the returned result from the participating nodes.
-If the subset is set to false (or is not specified), if a node does not return a reply, the entire command inclluding the replies
+When the command is send, and using a flag called ***subset flag***, users can specify to consider the returned result from the participating nodes
+and indicate which are the nodes that failed.
+If the subset is set to false (or is not specified), if a node does not return a reply, the entire command including the replies
 from the participating nodes is considered as an error.
 
 The following examples sets the subset flag to true, allowing the user to receive a replies from the participating nodes,
