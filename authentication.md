@@ -26,7 +26,14 @@ The messages aew encrypted using the public key of the receiver and decrypted by
 
 # Internal Authentication
 
-Each node in the network is assigned with a public and a private key. 
+Each node in the network is assigned with a public and a private key.
+The public key uniquely identifies the node and the private key signs the outgoing messages such that the node can be authenticated 
+by the node receiving the message.
+
+
+Users issuing commands on the AnyLog CLI, can be assigned with a private and public key and can use their assigned keys 
+to send messages to peers in the network.
+
 The public key serves as an identification of the node and can be associated with a permission group.    
 A permission group sets a list of permitted operations (such as querying specific databases). 
 When a public key is associated with the permission group, the node is assigned with the group permissions.  
