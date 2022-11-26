@@ -1,7 +1,30 @@
-# Users Authentication
+# Users Authentication, making the data secure
 
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users and nodes 
 within a framework that determines access and permissions to the processes of the network and data maintained by nodes of the network.
+
+The network provides 2 layers of authentications:
+1) Internal Authentications - These are processes to authenticate users and processes delivering messages from one node to another.  
+   These messages are using the TCP server processes and related calls. Details on the TCP based processes are available in the 
+   [TCP Server process](./background%20processes.md#the-tcp-server-process) section.
+   Authentication is based on issuing a private key and a public key to nodes and users. Messages are signed by the private 
+   key of the sender (a user or a node) and validating the senders, at the destination nodes, using their public key and 
+   policies providing the authorized functionalities.
+   
+2) External Authentication - These are processes to authenticate users and processes delivering messages from external applications 
+   and users that are not members of the network.  
+   For example:
+   * Grafana calls issuing a REST request to a node in the network.
+   * cURL request to a node in the network.
+   Details on REST requests are available in the [REST requests](./background%20processes.md#rest-requests) section.
+   Authentication is based on one oif the following methods:
+   * Usernames and passwords that are kept on the destination node.
+   * Issuing client certificate and validating the signature with policies providing the authorized functionalities.  
+   
+AnyLog provide the mechanisms to encrypt messages over the network.
+The messages aew encrypted using the public key of the receiver and decrypted by the reciever with the private key.
+
+# Internal Authentication
 
 Each node in the network is assigned with a public and a private key. 
 The public key serves as an identification of the node and can be associated with a permission group.    
@@ -26,7 +49,7 @@ Use the following command to determine if user authentication is enabled:
 get authentication
 </pre>
 
-# Creating a private and a public key for a node in the network
+## Creating a private and a public key for a node in the network
 
 These keys are kept on the node. The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.
 
@@ -42,7 +65,7 @@ get node id
 </pre> 
 Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
 
-# Creating a private and a public key for a user
+## Creating a private and a public key for a user
 
 These keys are provided to a user and managed by the user. 
 The public key uniquely identifies the user and the private key allows to sign policies added to the the blockchain by the user.  
@@ -70,7 +93,7 @@ If a file name is not provided, the keys are displayed on the screen and the use
 If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
 
   
-# Signing a policy
+## Signing a policy
 
 Users and nodes can publish policies on the blockchain.  
 Using the ***id sign*** command, these policies are updated with the public key and the signature of the publisher such that the publisher can be authenticated and his authorization can be validated.    
@@ -91,7 +114,7 @@ id sign !json_script where password = my_password
 </pre>
   
   
-# Authenticate signature
+## Authenticate signature
 
 Authenticate the policy by validating that the policy was signed using the private key associated with the public key on the policy.  
 Command:
@@ -104,9 +127,28 @@ Example:
 id authenticate !json_script
 </pre>
 
+
+# Validate permitted command
+
+When a node receives a command from a peer node, the receiving node is using the public key of the peer to validate the authorization of the peer to issue the command.  
+Authorization is validated against ***permissions*** policies.  
+The receiving node considers the permissions policy to determine that the public key of the peer is represented in a permission policy which is signed by an authorized member.  
+
+Command:
+<pre>
+id validate where key = [public_key] and command = [command text] and table = [table name] and dbms = [dbms name]
+</pre>   
+Table and dbms are optional and are used with SQL command.
+
+Example:
+<pre>
+id validate where key = !public_key and command = copy
+id validate where key = !public_key and command = sql and dbms = lsl_demo and table = ping_sensor
+</pre>   
+
 # Encrypt and Decrypt messages
 
-When a message is send, the sender can encrypt the message using the public key of the receiver.  
+When a message is sent, the sender can encrypt the message using the public key of the receiver.  
 When the message arrives at the receiver, the receiver is able to decrypt the message using his private key.
 
 ## Encrypting a message
@@ -134,25 +176,9 @@ id decript !message where key = !private_key and password = !my_password
 id decript !message where password = !my_password
 </pre>
 
-# Validate permitted command
+# External Authentication
 
-When a node receives a command from a peer node, the receiving node is using the public key of the peer to validate the authorization of the peer to issue the command.  
-Authorization is validated against ***permissions*** policies.  
-The receiving node considers the permissions policy to determine that the public key of the peer is represented in a permission policy which is signed by an authorized member.  
-
-Command:
-<pre>
-id validate where key = [public_key] and command = [command text] and table = [table name] and dbms = [dbms name]
-</pre>   
-Table and dbms are optional and are used with SQL command.
-
-Example:
-<pre>
-id validate where key = !public_key and command = copy
-id validate where key = !public_key and command = sql and dbms = lsl_demo and table = ping_sensor
-</pre>   
-
-# Add users
+## Add users
 
 Users names and passwords are added to each node to only allow connections with permitted users.  
 The ***id add user*** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
@@ -179,7 +205,7 @@ Example:
 id add user where name = ori and password = 123 and expiration = 2 minutes
 </pre>  
 
-# Remove users
+## Remove users
 
 A user can be removed with the following command:
 <pre>
@@ -191,7 +217,7 @@ Example:
 id remove user where name = john
 </pre>  
 
-# Update password
+## Update password
 
 A user can modify his password using the following command:
 <pre>
@@ -203,11 +229,11 @@ Example:
 id update user password where name = ori and old = 123456 and new = iugsek88ekA
 </pre>  
 
-# Authenticating HTTP requests
+## Authenticating HTTP requests
 
 Nodes in the network can be configured to enable authentication of HTTP REST requests.
 
-## Enabling Basic Authentication in a node in the network
+### Enabling Basic Authentication in a node in the network
 
 Basic authentication is enabled using the following procedure:
 
