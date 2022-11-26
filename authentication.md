@@ -22,13 +22,42 @@ The network provides 2 layers of authentications:
    * Issuing client certificate and validating the signature with policies providing the authorized functionalities.  
    
 AnyLog provide the mechanisms to encrypt messages over the network.
-The messages aew encrypted using the public key of the receiver and decrypted by the reciever with the private key.
+The messages aew encrypted using the public key of the receiver and decrypted by the receiver with the private key.
 
 # Internal Authentication
 
-Each node in the network is assigned with a public and a private key.
-The public key uniquely identifies the node and the private key signs the outgoing messages such that the node can be authenticated 
-by the node receiving the message.
+Members participating in the network are assigned with a public and a private key.  
+The public key uniquely identifies the member and its privileges and the private key signs the outgoing messages such
+that the member can be authenticated by the node receiving the message.
+
+## Creating a private public keys 
+
+A private and a public key are issued for each node which is a member of the network. The public key is assigned with 
+privileges (see the [assignment policy](...) below) that determine if a command send from the node to a peer can be executed on the peer node.
+In addition, users can be issued with a private and a public key. Setting users with keys assigns privileges to individual 
+users such that, when a user is issuing commands to peer nodes, the privileges granted to the user determine if a command is
+processed, rather than the privileges granted to the node.  
+For example, an administrator can issue a command and use the administrator privileges when the command is executed on a peer member
+rather than be rejected if the node's privileges (the privileges of the node from which the command is executed) are not sufficient to allow processing.
+
+### Creating keys for a node in the network
+
+The command ***id create keys for node*** creates a private and a public key. These keys are kept on the node 
+and the private key is encrypted using the password. 
+
+Command:
+<pre>
+id create keys for node where password = [password]
+</pre> 
+
+The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.  
+The public key is unique and serves as an identifier of the node and can be retrieved using the command:
+<pre>
+get node id
+</pre> 
+Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
+
+### Creating keys for users in the network
 
 
 Users issuing commands on the AnyLog CLI, can be assigned with a private and public key and can use their assigned keys 
@@ -56,21 +85,6 @@ Use the following command to determine if user authentication is enabled:
 get authentication
 </pre>
 
-## Creating a private and a public key for a node in the network
-
-These keys are kept on the node. The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.
-
-Command:
-<pre>
-id create keys for node where password = [password]
-</pre> 
-
-The command creates a public and private key for the node.
-The public key serves as an identifier of the node and can be retrieved using the command:
-<pre>
-get node id
-</pre> 
-Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
 
 ## Creating a private and a public key for a user
 
