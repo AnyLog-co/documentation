@@ -57,30 +57,23 @@ Each node can be assigned with 2 types of passwords:
   If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
   users needs to call ***set private password*** whenever the node is starting.
 
-# Enable and Disable Authentication
-A node is configured to consider Nodes Authentications and Users Authentications.  
-The following command determines how the node is configured:  
-<pre>
-get authentication
-</pre>
-
-The following examples enable and disable node authentication:
-<pre>
-set node authentication on
-set node authentication off
-</pre>
-The following examples enable and disable node authentication:
-<pre>
-set user authentication on
-set user authentication off
-</pre>
-
-
 # Node Authentication
 
 Members participating in the network are assigned with a public and a private key.  
 The public key uniquely identifies the member and its privileges and the private key signs the outgoing messages such
 that the member can be authenticated by the node receiving the message.
+ 
+The following examples enable and disable node authentication:
+<pre>
+set node authentication on
+set node authentication off
+</pre>
+
+The following command determines how the node is configured:  
+<pre>
+get authentication
+</pre>
+Note: user authentication is detailed [below](#add-users).
 
 ## Creating private public keys 
 
@@ -261,6 +254,7 @@ Use the following command to determine if user authentication is enabled:
 <pre>
 get authentication
 </pre>
+Note: node authentication is detailed [above](#node-authentication).
 
 
 Users names and passwords are added to each node to only allow connections with permitted users.  
