@@ -39,7 +39,7 @@ Each node can be assigned with 2 types of passwords:
 ## The local password
 * A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
   This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
-  password is not stored on a local file - it needs to be provided whenever the node starts.
+  password is not stored on a local file - it needs to be provided whenever the node starts.  
   Usage:
   <pre>
    set local password = [password]
@@ -47,11 +47,12 @@ Each node can be assigned with 2 types of passwords:
       
 ## The private password
 * A password protecting the node's private key. This password is provided using the command ***set private password*** and 
-  can be optionally stored in a local file and protected by the node's [local password](#the-local-password).
+  can be optionally stored in a local file and protected by the node's [local password](#the-local-password).  
+  Usage:
   <pre>
   set private password = [password] [in file]
   </pre>
-  ***in file*** is an optional keywords. If provided, the password protecting the node's private key will be stored in 
+  ***in file*** are optional keywords. If provided, the password protecting the node's private key will be stored in 
   a local file and the private key will be available to all processes that need the private key 
   (assuming that the node's local password is available).
   If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
