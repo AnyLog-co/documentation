@@ -9,7 +9,7 @@ d) Validates policies by authenticating their authors and their assigned permiss
 e) Encrypt and decrypt commands and data transferred in the network.
 
 The network provides 2 layers of authentications:
-1) Internal Authentications - These are processes to authenticate users and processes delivering messages from one node to another
+1) Node Authentications - These are processes to authenticate users and processes delivering messages from one node to another
    and authenticate policies registered on the blockchain.  
    The messages that are authenticated are using the TCP server processes and related calls. 
    Details on the TCP based processes are available in the [TCP Server process](./background%20processes.md#the-tcp-server-process) section.
@@ -18,7 +18,7 @@ The network provides 2 layers of authentications:
    policies providing the authorized functionalities.
    Policies are authenticated by validating the policies authors' permissions to create the policies.
    
-2) External Authentication - These are processes to authenticate users and processes delivering messages from external applications 
+2) User Authentication - These are processes to authenticate users and processes delivering messages from external applications 
    and users that are not members of the network.  
    For example:
    * Grafana calls issuing a REST request to a node in the network.
@@ -31,7 +31,52 @@ The network provides 2 layers of authentications:
 AnyLog provide the mechanisms to encrypt messages over the network.
 The messages aew encrypted using the public key of the receiver and decrypted by the receiver with the private key.
 
-# Internal Authentication
+# Passwords
+Private keys and sensitive information can be kept outside the node and provided when needed.  
+Or users can issue passwords to protect sensitive information that is kept on the node (like private keys and users passwords).
+Each node can be assigned with 2 types of passwords:
+
+## The local password
+* A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
+  This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
+  password is not stored on a local file - it needs to be provided whenever the node starts.
+  Usage:
+  <pre>
+   set local password = [password]
+  </pre>
+      
+## The private password
+* A password protecting the node's private key. This password is provided using the command ***set private password*** and 
+  can be optionally stored in a local file and protected by the node's [local password](#the-local-password).
+  <pre>
+  set private password = [password] [in file]
+  </pre>
+  ***in file*** is an optional keywords. If provided, the password protecting the node's private key will be stored in 
+  a local file and the private key will be available to all processes that need the private key 
+  (assuming that the node's local password is available).
+  If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
+  users needs to call ***set private password*** whenever the node is starting.
+
+# Enable and Disable Authentication
+A node is configured to consider Nodes Authentications and Users Authentications.  
+The following command determines how the node is configured:  
+<pre>
+get authentication
+</pre>
+
+The following examples enable and disable node authentication:
+<pre>
+set node authentication on
+set node authentication off
+</pre>
+The following examples enable and disable node authentication:
+<pre>
+set user authentication on
+set user authentication off
+</pre>
+
+
+# Node Authentication
 
 Members participating in the network are assigned with a public and a private key.  
 The public key uniquely identifies the member and its privileges and the private key signs the outgoing messages such
@@ -115,9 +160,9 @@ the processing node can authenticate the message and determine the authorization
 ## Signing a policy
 
 Users and nodes can publish policies on the blockchain.  
-Using the ***id sign*** command, these policies are updated with the public key and the signature of the publisher such that the publisher can be authenticated and his authorization can be validated.    
-If the private key is not provided, the policy would be signed by the private key assigned to the node.    
-
+If authentication is enabled, the policies are signed by the ***id sign*** command, and the policies are updated with the public 
+key and the signature of the publisher such that the publisher can be authenticated, and his authorization can be validated.    
+ 
 Command options:
 <pre>
 id sign [JSON Policy] where key = [private key] and password = [password]
@@ -196,7 +241,7 @@ id decript !message where password = !my_password
 </pre>
 
 
-# External Authentication
+# Users Authentication
 
 
 ## Add users
