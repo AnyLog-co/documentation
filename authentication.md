@@ -105,35 +105,13 @@ When a policy is processed, these keys allow to validate the following:
 1. That the policy was signed by the user associated with the public key.
 2. That the user associated with the public key is authorized to sign the policy.
 
-
+## Permission Group
 The public key serves as an identification of the node and can be associated with a permission group.    
 A permission group sets a list of permitted operations (such as querying specific databases). 
 When a public key is associated with the permission group, the node is assigned with the group permissions.  
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
-the processing node can validate the authentication of the message and determine the authorization assigned by the relevant permission group.
+the processing node can authenticate the message and determine the authorization assigned by the relevant permission group.
 
-When an external user or application connects to a node in the network, and user authentication is enabled, the node validates the username and password
-against a local lis and if validated, the user inherits the permissions provided to the node.  
-
-Use the following command to enable user authentication:
-<pre>
-set user authentication on
-</pre>
-Use the following command to disable user authentication:
-<pre>
-set user authentication off
-</pre>
-Use the following command to determine if user authentication is enabled:
-<pre>
-get authentication
-</pre>
-
-
-## Creating a private and a public key for a user
-
-These keys are provided to a user and managed by the user. 
-
-  
 ## Signing a policy
 
 Users and nodes can publish policies on the blockchain.  
@@ -217,9 +195,28 @@ id decript !message where key = !private_key and password = !my_password
 id decript !message where password = !my_password
 </pre>
 
+
 # External Authentication
 
+
 ## Add users
+
+When an external user or application connects to a node in the network, and user authentication is enabled, the node validates the username and password
+against a local lis and if validated, the user inherits the permissions provided to the node.  
+
+Use the following command to enable user authentication:
+<pre>
+set user authentication on
+</pre>
+Use the following command to disable user authentication:
+<pre>
+set user authentication off
+</pre>
+Use the following command to determine if user authentication is enabled:
+<pre>
+get authentication
+</pre>
+
 
 Users names and passwords are added to each node to only allow connections with permitted users.  
 The ***id add user*** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
