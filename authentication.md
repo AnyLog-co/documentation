@@ -1,15 +1,22 @@
 # Users Authentication, making the data secure
 
-A set of authentication commands (described in this document) provides the mechanisms to authenticate users and nodes 
-within a framework that determines access and permissions to the processes of the network and data maintained by nodes of the network.
+A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies. 
+These commands, set a framework that provides the following functionality:  
+a) Authenticates messages send from nodes to peer nodes.  
+b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.
+c) Determines permissions to the processes of the network and data maintained by nodes of the network.
+d) Validates policies by authenticating their authors and their assigned permissions (see section [adding policies to the blockchain](#adding-policies-to-the-blockchain) below.
+e) Encrypt and decrypt commands and data transferred in the network.
 
 The network provides 2 layers of authentications:
-1) Internal Authentications - These are processes to authenticate users and processes delivering messages from one node to another.  
-   These messages are using the TCP server processes and related calls. Details on the TCP based processes are available in the 
-   [TCP Server process](./background%20processes.md#the-tcp-server-process) section.
-   Authentication is based on issuing a private key and a public key to nodes and users. Messages are signed by the private 
+1) Internal Authentications - These are processes to authenticate users and processes delivering messages from one node to another
+   and authenticate policies registered on the blockchain.  
+   The messages that are authenticated are using the TCP server processes and related calls. 
+   Details on the TCP based processes are available in the [TCP Server process](./background%20processes.md#the-tcp-server-process) section.
+   Message Authentication is based on issuing a private key and a public key to nodes and users. Messages are signed by the private 
    key of the sender (a user or a node) and validating the senders, at the destination nodes, using their public key and 
    policies providing the authorized functionalities.
+   Policies are authenticated by validating the policies authors' permissions to create the policies.
    
 2) External Authentication - These are processes to authenticate users and processes delivering messages from external applications 
    and users that are not members of the network.  
@@ -30,9 +37,9 @@ Members participating in the network are assigned with a public and a private ke
 The public key uniquely identifies the member and its privileges and the private key signs the outgoing messages such
 that the member can be authenticated by the node receiving the message.
 
-## Creating a private public keys 
+## Creating private public keys 
 
-A private and a public key are issued for each node which is a member of the network. The public key is assigned with 
+A private key and a public key are issued for each node which is a member of the network. The public key is assigned with 
 privileges (see the [assignment policy](...) below) that determine if a command send from the node to a peer can be executed on the peer node.
 In addition, users can be issued with a private and a public key. Setting users with keys assigns privileges to individual 
 users such that, when a user is issuing commands to peer nodes, the privileges granted to the user determine if a command is
@@ -51,17 +58,53 @@ id create keys for node where password = [password]
 </pre> 
 
 The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.  
-The public key is unique and serves as an identifier of the node and can be retrieved using the command:
+The public key can be retrieved using the command:
 <pre>
 get node id
 </pre> 
-Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
+
+In addition, policies added to the blockchain include the public key of the author and a signature. Prior to executing
+a policy by a node in the network, the node executing the policy validates that the policy was signed using the 
+private key of the holder of the public key contained in the policy. If the signature is validated, the node executing
+the policy needs to determine that the author of the policy has the permissions to create the policy, and only afterwards,
+the policy is considered by the node.
+
+Notes:  
+* Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
+* The public key and the encrypted private key keys are stored in a file called ***node_id.pem***.
 
 ### Creating keys for users in the network
 
+Users issuing commands on the AnyLog CLI, can be assigned with a private and public key and the public key uniquely identifies the user.
 
-Users issuing commands on the AnyLog CLI, can be assigned with a private and public key and can use their assigned keys 
-to send messages to peers in the network.
+Users can use their assigned keys to:   
+a) Send messages to nodes in the network.
+b) Sign policies added to the blockchain by the user.
+
+Command:
+<pre>
+id create keys for node where password = [password] and keys_file = [file path and name]
+</pre> 
+
+Providing a key file is optional.
+Examples:
+<pre>
+id create keys for node where password = my_password  
+id create keys for node where password = my_password and keys_file = !usb_path/my_keys
+</pre> 
+
+The command creates a public and private key.      
+If a file name is provided, the keys are stored in the file.        
+The file location can be on a detached drive like a USB such that the user is able to physically secure the keys.    
+If a file name is not provided, the keys are displayed on the screen and the user needs to copy and secure the keys.  
+If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
+
+### Adding policies to the blockchain
+When a policy is added to the blockchain, the public key is added to the policy.    
+When a policy is processed, these keys allow to validate the following:
+1. That the policy was signed by the user associated with the public key.
+2. That the user associated with the public key is authorized to sign the policy.
+
 
 The public key serves as an identification of the node and can be associated with a permission group.    
 A permission group sets a list of permitted operations (such as querying specific databases). 
@@ -89,29 +132,6 @@ get authentication
 ## Creating a private and a public key for a user
 
 These keys are provided to a user and managed by the user. 
-The public key uniquely identifies the user and the private key allows to sign policies added to the the blockchain by the user.  
-When a policy is added to the blockchain, the public key is added to the policy.    
-When a policy is processed, these keys allow to validate the following:
-1. That the policy was signed by the user associated with the public key.
-2. That the user associated with the public key is authorized to sign the policy.
-
-Command:
-<pre>
-id create keys for node where password = [password] and keys_file = [file path and name]
-</pre> 
-
-Providing a key file is optional.
-Examples:
-<pre>
-id create keys for node where password = my_password  
-id create keys for node where password = my_password and keys_file = !usb_path/my_keys
-</pre> 
-
-The command creates a public and private key.      
-If a file name is provided, the keys are stored in the file.        
-The file location can be on a detached drive like a USB such that the user is able to physically secure the keys.    
-If a file name is not provided, the keys are displayed on the screen and the user needs to copy and secure the keys.  
-If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
 
   
 ## Signing a policy
