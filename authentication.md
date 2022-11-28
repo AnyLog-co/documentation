@@ -1,4 +1,4 @@
-# Users Authentication, making the data secure
+# Users and nodes Authentication, making the data secure
 
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies. 
 These commands, set a framework that provides the following functionality:  
@@ -27,9 +27,31 @@ The network provides 2 layers of authentications:
    Authentication is based on one oif the following methods:
    * Usernames and passwords that are kept on the destination node.
    * Issuing client certificate and validating the signature with policies providing the authorized functionalities.  
-   
-AnyLog provide the mechanisms to encrypt messages over the network.
+    
+Enabling and disabling authentication (both - nodes authentication and users authentication) is using the following command:
+<pre>
+set authentication [on/off]
+</pre>
+Note:
+* Optionally, node authentication can be enabled using ***set node authentication*** detailed [below](#node-authentication).
+* Optionally, user authentication can be enabled using ***set user authentication*** detailed [below](#add-users).
+
+The following command determines how the node is configured:  
+<pre>
+get authentication
+</pre>
+Note: 
+* Node authentication is detailed [below](#node-authentication).
+* user authentication is detailed [below](#add-users).
+
+## SSL Certificates
+3) A second option to authenticate external users and application is with SSL Certificates.
+   These processes are detailed [below](#using-ssl-certificates).
+
+## Encrypting network messages   
+AnyLog provide the mechanisms to encrypt messages transferred over the network.
 The messages aew encrypted using the public key of the receiver and decrypted by the receiver with the private key.
+These processes are detailed [below](#encrypt-and-decrypt-messages).
 
 # Passwords
 Private keys and sensitive information can be kept outside the node and provided when needed.  
@@ -37,26 +59,27 @@ Or users can issue passwords to protect sensitive information that is kept on th
 Each node can be assigned with 2 types of passwords:
 
 ## The local password
-* A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
-  This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
-  password is not stored on a local file - it needs to be provided whenever the node starts.  
-  Usage:
-  <pre>
-   set local password = [password]
-  </pre>
+A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
+This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
+password is not stored on a local file - it needs to be provided whenever the node starts.  
+Usage:
+<pre>
+set local password = [password]
+</pre>
       
 ## The private password
-* A password protecting the node's private key. This password is provided using the command ***set private password*** and 
-  can be optionally stored in a local file and protected by the node's [local password](#the-local-password).  
-  Usage:
-  <pre>
-  set private password = [password] [in file]
-  </pre>
-  ***in file*** are optional keywords. If provided, the password protecting the node's private key will be stored in 
-  a local file and the private key will be available to all processes that need the private key 
-  (assuming that the node's local password is available).
-  If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
-  users needs to call ***set private password*** whenever the node is starting.
+A password protecting the node's private key. This password is provided using the command ***set private password*** and 
+can be optionally stored in a local file and protected by the node's [local password](#the-local-password).  
+Usage:
+<pre>
+set private password = [password] [in file]
+</pre>
+***in file*** are optional keywords. If provided, the password protecting the node's private key will be stored in 
+a local file and the private key will be available to all processes that need the private key 
+(assuming that the node's local password is available).
+If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
+users needs to call ***set private password*** whenever the node is starting.
+
 
 # Node Authentication
 
@@ -70,11 +93,6 @@ set node authentication on
 set node authentication off
 </pre>
 
-The following command determines how the node is configured:  
-<pre>
-get authentication
-</pre>
-Note: user authentication is detailed [below](#add-users).
 
 ## Creating private public keys 
 
@@ -234,9 +252,7 @@ id decript !message where key = !private_key and password = !my_password
 id decript !message where password = !my_password
 </pre>
 
-
 # Users Authentication
-
 
 ## Add users
 
