@@ -57,11 +57,15 @@ These processes are detailed [below](#encrypt-and-decrypt-messages).
 Private keys and sensitive information can be kept outside the node and provided when needed.  
 Or users can issue passwords to protect sensitive information that is kept on the node (like private keys and users passwords).
 Each node can be assigned with 2 types of passwords:
-
+1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
+2. The private key password - enables the usage of the private key to sign policies and authenticate members.   
+ 
 ## The local password
 A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
 This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
-password is not stored on a local file - it needs to be provided whenever the node starts.  
+password is not stored on a local file - it needs to be provided whenever the node starts. 
+If a local password was provided to a node, restarting the node requires to re-provide the same password. 
+When the password is re-provided, it is validated to determine that it is identical to the initial password.
 Usage:
 <pre>
 set local password = [password]
@@ -78,7 +82,8 @@ set private password = [password] [in file]
 a local file and the private key will be available to all processes that need the private key 
 (assuming that the node's local password is available).
 If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
-users needs to call ***set private password*** whenever the node is starting.
+users needs to call ***set private password*** whenever the node is starting.    
+Note: the key is protected using the [local password](#the-local-password).
 
 
 # Node Authentication
@@ -385,31 +390,6 @@ On the Data Source connection page:
 In the Authorization Tab:  
 1, select: ***Basic Auth***.  
 2. Update user name and password.
-
-
-# Using passwords
-
-For authentication of users, members and message encryption, nodes operate with 2 secret passwords:  
-1. A local password - enables to encrypt and decrypt sensitive data that is stored on the local file system.  
-2. The private key password - enables the usage of the private key to sign policies and authenticate members.   
- 
-### The local password
-The local password is provided using the command:
-<pre>
-set local password = [password]
-</pre>
-If a local password was provided to a node, restarting the node requires to re-provide the same password. 
-When the password is re-provided, it is validated to determine that it is identical to the initial password.
-
-
-### The private key password
-The private key password is provided using the command:
-<pre>
-set private password = [password] [in file]
-</pre>
-[in file] - An optional command text to store the password in an encrypted file protected by the ***local password***.  
-If the ***in file*** option is added to the command but the ***local password*** is not set, the ***set private password*** command returns an error.    
-If the private password is available, the encrypted password (of the private key) is written to the local file system.
 
 
 # Using SSL Certificates
