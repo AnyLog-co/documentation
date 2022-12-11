@@ -225,7 +225,7 @@ id validate where key = !public_key and command = sql and dbms = lsl_demo and ta
 # Setting the signatory
 If node authentication is enabled, messages and policies are signed by the node's private key and identified by the node's public key.  
 Users can use a different private key to sign messages and policies. In this case, the associated public key identifies the message and policy.  
-This option is used to allow users with higher permissions, to leverage their assigned permissions when operating on a node.
+This option is used to allow users with higher permissions, to leverage their assigned permissions when operating on a node.  
 The following commands replace the signatory on a node, revert to allow the node to be the signatory and validates the signatory name:  
 
 ## Assign a signatory
@@ -242,7 +242,7 @@ Usage:
 <pre>
 reset signatory
 </pre>
-This command will set the node as the signatory whereas messages and policies would be signed by private key assigned to the node.
+This command sets the node as the signatory such that messages and policies would be signed by the private key assigned to the node.
 
 ## Get the signatory name
 Usage:
