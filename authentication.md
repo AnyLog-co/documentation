@@ -474,6 +474,7 @@ When the command is issued 2 files are generated:
 | ------------- | ------------| ---- |
 | .key  | server-[org]-private_key | The Private Key for the requesting server. |
 | .csr  | server-[org]-csr | A CR representing the server. |
+| .pem  | server-[org]-public_key | The Public Key for the requesting server. This key is updated in the shared metadata layer to determine permissions.|
 
 
 ## Signing a certificate request
@@ -527,8 +528,10 @@ With the examples described above, the following files were generated:
 | server-acme-inc-csr.csr  | The non-signed CR of the server (Acme Inc). |
 | server-acme-inc-private-key.key  | The private key key of the server (Acme Inc). |
 | server-acme-inc-public-key.crt  | The signed certificate request of the server (Acme Inc). |
+| server-acme-inc-public-key.pem  | The public key of the server (Acme Inc). It is represented in the metadata to determine the permissions. |
 | server-node-128-csr.csr  | The non-signed CR of the AnyLog node (Node 128). |
 | server-node-128-private-key.key  | The private key key of the AnyLog node (Node 128). |
+| server-node-128-public-key.pem  | The public key associated with the private key (Node 128). |
 | server-node-128-public-key.crt  | The signed certificate request of the AnyLog node (Node 128). |
 
 
