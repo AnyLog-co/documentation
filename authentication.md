@@ -406,10 +406,10 @@ can authenticate the nodes using the Certificate Authority public key.
 * The AnyLog CA validates the identity of the server and if validated, signs the CR. This process provides to
   the server a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
 
-Notes: 
+Notes:  
     1) When the certificate commands are issued, different files are generated. These files are written to the location assigned to the ***pem_dir*** variable (by default to the AnyLog-Network/data/pem directory).
-        To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.
-   2) [org] in the file name is a key based on the organization name provided in the command line ((value assigned to the key org whereas spaces are replaced with hyphen sign).
+        To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.   
+    2) [org] in the file name is a key based on the organization name provided in the command line ((value assigned to the key org whereas spaces are replaced with hyphen sign).
 
 ## Setup the CA
 The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
