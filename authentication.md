@@ -169,10 +169,18 @@ When a policy is processed, these keys allow to validate the following:
 
 ## Permission Group
 The public key serves as an identification of the node and can be associated with a permission group.    
-A permission group sets a list of permitted operations (such as querying specific databases). 
+A permission group is declared using a permission policy. The policy sets a list of permitted operations (such as querying specific databases). 
 When a public key is associated with the permission group, the node is assigned with the group permissions.  
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
-the processing node can authenticate the message and determine the authorization assigned by the relevant permission group.
+the processing node can authenticate the message and determine the authorization assigned by the relevant permission group.  
+
+The command ***get permissions*** returns the permissions of the current node, or if a public key is specified, the permissions assigned 
+to the public key are returned.     
+Usage:
+<pre>
+get permissions
+get permissions for member [public key]
+</pre> 
 
 ## Signing a policy
 
