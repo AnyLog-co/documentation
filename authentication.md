@@ -159,7 +159,40 @@ The command creates a public and private key.
 If a file name is provided, the keys are stored in the file.        
 The file location can be on a detached drive like a USB such that the user is able to physically secure the keys.    
 If a file name is not provided, the keys are displayed on the screen and the user needs to copy and secure the keys.  
-If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the comand ```!id_dir```.
+If only a file name is provided (without a path), the file is written to the AnyLog keys directory. The location of the directory can be found with the command ```!id_dir```.
+
+### Retrieving the keys
+
+The following commands retrieve the private key and public key of the node:
+<pre>
+get private key  
+get public key
+</pre>
+users can retrieve the keys without the headers and new lines using the following commands:
+<pre>
+get private string  
+get public string
+</pre>
+
+The following commands retrieve the private key and public key from a PEM file: 
+<pre>
+get private key where keys_file = [path and file name] 
+get public key where keys_file = [path and file name]
+</pre>
+Note:
+* if the path is not specified, it is assumed to be !id_dir.
+* If no file type is specified, it is assumed to be 'pem', and the file name is extended to include the type.
+Examples:
+<pre>
+get private key where keys_file = roy
+get public key where keys_file = !pem_dir/server-acme-inc-public-key
+</pre> 
+users can retrieve the keys without the headers and new lines using the following commands:
+<pre>
+get private string where keys_file = [path and file name] 
+get public string where keys_file = [path and file name]
+</pre>
+
 
 ### Adding policies to the blockchain
 When a policy is added to the blockchain, the public key is added to the policy.    
