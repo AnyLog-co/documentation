@@ -181,7 +181,7 @@ get public key where keys_file = [path and file name]
 </pre>
 Note:
 * if the path is not specified, it is assumed to be !id_dir.
-* If no file type is specified, it is assumed to be 'pem', and the file name is extended to include the type.
+* If no file type is specified, it is assumed to be 'pem', and the file name is extended to include the type.  
 Examples:
 <pre>
 get private key where keys_file = roy
@@ -194,7 +194,7 @@ get public string where keys_file = [path and file name]
 </pre>
 
 
-### Adding policies to the blockchain
+## Adding policies to the blockchain
 When a policy is added to the blockchain, the public key is added to the policy.    
 When a policy is processed, these keys allow to validate the following:
 1. That the policy was signed by the user associated with the public key.
