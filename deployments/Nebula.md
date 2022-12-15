@@ -38,6 +38,8 @@ from the
 ./nebula-cert sign -name lighthouse -ip 10.0.0.1/24
 ./nebula-cert sign -name node1 -ip 10.0.0.2/24 
 ```
+Note - Each non-lighthouse node should have its own IP address and configuration files. 
+
 4. Download configuration file(s)
 ```shell
 curl -o config.yml https://raw.githubusercontent.com/slackhq/nebula/master/examples/config.yml
@@ -108,8 +110,6 @@ screen -Sd nebula -m bash -c "cd $HOME/nebula ; sudo ./nebula -config /etc/nebul
 ```
 
 ### Deploy Node
-Please note - Each non-lighthouse node should have its own configuration files.
-
 1. Assuming you created the configurations and keys on a different machine, copy the relevant content into the node
     * ca.crt 
     * config-node.yaml
