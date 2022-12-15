@@ -182,6 +182,7 @@ get public key where keys_file = [path and file name]
 Note:
 * if the path is not specified, it is assumed to be !id_dir.
 * If no file type is specified, it is assumed to be 'pem', and the file name is extended to include the type.  
+
 Examples:
 <pre>
 get private key where keys_file = roy
