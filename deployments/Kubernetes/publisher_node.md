@@ -48,7 +48,7 @@ configs:
     external_ip: ""
     local_ip: ""
     # Proxy IP used by Nginx or other loadbalancer
-    k8s_proxy_ip: 172.104.180.110
+    proxy_ip: 172.104.180.110
 
   authentication:
     enable: false
@@ -114,7 +114,7 @@ configs:
 helm install ~/deployments/helm/packages/anylog-node-1.22.3.tgz --values ~/deployments/helm/sample-configurations/anylog_publisher.yaml --name-template anylog-publisher
 ```
 
-3. Updating [nginx](nginx.md) files to support REST & MQTT communication remotely & restart the service
+3. Updating [nginx](../Networking/nginx.md) files to support REST & MQTT communication remotely & restart the service
 
    i. To Support TCP - add following content in `/etc/nginx/nginx.conf`
    
