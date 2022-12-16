@@ -62,7 +62,7 @@ running in the background, but already having the default network configurations
 **[Kubernetes](Kubernetes)**
 * [Preparing Machine(s) for Deployment](Kubernetes/Prerequisites.md)
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
-  * [Install & Configure Nginx](Kubernetes/nginx.md)
+  * [Install & Configure Nginx](Networking/nginx.md)
 * [Install PostgreSQL](Kubernetes/Postgres.md)
 * [Install Master Node](Kubernetes/master_node.md)
   * [Deployment Process](Kubernetes/master_node_deployment_process.md)
