@@ -32,5 +32,109 @@ using their assigned permissions which may be less restrictive compared to the p
 The relevant AnyLog commands are detailed in the section [Node Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#node-authentication).  
 
 
+## Key-Based-Authentication deployment example
 
+The example below demonstrates the following:
+a) Assigning keys to nodes and users as needed.
+b) Defining the policies that determine user permissions.
+c) Assigning nodes and users to the policy that determine their permissions.
+
+
+### Definitions
+
+Policies
+* A member policy - a policy that provides information on a member node or a user. The policy includes the public key assigned to the member.
+* A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.
+* An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the permitted operations to the listed members. 
+Directories
+* keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node. 
+
+### Prerequisites and reset
+
+* A network with 2 operators and a master node.  
+* No existing permissions and assignment policies.   
+* No existing keys assigned to nodes and users.  
+
+Use the following commands to set up each operator node:
+<pre> 
+set authentication off
+master_node = 10.0.0.25:2048        # Replace with the proper address
+</pre>
+
+Use the following commands to set up the master node:
+<pre> 
+set authentication off
+connect dbms sqlite !db_user !db_port blockchain
+</pre>
+
+Use the following commands to delete all policies on a master node:
+<pre> 
+run client !master_node "drop table ledger where dbms = blockchain"
+run client !master_node "create table ledger where dbms = blockchain"
+run client !master_node "blockchain delete local file"
+</pre>
+
+Use the following command to delete the local blockchain file on each operator node:
+<pre> 
+blockchain delete local file
+</pre>
+
+Use the following commands to delete existing issued keys on each node:
+<pre> 
+system del !id_dir/*.* /q      # Windows
+system rm !id_dir/*.*          # linux
+</pre>
+
+### Validate policy structure
+Policies are represented in JSON structure.  
+When a variable name is assigned with a policy, the policy info is presented on the CLI when the variable name is prefixed with  
+exclamation point (like: ***!member*** when "member" is the variable name).  
+The command ***json*** presents the policy on the CLI only if the policy is in correct JSON structure.  
+For example:
+<pre> 
+json !member
+</pre>
+Adding the keyword test, returns ***true*** if the structure is correct, otherwise ***false*** is returned.
+<pre> 
+json !member test
+</pre>
+
+## The demo steps
+The following chart details the processes demonstrated:  
+
+| Step | Process           | Details       |
+| -----| ------------- | ------------- |
+| 1    | Root user keys  | Generate keys for the root user  |
+| 2    | Root user policy  | Create a policy for a root user, this policy provides the permissions to all members (nodes and users)  |
+
+
+### Step 1 - Generate keys for the Root User
+
+<pre> 
+id create keys where password = abc and keys_file = root_keys
+</pre>
+ 
+A file (name root keys) with the public and encrypted private key is created in the keys' directory (!key_dir).  
+These are the keys of the root user. If a file name is not specified, the keys would be presented on the monitor, and the
+user is responsible to store and protect the keys.
+
+### Root user policy
+
+This policy can include any information which is representative of the root user. The only required attributes are:
+* type - with the value "root"
+* public_key - with the public key of the root user. Note that the public key is added when the policy is signed (as in the example below).
+
+In the example, we add a name (rachel) to the policy. It allows to reference the policy by the name, however, ***name*** is not a required attribute.
+ 
+```<pre> 
+<member = {"member" : {  
+    "type" : "root",  
+    "name"  : "rachel"  
+    }  
+}>  
+private_key = get private key where keys_file = root_keys
+member = id sign !member where key = !private_key and password = abc
+json !member    # View the policy including the signature and public key
+blockchain insert where policy = !member and local = true  and master = !master_node
+```  
 
