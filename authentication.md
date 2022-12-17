@@ -26,7 +26,9 @@ The network provides 2 layers of authentications:
    Details on REST requests are available in the [REST requests](./background%20processes.md#rest-requests) section.
    Authentication is based on one oif the following methods:
    * Usernames and passwords that are kept on the destination node.
-   * Issuing client certificate and validating the signature with policies providing the authorized functionalities.  
+     Details are available [below](#users-authentication)
+   * Issuing client certificate and validating the signature with policies providing the authorized functionalities. 
+    Details are available [below](#using-ssl-certificates).
     
 Enabling and disabling authentication (both - nodes authentication and users authentication) is using the following command:
 <pre>
@@ -40,13 +42,6 @@ The following command determines how the node is configured:
 <pre>
 get authentication
 </pre>
-Note: 
-* Node authentication is detailed [below](#node-authentication).
-* user authentication is detailed [below](#add-users).
-
-## SSL Certificates
-3) A second option to authenticate external users and application is with SSL Certificates.
-   These processes are detailed [below](#using-ssl-certificates).
 
 ## Encrypting network messages   
 AnyLog provide the mechanisms to encrypt messages transferred over the network.
