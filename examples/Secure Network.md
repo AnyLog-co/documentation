@@ -39,7 +39,6 @@ a) Assigning keys to nodes and users as needed.
 b) Defining the policies that determine user permissions.
 c) Assigning nodes and users to the policy that determine their permissions.
 
-
 ### Definitions
 
 Policies
@@ -47,7 +46,8 @@ Policies
 * A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.
 * An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the permitted operations to the listed members. 
 Directories
-* keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node. 
+* keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node.
+
 
 ### Prerequisites and reset
 
@@ -99,14 +99,28 @@ Adding the keyword test, returns ***true*** if the structure is correct, otherwi
 json !member test
 </pre>
 
+### Comments
+This demo is executed on the CLI of the 2 operators.  
+* When a command is executed on operator 1 it is designated by CLI(opr.1).
+* When a command is executed on operator 2 it is designated by CLI(opr.2).
+* When a command is executed on operator 1 and 2 it is designated by CLI(opr.1.2).
+
+
 ## The demo steps
+The demo is using 2 operator nodes and 2 users (root user and a non-root user). Each node and user is assigned with keys.
+Each node and user are associated with member policies. Each member policy is assigned with permission policy such that 
+each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
+the senders of messages and determine the permissions.
+
 The following chart details the processes demonstrated:  
 
-| Step | Process           | Details       |
-| -----| ------------- | ------------- |
-| 1    | Root user keys  | Generate keys for the root user  |
-| 2    | Root user policy  | Create a policy for a root user, this policy provides the permissions to all members (nodes and users)  |
-
+| Step | Node         | Process         | Details       |
+| -----| ------------ | --------------- | ------------- |
+| 1    | CLI(opr.1)   |Root user keys   | Generate keys for the root user  |
+| 2    | CLI(opr.1)   |Root user policy  | Create a policy for a root user, this policy provides the permissions to all members (nodes and users)  |
+| 3    | CLI(opr.1.2) |Node Keys  | Generate keys to the operator nodes  |
+| 4    | CLI(opr.1.2) |Node member policy  | Create member policies to the operator nodes  |
+| 5    | CLI(opr.1)   |User keys  | Generate keys to a user which is not a node  |
 
 ### Step 1 - Generate keys for the Root User
 
@@ -118,7 +132,7 @@ A file (name root keys) with the public and encrypted private key is created in 
 These are the keys of the root user. If a file name is not specified, the keys would be presented on the monitor, and the
 user is responsible to store and protect the keys.
 
-### Root user policy
+### Step 2 - Root user policy
 
 This policy can include any information which is representative of the root user. The only required attributes are:
 * type - with the value "root"
@@ -138,3 +152,47 @@ json !member    # View the policy including the signature and public key
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```  
 
+### Step 3 - Generate keys to nodes
+
+Generate keys to the 2 operator nodes.  
+
+Use CLI(oper.1) to generates keys to operator #1:
+<pre> 
+id create keys for node where password = opr001
+</pre>
+
+Use CLI(oper.2) to generates keys to operator #2:
+<pre> 
+id create keys for node where password = opr002
+</pre>
+
+### Step 4 - Create member policies to the operator nodes
+
+Create a member policy to the 2 operator nodes.
+
+Use CLI(oper.1) to create the member policy of operator #1:
+```
+<member = {"member" : {
+    "id"   : "node_001",
+    "type" : "node",
+    "company"  : "Northern Light",
+    "name" : "server south"
+    }
+}>
+member = id sign !member where password = opr001
+!member
+blockchain insert where policy = !member and local = true  and master = !master_node
+```
+Use CLI(oper.2) to create the member policy of operator #2:
+```
+<member = {"member" : {
+    "id"   : "node_002",
+    "type" : "node",
+    "company"  : "Northern Light",
+    "name" : "server north"
+    }
+}>
+member = id sign !member where password = opr002
+!member
+blockchain insert where policy = !member and local = true  and master = !master_node
+```
