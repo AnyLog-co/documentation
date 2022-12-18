@@ -104,11 +104,18 @@ json !member test
 The following chart summarizes the policies declared to authenticate users and validate their permissions.
 
 
-| Policy Type | Role                                | Attribute   | Required  |  Unique / comments       |
-| ------------| ----------------------------------- | ----------- | --------- | ---------------- |
-| member      | Declares a member node or a user    | type        | Yes       | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the ***type***.|
-|             |                                     | public_key  | Yes       | Yes  - a single policy for each member   |
-| Permissions | Determines commands and databases allowed  | enable | Yes     | a list with commands allowed, '*' represents all commands |
+| Policy Type | Role                                | Attribute   | Required |  Comments       |
+| ------------| ----------------------------------- | ----------- | -------- | ---------------- |
+| member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the ***type***.|
+|             |                                     | public_key  | Yes      | Unique - a single policy for each member   |
+| Permissions | Determines commands and             | enable      | Yes      | a list with commands allowed, '*' represents all commands |
+|             | databases allowed                   | disable     | No       | An optional attribute to specify non-allowed commands    |
+|             |                                     | databases   | No       | An optional attribute to specify databases allowed    |
+|             |                                     | tables      | No       | An optional attribute to specify tables allowed    |
+| Assignment  | Associates a permissions policy     | permissions | Yes      | The ID of the permissions policy |
+|             | with one or more member policies    | members     | Yes      | A list of the public keys of the assigned members    |
+|             |                                     | public_key  | Yes      | The public key of the node or user creating the assignment policy    |
+|             |                                     | signature   | Yes      | The signature of the node or user creating assignment the policy    |
 
 
 
