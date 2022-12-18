@@ -158,12 +158,12 @@ Generate keys to the 2 operator nodes.
 
 Use CLI(oper.1) to generates keys to operator #1:
 <pre> 
-id create keys for node where password = opr001
+id create keys for node where password = demo1
 </pre>
 
 Use CLI(oper.2) to generates keys to operator #2:
 <pre> 
-id create keys for node where password = opr002
+id create keys for node where password = demo2
 </pre>
 
 ### Step 4 - Create member policies to the operator nodes
@@ -179,8 +179,8 @@ Use CLI(oper.1) to create the member policy of operator #1:
     "name" : "server south"
     }
 }>
-member = id sign !member where password = opr001
-!member
+member = id sign !member where password = demo1
+json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
 Use CLI(oper.2) to create the member policy of operator #2:
@@ -192,7 +192,7 @@ Use CLI(oper.2) to create the member policy of operator #2:
     "name" : "server north"
     }
 }>
-member = id sign !member where password = opr002
-!member
+member = id sign !member where password = demo2
+json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
