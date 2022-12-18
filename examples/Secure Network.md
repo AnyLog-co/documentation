@@ -99,6 +99,19 @@ Adding the keyword test, returns ***true*** if the structure is correct, otherwi
 json !member test
 </pre>
 
+## Required attributes in each policy
+
+The following chart summarizes the policies declared to authenticate users and validate their permissions.
+
+
+| Policy Type | Role                                | Attribute   | Required  |  Unique / comments       |
+| ------------| ----------------------------------- | ----------- | --------- | ---------------- |
+| member      | Declares a member node or a user    | type        | Yes       | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the ***type***.|
+|             |                                     | public_key  | Yes       | Yes  - a single policy for each member   |
+| Permissions | Determines commands and databases allowed  | enable | Yes     | a list with commands allowed, '*' represents all commands |
+
+
+
 ### Comments
 This demo is executed on the CLI of the 2 operators.  
 * When a command is executed on operator 1 it is designated by CLI(opr.1).
@@ -121,6 +134,8 @@ The following chart details the processes demonstrated:
 | 3    | CLI(opr.1.2) |Node Keys  | Generate keys to the operator nodes  |
 | 4    | CLI(opr.1.2) |Node member policy  | Create member policies to the operator nodes  |
 | 5    | CLI(opr.1)   |User keys  | Generate keys to a user which is not a node  |
+| 6    | CLI(opr.1)   |User Policy  | Create a member policy to the user  |
+| 7    | CLI(opr.1)   |Permission Policy | Create a permission policy with no restrictions  |
 
 ### Step 1 - Generate keys for the Root User
 
@@ -196,3 +211,43 @@ member = id sign !member where password = demo2
 json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
+
+### Step 5 - Generate keys to a user
+
+Use CLI(oper.1) to generate keys for a user named Roy. The keys are stored in the keys directory:
+<pre> 
+id create keys where password = 123 and keys_file = roy
+</pre>
+
+### Step 6 - Create a member policy to the user
+
+Use CLI(oper.1) to create a member policy for a user named roy. Note the policy type is ***user*** to differentiate from 
+the type ***root***. 
+
+```
+<member = {"member" : {
+    "id"   : "user_001",
+    "type" : "user",
+    "name"  : "roy"
+    }
+}>
+private_key = get private key where keys_file = roy
+member = id sign !member where key = !private_key and password = 123
+!member
+blockchain insert where policy = !member and local = true  and master = !master_node
+```
+
+### Step 7 - Create a permission policy with no restrictions
+
+Use CLI(oper.1) to create a permission policy that has no restrictions.  
+This policy enables all commands and allows to operate with all databases.
+```
+<permissions = {"permissions" : {
+    "name" : "no restrictions",
+    "databases" : ["*"],
+    "enable" : ["*"]
+    }
+}>
+blockchain insert where policy = !permissions and local = true  and master = !master_node 
+```
+
