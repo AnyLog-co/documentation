@@ -108,8 +108,9 @@ The following chart summarizes the policies declared to authenticate users and v
 | ------------| ----------------------------------- | ----------- | -------- | ---------------- |
 | member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the ***type***|
 |             |                                     | public_key  | Yes      | Unique - a single policy for each member   |
-| Permissions | Determines commands and             | enable      | Yes      | a list with commands allowed, '*' represents all commands |
-|             | databases allowed                   | disable     | No       | An optional attribute to specify non-allowed commands    |
+| Permissions | Determines commands and             | name        | Yes      | A unique name assigned to the permissions policy |
+|             | databases allowed                   | enable      | Yes      | a list with commands allowed, '*' represents all commands |
+|             |                                     | disable     | No       | An optional attribute to specify non-allowed commands    |
 |             |                                     | databases   | No       | An optional attribute to specify databases allowed    |
 |             |                                     | tables      | No       | An optional attribute to specify tables allowed    |
 | Assignment  | Associates a permissions policy     | permissions | Yes      | The ID of the permissions policy |
