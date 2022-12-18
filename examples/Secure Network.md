@@ -118,8 +118,6 @@ The following chart summarizes the policies declared to authenticate users and v
 |             |                                     | public_key  | Yes      | The public key of the node or user creating the assignment policy    |
 |             |                                     | signature   | Yes      | The signature of the node or user creating assignment the policy    |
 
-
-
 ### Comments
 This demo is executed on the CLI of the 2 operators.  
 * When a command is executed on operator 1 it is designated by CLI(opr.1).
@@ -144,6 +142,7 @@ The following chart details the processes demonstrated:
 | 5    | CLI(opr.1)   |User keys  | Generate keys to a user which is not a node  |
 | 6    | CLI(opr.1)   |User Policy  | Create a member policy to the user  |
 | 7    | CLI(opr.1)   |Permission Policy | Create a permission policy with no restrictions  |
+| 8    | CLI(opr.1)   |Assign permissions to a user | Root user provides all privileges to a user  |
 
 ### Step 1 - Generate keys for the Root User
 
@@ -259,3 +258,25 @@ This policy enables all commands and allows to operate with all databases.
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
 
+### Step 8 - Assign privileges to a user
+Use CLI(oper.1) - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
+The assignment process and ***assignment policy*** are detailed below:  
+```
+permission_id = blockchain get permissions where name = "no restrictions" bring ['permissions']['id']
+member_user = blockchain get member where name = roy bring ['member']['public_key']
+
+<assignment = {"assignment" : {
+        "name" : "assignment to no restrictions",
+        "permissions"  : !permission_id,
+        "members"  : [!member_user]
+        }
+}>
+private_key = get private key where keys_file = root_keys
+assignment = id sign !assignment where key = !private_key and password = abc
+!assignment 
+blockchain insert where policy = !assignment and local = true  and master = !master_node  
+```
+
+Notes: 
+1) The assignment policy needs to be signed by the root user or a user with permissions to sign assignment policies.
+2) After the assignments, as Roy is assigned to a no resrictions policy, Roy is permitted to sign assignments policies.
