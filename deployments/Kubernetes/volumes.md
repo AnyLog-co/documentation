@@ -1,9 +1,9 @@
 # Volumes
-Docker volumes are really a directory that seats on the physical machine and is associated with the docker instance(s). 
-While Kubernetes volumes are more of an abstract idea, where (persistent) data can be stored either on the local machine, 
-or cloud (ex. AWS S3) and get associated with a Kubernetes deployment (pod). 
+Docker volumes are a set of directories that seats on the physical machine and are associated with docker instance(s). 
+Kubernetes volumes, are more of an abstract idea as persistent data can be stored either on the machine  
+or cloud (ex. AWS S3). 
 
-AnyLog "requires" storing certain content generated throughout the usage locally, in order to have a backup for when a 
+AnyLog "requires" storing certain content generated throughout the usage (locally) in order to have a backup for when a 
 node (physically) resets, or when migrating data from one machine to another. These include:
 * `anylog` directory - which contains authentication keys
 * `blockchain` directory - which contains a copy of the blockchain (as JSON file)
