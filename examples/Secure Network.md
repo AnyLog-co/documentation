@@ -54,13 +54,13 @@ c) Assigning nodes and users to the policies that determine their permissions.
 * No existing permissions and assignment policies.   
 * No existing keys assigned to nodes and users.  
 
-Use the following commands to set up each operator node:
+Use the following commands to configure each operator node:
 <pre> 
 set authentication off
 master_node = 10.0.0.25:2048        # Replace with the proper address
 </pre>
 
-Use the following commands to set up the master node:
+Use the following commands to configure the master node:
 <pre> 
 set authentication off
 connect dbms sqlite !db_user !db_port blockchain
@@ -85,9 +85,9 @@ system rm !id_dir/*.*          # linux
 </pre>
 
 ### Validate policy structure
-Policies are represented in JSON structure.  
-When a variable name is assigned with a policy, the policy info is presented on the CLI when the variable name is prefixed with  
-exclamation point (like: ***!member*** when "member" is the variable name).  
+Policies are represented by JSON structures. The root of the JSON has one attribute and is considered the ***policy type***.    
+When a variable is assigned with a policy, the policy info is presented on the CLI when the variable name is prefixed with  
+exclamation point (like: ***!member*** whereas "member" is the variable name).  
 The command ***json*** presents the policy on the CLI only if the policy is in correct JSON structure.  
 For example:
 <pre> 
@@ -98,6 +98,7 @@ Adding the keyword test, returns ***true*** if the structure is correct, otherwi
 json !member test
 </pre>
 
+
 ## Required attributes in each policy
 
 The following chart summarizes the policies declared to authenticate users and validate their permissions.
@@ -105,10 +106,10 @@ The following chart summarizes the policies declared to authenticate users and v
 
 | Policy Type | Role                                | Attribute   | Required |  Comments       |
 | ------------| ----------------------------------- | ----------- | -------- | ---------------- |
-| member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the ***type***|
-|             |                                     | public_key  | Yes      | Unique - a single policy for each member   |
-| Permissions | Determines commands and             | name        | Yes      | A unique name assigned to the permissions policy |
-|             | databases allowed                   | enable      | Yes      | a list with commands allowed, '*' represents all commands |
+| member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the attribute ***type***|
+|             |                                     | public_key  | Yes      | Unique - multiple member policies with the same public key are not allowed   |
+| Permissions | Determines commands and databases allowed | name        | Yes      | A unique name assigned to the permissions policy |
+|             |                                     | enable      | Yes      | A list with commands allowed, '*' represents all commands |
 |             |                                     | disable     | No       | An optional attribute to specify non-allowed commands    |
 |             |                                     | databases   | No       | An optional attribute to specify databases allowed    |
 |             |                                     | tables      | No       | An optional attribute to specify tables allowed    |
@@ -126,7 +127,7 @@ This demo is executed on the CLI of the 2 operators.
 
 ## The demo steps
 The demo is using 2 operator nodes and 2 users (root user and a non-root user). Each node and user is assigned with keys.
-Each node and user are associated with member policies. Each member policy is assigned with permission policy such that 
+Each node and user is associated with member policies. Each member policy is assigned with permission policy such that 
 each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
 the senders of messages and determine the permissions.
 
@@ -144,7 +145,7 @@ The following chart details the processes demonstrated:
 | 8    | CLI(opr.1)   |Assign permissions to a user | Root user provides all privileges to a user  |
 | 9    | CLI(opr.1)   |Permission policy | Generate a permission policy with limited privileges  |
 |10    | CLI(opr.1)   |Assign permissions to a node | A privileged user provides limited privileges to a node  |
-|11    | CLI(opr.1.2) |Set a local password | The local password protects local data and provided to the node every time the node restarts  |
+|11    | CLI(opr.1.2) |Set a local password | The local password protects local data. This password is provided to the node every time the node restarts  |
 |12    | CLI(opr.1.2) |Save the node's private key | The node's private key is saved locally and protected by the local password  |
 |13    | CLI(opr.1.2) |Enable authentication | Enable authentication of messages from users and nodes  |
 
@@ -154,8 +155,9 @@ The following chart details the processes demonstrated:
 id create keys where password = abc and keys_file = root_keys
 </pre>
  
-A file (name root keys) with the public and encrypted private key is created in the keys' directory (!key_dir).  
-These are the keys of the root user. If a file name is not specified, the keys would be presented on the monitor, and the
+A file (named ***root_keys***) with the public and encrypted private key is created in the keys' directory (!key_dir).  
+These are the keys of the root user.  
+Note: If a file name is not specified, the keys would be presented on the monitor, and the
 user is responsible to store and protect the keys.
 
 ### Step 2 - Root user policy
