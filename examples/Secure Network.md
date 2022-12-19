@@ -505,3 +505,41 @@ blockchain insert where policy = !permissions and local = true  and master = !ma
 ```
 
 ### Assign the Permission Policy to the Member Policy
+
+```
+member_certificate = blockchain get member where type = certificate and name = acme bring ['member']['public_key']
+
+permission_id = blockchain get permissions where name = "application basic permissions" bring [permissions][id]
+
+<assignment = {"assignment" : {
+        "permissions"  : !permission_id,
+        "members"  : [!member_certificate]
+        }
+}>
+private_key = get private key where keys_file = roy
+assignment = id sign !assignment where key = !private_key and password = 123
+json !assignment 
+blockchain insert where policy = !assignment and local = true  and master = !master_node
+```
+
+### Query permissions by a public 
+
+<pre> 
+public_key = get public key where keys_file = !pem_dir/server-acme-inc-public-key
+get permissions for member !public_key
+</pre>
+
+### Example of a third part application - cURL
+
+<pre> 
+curl --location --request GET https://10.0.0.78:7849 --header "User-Agent: AnyLog/1.23" --header "command: get status" --cert "server-acme-inc-private-key.crt" --key "server-acme-inc-private-key.key"
+</pre>
+
+### Example of a third part application - AnyLog Remote CLI
+
+Use the Setting Tab to configure the REST calls as follows:
+* Enable CA Certificate
+* Update PEM file to use: ```ca-anylog-public-key.crt```
+* Update CRT file to use: ```server-acme-inc-public-key.crt```
+* Update KEY file to use: ```server-acme-inc-private-key.key```
+
