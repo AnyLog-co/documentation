@@ -236,9 +236,8 @@ id create keys where password = 123 and keys_file = roy
 
 Use CLI(oper.1) to create a member policy for a user named roy.    
 Notes:  
-1) The policy type is ***user*** to differentiate from the type ***root*** used to identify the policy of the root member.  
+1) The policy type is ***user*** to differentiate from the type ***root*** (that identifies the policy of the root member).  
 2) The public key is added to the policy when the policy is signed. No 2 members policies with the same public key is allowed. 
-
 
 ```
 <member = {"member" : {
@@ -309,7 +308,7 @@ blockchain insert where policy = !permissions and local = true  and master = !ma
 ```
 Notes:
 1) The policy example permits operating on all databases except a database called lsl_demo.
-2) The ***tables*** attribute permits 2 tables (temperature_sensor and ping_sensor) in lsl_demo databases.
+2) The ***tables*** attribute permits 2 tables (temperature_sensor and ping_sensor) in lsl_demo database.
 3) The derived data permission is as follows: the permission allows operating on all databases, however, 
    only table temperature_sensor and tables ping_sensor are allowed in database lsl_demo.
 4) The attribute ***enable*** lists the anylog commands which are permitted.
@@ -338,7 +337,7 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 
 ### Step 11 - Provide the local password
 The local password protects sensitive info on each node and is provided whenever the node restarts.  
-In this demo, each node's private key is stored locally and protected by the local password. 
+In this demo, each node's private key is stored locally and protected by the local password.  
 In the example below, the password 123 is assigned to operator 1 and 456 is assigned to operator 2.      
 
 On CLI(oper.1):
@@ -370,12 +369,12 @@ On CLI(oper.2):
 set private password = demo2 in file
 </pre>
 
-Note: The keys are stored in a file called ***auth.id*** in the ***keys directory***.
+Note: The key is stored in a file called ***auth.id*** in the ***keys directory***.
 
 
 ### Step 13 - Enable authentication
 Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
-When a node receives a message, the message is signed by the private key of the sender (the node or the user sending the message).   
+When a node receives a message, the message is signed by the private key of the sender (the key of tje node or the user sending the message).   
 The receiving node will first use the public key of the sender to authenticate the sender. Next it will consider the permission 
 policies to determine that the sender is authorized to the type of message received. Authorization is determined if it
 is granted by the root user, or by a user which is in a chain of permitted authorizations that is derived from the root user.  
