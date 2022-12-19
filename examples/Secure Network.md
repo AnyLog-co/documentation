@@ -543,3 +543,9 @@ Use the Setting Tab to configure the REST calls as follows:
 * Update CRT file to use: ```server-acme-inc-public-key.crt```
 * Update KEY file to use: ```server-acme-inc-private-key.key```
 
+### Example of a third part application - Grafana
+
+Update the Grafana connection information with the CRT and KEY info.  
+Set the following flags:  
+* TLS Client Auth is set to ON
+* Skip TLS Verify is set to ON
