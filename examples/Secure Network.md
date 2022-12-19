@@ -438,9 +438,9 @@ On CLI(oper.2):
 ## Messaging using the private key of a user
 
 A user may want to send a messages using his authorization.  
-For example, an administrator logins to a node and may need to issue a query or a command which is not permitted by 
+For example, an administrator logins to a node and needs to issue a query, or a command which is not permitted by 
 the permission policy assigned to the node.  
-The user can leverage his assigned permissions using the commands in the example below:
+The user can leverage his assigned permissions as in the example below:
 <pre> 
 private_key = get private key where keys_file = roy
 set signatory where key = !private_key and password = 123  and name = roy
