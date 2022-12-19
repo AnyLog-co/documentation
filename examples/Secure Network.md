@@ -46,7 +46,7 @@ c) Assigning nodes and users to the policies that determine their permissions.
 * An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the 
   permitted operations to the listed members.   
 * keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node.
-
+* pem directory (!pem_dir) - a directory that contains certificates and their associated keys. 
 
 ### Prerequisites and reset
 
@@ -448,3 +448,60 @@ get signatory   # Validate signatory change from the node to the user
 run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the command will be executed
 </pre>
 
+## Using certificates
+
+This process makes AnyLog a Certificate Authority (CA) that issues Client Certificates to 3rd parties applications.   
+This process id detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) section.  
+Client Certificates enable the following:  
+* Only clients holding certificates can communicate with the network nodes.
+* A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
+  * The private key is represented by a member policy (and the type attribute is with the value ***certificate***).
+  * Using an assignment policy, the member policy is associated with a permission policy.
+  * A message from a 3rd party to a node in the network is processed if the sender is authenticated and is with proper permissions.
+
+Notes:
+This setup allows Secure Socket Layer (SSL) between a server (AnyLog Node) and a client (the 3rd party application).
+Bekow is an example of the Server Side (AnyLog) REST sockets configuration to allow SSL Certificates: 
+<pre> 
+run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
+</pre>
+Use the following command to determine how the AnyLog Node is configured to allow SSL:
+<pre> 
+get rest server info
+</pre>
+
+### Example
+
+The following example assumes that the example certificates detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) 
+section are available in the pem directory (!pem_dir). 
+
+### Generate a Member Policy representing the issued certificate:
+```
+public_key = get public string where keys_file = !pem_dir/server-acme-inc-public-key
+
+<member = {"member" : {
+    "type" : "certificate",
+    "name"  : "acme",
+    "public_key" : !public_key
+    }
+}>
+
+# No need to sign this policy
+blockchain insert where policy = !member and local = true  and master = !master_node
+```
+
+### Generate a Permission Policy for 3rd patties applications:
+```
+<permissions = {"permissions" : {
+    "name" : "application basic permissions",
+    "tables" : ["lsl_demo.temperature_sensor", "lsl_demo.ping_sensor"],
+    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain"],
+    }
+}>
+private_key = get private key where keys_file = roy
+permissions = id sign !permissions where key = !private_key and password = 123
+json !permissions 
+blockchain insert where policy = !permissions and local = true  and master = !master_node
+```
+
+### Assign the Permission Policy to the Member Policy
