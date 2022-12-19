@@ -1,7 +1,8 @@
 # Users and nodes Authentication, making the data secure
 
-A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies. 
-These commands, set a framework that provides the following functionality:  
+A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies.  
+For a detailed demo setup of a secured network refer to the document [Securing the Network](https://github.com/AnyLog-co/documentation/blob/master/examples/Secure%20Network.md).   
+These commands detailed in this document facilitate a framework that provides the following functionality:  
 a) Authenticates messages send from nodes to peer nodes.  
 b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.  
 c) Determines permissions to the processes of the network and data maintained by nodes of the network.  
