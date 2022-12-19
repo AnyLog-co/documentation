@@ -3,10 +3,10 @@
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies. 
 These commands, set a framework that provides the following functionality:  
 a) Authenticates messages send from nodes to peer nodes.  
-b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.
-c) Determines permissions to the processes of the network and data maintained by nodes of the network.
-d) Validates policies by authenticating their authors and their assigned permissions (see section [adding policies to the blockchain](#adding-policies-to-the-blockchain) below.
-e) Encrypt and decrypt commands and data transferred in the network.
+b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.  
+c) Determines permissions to the processes of the network and data maintained by nodes of the network.  
+d) Validates policies by authenticating their authors and their assigned permissions (see section [adding policies to the blockchain](#adding-policies-to-the-blockchain) below.  
+e) Encrypt and decrypt commands and data transferred in the network.  
 
 The network provides 2 layers of authentications:
 1) Node Authentications - These are processes to authenticate users and processes delivering messages from one node to another
