@@ -234,8 +234,11 @@ id create keys where password = 123 and keys_file = roy
 
 ### Step 6 - Create a member policy to the user
 
-Use CLI(oper.1) to create a member policy for a user named roy. Note the policy type is ***user*** to differentiate from 
-the type ***root***. 
+Use CLI(oper.1) to create a member policy for a user named roy.    
+Notes:  
+1) The policy type is ***user*** to differentiate from the type ***root*** used to identify the policy of the root member.  
+2) The public key is added to the policy when the policy is signed. No 2 members policies with the same public key is allowed. 
+
 
 ```
 <member = {"member" : {
