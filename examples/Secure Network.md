@@ -136,13 +136,16 @@ The following chart details the processes demonstrated:
 | Step | Node         | Process         | Details       |
 | -----| ------------ | --------------- | ------------- |
 | 1    | CLI(opr.1)   |Root user keys   | Generate keys for the root user  |
-| 2    | CLI(opr.1)   |Root user policy  | Create a policy for a root user, this policy provides the permissions to all members (nodes and users)  |
+| 2    | CLI(opr.1)   |Root user policy  | Create a policy for a root user, the root user grants permissions to members (nodes and users)  |
 | 3    | CLI(opr.1.2) |Node Keys  | Generate keys to the operator nodes  |
-| 4    | CLI(opr.1.2) |Node member policy  | Create member policies to the operator nodes  |
+| 4    | CLI(opr.1.2) |Node member policy  | Create member policies representing the operator nodes  |
 | 5    | CLI(opr.1)   |User keys  | Generate keys to a user which is not a node  |
 | 6    | CLI(opr.1)   |User Policy  | Create a member policy to the user  |
 | 7    | CLI(opr.1)   |Permission Policy | Create a permission policy with no restrictions  |
 | 8    | CLI(opr.1)   |Assign permissions to a user | Root user provides all privileges to a user  |
+| 9    | CLI(opr.1)   |Permission policy | Generate a permission policy with limited privileges  |
+|10    | CLI(opr.1)   |Assign permissions to a node | A privileged user provides limited privileges to a node  |
+|11    | CLI(opr.1.2) |Set a local password | The local password provided to the node every time the node restarts  |
 
 ### Step 1 - Generate keys for the Root User
 
@@ -280,3 +283,63 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 Notes: 
 1) The assignment policy needs to be signed by the root user or a user with permissions to sign assignment policies.
 2) After the assignments, as Roy is assigned to a no resrictions policy, Roy is permitted to sign assignments policies.
+
+### Step 9 - Create a permission policy with limited permissions
+Use CLI(oper.1) to generate a ***permission*** policy with limited privileges.
+
+```
+<permissions = {"permissions" : {
+    "name" : "node basic permissions",
+    "databases" : ["*", "-lsl_demo"],
+    "tables" : ["lsl_demo.temperature_sensor", "lsl_demo.ping_sensor"],
+    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain"],
+    "disable" : ["get node id"]
+    }
+}>
+private_key = get private key where keys_file = roy
+permissions = id sign !permissions where key = !private_key and password = 123
+!permissions 
+blockchain insert where policy = !permissions and local = true  and master = !master_node
+```
+Notes:
+1) The policy example permits operating on all databases except a database called lsl_demo.
+2) The ***tables*** attribute permits 2 tables (temperature_sensor and ping_sensor) in lsl_demo databases.
+3) The derived data permission is as follows: the permission allows operating on all databases, however, 
+   only table temperature_sensor and tables ping_sensor are allowed in database lsl_demo.
+4) The attribute ***enable*** lists the anylog commands which are permitted.
+5) The attribute ***disable*** lists the AnyLog commands which are not allowed. 
+
+### Step 10 - Assign limited privileges to nodes
+Use CLI(oper.1) - a user with privileges to assign permissions, provides limited permissions to the operator nodes.
+In the example below, roy assignes the policy named ***node basic permissions*** to the 2 operator nodes:
+
+```
+member_node1 = blockchain get member where id = node_001 bring ['member']['public_key']
+member_node2 = blockchain get member where id = node_002 bring ['member']['public_key']
+
+permission_id =  blockchain get permissions where name = "node basic permissions" bring ['permissions']['id']
+
+<assignment = {"assignment" : {
+        "permissions"  : !permission_id,
+        "members"  : [!member_node1, !member_node2]
+        }
+}>
+private_key = get private key where keys_file = roy
+assignment = id sign !assignment where key = !private_key and password = 123
+json !assignment 
+blockchain insert where policy = !assignment and local = true  and master = !master_node
+```
+
+### Step 11 - Provide the local password
+The local password provides sensative keys on each node and is provided whenever the node restarts.  
+In the example below, the password 123 is assigned to operator 1 and 456 is assigned to operator 2.      
+
+On CLI(oper.1):
+<pre> 
+set local password = 123
+</pre>
+
+On CLI(oper.2):
+<pre> 
+set local password = 456
+</pre>
