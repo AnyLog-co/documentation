@@ -145,7 +145,9 @@ The following chart details the processes demonstrated:
 | 8    | CLI(opr.1)   |Assign permissions to a user | Root user provides all privileges to a user  |
 | 9    | CLI(opr.1)   |Permission policy | Generate a permission policy with limited privileges  |
 |10    | CLI(opr.1)   |Assign permissions to a node | A privileged user provides limited privileges to a node  |
-|11    | CLI(opr.1.2) |Set a local password | The local password provided to the node every time the node restarts  |
+|11    | CLI(opr.1.2) |Set a local password | The local password protects local data and provided to the node every time the node restarts  |
+|12    | CLI(opr.1.2) |Save the node's private key | The node's private key is saved locally and protected by the local password  |
+|13    | CLI(opr.1.2) |Enable authentication | Enable authentication of messages from users and nodes  |
 
 ### Step 1 - Generate keys for the Root User
 
@@ -331,7 +333,8 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 ```
 
 ### Step 11 - Provide the local password
-The local password provides sensative keys on each node and is provided whenever the node restarts.  
+The local password protects sensitive info on each node and is provided whenever the node restarts.  
+In this demo, each node's private key is stored locally and protected by the local password. 
 In the example below, the password 123 is assigned to operator 1 and 456 is assigned to operator 2.      
 
 On CLI(oper.1):
@@ -342,4 +345,89 @@ set local password = 123
 On CLI(oper.2):
 <pre> 
 set local password = 456
+</pre>
+
+Note:
+* If a local password exists, an error is returned if the nodes restarts, and the node is provided with incorrect password.
+* If the local password is lost, all the relevant files in the ***keys directory*** needs to be deleted, and the 
+  node needs to be assigned with new keys and a new assignment policy. 
+
+### Step 12 - Save the node's private key 
+The private key can be stored on the node and protected using the local password.  
+The following examples stores the private key on each node:
+
+On CLI(oper.1):
+<pre> 
+set private password = demo1 in file
+</pre>
+
+On CLI(oper.2):
+<pre> 
+set private password = demo2 in file
+</pre>
+
+Note: The keys are stored in a file called ***auth.id*** in the ***keys directory***.
+
+
+### Step 13 - Enable authentication
+Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
+When a node receives a message, the message is signed by the private key of the sender (the node or the user sending the message).   
+The receiving node will first use the public key of the sender to authenticate the sender. Next it will consider the permission 
+policies to determine that the sender is authorized to the type of message received. Authorization is determined if it
+is granted by the root user, or by a user which is in a chain of permitted authorizations that is derived from the root user.  
+
+Enable authentication on each node using the following command:
+
+On CLI(oper.1.2):
+<pre> 
+set node authentication on
+</pre>
+
+## Demo authorized and non-authorized commands
+
+Get the address of each operator:
+On CLI(oper.1):
+<pre> 
+AL +> get connections
+Type      External Address  Local Address
+---------|-----------------|--------------|
+TCP      |73.222.38.13:7848|10.0.0.78:7848|
+REST     |10.0.0.78:7849   |10.0.0.78:7849|
+Messaging|73.222.38.13:7850|10.0.0.78:7850|
+</pre>
+On CLI(oper.2):
+<pre> 
+AL +> get connections
+Type      External Address  Local Address
+---------|-----------------|--------------|
+TCP      |73.222.38.13:3048|10.0.0.78:3048|
+REST     |10.0.0.78:3049   |10.0.0.78:3049|
+Messaging|73.222.38.13:7855|10.0.0.78:7855|
+</pre>
+
+### Examples permitted messages
+On CLI(oper.1):
+<pre> 
+ run client 10.0.0.78:3048 get status
+ run client 10.0.0.78:3048 echo 'hello world'
+ run client 10.0.0.78:3048 get status
+ run client 10.0.0.78:3048 get databases
+</pre>
+On CLI(oper.2):
+<pre> 
+ run client 10.0.0.78:7848 get status
+ run client 10.0.0.78:7848 echo 'hello world'
+ run client 10.0.0.78:7848 get status
+ run client 10.0.0.78:7848 show databases
+</pre>
+### Examples denied messages
+On CLI(oper.1):
+<pre> 
+ run client 10.0.0.78:3048 system ls
+ run client 10.0.0.78:3048 set authentication off
+</pre>
+On CLI(oper.2):
+<pre> 
+ run client 10.0.0.78:7848 system ls
+ run client 10.0.0.78:7848 set authentication off
 </pre>
