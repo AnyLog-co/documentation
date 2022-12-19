@@ -10,8 +10,8 @@ The AnyLog Network is using 3 mechanisms to make the network secure:
 ## Deploying a 3rd party overlay network
 
 The overlay network allows for:  
-a) Authorize the nodes allowed to participate in the network.  
-b) Identify the members of the network by unique IP and Port.    
+a) Authorize the nodes participating in the overlay network.  
+b) Identify the members of the network by a unique IP and Port.    
 c) Resolve network routing issues.  
 d) Encrypted messaging between the member nodes.    
 
@@ -19,12 +19,12 @@ Refer to the 3rd party vendor manual for instalation and configuration instructi
 
 ## Key-Based Authentication
 
-These processes are based on the following processes:  
+The Key-Based Authentication enables the following:  
 * Each node is assigned with a private key and a public key^.
 * A message from a node to a peer is signed by the private key.
-* The peer receiving th message authenticates the sender using the public key.
+* A peer node receiving a message authenticates the sender using the public key.
 * If the sender is authenticated, the sender permissions are validated using the relevant policies. 
-* If the sender is authenticated, and the message request is permitted, the message will be processed.
+* A message is processed on the receiver node, if the sender is authenticated, and the sender is permitted to sent messages of that type.
 
 ^Note: A private key and a public key can be assigned to users - it allows for administrators to operate on the node's CLI
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
@@ -37,14 +37,15 @@ The relevant AnyLog commands are detailed in the section [Node Authentication](h
 The example below demonstrates the following:
 a) Assigning keys to nodes and users as needed.
 b) Defining the policies that determine user permissions.
-c) Assigning nodes and users to the policy that determine their permissions.
+c) Assigning nodes and users to the policies that determine their permissions.
 
 ### Definitions
 
 Policies
-* A member policy - a policy that provides information on a member node or a user. The policy includes the public key assigned to the member.
-* A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.
-* An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the permitted operations to the listed members. 
+* A member policy - a policy that provides information on a member node or a user. The policy includes the public key assigned to the member.    
+* A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.    
+* An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the 
+  permitted operations to the listed members.   
 Directories
 * keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node.
 
