@@ -545,7 +545,14 @@ Use the Setting Tab to configure the REST calls as follows:
 
 ### Example of a third part application - Grafana
 
-Update the Grafana connection information with the CRT and KEY info.  
-Set the following flags:  
-* TLS Client Auth is set to ON
-* Skip TLS Verify is set to ON
+Note: Configuring Grafana is detailed in the [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) section.  
+
+To use Certificate, update the Grafana JSON data source page as follows:
+* Update the AnyLog URL to use HTTPS (Encrypted Connection).
+* Set ***TLS Client Auth*** to ON
+* Set ***Skip TLS Verify*** to ON
+* In the ***TLS/SSL Auth Details*** section:
+    * Update the ***Client Cert*** with the content of the ```server-acme-inc-public-key.crt``` file.
+    * Update the ***Client Key*** with the content of the ```server-acme-inc-private-key.key``` file.
+    
+With this setup, ***Save & Test*** needs to return as ***OK***.
