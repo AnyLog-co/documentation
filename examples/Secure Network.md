@@ -434,3 +434,17 @@ On CLI(oper.2):
  run client 10.0.0.78:7848 system ls
  run client 10.0.0.78:7848 set authentication off
 </pre>
+
+## Messaging using the private key of a user
+
+A user may want to send a messages using his authorization.  
+For example, an administrator logins to a node and may need to issue a query or a command which is not permitted by 
+the permission policy assigned to the node.  
+The user can leverage his assigned permissions using the commands in the example below:
+<pre> 
+private_key = get private key where keys_file = roy
+set signatory where key = !private_key and password = 123  and name = roy
+get signatory   # Validate signatory change from the node to the user
+run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the command will be executed
+</pre>
+
