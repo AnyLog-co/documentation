@@ -2,18 +2,18 @@
 
 ## Overview
 
-The network is secured using 3 mechanisms:
+The AnyLog Network is using 3 mechanisms to make the network secure:
 1) Using a 3rd party Overlay Network. An example of an overlay network is [Nebula](https://nebula.defined.net/docs/).
 2) Securing the messages transferred between AnyLog nodes using Key-Based Authentication (Public Key Authentication).
 3) Securing messages transferred between 3rd parties applications and AnyLog nodes using certificates and passwords.
 
 ## Deploying a 3rd party overlay network
 
-The overlay network allows for:
-a) Authorize the nodes allowed to participate in the network.
-b) Identify the members of the network by unique IP and Port.
-c) Resolve network routing issues.
-d) Encrypted messaging between the member nodes.
+The overlay network allows for:  
+a) Authorize the nodes allowed to participate in the network.  
+b) Identify the members of the network by unique IP and Port.    
+c) Resolve network routing issues.  
+d) Encrypted messaging between the member nodes.    
 
 Refer to the 3rd party vendor manual for instalation and configuration instructions.
 
