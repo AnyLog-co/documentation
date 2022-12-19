@@ -34,19 +34,17 @@ The relevant AnyLog commands are detailed in the section [Node Authentication](h
 
 ## Key-Based-Authentication deployment example
 
-The example below demonstrates the following:
-a) Assigning keys to nodes and users as needed.
-b) Defining the policies that determine user permissions.
-c) Assigning nodes and users to the policies that determine their permissions.
+The example below demonstrates the following:  
+a) Assigning keys to nodes and users as needed.    
+b) Defining the policies that determine user permissions.    
+c) Assigning nodes and users to the policies that determine their permissions.    
 
 ### Definitions
 
-Policies
 * A member policy - a policy that provides information on a member node or a user. The policy includes the public key assigned to the member.    
 * A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.    
 * An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the 
   permitted operations to the listed members.   
-Directories
 * keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node.
 
 
