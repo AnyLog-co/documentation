@@ -131,22 +131,23 @@ curl -X GET ${IP_ADDRESS}:32049 -H "command: get status" -H "User-Agent: AnyLog/
 curl -X GET ${IP_ADDRESS}:32049 -H "command: get processes" -H "User-Agent: AnyLog/1.23"  -w "\n"
 ```
 * via AnyLog CLI
+* via AnyLog CLI
 ```shell
 # docker attach --detach-keys=ctrl-d anylog-master 
 ubuntu@al-live-master:~$ docker attach --detach-keys=ctrl-d mastaer-node 
-AL mastaer-node +> test node 
+AL operator-node +> test node 
 --> Test TCP Server ...
 run client 45.79.74.39:32048 get status
-[From Node 45.79.74.39:32048]  'mastaer-node@45.79.74.39:32048 running'
+[From Node 45.79.74.39:32048]  'master-node@45.79.74.39:32048 running'
  
 --> Test REST Server ...
 rest get where url = http://45.79.74.39:32049 and type = info and command = "get status where format = json" and User-Agent = AnyLog/1.23
-{'status': 'mastaer-node@45.79.74.39:32048 running'}
+{'status': 'master-node@45.79.74.39:32048 running'}
  
 --> Test local Blockchain file ...
 blockchain test: pass
 
-AL mastaer-node +> get processes 
+AL master-node +> get processes 
     Process         Status       Details                                                                  
     ---------------|------------|------------------------------------------------------------------------|
     TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                        |
