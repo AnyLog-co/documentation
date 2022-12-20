@@ -46,7 +46,7 @@ curl -o config.yml https://raw.githubusercontent.com/slackhq/nebula/master/examp
 cp config.yml config-lighthouse.yaml
 ```
 5. Update `config-lighthouse.yaml` 
-   * Update `static_host_map` -- `"${NEBULA_IP}": ["${EXTERNAL_IP}:4242"]`
+   * Update `static_host_map` -- `"${NEBULA_IP}": ["${NEBULA_NODE_EXTERNAL_IP}:4242"]`
    * Set `am_lighthouse` to **`true`**
    * `hosts` value(s) should be commented out
    * Under `inbound` make sure everything is accessible
