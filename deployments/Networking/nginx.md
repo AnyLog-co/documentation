@@ -99,7 +99,7 @@ server {
 5. Update `/etc/nginx/nginx.conf` to support both TCP & Message broker (if set) communication
 ```editorconfig
 # 1. import ngx_stream_module.so module at the top of the file.
-# With Ubuntu 20.04 this step was need. However, with later version of Ubuntu it was not. 
+# With Ubuntu 20.04 this import was need. However, with later version of Ubuntu it was not. 
 include /usr/lib/nginx/modules/ngx_stream_module.so;
 
 # 2. At the bottom add stream process - each AnyLog node (on the same machine) should have its own upstream & server 

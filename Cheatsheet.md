@@ -117,7 +117,7 @@ Connection:   Not connected: MQTT_ERR_NO_CONN
      Error Dir     |/app/AnyLog-Network/data/error|
 ```
 ### EdgeX
-[Directions for EdgeX](deployments/Docker/EdgeX.md)
+[Directions for EdgeX](deployments/Support/EdgeX.md)
 * Validate EdgeX is running
 ```shell
 anylog@new-node:~$ docker ps -a | grep edgex 

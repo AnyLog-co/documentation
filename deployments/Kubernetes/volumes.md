@@ -13,7 +13,8 @@ Our [deployment package](https://github.com/AnyLog-co/deployments) has Kubernete
 deployment for: 
 * AnyLog Node 
 * Remote-CLI 
-* Postgres 
+* Postgres
+* MongoDB
 * Grafana 
 
 ## Deployment Process

@@ -52,7 +52,7 @@ docker-compose up -d
 
 ### Install EdgeX
 _Operator1_ utilizes a local MQTT client. In our demonstration, we utilize a local EdgeX instance.  
-Directions for deploying a local EdgeX instance can be found [here](EdgeX.md)  
+Directions for deploying a local EdgeX instance can be found [here](../Other%20Tools/EdgeX.md)  
 
 ## Validate Deployment
 * Attaching to an AnyLog node 
