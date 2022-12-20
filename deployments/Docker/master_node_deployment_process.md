@@ -38,19 +38,20 @@ run blockchain sync where source=blockchain_source and time=!sync_time and dest=
 
 5. Declare the Master in the metadata (Master Node Policy)
 ```anylog
-<{'master': {
-   'hostname': !hostname,
-   'name': !node_name,
-   'ip': !external_ip,
-   'local_ip': !ip,
-   'company': !company_name,
-   'port': !anylog_server_port,
-   'rest_port': !anylog_rest_port,
-   'loc': !loc,
-   'country': !country,
-   'state': !state,
-   'city': !city
+<new_policy = {"master": {
+    "hostname": !hostname,
+    "name": !node_name,
+    "ip" : !external_ip,
+    "local_ip": !ip,
+    "company": !company_name,
+    "port" : !anylog_server_port.int,
+    "rest_port": !anylog_rest_port.int,
+    "loc": !loc,
+    "country": !country,
+    "state": !state, 
+    "city": !city
 }}>
+
 blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
