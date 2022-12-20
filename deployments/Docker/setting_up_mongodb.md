@@ -1,34 +1,7 @@
-# MongoDB Process 
-
-The [image processing document](../../image%20mapping.md) provide details into the general process of how AnyLog
-processes images and videos into MongoDB and/or local folder(s). This document covers the deployment process from the
-AnyLog side. 
-
-### Start MongoDB 
-1. Clone Deployments
-```shell
-git clone https://github.com/AnyLog-co/deployments
-```
-2. (Optional) Configure MongoDB 
-```dotenv
-# deployments/docker-compose/mongodb
-PORT=27017
-MONGO_USER=admin
-MONGO_PASSWORD=passwd
-```
-3. Start MongoDB
-```shell
-cd deployments/docker-compose/mongodb
-docker-compose up -d 
-```
-4. Accessing MongoDB
-```shell
-docker exec -it MongoDB mongo
-```
-
-### Accessing MongoDB via AnyLog
+# Accessing MongoDB via AnyLog
 The following is based on the example in `!local_scripts/sample_code/mongodb_process.al`, within AnyLog, to demonstrate 
-accepting videos into AnyLog and storing them in MongoDB (and/or local folder). 
+accepting videos into AnyLog and storing them in MongoDB (and/or local folder). Directions to install MongoDB can be 
+found [here](database_configuration.md#mongodb). 
 
 1. Connect to MongoDB  
 ```anylog
@@ -37,20 +10,16 @@ mongo_db_port = 27017
 mongo_db_user = admin
 mongo_db_passwd = passwd
 
-connect dbms !default_dbms where type=mongo and ip=!mongo_db_ip and port=!mongo_db_port and user=!mongo_db_user and password=!mongo_db_passwd
+<connect dbms !default_dbms where 
+    type=mongo and 
+    ip=!mongo_db_ip and 
+    port=!mongo_db_port and 
+    user=!mongo_db_user and 
+    password=!mongo_db_passwd
+>
 ```
 
-2. Initiate `blobs archiver`
-```anylog
-# A boolean value to determine if blobs database is used
-set blobs_dbms=true
-# A boolean value to determine if file is saved in a folder as f(date)
-set blobs_folder=true
-# A boolean value to determine if compression is applied
-set blobs_compress=true
 
-run blobs archiver where dbms=!blobs_dbms and folder=!blobs_folder and compress=!blobs_compress
-```
 3. Declare Policy (based on data coming from EdgeX) 
 ```anylog
 policy_id = image-data 

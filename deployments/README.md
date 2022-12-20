@@ -66,19 +66,8 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
 
 **[Kubernetes](Kubernetes)**
-* [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
-  * [Install & Configure Nginx](Networking/nginx.md)
-* [Install PostgreSQL](Kubernetes/Postgres.md)
-* [Install Master Node](Kubernetes/master_node.md)
-  * [Deployment Process](Kubernetes/master_node_deployment_process.md)
-* [Install Operator Node](Kubernetes/operator_node.md)
-  * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
-* [Install Query Node](Kubernetes/query_node.md)
-  *  [Deployment Process](Kubernetes/query_node_deployment_process.md)
-* [Install Publisher Node](Kubernetes/publisher_node.md)
-  *  [Deployment Process](Kubernetes/publisher_node_deployment_process.md)
-* [Understanding Kubernetes Volumes](Kubernetes/volumes.md)
-* [Accessing AnyLog on Kubernetes]()
+* [Persistent Data on Kubernetes](Kubernetes/volumes.md)
+* [Networking on Kubernetes](Kubernetes/networking.md)
 
 **[Networking](Networking)** - General Networking Information
 * [Nebula](Networking/nebula.md)
