@@ -49,8 +49,9 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 
 
 ## Table of Content
+[Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
+
 **[Docker](Docker)**
-* [Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
 * [Install PostgreSQL](Docker/Postgres.md)
 * [Install Master Node](Docker/master_node.md)
   * [Deployment Process](Docker/master_node_deployment_process.md)
@@ -65,7 +66,6 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
 
 **[Kubernetes](Kubernetes)**
-* [Preparing Machine(s) for Deployment](Kubernetes/Prerequisites.md)
 * [Understanding Kubernetes Networking for AnyLog](Kubernetes/Networking.md)
   * [Install & Configure Nginx](Networking/nginx.md)
 * [Install PostgreSQL](Kubernetes/Postgres.md)
