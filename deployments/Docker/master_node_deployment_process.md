@@ -11,34 +11,34 @@ For directions to start a master node please visit the [master node](master_node
 ```anylog
 AL > hostname = get hostname
 AL > node_name=$NODE_NAME
-AL anylog-master > company_name=$COMPANY_NAME
-AL anylog-master > anylog_server_port=$ANYLOG_SERVER_PORT
+company_name=$COMPANY_NAME
+anylog_server_port=$ANYLOG_SERVER_PORT
 ...
 ```
 
 2. Connect to TCP & REST 
 ```anylog
-AL anylog-master > run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
-AL anylog-master > run rest server !ip !anylog_rest_port
+run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
+run rest server !ip !anylog_rest_port
 ```
 
 3. Connect to blockchain database & create ledger table 
 ```anylog
-AL anylog-master > connect dbms blockchain where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
-AL anylog-master > create table ledger where dbms=blockchain
+connect dbms blockchain where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
+create table ledger where dbms=blockchain
 ```
 <p style="color: gray; size: 90%">Note: `blockchain.ledger` contains the metadata policies. For example, the different node 
 types connected to the network  data tables associated with each node. </p>
 
 4. Set scheduler 1 & blockchain sync 
 ```anylog
-AL anylog-master > run scheduler 1
-AL anylog-master > run blockchain sync where source=blockchain_source and time=!sync_time and dest=blockchain_destination and connection=!ledger_conn
+run scheduler 1
+run blockchain sync where source=blockchain_source and time=!sync_time and dest=blockchain_destination and connection=!ledger_conn
 ```
 
 5. Declare the Master in the metadata (Master Node Policy)
 ```anylog
-AL anylog-master > <{'master': {
+<{'master': {
    'hostname': !hostname,
    'name': !node_name,
    'ip': !external_ip,
@@ -51,13 +51,13 @@ AL anylog-master > <{'master': {
    'state': !state,
    'city': !city
 }}>
-AL anylog-master > blockchain prepare policy !new_policy
-AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+blockchain prepare policy !new_policy
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
 6. (Manually) Validate processes are running
 ```anylog
-AL anylog-master > get processes 
+get processes 
 
     Process         Status       Details                                                                  
     ---------------|------------|------------------------------------------------------------------------|
