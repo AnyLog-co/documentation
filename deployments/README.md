@@ -54,9 +54,7 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Install PostgreSQL](Docker/Postgres.md)
 * [Install Master Node](Docker/master_node.md)
   * [Deployment Process](Docker/master_node_deployment_process.md)
-* [Install Operator Node I](Docker/operator_node.md)
-  * [Deployment Process](Docker/operator_node_deployment_process.md)
-* [Install Operator Node II](Docker/operator2_node.md)
+* [Install Operator Node](Docker/operator_node.md)
   * [Deployment Process](Docker/operator_node_deployment_process.md)
 * [Install Query Node](Docker/query_node.md)
   * [Deployment Process](Docker/query_node_deployment_process.md)
@@ -64,7 +62,6 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
   *  [Deployment Process](Docker/publisher_node_deployment_process.md)
 * [Install Grafana](Support/AnyLog_Support_Tools.md#grafana)
 * [Install Remote CLI](Support/AnyLog_Support_Tools.md#remote-cli)
-* [Setting Up EdgeX](Support/EdgeX.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
 
 **[Kubernetes](Kubernetes)**
@@ -74,20 +71,21 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Install PostgreSQL](Kubernetes/Postgres.md)
 * [Install Master Node](Kubernetes/master_node.md)
   * [Deployment Process](Kubernetes/master_node_deployment_process.md)
-* [Install Operator Node I](Kubernetes/operator_node.md)
-  * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
-* [Install Operator Node II](Kubernetes/operator2_node.md)
+* [Install Operator Node](Kubernetes/operator_node.md)
   * [Deployment Process](Kubernetes/operator_node_deployment_process.md)
 * [Install Query Node](Kubernetes/query_node.md)
   *  [Deployment Process](Kubernetes/query_node_deployment_process.md)
 * [Install Publisher Node](Kubernetes/publisher_node.md)
   *  [Deployment Process](Kubernetes/publisher_node_deployment_process.md)
+* [Understanding Kubernetes Volumes](Kubernetes/volumes.md)
+* [Accessing AnyLog on Kubernetes]()
 
 **[Networking](Networking)** - General Networking Information
 * [Nebula](Networking/nebula.md)
 * [NGINX](Networking/nginx.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
+* [Cheat Sheet](Support/cheat_sheet.md)
 * [Remote-CLI](Support/Remote-CLI.md)
 * [Grafana](Support/Grafana.md)
 * [EdgeX](Support/EdgeX.md)
