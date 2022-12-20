@@ -55,7 +55,12 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Install Database](Docker/database_configuration.md)
 * [Install Master Node](Docker/master_node.md)
   * [Deployment Process](Docker/master_node_deployment_process.md)
-
+* [Install Operator Node](Docker/operator_node.md)
+  * [Deployment Process](Docker/operator_node_deployment_process.md)
+* [Install Publisher Node](Docker/publisher_node.md)
+  * [Deployment Process](Docker/publisher_node_deployment_process.md)
+* [Install Query Node](Docker/query_node.md)
+  * [Deployment Process](Docker/query_node_deployment_process.md)
 * [Single Deployment Demo](Docker/single_deployment_demo.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
 * [Accessing MongoDB via AnyLog](Docker/setting_up_mongodb.md)
