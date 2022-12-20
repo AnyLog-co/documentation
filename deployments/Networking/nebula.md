@@ -54,20 +54,8 @@ cp config.yml config-lighthouse.yaml
 inbound:
 # Allow icmp between any nebula hosts
 - port: any
-  proto: icmp
-  host: any
-
-- port: any
   proto: any
   host: any
-
-# Allow tcp/443 from any host with BOTH laptop and home group
-- port: 443
-  proto: tcp
-  groups:
-    - laptop
-    - home
-```
 
 6. Copy the lighthouse configuration file to create nebula node configuration file
 ```shell
