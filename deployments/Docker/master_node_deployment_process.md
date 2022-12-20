@@ -4,67 +4,76 @@ The following provides insight the work being done in the background to deploy t
 For directions to start a master node please visit the [master node](master_node.md) document.
 
 ## Steps
-1. Set parameters such as 
-   * hostname 
-   * Local & external IP 
-   * ENV parameters from configuration into AnyLog parameters
+1. Set parameters such as:
+   * hostname
+   * Local & External IPs (backend of AnyLog if not preset in configuration)
+   * `ENV` parameters from configuration into AnyLog parameters  
+```anylog
+AL > hostname = get hostname
+AL > node_name=$NODE_NAME
+AL anylog-master > company_name=$COMPANY_NAME
+AL anylog-master > anylog_server_port=$ANYLOG_SERVER_PORT
+...
+```
 
-   
 2. Connect to TCP & REST 
 ```anylog
-run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
-run rest server !ip !anylog_rest_port
+AL anylog-master > run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
+AL anylog-master > run rest server !ip !anylog_rest_port
 ```
 
-3. Connect to blockchain database & create ledger table – Note: blockchain.ledger contains the metadata policies. 
-For example, the different node types connected to the network & data tables associated with each node.
+3. Connect to blockchain database & create ledger table 
 ```anylog
-# connect to logical database - for SQLite there's only a need to specify the database type 
-connect dbms blockchain where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_password 
+AL anylog-master > connect dbms blockchain where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
+AL anylog-master > create table ledger where dbms=blockchain
+```
+<p style="color: gray; size: 90%">Note: `blockchain.ledger` contains the metadata policies. For example, the different node 
+types connected to the network  data tables associated with each node. </p>
 
-
-# create ledger table  
-create table ledger where dbms=blockchain
+4. Set scheduler 1 & blockchain sync 
+```anylog
+AL anylog-master > run scheduler 1
+AL anylog-master > run blockchain sync where source=blockchain_source and time=!sync_time and dest=blockchain_destination and connection=!ledger_conn
 ```
 
-4. (Optional) Connect to system_query – <font color="red">Note: the configurations set the `system_query` logical 
-database to run directly against the memory. This allows queries to run faster.</font> 
+5. Declare the Master in the metadata (Master Node Policy)
 ```anylog
-# for SQLite there's only a need to specify the database type 
-connect dbms system_query where type=!db_type and memory=!memory
-```
-
-5. Set scheduler & blockchain sync
-```anylog
-# init scheduler processes 
-run scheduler 1 
-
-# init blockchain sync
-run blockchain sync where source=master and time=!sync_time and dest=file and connection=!ledger_conn
-```
-
-6. Declare the Master in the metadata (Master Node Policy)
-```anylog
-# declaration of policy
-<new_policy={"master": {
-   "hostname": !hostname, 
-   "name": !node_name, 
-   "ip" : !external_ip, 
-   "local_ip": !ip, 
-   "company": !company_name, 
-   "port" : !anylog_server_port.int, 
-   "rest_port": !anylog_rest_port.int, 
-   "loc": !loc,
-   "country": !country,
-   "state": !state, 
-   "city": !city
+AL anylog-master > <{'master': {
+   'hostname': !hostname,
+   'name': !node_name,
+   'ip': !external_ip,
+   'local_ip': !ip,
+   'company': !company_name,
+   'port': !anylog_server_port,
+   'rest_port': !anylog_rest_port,
+   'loc': !loc,
+   'country': !country,
+   'state': !state,
+   'city': !city
 }}>
+AL anylog-master > blockchain prepare policy !new_policy
+AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+```
 
-# check if policy exists  
-policy = blockchain get master where ip = !external_ip and local_ip = !ip and company=!company_name and port=!anylog_server_port 
+6. (Manually) Validate processes are running
+```anylog
+AL anylog-master > get processes 
 
-# declare policy if DNE
-if not !policy then 
-do blockchain prepare policy !new_policy
-do blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+    Process         Status       Details                                                                  
+    ---------------|------------|------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                        |
+    REST           |Running     |Listening on: 45.79.74.39:32049, Threads Pool: 5, Timeout: 20, SSL: None|
+    Operator       |Not declared|                                                                        |
+    Publisher      |Not declared|                                                                        |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                          |
+    Distributor    |Not declared|                                                                        |
+    Blobs Archiver |Not declared|                                                                        |
+    Consumer       |Not declared|                                                                        |
+    MQTT           |Not declared|                                                                        |
+    Message Broker |Not declared|No active connection                                                    |
+    SMTP           |Not declared|                                                                        |
+    Streamer       |Not declared|                                                                        |
+    Query Pool     |Running     |Threads Pool: 3                                                         |
+    Kafka Consumer |Not declared|                                                                        |
 ```
