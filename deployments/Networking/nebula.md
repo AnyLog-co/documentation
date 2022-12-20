@@ -50,9 +50,9 @@ cp config.yml config-lighthouse.yaml
    * Set `am_lighthouse` to **`true`**
    * `hosts` value(s) should be commented out
    * Under `inbound` make sure everything is accessible
-```yaml
+
 inbound:
-# Allow icmp between any nebula hosts
+# Allow all inbound traffic between nebula hosts
 - port: any
   proto: any
   host: any
