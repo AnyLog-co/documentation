@@ -57,7 +57,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 6. (Manually) Validate processes are running
 ```anylog
-get processes 
+AL anylog-master +> get processes 
 
     Process         Status       Details                                                                  
     ---------------|------------|------------------------------------------------------------------------|

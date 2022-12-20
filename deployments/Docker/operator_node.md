@@ -209,15 +209,15 @@ curl -X GET ${IP_ADDRESS}:32049 -H "command: get processes" -H "User-Agent: AnyL
 * via AnyLog CLI
 ```shell
 # docker attach --detach-keys=ctrl-d anylog-master 
-ubuntu@al-live-master:~$ docker attach --detach-keys=ctrl-d mastaer-node 
+ubuntu@anylog-operator:~$ docker attach --detach-keys=ctrl-d mastaer-node 
 AL AL anylog-operator +> test node 
 --> Test TCP Server ...
 run client 139.162.56.87:32148 get status
-[From Node 139.162.56.87:32148]  'edgex-cluster2-operator1@139.162.56.87:32148 running'
+[From Node 139.162.56.87:32148]  'anylog-operator@139.162.56.87:32148 running'
  
 --> Test REST Server ...
 rest get where url = http://139.162.56.87:32149 and type = info and command = "get status where format = json" and User-Agent = AnyLog/1.23
-{'status': 'edgex-cluster2-operator1@139.162.56.87:32148 running'}
+{'status': 'anylog-operator@139.162.56.87:32148 running'}
  
 --> Test local Blockchain file ...
 blockchain test: pass
