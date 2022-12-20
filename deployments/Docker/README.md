@@ -91,8 +91,8 @@ vim anylog_configs.env
 vim .env 
 ```
 **Note** - If you'd like to deploy multiple operator nodes on a single machine, then the service name 
-(`anylog-operator-node`) and volume names in [docker-compose.yaml](anylog-operator/docker-compose.yml) needs to be 
-updated. 
+(`anylog-operator-node`) and volume names in [docker-compose.yaml](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/anylog-operator/docker-compose.yml)  
+needs to be updated. 
 
 5. Deploy Node 
 ```shell
@@ -117,8 +117,11 @@ AnyLog physical machine. This includes:
    * 2 Operators (1 with SQLite and one with Postgres)
    * 1 Query Node 
    * Postgres 
-   * Grafana 
    * Remote-CLI
+   * Grafana
+
+The single deployment will have data coming into 1 operator from _CloudMQTT_ broker and another via a local 
+[EdgeX](../Support/EdgeX.md) instance; that needs to be deployed separately. 
 
 0. Clone [deployments](https://github.com/AnyLog-co/deployments/) directory & login into our Docker hub.
 ```shell
