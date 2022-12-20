@@ -12,11 +12,11 @@ nodes. The following steps should be done on each of them.
 git clone https://github.com/AnyLog-co/deployments 
 ```
 
-2. For Kubernetes, we recommend having a proxy IP address (we use [NGINX](Networking/nginx.md)) in order to have consistent
-IP address(es) for a given node. 
+2. For Kubernetes deployments, we recommend having a proxy IP address (we use [NGINX](Networking/nginx.md)) in order to 
+have consistent IP address(es) for a given node. 
 
 
-3. Since AnyLog is a distributed overlay network, we recommand setting up an overlay network for those super secure 
+3. Since AnyLog is a distributed overlay network, we recommend setting up an overlay network for those super secure 
 systems. For our testing purposes, we had used [nebula](Networking/nebula.md) - an overlay network created by _Slack_ 
 which was easy to deploy and utilize. 
 
