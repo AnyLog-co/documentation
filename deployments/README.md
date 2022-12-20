@@ -52,7 +52,7 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 [Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
 
 **[Docker](Docker)**
-* [Install PostgreSQL](Docker/Postgres.md)
+* [Install Database](Docker/database_configuration.md)
 * [Install Master Node](Docker/master_node.md)
   * [Deployment Process](Docker/master_node_deployment_process.md)
 * [Install Operator Node](Docker/operator_node.md)
