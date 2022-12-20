@@ -3,13 +3,13 @@
 ## Overview
 
 AnyLog includes a Grafana connector such that Grafana can serve as a visualization tier using a build-in/transparent interface that maps Grafana calls to queries over data maintained in the AnyLog Network.  
-Using a HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.  
+Using HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.  
 
-Using Grafana, users can visualize time series data using using pre-defined queries and add new queries using SQL.
+Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
 ## Prerequisites
 
-* Grafana instance installed.
+* Grafana instance installed. Directions to install Grafana can be found [here](../deployments/Support/Grafana.md)
 * An AnyLog Node that provides a REST connection.
 To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
 ```run rest server [ip] [port] [max time]```  

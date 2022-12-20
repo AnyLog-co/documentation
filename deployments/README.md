@@ -35,9 +35,17 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 
 By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
 are running, but no other process is enabled. This allows for users to play with the system with no other services 
-running in the background, but already having the default network configurations. The deployment command is: 
-`docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop`  
+running in the background, but already having the default network configurations.  A basic deployment of an AnyLog REST 
+instance can be  executed using the following line:
+```shell
+# docker 
+docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
 
+# Kubernetes
+git clone https://github.com/AnyLog-co/deployments 
+helm install $HOME/helm/packages/anylog-node-volume-1.22.3.tgz --name-template anylog-node-volume 
+helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylog-node
+```
 
 
 ## Table of Content
@@ -54,9 +62,9 @@ running in the background, but already having the default network configurations
   * [Deployment Process](Docker/query_node_deployment_process.md)
 * [Install Publisher Node](Docker/publisher_node.md)
   *  [Deployment Process](Docker/publisher_node_deployment_process.md)
-* [Install Grafana](Docker/AnyLog_Support_Tools.md#grafana)
-* [Install Remote CLI](Docker/AnyLog_Support_Tools.md#remote-cli)
-* [Setting Up EdgeX](Docker/EdgeX.md)
+* [Install Grafana](Support/AnyLog_Support_Tools.md#grafana)
+* [Install Remote CLI](Support/AnyLog_Support_Tools.md#remote-cli)
+* [Setting Up EdgeX](Support/EdgeX.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
 
 **[Kubernetes](Kubernetes)**
@@ -74,3 +82,12 @@ running in the background, but already having the default network configurations
   *  [Deployment Process](Kubernetes/query_node_deployment_process.md)
 * [Install Publisher Node](Kubernetes/publisher_node.md)
   *  [Deployment Process](Kubernetes/publisher_node_deployment_process.md)
+
+**[Networking](Networking)** - General Networking Information
+* [Nebula](Networking/nebula.md)
+* [NGINX](Networking/nginx.md)
+
+**[Support](Support)** - Deployment directions for non-AnyLog services 
+* [Remote-CLI](Support/Remote-CLI.md)
+* [Grafana](Support/Grafana.md)
+* [EdgeX](Support/EdgeX.md)
