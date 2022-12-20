@@ -50,9 +50,13 @@ c) Assigning nodes and users to the policies that determine their permissions.
 
 ### Prerequisites and reset
 
-* A network with 2 operators and a master node.  
+* A network with 2 operators
+* A setup using a blockchain or a master node.  
 * No existing permissions and assignment policies.   
 * No existing keys assigned to nodes and users.  
+
+This document details how to configure a network using a master node.  
+If a blockchain is used, the master node configuration is ignored.  
 
 Use the following commands to configure each operator node:
 <pre> 
@@ -123,13 +127,16 @@ This demo is executed on the CLI of the 2 operators.
 * When a command is executed on operator 1 it is designated by CLI(opr.1).
 * When a command is executed on operator 2 it is designated by CLI(opr.2).
 * When a command is executed on operator 1 and 2 it is designated by CLI(opr.1.2).
+* If a master
 
 
 ## The demo steps
 The demo is using 2 operator nodes and 2 users (root user and a non-root user). Each node and user is assigned with keys.
 Each node and user is associated with member policies. Each member policy is assigned with permission policy such that 
 each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
-the senders of messages and determine the permissions.
+the senders of messages and determine the permissions.  
+If a master node is used, the master node configuration is detailed [below](#master-node-configuration).  
+
 
 The following chart details the processes demonstrated:  
 
@@ -371,7 +378,6 @@ set private password = demo2 in file
 
 Note: The key is stored in a file called ***auth.id*** in the ***keys directory***.
 
-
 ### Step 13 - Enable authentication
 Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
 When a node receives a message, the message is signed by the private key of the sender (the key of tje node or the user sending the message).   
@@ -385,6 +391,83 @@ On CLI(oper.1.2):
 <pre> 
 set node authentication on
 </pre>
+
+## Master Node Configuration
+This setup is optional (if a master node is used).    
+CLI(master) designates the master node command line.
+
+### Generate keys for the Master Node
+On CLI(master) 
+<pre> 
+id create keys for node where password = masterpswd
+</pre>
+ 
+
+### Master node policy
+On CLI(master) 
+ 
+```<pre> 
+<member = {"node" : {  
+    "type" : "node",  
+    "name"  : "master_node"  
+    }  
+}>  
+private_key = get private key where keys_file = master_keys
+member = id sign !member where key = !private_key and password = masterpswd
+json !member    # View the policy including the signature and public key
+blockchain insert where policy = !member and local = true  and master = !master_node
+```  
+### Create a permission policy for the master node
+On CLI(opr.1) 
+
+```
+<permissions = {"permissions" : {
+    "name" : "master node permissions",
+    "enable" : [ "file", "event", "echo", "print"]
+    }
+}>
+private_key = get private key where keys_file = roy
+permissions = id sign !permissions where key = !private_key and password = 123
+!permissions 
+blockchain insert where policy = !permissions and local = true  and master = !master_node
+```
+### Assign privileges to the master node
+On CLI(oper.1)
+
+```
+permission_id = blockchain get permissions where name = "master node permissions" bring ['permissions']['id']
+member_node = blockchain get member where name = master_node bring ['member']['public_key']
+
+<assignment = {"assignment" : {
+        "name" : "assignment to no restrictions",
+        "permissions"  : !permission_id,
+        "members"  : [!member_node]
+        }
+}>
+private_key = get private key where keys_file = root_keys
+assignment = id sign !assignment where key = !private_key and password = abc
+!assignment 
+blockchain insert where policy = !assignment and local = true  and master = !master_node  
+```
+
+### Provide the local password
+On CLI(master):
+<pre> 
+set local password = 123
+</pre>
+
+### Save the master node private key 
+On CLI(master):
+<pre> 
+set private password = demo1 in file
+</pre>
+
+### Enable authentication
+On CLI(master):
+<pre> 
+set node authentication on
+</pre>
+
 
 ## Demo authorized and non-authorized commands
 
