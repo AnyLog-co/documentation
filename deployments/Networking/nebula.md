@@ -51,12 +51,13 @@ cp config.yml config-lighthouse.yaml
    * `hosts` value(s) should be commented out
    * Under `inbound` make sure everything is accessible
 
+```shell
 inbound:
 # Allow all inbound traffic between nebula hosts
 - port: any
   proto: any
   host: any
-
+```
 6. Copy the lighthouse configuration file to create nebula node configuration file
 ```shell
 cp config-lighthouse.yaml config-node.yaml
