@@ -171,10 +171,10 @@ docker-compose up -d
 * via cURL 
 ```shell
 # Get Status
-curl -X GET ${IP_ADDRESS}:32049 -H "command: get status" -H "User-Agent: AnyLog/1.23"  -w "\n"
+curl -X GET ${IP_ADDRESS}:32249 -H "command: get status" -H "User-Agent: AnyLog/1.23"  -w "\n"
 
 # Get Processes
-curl -X GET ${IP_ADDRESS}:32049 -H "command: get processes" -H "User-Agent: AnyLog/1.23"  -w "\n"
+curl -X GET ${IP_ADDRESS}:32249 -H "command: get processes" -H "User-Agent: AnyLog/1.23"  -w "\n"
 ```
 * via AnyLog CLI
 ```shell
