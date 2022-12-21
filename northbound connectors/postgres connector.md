@@ -77,7 +77,7 @@ AL aiops-single-node > query explain
 07 Local Create   : create table new_table (increments_1_trunc timestamp without time zone, increments_1_extract integer, min_2 timestamp without time zone, min_3 double precision, SUM__value numeric, COUNT__value integer, max_5 double precision);
 07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract
 ```
-Disclaimer: [Full list of SQL options](../queries.md#query-options)
+Disclaimer: [Full list of SQL options](../query%20data/queries.md#query-options)
 
 ## Extract Data onto Tableau
 1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)

@@ -73,7 +73,7 @@ This will show the different JSON keys that’ll be converted to table columns
 The following shows 3 diagrams, each is assigned to its own query
    * The table shows number of rows per table in the database
    * The bar graph shows _MIN_, _MAX_, _AVG_ and _Row Count_ difference between 2021 and 2022. 
-   * The line graph uses [increments function](../queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
+   * The line graph uses [increments function](../query%20data/queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
 
 
 ## Using Excel and other Microsft Office tools to view data
@@ -107,7 +107,7 @@ This will show the different JSON keys that’ll be converted to table columns
 
 8. From this point you should be able to draw tables & graphs with the data 
 ![sample table](../imgs/excel_img3.png)
-The diagram uses a single query with [period function](../queries.md#the-period-function) to generate both the table and graph
+The diagram uses a single query with [period function](../query%20data/queries.md#the-period-function) to generate both the table and graph
 
 
 ## Error Handling 
