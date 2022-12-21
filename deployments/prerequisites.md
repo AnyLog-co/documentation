@@ -48,7 +48,7 @@ Our Kubernetes installation script conssits of [helm](https://helm.sh/) and mini
    * Unique hostname, MAC address, and product_uuid for every node
    * Swap memory disabled
 
-1. Install Kubernetes & Helm - our deployment script uses _minikube_. Directions for other can be found on the [official website](https://kubernetes.io/docs/setup/production-environment/tools/)
+1. Install Kubernetes & Helm - our deployment script uses _minikube_. Directions for other Kubernetes deployment tools can be found on the [official website](https://kubernetes.io/docs/setup/production-environment/tools/)
 ```shell
 bash $HOME/deployments/installations/kube_install.sh
 ```
