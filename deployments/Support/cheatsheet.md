@@ -166,15 +166,82 @@ AL anylog-node > test network
 ### Blockchain 
 * view all policies on blockchain
 ```anylog
-blockchain get * 
+AL anylog-node > blockchain get * 
 ```
 * get list of all query nodes on blockchain 
 ```anylog 
-blockchain get query 
+AL anylog-node > blockchain get query 
+[{'query' : {'hostname' : 'anylog-query',
+             'name' : 'anylog-query-node',
+             'ip' : '23.239.12.151',
+             'local_ip' : '23.239.12.151',
+             'company' : 'AnyLog',
+             'port' : 32348,
+             'rest_port' : 32349,
+             'loc' : '40.8223,-74.4569',
+             'country' : 'US',
+             'state' : 'New Jersey',
+             'city' : 'Morris Plains',
+             'id' : '83fd249bef7dc7ce6d876b0bd879b686',
+             'date' : '2022-08-01T02:09:37.947008Z',
+             'ledger' : 'global'}},
+ {'query' : {'hostname' : 'anylog-query-node2',
+             'name' : 'query-node2',
+             'ip' : '45.79.18.179',
+             'local_ip' : '45.79.18.179',
+             'company' : 'AnyLog',
+             'port' : 32348,
+             'rest_port' : 32349,
+             'loc' : '32.9482,-96.7297',
+             'country' : 'US',
+             'state' : 'Texas',
+             'city' : 'Richardson',
+             'id' : 'ebba19b10c2483e1afd71c6f0355fa06',
+             'date' : '2022-08-04T20:37:43.958960Z',
+             'ledger' : 'global'}}]
+
 ```
 * view information regarding data nodes (operators)
 ```anylog 
-get data nodes 
+AL anylog-node > get data nodes 
+
+Company         DBMS          Table                Cluster ID                       Cluster Status Node Name                Member ID External IP/Port      Local IP/Port         Node Status 
+---------------|-------------|--------------------|--------------------------------|--------------|------------------------|---------|---------------------|---------------------|-----------|
+AFG            |afg          |battery             |56ff4fdcca9d65c5c418cdb62ba35779|active        |afg-cluster3-operator1  |      151|172.105.60.50:32148  |172.105.60.50:32148  |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+               |             |                    |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+AFG            |afg          |inverter            |56ff4fdcca9d65c5c418cdb62ba35779|active        |afg-cluster3-operator1  |      151|172.105.60.50:32148  |172.105.60.50:32148  |active     |
+               |             |                    |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+AFG            |afg          |eswitch             |56ff4fdcca9d65c5c418cdb62ba35779|active        |afg-cluster3-operator1  |      151|172.105.60.50:32148  |172.105.60.50:32148  |active     |
+               |             |                    |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+AFG            |afg          |solar               |56ff4fdcca9d65c5c418cdb62ba35779|active        |afg-cluster3-operator1  |      151|172.105.60.50:32148  |172.105.60.50:32148  |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+               |             |                    |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+AFG            |afg          |pmu                 |56ff4fdcca9d65c5c418cdb62ba35779|active        |afg-cluster3-operator1  |      151|172.105.60.50:32148  |172.105.60.50:32148  |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+               |             |                    |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+AFG            |afg          |synchrophasor       |07b9b4ca2955299adb44e82ef679c7f6|active        |afg-cluster2-operator1  |       73|172.105.6.90:32148   |172.105.6.90:32148   |active     |
+               |             |                    |bde201429a660306df45d03593d9abb1|active        |afg-cluster1-operator1  |      186|69.164.203.68:32148  |69.164.203.68:32148  |active     |
+Lit San Leandro|litsanleandro|ping_sensor         |efb22a109434b64244fc01fea01e711b|active        |lsl-cluster2-operator2  |      169|172.105.112.207:32148|172.105.112.207:32148|active     |
+               |             |                    |                                |active        |lsl-cluster2-operator1  |       25|139.162.164.95:32148 |139.162.164.95:32148 |active     |
+               |             |                    |091ced55d3ff918bbe440e20251b30cd|active        |lsl-cluster3-operator1  |       33|172.105.13.202:32148 |172.105.13.202:32148 |active     |
+               |             |                    |                                |active        |lsl-cluster3-operator2  |      243|50.116.61.153:32148  |50.116.61.153:32148  |active     |
+               |             |                    |0015392622f3eaac70eafa4311fc2338|active        |lsl-cluster1-operator1  |       76|139.162.126.241:32148|139.162.126.241:32148|active     |
+               |             |                    |                                |active        |lsl-cluster1-operator2  |       77|139.177.192.209:32148|139.177.192.209:32148|active     |
+Lit San Leandro|litsanleandro|percentagecpu_sensor|efb22a109434b64244fc01fea01e711b|active        |lsl-cluster2-operator2  |      169|172.105.112.207:32148|172.105.112.207:32148|active     |
+               |             |                    |                                |active        |lsl-cluster2-operator1  |       25|139.162.164.95:32148 |139.162.164.95:32148 |active     |
+               |             |                    |0015392622f3eaac70eafa4311fc2338|active        |lsl-cluster1-operator1  |       76|139.162.126.241:32148|139.162.126.241:32148|active     |
+               |             |                    |                                |active        |lsl-cluster1-operator2  |       77|139.177.192.209:32148|139.177.192.209:32148|active     |
+               |             |                    |091ced55d3ff918bbe440e20251b30cd|active        |lsl-cluster3-operator1  |       33|172.105.13.202:32148 |172.105.13.202:32148 |active     |
+               |             |                    |                                |active        |lsl-cluster3-operator2  |      243|50.116.61.153:32148  |50.116.61.153:32148  |active     |
+NTT            |ntt          |deeptector          |f0a62fce8bff170fc0d72f4adc35d0a8|active        |ntt-operator-node-remote|       55|176.58.126.170:32148 |176.58.126.170:32148 |active     |
+IOTech System  |edgex        |rand_data           |8dbb1fdab6d1b0c181e630ff4bb74e3a|active        |edgex-cluster1-operator1|      180|172.105.86.168:32148 |172.105.86.168:32148 |active     |
+               |             |                    |0172634946c53e4c9bbede925182aa18|active        |edgex-cluster2-operator1|      188|139.162.56.87:32148  |139.162.56.87:32148  |active     |
+IOTech System  |edgex        |videos              |8dbb1fdab6d1b0c181e630ff4bb74e3a|active        |edgex-cluster1-operator1|      180|172.105.86.168:32148 |172.105.86.168:32148 |active     |
+               |             |                    |0172634946c53e4c9bbede925182aa18|active        |edgex-cluster2-operator1|      188|139.162.56.87:32148  |139.162.56.87:32148  |active     |
+
 ```
 
 ### Other Commands
