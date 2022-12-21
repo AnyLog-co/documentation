@@ -455,13 +455,13 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 ### Provide the local password
 On CLI(master):
 <pre> 
-set local password = 123
+set local password = masterlocpsswd
 </pre>
 
 ### Save the master node private key 
 On CLI(master):
 <pre> 
-set private password = demo1 in file
+set private password = masterpswd in file
 </pre>
 
 ### Enable authentication
