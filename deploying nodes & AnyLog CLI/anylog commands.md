@@ -240,8 +240,8 @@ Options:
 | get connections | The list of TCP and REST connections supported by the node. |
 | get machine connections | The system-wide socket connection. Users can detail specific port: ```get machine connections where port = [port]```|
 | get platforms | The list connected blockchain platforms. |
-| [get dictionary](monitoring%20nodes.md#the-get-dictionary-command) | The list of the variable names and their assigned values. |
-| [get env var](monitoring%20nodes.md#the-get-env-var-command) | The environment variables keys and values. |
+| [get dictionary](../monitoring%20nodes.md#the-get-dictionary-command) | The list of the variable names and their assigned values. |
+| [get env var](../monitoring%20nodes.md#the-get-env-var-command) | The environment variables keys and values. |
 | get databases  | The list of databases managed on the local node. |
 | get partitions | Information on how data is partitioned on the local databases. |
 | get partitions where dbms = [dbms_name] and table = [table name] | Partition details on a specific table. |
@@ -298,8 +298,8 @@ Options:
 | get cpu usage | Info on current usage of each CPU.  The function depends on psutil installed. |
 | get ip list | The list of IP addresses available on the node. |
 | get cpu temperature | The CPU temperature. |
-| get os process [options] | Different statistics on the OS processes. Details are available [here](monitoring%20nodes.md#the-get-os-process-command).|
-| get node info [options] | Different statistics on the node. Details are available [here](monitoring%20nodes.md#the-get-node-info-command).|
+| get os process [options] | Different statistics on the OS processes. Details are available [here](../monitoring%20nodes.md#the-get-os-process-command).|
+| get node info [options] | Different statistics on the node. Details are available [here](../monitoring%20nodes.md#the-get-node-info-command).|
 | get monitored | Retrieve the list of topics monitored by an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
 | get monitored [topic] | Retrieve monitored info on a specific topic from an aggregator node. Details are available [here](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
 

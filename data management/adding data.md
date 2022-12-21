@@ -218,7 +218,7 @@ Command details are available [here](https://github.com/AnyLog-co/documentation/
 With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key ***topic***. If a topic value is not provided, the default topic is used.  
 The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
-in the [Subscribing to REST calls](./using%20rest.md#subscribing-to-rest-calls) section.
+in the [Subscribing to REST calls](../using%20rest.md#subscribing-to-rest-calls) section.
 
 **MQTT Call**: 
 

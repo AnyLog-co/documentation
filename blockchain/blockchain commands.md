@@ -98,7 +98,7 @@ Queries detail filter criteria to return the needed policies in JSON format and 
 Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command ***from*** and is explained at the
-section called: [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
+section called: [The 'From JSON Object Bring' command](../json%20data%20transformation.md#the-from-json-object-bring-command).
 
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
@@ -155,7 +155,7 @@ The list of attribute name (key) value pairs in the where conditions is provided
      <pre>
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
     </pre>
- Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
+ Conditional execution is detailed [here](../deploying%20nodes/anylog%20commands.md#conditional-execution). 
 
 Examples:
 <pre>
@@ -230,7 +230,7 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 
 
 ## Copying policies representing the metadata to the local ledger
-The local representation of the blockchain file is updated continuously if the [blockchain synchronization](./background%20processes.md#blockchain-synchronizer) 
+The local representation of the blockchain file is updated continuously if the [blockchain synchronization](../background%20processes.md#blockchain-synchronizer) 
 process is enabled.  
 If the blockchain sync process is disabled, and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
 will force the node to use the updated local file.  

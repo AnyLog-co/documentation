@@ -104,7 +104,7 @@ Notes:
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
 If authentication is enabled, there are different layers that can be leveraged: passwords, signature of messages, and certificates.  
-Details are available in the [Users Authentication](../authentication.md#users-authentication) section.
+Details are available in the [Users Authentication](../security%20&%20authentication/authentication.md#users-authentication) section.
 
 <pre>
 set authentication off

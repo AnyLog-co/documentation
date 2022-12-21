@@ -1,4 +1,3 @@
-
 # Data Distribution and Configuration
 
 The distribution of data to nodes in the network is determined by policies published on the blockchain.  
