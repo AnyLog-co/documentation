@@ -16,7 +16,7 @@ git clone https://github.com/AnyLog-co/deployments
 have consistent IP address(es) for a given node. 
 
 
-3. Since AnyLog is a distributed overlay network, we recommend setting up an overlay network for those super secure 
+3. Since AnyLog is a distributed network, we recommend setting up an overlay network for those super secure 
 systems. For our testing purposes, we had used [nebula](Networking/nebula.md) - an overlay network created by _Slack_ 
 which was easy to deploy and utilize. 
 
@@ -24,7 +24,7 @@ which was easy to deploy and utilize.
 ### Docker 
 1. Install Docker & docker-compose
 ```shell
-bash $HOME/deployments/installations/docker_credentials.sh
+bash $HOME/deployments/installations/docker_install.sh
 ```
 
 2. Validate Docker & docker-composer are installed
@@ -41,14 +41,14 @@ bash $HOME/deployments/installations/docker_credentials.sh ${DOCKER_PASSWORD}
 If the docker request link doesn't work, please email us at [info@anylog.co](mailto:info@anylog.co).    
 
 ### Kubernetes with Helm
-Our Kubernetes deployment is based installed with [helm](https://helm.sh/). Unlike Docker, Kubernetes has the following [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#:~:text=Before%20you%20begin%201%20A%20compatible%20Linux%20host.,on%20your%20machines.%20...%207%20Swap%20disabled.%20): 
+Our Kubernetes installation script conssits of [helm](https://helm.sh/) and minikube; however, it has also been tested with [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/) and other flavors of kubernetes installations. Unlike Docker, Kubernetes has the following [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#:~:text=Before%20you%20begin%201%20A%20compatible%20Linux%20host.,on%20your%20machines.%20...%207%20Swap%20disabled.%20): 
    * \>= 2GB of RAM per machine
    * \>=2 CPUs 
    * network connectivity between all machines in the cluster (public or private)
    * Unique hostname, MAC address, and product_uuid for every node
    * Swap memory disabled
 
-1. Install Kubernetes & Helm - our deployment script uses _minikube_. Directions for other can be found on the [official website](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+1. Install Kubernetes & Helm - our deployment script uses _minikube_. Directions for other can be found on the [official website](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/](https://kubernetes.io/docs/setup/production-environment/tools/)
 ```shell
 bash $HOME/deployments/installations/kube_install.sh
 ```
