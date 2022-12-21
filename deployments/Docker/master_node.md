@@ -1,5 +1,5 @@
 # Master Node
-Master node is an AnyLog instance that that manages the shared metadata. In the case of using a blockchain platform, such 
+Master node is an AnyLog instance that manages the shared metadata. In the case of using a blockchain platform, such 
 as _[Jasmy](https://jasmy.global/)_ or Ethereum, this node is redundant. 
 
 For a step-by-step process of what's being done in the background, please visit the [deployment process](master_node_deployment_process.md)
