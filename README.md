@@ -14,6 +14,7 @@ As we are in an early beta stage, this program is not available to all. To join 
 
 ## Table of Content 
 * [How to Deploy a Node & Using AnyLog CLI](deploying%20nodes%20&%20AnyLog%20CLI)
+  * [Getting Started](deploying%20nodes%20&%20AnyLog%20CLI/getting%20started.md) 
   * [Starting an AnyLog Instance](deploying%20nodes%20&%20AnyLog%20CLI/starting%20an%20anylog%20instance.md)
   * [Master Node](deploying%20nodes%20&%20AnyLog%20CLI/master%20node.md)
   * [Understanding Background Processes](deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md)
@@ -25,7 +26,8 @@ As we are in an early beta stage, this program is not available to all. To join 
 * [Managing Data](data%20management)
   * [Adding Data](data%20management/adding%20data.md)
   * [Mapping data to tables](data%20management/mapping%20data%20to%20tables.md)
-
+  * [Storing Images](data%20management/image%20mapping.md)
+  
 * [Querying Data](query%20data/)
   * [Build Queries](query%20data/queries.md)
   * [SQL Setup](query%20data/sql%20setup.md)
