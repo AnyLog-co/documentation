@@ -32,8 +32,7 @@ add hosts to a Nebula network.
 ./nebula-cert ca -name "AnyLog co."
 ```
 3. Create [node specific keys](https://nebula.defined.net/docs/guides/quick-start/#creating-keys-and-certificates) - 
-You can name the hosts any way you'd like, including FQDN. Make sure the nebula IP address(es) are on a different subnet 
-from the  
+You can name the hosts any way you'd like, including FQDN. Make sure the nebula IP address(es) are on a unique subnet.
 ```shell
 ./nebula-cert sign -name lighthouse -ip 10.0.0.1/24
 ./nebula-cert sign -name node1 -ip 10.0.0.2/24 
