@@ -16,7 +16,7 @@ To configure an AnyLog Node to satisfy REST calls, issue the following command o
 A 0 value means a call would never be aborted and the default time is 20 seconds.    
 Additional information on the REST API is available at the section [Rest requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-request).
   
-## HTTP methods suported
+## HTTP methods supported
 
 AnyLog commands are supported using the the HTTP methods GET, PUT and POST.  
 ***GET*** is used to retrieve information.  
@@ -32,7 +32,7 @@ AnyLog commands are supported using the the HTTP methods GET, PUT and POST.
 |               | blockchain get   | Query the metadata |
 |               | help             | Help on the ANyLog commands |
 
-#### Exampless
+#### Examples
 
 <pre>
 curl --location --request GET '10.0.0.78:7849' \

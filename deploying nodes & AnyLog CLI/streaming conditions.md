@@ -1,4 +1,3 @@
-
 # Streaming Conditions
 
 Streaming conditions are conditions that are applied on streaming data in each node.  
