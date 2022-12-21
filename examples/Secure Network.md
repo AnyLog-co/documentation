@@ -392,6 +392,8 @@ On CLI(oper.1.2):
 set node authentication on
 </pre>
 
+Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
+
 ## Master Node Configuration
 This setup is optional (if a master node is used).    
 CLI(master) designates the master node command line.
@@ -407,12 +409,12 @@ id create keys for node where password = masterpswd
 On CLI(master) 
  
 ```<pre> 
-<member = {"node" : {  
+<member = {"member" : {  
     "type" : "node",  
     "name"  : "master_node"  
     }  
 }>  
-private_key = get private key where keys_file = master_keys
+private_key = get private key
 member = id sign !member where key = !private_key and password = masterpswd
 json !member    # View the policy including the signature and public key
 blockchain insert where policy = !member and local = true  and master = !master_node
