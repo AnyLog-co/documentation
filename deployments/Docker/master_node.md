@@ -131,7 +131,6 @@ curl -X GET ${IP_ADDRESS}:32049 -H "command: get status" -H "User-Agent: AnyLog/
 curl -X GET ${IP_ADDRESS}:32049 -H "command: get processes" -H "User-Agent: AnyLog/1.23"  -w "\n"
 ```
 * via AnyLog CLI
-* via AnyLog CLI
 ```shell
 # docker attach --detach-keys=ctrl-d anylog-master 
 ubuntu@master-node:~$ docker attach --detach-keys=ctrl-d mastaer-node 
