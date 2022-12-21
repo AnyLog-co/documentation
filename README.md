@@ -22,18 +22,21 @@ As we are in an early beta stage, this program is not available to all. To join 
   * [Using REST](deploying%20nodes%20&%20AnyLog%20CLI/using%20rest.md)
   * [Managing Data File Status](deploying%20nodes%20&%20AnyLog%20CLI/managing%20data%20files%20status.md)
   * [Streaming Conditions](deploying%20nodes%20&%20AnyLog%20CLI/streaming%20conditions.md)
+  * [Metadata Management](data%20management/metadata%20management.md)
   * [Kubernetes & Docker Deployment of AnyLog](deployments)
     * [Docker Deployment](deployments/Docker)
     * [Kubernetes Deployment](deployments/Kubernetes)
     
 * [Managing Data](data%20management)
   * [Adding Data](data%20management/adding%20data.md)
+  * [Metadata Requests](data%20management/metadata%20requests.md)
   * [Mapping data to tables](data%20management/mapping%20data%20to%20tables.md)
   * [JSON Data Transformation](data%20management/json%20data%20transformation.md)
   * [Storing Images](data%20management/image%20mapping.md)
  
 * [Monitoring AnyLog](monitoring)
   * [General Monitoring](monitoring/monitoring%20calls.md) 
+  * [Monitoring Nodes](monitoring/monitoring%20nodes.md)
   * [Logging Events](monitoring/logging%20events.md)
   * [Alerts & Monitoring](monitoring/alerts%20and%20monitoring.md)
   * [Monitoring Data](monitoring/monitoring%20data.md)
@@ -43,8 +46,10 @@ As we are in an early beta stage, this program is not available to all. To join 
 * [Querying Data](query%20data/)
   * [Build Queries](query%20data/queries.md)
   * [SQL Setup](query%20data/sql%20setup.md)
+  * [Profile & Monitor Queries](query%20data/profiling%20and%20monitoring%20queries.md)
+  * [Querying Across the Network](query%20data/network%20processing.md)
   * [SQL Testing](query%20data/test%20suites.md)
-  
+
 * [Security & Authentication](security%20&%20authentication)
   * [Secure Network](security%20&%20authentication/Secure%20Network.md)
     * [Using NGINX as Proxy](deployments/Networking/nginx.md)
@@ -56,6 +61,7 @@ As we are in an early beta stage, this program is not available to all. To join 
   * [Configuring Data Distribution](HA/data%20distribution%20and%20configuration.md)
 
 * [Southbound Connectors](southbound%20connectors)
+  * [AnyLog as a Broker](southbound%20connectors/message%20broker.md) 
   * [Using Edgex](southbound%20connectors/using%20edgex.md)
   * [Using Kafka](southbound%20connectors/using%20kafka.md)
   * [Registering OSIsoft's PI](southbound%20connectors/registering%20pi%20in%20the%20anylog%20network.md)

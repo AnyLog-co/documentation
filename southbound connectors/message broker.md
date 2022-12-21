@@ -368,7 +368,7 @@ The process of using an AnyLog node as a message broker is similar to the proces
 * Subscribing to the published topics and mapping the data to the needed schema - this process is using the same command options as the [Subscribing to a third party broker](#subscribing0-to-a-third-party-broker) process.
 * The [Streamer Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process) needs to be enabled.
 
-A detailed configuration example is available in the examples section - [Broker Setup](examples/Broker%20Setup.md#setting-anylog-as-a-message-broker).
+A detailed configuration example is available in the examples section - [Broker Setup](../examples/Broker%20Setup.md#setting-anylog-as-a-message-broker).
 
 ## The message broker configuration
 
