@@ -430,7 +430,7 @@ On CLI(opr.1)
 }>
 private_key = get private key where keys_file = roy
 permissions = id sign !permissions where key = !private_key and password = 123
-!permissions 
+json !permissions 
 blockchain insert where policy = !permissions and local = true  and master = !master_node
 ```
 ### Assign privileges to the master node
@@ -441,14 +441,14 @@ permission_id = blockchain get permissions where name = "master node permissions
 member_node = blockchain get member where name = master_node bring ['member']['public_key']
 
 <assignment = {"assignment" : {
-        "name" : "assignment to no restrictions",
+        "name" : "master assignment",
         "permissions"  : !permission_id,
         "members"  : [!member_node]
         }
 }>
-private_key = get private key where keys_file = root_keys
-assignment = id sign !assignment where key = !private_key and password = abc
-!assignment 
+private_key = get private key where keys_file = roy
+assignment = id sign !assignment where key = !private_key and password = 123
+json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
 ```
 
