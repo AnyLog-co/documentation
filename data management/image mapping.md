@@ -165,7 +165,7 @@ file retrieve where dbms = blobs_edgex and table = image and dest = !blobs_dir
 
 Files are removed from storage using the ***file remove*** command.  
 A single fle is removed by identifying the database name, the table name, the file unique ID (name) or the hash value.   
-A group of files are removed by identifying the database name a table name and a date key (YYMMDD in UTC format).  
+A group of files gets removed by identifying the database name a table name and a date key (YYMMDD in UTC format).  
 Usage:
 <pre>
   file remove where dbms = [dbms name] and table = [table name] and hash = [hash value]
@@ -257,7 +257,7 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
       run message broker !external_ip 7850 !ip 7850 6
       </pre>
       Details on configuration of AnyLog as a broker are available [here](../southbound%20connectors/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
-    * As a Blobs Archiver - this process loads the images into the blobs database.  
+    * As a Blobs Archiver - this process loads the images into blobs database (such as MongoDB).  
       Example:    
       <pre>
       run blobs archiver where dbms = true and folder = true and compress = False

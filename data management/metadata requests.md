@@ -19,13 +19,13 @@ transforms the policy to a table that is maintained by a local database.
 A node can determine to partition the data by time. This process is done by declaring the table and the time interval for partitioning. The partitioning 
 is transparent to the query processes in the network.  
 The partitioning command is as follows:
-<pre>
+```anylog
 partition [dbms name] [table name] using [column name] by [time interval]
-</pre>
+```
 An example of time partitioning is the following configuration command:  
-<pre>
+```anylog
 partition dmci ping_sensor using timestamp by 1 month
-</pre>
+```
 Once a table schema is available, the ingestion process maps the data in the JSON files to the table's schema.
 
 
@@ -46,9 +46,9 @@ The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/
 The sensor data (or time series data) is placed in the ***watch directory***.
 The file name follows a convention that determines how the file is being processed.    
 The command ***get json file struct*** details the file structure convention and has the following output:  
-<pre>
+```anylog
 [dbms name].[table name].[data source].[hash value].[instructions].[TSD member ID].[TSD row ID].[TSD date].json
-</pre>
+```
 
 The file type is ***json*** indicating the internal structure.  
 The file name structure is composed of 8 substrings separated by a period. The substrings are as follows:
@@ -62,7 +62,7 @@ The file name structure is composed of 8 substrings separated by a period. The s
 | Instructions | An ID that identifies the set of instructions that map the JSON data to the table structure. | No |
 | TSD member ID | An ID of the TSD table containing information on the JSON file. | No |
 | TSD row ID | The ID of the row in  the TSD table that contains information about the file. | No |
-| TSD date | The time and date when the file was injested to the local database. | No |
+| TSD date | The time and date when the file was ingested to the local database. | No |
 
 Note: Details on the TSD tables is available at [Managing Data files](../deploying%20nodes%20&%20AnyLog%20CLI/managing%20data%20files%20status.md#managing-data-files).
 
@@ -91,7 +91,7 @@ The listed databases are available to host data and query data and were assigned
 
 Example:
 
-<pre>
+```anylog
 List of DBMS connections
 Logical DBMS         Database Type IP:Port                        Storage
 -------------------- ------------- ------------------------------ -------------------------
@@ -100,32 +100,32 @@ blockchain           psql          127.0.0.1:5432                 Persistent
 dmci                 sqlite        Local                          D:\Node\AnyLog-Network\data\dbms\dmci.dbms
 lsl_demo             psql          127.0.0.1:5432                 Persistent
 system_query         psql          127.0.0.1:5432                 Persistent
-</pre>
+```
 
 ### The network databases
 
 The following command retrieves the list of databases on the network.
-<pre>
+```anylog
 get network databases
-</pre>
+```
 Or if company name is included in the JSON policies:
-<pre>
+```anylog
 get network databases where company = my_company
-</pre>
+```
 
 ### The network tables
 The following command retrieves the list of tables declared the network and determines which table is hosted on the current node.
-<pre>
+```anylog
 get tables where dbms = [dbms name]
-</pre>
+```
 
 The following example retrieves all tables:
-<pre>
+```anylog
 get tables where dbms = *
-</pre>
+```
 
 And an example output is the following:
-<pre>
+```anylog
 Database      Table name   Local DBMS  Blockchain
 -------------|------------|----------------------|
 litsanleandro|ping_sensor |           |     V    |
@@ -137,45 +137,45 @@ orics        |sensor_1    |           |     V    |
              |sensor_3    |           |     V    |
              |sensor_4    |           |     V    |
              |sensor_5    |           |     V    |
-</pre>
+```
 
 ###  Retrieving the columns list for a Tables
 
 The following command retrieves the list of columns and the data types for a particular table:
-<pre>
+```anylog
 get columns where dbms = [dbms name] and table = [table name]
-</pre>
+```
 
 The list represents the columns declared on the global metadata layer.
 
 Example:
-<pre>
+```anylog
 get columns where dbms = dmci and table = machine_data
-</pre>
+```
 
 To retrieve how the table is declared on  the local database on this node use the following command:
 
-<pre>
+```anylog
 info table [dbms name] [table name] columns
-</pre>
+```
 
 Example:
-<pre>
+```anylog
 info table dmci machine_data columns
-</pre>
+```
 
 ### Validating a schema
 
 As a schema of a table can exist on the local database and on the blockchain, the command ***test table*** compares the table definitions on the local database with the schema definition on the blockchain.  
 The structure of the command is as follows:  
-<pre>
+```anylog
 test table [table name] where dbms = [dbms name]
-</pre>
+```
 
 Example: 
-<pre>
+```anylog
 test table ping_sensor where dbms = lsl_demo
-</pre> 
+``` 
 
 
 

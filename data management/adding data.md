@@ -4,7 +4,7 @@ AnyLog hosts the data on nodes in the network that are configured as Operators (
 Any connected node can host data. 
  
 There are multiple ways to add data to Operators in the network:
-* [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory. An example is available [here](.,./examples/network%20setup.md#push-data-to-the-network).
+* [Using a WATCH directory](#placing-data-in-the-watch-directory) - Adding data is by placing files containing JSON data in the WATCH directory.
 * [Using a REST API](#data-transfer-using-a-rest-api) - the REST client is not necessarily a member of the network, data is delivered using the PUT or POST commands.
 * [Subscribing to a third party message broker](#subscribing-to-a-third-party-message-broker) and receiving the published data from the third party broker. 
 * [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker) and receiving published data from clients.   
@@ -34,39 +34,39 @@ The default processing is as follows:
 The file name includes the information needed to determine how the file's data is processed.  
 The file name is partitioned to segments separated by a dot as follows: 
 
-<pre>
+```anylog
 [dbms name].[table name].[data source].[hash value].[instructions].json
-</pre>
+```
 
 Users can display the segments dynamically by issuing the following command:
-<pre>
+```anylog
 show json file structure
-</pre>
+```
 The name segments are treated as follows:
  
-<pre>
+```anylog
 dbms name       - The logical database to contain the file data.
 table name      - The logical table to contain the file data.
 data source     - A unique ID to identify the data source (i.e. an ID of the sensor).
 hash value      - A hash value that identifies the file. 
 instructions    - An ID of a policy that determines the mapping of the file data to the table's structure.
 json            - The content of data inside the file is of JSON data.
-</pre>
+```
 
 Users can determine the hash value of a file by issuing the command:
-<pre>
+```anylog
 file hash [file name and path]
-</pre>
+```
 
 ### The Data Format
 
 To process a file containing JSON instances, the JSON instances need to be organized as strings with the new line character (LF) separating between the instances.  
 Example:  
-<pre>
+```anylog
 {"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}  
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}  
 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}  
-</pre>
+```
 
 ## Data transfer using a REST API
 
@@ -93,9 +93,9 @@ The node processing the REST request needs to be configured as follows:
 
 * As a REST server to receive the REST requests from the client.
 using the following command on the AnyLog command prompt:
-<pre>
+```anylog
 run rest server [ip] [port] [timeout]
-</pre>
+```
 ***[ip]*** - The IP supporting the REST connection  
 ***[port]*** - The REST port  
 ***[timeout]*** - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***.  
@@ -109,7 +109,7 @@ Details on how an operator is configured are available [here](../deploying%20nod
  
 Use a REST client software (such as Curl or Postman) and issue a ***PUT*** command to send the data with the following keys and values in the header:
   
-<pre>
+```anylog
 Key             Value
 ------          -------------
 User-Agent      AnyLog/1.23
@@ -119,7 +119,7 @@ table           The logical table to contain the data.
 source          A unique ID to identify the data source (i.e. an ID of a sensor).
 mode            File or Streaming (see details below). The default value is 'file'.
 instructions    An ID of a policy that determines the mapping of the file data to the table's structure.
-</pre>
+```
 
 The JSON data is transferred using the data-raw part of the REST call and can include any number of readings.
 
@@ -153,7 +153,7 @@ Data ingested to a local database is organized in files. Each file contains one 
 Users adding data with the REST API determines the mode in which data is processed:
 
 * Using a ***File Mode*** (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other PUT requests.  
-A File Mode is usually used when the PUT request contains a large amount of data or when the data is not frequenty created.  
+A File Mode is usually used when the PUT request contains a large amount of data or when the data is not frequently created.  
     
 * Using a ***Streaming Mode*** - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Upon a threshold, the accumulated data is organized as a file that is processed as a single unit.
 A Streaming Mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
@@ -174,9 +174,9 @@ Thresholds determine when buffered data is processed and are based on a time thr
 As multiple thresholds ate set, the earlier of the two triggers the processing of the data.  
 
 Usage:
-<pre> 
+```anylog
 set buffer threshold where dbms_name = [dbms name] and table_name = [table name] and time = [time] and volume = [data volume] and write_immediate = [true/false]
-</pre>  
+```
 
 Options:
 
@@ -193,23 +193,23 @@ Note:
 * Volume threshold can be specified byes, KB, MB or GB.
 * Volume thresholds are enforced by the processes that add the data to the buffers (i.e. REST processes and MQTT processes).  
 * The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
-    <pre>
+    ```anylog
     run streamer 
-    </pre>
+    ```
     More information on the streamer process is available at the [Streamer Process](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#streamer-process) section.
 * If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
 * If the time is set to 0 seconds and the volume is set to 0 bytes - the thresholds are reverted to the default values.    
 
 Example:  
-<pre>
+```anylog
 set buffer threshold where time = 1 hour and volume = 2KB
-</pre>
+```
 
 ### Retrieving the thresholds values is with the following command:  
 The command provides information on the REST API usage and status including the buffer thresholds.
-<pre>
+```anylog
 get streaming
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-streaming).
 
 
@@ -295,7 +295,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
 
 ## The Southbound Connectors Diagram
 
-<pre>
+```anylog
                                                        --------------------------       --------------------------
   Option A:                                            |                        |       |                        |   
   Data published to external Broker                    |       MQTT Broker      |       |          Kafka         |   
@@ -359,7 +359,7 @@ Details are available at the [message broker section - Configuring an AnyLog nod
                                                                |               |
                                                                -----------------
  
-</pre>
+```
 
 The diagram describes the different southbound connectors options and the data flow.
 
@@ -368,13 +368,16 @@ The diagram describes the different southbound connectors options and the data f
 Data is published to an external broker. 
 Example of brokers are: MQTT broker and Kafka.  
 AnyLog client is registered to the broker and does the following:  
-a) pulls the data from the broker and b) transfers the data to the mapper.  
+  a) pulls the data from the broker 
+
+  b) transfers the data to the mapper  
+
 Details are available at the [message broker section - Subscribing to a third party broker](../southbound%20connectors/message%20broker.md#subscribing-to-a-third-party-broker).
 
 The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:
-<pre>
+```anylog
 get msg client
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-msg-clients).
 
 ***Option B: Data published to AnyLog as a Broker***  
@@ -385,14 +388,14 @@ pushes to the mapper.
 Details are available at: [Configuring the AnyLog node as a message broker](#configuring-the-anylog-node-as-a-message-broker).
 
 The following command provides status and statistics on data published on the AnyLog message broker process:
-<pre>
+```anylog
 get broker
-</pre>
+```
 
 The following command provides status and statistics on the mapping (of published data on the local broker) to the table's schema:
-<pre>
+```anylog
 get msg client
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-msg-clients).
 
 ***Option C: Data transferred using POST***    
@@ -402,15 +405,15 @@ and the AnyLog mapper transforms the received data to the destination format.
 Details are available at the section [Using a POST command](#using-a-post-command).
 
 The following command provides status and statistics on HTTP POST messages:
-<pre>
+```anylog
 get rest calls
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-rest-calls).
 
 The following command provides status and statistics on the mapping (of POST calls) to the table's schema:
-<pre>
+```anylog
 get msg client
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-msg-clients).
 
 ***Option D: Data transferred using PUT***    
@@ -419,17 +422,17 @@ The data is transferred using REST PUT messages. The data is provided in a forma
 Details are available at the section [Using a PUT command](#using-a-put-command).
 
 The following command provides status and statistics on HTTP PUT messages:
-<pre>
+```anylog
 get rest calls
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-rest-calls). 
 
 ***Monitoring the data passing through the internal buffers***
 
 The following command provides status and statistics on the internal buffers:
-<pre>
+```anylog
 get streaming
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-streaming).
 
 
@@ -440,9 +443,9 @@ Details are available at the section [Placing data in the WATCH directory](#plac
 File naming convention is detailed at [Managing Data files](../deploying%20nodes%20&%20AnyLog%20CLI/managing%20data%20files%20status.md).
 
 The following command provides status and statistics on the processing of the JSON files:
-<pre>
+```anylog
 get operator
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-operator).
 
 ***Option F: Adding SQL files to the watch directory***   
@@ -451,7 +454,7 @@ The SQL files are in a format representative of the table's schema and the file 
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).
 
 The following command provides status and statistics on the processing of the SQL files:
-<pre>
+```anylog
 get operator
-</pre>
+```
 Command details are available [here](../monitoring/monitoring%20calls.md#get-operator).
