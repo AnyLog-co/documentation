@@ -29,7 +29,7 @@ docker-compose up -d
 **Note**: The docker-compose file deploys PostgresSQL version 14.0-alpine 
 
 ## MongoDB 
-On machines that will use MongoDB (usually Operator nodes) - make sure MongoDB is installed and locally. Our deployments 
+On machines that will use MongoDB (usually Operator nodes) - make sure MongoDB is installed locally. Our deployments 
 package provides a docker deployment for MongoDB - alternatively a user can deploy / use their own MongoDB database. If 
 you'd like to install MongoDB locally, rather than via Docker feel free to utilize the  following documentation:
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)

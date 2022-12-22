@@ -49,7 +49,7 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 
 
 ## Table of Content
-[Preparing Machine(s) for Deployment](Docker/Prerequisites.md)
+[Preparing Machine(s) for Deployment](prerequisites.md)
 
 **[Docker](Docker)**
 * [Install Database](Docker/database_configuration.md)

@@ -73,7 +73,8 @@ server {
 }
 
 # AnyLog Node - make sure the IP & REST Port are correct. This section needs to repeated for each AnyLog node on the 
-# machine. 
+# machine. Additionally, when using NGINX with docker, the listen port must be different from the proxy_pass port as
+# the two seat on the same network card, when docker host is configured to "network" 
 server {
   listen 32049;
   server_name _;
