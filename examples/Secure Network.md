@@ -262,7 +262,8 @@ blockchain insert where policy = !member and local = true  and master = !master_
 ### Step 7 - Create a permission policy with no restrictions
 
 Use CLI(oper.1) to create a permission policy that has no restrictions.  
-This policy enables all commands and allows to operate with all databases.
+This policy enables all commands and allows to operate with all databases.  
+This policy needs to be signed by the root user.
 ```
 <permissions = {"permissions" : {
     "name" : "no restrictions",
@@ -270,7 +271,7 @@ This policy enables all commands and allows to operate with all databases.
     "enable" : ["*"]
     }
 }>
-private_key = get private key where keys_file = roy
+private_key = get private key where keys_file = root_keys
 permissions = id sign !permissions where key = !private_key and password = 123
 json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
@@ -289,7 +290,7 @@ member_user = blockchain get member where name = roy bring ['member']['public_ke
         "members"  : [!member_user]
         }
 }>
-private_key = get private key where keys_file = roy
+private_key = get private key where keys_file = root_keys
 assignment = id sign !assignment where key = !private_key and password = abc
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
