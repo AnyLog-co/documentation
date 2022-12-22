@@ -211,7 +211,7 @@ Use CLI(oper.1) to create the member policy of operator #1:
     "id"   : "node_001",
     "type" : "node",
     "company"  : "Northern Light",
-    "name" : "server south"
+    "name" : "member north"
     }
 }>
 member = id sign !member where password = demo1
@@ -224,7 +224,7 @@ Use CLI(oper.2) to create the member policy of operator #2:
     "id"   : "node_002",
     "type" : "node",
     "company"  : "Northern Light",
-    "name" : "server north"
+    "name" : "member south"
     }
 }>
 member = id sign !member where password = demo2
@@ -255,7 +255,7 @@ Notes:
 }>
 private_key = get private key where keys_file = roy
 member = id sign !member where key = !private_key and password = 123
-!member
+json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
 
@@ -270,6 +270,8 @@ This policy enables all commands and allows to operate with all databases.
     "enable" : ["*"]
     }
 }>
+permissions = id sign !permissions where key = !private_key and password = 123
+json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
 
@@ -288,7 +290,7 @@ member_user = blockchain get member where name = roy bring ['member']['public_ke
 }>
 private_key = get private key where keys_file = root_keys
 assignment = id sign !assignment where key = !private_key and password = abc
-!assignment 
+json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
 ```
 
@@ -304,7 +306,7 @@ Use CLI(oper.1) to generate a ***permission*** policy with limited privileges.
     "name" : "node basic permissions",
     "databases" : ["*", "-lsl_demo"],
     "tables" : ["lsl_demo.temperature_sensor", "lsl_demo.ping_sensor"],
-    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain"],
+    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain", "event"],
     "disable" : ["get node id"]
     }
 }>
@@ -427,7 +429,7 @@ On CLI(opr.1)
     "name" : "master node permissions",
     "enable" : [ "file", "event", "echo", "print"]
     }
-}>
+}>    
 private_key = get private key where keys_file = roy
 permissions = id sign !permissions where key = !private_key and password = 123
 json !permissions 
