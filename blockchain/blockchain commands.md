@@ -203,24 +203,25 @@ in a dictionary variable.
 The second command sends a request to get the network status from the destination nodes assigned to the variable.  
 The second example details the destination using the ***blockchain get*** command in the destination parenthesis of the ***run client ()*** command.
 
-<pre>
+```anylog
+# Using an AnyLog variable get network information regarding nodes in the US and Israel
 destinations = blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,
-run client (!destinations) get node info net_io_counters 
-</pre>
 
-<pre>
-run client (blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,) get node info net_io_counters 
-</pre>
-    
+run client (!destinations) get node info net_io_counters 
+
+# Without first declaring a variable (destination) get network information regarding nodes in the US and Israel 
+run client (blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,) get node info net_io_counters
+```
+
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
 This command can update both - the local copy and the global copy of the ledger. In addition, it facilitates a process that validates that all the updates
 are represented on the global copy (as during the issue of the insert command, the global copy may not be accessible).  
 
 Usage:
-<pre>
+```anylog
 blockchain insert where policy = [policy] and blockchain = [platform] and local = [true/false] and master = [IP:Port]
-</pre>
+```
 
 Command details:
 
@@ -292,8 +293,8 @@ run client (!master_node) blockchain pull to json
 run client (!master_node) file get !!blockchain_file !blockchain_file
 </pre>
 Notes:
-* ```blockchain_file``` is configured to the path and file name of the ledger.
-* The double exclamation points (!!) determine to derive the value of the key ```blockchain_file``` on the target node (127.45.35.12).
+* `blockchain_file` is configured to the path and file name of the ledger.
+* The double exclamation points (!!) determine to derive the value of the key `blockchain_file` on the target node (127.45.35.12).
 * Details on the ***file get*** command are available [here](../deploying%20nodes%20&%20AnyLog%20CLI/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node).
 * With synchronization enabled, this process is done continuously as configured and is not required to be triggered by the user. 
 
