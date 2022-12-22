@@ -270,6 +270,7 @@ This policy enables all commands and allows to operate with all databases.
     "enable" : ["*"]
     }
 }>
+private_key = get private key where keys_file = roy
 permissions = id sign !permissions where key = !private_key and password = 123
 json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
@@ -288,7 +289,7 @@ member_user = blockchain get member where name = roy bring ['member']['public_ke
         "members"  : [!member_user]
         }
 }>
-private_key = get private key where keys_file = root_keys
+private_key = get private key where keys_file = roy
 assignment = id sign !assignment where key = !private_key and password = abc
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
