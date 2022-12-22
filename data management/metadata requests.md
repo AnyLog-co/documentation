@@ -3,7 +3,7 @@
 Nodes in the network interact with a global metadata layer that manages and synchronizes the data views and processes among 
 the member nodes and with a local setup and configurations that determine how data is managed locally on the node.  
 
-An overview on the global metadata layer is provided in [Managing Metadata](https://github.com/AnyLog-co/documentation/blob/master/metadata%20management.md#managing-metadata).  
+An overview on the global metadata layer is provided in [Managing Metadata](../deploying%20nodes%20&%20AnyLog%20CLI/metadata%20management.md#managing-metadata).  
 This document explains the layout and organization of the data on the nodes and how the node processes interact with the global and local metadata.  
  
 Note: The processes of a node in the network are agnostic to where the global metadata is hosted (a blockchain or a master node). 
@@ -36,8 +36,8 @@ as the query protocol and interfaces are satisfied.
 Data can be received as files in JSON format or can be collected by the node and transformed to files in JSON format.  
 The JSON files are placed in a ***watch directory*** and ingested to the local database.
 The ***watch directory*** is determined by the configuration and when a file is placed in the directory, it is read and ingested by the local databases.  
-A description of the directory structure of a node is available at the section [Local Directory Structure](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#local-directory-structure).  
-The section [Adding Data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#adding-data-to-nodes-in-the-network) 
+A description of the directory structure of a node is available at the section [Local Directory Structure](../deploying%20nodes%20&%20AnyLog%20CLI/getting%20started.md#local-directory-structure).  
+The section [Adding Data](../data%20management/adding%20data.md#adding-data-to-nodes-in-the-network) 
 details how watch-directories are used and how data is added to nodes in the network using REST.       
 The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) details how data is added using a broker.  
 
@@ -64,7 +64,7 @@ The file name structure is composed of 8 substrings separated by a period. The s
 | TSD row ID | The ID of the row in  the TSD table that contains information about the file. | No |
 | TSD date | The time and date when the file was injested to the local database. | No |
 
-Note: Details on the TSD tables is available at [Managing Data files](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#managing-data-files).
+Note: Details on the TSD tables is available at [Managing Data files](../deploying%20nodes%20&%20AnyLog%20CLI/managing%20data%20files%20status.md#managing-data-files).
 
 ### File ingestion
 
@@ -77,7 +77,7 @@ When the table is located or created, the file is ingested using one of 2 method
 2. If mapping ***Instructions*** appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
 
 
-### Creating a local dbms table published as a policy on the blockchin
+### Creating a local dbms table published as a policy on the blockchain
 
 The command: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
 

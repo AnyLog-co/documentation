@@ -40,7 +40,7 @@ The chart below describes the sections of the policy.
 | readings      | String  |   No     | A key to a list of readings in the source JSON   |
 | schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions   |
 
-Note: The ***if statement*** is detailed in the section [Conditional Execution](anylog%20commands.md#conditional-execution).   
+Note: The ***if statement*** is detailed in the section [Conditional Execution](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#conditional-execution).   
 
 ### The schema section
 The schema is a dictionary whereas the target columns are the keys and each value is a dictionary representing the column's properties including the mapping instructions.  
@@ -87,9 +87,9 @@ In this doc, we download the London air quality data from datahub and provide a 
 ## Prerequisite
 
 1) An AnyLog Operator node.  
-   Details on Operator configurations are available in the section [background processes](background%20processes.md#operator-process).
+   Details on Operator configurations are available in the section [background processes](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#operator-process).
 2) Define a physical database (i.e.: PostgreSQL or SQLite) to the logical database name (london). 
-   Details on database configurations are available in the section [Connecting to a local database](sql%20setup.md#connecting-to-a-local-database).
+   Details on database configurations are available in the section [Connecting to a local database](../query%20data/sql%20setup.md#connecting-to-a-local-database).
    
 ## Downloading the data
 
@@ -106,9 +106,9 @@ Notes:
     ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
     ***show*** provides a visual status bar that monitors the write to file process.
 
- * More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
-
- * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
+ * More details on the REST GET command are available in the [AnyLog Commands section](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#rest-command).
+   
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
 
 ## Creating the mapping instructions
@@ -150,7 +150,7 @@ blockchain insert where policy = !instruct and local = true and master = !master
 
 ## Adding the data
 Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST or assigning
-a broker role to the node and publishing the data. These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
+a broker role to the node and publishing the data. These methods are explained in the section [adding data](../data%20management/adding%20data.md).
 
 #### Example:
 
@@ -194,7 +194,7 @@ Edgex is an open source platform that facilitates interoperability between devic
 
 ## Sending data to an AnyLog node from EdgeX 
 Data transfer from Edgex to AnyLog can be done using REST calls or by publishing the data on an AnyLog node.
-Details are available at the [Using EdgeX](/using%20edgex.md#using-edgex) section of the documentation.  
+Details are available at the [Using EdgeX](../southbound%20connectors/using%20edgex.md#using-edgex) section of the documentation.  
 The example below details a mapping process on a sample data detailed [below](#sample-data).
 
 ## The Mapping Policies

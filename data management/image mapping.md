@@ -85,7 +85,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 </pre> 
 
-Additional information is available at the [configuring a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#configuring-a-local-database) section.
+Additional information is available at the [configuring a local database](../query%20data/sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -215,7 +215,7 @@ trace level = 0 file store
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
-The command [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
+The command [file get](../deploying%20nodes%20&%20AnyLog%20CLI/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
 is used to copy files from a remote node to the local node.   
 If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
 
@@ -256,13 +256,13 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
       <pre>
       run message broker !external_ip 7850 !ip 7850 6
       </pre>
-      Details on configuration of AnyLog as a broker are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+      Details on configuration of AnyLog as a broker are available [here](../southbound%20connectors/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
     * As a Blobs Archiver - this process loads the images into the blobs database.  
       Example:    
       <pre>
       run blobs archiver where dbms = true and folder = true and compress = False
       </pre>
-      Details on configuration of the Blobs Archiver process are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
+      Details on configuration of the Blobs Archiver process are available [here](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#the-blobs-archiver).
     
 ## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
