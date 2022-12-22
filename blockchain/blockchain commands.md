@@ -92,7 +92,7 @@ the update, the global ledger is not accessible, when the network reconnects, th
 
 Below are the list of commands to add new policies to the ledger:
 
-| Command | Platform Updated |  Details |
+| **Command** | **Platform Updated** |  **Details** |
 | ------------ | ------------------------------------ | --- | 
 | [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | All that are specified | Add a new policy to the ledger in one or more blockchain platform. |
 | blockchain add [policy]           | Local Copy |Add a Policy to the local ledger file. |
@@ -347,7 +347,7 @@ Note: This process is redundant if the update of the new policies was done using
 
 ## Other blockchain commands:
 
-| ===========Command============ | ===============Details=============== |
+| **Command** | **Details** |
 | ------------------------------------ | ------------| 
 | blockchain update file [path and file name]| Copy the file to replace the current local blockchain file. Prior to the copy, the current blockchain file is copied to a file with extension ***'.old'***. If file name is not specified, a ***blockchain.new*** is used as the file to copy. |    
 | blockchain checkout| Retrieve the blockchain data from the blockchain platform to a JSON file. |  

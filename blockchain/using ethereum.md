@@ -43,60 +43,61 @@ This document details how to use Ethereum as the metadata layer by providing and
 * An AnyLog node to configure.
 
 ## The blockchain commands
-The AnyLog Blockchain commands are detailed [here](../blockchain%20commands.md#the-blockchain-commands).
+The AnyLog Blockchain commands are detailed [here](blockchain%20commands.md).
 
 ## Connecting to Ethereum
 
 * Assign the Endpoint to a variable:
-<pre>
+```anylog
 provider = https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
-</pre>
+```
 
 * Use the following command to connect the AnyLog node to the Endpoint:
-<pre>
+```anylog
 blockchain connect to ethereum where provider = !provider
-</pre>
+```
 
 * Use the following command to test the connection parameters and status:
-<pre>
+```anylog
 get platforms
-</pre>
+```
 
 Executing the ***get platforms*** command provides the following output:
-<pre>
+```anylog
+AL anylog-node > get platform 
 Blockchains connected
 Name     Active Balance                   URL                                                           Public Key/Contract
 --------|------|-------------------------|-------------------------------------------------------------|-------------------|
 ethereum|True  |Failed to extract balance|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|                   |
         |      |                         |                                                             |                   |
-</pre>
+```
 Note that keys were not yet created and therefore there in no available balance.  
 
 ## Create an Account 
 
 Use the following command to create a  new Ethereum account:
-<pre>
+```anylog
 blockchain create account ethereum
-</pre>
+```
 
 Executing the ***create account*** command provides an account address and a private key that can be used to create and maintain the metadata contract.
 
 ## Associate an account with the Ethereum connection
 
-* Assign the the public key and private key to variables as in the example below:
-<pre>
+* Assign the public key and private key to variables as in the example below:
+```anylog
 public_key = 0xb425E72041d1c5a640BFc4479A808Da83b83b515
 private_key = 0x2e0796621732f74ac49a532e523bedbd707e4d1324506ff63528b553dc101ab0
-</pre>
+```
 
 * Use the ***set account info*** command to specify the account information to use:
 
-<pre>
+```
 blockchain set account info where platform = ethereum and private_key = !private_key and public_key = !public_key
-</pre>
+```
 
 ## Transfer funds to the account
-For a Rinkeby TestNet, funds can be added from this [webite](https://www.rinkeby.io/#faucet). 
+For a Rinkeby TestNet, funds can be added from this [website](https://www.rinkeby.io/#faucet). 
 
 ## Publish the AnyLog contract on the blockchain
 
@@ -106,37 +107,38 @@ Users can maintain multiple independent networks by deploying multiple contracts
 
 * Publish a contract and assign the contract address to a variable:
 
-<pre>
+```anylog
 contract = blockchain deploy contract where  platform = ethereum and public_key = !public_key
-</pre>
+```
 
 Executing the ***deploy contract*** command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
 
 
 * Add the contract information to the Ethererum connection information using the command ***set account info***
-<pre>
+```anylog
 blockchain set account info where platform = ethereum and contract = !contract
-</pre>
+```
 
 ## Review the connection information
 
 Executing the ***get platforms*** command provides the following output:
-<pre>
+```anylog
+AL anylog-node > get platforms
 Blockchains connected
 Name     Active Balance                          URL                                                           Public Key/Contract
 --------|------|--------------------------------|-------------------------------------------------------------|------------------------------------------|
 ethereum|True  |Ether: 2 Wei: 999567574000000000|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|0xb425E72041d1c5a640BFc4479A808Da83b83b515|
         |      |                                |                                                             |0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0|
-</pre>
+```
 Note that the Ethereum connection is now associated with the contract (and the balance is the outcome of the [transfer funds](#transfer-funds-to-the-account) step).
 
 ## Updating a policy on the blockchain
 
 The following command updates a policy on the blockchain:
 
-<pre>
+```anylog
 blockchain commit to ethereum !test_policy
-</pre>
+```
 
 The variable ***test_policy*** is assigned with the policy to update.
 
