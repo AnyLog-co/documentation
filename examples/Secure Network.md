@@ -565,6 +565,8 @@ The following example assumes that the example certificates detailed in the [Usi
 section are available in the pem directory (!pem_dir). 
 
 ### Generate a Member Policy representing the issued certificate:
+
+This policy is not to be signed as the member is outside the network.
 ```
 public_key = get public string where keys_file = !pem_dir/server-acme-inc-public-key
 
@@ -574,8 +576,7 @@ public_key = get public string where keys_file = !pem_dir/server-acme-inc-public
     "public_key" : !public_key
     }
 }>
-
-# No need to sign this policy
+json !member 
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
 
@@ -584,7 +585,7 @@ blockchain insert where policy = !member and local = true  and master = !master_
 <permissions = {"permissions" : {
     "name" : "application basic permissions",
     "tables" : ["lsl_demo.temperature_sensor", "lsl_demo.ping_sensor"],
-    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain"],
+    "enable" : [ "file", "get", "reset", "sql", "echo", "print", "blockchain", "event", "run client"]
     }
 }>
 private_key = get private key where keys_file = roy
@@ -601,6 +602,7 @@ member_certificate = blockchain get member where type = certificate and name = a
 permission_id = blockchain get permissions where name = "application basic permissions" bring [permissions][id]
 
 <assignment = {"assignment" : {
+        "name" : "application assignment", 
         "permissions"  : !permission_id,
         "members"  : [!member_certificate]
         }
