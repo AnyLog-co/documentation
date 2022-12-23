@@ -218,6 +218,7 @@ member = id sign !member where password = demo1
 json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
+
 Use CLI(oper.2) to create the member policy of operator #2:
 ```
 <member = {"member" : {
@@ -612,8 +613,16 @@ assignment = id sign !assignment where key = !private_key and password = 123
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node
 ```
+### Query members policies
+The following commands returns the member policies:
+<pre> 
+blockchain get member       # The entire policies
+blockchain get member bring.table [] [*][name] [*][type] [*][public_key]      # Selected attributes from each policy
+</pre>
 
-### Query permissions by a public 
+### Query permissions for members
+
+The command [get permissions]() returns the permissions assigned to member policies in the network.
 
 <pre> 
 public_key = get public key where keys_file = !pem_dir/server-acme-inc-public-key
