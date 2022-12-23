@@ -622,11 +622,18 @@ blockchain get member bring.table [] [*][name] [*][type] [*][public_key]      # 
 
 ### Query permissions for members
 
-The command [get permissions]() returns the permissions assigned to member policies in the network.
+The command [get permissions](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#permission-group)
+returns the permissions assigned to member policies in the network.
 
+Examples:  
+Retrieve permissions assigned to a public key:
 <pre> 
 public_key = get public key where keys_file = !pem_dir/server-acme-inc-public-key
-get permissions for member !public_key
+get permissions where public_key = !public_key
+</pre>
+Retrieve permissions assigned to a member policy using the policy name:
+<pre>
+get permissions where name = roy
 </pre>
 
 ### Example of a third part application - cURL
