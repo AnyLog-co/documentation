@@ -72,7 +72,7 @@ run tcp server where external_ip = ![ip] and external_port = [port] and internal
 The default value is 6.  
 ***[bind]*** - An optional parameters that determines if to bind to a specific IP and Port. The default value is false. 
  
-### Determining and setting the IP
+### IP Configuration
 When an AnyLog instance initiates, it identifies the default local IP (an IP accessible from a local network),
  and the external IP (that is accessible from the Internet).
 These values are placed in the AnyLog dictionary with the keys ***ip*** and ***external_ip*** respectively.   
@@ -87,7 +87,6 @@ To reconfigure the TCP server process, terminate the existing configuration usin
 <pre>
 exit tcp
 </pre>
-
 
 ### The bind parameter
 Bind set to ***true*** determines that only one IP address supports incoming messages.  
