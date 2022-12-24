@@ -48,32 +48,54 @@ exit SMTP
 ## The TCP Server process
 
 A process that listens for incoming messages from peer nodes. When a message is received, the process executes the command contained in the message.    
-The IP and ports used by the process are published on the Blockchain and make the node recognizable, searchable and accessible by network peers.      
+The IP and ports used by the process are published on the Blockchain and make the node recognizable, searchable and accessible by network peers. 
 This process makes the node a member in the AnyLog Network.    
 
-Usage:
+Each node is identified by one or two IP addresses:
+* An ***External IP*** - an IP address that uniquely identifies the node and is accessible from the Internet.  
+* An ***Internal IP*** - an IP address that uniquely identifies the node on a private network and is accessible from the private network.
+A node is configured as follows:
+* If both external and internal IP are provided, the node listens to the internal IP (and port).
+* If one is provided, the node listens to the provided IP (and port).
+* If the ***bind*** parameter is set to False (see details below), the nodes listens to all IPs which are reachable to the node on the specified port.
+
+Examples Usage:
 <pre>
 run tcp server [ip] [port] [local ip] [local port] [threads]
+or
+run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and workers = [threads count]
 </pre>
-Explanation:  
+
 ***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog network. These are referred to as the External IP and Port.  
 ***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
-***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
-
-When an AnyLog instance initiates, it tries to identify the local IP and Port and the IP and Port that is accessible from the Internet.
-These values are placed in the dictionary with the keys ***ip*** and ***external_ip*** respectively.  
-The following example starts a TCP server instance using these values:  
+***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. 
+The default value is 6.  
+***[bind]*** - An optional parameters that determines if to bind to a specific IP and Port. The default value is false. 
+ 
+### IP Configuration
+When an AnyLog instance initiates, it identifies the default local IP (an IP accessible from a local network),
+ and the external IP (that is accessible from the Internet).
+These values are placed in the AnyLog dictionary with the keys ***ip*** and ***external_ip*** respectively.   
+When a node starts, the configuration determines the IPs to use, These can be derived from the default values
+or by an IP which is determined by the user (and overwrites the default setups).    
+The following example starts a TCP server instance using dictionary values:  
 <pre>
 run tcp server !external_ip 20048 !ip 20048
 </pre>
-
-If a local IP and Port is specified, the listener process will use the local IP and Port and the 
-router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).  
 
 To reconfigure the TCP server process, terminate the existing configuration using the command:
 <pre>
 exit tcp
 </pre>
+
+### The bind parameter
+Bind set to ***true*** determines that only one IP address supports incoming messages.  
+Bind set to ***false*** determines that all IP addresses with the specified port support incoming messages.   
+
+### Configuring a setup with external IP provided by a router 
+If a local IP and Port is specified, the listener process will use the local IP and Port and the 
+router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).  
+
 
 Additional information is available in the following sections:
 * [Network Configuration](./network%20configuration.md#network-configuration)

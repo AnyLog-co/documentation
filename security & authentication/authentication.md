@@ -204,12 +204,20 @@ When a public key is associated with the permission group, the node is assigned 
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
 the processing node can authenticate the message and determine the authorization assigned by the relevant permission group.  
 
-The command ***get permissions*** returns the permissions of the current node, or if a public key is specified, the permissions assigned 
-to the public key are returned.     
+The command ***get permissions*** returns the permissions of the current node.   
+If the where condition is not specified, the permissions assigned to the current node are returned.  
+The where condition retrieves the Member Policy that satisfies the condition, and the permissions assigned to the policy are returned.     
 Usage:
 <pre>
 get permissions
-get permissions for member [public key]
+get permissions where [attribute name] = [attribute value]
+</pre>
+
+Examples:
+<pre>
+get permissions
+get permissions where public_key = !public_key
+get permissions where name = value
 </pre> 
 
 ## Signing a policy
