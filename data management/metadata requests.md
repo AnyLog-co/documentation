@@ -39,7 +39,7 @@ The ***watch directory*** is determined by the configuration and when a file is 
 A description of the directory structure of a node is available at the section [Local Directory Structure](../deploying%20nodes%20&%20AnyLog%20CLI/getting%20started.md#local-directory-structure).  
 The section [Adding Data](../data%20management/adding%20data.md#adding-data-to-nodes-in-the-network) 
 details how watch-directories are used and how data is added to nodes in the network using REST.       
-The section [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) details how data is added using a broker.  
+The section [Using MQTT Broker](../southbound%20connectors/message%20broker.md#using-a-message-broker) details how data is added using a broker.  
 
 ### File names
 

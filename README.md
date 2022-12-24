@@ -56,9 +56,9 @@ As we are in an early beta stage, this program is not available to all. To join 
     * [Using Nebula as Overlay Network](deployments/Networking/nebula.md)
   * [Authentication](security%20&%20authentication/authentication.md)
 
-* [High-Availability (HA)](HA)
-  * [high availability](HA/high%20availability.md)
-  * [Configuring Data Distribution](HA/data%20distribution%20and%20configuration.md)
+* [High-Availability (HA)](high-availability)
+  * [high availability](high-availability/high%20availability.md)
+  * [Configuring Data Distribution](high-availability/data%20distribution%20and%20configuration.md)
 
 * [Southbound Connectors](southbound%20connectors)
   * [AnyLog as a Broker](southbound%20connectors/message%20broker.md) 

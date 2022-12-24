@@ -315,7 +315,7 @@ Additional information on the blockchain commands is available in the [Blockchai
 
 Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
 Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
-Additional information on the HA processes is available in the [High Availability](../HA/high%20availability.md#high-availability--ha-) section.
+Additional information on the HA processes is available in the [High Availability](../high-availability/high%20availability.md#high-availability--ha-) section.
 
 ## Network security
 
