@@ -40,7 +40,7 @@ A streaming process that includes an image is shown in the following diagram:
 The data flow is as follows (and see the diagram above):
 1) Data is published to a broker.
 2) An AnyLog client process is subscribing to the broker (and a topic).
-3) The subscription process (enablrd using `run mqtt client` command) associates a policy to the subscription.
+3) The subscription process (enable using `run mqtt client` command) associates a policy to the subscription.
 4) The policy provides the instructions of the data transformation including how to extract the image data.
 5) The transformation of the source data generates a data structure that updates the relational store and extracts the image data.
 6) The image data is maintained as a file on the operating system or stored in a dedicated database like MongoDB (or both).
@@ -56,9 +56,9 @@ As each blob data is associated with a row in a table of the relational database
    For example: if the database name is "my_dbms", the blobs database name will be "blobs_my_dbms"
 2) The logical table name is maintain with the blobs data such that each blob is associated with a table name which is the same as the relational table name.  
 Each blob data is associated with a key representing the date the file was added to the database.  
-The date key is in the format: YYMMDD representing the date in the UTC time zone.  
+The date key is in the format: _YYMMDD_ representing the date in the UTC time zone.  
    
-This approcah associates the following to each file:
+This approach associates the following to each file:
 1) A unique Hash Value (or a file name)
 2) A database name
 3) A table name
@@ -107,7 +107,7 @@ get files where dbms = [dbms name] and table = [table name] and id = [file name]
 ```
 Specifying the dbms is mandatory. All the other parameters are optional and serve as a filter.  
 * Limit sets a cap on the number of files listed.
-* Date is a 6 digits date in the format YYMMDD and limits the listed file by the update date. 
+* Date is a 6-digits date in the format YYMMDD and limits the listed file by the update date. 
 
 The following examples retrieve list of files assigned to a table (and their file size):
 ```anylog
@@ -237,7 +237,7 @@ run client 10.0.0.78:7848 file get (dbms = blobs_edgex and table = videos and id
 
 The following example demonstrates data published on an AnyLog node that acts as a broker.  
 The data includes an image and information relating to the image.  
-A policy is assigned to the topic, and the incoming data updates the streaming data database (PostgreSQL) and 
+A policy is assigned to the topic, and the incoming data updates the streaming data database (PostgresSQL) and 
 a blobs storage database (MongoDB).  
 The rows in the streaming database reference the blobs database such that, given a query to a remote node (that stores the data), the
 query returns the location and identifier of the images that are associated with the returned data.  This information 
@@ -376,7 +376,7 @@ Follow the following commands to configure the needed setup and process the data
 ### Declare the participating databases
 The [data example](#example-data) was generated from an [EdgeX](https://www.edgexfoundry.org/) based platform.  
 The example names the logical database as follows:  
-* _edgex_ - to represent the streaming data in a potgreSQL database.
+* _edgex_ - to represent the streaming data in a PostgresSQL database.
 * _blobs_edgex_ - to represent the image (blob) data in a MongoDB database.
 
 ```anylog 
@@ -435,7 +435,7 @@ mqtt publish where broker=local and topic=images and message=!sample_data
 The streaming data is passed through the following processes:  
 * The client subscription receives the published data, and transforms the data according to the policy assigned to the topic.
 * From the client process, the data is pushed to the streaming buffers.
-* From the streaming buffers, the data is transferred to the Blobs Archiver that adds the image to the blobs database.
+* From the streaming buffers, the data is transferred to the Blobs Archiver that adds the image to the blob database.
 * From the Blobs Archiver the data is pushed to the Operator process that inserts the streaming data to the local streaming database. 
 
 These processes are monitored using the following commands:

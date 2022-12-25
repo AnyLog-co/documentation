@@ -234,7 +234,7 @@ example is correlated to the sample POST commands.
 )>  
 ```
 **cURL Example**: 
-```
+```shell
 curl --location --request POST '10.0.0.226:32149' \
   --header 'command: data' \
   --header 'topic: new_data' \
