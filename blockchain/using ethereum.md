@@ -62,7 +62,7 @@ blockchain connect to ethereum where provider = !provider
 get platforms
 ```
 
-Executing the ***get platforms*** command provides the following output:
+Executing the `get platforms` command provides the following output:
 ```anylog
 AL anylog-node > get platform 
 Blockchains connected
@@ -80,7 +80,7 @@ Use the following command to create a  new Ethereum account:
 blockchain create account ethereum
 ```
 
-Executing the ***create account*** command provides an account address and a private key that can be used to create and maintain the metadata contract.
+Executing the `create account` command provides an account address and a private key that can be used to create and maintain the metadata contract.
 
 ## Associate an account with the Ethereum connection
 
@@ -90,7 +90,7 @@ public_key = 0xb425E72041d1c5a640BFc4479A808Da83b83b515
 private_key = 0x2e0796621732f74ac49a532e523bedbd707e4d1324506ff63528b553dc101ab0
 ```
 
-* Use the ***set account info*** command to specify the account information to use:
+* Use the `set account info` command to specify the account information to use:
 
 ```
 blockchain set account info where platform = ethereum and private_key = !private_key and public_key = !public_key
@@ -103,6 +103,7 @@ For a Rinkeby TestNet, funds can be added from this [website](https://www.rinkeb
 
 The following command will deploy a contract that contains the logic to anchor the policies which are shared by the nodes in the network.
 Users can maintain multiple independent networks by deploying multiple contracts and associating nodes to different contracts.  
+
 ***Nodes that are assigned to the same contract, form a network.***
 
 * Publish a contract and assign the contract address to a variable:
@@ -140,7 +141,7 @@ The following command updates a policy on the blockchain:
 blockchain commit to ethereum !test_policy
 ```
 
-The variable ***test_policy*** is assigned with the policy to update.
+The variable _`test_policy`_ is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 

@@ -37,7 +37,7 @@ master node is used, the master node is configured such that the ledger is store
 
 When new policies are added to the ledger, they need to update the global metadata layer (the global copy). As every node continuously synchronizes 
 the local copy with the global copy, evey update will appear on the local copy of every member node.  
-Synchronization is enabled with the ***run blockchain sync*** command. Details are available [here](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#blockchain-synchronizer).  
+Synchronization is enabled with the `run blockchain sync` command. Details are available [here](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#blockchain-synchronizer).  
 
 ## The Policy ID
 When a Policy is added to the metadata, one of the fields describing the object is an ID field.  
@@ -46,7 +46,7 @@ If the value is auto-generated, it is based on the MD5 Hash value of the object.
 
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the ledger in a local JSON file.
-The local copy becomes available by assigning the path and file name to the global variable ***blockchain_file***.
+The local copy becomes available by assigning the path and file name to the global variable _blockchain_file_.
 A user can validate the availability and the structure of the blockchain using the command: ```blockchain test```.
 
 ## A Master Node
@@ -77,17 +77,17 @@ Using a blockchain platform requires the following :
 blockchain connect to [platform name] where [connection parameters]
 ```
      
-2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or ***blockchain push***.
+2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or `blockchain push`.
 
 3. [Configuring synchronization](../blockchain/blockchain%20configuration.md) against the blockchain platform.  
 
 ## Adding policies
 
 AnyLog offers a set of commands to add new policies to the ledger.
-The generic command is ***blockchain insert***. This command is used to update both - the global copy and the local copy.  
+The generic command is `blockchain insert`. This command is used to update both - the global copy and the local copy.  
 If only the global copy is updated, it may take a few seconds for the update to be reflected on the local copy. The 
-***blockchain insert*** command makes the new policy immediately available on the node that triggered the update.  
-Policies that are added using the ***blockchain insert*** command will also persist locally (if the command directs to update the local copy), such that if during the time of 
+`blockchain insert` command makes the new policy immediately available on the node that triggered the update.  
+Policies that are added using the `blockchain insert` command will also persist locally (if the command directs to update the local copy), such that if during the time of 
 the update, the global ledger is not accessible, when the network reconnects, the new policies will be delivered to the global ledger.
 
 Below are the list of commands to add new policies to the ledger:
@@ -95,9 +95,9 @@ Below are the list of commands to add new policies to the ledger:
 | **Command** | **Platform Updated** |  **Details** |
 | ------------ | ------------------------------------ | --- | 
 | [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | All that are specified | Add a new policy to the ledger in one or more blockchain platform. |
-| blockchain add [policy]           | Local Copy |Add a Policy to the local ledger file. |
-| blockchain push [policy]          | DBMS |Add a Policy to the local database. |
-| blockchain commit [policy]       | Blockchain Platform (i.e. Ethereum) |  – Add a Policy to a blockchain platform. |  
+| `blockchain add [policy]`           | Local Copy |Add a Policy to the local ledger file. |
+| `blockchain push [policy]`          | DBMS |Add a Policy to the local database. |
+| `blockchain commit [policy]`       | Blockchain Platform (i.e. Ethereum) |  – Add a Policy to a blockchain platform. |  
 
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
@@ -109,7 +109,7 @@ Queries are processed on the local copy of the ledger and are not dependent on t
 Queries detail filter criteria to return the needed policies in JSON format and can be augmented by formatting instructions.   
 Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
-The second search is using the command ***from*** and is explained at the
+The second search is using the command _from_ and is explained at the
 section called: [The 'From JSON Object Bring' command](../data%20management/json%20data%20transformation.md#the--from-json-object-bring-command).
 
 Queries are done in 2 steps:
@@ -123,42 +123,42 @@ blockchain get [policy type] [where] [where conditions] [bring] [bring command i
 
 
 Explanation:
-The ***blockchain get*** command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
-* ***policy type*** - the key at the root of the JSON representing the policy.
-* ***where conditions*** - reference the policy values that are evaluated to determine if the policy is selected.
-* ***bring command*** - determined the retrieved data and formatting options.  
+The `blockchain get` command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
+* _policy_ type - the key at the root of the JSON representing the policy.
+* _where_ conditions - reference the policy values that are evaluated to determine if the policy is selected.
+* _bring_ command - determined the retrieved data and formatting options.  
 
 ### Selecting the policy type
 
 AnyLog policies have a single attribute at the root of the policy. The root attribute name is the policy type.  
-For example, in the [Metadata Section](#the-metadata), the policy type is ***operator***.  
+For example, in the [Metadata Section](#the-metadata), the policy type is _operator_.  
 The following command selects all policies of a particular type:
-<pre>
+```anylog
 blockchain get [policy type]
-</pre>
-The following example selects all policies of a type ***operator***:
-<pre>
+```
+The following example selects all policies of a type operator_:
+```anylog
 blockchain get operator
-</pre>
+```
 
 Selecting multiple types is allowed by separating policies using a comma and placing the policies types in parentheses.    
 The following example selects all policies of a type ***operator*** and type ***publisher***:
-<pre>
+```anylog
 blockchain get (operator, publisher)
-</pre>
+```
 Selecting all policies is allowed as in the following example:
-<pre>
+```anylog
 blockchain get *
-</pre>
+```
 
 ### The where condition
 
 The where condition is provided in one of 2 ways:  
 * As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) separated by the ***and*** keyword.   
 The list of attribute name (key) value pairs in the where conditions is provided as follows:
-    <pre>
+    ```anylog
     key1 = value1 and key2 = value2 and key3 = value3 and ... keyN = valueN
-    </pre>
+    ```
     A key represents the path in the policy to the tested value, for example ***[operator][name]*** is the path to the name value in the operator policy.  
     Note that the root name in the path does not have to be enclosed with square brackets: ***[operator][name]*** is equivalent to ***operator[name]***.
 
@@ -167,9 +167,9 @@ criteria. Attribute name value pairs are referenced using square brackets, for e
 the name from the Operator policy. The following example evaluates attribute values of the policy example in the 
 [Metadata Section](#the-metadata):
 
-     <pre>
+     ```anylog
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
-    </pre>
+    ```
  Conditional execution is detailed [here](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#conditional-execution). 
 
 Examples:
@@ -240,10 +240,10 @@ the policy is not yet confirmed on the global ledger (the blockchain platform or
 When the local ledger is synchronized with the global ledger, the status of the key "ledger" is changed from "local" to "global".
 
 Examples:
-<pre>
+```anylog
 blockchain insert where policy = !policy and local = true and master = !master_node
 blockchain insert where policy = !policy and local = true and blockchain = ethereum
-</pre>
+```
 
 
 ## Copying policies representing the metadata to the local ledger
@@ -281,17 +281,17 @@ The following are commands that interact with a database that hosts the ledger:
 ### Retrieve blockchain data from the local database
 
 Retrieve blockchain data from the local database on the AnyLog command line can be done using SQL.  
-Example: `sql blockchain text "select * from ledger"`
+Example: `sql blockchain "select * from ledger"`
 
 ### Retrieving the Metadata from a Master Node
 Retrieving the metadata from a Master Node is done by a blockchain pull request that is sent to the Master Node (using 
 “run client” command) and copying the data to the desired location on the client node (using ***file get*** command).  
 Example:
-<pre>
-mater_node = 127.45.35.12:2048
+```anylog
+mater_node = 127.45.35.12:32048
 run client (!master_node) blockchain pull to json
 run client (!master_node) file get !!blockchain_file !blockchain_file
-</pre>
+```
 Notes:
 * `blockchain_file` is configured to the path and file name of the ledger.
 * The double exclamation points (!!) determine to derive the value of the key `blockchain_file` on the target node (127.45.35.12).
@@ -301,8 +301,8 @@ Notes:
 ### Removing policies from a master node
 Policies are deleted using the ***blockchain drop policy*** command.   
 Policies are dropped on the master node and if issued on a member node, the command is transferred to the master node using 
-***run client !master_node*** directive.  
-The ***blockchain drop policy*** command can be issued in one of the following forms:  
+`run client !master_node` directive.  
+The `blockchain drop policy` command can be issued in one of the following forms:  
  * Specifying the policy ID
     ```anylog 
     blockchain drop policy where id = [one or more policy ids]
@@ -313,7 +313,7 @@ The ***blockchain drop policy*** command can be issued in one of the following f
     blockchain drop policy where id = b90b40ff46ea7244a49357a46901e114, 4a0c16ff565c6dfc05eb5a1aca4bf825 
     blockchain drop policy where id = !id_string  # id_string is a comma separated IDs
    ```
-* specifying the IP-Port list as a ***blockchain get*** command: 
+* specifying the IP-Port list as a `blockchain get` command: 
     ```anylog
     blockchain drop policy where id = blockchain get (cluster, operator) where [company] contains ibm bring [*][id] separator = ,
     ```
@@ -336,11 +336,16 @@ The ***blockchain drop policy*** command can be issued in one of the following f
 
 When a process on a node updates a policy on a remote blockchain platform (or on a master node), the process can wait for 
 the update to be reflected on the local copy using the ***blockchain wait for ...*** command:
-<pre>
-blockchain prepare policy !policy     # Add an ID and a date to the policy being updated
-run client (!master_node) blockchain push !policy   # Make the update
-is_updated = blockchain wait for !policy  # Force sync and validate that the update is available
-</pre>
+```anylog
+# Add an ID and a date to the policy being updated
+AL anylog-node > blockchain prepare policy !policy     
+
+# Make the update
+AL anylog-node > run client (!master_node) blockchain push !policy
+
+# Force sync and validate that the update is available   
+AL anylog-node > is_updated = blockchain wait for !policy  
+```
 The wait command forces synchronization with the blockchain platform and validates that the update is reflected on the local file.
 
 Note: This process is redundant if the update of the new policies was done using the [blockchain insert](#the-blockchain-insert-command) command.
