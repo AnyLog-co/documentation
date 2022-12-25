@@ -1,22 +1,24 @@
 # README Formatting
 
-# Title
-## Section
-### Subsection 
+# # Title
+## ## Section
+### ### Subsection 
 
-* **Bold**
+* ** **Bold** ** 
   * Subsection
   * Notes
   * Other
 
-* _Italics_
+* _ _Italics_ _ 
   * variable type (ex. _file_, _get_) 
   * database name
   * table name
      
 
-* `code`
+* \` `code` \`
   * command (ex. `run tcp server`)
+
+[link to file](formatting.md)
 
 
 
