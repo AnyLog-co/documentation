@@ -9,7 +9,7 @@ A node in the network interacts with 2 layers of metadata:
 * With a global metadata layer shared by all the members of the network.
 
 This document provides an overview on the global metadata layer.  
-The document [metadata requests](https://github.com/AnyLog-co/documentation/blob/master/metadata%20requests.md#metadata-requests) 
+The document [metadata requests](../data%20management/metadata%20requests.md#metadata-requests) 
 provides an overview of the local metadata layer.
 
 ## The global metadata
@@ -45,84 +45,86 @@ Using policies nodes declare their availability on the network, the list of tabl
 Policies are organized as JSON objects with a single root attribute name. The root attribute name is called the policy type.  
 Below is an example of a policy declaring an Operator node:
 
-<pre>
- {'operator' : {'hostname' : 'orics-test-node',
-                'name' : 'orics-bkup-operator',
-                'cluster' : 'fc86672d4fe687d4f82d0c407063800b',
-                'company' : 'orics',
-                'local ip' : '45.79.192.111',
-                'ip' : '45.79.192.111',
-                'port' : 2048,
-                'rest port' : 2049,
-                'db type' : 'psql',
-                'loc' : '33.7490,-84.3880',
-                'id' : 'e87c12fb3c9677be29d5b3c289a0ef5a',
-                'date' : '2021-02-16T19:56:44.260273Z',
-                'member' : 86}}]
-</pre>
+```json
+{"operator":  {
+    "hostname": "orics-test-node",
+    "name": "orics-bkup-operator",
+    "cluster": "fc86672d4fe687d4f82d0c407063800b",
+    "company": "orics",
+    "local ip": "45.79.192.111",
+    "ip": "45.79.192.111",
+    "port":  2048,
+    "rest port":  2049,
+    "db type": "psql",
+    "loc": "33.7490,-84.3880",
+    "id": "e87c12fb3c9677be29d5b3c289a0ef5a",
+    "date": "2021-02-16T19:56:44.260273Z",
+    "member":  86
+}}
+```
 
 Some types of policies require particular attributes. For example, an Operator Policy requires the declaration of the IP and Port which the Operator uses to receive messages from peers.  
 Within a policy, there is no limit on the attributes names and values which are not the root of the policy.    
-The attributes ***id*** and ***date*** are added dynamically when the policy is updating the blockchain or the master node.    
-If authentication is enabled, the attributes ***public_key*** and ***signatire*** are added dynamically.
+The attributes _id_ and _date_ are added dynamically when the policy is updating the blockchain or the master node.    
+If authentication is enabled, the attributes _public_key_ and _signature_ are added dynamically.
 
 ## The blockchain commands
 
 These are sets of command that allow to update and query the metadata layer.   
 The blockchain command are issued to a metadata repository which can be on the local node (either as a JSON file or hosted in a database), a master-node or a blockchain platform.  
  
-The ***blockchain commands*** are detailed in the [blockchain commands section](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md).
+The ***blockchain commands*** are detailed in the [blockchain commands section](../blockchain/blockchain%20commands.md).
 
 ### Updating a blockchain
 
 The following command updates the blockchain platform with a new policy:
 
-<pre>
+```anylog
 blockchain commit to [blockchain name] [policy] 
-</pre>
+```
 
 Example:
 
-<pre>
+```anylog
 blockchain commit to ethereum !test_policy
-</pre>
+```
 
 ### Retrieve metadata from a blockchain
 
 The following command retrieves the metadata from the blockchain:
 
-<pre>
+```anylog
 blockchain checkout from [blockchain name]
-</pre>
+```
 
 Example:
 
-<pre>
+```anylog
 blockchain checkout from ethereum
-</pre>
+```
 
 
 ### Updating a master node
 
 The following command updates a master node with a new policy:
 
-<pre>
+```anylog
 blockchain push [policy] 
-</pre>
+```
 
 If the update is done from a node which is not the master node, the update needs to be sent as a message to the master node as in the example below:
 
-<pre>
+```anylog
 run client !master_node blockchain push !test_policy
-</pre>
+```
 
 ### Retrieve metadata from a master node
 
 The following command retrieves the metadata from the blockchain:
 
-<pre>
+```anylog
 blockchain pull to [json | sql | stdout] [file name]
-</pre>
+```
 
 Examples:  
 To retrieve data from the master node:  
@@ -135,26 +137,26 @@ To retrieve data from the master node:
 | blockchain pull to stdout | The output is policies displayed on the stdout |
 
 
-* Use the command ***file get*** to copy the output file (of thhe pull command) from a node (like the master node) to a destination node.
-<pre>
+* Use the command ***file get*** to copy the output file (of the pull command) from a node (like the master node) to a destination node.
+```anylog
 file get [source location] [destination location]
-</pre>
-[source location] is the path name and file name on the master node.  
-[destination location] is the path name and file name on the requesting node.
+```
+`[source location]` is the path name and file name on the master node.  
+`[destination location]` is the path name and file name on the requesting node.
 
 The following script pulls the metadata from a Master Node and copies the log file to the local node to serve as the metadata on the local node.
-<pre>
+```anylog
 run client [ip]:[port] "blockchain pull to log"    # create a copy of the log file on the Master Node
 run client [ip]:[port] "file get [source path and file name] [destination path and file name] # copy the log file from the Master Node to the Local Node.
-</pre>
+```
 In the above script:
-[ip]:[port] - the ip and port of the Master Node.
-[source path and file name] - the path and file name of the log file on the Master Node.
-[destination path and file name] - the path and file name of the metadata log file on the Local Node.
+`[ip]:[port]` - the ip and port of the Master Node.
+`[source path and file name]` - the path and file name of the log file on the Master Node.
+`[destination path and file name]` - the path and file name of the metadata log file on the Local Node.
 
 ## Periodically synchronizing the local copy of the metadata with a blockchain or a master node
 
-Details are available at the section [Blockchain Synchronizer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).
+Details are available at the section [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).
 
 ## Using a local database
 
@@ -164,23 +166,23 @@ The following process creates the local blockchain database:
 
 1. Define a location for the blockchain log file by declaring ***blockchain_file*** constant with the path and file name of the log file.  
   Example:
-  <pre>  
+```anylog  
   blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
-  </pre>
+```
 
 2. Connect the node to the local database.    
-  * Example using PostgreSQL to manage the blockchain data:
-  <pre>
+  * Example using PostgresSQL to manage the blockchain data:
+```anylog
   connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-  </pre>
+```
   * Example using SQLite to manage the blockchain data:   
-  <pre>
+```anylog
   connect dbms blockchain where type = sqlite
-  </pre>
+```
 
 3. Create the local ***ledger*** table.
-  <pre>
+```anylog
   blockchain create table
-  </pre>
+```
   The command will create the 'ledger' table in the database assigned to 'blockchain'.
 

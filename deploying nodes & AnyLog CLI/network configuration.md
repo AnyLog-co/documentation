@@ -57,13 +57,13 @@ Usage:
 run tcp server [ip] [port] [threads]
 ```
    
-***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog Network.   
-***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
-***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
+`[ip] [port]` - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog Network.   
+`[local ip] [port]` - Optional parameters to indicate an IP and Port that are accessible from a local network.  
+`[threads]` - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
  
 
 ### The Source Address
-When the command ***run tcp server*** is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
+When the command `run tcp server` is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.
 When the node sends a message to a peer, it requests that the reply is sent to the declared IP and Port.  
 Therefore, for an outgoing message, the declared IP and Port serve as a Source Address identifying the node that issued the message and an address for a reply message.   
  
@@ -73,7 +73,7 @@ a) Request peers to reply using a different address.
 b) Request peers to determine the reply address from the message socket.
 
 ### Setting a different IP address for replies 
-Using the ***set reply ip*** command, user can direct a node sending a message, to receive the reply on a different IP address.    
+Using the `set reply ip` command, user can direct a node sending a message, to receive the reply on a different IP address.    
 Usage:
 ```anylog
 set reply ip = [ip]

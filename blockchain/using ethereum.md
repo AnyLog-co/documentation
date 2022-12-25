@@ -111,17 +111,17 @@ Users can maintain multiple independent networks by deploying multiple contracts
 contract = blockchain deploy contract where  platform = ethereum and public_key = !public_key
 ```
 
-Executing the ***deploy contract*** command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
+Executing the `_deploy contract_` command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
 
 
-* Add the contract information to the Ethererum connection information using the command ***set account info***
+* Add the contract information to the Ethererum connection information using the command `set account info`
 ```anylog
 blockchain set account info where platform = ethereum and contract = !contract
 ```
 
 ## Review the connection information
 
-Executing the ***get platforms*** command provides the following output:
+Executing the `get platforms` command provides the following output:
 ```anylog
 AL anylog-node > get platforms
 Blockchains connected
