@@ -30,7 +30,7 @@ operator_port = 2048
 
 Note:
 * The less than and greater than signs (< ... >) that wrap the policy allow to consider multiple lines on the AnyLog CLI as a single command.
-* A value associated to ***external_ip*** is set by default when AnyLog node is initiated. 
+* A value associated to `external_ip` is set by default when AnyLog node is initiated. 
 
 The following command returns the value assigned to the variable new_operator on the AnyLog CLI:
 ```anylog
@@ -43,7 +43,7 @@ get !new_operator
 
 ## Transforming JSON representatives to JSON Objects
 
-The command ***json*** returns a JSON object or validates a correct JSON structure whereas variable names are replaced by their assigned values.     
+The command `json` returns a JSON object or validates a correct JSON structure whereas variable names are replaced by their assigned values.     
 Usage:
 ```anylog
 json [JSON object] [test]
@@ -63,7 +63,7 @@ AL anylog-node > json !new_operator
  
 
 ### Validating the JSON object structure
-The keyword ***test*** is optional. If added, the command returns ***true*** if the structure is correct and ***false*** if the test structure is not in JSON format.
+The keyword `test` is optional. If added, the command returns _true_ if the structure is correct and _false_ if the test structure is not in JSON format.
 Example:
 ```anylog
 json !new_operator test
@@ -76,7 +76,7 @@ The `bring` command retrieves values from a JSON object and formats the retrieve
 The `bring` command is followed by a list of keys and string values. The keys are applied on the JSON object to retrieve the
 values associated with the keys and the string values are added to the retrieved data. 
    
-* The formatting instruction may use the keyword ***separator*** to provide a suffix to the output string returned from each object.  
+* The formatting instruction may use the keyword `separator` to provide a suffix to the output string returned from each object.  
 ### Special separators:
 
 | separator  | Explanation |
@@ -104,22 +104,19 @@ For example ```bring [operator][name]``` will pull the name value from an Operat
 * Empty brackets ```[]``` designate the policy type.
   
 ### Examples:
-1. Return policy info in a table structure:
+  1. Return policy info in a table structure:
 ```anylog
  blockchain get (master,operator,query) bring.table [*][name] [*][ip]
 ```
-
-2. Return policy info in a JSON structure:
+  2. Return policy info in a JSON structure:
 ```anylog
  blockchain get (master,operator,query) bring.json [*][name] [*][ip]
 ```
-
-3. Return policy info in a JSON structure and include null values:
+  3. Return policy info in a JSON structure and include null values:
 ```anylog
  blockchain get (master,operator,query) bring.json.null [*][name] [*][ip] [*][address]
 ```
-
-4. Return policy info in a sorted table structure:   
+  4. Return policy info in a sorted table structure:   
 ```anylog
 blockchain get * bring.table.sort [] [*][name] [*][ip]
 ```

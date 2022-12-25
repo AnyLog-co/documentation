@@ -34,8 +34,8 @@ Once a table schema is available, the ingestion process maps the data in the JSO
 A node that hosts the data is responsible to satisfy queries over the data. The way the data is managed on each node can vary as long
 as the query protocol and interfaces are satisfied.
 Data can be received as files in JSON format or can be collected by the node and transformed to files in JSON format.  
-The JSON files are placed in a ***watch directory*** and ingested to the local database.
-The ***watch directory*** is determined by the configuration and when a file is placed in the directory, it is read and ingested by the local databases.  
+The JSON files are placed in a _watch_ directory and ingested to the local database.
+The _watch_ directory is determined by the configuration and when a file is placed in the directory, it is read and ingested by the local databases.  
 A description of the directory structure of a node is available at the section [Local Directory Structure](../deploying%20nodes%20&%20AnyLog%20CLI/getting%20started.md#local-directory-structure).  
 The section [Adding Data](../data%20management/adding%20data.md#adding-data-to-nodes-in-the-network) 
 details how watch-directories are used and how data is added to nodes in the network using REST.       
@@ -43,14 +43,14 @@ The section [Using MQTT Broker](../southbound%20connectors/message%20broker.md#u
 
 ### File names
 
-The sensor data (or time series data) is placed in the ***watch directory***.
+The sensor data (or time series data) is placed in the `watch` directory.
 The file name follows a convention that determines how the file is being processed.    
-The command ***get json file struct*** details the file structure convention and has the following output:  
+The command `get json file struct` details the file structure convention and has the following output:  
 ```anylog
 [dbms name].[table name].[data source].[hash value].[instructions].[TSD member ID].[TSD row ID].[TSD date].json
 ```
 
-The file type is ***json*** indicating the internal structure.  
+The file type is _JSON_ indicating the internal structure.  
 The file name structure is composed of 8 substrings separated by a period. The substrings are as follows:
 
 | Section       | Explanation  | Mandatory  |
@@ -74,32 +74,30 @@ If the table is available on the blockchain, the node will create an identical t
 If the table is not available on the blockchain, the node will create the table and register the table on the blockchain.  
 When the table is located or created, the file is ingested using one of 2 methods:  
 1. The default mapping - attribute names are assigned to column names. If a column name is not part of the table's structure, the attribute value is ignored.  
-2. If mapping ***Instructions*** appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
+2. If mapping _instructions_ appears in the file name, the instructions override, for the relevant columns, the default mapping of step 1.
 
 
 ### Creating a local dbms table published as a policy on the blockchain
 
-The command: ```create table [table name] where dbms = [dbms name]``` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
+The command: `create table [table name] where dbms = [dbms name]` creates a table assigned to the logical database with a schema identical to the schema published on the blockchain for the named table.
 
 
 ## Retrieving the list of databases
 
 ### The local databases
 
-A node may manage data locally. The command ***get databases*** lists the databases that are serving data on the local node.  
-The listed databases are available to host data and query data and were assigned using the command ***connect dbms***.  
+A node may manage data locally. The command `get databases` lists the databases that are serving data on the local node.  
+The listed databases are available to host data and query data and were assigned using the command `connect dbms`.  
 
-Example:
-
+**Example**:
 ```anylog
+AL anylog-network > get databases
 List of DBMS connections
 Logical DBMS         Database Type IP:Port                        Storage
 -------------------- ------------- ------------------------------ -------------------------
 almgm                psql          127.0.0.1:5432                 Persistent
-blockchain           psql          127.0.0.1:5432                 Persistent
-dmci                 sqlite        Local                          D:\Node\AnyLog-Network\data\dbms\dmci.dbms
-lsl_demo             psql          127.0.0.1:5432                 Persistent
-system_query         psql          127.0.0.1:5432                 Persistent
+dmci                 psql          127.0.0.1:5432                 Persistent
+system_query         sqlite        Local                          Memory
 ```
 
 ### The network databases
@@ -166,7 +164,7 @@ info table dmci machine_data columns
 
 ### Validating a schema
 
-As a schema of a table can exist on the local database and on the blockchain, the command ***test table*** compares the table definitions on the local database with the schema definition on the blockchain.  
+As a schema of a table can exist on the local database and on the blockchain, the command `test table` compares the table definitions on the local database with the schema definition on the blockchain.  
 The structure of the command is as follows:  
 ```anylog
 test table [table name] where dbms = [dbms name]
