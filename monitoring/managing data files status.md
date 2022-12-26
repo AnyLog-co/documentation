@@ -1,12 +1,12 @@
 # Managing Data files
 
 Publisher nodes and devices are configured to send data to Operator nodes. Operators receive the data as JSON files or organize the data in JSON files.  
-Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](blob/master/adding%20data.md#adding-data-to-nodes-in-the-network).  
-If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution and Configuration](blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
+Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](../data%20management/adding%20data.md#adding-data-to-nodes-in-the-network).  
+If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution and Configuration](../high-availability/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
 The JSON files follow a naming convention that include metadata information on the data contained in the file and is explained below.
 Each Operator node maintains a set of tables to record information on each JSON file processed. The information in these tables allow to monitor the following:  
-* The source of the the data.
+* The source of the data.
 * Timestamp associated with the file, the hash value of the file and the number of reading in the file.
 * Errors during the load.     
 
@@ -14,16 +14,12 @@ The command ***time file*** allows to modify file names to follow the naming con
 
   
 ## The structure of the data files 
-The data files contain Time Series Data (TSD) that is organized in JSON format.
-Each file name follows a convention. To view the naming comvention use the command:  ```get json file struct```.
-More details are provided below.
-
-#### The file naming convention
-
-File name is structured as follows:
-<pre>
-[dbms name].[table name].[data source].[hash value].[instructions].[TSD member].[TSD ID].[TSD date].[file type]
-</pre>
+The data files contain Time Series Data (TSD) that is organized in JSON format. Each file name follows a convention. To 
+view the naming convention use the command:  
+```anylog
+AL anylog-node > get json file struct
+[dbms name].[table name].[data source].[hash value].[mapping policy].[TSD member ID].[TSD row ID].[TSD date].json
+```
 
 | Name Section | Functionality  | 
 | ---------- | -------| 
@@ -40,11 +36,12 @@ File name is structured as follows:
 ## The info table
 
 Nodes can monitor the state of the data files using a local database.
-* The local database name is ```almgm``` (AnyLog Management).
-* The local table name is ```tsd_info``` (Time Series Data Info).
-* If the data is received from a cluster member, it will be menaged in a table called  ```tsd_id``` whereas id is the member ID in the cluster.
+* The local database name is `almgm` (AnyLog Management).
+* The local table name is `tsd_info` (Time Series Data Info).
+* If the data is received from a cluster member, it will be managed in a table called  `tsd_id` whereas id is the member 
+ID in the cluster.
 
-##### The structure of the ```tsd_info``` table:
+**The structure of the `tsd_info` table**:
 
 * Each segment in the file name is a column in the table.
 * The table includes 2 status fields which are updated as described below.
@@ -63,87 +60,98 @@ The following command determines the hash value of a file:
 The ***tsd_info*** table organizes the information on the data received from Publishers and devices.  
 The ***tsd_id*** are a set of tables whereas ***id*** is the ID of the cluster member that transferred the data.
 These tables are created dynamically as data is processed in the cluster and if the ***almgm*** database is connected.
-Managing the data data is with the following commands and processes:
+Managing the data is with the following commands and processes:
 
-* To connect to the ```almgm``` use the ***connect dbms*** command.  
-Example: ```'connect dbms psql anylog@127.0.0.1:demo 5432 almgm```
+* To connect to the `almgm` use the `connect dbms` command.  
+**Example**: 
+```anylog 
+connect dbms almgm where type=psql and ip=127.0.0.1 and port=5432 and user=admin and passwowrd=passwd
+```
 
-* Creating the ```tsd_info``` table:  
-```create table tsd_info where dbms = almgm```  
+* Creating the `tsd_info` table:  
+```anylog
+create table tsd_info where dbmms=almgm
+```
+
 This call creates the table with the needed columns.
 
-* Dropping the ```tsd_info``` table:  
-```drop table tsd_info where dbms = almgm```  
+* Dropping the `tsd_info` table:
+```anylog 
+drop table tsd_info where dbms = almgm
+```  
+
 This call creates the table with the needed columns.
 
 ## Time File commands
 
-The ***time file*** commands are a set of commands to monitor and manage data ingested on each Operator node.
+The `time file` commands are a set of commands to monitor and manage data ingested on each Operator node.
 
 ### Usage: 
+
  
 #### Set the file name to satisfy the naming convention
-The ***time file rename*** command changes the names of files containing data to follow the data files naming convention.  
+The `time file rename` command changes the names of files containing data to follow the data files naming convention.  
+
 Usage:  
-<pre>
+```anylog
 time file rename [source file path and name] to dbms = [dbms name] and table = [table name] and source = [source ID] and hash = [hash value] and instructions = [instructions id]
-</pre>
+```
 This command will change the source file name to the convention using the values provided.
-If ***dbms*** or ***table*** are not provided, they are unchanged.  
-If ***source*** is not provided, the value '0' is used.  
-If ***hash*** value is not provided, the hash value of the file will be calculated.  
-If ***instructions id*** is not provided, the value '0' is used.   
+If _dbms_ or _table_ are not provided, they are unchanged.  
+If _source_ is not provided, the value '0' is used.  
+If _hash_ value is not provided, the hash value of the file will be calculated.  
+If _instructions id_ is not provided, the value _0_ is used.   
 
 Examples:
 1) The example below adds the hash value to the file name.
-<pre>
+```anylog
  time file rename !prep_dir/lsl_demo.ping_sensor.json
-</pre>
+```
 2) The example below modifies the file name to include a different table name and the hash value.
-<pre>
+```anylog
  time file rename !prep_dir/lsl_demo.ping_sensor.json to table = heat_sensor 
-</pre>
+```
 
 #### Show the list of TSD tables on this node
-<pre>
+```anylog
 time file tables
-</pre>
+```
 
 #### Add a new entry to the TSD table
 Adding data to a TSD table is by associating to a file that is named using the naming convention.  
 The proces retrieves the info from the file name and updates a TSD table. Below is the command format:
-<pre>
+```anylog
 time file new [file path and name] [optional status 1] [optional status 2] [optional: using the keyword into and: TSD table name and a row id]
-</pre>
+```
 [file path and name] - a path to a file that is named according to the JSON file naming convention.    
 [optional status 1] - a first status field in the table.  
 [optional status 2] - a second status field in the table.    
 
 Example:
-<pre>
+```anylog
 time file new !prep_dir/lsl_demo.ping_sensor.0.c490e6000d9487962d890a7cba2e1e74.0.json 
-</pre>
+```
 
-To validate that the file exixts on the local directory use the ketword ***add**. 
-<pre>
+To validate that the file exists on the local directory use the keyword _add_. 
+```anylog
 time file add [file path and name] [optional status 1] [optional status 2] [optional: using the keyword into and: TSD table name and a row id]
-</pre>
+```
 
 #### Update the status fields in an TSD entry
-<pre> 
+```anylog 
 time file update [hash value] [optional status 1] [optional status 2]
-</pre>
+```
 This command will update the status fields in a ***tsd_info*** entry with the specified hash value.    
 Example:
-<pre> 
+```anylog 
 time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
-</pre>
+```
 
 #### Retrieve information from a TSD table
 The following command retrieves information from a TSD table. The information includes the details of each file ingested to the local database.
-<pre> 
+```anylog 
 time file get where [options]
-</pre>
+```
 Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
@@ -156,19 +164,19 @@ Options are optional and determine the information of interest, expressed as a w
 | format | Output format - ***table*** or ***json***  | table |
   
 Examples:  
-<pre> 
+```anylog 
 time file get
 time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
 time file get where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75f7 and format = json
 time file get where start_date = -3d and end_date = -2d
-</pre>
+```
 
 
 #### Retrieve summary information from a TSD table
 The following command retrieves summary information from a TSD table. 
-<pre> 
+```anylog 
 time file summary where [options]
-</pre>
+```
 Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
@@ -179,19 +187,19 @@ Options are optional and determine the information of interest, expressed as a w
 
 Note: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
 Examples:  
-<pre> 
+```anylog 
 time file summary
 time file summary where table = *
 time file summary where start_date = -3d
-</pre>
+```
 
 An example of the output is the following:
-<pre>
+```anylog
 DBMS          Table       Start Date          From ID End Date            To ID Files Count Source Count Status 1 Status 2 Total Rows
 -------------|-----------|-------------------|-------|-------------------|-----|-----------|------------|--------|--------|----------|
 litsanleandro|heat_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|   50|         50|           1|       1|       1|   453,455|
 litsanleandro|ping_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|  378|        378|           1|       1|       1|    77,624|
-</pre>
+```
 The output provides the summary on each table as follows:
 | Column name| explanation | 
 | ---------- | -------|
@@ -203,53 +211,56 @@ The output provides the summary on each table as follows:
 | To ID | The last Row ID in the TSD table within the requested time range |
 | Files Count | The number of files ingested within the requested time range |
 | Source Count | The number of sources (like sensors) providing data during the requested time range |
-| Status 1 | The number of unique status-message updates in the "status 1" coulumn. The value 1 indicates all status messages are the same |
-| Status 2 | The number of unique status-message updates in the "status 2" coulumn. The value 1 indicates all status messages are the same |
+| Status 1 | The number of unique status-message updates in the "status 1" column. The value 1 indicates all status messages are the same |
+| Status 2 | The number of unique status-message updates in the "status 2" column. The value 1 indicates all status messages are the same |
 | Total Rows | The number of rows ingested in the requested time range |
 
 #### Retrieve the list of files which were not ingested on the local node
 The following command retrieves the list of files that were identified as missing and the source node failed to deliver. 
-<pre> 
+```anylog 
 time file errors where [options]
-</pre>
+```
 The options are the same as the options in the [time file get](#retrieve-information-from-a-tsd-table) command. 
 
 #### Creating and dropping the TSD tables
 The ***tsd_info*** table is created using the following command:
-<pre> 
+```anylog 
 create table tsd_info where dbms = almgm
-</pre>
+```
 Tables that represent members of the cluster are created dynamically.  
 
 Local TSD tables can be dropped using one of the following commands:
-<pre> 
+```anylog 
 drop table [tsd table name] where dbms = almgm
-</pre>
-or
-<pre> 
-time file drop [table name]
-</pre>
-Dropping all TSD tables is by the following command:
-<pre> 
-time file drop all
-</pre>
+```
 
-Examples:  
-<pre> 
+OR 
+
+```anylog 
+time file drop [table name]
+```
+Dropping all TSD tables is by the following command:
+```anylog 
+time file drop all
+```
+
+**Examples**:  
+```anylog 
 drop table tsd_info where dbms = almgm
 time file drop tsd_123
 time file drop all
-</pre>
+```
 
 #### Deleting a single TSD row
-Usage
-<pre> 
-time file delete [row id] from [tsd table name]
-</pre>
 
-Examples:  
-<pre> 
+**Usage**: 
+```anylog 
+time file delete [row id] from [tsd table name]
+```
+
+**Examples**:  
+```anylog 
 time file delete 16 from tsd_info
 time file delete 126 from tsd_129
-</pre>
+```
   

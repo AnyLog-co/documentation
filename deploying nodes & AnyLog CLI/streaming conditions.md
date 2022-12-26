@@ -17,7 +17,7 @@ When new data is associated with the table and database - the relevant condition
 and if a condition is satisfied, the command that depends on the condition is processed.  
 
 Usage:
-```
+```anylog
 set streaming condition where dbms = [dbms name] and table = [table name] and limit = [execution Limit] if [condition] then [command]
 ```
 
@@ -40,7 +40,7 @@ In the example above, the readings are ignored when the value is less than 3
 
 
 Note: to send an email, enable the SMTP server as in the example below:
-```
+```anylog
 run smtp client where email = anylog.iot@gmail.com and password = oeiussclzecgtkxu
 ```
 Details are available at the [SMTP Client](background%20processes.md#smtp-client) section.
@@ -49,14 +49,14 @@ Details are available at the [SMTP Client](background%20processes.md#smtp-client
 
 The following command returns the declared conditions:  
 Usage:
-```
+```anylog
 get streaming conditions where dbms = [dbms name] and table = [table name]
 ```
 
 If a DBMS name is not specified, all conditions are returned.  
 If a table name is not specified, all conditions of the specified database are returned.    
 All examples below are valid:
-```
+```anylog
 get streaming conditions
 get streaming conditions where dbms = test
 get streaming conditions where dbms = test and table = rand_data
@@ -65,7 +65,7 @@ get streaming conditions where dbms = test and table = rand_data
 ## Reset Streaming Condition
 Reset allows to remove one or more Streaming Conditions.
 Usage:
-```
+```anylog
 reset streaming conditions where dbms = [dbms name] and table = [table name] and id = [condition id]
 ```
 The condition ID is the condition sequence number.
@@ -76,7 +76,7 @@ Notes:
 * If a table name is not specified, all conditions of the database are removed.
 
 All examples below are valid:
-```
+```anylog
 reset streaming conditions
 reset streaming conditions where dbms = test
 reset streaming conditions where dbms = test and table = rand_data

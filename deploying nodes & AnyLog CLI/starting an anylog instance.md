@@ -15,10 +15,16 @@ will initiate an AnyLog instance and configure the node to listen to TCP message
 3)	By configuring a node as a REST server and issuing command to the configured REST IP and Port. The REST API only support a subset of the commands.
 
 ## Assigning values to variables
-Values are assigned by using the equal sign.  
-my_location =  $HOME/AnyLog-Network/tests/scripts/script_test_blockchain.anylog assigns the detailed path to the variable my_location.  
-Referencing the assigned value is by an exclamation point followed by the variable name.  
-`!my_location` provides the assigned path and file name.  
+Values are assigned by using the equal sign. `my_script = !anylog_path/AnyLog-Network/scripts/deployment_scripts/local_script.al` 
+assigns the detailed path to the variable my_location. Referencing the assigned value is by an exclamation point followed 
+by the variable name. `!my_script` provides the assigned path and file name.  
+
+**Example**: 
+```anylog
+AL anylog-node > my_script = !anylog_path/AnyLog-Network/scripts/deployment_scripts/local_script.al 
+AL anylog-node > !my_script 
+'/app/AnyLog-Network/scripts/deployment_scripts/local_script.al' 
+```
 
 ## Execution flow commands
 Managing commands in scripts allows to control the execution path by issuing `if then` commands and redirecting the execution using a `goto` statement to a named location in the script.

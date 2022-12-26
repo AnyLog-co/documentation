@@ -31,8 +31,10 @@ The metadata is the network related information that is shared by members of the
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
 The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
 The interaction with the metadata is not dependent on the repository. When a member node operates, it is configured to use a particular metadata repository and
-there are no operational differences which are dependent on the type of the metadata repository used.  
-***Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.***   
+there are no operational differences which are dependent on the type of the metadata repository used.
+
+**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.**
+
 The nodes in the network are configured to pull the metadata (from the blockchain platform or the master node) periodically (if it was changed) and update a local copy of the metadata on the node.  
 The processing in a node considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform and if a connection 
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
@@ -120,14 +122,14 @@ From the AnyLog-Network directory issue the following command:
 ```anylog
 python3 source/cmd/user_cmd.py [command line arguments]
 ```
-The command line arguments are optional and can include a list of AnyLog commands separated by the ***and*** keyword.  
+The command line arguments are optional and can include a list of AnyLog commands separated by the _and_ keyword.  
 The commands specified in the command line are executed upon initialization of the node and can include configuration and setup instructions.
 
-If the initialization commands are organized in a script file, call the command ***process*** followed by the path to the script. 
+If the initialization commands are organized in a script file, call the command _process_ followed by the path to the script. 
 
 ### AnyLog Command Line Interface
-When a node starts, it provides the ***AnyLog Command Line Interface*** (CLI).  
-The command line prompt appear as ***AL >*** and it can be changed by issuing the following command on the CLI:
+When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
+The command line prompt appear as `AL >` and it can be changed by issuing the following command on the CLI:
 ```anylog
 node_name = my_node_name
 ```
@@ -136,7 +138,32 @@ Using the CLI, a user can interact with the node or peer nodes in the network.
 The supported commands allow to retrieve and modify configuration, state of different processes, query and update the blockchain data and
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
 
-Exiting and terminating an AnyLog node is by issuing the command ***exit*** on the CLI.
+Exiting and terminating an AnyLog node is by issuing the command `exit node` on the CLI.
+```anylog
+AL anylog-node +> help exit 
+Usage:
+        exit [process type|reset]
+        
+Explanation:
+        exit node - terminate all process and shutdown
+        exit tcp - terminate the TCP listner thread
+        exit rest - terminate the REST listner thread
+        exit scripts - terminate the running scripts
+        exit scheduler - terminate the scheduler process
+        exit workers - terminate the query threads
+
+Examples:
+        exit node
+        exit tcp
+        exit rest
+        exit scripts
+        exit scheduler
+        exit synchronizer
+        exit mqtt
+        exit kafka
+        exit smtp
+        exit workers
+```
 
 ### The help command
 The list of commands is available by executing the ***help*** command on the CLI:
@@ -315,7 +342,7 @@ Additional information on the blockchain commands is available in the [Blockchai
 
 Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
 Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
-Additional information on the HA processes is available in the [High Availability](../high-availability/high%20availability.md#high-availability--ha-) section.
+Additional information on the HA processes is available in the [High Availability](../high-availability/high-availability.md#high-availability--ha-) section.
 
 ## Network security
 

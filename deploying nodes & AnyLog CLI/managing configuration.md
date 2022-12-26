@@ -8,20 +8,20 @@ Node configuration includes the update of the local dictionary, and the initiati
 The AnyLog configuration can be done in different ways:  
 * Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](using%20rest.md#using-rest) section).  
 * By a script file that contains AnyLog commands. The advantage in a script file is that it can be organized
-as a program with ***if*** conditions and ***goto*** statements (details are available in the [Configuration Examples](../examples/Configuration.md#configuration-examples) section).
+as a program with _if_ conditions and _goto_ statements (details are available in the [Configuration Examples](../examples/Configuration.md#configuration-examples) section).
 * By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](../examples/Configuration.md#configuring-a-node-with-a-json-file) section).
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
 ## Using a script file, JSON file, or a table to configure AnyLog command
 
-* The command ***process*** followed by a path and a file name will process all the commands in the specified file.  
+* The command _process_ followed by a path and a file name will process all the commands in the specified file.  
   Usage:
 ```anylog
-  process [path and file name]
+process [path and file name]
 ```
   Example:
 ```anylog
-  process !anylog_path/AnyLog-Network/demo/ha_operator1.al
+process !anylog_path/AnyLog-Network/demo/ha_operator1.al
 ```
 * The command [process from dbms](#configuration-from-a-database-table) followed by the DBMS and table details will process the commands contained in
   the table.  
@@ -42,7 +42,7 @@ anyLog process "run tcp server !external_ip !node_1_port !ip !node_1_port" and "
 
 ## Configuration from a database table
 
-The ***process from dbms*** command will retrieve the AnyLog commands contained in the table and process each command:
+The `process from dbms` command will retrieve the AnyLog commands contained in the table and process each command:
 
 Usage:
 ```anylog
@@ -51,13 +51,13 @@ process from table where name = [table name] and dbms = [dbms name] and value = 
 
 Command options:
 
-| Key        | Value  | Comments  |
-| ---------- | -------| ------- |
-| name      | The name of the table containing the AnyLog commands | |
-| dbms       | The DBMS name containing the table |  |
-| value      | The field name with the value to associate with the command (the designated value)| Optional key-value  |
-| command    | The command to execute| If the command string contains the ***<>*** sign, it will be assigned with the row's designated value (the ***<>*** sign is similar to ***%s*** in C/Python) |
-| condition  | The ***where*** condition to use when the commands are retrieved | Optional key-value |
+| Key        | Value  | Comments                                                                                                                                             |
+| ---------- | -------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name      | The name of the table containing the AnyLog commands |                                                                                                                                                      |
+| dbms       | The DBMS name containing the table |                                                                                                                                                      |
+| value      | The field name with the value to associate with the command (the designated value)| Optional key-value                                                                                                                                   |
+| command    | The command to execute| If the command string contains the _<>_ sign, it will be assigned with the row's designated value (the _<>_ sign is similar to `%s` in `C/Python`) |
+| condition  | The _where_ condition to use when the commands are retrieved | Optional key-value                                                                                                                                   |
 
 Example:
 
@@ -65,12 +65,12 @@ A table in a database needs to be available with the configuration commands. The
 
 In the example below we create the table and update the configuration from the AnyLog CLI:  
 
-***Step A***: Connect to the database containing the config table:
+**Step A**: Connect to the database containing the config table:
 ```anylog
 connect dbms config_dbms where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 ```
 
-***Step B***: Create the config table and update the AnyLog configuration commands.  
+**Step B**: Create the config table and update the AnyLog configuration commands.  
 Note: this step can be done once (or whenever configurations are updated) and can be done from an application.
 ```anylog
 # Create the table struct
@@ -87,7 +87,7 @@ Use the following command to view the config data:
 sql config_dbms format = table "select * from my_config"
 ```
 
-***Step C***: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
+**Step C**: The following command will process the commands in the table. Trigger the command whenever AnyLog is initiated.
 The command can be issued as a command argument on the OS command line when AnyLog is initiated or on the AnyLog CLI or using REST. 
 
 ```anylog
@@ -104,7 +104,8 @@ The AnyLog instance is initiated with command line arguments as follows:
 anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
 ```
 
-```dbms_config``` is a script file inside the folder `!anylog_path/AnyLog-Network/demo`.  
+`dbms_config` is a script file inside the folder `!anylog_path/AnyLog-Network/demo`.
+
 The Config file includes the following commands:
 ```anylog
 connect dbms config_dbms where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
