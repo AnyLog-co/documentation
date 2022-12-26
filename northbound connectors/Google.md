@@ -38,7 +38,7 @@ which provides the ability to import data via REST, Database, Social Media and o
 3. Under _Data Source_ set the Type to API Bridge & Fill-out the form
 
 Notice that for the complete form user should specifiy: _Base URL_, _Authentication_ (if set) and headers.    
-For demo purposes, I'm using a query that consists of [increments function](../query%20data/queries.md#the-increment-function) and returns the data as a list of JSON values without statistics:
+For demo purposes, I'm using a query that consists of [increments function](../queries.md#the-increment-function) and returns the data as a list of JSON values without statistics:
 ```sql
 sql aiops format=json:list and stat=false "select increments(hour, 1, timestamp), min(timestamp) as timestamp, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from sic1001_mv where timestamp >= NOW() - 1 week"
 ```

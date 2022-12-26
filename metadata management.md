@@ -156,7 +156,7 @@ In the above script:
 
 ## Periodically synchronizing the local copy of the metadata with a blockchain or a master node
 
-Details are available at the section [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).
+Details are available at the section [Blockchain Synchronizer](background processes.md#blockchain-synchronizer).
 
 ## Using a local database
 

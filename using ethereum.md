@@ -9,7 +9,7 @@ This document explains how to leverage Ethereum as the underlying global metadat
 initial setup that is needed to facilitate Ethereum as the metadata layer.   
 Once the setup is completed, nodes can synchronize their local metadata with the global metadata by configuring the synchronizer 
 to connect to Ethereum. The details of configuring a node to sync with Ethererum are detailed at the
-[Blockchain Configuration](blockchain%20configuration.md) section.
+[Blockchain Configuration](blockchain configuration.md) section.
 
 
 Connection to the blockchain platform can be done using a local node or a hosted node.
@@ -30,7 +30,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * Create accounts, the accounts are used for blockchain transactions payments. Note that although accounts creation is available 
   directly from an AnyLog node, the functionality is supported to simplify testing and users should create accounts using proper tools (see the highlighted note above). 
 * Publish the AnyLog contract, the contract manages the global metadata (in the form of Policies) which is shared by members of the network.
-  Policies are detailed in the [Managing Metadata](../deploying%20nodes%20&%20AnyLog%20CLI/metadata%20management.md#managing-metadata) section.
+  Policies are detailed in the [Managing Metadata](metadata management.md#managing-metadata) section.
 * Update a policy on the blockchain.
 * Configure an AnyLog node to continuously synchronize the local copy of the metadata (that is hosted on the node) with the global copy of the metadata (that is hosted on the blockchain).
 
@@ -43,7 +43,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * An AnyLog node to configure.
 
 ## The blockchain commands
-The AnyLog Blockchain commands are detailed [here](blockchain%20commands.md).
+The AnyLog Blockchain commands are detailed [here](blockchain commands.md).
 
 ## Connecting to Ethereum
 
@@ -145,4 +145,4 @@ The variable _`test_policy`_ is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 
-Details are available in the [Blockchain Configuration](blockchain%20configuration.md) section.
+Details are available in the [Blockchain Configuration](blockchain configuration.md) section.

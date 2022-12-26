@@ -21,7 +21,7 @@ Examples of mapping policies are provided [below](#creating-the-mapping-instruct
 
 Pulling the needed values from the source data is done using the `_bring_` command. A `_bring_` command 
 includes keys and transformation logic that is applied to the source JSON data to construct the destination format. 
-Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json%20data%20transformation.md#the--from-json-object-bring-command) section.  
+Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json data transformation.md#the--from-json-object-bring-command) section.  
 The `_bring_` commands are associated with source data in the following ways:
 1) The `run mqtt client` command associates the source data published with a topic to a `_bring_` command that provides the mapping logic. 
    This option is detailed [here](message%20broker.md#the-command-structure).
@@ -40,7 +40,7 @@ The chart below describes the sections of the policy.
 | readings      | String  |   No     | A key to a list of readings in the source JSON                                                                         |
 | schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions                                                                  |
 
-Note: The _if_ statement is detailed in the section [Conditional Execution](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#conditional-execution).   
+Note: The _if_ statement is detailed in the section [Conditional Execution](anylog commands.md#conditional-execution).   
 
 ### The schema section
 The schema is a dictionary whereas the target columns are the keys and each value is a dictionary representing the column's properties including the mapping instructions.  
@@ -87,9 +87,9 @@ In this doc, we download the London air quality data from datahub and provide a 
 ## Prerequisite
 
 1) An AnyLog Operator node.  
-   Details on Operator configurations are available in the section [background processes](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#operator-process).
+   Details on Operator configurations are available in the section [background processes](background processes.md#operator-process).
 2) Define a physical database (i.e.: PostgresSQL or SQLite) to the logical database name (london). 
-   Details on database configurations are available in the section [Connecting to a local database](../query%20data/sql%20setup.md#connecting-to-a-local-database).
+   Details on database configurations are available in the section [Connecting to a local database](sql setup.md#connecting-to-a-local-database).
    
 ## Downloading the data
 
@@ -106,9 +106,9 @@ Notes:
     _key_ provides the key (in the PurpleAir JSON file) of the list of readings.  
     _show_ provides a visual status bar that monitors the write to file process.
 
- * More details on the REST GET command are available in the [AnyLog Commands section](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#rest-command).
+ * More details on the REST GET command are available in the [AnyLog Commands section](anylog commands.md#rest-command).
    
- * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog commands.md#using-rest-command-to-retrive-data-from-a-data-source).
  
 
 ## Creating the mapping instructions
@@ -149,7 +149,7 @@ blockchain insert where policy = !instruct and local = true and master = !master
 
 ## Adding the data
 Adding data to an Operator can be done by placing data in a `watch` directory or sending data using REST or assigning
-a broker role to the node and publishing the data. These methods are explained in the section [adding data](../data%20management/adding%20data.md).
+a broker role to the node and publishing the data. These methods are explained in the section [adding data](adding data.md).
 
 #### Example:
 

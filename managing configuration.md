@@ -3,13 +3,13 @@
 Node configuration includes the update of the local dictionary, and the initiation of processes:  
 1) Updating the local dictionary - Updating the local dictionary of a node with the values that are needed by the node processes.
 2) Initiating processes - Initiating the processes that determine how the node operates (detailed explanations of the 
-   processes are available in the [Background Processes](background%20processes.md#background-processes) section).
+   processes are available in the [Background Processes](background processes.md#background-processes) section).
 
 The AnyLog configuration can be done in different ways:  
-* Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](using%20rest.md#using-rest) section).  
+* Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](using rest.md#using-rest) section).  
 * By a script file that contains AnyLog commands. The advantage in a script file is that it can be organized
-as a program with _if_ conditions and _goto_ statements (details are available in the [Configuration Examples](../examples/Configuration.md#configuration-examples) section).
-* By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](../examples/Configuration.md#configuring-a-node-with-a-json-file) section).
+as a program with _if_ conditions and _goto_ statements (details are available in the [Configuration Examples](examples/Configuration.md#configuration-examples) section).
+* By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](examples/Configuration.md#configuring-a-node-with-a-json-file) section).
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
 ## Using a script file, JSON file, or a table to configure AnyLog command

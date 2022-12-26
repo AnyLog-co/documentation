@@ -17,7 +17,7 @@ run rest server [ip] [port] [max time]
 [ip] and [port] are the IP and Port that would be available to REST calls.  
 [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.  
 A 0 value means a call would never be aborted and the default time is 20 seconds.    
-Additional information on the REST API is available at the section [REST requests](background%20processes.md#rest-requests).
+Additional information on the REST API is available at the section [REST requests](background processes.md#rest-requests).
   
 ## HTTP methods supported
 
@@ -138,7 +138,7 @@ This process is done as follows:
     
   Notes:  
   a) The User-Agent request header is a characteristic string that lets servers and network peers identify the application, operating system, vendor, and/or version of the requesting user agent.  
-  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](../southbound%20connectors/message%20broker.md) section.
+  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](message broker.md) section.
 
 2. Issue REST calls to the AnyLog node.  
    Example:  

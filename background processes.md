@@ -98,8 +98,8 @@ router connected to the external networks needs to redirect the messages send to
 
 
 Additional information is available in the following sections:
-* [Network Configuration](./network%20configuration.md#network-configuration)
-* [Connecting Nodes](../examples/Connecting%20Nodes.md)   
+* [Network Configuration](network configuration.md#network-configuration)
+* [Connecting Nodes](examples/Connecting Nodes.md)   
  
 ## REST requests
 
@@ -143,8 +143,8 @@ exit rest
 </pre>
 
 Additional information is available in the following sections:
-* [Network Configuration](./network%20configuration.md#network-configuration)
-* [Connecting Nodes](../examples/Connecting%20Nodes.md)   
+* [Network Configuration](network configuration.md#network-configuration)
+* [Connecting Nodes](examples/Connecting Nodes.md)   
  
 ## Operator Process
 

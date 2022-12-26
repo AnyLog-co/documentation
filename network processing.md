@@ -35,7 +35,7 @@ The AnyLog Network Protocol deploys 2 layers of messaging:
 Users and applications can query data or state by sending a request to a node in the network using REST. 
 The node receiving the reply will process the request and if needed, return a reply to the caller. 
   
-The [Querying Data](../examples/Querying%20Data.md#querying-data) section provides examples of issuing queries to retrieve 
+The [Querying Data](examples/Querying Data.md#querying-data) section provides examples of issuing queries to retrieve 
 data using REST.
 
 The following example is a cURL call to determine the status of a node:
