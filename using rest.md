@@ -2,7 +2,7 @@
 
 ## Overview
 
-Users can interact with the nodes in the network using REST.
+Users can interact with the nodes in the network using REST.  
 Using REST, users can execute AnyLog commands over HTTP on any node in the network that is configured to satisfy REST requests.
 
 ## Prerequisites
