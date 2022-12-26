@@ -5,7 +5,7 @@ same data such that if an Operator fails, the data is available on a surviving O
 surviving node. This document explains how to configure AnyLog to provide High Availability, and details the commands that 
 monitor and report on the HA state.
 
-This document extends the explanations in [Data Distribution and Configuration](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
+This document extends the explanations in [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
 ## The Cluster Policy
 
@@ -69,9 +69,9 @@ and all the Operators supporting the cluster maintain identical data.
 
 | Command        | Functionality  | 
 | ---------- | -------| 
-| [run operator](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process) | Enables the process that ingests data to the local databases. |
-| [run data distributor](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
-| [run data consumer](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
+| [run operator](background%20processes.md#operator-process) | Enables the process that ingests data to the local databases. |
+| [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
+| [run data consumer](background%20processes.md#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
 
 Example:
 
@@ -99,7 +99,7 @@ The following command provides similar information using a different presentatio
 ```anylog
 blockchain query metadata
 ```
-Note: More details are available [here](https://github.com/AnyLog-co/documentation/blob/master/data%20distribution%20and%20configuration.md#view-data-distribution-policies).
+Note: More details are available [here](data%20distribution%20and%20configuration.md#view-data-distribution-policies).
 
 ## View the distribution of data to an operator
 
@@ -132,7 +132,7 @@ time file summary where table = * and start_date = -10d
 time file errors where table = tsd_159 and start_date = -10d
 ```
 
-Additional information on the time file commands is available at the [Time File Commands](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#time-file-commands) section.  
+Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.  
 
 ## The Archive of source data
 
@@ -158,7 +158,7 @@ A listed file name:
 ```
 The archive directory is determined by the first 6 digits of the last field in the file name (the name segment before the file type 
 representing the file ingestion date and time - 210404201021 in the example below).  
-Details on file naming are available at the [file naming convention](https://github.com/AnyLog-co/documentation/blob/master/managing%20data%20files%20status.md#the-file-naming-convention) section.
+Details on file naming are available at the [file naming convention](managing%20data%20files%20status.md#the-file-naming-convention) section.
 
 ## Query execution
 
@@ -171,7 +171,7 @@ The following command provides information on the queries being executed, their 
 ```anylog
 query status
 ```
-Additional information is available in [Command options for profiling and monitoring queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#command-options-for-profiling-and-monitoring-queries).
+Additional information is available in [Command options for profiling and monitoring queries](profiling%20and%20monitoring%20queries.md#command-options-for-profiling-and-monitoring-queries).
 
 ## Adding Operator Nodes to a Cluster
 

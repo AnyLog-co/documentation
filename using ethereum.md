@@ -9,7 +9,7 @@ This document explains how to leverage Ethereum as the underlying global metadat
 initial setup that is needed to facilitate Ethereum as the metadata layer.   
 Once the setup is completed, nodes can synchronize their local metadata with the global metadata by configuring the synchronizer 
 to connect to Ethereum. The details of configuring a node to sync with Ethererum are detailed at the
-[Blockchain Configuration](blockchain configuration.md) section.
+[Blockchain Configuration](blockchain%20configuration.md) section.
 
 
 Connection to the blockchain platform can be done using a local node or a hosted node.
@@ -30,7 +30,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * Create accounts, the accounts are used for blockchain transactions payments. Note that although accounts creation is available 
   directly from an AnyLog node, the functionality is supported to simplify testing and users should create accounts using proper tools (see the highlighted note above). 
 * Publish the AnyLog contract, the contract manages the global metadata (in the form of Policies) which is shared by members of the network.
-  Policies are detailed in the [Managing Metadata](metadata management.md#managing-metadata) section.
+  Policies are detailed in the [Managing Metadata](metadata%20management.md#managing-metadata) section.
 * Update a policy on the blockchain.
 * Configure an AnyLog node to continuously synchronize the local copy of the metadata (that is hosted on the node) with the global copy of the metadata (that is hosted on the blockchain).
 
@@ -104,7 +104,7 @@ For a Rinkeby TestNet, funds can be added from this [website](https://www.rinkeb
 The following command will deploy a contract that contains the logic to anchor the policies which are shared by the nodes in the network.
 Users can maintain multiple independent networks by deploying multiple contracts and associating nodes to different contracts.  
 
-***Nodes that are assigned to the same contract, form a network.***
+**Nodes that are assigned to the same contract, form a network.**
 
 * Publish a contract and assign the contract address to a variable:
 

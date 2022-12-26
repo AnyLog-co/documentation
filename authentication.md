@@ -1,7 +1,7 @@
 # Users and nodes Authentication, making the data secure
 
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies.  
-For a detailed demo setup of a secured network refer to the document [Securing the Network](https://github.com/AnyLog-co/documentation/blob/master/examples/Secure%20Network.md).   
+For a detailed demo setup of a secured network refer to the document [Securing the Network](examples/Secure%20Network.md).   
 These commands detailed in this document facilitate a framework that provides the following functionality:  
 a) Authenticates messages send from nodes to peer nodes.  
 b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.  
@@ -32,17 +32,17 @@ The network provides 2 layers of authentications:
     Details are available [below](#using-ssl-certificates).
     
 Enabling and disabling authentication (both - nodes authentication and users authentication) is using the following command:
-<pre>
+```anylog
 set authentication [on/off]
-</pre>
+```
 Note:
-* Optionally, node authentication can be enabled using ***set node authentication*** detailed [below](#node-authentication).
-* Optionally, user authentication can be enabled using ***set user authentication*** detailed [below](#add-users).
+* Optionally, node authentication can be enabled using `set node authentication` detailed [below](#node-authentication).
+* Optionally, user authentication can be enabled using `set user authentication` detailed [below](#add-users).
 
 The following command determines how the node is configured:  
-<pre>
+```anylog
 get authentication
-</pre>
+```
 
 ## Encrypting network messages   
 AnyLog provide the mechanisms to encrypt messages transferred over the network.
@@ -58,27 +58,27 @@ Each node can be assigned with 2 types of passwords:
  
 ## The local password
 A password to encrypt the node's sensitive information. This password is used to encrypt data saved in files on the node.
-This encryption is using a random salt key. This password is provided using the command ***set local password***, and the 
+This encryption is using a random salt key. This password is provided using the command `set local password`, and the 
 password is not stored on a local file - it needs to be provided whenever the node starts. 
 If a local password was provided to a node, restarting the node requires to re-provide the same password. 
 When the password is re-provided, it is validated to determine that it is identical to the initial password.
 Usage:
-<pre>
+```anylog
 set local password = [password]
-</pre>
+```
       
 ## The private password
-A password protecting the node's private key. This password is provided using the command ***set private password*** and 
+A password protecting the node's private key. This password is provided using the command `set private password` and 
 can be optionally stored in a local file and protected by the node's [local password](#the-local-password).  
 Usage:
-<pre>
+```anylog
 set private password = [password] [in file]
-</pre>
-***in file*** are optional keywords. If provided, the password protecting the node's private key will be stored in 
+```
+_in file_ are optional keywords. If provided, the password protecting the node's private key will be stored in 
 a local file and the private key will be available to all processes that need the private key 
 (assuming that the node's local password is available).
-If ***in file*** is specified, the password is provided once and is available on the node afterwards. Otherwise,
-users needs to call ***set private password*** whenever the node is starting.    
+If _in file_ is specified, the password is provided once and is available on the node afterwards. Otherwise,
+users needs to call `set private password` whenever the node is starting.    
 Note: the key is protected using the [local password](#the-local-password).
 
 
@@ -89,10 +89,10 @@ The public key uniquely identifies the member and its privileges and the private
 that the member can be authenticated by the node receiving the message.
  
 The following examples enable and disable node authentication:
-<pre>
+```anylog
 set node authentication on
 set node authentication off
-</pre>
+```
 
 
 ## Creating private public keys 
@@ -107,19 +107,19 @@ rather than be rejected if the node's privileges (the privileges of the node fro
 
 ### Creating keys for a node in the network
 
-The command ***id create keys for node*** creates a private and a public key. These keys are kept on the node 
+The command `id create keys for node` creates a private and a public key. These keys are kept on the node 
 and the private key is encrypted using the password. 
 
 Command:
-<pre>
+```anylog
 id create keys for node where password = [password]
-</pre> 
+``` 
 
 The public key serves to uniquely identify a node and the private key serves to sign messages send from the node.  
 The public key can be retrieved using the command:
-<pre>
+```anylog
 get node id
-</pre> 
+```
 
 In addition, policies added to the blockchain include the public key of the author and a signature. Prior to executing
 a policy by a node in the network, the node executing the policy validates that the policy was signed using the 
@@ -129,7 +129,7 @@ the policy is considered by the node.
 
 Notes:  
 * Keys for each node needs to be created only once. Once the keys were created, a new call to ```id create keys for node``` returns an error.
-* The public key and the encrypted private key keys are stored in a file called ***node_id.pem***.
+* The public key and the encrypted private key keys are stored in a file called _node_id.pem_.
 
 ### Creating keys for users in the network
 
@@ -139,17 +139,17 @@ Users can use their assigned keys to:
 a) Send messages to nodes in the network.
 b) Sign policies added to the blockchain by the user.
 
-Command:
-<pre>
+**Command**:
+```anylog
 id create keys for node where password = [password] and keys_file = [file path and name]
-</pre> 
+```
 
 Providing a key file is optional.
-Examples:
-<pre>
+**Examples**:
+```anylog
 id create keys for node where password = my_password  
 id create keys for node where password = my_password and keys_file = !usb_path/my_keys
-</pre> 
+```
 
 The command creates a public and private key.      
 If a file name is provided, the keys are stored in the file.        
@@ -160,35 +160,39 @@ If only a file name is provided (without a path), the file is written to the Any
 ### Retrieving the keys
 
 The following commands retrieve the private key and public key of the node:
-<pre>
+```anylog
 get private key  
 get public key
-</pre>
+```
+
 users can retrieve the keys without the headers and new lines using the following commands:
-<pre>
+
+```anylog
 get private string  
 get public string
-</pre>
+```
 
 The following commands retrieve the private key and public key from a PEM file: 
-<pre>
+```anylog
 get private key where keys_file = [path and file name] 
 get public key where keys_file = [path and file name]
-</pre>
-Note:
+```
+
+**Note**:
 * if the path is not specified, it is assumed to be !id_dir.
 * If no file type is specified, it is assumed to be 'pem', and the file name is extended to include the type.  
 
-Examples:
-<pre>
+**Examples**:
+```anylog
 get private key where keys_file = roy
 get public key where keys_file = !pem_dir/server-acme-inc-public-key
-</pre> 
+```
+
 users can retrieve the keys without the headers and new lines using the following commands:
-<pre>
+```anylog
 get private string where keys_file = [path and file name] 
 get public string where keys_file = [path and file name]
-</pre>
+```
 
 
 ## Adding policies to the blockchain
@@ -208,17 +212,17 @@ The command ***get permissions*** returns the permissions of the current node.
 If the where condition is not specified, the permissions assigned to the current node are returned.  
 The where condition retrieves the Member Policy that satisfies the condition, and the permissions assigned to the policy are returned.     
 Usage:
-<pre>
+```anylog
 get permissions
 get permissions where [attribute name] = [attribute value]
-</pre>
+```
 
 Examples:
-<pre>
+```anylog
 get permissions
 get permissions where public_key = !public_key
 get permissions where name = value
-</pre> 
+```
 
 ## Signing a policy
 
@@ -226,33 +230,33 @@ Users and nodes can publish policies on the blockchain.
 If authentication is enabled, the policies are signed by the ***id sign*** command, and the policies are updated with the public 
 key and the signature of the publisher such that the publisher can be authenticated, and his authorization can be validated.    
  
-Command options:
-<pre>
+**Command options**:
+```anylog
 id sign [JSON Policy] where key = [private key] and password = [password]
 id sign [JSON Policy] where password = [password]
-</pre> 
+```
 
-If ***id sign*** assigns the results to a variable, the variable value is the signed message.  
-If ***id sign*** does not assign the results to a variable, the value of the variable providing the policy changes.
-Examples:
-<pre>
+If _id sign_ assigns the results to a variable, the variable value is the signed message.  
+If _id sign_ does not assign the results to a variable, the value of the variable providing the policy changes.
+**Examples**:
+```anylog
 id sign !json_script where key = !my_key and password = my_password
 id sign !json_script where password = my_password
-</pre>
+```
   
   
 ## Authenticate signature
 
 Authenticate the policy by validating that the policy was signed using the private key associated with the public key on the policy.  
-Command:
-<pre>
+**Command**:
+```anylog
 id authenticate [JSON Policy]
-</pre> 
+```
 
-Example:
-<pre>
+**Example**:
+```anylog
 id authenticate !json_script
-</pre>
+```
 
 
 # Validate permitted command
@@ -261,17 +265,18 @@ When a node receives a command from a peer node, the receiving node is using the
 Authorization is validated against ***permissions*** policies.  
 The receiving node considers the permissions policy to determine that the public key of the peer is represented in a permission policy which is signed by an authorized member.  
 
-Command:
-<pre>
+**Command**:
+```anylog
 id validate where key = [public_key] and command = [command text] and table = [table name] and dbms = [dbms name]
-</pre>   
+```
+
 Table and dbms are optional and are used with SQL command.
 
-Example:
-<pre>
+**Example**:
+```anylog
 id validate where key = !public_key and command = copy
 id validate where key = !public_key and command = sql and dbms = lsl_demo and table = ping_sensor
-</pre>   
+```
 
 # Setting the signatory
 If node authentication is enabled, messages and policies are signed by the node's private key and identified by the node's public key.  
@@ -280,27 +285,30 @@ This option is used to allow users with higher permissions, to leverage their as
 The following commands replace the signatory on a node, revert to allow the node to be the signatory and validates the signatory name:  
 
 ## Assign a signatory
-Usage:
-<pre>
+**Usage**:
+```anylog
 set signatory where key = [private key] and password = [password] and name = [signatory name]
-</pre>
-***private key*** is the encrypted private key of the signatory.      
-***password*** is the private key password.    
-***name*** is a name assigned to the signatory. The name can be any string, excluding "node", which is the signatory name when the node's keys are used.
+```
+
+**private key** is the encrypted private key of the signatory.      
+**password** is the private key password.    
+**name** is a name assigned to the signatory. The name can be any string, excluding "node", which is the signatory name when the node's keys are used.
 
 ## Revert to the node as the signatory
-Usage:
-<pre>
+**Usage**:
+```anylog
 reset signatory
-</pre>
+```
+
 This command sets the node as the signatory such that messages and policies would be signed by the private key assigned to the node.
 
 ## Get the signatory name
 Usage:
-<pre>
+```anylog
 get signatory name
-</pre>
-Return the ***signatory name***. If the node is the signatory, the string "node" is returned. If no signatory is assigned,
+```
+
+Return the **signatory name**. If the node is the signatory, the string "node" is returned. If no signatory is assigned,
 the message "No signatory assigned" is returned.
 
 
@@ -310,29 +318,30 @@ When a message is sent, the sender can encrypt the message using the public key 
 When the message arrives at the receiver, the receiver is able to decrypt the message using his private key.
 
 ## Encrypting a message
-Command:
-<pre>
+**Command**:
+```anylog
 id encrypt !message !public_key
-</pre> 
+```
 
 Example:
-<pre>
+```anylog
 id encrypt !message !public_key
-</pre>
+```
 
 
 ## Decrypting a message
-Command:
-<pre>
+**Command**:
+```anylog
 id decrypt [message text] where key = [private key] and password = [password]
-</pre> 
+```
+
 If key is not provided, the decryption will apply the private key of the node.
 
-Exampls:
-<pre>
+**Examples**:
+```anylog
 id decript !message where key = !private_key and password = !my_password
 id decript !message where password = !my_password
-</pre>
+```
 
 # Users Authentication
 
@@ -342,28 +351,30 @@ When an external user or application connects to a node in the network, and user
 against a local lis and if validated, the user inherits the permissions provided to the node.  
 
 Use the following command to enable user authentication:
-<pre>
+```anylog
 set user authentication on
-</pre>
+```
+
 Use the following command to disable user authentication:
-<pre>
+```anylog
 set user authentication off
-</pre>
+```
+
 Use the following command to determine if user authentication is enabled:
-<pre>
+```anylog
 get authentication
-</pre>
+```
 Note: node authentication is detailed [above](#node-authentication).
 
 
 Users names and passwords are added to each node to only allow connections with permitted users.  
-The ***id add user*** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
-Command:
-<pre>
+The **id add user** command can specify a time frame (expiration) that determines if the user permission is terminated after a period of time.  
+**Command**:
+```anylog
 id add user where name = [user name] and type = [user type] and password = [password] and expiration = [duration]
-</pre>  
+```
 
-Command variables:
+**Command Variables**:
 
 | Option        | Explanation  |
 | ------------- | ------------| 
@@ -376,34 +387,34 @@ If expiration time is specified, the user permission to connect to the node is r
 Duration can be specified in seconds, minutes, hours and days.
 If expiration is not specified, the user permissions are not limited by time. User can be removed using the ```remove user``` command.
 
-Example:
-<pre>
+**Example**:
+```anylog
 id add user where name = ori and password = 123 and expiration = 2 minutes
-</pre>  
+```
 
 ## Remove users
 
 A user can be removed with the following command:
-<pre>
+```anylog
 id remove user where name = [user name]
-</pre>   
+```
 
-Example:
-<pre>
+**Example**:
+```anylog
 id remove user where name = john
-</pre>  
+```
 
 ## Update password
 
 A user can modify his password using the following command:
-<pre>
+```anylog
 id update user password where name = [user name] and old = [old password] and new = [new password]
-</pre>   
+```
 
-Example:
-<pre>
+**Example**:
+```anylog
 id update user password where name = ori and old = 123456 and new = iugsek88ekA
-</pre>  
+```
 
 ## Authenticating HTTP requests
 
@@ -416,31 +427,31 @@ Basic authentication is enabled using the following procedure:
 1. On the AnyLog node:  
     a. Provide the [local passoword](#The-local-password) (if was not yet provided) usinf the command: ```set local password = [the local passoword]```   
     b. Enable user authentication using the command: ```set user authentication on```.          
-    c. Update the list of permitted users using the command: [id add user](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#add-users).  
+    c. Update the list of permitted users using the command: [id add user](authentication.md#add-users).  
 2. When the REST call is send, include the following key-value pair to the header:
-<pre>
+```anylog
 key - "Authorization"  
 value - Base64 encoded string of the user name and password separated by a colon.
-</pre>
+```
 
 Examples of basic authentication setup on 3rd parties tools:
 
 #### Enabling Basic Authentication in Grafana
 
 On the Data Source connection page:
-1. In the ***Auth*** section: Enable ***Basic Auth***.
-2. In the ***Basic Auth Details*** section: Add the user name and password.
+1. In the _Auth_ section: Enable _Basic Auth_.
+2. In the [_Basic Auth_ Details](#enabling-basic-authentication-in-a-node-in-the-network) section: Add the username and password.
 
 #### Enabling Basic Authentication in Postman
 
 In the Authorization Tab:  
-1, select: ***Basic Auth***.  
-2. Update user name and password.
+1, select: _Basic Auth_.  
+2. Update username and password.
 
 
 # Using SSL Certificates
 
-Nodes which are not members of the network (called servers in the description below) interacting with the network can be authenticated by the AnyLog nodes using ***users certificates***.  
+Nodes which are not members of the network (called servers in the description below) interacting with the network can be authenticated by the AnyLog nodes using _users_ certificates.  
 An example is a Grafana node using [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
 which is delivered to the AnyLog node with the queries requests.  
 In addition, the participating AnyLog nodes are issued with Signed Certificate Requests such that a server which is not a member of the network
@@ -453,16 +464,16 @@ can authenticate the nodes using the Certificate Authority public key.
   the server a signed certificate, and a private key to sign messages delivered to the AnyLog Node.
 
 Notes:  
-    1) When the certificate commands are issued, different files are generated. These files are written to the location assigned to the ***pem_dir*** variable (by default to the AnyLog-Network/data/pem directory).
-        To view the location assigned to the ***pem_dir*** variable, issue ```!pem_dir``` on the AnyLog CLI.   
+    1) When the certificate commands are issued, different files are generated. These files are written to the location assigned to the `pem_dir` variable (by default to the `AnyLog-Network/data/pem` directory).
+        To view the location assigned to the `pem_dir` variable, issue `!pem_dir` on the AnyLog CLI.   
     2) [org] in the file name is a key based on the organization name provided in the command line ((value assigned to the key org whereas spaces are replaced with hyphen sign).
 
 ## Setup the CA
 The root user is responsible for creating and distributing certificates and private key pairs, which will be used to authenticate requests and encrypt messages at REST. 
 To create the private key and public certificate of the root user (or Certificate Authority), run the following command on the AnyLog CLI:
-<pre>
+```anylog
 id generate certificate authority where [command options]
-</pre>
+```
 
 The command options:
 
@@ -476,9 +487,9 @@ The command options:
 | hostname  | The URL representing the CA.|
 
 Example:
-<pre>
+```anylog
 id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
-</pre>
+```
 
 When the command is issued 2 files are generated:  
 
@@ -492,9 +503,9 @@ When the command is issued 2 files are generated:
 
 A server which is not a member of the AnyLog network is represented by a Certificate Request (CR) and a Private Key.
 Use the following command to generate a certificate request:
-<pre>
+```anylog
 id generate certificate request where [command options]
-</pre>
+```
 
 The command options:
 
@@ -510,9 +521,9 @@ The command options:
 | ip  | The IP of the node that issues the CR.|
 
 Example:
-<pre>
+```anylog
 id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_names = 127.0.0.1 and hostname =  acme.co and ip = "192.56.76.4"
-</pre>
+```
 
 When the command is issued 2 files are generated:  
 
@@ -527,9 +538,9 @@ When the command is issued 2 files are generated:
 
 To allow an AnyLog node authenticate the server, the CA signs the CR using the following command:
 
-<pre>
+```anylog
 id sign certificate request where [command options]
-</pre>
+```
 
 The command options:
 
@@ -539,9 +550,9 @@ The command options:
 | server_org  | The organization name of the server associated with the CR. |
 
 Example:
-<pre>
+```anylog
 id sign certificate request where ca_org = AnyLog and server_org = "Acme Inc"
-</pre>
+```
 
 When the command is issued 1 file is generated:  
 
@@ -554,14 +565,14 @@ When the command is issued 1 file is generated:
 
 The following example generates generate certificate request for the AnyLog node.
 
-<pre>
+```anylog
 id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_names = 127.0.0.1 and hostname =  anylog.co and ip = "192.38.78.8"
-</pre>
+```
 
 Signing the CR using the CA private key:
-<pre>
+```anylog
 id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
-</pre>
+```
 
 ## Summary of the example files
 With the examples described above, the following files were generated:
@@ -585,21 +596,21 @@ With the examples described above, the following files were generated:
 
 ### Setup the AnyLog node
 
-Make the following files available in the ***pem*** directory:
+Make the following files available in the _pem_ directory:
 1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt)
 2) The Private Key of the AnyLog Node: server-[org]-csr.csr  (using the example files: server-node-128-private-key.key)
 3) The Signed CR of the AnyLog Node: server-[org]-public-key.crt  (using the example files: server-node-128-public-key.crt)
 
 
 Deploy AnyLog with SSL enabled using the following command: 
-<pre>
+```anylog
 run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
-</pre>
+```
 
 Use the following command to retrieve the REST server configuration:
-<pre>
+```anylog
 get rest server info
-</pre>
+```
 
 
 ### Setup the Server (Client Side)
@@ -609,4 +620,4 @@ The client is configured using the following files:
 2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
-Example of Postman configuration is available at [using postman](https://github.com/AnyLog-co/documentation/blob/master/using%20postman.md#how-too-use-postman-as-the-query-interface).
+Example of Postman configuration is available at [using postman](using%20postman.md#how-too-use-postman-as-the-query-interface).

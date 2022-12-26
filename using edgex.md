@@ -14,7 +14,7 @@ whereas the broker can be any third party broker or an AnyLog node that is confi
 ### Integration with a third party broker
 Edgex can be configured with a third party MQTT broker. Examples of MQTT brokers are the open source [Eclipse Mosquitto](https://mosquitto.org/) project 
 and [CloudMQTT](https://www.cloudmqtt.com/) that provides an MQTT broker (using Mosquitto) as a service.  
-Configuring AnyLog to pull data from a third party MQTT broker is explained in the AnyLog [Using MQTT Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#using-mqtt-broker) section.
+Configuring AnyLog to pull data from a third party MQTT broker is explained in the AnyLog [Using MQTT Broker](mqtt.md#using-mqtt-broker) section.
 
 ### Sending MQTT data to an AnyLog instance
 
@@ -25,35 +25,36 @@ By configuring a node as message broker, data can be delivered from Edgex direct
 
 As detailed below, Edgex is configured to send the data to a message broker and an AnyLog instance is configured as a Message Broker.  
 The AnyLog node receiving the data can be an Operator node that hosts the data or a Publisher node that delivers the data to one or multiple Operator nodes 
-(the [getting started](https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#type-of-instances) document details the types of nodes participating in the AnyLog Network). 
+(the [getting started](getting%20started.md#type-of-instances) document details the types of nodes participating in the AnyLog Network). 
 
 ## Prerequisites
 
-* An Anylog node configured as a [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker).
+* An Anylog node configured as a [Message Broker](background%20processes.md#message-broker).
 * An Edgex platform configured to publish the device data on an AnyLog node as the message broker.
 
 ## Configuring AnyLog
 
 The AnyLog node receiving the data needs to be configured as follows:
 
-* Enable the ***Message Broker*** functionality:   
-Usage:
-<pre>
+* Enable the _Message Broker_ functionality:   
+**Usage**:
+```anylog
 run message broker [ip] [port] [local ip] [Local port] [threads]
-</pre>
-Details on the the ***run message broker*** command are available at the [Message Broker](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
-section in the [Background Processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#background-processes) document.
+```
+Details on the run `message broker` command are available at the [Message Broker](background%20processes.md#message-broker)
+section in the [Background Processes](background%20processes.md#background-processes) document.
 
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the [subscription process to 3rd parties MQTT brokers](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) 
+This process is identical to the [subscription process to 3rd parties MQTT brokers](mqtt.md#subscribing-to-a-broker) 
   whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
   
-Example:
-<pre>
+**Example**:
+```anylog
 run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogedgex and dbms=edgex and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
-</pre>
-Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the ***run mqtt client*** command and the data mapping instructions are available at the [Subscribing to a Broker](https://github.com/AnyLog-co/documentation/blob/master/mqtt.md#subscribing-to-a-broker) section.  
+```
+
+**Note**: the key value pair `broker=local` replace the assignment of an IP and port (when 3rd parties brokers are used).    
+Details on the `run mqtt client` command and the data mapping instructions are available at the [Subscribing to a Broker](mqtt.md#subscribing-to-a-broker) section.  
 
 ## Downloading and Configuring Edgex 
 Our [deployments directions](deployments/Support/EdgeX.md) provide details for deploying Edgex with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
@@ -83,7 +84,7 @@ The following example uses third-party broker to accept random data generator da
 docker attach --detach-keys="ctrl-d" anylog-node
 ```
 2. Execute `run mqtt client`
-```commandline
+```anylog
 broker=driver.cloudmqtt.com
 port=18785
 user=ibglowct
@@ -101,7 +102,7 @@ table_name=rand_data
 )>
 ```
 3. Validate MQTT client is accepting data
-```commandline
+```anylog
 get msg client
 ```
 

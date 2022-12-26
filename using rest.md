@@ -3,7 +3,7 @@
 ## Overview
 
 Users can interact with the nodes in the network using REST.  
-Using REST, users can execute AnyLog commands over HTTP on any node in the network that is configured to satisfy REST requests.
+Using REST, users can execute AnyLog commands over _HTTP_ on any node in the network that is configured to satisfy REST requests.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ POST supports all other commands. Some examples are:
 | ------------- | -----------------|  ------|
 | POST          | set              | Set values or change status |
 |               | reset            | Reset values or status |
-|               | blockchain       | Manage metadata commands (note the ***blockchain get*** is supported using GET.  |
+|               | blockchain       | Manage metadata commands (note the `blockchain get` is supported using GET.  |
 
 #### Example
 <pre>
@@ -129,16 +129,24 @@ curl --location --request POST '172.18.12.129:2149' \
 Users can associate REST calls with topics and subscribe to the topics such that when data is added, the subscription logic applies to the data.  
 This process is done as follows:
 
-1. Define a MQTT client, assign the broker to ***rest*** and identify the User-Agent on the rest calls.     
+1. Define a MQTT client, assign the broker to _REST_ and identify the User-Agent on the rest calls.     
    
    Example: 
   ```anylog
-  run mqtt client where broker = rest and user-agent = anylog and topic = (name = opcua and dbms = "bring [dbms]" and table = "bring [table]" and column.timestamp.timestamp = "bring [ts]" and column.value.float = "bring [value]")
+  <run mqtt client where broker=rest and 
+    user-agent = anylog and 
+    topic = (
+        name = opcua and 
+        dbms = "bring [dbms]" and 
+        table = "bring [table]" and 
+        column.timestamp.timestamp = "bring [ts]" and 
+        column.value.float = "bring [value]"
+    )> 
   ```
     
   Notes:  
   a) The User-Agent request header is a characteristic string that lets servers and network peers identify the application, operating system, vendor, and/or version of the requesting user agent.  
-  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](message broker.md) section.
+  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](message%20broker.md) section.
 
 2. Issue REST calls to the AnyLog node.  
    Example:  

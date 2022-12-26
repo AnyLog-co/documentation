@@ -15,7 +15,7 @@ b) Identify the members of the network by a unique IP and Port.
 c) Resolve network routing issues.  
 d) Encrypted messaging between the member nodes.    
 
-Refer to the 3rd party vendor manual for instalation and configuration instructions.
+Refer to the 3rd party vendor manual for installation and configuration instructions.
 
 ## Key-Based Authentication
 
@@ -29,7 +29,7 @@ The Key-Based Authentication enables the following:
 ^Note: A private key and a public key can be assigned to users - it allows for administrators to operate on the node's CLI
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
-The relevant AnyLog commands are detailed in the section [Node Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#node-authentication).  
+The relevant AnyLog commands are detailed in the section [Node Authentication](authentication.md#node-authentication).  
 
 
 ## Key-Based-Authentication deployment example
@@ -45,8 +45,8 @@ c) Assigning nodes and users to the policies that determine their permissions.
 * A permission policy - a policy that lists permitted and restricted commands and permitted and restricted database tables.    
 * An assignment policy - a policy that lists one or more members and a permission policy. The assignment determines the 
   permitted operations to the listed members.   
-* keys directory (!id_dir) - a directory that contains keys assigned to different members and are saved on the node.
-* pem directory (!pem_dir) - a directory that contains certificates and their associated keys. 
+* _keys directory_ (`!id_dir`) - a directory that contains keys assigned to different members and are saved on the node.
+* _pem directory_ (`!pem_dir`) - a directory that contains certificates and their associated keys. 
 
 ### Prerequisites and reset
 
@@ -59,34 +59,34 @@ This document details how to configure a network using a master node.
 If a blockchain is used, the master node configuration is ignored.  
 
 Use the following commands to configure each operator node:
-<pre> 
+```anylog
 set authentication off
 master_node = 10.0.0.25:2048        # Replace with the proper address
-</pre>
+```
 
 Use the following commands to configure the master node:
-<pre> 
+```anylog 
 set authentication off
 connect dbms sqlite !db_user !db_port blockchain
-</pre>
+```
 
 Use the following commands to delete all policies on a master node:
-<pre> 
+```anylog 
 run client !master_node "drop table ledger where dbms = blockchain"
 run client !master_node "create table ledger where dbms = blockchain"
 run client !master_node "blockchain delete local file"
-</pre>
+```
 
 Use the following command to delete the local blockchain file on each operator node:
-<pre> 
+```anylog 
 blockchain delete local file
-</pre>
+```
 
 Use the following commands to delete existing issued keys on each node:
-<pre> 
+```anylog 
 system del !id_dir/*.* /q      # Windows
 system rm !id_dir/*.*          # linux
-</pre>
+```
 
 ### Validate policy structure
 Policies are represented by JSON structures. The root of the JSON has one attribute and is considered the ***policy type***.    
@@ -94,13 +94,13 @@ When a variable is assigned with a policy, the policy info is presented on the C
 exclamation point (like: ***!member*** whereas "member" is the variable name).  
 The command ***json*** presents the policy on the CLI only if the policy is in correct JSON structure.  
 For example:
-<pre> 
+```anylog 
 json !member
-</pre>
+```
 Adding the keyword test, returns ***true*** if the structure is correct, otherwise ***false*** is returned.
-<pre> 
+```anylog 
 json !member test
-</pre>
+```
 
 
 ## Required attributes in each policy
@@ -110,7 +110,7 @@ The following chart summarizes the policies declared to authenticate users and v
 
 | Policy Type | Role                                | Attribute   | Required |  Comments       |
 | ------------| ----------------------------------- | ----------- | -------- | ---------------- |
-| member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value ***root***. Multiple members can have ***node*** or ***user*** as the value for the attribute ***type***|
+| member      | Declares a member node or a user    | type        | Yes      | Only a single policy can have the value _**root_** Multiple members can have _**node**_ or _**user**_ as the value for the attribute _type_|
 |             |                                     | public_key  | Yes      | Unique - multiple member policies with the same public key are not allowed   |
 | Permissions | Determines commands and databases allowed | name        | Yes      | A unique name assigned to the permissions policy |
 |             |                                     | enable      | Yes      | A list with commands allowed, '*' represents all commands |
@@ -158,9 +158,9 @@ The following chart details the processes demonstrated:
 
 ### Step 1 - Generate keys for the Root User
 
-<pre> 
+```anylog
 id create keys where password = abc and keys_file = root_keys
-</pre>
+```
  
 A file (named ***root_keys***) with the public and encrypted private key is created in the keys' directory (!key_dir).  
 These are the keys of the root user.  
@@ -175,7 +175,7 @@ This policy can include any information which is representative of the root user
 
 In the example, we add a name (rachel) to the policy. It allows to reference the policy by the name, however, ***name*** is not a required attribute.
  
-```<pre> 
+```anylog 
 <member = {"member" : {  
     "type" : "root",  
     "name"  : "rachel"  
@@ -191,22 +191,22 @@ blockchain insert where policy = !member and local = true  and master = !master_
 
 Generate keys to the 2 operator nodes.  
 
-Use CLI(oper.1) to generates keys to operator #1:
-<pre> 
+**Use CLI(oper.1)** to generates keys to operator #1:
+```anylog
 id create keys for node where password = demo1
-</pre>
+```
 
-Use CLI(oper.2) to generates keys to operator #2:
-<pre> 
+**Use CLI(oper.2)** to generates keys to operator #2:
+```anylog 
 id create keys for node where password = demo2
-</pre>
+```
 
 ### Step 4 - Create member policies to the operator nodes
 
 Create a member policy to the 2 operator nodes.
 
-Use CLI(oper.1) to create the member policy of operator #1:
-```
+**Use CLI(oper.1)** to create the member policy of operator #1:
+```anylog
 <member = {"member" : {
     "id"   : "node_001",
     "type" : "node",
@@ -218,8 +218,8 @@ member = id sign !member where password = demo1
 json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
-Use CLI(oper.2) to create the member policy of operator #2:
-```
+**Use CLI(oper.2)** to create the member policy of operator #2:
+```anylog
 <member = {"member" : {
     "id"   : "node_002",
     "type" : "node",
@@ -234,19 +234,19 @@ blockchain insert where policy = !member and local = true  and master = !master_
 
 ### Step 5 - Generate keys to a user
 
-Use CLI(oper.1) to generate keys for a user named Roy. The keys are stored in the keys directory:
-<pre> 
+**Use CLI(oper.1)** to generate keys for a user named Roy. The keys are stored in _keys directory_:
+```anylog
 id create keys where password = 123 and keys_file = roy
-</pre>
+```
 
 ### Step 6 - Create a member policy to the user
 
-Use CLI(oper.1) to create a member policy for a user named roy.    
-Notes:  
-1) The policy type is ***user*** to differentiate from the type ***root*** (that identifies the policy of the root member).  
-2) The public key is added to the policy when the policy is signed. No 2 members policies with the same public key is allowed. 
+**Use CLI(oper.1)** to create a member policy for a user named roy.    
+**Notes**:  
+  1) The policy type is ***user*** to differentiate from the type ***root*** (that identifies the policy of the root member).  
+  2) The public key is added to the policy when the policy is signed. No 2 members policies with the same public key is allowed. 
 
-```
+```anylog
 <member = {"member" : {
     "id"   : "user_001",
     "type" : "user",
@@ -261,9 +261,9 @@ blockchain insert where policy = !member and local = true  and master = !master_
 
 ### Step 7 - Create a permission policy with no restrictions
 
-Use CLI(oper.1) to create a permission policy that has no restrictions.  
+**Use CLI(oper.1)** to create a permission policy that has no restrictions.  
 This policy enables all commands and allows to operate with all databases.
-```
+```anylog
 <permissions = {"permissions" : {
     "name" : "no restrictions",
     "databases" : ["*"],
@@ -274,9 +274,9 @@ blockchain insert where policy = !permissions and local = true  and master = !ma
 ```
 
 ### Step 8 - Assign privileges to a user
-Use CLI(oper.1) - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
+**Use CLI(oper.1)** - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
 The assignment process and ***assignment policy*** are detailed below:  
-```
+```anylog
 permission_id = blockchain get permissions where name = "no restrictions" bring ['permissions']['id']
 member_user = blockchain get member where name = roy bring ['member']['public_key']
 
@@ -294,12 +294,12 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 
 Notes: 
 1) The assignment policy needs to be signed by the root user or a user with permissions to sign assignment policies.
-2) After the assignments, as Roy is assigned to a no resrictions policy, Roy is permitted to sign assignments policies.
+2) After the assignments, as _Roy_ is assigned to a no restriction policy, _Roy_ is permitted to sign assignments policies.
 
 ### Step 9 - Create a permission policy with limited permissions
-Use CLI(oper.1) to generate a ***permission*** policy with limited privileges.
+**Use CLI(oper.1)** to generate a **permission** policy with limited privileges.
 
-```
+```anylog
 <permissions = {"permissions" : {
     "name" : "node basic permissions",
     "databases" : ["*", "-lsl_demo"],
@@ -323,7 +323,7 @@ Notes:
 
 ### Step 10 - Assign limited privileges to nodes
 Use CLI(oper.1) - a user with privileges to assign permissions, provides limited permissions to the operator nodes.
-In the example below, roy assignes the policy named ***node basic permissions*** to the 2 operator nodes:
+In the example below, roy assign the policy named _node basic permissions_ to the 2 operator nodes:
 
 ```
 member_node1 = blockchain get member where id = node_001 bring ['member']['public_key']
@@ -348,18 +348,18 @@ In this demo, each node's private key is stored locally and protected by the loc
 In the example below, the password 123 is assigned to operator 1 and 456 is assigned to operator 2.      
 
 On CLI(oper.1):
-<pre> 
+```anylog
 set local password = 123
-</pre>
+```
 
 On CLI(oper.2):
-<pre> 
+```anylog 
 set local password = 456
-</pre>
+```
 
 Note:
 * If a local password exists, an error is returned if the nodes restarts, and the node is provided with incorrect password.
-* If the local password is lost, all the relevant files in the ***keys directory*** needs to be deleted, and the 
+* If the local password is lost, all the relevant files in the _keys directory_ needs to be deleted, and the 
   node needs to be assigned with new keys and a new assignment policy. 
 
 ### Step 12 - Save the node's private key 
@@ -367,16 +367,16 @@ The private key can be stored on the node and protected using the local password
 The following examples stores the private key on each node:
 
 On CLI(oper.1):
-<pre> 
+```anylog
 set private password = demo1 in file
-</pre>
+```
 
 On CLI(oper.2):
-<pre> 
+```anylog 
 set private password = demo2 in file
-</pre>
+```
 
-Note: The key is stored in a file called ***auth.id*** in the ***keys directory***.
+Note: The key is stored in a file called `auth.id` in _keys directory_.
 
 ### Step 13 - Enable authentication
 Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
@@ -388,9 +388,9 @@ is granted by the root user, or by a user which is in a chain of permitted autho
 Enable authentication on each node using the following command:
 
 On CLI(oper.1.2):
-<pre> 
+```anylog
 set node authentication on
-</pre>
+```
 
 Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
 
@@ -400,15 +400,15 @@ CLI(master) designates the master node command line.
 
 ### Generate keys for the Master Node
 On CLI(master) 
-<pre> 
+```anylog
 id create keys for node where password = masterpswd
-</pre>
+```
  
 
 ### Master node policy
 On CLI(master) 
  
-```<pre> 
+```anylog
 <member = {"member" : {  
     "type" : "node",  
     "name"  : "master_node"  
@@ -422,7 +422,7 @@ blockchain insert where policy = !member and local = true  and master = !master_
 ### Create a permission policy for the master node
 On CLI(opr.1) 
 
-```
+```anylog
 <permissions = {"permissions" : {
     "name" : "master node permissions",
     "enable" : [ "file", "event", "echo", "print"]
@@ -436,7 +436,7 @@ blockchain insert where policy = !permissions and local = true  and master = !ma
 ### Assign privileges to the master node
 On CLI(oper.1)
 
-```
+```anylog
 permission_id = blockchain get permissions where name = "master node permissions" bring ['permissions']['id']
 member_node = blockchain get member where name = master_node bring ['member']['public_key']
 
@@ -454,71 +454,72 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 
 ### Provide the local password
 On CLI(master):
-<pre> 
+```anylog
 set local password = masterlocpsswd
-</pre>
+```
 
 ### Save the master node private key 
 On CLI(master):
-<pre> 
+```anylog
 set private password = masterpswd in file
-</pre>
+```
 
 ### Enable authentication
 On CLI(master):
-<pre> 
+```anylog
 set node authentication on
-</pre>
+```
 
 
 ## Demo authorized and non-authorized commands
 
 Get the address of each operator:
 On CLI(oper.1):
-<pre> 
+```anylog
 AL +> get connections
 Type      External Address  Local Address
 ---------|-----------------|--------------|
 TCP      |73.222.38.13:7848|10.0.0.78:7848|
 REST     |10.0.0.78:7849   |10.0.0.78:7849|
 Messaging|73.222.38.13:7850|10.0.0.78:7850|
-</pre>
+```
+
 On CLI(oper.2):
-<pre> 
+```anylog 
 AL +> get connections
 Type      External Address  Local Address
 ---------|-----------------|--------------|
 TCP      |73.222.38.13:3048|10.0.0.78:3048|
 REST     |10.0.0.78:3049   |10.0.0.78:3049|
 Messaging|73.222.38.13:7855|10.0.0.78:7855|
-</pre>
+```
 
 ### Examples permitted messages
 On CLI(oper.1):
-<pre> 
+```anylog
  run client 10.0.0.78:3048 get status
  run client 10.0.0.78:3048 echo 'hello world'
  run client 10.0.0.78:3048 get status
  run client 10.0.0.78:3048 get databases
-</pre>
+```
 On CLI(oper.2):
-<pre> 
+```anylog
  run client 10.0.0.78:7848 get status
  run client 10.0.0.78:7848 echo 'hello world'
  run client 10.0.0.78:7848 get status
  run client 10.0.0.78:7848 show databases
-</pre>
+```
 ### Examples denied messages
-On CLI(oper.1):
-<pre> 
+**On CLI(oper.1)**:
+```anylog 
  run client 10.0.0.78:3048 system ls
  run client 10.0.0.78:3048 set authentication off
-</pre>
-On CLI(oper.2):
-<pre> 
+```
+**On CLI(oper.2)**:
+```anylog
  run client 10.0.0.78:7848 system ls
  run client 10.0.0.78:7848 set authentication off
-</pre>
+```
 
 ## Messaging using the private key of a user
 
@@ -526,17 +527,17 @@ A user may want to send a messages using his authorization.
 For example, an administrator logins to a node and needs to issue a query, or a command which is not permitted by 
 the permission policy assigned to the node.  
 The user can leverage his assigned permissions as in the example below:
-<pre> 
+```anylog
 private_key = get private key where keys_file = roy
 set signatory where key = !private_key and password = 123  and name = roy
 get signatory   # Validate signatory change from the node to the user
 run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the command will be executed
-</pre>
+```
 
 ## Using certificates
 
 This process makes AnyLog a Certificate Authority (CA) that issues Client Certificates to 3rd parties applications.   
-This process id detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) section.  
+This process id detailed in the [Using SSL Certificates](authentication.md#using-ssl-certificates) section.  
 Client Certificates enable the following:  
 * Only clients holding certificates can communicate with the network nodes.
 * A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
@@ -546,22 +547,22 @@ Client Certificates enable the following:
 
 Notes:
 This setup allows Secure Socket Layer (SSL) between a server (AnyLog Node) and a client (the 3rd party application).
-Bekow is an example of the Server Side (AnyLog) REST sockets configuration to allow SSL Certificates: 
-<pre> 
+Below is an example of the Server Side (AnyLog) REST sockets configuration to allow SSL Certificates: 
+```anylog
 run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
-</pre>
+```
 Use the following command to determine how the AnyLog Node is configured to allow SSL:
-<pre> 
+```anylog
 get rest server info
-</pre>
+```
 
 ### Example
 
-The following example assumes that the example certificates detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) 
+The following example assumes that the example certificates detailed in the [Using SSL Certificates](authentication.md#using-ssl-certificates) 
 section are available in the pem directory (!pem_dir). 
 
 ### Generate a Member Policy representing the issued certificate:
-```
+```anylog
 public_key = get public string where keys_file = !pem_dir/server-acme-inc-public-key
 
 <member = {"member" : {
@@ -576,7 +577,7 @@ blockchain insert where policy = !member and local = true  and master = !master_
 ```
 
 ### Generate a Permission Policy for 3rd patties applications:
-```
+```annylog
 <permissions = {"permissions" : {
     "name" : "application basic permissions",
     "tables" : ["lsl_demo.temperature_sensor", "lsl_demo.ping_sensor"],
@@ -591,7 +592,7 @@ blockchain insert where policy = !permissions and local = true  and master = !ma
 
 ### Assign the Permission Policy to the Member Policy
 
-```
+```anylog
 member_certificate = blockchain get member where type = certificate and name = acme bring ['member']['public_key']
 
 permission_id = blockchain get permissions where name = "application basic permissions" bring [permissions][id]
@@ -609,35 +610,39 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 
 ### Query permissions by a public 
 
-<pre> 
+```anylog
 public_key = get public key where keys_file = !pem_dir/server-acme-inc-public-key
 get permissions for member !public_key
-</pre>
+```
 
 ### Example of a third part application - cURL
 
-<pre> 
-curl --location --request GET https://10.0.0.78:7849 --header "User-Agent: AnyLog/1.23" --header "command: get status" --cert "server-acme-inc-private-key.crt" --key "server-acme-inc-private-key.key"
-</pre>
+```shell
+curl --location --request GET https://10.0.0.78:7849 \
+  --header "User-Agent: AnyLog/1.23" \
+  --header "command: get status" \
+  --cert "server-acme-inc-private-key.crt" \
+  --key "server-acme-inc-private-key.key"
+```
 
 ### Example of a third part application - AnyLog Remote CLI
 
 Use the Setting Tab to configure the REST calls as follows:
 * Enable CA Certificate
-* Update PEM file to use: ```ca-anylog-public-key.crt```
-* Update CRT file to use: ```server-acme-inc-public-key.crt```
-* Update KEY file to use: ```server-acme-inc-private-key.key```
+* Update PEM file to use: `ca-anylog-public-key.crt`
+* Update CRT file to use: `server-acme-inc-public-key.crt`
+* Update KEY file to use: `server-acme-inc-private-key.key`
 
 ### Example of a third part application - Grafana
 
-Note: Configuring Grafana is detailed in the [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) section.  
+Note: Configuring Grafana is detailed in the [Using Grafana](northbound%20connectors/using%20grafana.md) section.  
 
 To use Certificate, update the Grafana JSON data source page as follows:
 * Update the AnyLog URL to use HTTPS (Encrypted Connection).
 * Set ***TLS Client Auth*** to ON
 * Set ***Skip TLS Verify*** to ON
 * In the ***TLS/SSL Auth Details*** section:
-    * Update the ***Client Cert*** with the content of the ```server-acme-inc-public-key.crt``` file.
-    * Update the ***Client Key*** with the content of the ```server-acme-inc-private-key.key``` file.
+    * Update the ***Client Cert*** with the content of the `server-acme-inc-public-key.crt` file.
+    * Update the ***Client Key*** with the content of the `server-acme-inc-private-key.key` file.
     
 With this setup, ***Save & Test*** needs to return a green message with the text: ***Data Source is working***.

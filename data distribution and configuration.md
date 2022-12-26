@@ -110,7 +110,7 @@ For example, by configuring the nodes to use the blockchain synchronizer using t
 ```anylog
 run blockchain sync
 ```
-Information on the Synchronizer process is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
+Information on the Synchronizer process is available at [background processes](background%20processes.md#blockchain-synchronizer).  
 The Synchronizer process will automatically update the metadata by the policies declared.
 To manually force the updated policies, use the command:
 ```anylog
