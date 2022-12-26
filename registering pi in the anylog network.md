@@ -8,7 +8,7 @@ the data is retrieved and evaluated as if it is being stored in a relational dat
 To make PI a member of the AnyLog network, the PI data is mapped to one or more relational tables.  
 When a query in SQL is issued against a relational table, the relevant mapped PI data becomes part of the returned data set.  
 
-The mapping of PI data to a relational schema is done using JSON objects and it assumes the following:  
+The mapping of PI data to a relational schema is done using JSON objects, and it assumes the following:  
 a) PI data is Hierarchical - PI objects are organized in a tree structure.  
 b) Attributes in the hierarchy can be mapped to a Relational Table (or multiple tables) and users can issue SQL queries against these table as if the data is organized in a relational database.  
 
@@ -46,7 +46,7 @@ For each issued query to ***lsl_demo*** and table ***ping_sensor***, the data co
 the participating PI attributes would be considered as columns in the ***ping_sensor*** table.
 
 Example:
-```json
+```anylog
 operator = {"operator" : {
     "id" : "0x184df883229af3b3b978493008345de3377723",
     "dbms" : "lsl_demo",
@@ -71,7 +71,7 @@ operator = {"operator" : {
 The first part of the JSON structure declares the AnyLog Operator instance that manage the PI instance.  
 This section of the JSON is the same as a declaration of an Operator using a relational database.
 The ***"mapping"*** section maps the PI data to the relational view.  
-In this example, the data of database "LitSanLeandro" in the AF called "XOMPASS-LITSL" is mapped to the "ping_sensor" table in the logical database of "lsl_demo".
+In this example, the data of database `LitSanLeandro` in the AF called "XOMPASS-LITSL" is mapped to the "ping_sensor" table in the logical database of "lsl_demo".
 The sensor data from sensors called "ping" belonging to element "ADVA ALM OTDR" are mapped to the "ping_sensor" table such that:  
 * Sensor Timestamp is mapped to column timestamp in the "ping_sensor" table.
 * Sensor Value is mapped to column value in the "ping_sensor" table.

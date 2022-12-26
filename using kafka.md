@@ -23,7 +23,7 @@ run client () sql litsanleandro format = json:output and stat  = false and dest 
 ```
 
 Note:
-* The format directive ***json:output*** organizes each set of timestamp and value (that are returned by the query) in JSON.
+* The format directive _json:output_ organizes each set of timestamp and value (that are returned by the query) in JSON.
 * The destination is identified by the key _Kafka_ followed by the Kafka configured IP and Port (dest = kafka@198.74.50.131:9092).
 * The Kafka topic that is associated with the data in the example above is `ping_data`
 

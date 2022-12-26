@@ -53,7 +53,7 @@ curl --location --request GET '10.0.0.78:7849' \
 
 ### Using PUT to add data to nodes in the network.
 
-Details are provided in  the section [Data transfer using a REST API](../data%20management/adding%20data.md#data-transfer-using-a-rest-api).
+Details are provided in  the section [Data transfer using a REST API](adding%20data.md#data-transfer-using-a-rest-api).
 
 
 ### Using POST request to execute an AnyLog commands
@@ -75,7 +75,7 @@ curl --location --request POST '10.0.0.78:7849' \
 
 ## Headers setup
 
-The header setup for the PUT command is detailed in the section [Configuring the Sender Node](../data%20management/adding%20data.md#configuring-the-sender-node--a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network--).  
+The header setup for the PUT command is detailed in the section [Configuring the Sender Node](adding%20data.md#configuring-the-sender-node--a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network--).  
 The header setup for GET and POST is the following:
 
 | Key        | Value  |

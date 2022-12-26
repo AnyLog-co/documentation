@@ -15,7 +15,7 @@ This chapter covers the following topics:
 * The [metadata layer](#the-metadata)
 * Monitoring the tables in a local database
 
-Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#executing-queries-against-the-nodes-in-the-network) section.
+Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#query-nodes-in-the-network) section.
 
 # Configuring a local database
 
@@ -24,7 +24,7 @@ are [PostgresSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/
 Users determine which physical database to use and a node operates indifferently regardless of the physical database selected.  
 When a logical database is created, users name the physical database that is assigned to the logical database. The association
 will host the database tables in the physical database associated with the logical database.  
-Usually, users will leverage SQLite with nodes that are low in compute power and PostgreSQL with stronger nodes.  
+Usually, users will leverage SQLite with nodes that are low in compute power and PostgresSQL with stronger nodes.  
 Users can leverage multiple physical databases for different logical databases within the same nodes.
 In addition, different nodes in the network can use different physical databases for the same logical database.
 
@@ -49,7 +49,7 @@ connect dbms [db name] where type = [db type] and user = [db user] and password 
 **Note 1**: For SQLite, the logical name of the database can include the path to maintain the data. Otherwise, the database 
 data is maintained, for each table in the database, in the default location defined by `!dbms_dir`.    
 
-**Note 2**: If 'memory' is set to _true_, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgreSQL).
+**Note 2**: If 'memory' is set to _true_, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgresSQL).
 
 **Examples**:
 ```anylog 
@@ -60,7 +60,7 @@ connect dbms sensor_data where type = psql and user = anylog and password = demo
 
 ## Disconnecting from a database
 
-Users can issue the `disconnect dbms` command to disconnect from a connected database. This command is usefull to switch 
+Users can issue the `disconnect dbms` command to disconnect from a connected database. This command is useful to switch 
 between different physical databases that are serving the same logical database.
 
 **Usage**:
@@ -169,7 +169,7 @@ The command `sql` directs the node to process a sql command on a local node. The
 sql [dbms name] [query options] [sql command or select statement]
 ```  
 * [dbms name] is the logical DBMS containing the data.
-* [query option] are formatting instructions and output directions ([and are detailed below](#query-options)).
+* [query option] are formatting instructions and output directions ([and are detailed below](#issuing-a-query-to-the-network)).
 * [SQL command] a SQL command including a SQL query.
 
 **Example**: issuing a SQL command on a local node
@@ -198,7 +198,7 @@ run client () sql [dbms name] [query options] [select statement]
 **Note 1**: The SQL queries that are supported by the network protocol are limited to a subset of queries.
 **Note 2**: The network protocol also supports pre-defined functions.
 
-Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](queries.md#executing-queries-against-the-nodes-in-the-network).
+Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](queries.md#query-nodes-in-the-network).
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
@@ -279,7 +279,7 @@ get rows count where dbms = [dbms name] and table = [table name] and format = [f
 ```  
 
 **Details**:
-* [dbms name] - the name of the database that hosts the tablle of interest.
+* [dbms name] - the name of the database that hosts the table of interest.
 * [table name] - the name of the table of interest.
 * [format type] -An optional parameter to specify the format of the reply info. The format options are _table_ (default) and _json_.
 * [group type] -An optional parameter to specify if rows are returned per partition or aggregated as a single value for each table.
