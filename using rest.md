@@ -37,18 +37,18 @@ AnyLog commands are supported using the _HTTP_ methods `GET`, `PUT` and `POST`.
 
 #### Examples
 
-<pre>
+```anylog
 curl --location --request GET '10.0.0.78:7849' \
 --header 'destination: network' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: sql orics "select count(*) from heater_temperature_1"'
-</pre>
+```
 
-<pre>
+```anylog
 curl --location --request GET '10.0.0.78:7849' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: blockchain get operator where company = anylog'
-</pre>
+```
 
 
 ### Using PUT to add data to nodes in the network.
@@ -67,11 +67,11 @@ POST supports all other commands. Some examples are:
 |               | blockchain       | Manage metadata commands (note the `blockchain get` is supported using GET.  |
 
 #### Example
-<pre>
+```anylog
 curl --location --request POST '10.0.0.78:7849' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: reset error log'
-</pre>
+```
 
 ## Headers setup
 

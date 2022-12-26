@@ -18,16 +18,16 @@ On the AnyLog instance, messages are mapped to JSON structures and aggregated to
 The message data on the AnyLog instance is treated as ***streaming data***, this process is explained at [File Mode and Ssreaming Mode](adding%20data.md#file-mode-and-streaming-mode).
 
 ## The command structure
-<pre>
+```anylog
 run mqtt client where [list of options]
-</pre>
+```
 The list of options are represented by key = value' pairs and separated by an 'and'. 
 Providing the ***broker*** value is mandatory. ALl the other fields are optional depending on the broker setting and how the messages need to be processed.       
 The details of the topic are enclosed in parentheses and the MQTT client declared on the command line could subscribe to multiple topics.    
 The command format with subscriptions to multiple topics is as follows:  
-<pre>
+```anylog
 run mqtt client where [connection parameters] and [Config parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
-</pre>
+```
 
 The subscription details of each topic are enclosed in the parenthesis and include 3 types of parameters:    
 1. Connection Params - providing the information that allows to connect to the broker.  
@@ -104,9 +104,9 @@ The chart below summarizes the information extracted from each message:
 ***Retrieving column values***  
 The columns values pulled from the message are assigned to a new JSON structure which is the structure that creates and updates the database tables.  
 The format declaring the columns and their values is the following:
-<pre>
+```anylog
 column.[column name].[data type] = [bring command]
-</pre> 
+``` 
 ***column name*** - The name of the column that is used in the database table.    
 ***data type*** - The data type to use. Supported data types are the following: ***str, int, float, timestamp, bool***.  
 
@@ -118,43 +118,43 @@ The ***column.name.type*** groups the following:
 * A bring command that details how to extract the column data from the source data.  
 There are 2 ways to detail the association:  
   1.  identify column name and data type with the bring command and expressed as follows:
-    <pre>
+    ```anylog
     column.[column name].[column type] = [bring command]
-    </pre> 
+    ``` 
     In the example below, the column **value** is assigned with a float data type and is associated with data retrieved from the source data using the bring command.   
-    <pre>
+    ```anylog
     column.value.float = "bring [readings][][value]"
-    </pre> 
+    ``` 
   2. identify a column name. The column type and the value are retrieved from the source data using the bring command and expressed as follows:
-    <pre>
+    ```anylog
     column.[column name] = (value = [bring command] and type = [bring command])
-    </pre> 
+    ``` 
     In the example below, the column **value** is associated with data type and value retrieved from the source data:   
-    <pre>
+    ```anylog
     column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
-    </pre> 
+    ``` 
     
 By default, an error is returns if the bring command does not return a value.  
 The keyword ***optional*** assigned to ***true*** designates that if the bring command fails, the process continues without returning an error.  
 Example:
-    <pre>
+    ```anylog
     column.info=(type=str and value="bring [info]" and optional=true)
-    </pre> 
+    ``` 
 
 ***Examples - associating published data with the needed schema***
 
 Example 1 - assigning the name ***machines_data*** as the database name:
-<pre>
+```anylog
 dbms = machines_data
-</pre> 
+``` 
 Example 2 - retrieving the machine name and the serial number from the message as the table name:
-<pre>
+```anylog
 table = "bring [metadata][machine_name] _ [metadata][serial_number]"
-</pre> 
+``` 
 Example 3 - retrieving the timestamp and value from the message and mapping the retrieved values to columns in the table.
-<pre>
+```anylog
 column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
-</pre> 
+``` 
 
 
 A complete example is provided [below](#example).
@@ -176,80 +176,80 @@ Unless modified on the command line, the default locations are used. The command
 When a message is processed, it is placed in the AnyLog internal buffers. Multiple messages that update the same table are organized as a JSON file that is placed in the designated directory for processing.    
 The amount of data in each file depends on thresholds based on time and file size.  
 The time thresholds are enforced by the ***Streaming*** process. To enable the streaming process execute the following command:
-<pre>
+```anylog
 run streamer 
-</pre> 
+``` 
 More information on the Streamer process is available at the [Streamer Process](background%20processes.md#streamer-process) section.  
 Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).      
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
 
 ***Terminating Clients***  
 * To terminate all the MQTT clients use the command: 
-<pre>
+```anylog
 exit mqtt
-</pre>
+```
 * To terminate a particular client use the command (***n*** is the client ID):
-<pre>
+```anylog
 exit mqtt [n]
-</pre>
+```
 
 ### View client status
   
 * To view status and configuration of all clients use the following command:
-<pre>
+```anylog
 get msg clients
-</pre>    
+```    
 * To view the status and configuration of a particular client use the command (***n*** is the client ID): 
-<pre>
+```anylog
 get msg client [n]
-</pre>
+```
 * To view statistics per topic of all clients use the following command:
-<pre>
+```anylog
 get msg clients statistics
-</pre>    
+```    
 * To view statistics per each topic of a particular client use the command (***n*** is the client ID): 
-<pre>
+```anylog
 get msg client statistics [n]
-</pre>
+```
 * To view the streaming data status, use the following command:
-<pre>
+```anylog
 get streaming
-</pre>    
+```    
 
 ### View summary of AnyLog processes as a local broker
 Users can see the summary of messages processed on AnyLog as a broker using the following command:
-<pre>
+```anylog
 get local broker
-</pre>
+```
 Note: this command only provides statistics on data published using the broker IP and Port. 
 Data that is published using "local", is not included in the ***get local broker*** command statistics.
 
 ### Example
 The example below connects to a broker to pull data assigned to a topic.
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 
 
 ## Publishing
 
 Users can publish a message to a particular topic in a broker using the following command:  
-<pre>
+```anylog
 mqtt publish where broker = [url] and port = [port value] and user = [user name]  and password = [password name] and topic = [topic] and qos = [value] and message = [published message]
-</pre>
+```
 
 When the broker and the publishing node are the same node, users can define the broker as ***local*** and transfer the data 
 to the broker directly avoiding the networking overhead. The example below transfers data when the publisher and broker are 
 on the same node:
-<pre>
+```anylog
 mqtt publish where broker = local and topic = [topic] and qos = [value] and message = [published message]
-</pre>
+```
 
 Example:  
 Publishing "Hellow World" to a broker:
-<pre>
+```anylog
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
-</pre>
+```
 
 ## Debugging
 
@@ -265,15 +265,15 @@ When pulling data from third parties brokers, users are able to enable the MQTT 
 This option has no impact if AnyLog node is the broker.
 Enabling the on_log() callback is done on the  ***run mqtt client*** call with the ```log = true``` option.  
 Example:
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 
 #### Display of the messages being processed
 Users are able to display the incoming messages using the following command:
-<pre>
+```anylog
 set mqtt debug [on/off]
-</pre>
+```
 * on - Sends incoming messages and the processing status to the stdout.
 * off - disables the debug functionality.
 
@@ -281,27 +281,27 @@ set mqtt debug [on/off]
 Users are able to disable the AnyLog processing and flush incomming messages to files.  
 The name of the file is based on the broker ID and the topic associated with the message.    
 The following example subscribes to the topic ***anylog*** and writes all the incoming messages to a file in the watch directory.    
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = anylog
-</pre>
+```
 
 #### Updating a log file with messages that were not successfully processed
 By setting the log_error option to true, messages that were not successfully processed will be written to a log file.  
 The name of the file starts with "err_" and extended by the broker ID and the topic associated with the message.  
 The log file is written to the error directory.  
 Example:  
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and log_error = true and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 
 ####  Subscribing to all topics
 By setting the topic to the pound sign (#), all published messages are considered such that:    
 If the topic is defined - the message is processed according to the subscription definitions.  
 If the topic is not defiled, the message is flushed to a log file.  
 Example:  
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = "#"
-</pre>
+```
 
 
 ## Demo - Subscribe and Publish
@@ -310,16 +310,16 @@ This demo publishes and subscribes to a topic called ***test*** on a MQTT manage
 CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the MQ Telemetry Transport protocol, MQTT, which provides lightweight methods of carrying out messaging using a publish/subscribe message queueing model.  
 
 ### Enable the streamer process:
-<pre>
+```anylog
 run streamer 
-</pre> 
+``` 
 Info on the ***run streamer*** command is available in the [Streamer Process](background%20processes.md#streamer-process) in the ***Background Processes" section.
 
 ### Subscribing to the topic:
 
-<pre>
+```anylog
 run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 
 ### Publishing time series data event to a broker:
 
@@ -335,24 +335,24 @@ run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user 
                     "serial_number":"1234567890"}}>
 ```
 ***Publish the message***  
-<pre>
+```anylog
 mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
-</pre>
+```
 
 ### View all client status  
-<pre>
+```anylog
 get msg clients
-</pre>    
+```    
 
 To view the ***Streaming Data*** buffers state use the following command:
-<pre>
+```anylog
 get streaming
-</pre>   
+```   
 
 ### View registered brokers
-<pre>
+```anylog
 get msg brokers
-</pre>
+```
  
 
 # Configuring an AnyLog node as a message broker
@@ -373,9 +373,9 @@ A detailed configuration example is available in the examples section - [Broker 
 ## The message broker configuration
 
 The AnyLog node serving as the broker is configured as follows:
-<pre>
+```anylog
 run message broker [ip] [port] [local ip] [Local port] [threads]
-</pre>
+```
 Details on the the ***run message broker*** command are available at the [Message Broker](background%20processes.md#message-broker)
 section in the [Background Processes](background%20processes.md#background-processes) document.
 
@@ -385,28 +385,28 @@ This process is identical to the  [Subscribing to a third party broker](#subscri
   whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
 
 usage:
-<pre>
+```anylog
 run mqtt client where broker = local and [Config parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
-</pre>
+```
 
 
 ## Example:
 
 ### Init an AnyLog node as a broker
-<pre>
+```anylog
 run message broker !external_ip 7850 !ip 7850 6
-</pre>
+```
 
 ### Subscribe to a topic and provide data mapping instructions
-<pre>
+```anylog
 run mqtt client where broker = local and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 Note: the key value pair ***broker=local*** replace the assignment of an IP and port (when 3rd parties brokers are used).    
 
 Use the following command to view messages processed on AnyLog as a broker:
-<pre>
+```anylog
 get local broker
-</pre>
+```
 
 ### Publish a message on the AnyLog node 
 ***Define a message***  
@@ -421,9 +421,9 @@ get local broker
                     "serial_number":"1234567890"}}>
 ```
 ***Publish the message***  
-<pre>
+```anylog
 mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
-</pre>
+```
 
 # AnyLog as a broker receiving REST commands 
 
@@ -434,17 +434,17 @@ This option requires 2 special settings:
 
 ## Subscription to topics published on the AnyLog node
 Usage:
-<pre>
+```anylog
 run mqtt client where broker = rest and user-agent = [detination API] and [Config parameters] and topic = (topic 1 params) and topic = (topic 2 params) .... 
-</pre>
+```
 Note: the key value pair ***broker=rest*** replaces the assignment of an IP and port (when 3rd parties brokers are used).    
 
 ## Example
 
 ### Subscribe to a topic and provide data mapping instructions
-<pre>
+```anylog
 run mqtt client where broker = rest and user-agent=anylog and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-</pre>
+```
 
 ### Publish data using REST
 curl --location --request POST '10.0.0.78:7849' \
@@ -474,11 +474,11 @@ curl --location --request POST '10.0.0.78:7849' \
 ## Debugging the POST commands
 Users can enable trace to debug the POST calls.  
 The following command displays (on the AnyLog REST server) the REST command issued by a client.
-<pre>
+```anylog
 trace level = 1 run rest server 
-</pre>
+```
 
 The following command displays (on the AnyLog REST server) the REST command issued by a client including the header and the message body.
-<pre>
+```anylog
 trace level = 2 run rest server 
-</pre>
+```
