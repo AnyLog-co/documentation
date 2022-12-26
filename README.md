@@ -17,6 +17,7 @@ As we are in an early beta stage, this program is not available to all. To join 
   * [Getting Started](deploying%20nodes%20&%20AnyLog%20CLI/getting%20started.md) 
   * [Starting an AnyLog Instance](deploying%20nodes%20&%20AnyLog%20CLI/starting%20an%20anylog%20instance.md)
   * [Master Node](deploying%20nodes%20&%20AnyLog%20CLI/master%20node.md)
+  * [Network Configuration](deploying%20nodes%20&%20AnyLog%20CLI/network%20configuration.md)
   * [Understanding Background Processes](deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md)
   * [Using AnyLog CLI](deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md)
   * [Using REST](deploying%20nodes%20&%20AnyLog%20CLI/using%20rest.md)
