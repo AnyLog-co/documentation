@@ -24,10 +24,10 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
   * [Master Node](master%20node.md)
+  * [Node Configuration](node%20configuration.md)  
   * [Network Configuration](network%20configuration.md)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
-  * [Streaming Conditions](streaming%20conditions.md)
   * [Metadata Management](metadata%20management.md)
   * [Kubernetes & Docker Deployment of AnyLog](deployments)
     * [Docker Deployment](deployments/Docker)
@@ -52,21 +52,21 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **Monitoring AnyLog**
   * [General Monitoring](monitoring%20calls.md) 
   * [Monitoring Nodes](monitoring%20nodes.md)
+  * [Streaming Conditions](streaming%20conditions.md)
   * [Logging Events](logging%20events.md)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
   * [Monitoring Data](monitoring%20data.md)
   * [Monitoring File Status](managing%20data%20files%20status.md)
-  * [Managing Configurations](managing%20configuration.md)
-  
+    
 * **Querying Data**
-  * [Build Queries](queries.md)
+  * [Data Queries](queries.md)
   * [SQL Setup](sql%20setup.md)
   * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
   * [Querying Across the Network](network%20processing.md)
 
 * **Security & Authentication**
   * [Authentication](authentication.md)
-  * [Secure Network](Secure%20Network.md)
+  * [Secure Network](secure%20network.md)
     * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
     * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
 

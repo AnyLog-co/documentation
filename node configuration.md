@@ -1,4 +1,4 @@
-# Managing configurations
+# Node configuration
 
 Node configuration includes the update of the local dictionary, and the initiation of processes:  
 1) Updating the local dictionary - Updating the local dictionary of a node with the values that are needed by the node processes.
@@ -101,7 +101,7 @@ process from table where name = my_config and dbms = config_dbms and value = al_
 
 The AnyLog instance is initiated with command line arguments as follows:
 ```anylog
-anyLog process !anylog_path/AnyLog-Network/demo/dbms_config.al
+process !anylog_path/AnyLog-Network/demo/dbms_config.al
 ```
 
 `dbms_config` is a script file inside the folder `!anylog_path/AnyLog-Network/demo`.
