@@ -127,15 +127,15 @@ The JSON data is transferred using the data-raw part of the REST call and can in
 
 ```shell
 curl --location --request PUT '10.0.0.226:32149' \
---header 'type: json' \
---header 'dbms: test' \
---header 'table: table1' \
---header 'Content-Type: text/plain' \
---header 'User-Agent: AnyLog/1.23' \
--w "\n" \ 
---data-raw '[{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}, 
-             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}, 
-             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
+    --header 'type: json' \
+    --header 'dbms: test' \
+    --header 'table: table1' \
+    --header 'Content-Type: text/plain' \
+    --header 'User-Agent: AnyLog/1.23' \
+    -w "\n" \ 
+    --data-raw '[{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}, 
+                 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}, 
+                 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
 
 # Expected output: {"AnyLog.status":"Success", "AnyLog.hash": "0dd6b959e48c64818bf4748e4ae0c8cb" }   
 ```
