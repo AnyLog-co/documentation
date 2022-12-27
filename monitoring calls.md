@@ -1,7 +1,7 @@
 # Monitoring calls from external applications
 
 ## REST server configuration
-The command ***get rest server info*** provides the info on how the REST server is configured.
+The command `get rest server info` provides the info on how the REST server is configured.
 
 **Usage**: 
 ```anylog
@@ -45,10 +45,10 @@ anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11
 
 ## Get Streaming
 Data provided via REST APIs and message brokers passes to processing through internal buffers.
-The buffers are associated with database tables and the ***get streaming*** command provides information on the data 
+The buffers are associated with database tables and the `get streaming` command provides information on the data 
 that passes through these buffers.
 
-The command returns the data in a text format. Adding the key-value pair ***format = json*** returns the info in a JSON structure.
+The command returns the data in a text format. Adding the key-value pair _format=json_ returns the info in a JSON structure.
 
 **Usage**: 
 ```anylog
@@ -88,26 +88,26 @@ The non JSON reply has 2 sections showing configurations and statistics.
 # Get MSG Clients
 
 The `get msg clients` command provides statistics and details on the mapping of data to the tables structures.  
-The mapping is done using the command ***run mqtt client***, details are available at the [AnyLog as a broker receiving REST commands](message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
+The mapping is done using the command `run mqtt client`, details are available at the [AnyLog as a broker receiving REST commands](message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
 
 Usage: 
 ```anylog
 get msg clients 
 get msg client N
 ```
-N represents the subscription ID which is assigned for each ***run mqtt client*** call.
+N represents the subscription ID which is assigned for each `run mqtt client` call.
 if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
 
 The reply has 4 sections showing configurations and statistics.  
 
 **Section A attributes**:
 
-| Attribute name | Details  |
-| ------------- | ------------| 
-| Subscription | The subscription ID |
-| User | The ID of the user connecting to the broker (if the data is published on a broker), or ***unused*** if data is published via REST |
-| Broker | The URL of the broker, or ***rest*** if data is published via REST  |
-| Connection | The type of connection  |
+| Attribute name | Details                                                                                                                           |
+| ------------- |-----------------------------------------------------------------------------------------------------------------------------------| 
+| Subscription | The subscription ID                                                                                                               |
+| User | The ID of the user connecting to the broker (if the data is published on a broker), or _unused_ if data is published via REST |
+| Broker | The URL of the broker, or _REST_ if data is published via REST                                                                      |
+| Connection | The type of connection                                                                                                            |
 
 **Section B attributes**:
 
@@ -247,7 +247,7 @@ SQL Files Errors    |      0|         |          |         0|               |
 
 ## Get Operator Summary
 
-The ***get operator summary*** command provides summary information on the operator processes.  
+The `get operator summary` command provides summary information on the operator processes.  
 Usage
 ```anylog
 get operator summary
@@ -265,7 +265,7 @@ The returned info is the following:
 | Delta Rows | The number of rows processed by the Operator (in all logical tables) since the previous summary call |
 | Errors | The total number of errors (in all logical tables) |
 
-The ***get operator summary*** command can be placed on continuous display as follows: 
+The `get operator summary` command can be placed on continuous display as follows: 
 ```anylog
 continuous "get operator summary"
 ```

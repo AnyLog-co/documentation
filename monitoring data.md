@@ -3,7 +3,7 @@
 Nodes in the network can monitor data in 2 ways:  
 1.  By organizing the data in persistent storage in database tables that are hosted on operator nodes.
 This approach allows viewing current and historical data by issuing queries to the database tables. This process of adding data 
-    to tables is explained in the section: [Adding Data to Nodes in the Network](../deploying%20nodes%20&%20AnyLog%20CLI/adding%20data.md#adding-data-to-nodes-in-the-network).
+    to tables is explained in the section: [Adding Data to Nodes in the Network](adding%20data.md#adding-data-to-nodes-in-the-network).
     
 2. By configuring a node to monitor streaming/ingested data and track the recently added data. This process allows
 evaluating ingested data as it streams into the node and apply monitoring and alerts on the most recent data.
@@ -44,7 +44,7 @@ data monitor where dbms = dmci and intervals = 10 and time = 1 minute and time_c
 
 ## Retrieve the status of the monitored data
 
-The command ***get data monitored*** retrieves the monitored data.   
+The command `get data monitored` retrieves the monitored data.   
 **Example**:  
 ```anylog
 get data monitored

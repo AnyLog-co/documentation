@@ -5,7 +5,7 @@ to generate a destination JSON structure, such that the generated data can fit t
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
 needed data types and formats that are required in the destination tables.
 
-The mappings are defined in policies of types `_mapping_` that are saved in the shared metadata layer.  
+The mappings are defined in policies of types `mapping` that are saved in the shared metadata layer.  
 When source JSON structures are processed, the data is transformed using a set of _mapping_ policies that defines the mapping logic.
 
 ## The Source Data
@@ -21,7 +21,7 @@ Examples of mapping policies are provided [below](#creating-the-mapping-instruct
 
 Pulling the needed values from the source data is done using the `_bring_` command. A `_bring_` command 
 includes keys and transformation logic that is applied to the source JSON data to construct the destination format. 
-Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json data transformation.md#the--from-json-object-bring-command) section.  
+Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json%20data%20transformation.md#the--from-json-object-bring-command) section.  
 The `_bring_` commands are associated with source data in the following ways:
 1) The `run mqtt client` command associates the source data published with a topic to a `_bring_` command that provides the mapping logic. 
    This option is detailed [here](message%20broker.md#the-command-structure).
@@ -40,11 +40,11 @@ The chart below describes the sections of the policy.
 | readings      | String  |   No     | A key to a list of readings in the source JSON                                                                         |
 | schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions                                                                  |
 
-Note: The _if_ statement is detailed in the section [Conditional Execution](anylog commands.md#conditional-execution).   
+Note: The _if_ statement is detailed in the section [Conditional Execution](anylog%20commands.md#conditional-execution).   
 
 ### The schema section
 The schema is a dictionary whereas the target columns are the keys and each value is a dictionary representing the column's properties including the mapping instructions.  
-The ***schema*** sections are detailed in the chart below:
+The _schema_ sections are detailed in the chart below:
 
 | Key           | Data Type | Mandatory | Details                                                                                                                    |
 | ------------- | --------- | --------- |----------------------------------------------------------------------------------------------------------------------------|
@@ -57,13 +57,13 @@ Note: An error is returned if both - _bring_ and _default_ keys are not provided
 
 ### Data type supported
 
-* `string`
-* `integer`
-* `float`
-* `char`
-* `timestamp`
-* `bool`
-* `varchar`
+* _string_ (_str_)
+* _integer_
+* _float_
+* _char_
+* timestamp
+* _bool_
+* _varchar_
 
 ## Mapping blobs data
 Blob data, like images and video, can be designated to be treated efficiently.   
@@ -87,9 +87,9 @@ In this doc, we download the London air quality data from datahub and provide a 
 ## Prerequisite
 
 1) An AnyLog Operator node.  
-   Details on Operator configurations are available in the section [background processes](background processes.md#operator-process).
+   Details on Operator configurations are available in the section [background processes](background%20processes.md#operator-process).
 2) Define a physical database (i.e.: PostgresSQL or SQLite) to the logical database name (london). 
-   Details on database configurations are available in the section [Connecting to a local database](sql setup.md#connecting-to-a-local-database).
+   Details on database configurations are available in the section [Connecting to a local database](sql%20setup.md#connecting-to-a-local-database).
    
 ## Downloading the data
 
@@ -108,7 +108,7 @@ Notes:
 
  * More details on the REST GET command are available in the [AnyLog Commands section](anylog commands.md#rest-command).
    
- * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog commands.md#using-rest-command-to-retrive-data-from-a-data-source).
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog commands.md#using-rest-command-to-retrieve-data-from-a-data-source).
  
 
 ## Creating the mapping instructions
@@ -193,7 +193,7 @@ EdgeX is an open source platform that facilitates interoperability between devic
 
 ## Sending data to an AnyLog node from EdgeX 
 Data transfer from EdgeX to AnyLog can be done using REST calls or by publishing the data on an AnyLog node.
-Details are available at the [Using EdgeX](../southbound%20connectors/using%20EdgeX.md#using-EdgeX) section of the documentation.  
+Details are available at the [Using EdgeX](using%20edgex.md#using-EdgeX) section of the documentation.  
 The example below details a mapping process on a sample data detailed [below](#sample-data).
 
 ## The Mapping Policies

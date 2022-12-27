@@ -541,7 +541,7 @@ This process id detailed in the [Using SSL Certificates](authentication.md#using
 Client Certificates enable the following:  
 * Only clients holding certificates can communicate with the network nodes.
 * A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
-  * The private key is represented by a member policy (and the type attribute is with the value ***certificate***).
+  * The private key is represented by a member policy (and the type attribute is with the value _certificate_).
   * Using an assignment policy, the member policy is associated with a permission policy.
   * A message from a 3rd party to a node in the network is processed if the sender is authenticated and is with proper permissions.
 
@@ -639,10 +639,12 @@ Note: Configuring Grafana is detailed in the [Using Grafana](northbound%20connec
 
 To use Certificate, update the Grafana JSON data source page as follows:
 * Update the AnyLog URL to use HTTPS (Encrypted Connection).
-* Set ***TLS Client Auth*** to ON
-* Set ***Skip TLS Verify*** to ON
+* Set _TLS Client Auth_ to ON
+* Set _Skip TLS Verify_ to ON
 * In the ***TLS/SSL Auth Details*** section:
     * Update the ***Client Cert*** with the content of the `server-acme-inc-public-key.crt` file.
     * Update the ***Client Key*** with the content of the `server-acme-inc-private-key.key` file.
-    
-With this setup, ***Save & Test*** needs to return a green message with the text: ***Data Source is working***.
+
+![Grafana Authentication Example](imgs/Grafana_auth_image.png)
+
+With this setup, _Save_ & _Test_ needs to return a green message with the text: **Data Source is working**.

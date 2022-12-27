@@ -46,7 +46,7 @@ section in the [Background Processes](background%20processes.md#background-proce
 
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
 This process is identical to the [subscription process to 3rd parties MQTT brokers](message%20broker.md#subscribing-to-a-third-party-broker) 
-  whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword ***local***.  
+whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword _local_.  
   
 **Example**:
 ```anylog

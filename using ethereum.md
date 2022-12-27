@@ -19,7 +19,7 @@ With a hosted node, users connect to a 3rd party node that provides the local no
 The AnyLog network is agnostic to how Ethereum services are provided, in this document we use [Infura](https://infura.io/) hosted node.
 With Infura, users can connect to an Ethereum network and for testing purposes, to the Ethereum TestNet.
 
-***Note***: In the examples below, the accounts and keys are exposed and are not maintained in a secure way. In a deployment which 
+**Note**: In the examples below, the accounts and keys are exposed and are not maintained in a secure way. In a deployment which 
 is using the Ethereum MainNet, users should do the following:
 * Delegate private key creation and management to software clients (like [Geth](https://geth.ethereum.org/)) 
   or wallets (like [MetaMask](https://metamask.io/)). These projects provide a secure way to generate and handle private keys for blockchain interactions.

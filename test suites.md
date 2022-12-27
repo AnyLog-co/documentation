@@ -69,7 +69,7 @@ Any 2 files in test format can be compared such that:
 The `analyze output` command compares 2 test files, each represents the result set of a _test case_, 
 to determine if the test case was executed successfully.  
 
-Usage:
+**Usage**:
 ```anylog
 analyze output where file = [file path and name] and source = [file path and name] and option = time
 ``` 
@@ -79,7 +79,7 @@ _source_ - the path and file name to the source output that is trusted.
 _option_ (optional key - value pairs) - if **time** is added (option = time), the comparison will trigger a failure 
 if the execution time is slower than the recorded time in the source file.  
 
-Example:
+**Example**:
 ```anylog
 analyze output where file = !test_dir/test_file3.out and source = !test_dir/test_file2.out and option = time
 ``` 

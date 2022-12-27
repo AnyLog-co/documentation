@@ -32,7 +32,7 @@ run client (destination) blockchain push [JSON data]
 `_destination_` - the IP and Port of the master node.
 _JSON data_ - the policy to update.
 
-Additional information on the blockchain commands is available at [blockchain commands](../blockchain/blockchain%20commands.md).
+Additional information on the blockchain commands is available at [blockchain commands](blockchain%20commands.md).
 
 ## Synchronizing a local copy of the blockchain
 

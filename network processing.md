@@ -163,8 +163,8 @@ Usage:
 ```anylog
 run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 ```
-More details on the REST API are available at [using rest](../deploying%20nodes%20&%20AnyLog%20CLI/using%20rest.md#using-rest).  
-More details on setting a node as a REST server is available at [background processes](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#rest-requests).  
+More details on the REST API are available at [using rest](using%20rest.md#using-rest).  
+More details on setting a node as a REST server is available at [background processes](background%20processes.md#rest-requests).  
 
 ## Configuring a TCP server process
 This process makes each node a member in the AnyLog Network and allows communication between peers in the network.  
@@ -178,7 +178,7 @@ run tcp server [ip] [port] [threads]
 * [local ip] [local port] - Optional parameters to indicate an IP and Port that are accessible from a local network.  
 * [threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
 
-Additional information is available in the [Background Processes](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#the-tcp-server-process) section. 
+Additional information is available in the [Background Processes](background%20processes.md#the-tcp-server-process) section. 
 
 ### The Source Address
 When the command `run tcp server` is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.

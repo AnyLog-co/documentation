@@ -10,11 +10,11 @@ Examples of information monitored:
 
 Notes: 
 * Some functionalities require psutil installed.
-* To support continues monitoring, monitoring tasks are placed on the ***scheduler***. The scheduler functionality is explained at [Alerts and Monitoring](alerts and monitoring.md#alerts-and-monitoring).
+* To support continues monitoring, monitoring tasks are placed on the _scheduler_. The scheduler functionality is explained at [Alerts and Monitoring](alerts and monitoring.md#alerts-and-monitoring).
 
 ## Monitoring data commands
 
-* The command ***get rows count*** provides the list of tables in databases, and the number of rows in each table.  
+* The command `get rows count` provides the list of tables in databases, and the number of rows in each table.  
 Usage:
 ```anylog
 get rows count where dbms = [dbms name] and table = [table name] and format = [json] and group = [partition/table]
@@ -95,7 +95,7 @@ get os process all
 get os process list
 ```
 
-* The command `get os process` is identical to ***get os process anylog*** and provides info on the AnyLog process.
+* The command `get os process` is identical to `get os process anylog` and provides info on the AnyLog process.
 * The command `get os process [pid]` provides info on the process with the provided pid.
 * The command `get os process all` provides info on all processes. As CPU measurement is using a second interval,
 on the AnyLog CLI, a bar displays the command progress.
@@ -136,16 +136,14 @@ get node info net_io_counters
 
 ## The "get status" command
 
-A node can issue a `get status` command to any peer in the network. Below is an example of the command and reply:  
-Usage:
+A node can issue a `get status` command to any peer in the network. Below is an example of the command and reply:
+  
 ```anylog
-run client 10.0.0.78:7848 get status
-```
-Reply:  
-```anylog
+AL anylog-node > run client (10.0.0.78:7848) get status
 [From Node 10.0.0.78:7848]  'AnyLog@24.23.250.144:7848 running'
 ```
-The ***get status*** command can be extended to return additional status information.  
+
+The `get status` command can be extended to return additional status information.  
 For example, the scheduler can be configured to monitor the CPU utilization, 
 CPU temperature and disk free space and usage. The `get status` command can request to include their values.  
 
@@ -159,10 +157,7 @@ disk_percentage = get disk percentage d:\
 ```
 * Getting the status information:
 ```anylog
-run client 10.0.0.78:7848 get status include cpu_percent cpu_temperature disk_free disk_percentage
-```
-* Reply:
-```anylog
+AL anylog-node > run client (10.0.0.78:7848) get status include cpu_percent cpu_temperature disk_free disk_percentage
 [From Node 10.0.0.78:7848]
 {'status' : 'AnyLog@24.23.250.144:7848 running',
  'cpu_percent' : '6.7',
@@ -201,7 +196,7 @@ AL anylog-node > get processes
 
 Each node is using a dictionary to map keys to values.  
 Some mappings represent default assignments, and some mappings are declared using scripts or on the CLI.  
-The ***get dictionary*** command lists the key values pairs.  
+The `get dictionary` command lists the key values pairs.  
 Usage:
 ```anylog
 get dictionary
@@ -219,8 +214,8 @@ The following command retrieves a single value:
 
 ## The "get env var" command
 
-The ***get env var*** command lists the environment variables key values pairs.  
-Usage:
+The `get env var` command lists the environment variables key values pairs.  
+**Usage**:
 ```anylog
 get env var
 ```
@@ -251,14 +246,14 @@ The tables' data is partitioned by date such that data of the previous day is re
 
 1) Background processes to enable:
 
-* [Streamer](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#streamer-process) such that the data is flushed to disk.
-* [Operator](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#operator-process) for the flushed data to be ingested to the table.
+* [Streamer](background%20processes.md#streamer-process) such that the data is flushed to disk.
+* [Operator](background%20processes.md#operator-process) for the flushed data to be ingested to the table.
 * [Scheduler](alerts and monitoring.md#invoking-a-scheduler) to process scheduled tasks.
 
 
-1) Connect to a SQLite database. The logical database name is ***monitor***.
+1) Connect to a SQLite database. The logical database name is `monitor`.
 ```anylog
-connect dbms sqlite !db_user !db_port monitor
+connect dbms monitor where type=sqlite 
 ```
 
 2) Partition the data collected by day
@@ -266,21 +261,21 @@ connect dbms sqlite !db_user !db_port monitor
 partition dmci ping_sensor using timestamp by 1 day
 ```
 
-Note: Partition command is detailed [here](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#partition-command).
+Note: Partition command is detailed [here](anylog%20commands.md#partition-command).
 
-3) Using the scheduler, collect CPU utilization every 15 seconds
+3) Using the scheduler, collect _CPU utilization_ every 15 seconds
 ```anylog
 schedule time = 15 seconds and name = "Monitor CPU" task get node info cpu_percent into dbms = monitor and table = cpu_percent
 ```
 
-4) Removing older than 1 day data (by placing the ***drop partition*** command in the scheduler)
+4) Removing older than 1 day data (by placing the `drop partition` command in the scheduler)
 
 ```anylog
 schedule time = 1 day and start = +1d and name = "Drop 1 day CPU data" task drop partition where dbms = monitor and table = cpu_percent
 ```
 
 Note:
-* Drop partition command is detailed [here](../deploying%20nodes%20&%20AnyLog%20CLI/anylog%20commands.md#drop-partition-command).
+* Drop partition command is detailed [here](anylog%20commands.md#drop-partition-command).
 * As partition name is not specified, only the oldest partition is dropped and the active partition is never dropped.
 
  
@@ -301,7 +296,7 @@ The configuration of a setup with an aggregator node is as follows:
 
 ### The monitor command
 
-The ***monitor*** command organizes data by topics such that when a topic is queried, the status associated with the topic, 
+The `monitor` command organizes data by topics such that when a topic is queried, the status associated with the topic, 
 from each participating node is available.   
 
 Command details:

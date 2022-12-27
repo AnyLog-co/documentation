@@ -70,7 +70,7 @@ reset streaming conditions where dbms = [dbms name] and table = [table name] and
 ```
 The condition ID is the condition sequence number.
 Notes: 
-* Use the ***get streaming conditions*** command to view the ID assigned to each condition.
+* Use the `get streaming conditions` command to view the ID assigned to each condition.
 * Multiple IDs are allowed
 * If a DBMS name is not specified, all conditions are removed.
 * If a table name is not specified, all conditions of the database are removed.

@@ -97,7 +97,7 @@ get dictionary
 |-------------------------------------------------------------------------------------------------------|
 | [alerts](alerts and monitoring.md#alerts-and-monitoring)                            |
 | [backup](anylog commands.md#backup-command)                 | 
-| [blockchain](../blockchain/blockchain%20commands.md)                                                  | 
+| [blockchain](blockchain%20commands.md)                                                  | 
 | [drop partition](anylog commands.md#drop-partition-command) | 
 | [file](file commands.md)                                    | 
 | [get](anylog commands.md#get-command)                       |
@@ -106,7 +106,7 @@ get dictionary
 | [set](anylog commands.md#set-command)                       | 
 | [sql](anylog commands.md#sql-command)                       | 
 | [test](anylog commands.md#sql-command)                      | 
-| [time file](monitoring/managing data files status.md#Time-file-commands)                     | 
+| [time file](managing data files status.md#Time-file-commands)                     | 
 
 
 ## Set Command
@@ -282,7 +282,7 @@ Options:
 | get data nodes                                                                                                                                      | Details the Operators that host each table's data. |
 | [get rows count](monitoring nodes.md#monitoring-data-commands)                                                                      | Details the number of rows in all or specified tables.|
 | [get files count](../dat%20manaement/image%20mapping.md#get-files-count)                                                                            | Details the number of files stored in all or specified tables.|
-| [get query execution](../monitoring/profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
+| [get query execution](../profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
 | get timezone info                                                                                                                                   | Get the timezone on the local machine. |
 | get datetime [date-time function](queries.md#get-datetime-command)                                                                  | Translate a date-time function to the date-time string. |
 | [get streaming conditions](streaming conditions.md#condition-declaration)                  | List the conditions assigned to streaming data. |
@@ -330,7 +330,7 @@ If the ***where*** condition is used, the process is satisfied with Operators as
 If a value for a company, dbms or table is not provided - an asterisk value is assumed ('*') such that all values satisfy the call.  
 The bring command determines the values retrieved from the policies and formatting options.  
 If ***bring*** is omitted, the IP and Port of the servers are retrieved.  
-Details on the bring command are available in the section [The 'From JSON Object Bring' command](../data%20management/json%20data%20transformation.md#the--from-json-object-bring-command).   
+Details on the bring command are available in the section [The 'From JSON Object Bring' command](json%20data%20transformation.md#the--from-json-object-bring-command).   
 Examples:
 ```anylog
 get servers
@@ -410,7 +410,7 @@ Examples:
 
 ### Using REST command to retrieve data from a data source
 
-Using a ***REST GET*** command data can be pulled from a REST data source and written to a file.  
+Using a REST _GET_ command data can be pulled from a REST data source and written to a file.  
 To pull data, the command results are assigned to a process that directs the data to a file as follows:
 ```anylog
 [File and Data Format Instructions] = rest get where url=[url] and [option] = [value] and [option] = [value] ...
@@ -433,7 +433,7 @@ The following command, pulls the dictionary using a ***GET*** call, from the dic
 ```anylog
 [file=!prep_dir/purpleair.json, key=results, show=true] = rest get where url = https://www.purpleair.com/json
 ```
-An Example of the usage of the REST GET command is available in the section [Mapping Data to Tables](../data%20management/mapping%20data%20to%20tables.md#purpleair-example).
+An Example of the usage of the REST _GET_ command is available in the section [Mapping Data to Tables](mapping%20data%20to%20tables.md#mapping-data).
 
  
 ## SQL Command

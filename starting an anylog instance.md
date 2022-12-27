@@ -3,12 +3,12 @@
 An AnyLog instance is initiated by calling AnyLog on the OS command line.  
 Once an AnyLog instance is called, it presents the AnyLog command prompt. The command prompt allows to issue AnyLog commands.    
 These commands configure the AnyLog instance to operate in one or more of the roles: as a Publisher of data, as an Operator managing data or as a Query node that issues queries against the data in the network.    
-Commands can be arranged in a text file, the command ***script*** followed by the location and name of the file will trigger an execution of all the commands in the script.  
+Commands can be arranged in a text file, the command `script` followed by the location and name of the file will trigger an execution of all the commands in the script.  
 
 There are 3 ways to issue AnyLog commands:    
 
 1)	On the OS command line, by initiating an AnyLog instance followed by one or more commands to execute.  
-If multiple commands are issued on the OS command line, the commands needs to be separated by the keyword ***and***.  
+If multiple commands are issued on the OS command line, the commands needs to be separated by the keyword _and_.  
 Example: the command `run tcp server 192.168.234.6:2046 and run rest server 192.168.234.6:2047`   
 will initiate an AnyLog instance and configure the node to listen to TCP messages and REST messages on the detailed IPs and Ports.     
 2)	On the AnyLog command line by issuing the command on the AnyLog command line prompt.  
@@ -107,7 +107,7 @@ If a local database is used to manage the metadata:
 * Connect to the _blockchain_ database.
 * If the _ledger_ table was not created on the blockchain database, use `blockchain create table` to create the table.  
 
-***Note:***  
+**Note**:
 Use `get databases` to see the databases connected on each node.  
 Use `connect dbms psql [dbms user] [dbms port] [dbms name]` to connect to a specif database.
 

@@ -1,5 +1,5 @@
 # Query nodes in the network
-The ***run client ()*** ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 
+The `run client ()` ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 
 If the parenthesis are left empty, all the nodes with the tables' data receive and process the query. Users can detail 
 specific nodes of interest in providing their IP and Ports.  
   
@@ -45,7 +45,7 @@ get timezone info
 Users can validate a timezone using the command [get datetime](#get-datetime-command).
 
 ### Output format
-The key ***format*** determines the output format.
+The key _format_ determines the output format.
 The following chart summarizes the optional values:
 
 | value  | Explanation |
@@ -142,7 +142,7 @@ run client (!ip 2048) sql lsl_demo "select * from ping_sensor where reading_time
 
 ## Cast Data
 Cast allows to map the projected data to a different format. Casting is applied by adjacent double semicolons (::) to the 
-projected column name. For example, the SQL statement below projects the value in the column ***speed*** as a float rounded 
+projected column name. For example, the SQL statement below projects the value in the column _speed_ as a float rounded 
 to 2 digits after the decimal point:
 
 ```anylog
@@ -151,20 +151,22 @@ run client () sql lsl_demo "select reading_time, speed::float(2) from performanc
 
 The casting options are detailed in the table below:
 
-| Cast  | details                                                                                                                                                                              |
-| ---- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| float(x) | Cast to a ***float*** value. x represents rounding to x digits after the decimal point. Adding the percent sigh (***%***) before the digits adds comma separation and padding zeros. |
-| int | Cast to an ***int***.                                                                                                                                                                |
-| str | Cast to a ***string***.                                                                                                                                                              |
-| ljust(x) | Cast to a ***left-justified string*** with a given x bytes width.                                                                                                                    |
-| rjust(x) | Cast to a ***right-justified*** string with a given x bytes width.                                                                                                                   |
-| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                                   |
+| Cast  | details                                                                                                                                                                        |
+| ---- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| float(x) | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
+| int | Cast to an _int_.                                                                                                                                                              |
+| str | Cast to a _string_.                                                                                                                                                            |
+| ljust(x) | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
+| rjust(x) | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
+| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
 
-Note: multiple casting is allowed.  
-Examples:
+**Note**: multiple casting is allowed.  
+
+**Examples**:
 ```anylog
 run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
 ```
+
 The example above represents the speed as an int and formats the speed value with commas. 
 ```anylog
 run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
@@ -185,6 +187,7 @@ The following chart provides formatting types options:
 | :+ | Places the plus sign to the left most position |
 
 The following examples provide number formatting with padding for int and float:
+
 | Example  | details |
 | ---- | -----------------|
 | :.3f | float with digits length  |

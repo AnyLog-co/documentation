@@ -22,9 +22,9 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
 
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.   
-Enabling the blockchain functionality using the Ethereum blockchain is explained in the [Using Ethereum as a Global Metadata Platform](../blockchain/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) section.
+Enabling the blockchain functionality using the Ethereum blockchain is explained in the [Using Ethereum as a Global Metadata Platform](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) section.
 If a blockchain platform is used, there is no need in a Master node as the metadata is registered on (and is available from) the blockchain.  
-Additional information on a Master Node configuration is available at the section: [Using a Master Node](../blockchain/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform).
+Additional information on a Master Node configuration is available at the section: [Using a Master Node](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform).
 
 ## The Network MetaData
 The metadata is the network related information that is shared by members of the network.
@@ -47,7 +47,7 @@ Related documentation:
 |----------------------------------------------------------------------------------------| ------------| 
 | [Metadata Management](../data%20management/metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
 | [Metadata Requests](metadata%20requests.md)                                            | Details on how the metadata can be queried. |
-| [Using Ethereum](../blockchain/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
+| [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
 
 ## The Data
 The users data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
@@ -336,7 +336,7 @@ Additional information is available at [Queries and info requests to the AnyLog 
 
 The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
-Additional information on the blockchain commands is available in the [Blockchain commands](../blockchain/blockchain%20commands.md) section.
+Additional information on the blockchain commands is available in the [Blockchain commands](blockchain%20commands.md) section.
 
 ## High Availability (HA)
 

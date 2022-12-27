@@ -37,10 +37,10 @@ When a query is executed, it triggers a process that maintains information on th
 The information details, for each executed query, the nodes (Operators) that participate in the query, the amount
 of data transferred and execution time.
 
-The command that starts with the key ***query***, returns the query execution information.  
+The command that starts with the key _query_, returns the query execution information.  
 As multiple queries are processed on each node concurrently, each query is assigned with an ID that identifies the query.
 
-The command ***query*** provides information on the last executed queries and is issued on the Query Node.  
+The command _query_ provides information on the last executed queries and is issued on the Query Node.  
 Use the command [get operator execution](#retrieving-the-status-of-queries-being-processed-on-an-operator-node) to monitor the 
 execution of the query on the Operator side. 
 
@@ -61,7 +61,7 @@ Operation is one of the following:
 Note: The query status information is maintained in a stack, old information is removed.
 
 Examples:  
-The info below is returned when a ***query status*** command is issued.  
+The info below is returned when a `query status` command is issued.  
 It provides the ID of the query, the destination (Operators) nodes and the process status with each Operator node.  
 It details the execution time, and a breakdown to the processing time of each operator. 
 ```anylog
@@ -102,16 +102,16 @@ get operator execution where node = [node id] and job = [job id]
 [node id] is the IP of the Query Node (the node that issued the query).  
 [job id] is the id of the job assigned by the Query Node (the command `query status` on the query node provides the job id).
 
-If ***node id*** and ***job id*** are not provided, all recently executed queries information is provided.  
-If only ***node id*** is provided, the query information of the specified node is provided.  
+If `node id` and `job id` are not provided, all recently executed queries information is provided.  
+If only _node id_ is provided, the query information of the specified node is provided.  
 
-Examples:
+**Examples**:
 ```anylog
  get operator execution where node = 10.0.0.78 and job = 12
  get operator execution where node = 10.0.0.78
  get operator execution
 ``` 
 
-Notes:
+**Notes**:
 1) The call provides the Operator side information complimentary to the [query status](#command-options-for-monitoring-queries) call that is executed on the Query Node. 
 2) The information is maintained in a stack, old information is removed.

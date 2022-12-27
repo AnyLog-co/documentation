@@ -9,7 +9,7 @@ A node in the network interacts with 2 layers of metadata:
 * With a global metadata layer shared by all the members of the network.
 
 This document provides an overview on the global metadata layer.  
-The document [metadata requests](../data%20management/metadata%20requests.md#metadata-requests) 
+The document [metadata requests](metadata%20requests.md#metadata-requests) 
 provides an overview of the local metadata layer.
 
 ## The global metadata
@@ -73,7 +73,7 @@ If authentication is enabled, the attributes _public_key_ and _signature_ are ad
 These are sets of command that allow to update and query the metadata layer.   
 The blockchain command are issued to a metadata repository which can be on the local node (either as a JSON file or hosted in a database), a master-node or a blockchain platform.  
  
-The ***blockchain commands*** are detailed in the [blockchain commands section](../blockchain/blockchain%20commands.md).
+The _blockchain commands_ are detailed in the [blockchain commands section](blockchain%20commands.md).
 
 ### Updating a blockchain
 
@@ -128,7 +128,7 @@ blockchain pull to [json | sql | stdout] [file name]
 
 Examples:  
 To retrieve data from the master node:  
-* Use the command ***blockchain pull*** to pull the log file from the master node. The output file will be paced in the blockchain directory with the following options:
+* Use the command `blockchain pull` to pull the log file from the master node. The output file will be paced in the blockchain directory with the following options:
 
 | Option        | Explanation  |
 | ------------- | ------------| 
@@ -137,12 +137,12 @@ To retrieve data from the master node:
 | blockchain pull to stdout | The output is policies displayed on the stdout |
 
 
-* Use the command ***file get*** to copy the output file (of the pull command) from a node (like the master node) to a destination node.
+* Use the command `file get` to copy the output file (of the pull command) from a node (like the master node) to a destination node.
 ```anylog
 file get [source location] [destination location]
 ```
-`[source location]` is the path name and file name on the master node.  
-`[destination location]` is the path name and file name on the requesting node.
+[source location] - is the path name and file name on the master node.  
+[destination location] - is the path name and file name on the requesting node.
 
 The following script pulls the metadata from a Master Node and copies the log file to the local node to serve as the metadata on the local node.
 ```anylog
@@ -160,29 +160,29 @@ Details are available at the section [Blockchain Synchronizer](background proces
 
 ## Using a local database
 
-A node may keep a copy of the blockchain data on a local database. On the local database, the blockchain data is maintained in a table called ***ledger***.   
+A node may keep a copy of the blockchain data on a local database. On the local database, the blockchain data is maintained in a table called `ledger`.   
 
 The following process creates the local blockchain database:
 
-1. Define a location for the blockchain log file by declaring ***blockchain_file*** constant with the path and file name of the log file.  
+1. Define a location for the blockchain log file by declaring _blockchain_file_ constant with the path and file name of the log file.  
   Example:
 ```anylog  
-  blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt```
+blockchain_file = $HOME/AnyLog-Network/data/blockchain/blockchain.txt
 ```
 
 2. Connect the node to the local database.    
   * Example using PostgresSQL to manage the blockchain data:
 ```anylog
-  connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
+connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 ```
   * Example using SQLite to manage the blockchain data:   
 ```anylog
-  connect dbms blockchain where type = sqlite
+connect dbms blockchain where type = sqlite
 ```
 
-3. Create the local ***ledger*** table.
+3. Create the local `ledger` table.
 ```anylog
-  blockchain create table
+create table ledger where dbms=blockchain
 ```
   The command will create the 'ledger' table in the database assigned to 'blockchain'.
 

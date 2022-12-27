@@ -1,7 +1,7 @@
 # Managing Data files
 
 Publisher nodes and devices are configured to send data to Operator nodes. Operators receive the data as JSON files or organize the data in JSON files.  
-Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](../data%20management/adding%20data.md#adding-data-to-nodes-in-the-network).  
+Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](adding%20data.md#adding-data-to-nodes-in-the-network).  
 If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution and Configuration](data distribution and configuration.md#data-distribution-and-configuration).
 
 The JSON files follow a naming convention that include metadata information on the data contained in the file and is explained below.
@@ -10,7 +10,7 @@ Each Operator node maintains a set of tables to record information on each JSON 
 * Timestamp associated with the file, the hash value of the file and the number of reading in the file.
 * Errors during the load.     
 
-The command ***time file*** allows to modify file names to follow the naming convention and to retrieve information on the files processed on each node. 
+The command `time file` allows to modify file names to follow the naming convention and to retrieve information on the files processed on each node. 
 
   
 ## The structure of the data files 
@@ -52,7 +52,7 @@ Nodes can monitor the state of the data files using a local database.
 
 * Each segment in the file name is a column in the table.
 * The table includes 2 status fields which are updated as described below.
-* The column ***Hash Value of Data*** is a 16 bytes number and serves as a unique key in the table.
+* The column ***Hash Value of Data*** is a 16-bytes number and serves as a unique key in the table.
 
 
 ## Identifying duplicate files
@@ -61,16 +61,21 @@ When a file is processed on a node, the Hash Value representing the file is calc
 If the value exists in the local `almgm` database, the file is treated as a duplicate file.
 
 The following command determines the hash value of a file:  
-```file hash [file name and path]```
+```anylog 
+file hash [file name and path]
+```
 
 ## Creating and Updating the TSD tables
-The ***tsd_info*** table organizes the information on the data received from Publishers and devices.  
-The ***tsd_id*** are a set of tables whereas ***id*** is the ID of the cluster member that transferred the data.
+The `tsd_info` table organizes the information on the data received from Publishers and devices.  
+The `tsd_id` are a set of tables whereas _id_ is the ID of the cluster member that transferred the data.
 These tables are created dynamically as data is processed in the cluster and if the `almgm` database is connected.
 Managing the data is with the following commands and processes:
 
-* To connect to the `almgm` use the ***connect dbms*** command.  
-Example: `'connect dbms psql anylog@127.0.0.1:demo 5432 almgm`
+* To connect to the `almgm` use the `connect dbms` command.   
+
+```anylog
+AL anylog-node > connect dbms almgm where type=psql and ip=127.0,0.1 and port=5432 and user=admin and password=passwd
+```
 
 * Creating the `tsd_info` table:  
 ```anylog
@@ -87,21 +92,21 @@ This call creates the table with the needed columns.
 
 ## Time File commands
 
-The ***time file*** commands are a set of commands to monitor and manage data ingested on each Operator node.
+The `time file` commands are a set of commands to monitor and manage data ingested on each Operator node.
 
 ### Usage: 
  
-#### Set the file name to satisfy the naming convention
-The ***time file rename*** command changes the names of files containing data to follow the data files naming convention.  
-Usage:  
+**Set the file name to satisfy the naming convention**
+The `time file rename` command changes the names of files containing data to follow the data files naming convention.  
+  
 ```anylog
 time file rename [source file path and name] to dbms = [dbms name] and table = [table name] and source = [source ID] and hash = [hash value] and instructions = [instructions id]
 ```
 This command will change the source file name to the convention using the values provided.
-If ***dbms*** or ***table*** are not provided, they are unchanged.  
-If ***source*** is not provided, the value '0' is used.  
-If ***hash*** value is not provided, the hash value of the file will be calculated.  
-If ***instructions id*** is not provided, the value '0' is used.   
+If _dbms_ or _table_ are not provided, they are unchanged.  
+If _source_ is not provided, the value '0' is used.  
+If _hash_ value is not provided, the hash value of the file will be calculated.  
+If _instructions id_ is not provided, the value '0' is used.   
 
 Examples:
 1) The example below adds the hash value to the file name.
@@ -143,8 +148,8 @@ time file add [file path and name] [optional status 1] [optional status 2] [opti
 ```anylog 
 time file update [hash value] [optional status 1] [optional status 2]
 ```
-This command will update the status fields in a ***tsd_info*** entry with the specified hash value.    
-Example:
+This command will update the status fields in a _tsd_info_ entry with the specified hash value.    
+**Example**:
 ```anylog 
 time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
 ```
@@ -163,9 +168,9 @@ Options are optional and determine the information of interest, expressed as a w
 | hash    | Retrieve a key with the specified hash value. | |
 | start_date | Retrieve entries with a date greater or equal to the start_date. | |
 | end_date | Retrieve entries with a date earlier than the end_date. | |
-| format | Output format - ***table*** or ***json***  | table |
+| format | Output format - _table_ or _json_  | table |
   
-Examples:  
+**Examples**:  
 ```anylog 
 time file get
 time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
@@ -187,8 +192,8 @@ Options are optional and determine the information of interest, expressed as a w
 | start_date | retrieve entries with a date greater or equal to the start_date. | |
 | end_date | retrieve entries with a date earlier than the end_date. | |
 
-Note: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
-Examples:  
+**Note**: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
+**Examples**:  
 ```anylog 
 time file summary
 time file summary where table = *
@@ -225,7 +230,7 @@ time file errors where [options]
 The options are the same as the options in the [time file get](#retrieve-information-from-a-tsd-table) command. 
 
 #### Creating and dropping the TSD tables
-The ***tsd_info*** table is created using the following command:
+The _tsd_info_ table is created using the following command:
 ```anylog 
 create table tsd_info where dbms = almgm
 ```
@@ -244,7 +249,7 @@ Dropping all TSD tables is by the following command:
 time file drop all
 ```
 
-Examples:  
+**Examples**:  
 ```anylog 
 drop table tsd_info where dbms = almgm
 time file drop tsd_123

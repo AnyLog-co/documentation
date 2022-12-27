@@ -171,7 +171,7 @@ The following command provides information on the queries being executed, their 
 ```anylog
 query status
 ```
-Additional information is available in [Command options for profiling and monitoring queries](profiling%20and%20monitoring%20queries.md#command-options-for-profiling-and-monitoring-queries).
+Additional information is available in [Command options for profiling and monitoring queries](profiling%20and%20monitoring%20queries.md#command-options-for-monitoring-queries).
 
 ## Adding Operator Nodes to a Cluster
 
