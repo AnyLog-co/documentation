@@ -95,18 +95,18 @@ get dictionary
 # List of Commands:
 | Commands                                                                                              | 
 |-------------------------------------------------------------------------------------------------------|
-| [alerts](alerts and monitoring.md#alerts-and-monitoring)                            |
-| [backup](anylog commands.md#backup-command)                 | 
+| [alerts](alerts%20and%20monitoring.md#alerts-and-monitoring)                            |
+| [backup](anylog%20commands.md#backup-command)                 | 
 | [blockchain](blockchain%20commands.md)                                                  | 
-| [drop partition](anylog commands.md#drop-partition-command) | 
-| [file](file commands.md)                                    | 
-| [get](anylog commands.md#get-command)                       |
-| [partition](anylog commands.md#partition-command)           | 
-| [rest](anylog commands.md#rest-command)                     | 
-| [set](anylog commands.md#set-command)                       | 
-| [sql](anylog commands.md#sql-command)                       | 
-| [test](anylog commands.md#sql-command)                      | 
-| [time file](managing data files status.md#Time-file-commands)                     | 
+| [drop partition](anylog%20commands.md#drop-partition-command) | 
+| [file](file%20commands.md)                                    | 
+| [get](anylog%20commands.md#get-command)                       |
+| [partition](anylog%20commands.md#partition-command)           | 
+| [rest](anylog%20commands.md#rest-command)                     | 
+| [set](anylog%20commands.md#set-command)                       | 
+| [sql](anylog%20commands.md#sql-command)                       | 
+| [test](anylog%20commands.md#sql-command)                      | 
+| [time file](managing%20data%20files%20status.md#Time-file-commands)                     | 
 
 
 ## Set Command
@@ -118,8 +118,8 @@ Options:
 | Option                                                                                                                                             | Explanation  |
 |----------------------------------------------------------------------------------------------------------------------------------------------------| ------------| 
 | [set query mode](#set-query-mode)                                                                                                                  | Setting execution instructions to the issued queries. |
-| [set query log on/off](logging events.md#the-query-log)                                                                            | Enable/Disable a log to record the executed queries. |
-| [set query log profile [n] seconds](logging events.md#the-query-log)                                                               | Applying the Query Log to queries with execution time higher than threshold.  |
+| [set query log on/off](logging%20events.md#the-query-log)                                                                            | Enable/Disable a log to record the executed queries. |
+| [set query log profile [n] seconds](logging%20events.md#the-query-log)                                                               | Applying the Query Log to queries with execution time higher than threshold.  |
 | set rest log on/off                                                                                                                                | Enable/Disable a log to record the processed REST commands. The log is retrieved using the 'get rest log' command. |
 | set debug [on/off]                                                                                                                                 | Displays the executed commands processed in scripts. |
 | set mqtt debug [on/off]                                                                                                                            | Displays the MQTT messages and their processing status. |
@@ -133,12 +133,12 @@ Options:
 | set private password = [password] [in file]                                                                                                        | Provide the password of the private key with an optional command text [in file] to keep encrypted copy on the filesystem. See also [Using passwords](../security%20authentication/authentication.md#using-passwords).|
 | set anylog home [absolute path]                                                                                                                    | Declare a path to the AnyLog data files. |
 | set traceback [on/off]                                                                                                                             | Print the code path with every call to the error log. If text is specified, stacktrace is added only if the text is a substring in the error message",|
-| [set reply ip = [ip]](network configuration.md#setting-a-different-ip-address-for-replies) | Set the IP address that for a reply message. |
-| [set self ip = [ip]](network configuration.md#self-messaging)                             | Set the IP address when the sender and receiver are the same node. |
+| [set reply ip = [ip]](network%20configuration.md#setting-a-different-ip-address-for-replies) | Set the IP address that for a reply message. |
+| [set self ip = [ip]](network%20configuration.md#self-messaging)                             | Set the IP address when the sender and receiver are the same node. |
 | set consumer mode = [mode]                                                                                                                         | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]                                                                                                              |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 | [set data distribution](#set-data-distribution) where ...                                                                                          |  Define how data is distributed to the storage nodes. |
-| [set streaming condition](streaming conditions.md#condition-declaration)                                 |  Declare a condition on streaming data. |
+| [set streaming condition](streaming%20conditions.md#condition-declaration)                                 |  Declare a condition on streaming data. |
 
 
 #### Set query mode
@@ -202,9 +202,9 @@ Options:
 | reset query timer | Reset the query timer. | 
 | reset echo queue  | Reset the queue. |
 | reset echo queue where size = [n] | Resets the queue and sets the size of the queue to maintain the last n messages (between 1 and 100). |
-| reset reply IP | Identify a reply IP to be used by the replying node. Details are available at [Network Configuration](network configuration.md#reset-the-reply-ip-to-the-source-ip).|
-| reset self IP | Identify an IP to be used when sender and receiver are the same node. Details are available at [Network Configuration](network configuration.md#reset-self-messaging).|
-| reset streaming conditions | Remove one or more streaming conditions. Details are available at [Reset Streaming Condition](streaming conditions.md#reset-streaming-condition).|
+| reset reply IP | Identify a reply IP to be used by the replying node. Details are available at [Network Configuration](network%20configuration.md#reset-the-reply-ip-to-the-source-ip).|
+| reset self IP | Identify an IP to be used when sender and receiver are the same node. Details are available at [Network Configuration](network%20configuration.md#reset-self-messaging).|
+| reset streaming conditions | Remove one or more streaming conditions. Details are available at [Reset Streaming Condition](streaming%20conditions.md#reset-streaming-condition).|
 
 
 ## Get Command
@@ -215,28 +215,28 @@ Options:
 
 | Option                                                                                                                                              | Information provided  |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------| ------------| 
-| [get event log](logging events.md#the-event-log)                                                                                    | Records the Last commands processed by the node. | 
-| [get error log](logging events.md#the-error-log)                                                                                    | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| [get event log](logging%20events.md#the-event-log)                                                                                    | Records the Last commands processed by the node. | 
+| [get error log](logging%20events.md#the-error-log)                                                                                    | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | [get file log](#get-logged-instances)                                                                                                               | Records the last data files processed by the node. |
 | [get rest log](#get-logged-instances)                                                                                                               | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
-| [get query log](logging events.md#the-query-log)                                                                                    | The last queries processed by the node. Enable this log using the ***set query log*** command|
-| [get processes](®#the-get-processes-command)                                                                                                        | The list of background processes. More details are available in [background processes](background processes.md).|
+| [get query log](logging%20events.md#the-query-log)                                                                                    | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| [get processes](®#the-get-processes-command)                                                                                                        | The list of background processes. More details are available in [background processes](background%20processes.md).|
 | get members status                                                                                                                                  | Get status of members nodes that are messaged by this node. |
 | get synchronizer                                                                                                                                    | Information on the blockchain synchronize process. |
-| [get operator](monitoring calls.md#get-operator)                                                                                    | Information on the Operator processes. |
-| [get blobs archiver](background processes.md#the-blobs-archiver)                                                                                  | Information on the Blobs Archiving processes. |
+| [get operator](monitoring%20calls.md#get-operator)                                                                                    | Information on the Operator processes. |
+| [get blobs archiver](background%20processes.md#the-blobs-archiver)                                                                                  | Information on the Blobs Archiving processes. |
 | get publisher                                                                                                                                       | Information on the Publisher processes. |
 | get distributor                                                                                                                                     | With HA enabled, information on the distributions of source files to cluster members. |
 | get consumer                                                                                                                                        | With HA enabled, information on pulling source files from cluster members. |
-| [get streaming](monitoring calls.md#get-streaming)                                                                                  | Information on streaming data from REST and MQTT calls. |
+| [get streaming](monitoring%20calls.md#get-streaming)                                                                                  | Information on streaming data from REST and MQTT calls. |
 | get cluster info                                                                                                                                    | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
 | get tsd info [table name]                                                                                                                           | Information on the synchronization status between the cluster members. |
-| [get rest calls](monitoring calls.md#get-rest-calls)                                                                                | Statistical information on the REST calls. |
-| [get rest server info](monitoring calls.md#rest-server-configuration)                                                               | Information on the REST server configuration. |
-| [get msg clients](monitoring calls.md#get-msg-clients)                                                                              | Information on clients subscribed to topics. |
+| [get rest calls](monitoring%20calls.md#get-rest-calls)                                                                                | Statistical information on the REST calls. |
+| [get rest server info](monitoring%20calls.md#rest-server-configuration)                                                               | Information on the REST server configuration. |
+| [get msg clients](monitoring%20calls.md#get-msg-clients)                                                                              | Information on clients subscribed to topics. |
 | get msg brokers                                                                                                                                     | Information on message brokers and the topics subscribed with each broker. |
 | get local broker                                                                                                                                    | Information on the Message Broker. |
-| [get status](monitoring nodes.md#the-get-status-command)                                                                            | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
+| [get status](monitoring%20nodes.md#the-get-status-command)                                                                            | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
 | get connections                                                                                                                                     | The list of TCP and REST connections supported by the node. |
 | get machine connections                                                                                                                             | The system-wide socket connection. Users can detail specific port: ```get machine connections where port = [port]```|
 | get platforms                                                                                                                                       | The list connected blockchain platforms. |
@@ -280,12 +280,12 @@ Options:
 | get size [dir name] [YYYY-MM-DD]                                                                                                                    | List the size of a directory including sub-directories. |
 | get access [path and file name or directory name]                                                                                                   | Get the access rights to the provided file or directory. |
 | get data nodes                                                                                                                                      | Details the Operators that host each table's data. |
-| [get rows count](monitoring nodes.md#monitoring-data-commands)                                                                      | Details the number of rows in all or specified tables.|
+| [get rows count](monitoring%20nodes.md#monitoring-data-commands)                                                                      | Details the number of rows in all or specified tables.|
 | [get files count](../dat%20manaement/image%20mapping.md#get-files-count)                                                                            | Details the number of files stored in all or specified tables.|
 | [get query execution](../profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
 | get timezone info                                                                                                                                   | Get the timezone on the local machine. |
 | get datetime [date-time function](queries.md#get-datetime-command)                                                                  | Translate a date-time function to the date-time string. |
-| [get streaming conditions](streaming conditions.md#condition-declaration)                  | List the conditions assigned to streaming data. |
+| [get streaming conditions](streaming%20conditions.md#condition-declaration)                  | List the conditions assigned to streaming data. |
 
 #### Monitoring node status options:
 
@@ -300,12 +300,12 @@ Options:
 | get cpu temperature | The CPU temperature.                                                                                                                                                                  |
 | get os process [options] | Different statistics on the OS processes. Details are available [here](../monitoring%20nodes.md#the-get-os-process-command).                                                          |
 | get node info [options] | Different statistics on the node. Details are available [here](../monitoring%20nodes.md#the-get-node-info-command).                                                                   |
-| get monitored | Retrieve the list of topics monitored by an aggregator node. Details are available [here](monitoring nodes.md#organizing-nodes-status-in-an-aggregator-node).         |
-| get monitored [topic] | Retrieve monitored info on a specific topic from an aggregator node. Details are available [here](monitoring nodes.md#organizing-nodes-status-in-an-aggregator-node). |
+| get monitored | Retrieve the list of topics monitored by an aggregator node. Details are available [here](monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node).         |
+| get monitored [topic] | Retrieve monitored info on a specific topic from an aggregator node. Details are available [here](monitoring%20nodes.md#organizing-nodes-status-in-an-aggregator-node). |
 
 
 
-Additional information is available at [monitoring nodes](monitoring nodes.md#monitoring-nodes).
+Additional information is available at [monitoring nodes](monitoring%20nodes.md#monitoring-nodes).
 
 #### Security and encryption related options:  
 
@@ -392,7 +392,7 @@ rest [operation] where url=[url] and [option] = [value] and [option] = [value] .
 
 Explanation:  
 When an AnyLog node is running, it offers a REST API. The REST allows to accept REST calls from users and applications (like Grafana) to the Network members.    
-Activating the REST API on a particular node is explained in [REST requests](background processes.md#rest-requests).  
+Activating the REST API on a particular node is explained in [REST requests](background%20processes.md#rest-requests).  
 Using the REST command users can issue REST calls between members of the network and between non-members to members of the network.         
 The rest call provides the target URL (of the REST server) and additional values.  
 The URL must be provided, the other key value pairs are optional headers and data values.
@@ -482,7 +482,7 @@ run client () sql purpleair file = !prep_dir/my_data.json and dest = file and fo
 ### Predefined SQL functions
 Details on queries executed against time series data are available in [Optimized time series data queries](queries.md#optimized-time-series-data-queries).
 ### Monitoring queries  
-Details on profiling and monitoring queries are available in [Profiling and Monitoring Queries](profiling and monitoring queries.md#profiling-and-monitoring-queries)
+Details on profiling and monitoring queries are available in [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 # Backup Command
 
@@ -577,7 +577,7 @@ info table sensors readings partitions count
 # Drop Partition Command
 
 When data needs to be removed from a node, users can process the removal by dropping partitions. As the data is partitioned by time, it is possible to drop the oldest partition while the system continues to process data with the remaining partitions.  
-Users can leverage the [backup](anylog commands.md#backup-command) process prior to the drop of the partition.
+Users can leverage the [backup](anylog%20commands.md#backup-command) process prior to the drop of the partition.
 
 Usage:  
 ```anylog

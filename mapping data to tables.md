@@ -106,9 +106,9 @@ Notes:
     _key_ provides the key (in the PurpleAir JSON file) of the list of readings.  
     _show_ provides a visual status bar that monitors the write to file process.
 
- * More details on the REST GET command are available in the [AnyLog Commands section](anylog commands.md#rest-command).
+ * More details on the REST GET command are available in the [AnyLog Commands section](anylog%20commands.md#rest-command).
    
- * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog commands.md#using-rest-command-to-retrieve-data-from-a-data-source).
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog%20commands.md#using-rest-command-to-retrieve-data-from-a-data-source).
  
 
 ## Creating the mapping instructions
@@ -149,7 +149,7 @@ blockchain insert where policy = !instruct and local = true and master = !master
 
 ## Adding the data
 Adding data to an Operator can be done by placing data in a `watch` directory or sending data using REST or assigning
-a broker role to the node and publishing the data. These methods are explained in the section [adding data](adding data.md).
+a broker role to the node and publishing the data. These methods are explained in the section [adding data](adding%20data.md).
 
 #### Example:
 

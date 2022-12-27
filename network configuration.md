@@ -7,7 +7,7 @@ Information regarding configuring _NGINX_ and/or an overlay network (_nebula_) c
 
 ## Overview
 
-Nodes in the network are configured to receive messages through _TCP_ (usually used between nodes), _REST_ and [message broker](message broker.md). 
+Nodes in the network are configured to receive messages through _TCP_ (usually used between nodes), _REST_ and [message broker](message%20broker.md). 
 
 * From peer nodes using the native AnyLog API. This functionality is enables by calling the command: 
 ```anylog
@@ -17,7 +17,7 @@ run tcp server
 ```anylog
 run rest server
 ```  
-* From applications such as [_EdgeX_](using edgex.md) and [_Kafka_](using kafka.md).
+* From applications such as [_EdgeX_](using%20edgex.md) and [_Kafka_](using%20kafka.md).
 This function is enabled by calling the command: 
 ```anylog
 run message broker 
@@ -46,8 +46,8 @@ Usage:
 run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 ```
 
-More details on the REST API are available at [using rest](using rest.md#using-rest).  
-More details on setting a node as a REST server is available at [background processes](background processes.md#rest-requests).  
+More details on the REST API are available at [using rest](using%20rest.md#using-rest).  
+More details on setting a node as a REST server is available at [background processes](background%20processes.md#rest-requests).  
 
 ## Configuring a TCP server process
 This process makes each node a member in the AnyLog Network and allows communication between peers in the network.  

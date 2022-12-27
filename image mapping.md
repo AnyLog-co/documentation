@@ -85,7 +85,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 ``` 
 
-Additional information is available at the [configuring a local database](sql setup.md#configuring-a-local-database) section.
+Additional information is available at the [configuring a local database](sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -215,7 +215,7 @@ trace level = 0 file store
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
-The command [file get](file commands.md#file-copy-from-a-remote-node-to-a-local-node)
+The command [file get](file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
 is used to copy files from a remote node to the local node.   
 If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
 
@@ -256,13 +256,13 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
       ```anylog
       run message broker !external_ip 7850 !ip 7850 6
       ```
-      Details on configuration of AnyLog as a broker are available [here](message broker.md#configuring-an-anylog-node-as-a-message-broker).
+      Details on configuration of AnyLog as a broker are available [here](message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
     * As a Blobs Archiver - this process loads the images into blobs database (such as MongoDB).  
       Example:    
       ```anylog
       run blobs archiver where dbms = true and folder = true and compress = False
       ```
-      Details on configuration of the Blobs Archiver process are available [here](background processes.md#the-blobs-archiver).
+      Details on configuration of the Blobs Archiver process are available [here](background%20processes.md#the-blobs-archiver).
     
 ## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)

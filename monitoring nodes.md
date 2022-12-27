@@ -10,7 +10,7 @@ Examples of information monitored:
 
 Notes: 
 * Some functionalities require psutil installed.
-* To support continues monitoring, monitoring tasks are placed on the _scheduler_. The scheduler functionality is explained at [Alerts and Monitoring](alerts and monitoring.md#alerts-and-monitoring).
+* To support continues monitoring, monitoring tasks are placed on the _scheduler_. The scheduler functionality is explained at [Alerts and Monitoring](alerts%20and%20monitoring.md#alerts-and-monitoring).
 
 ## Monitoring data commands
 
@@ -248,7 +248,7 @@ The tables' data is partitioned by date such that data of the previous day is re
 
 * [Streamer](background%20processes.md#streamer-process) such that the data is flushed to disk.
 * [Operator](background%20processes.md#operator-process) for the flushed data to be ingested to the table.
-* [Scheduler](alerts and monitoring.md#invoking-a-scheduler) to process scheduled tasks.
+* [Scheduler](alerts%20and%20monitoring.md#invoking-a-scheduler) to process scheduled tasks.
 
 
 1) Connect to a SQLite database. The logical database name is `monitor`.

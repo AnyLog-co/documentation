@@ -327,6 +327,6 @@ The summary table is configured as a data source to Grafana to monitor and alert
 
 ## Example - Monitoring CPU usage
 
-The section [Organizing statistics in a database table](monitoring nodes.md#organizing-statistics-in-a-database-table)
+The section [Organizing statistics in a database table](monitoring%20nodes.md#organizing-statistics-in-a-database-table)
 details how to organize operational statistics (like CPU utilization) in a table.
 
