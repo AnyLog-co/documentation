@@ -4,59 +4,72 @@
     <img src="imgs/anylog_logo.png" />
 </div> 
 
-AnyLog allows managing your data on edge nodes as if they're located at a single point. We currently operate with a 
-selected group of companies that are using the network to manage their data, as well as  companies that build 
-applications that leverage the network as a unified source of IoT data. 
+AnyLog provides Real-Time Visibility and Management of Distributed Edge Data, Applications and Infrastructure.   
+AnyLog transforms the edge to a scalable data tier that is optimized for IoT data, enabling organizations
+to extract real-time insight for any use case in any industries spanning Manufacturing, Utilities, Oil & Gas, Retail,
+Robotics, Smart Cities, Automotive, and more.  
+With AnyLog deployed on edge nodes, the nodes become members of a peer-to-peer (P2P) network that provides access to
+distributed IoT data from a single point, as if the data is organized and unified on a single machine. 
+This approach creates two tiers: a physical tier that automates data management on the edge nodes, and a virtualized tier that
+provides access to the distributed data from a single point.
+This approach provides a cloud-like setup for the distributed edge making IoT data available in real time anywhere, anytime 
+and for any use case, without the need to move the data and without locking customers into specific clouds, applications or hardware.
 
-As we are in an early beta stage, this program is not available to all. To join the program, email a request to 
-[info@anylog.co](mailto:info@anylog.co)
+To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 
 ## Table of Content 
-* **How to Deploy a Node & Using AnyLog CLI**
-  * [Getting Started](getting%20started.md) 
+* **Deploy AnyLog**
+  * [Getting Started](getting%20started.md)
+  * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
   * [Master Node](master%20node.md)
+  * [Node Configuration](node%20configuration.md)  
   * [Network Configuration](network%20configuration.md)
-  * [Understanding Background Processes](background%20processes.md)
-  * [Using AnyLog CLI](anylog%20commands.md)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
-  * [Streaming Conditions](streaming%20conditions.md)
   * [Metadata Management](metadata%20management.md)
   * [Kubernetes & Docker Deployment of AnyLog](deployments)
     * [Docker Deployment](deployments/Docker)
     * [Kubernetes Deployment](deployments/Kubernetes)
-    
+  * [Setting Test Suites](test%20suites.md)
+  
+* **AnyLog Commands**
+  * [Main Commands](anylog%20commands.md)
+  * [File Commands](file%20commands.md)
+  
 * **Managing Data**
   * [Adding Data](adding%20data.md)
   * [Metadata Requests](metadata%20requests.md)
   * [Mapping data to tables](mapping%20data%20to%20tables.md)
   * [JSON Data Transformation](json%20data%20transformation.md)
   * [Storing Images](image%20mapping.md)
+  
+* **Managing Metadata**
+  * [Blockchain Commands](blockchain%20commands.md)
+  * [Blockchain Configuration](blockchain%20configuration.md)
+  * [Using Ethereum](using%20ethereum.md)
  
 * **Monitoring AnyLog**
   * [General Monitoring](monitoring%20calls.md) 
   * [Monitoring Nodes](monitoring%20nodes.md)
+  * [Streaming Conditions](streaming%20conditions.md)
   * [Logging Events](logging%20events.md)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
   * [Monitoring Data](monitoring%20data.md)
   * [Monitoring File Status](managing%20data%20files%20status.md)
-  * [Managing Configurations](managing%20configuration.md)
-  
+    
 * **Querying Data**
-  * [Build Queries](queries.md)
+  * [Data Queries](queries.md)
   * [SQL Setup](sql%20setup.md)
   * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
   * [Querying Across the Network](network%20processing.md)
-  * [SQL Testing](test%20suites.md)
 
 * **Security & Authentication**
-  * [Secure Network](Secure%20Network.md)
+  * [Authentication](authentication.md)
+  * [Secure Network](secure%20network.md)
     * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
     * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
-    * [Deploying Security](deployments/Networking%20&%20Security/security.md)
-  * [Authentication](authentication.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
