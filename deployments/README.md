@@ -70,9 +70,9 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [Persistent Data on Kubernetes](Kubernetes/volumes.md)
 * [Networking on Kubernetes](Kubernetes/networking.md)
 
-**[Networking](Networking & Security)** - General Networking Information
-* [Nebula](Networking & Security/nebula.md)
-* [NGINX](Networking & Security/nginx.md)
+**[Networking](Networking)** - General Networking Information
+* [Nebula](Networking/nebula.md)
+* [NGINX](Networking/nginx.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
 * [Cheat Sheet](Support/cheat_sheet.md)
