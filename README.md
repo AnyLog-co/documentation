@@ -46,8 +46,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Storing Images](image%20mapping.md)
   
 * **Managing Metadata**
-  * [blockchain commands](blockchain%20commands.md)
-  * [blockchain configuration](blockchain%20configuration.md)
+  * [Blockchain Commands](blockchain%20commands.md)
+  * [Blockchain Configuration](blockchain%20configuration.md)
+  * [Using Ethereum](using%20ethereum.md)
  
 * **Monitoring AnyLog**
   * [General Monitoring](monitoring%20calls.md) 
