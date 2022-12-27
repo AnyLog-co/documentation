@@ -4,12 +4,18 @@
     <img src="imgs/anylog_logo.png" />
 </div> 
 
-AnyLog allows managing your data on edge nodes as if they're located at a single point. We currently operate with a 
-selected group of companies that are using the network to manage their data, as well as  companies that build 
-applications that leverage the network as a unified source of IoT data. 
+AnyLog provides Real-Time Visibility and Management of Distributed Edge Data, Applications and Infrastructure.   
+AnyLog transforms the edge to a scalable data tier that is optimized for IoT data, enabling organizations
+to extract real-time insight for any use case in any industries spanning Manufacturing, Utilities, Oil & Gas, Retail,
+Robotics, Smart Cities, Automotive, and more.  
+With AnyLog deployed on edge nodes, the nodes become members of a peer-to-peer (P2P) network that provides access to
+distributed IoT data from a single point, as if the data is organized and unified on a single machine. 
+This approach creates two tiers: a physical tier that automates data management on the edge nodes, and a virtualized tier that
+provides access to the distributed data from a single point.
+This approach provides a cloud-like setup for the distributed edge making IoT data available in real time anywhere, anytime 
+and for any use case, without the need to move the data and without locking customers into specific clouds, applications or hardware.
 
-As we are in an early beta stage, this program is not available to all. To join the program, email a request to 
-[info@anylog.co](mailto:info@anylog.co)
+To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 
 ## Table of Content 
