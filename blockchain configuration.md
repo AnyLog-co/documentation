@@ -2,7 +2,7 @@
 
 Nodes in the network can be configured to synchronize their local metadata with a global metadata hosted by a blockchain platform.
 With proper configuration, when a node updates the metadata, the updates will be published on the blockchain platform
-and at the same time, updates done by peer nodes and are published on the blockchain, become available to 
+and at the same time, updates done by peer nodes and are published on the blockchain become available to 
 the members of the network.  
 This document explains how to configure a node sch that updates to the metadata are published on the 
 blockchain platform and how to configure to continuously receive metadata updates published by peers.

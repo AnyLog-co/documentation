@@ -19,13 +19,12 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 
 ## Table of Content 
-* **How to Deploy a Node & Using AnyLog CLI**
-  * [Getting Started](getting%20started.md) 
+* **Deploy AnyLog**
+  * [Getting Started](getting%20started.md)
+  * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
   * [Master Node](master%20node.md)
   * [Network Configuration](network%20configuration.md)
-  * [Understanding Background Processes](background%20processes.md)
-  * [Using AnyLog CLI](anylog%20commands.md)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
   * [Streaming Conditions](streaming%20conditions.md)
@@ -33,13 +32,22 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Kubernetes & Docker Deployment of AnyLog](deployments)
     * [Docker Deployment](deployments/Docker)
     * [Kubernetes Deployment](deployments/Kubernetes)
-    
+  * [Setting Test Suites](test%20suites.md)
+  
+* **AnyLog Commands**
+  * [Main Commands](anylog%20commands.md)
+  * [File Commands](file%20commands.md)
+  
 * **Managing Data**
   * [Adding Data](adding%20data.md)
   * [Metadata Requests](metadata%20requests.md)
   * [Mapping data to tables](mapping%20data%20to%20tables.md)
   * [JSON Data Transformation](json%20data%20transformation.md)
   * [Storing Images](image%20mapping.md)
+  
+* **Managing Metadata**
+  * [blockchain commands](blockchain%20commands.md)
+  * [blockchain configuration](blockchain%20configuration.md)
  
 * **Monitoring AnyLog**
   * [General Monitoring](monitoring%20calls.md) 
@@ -55,14 +63,12 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [SQL Setup](sql%20setup.md)
   * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
   * [Querying Across the Network](network%20processing.md)
-  * [SQL Testing](test%20suites.md)
 
 * **Security & Authentication**
+  * [Authentication](authentication.md)
   * [Secure Network](Secure%20Network.md)
     * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
     * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
-    * [Deploying Security](deployments/Networking%20&%20Security/security.md)
-  * [Authentication](authentication.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
