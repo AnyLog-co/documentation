@@ -5,8 +5,8 @@ to generate a destination JSON structure, such that the generated data can fit t
 The mapping process can modify the attributes names and values to be consistent with the tables structures and with the 
 needed data types and formats that are required in the destination tables.
 
-The mappings are defined in policies of types ***mapping*** that are saved in the shared metadata layer.  
-When source JSON structures are processed, the data is transformed using a set of ***mapping policies*** that defines the mapping logic.
+The mappings are defined in policies of types `mapping` that are saved in the shared metadata layer.  
+When source JSON structures are processed, the data is transformed using a set of _mapping_ policies that defines the mapping logic.
 
 ## The Source Data
 The source data is assumed to be in a JSON format. The sensor readings are represented in one of 2 ways:
@@ -16,54 +16,54 @@ The source data is assumed to be in a JSON format. The sensor readings are repre
    is provided in the [sample data](#sample-data) below.
 
 ## The mapping policy
-The mapping is declared as a JSON structure with ***mapping*** as a root key leading to information on the transformation of the data.
+The mapping is declared as a JSON structure with **mapping** as a root key leading to information on the transformation of the data.
 Examples of mapping policies are provided [below](#creating-the-mapping-instructions). 
 
-Pulling the needed values from the source data is done using the ***bring command***. A ***bring command*** 
+Pulling the needed values from the source data is done using the `_bring_` command. A `_bring_` command 
 includes keys and transformation logic that is applied to the source JSON data to construct the destination format. 
-Details of the ***bring command*** are available in the [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command) section.  
-The ***bring commands*** are associated with source data in the following ways:
-1) The ***run mqtt client*** command associates the source data published with a topic to a ***bring command*** that provides the mapping logic. 
+Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json%20data%20transformation.md#the--from-json-object-bring-command) section.  
+The `_bring_` commands are associated with source data in the following ways:
+1) The `run mqtt client` command associates the source data published with a topic to a `_bring_` command that provides the mapping logic. 
    This option is detailed [here](message%20broker.md#the-command-structure).
-2) The ***run mqtt client*** command associates the source data published with a topic to a ***mapping policy***. The 
+2) The `run mqtt client` command associates the source data published with a topic to a _mapping_ policy. The 
    mapping policy provides the destination schema and the mapping instruction. This option is detailed in this document.
    
 The policy sections are in the form of key-value pairs. The key determines the type of information, and the value provides the details.  
 The chart below describes the sections of the policy.
 
-| Key           | Data Type | Mandatory | Details |
-| ------------- | --------- | --------- | ----------------------|
+| Key           | Data Type | Mandatory | Details                                                                                                                |
+| ------------- | --------- | --------- |------------------------------------------------------------------------------------------------------------------------|
 | id            | String  |   Yes     | The policy ID, users can provide a unique ID or when the policy is updated, an ID representing the Hash value is added |
-| condition     | String  |   No      | An ***if statement*** that determines if the mapping policy needs to be processed  |
-| dbms          | String  |   Yes     | The database name   |
-| table         | String  |   Yes     | The table name   |
-| readings      | String  |   No     | A key to a list of readings in the source JSON   |
-| schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions   |
+| condition     | String  |   No      | An _if_ statement that determines if the mapping policy needs to be processed                                          |
+| dbms          | String  |   Yes     | The database name                                                                                                      |
+| table         | String  |   Yes     | The table name                                                                                                         |
+| readings      | String  |   No     | A key to a list of readings in the source JSON                                                                         |
+| schema        | Dictionary  |   Yes     | The schema of the table with the mapping instructions                                                                  |
 
-Note: The ***if statement*** is detailed in the section [Conditional Execution](anylog%20commands.md#conditional-execution).   
+Note: The _if_ statement is detailed in the section [Conditional Execution](anylog%20commands.md#conditional-execution).   
 
 ### The schema section
 The schema is a dictionary whereas the target columns are the keys and each value is a dictionary representing the column's properties including the mapping instructions.  
-The ***schema*** sections are detailed in the chart below:
+The _schema_ sections are detailed in the chart below:
 
-| Key           | Data Type | Mandatory | Details |
-| ------------- | --------- | --------- | ----------------------|
-| condition     | String    |   No      | An ***if statement*** that determines if the column needs to be processed  |
-| bring         | String    |   No      | the ***bring*** command to extract the data from the source JSON (or from each entry in the readings list) |
-| type          | String    |   yes     | the column data type |
-| default       | String    |   No     | A default value if the bring command does not return a value from the source data or the ***bring*** key is not specified. |
+| Key           | Data Type | Mandatory | Details                                                                                                                    |
+| ------------- | --------- | --------- |----------------------------------------------------------------------------------------------------------------------------|
+| condition     | String    |   No      | An `if` statement that determines if the column needs to be processed                                                      |
+| bring         | String    |   No      | the `bring` command command to extract the data from the source JSON (or from each entry in the readings list)               |
+| type          | String    |   yes     | the column data type                                                                                                       |
+| default       | String    |   No     | A default value if the bring command does not return a value from the source data or the `bring` key is not specified. |
 
-Note: An error is returned if both - the ***bring*** and ***default*** keys are not provided.
+Note: An error is returned if both - _bring_ and _default_ keys are not provided.
 
 ### Data type supported
 
-* string
-* integer
-* float
-* char
+* _string_ (_str_)
+* _integer_
+* _float_
+* _char_
 * timestamp
-* bool
-* varchar
+* _bool_
+* _varchar_
 
 ## Mapping blobs data
 Blob data, like images and video, can be designated to be treated efficiently.   
@@ -88,32 +88,31 @@ In this doc, we download the London air quality data from datahub and provide a 
 
 1) An AnyLog Operator node.  
    Details on Operator configurations are available in the section [background processes](background%20processes.md#operator-process).
-2) Define a physical database (i.e.: PostgreSQL or SQLite) to the logical database name (london). 
+2) Define a physical database (i.e.: PostgresSQL or SQLite) to the logical database name (london). 
    Details on database configurations are available in the section [Connecting to a local database](sql%20setup.md#connecting-to-a-local-database).
    
 ## Downloading the data
 
 Using a REST GET command from the AnyLog CLI: 
  
-<pre> 
+```anylog 
 [file=!prep_dir/london.readings.0.0.london_mapping.json, key=results, show= true] = rest get where url = https://datahub.io/core/london-air-quality/r/1.json
-</pre> 
+``` 
 The example above downloads a JSON file from Datahub that includes a list of recent readings.      
 
 Notes:
  * The information in the brackets provides the download destination:  
-    ***file*** provides the path and file name. ***!prep_dir*** is a path assigned to the variable ***prep_dir***. To view the assigned value, type ```!prep_dir``` on the command line.  
-    ***key*** provides the key (in the PurpleAir JSON file) of the list of readings.  
-    ***show*** provides a visual status bar that monitors the write to file process.
+    _file_ provides the path and file name. `!prep_dir` is a path assigned to the variable `prep_dir`. To view the assigned value, type `!prep_dir` on the command line.  
+    _key_ provides the key (in the PurpleAir JSON file) of the list of readings.  
+    _show_ provides a visual status bar that monitors the write to file process.
 
- * More details on the REST GET command are available in the [AnyLog Commands section](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command).
-
- * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrive data from a data source](anylog%20commands.md#using-rest-command-to-retrive-data-from-a-data-source).
+ * More details on the REST GET command are available in the [AnyLog Commands section](anylog%20commands.md#rest-command).
+   
+ * Details on retrieving data from a data source using REST GET are available in the section [Using REST command to retrieve data from a data source](anylog%20commands.md#using-rest-command-to-retrieve-data-from-a-data-source).
  
 
 ## Creating the mapping instructions
-
-```
+```anylog
 <instruct = {"mapping" : {
                "id" : "london_mapping",
                "dbms" : "lsl_demo",
@@ -140,61 +139,61 @@ Notes:
 }> 
 ``` 
 Notes: 
-* In the example above, the ID of the policy is set to ***london_mapping***. If not provided, when the policy is updated, a unique ID is generated.
+* In the example above, the ID of the policy is set to `london_mapping`. If not provided, when the policy is updated, a unique ID is generated.
 * For simplicity, the example is mapping 3 attributes from each reading (gmt, nitric, nitrogen), users can update the mapping policy to include all attributes.
 
 Add the policy to the blockchain:
-<pre>
+```anylog
 blockchain insert where policy = !instruct and local = true and master = !master_node
-</pre> 
+``` 
 
 ## Adding the data
-Adding data to an Operator can be done by placing data in a ***watch*** directory or sending data using REST or assigning
-a broker role to the node and publishing the data. These methods are explained in the section [adding data](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md).
+Adding data to an Operator can be done by placing data in a `watch` directory or sending data using REST or assigning
+a broker role to the node and publishing the data. These methods are explained in the section [adding data](adding%20data.md).
 
 #### Example:
 
-The examples below copy the data to the ***watch*** directory. To see the path assigned to ***watch directory*** type ```!watch_dir``` on the AnyLog CLI.  
+The examples below copy the data to the `watch` directory. To see the path assigned to `watch` directory type `!watch_dir` on the AnyLog CLI.  
 
-When data is copied to the watch directory, the file name serves as the metadata. If the file name is: ***london.readings.json.0.0.london_mapping.json***    
-***dbms_name = file_name[0]*** will treat the first section of the file name (london) as the logical database name.  
-***table_name = file_name[1]*** will treat the second section of the file name (readings) as the logical table name.  
-***data_source = file_name[2]*** will treat the third section of the file name (0) as the representative of the data source.  
-***hash_value = file_name[3]*** will treat the fourth section of the file name (0) as the hash value of the file. This section will be updated in the process.      
-***instructions = file_name[4]*** will treat the fifth section of the file name (london_mapping) as the mapping instructions policy id.london_mapping.   
-***file type*** - JSON.  
+When data is copied to the watch directory, the file name serves as the metadata. If the file name is: `_london.readings.0.0.london_mapping.json_`    
+`dbms_name = file_name[0]` will treat the first section of the file name (london) as the logical database name.  
+`table_name = file_name[1]` will treat the second section of the file name (readings) as the logical table name.  
+`data_source = file_name[2]` will treat the third section of the file name (0) as the representative of the data source.  
+`hash_value = file_name[3]` will treat the fourth section of the file name (0) as the hash value of the file. This section will be updated in the process.      
+`instructions = file_name[4]` will treat the fifth section of the file name (london_mapping) as the mapping instructions policy id.london_mapping.   
+file type - _JSON_.  
 
  
- Copy the data to the ***watch*** directory.  
- The logical database ***london*** will be updated to include the table ***readings*** and the mapping instructions will process the data.
+ Copy the data to the `watch` directory.  
+ The logical database `london` will be updated to include the table `readings` and the mapping instructions will process the data.
  
 To view the status of the Operator:
-<pre>
+```anylog
  get operator
-</pre> 
+``` 
  To view the list of tables on a local database:
-<pre>
+```anylog
  get tables where dbms = london
-</pre> 
+``` 
 To view the list of columns in a table:
-<pre>
+```anylog
 get columns where dbms = london and table = readings
-</pre> 
+``` 
 Examples data queries
-<pre>
+```anylog
 run client () sql london format = table "select count(*) from readings"
 run client () sql london format = table "select gmt, Nitrogen, nitric from readings limit 100"
-</pre>
+```
 
  
 # Data mapping with multiple policies
 
-This example maps data generated by Edgex data generator (from [EdgeX Foundry](https://www.edgexfoundry.org/)).
-Edgex is an open source platform that facilitates interoperability between devices and applications.
+This example maps data generated by EdgeX data generator (from [EdgeX Foundry](https://www.edgexfoundry.org/)).
+EdgeX is an open source platform that facilitates interoperability between devices and applications.
 
 ## Sending data to an AnyLog node from EdgeX 
-Data transfer from Edgex to AnyLog can be done using REST calls or by publishing the data on an AnyLog node.
-Details are available at the [Using EdgeX](/using%20edgex.md#using-edgex) section of the documentation.  
+Data transfer from EdgeX to AnyLog can be done using REST calls or by publishing the data on an AnyLog node.
+Details are available at the [Using EdgeX](using%20edgex.md#using-EdgeX) section of the documentation.  
 The example below details a mapping process on a sample data detailed [below](#sample-data).
 
 ## The Mapping Policies
@@ -203,17 +202,13 @@ In this example, data published is split into 2 tables.
 1. rnd_val - A table that collects timestamps and integer values
 2. device - A table that collects Temperature, Operational Mode, and Fan Speed as well as the timestamp of the reading.  
 
-```
+```anylog
 <mapping1 = {"mapping" : {
-
                "condition" : "if [device] == 'Random-Integer-Generator01'",
-
                "id" : "rnd_val",
-               
-               "dbms" : "edgex",
+               "dbms" : "EdgeX",
                "table" : "rnd_val",
                 "readings" : "readings",
-               
                "schema" : {
                             "timestamp" : {
                                 "bring" : "[created]",
@@ -224,16 +219,15 @@ In this example, data published is split into 2 tables.
                                 "bring" : "[value]",
                                 "type" : "decimal"
                             }
-                           
                         }
             }
 }> 
 ```
 
 Add the policy to the blockchain:
-<pre>
+```anylog
 blockchain insert where policy = !mapping1 and local = true and master = !master_node
-</pre> 
+``` 
 
 
 ```
@@ -243,7 +237,7 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
 
                "id" : "device",
                
-               "dbms" : "edgex",
+               "dbms" : "EdgeX",
                "table" : "device",
                "readings" : "readings",
 
@@ -273,48 +267,47 @@ blockchain insert where policy = !mapping1 and local = true and master = !master
 }> 
 ``` 
 Add the policy to the blockchain:
-<pre>
+```anylog
 blockchain insert where policy = !mapping2 and local = true and master = !master_node
-</pre> 
+``` 
 
 ### Associate the policies to a topic
-<pre>
+```anylog
 run mqtt client where broker=local and log=false and topic=( name=anylog_test and policy = rnd_val and policy = device )
-</pre> 
+``` 
 
 ### Validate the assigned policies
-<pre>
+```anylog
 get msg client
-</pre> 
+``` 
 
 ### Publish the sample data
 
 Cut and paste the sample data example [below](#sample-data) to the AnyLog CLI.
 
-The following command on the CLI shows the assigned data to the key ***sample_data***.
-<pre>
-!sample_data
-</pre>
+The following command on the CLI shows the assigned data to the key _sample_data_ -- `!sample_data`
+
 
 Publish the data using one of the below commands:  
-1) Avoiding the network API (better performance than using the network call):
-<pre>
+1. Avoiding the network API (better performance than using the network call):
+```anylog
 mqtt publish where broker=local and topic=anylog_test and message=!sample_data 
-</pre>
-2) Using the network API:
-<pre>
+```
+
+2. Using the network API:
+```anylog
 mqtt publish where broker=10.0.0.78 and port = 7850 and topic=anylog_test and message=!sample_data 
-</pre>
+```
 
 View the messages processed by the client (per topic) using the following command:
-<pre>
+```anylog
 get msg client statistics
-</pre>
+```
 
 View the messages processed by the broker using the following command:
-<pre>
+```anylog
 get broker 
-</pre>
+```
 
 
 ## Sample data

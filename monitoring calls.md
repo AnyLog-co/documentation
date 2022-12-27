@@ -1,14 +1,14 @@
 # Monitoring calls from external applications
 
 ## REST server configuration
-The command ***get rest server info*** provides the info on how the REST server is configured.
+The command `get rest server info` provides the info on how the REST server is configured.
 
-Usage: 
-<pre>
+**Usage**: 
+```anylog
 get rest server info
-</pre>
+```
 
-Explanation output:
+**Explanation output**:
 
 | Attribute Value | Details  |
 | ------------- | ------------| 
@@ -26,40 +26,39 @@ Explanation output:
 
 ## Get REST Calls
 
-The ***get rest calls*** command returns statistics on the REST calls issued and their execution results.
+The `get rest calls` command returns statistics on the REST calls issued and their execution results.
 
 Usage: 
-<pre>
+```anylog
 get rest calls
-</pre>
+```
 
 ###Example reply:
-<pre>
+```anylog
 Statistics
 Caller Call Processed Errors Last Error              First Call          Last Call           Last Caller
 ------|----|---------|------|-----------------------|-------------------|-------------------|---------------|
 anylog|GET |        3|     1|Error Command Structure|2021-11-24 13:29:01|2021-11-24 13:29:19|10.0.0.78:50183|
       |POST|        4|     0|                       |2021-11-24 13:29:08|2021-11-24 13:29:24|10.0.0.78:50185|
-</pre>
+```
 
 
 ## Get Streaming
-
 Data provided via REST APIs and message brokers passes to processing through internal buffers.
-The buffers are associated with database tables and the ***get streaming*** command provides information on the data 
+The buffers are associated with database tables and the `get streaming` command provides information on the data 
 that passes through these buffers.
 
-The command returns the data in a text format. Adding the key-value pair ***format = json*** returns the info in a JSON structure.
+The command returns the data in a text format. Adding the key-value pair _format=json_ returns the info in a JSON structure.
 
-Usage: 
-<pre>
+**Usage**: 
+```anylog
 get streaming
 get streaming where format = json
-</pre>
+```
 
 The non JSON reply has 2 sections showing configurations and statistics.
 
-***Section A attributes:***
+**Section A attributes**:
 | Attribute name | Details  |
 | ------------- | ------------| 
 | Default time | The threshold time to flush the buffers (the default value for tables that are not assigned with time) |
@@ -68,7 +67,7 @@ The non JSON reply has 2 sections showing configurations and statistics.
 | Buffered Rows | The total number of rows placed in the streaming buffers |
 | Flushed Rows | The total number of rows added to databases |
 
-***Section B attributes:***
+**Section B attributes**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -88,29 +87,29 @@ The non JSON reply has 2 sections showing configurations and statistics.
 
 # Get MSG Clients
 
-The ***get msg clients*** command provides statistics and details on the mapping of data to the tables structures.  
-The mapping is done using the command ***run mqtt client***, details are available at the [AnyLog as a broker receiving REST commands](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
+The `get msg clients` command provides statistics and details on the mapping of data to the tables structures.  
+The mapping is done using the command `run mqtt client`, details are available at the [AnyLog as a broker receiving REST commands](message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
 
 Usage: 
-<pre>
+```anylog
 get msg clients 
 get msg client N
-</pre>
-N represents the subscription ID which is assigned for each ***run mqtt client*** call.
+```
+N represents the subscription ID which is assigned for each `run mqtt client` call.
 if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
 
 The reply has 4 sections showing configurations and statistics.  
 
-***Section A attributes:***
+**Section A attributes**:
 
-| Attribute name | Details  |
-| ------------- | ------------| 
-| Subscription | The subscription ID |
-| User | The ID of the user connecting to the broker (if the data is published on a broker), or ***unused*** if data is published via REST |
-| Broker | The URL of the broker, or ***rest*** if data is published via REST  |
-| Connection | The type of connection  |
+| Attribute name | Details                                                                                                                           |
+| ------------- |-----------------------------------------------------------------------------------------------------------------------------------| 
+| Subscription | The subscription ID                                                                                                               |
+| User | The ID of the user connecting to the broker (if the data is published on a broker), or _unused_ if data is published via REST |
+| Broker | The URL of the broker, or _REST_ if data is published via REST                                                                      |
+| Connection | The type of connection                                                                                                            |
 
-***Section B attributes:***
+**Section B attributes**:
 
 Statistics on the mapping of data using the subscription.
 
@@ -123,22 +122,24 @@ Statistics on the mapping of data using the subscription.
 | Last error time | The data and time of the last mapping error identified | 
 | Last error | The details of the last error recorded | 
 
-***Section C attributes:***
+**Section C attributes**:
 
-Details of the topic and the ,apping instructions between the source data and the table structure.
+Details of the topic and mapping instructions between the source data and the table structure.
 
-***Section D attributes:***
+**Section D attributes**:
 
 The locations of the local directories that are used to organize the data for the database ingestion.   
 This section is provided by adding the keyword detailed to the command:
-<pre>
+```anylog
 get msg clients detailed 
 get msg client N detailed
-</pre>
+```
 
 
-###Example reply:
-<pre>
+**Example reply**:
+```anylog
+AL anylog-node > get msg clients detailed
+
 Subscription: 0001
 User:         unused
 Broker:       rest
@@ -161,28 +162,27 @@ Connection:   Connected to local Message Server
      Prep Dir      |D:\Node\AnyLog-Network\data\prep |
      Watch Dir     |D:\Node\AnyLog-Network\data\watch|
      Error Dir     |D:\Node\AnyLog-Network\data\error|
-</pre>
+```
 
 ## Get Operator
 
-The ***get operator*** command provides information on data ingested to the local databases.  
-Data is mapped from a JSON format to a SQL format and added to the local database, the command provides information on the process of
-transforming the JSON to SQL and the ingestion process.
+The `get operator` command provides information on data ingested to the local databases. Data is mapped from a JSON format 
+to a SQL format and added to the local database, the command provides information on the process of transforming the JSON 
+to SQL and the ingestion process.
 
-The command returns the data in a text format. Adding the key-value pair ***format = json*** returns the info in a JSON structure.
+The command returns the data in a text format. Adding the key-value pair `format = json` returns the info in a JSON structure.
 
 Usage: 
-<pre>
+```anylog
 get operator
 get operator format = json
-</pre>
+```
 
+The non-JSON reply has 4 sections showing configurations and statistics.
 
-The non JSON reply has 4 sections showing configurations and statistics.
+### Section A attributes
 
-***Section A attributes:***
-
-Operator information:
+**Operator Information**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -191,9 +191,9 @@ Operator information:
 | Cluster | The cluster ID assigned to the operator |
 | Member | A unique member ID assigned to the operator as member of the cluster |
 
-***Section B attributes:***
+### Section B attributes
 
-JSON Data information:
+**JSON Data information**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -204,9 +204,9 @@ JSON Data information:
 | Last Process | The time of the last file processed |
 
 
-***Section C attributes:***
+### Section C attributes:
 
-SQL Data information:
+**SQL Data information**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -216,12 +216,13 @@ SQL Data information:
 | Immediate | The number of files processed with immediate flag |
 | Last Process | The time of the last file processed |
 
-***Section D attributes:***
+### Section D attributes:
 
 Files with failed processes identifying the table and the error.
 
-###Example reply:
-<pre>
+**Example reply**:
+```anylog
+AL anylog-node > get operator
 Status:     Active
 Time:       0:8:50 (H:M:S)
 Cluster:    7a00b26006a6ab7b8af4c400a5c47f2a
@@ -242,16 +243,16 @@ Error Type           Counter DBMS Name Table Name Last Error Last Error Text
 Duplicate JSON Files|      0|         |          |         0|               |
 JSON Files Errors   |      0|         |          |         0|               |
 SQL Files Errors    |      0|         |          |         0|               |
-</pre>
+```
 
 ## Get Operator Summary
 
-The ***get operator summary*** command provides summary information on the operator processes.  
+The `get operator summary` command provides summary information on the operator processes.  
 Usage
-<pre>
+```anylog
 get operator summary
 get operator summary format = json
-</pre>
+```
 
 The summary call returns info in a table format or in a JSON format.  
 The returned info is the following:
@@ -264,12 +265,12 @@ The returned info is the following:
 | Delta Rows | The number of rows processed by the Operator (in all logical tables) since the previous summary call |
 | Errors | The total number of errors (in all logical tables) |
 
-The ***get operator summary*** command can be placed on continuous display as follows: 
-<pre>
+The `get operator summary` command can be placed on continuous display as follows: 
+```anylog
 continuous "get operator summary"
-</pre>
+```
 
 Details are available in the
-[continuous command section](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes-operations)
+[continuous command section](monitoring%20nodes.md#monitoring-nodes-operations)
 
 

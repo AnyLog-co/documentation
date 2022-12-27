@@ -1,4 +1,3 @@
-
 # Data Distribution and Configuration
 
 The distribution of data to nodes in the network is determined by policies published on the blockchain.  
@@ -14,7 +13,7 @@ This method does not offer the High Availability (HA) features and is usually us
 
 Users view the data as if it is organized in tables assigned to databases.  
 The physical organization of the data partitions the data to clusters. Each of the clusters is supported by multiple Operators
-that maintain identical copies of the cluster's data. Therefore if an Operator nodes fails, the cluster's data is available on a surviving node.    
+that maintain identical copies of the cluster's data. Therefore, if an Operator nodes fails, the cluster's data is available on a surviving node.    
 The way data is treated is as follows:  
 * Data is assigned to a logical table.
 * Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
@@ -24,7 +23,7 @@ In the example below, the data of tables 1-4 is distributed to 2 clusters. Each 
 The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the second Operator
 (and based on the policies, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator).
 
-<pre>
+```anylog
 |--------------------|          |--------------------|          |--------------------|  
 |                    |          |                    |   --->   |     Operator 1     |          
 |                    |   --->   |                    |          |--------------------|  
@@ -40,7 +39,7 @@ The data of each cluster is maintained by 2 Operators such that if an Operator f
 |                    |   --->   |                    |          |--------------------|  
 |                    |          |                    |   --->   |     Operator 4     |  
 |--------------------|          |--------------------|          |--------------------|  
-</pre>
+```
 
 ## Prerequisites
 
@@ -49,10 +48,15 @@ The data of each cluster is maintained by 2 Operators such that if an Operator f
 To view connection information issue the following command:  
 ```get connections``` on each participating operator.  
 * Operators that host data are configured to provide a local database service.  
-For example, to support a database called ***lsl_data*** using PotgreSQL, the ***connect dbms*** is called as follows:  
-``` connect dbms psql !db_user !db_port lsl_data```  
+For example, to support a database called `lsl_data` using PostgresSQL, the `connect dbms` is called as follows:  
+```anylog 
+connect dbms lsl_demo where type=psql and port=5432 and user=admin and password=passwd 
+```  
+
 To view connected databases call:  
-```get databases```
+```anylog
+get databases
+```
  
 ## Assigning data to Operators
 
@@ -60,15 +64,16 @@ Using the first method, Operators declare the tables supported using a policies 
 
 ### Example
 
-<pre>
-{"operator" : {
-    "dbms" : "lsl_data"
-    "table" : ["ping_sensor", "percentage_cpu", "pressure_sensor"],
+```json
+{"operator": {
+    "dbms": "lsl_data",
+    "table": ["ping_sensor", "percentage_cpu", "pressure_sensor"],
     "ip" : "10.0.0.25",
-    "port" : "2048"
+    "port": 2048,
+    "rest_port": 2049
     }
-}>
-</pre>
+}
+```
 
 When data is distributed to a table or is being queried, all the relevant Operators will participate in the process.
 
@@ -85,10 +90,11 @@ Declaring clusters and assigning Operators to each cluster can be done in 2 ways
 
 ### Declaring the Cluster's tables
 With method 1, the cluster policy includes a list of tables that are supported. The tables are identified by:  
-***company*** - the name of the company that owns the data (optional).  
-***dbms*** - the name of the logical database that hosts the data.  
-***name*** - the name of the logical table that hosts the data.  
-With method 2, the cluster policy includes compamy name only. Tables will be assigned to the cluster using the Policies of the Operators.
+_company_ - the name of the company that owns the data (optional).  
+_dbms_ - the name of the logical database that hosts the data.  
+_name_ - the name of the logical table that hosts the data.  
+
+With method 2, the cluster policy includes company name only. Tables will be assigned to the cluster using the Policies of the Operators.
 
 
 ### Assigning Operators to Clusters
@@ -101,23 +107,23 @@ The Member ID is generated automatically and is used to uniquely Identify a memb
 
 When the policies are declared they become available to the relevant nodes using one of the methods that distributes the blockchain updates.  
 For example, by configuring the nodes to use the blockchain synchronizer using the command:
-<pre>
+```anylog
 run blockchain sync
-</pre>
-Information on the Synchronizer process is available at [background processes](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer).  
+```
+Information on the Synchronizer process is available at [background processes](background%20processes.md#blockchain-synchronizer).  
 The Synchronizer process will automatically update the metadata by the policies declared.
 To manually force the updated policies, use the command:
-<pre>
+```anylog
 blockchain load metadata
-</pre>
+```
 
 ## View data distribution policies
 The command below provides a visual chart of how data is distributed to nodes in the network:
-<pre>
+```anylog
 blockchain query metadata
-</pre>
+```
 The command presents a hierarchical view of how the data is distributed:
-<pre>
+```anylog
 |- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
 litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
@@ -133,14 +139,15 @@ litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a
                                                          ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
                                                                                                              ==> 142.10.83.145:2048         [0012  remote active]
 
-</pre>
+```
 
 ## View tables managed by an Operator
 
-Excuting the command ```get cluster info``` on an Operator node presents the cluster supported by the operator,
+Executing the command `get cluster info` on an Operator node presents the cluster supported by the operator,
 the members Operators that are supporting the cluster and the tables associated with the cluster.
 
-<pre>
+```anylog
+AL anylog-node > get cluster info
 Cluster ID : 2436e8aeeee5f0b0d9a55aa8de396cc2
 Member ID  : 206
 Participating Operators:
@@ -153,23 +160,23 @@ Tables Supported:
       -------------|-------------|--------------------|
       litsanleandro|litsanleandro|ping_sensor         |
       litsanleandro|litsanleandro|percentagecpu_sensor|
-</pre>
+```
 
 ## Test Cluster policies
 The command below tests the validity of the cluster policies:
-<pre>
+```anylog
 blockchain test cluster
-</pre>
+```
 
 ## Example Policies
 
 The following example declares the following:  
 1. 2 tables: cos_data and sin_data.  
-2. 2 clusters, the first supports the 2 tables and the second supports cos_data only.  
+2. 2 clusters, the first supports the 2 tables and the second; supports _cos_data_ only.  
 3. 3 Operators - 2 Operators supporting the first cluster and 1 operator supporting the second cluster.  
 
 #### Declaring the tables
-<pre>
+```anylog
 {"table": {"create": "CREATE TABLE IF NOT EXISTS cos_data(  row_id SERIAL "
                       "PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL "
                       "DEFAULT NOW(),  timestamp TIMESTAMP NOT NULL DEFAULT "
@@ -193,10 +200,10 @@ The following example declares the following:
             "id": "e46d9b768d7eef2abaacb17b251191aa",
             "name": "sin_data"}}
 
-</pre>
+```
 
 #### Declaring the Clusters
-<pre>
+```anylog
 {"cluster" : {
                 "company" : "anylog",
                 "status" : "active",
@@ -231,33 +238,36 @@ cluster = {"cluster" : {
 
     }
 }
-</pre>
+```
 
 #### Declaring the Operators
 
-<pre>
-{"operator" : {
-    "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
-    "member" : 1,
-    "ip" : "10.0.0.25",
-    "port" : "2048"
-    }
-}
+```json
+{"operator": {
+    "cluster": "6c67e2982a69f606107d3c0f50aae8cc",
+    "member": 1,
+    "ip": "10.0.0.25",
+    "port": 2048,
+    "rest_port": 2049
+  }
+},
 
-{"operator" : {
-    "cluster" : "6c67e2982a69f606107d3c0f50aae8cc",
-    "member" : 2,
+{"operator": {
+    "cluster": "6c67e2982a69f606107d3c0f50aae8cc",
+    "member": 2,
     "ip" : "10.0.0.87",
-    "port" : "2048"
+    "port": 2048,
+    "rest_port": 2049
     }
-}
+},
 
-{"operator" : {
-    "cluster" : "56142ddfa243bb3bc8c6688848af01db",
-    "member" : 1,
-    "ip" : "10.0.0.169",
-    "port" : "2148"
+{"operator": {
+    "cluster": "56142ddfa243bb3bc8c6688848af01db",
+    "member": 1,
+    "ip": "10.0.0.169",
+    "port": 2148,
+    "rest_port": 2049
     }
 }
-</pre>
+```
 

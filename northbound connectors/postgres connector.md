@@ -1,7 +1,11 @@
 # PSQL Connector & Tableau Visualization
   
-For software that doesn't support REST requests, but does support PostgreSQL connector graphs can be generated through 
-the `system_query` database.
+For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
+the `system_query` database. To connect `system_query` in  PostgresSQL
+
+```anylog 
+```
+
 
 ## Setting up Postgres 
 0. [Install Postgres](https://www.postgresqltutorial.com/install-postgresql/)
@@ -50,7 +54,7 @@ Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-al
     host    all             new_user           27.147.176.2/32       md5
     ```
    
-4. Restart PostgreSQL instance
+4. Restart PostgresSQL instance
     ```bash
     docker restart anylog-psql
     ```
@@ -81,7 +85,7 @@ Disclaimer: [Full list of SQL options](../queries.md#query-options)
 
 ## Extract Data onto Tableau
 1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
-2. Under _Data_ → _Data Sources_ select PostgreSQL connector type 
+2. Under _Data_ → _Data Sources_ select PostgresSQL connector type 
 
 | ![data](../imgs/tableau_img2a.png) | ![data source](../imgs/tableau_img2b.png) |
 | --- | --- |

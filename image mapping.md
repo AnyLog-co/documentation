@@ -1,6 +1,6 @@
 # Image Mapping
 
-An AnyLog Operator node can host images (or any type of ***blob*** data like videos, photos, voice etc.) locally on the node and transfer the images to a destination node upon request.    
+An AnyLog Operator node can host images (or any type of _blob_ data like videos, photos, voice etc.) locally on the node and transfer the images to a destination node upon request.    
 The process of managing images is similar to the process of managing streaming data with an additional process to store the image locally.  
 Logically, the image is considered as a column in the database that hosts the data.  
 Physically, the table column includes an identifier of the image, and the image is hosted separately using one (or both) 
@@ -40,7 +40,7 @@ A streaming process that includes an image is shown in the following diagram:
 The data flow is as follows (and see the diagram above):
 1) Data is published to a broker.
 2) An AnyLog client process is subscribing to the broker (and a topic).
-3) The subscription process (enablrd using ***run mqtt client*** command) associates a policy to the subscription.
+3) The subscription process (enable using `run mqtt client` command) associates a policy to the subscription.
 4) The policy provides the instructions of the data transformation including how to extract the image data.
 5) The transformation of the source data generates a data structure that updates the relational store and extracts the image data.
 6) The image data is maintained as a file on the operating system or stored in a dedicated database like MongoDB (or both).
@@ -52,13 +52,13 @@ Therefore, rows in the relational database represent the blobs using a column th
 The identifier can be provided by a user (i.e. a unique file name), like an image name, or provided by the system, in that case the identifier is the 
 hash value of the blob.  
 As each blob data is associated with a row in a table of the relational database, we maintain a similar representation in the blob database:
-1) The logical database name in the blobs' database is the same as the logical database name in the relational table with a prefix extension of: ***blobs_***.  
+1) The logical database name in the blobs' database is the same as the logical database name in the relational table with a prefix extension of: _blobs__.  
    For example: if the database name is "my_dbms", the blobs database name will be "blobs_my_dbms"
 2) The logical table name is maintain with the blobs data such that each blob is associated with a table name which is the same as the relational table name.  
 Each blob data is associated with a key representing the date the file was added to the database.  
-The date key is in the format: YYMMDD representing the date in the UTC time zone.  
+The date key is in the format: _YYMMDD_ representing the date in the UTC time zone.  
    
-This approcah associates the following to each file:
+This approach associates the following to each file:
 1) A unique Hash Value (or a file name)
 2) A database name
 3) A table name
@@ -71,21 +71,21 @@ The following commands allow to store, retrieve and monitor blob data:
 ### Declare the blobs dbms
 
 Using a database for blob storage requires associating the logical database name with a physical storage.  
-The command ***connect dbms*** is used to associate the logical database name with a physical database.  
+The command `connect dbms` is used to associate the logical database name with a physical database.  
 The default choice for a logical name would be as the logical database name in the relational dbms that is referencing the blob data
 - see details [above](#the-blobs-database).  
 
 Usage:
-<pre> 
+```anylog 
 connect dbms [logical name prefixed with blobs_] where type = [physical database name] and ip = [ip] and port = [port] and user = [use name] and password = [password]
-</pre> 
+``` 
 
 Example:
-<pre> 
+```anylog 
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
-</pre> 
+``` 
 
-Additional information is available at the [configuring a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#configuring-a-local-database) section.
+Additional information is available at the [configuring a local database](sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -94,47 +94,47 @@ Dropping a database is a 2 step process.
 2) Drop the database. The drop will delete all files stored in the logical database.  
 
 Example:
-<pre>
+```anylog
 disconnect dbms blobs_lsl
 drop dbms blobs_lsl from mongo where ip = localhost and port = 27017
-</pre>
+```
 
 ### Get the list of files stores in the blobs database
 
 Usage:
-<pre>
+```anylog
 get files where dbms = [dbms name] and table = [table name] and id = [file name] and hash = [hash value] and date = [YYMMDD in UTC] and limit = [limit]
-</pre>
+```
 Specifying the dbms is mandatory. All the other parameters are optional and serve as a filter.  
 * Limit sets a cap on the number of files listed.
-* Date is a 6 digits date in the format YYMMDD and limits the listed file by the update date. 
+* Date is a 6-digits date in the format YYMMDD and limits the listed file by the update date. 
 
 The following examples retrieve list of files assigned to a table (and their file size):
-<pre>
+```anylog
 get files where dbms = blobs_edgex and table = image and limit = 100
 get files where dbms = blobs_edgex and table = image
-</pre>
+```
 
 Use the following example to View all the files assigned to a table in a particular date:
-<pre>
+```anylog
 get files where dbms = blobs_edgex and table = video and date = 220723 and limit = 100
 get files where dbms = blobs_edgex and date = 220723  limit = 100
-</pre>
+```
 
 ### get files count
 
 The command returns the count of files stored in each table of the database.  
 Usage:
-<pre>
+```anylog
 get files count where dbms = [dbms name] and table = [table name]
-</pre>
+```
 * DBMS name is optional - if not provided, all databases are considered.
 * Table name is optional - if not provided, all tables of the specified database are considered.
 
 Example:
-<pre>
+```anylog
 get files count where dbms = blobs_edgex and table = image
-</pre>
+```
 
 ### Retrieve a file or files
 
@@ -149,37 +149,37 @@ A group of files can be retrieved by a combination of the following search crite
 If a group of files is retrieved, the destination can only be a folder.
    
 Usage:
-<pre>
+```anylog
 file retrieve where dbms = [dbms name] and table = [table name] and id = [file id] and dest = [destination folder and optionally a file name]
 file retrieve where dbms = [dbms name] and table = [table name] and hash = [file hash] and dest = [destination folder and optionally a file name]
 file retrieve where dbms = [dbms name] and table = [table name] and date = [date key] and dest = [destination folder]
-</pre>
+```
 
 Examples:  
-<pre>
+```anylog
 file retrieve where dbms = blobs_edgex and table = image and id = 9439d99e6b0157b11bc6775f8b0e2490.png and dest = !blobs_dir/test_video.mp4
 file retrieve where dbms = blobs_edgex and table = image and dest = !blobs_dir
-</pre>
+```
 
 ### Delete a file or a group of files
 
-Files are removed from storage using the ***file remove*** command.  
+Files are removed from storage using the `file remove` command.  
 A single fle is removed by identifying the database name, the table name, the file unique ID (name) or the hash value.   
-A group of files are removed by identifying the database name a table name and a date key (YYMMDD in UTC format).  
+A group of files gets removed by identifying the database name a table name and a date key (YYMMDD in UTC format).  
 Usage:
-<pre>
+```anylog
   file remove where dbms = [dbms name] and table = [table name] and hash = [hash value]
   file remove where dbms = [dbms name] and table = [table name] and id = [file id]
   file remove where dbms = [dbms name] and table = [table_name]
   file remove where dbms = [dbms name] and and table = [table_name] and date = [date key]
-</pre>
+```
 
 Examples:
-<pre>
+```anylog
   file remove where dbms = blobs_edgex and table = videos and id = 9439d99e6b0157b11bc6775f8b0e2490
   ile remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and table = image and date  = 220723
-</pre>
+```
 
 
 ### Insert a file to a local database
@@ -188,34 +188,34 @@ Files can be added to the database and assigned to a table.
 When a file is added to the database, a file name and the hash value of the file serve as unique identifiers of the file (per table).
 
 A file can be added and assigned to a table in a blobs database using the following command:
-<pre>
+```anylog
 file store where dbms = [dbms_name] and table = [table name] and hash = [hash value] and file = [path and file name]
-</pre>
+```
 Example:
-<pre>
+```anylog
 file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/device12atpeak.bin
-</pre>
+```
 
 Note: the following example returns the hash value of a file:
-<pre>
+```anylog
 file hash !prep_dir/device12atpeak.bin
-</pre>
+```
 
-***Using Trace***  
+**Using Trace**  
 To trace a failure, the following command outputs the failure error to stdout:
-<pre>
+```anylog
 trace level = 1 file store
-</pre>
+```
 Use the following command to disable the trace outputs:
-<pre>
+```anylog
 trace level = 0 file store
-</pre>
+```
 
 
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
-The command [file get](https://github.com/AnyLog-co/documentation/blob/master/file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
+The command [file get](file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
 is used to copy files from a remote node to the local node.   
 If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
 
@@ -223,21 +223,21 @@ This process is frequently used to augment a SQL query, if the rows returned inc
 the query process can complete the query by a call to retrieve files from the remote machines.
 
 Usage:
-<pre>
+```anylog
 run client [Remote node IP and Port] file get (dbms = [dbms name] and table = [table name] and id = [file ID]) [destination folder]
-</pre>
+```
 
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
-<pre>
+```anylog
 run client 10.0.0.78:7848 file get (dbms = blobs_edgex and table = videos and id = sample-5s.mp4) !tmp_dir
-</pre>
+```
 
 # Example - processing data with images
 
 The following example demonstrates data published on an AnyLog node that acts as a broker.  
 The data includes an image and information relating to the image.  
-A policy is assigned to the topic, and the incoming data updates the streaming data database (PostgreSQL) and 
+A policy is assigned to the topic, and the incoming data updates the streaming data database (PostgresSQL) and 
 a blobs storage database (MongoDB).  
 The rows in the streaming database reference the blobs database such that, given a query to a remote node (that stores the data), the
 query returns the location and identifier of the images that are associated with the returned data.  This information 
@@ -253,16 +253,16 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
 2) An Operator node configured with the following functionalities:
     * As a message broker - the new data is published on AnyLog node as a Broker.  
       Example:  
-      <pre>
+      ```anylog
       run message broker !external_ip 7850 !ip 7850 6
-      </pre>
-      Details on configuration of AnyLog as a broker are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
-    * As a Blobs Archiver - this process loads the images into the blobs database.  
+      ```
+      Details on configuration of AnyLog as a broker are available [here](message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
+    * As a Blobs Archiver - this process loads the images into blobs database (such as MongoDB).  
       Example:    
-      <pre>
+      ```anylog
       run blobs archiver where dbms = true and folder = true and compress = False
-      </pre>
-      Details on configuration of the Blobs Archiver process are available [here](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
+      ```
+      Details on configuration of the Blobs Archiver process are available [here](background%20processes.md#the-blobs-archiver).
     
 ## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
@@ -299,34 +299,34 @@ When the policy is applied (on the data) the following processes generate the in
 1. The ID of the policy is named to be "id_image_mapping" - if an ID is not included in the policy, 
    an ID will be dynamically added when the policy is added to the ledger.
 2. The DBMS and Table are provided in the policy as "edgex" and "image" respectively.
-3. The Source attribute in the policy represents the source of the data, it will be provided by the ***bring*** function applied to the "deviceName"
+3. The Source attribute in the policy represents the source of the data, it will be provided by the _bring_ function applied to the "deviceName"
    attribute in the data (to retrieve the value - "Camera001"). 
-   If the source data does not have a "deviceName" attribute, it will use the default value ("12). 
+   If the source data does not have a "deviceName" attribute, it will use the default value (_12_). 
    If a "deviceName" attribute is missing, it will use the value "0" to represent that data source is not represented.  
 4. The "readings" attributes in the policy maps to the name of the readings attribute in the data. If a "readings" attribute is missing,
    it is assumed that the data does not contain the readings under a special attribute.
 5. In the data example above, the data readings appear as a list under the "readings" attribute. Therefore, the 
    policy below identifies the "readings" attribute and identifies the needed info such that:  
-    a. ***Timestamp*** value is generated from the function now().  
-    b. ***Profilename*** is derived from the "profilename" attribute (within the readings attribute).  
-    c. ***ValueType*** is derivrd from the "valueType" attribute (within the readings attribute).  
-    d. The ***file*** attribute describes the file info as follows:  
+    a. _Timestamp_ value is generated from the function now().  
+    b. _Profilename_ is derived from the "profilename" attribute (within the readings attribute).  
+    c. _ValueType_ is derivrd from the "valueType" attribute (within the readings attribute).  
+    d. The _file_ attribute describes the file info as follows:  
     * It is a blob type of info.
     * It is derived from the "binaryValue" attribute.
     * It will be placed in a file with an extension "png".
     * It is uniquely identified by the Hash value (based on md5 hashing).
     * When stored, it will be decoded using base 64 decoding (see details [here](https://en.wikipedia.org/wiki/Base64).)
     
-This process ends with a table ***image*** assigned to a database ***edgex*** that includes the following columns:    
-a. ***Timestamp*** - the current time   
-b. ***Profilename*** - taken from the readings  
-c. ***ValueType*** - taken from the readings  
-d. ***file*** - the hash value of the image including the file type (i.e.: 9439d99e6b0157b11bc6775f8b0e2490.png) is stored in a varchar column.
+This process ends with a table _image_ assigned to a database _edgex_ that includes the following columns:    
+a. _Timestamp_ - the current time   
+b. _Profilename_ - taken from the readings  
+c. _ValueType_ - taken from the readings  
+d. _file_ - the hash value of the image including the file type (i.e.: 9439d99e6b0157b11bc6775f8b0e2490.png) is stored in a varchar column.
 
-Based on the configuration of the Archiver Process, the image (from the attribute "binaryValue") is stored in an object database assigned to a table ***image***
-and a database ***blobs_edgex***.  
+Based on the configuration of the Archiver Process, the image (from the attribute "binaryValue") is stored in an object database assigned to a table _image_
+and a database _blobs_edgex_.  
 
-```
+```anylog
 <mapping_policy = {"mapping" : {
     
         "id" : "id_image_mapping",
@@ -374,133 +374,132 @@ and a database ***blobs_edgex***.
 Follow the following commands to configure the needed setup and process the data:
 
 ### Declare the participating databases
-The [data example](#example-data) was generated from an [Edgex](https://www.edgexfoundry.org/) based platform.  
+The [data example](#example-data) was generated from an [EdgeX](https://www.edgexfoundry.org/) based platform.  
 The example names the logical database as follows:  
-* ***edgex*** - to represent the streaming data in a potgreSQL database.
-* ***blobs_edgex*** - to represent the image (blob) data in a MongoDB database.
+* _edgex_ - to represent the streaming data in a PostgresSQL database.
+* _blobs_edgex_ - to represent the image (blob) data in a MongoDB database.
 
-<pre> 
+```anylog 
 connect dbms edgex where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-</pre> 
-<pre> 
+``` 
+```anylog 
 connect dbms blobs_edgex where type = mongo and ip = localhost and port = 27017
-</pre> 
+``` 
 
-***Note: To maintain the association between the blobs and the relational data, the logical database name in the blobs
-database is the same as the logical database name in the relational table with a prefix extension of: blobs.***
+**Note: To maintain the association between the blobs and the relational data, the logical database name in the blobs
+database is the same as the logical database name in the relational table with a prefix extension of: blobs.**
 
 ### Add the policy to the metadata
-Cut and paste the policy definition above to the AnyLog CLI such that ***mapping_policy*** is assigned with the policy info.  
-The following command will display the policy info:
-<pre>
-!mapping_policy
-</pre> 
+Cut and paste the policy definition above to the AnyLog CLI such that _mapping_policy_ is assigned with the policy info.  
+The following command will display the policy info: `!mapping_policy`
+
+ 
 Use the following command to update the metadata with the policy of the example above:  
-<pre>
+```anylog
 blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
-</pre> 
+``` 
 Use the following command to view the update of the metadata with the new policy:
-<pre>
+```anylog
 blockchain get mapping where id = id_image_mapping
-</pre> 
+``` 
 
 ### Subscribe to the published data 
 The new data will be published to a topic called images and the command below associates data published to the 
-***images*** topic with the policy above such that when the data is published, the data is mapped according to the mapping policy.
+_images_ topic with the policy above such that when the data is published, the data is mapped according to the mapping policy.
 
-<pre>
+```anylog
 run mqtt client where broker=local and log=false and topic=( name=images and policy = id_image_mapping)
-</pre> 
+``` 
 
 ### Publish the data
 To test the setup above, the configured node can publish the data to the broker.  
 The data example contain some image characters that are modified when are pasted on the AnyLog CLI.  
 To publish, cut and paste the [data example](#example-data) to a file (i.e.: image_setup.al in the prep directory) and assign the data using the command:
-<pre>
+```anylog
 process !prep_dir/image_setup.al 
-</pre> 
+``` 
 
 The following command will display the sample data:
-<pre>
+```anylog
 !sample_data 
-</pre> 
+``` 
 
-The command below publishes the data to the ***images*** topic and trigger the processing:
+The command below publishes the data to the _images_ topic and trigger the processing:
 
-<pre>
+```anylog
 mqtt publish where broker=local and topic=images and message=!sample_data 
-</pre>
+```
 
 
 ### Monitor the process:
 The streaming data is passed through the following processes:  
 * The client subscription receives the published data, and transforms the data according to the policy assigned to the topic.
 * From the client process, the data is pushed to the streaming buffers.
-* From the streaming buffers, the data is transferred to the Blobs Archiver that adds the image to the blobs database.
+* From the streaming buffers, the data is transferred to the Blobs Archiver that adds the image to the blob database.
 * From the Blobs Archiver the data is pushed to the Operator process that inserts the streaming data to the local streaming database. 
 
 These processes are monitored using the following commands:
 
 Monitor the messages processed by the client (per topic):
-<pre>
+```anylog
 get msg client
-</pre>
+```
 
 Monitor the streaming buffers:
-<pre>
+```anylog
 get streaming
-</pre>
+```
 
 Monitor the Blobs Archiver:
-<pre>
+```anylog
 get blobs archiver
-</pre>
+```
 
 Monitor the Operator:
-<pre>
+```anylog
 get operator
-</pre>
+```
 
 
 ### Get the list of files stores in the blobs database
 
 View all the files assigned to a table:
-<pre>
+```anylog
 get files where dbms = blobs_edgex and table = image and limit = 100
-</pre>
+```
 
 View a list of up to 100 files assigned to a table in a particular date:
-<pre>
+```anylog
 get files where dbms = blobs_edgex and table = image  and date = 220807 and limit = 100
-</pre>
+```
 
 ### get rows count
-<pre>
+```anylog
 get rows count where dbms = blobs_edgex and table = image
-</pre>
+```
 
 ### Retrieve a file
-<pre>
+```anylog
   file retrieve where dbms = blobs_edgex and table = images and id = 07da45a366e5778fc7d34bf231bddcfa.png and dest = !prep_dir
-</pre>
+```
 
 ### Delete a file or a group of files
-<pre>
+```anylog
   file remove where dbms = blobs_edgex and table = videos and id = 9439d99e6b0157b11bc6775f8b0e2490.png
   ile remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and table = image and date  = 220723
-</pre>
+```
   
 ### Drop a database:
-<pre>
+```anylog
 disconnect dbms blobs_edgex
 drop dbms blobs_edgex from mongo where ip = localhost and port = 27017
-</pre>
+```
 
 ### Retrieve a blob file from a different node
 The file sample-5s.mp4 is stored on a different node (at 10.0.0.78:7848) and is copied to the current node
 using the following command:
-<pre>
+```anylog
 run client 10.0.0.78:7848 file get (dbms = blobs_edgex and table = images and id = sample-5s.mp4) !!tmp_dir
-</pre>
+```
 
