@@ -44,7 +44,6 @@ exit MQTT
 exit SMTP
 ```
 
-
 ## The TCP Server process
 
 A process that listens for incoming messages from peer nodes. When a message is received, the process executes the command contained in the message.    
@@ -105,22 +104,28 @@ Additional information is available in the following sections:
  
 ## REST requests
 
-A node in the network can be configured to receive HTTP requests from a client (from applications which are not members of the network). 
+A node in the network can be configured to receive HTTP (or HTTPS) requests from a client (from applications which are not members of the network). 
 
 Usage:
 ```anylog
-run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
+run rest server where [ip] [port] timeout = [timeout] and threads = [threads count] and ssl = [true/false]
+run rest server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and timeout = 0 and threads = [threads count] and ssl = [true/false] and ca_org = [certificate authority name] and server_org = [sergver organization name]
 ```
 
 Options:  
 
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
-| ip  | The IP supporting the HTTP methods.  |   |
-| port  | The port supporting the HTTP methods. |   |
+| external_ip  | An IP on the internet that identifies the node.  |   |
+| external_port  | A port number used to receive REST requests from the external IP. |   |
+| internal_ip  | An IP on an internal network that identifies the node.  |   |
+| internal_port  | A port number used to receive REST requests from the internal IP. |   |
+| bind  |  A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs).  | true  |
 | timeout  | Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns ***timeout error***. | 20 seconds  |
 | threads  | The number of concurrent threads supporting HTTP requests. | 5  |
 | ssl  | Boolean value to determine if messages are send over HTTPS with client certificates. | false  |
+| ca_org  | The name of the certificate authority. This name needs to match the name in the CA public key file (ca-CA-ORG-public-key.crt)  |   |
+| server_org  | The name assigned to the AnyLog node. This name needs to match the name in the node's key files (server-SERVER-ORG-public-key.crt) and (server-SERVER-ORG-private-key.key) |   |
 
 Notes:
 * If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](authentication.md#using-ssl-certificates).
@@ -137,17 +142,17 @@ Notes:
     ```anylog
     trace level = 2 run rest server 
     ```
+* The ***get rest server info*** command returns the info on how the REST server is configured.  
 
-
-To reconfigure the REST server process, terminate the existing configuration using the command:
+* To reconfigure the REST server process, terminate the existing configuration using the command:
 ```anylog
 exit rest
 ```
-
 Additional information is available in the following sections:
 * [Network Configuration](network%20configuration.md#network-configuration)
 * [Connecting Nodes](examples/Connecting Nodes.md)   
- 
+* [Certificate Configuration](authentication.md) 
+
 ## Operator Process
 
 A process that adds users data to local databases. The Operator identifies JSON files, transforms the JSON files to SQL files 
