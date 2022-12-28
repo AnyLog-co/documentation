@@ -12,7 +12,8 @@ as a program with _if_ conditions and _goto_ statements (details are available i
 * By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](examples/Configuration.md#configuring-a-node-with-a-json-file) section).
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
-## Issuing multiple AnyLog commands 
+## The configuration process 
+COnfiguration is by calling multiple AnyLog commands.
 AnyLog commands can be provided on the CLI or organized in a script file, a JSON file, or a table in a database.    
 A node is configured by calling a group of commands that determine how a node operates.
 
