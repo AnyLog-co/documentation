@@ -74,12 +74,12 @@ Using HTTP methods, data is transferred to a particular node in the network.
 There are 2 methods that support the transfer of data:
 * PUT - data is provided in JSON format and mapped to a table structure whereas attribute names are dynamically mapped to column names and attribute values are mapped to column values.
 * POST - data is provided in JSON format, the data includes a topic that determines the mapping to the table structure.
-  Details are available in the section [AnyLog as a broker receiving REST commands](message broker.md#anylog-as-a-broker-receiving-rest-commands).
+  Details are available in the section [AnyLog as a broker receiving REST commands](message%20broker.md#anylog-as-a-broker-receiving-rest-commands).
   
 
 Depending on the configuration, the receiving node can operate as an Operator and host the data, or it can be configured to operate as a Publisher and transfers the data to one or more Operator nodes that will host the data.  
 In both cases, the receiving node serves as a REST server waiting for incoming messages with new data.
-Configuring a node as a _rest server_ is detailed at [REST requests](background processes.md#rest-requests).  
+Configuring a node as a _rest server_ is detailed at [REST requests](background%20processes.md#rest-requests).  
 
 The transferred data is processed in one of two modes:
 * In a file mode - The transferred data is a file, the file is written to the Prep Directory and then moved to the Watch Directory.
@@ -101,7 +101,7 @@ run rest server [ip] [port] [timeout]
 [timeout] - Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns `timeout error`.  
 The default value is 20 seconds.  
 * As an Operator (to host the new data) or as a Publisher (to transfer the new data to open or more Operators).  
-Details on how an operator is configured are available [here](background processes.md#publisher-process).
+Details on how an operator is configured are available [here](background%20processes.md#publisher-process).
     
 ### Configuring the Sender Node (a client node which is not necessarily a member of the AnyLog Network):
 
@@ -127,15 +127,15 @@ The JSON data is transferred using the data-raw part of the REST call and can in
 
 ```shell
 curl --location --request PUT '10.0.0.226:32149' \
---header 'type: json' \
---header 'dbms: test' \
---header 'table: table1' \
---header 'Content-Type: text/plain' \
---header 'User-Agent: AnyLog/1.23' \
--w "\n" \ 
---data-raw '[{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}, 
-             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}, 
-             {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
+    --header 'type: json' \
+    --header 'dbms: test' \
+    --header 'table: table1' \
+    --header 'Content-Type: text/plain' \
+    --header 'User-Agent: AnyLog/1.23' \
+    -w "\n" \ 
+    --data-raw '[{"parentelement": "62e71893-92e0-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "ADVA FSP3000R7", "value": 0, "timestamp": "2019-10-11T17:05:08.0400085Z"}, 
+                 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}, 
+                 {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
 
 # Expected output: {"AnyLog.status":"Success", "AnyLog.hash": "0dd6b959e48c64818bf4748e4ae0c8cb" }   
 ```
@@ -196,7 +196,7 @@ Note:
     ```anylog
     run streamer 
     ```
-    More information on the streamer process is available at the [Streamer Process](background processes.md#streamer-process) section.
+    More information on the streamer process is available at the [Streamer Process](background%20processes.md#streamer-process) section.
 * If the table name is not provided, the thresholds are assigned to all the tables in the database which are not assigned with values.
 * If the time is set to 0 seconds and the volume is set to 0 bytes - the thresholds are reverted to the default values.    
 
@@ -210,7 +210,7 @@ The command provides information on the REST API usage and status including the 
 ```anylog
 get streaming
 ```
-Command details are available [here](monitoring calls.md#get-streaming).
+Command details are available [here](monitoring%20calls.md#get-streaming).
 
 
 ### Using a POST command
@@ -218,7 +218,7 @@ Command details are available [here](monitoring calls.md#get-streaming).
 With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key _topic_. If a topic value is not provided, the default topic is used.  
 The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
-in the [Subscribing to REST calls](using rest.md#subscribing-to-rest-calls) section.
+in the [Subscribing to REST calls](using%20rest.md#subscribing-to-rest-calls) section.
 
 **MQTT Call**: 
 
@@ -286,11 +286,11 @@ else:
 
 ## Subscribing to a third party message broker
 
-Details are available at the [message broker section - Subscribing to a third party broker](message broker.md#subscribing-to-a-third-party-broker).
+Details are available at the [message broker section - Subscribing to a third party broker](message%20broker.md#subscribing-to-a-third-party-broker).
 
 ## Configuring the AnyLog node as a message broker
 
-Details are available at the [message broker section - Configuring an AnyLog node as a message broker](message broker.md#configuring-an-anylog-node-as-a-message-broker).
+Details are available at the [message broker section - Configuring an AnyLog node as a message broker](message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
 
 
 ## The Southbound Connectors Diagram
@@ -372,13 +372,13 @@ AnyLog client is registered to the broker and does the following:
 
   b) transfers the data to the mapper  
 
-Details are available at the [message broker section - Subscribing to a third party broker](message broker.md#subscribing-to-a-third-party-broker).
+Details are available at the [message broker section - Subscribing to a third party broker](message%20broker.md#subscribing-to-a-third-party-broker).
 
 The following command provides status and statistics on the mapping of published messages on the external broker to the table's schema:
 ```anylog
 get msg client
 ```
-Command details are available [here](monitoring calls.md#get-msg-clients).
+Command details are available [here](monitoring%20calls.md#get-msg-clients).
 
 **Option B**: Data published to AnyLog as a Broker  
 
@@ -396,7 +396,7 @@ The following command provides status and statistics on the mapping (of publishe
 ```anylog
 get msg client
 ```
-Command details are available [here](monitoring calls.md#get-msg-clients).
+Command details are available [here](monitoring%20calls.md#get-msg-clients).
 
 **Option C**: Data transferred using _POST_    
 
@@ -408,13 +408,13 @@ The following command provides status and statistics on HTTP POST messages:
 ```anylog
 get rest calls
 ```
-Command details are available [here](monitoring calls.md#get-rest-calls).
+Command details are available [here](monitoring%20calls.md#get-rest-calls).
 
 The following command provides status and statistics on the mapping (of POST calls) to the table's schema:
 ```anylog
 get msg client
 ```
-Command details are available [here](monitoring calls.md#get-msg-clients).
+Command details are available [here](monitoring%20calls.md#get-msg-clients).
 
 **Option D**: Data transferred using _PUT_    
 
@@ -425,7 +425,7 @@ The following command provides status and statistics on HTTP PUT messages:
 ```anylog
 get rest calls
 ```
-Command details are available [here](monitoring calls.md#get-rest-calls). 
+Command details are available [here](monitoring%20calls.md#get-rest-calls). 
 
 ### Monitoring the data passing through the internal buffers
 
@@ -433,20 +433,20 @@ The following command provides status and statistics on the internal buffers:
 ```anylog
 get streaming
 ```
-Command details are available [here](monitoring calls.md#get-streaming).
+Command details are available [here](monitoring%20calls.md#get-streaming).
 
 
 **Option E**: Adding JSON files to the watch directory   
 
 The JSON files are in a format representative of the table's schema and the file names follow the naming convention.  
 Details are available at the section [Placing data in the WATCH directory](#placing-data-in-the-watch-directory).  
-File naming convention is detailed at [Managing Data files](managing data files status.md).
+File naming convention is detailed at [Managing Data files](managing%20data%20files%20status.md).
 
 The following command provides status and statistics on the processing of the JSON files:
 ```anylog
 get operator
 ```
-Command details are available [here](monitoring calls.md#get-operator).
+Command details are available [here](monitoring%20calls.md#get-operator).
 
 **Option F**: Adding SQL files to the watch directory   
 
@@ -457,4 +457,4 @@ The following command provides status and statistics on the processing of the SQ
 ```anylog
 get operator
 ```
-Command details are available [here](monitoring calls.md#get-operator).
+Command details are available [here](monitoring%20calls.md#get-operator).

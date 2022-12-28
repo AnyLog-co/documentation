@@ -271,6 +271,6 @@ continuous "get operator summary"
 ```
 
 Details are available in the
-[continuous command section](monitoring nodes.md#monitoring-nodes-operations)
+[continuous command section](monitoring%20nodes.md#monitoring-nodes-operations)
 
 

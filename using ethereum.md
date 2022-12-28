@@ -43,7 +43,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * An AnyLog node to configure.
 
 ## The blockchain commands
-The AnyLog Blockchain commands are detailed [here](blockchain commands.md).
+The AnyLog Blockchain commands are detailed [here](blockchain%20commands.md).
 
 ## Connecting to Ethereum
 
@@ -145,4 +145,4 @@ The variable _`test_policy`_ is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 
-Details are available in the [Blockchain Configuration](blockchain configuration.md) section.
+Details are available in the [Blockchain Configuration](blockchain%20configuration.md) section.

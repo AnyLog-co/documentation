@@ -38,7 +38,7 @@ there are no operational differences which are dependent on the type of the meta
 The nodes in the network are configured to pull the metadata (from the blockchain platform or the master node) periodically (if it was changed) and update a local copy of the metadata on the node.  
 The processing in a node considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform and if a connection 
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
-Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](background processes.md#blockchain-synchronizer).  
+Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).  
 
 
 Related documentation:
@@ -78,7 +78,7 @@ Related documentation:
 ## AnyLog Install
 
 AnyLog can be installed from [Docker](deployments/Docker), [Kubernetes](deployments/Kubernetes) or by downloading the codebase from GitHub and calling an installation script.
-Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting an anylog instance.md).
+Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
 
@@ -221,7 +221,7 @@ get dictionary
 ```
 
 The values assigned to key can be tested using an ***if statement*** to trigger conditional execution of ANyLog commands.  
-Details are available in thr [Conditional Execution](anylog commands.md#conditional-execution) section. 
+Details are available in thr [Conditional Execution](anylog%20commands.md#conditional-execution) section. 
 
 
 ### Retrieving environment variables
@@ -236,14 +236,14 @@ To view the list of active processes issue the following command:
 ```anylog
 get processes
 ```
-More information on the background processes is available the [background processes](background processes.md) section.
+More information on the background processes is available the [background processes](background%20processes.md) section.
 
 ### The dynamic logs
 Every node maintains 4 dynamic logs that capture different types of events:
 * The event log - registers the executed commands
 * The error log - registers the commands that failed to execute.
 * The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
-Additional information is available at [Profiling and Monitoring Queries](profiling and monitoring queries.md#profiling-and-monitoring-queries)
+Additional information is available at [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
 ```anylog
@@ -261,7 +261,7 @@ reset query log
 
 ## Making a node a member of the network
 
-Connecting a node to the network is explained in [network configuration](network configuration.md).
+Connecting a node to the network is explained in [network configuration](network%20configuration.md).
 
 Users can associate a node to different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks, or they switch between a main-net and a testnet.
@@ -278,7 +278,7 @@ AnyLog root is the ***AnyLog-Network*** directory.
 ### Switching between different master nodes
 
 Users may need to switch between different master nodes.
-The following command makes the [blockchain synchronizer process](background processes.md#blockchain-synchronizer)
+The following command makes the [blockchain synchronizer process](background%20processes.md#blockchain-synchronizer)
  connect to a different master node:
 ```anylog
 blockchain switch network where master = [IP:Port]
@@ -288,7 +288,7 @@ blockchain switch network where master = [IP:Port]
 
 Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
-Additional information on the REST API to AnyLOg is available at the following section: [Using REST](using rest.md).
+Additional information on the REST API to AnyLOg is available at the following section: [Using REST](using%20rest.md).
 
  
 ## Sending messages to peers in the network
@@ -309,7 +309,7 @@ run client (destination) command
 ***run client*** - Making the current node a client of a member node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
 ***(destination)*** - the destination nodes identified by the IP and Port assigned to their
-[TCP Server configuration](background processes.md#the-tcp-server-process).
+[TCP Server configuration](background%20processes.md#the-tcp-server-process).
 Destination can be represented in any of the following ways:
 * As a comma separate list of IP-Ports pairs. The IP and Port are separated by space. For example: `139.162.126.241 2048, 172.105.13.202 2048)`    
 * For a single destination node - as an IP-Port string. For example:  `10.0.0.78:20348`  

@@ -100,7 +100,7 @@ router connected to the external networks needs to redirect the messages send to
 
 
 Additional information is available in the following sections:
-* [Network Configuration](network configuration.md#network-configuration)
+* [Network Configuration](network%20configuration.md#network-configuration)
 * [Connecting Nodes](examples/Connecting Nodes.md)   
  
 ## REST requests
@@ -145,7 +145,7 @@ exit rest
 ```
 
 Additional information is available in the following sections:
-* [Network Configuration](network configuration.md#network-configuration)
+* [Network Configuration](network%20configuration.md#network-configuration)
 * [Connecting Nodes](examples/Connecting Nodes.md)   
  
 ## Operator Process

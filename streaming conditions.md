@@ -8,7 +8,7 @@ The Streaming Conditions functionality allows to do the following:
 * View the declared conditions on each node
 * Remove conditions
 
-Note: Alerts and Monitoring assigned to the scheduler are detailed in the [Alerts and Monitoring](alerts and monitoring.md#alerts-and-monitoring) section. 
+Note: Alerts and Monitoring assigned to the scheduler are detailed in the [Alerts and Monitoring](alerts%20and%20monitoring.md#alerts-and-monitoring) section. 
  
 ## Condition Declaration
 
@@ -25,7 +25,7 @@ Details:
 * `_dbms name_` - the logical database name associated with the data
 * `_table name_` - the logical table name associated with the data
 * `_execution limit_` - (optional) if a value greater than 0 is provided, the limit places a cap on the number of times the "then" command is executed. 
-* `_condition_` - a condition to validate. Details are available in the [conditional execution](anylog commands.md#conditional-execution) section.
+* `_condition_` - a condition to validate. Details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
 * `_command_` - an AnyLog command.
 
 Examples:  
@@ -43,7 +43,7 @@ Note: to send an email, enable the SMTP server as in the example below:
 ```anylog
 run smtp client where email = anylog.iot@gmail.com and password = oeiussclzecgtkxu
 ```
-Details are available at the [SMTP Client](background processes.md#smtp-client) section.
+Details are available at the [SMTP Client](background%20processes.md#smtp-client) section.
 
 ## View declared conditions
 
