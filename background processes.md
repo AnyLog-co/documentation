@@ -64,14 +64,19 @@ run tcp server [ip] [port] [local ip] [local port] [threads]
 ```
 
 ```anylog
-run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and workers = [threads count]
+run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
 
-***[ip] [port]*** - The IP and Port of the socket that is in the listening state and accessible by peer nodes in the AnyLog network. These are referred to as the External IP and Port.  
-***[local ip] [local port]*** - Optional parameters to indicate an IP and Port that are accessible from a local network.  
-***[threads]*** - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. 
-The default value is 6.  
-***[bind]*** - An optional parameters that determines if to bind to a specific IP and Port. The default value is false. 
+Options:  
+
+| Option        | Explanation   | Default Value |
+| ------------- | ------------- | ------------- |
+| external_ip  | An IP on the Internet that identifies the node.  |   |
+| external_port  | A port number used to receive REST requests from the external IP. |   |
+| internal_ip  | An IP on an internal network that identifies the node.  |   |
+| internal_port  | A port number used to receive REST requests from the internal IP. |   |
+| bind  |  A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs).  | true  |
+| threads  | The number of concurrent threads supporting HTTP requests. | 6  |
  
 ### IP Configuration
 When an AnyLog instance initiates, it identifies the default local IP (an IP accessible from a local network),
@@ -96,7 +101,6 @@ Bind set to ***false*** determines that all IP addresses with the specified port
 ### Configuring a setup with external IP provided by a router 
 If a local IP and Port is specified, the listener process will use the local IP and Port and the 
 router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).  
-
 
 Additional information is available in the following sections:
 * [Network Configuration](network%20configuration.md#network-configuration)
