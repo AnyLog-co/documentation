@@ -203,25 +203,36 @@ When a policy is processed, these keys allow to validate the following:
 
 ## Permission Group
 The public key serves as an identification of the node and can be associated with a permission group.    
-A permission group is declared using a permission policy. The policy sets a list of permitted operations (such as querying specific databases). 
-When a public key is associated with the permission group, the node is assigned with the group permissions.  
+A permission group is declared using a permission policy. The policy sets a list of permitted operations (such as querying specific databases).  
+The ```get permissions``` commands show the details of one or more permission policies.  
+Usage:
+```anylog
+get permissions where [attribute name] = [attribute value]
+```
+Examples:
+```anylog
+get permissions
+get permissions where name = "application basic permissions"
+```
+Nodes and users are represented by their public key, when a public key is associated with the permission group, 
+the node or user is assigned with the group permissions.  
 The private key signs messages sends from the nodes to peers in the network such that when a message needs to be processed,
 the processing node can authenticate the message and determine the authorization assigned by the relevant permission group.  
 
-The command ***get permissions*** returns the permissions of the current node.   
-If the where condition is not specified, the permissions assigned to the current node are returned.  
+The command ***get member permissions*** returns the permissions of the current node.   
+If the public key is not included in the where condition, the permissions assigned to the current node are returned.  
 The where condition retrieves the Member Policy that satisfies the condition, and the permissions assigned to the policy are returned.     
 Usage:
 ```anylog
-get permissions
-get permissions where [attribute name] = [attribute value]
+get member permissions
+get member permissions where [attribute name] = [attribute value]
 ```
 
 Examples:
 ```anylog
-get permissions
-get permissions where public_key = !public_key
-get permissions where name = value
+get member permissions
+get member permissions where public_key = !public_key
+get member permissions where name = value
 ```
 
 ## Signing a policy
