@@ -150,8 +150,8 @@ exit rest
 ```
 Additional information is available in the following sections:
 * [Network Configuration](network%20configuration.md#network-configuration)
-* [Connecting Nodes](examples/Connecting Nodes.md)   
-* [Certificate Configuration](authentication.md) 
+* [Connecting Nodes](examples/Connecting%20Nodes.md)   
+* [Using SSL](authentication.md#using-ssl-certificates) 
 
 ## Operator Process
 
