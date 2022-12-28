@@ -100,7 +100,7 @@ router connected to the external networks needs to redirect the messages send to
 
 Additional information is available in the following sections:
 * [Network Configuration](network%20configuration.md#network-configuration)
-* [Connecting Nodes](examples/Connecting Nodes.md)   
+* [Connecting Nodes](examples/Connecting%20Nodes.md)
  
 ## REST requests
 
@@ -116,7 +116,7 @@ Options:
 
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
-| external_ip  | An IP on the internet that identifies the node.  |   |
+| external_ip  | An IP on the Internet that identifies the node.  |   |
 | external_port  | A port number used to receive REST requests from the external IP. |   |
 | internal_ip  | An IP on an internal network that identifies the node.  |   |
 | internal_port  | A port number used to receive REST requests from the internal IP. |   |
@@ -133,7 +133,7 @@ Notes:
     ```anylog
     get rest server info
     ```
-* Debugging HTTP command calls:
+* Debugging HTTP command calls:  
     The following command displays (on the AnyLog REST server) the REST command issued by a client.
     ```anylog
     trace level = 1 run rest server 
