@@ -536,12 +536,20 @@ or transferred to Operator nodes that will host the data.
 Usage:
 ```anylog
 run message broker [ip] [port] [local ip] [Local port] [threads]
+run message broker where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
 ```
 
 The ***run message broker*** command configures a process in a listening mode on the specified IP and port.  
-* The first pair of IP and Port that are used by a listener process to receive messages from members of the network.  
-* The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.  
-* threads - an optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.  
+Options:  
+
+| Option        | Explanation   | Default Value |
+| ------------- | ------------- | ------------- |
+| external_ip  | An IP on the Internet that identifies the node.  |   |
+| external_port  | A port number used to receive messages from the external IP. |   |
+| internal_ip  | An IP on an internal network that identifies the node.  |   |
+| internal_port  | A port number used to receive messages from the internal IP. |   |
+| bind  |  A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs).  | true  |
+| threads  | The number of concurrent threads supporting HTTP requests. | 6  |
 
 An example of configuring AnyLog as an MQTT message broker is available at the section [Using EdgeX](using%20edgex.md#using-edgex).
 
