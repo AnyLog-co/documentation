@@ -24,7 +24,6 @@ Slow queries can be redirected to the query log with the following AnyLog comman
 set query log profile [n] seconds
 ```
 
-
 The  `set query log` on records all queries in the query log whereas adding `profile [n] seconds` places in the query 
 log only queries with execution time greater or equal to [n] seconds.
 
