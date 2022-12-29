@@ -557,4 +557,8 @@ To check the status of the Message Broker, use the following command:
 ```anylog
 get local broker
 ```
+Terminating the broker process is with the following command:
+```anylog
+exit broker
+```
 
