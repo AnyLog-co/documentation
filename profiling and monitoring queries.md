@@ -12,6 +12,10 @@ In order to get statistical information, use the following command to get a summ
 ```anylog
 get queries time
 ```
+Use the following command to reset the statistical information:
+```anylog
+reset query timer
+```
 
 ## Identifying slow queries
 
