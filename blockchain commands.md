@@ -51,7 +51,7 @@ A user can validate the availability and the structure of the blockchain using t
 
 ## A Master Node
 A master node is a node that maintains a complete copy of the metadata in a local database.  
-Maintaining a master node in the network is optional.
+Maintaining a master node in the network is needed only if a blockchain platform is not used.
 
 ## The Storage of the Metadata
 The metadata is stored ias follows:
@@ -97,7 +97,7 @@ Below are the list of commands to add new policies to the ledger:
 | [blockchain insert](#the-blockchain-insert-command) [policy and ledger platforms information] | All that are specified | Add a new policy to the ledger in one or more blockchain platform. |
 | `blockchain add [policy]`           | Local Copy |Add a Policy to the local ledger file. |
 | `blockchain push [policy]`          | DBMS |Add a Policy to the local database. |
-| `blockchain commit [policy]`       | Blockchain Platform (i.e. Ethereum) |  – Add a Policy to a blockchain platform. |  
+| `blockchain commit [policy]`       | Blockchain Platform (i.e. Ethereum) | Add a Policy to a blockchain platform. |  
 
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
@@ -212,6 +212,12 @@ run client (!destinations) get node info net_io_counters
 # Without first declaring a variable (destination) get network information regarding nodes in the US and Israel 
 run client (blockchain get (operator, query) where [country] == US or [country] == IL  bring [*][ip] : [*][port] separator = ,) get node info net_io_counters
 ```
+## The blockchain read command
+The ```blockchain read``` command in interpreted as the ```blockchain get``` command with the following difference:
+* blockchain get - retrieves the policies after the analysis done by the node. Some policies are updated dynamically during normal operations.  
+* blockchain read - retrieves the policies from the copy provided by the blockchain platform or master node. This version of the policies does not include dynamic updates.
+Usually, users query the metadata using ***blockchain get***.  
+The ***blockchain read*** option is only used to determine the source format of the policies at their time of arrival. 
 
 ## The blockchain insert command
 The ***blockchain insert*** command adds a policy to the blockchain ledger. 
