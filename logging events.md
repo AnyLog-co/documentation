@@ -111,3 +111,4 @@ set query log profile 6 seconds
 ```anylog
 set query log off
 ```
+Additional details are available in the [Identifying slow queries](profiling%20and%20monitoring%20queries.md#identifying-slow-queries) section. 
