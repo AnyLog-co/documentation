@@ -183,8 +183,7 @@ help set
 help reset
 help blockchain
 ```
-* Detailed information on a particular command including a link to the documentation is by typing ***help*** followed by
-  the command text.  
+* List command usage and examples - type ***help*** followed by the command text.  
   Examples:
 ```anylog
 help connect dbms
@@ -200,9 +199,9 @@ help index
 ```anylog
 help index query
 ```
-From the presented list of commands, users can issue help on a command of interest.  
-Example: 
+From the presented list of commands, users list the details of the command of interest as in the examples below:
 ```anylog
+help connect dbms
 help sql
 ```
 
