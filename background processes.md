@@ -58,11 +58,7 @@ A node is configured as follows:
 * If one is provided, the node listens to the provided IP (and port).
 * If the ***bind*** parameter is set to False (see details below), the nodes listens to all IPs which are reachable to the node on the specified port.
 
-Examples Usage:
-```anylog
-run tcp server [ip] [port] [local ip] [local port] [threads]
-```
-
+Usage:
 ```anylog
 run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
@@ -112,7 +108,6 @@ A node in the network can be configured to receive HTTP (or HTTPS) requests from
 
 Usage:
 ```anylog
-run rest server where [ip] [port] timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 run rest server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and timeout = 0 and threads = [threads count] and ssl = [true/false] and ca_org = [certificate authority name] and server_org = [sergver organization name]
 ```
 
@@ -535,7 +530,6 @@ or transferred to Operator nodes that will host the data.
 
 Usage:
 ```anylog
-run message broker [ip] [port] [local ip] [Local port] [threads]
 run message broker where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
 ```
 
