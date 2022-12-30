@@ -11,7 +11,7 @@ This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
 * [System databases and system tables](#system-databases-and-system-tables) configured on nodes. 
 * Issuing a [SQL command](#sql-commands) to the local database
-* Issuing a [SQL query](#sql-commands) to the local database
+* Issuing a [SQL query](queries.md#query-nodes-in-the-network) to the local database
 * The [metadata layer](#the-metadata)
 * Monitoring the tables in a local database
 

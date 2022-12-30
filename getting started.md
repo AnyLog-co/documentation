@@ -168,20 +168,41 @@ Examples:
 ```
 
 ### The help command
-The list of commands is available by executing the ***help*** command on the CLI:
+The ***help*** command provides information on AnyLog commands.  
+The help command can be used in multiple ways:
+* List the commands by typing ***help*** on the CLI.
 ```anylog
 help
 ```
-
-Users can apply the ***help*** command to detail specific options and examples of usage. Below are some examples:
-```anylog
+* List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
+  These commands can be listed by typing ***help get***.   
+  Examples:
+ ```anylog
 help get 
-help get mqtt clients
 help set
-help set echo queue
+help reset
 help blockchain
-help blockchain push
+```
+* Detailed information on a particular command including a link to the documentation is by typing ***help*** followed by
+  the command text.  
+  Examples:
+```anylog
 help connect dbms
+help blockchain insert
+help get msg client
+```
+
+* Index that classifies the commands.
+```anylog
+help index
+```
+* Users select an index key and list all commands associated with the index.
+```anylog
+help index query
+```
+From the presented list of commands, users can issue help on a command of interest.  
+Example: 
+```anylog
 help sql
 ```
 
