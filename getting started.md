@@ -199,9 +199,11 @@ help index
 ```anylog
 help index query
 ```
-From the presented list of commands, users list the details of the command of interest as in the examples below:
+
+* From the presented list of commands, users list the details of the command of interest as in the examples below:
 ```anylog
-help connect dbms
+help reset query timer
+help  query destination
 help sql
 ```
 
