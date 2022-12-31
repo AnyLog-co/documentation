@@ -399,6 +399,20 @@ set node authentication on
 
 Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
 
+## Adding members to an existing network
+When a new node is initiated, it has no assigned permissions and is not able to update the metadata with its new member policy.  
+The process requires an existing and permitted node to add the member policy of the new node to the metadata. 
+This process involves the following steps:
+1. The new node generates its public and private keys. See details in [Creating keys for a node in the network](authentication.md#creating-keys-for-a-node-in-the-network).
+2. An existing node with proper permissions retrieves the public key using the following command:
+<pre> 
+peer_key = run client IP:Port get node id
+</pre>
+3. The existing node creates the member policy for the new node.
+4. The existing node assigns permissions to the new node.
+
+The new node is now an active member in the network.
+
 ## Master Node Configuration
 This setup is optional (if a master node is used).    
 CLI(master) designates the master node command line.
