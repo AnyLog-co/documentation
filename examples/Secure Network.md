@@ -400,7 +400,7 @@ set node authentication on
 Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
 
 ## Adding members to an existing network
-When a new node is initiated, it has no assigned permissions and is not able to update the metadata with its new member policy.  
+When a new node is initiated, it has no permissions and therefore, is not able to publish a new member policy.  
 The process requires an existing and permitted node to add the member policy of the new node to the metadata. 
 This process involves the following steps:
 1. The new node generates its public and private keys. See details in [Creating keys for a node in the network](authentication.md#creating-keys-for-a-node-in-the-network).
