@@ -375,12 +375,12 @@ The following chart details the information provided:
 | ---------------- | ----------------------------------------- |
 | Status           | Indication if the synchronizer is enabled |
 | Sync Source      | Blockchain or Master Node as the source for the metadata |
-| Connection       | Connection infotmation to the source providing the metadata |
-| Sync Time        | The configuration time setup for periodic sync process |
-| Metadata Version | The version of the metadata used on the node |
+| Connection       | Connection information to the source providing the metadata |
+| Sync Time        | The configuration time setup of the periodic sync process |
+| Metadata Version | The version of the metadata used by the node |
 | Time Since Update | The duration since the last update of the metadata with a new metadata version |
 | Calls           | The number of times the metadata version was tested to determine if an update is needed |
-| Loads           | The number of times the metadata was updated on the current node |
+| Loads           | The number of times the metadata was updated with the new version |
 | Policies         | The number of policies in the current metadata version |
 
 ## Scheduler Process
