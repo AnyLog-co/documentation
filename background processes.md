@@ -354,7 +354,34 @@ Example:
 ```anylog
 run blockchain sync
 ```
-The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.   
+The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.
+
+### Synchronizer status
+The ***get synchronizer*** command provides the synchronizer status with information on the status of the metadata.  
+
+Example:
+```anylog
+get synchronizer
+
+Status  Sync    Connection     Sync  Metadata Version                 Time          Calls Loads Policies
+        Source                 Time                                   Since Update
+-------|-------|--------------|-----|--------------------------------|-------------|-----|-----|--------|
+Running|master |10.0.0.25:2548|   30|3275c57c0358ea787ef50d2454787335|00:03:21     |    7|    2|      21|
+```
+
+The following chart details the information provided:
+
+| Column Name      | Info provided |
+| ---------------- | ----------------------------------------- |
+| Status           | Indication if the synchronizer is enabled |
+| Sync Source      | Blockchain or Master Node as the source for the metadata |
+| Connection       | Connection infotmation to the source providing the metadata |
+| Sync Time        | The configuration time setup for periodic sync process |
+| Metadata Version | The version of the metadata used on the node |
+| Time Since Update | The duration since the last update of the metadata with a new metadata version |
+| Calls           | The number of times the metadata version was tested to determine if an update is needed |
+| Loads           | The number of times the metadata was updated on the current node |
+| Policies         | The number of policies in the current metadata version |
 
 ## Scheduler Process
  
