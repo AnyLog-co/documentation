@@ -412,11 +412,11 @@ peer_key = run client IP:Port get node id
 4. The existing node assigns permissions to the new node.
 5. As the new is without metadata, it will not be able to process messages from peer nodes. 
    Therefore, a peer node needs to provide the new node a valid copy of the metadata using the following process:
-   a. The new node is setting its local authentication to off, using the following command:  
+   1. The new node is setting its local authentication to off, using the following command:  
       ```set authentication off```
-   b. The peer node copies the metadata to the new node. For example:
+   2. The peer node copies the metadata to the new node. For example:
       ```run client 10.0.0.78:3048 file copy !blockchain_file !!blockchain_file```
-   c.  The new node provides the local password and sets authentication to on. For example:
+   3.  The new node provides the local password and sets authentication to on. For example:
       * ```set local password = 456```  
       * ```set authentication on ```
   
