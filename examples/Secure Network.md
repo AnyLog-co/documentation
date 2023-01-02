@@ -401,7 +401,7 @@ Note: If master node is used, enable authentication on the nodes after the [setu
 
 ## Adding members to an existing network
 When a new node is initiated, it has no permissions and therefore, is not able to publish a new member policy.  
-The process requires an existing and permitted node to add the member policy of the new node to the metadata. 
+The process requires a permitted peer node to add the member policy of the new node to the metadata. 
 This process involves the following steps:
 1. The new node generates its public and private keys. See details in [Creating keys for a node in the network](authentication.md#creating-keys-for-a-node-in-the-network).
 2. A peer node with proper permissions retrieves the public key using the following command:
