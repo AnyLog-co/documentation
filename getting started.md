@@ -204,8 +204,7 @@ For example:
 ```anylog
 help index s
 ```
-returns all commands associated with: ```script``` ```secure network``` ```streaming```
-script
+Returns all commands associated with ***s*** in the index prefix: ```script``` ```secure network``` ```streaming```.
 
 * From the presented list of commands, users list the details of the command of interest as in the examples below:
 ```anylog
