@@ -199,6 +199,13 @@ help index
 ```anylog
 help index query
 ```
+Note: **help index** followed by a key prefix, returns all the AnyLog commands associated with the key prefix.   
+For example:
+```anylog
+help index s
+```
+returns all commands associated with: ```script``` ```secure network``` ```streaming```
+script
 
 * From the presented list of commands, users list the details of the command of interest as in the examples below:
 ```anylog
