@@ -110,11 +110,7 @@ run operator where policy = 52612f21b18cf29f7d2e511e3ca56ca6 and create_table = 
 run data distributor
 run data consumer where start_date = -30d 
 ```
-Note: 
-The configuration example enable the HA processes.  
-The policy ID associate the operator with the cluster. If multiple operators support the same cluster 
-(their operator policy reference the same cluster ID), they will share the same data.   
-
+Note:  
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
 
@@ -137,7 +133,9 @@ Note: More details are available [here](data%20distribution%20and%20configuratio
 
 ## View the distribution of data to an operator
 
-The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:
+The following command provides 2 lists:
+1) The list of peer Operators that support the cluster.
+1) The list of tables supported by the Operator.
 ```anylog
 get cluster info
 ```
