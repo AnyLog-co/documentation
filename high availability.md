@@ -44,7 +44,7 @@ The command returns the HA configuration and relevant status. The info includes 
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
-one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster) and the number of
+one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster), and the number of
 operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators assigned to a cluster maintain the same data).  
 
 Below is an example of a policy declaring a cluster:
@@ -53,24 +53,20 @@ Below is an example of a policy declaring a cluster:
 {"cluster": {
   "company": "Lit San Leandro",
   "name": "lsl-cluster2",
-  "master": "45.33.41.185:2048",
-  "table": [{
-    "name": "ping_sensor",
-    "dbms": "litsanleandro",
-    "status": "active"
-  }, {
-    "name": "perecentagecpu_sensor",
-    "dbms": "litsanleandro",
-    "status": "active"
-  }],
-  "id": "11612ba3c05e123e2a3fef9fcd4d53fe",
-  "date": "2021-04-02T18:31:46.802694Z",
   "status": "active"
 }}
 ```
+WHen the cluster policy is added to the metadata, it will be added with additional attributes as follows:
+```json
+{"cluster" : {
+   "company": "Lit San Leandro",
+   "name": "lsl-cluster2",
+   "status": "active",
+   "id" : "7a00b26006a6ab7b8af4c400a5c47f2a",
+   "date" : "2022-12-23T01:48:33.794562Z",
+   "ledger" : "global"}}
+```
 
-The cluster policy includes the list of tables that use the cluster for storage. If the same table is listed in multiple clusters,
-the data of the table is split between the clusters.  
 
 Notes: 
 1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
@@ -82,7 +78,7 @@ Notes:
 An Operator is assigned to a cluster in the following manner:
 
 ```anylog
-{'operator' : {'cluster' : '11612ba3c05e123e2a3fef9fcd4d53fe',
+{'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
                 'ip' : '24.23.250.144',
                 'local_ip' : '10.0.0.78',
                 'port' : 7848,
@@ -110,10 +106,14 @@ and all the Operators supporting the cluster maintain identical data.
 Example:
 
 ```anylog
-run operator where create_table = true and update_tsd_info = true and archive = true and distributor = true
+run operator where policy = 52612f21b18cf29f7d2e511e3ca56ca6 and create_table = true and update_tsd_info = true and archive = true and distributor = true and master_node = !master_node
 run data distributor
 run data consumer where start_date = -30d 
 ```
+Note: 
+The configuration example enable the HA processes.  
+The policy ID associate the operator with the cluster. If multiple operators support the same cluster 
+(their operator policy reference the same cluster ID), they will share the same data.   
 
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
@@ -129,9 +129,9 @@ get data nodes where company = [company name] and dbms = [dbms name] and table =
 The where condition is optional. If company name or database name or table name are not provided, the process assumes a 
 request for all values.
 
-The following command provides similar information using a different presentation:
+The following example lists the operators that host the data of each supported table:
 ```anylog
-blockchain query metadata
+get data nodes
 ```
 Note: More details are available [here](data%20distribution%20and%20configuration.md#view-data-distribution-policies).
 
