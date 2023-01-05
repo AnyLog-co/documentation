@@ -7,6 +7,22 @@ monitor and report on the HA state.
 
 This document extends the explanations in [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
+## Overview
+
+High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.  
+In HA setup, multiple nodes are grouped together and assigned to maintain copies of the data such that if a node fails, 
+the data is available from a surviving peer node.    
+To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
+push and pull processes, that operate on the data, such that, when data is added to one of the nodes, it will be replicated the  
+assigned peer nodes.
+This setup requires the following:
+1) Associating multiple Operator nodes to the same cluster such that these nodes have identical copies of the data.  
+2) Enabling the following background processes on each node:
+   1) The Operator Background Process to ingest data to the local databases.
+   2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
+   3) The  Consumer Background Process to pull data which is missing on the current node.
+3) Enabling the TSD tables operations.
+
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
