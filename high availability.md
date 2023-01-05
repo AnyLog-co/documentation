@@ -29,7 +29,7 @@ Usage:
 <pre> 
 test ha setup
 </pre>
-The command details the HA configuration and relevant status. The info includes the following:
+The command returns the HA configuration and relevant status. The info includes the following:
 
 | Functionality | Expected Status                    | Details       |
 | --------------| ---------------------------------- | --------------- | 
@@ -39,7 +39,7 @@ The command details the HA configuration and relevant status. The info includes 
 | Operator Name | Valid name                         | The Operator name from the Operator policy.     |
 | Member ID     | Valid ID                           | The member ID from the Operator policy.     |
 | Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
-| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created.                |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
 
 ## The Cluster Policy
 
