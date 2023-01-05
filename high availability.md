@@ -23,6 +23,24 @@ This setup requires the following:
    3) The  Consumer Background Process to pull data which is missing on the current node.
 3) Enabling the TSD tables operations.
 
+## Testing the node configuration for HA
+The **test ha setup** command details if the node is properly configured to support HA.  
+Usage:
+<pre> 
+test ha setup
+</pre>
+The command details the HA configuration and relevant status. The info includes the following:
+
+| Functionality | Expected Status                    | Details       |
+| --------------| ---------------------------------- | --------------- | 
+| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
+| Distributor   | Running                            |                |
+| Consumer      | Running                            |                |
+| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
+| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
+| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created.                |
+
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
