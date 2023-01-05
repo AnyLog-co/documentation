@@ -152,7 +152,13 @@ The state of the data on each node is recorded on a set of tables called TSD tab
 * Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
 Note: When an Operator policy is added, the policy is updated with a member ID. The member ID is unique among the cluster members.
   
-The following ***time file*** commands allow to query the TSD tables:
+The TSD tables can be queried (as detailed below) to control and monitor the data state on each participating node.
+
+### Retrieve TSD table data
+
+
+ 
+
 
 * Use the ***time file summary*** command to find the total rows ingested within a time interval.
 ```anylog
