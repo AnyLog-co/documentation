@@ -58,11 +58,7 @@ A node is configured as follows:
 * If one is provided, the node listens to the provided IP (and port).
 * If the ***bind*** parameter is set to False (see details below), the nodes listens to all IPs which are reachable to the node on the specified port.
 
-Examples Usage:
-```anylog
-run tcp server [ip] [port] [local ip] [local port] [threads]
-```
-
+Usage:
 ```anylog
 run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
@@ -112,7 +108,6 @@ A node in the network can be configured to receive HTTP (or HTTPS) requests from
 
 Usage:
 ```anylog
-run rest server where [ip] [port] timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 run rest server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and timeout = 0 and threads = [threads count] and ssl = [true/false] and ca_org = [certificate authority name] and server_org = [sergver organization name]
 ```
 
@@ -359,7 +354,34 @@ Example:
 ```anylog
 run blockchain sync
 ```
-The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.   
+The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.
+
+### Synchronizer status
+The ***get synchronizer*** command provides the synchronizer status with information on the status of the metadata.  
+
+Example:
+```anylog
+get synchronizer
+
+Status  Sync    Connection     Sync  Metadata Version                 Time          Calls Loads Policies
+        Source                 Time                                   Since Update
+-------|-------|--------------|-----|--------------------------------|-------------|-----|-----|--------|
+Running|master |10.0.0.25:2548|   30|3275c57c0358ea787ef50d2454787335|00:03:21     |    7|    2|      21|
+```
+
+The following chart details the information provided:
+
+| Column Name      | Info provided |
+| ---------------- | ----------------------------------------- |
+| Status           | Indication if the synchronizer is enabled |
+| Sync Source      | Blockchain or Master Node as the source for the metadata |
+| Connection       | Connection information to the source providing the metadata |
+| Sync Time        | The configuration time setup of the periodic sync process |
+| Metadata Version | The version of the metadata used by the node |
+| Time Since Update | The duration since the last update of the metadata with a new metadata version |
+| Calls           | The number of times the metadata version was tested to determine if an update is needed |
+| Loads           | The number of times the metadata was updated with the new version |
+| Policies         | The number of policies in the current metadata version |
 
 ## Scheduler Process
  
@@ -535,7 +557,6 @@ or transferred to Operator nodes that will host the data.
 
 Usage:
 ```anylog
-run message broker [ip] [port] [local ip] [Local port] [threads]
 run message broker where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
 ```
 

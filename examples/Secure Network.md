@@ -399,6 +399,29 @@ set node authentication on
 
 Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
 
+## Adding members to an existing network
+When a new node is initiated, it has no permissions and therefore, is not able to publish a new member policy.  
+The process requires a permitted peer node to add the member policy of the new node to the metadata. 
+This process involves the following steps:
+1. The new node generates its public and private keys. See details in [Creating keys for a node in the network](authentication.md#creating-keys-for-a-node-in-the-network).
+2. A peer node with proper permissions retrieves the public key using the following command:
+<pre> 
+peer_key = run client IP:Port get node id
+</pre>
+3. The peer node creates the member policy for the new node.
+4. The peer node assigns permissions to the new node.
+5. As the new is without metadata, it will not be able to process messages from members of the network. 
+   Therefore, a peer node needs to provide to the new node, a valid copy of the metadata using the following process:
+   1. On the new node - set local authentication to off, using the following command:   
+      ```set authentication off```
+   2. On the peer node - copy the metadata to the new node. For example:  
+      ```run client 10.0.0.78:3048 file copy !blockchain_file !!blockchain_file```
+   3.  On the new node - provides the local password and sets authentication to on. For example:  
+      * ```set local password = 456```  
+      * ```set authentication on ```
+  
+The new node is now an active member in the network.
+
 ## Master Node Configuration
 This setup is optional (if a master node is used).    
 CLI(master) designates the master node command line.

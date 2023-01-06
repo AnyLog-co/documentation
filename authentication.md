@@ -234,7 +234,9 @@ get member permissions
 get member permissions where public_key = !public_key
 get member permissions where name = value
 ```
-Note: The where conditions are applied on the member policy, and the permissions retrieved represent the permission policy assigned to the member.
+Notes: 
+* The where conditions are applied on the member policy, and the permissions retrieved represent the permission policy assigned to the member.
+* If a signatory is assigned to the node, the command **get member permissions** (without _where_ condition) returns the permissions of the signatory.
 
 ## Signing a policy
 

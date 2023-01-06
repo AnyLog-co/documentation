@@ -7,10 +7,44 @@ monitor and report on the HA state.
 
 This document extends the explanations in [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
+## Overview
+
+High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.  
+In HA setup, multiple nodes are grouped together and assigned to maintain copies of the data such that if a node fails, 
+the data is available from a surviving peer node.    
+To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
+push and pull processes, that operate on the data, such that, when data is added to one of the nodes, it will be replicated the  
+assigned peer nodes.
+This setup requires the following:
+1) Associating multiple Operator nodes to the same cluster such that these nodes have identical copies of the data.  
+2) Enabling the following background processes on each node:
+   1) The Operator Background Process to ingest data to the local databases.
+   2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
+   3) The  Consumer Background Process to pull data which is missing on the current node.
+3) Enabling the TSD tables operations.
+
+## Testing the node configuration for HA
+The **test ha setup** command details if the node is properly configured to support HA.  
+Usage:
+<pre> 
+test ha setup
+</pre>
+The command returns the HA configuration and relevant status. The info includes the following:
+
+| Functionality | Expected Status                    | Details       |
+| --------------| ---------------------------------- | --------------- | 
+| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
+| Distributor   | Running                            |                |
+| Consumer      | Running                            |                |
+| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
+| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
+| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
+
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
-one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster) and the number of
+one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster), and the number of
 operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators assigned to a cluster maintain the same data).  
 
 Below is an example of a policy declaring a cluster:
@@ -19,24 +53,20 @@ Below is an example of a policy declaring a cluster:
 {"cluster": {
   "company": "Lit San Leandro",
   "name": "lsl-cluster2",
-  "master": "45.33.41.185:2048",
-  "table": [{
-    "name": "ping_sensor",
-    "dbms": "litsanleandro",
-    "status": "active"
-  }, {
-    "name": "perecentagecpu_sensor",
-    "dbms": "litsanleandro",
-    "status": "active"
-  }],
-  "id": "11612ba3c05e123e2a3fef9fcd4d53fe",
-  "date": "2021-04-02T18:31:46.802694Z",
   "status": "active"
 }}
 ```
+WHen the cluster policy is added to the metadata, it will be added with additional attributes as follows:
+```json
+{"cluster" : {
+   "company": "Lit San Leandro",
+   "name": "lsl-cluster2",
+   "status": "active",
+   "id" : "7a00b26006a6ab7b8af4c400a5c47f2a",
+   "date" : "2022-12-23T01:48:33.794562Z",
+   "ledger" : "global"}}
+```
 
-The cluster policy includes the list of tables that use the cluster for storage. If the same table is listed in multiple clusters,
-the data of the table is split between the clusters.  
 
 Notes: 
 1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
@@ -48,7 +78,7 @@ Notes:
 An Operator is assigned to a cluster in the following manner:
 
 ```anylog
-{'operator' : {'cluster' : '11612ba3c05e123e2a3fef9fcd4d53fe',
+{'operator' : {'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
                 'ip' : '24.23.250.144',
                 'local_ip' : '10.0.0.78',
                 'port' : 7848,
@@ -76,11 +106,11 @@ and all the Operators supporting the cluster maintain identical data.
 Example:
 
 ```anylog
-run operator where create_table = true and update_tsd_info = true and archive = true and distributor = true
+run operator where policy = 52612f21b18cf29f7d2e511e3ca56ca6 and create_table = true and update_tsd_info = true and archive = true and distributor = true and master_node = !master_node
 run data distributor
 run data consumer where start_date = -30d 
 ```
-
+Note:  
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
 
@@ -95,15 +125,17 @@ get data nodes where company = [company name] and dbms = [dbms name] and table =
 The where condition is optional. If company name or database name or table name are not provided, the process assumes a 
 request for all values.
 
-The following command provides similar information using a different presentation:
+The following example lists the operators that host the data of each supported table:
 ```anylog
-blockchain query metadata
+get data nodes
 ```
 Note: More details are available [here](data%20distribution%20and%20configuration.md#view-data-distribution-policies).
 
 ## View the distribution of data to an operator
 
-The following command provides the list of tables supported by the Operator and the list of peer Operators that support the cluster:
+The following command provides 2 lists:
+1) The list of peer Operators that support the cluster.
+1) The list of tables supported by the Operator.
 ```anylog
 get cluster info
 ```
@@ -120,7 +152,13 @@ The state of the data on each node is recorded on a set of tables called TSD tab
 * Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
 Note: When an Operator policy is added, the policy is updated with a member ID. The member ID is unique among the cluster members.
   
-The following ***time file*** commands allow to query the TSD tables:
+The TSD tables can be queried (as detailed below) to control and monitor the data state on each participating node.
+
+### Retrieve TSD table data
+
+
+ 
+
 
 * Use the ***time file summary*** command to find the total rows ingested within a time interval.
 ```anylog
