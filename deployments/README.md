@@ -79,7 +79,7 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [NGINX](Networking/nginx.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
-* [Cheat Sheet](Support/cheat_sheet.md)
+* [Cheat Sheet](Support/cheatsheet.md)
 * [Remote-CLI](Support/Remote-CLI.md)
 * [Grafana](Support/Grafana.md)
 * [EdgeX](Support/EdgeX.md)
