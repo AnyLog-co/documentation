@@ -154,7 +154,15 @@ Note: When an Operator policy is added, the policy is updated with a member ID. 
   
 The TSD tables can be queried (as detailed below) to control and monitor the data state on each participating node.
 
-### Retrieve TSD table data
+### The TSD tables
+
+Nodes synchronize their data using a set of tables called TSD tables.  
+The following command returns the list of TSD tables on this node:  
+
+```anylog
+get tsd list
+```
+
 
 
  
@@ -170,7 +178,7 @@ time file summary where table = * and start_date = -10d
 time file errors where table = tsd_159 and start_date = -10d
 ```
 
-# Retrieve synchronization status
+### Retrieve synchronization status
 When multiple nodes support the same cluster, they sync their TSD info.  
 The ***get ha sync status" provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
 Usage:
