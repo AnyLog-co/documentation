@@ -42,12 +42,21 @@ Failure to connect may be the result of one of the following:
 
 ## Enabling Authentication
 
-Enabling authentication is explained at [Authenticating HTTP requests](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#Authenticating-http-requests).
+Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
+
+When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
+the Grafana configuration should have _basic auth_ enabled. 
+
+![basic authentication](../imgs/grafana_basic_auth.png)
+
+While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
+![SSL Authentication](../imgs/grafana_auth_image.png)
+
 
 
 ## Using Grafana to visualize AnyLog data
 
-* On the Grafana menu, use the ***+*** sign to create a new panel.
+* On the Grafana menu, use the **+** sign to create a new panel.
 * Or, open an existing panel in Edit mode.  
 * On the left side, under the graph location, select ***Query*** and underneath select the AnyLog data source unique name from the pull down list.
 * The Metric window shows the list of tables supported by the database. Select a table from the options provided.

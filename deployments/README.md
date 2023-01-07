@@ -25,13 +25,17 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 * testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. Usually the image will be Ubuntu based, unless stated otherwise.
 
 
-| Build | Base Image | CPU Architecture | Pull Command | Size | 
-|---|---|---|---|---|
-| develop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop` | 664MB | 
-| develop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop-alpine` | 460MB| 
-| predevelop | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop` | ~245MB | 
-| predevelop-alpine | python:3.9-alpine | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~178MB | 
-| testing | Ubuntu:20.04 | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing` |
+| Build             | Base Image          | CPU Architecture | Pull Command                                            | Compressed Size | 
+|-------------------|---------------------|---|---------------------------------------------------------|-----------------|
+| develop           | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop`           | ~320MB                | 
+| develop-alpine    | python:3.9-alpine   | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:develop-alpine`    | ~170MB                |
+| develop-rhl       | redhat/ubi8:latest  | amd64,arm64 | `docker pull anylogco/anylog-network:develop-rhl`       |  ~215MB               |
+| predevelop        | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop`        | ~320MB          | 
+| predevelop-alpine | python:3.9-alpine   | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~170MB          |
+| predevelop-rhl    | redhat/ubi8:latest   | amd64,arm64 | `docker pull anylogco/anylog-network:predevelop-rhl`    | ~215MB          |
+| testing           | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing`           |
+*Compressed Size - size calculated by summing the image's layers, which are compressed
+
 
 By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
 are running, but no other process is enabled. This allows for users to play with the system with no other services 
@@ -75,7 +79,7 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 * [NGINX](Networking/nginx.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
-* [Cheat Sheet](Support/cheat_sheet.md)
+* [Cheat Sheet](Support/cheatsheet.md)
 * [Remote-CLI](Support/Remote-CLI.md)
 * [Grafana](Support/Grafana.md)
 * [EdgeX](Support/EdgeX.md)
