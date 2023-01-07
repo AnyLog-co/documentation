@@ -170,6 +170,19 @@ time file summary where table = * and start_date = -10d
 time file errors where table = tsd_159 and start_date = -10d
 ```
 
+# Retrieve synchronization status
+When multiple nodes support the same cluster, they sync their TSD info.  
+The ***get ha sync status" provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
+Usage:
+```anylog
+get tsd sync status where table = [tsd table name]
+```
+Examples:
+```anylog
+get tsd sync statu
+get tsd sync status where table = tsd_128
+```
+
 Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.  
 
 ## The Archive of source data
