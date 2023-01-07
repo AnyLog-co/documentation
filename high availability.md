@@ -88,7 +88,7 @@ An Operator is assigned to a cluster in the following manner:
 ```
 
 Note: 
-1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy.
+1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy (the ID of the cluster policy).
 2) All the data provided to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
@@ -150,63 +150,76 @@ The pull is done by each member when the member determines that data available o
 The state of the data on each node is recorded on a set of tables called TSD tables in the following manner:  
 * Data received from a data source is registered in a table called TSD_INFO.
 * Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
-Note: When an Operator policy is added, the policy is updated with a member ID. The member ID is unique among the cluster members.
+Note: When an Operator policy is added, the policy is updated with an attribute called member and a value representing an ID. The member ID is unique among the cluster members.
   
 The TSD tables can be queried (as detailed below) to control and monitor the data state on each participating node.
 
-### The TSD tables
+### The TSD tables on each node
 
-Nodes synchronize their data using a set of tables called TSD tables.  
+Nodes synchronize their data using a set of tables called TSD tables. The current node is represented by tsd_info and
+peers that support the same cluster are represented by a tsd suffixed with their member ID.
 The following command returns the list of TSD tables on this node:  
 
 ```anylog
 get tsd list
 ```
 
-#### Retrieve information from a TSD table
+## Retrieve information from TSD tables
 The following command retrieves information from a TSD table. The information includes the details of each file ingested to the local database.
 ```anylog 
-time file get where [options]
+get tsd [info type] [options]
 ```
-Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+* **Info type** is one of the following keywords:
+   * details - the last entries in the requested TSD tables (note: by default, the list has a limit of the last 1-- entries of each table).
+   * summary - a summary view of the info in the requested TSD tables.
+   * errors - entries in TSD tables that represent sync processes that failed.
+
+* Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
 | ---------- | -------| -------| 
 | limit    | Setting a limit on the number of rows retrieved from the table, 0 value sets no limit. | 100 |
-| table    | The name of the table to use. | tsd_info |
+| table    | The name of the table to use. If **table=*** is specified, all the TSD tables are considered. Otherwise only **tsd_info** is considered. | tsd_info |
 | hash    | Retrieve a key with the specified hash value. | |
 | start_date | Retrieve entries with a date greater or equal to the start_date. | |
 | end_date | Retrieve entries with a date earlier than the end_date. | |
-| format | Output format - _table_ or _json_  | table |
+| format | Output format - **table** or **json**  | table |
+
+
+### Retrieve details from TSD tables
+Each ingested log file is represented as an entry in one TSD table.    
+Log files with data from devices are represented in tsd_info and files with log files from peers are represented in tsd_id whereas ID is the peer member ID.       
   
 **Examples**:  
 ```anylog 
-time file get
-time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
-time file get where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75f7 and format = json
-time file get where start_date = -3d and end_date = -2d
+get tsd details
+get tsd details where table = *
+get tsd details where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
+get tsd details where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75f7 and format = json
+get tsd details where start_date = -3d and end_date = -2d
 ```
 
-
 #### Retrieve summary information from a TSD table
-The following command retrieves summary information from a TSD table. 
+The following command retrieves summary information from a TSD table.  
+The summary information allows to validate that the different nodes supporting the same cluster maintain the same data.
+
 ```anylog 
-time file summary where [options]
+get tsd summary where [options]
 ```
 Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
 | ---------- | -------| -------| 
-| table    | The name of the table to use. | tsd_info |
+| table    | The name of the table to use (or asterisk (*) for all tables). | tsd_info |
 | start_date | retrieve entries with a date greater or equal to the start_date. | |
 | end_date | retrieve entries with a date earlier than the end_date. | |
 
 **Note**: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
 **Examples**:  
 ```anylog 
-time file summary
-time file summary where table = *
-time file summary where start_date = -3d
+get tsd summary
+get tsd summary where table = *
+get tsd summary where start_date = -3d
 ```
 
 An example of the output is the following:
@@ -234,9 +247,9 @@ The output provides the summary on each table as follows:
 #### Retrieve the list of files which were not ingested on the local node
 The following command retrieves the list of files that were identified as missing and the source node failed to deliver. 
 ```anylog 
-time file errors where [options]
+get tsd errors where [options]
 ```
-The options are the same as the options in the [time file get](#retrieve-information-from-a-tsd-table) command. 
+The options are the same as the options detailed [above](#retrieve-information-from-TSD-tables) command. 
 
 #### Creating and dropping the TSD tables
 The _tsd_info_ table is created using the following command:
