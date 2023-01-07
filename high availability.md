@@ -163,6 +163,120 @@ The following command returns the list of TSD tables on this node:
 get tsd list
 ```
 
+#### Retrieve information from a TSD table
+The following command retrieves information from a TSD table. The information includes the details of each file ingested to the local database.
+```anylog 
+time file get where [options]
+```
+Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+ 
+| Key        | Value  | Default | 
+| ---------- | -------| -------| 
+| limit    | Setting a limit on the number of rows retrieved from the table, 0 value sets no limit. | 100 |
+| table    | The name of the table to use. | tsd_info |
+| hash    | Retrieve a key with the specified hash value. | |
+| start_date | Retrieve entries with a date greater or equal to the start_date. | |
+| end_date | Retrieve entries with a date earlier than the end_date. | |
+| format | Output format - _table_ or _json_  | table |
+  
+**Examples**:  
+```anylog 
+time file get
+time file get where table = tsd_123 and hash = 6c78d0b005a86933ba44573c09365ad5
+time file get where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75f7 and format = json
+time file get where start_date = -3d and end_date = -2d
+```
+
+
+#### Retrieve summary information from a TSD table
+The following command retrieves summary information from a TSD table. 
+```anylog 
+time file summary where [options]
+```
+Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+ 
+| Key        | Value  | Default | 
+| ---------- | -------| -------| 
+| table    | The name of the table to use. | tsd_info |
+| start_date | retrieve entries with a date greater or equal to the start_date. | |
+| end_date | retrieve entries with a date earlier than the end_date. | |
+
+**Note**: Setting a star sign (*) for a table name provides information from all the TSD tables hosted on the node.  
+**Examples**:  
+```anylog 
+time file summary
+time file summary where table = *
+time file summary where start_date = -3d
+```
+
+An example of the output is the following:
+```anylog
+DBMS          Table       Start Date          From ID End Date            To ID Files Count Source Count Status 1 Status 2 Total Rows
+-------------|-----------|-------------------|-------|-------------------|-----|-----------|------------|--------|--------|----------|
+litsanleandro|heat_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|   50|         50|           1|       1|       1|   453,455|
+litsanleandro|ping_sensor|2021-04-02 02:47:56|      1|2021-04-02 17:50:01|  378|        378|           1|       1|       1|    77,624|
+```
+The output provides the summary on each table as follows:
+| Column name| explanation | 
+| ---------- | -------|
+| DBMS | The DBMS containing the ingested data |
+| Table | The Table containing the ingested data |
+| Start Date | The first date within the requested time range with data ingested |
+| From ID | The first Row ID in the TSD table within the requested time range |
+| End Date | The last date within the requested time range with data ingested |
+| To ID | The last Row ID in the TSD table within the requested time range |
+| Files Count | The number of files ingested within the requested time range |
+| Source Count | The number of sources (like sensors) providing data during the requested time range |
+| Status 1 | The number of unique status-message updates in the "status 1" column. The value 1 indicates all status messages are the same |
+| Status 2 | The number of unique status-message updates in the "status 2" column. The value 1 indicates all status messages are the same |
+| Total Rows | The number of rows ingested in the requested time range |
+
+#### Retrieve the list of files which were not ingested on the local node
+The following command retrieves the list of files that were identified as missing and the source node failed to deliver. 
+```anylog 
+time file errors where [options]
+```
+The options are the same as the options in the [time file get](#retrieve-information-from-a-tsd-table) command. 
+
+#### Creating and dropping the TSD tables
+The _tsd_info_ table is created using the following command:
+```anylog 
+create table tsd_info where dbms = almgm
+```
+Tables that represent members of the cluster are created dynamically.  
+
+Local TSD tables can be dropped using one of the following commands:
+```anylog 
+drop table [tsd table name] where dbms = almgm
+```
+or
+```anylog 
+time file drop [table name]
+```
+Dropping all TSD tables is by the following command:
+```anylog 
+time file drop all
+```
+
+**Examples**:  
+```anylog 
+drop table tsd_info where dbms = almgm
+time file drop tsd_123
+time file drop all
+```
+
+#### Deleting a single TSD row
+Usage
+```anylog 
+time file delete [row id] from [tsd table name]
+```
+
+Examples:  
+```anylog 
+time file delete 16 from tsd_info
+time file delete 126 from tsd_129
+```
+  
 
 
  
