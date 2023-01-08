@@ -191,7 +191,7 @@ get tsd [info type] [options]
    * summary - a summary view of the info in the requested TSD tables.
    * errors - entries in TSD tables that represent sync processes that failed.
 
-* Options are optional and determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+* Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
  
 | Key        | Value  | Default | 
 | ---------- | -------| -------| 
@@ -328,8 +328,22 @@ The **test ha cluster*** command provides the synchronization status for each us
 The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
 Usage:
 ```anylog
-test ha cluster
+test ha cluster [options]
 ```
+
+Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
+ 
+| Key        | Value  | 
+| ---------- | -------| 
+| start_date | Retrieve entries with a date greater or equal to the start_date. |
+| end_date | Retrieve entries with a date earlier than the end_date. |
+
+Examples:
+```anylog
+test ha cluster
+test ha cluster where start_date = -7d
+```
+
 Example output:
 ```anylog
 Table                Node_128        Node_222
