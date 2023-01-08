@@ -41,6 +41,23 @@ The command returns the HA configuration and relevant status. The info includes 
 | Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
 | almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
 
+
+## HA related commands
+The following list summarizes the commands supporting the HA processes:
+ 
+| command           | Details | 
+| ----------------- | ----------------| 
+| get data nodes    | The list of user tables and the physical nodes that manage each table |
+| blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
+| get tsd list   | The list of tsd tables on the current node |
+| get tsd details  | Query one or more TSD tables  |
+| get tsd summary  | Summary info of TSD tables  |
+| get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
+| get tsd sync status  | The sync status on the current node  |
+| test ha setup  | The configuration of the node to support HA  |
+| test ha cluster  | Compare the data status on all the nodes that support the same cluster  |
+
+
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
@@ -199,7 +216,7 @@ get tsd details where table = tsd_info and hash = a00e6d4636b9fd8e1742d673275a75
 get tsd details where start_date = -3d and end_date = -2d
 ```
 
-#### Retrieve summary information from a TSD table
+### Retrieve summary information from a TSD table
 The following command retrieves summary information from a TSD table.  
 The summary information allows to validate that the different nodes supporting the same cluster maintain the same data.
 
@@ -244,14 +261,14 @@ The output provides the summary on each table as follows:
 | Status 2 | The number of unique status-message updates in the "status 2" column. The value 1 indicates all status messages are the same |
 | Total Rows | The number of rows ingested in the requested time range |
 
-#### Retrieve the list of files which were not ingested on the local node
+### Retrieve the list of files which were not ingested on the local node
 The following command retrieves the list of files that were identified as missing and the source node failed to deliver. 
 ```anylog 
 get tsd errors where [options]
 ```
 The options are the same as the options detailed [above](#retrieve-information-from-TSD-tables) command. 
 
-#### Creating and dropping the TSD tables
+## Creating and dropping the TSD tables
 The _tsd_info_ table is created using the following command:
 ```anylog 
 create table tsd_info where dbms = almgm
@@ -289,25 +306,10 @@ Examples:
 time file delete 16 from tsd_info
 time file delete 126 from tsd_129
 ```
-  
 
-
- 
-
-
-* Use the ***time file summary*** command to find the total rows ingested within a time interval.
-```anylog
-time file summary where table = * and start_date = -10d
-```
-
-* Use the errors command to list the files that were not ingested within a time interval.
-```anylog
-time file errors where table = tsd_159 and start_date = -10d
-```
-
-### Retrieve synchronization status
+## Node synchronization status 
 When multiple nodes support the same cluster, they sync their TSD info.  
-The ***get ha sync status" provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
+The ***get tsd sync status" provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
 Usage:
 ```anylog
 get tsd sync status where table = [tsd table name]
@@ -318,7 +320,26 @@ get tsd sync statu
 get tsd sync status where table = tsd_128
 ```
 
-Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.  
+Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.
+
+## Cluster synchronization status
+
+The **test ha cluster*** command provides the synchronization status for each user table.  
+The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
+Usage:
+```anylog
+test ha cluster
+```
+Example output:
+```anylog
+Table                Node_128        Node_222
+                     10.0.0.78:7848  10.0.0.78:3048
+--------------------|---------------|---------------|
+lsl_demo.ping_sensor|1034/21778        |1034/21     |
+
+```
+In the example above, 2 operators supporting the cluster. The cluster table ping_sensor (in DBMS) lsl_demo was update by
+1034 files and a total of 21778 rows.
 
 ## The Archive of source data
 
