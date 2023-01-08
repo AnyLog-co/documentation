@@ -309,7 +309,7 @@ time file delete 126 from tsd_129
 
 ## Node synchronization status 
 When multiple nodes support the same cluster, they sync their TSD info.  
-The ***get tsd sync status" provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
+The **get tsd sync status** provides the synchronization status. If a table is not specified, all tsd tables ate considered.  
 Usage:
 ```anylog
 get tsd sync status where table = [tsd table name]
