@@ -324,7 +324,7 @@ Additional information on the time file commands is available at the [Time File 
 
 ## Cluster synchronization status
 
-The **test ha cluster*** command provides the synchronization status for each user table.  
+The **test ha cluster** command provides the synchronization status for each user table.  
 The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
 Usage:
 ```anylog
