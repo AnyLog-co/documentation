@@ -343,7 +343,7 @@ Destination can be represented in any of the following ways:
 * As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: `(139.162.126.241 2048, 172.105.13.202 2048)`    
 * For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  `10.0.0.78:20348`  
 * As variables. For example: `!dest_ip !dest_port`
-* As a query ti the metadata that returns a list of comma separated IPs and Ports.
+* As a query to the metadata that returns a list of comma separated IPs and Ports.
 
 Note: If more than a single destination is specified, the destinations are contained in parentheses.   
   
@@ -353,6 +353,7 @@ Note: If more than a single destination is specified, the destinations are conta
 
 ```anylog
 run client 10.0.0.78:20348 get status
+run client (139.162.126.241:2048, 172.105.13.202:2048) get processes   
 run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
 ```
 Queries are not required to specify destinations (and the parentheses are left empty).  
