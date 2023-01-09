@@ -333,33 +333,40 @@ The format to send a command is the following:
 ```anylog
 run client (destination) command
 ```
-#### The message sections:  
-***run client*** - Making the current node a client of a member node (or nodes). The command is organized in a message
+### The message sections:  
+**run client** - Making the current node a client of a peer node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
-***(destination)*** - the destination nodes identified by the IP and Port assigned to their
+
+**(destination)** - the destination nodes identified by the IP and Port assigned to their
 [TCP Server configuration](background%20processes.md#the-tcp-server-process).
 Destination can be represented in any of the following ways:
-* As a comma separate list of IP-Ports pairs. The IP and Port are separated by space. For example: `139.162.126.241 2048, 172.105.13.202 2048)`    
-* For a single destination node - as an IP-Port string. For example:  `10.0.0.78:20348`  
+* As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: `(139.162.126.241 2048, 172.105.13.202 2048)`    
+* For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  `10.0.0.78:20348`  
 * As variables. For example: `!dest_ip !dest_port`
-* If more than a single destination is specified, the destinations are contained in parentheses.  
-  
-***command*** - any of the AnyLog commands.  
+* As a query ti the metadata that returns a list of comma separated IPs and Ports.
 
-Examples:
+Note: If more than a single destination is specified, the destinations are contained in parentheses.   
+  
+**command** - any of the AnyLog commands.  
+
+### Examples:
 
 ```anylog
 run client 10.0.0.78:20348 get status
 run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
 ```
-
-Queries are not required to specify destinations. If destination is specified, only the destination nodes participate in the query.    
-If destination is not specified, the network protocol identifies the destination.
-When destination is not specified, the parentheses are left empty.  
+Queries are not required to specify destinations (and the parentheses are left empty).  
+If destination is not specified, the network protocol identifies the destination nodes.  
 For example:
 ```anylog
 run client () sql my_dbms "select count(*) from my_table"
 ```
+Destination can be a query to the metadata that generates a list of IPs and Ports.  
+The example below returns the CPU usage from all the Operator nodes in the US: 
+```anylog
+run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage
+```
+
 Additional information is available at [Queries and info requests to the AnyLog Network](queries.md#query-nodes-in-the-network).
 
 ## Querying and updating metadata in the blockchain
