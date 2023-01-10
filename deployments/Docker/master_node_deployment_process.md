@@ -1,12 +1,12 @@
 # Deployment Process
-The following provides insight the work being done in the background to deploy the Master node. 
+The following provides insight into the work being done in the background to deploy the Master node. 
 
 For directions to start a master node please visit the [master node](master_node.md) document.
 
 ## Steps
 1. Set parameters such as:
    * hostname
-   * Local & External IPs (backend of AnyLog if not preset in configuration)
+   * Internal & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 AL > hostname = get hostname
