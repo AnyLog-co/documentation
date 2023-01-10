@@ -134,7 +134,7 @@ curl -X GET ${IP_ADDRESS}:32049 -H "command: get processes" -H "User-Agent: AnyL
 * via AnyLog CLI
 ```shell
 # docker attach --detach-keys=ctrl-d anylog-master 
-ubuntu@master-node:~$ docker attach --detach-keys=ctrl-d mastaer-node 
+ubuntu@master-node:~$ docker attach --detach-keys=ctrl-d master-node 
 AL master-node +> test node 
 --> Test TCP Server ...
 run client 45.79.74.39:32048 get status
