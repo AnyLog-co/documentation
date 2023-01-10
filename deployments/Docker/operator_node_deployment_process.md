@@ -113,8 +113,8 @@ schedule time=!partition_sync and name="Drop Partitions" task drop partition whe
     folder=!blobs_folder and
     compress=!blobs_compress and
     reuse_blobs=!blobs_reuse
->```
-
+>
+```
 12. Start Operator - There are 3 steps need to start the operator process:
     * `set buffer threshold` –  By setting the threshold to immediate, data (new) coming in will be stored within the operator database with no delay, whereas when disabled it takes up to 60 seconds for new data to be stored in the database. 
     * `run data distributor` – The distributor tells the node to share its data with other operator instances connected to the same cluster (if  HA  is enabled). In the case of this demo, each of the (two) operators deployed is correlated to a different cluster without HA.
