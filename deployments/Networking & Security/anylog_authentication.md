@@ -61,7 +61,7 @@ responsible for managing access for all other members.
 ### Root Authentication & Preset Permissions
 Root user grants permissions to members (nodes and users) - this should be done only on a single AnyLog instance.
 
-1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/enable_authentication.al)
+1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/set_params.al)
 presets the configurations values used to configure certificate based authentication. Directions for updating configuration 
 values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
 
