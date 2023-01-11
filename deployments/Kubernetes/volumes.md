@@ -23,6 +23,12 @@ deployment for:
 
 As long as the volume package is still running data would be persistent.
 
+## Accessing Volumes
+
+Unlike _Docker_, Kubernetes volumes cannot be accessed via Shell interface; thus an AnyLog instance **must** be running and
+associated with the volume(s) in order to access them. 
+
+
 ## Other 
 * [Kubernetes Volume Support](https://kubernetes.io/docs/concepts/storage/volumes/)
 * The _Docker_ deployment also persists `scripts` directory, which is where the deployment scripts are. However, when 
