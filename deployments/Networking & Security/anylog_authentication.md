@@ -61,7 +61,7 @@ responsible for managing access for all other members.
 ### Root Authentication & Preset Permissions
 Root user grants permissions to members (nodes and users) - this should be done only on a single AnyLog instance.
 
-1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/master/scripts/authentication/enable_authentication.al)
+1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/enable_authentication.al)
 presets the configurations values used to configure certificate based authentication. Directions for updating configuration 
 values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
 
@@ -109,8 +109,8 @@ as their permissions. We recommend having a [node member](#declare-non-root-memb
 
 ### Declare non-Root Member
 Except for `root` member policy, all other members must be associated with a subset of permissions of what their
-respective keys can and cannot do. The default scripts provide examples for permissions with [no restrictions](https://github.com/AnyLog-co/AnyLog-Network/blob/master/scripts/authentication/no_restrictions_permissions.al) 
-and with [limited permissions](https://github.com/AnyLog-co/AnyLog-Network/blob/master/scripts/authentication/limited_permissions.al).
+respective keys can and cannot do. The default scripts provide examples for permissions with [no restrictions](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/no_restrictions_permissions.al) 
+and with [limited permissions](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/limited_permissions.al).
 The limited permissions allows commands such as: _get_, _sql_ and _blockchain_.
 
 1. Declare no restrictions permissions policy 
@@ -148,7 +148,7 @@ The node authentication requires access to **both** the new AnyLog node (_new no
 adding a new AnyLog instance to the network (_root node_). If you do not have access to such a node, please work with your administrator
 to connect your node to the network. 
 
-1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/master/scripts/authentication/enable_authentication.al)
+1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/enable_authentication.al)
 presets the configurations values used to configure certificate based authentication; this step needs to be done on **both**
 the _root node_, as-well-as the _new node_ being added to the network. Directions for updating configuration 
 values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
