@@ -1,6 +1,6 @@
 # Query Node
 While any node can execute a query, as long as `system_query` logical database is active, the _query node_  is 
-dedicataed to only coordinate the query process(es). When deploying with docker, we recommend deploying [query with 
+dedicated to only coordinate the query process(es). When deploying with docker, we recommend deploying [query with 
 remote-cli](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/query-remote-cli)    
 
 For a step-by-step process of what's being done in the background, please visit the [deployment process](query_node_deployment_process.md)
@@ -109,7 +109,7 @@ File Path: `$HOME/deployments/docker-compose/query-remote-cli/.env`
 ```dotenv
 BUILD=predevelop
 ENV_FILE=anylog_configs.env
-CONTAINER_NAME=anylog-master
+CONTAINER_NAME=anylog-query
 NETWORK=host
 ```
 
@@ -128,7 +128,6 @@ curl -X GET ${IP_ADDRESS}:32349 -H "command: get status" -H "User-Agent: AnyLog/
 # Get Processes
 curl -X GET ${IP_ADDRESS}:32349 -H "command: get processes" -H "User-Agent: AnyLog/1.23"  -w "\n"
 ```
-* via AnyLog CLI
 * via AnyLog CLI
 ```shell
 # docker attach --detach-keys=ctrl-d anylog-master 
