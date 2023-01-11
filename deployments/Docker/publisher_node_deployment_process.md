@@ -6,7 +6,7 @@ For directions to start a master node please visit the [publisher node](publishe
 ## Steps
 1. Set parameters such as:
    * hostname
-   * Local & External IPs (backend of AnyLog if not preset in configuration)
+   * Internal & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 hostname = get hostname
@@ -21,7 +21,7 @@ anylog_server_port=$ANYLOG_SERVER_PORT
 run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 run rest server !ip !anylog_rest_port
 
-# If declare connect to message broker 
+# If declared run message broker 
 run message broker !external_ip !anylog_broker_port !ip !anylog_broker_port
 ```
 
