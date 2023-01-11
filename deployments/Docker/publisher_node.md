@@ -157,7 +157,7 @@ File Path: `$HOME/deployments/docker-compose/anylog-publisher/.env`
 ```dotenv
 BUILD=predevelop
 ENV_FILE=anylog_configs.env
-CONTAINER_NAME=anylog-master
+CONTAINER_NAME=anylog-publisher
 NETWORK=host
 ```
 
