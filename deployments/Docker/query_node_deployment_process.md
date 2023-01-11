@@ -6,7 +6,7 @@ For directions to start a master node please visit the [query node](query_node.m
 ## Steps
 1. Set parameters such as:
    * hostname
-   * Local & External IPs (backend of AnyLog if not preset in configuration)
+   * Internal & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 AL > hostname = get hostname
