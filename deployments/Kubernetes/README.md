@@ -1,7 +1,7 @@
 # Installing AnyLog using Docker
 
 You can delpoly AnyLog via _docker-compose_ by using either our deployment script or manually. 
-Additionally, we provide a single docker-compose that builds a [demo network](single_deployment_demo_network.md) 
+Additionally, we provide a single docker-compose that builds a [demo network](single_deployment_demo.md) 
 (1 _Master_, 1 _Query_ and 2 _Operator_ nodes) on a single machine. 
 
 For login credentials contact us at: [info@anylog.co](mailto:info@anylog.co)
@@ -111,7 +111,7 @@ cd $HOME/deployments/docker-compose/grafana/ ; docker-compose up -d
 
 
 ### Demo Network 
-The [Demo Network Deployment](single_deployment_demo_network.md) is a standalone package that deploys the demo network on a single
+The [Demo Network Deployment](single_deployment_demo.md) is a standalone package that deploys the demo network on a single
 AnyLog physical machine. This includes:
    * 1 Master 
    * 2 Operators (1 with SQLite and one with Postgres)
