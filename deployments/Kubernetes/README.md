@@ -21,7 +21,7 @@ in order to run.
 * 20GB of free disk space
 * network connectivity between all machines in the cluster
 
-For our deployment we use [minikube](https://minikube.sigs.k8s.io/docs/start/) and [helm](https://helm.sh/docs/) via 
+For testing purposes we use [minikube](https://minikube.sigs.k8s.io/docs/start/) and [helm](https://helm.sh/docs/) via 
 Docker; but can also be used with [other deployment tools](https://kubernetes.io/docs/tasks/tools/). 
 
 
