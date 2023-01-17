@@ -105,8 +105,9 @@ Options are represented as key value pairs and are one of the following:
 
 Examples:
 ```anylog
+get msg clients 
 get msg client where id = 2
-get msg client where brol = 2
+get msg client where broker = driver.cloudmqtt.com:18785
 get msg client where broker = driver.cloudmqtt.com:18785 and topic = anylogedgex
 get msg client where id = 2 and detailed = true
 ```
