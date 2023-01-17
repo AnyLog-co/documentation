@@ -92,9 +92,18 @@ The mapping is done using the command `run mqtt client`, details are available a
 
 Usage: 
 ```anylog
-get msg clients 
-get msg client N
+get msg clients where [options]
 ```
+Options are represented as key value pairs and are one of the following:
+
+| Option name   | Details                                             |
+| ------------- |-----------------------------------------------------| 
+| id            | The subscription ID                                 |
+| broker        | The broker connection information (ip and port)     |
+| topic         | The topic name                                      |
+| detailed      | true provides the list of directories used in the process  |
+
+
 N represents the subscription ID which is assigned for each `run mqtt client` call.
 if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
 
