@@ -96,17 +96,20 @@ get msg clients where [options]
 ```
 Options are represented as key value pairs and are one of the following:
 
-| Option name   | Details                                             |
-| ------------- |-----------------------------------------------------| 
-| id            | The subscription ID                                 |
-| broker        | The broker connection information (ip and port)     |
-| topic         | The topic name                                      |
-| detailed      | true provides the list of directories used in the process  |
+| Option name   | Details                                             | Default            |
+| ------------- |-----------------------------------------------------| -----------------  |
+| id            | The subscription ID (assigned for each `run mqtt client` call.) | All subscriptions  |
+| broker        | The broker connection information (ip and port)     |                    |
+| topic         | The topic name                                      |                    |
+| detailed      | 'true' provides the list of directories used in the process  |  False    |
 
-
-N represents the subscription ID which is assigned for each `run mqtt client` call.
-if N is specified, only the specified subscription info is returned, otherwise all subscription declarations are returned.
-
+Examples:
+```anylog
+get msg client where id = 2
+get msg client where brol = 2
+get msg client where broker = driver.cloudmqtt.com:18785 and topic = anylogedgex
+get msg client where id = 2 and detailed = true
+```
 The reply has 4 sections showing configurations and statistics.  
 
 **Section A attributes**:
@@ -138,16 +141,11 @@ Details of the topic and mapping instructions between the source data and the ta
 **Section D attributes**:
 
 The locations of the local directories that are used to organize the data for the database ingestion.   
-This section is provided by adding the keyword detailed to the command:
-```anylog
-get msg clients detailed 
-get msg client N detailed
-```
-
+This section is provided by assigning the keyword ***detailed*** to the value ***true***:
 
 **Example reply**:
 ```anylog
-AL anylog-node > get msg clients detailed
+AL anylog-node > get msg clients where detailed = true
 
 Subscription: 0001
 User:         unused
