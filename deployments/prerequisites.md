@@ -41,7 +41,8 @@ bash $HOME/deployments/installations/docker_credentials.sh ${DOCKER_PASSWORD}
 If the docker request link doesn't work, please email us at [info@anylog.co](mailto:info@anylog.co).    
 
 ### Kubernetes with Helm
-Our Kubernetes installation script conssits of [helm](https://helm.sh/) and minikube; however, it has also been tested with [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/) and other flavors of kubernetes installations. Unlike Docker, Kubernetes has the following [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#:~:text=Before%20you%20begin%201%20A%20compatible%20Linux%20host.,on%20your%20machines.%20...%207%20Swap%20disabled.%20): 
+Our Kubernetes installation script conssits of [helm](https://helm.sh/) and minikube; however, it has also been tested 
+with [other deployment tools](https://kubernetes.io/docs/tasks/tools/).  
    * \>= 2GB of RAM per machine
    * \>=2 CPUs 
    * network connectivity between all machines in the cluster (public or private)

@@ -8,18 +8,19 @@ For login credentials contact us at: [info@anylog.co](mailto:info@anylog.co)
 * Deploy [Remote-CLI](../Support/Remote-CLI)
 * Deploy [EdgeX](../Support/EdgeX.md)
 * Deploy [Grafana](../Support/Grafana.md)
-* [Trouble Shooting]()
+* [Trouble Shooting](../Support/)
 * [Sample Queries]()
-
 
 
 ### Requirements
 Unlike _Docker_, Kubernetes has [machine requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) 
 in order to run. 
-* 2GB or more of RAM
-* 2 CPUs or more
-* 20GB of free disk space
+* \>= 2GB of RAM
+* \>= 2 CPUs or more
+* \>= 20GB of free disk space
 * network connectivity between all machines in the cluster
+* Unique hostname, MAC address, and product_uuid for every node
+* Swap memory disabled
 
 For testing purposes we use [minikube](https://minikube.sigs.k8s.io/docs/start/) and [helm](https://helm.sh/docs/) via 
 Docker; but can also be used with [other deployment tools](https://kubernetes.io/docs/tasks/tools/). 

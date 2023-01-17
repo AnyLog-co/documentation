@@ -63,7 +63,7 @@ Root user grants permissions to members (nodes and users) - this should be done 
 
 1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/set_params.al)
 presets the configurations values used to configure certificate based authentication. Directions for updating configuration 
-values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
+values in [Docker](../Docker/volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
 
 **Relevant Params for creating a _root_ user**: 
 * root_name 
@@ -151,7 +151,7 @@ to connect your node to the network.
 1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/enable_authentication.al)
 presets the configurations values used to configure certificate based authentication; this step needs to be done on **both**
 the _root node_, as-well-as the _new node_ being added to the network. Directions for updating configuration 
-values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
+values in [Docker](../Docker/volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
 
 **Relevant Params on New Node**: 
 * `node_password` - node password for when creating node_keys -- used for both private and local password in enable_authentication.al
@@ -193,7 +193,7 @@ process !local_scripts/authentication/declare_node_member.al
 
 4. Once a member policy is declared for a node, the _root node_ needs to give this member permissions. The scripts provided
 currently give (new) node members full access. However, administrators may choose to set different permissions for different
-nodes. Directions for updating configuration values in [Docker](../Docker/docker_volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
+nodes. Directions for updating configuration values in [Docker](../Docker/volumes.md) | [Kubernetes](../Kubernetes/volumes.md).
 ```anylog
 process !local_scripts/authentication/assign_node_privileges.al
 ```
