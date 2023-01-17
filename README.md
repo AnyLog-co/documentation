@@ -73,7 +73,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
-  * [Configuring Data Distribution](data%20distribution%20and%20configuration.md)
 
 * **Southbound Connectors**
   * [AnyLog as a Broker](message%20broker.md) 
