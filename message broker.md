@@ -202,9 +202,16 @@ get msg clients
 ```    
 * To view the status and configuration of a particular client use the command (_n_ is the client ID): 
 ```anylog
-get msg client where id = [n]
+get msg client [n]
 ```
-
+* To view statistics per topic of all clients use the following command:
+```anylog
+get msg clients statistics
+```    
+* To view statistics per each topic of a particular client use the command (_n_ is the client ID): 
+```anylog
+get msg client statistics [n]
+```
 * To view the streaming data status, use the following command:
 ```anylog
 get streaming
