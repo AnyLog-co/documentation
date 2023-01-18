@@ -32,7 +32,7 @@ bash $HOME/deployments/installations/docker_credentials.sh ${ANYLOG_PASSWORD}
 ```
 
 ### Deploying Database 
-The AnyLog [deployment scripts](https://github.com/AnyLog-co/deployments) consists Docker packages to install database 
+The AnyLog [deployment scripts](https://github.com/AnyLog-co/deployments) consists of Docker packages to install database 
 services; however, they are not part of the automated deployment process at this time. Please note, alternatively users 
 can manually install the database locally on their machines rather than as docker packages. 
 
@@ -116,7 +116,7 @@ vim anylog_configs.env
 vim .env 
 ```
 **Note** - If you'd like to deploy multiple operator nodes on a single machine, then the service name 
-(`anylog-operator-node`) and volume names in [docker-compose.yaml](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/anylog-operator/docker-compose.yml)  
+(`anylog-operator-node`) and volume names in [docker-compose.yaml](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/anylog-operator/docker-compose.yml)
 needs to be updated. 
 
 5. Deploy Node 
