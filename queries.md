@@ -11,7 +11,7 @@ as key = value pairs. With multiple option, the keyword _and_ separates between 
 | ---- | --------------- | ------------| --------------|
 | format | json / table | The format of the result set | JSON |
 | timezone | utc / local | Timezone used for time values in the result set | local |
-| include | dbms.table | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table` | ignored |
+    | include | dbms.table | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table` | ignored |
 | drop | True/False | Drops the local output table with the issued query. | True |
 | dest | stdout / rest / dbms / file | Destination of the query result set (i.e. stdout, rest, file) | Set dynamically depending on the interface used |
 | file | file name | File name for the output data |  |

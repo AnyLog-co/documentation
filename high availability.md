@@ -1,11 +1,10 @@
 # High Availability (HA)
 
-AnyLog can be configured such that data is highly available. The HA process is such that multiple Operators maintain the 
-same data such that if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
-surviving node. This document explains how to configure AnyLog to provide High Availability, and details the commands that 
+To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data such that 
+if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
+surviving node.
+This document explains how to configure AnyLog to provide High Availability, and details the commands that 
 monitor and report on the HA state.
-
-This document extends the explanations in [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
 ## Overview
 
@@ -15,13 +14,99 @@ the data is available from a surviving peer node.
 To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
 push and pull processes, that operate on the data, such that, when data is added to one of the nodes, it will be replicated the  
 assigned peer nodes.
-This setup requires the following:
-1) Associating multiple Operator nodes to the same cluster such that these nodes have identical copies of the data.  
-2) Enabling the following background processes on each node:
+
+### The organization of the data for HA
+
+Data in the network is organized as follows:
+* Users and application view the data as if it is organized in tables assigned to databases.      
+* The physical organization of the data partitions the data of each table to one or more clusters.
+* Each cluster is supported by multiple Operators that maintain identical copies of the cluster's data. 
+  Therefore, if an Operator nodes fails, the cluster's data is available on a surviving node.
+
+The way data is treated is as follows:  
+* Data is assigned to a logical tables, in the same way that data is assigned to table in a database. 
+* Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
+* Each cluster is assigned to X Operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.
+
+In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the data.    
+The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the surviving Operator.  
+If an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
+
+```anylog
+|--------------------|          |--------------------|          |--------------------|  
+|                    |          |                    |   --->   |     Operator 1     |          
+|                    |   --->   |                    |          |--------------------|  
+|                    |          |      Cluster 1     |  
+|      Table 1       |          |                    |          |--------------------|  
+|                    |          |                    |   --->   |     Operator 2     |  
+|      Table 2       |          |--------------------|          |--------------------|  
+|                    |  
+|      Table 3       |          |--------------------|          |--------------------|  
+|                    |          |                    |   --->   |     Operator 3     |  
+|      Table 4       |          |                    |          |--------------------|  
+|                    |          |      Cluster 2     |  
+|                    |   --->   |                    |          |--------------------|  
+|                    |          |                    |   --->   |     Operator 4     |  
+|--------------------|          |--------------------|          |--------------------|  
+```
+
+### The data distribution
+
+When data in created, it is assigned to a cluster in a table and streamed to an Operator node that is assigned to the cluster.  
+The Operator node hosts the data in a local database, and the HA process will transfer the data to all the nodes that are assigned to the cluster.  
+The selection of an Operator can be done dynamically using a Publisher node that distributes the data based on predetermined logic,
+or by configuring a data source to a particular cluster.
+
+## Prerequisites for HA configuration
+
+HA setup requires the following:
+
+1) Cluster policies.
+2) Operator nodes
+3) Operator policy representing each operator and assign each operator to a cluster.
+4) Enabling the following background processes on each Operator node:
    1) The Operator Background Process to ingest data to the local databases.
    2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
    3) The  Consumer Background Process to pull data which is missing on the current node.
-3) Enabling the TSD tables operations.
+5) Enabling the TSD tables operations (Detaile are available in the 
+   section[The Time Series Data (TSD) Management Tables](#the-time-series-data-tsd-management-tables) below.
+
+Notes:
+   * For HA, at least 2 operators are assigned to each cluster.
+   * When data is pushed to an Operator, it is assigned to the cluster supported by the Operator and the data will be replicated to
+    all the nodes that support the cluster.
+
+## View data distribution policies
+There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
+```anylog
+blockchain query metadata
+get data nodes
+```
+Below is the output of the ***blockchain query metadata*** command. It shows, for each logical table, the list of clusters and the physical nodes 
+assigned to each cluster (The command ***get data nodes*** provides the same info, however in a table format):
+```anylog
+|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
+     
+litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+
+```
+
+## Test Cluster policies
+The command below tests the validity of the cluster policies:
+```anylog
+blockchain test cluster
+```
 
 ## Testing the node configuration for HA
 The **test ha setup** command details if the node is properly configured to support HA.  
@@ -49,6 +134,7 @@ The following list summarizes the commands supporting the HA processes:
 | ----------------- | ----------------| 
 | get data nodes    | The list of user tables and the physical nodes that manage each table |
 | blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
+| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
 | get tsd list   | The list of tsd tables on the current node |
 | get tsd details  | Query one or more TSD tables  |
 | get tsd summary  | Summary info of TSD tables  |
@@ -56,7 +142,6 @@ The following list summarizes the commands supporting the HA processes:
 | get tsd sync status  | The sync status on the current node  |
 | test ha setup  | The configuration of the node to support HA  |
 | test ha cluster  | Compare the data status on all the nodes that support the same cluster  |
-
 
 ## The Cluster Policy
 
@@ -150,12 +235,25 @@ Note: More details are available [here](data%20distribution%20and%20configuratio
 
 ## View the distribution of data to an operator
 
-The following command provides 2 lists:
-1) The list of peer Operators that support the cluster.
-1) The list of tables supported by the Operator.
+Executing the command `get cluster info` on an Operator node presents the cluster supported by the operator,
+the members Operators that are supporting the cluster, and the tables associated with the cluster.
+
 ```anylog
-get cluster info
+AL anylog-node > get cluster info
+Cluster ID : 2436e8aeeee5f0b0d9a55aa8de396cc2
+Member ID  : 206
+Participating Operators:
+      IP              Port Member Status 
+      ---------------|----|------|------|
+      139.162.126.241|2048|   206|active|
+      139.12.224.186 |2048|   008|active|
+Tables Supported:
+      Company       DBMS          Table                
+      -------------|-------------|--------------------|
+      litsanleandro|litsanleandro|ping_sensor         |
+      litsanleandro|litsanleandro|percentagecpu_sensor|
 ```
+
 
 ## The Time Series Data (TSD) Management Tables
 
