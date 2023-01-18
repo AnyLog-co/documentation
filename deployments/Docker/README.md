@@ -1,74 +1,99 @@
 # Installing AnyLog using Docker
 
-You can delpoly AnyLog via _docker-compose_ by using either our deployment script or manually. 
-Additionally, we provide a single docker-compose that builds a [demo network](single_deployment_demo_network.md) 
-(1 _Master_, 1 _Query_ and 2 _Operator_ nodes) on a single machine. 
+You can deploy AnyLog via _docker-compose_ by using either our deployment script or manually. Additionally, we provide a 
+single docker-compose that builds a [demo network](single_deployment_demo_network.md) [1 _Master_, 1 _Query_ and 
+2 _Operator_ nodes] on a single machine.  
 
 For login credentials contact us at: [info@anylog.co](mailto:info@anylog.co)
 
 **Support Links**
-* Deploy [Remote-CLI](../Support/Remote-CLI)
-* Deploy [EdgeX](../Support/EdgeX.md)
-* Deploy [Grafana](../Support/Grafana.md)
-* [Trouble Shooting]()
-* [Sample Queries]()
+* [Remote-CLI](../Support/Remote-CLI)
+* [EdgeX](../Support/EdgeX.md)
+* [Grafana](../Support/Grafana.md)
+* [Trouble Shooting](../Support/cheatsheet.md)
 
 
-
-### Requirements
+**Requirements**
 * Docker
 * docker-compose
 * Python3 + [dotenv](https://pypi.org/project/python-dotenv/) - for utilizing [deployment scripts](../deplyoment_scripts) 
 
-## Deployment 
-### Scripted Process
-0. Clone [deployments](https://github.com/AnyLog-co/deployments/) directory  & login into our Docker hub.  
+Directions for downloading Docker / docker-compose can be found here: [Docker Engine Installation](https://docs.docker.com/engine/install/)
+
+## Deployment
+Please make sure to download [deployment scripts](https://github.com/AnyLog-co/deployments) and have AnyLog's docker 
+login credentials in order to deploy the network.
+
 ```shell
-cd $HOME ; git clone https://github.com/AnyLog-co/deployments
-bash $HOME/deployments/installations/docker_credentials.sh ${USER_PASSWORD}
+cd $HOME 
+git clone https://github.com/AnyLog-co/deployments
+
+bash $HOME/deployments/installations/docker_credentials.sh ${ANYLOG_PASSWORD}
 ```
-1. Manually deploy Postgres and/or MongoDB if planning to use in deployment
-    * [Postgres Configuration](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/postgres/postgres.env)
-    * [MongoDB Configurations](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/mongodb/.env)
+
+### Deploying Database 
+The AnyLog [deployment scripts](https://github.com/AnyLog-co/deployments) consists Docker packages to install database 
+services; however, they are not part of the automated deployment process at this time. Please note, alternatively users 
+can manually install the database locally on their machines rather than as docker packages. 
+
+
+#### Postgres 
+PostgresSQL is used for storing time-series (non-blobs), usually provided in JSON format. If PostgresSQL is _not_ 
+installed, AnyLog will automatically retry connecting to a SQLite logical database instead. 
+
+Directions for installing PostgresSQL on your machine can be found [here](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart)
+
+1. Update [configurations](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/postgres/postgres.env)  
+   * POSTGRES_USER
+   * POSTGRES_PASSWORD 
 ```shell
-# deploy PostgreSQL 
-cd $HOME/deployments/docker-compose/postgres/ ; docker-compose up -d 
-# Deploy MongoDB 
-cd $HOME/deployments/docker-compose/mongodb/ ; docker-compose up -d 
+cd $HOME/deployments/docker-compose/postgres/
+vim postgres.env
 ```
-2. Initiate the deployment scripts - this will prepare the configurations (based on user input) and deploy an AnyLog 
-instance.    
+
+2. Deploy Postgres 
+```shell
+cd $HOME/deployments/docker-compose/postgres/
+docker-compose up -d
+```
+
+#### MongoDB 
+MongoDB is used to store blobs such as _images_, _videos_ and _files_.
+
+Directions for installing MongoDB on your machine can be found [here](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04)
+
+1. Update [configurations](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/mongodb/.env)
+   * MONGO_USER
+   * MONGO_PASSWORD 
+```shell
+cd $HOME/deployments/docker-compose/mongodb/  
+vim .env
+```
+
+2. Deploy Postgres 
+```shell
+cd $HOME/deployments/docker-compose/mongodb/
+docker-compose up -d
+```
+
+### Deploying Node
+An AnyLog node can be deployed either manually, or through an easy-to-use questionnaire
+
+#### Questionnaire Based Deployment 
+A questionnaire based deployment will ask a series of question (including whether you'd like to deploy on _Docker_ or 
+_Kubernetes_ and will attempt to deploy the node).
+
 ```shell
 bash $HOME/deployments/deployment_scripts/deploy_node.sh 
 ```
-3. (Optional) Deploy Remote-CLI -- A _query_ instance will also deploy Remote-CLI by itself; there's no need to redeploy it.
-   * Access for Remote-CLI is [http://${LOCAL_IP_ADDRESS}:31800]() 
-```shell
-cd $HOME/deployments/docker-compose/remote-cli/ ; docker-compose up -d 
-```
-4. (Optional) Deploy Grafana
-   * Access for Grafana is [http://${LOCAL_IP_ADDRESS}:3000]()
-```shell
-cd $HOME/deployments/docker-compose/grafana/ ; docker-compose up -d 
-```
 
-### Manual Process  
-0. Clone [deployments](https://github.com/AnyLog-co/deployments/) directory & login into our Docker hub.
-```shell
-cd $HOME ; git clone https://github.com/AnyLog-co/deployments
-bash $HOME/deployments/installations/docker_credentials.sh ${USER_PASSWORD}
-```
+**Note** - when deploying a Query node (via Docker) with the deployment script, the process will also include Remote-CLI. 
+This is because when querying for blobs (ie MongoDB), the data must be accessible by **both** the Query Node and 
+Remote-CLI.
 
-1. Manually deploy Postgres and/or MongoDB if planning to use in deployment
-    * [Postgres Configuration](postgres/postgres.env)
-    * [MongoDB Configurations](mongodb/.env)
-```shell
-# deploy PostgreSQL 
-cd $HOME/deployments/docker-compose/postgres/ ; docker-compose up -d 
-# Deploy MongoDB 
-cd $HOME/deployments/docker-compose/mongodb/ ; docker-compose up -d 
-```
-2. cd into the desired node 
+
+#### Manual Deployment
+1. cd into the desired node 
 ```shell
 # master node
 cd $HOME/deployments/docker-compose/anylog-master/
@@ -98,43 +123,24 @@ needs to be updated.
 ```shell
 docker-compose up -d 
 ```
-6. (Optional) Deploy Remote-CLI -- A _query_ instance will also deploy Remote-CLI by itself; there's no need to redeploy it.
-   * Access for Remote-CLI is [http://${INTERNAL_IP_ADDRESS}:31800]() 
-```shell
-cd $HOME/deployments/docker-compose/remote-cli/ ; docker-compose up -d 
-```
-7. (Optional) Deploy Grafana
-   * Access for Grafana is [http://${INTERNAL_IP_ADDRESS}:3000]()
-```shell
-cd $HOME/deployments/docker-compose/grafana/ ; docker-compose up -d 
-```
 
-
-### Demo Network 
-The [Demo Network Deployment](single_deployment_demo_network.md) is a standalone package that deploys the demo network on a single
-AnyLog physical machine. This includes:
+#### Demo Network 
+A standalone package that deploys a small network on a single machine. This includes:
    * 1 Master 
    * 2 Operators (1 with SQLite and one with Postgres)
    * 1 Query Node 
    * Postgres 
    * Remote-CLI
-   * Grafana
+   * Grafana  
 
-The single deployment will have data coming into 1 operator from _CloudMQTT_ broker and another via a local 
-[EdgeX](../Support/EdgeX.md) instance; that needs to be deployed separately. 
+The single deployment will have data coming into 1 operator from _CloudMQTT_ broker and another via a local [EdgeX](../Support/EdgeX.md) 
+instance with data coming from a cloud-based MQTT broker. There is no need to deploy PostgresSQL on its own when running 
+a standalone demo network.
 
-0. Clone [deployments](https://github.com/AnyLog-co/deployments/) directory & login into our Docker hub.
+1. (Optional) Update configurations
 ```shell
-cd $HOME ; git clone https://github.com/AnyLog-co/deployments
-bash $HOME/deployments/installations/docker_credentials.sh ${USER_PASSWORD}
-```
+cd $HOME/deployments/docker-compose/anylog-demo-network/
 
-1. cd into [demo-network-deployment](demo-network-deployment)
-```shell
-cd $HOME/deployments/docker-compose/demo-network-deployment/
-```
-2. (Optional) Update configurations
-```shell
 # Postgres 
 vim envs/postgres.env 
 
@@ -150,15 +156,11 @@ vim envs/anylog_operator2.env
 # Query 
 vim envs/anylog_query.env
 ```
-3. Update image information (default is _predevelop_)
+2. (Optional) Update AnyLog build version
 ```shell
-vim .env 
+vim .env
 ```
-4. Deploy Node
-   * Access for Remote-CLI is [http://${INTERNAL_IP_ADDRESS}:31800]()
-   * Access for Grafana is [http://${INTERNAL_IP_ADDRESS}:3000]()
+3. Deploy Demo Network
 ```shell
 docker-compose up -d 
 ```
-5. Deploy EdgeX using the directions in [lfedge-code](https://github.com/AnyLog-co/lfedge-code) to get data into the 
-operator running with local broker 
