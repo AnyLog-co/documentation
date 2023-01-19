@@ -109,10 +109,10 @@ blockchain test cluster
 ```
 
 ## Testing the node configuration for HA
-The **test ha setup** command details if the node is properly configured to support HA.  
+The **test cluster setup** command details if the node is properly configured to support HA.  
 Usage:
 <pre> 
-test ha setup
+test cluster setup
 </pre>
 The command returns the HA configuration and relevant status. The info includes the following:
 
@@ -140,8 +140,8 @@ The following list summarizes the commands supporting the HA processes:
 | get tsd summary  | Summary info of TSD tables  |
 | get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
 | get tsd sync status  | The sync status on the current node  |
-| test ha setup  | The configuration of the node to support HA  |
-| test ha data  | Compare the data status on all the nodes that support the same cluster  |
+| test cluster setup  | The configuration of the node to support HA  |
+| test cluster data  | Compare the data status on all the nodes that support the same cluster  |
 
 ## The Cluster Policy
 
@@ -420,13 +420,23 @@ get tsd sync status where table = tsd_128
 
 Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.
 
+
+## Cluster databases
+Nodes assigned to the same cluster needs to be in sync on the logical databases that store the data tables 
+(note that the physical databases on each node can be different).  
+The **test cluster databases** command provides a comparison list of all the databases defined on each node in the cluster.
+Usage:
+```anylog
+test cluster databases
+```
+
 ## Cluster synchronization status
 
-The **test ha data** command provides the synchronization status for each user table.  
+The **test cluster data** command provides the synchronization status for each user table.  
 The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
 Usage:
 ```anylog
-test ha data [options]
+test cluster data [options]
 ```
 
 Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
@@ -438,8 +448,8 @@ Options determine the information of interest, expressed as a where condition wi
 
 Examples:
 ```anylog
-test ha data
-test ha data where start_date = -7d
+test cluster data
+test cluster data where start_date = -7d
 ```
 
 Example output:
