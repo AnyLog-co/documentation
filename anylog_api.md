@@ -22,11 +22,10 @@ positional arguments:
   config_file           Configuration file to be utilized
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --auth AUTH           Authentication information (comma separated) [ex. username,password] (default: None)
-  --timeout TIMEOUT     REST timeout (default: 30)
-  -e [EXCEPTION], --exception [EXCEPTION]
-                        Whether to print errors (default: False)
+  -h, --help                     show this help message and exit
+  --auth          AUTH           Authentication information (comma separated) [ex. username,password] (default: None)
+  --timeout       TIMEOUT        REST timeout (default: 30)
+  -e, --exception [EXCEPTION]    Whether to print errors (default: False)
 ```
 
 
@@ -66,6 +65,8 @@ _REST_. Directions for deploying a [REST node](deployments/Docker/rest_node.md)
 ├    * set partitions
 ├    * query data  
 ├── generic_data_support.py
+├    * Build `run mqtt client` command
+├    * Build query command 
 ├── blockchain_calls.py
 ├    * blockchain   
 ├    * blockchain sync
