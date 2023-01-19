@@ -42,7 +42,6 @@ vim $HOME/deployments/docker-compose/mongodb/.env
 
 2.change configurations 
 ```dotenv
-PORT=27017
 MONGO_USER=admin
 MONGO_PASSWORD=passwd
 ```

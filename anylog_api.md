@@ -31,7 +31,7 @@ optional arguments:
 
 ## Usage
 In order for AnyLog-API to work, the AnyLog instance which the API is communicating against must be running with at least
-_REST_. Directions for deploying a [REST node](deployments/Docker/rest_node.md)
+_REST_. Directions for deploying a [REST node](deployments/Docker-old/rest_node.md)
 
 ```shell
 /home/anylog/AnyLog-API/python_rest/src

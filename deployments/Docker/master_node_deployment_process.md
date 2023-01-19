@@ -1,7 +1,7 @@
 # Deployment Process
 The following provides insight into the work being done in the background to deploy the Master node. 
 
-For directions to start a master node please visit the [master node](master_node.md) document.
+For directions to start a master node please visit the [master node](deploying_node.md) document.
 
 ## Steps
 1. Set parameters such as:

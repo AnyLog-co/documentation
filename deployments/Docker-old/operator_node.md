@@ -7,7 +7,7 @@ important to make sure that:
 
 ## Requirements
 * [Node Setup](../prerequisites.md#docker) - including logging into AnyLog's Docker hub
-* [Postgres](database_configuration.md#postgressql)
+* [Postgres](../Docker/database_configuration.md#postgressql)
 
 ## Process
 For a simplified process, feel free to utilize our deployment script. 

@@ -3,7 +3,7 @@ While any node can execute a query, as long as `system_query` logical database i
 dedicated to only coordinate the query process(es). When deploying with docker, we recommend deploying [query with 
 remote-cli](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/query-remote-cli)    
 
-For a step-by-step process of what's being done in the background, please visit the [deployment process](query_node_deployment_process.md)
+For a step-by-step process of what's being done in the background, please visit the [deployment process](../Docker/query_node_deployment_process.md)
 
 
 ## Requirements

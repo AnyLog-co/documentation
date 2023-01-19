@@ -1,7 +1,7 @@
 # Deployment Process
 The following provides insight the work being done in the background to deploy the Operator node. 
 
-For directions to start a master node please visit the [operator node](operator_node.md) document.
+For directions to start a master node please visit the [operator node](deploying_node.md) document.
 
 ## Steps
 1. Set parameters such as:
