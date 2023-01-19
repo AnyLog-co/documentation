@@ -78,7 +78,7 @@ USER_TYPE=admin
 # --- Networking ---
 # External IP address of the machine
 #EXTERNAL_IP=<NETWORKING_EXTERNAL_IP>
-# Local or  internal network IP address of the machine
+# Internal network IP address of the machine
 #INTERNAL_IP=<NETWORKING_INTERNAL_IP>
 # Configurable (local) IP address that can be used when behind a proxy, or using Kubernetes for static IP
 #PROXY_IP=<NETWORKING_PROXY_IP>
