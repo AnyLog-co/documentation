@@ -2,15 +2,13 @@
 
 To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data.
 Using this setup, if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
-surviving node.
+surviving node.  
 This document explains how to configure AnyLog to provide High Availability, and details the commands that 
-monitor and report on the HA state.
+monitor and report the HA state.
 
 ## Overview
 
-High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.  
-In HA setup, multiple nodes are grouped together and assigned to maintain copies of the data such that if a node fails, 
-the data is available from a surviving peer node.    
+High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.    
 To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
 push and pull processes, that operate on the data, such that, when data is added to one of the nodes, it will be replicated the  
 assigned peer nodes.
@@ -23,31 +21,38 @@ Data in the network is organized as follows:
 * Each cluster is supported by multiple Operators that maintain identical copies of the cluster's data. 
   Therefore, if an Operator nodes fails, the cluster's data is available on a surviving node.
 
-The way data is treated is as follows:  
-* Data is assigned to a logical tables, in the same way that data is assigned to table in a database. 
+### Example
+In the diagram below:
+* Data is assigned to one of 4 a logical tables (in the same way that data is assigned to table in a database). 
 * Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
-* Each cluster is assigned to X Operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.
+  In the example below, N is 2. That means that about half of the table data is assigned to each cluster.
+* Each cluster is assigned to X Operators. If X is 3, there are 3 copies of the cluster's data, one on each assigned Operator.
 
 In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the data.    
-The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the surviving Operator.  
+The data of each cluster is maintained by 3 Operators such that if an Operator fails, the data remains available with the surviving Operators.  
 If an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
 
 ```anylog
-|--------------------|          |--------------------|          |--------------------|  
-|                    |          |                    |   --->   |     Operator 1     |          
-|                    |   --->   |                    |          |--------------------|  
-|                    |          |      Cluster 1     |  
-|      Table 1       |          |                    |          |--------------------|  
-|                    |          |                    |   --->   |     Operator 2     |  
-|      Table 2       |          |--------------------|          |--------------------|  
-|                    |  
+                                                                            
+                                |--------------------|          |--------------------|        
+|--------------------|          |                    |   --->   |     Operator 1     |  
+|                    |          |                    |          |--------------------|          
+|                    |   --->   |                    |          |--------------------|   
+|                    |          |      Cluster 1     |   --->   |     Operator 2     | 
+|      Table 1       |          |                    |          |--------------------| 
+|                    |          |                    |          |--------------------|
+|      Table 2       |          |--------------------|   --->   |     Operator 3     |  
+|                    |                                          |--------------------|
 |      Table 3       |          |--------------------|          |--------------------|  
-|                    |          |                    |   --->   |     Operator 3     |  
-|      Table 4       |          |                    |          |--------------------|  
-|                    |          |      Cluster 2     |  
-|                    |   --->   |                    |          |--------------------|  
 |                    |          |                    |   --->   |     Operator 4     |  
-|--------------------|          |--------------------|          |--------------------|  
+|      Table 4       |          |                    |          |--------------------|  
+|                    |          |                    |          |--------------------|
+|                    |   --->   |      Cluster 2     |   --->   |     Operator 5     |  
+|                    |          |                    |          |--------------------|  
+|                    |          |                    |          |--------------------|
+|--------------------|          |-                   |   --->   |     Operator 6     |
+                                |--------------------|          |--------------------|
+  
 ```
 
 ### The data distribution
@@ -68,7 +73,7 @@ HA setup requires the following:
    1) The Operator Background Process to ingest data to the local databases.
    2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
    3) The  Consumer Background Process to pull data which is missing on the current node.
-5) Enabling the TSD tables operations (Detaile are available in the 
+5) Enabling the TSD tables operations (Details are available in the 
    section[The Time Series Data (TSD) Management Tables](#the-time-series-data-tsd-management-tables) below.
 
 Notes:
