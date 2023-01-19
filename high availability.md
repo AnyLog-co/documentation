@@ -1,7 +1,7 @@
 # High Availability (HA)
 
-To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data such that 
-if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
+To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data.
+Using this setup, if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
 surviving node.
 This document explains how to configure AnyLog to provide High Availability, and details the commands that 
 monitor and report on the HA state.
