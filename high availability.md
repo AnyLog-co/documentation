@@ -80,74 +80,7 @@ Notes:
    * For HA, at least 2 operators are assigned to each cluster.
    * When data is pushed to an Operator, it is assigned to the cluster supported by the Operator and the data will be replicated to
     all the nodes that support the cluster.
-
-## View data distribution policies
-There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
-```anylog
-blockchain query metadata
-get data nodes
-```
-Below is the output of the ***blockchain query metadata*** command. It shows, for each logical table, the list of clusters and the physical nodes 
-assigned to each cluster (The command ***get data nodes*** provides the same info, however in a table format):
-```anylog
-|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
-litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
-                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
-                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
-                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
-                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
-                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
-
-```
-
-## Test Cluster policies
-The command below tests the validity of the cluster policies:
-```anylog
-blockchain test cluster
-```
-
-## Testing the node configuration for HA
-The **test cluster setup** command details if the node is properly configured to support HA.  
-Usage:
-<pre> 
-test cluster setup
-</pre>
-The command returns the HA configuration and relevant status. The info includes the following:
-
-| Functionality | Expected Status                    | Details       |
-| --------------| ---------------------------------- | --------------- | 
-| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
-| Distributor   | Running                            |                |
-| Consumer      | Running                            |                |
-| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
-| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
-| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
-| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
-
-
-## HA related commands
-The following list summarizes the commands supporting the HA processes:
- 
-| command           | Details | 
-| ----------------- | ----------------| 
-| get data nodes    | The list of user tables and the physical nodes that manage each table |
-| blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
-| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
-| get tsd list   | The list of tsd tables on the current node |
-| get tsd details  | Query one or more TSD tables  |
-| get tsd summary  | Summary info of TSD tables  |
-| get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
-| get tsd sync status  | The sync status on the current node  |
-| test cluster setup  | The configuration of the node to support HA  |
-| test cluster data  | Compare the data status on all the nodes that support the same cluster  |
-
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
@@ -220,6 +153,79 @@ run data consumer where start_date = -30d
 Note:  
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
+
+
+## View data distribution policies
+There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
+```anylog
+blockchain query metadata
+get data nodes
+```
+Below is the output of the ***blockchain query metadata*** command. It shows, for each logical table, the list of clusters and the physical nodes 
+assigned to each cluster (The command ***get data nodes*** provides the same info, however in a table format):
+```anylog
+|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
+     
+litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+
+```
+
+
+# Managing a cluster
+A set of commands makes replicas of the data on all members of the cluster.
+
+## Test Cluster policies
+The command below tests the validity of the cluster policies:
+```anylog
+blockchain test cluster
+```
+
+## Testing the node configuration for HA
+The **test cluster setup** command details if the node is properly configured to support HA.  
+Usage:
+<pre> 
+test cluster setup
+</pre>
+The command returns the HA configuration and relevant status. The info includes the following:
+
+| Functionality | Expected Status                    | Details       |
+| --------------| ---------------------------------- | --------------- | 
+| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
+| Distributor   | Running                            |                |
+| Consumer      | Running                            |                |
+| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
+| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
+| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
+
+
+## HA related commands
+The following list summarizes the commands supporting the HA processes:
+ 
+| command           | Details | 
+| ----------------- | ----------------| 
+| get data nodes    | The list of user tables and the physical nodes that manage each table |
+| blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
+| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
+| get tsd list   | The list of tsd tables on the current node |
+| get tsd details  | Query one or more TSD tables  |
+| get tsd summary  | Summary info of TSD tables  |
+| get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
+| get tsd sync status  | The sync status on the current node  |
+| test cluster setup  | The configuration of the node to support HA  |
+| test cluster data  | Compare the data status on all the nodes that support the same cluster  |
+
 
 ## View the distribution of data to clusters
 
