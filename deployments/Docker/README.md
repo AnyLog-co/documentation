@@ -51,7 +51,7 @@ cd $HOME/deployments/docker-compose/postgres/
 vim postgres.env
 ```
 
-2. Deploy Postgres 
+2. Deploy PostgresSQL
 ```shell
 cd $HOME/deployments/docker-compose/postgres/
 docker-compose up -d
@@ -70,7 +70,7 @@ cd $HOME/deployments/docker-compose/mongodb/
 vim .env
 ```
 
-2. Deploy Postgres 
+2. Deploy MongoDB 
 ```shell
 cd $HOME/deployments/docker-compose/mongodb/
 docker-compose up -d
