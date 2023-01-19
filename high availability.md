@@ -141,7 +141,7 @@ The following list summarizes the commands supporting the HA processes:
 | get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
 | get tsd sync status  | The sync status on the current node  |
 | test ha setup  | The configuration of the node to support HA  |
-| test ha cluster  | Compare the data status on all the nodes that support the same cluster  |
+| test ha data  | Compare the data status on all the nodes that support the same cluster  |
 
 ## The Cluster Policy
 
@@ -422,11 +422,11 @@ Additional information on the time file commands is available at the [Time File 
 
 ## Cluster synchronization status
 
-The **test ha cluster** command provides the synchronization status for each user table.  
+The **test ha data** command provides the synchronization status for each user table.  
 The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
 Usage:
 ```anylog
-test ha cluster [options]
+test ha data [options]
 ```
 
 Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
@@ -438,8 +438,8 @@ Options determine the information of interest, expressed as a where condition wi
 
 Examples:
 ```anylog
-test ha cluster
-test ha cluster where start_date = -7d
+test ha data
+test ha data where start_date = -7d
 ```
 
 Example output:
