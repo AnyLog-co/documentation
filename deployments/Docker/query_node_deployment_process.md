@@ -1,7 +1,11 @@
 # Deployment Process
 The following provides insight the work being done in the background to deploy the Master node. 
 
-For directions to start a master node please visit the [query node](deploying_node.md) document.
+For directions to start a Query node please visit the [deployment process](deploying_node.md) document.
+configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-query/anylog_configs.env)
+
+Please note, when deploying an AnyLog Query via the deployment scripts, the process also deploys [Remote-CLI](../Support/Remote-CLI.md).
+This is because when querying for blobs, the two must have shared folders (_volumes_) in order to access the blobs.  
 
 ## Steps
 1. Set parameters such as:

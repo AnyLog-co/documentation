@@ -1,7 +1,9 @@
 # Deployment Process
 The following provides insight the work being done in the background to deploy the Operator node. 
 
-For directions to start a master node please visit the [publisher node](deploying_node.md) document.
+For directions to start a Publisher node please visit the [deployment process](deploying_node.md) document.
+configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-publisher/anylog_configs.env)   
+
 
 ## Steps
 1. Set parameters such as:
