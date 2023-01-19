@@ -49,7 +49,6 @@ _REST_. Directions for deploying a [REST node](deployments/Docker/rest_node.md)
 ├── generic_post_calls.py
 ├    * adding key/value pairs to AnyLog dictionary
 ├    * network connection
-├    * adding key/value pairs to AnyLog dictionary
 ├    * run scheduler 
 ├    * run operator / publisher
 ├── rest_support.py
