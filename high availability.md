@@ -424,7 +424,7 @@ Additional information on the time file commands is available at the [Time File 
 ## Cluster databases
 Nodes assigned to the same cluster needs to be in sync on the logical databases that store the data tables 
 (note that the physical databases on each node can be different).  
-The **test cluster databases** command provides a comparison list of all the databases defined on each node in the cluster.
+The **test cluster databases** command provides a comparison list of all the databases defined on each node in the cluster.  
 Usage:
 ```anylog
 test cluster databases
