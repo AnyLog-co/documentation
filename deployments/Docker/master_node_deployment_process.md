@@ -9,6 +9,7 @@ configurations used for this deployment can be found [here](https://raw.githubus
 1. Set parameters such as:
    * hostname
    * Internal & External IPs (backend of AnyLog if not preset in configuration)
+   *  If overlay_network is configured by setting the OVERLAY_NETWORK to true and OVERLAY_IP, INTERNAL_IP will be set to the OVERLAY_IP
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 AL > hostname = get hostname
