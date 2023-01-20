@@ -110,7 +110,7 @@ WHen the cluster policy is added to the metadata, it will be added with addition
 
 Notes: 
 1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
-2) A policy ID and Date attributes of the policy are added by the network protocol.
+2) A Policy ID and a Date attribute are added by the network protocol.
 3) The policy ID uniquely identifies the cluster.
 
 ## The Operator Policy
@@ -129,7 +129,7 @@ An Operator is assigned to a cluster in the following manner:
 
 Note: 
 1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy (the ID of the cluster policy).
-2) All the data provided to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
+2) All the data assigned to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
 
@@ -153,6 +153,30 @@ run data consumer where start_date = -30d
 Note:  
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
+
+# Monitoring the configuration and state of a cluster
+
+A special group of commands allows to monitor the configuration of the nodes supporting each cluster and the cluster state.
+
+## Testing the node configuration for HA
+The **test cluster setup** command details if the node is properly configured to support HA.  
+Usage:
+<pre> 
+test cluster setup
+</pre>
+The command returns the HA configuration and relevant status. The info includes the following:
+
+| Functionality | Expected Status                    | Details       |
+| --------------| ---------------------------------- | --------------- | 
+| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
+| Distributor   | Running                            |                |
+| Consumer      | Running                            |                |
+| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
+| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
+| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
+
+
 
 
 ## View data distribution policies
@@ -182,33 +206,12 @@ litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a
 ```
 
 
-# Managing a cluster
-A set of commands makes replicas of the data on all members of the cluster.
 
 ## Test Cluster policies
 The command below tests the validity of the cluster policies:
 ```anylog
 blockchain test cluster
 ```
-
-## Testing the node configuration for HA
-The **test cluster setup** command details if the node is properly configured to support HA.  
-Usage:
-<pre> 
-test cluster setup
-</pre>
-The command returns the HA configuration and relevant status. The info includes the following:
-
-| Functionality | Expected Status                    | Details       |
-| --------------| ---------------------------------- | --------------- | 
-| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
-| Distributor   | Running                            |                |
-| Consumer      | Running                            |                |
-| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
-| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
-| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
-| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
-
 
 ## HA related commands
 The following list summarizes the commands supporting the HA processes:
