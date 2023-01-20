@@ -76,7 +76,7 @@ docker attach --detach-keys="ctrl-d" anylog-query-node
 ```shell
 ubuntu@demo:~$ docker attach --detach-keys="ctrl-d" anylog-master-node
 
-AL master-node +> get connections
+AL master-node +> get connections (need to update this to the new format showing binds)
 
 Type      External Address     Local Address        
 ---------|--------------------|--------------------|
