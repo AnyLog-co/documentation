@@ -90,8 +90,10 @@ ANYLOG_REST_PORT=32049
 ANYLOG_BROKER_PORT=32050
 # A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs) [Default: false]
 TCP_BIND=false
-# A boolean value to indicate if an ovelay network is configured. Default is false, set to true when enabling overlay network.
+# A boolean value to indicate if an ovelay network is configured. [Default:false], set to true when configuring overlay network.
 OVERLAY_NETWORK=false
+# Overlay IP, when using Nebula, it is the Nebula IP assigned to the node, otherwise it should not be set [Default: not set]
+#OVERLAY_IP=<NETWORKING_OVERLAY_IP>
 # The number of concurrent threads supporting HTTP requests.	 [Default: 6]
 TCP_THREADS=6
 # A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs) [Default: true]
