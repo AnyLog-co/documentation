@@ -20,8 +20,17 @@ anylog_server_port=$ANYLOG_SERVER_PORT
 
 2. Connect to TCP & REST 
 ```anylog
-run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
-run rest server !ip !anylog_rest_port
+if (overlay_network is true {
+  run tcp server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
+  and internal_port = !anylog_server_port and bind = true 
+  run rest server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
+  and internal_port = !anylog_server_port and bind = false 
+  } else {
+   run tcp server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
+   and internal_port = !anylog_server_port and bind = false
+   run rest server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
+   and internal_port = !anylog_server_port and bind = false 
+  }
 ```
 
 3. Connect to blockchain database & create ledger table 
@@ -40,11 +49,11 @@ run blockchain sync where source=blockchain_source and time=!sync_time and dest=
 
 5. Declare the Master in the metadata (Master Node Policy)
 ```anylog
+If (overlay_network is true) {
 <new_policy = {"master": {
     "hostname": !hostname,
     "name": !node_name,
-    "ip" : !external_ip,
-    "local_ip": !ip,
+    "internal_ip": !internal_ip,
     "company": !company_name,
     "port" : !anylog_server_port.int,
     "rest_port": !anylog_rest_port.int,
@@ -53,6 +62,21 @@ run blockchain sync where source=blockchain_source and time=!sync_time and dest=
     "state": !state, 
     "city": !city
 }}>
+} else {
+<new_policy = {"master": {
+    "hostname": !hostname,
+    "name": !node_name,
+    "external_ip" : !external_ip,
+    "internal_ip": !internal_ip,
+    "company": !company_name,
+    "port" : !anylog_server_port.int,
+    "rest_port": !anylog_rest_port.int,
+    "loc": !loc,
+    "country": !country,
+    "state": !state, 
+    "city": !city
+}}>
+}
 
 blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
