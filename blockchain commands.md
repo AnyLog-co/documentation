@@ -285,12 +285,12 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 
 ## The blockchain delete policy command
 
-The ***blockchain delete policy*** command removes a policy to the blockchain ledger. 
+The ***blockchain delete policy*** command removes a policy from the ledger.   
 The command updates the local copy and the global copy of the ledger. 
 
 Usage:
 ```anylog
-blockchain delete policy where id = [policy id] and blockchain = [platform] and master = [IP:Port] and local =[true/false]
+blockchain delete policy where id = [policy id] and blockchain = [platform] and master = [IP:Port] and local = [true/false]
 ```
 
 Command details:
@@ -298,14 +298,13 @@ Command details:
 | Key | Value | 
 | ------------ | ------------------------------------ |
 | id  | The Policy ID|
-| platform        | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
 | blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
-| master          | The IP and Port value of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
+| master          | The IP and Port of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
 | local           | A true/false value to determine an update to the local copy of the ledger. The default value is True    |
 
 Examples:
 ```anylog
-blockchain delete policy where id = !policy_id and local = true and master = !master_node
+blockchain delete policy where id = !policy_id and master = !master_node
 blockchain delete policy where policy_id = !policy_id and local = true and blockchain = ethereum
 ```
 
@@ -322,7 +321,6 @@ The following command will force the node to replace the metadata representation
 ```anylog
 blockchain load metadata
 ```
-
 
 ## Using a local database to host the ledger
 
