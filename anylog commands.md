@@ -71,7 +71,6 @@ Or
 set [key] = ""
 ```
 
-
 To retrieve the value assigned to a key use exclamation point prefixed to the key name.
 ```anylog
 ![key]
