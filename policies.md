@@ -85,41 +85,37 @@ To be considered as a configuration policy, the policy needs to include one or t
 
 ### Configuration of network related services
 
-Configuring the TCP, REST and Message Broker services can be done by specifying the services Ips and Ports in 
+Configuring the TCP, REST and Message Broker services can be done by specifying the services IPs and Ports in 
 the policy.   
 Below are the needed attributes for the networking services.
 
-1. TCP service - The TCP service makes a node a member of the network. It is equivalent to configure the node using
+1. **TCP service** - The TCP service makes a node a member of the network. It is equivalent to configure the node using
 the command [run tcp server](background%20processes.md#the-tcp-server-process).  
    Attributes required:  
-   1. ip – the IP address allowing the node to communicate with peer nodes.
-   2. port - the port used to communicate with peer nodes.
-   3. local_ip – a second IP which can be used to communicate with node (i.e. on a local network). 
+   1. ip – the IP address allowing peer nodes to communicate with the service.
+   2. port - the service port.
+   3. local_ip – a second IP which can be used to communicate with node (i.e. an IP that identifies the service on a local network). 
       
     If a local_ip is not provided, the service binds to the ip address. if both attributes are provided
-    (ip and local_ip), the service would be listenning to all messages (regardless of the IP) on the service port.
+    (ip and local_ip), the service would be listening to all messages (regardless of the IP) on the service port.
+    To avoid binding, without a dedicated local_ip, assign the IP value to the 2 attributes (ip and local_ip). 
    
 
-2. REST Service - The REST service communicates with applications and data generators (like sensors). It is equivalent 
+2. **REST Service** - The REST service communicates with applications and data generators (like sensors). It is equivalent 
    to configure the node using the command [run rest server](background%20processes.md#rest-requests).   
    Attributes required:  
-   1. rest_ip – (optional) an IP that provides a dedicated address for REST requests.
-   2. rest_port - the port to communicate with a node using REST.
+   1. rest_ip – (optional) an IP that provides a dedicated address for the REST services.
+   2. rest_port - the service port.
       
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all REST based requests on the specified port.
 
-3. Broker Service - These services communicate with data generators (like sensors) using Publish-Subscribe functionalities.
+3. **Broker Service** - These services communicate with data generators (like sensors) using Publish-Subscribe functionalities.
    It is equivalent to configure the node using the command [run messsage broker](background%20processes.md#message-broker).   
    Attributes required:  
-   1. broker_ip – (optional) an IP that provides a dedicated address to publish requests.
-   2. broker_port - the port to communicate with a node using Publish request.
+   1. broker_ip – (optional) an IP that provides a dedicated address for the broker services.
+   2. broker_port -the service port.
       
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all Publish requests on the specified port.
 
 
     
-    
-   2. For REST and Message Broker, the (default) binding value is False. This is because data andd/or GET requests
-      coming-in may come from machines/devices outside the network.
-   3. If a `proxy_ip` is declared, the actual value wll not be used. It is more of an FYI regarding network
-      configurations of the actual machine.
