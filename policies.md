@@ -117,5 +117,55 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
       
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all Publish requests on the specified port.
 
+### Example:
+The example below defines an Operator policy including the networking services (info within greater than and less than signs 
+is a code block that can be coppied to the AnyLog CLI).
+The insert command adds the policy to the shared metadata layer. When the policy is added, it is updated with a unique ID.
 
-    
+```anylog
+<member = {"operator" : {
+    "name"  : "operator_2",
+    'company' : 'New Company',
+    'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2b',
+    "ip" : !external_ip,
+    "local_ip" : !ip,
+    "port" : 7848,
+    "rest_port" : 7849,
+    "broker_port" :7850
+    }
+}>
+
+blockchain insert where policy = !member and local = true  and master = !master_node
+```
+
+When the node starts it is configured using **config from policy** command. 
+
+```anylog
+policy_id =  blockchain get operator where name = operator2 and ip = !external_ip bring [operator][id]
+
+config from policy where id = !policy_id
+```
+
+## Policies Configuration
+
+AnyLog commands can be detailed in policies and replace or co-exist with configuration scripts. 
+This process is done by an attribute called **script** which is a list with the configuration commands.
+
+The following policy includes both - the networking services and script commands:
+
+```anylog
+<config = {"config" : {
+    "name"  : "default_config",
+    "ip" : "!external_ip",
+    "local_ip" : "!ip",
+    "port" : 7848,
+    "rest_port" : 7849,
+    "broker_port" :7850,
+    "script" : [
+      "set authentication off",
+      "set echo queue on",
+      "set anylog home D:/Node"
+    ]
+    }
+}>
+```
