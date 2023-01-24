@@ -118,7 +118,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all Publish requests on the specified port.
 
 ### Example:
-The example below defines an Operator policy including the networking services (info within greater than and less than signs 
+The example below defines an Operator policy including the networking services (info contained within greater than and less than signs 
 is a code block that can be coppied to the AnyLog CLI).
 The insert command adds the policy to the shared metadata layer. When the policy is added, it is updated with a unique ID.
 
@@ -137,8 +137,7 @@ The insert command adds the policy to the shared metadata layer. When the policy
 
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
-
-When the node starts it is configured using **config from policy** command. 
+The commands below retrieve the assigned ID and configure the node using **config from policy** command. 
 
 ```anylog
 policy_id =  blockchain get operator where name = operator2 and ip = !external_ip bring [operator][id]
@@ -148,8 +147,10 @@ config from policy where id = !policy_id
 
 ## Policies Configuration
 
-AnyLog commands can be detailed in policies and replace or co-exist with configuration scripts. 
-This process is done by an attribute called **script** which is a list with the configuration commands.
+AnyLog commands can be added to policies and replace or co-exist with configuration scripts.    
+Commands in policies are listed with attribute named **script**.  
+The command ```config from policy ``` configures the network based services (if detailed) and 
+afterwards executes the commands listed in the **script** attribute.
 
 The following policy includes both - the networking services and script commands:
 
