@@ -145,7 +145,7 @@ policy_id =  blockchain get operator where name = operator2 and ip = !external_i
 config from policy where id = !policy_id
 ```
 
-## Policies Configuration
+## Policies based Configuration
 
 AnyLog commands can be added to policies and replace or co-exist with configuration scripts.    
 Commands in policies are listed with attribute named **script**.  
