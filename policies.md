@@ -190,7 +190,7 @@ The code block assigns a policy to a key, is contained between less than and gre
 When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
 
 Using the code block example [above](#policies-based-configuration), when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
-This process updates the node's dictionary with the key and value such the value (policy) can be referenced using the key (see the examples below).
+This process updates the node's dictionary with the key and value such that the value (policy) can be referenced using the key (see the examples below).
 
 Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
 ```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
@@ -214,8 +214,9 @@ The command ```json``` followed by the key (prefixed with exclamation point) doe
 Example:
 ```anylog
 json !config_policy
-
-
+```
+Returns:
+```anylog
 {'config' : {'name' : 'default_config',
              'ip' : '73.222.38.83',
              'local_ip' : '10.0.0.78',
@@ -230,7 +231,7 @@ json !config_policy
 Note that the value assigned to the key ```ip``` is set to be 73.222.38.83 which is the dictionary value assigned 
 to the key ```external_ip```.
 
-The **json** command is detailed in the section [Transforming JSON representatives to JSON Objects](json%20data%20transformation.md#transforming-json-representatives-to-json-objects)
+The **json** command is detailed in the section [Transforming JSON representatives to JSON Objects](json%20data%20transformation.md#transforming-json-representatives-to-json-objects).
 
 ## Retrieving and formatting attributes from policies
 
@@ -254,7 +255,7 @@ set policy [policy name] [one or more key value pairs]
 
 The policy name represents the key in the dictionary, and the key value pairs assign values to policy.
 
-The example below dynamically defines policy identical to the code block example [above](#policies-based-configuration).   
+The example below dynamically defines a policy identical to the code block example [above](#policies-based-configuration).   
 
 ```anylog
 set policy config_policy [config] = {} and [config][name] = default_config 
