@@ -199,7 +199,7 @@ are replaced with their assigned values.
 ## Retrieving policies from the dictionary
 
 The value assigned to an attribute name is retrieved by providing the attribute name prefixed with exclamation point 
-or using the command **get**.  
+or optionally using the command ```get```.     
 Each of the following 2 commands on the CLI return the value assigned to the key ```config_policy```:
 
 ```anylog
@@ -234,8 +234,8 @@ The **json** command is detailed in the section [Transforming JSON representativ
 
 ## Retrieving and formatting attributes from policies
 
-Using the **from** command it is possible to retrieve and format attributes from a policy or a group of policies.  
-The following example retrieves the IP and Ports from the config policy to a table format.
+Using the **from** command it is possible to retrieve and format attributes of a policy or of multiple policies.  
+The following example retrieves the name, IPs and Port from the config policy to a table format.
 
 ```anylog
 from !config_policy bring.table [config][name] [config][ip] [config][local_ip] [config][port]
@@ -245,22 +245,16 @@ The **from** command is detailed in the section [The 'From JSON Object Bring' co
 
 ## Declaring a policy using set commands
 
-The **set policy** command can create an update a policy dynamically.  
+The **set policy** command creates and updates a policy dynamically.  
 
 Usage:
 ```anylog
 set policy [policy name] [one or more key value pairs]
 ```
 
-The policy name represent the key in the dictionary, and the key value pairs assign values to policy.
+The policy name represents the key in the dictionary, and the key value pairs assign values to policy.
 
-The example below dynamically defines policy identical to the code block example [above](#policies-based-configuration).  
-Notes:
-1. The policy attribute values can be assigned in a single command or using multiple **set policy** commands
-that reference the same policy name (```config_policy``` in the example below). This property allows to condition the 
-assignment with **if** conditions (details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
-2. A dictionary is assigned to a key using the signs: {}
-3. A list is assigned to a key using the signs: [] and entries are added to a lixt using the + sign as in the example below.
+The example below dynamically defines policy identical to the code block example [above](#policies-based-configuration).   
 
 ```anylog
 set policy config_policy [config] = {} and [config][name] = default_config 
@@ -269,4 +263,11 @@ set policy config_policy [config][port] = 7848 and [config][restport] = 7849 and
 set policy config_policy [config][script] = []
 set policy config_policy [config][script] + 'set authentication off' and [config][script] + 'set echo queue on' and [config][script] + 'set anylog home D:/Node'
 ```
+
+Notes:
+1. The policy attribute values can be assigned in a single command or using multiple **set policy** commands
+that reference the same policy name (```config_policy``` in the example below). This property allows to condition the 
+assignment with **if** conditions (details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
+2. A dictionary is assigned to a key using the signs: {}
+3. A list is assigned to a key using the sign: [] and entries are added to the list using the plus (+) sign as in the example above.
 
