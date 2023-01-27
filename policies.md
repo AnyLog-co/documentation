@@ -33,7 +33,7 @@ json file, The path to the file is represented by the `blockchain_file` variable
 assigned to the variable: `!blockchain_file`. Optionally, the local ledger can be hosted in a local database. If a 
 master node is used, the master node is configured such that the ledger is stored on a local database.
 
-When new policies are added to the ledger, they need to update the global metadata layer (the global copy).
+New policies are added to the ledger, and when a new policy is added, it updates the global metadata layer (the global copy).
 As every node continuously synchronizes the local copy with the global copy, evey update will appear on the local copy 
 of every member node. Synchronization is enabled with the `run blockchain sync` command. 
 Details are available [here](background%20processes.md#blockchain-synchronizer).  
@@ -180,6 +180,8 @@ or retrieved from the shared metadata layer.
 The only requirement is that the root of the JSON is with a single key.   
 The root key is called the 'policy type', it allows identifying and classifying policies by their type and facilitates
 search where filtering processes are assigned to a group of policies identified by their type.
+
+Adding and retrieving policies from the shared metadata layer is described in the [Blockchain Commands](blockchain%20commands.md#blockchain-commands) section.
  
 ## declaring a policy using a code block
 
@@ -241,7 +243,7 @@ from !config_policy bring.table [config][name] [config][ip] [config][local_ip] [
 
 The **from** command is detailed in the section [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
 
-## declaring a policy using set commands
+## Declaring a policy using set commands
 
 The **set policy** command can create an update a policy dynamically.  
 
