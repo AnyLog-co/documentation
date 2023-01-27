@@ -177,7 +177,7 @@ Policies are JSON structures that represent logical and physical objects which a
 For example, members of the network, security rules, table definitions are represented as policies.  
 Users and processes can create policies and using a simple API, the policies can be written to the shared metadata layer
 or retrieved from the shared metadata layer. 
-The only requirement for policies is that the root of the JSON is with a single key.   
+The only requirement is that the root of the JSON is with a single key.   
 The root key is called the 'policy type', it allows identifying and classifying policies by their type and facilitates
 search where filtering processes are assigned to a group of policies identified by their type.
  
