@@ -1,0 +1,22 @@
+# General
+requests>=0.0
+cryptography>=0.0
+jwt>=0.0
+pyOpenSSL>=0.0
+psutil>=0.0
+
+# Datetime
+python-dateutil>=0.0
+pytz>=0.0
+
+# Database
+psycopg2-binary>=0.0
+pymongo>=0.0
+
+# North/South Plugins
+paho-mqtt>=0.0
+kafka-python>=0.0
+
+# Blockchain
+#web3>=0.0
+#py4j>=0.0
