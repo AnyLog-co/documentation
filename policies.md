@@ -189,8 +189,8 @@ Using a code block, users can describe a policy on the AnyLog command line.
 The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
 When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
 
-A code block example is available [above](#policies-based-configuration).    
-Using the code block example above, when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
+Using the code block example [above](#policies-based-configuration), when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
+This process updates the node's dictionary with the key and value such the value (policy) can be referenced using the key (see the examples below).
 
 Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
 ```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
@@ -198,7 +198,7 @@ are replaced with their assigned values.
 
 ## Retrieving policies from the dictionary
 
-The value assigned to an attribute name is retrieved by providing the attribute name prefixed with exclamation point 
+The value assigned to a key in the dictionary is retrieved by providing the attribute name prefixed with exclamation point 
 or optionally using the command ```get```.     
 Each of the following 2 commands on the CLI return the value assigned to the key ```config_policy```:
 
