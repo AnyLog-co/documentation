@@ -155,10 +155,10 @@ afterwards executes the commands listed in the **script** attribute.
 The following policy includes both - the networking services and script commands:
 
 ```anylog
-<config = {"config" : {
+<config_policy = {"config" : {
     "name"  : "default_config",
-    "ip" : "!external_ip",
-    "local_ip" : "!ip",
+    "ip" : !external_ip,
+    "local_ip" : !ip,
     "port" : 7848,
     "rest_port" : 7849,
     "broker_port" :7850,
@@ -181,9 +181,60 @@ The only requirement for policies is that the root of the JSON is with a single 
 The root key is called the 'policy type', it allows identifying and classifying policies by their type and facilitates
 search where filtering processes are assigned to a group of policies identified by their type.
  
-## declaring a policy in RAM
+## declaring a policy using a code block
+
 Using a code block, users can describe a policy to the AnyLog command line.  
 The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
 When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
 
+A code block example is available [above](#policies-based-configuration).  When the code block is copied to the CLI, 
+the key ```config_policy``` is assigned with the policy as the value.
 
+Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
+```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
+are replaced with their assigned values.
+
+## Retrieving policies from the dictionary
+
+The value assigned to an attribute name is retrieved by providing the attribute name prefixed with exclamation point 
+or using the command **get**.  
+Each of the following 2 commands on the CLI return the value assigned to the key ```config_policy```:
+
+```anylog
+!config_policy
+get !config_policy
+```
+
+The command ```json``` followed by the key (prefixed with exclamation point) does the following:
+1. It replaces the keys in the policy with their associated values.
+2. It validates that the policy is formatted correctly (orherwise an empty string is returned).
+
+Example:
+```anylog
+json !config_policy
+
+
+{'config' : {'name' : 'default_config',
+             'ip' : '73.222.38.83',
+             'local_ip' : '10.0.0.78',
+             'port' : 7848,
+             'rest_port' : 7849,
+             'broker_port' : 7850,
+             'script' : ['set authentication off',
+                         'set echo queue on',
+                         'set anylog home D:/Node']}}
+
+```
+Note that the value assigned to the key ```ip``` is set to be 73.222.38.83 which is the dictionary value assigned 
+to the key ```external_ip```.
+
+The **json** command is detailed in the section [Transforming JSON representatives to JSON Objects](json%20data%20transformation.md#transforming-json-representatives-to-json-objects)
+
+## Retrieving and formatting attributes from policies
+
+Using the **from** command it is possible to retrieve and format attributes from a policy or a group of policies.  
+The following example retrieves the IP and Ports from the config policy to a table format.
+
+```anylog
+from config_policy bring.table [config][ip]  
+```
