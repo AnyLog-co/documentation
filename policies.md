@@ -170,3 +170,20 @@ The following policy includes both - the networking services and script commands
     }
 }>
 ```
+
+# Creating policies
+
+Policies are JSON structures that represent logical and physical objects which are stored on the shared metadata.   
+For example, members of the network, security rules, table definitions are represented as policies.  
+Users and processes can create policies and using a simple API, the policies can be written to the shared metadata layer
+or retrieved from the shared metadata layer. 
+The only requirement for policies is that the root of the JSON is with a single key.   
+The root key is called the 'policy type', it allows identifying and classifying policies by their type and facilitates
+search where filtering processes are assigned to a group of policies identified by their type.
+ 
+## declaring a policy in RAM
+Using a code block, users can describe a policy to the AnyLog command line.  
+The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
+When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
+
+
