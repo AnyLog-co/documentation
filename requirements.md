@@ -13,7 +13,7 @@ AnyLog has 3 major versions -
 * develop - is a stable release that's been used as part of our Test Network for a number of weeks, and gets updated every 4-6 weeks.
 * predevelop - is our beta release, which is being used by our Test Network for testing purposes.
 * testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. 
-Usually the image will be Ubuntu based, unless stated otherwise.
+Usually the image will be Ubuntu based for an amd64 unless stated otherwise.
 
 For _develop_ and _predevelop_ users can deploy with  base operating system of _Ubuntu:20.04_, _python:3.9-alpine_ and 
 _redhat/ubi8:latest_ on CPU architecture types amd64 (ex. PCs and servers), arm/v7 (ex. RaspberryPi4), arm64 (ex. NVIDIA 
@@ -28,7 +28,7 @@ InfiniBand Switches)
 | predevelop        | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop`        | ~320MB          | 
 | predevelop-alpine | python:3.9-alpine   | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~170MB          |
 | predevelop-rhl    | redhat/ubi8:latest   | amd64,arm64 | `docker pull anylogco/anylog-network:predevelop-rhl`    | ~215MB          |
-| testing           | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing`           |
+| testing           | Ubuntu:20.04        | amd64 | `docker pull anylogco/anylog-network:testing`           |
 
 
 ## Requirements for Container-based Deployment
