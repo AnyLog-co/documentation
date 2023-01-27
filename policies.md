@@ -268,18 +268,3 @@ set policy config_policy [config][script] = []
 set policy config_policy [config][script] + 'set authentication off' and [config][script] + 'set echo queue on' and [config][script] + 'set anylog home D:/Node'
 ```
 
-
-<config_policy = {"config" : {
-    "name"  : "default_config",
-    "ip" : !external_ip,
-    "local_ip" : !ip,
-    "port" : 7848,
-    "rest_port" : 7849,
-    "broker_port" :7850,
-    "script" : [
-      "set authentication off",
-      "set echo queue on",
-      "set anylog home D:/Node"
-    ]
-    }
-}>
