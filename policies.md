@@ -236,5 +236,50 @@ Using the **from** command it is possible to retrieve and format attributes from
 The following example retrieves the IP and Ports from the config policy to a table format.
 
 ```anylog
-from config_policy bring.table [config][ip]  
+from !config_policy bring.table [config][name] [config][ip] [config][local_ip] [config][port]
 ```
+
+The **from** command is detailed in the section [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
+
+## declaring a policy using set commands
+
+The **set policy** command can create an update a policy dynamically.  
+
+Usage:
+```anylog
+set policy [policy name] [one or more key value pairs]
+```
+
+The policy name represent the key in the dictionary, and the key value pairs assign values to policy.
+
+The example below dynamically defines policy identical to the code block example [above](#policies-based-configuration).  
+Notes:
+1. The policy attribute values can be assigned in a single command or using multiple **set policy** commands
+that reference the same policy name (```config_policy``` in the example below). This property allows to condition the 
+assignment with **if** conditions (details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
+2. A dictionary is assigned to a key using the signs: {}
+3. A list is assigned to a key using the signs: [] and entries are added to a lixt using the + sign as in the example below.
+
+```anylog
+set policy config_policy [config] = {} and [config][name] = default_config 
+set policy config_policy [config][ip] = !external_ip and [config][local_ip] = !ip 
+set policy config_policy [config][port] = 7848 and [config][restport] = 7849 and [config][broker_port] = 7850
+set policy config_policy [config][script] = []
+set policy config_policy [config][script] + 'set authentication off' and [config][script] + 'set echo queue on' and [config][script] + 'set anylog home D:/Node'
+```
+
+
+<config_policy = {"config" : {
+    "name"  : "default_config",
+    "ip" : !external_ip,
+    "local_ip" : !ip,
+    "port" : 7848,
+    "rest_port" : 7849,
+    "broker_port" :7850,
+    "script" : [
+      "set authentication off",
+      "set echo queue on",
+      "set anylog home D:/Node"
+    ]
+    }
+}>
