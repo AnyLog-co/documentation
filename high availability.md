@@ -1,16 +1,14 @@
 # High Availability (HA)
 
-To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data such that 
-if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
-surviving node.
+To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data.
+Using this setup, if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
+surviving node.  
 This document explains how to configure AnyLog to provide High Availability, and details the commands that 
-monitor and report on the HA state.
+monitor and report the HA state.
 
 ## Overview
 
-High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.  
-In HA setup, multiple nodes are grouped together and assigned to maintain copies of the data such that if a node fails, 
-the data is available from a surviving peer node.    
+High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.    
 To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
 push and pull processes, that operate on the data, such that, when data is added to one of the nodes, it will be replicated the  
 assigned peer nodes.
@@ -23,31 +21,38 @@ Data in the network is organized as follows:
 * Each cluster is supported by multiple Operators that maintain identical copies of the cluster's data. 
   Therefore, if an Operator nodes fails, the cluster's data is available on a surviving node.
 
-The way data is treated is as follows:  
-* Data is assigned to a logical tables, in the same way that data is assigned to table in a database. 
+### Example
+In the diagram below:
+* Data is assigned to one of 4 a logical tables (in the same way that data is assigned to table in a database). 
 * Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
-* Each cluster is assigned to X Operators. If X is 4, there are 4 copies of the cluster's data, one on each assigned Operator.
+  In the example below, N is 2. That means that about half of the table data is assigned to each cluster.
+* Each cluster is assigned to X Operators. If X is 3, there are 3 copies of the cluster's data, one on each assigned Operator.
 
 In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the data.    
-The data of each cluster is maintained by 2 Operators such that if an Operator fails, the data remains available with the surviving Operator.  
+The data of each cluster is maintained by 3 Operators such that if an Operator fails, the data remains available with the surviving Operators.  
 If an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
 
 ```anylog
-|--------------------|          |--------------------|          |--------------------|  
-|                    |          |                    |   --->   |     Operator 1     |          
-|                    |   --->   |                    |          |--------------------|  
-|                    |          |      Cluster 1     |  
-|      Table 1       |          |                    |          |--------------------|  
-|                    |          |                    |   --->   |     Operator 2     |  
-|      Table 2       |          |--------------------|          |--------------------|  
-|                    |  
+                                                                            
+                                |--------------------|          |--------------------|        
+|--------------------|          |                    |   --->   |     Operator 1     |  
+|                    |          |                    |          |--------------------|          
+|                    |   --->   |                    |          |--------------------|   
+|                    |          |      Cluster 1     |   --->   |     Operator 2     | 
+|      Table 1       |          |                    |          |--------------------| 
+|                    |          |                    |          |--------------------|
+|      Table 2       |          |--------------------|   --->   |     Operator 3     |  
+|                    |                                          |--------------------|
 |      Table 3       |          |--------------------|          |--------------------|  
-|                    |          |                    |   --->   |     Operator 3     |  
-|      Table 4       |          |                    |          |--------------------|  
-|                    |          |      Cluster 2     |  
-|                    |   --->   |                    |          |--------------------|  
 |                    |          |                    |   --->   |     Operator 4     |  
-|--------------------|          |--------------------|          |--------------------|  
+|      Table 4       |          |                    |          |--------------------|  
+|                    |          |                    |          |--------------------|
+|                    |   --->   |      Cluster 2     |   --->   |     Operator 5     |  
+|                    |          |                    |          |--------------------|  
+|                    |          |                    |          |--------------------|
+|--------------------|          |-                   |   --->   |     Operator 6     |
+                                |--------------------|          |--------------------|
+  
 ```
 
 ### The data distribution
@@ -68,81 +73,14 @@ HA setup requires the following:
    1) The Operator Background Process to ingest data to the local databases.
    2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
    3) The  Consumer Background Process to pull data which is missing on the current node.
-5) Enabling the TSD tables operations (Detaile are available in the 
+5) Enabling the TSD tables operations (Details are available in the 
    section[The Time Series Data (TSD) Management Tables](#the-time-series-data-tsd-management-tables) below.
 
 Notes:
    * For HA, at least 2 operators are assigned to each cluster.
    * When data is pushed to an Operator, it is assigned to the cluster supported by the Operator and the data will be replicated to
     all the nodes that support the cluster.
-
-## View data distribution policies
-There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
-```anylog
-blockchain query metadata
-get data nodes
-```
-Below is the output of the ***blockchain query metadata*** command. It shows, for each logical table, the list of clusters and the physical nodes 
-assigned to each cluster (The command ***get data nodes*** provides the same info, however in a table format):
-```anylog
-|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
-litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
-                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
-                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
-                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
-                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
-                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
-                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
-                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
-
-```
-
-## Test Cluster policies
-The command below tests the validity of the cluster policies:
-```anylog
-blockchain test cluster
-```
-
-## Testing the node configuration for HA
-The **test ha setup** command details if the node is properly configured to support HA.  
-Usage:
-<pre> 
-test ha setup
-</pre>
-The command returns the HA configuration and relevant status. The info includes the following:
-
-| Functionality | Expected Status                    | Details       |
-| --------------| ---------------------------------- | --------------- | 
-| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
-| Distributor   | Running                            |                |
-| Consumer      | Running                            |                |
-| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
-| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
-| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
-| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
-
-
-## HA related commands
-The following list summarizes the commands supporting the HA processes:
- 
-| command           | Details | 
-| ----------------- | ----------------| 
-| get data nodes    | The list of user tables and the physical nodes that manage each table |
-| blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
-| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
-| get tsd list   | The list of tsd tables on the current node |
-| get tsd details  | Query one or more TSD tables  |
-| get tsd summary  | Summary info of TSD tables  |
-| get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
-| get tsd sync status  | The sync status on the current node  |
-| test ha setup  | The configuration of the node to support HA  |
-| test ha cluster  | Compare the data status on all the nodes that support the same cluster  |
-
 ## The Cluster Policy
 
 HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
@@ -172,7 +110,7 @@ WHen the cluster policy is added to the metadata, it will be added with addition
 
 Notes: 
 1) A cluster is a logical definition, the actual storage is on the operator nodes that are associated with the cluster (and all the operators assigned to a cluster maintain the same data).
-2) A policy ID and Date attributes of the policy are added by the network protocol.
+2) A Policy ID and a Date attribute are added by the network protocol.
 3) The policy ID uniquely identifies the cluster.
 
 ## The Operator Policy
@@ -191,7 +129,7 @@ An Operator is assigned to a cluster in the following manner:
 
 Note: 
 1) The value for the key ***cluster*** is the Cluster ID that identifies the cluster policy (the ID of the cluster policy).
-2) All the data provided to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
+2) All the data assigned to the cluster will be hosted by the operator (as well as by all other operators that are associated with the cluster).
 
 ## Configuring an Operator Node
 
@@ -215,6 +153,82 @@ run data consumer where start_date = -30d
 Note:  
 With the configuration above, each operator that receives data will share the data with all peer operators and each operator will constantly and continuously
 synchronize its locally hosted data with the peer operators that support the cluster.
+
+# Monitoring the configuration and state of a cluster
+
+A special group of commands allows to monitor the configuration of the nodes supporting each cluster and the cluster state.
+
+## Testing the node configuration for HA
+The **test cluster setup** command details if the node is properly configured to support HA.  
+Usage:
+<pre> 
+test cluster setup
+</pre>
+The command returns the HA configuration and relevant status. The info includes the following:
+
+| Functionality | Expected Status                    | Details       |
+| --------------| ---------------------------------- | --------------- | 
+| Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
+| Distributor   | Running                            |                |
+| Consumer      | Running                            |                |
+| Operator Name | Valid name                         | The Operator name from the Operator policy.     |
+| Member ID     | Valid ID                           | The member ID from the Operator policy.     |
+| Cluster ID    | Valid Cluster ID                   | The cluster ID assigned by the Operator in the **run operator** command.     |
+| almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
+
+
+
+
+## View data distribution policies
+There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
+```anylog
+blockchain query metadata
+get data nodes
+```
+Below is the output of the ***blockchain query metadata*** command. It shows, for each logical table, the list of clusters and the physical nodes 
+assigned to each cluster (The command ***get data nodes*** provides the same info, however in a table format):
+```anylog
+|- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
+     
+litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+                                ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+                                                                                                             ==> 139.12.224.186:2048        [0008  remote active]
+                                                         ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
+                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                         ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
+                                                                                                             ==> 142.10.83.145:2048         [0012  remote active]
+
+```
+
+
+
+## Test Cluster policies
+The command below tests the validity of the cluster policies:
+```anylog
+blockchain test cluster
+```
+
+## HA related commands
+The following list summarizes the commands supporting the HA processes:
+ 
+| command           | Details | 
+| ----------------- | ----------------| 
+| get data nodes    | The list of user tables and the physical nodes that manage each table |
+| blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
+| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
+| get tsd list   | The list of tsd tables on the current node |
+| get tsd details  | Query one or more TSD tables  |
+| get tsd summary  | Summary info of TSD tables  |
+| get tsd error  | Query TSD tables for entries indicating errors in the database update process  |
+| get tsd sync status  | The sync status on the current node  |
+| test cluster setup  | The configuration of the node to support HA  |
+| test cluster data  | Compare the data status on all the nodes that support the same cluster  |
+
 
 ## View the distribution of data to clusters
 
@@ -420,13 +434,23 @@ get tsd sync status where table = tsd_128
 
 Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.
 
+
+## Cluster databases
+Nodes assigned to the same cluster needs to be in sync on the logical databases that store the data tables 
+(note that the physical databases on each node can be different).  
+The **test cluster databases** command provides a comparison list of all the databases defined on each node in the cluster.  
+Usage:
+```anylog
+test cluster databases
+```
+
 ## Cluster synchronization status
 
-The **test ha cluster** command provides the synchronization status for each user table.  
+The **test cluster data** command provides the synchronization status for each user table.  
 The info returned presents, for each user table, the number of rows and the number of files processed on each node that supports the cluster.  
 Usage:
 ```anylog
-test ha cluster [options]
+test cluster data [options]
 ```
 
 Options determine the information of interest, expressed as a where condition with key-value pairs and is summarized below. 
@@ -438,8 +462,8 @@ Options determine the information of interest, expressed as a where condition wi
 
 Examples:
 ```anylog
-test ha cluster
-test ha cluster where start_date = -7d
+test cluster data
+test cluster data where start_date = -7d
 ```
 
 Example output:

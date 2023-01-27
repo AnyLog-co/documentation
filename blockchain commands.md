@@ -4,45 +4,7 @@
 AnyLog maintains the metadata in a ledger. The metadata is organized as a collection of objects, called policies. A 
 policy is a JSON structure with a single key at the root. The root key is called the Policy Type.
 
-Example of policy types: database, table, operator, device. The following Policy describes an Operator (an Operator is a 
-node that hosts data):
-
-```json
-{"operator": {
-    "cluster": "7a00b26006a6ab7b8af4c400a5c47f2a",
-    "ip": "24.23.250.144",
-    "local_ip": "10.0.0.78",
-    "port": 32148,
-    "rest_port": 32149,
-    "loc": "37.77986, -122.42905",
-    "country": "USA",
-    "city": "San Francisco",
-    "id": "f3a3c56fcfb78aecc110eb911f35851c",
-    "date": "2021-12-28T04:10:14.210574Z",
-    "member": 91,
-    "ledger": "global"
-  }
-}
-```
-
-
-Policies are written to the ledger and are available to all the members of the network. The ledger can be hosted on a 
-blockchain platform (like Ethereum) or contained in a master node. Regardless of where the blockchain is hosted, every 
-node maintains a local copy of the ledger such that when the node needs metadata - it can be satisfied from the local 
-copy with no dependency on network connectivity or the blockchain latency. The local copy on a node is organized in a 
-json file, The path to the file is stored by the `blockchain_file` variable. Use the following command to see the value 
-assigned to the variable: `!blockchain_file`. Optionally, the local ledger can be hosted in a local database. If a 
-master node is used, the master node is configured such that the ledger is stored on a local database.
-
-
-When new policies are added to the ledger, they need to update the global metadata layer (the global copy). As every node continuously synchronizes 
-the local copy with the global copy, evey update will appear on the local copy of every member node.  
-Synchronization is enabled with the `run blockchain sync` command. Details are available [here](background%20processes.md#blockchain-synchronizer).  
-
-## The Policy ID
-When a Policy is added to the metadata, one of the fields describing the object is an ID field.  
-The ID value can be provided by the user or generated dynamically when the policy is added to the ledger.  
-If the value is auto-generated, it is based on the MD5 Hash value of the object. 
+An overview of the structure of the policies is available in the [Policies based Metadata](policies.md#policies-based-metadata) section.
 
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the ledger in a local JSON file.
@@ -81,6 +43,17 @@ blockchain connect to [platform name] where [connection parameters]
 
 3. [Configuring synchronization](blockchain%20configuration.md) against the blockchain platform.  
 
+## Executing the blockchain commands
+The blockchain commands can be executed on each node of the cluster and operate on the blockchain platform or the master node 
+that is used by the network. The commonly used commands are the following:
+* ```blockchain insert``` - add a policy to the ledger.
+*```blockchain delete policy``` - delete a policy from the ledger.
+* ```blockchain get``` - query a policy or policies from the ledger.
+  
+Other commands may be specific to a blockchain platform or a master node and are used to debug and monitor a particular 
+setup of a particular environment.
+These blockchain commands are detailed below.
+
 ## Adding policies
 
 AnyLog offers a set of commands to add new policies to the ledger.
@@ -101,6 +74,27 @@ Below are the list of commands to add new policies to the ledger:
 
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
+
+## Delete policies
+
+AnyLog offers a set of commands to delete policies from the ledger.
+The generic command is `blockchain delete policy`. This command is used to update both - the global copy and the local copy.  
+
+Policies that are deleted using the `blockchain delete` command will also deleted from the local copy of the ledger 
+(if the command directs to update the local copy), such that if during the time of the update, the global ledger is 
+not accessible, when the network reconnects, the new policies will be delivered to the global ledger.
+
+Below are the list of commands to add new policies to the ledger:
+
+| **Command** | **Platform Updated** |  **Details** |
+| ------------ | ------------------------------------ | --- | 
+| [blockchain delete policy](#the-blockchain-delete-policy-command) [policy and ledger platforms information] | All that are specified | Delete an existing policy from the ledger. |
+| `blockchain drop policy`           | Local DBMS | Remove a policy from the local database. |
+| `blockchain drop by host`          | local DBMS | Remove all policies updated by a particular host. |
+
+When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
+updated with a date and time of the update and a [unique ID](#the-policy-id).
+
 
 ## Query policies
 
@@ -234,8 +228,8 @@ Command details:
 | Key | Value | 
 | ------------ | ------------------------------------ |
 | policy          | A json policy that is added to the ledger                                                                                                                                                  |
-| platform        | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
-| local           | A true/false value to determine an update to the local copy of the ledger                                                                                                                  |
+| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
+| local           | A true/false value to determine an update to the local copy of the ledger. The default value is True                               |
 | master          | The IP and Port value of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
 
 Using the ***blockchain insert*** command, all the specified ledgers are updated. The common configuration would include the local ledger and 
@@ -251,6 +245,30 @@ blockchain insert where policy = !policy and local = true and master = !master_n
 blockchain insert where policy = !policy and local = true and blockchain = ethereum
 ```
 
+## The blockchain delete policy command
+
+The ***blockchain delete policy*** command removes a policy from the ledger.   
+The command updates the local copy and the global copy of the ledger. 
+
+Usage:
+```anylog
+blockchain delete policy where id = [policy id] and blockchain = [platform] and master = [IP:Port] and local = [true/false]
+```
+
+Command details:
+
+| Key | Value | 
+| ------------ | ------------------------------------ |
+| id  | The Policy ID|
+| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
+| master          | The IP and Port of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
+| local           | A true/false value to determine an update to the local copy of the ledger. The default value is True    |
+
+Examples:
+```anylog
+blockchain delete policy where id = !policy_id and master = !master_node
+blockchain delete policy where policy_id = !policy_id and local = true and blockchain = ethereum
+```
 
 ## Copying policies representing the metadata to the local ledger
 The local representation of the blockchain file is updated continuously if the [blockchain synchronization](background%20processes.md#blockchain-synchronizer) 
@@ -265,7 +283,6 @@ The following command will force the node to replace the metadata representation
 ```anylog
 blockchain load metadata
 ```
-
 
 ## Using a local database to host the ledger
 

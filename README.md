@@ -47,6 +47,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   
 * **Managing Metadata**
   * [Blockchain Commands](blockchain%20commands.md)
+  * [Policies](policies.md#policies-based-metadata)  
   * [Blockchain Configuration](blockchain%20configuration.md)
   * [Using Ethereum](using%20ethereum.md)
  
