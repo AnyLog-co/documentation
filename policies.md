@@ -183,14 +183,14 @@ search where filtering processes are assigned to a group of policies identified 
 
 Adding and retrieving policies from the shared metadata layer is described in the [Blockchain Commands](blockchain%20commands.md#blockchain-commands) section.
  
-## declaring a policy using a code block
+## Declaring a policy using a code block
 
-Using a code block, users can describe a policy to the AnyLog command line.  
+Using a code block, users can describe a policy on the AnyLog command line.  
 The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
 When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
 
-A code block example is available [above](#policies-based-configuration).  When the code block is copied to the CLI, 
-the key ```config_policy``` is assigned with the policy as the value.
+A code block example is available [above](#policies-based-configuration).    
+Using the code block example above, when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
 
 Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
 ```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
