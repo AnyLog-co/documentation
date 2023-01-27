@@ -3,8 +3,8 @@
 An AnyLog node can be run as either a Docker image with Docker or Kubernetes, or it can run as a standalone product. 
 
 ## AnyLog Requirements
-AnyLog is a Python-based software, which means that as long as Python and [package requirements](deployments/requirements.txt)
-are installed AnyLog should be able to run.
+AnyLog is a Python-based software, which means that as long as Python3.5 or higher and 
+[package requirements](deployments/requirements.txt) are installed AnyLog should be able to run.
 
 Please [contact us](mailto:info@anylog.co) if you'd like to deploy AnyLog without a container. 
 
