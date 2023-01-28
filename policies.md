@@ -272,8 +272,7 @@ assignment with **if** conditions (details are available in the [conditional exe
 2. A dictionary is assigned to a key using the signs: {}
 3. A list is assigned to a key using the sign: [] and entries are added to the list using the plus (+) sign as in the example above.
 4. Removing entries from the local dictionary is by assigning a null string to the key in the dictionary. The example below 
-removes the policy from the local dictionary:
-```anylog
-config_policy = ""
-```
-
+   removes the policy from the local dictionary:
+   ```anylog
+   config_policy = ""
+   ```
