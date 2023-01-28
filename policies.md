@@ -193,7 +193,7 @@ Using the code block example [above](#policies-based-configuration), when the co
 This process updates the node's dictionary with the key and value such that the value (policy) can be referenced using the key (see the examples below).
 
 Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
-```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
+```ip``` is assigned with ```!external_ip``` as its value. When the policy is written to the metadata, the dictionary keys
 are replaced with their assigned values.
 
 ## Retrieving policies from the dictionary
