@@ -1,5 +1,7 @@
 # Deployment Process
 The following provides insight into the work being done in the background to deploy the Master node. 
+In the example, the node is part of a [nebula overlay network](../Networking%20&%20Security/nebula.md), with the TCP 
+connection set to bind. 
 
 For directions to start a Master node please visit the [deployment process](deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-master/anylog_configs.env)   
@@ -14,94 +16,93 @@ configurations used for this deployment can be found [here](https://raw.githubus
 ```anylog
 AL > hostname = get hostname
 AL > node_name=$NODE_NAME
-company_name=$COMPANY_NAME
-anylog_server_port=$ANYLOG_SERVER_PORT
+AL anylog-master > company_name=$COMPANY_NAME
+AL anylog-master > anylog_server_port=$ANYLOG_SERVER_PORT
 ...
 ```
 
-2. Connect to TCP & REST 
+2. Declare (optional) configurations and master policies - the polices are built based on parameters
 ```anylog
-if (overlay_network is true {
-  run tcp server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
-  and internal_port = !anylog_server_port and bind = true 
-  run rest server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
-  and internal_port = !anylog_server_port and bind = false 
-  } else {
-   run tcp server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
-   and internal_port = !anylog_server_port and bind = false
-   run rest server where external_ip = !external_ip and external_port = !anylog_server_port and internal_ip = !internal_ip 
-   and internal_port = !anylog_server_port and bind = false 
-  }
+AL anylog-master > <new_policy = {'config' : {
+   'name' : 'master-overlay-configs',
+   'company' : 'New Company',
+   'port' : '!anylog_server_port.int',
+   'external_ip' : '!external_ip',
+   'ip' : '!overlay_ip',
+   'rest_port' : '!anylog_rest_port.int'
+}}>
+AL anylog-master > blockchain prepare policy !new_policy
+AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+
+AL anylog-master > <new_policy = {'master' : {
+   'name' : 'anylog-master',
+   'company' : 'New Company',
+   'hostname' : 'nebula-node1',
+   'loc' : '51.5085,-0.1257',
+   'country' : 'GB',
+   'state' : 'England',
+   'city' : 'London',
+   'port' : 32048,
+   'external_ip' : '212.71.244.21',
+   'ip' : '10.0.0.2',
+   'rest_port' : 32049
+}}>
+AL anylog-master > blockchain prepare policy !new_policy
+AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-3. Connect to blockchain database & create ledger table 
+3. Connect to [network](../../network%20configuration.md) - either based on a configuration or node policy ID. In this case, 
+the node is using the configuration policy ID
+```anylog  
+AL anylog-master > config from policy where id = !policy_id
+```
+
+4. Connect to `blockchain` logical database and create `ledger` table
 ```anylog
-connect dbms blockchain where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
+# connect to logical database 
+AL anylog-master > connect dbms blockchain where type=!db_type and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
+
 create table ledger where dbms=blockchain
 ```
-<p style="color: gray; size: 90%">Note: `blockchain.ledger` contains the metadata policies. For example, the different node 
-types connected to the network  data tables associated with each node. </p>
+5. If set, connect to `system_query` logical database 
+```anylog
+AL anylog-master > connect dbms system_query where type=sqlite and memory=!memory
+```
 
-4. Set scheduler 1 & blockchain sync 
+6. Run [scheduler processes](../../background%20processes.md#scheduler-process) and [blockchain sync](../../background%20processes.md#blockchain-synchronizer)
 ```anylog
 run scheduler 1
-run blockchain sync where source=blockchain_source and time=!sync_time and dest=blockchain_destination and connection=!ledger_conn
+run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
 ```
 
-5. Declare the Master in the metadata (Master Node Policy)
+**Expected Behavior**: The _basic_ deployment for the given master node is something like this: 
 ```anylog
-If (overlay_network is true) {
-<new_policy = {"master": {
-    "hostname": !hostname,
-    "name": !node_name,
-    "internal_ip": !internal_ip,
-    "company": !company_name,
-    "port" : !anylog_server_port.int,
-    "rest_port": !anylog_rest_port.int,
-    "loc": !loc,
-    "country": !country,
-    "state": !state, 
-    "city": !city
-}}>
-} else {
-<new_policy = {"master": {
-    "hostname": !hostname,
-    "name": !node_name,
-    "external_ip" : !external_ip,
-    "internal_ip": !internal_ip,
-    "company": !company_name,
-    "port" : !anylog_server_port.int,
-    "rest_port": !anylog_rest_port.int,
-    "loc": !loc,
-    "country": !country,
-    "state": !state, 
-    "city": !city
-}}>
-}
+AL anylog-master +> get connections 
 
-blockchain prepare policy !new_policy
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
-```
+Type      External Address Internal Address Bind Address   
+---------|----------------|----------------|--------------|
+TCP      |10.0.0.2:32048  |10.0.0.2:32048  |10.0.0.2:32048|
+REST     |10.0.0.2:32049  |10.0.0.2:32049  |0.0.0.0:32049 |
+Messaging|Not declared    |Not declared    |Not declared  |
 
-6. (Manually) Validate processes are running
-```anylog
 AL anylog-master +> get processes 
 
-    Process         Status       Details                                                                  
-    ---------------|------------|------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                        |
-    REST           |Running     |Listening on: 45.79.74.39:32049, Threads Pool: 5, Timeout: 20, SSL: None|
-    Operator       |Not declared|                                                                        |
-    Publisher      |Not declared|                                                                        |
-    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                |
-    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                          |
-    Distributor    |Not declared|                                                                        |
-    Blobs Archiver |Not declared|                                                                        |
-    Consumer       |Not declared|                                                                        |
-    MQTT           |Not declared|                                                                        |
-    Message Broker |Not declared|No active connection                                                    |
-    SMTP           |Not declared|                                                                        |
-    Streamer       |Not declared|                                                                        |
-    Query Pool     |Running     |Threads Pool: 3                                                         |
-    Kafka Consumer |Not declared|                                                                        |
+    Process         Status       Details                                                                
+    ---------------|------------|----------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 10.0.0.2:32048, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 10.0.0.2:32049, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Not declared|                                                                      |
+    Publisher      |Not declared|                                                                      |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 10.0.0.2:32048               |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                        |
+    Distributor    |Not declared|                                                                      |
+    Blobs Archiver |Not declared|                                                                      |
+    Consumer       |Not declared|                                                                      |
+    MQTT           |Not declared|                                                                      |
+    Message Broker |Not declared|No active connection                                                  |
+    SMTP           |Not declared|                                                                      |
+    Streamer       |Not declared|                                                                      |
+    Query Pool     |Running     |Threads Pool: 3                                                       |
+    Kafka Consumer |Not declared|                                                                      |
 ```
+
