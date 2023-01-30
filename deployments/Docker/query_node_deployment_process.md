@@ -6,7 +6,7 @@ connectivity is based on the default local IP address with TCP bind disabled.
 For directions to start a Query node please visit the [deployment process](deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-query-remote-cli/anylog_configs.env)   
 
-Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommnad utilizing Relational 
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 
 databases, such as _PostgreSQL_, for large scale projects when/if possible.
 
 **Reminder** - By default, when using the [deployment scripts](https://github.com/AnyLog-co/deployments), [Remote-CLI](../Support/Remote-CLI.md)

@@ -3,10 +3,10 @@ The following provides insight into the work being done in the background to dep
 In the example, the node is part of a [nebula overlay network](../Networking%20&%20Security/nebula.md), with the TCP 
 connection set to bind. 
 
-For directions to start a Operator node please visit the [deployment process](deploying_node.md) document.
+For directions to start an Operator node please visit the [deployment process](deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-operator/anylog_configs.env)
 
-Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommnad utilizing Relational 
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 
 databases, such as _PostgreSQL_, for large scale projects when/if possible.       
 
 ## Steps
@@ -91,6 +91,37 @@ AL anylog-operator > run blockchain sync where source=!blockchain_source and tim
 ```anylog 
 AL anylog-operator > partition !default_dbms !table_name using !partition_column by !partition_interval
 AL anylog-operator > schedule time=!partition_sync and name="Drop Partitions" task drop partition where dbms=!default_dbms and table =!table_name and keep=!partition_keep
+```
+
+8. Prepare node for accepting data 
+```anylog
+AL anylog-operator > set buffer threshold where time=!threshold_time and volume=!threshold_volume and write_immediate=!write_immediate
+AL anylog-operator > run streamer
+```
+
+9. Start accepting data
+```anylog
+AL anylog-operator > <run operator where
+    create_table=!create_table and
+    update_tsd_info=!update_tsd_info and
+    compress_json=!compress_file and
+    compress_sql = !compress_file and archive=!archive and
+    master_node=!ledger_conn and
+    policy=!operator_id and
+    threads = !operator_threads
+>
+```
+
+10. If set, accept data from MQTT client
+```anylog
+AL anylog-operator > <run mqtt client where broker=!broker and port=!mqtt_port and user=!mqtt_user and password=!mqtt_passwd and
+    log=!mqtt_log and topic=(
+        name=!mqtt_topic and
+        dbms=!mqtt_dbms and
+        table=!mqtt_table and
+        column.timestamp.timestamp=!mqtt_timestamp_column and
+        column.value=(type=!mqtt_value_column_type and value=!mqtt_value_column)
+    )>
 ```
 
 **Expected Behavior**: Validate the node is running properly

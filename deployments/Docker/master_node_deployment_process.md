@@ -6,7 +6,7 @@ connection set to bind.
 For directions to start a Master node please visit the [deployment process](deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-master/anylog_configs.env)
 
-Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommnad utilizing Relational 
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 
 databases, such as _PostgreSQL_, for large scale projects when/if possible.
 
 ## Steps
