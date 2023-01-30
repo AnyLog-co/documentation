@@ -61,8 +61,7 @@ AL anylog-master > config from policy where id = !policy_id
 ```anylog
 # connect to logical database 
 AL anylog-master > connect dbms blockchain where type=!db_type and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
-
-create table ledger where dbms=blockchain
+AL anylog-master > create table ledger where dbms=blockchain
 ```
 5. If set, connect to `system_query` logical database 
 ```anylog
