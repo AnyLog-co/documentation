@@ -6,14 +6,16 @@ connectivity is based on the default local IP address with TCP bind disabled.
 For directions to start a Query node please visit the [deployment process](deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-query-remote-cli/anylog_configs.env)   
 
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommnad utilizing Relational 
+databases, such as _PostgreSQL_, for large scale projects when/if possible.
+
 **Reminder** - By default, when using the [deployment scripts](https://github.com/AnyLog-co/deployments), [Remote-CLI](../Support/Remote-CLI.md)
 will be deployed with your node. 
 
 ## Steps
 1. Set parameters such as:
    * hostname
-   * Internal & External IPs (backend of AnyLog if not preset in configuration)
-   *  If overlay_network is configured by setting the OVERLAY_NETWORK to true and OVERLAY_IP, INTERNAL_IP will be set to the OVERLAY_IP
+   * Local & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 AL > hostname = get hostname
@@ -23,7 +25,7 @@ AL anylog-query > anylog_server_port=$ANYLOG_SERVER_PORT
 ...
 ```
 
-2. Declare (optional) configurations and master policies - the polices are built based on parameters
+2. Declare (optional) configurations and query policies - the polices are built based on parameters
 ```anylog
 AL anylog-query > <new_policy = {'config' : {
    'name' : !config_policy_name,
@@ -66,20 +68,14 @@ AL anylog-query > connect dbms system_query where type=sqlite and memory=!memory
 
 5. Run [scheduler processes](../../background%20processes.md#scheduler-process) and [blockchain sync](../../background%20processes.md#blockchain-synchronizer)
 ```anylog
-run scheduler 1
-run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
+AL anylog-query > run scheduler 1
+AL anylog-query > run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
 ```
 
-**Expected Behavior**: The _basic_ deployment for the given query node is something like this: 
+**Expected Behavior**: Validate the node is running properly
+* `get processes` - will show the background & connection information
+* `get databases` - will show which database the node is connected to
 ```anylog
-AL anylog-query > get connections 
-
-Type      External Address    Internal Address    Bind Address  
----------|-------------------|-------------------|-------------|
-TCP      |74.207.231.88:32348|74.207.231.88:32348|0.0.0.0:32348|
-REST     |74.207.231.88:32349|74.207.231.88:32349|0.0.0.0:32349|
-Messaging|Not declared       |Not declared       |Not declared |
-
 AL anylog-query > get processes 
 
     Process         Status       Details                                                                     
@@ -99,5 +95,12 @@ AL anylog-query > get processes
     Streamer       |Not declared|                                                                           |
     Query Pool     |Running     |Threads Pool: 3                                                            |
     Kafka Consumer |Not declared|                                                                           |
+
+AL anylog-query > get databases 
+
+List of DBMS connections
+Logical DBMS         Database Type IP:Port                        Storage
+-------------------- ------------- ------------------------------ -------------------------
+system_query         sqlite        Local                          MEMORY
 ```
 

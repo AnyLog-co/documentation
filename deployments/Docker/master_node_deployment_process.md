@@ -4,14 +4,15 @@ In the example, the node is part of a [nebula overlay network](../Networking%20&
 connection set to bind. 
 
 For directions to start a Master node please visit the [deployment process](deploying_node.md) document.
-configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-master/anylog_configs.env)   
+configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-master/anylog_configs.env)
 
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommnad utilizing Relational 
+databases, such as _PostgreSQL_, for large scale projects when/if possible.
 
 ## Steps
 1. Set parameters such as:
    * hostname
-   * Internal & External IPs (backend of AnyLog if not preset in configuration)
-   *  If overlay_network is configured by setting the OVERLAY_NETWORK to true and OVERLAY_IP, INTERNAL_IP will be set to the OVERLAY_IP
+   * Local & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
 AL > hostname = get hostname
@@ -70,20 +71,14 @@ AL anylog-master > connect dbms system_query where type=sqlite and memory=!memor
 
 6. Run [scheduler processes](../../background%20processes.md#scheduler-process) and [blockchain sync](../../background%20processes.md#blockchain-synchronizer)
 ```anylog
-run scheduler 1
-run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
+AL anylog-master > run scheduler 1
+AL anylog-master > run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
 ```
 
-**Expected Behavior**: The _basic_ deployment for the given master node is something like this: 
+**Expected Behavior**: Validate the node is running properly
+* `get processes` - show the background & connection information
+* `get databases` - show which database(s) the node is connected to  
 ```anylog
-AL anylog-master +> get connections 
-
-Type      External Address Internal Address Bind Address   
----------|----------------|----------------|--------------|
-TCP      |10.0.0.2:32048  |10.0.0.2:32048  |10.0.0.2:32048|
-REST     |10.0.0.2:32049  |10.0.0.2:32049  |0.0.0.0:32049 |
-Messaging|Not declared    |Not declared    |Not declared  |
-
 AL anylog-master +> get processes 
 
     Process         Status       Details                                                                
@@ -103,5 +98,12 @@ AL anylog-master +> get processes
     Streamer       |Not declared|                                                                      |
     Query Pool     |Running     |Threads Pool: 3                                                       |
     Kafka Consumer |Not declared|                                                                      |
+    
+AL anylog-master +> get databases  
+
+List of DBMS connections
+Logical DBMS         Database Type IP:Port                        Storage
+-------------------- ------------- ------------------------------ -------------------------
+blockchain           sqlite        Local                          /app/AnyLog-Network/data/dbms/blockchain.dbms
 ```
 
