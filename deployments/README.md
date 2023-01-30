@@ -22,7 +22,8 @@ deployment diagram. However, is often used in large scale projects.
 AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _python:3.9-alpine_. 
 * develop - is a stable release that's been used as part of our Test Network for a number of weeks, and gets updated every 4-6 weeks.
 * predevelop - is our beta release, which is being used by our Test Network for testing purposes.
-* testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. Usually the image will be Ubuntu based, unless stated otherwise.
+* testing - Any time there's a change in the code we deploy a "testing" image to be used for (internal) testing purposes. 
+Usually the image will be Ubuntu based, unless stated otherwise.
 
 
 | Build             | Base Image          | CPU Architecture | Pull Command                                            | Compressed Size | 
@@ -34,6 +35,7 @@ AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _
 | predevelop-alpine | python:3.9-alpine   | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:predevelop-alpine` | ~170MB          |
 | predevelop-rhl    | redhat/ubi8:latest   | amd64,arm64 | `docker pull anylogco/anylog-network:predevelop-rhl`    | ~215MB          |
 | testing           | Ubuntu:20.04        | amd64,arm/v7,arm64 | `docker pull anylogco/anylog-network:testing`           |
+
 *Compressed Size - size calculated by summing the image's layers, which are compressed
 
 
@@ -42,13 +44,7 @@ are running, but no other process is enabled. This allows for users to play with
 running in the background, but already having the default network configurations.  A basic deployment of an AnyLog REST 
 instance can be  executed using the following line:
 ```shell
-# docker 
 docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
-
-# Kubernetes
-git clone https://github.com/AnyLog-co/deployments 
-helm install $HOME/helm/packages/anylog-node-volume-1.22.3.tgz --name-template anylog-node-volume 
-helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylog-node
 ```
 
 
@@ -57,22 +53,19 @@ helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylo
 
 **[Docker](Docker)**
 * [Install Database](Docker/database_configuration.md)
-* [Install Master Node](Docker/master_node.md)
+* [Install Master Node](Docker-old/master_node.md)
   * [Deployment Process](Docker/master_node_deployment_process.md)
-* [Install Operator Node](Docker/operator_node.md)
+* [Install Operator Node](Docker-old/operator_node.md)
   * [Deployment Process](Docker/operator_node_deployment_process.md)
-* [Install Publisher Node](Docker/publisher_node.md)
+* [Install Publisher Node](Docker-old/publisher_node.md)
   * [Deployment Process](Docker/publisher_node_deployment_process.md)
-* [Install Query Node](Docker/query_node.md)
+* [Install Query Node](Docker-old/query_node.md)
   * [Deployment Process](Docker/query_node_deployment_process.md)
-* [Single Deployment Demo](Docker/single_deployment_demo.md)
-* [Docker Volumes & Creating AnyLog Scripts](Docker/docker_volumes.md)
+* [AnyLog REST Node](Docker-old/rest_node.md)
+* [Single Deployment Demo](Docker/single_deployment_demo_network.md)
+* [Docker Volumes & Creating AnyLog Scripts](Docker/volumes.md)
 * [Accessing MongoDB via AnyLog](Docker/setting_up_mongodb.md)
 
-
-**[Kubernetes](Kubernetes)**
-* [Persistent Data on Kubernetes](Kubernetes/volumes.md)
-* [Networking on Kubernetes](Kubernetes/networking.md)
 
 **[Networking](Networking)** - General Networking Information
 * [Nebula](Networking/nebula.md)

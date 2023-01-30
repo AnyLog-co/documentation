@@ -42,12 +42,11 @@ vim $HOME/deployments/docker-compose/mongodb/.env
 
 2.change configurations 
 ```dotenv
-PORT=27017
 MONGO_USER=admin
 MONGO_PASSWORD=passwd
 ```
 
-3. Deploy postgres 
+3. Deploy mongodb 
 ```shell
 cd $HOME/deployments/docker-compose/mongodb/
 docker-compose up -d

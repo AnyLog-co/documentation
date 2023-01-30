@@ -16,7 +16,7 @@ _master_ node. - [Nebula Install](nebula.md)
 when deploying Kubernetes, is to have consistent IP addresses in the AnyLog ledger. Otherwise, a new blockchain policy
 will be created each time the node initiates.  
 
-
+   
 4. Deploy AnyLog 
 
 For Kubernetes - the proxy IP could be the overlay IP address (if set) or the local IP address of the machine

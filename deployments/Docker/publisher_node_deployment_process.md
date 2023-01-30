@@ -1,7 +1,13 @@
 # Deployment Process
-The following provides insight the work being done in the background to deploy the Operator node. 
+The following provides insight into the work being done in the background to deploy the Publisher node. 
+In the example, the node is part of a [nebula overlay network](../Networking%20&%20Security/nebula.md), with the TCP 
+connection set to bind. 
 
-For directions to start a master node please visit the [publisher node](publisher_node.md) document.
+For directions to start a Publisher node please visit the [deployment process](deploying_node.md) document.
+configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-publisher/anylog_configs.env)
+
+Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 
+databases, such as _PostgreSQL_, for large scale projects when/if possible.       
 
 ## Steps
 1. Set parameters such as:
@@ -9,83 +15,75 @@ For directions to start a master node please visit the [publisher node](publishe
    * Local & External IPs (backend of AnyLog if not preset in configuration)
    * `ENV` parameters from configuration into AnyLog parameters  
 ```anylog
-hostname = get hostname
-node_name=$NODE_NAME
-company_name=$COMPANY_NAME
-anylog_server_port=$ANYLOG_SERVER_PORT
+AL > hostname = get hostname
+AL > node_name=$NODE_NAME
+AL anylog-publisher > company_name=$COMPANY_NAME
+AL anylog-publisher > anylog_server_port=$ANYLOG_SERVER_PORT
 ...
 ```
 
-2. Connect to TCP & REST 
+2. Declare (optional) configurations, and publisher policies - the polices are built based on parameters
 ```anylog
-run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
-run rest server !ip !anylog_rest_port
-
-# If declare connect to message broker 
-run message broker !external_ip !anylog_broker_port !ip !anylog_broker_port
-```
-
-3. Connect to databases almgm and create tsd_info table 
-```anylog
-connect dbms almgm where type=!db_type and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
-create table tsd_info where dbms=almgm
-```
-<p style="color: gray; size: 90%">`almgm.tsd_info` contains all metadata information about files injested. Other tables 
-in almgm contain information regarding data ingested in peer  nodes in the same  cluster.</p>
-
-5. (Optional) Connect to `system_query`
-```anylog
-connect dbms system_query where type=sqlite and memory=true  
-```
-
-6. Set scheduler 1 & blockchain sync 
-```anylog 
-run scheduler 1
-run blockchain sync where source=blockchain_source and time=!sync_time and dest=blockchain_destination and connection=!ledger_conn
-```
-
-8. Declare Publisher Node on the metadata layer 
-```anylog
-<new_policy = {"master": {
-    "hostname": !hostname,
-    "name": !node_name,
-    "ip" : !external_ip,
-    "local_ip": !ip,
-    "company": !company_name,
-    "port" : !anylog_server_port.int,
-    "rest_port": !anylog_rest_port.int,
-    "loc": !loc,
-    "country": !country,
-    "state": !state, 
-    "city": !city
+AL anylog-publisher > <new_policy = {'config' : {
+   'name' : !config_policy_name,
+   'company' : !company_name,
+   'port' : '!anylog_server_port.int',
+   'external_ip' : '!external_ip',
+   'ip' : '!overlay_ip',
+   'rest_port' : '!anylog_rest_port.int'
 }}>
+AL anylog-publisher > blockchain prepare policy !new_policy
+AL anylog-publisher > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 
-do blockchain prepare policy !new_policy
-do blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+AL anylog-publisher > <new_policy = {'publisher' : {
+   'name' : !node_name,
+   'company' : !company_name,
+   'hostname' : !hostname,
+   'loc' : !loc,
+   'country' : !country,
+   'state' : !state,
+   'city' : !city,
+   'port' : !anylog_server_port.int,
+   'external_ip' : !external_ip,
+   'ip' : !overlay_ip,
+   'rest_port' : !anylog_rest_port.int
+}}>
+AL anylog-publisher > blockchain prepare policy !new_policy
+AL anylog-publisher > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
+3. Connect to [network](../../network%20configuration.md) - either based on a configuration or node policy ID. In this case, 
+the node is using the configuration policy ID
+```anylog  
+AL anylog-publisher > config from policy where id = !policy_id
+```
 
-10. Run MQTT (if set)   
+4. Connect to a database that keeps record of data coming in and created assoicated table  
 ```anylog
-<run mqtt client where broker=!broker and port=!port and log=!mqtt_log and topic=(
-   name=!mqtt_topic_name and 
-   dbms=!mqtt_topic_dbms and 
-   table=!mqtt_topic_table and 
-   column.timestamp.timestamp=!mqtt_column_timestamp and
-   column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type)
-)>
+AL anylog-publisher > connect dbms almgm where type=!db_type and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
+AL anylog-publisher > create table tsd_info where dbms=almgm
 ```
-11. (Optional) Send data to specific operator nodes -- needs to be configured manually 
-    * when using `data distribution`, the table value can be set to be specific or all (`*`) tables in a given database 
-    * data coming from a publisher node can be distributed to multiple operators with `and dest ...` added. 
-```anylog 
-set data distribution where dbms={DB_NAME} and table={TABLE_NAME} and dest={DESTINATION_IP}:{DESTINATION_PORT} 
+5. If set, connect to `system_query` logical database 
+```anylog
+AL anylog-publisher > connect dbms system_query where type=sqlite and memory=!memory
 ```
 
-12. Deploy publisher 
+6. Run [scheduler processes](../../background%20processes.md#scheduler-process) and [blockchain sync](../../background%20processes.md#blockchain-synchronizer)
 ```anylog
-<run publisher where
-    compress_json=!compress_file and
+AL anylog-publisher > run scheduler 1
+AL anylog-publisher > run blockchain sync where source=!blockchain_source and time=!sync_time and dest=!blockchain_destination and connection=!ledger_conn
+```
+
+7. Prepare node for accepting data 
+```anylog
+AL anylog-publisher > set buffer threshold where time=!threshold_time and volume=!threshold_volume and write_immediate=!write_immediate
+AL anylog-publisher > run streamer
+```
+
+8. Start accepting data
+```anylog
+AL anylog-publisher > <run publisher where
+    compress_json=!publisher_compress_file and 
     compress_sql=!publisher_compress_file and
     master_node=!ledger_conn and
     dbms_name=!dbms_file_location and
@@ -93,27 +91,65 @@ set data distribution where dbms={DB_NAME} and table={TABLE_NAME} and dest={DEST
 >
 ```
 
- 
-
-13. (Manually) Validate processes are running
+10. If set, accept data from MQTT client
 ```anylog
-AL anylog-publisher +> get processes
-
-    Process         Status       Details                                                                      
-    ---------------|------------|----------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 172.104.180.110:32248, Threads Pool: 6                        |
-    REST           |Running     |Listening on: 172.104.180.110:32249, Threads Pool: 5, Timeout: 20, SSL: None|
-    Operator       |Not declared|                                                                            |
-    Publisher      |Running     |                                                                            |
-    Blockchain Sync|Running     |Sync every 30 seconds with master using: 45.79.74.39:32048                  |
-    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                              |
-    Distributor    |Not declared|                                                                            |
-    Blobs Archiver |Not declared|                                                                            |
-    Consumer       |Not declared|                                                                            |
-    MQTT           |Running     |                                                                            |
-    Message Broker |Running     |Listening on: 172.104.180.110:32250, Threads Pool: 4                        |
-    SMTP           |Not declared|                                                                            |
-    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes                |
-    Query Pool     |Running     |Threads Pool: 3                                                             |
-    Kafka Consumer |Not declared|                                                                            |
+AL anylog-publisher > <run mqtt client where broker=!broker and port=!mqtt_port and user=!mqtt_user and password=!mqtt_passwd and
+    log=!mqtt_log and topic=(
+        name=!mqtt_topic and
+        dbms=!mqtt_dbms and
+        table=!mqtt_table and
+        column.timestamp.timestamp=!mqtt_timestamp_column and
+        column.value=(type=!mqtt_value_column_type and value=!mqtt_value_column)
+    )>
 ```
+
+**Expected Behavior**: Validate the node is running properly
+* `get processes` - show the background & connection information
+* `get databases` - show which database(s) the node is connected to  
+* `get msg client` - view data coming into the node via MQTT
+```anylog
+AL anylog-publisher +> get processes 
+
+    Process         Status       Details                                                                
+    ---------------|------------|----------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 10.0.0.1:32248, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 10.0.0.1:32249, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Not declared|                                                                      |
+    Publisher      |Running     |                                                                      |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 10.0.0.2:32048               |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                        |
+    Distributor    |Not declared|                                                                      |
+    Blobs Archiver |Not declared|                                                                      |
+    Consumer       |Not declared|                                                                      |
+    MQTT           |Running     |                                                                      |
+    Message Broker |Not declared|No active connection                                                  |
+    SMTP           |Not declared|                                                                      |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes          |
+    Query Pool     |Running     |Threads Pool: 3                                                       |
+    Kafka Consumer |Not declared|                                                                      |
+
+AL anylog-publisher +> get databases 
+
+List of DBMS connections
+Logical DBMS         Database Type IP:Port                        Storage
+-------------------- ------------- ------------------------------ -------------------------
+almgm                sqlite        Local                          /app/AnyLog-Network/data/dbms/almgm.dbms
+
+AL anylog-publisher +> get msg client 
+
+Subscription ID: 0001
+User:         ibglowct
+Broker:       driver.cloudmqtt.com:18785
+Connection:   Connected
+
+     Messages    Success     Errors      Last message time    Last error time      Last Error
+     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
+             40          40           0  2023-01-30 05:01:43
+     
+     Subscribed Topics:
+     Topic       QOS DBMS Table     Column name Column Type Mapping Function        Optional Policies 
+     -----------|---|----|---------|-----------|-----------|-----------------------|--------|--------|
+     anylogedgex|  0|test|rand_data|timestamp  |timestamp  |now()                  |False   |        |
+                |   |    |         |value      |float      |['[readings][][value]']|False   |        |
+```
+
