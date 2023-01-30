@@ -24,8 +24,8 @@ AL anylog-master > anylog_server_port=$ANYLOG_SERVER_PORT
 2. Declare (optional) configurations and master policies - the polices are built based on parameters
 ```anylog
 AL anylog-master > <new_policy = {'config' : {
-   'name' : 'master-overlay-configs',
-   'company' : 'New Company',
+   'name' : !config_policy_name,
+   'company' : !company_name,
    'port' : '!anylog_server_port.int',
    'external_ip' : '!external_ip',
    'ip' : '!overlay_ip',
@@ -35,17 +35,17 @@ AL anylog-master > blockchain prepare policy !new_policy
 AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 
 AL anylog-master > <new_policy = {'master' : {
-   'name' : 'anylog-master',
-   'company' : 'New Company',
-   'hostname' : 'nebula-node1',
-   'loc' : '51.5085,-0.1257',
-   'country' : 'GB',
-   'state' : 'England',
-   'city' : 'London',
-   'port' : 32048,
-   'external_ip' : '212.71.244.21',
-   'ip' : '10.0.0.2',
-   'rest_port' : 32049
+   'name' : !node_name,
+   'company' : !company_name,
+   'hostname' : !hostname,
+   'loc' : !loc,
+   'country' : !country,
+   'state' : !state,
+   'city' : !city,
+   'port' : !anylog_server_port.int,
+   'external_ip' : !external_ip,
+   'ip' : !overlay_ip,
+   'rest_port' : !anylog_rest_port.int
 }}>
 AL anylog-master > blockchain prepare policy !new_policy
 AL anylog-master > blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
