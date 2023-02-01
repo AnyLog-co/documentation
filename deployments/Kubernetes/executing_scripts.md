@@ -6,7 +6,7 @@ time against the blockchain (or master node).
 With that in mind, users may want to deploy their own scripts, in addition to the default scripts; these scripts can
 be things like - complex MQTT client requests, scheduled processes to check disk space or executing a query every so 
 often. When using Kubernetes, as long as the [persistent volumes](volumes.md) are accessible to the deployment, these
-script will continue to exist. 
+scripts will continue to exist. 
 
 ## Creating Personalized Script
 1. Access the Kubernetes deployment bash interface  
@@ -31,7 +31,7 @@ vim deployment_scripts/local_scripts.al
 If _vim_ or other text editor program does not work, users can easily install it. 
 ```shell
 # Debian / Ubuntu 
-sudo apt-get -y install vim 
+apt-get -y install vim 
 
 # Alpine 
 apk add vim 
