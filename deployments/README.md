@@ -49,7 +49,6 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 
 
 ## Table of Content
-[Preparing Machine(s) for Deployment](prerequisites.md)
 
 **[Docker](Docker)**
 * [Install Database](Docker/database_configuration.md)
