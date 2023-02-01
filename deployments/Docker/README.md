@@ -16,7 +16,7 @@ For login credentials contact us at: [info@anylog.co](mailto:info@anylog.co)
 **Requirements**
 * Docker
 * docker-compose
-* Python3 + [dotenv](https://pypi.org/project/python-dotenv/) - for utilizing [deployment scripts](../deplyoment_scripts) 
+* Python3 + [dotenv](https://pypi.org/project/python-dotenv/) - for utilizing [deployment scripts](https://github.com/AnyLog-co/deployments) 
 
 Directions for downloading Docker / docker-compose can be found in the [Docker Engine Installation](https://docs.docker.com/engine/install/)
 
@@ -39,9 +39,8 @@ bash $HOME/deployments/installations/docker_credentials.sh ${YOUR_ANYLOG_DOCKER_
 3. [Deploy AnyLog](deploying_node.md)
 
 
-4. Deploy other services like [Remote-CLI](../Support/Remote-CLI.md) and [Grafana](../Support/Grafana.md) - when deploying
-a Query node through our deployment scripts, a Remote-CLI is automatically deployed with the Query  Node. This is because
-when querying for blobs, the two must have shared folders (_volumes_) in order to access the blobs.  
+4. Deploy other services like [Remote-CLI](../Support/Remote-CLI.md) and [Grafana](../Support/Grafana.md)
+
 
 If you are planning to deploy a [single deployment demo network](single_deployment_demo_network.md), there is no need to
 complete step 2 through 4 prior to deploying your node. The single demo network will automatically deploy: 

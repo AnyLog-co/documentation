@@ -8,16 +8,17 @@ are referenced in the node configuration process to apply a configuration option
 
 ## Basic Deployment
 Our basic deployment is a _Generic_ node that automatically connects to TCP and REST, without any user-defined 
-configurations. However, users can easily extend the deployment to inclue things like 
+configurations. However, users can easily extend the deployment to include things like 
 * persistent data (volumes) 
 * Message Broker 
-* Node name other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
+* Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
 
 By default, the _Generic_ node connect to port 2148 for _TCP_ and 2149 for _REST_. 
 
 ```shell
 docker run --network host -it --detach-keys=ctrl-d \
   --name anylog-node \
+  [-e NODE_NAME=my-anylog-node \]
   [-e ANYLOG_SERVER_PORT=32148 \] 
   [-e ANYLOG_REST_PORT=32149 \] 
   [-e ANYLOG_BROKER_PORT=2150 \] 
