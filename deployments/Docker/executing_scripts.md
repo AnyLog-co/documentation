@@ -1,5 +1,5 @@
 # Executing Script
-By default, AnyLog provides a series of scripts which help set up a given node. The scripts include things like 
+By default, AnyLog provides a series of scripts which help set up a given node. The scripts include things like setting 
 environment variables, network and database configurations, declaring policies to the blockchain and scheduling a sync
 time against the blockchain (or master node). 
 
@@ -18,18 +18,25 @@ docker volume ls
 docker volume inspect ${VOLUME_NAME}
 ```
 
-3. Once you know the _Mountpoint_, you can access the content within that volume. Note - Depending on the permissions, 
-you may need to do a `sudo` command. 
+3. Once you know the _Mountpoint_, you can access the content within that volume. Depending on the permissions, 
+you may need to do a `sudo` command in order to access content on said volume.
 
-`local_script.al` (Sample mountpoint - `/var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al`) 
-file will get executed automatically when setting `Enable Local Script` configuration to **true**
+Sample mountpoint Path: 
+```shell
+/var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al
+```
 
-4. Once the updated local script, you can also manually run it by executing `process` command.
+4. Either create a new script, or utilize the existing `local_script.al` file to write the your personalized script. 
+When setting the `Enable Local Script` configuration to **true**, the default deployment process will automatically run
+`local_script.al` when starting. 
+```shell 
+sudo vim /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al
+```
 
+5. Once the personalized script has been created, you can manually run it by executing `process` command.
 ```shell
 AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
 ```
-
 
 ## Sample Local Scripts
 In addition to the _default_ deployment scripts, the `sample_code` directory provides examples of utilizing MQTT client
