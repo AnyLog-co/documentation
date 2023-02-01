@@ -8,14 +8,16 @@ are referenced in the node configuration process to apply a configuration option
 
 ## Basic Deployment
 Our basic deployment is a _Generic_ node that automatically connects to TCP and REST, without any user-defined 
-configurations. However, users can easily extend the deployment to include things like 
-* persistent data (volumes) 
-* Message Broker 
-* Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
+configurations.
 
-By default, the _Generic_ node connect to port 2148 for _TCP_ and 2149 for _REST_. 
+By default, the _Generic_ node connect to port 32148 for _TCP_ and 32149 for _REST_. 
 
 ```shell
+# install volumes 
+helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz
+
+# install node 
+helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
 ```
 
 ## Configuration Based Deployment
@@ -27,9 +29,10 @@ script updates the correlating `.env` file of the node.
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
 
 0. Requirements
-    * [Docker and docker-compose](https://docs.docker.com/engine/install/)
+    * [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/)  
+    * [Helm](https://helm.sh/docs/)
     * Python3
-      * [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts 
+      * [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts 
 
 1. Download [deployment scripts](https://github.com/AnyLog-co/deployments)
 ```shell
@@ -49,16 +52,24 @@ bash $HOME/deployments/deployment_scripts/deploy_node.sh
 ```
 
 If a user already has a configuration file and does not want to go through the questionnaire, they can utilize the basic
-`docker-compose` command. 
+`helm` commands. 
 
 ```shell
-cd $HOME/deployments/docker-compose/anylog-${NODE_TYPE}
+# install volumes 
+helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz \
+  --name-template ${NODE_NAME}-volume
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE} \
 
-# start a node in detached mode
-docker-compose up -d 
-
+# install node 
+helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz \
+  --name-template ${NODE_NAME}-volume
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE} \
+  
 # to attach
-docker attach --detach-keys=ctrl-d anylog-${NODE_NAME} 
+kubectel get pod # get pod name 
+kubectl attach -it pod/${POD_NAME}
+
+# to detach ctrl-p + ctrl-pq
 ```
 
 ### Sample Questionare 
@@ -165,17 +176,37 @@ Section: Advanced Settings
         Threshold Time [default: 60 seconds | options: second, minute, hour, day]: 
         Threshold Volume [default: 10KB | options: KB, MB, GB]: 
 
-
-Would you like to deploy AnyLog now (y/n)? y
-Creating volume "anylog-rest_anylog-rest-node-anylog" with default driver
-Creating volume "anylog-rest_anylog-rest-node-blockchain" with default driver
-Creating volume "anylog-rest_anylog-rest-node-data" with default driver
-Creating volume "anylog-rest_anylog-rest-node-local-scripts" with default driver
-Pulling anylog-rest-node (anylogco/anylog-network:predevelop)...
-predevelop: Pulling from anylogco/anylog-network
-846c0b181fff: Pull complete
-741be954cf15: Pull complete
-2f2beb7e7388: Pull complete
-fce65e772dd8: Pull complete
-...
+--- Kubernetes Metadata Configurations ---
+Section: Metadata
+        Namespace [default: default]: 
+        Kubernetes pod hostname [default: anylog-node]: 
+        App Name [default: anylog-node-app]: 
+        Pod Name [default: anylog-node-pod]: 
+        Deployment Name [default: anylog-node-deployment]: 
+        Service Name [default: anylog-node-service]: 
+        Configuration Name [default: anylog-node-configmap]: 
+        Node Selector: 
+        Replicas [default: 1]: 
+Section: Image
+        Secret Name [default: imagepullsecret]: 
+        Repository [default: anylogco/anylog-network]: 
+        Deployment Version [default: predevelop | options: develop, predevelop, test]: 
+        Pull Policy [default: IfNotPresent | options: Always, IfNotPresent, Never]: 
+Section: Volume
+        Enable Volumes [default: true | options: true, false]: 
+        --> Volume: anylog_volume
+        Name [default: anylog-rest-anylog-data]: 
+        Path [default: /app/AnyLog-Network/anylog]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
+        --> Volume: blockchain_volume
+        Name [default: anylog-rest-blockchain-data]: 
+        Path [default: /app/AnyLog-Network/blockchain]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
+        --> Volume: data_volume
+        Name [default: anylog-rest-data-data]: 
+        Path [default: /app/AnyLog-Network/data]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
 ```

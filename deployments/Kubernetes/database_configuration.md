@@ -26,7 +26,7 @@ The following documentation provides instruction to install PostgresSQL locally:
 
 1. access configuration file 
 ```shell
-
+vim $HOME/deployments/helm/sample-configurations/postgres.yaml
 ```
 
 2. Deploy postgres 
@@ -50,7 +50,7 @@ The following documentation provides instruction to install MongoDB locally:
 
 1. access configuration file 
 ```shell
-
+vim $HOME/deployments/helm/sample-configurations/mongodb.yaml
 ```
 
 2. Deploy mongodb 
