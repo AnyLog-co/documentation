@@ -7,7 +7,7 @@ single docker-compose that builds a [demo network](single_deployment_demo_networ
 For login credentials contact us at: [info@anylog.co](mailto:info@anylog.co)
 
 **Support Links**
-* [Remote-CLI](../Support/Remote-CLI)
+* [Remote-CLI](../Support/Remote-CLI.md)
 * [EdgeX](../Support/EdgeX.md)
 * [Grafana](../Support/Grafana.md)
 * [Trouble Shooting](../Support/cheatsheet.md)
