@@ -54,12 +54,19 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 * [Install Database](Docker/database_configuration.md)
 * [Install Node](Docker/deploying_node.md)
 * [Single Deployment Demo](Docker/single_deployment_demo_network.md)
-* [Docker Volumes & Creating AnyLog Scripts](Docker/volumes.md)
+* [Docker Volumes](Docker/volumes.md)
+* [Creating AnyLog Scripts](Docker/executing_scripts.md)
 
+**[Kubernetes](Kubernetes)**
+* [Install Database](Kubernetes/database_configuration.md)
+* [Install Node](Kubernetes/deploying_node.md)
+* [Docker Volumes](Kubernetes/volumes.md)
+* [Creating AnyLog Scripts](Kubernetes/executing_scripts.md)
 
-**[Networking](Networking)** - General Networking Information
-* [Nebula](Networking/nebula.md)
-* [NGINX](Networking/nginx.md)
+**[Networking](Networking%20&%20Security)** - General Networking Information
+* [Nebula](Networking%20&%20Security/nebula.md)
+* [NGINX](Networking%20&%20Security/nginx.md)
+* [AnyLog Authentication](Networking%20&%20Security/anylog_authentication.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
 * [Cheat Sheet](Support/cheatsheet.md)

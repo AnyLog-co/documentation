@@ -33,7 +33,8 @@ Farther details regarding things like binding and thread count can be found in o
 The following provides a basic example of both the configuration policy, as-well-as a (master) node policy. 
 
 Values in the configuration policy are relatively set, that way when a deployment is restarted a new policy will not be
-declared for the node due to the changing virtual IP.
+declared for the node due to the changing virtual IP. As for the local IP in the (master) node policy, we assume the 
+service name will not change. 
 
 
 ```json 

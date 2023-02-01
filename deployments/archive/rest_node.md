@@ -59,7 +59,7 @@ USER_TYPE=admin
 # Password used by the ROOT member in authentication
 #ROOT_PASSWORD=<AUTHENTICATION_ROOT_PASSWORD>
 
-# --- Networking ---
+# --- Networking & Security ---
 # External IP address of the machine
 #EXTERNAL_IP=<NETWORKING_EXTERNAL_IP>
 # Local or  internal network IP address of the machine

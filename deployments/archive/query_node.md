@@ -36,7 +36,7 @@ COMPANY_NAME=New Company
 # City where machine is located
 #CITY=<GENERAL_CITY>
 
-# --- Networking ---
+# --- Networking & Security ---
 # External IP address of the machine
 #EXTERNAL_IP=<NETWORKING_EXTERNAL_IP>
 # Local or  internal network IP address of the machine
