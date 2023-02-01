@@ -60,7 +60,8 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 **[Kubernetes](Kubernetes)**
 * [Install Database](Kubernetes/database_configuration.md)
 * [Install Node](Kubernetes/deploying_node.md)
-* [Docker Volumes](Kubernetes/volumes.md)
+* [Persistent Data](Kubernetes/volumes.md)
+* [Networking](Kubernetes/networking.md)
 * [Creating AnyLog Scripts](Kubernetes/executing_scripts.md)
 
 **[Networking](Networking%20&%20Security)** - General Networking Information

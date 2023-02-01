@@ -7,7 +7,7 @@ An AnyLog deployment type is based on **system variables**, which users can assi
 are referenced in the node configuration process to apply a configuration option or a configuration value.
 
 ## Basic Deployment
-Our basic deployment is a _Generic_ node that automatically connects to TCP and REST, without any user-defined 
+Our basic deployment is a _Generic_ node (nicknamed REST) that automatically connects to TCP and REST, without any user-defined 
 configurations.
 
 By default, the _Generic_ node connect to port 32148 for _TCP_ and 32149 for _REST_. 
