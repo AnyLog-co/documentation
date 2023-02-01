@@ -51,10 +51,10 @@ bash $HOME/deployments/deployment_scripts/deploy_node.sh
 ```
 
 A step-by-step explanation of the AnyLog deployment of the different nodes is available here:   
-* [Master Node](master_node_deployment_process.md)
-* [Operator Node](operator_node_deployment_process.md)
-* [Publisher Node](publisher_node_deployment_process.md)
-* [Query Node](query_node_deployment_process.md)
+* [Master Node](../archive/master_node_deployment_process.md)
+* [Operator Node](../archive/operator_node_deployment_process.md)
+* [Publisher Node](../archive/publisher_node_deployment_process.md)
+* [Query Node](../archive/query_node_deployment_process.md)
 
 ## Sample Configuration Files
 Sample configurations for specific node types can be found in [deployments](https://github/AnyLog-co/deployments/docker-compose)

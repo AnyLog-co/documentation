@@ -3,7 +3,7 @@ The following provides insight into the work being done in the background to dep
 In the example, the node is part of a [nebula overlay network](../Networking%20&%20Security/nebula.md), with the TCP 
 connection set to bind. 
 
-For directions to start an Operator node please visit the [deployment process](deploying_node.md) document.
+For directions to start an Operator node please visit the [deployment process](../Docker/deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-operator/anylog_configs.env)
 
 Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 

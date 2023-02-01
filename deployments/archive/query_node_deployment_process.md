@@ -3,7 +3,7 @@ The following provides insight into the work being done in the background to dep
 In the example, the physical machine part a [nebula overlay network](../Networking%20&%20Security/nebula.md); however, 
 connectivity is based on the default local IP address with TCP bind disabled. 
 
-For directions to start a Query node please visit the [deployment process](deploying_node.md) document.
+For directions to start a Query node please visit the [deployment process](../Docker/deploying_node.md) document.
 configurations used for this deployment can be found [here](https://raw.githubusercontent.com/AnyLog-co/deployments/master/docker-compose/anylog-query-remote-cli/anylog_configs.env)   
 
 Note, the sample configurations use _SQLite_ so that users can take it run. However, we recommend utilizing Relational 
