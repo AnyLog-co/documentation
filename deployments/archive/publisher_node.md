@@ -3,7 +3,7 @@ A node that supports distribution of data from device(s) to operator nodes. This
 recommend in getting started, but is ideal for when wanting to send data from devices directly into AnyLog. 
 
 ## Requirements
-* [Node Setup](../prerequisites.md#docker) - including logging into AnyLog's Docker hub
+* [Node Setup](../deployments/prerequisites.md#docker) - including logging into AnyLog's Docker hub
 
 
 ## Process

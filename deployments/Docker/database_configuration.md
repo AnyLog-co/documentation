@@ -1,11 +1,26 @@
-# Database Configuration
-AnyLog utilizes 3 logical databases -- SQLite and/or PostgresSQL for SQL data and MongoDB for non-SQL (aka blobs) data. 
-SQLite database doesn't require extra configurations as it resides within AnyLog. 
+ # Database Configuration
+Physical databases are a pluggable component. A logical database is associated with a physical database when nodes start.  
+The command [connect dbms](../../sql%20setup.md#connecting-to-a-local-database) associates a logical database with a 
+physical database.  
+
+The association of logical and physical databases are the users choice, and the same logical database can be associated 
+with different physical databases (on different nodes).
+
+The following table lists the supported databases and their common usage:
+
+| Database Name   | Target Data    | Comments |
+| --------------- | ------------- | ------------- |
+| PostgresSQL     | Structured or semi-structured (i.e. sensor data, PLC data, telemetry data  |   |
+| SQLite          | Structured or semi-structured (i.e. sensor data, PLC data, telemetry data) | For small nodes or data in RAM |
+| MongoDB         | Unstructured data (i.e. images and video) |   |
+
+Other physical databases can be added if an AnyLog connector to the physical database is developed.
 
 ## PostgresSQL
 On machines that will use PostgresSQL - make sure PostgresSQL is installed and accessible. Our  deployments package 
 provides a docker deployment for PostgresSQL - alternatively a user can deploy / use their own PostgresSQL database. 
-If you'd like to install PostgresSQL locally, rather than via Docker feel free to utilize the  following documentation: 
+
+The following documentation provides instruction to install PostgresSQL locally: 
 * [Install PostgreSQL as a Service](https://www.postgresql.org/download/)
 * [Configure PostgreSQL for Remote Access](https://www.linode.com/docs/guides/configure-postgresql/)
 
@@ -28,10 +43,16 @@ docker-compose up -d
 
 **Note**: The docker-compose file deploys PostgresSQL version 14.0-alpine 
 
+## SQLite
+
+SQLite is installed by default with the AnyLog deployment.
+
 ## MongoDB 
 On machines that will use MongoDB (usually Operator nodes) - make sure MongoDB is installed locally. Our deployments 
-package provides a docker deployment for MongoDB - alternatively a user can deploy / use their own MongoDB database. If 
-you'd like to install MongoDB locally, rather than via Docker feel free to utilize the  following documentation:
+package provides a docker deployment for MongoDB - alternatively a user can deploy / use their own MongoDB database. 
+
+The following documentation provides instruction to install MongoDB locally: 
+
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
 * [Accepting MongoDB data on AnyLog](setting_up_mongodb.md)
 

@@ -44,38 +44,24 @@ are running, but no other process is enabled. This allows for users to play with
 running in the background, but already having the default network configurations.  A basic deployment of an AnyLog REST 
 instance can be  executed using the following line:
 ```shell
-# docker 
 docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
-
-# Kubernetes
-git clone https://github.com/AnyLog-co/deployments 
-helm install $HOME/helm/packages/anylog-node-volume-1.22.3.tgz --name-template anylog-node-volume 
-helm install    $HOME/helm/packages/anylog-node-1.22.3.tgz --name-template anylog-node
 ```
 
 
 ## Table of Content
-[Preparing Machine(s) for Deployment](prerequisites.md)
 
 **[Docker](Docker)**
 * [Install Database](Docker/database_configuration.md)
-* [Install Master Node](Docker-old/master_node.md)
-  * [Deployment Process](Docker/master_node_deployment_process.md)
-* [Install Operator Node](Docker-old/operator_node.md)
-  * [Deployment Process](Docker/operator_node_deployment_process.md)
-* [Install Publisher Node](Docker-old/publisher_node.md)
-  * [Deployment Process](Docker/publisher_node_deployment_process.md)
-* [Install Query Node](Docker-old/query_node.md)
-  * [Deployment Process](Docker/query_node_deployment_process.md)
+* [Install Node](Docker/deploying_node.md) 
+  * [Master Deployment Process](archive/master_node_deployment_process.md)
+  * Operator [Deployment Process](archive/operator_node_deployment_process.md)
+  * [Publisher Deployment Process](archive/publisher_node_deployment_process.md)
+  * [Query Deployment Process](archive/query_node_deployment_process.md)
 * [AnyLog REST Node](Docker-old/rest_node.md)
 * [Single Deployment Demo](Docker/single_deployment_demo_network.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/volumes.md)
 * [Accessing MongoDB via AnyLog](Docker/setting_up_mongodb.md)
 
-
-**[Kubernetes](Kubernetes)**
-* [Persistent Data on Kubernetes](Kubernetes/volumes.md)
-* [Networking on Kubernetes](Kubernetes/networking.md)
 
 **[Networking](Networking)** - General Networking Information
 * [Nebula](Networking/nebula.md)

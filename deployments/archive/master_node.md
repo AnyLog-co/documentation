@@ -6,7 +6,7 @@ For a step-by-step process of what's being done in the background, please visit 
 
 
 ## Requirements
-* [Node Setup](../prerequisites.md#docker) - including logging into AnyLog's Docker hub
+* [Node Setup](../deployments/prerequisites.md#docker) - including logging into AnyLog's Docker hub
 * [Postgres](../Docker/database_configuration.md#postgressql)
 
 ## Process

@@ -6,7 +6,7 @@ important to make sure that:
 2. That the two don't share a physical database - one should use SQLite and another PostgresSQL 
 
 ## Requirements
-* [Node Setup](../prerequisites.md#docker) - including logging into AnyLog's Docker hub
+* [Node Setup](../deployments/prerequisites.md#docker) - including logging into AnyLog's Docker hub
 * [Postgres](../Docker/database_configuration.md#postgressql)
 
 ## Process
