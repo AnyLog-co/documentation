@@ -54,7 +54,7 @@ package provides a docker deployment for MongoDB - alternatively a user can depl
 The following documentation provides instruction to install MongoDB locally: 
 
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
-* [Accepting MongoDB data on AnyLog](setting_up_mongodb.md)
+* [Accepting MongoDB data on AnyLog](../Support/setting_up_mongodb.md)
 
 1. access configuration file 
 ```shell

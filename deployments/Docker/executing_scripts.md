@@ -1,47 +1,36 @@
-## Executing Script
-Scripts get executed using the `process` command followed by the path and file name. 
+# Executing Script
+By default, AnyLog provides a series of scripts which help set up a given node. The scripts include things like 
+environment variables, network and database configurations, declaring policies to the blockchain and scheduling a sync
+time against the blockchain (or master node). 
 
-For example, the command below execute a script referenced by the path and file name. 
-```
-process !anylog_path/AnyLog-Network/demo/ha_operator1.al
-```
-In the example above, the path is prefixed by ```!anylog_path```. Therefore, anylog_path is treated as a key, which replaced 
-by the value of the key in the node.  
-The [Node Dictionary](../../getting%20started.md#the-node-dictionary) section explains how values are assigned to keys.  
-Use the [get dictionary](../../monitoring%20nodes.md#the-get-dictionary-command) command to view the values assigned to keys.
+With that in mind, users may want to deploy their own scripts, in addition to the default scripts; these scripts can
+be things like - complex MQTT client requests, scheduled processes to check disk space or executing a query every so 
+often. These scripts can be added in the [local scripts volume](volumes.md). 
 
-This example below detail the process to executes the script `sample_code/edegex.al` in a docker deployment:
-
-1. Using the `inspect` command get the path for anylog-node-local-scripts
+## Creating Personalized Script
+1. Get list of all your volumes
 ```shell
-docker volume inspect anylog-node-local-scripts
+docker volume ls 
 ```
 
-2. Based on the _Mountpoint_ copy `sample_code/edgex.al` into `deployment_scripts/local_script.al`
-    * Feel free to `vim` into either file to see their content, or develop your own (local) deployment script
+2. Using the `inspect` command get the directory path of the volume
+```shell 
+docker volume inspect ${VOLUME_NAME}
+```
+
+3. Once you know the _Mountpoint_, you can access the content within that volume. Note - Depending on the permissions, 
+you may need to do a `sudo` command. 
+
+`local_script.al` (Sample mountpoint - `/var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al`) 
+file will get executed automatically when setting `Enable Local Script` configuration to **true**
+
+4. Once the updated local script, you can also manually run it by executing `process` command.
+
 ```shell
-sudo cp /var/lib/docker/volumes/anylog-node-local-scripts/_data/sample_code/edgex.al /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al 
+AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
 ```
 
-3. attach to the node 
-```shell
-docker attach --detach-keys="ctrl-d" anylog-node 
 
-# to detach press ctrl-d
-```
-
-4. Within AnyLog CLI execute the new local script. 
-```shell
-AL anylog-node > process !local_scripts/local_script.al  
-```
-
-5. Once the script is done you should be able to see the following changes:
-    1. New policies added to the blockchain -- `blockchain get *`
-    2. Data coming in to MQTT client -- `get msg client`
-   
-
-6. Detach from docker container -- `ctrl-d`
-
-
-7. Update the .env file to have `DEPLOY_LOCAL_SCRIPT=true` instead of `DEPLOY_LOCAL_SCRIPT=false` so that the local 
-script will be deployed each time the node starts up. 
+## Sample Local Scripts
+In addition to the _default_ deployment scripts, the `sample_code` directory provides examples of utilizing MQTT client
+with either blockchain policies and / or multiple topics within the same call. 

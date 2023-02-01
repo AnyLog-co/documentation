@@ -52,15 +52,9 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 
 **[Docker](Docker)**
 * [Install Database](Docker/database_configuration.md)
-* [Install Node](Docker/deploying_node.md) 
-  * [Master Deployment Process](archive/master_node_deployment_process.md)
-  * Operator [Deployment Process](archive/operator_node_deployment_process.md)
-  * [Publisher Deployment Process](archive/publisher_node_deployment_process.md)
-  * [Query Deployment Process](archive/query_node_deployment_process.md)
-* [AnyLog REST Node](Docker-old/rest_node.md)
+* [Install Node](Docker/deploying_node.md)
 * [Single Deployment Demo](Docker/single_deployment_demo_network.md)
 * [Docker Volumes & Creating AnyLog Scripts](Docker/volumes.md)
-* [Accessing MongoDB via AnyLog](Docker/setting_up_mongodb.md)
 
 
 **[Networking](Networking)** - General Networking Information
@@ -72,3 +66,4 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 * [Remote-CLI](Support/Remote-CLI.md)
 * [Grafana](Support/Grafana.md)
 * [EdgeX](Support/EdgeX.md)
+* [Accessing MongoDB via AnyLog](Support/setting_up_mongodb.md)
