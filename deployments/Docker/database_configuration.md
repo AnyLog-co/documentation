@@ -1,7 +1,8 @@
  # Database Configuration
 Physical databases are a pluggable component. A logical database is associated with a physical database when nodes start.  
-The command [connect dbms](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#connecting-to-a-local-database) 
-associates a logical database with a physical database.  
+The command [connect dbms](../../sql%20setup.md#connecting-to-a-local-database) associates a logical database with a 
+physical database.  
+
 The association of logical and physical databases are the users choice, and the same logical database can be associated 
 with different physical databases (on different nodes).
 
