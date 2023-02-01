@@ -14,7 +14,7 @@ When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/
 
 ### Sample Node Policy for Kubernetes
 The following provides a basic example of both the configuration policy, as-well-as a (master) node policy. 
-Notice that the values for the configuration policy are relatively set, that way when a deployment is restarted there  
+Notice that the values for the configuration policy are relatively set, that way when a deployment is restarted there
 won't be a need to declare a new policy for the node due to the changing virtual IP address.
 
 ```json 
