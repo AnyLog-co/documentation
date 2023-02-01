@@ -174,26 +174,26 @@ The following policy includes both - the networking services and script commands
 # Creating policies
 
 Policies are JSON structures that represent logical and physical objects which are stored on the shared metadata.   
+Their only structural requirement is that the root of the JSON is with a single key.
 For example, members of the network, security rules, table definitions are represented as policies.  
 Users and processes can create policies and using a simple API, the policies can be written to the shared metadata layer
 or retrieved from the shared metadata layer. 
-The only requirement is that the root of the JSON is with a single key.   
-The root key is called the 'policy type', it allows identifying and classifying policies by their type and facilitates
-search where filtering processes are assigned to a group of policies identified by their type.
+The (single) root key in a policy is the 'policy type', it allows identifying and classifying policies by their type and facilitates
+search where query and filtering processes are assigned to a group of policies identified by their type.
 
 Adding and retrieving policies from the shared metadata layer is described in the [Blockchain Commands](blockchain%20commands.md#blockchain-commands) section.
  
 ## Declaring a policy using a code block
 
-Using a code block, users can describe a policy on the AnyLog command line.  
+Using a code block, users can describe a policy on the [AnyLog Command Line (CLI)](getting%20started.md#anylog-command-line-interface).  
 The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
-When the copy is done, the key is assigned with the policy and maintained in the local dictionary.
+When the copy is done, the key is assigned with the policy and maintained in the [local dictionary](getting%20started.md#the-node-dictionary).
 
 Using the code block example [above](#policies-based-configuration), when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
 This process updates the node's dictionary with the key and value such that the value (policy) can be referenced using the key (see the examples below).
 
 Note that some attribute names in the policy are associated with dictionary values. For example, the attribute name
-```ip``` is assigned with ```!external_ip``` as its value. When the policy is pushed to the metadata, the dictioanry keys
+```ip``` is assigned with ```!external_ip``` as its value. When the policy is written to the metadata, the dictionary keys
 are replaced with their assigned values.
 
 ## Retrieving policies from the dictionary
@@ -267,8 +267,12 @@ set policy config_policy [config][script] + 'set authentication off' and [config
 
 Notes:
 1. The policy attribute values can be assigned in a single command or using multiple **set policy** commands
-that reference the same policy name (```config_policy``` in the example below). This property allows to condition the 
+that reference the same policy name (```config_policy``` in the example above). This property allows to condition the 
 assignment with **if** conditions (details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
 2. A dictionary is assigned to a key using the signs: {}
 3. A list is assigned to a key using the sign: [] and entries are added to the list using the plus (+) sign as in the example above.
-
+4. Removing entries from the local dictionary is by assigning a null string to the key in the dictionary. The example below 
+   removes the policy from the local dictionary:
+   ```anylog
+   config_policy = ""
+   ```
