@@ -3,7 +3,7 @@
 The `run client ()` ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 
 If the parenthesis are left empty, all the nodes with the tables' data receive and process the query. Users can detail 
 specific nodes of interest by providing their IP and Ports.  
-The format of SQL commands is detailed in the [Issuing a SQL command](../sql%20setup.md#issuing-a-sql-command-to-a-node-in-the-network) section.
+The format of SQL commands is detailed in the [Issuing a SQL command](sql%20setup.md#issuing-a-sql-command-to-a-node-in-the-network) section.
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed 
