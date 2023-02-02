@@ -22,8 +22,7 @@ helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
 
 ## Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to 
-assist with deployment of an AnyLog instance of either _Docker_ or _Kubernetes_. For a _Docker_ instance the deployment 
-script updates the correlating `.env` file of the node. 
+assist with deployment of an AnyLog instance of either _Kubernetes_ or _Docker_.
 
 **Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your 
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
@@ -76,6 +75,10 @@ kubectl attach -it pod/${POD_NAME}
 Below is a sample questionnaire for a _Generic_ (nicknamed REST) node. The node will set the environment variables as 
 well as connect to TCP and REST. 
 
+Since AnyLog is a distributed network, each (data) node can be replicated across different machines / instances. As such, 
+while deployment with Kubernetes allows for [Kubernernaties replication](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/),
+we recommend our [High-Availability](../../high%20availability.md) alternative. 
+
 ```editorconfig
 anylog@anylog-builder:~$ bash $HOME/deployments/deployment_scripts/deploy_node.sh 
 Node Type [default: rest | options: rest, master, operator, publisher, query, info]: rest
@@ -114,7 +117,7 @@ Section: Database
         Database Type [default: sqlite | options: sqlite, psql]: psql
         Database User: admin
         Database Password: passwd
-        Database IP Address [default: 127.0.0.1]: 
+        Database IP Address [default: psql-svs]: 
         Database Port [default: 5432]: 
         Enable Autocommit [default: false | options: true, false]: 
         Enable System Query Database [default: false | options: true, false]: true
@@ -123,7 +126,7 @@ Section: Database
         Database Type [default: mongo | options: mongo]: 
         Database User: admin
         Database Password: passwd
-        Database IP Address [default: 127.0.0.1]: 
+        Database IP Address [default: mongo-svs]: 
         Database Port [default: 27017]: 
         Blobs DBMS [default: true | options: true, false]: 
         Blobs Folder [default: true | options: true, false]: 

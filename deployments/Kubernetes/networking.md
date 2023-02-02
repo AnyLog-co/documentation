@@ -14,6 +14,9 @@ local_ip will be set to the service name; which other members on the Kubernetes 
 When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/) or other proxy service, as well as our
 [configuration policy](../../policies.md).
 
+Directions for using Kubernetes Cluster Networking can be found [here](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+
+
 ## Sample Network Setup 
 * The External & Virtual IP are used for setting up TCP connections
 * The Virtual IP is used for setting the REST connection
@@ -36,6 +39,9 @@ Values in the configuration policy are relatively set, that way when a deploymen
 declared for the node due to the changing virtual IP. As for the local IP in the (master) node policy, we assume the 
 service name will not change. 
 
+The sample JSON for (master) node policy is set to have communication between AnyLog nodes to be set to binding. When
+the communication is set to not-binding, the external IP (`73.222.38.13`) will be set to `ip` key in the policy, and the 
+Kubernetes service IP (`anylog-master-service`) will be set to `local_ip`. 
 
 ```json 
 {"config" : {
