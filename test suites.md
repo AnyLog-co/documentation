@@ -104,7 +104,7 @@ name extends the name created to make the output name unique. The output file is
 in section [the test format](#the-test-format) above.
 
 ```anylog
-sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_*.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
+run client () sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_*.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
 ``` 
 
 ## Executing a query and comparing the output to the trusted output
@@ -120,7 +120,7 @@ include the following:
 
 **Example**:
 ```anylog
-sql lsl_demo format=json and stat=true and test = true and file = !test_dir\test_*.test and source = !test_dir\query_1.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
+run client () sql lsl_demo format=json and stat=true and test = true and file = !test_dir\test_*.test and source = !test_dir\query_1.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
 ``` 
 
 **Notes**:

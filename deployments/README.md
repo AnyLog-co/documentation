@@ -6,6 +6,9 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Configure EdgeX as a data source  
 * Configure Grafana to visualize the data 
 
+We recommend to deploy an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
+static IPs when deploying a production network.
+
 ## Deployment
 **Note Types**:
 * Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
@@ -54,12 +57,20 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 * [Install Database](Docker/database_configuration.md)
 * [Install Node](Docker/deploying_node.md)
 * [Single Deployment Demo](Docker/single_deployment_demo_network.md)
-* [Docker Volumes & Creating AnyLog Scripts](Docker/volumes.md)
+* [Docker Volumes](Docker/volumes.md)
+* [Creating AnyLog Scripts](Docker/executing_scripts.md)
 
+**[Kubernetes](Kubernetes)**
+* [Install Database](Kubernetes/database_configuration.md)
+* [Install Node](Kubernetes/deploying_node.md)
+* [Persistent Data](Kubernetes/volumes.md)
+* [Networking](Kubernetes/networking.md)
+* [Creating AnyLog Scripts](Kubernetes/executing_scripts.md)
 
-**[Networking](Networking)** - General Networking Information
-* [Nebula](Networking/nebula.md)
-* [NGINX](Networking/nginx.md)
+**[Networking](Networking%20&%20Security)** - General Networking Information
+* [Nebula](Networking%20&%20Security/nebula.md)
+* [NGINX](Networking%20&%20Security/nginx.md)
+* [AnyLog Authentication](Networking%20&%20Security/anylog_authentication.md)
 
 **[Support](Support)** - Deployment directions for non-AnyLog services 
 * [Cheat Sheet](Support/cheatsheet.md)

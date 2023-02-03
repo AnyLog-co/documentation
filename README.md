@@ -71,7 +71,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Secure Network](secure%20network.md)
     * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
     * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
-    * [Directions for Authenticating Nodes](deployments/Networking%20&%20Security/anylog_authentication.md)
+    * [Directions for Authenticating Nodes](deployments/Networking & Security/anylog_authentication.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
