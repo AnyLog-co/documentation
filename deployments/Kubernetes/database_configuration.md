@@ -24,16 +24,23 @@ The following documentation provides instruction to install PostgresSQL locally:
 * [Install PostgreSQL as a Service](https://www.postgresql.org/download/)
 * [Configure PostgreSQL for Remote Access](https://www.linode.com/docs/guides/configure-postgresql/)
 
-1. access configuration file 
+1. (optional) Update values in the configuration file 
 ```shell
 vim $HOME/deployments/helm/sample-configurations/postgres.yaml
 ```
 
 2. Deploy postgres 
 ```shell
+helm install $HOME/deployments/helm/packages/postgres-volume-14.0-alpine.tgz \
+  --name-template psql-vol \
+  --values sample-configurations/postgres.yaml
+
+helm install $HOME/deployments/helm/packages/postgres-14.0-alpine.tgz \
+  --name-template psql \
+  --values sample-configurations/postgres.yaml 
 ```
 
-**Note**: The Kubernetes package deploys PostgresSQL version 14.0-alpine 
+**Note**: The Kubernetes package deploys PostgresSQL version 14.0-alpine and is based on a [medium article](https://medium.com/@suyashmohan/setting-up-postgresql-database-on-kubernetes-24a2a192e962) 
 
 ## SQLite
 
@@ -48,14 +55,35 @@ The following documentation provides instruction to install MongoDB locally:
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
 * [Accepting MongoDB data on AnyLog](../Support/setting_up_mongodb.md)
 
-1. access configuration file 
+1. (optional) access configuration file 
 ```shell
 vim $HOME/deployments/helm/sample-configurations/mongodb.yaml
 ```
 
 2. Deploy mongodb 
 ```shell
+helm install $HOME/deployments/helm/packages/mongodb-volume-4.tgz \
+  --name-template mongo-vol \
+  --values $HOME/deployments/helm/sample-configurations/mongodb.yaml
 
+helm install $HOME/deployments/helm/packages/mongodb-4.tgz \
+  --name-template mongo \
+  --values $HOME/deployments/helm/sample-configurations/mongodb.yaml
 ```
 
-**Note**: The Kubernetes package deploys MongoDB latest version 
+**Note**: The Kubernetes package deploys MongoDB latest version and is based on a [DevOpsCube article](https://devopscube.com/deploy-mongodb-kubernetes/)
+
+
+## AnyLog Configuration 
+As explained in the [networking](networking.md) section, each time a Kubernetes pod is spun up, it generates a new
+virtual IP. 
+
+When connecting to non-SQLite database via AnyLog, the `connect dbms` configurations cannot use
+an actual IP address for connecting between AnyLog and a physical database. Instead, they should connect via the relative
+[Kubernetes Service Name](https://kubernetes.io/docs/concepts/services-networking/service/). 
+
+By default, the PostgreSQL service name is `postgres-svs` and the MongoDB service name is `mongo-svs`.
+
+When deploying an AnyLog node with the [deployment scripts](https://github.com/AnyLog-co/deployments) that is Kubernetes
+based, the default Database Address is already pre-configured to use the service name, as opposed to the usual "default"
+IP address `127.0.0.1`. 

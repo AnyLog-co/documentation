@@ -6,6 +6,9 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Configure EdgeX as a data source  
 * Configure Grafana to visualize the data 
 
+We recommend to deploy an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
+static IPs when deploying a production network.
+
 ## Deployment
 **Note Types**:
 * Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).

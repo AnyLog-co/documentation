@@ -57,12 +57,12 @@ If a user already has a configuration file and does not want to go through the q
 # install volumes 
 helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz \
   --name-template ${NODE_NAME}-volume
-  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE} \
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
 
 # install node 
 helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz \
   --name-template ${NODE_NAME}-volume
-  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE} \
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
   
 # to attach
 kubectel get pod # get pod name 
