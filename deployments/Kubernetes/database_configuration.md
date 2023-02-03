@@ -55,7 +55,7 @@ The following documentation provides instruction to install MongoDB locally:
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
 * [Accepting MongoDB data on AnyLog](../Support/setting_up_mongodb.md)
 
-1. (optional) access configuration file 
+1. (optional) update configuration file 
 ```shell
 vim $HOME/deployments/helm/sample-configurations/mongodb.yaml
 ```
@@ -82,7 +82,7 @@ When connecting to non-SQLite database via AnyLog, the `connect dbms` configurat
 an actual IP address for connecting between AnyLog and a physical database. Instead, they should connect via the relative
 [Kubernetes Service Name](https://kubernetes.io/docs/concepts/services-networking/service/). 
 
-By default, the PostgreSQL service name is `postgres-svs` and the MongoDB service name is `mongo-svs`.
+By default, the PostgresSQL service name is `postgres-svs` and the MongoDB service name is `mongo-svs`.
 
 When deploying an AnyLog node with the [deployment scripts](https://github.com/AnyLog-co/deployments) that is Kubernetes
 based, the default Database Address is already pre-configured to use the service name, as opposed to the usual "default"
