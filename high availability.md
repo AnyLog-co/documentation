@@ -222,6 +222,7 @@ The following list summarizes the commands supporting the HA processes:
 | command           | Details | 
 | ----------------- | ----------------| 
 | get data nodes    | The list of user tables and the physical nodes that manage each table |
+| get metadata version | The ID representing the metadata version used on the node |
 | blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
 | blockchain test cluster   | Validates that the structure of the cluster policies is correct |
 | get tsd list   | The list of tsd tables on the current node |
@@ -231,7 +232,7 @@ The following list summarizes the commands supporting the HA processes:
 | get tsd sync status  | The sync status on the current node  |
 | test cluster setup  | The configuration of the node to support HA  |
 | test cluster data  | Compare the data status on all the nodes that support the same cluster  |
-
+| test network metadata  | Returns metadata version on each participating nodes  |
 
 ## View the distribution of data to clusters
 
