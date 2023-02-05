@@ -23,18 +23,18 @@ Data in the network is organized as follows:
 
 ### Example
 In the diagram below:
-* Data is assigned to one of 4 a logical tables (in the same way that data is assigned to table in a database). 
-* Each table is assigned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
+* Data is assigned to one of 4 a logical tables of a database  (i.e., each particular reading is assigned to table in a database). 
+* Each table is partitioned to one or more clusters. With N clusters assigned to a table, the table's data is partitioned to N.
   In the example below, N is 2. That means that about half of the table data is assigned to each cluster.
 * Each cluster is assigned to X Operators. If X is 3, there are 3 copies of the cluster's data, one on each assigned Operator.
 
 In the example below, the data of tables 1-4 is distributed to 2 clusters. Each cluster will have approximately half of the data.    
 The data of each cluster is maintained by 3 Operators such that if an Operator fails, the data remains available with the surviving Operators.  
-If an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
+IN addition, if an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
 
 ```anylog
                                                                             
-                                |--------------------|          |--------------------|        
+       Database                 |--------------------|          |--------------------|        
 |--------------------|          |                    |   --->   |     Operator 1     |  
 |                    |          |                    |          |--------------------|          
 |                    |   --->   |                    |          |--------------------|   
@@ -57,19 +57,23 @@ If an Operator node fails, the network protocol will initiate a new Operator and
 
 ### The data distribution
 
-When data in created, it is assigned to a cluster in a table and streamed to an Operator node that is assigned to the cluster.  
-The Operator node hosts the data in a local database, and the HA process will transfer the data to all the nodes that are assigned to the cluster.  
+When data in created, it is provided to an Operator. The Operator node hosts the data in a local database, and the HA 
+process will transfer the data to all the nodes that are assigned to the cluster.
+As the Operator is assigned to a cluster, pushing the data to the Operator associates the data with a cluster, and in HA 
+mode, the data will be replicated to all the Operators assigned to the cluster.  
+For example, using the diagram above, if operator 5 receives data, the data is associated with cluster 2 and will be replicated 
+to Operators 4 and 6.  
 The selection of an Operator can be done dynamically using a Publisher node that distributes the data based on predetermined logic,
-or by configuring a data source to a particular cluster.
+or by configuring a data source to a particular Operator.
 
 ## Prerequisites for HA configuration
 
 HA setup requires the following:
 
-1) Cluster policies.
-2) Operator nodes
+1) Operator nodes.
+2) Cluster policies.
 3) Operator policy representing each operator and assign each operator to a cluster.
-4) Enabling the following background processes on each Operator node:
+4) Enabling the following services on each Operator node:
    1) The Operator Background Process to ingest data to the local databases.
    2) The Distributor Background Process to push new data to the peer nodes that host a copy of the data.
    3) The  Consumer Background Process to pull data which is missing on the current node.
@@ -78,14 +82,16 @@ HA setup requires the following:
 
 Notes:
    * For HA, at least 2 operators are assigned to each cluster.
-   * When data is pushed to an Operator, it is assigned to the cluster supported by the Operator and the data will be replicated to
-    all the nodes that support the cluster.
+   * When data is pushed to an Operator, it is assigned to the cluster supported by the Operator, and the data will be replicated to
+    all the Operators that support the cluster.
      
 ## The Cluster Policy
 
-HA is based on distributing the data to clusters. A cluster is a logical collection of data and each cluster is supported by
-one or more operators. Operators are assigned to clusters (each operator can be assigned to only one cluster), and the number of
-operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators assigned to a cluster maintain the same data).  
+HA is based on distributing the data to clusters. A cluster represents a logical distribution of the data and 
+the collection of clusters represent the complete data set. Each cluster is supported by one or more operators. 
+Operators are assigned to clusters (each operator can be assigned to only one cluster), and the number of
+operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators
+assigned to a cluster maintain the same data).  
 
 Below is an example of a policy declaring a cluster:
 
@@ -133,9 +139,10 @@ Note:
 
 ## Configuring an Operator Node
 
-The example below enables 3 processes on an Operator node. By enabling these processes on all Operators, the data  
-will be synchronized among the Operators such that the local databases on each Operator maintain a complete data set 
-and all the Operators supporting the cluster maintain identical data.
+The example below enables 3 processes on an Operator node.  
+The cluster policy is assigned to the operator in the ``run operator`` command (see below).  
+By enabling these processes on all Operators, the data will be synchronized among the Operators such that the local 
+databases on each Operator maintain a complete data set and all the Operators supporting the cluster maintain identical data.
 
 | Command        | Functionality  | 
 | ---------- | -------| 
@@ -177,8 +184,6 @@ The command returns the HA configuration and relevant status. The info includes 
 | almgm.tsd_info | Defined                           | A tsd_info table defined. If missing, it needs to be created (using **create table** command).                |
 
 
-
-
 ## View data distribution policies
 There are 2 commands that provide visualization of how data is distributed (from logical tables) to physical nodes in the network:
 ```anylog
@@ -204,8 +209,6 @@ litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a
                                                                                                              ==> 142.10.83.145:2048         [0012  remote active]
 
 ```
-
-
 
 ## Test Cluster policies
 The command below tests the validity of the cluster policies:
