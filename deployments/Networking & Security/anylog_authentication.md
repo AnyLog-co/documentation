@@ -50,11 +50,9 @@ curl -X GET 10.0.0.1:32048 -U user:password -H "command: get status" -H "User-Ag
 ```
 
 ## Certificate Based Authentication 
-Using certificate based authentication cannot be done via configurations at this time. Instead, this needs to be done once
-the node is already running.
- 
-Certificate based authentication, can be set for a _node_ or _user_. In addition, there should be a _root_ account that's
-responsible for managing access for all other members. 
+
+Certificate based authentication, can be set for a _node_ or _user_. 
+In addition, there should be a _root_ account that's responsible for managing access for all other members. 
 
 **Disclaimer**: We do not recommend setting up the `root` account on the master node
 

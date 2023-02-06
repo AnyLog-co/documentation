@@ -42,10 +42,13 @@ Usually the image will be Ubuntu based, unless stated otherwise.
 *Compressed Size - size calculated by summing the image's layers, which are compressed
 
 
-By default, the AnyLog image is configured to run as a _REST_ node, which means that the TCP and REST options 
-are running, but no other process is enabled. This allows for users to play with the system with no other services 
-running in the background, but already having the default network configurations.  A basic deployment of an AnyLog REST 
-instance can be  executed using the following line:
+When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
+The following are the main services which are enabled in most deployments:
+* TCP - Allowing the node to join the ANyLog network and communicate with peer nodes.
+* REST - Allowing third party applications and data sources to communicate with an AnyLog node.
+* BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
+  
+A basic deployment of an AnyLog instance can be executed using the following line:
 
 ```shell
 docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:predevelop
