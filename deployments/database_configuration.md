@@ -1,5 +1,5 @@
  # Database Configuration
-Physical databases are a pluggable component. A logical database is associated with a physical database when nodes start.  
+Physical databases are a pluggable component. The configuration assigns a logical database to a physical database.
 The command [connect dbms](../../sql%20setup.md#connecting-to-a-local-database) associates a logical database with a 
 physical database.  
 

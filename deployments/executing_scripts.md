@@ -1,14 +1,16 @@
 # Executing Script
-By default, AnyLog provides a series of scripts which help set up a given node. The scripts include things like setting 
-environment variables, network and database configurations, declaring policies to the blockchain and scheduling a sync
-time against the blockchain (or master node). 
 
-With that in mind, users may want to deploy their own scripts, in addition to the default scripts; these scripts can
-be things like - complex MQTT client requests, scheduled processes to check disk space or executing a query every so 
-often. These scripts can be added in the local scripts volume.
+AnyLog is configured using the AnyLog commands. These commands can be issued on the AnyLog CLI, or organized in script 
+files or within policies that are hosted on a ledger.
+AnyLog provides a series of default scripts which help set up a given node. 
+Using these scripts, users can configure and set environment variables, network and database configurations, 
+declare policies that are stored on a ledger, scheduling a sync time against the blockchain (or master node), 
+apply mapping on data published on a node, scheduled processes to check disk space, execute a scheduled query and more.   
 
-Note, When creating personalized scripts on [Kubernetes](#creating-personalized-script-on-kubernetes) there is no need
-to locate the relevant but rather just accessing the (AnyLog node) deployment bash interface.  
+These scripts can be added in the local scripts' volume or added to the ledger using 
+[configuration policies](../policies.md#configuration-policies) or using a combination of both.
+
+The example below details deployment using Docker or Kubernetes.
 
 ## Creating Personalized Script on Docker
 1. Get list of all your volumes

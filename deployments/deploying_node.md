@@ -1,21 +1,31 @@
 # Deploying a Node
 
-There are 4 main types of AnyLog instance (_Master_, _Operator_, _Query_ and _Publisher_), as-well-as an option to 
-deploy a _Generic_ instance (nicknamed REST) - which includes only TCP, REST and an optional Message Broker connection. 
+The AnyLog instances are using the same code base and differ by the services they provide. 
+The services offered by a node are determined by the configuration applied to the node. 
+For convenience, we named 4 types of nodes which are configured differently to provide different functionalities     
+(_Master_, _Operator_, _Query_ and _Publisher_), as-well-as a _Generic_ instance configured with commonly used
+services and can be deployed "out-of-the-box" to support many of the edge use cases. 
 
-An AnyLog deployment type is based on **system variables**, which users can assign values to different keys. These keys  
-are referenced in the node configuration process to apply a configuration option or a configuration value.
+In the examples below, users define **system variables** by assigning values to keys. These keys  
+are referenced in the node configuration process to apply a configuration option, or a configuration value.
 
 ## Basic Deployment
-Our basic deployment is a _Generic_ node that automatically connects to TCP and REST, without any user-defined 
-configurations. However, users can easily extend the deployment to include things like 
+When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
+The following are examples of services which are enabled in most deployments:
+* TCP - Allowing the node to join the ANyLog network and communicate with peer nodes.
+* REST - Allowing third party applications and data sources to communicate with an AnyLog node.
+* BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
+
+Our basic deployment example is a _Generic_ node offers TCP and REST services.
+
+Users can extend the deployment to include the following services: 
 * persistent data (volumes) 
 * Message Broker 
 * Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
 
 By default, the _Generic_ node connect to port 2548 for _TCP_ and 2549 for _REST_ .
 
-**Docker Deployment** - 
+**Docker Deployment**
 ```shell
 docker run --network host -it --detach-keys=ctrl-d \
   --name anylog-node \
@@ -119,8 +129,8 @@ kubectl attach -it pod/${POD_NAME}
 ```
 
 ### Sample Questionare 
-Below is a sample questionnaire for a _Generic_ (nicknamed REST) node. The node will set the environment variables as 
-well as connect to TCP and REST. Information regarding `Kubernetes Metadata` will not appear when deploying a _Docker_ 
+Below is a sample questionnaire for a _Generic_ node. The node will set the environment variables as 
+well as enable the TCP and REST services. Information regarding `Kubernetes Metadata` will not appear when deploying a _Docker_ 
 installation of AnyLog. 
 
 ```editorconfig

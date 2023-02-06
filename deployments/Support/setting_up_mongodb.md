@@ -62,15 +62,18 @@ blockchain insert where policy=!mapping_policy and local=true and master=!ledger
 ```
 
 4. Set blobs archiver configurations 
+
 ```anylog
 <run blobs archiver where
     dbms=!blobs_dbms and
     folder=!blobs_folder and
     compress=!blobs_compress and
     reuse_blobs=!blobs_reuse
->```
+>
+```
 
 5. Initiate `mqtt client` process with local broker 
+
 ```anylog
 <run mqtt client where  broker=local and port=!anylog_broker_port and log=false and topic=(
   name=anylogedgex-images and 
