@@ -15,7 +15,7 @@ configurations. However, users can easily extend the deployment to include thing
 
 By default, the _Generic_ node connect to port 2548 for _TCP_ and 2549 for _REST_ .
 
-**Docker Deployment** - 
+**Docker Deployment**
 ```shell
 docker run --network host -it --detach-keys=ctrl-d \
   --name anylog-node \
