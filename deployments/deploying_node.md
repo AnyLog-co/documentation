@@ -1,7 +1,7 @@
 # Deploying a Node
 
 There are 4 main types of AnyLog instance (_Master_, _Operator_, _Query_ and _Publisher_), as-well-as an option to 
-deploy a _Generic_ instance - which includes only TCP, REST and an optional Message Broker connection. 
+deploy a _Generic_ instance (nicknamed REST) - which includes only TCP, REST and an optional Message Broker connection. 
 
 An AnyLog deployment type is based on **system variables**, which users can assign values to different keys. These keys  
 are referenced in the node configuration process to apply a configuration option or a configuration value.
@@ -13,14 +13,15 @@ configurations. However, users can easily extend the deployment to include thing
 * Message Broker 
 * Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
 
-By default, the _Generic_ node connect to port 2148 for _TCP_ and 2149 for _REST_. 
+By default, the _Generic_ node connect to port 2548 for _TCP_ and 2549 for _REST_ .
 
+**Docker Deployment** - 
 ```shell
 docker run --network host -it --detach-keys=ctrl-d \
   --name anylog-node \
   [-e NODE_NAME=my-anylog-node \]
-  [-e ANYLOG_SERVER_PORT=32148 \] 
-  [-e ANYLOG_REST_PORT=32149 \] 
+  [-e ANYLOG_SERVER_PORT=32548 \] 
+  [-e ANYLOG_REST_PORT=32549 \] 
   [-e ANYLOG_BROKER_PORT=2150 \] 
   [--volume anylog-dir:/app/AnyLog-Network/anylog \]
   [--volume blockchain-dir:/app/AnyLog-Network/blockchain \]
@@ -28,19 +29,39 @@ docker run --network host -it --detach-keys=ctrl-d \
   -rm anylogco/anylog-network:predevelop
 ```
 
+**Kubernetes Deployment** 
+```shell
+# install volumes 
+helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz
+
+# install node 
+helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
+```
+
 ## Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist
 with deployment of an AnyLog instance of either _Docker_ or _Kubernetes_. For a _Docker_ instance the deployment script 
 updates the correlating `.env` file of the node. 
 
-**Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your 
+**Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
 
-0. Requirements
-    * [Docker and docker-compose](https://docs.docker.com/engine/install/)
-    * Python3
-      * [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts 
+### Requirements
+**Docker**
+* [Docker and docker-compose](https://docs.docker.com/engine/install/)
+* Python3
+  * [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts
 
+**Kubernetes**
+* [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/)  
+    * [Helm](https://helm.sh/docs/)
+    * Python3
+      * [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts
+
+For testing purposes we use and _minikube_ and _microk8s_ IaaS; however, other [IaaS](https://kubernetes.io/docs/tasks/tools/)
+should work just as well.   
+
+### Deployment
 1. Download [deployment scripts](https://github.com/AnyLog-co/deployments)
 ```shell
 cd $HOME
@@ -49,8 +70,15 @@ cd $HOME/deployments/
 ```
 
 2. Log into AnyLog's Dockerhub - [contact us](mailto:info@anylog.co) if you do not have login credentials
+
+**Docker**
 ```shell
 bash $HOME/deployments/installations/docker_credentials.sh ${YOUR_ANYLOG_DOCKER_CREDENTIALS}
+```
+
+**Kubernetes**
+```shell
+bash $HOME/deployments/installations/kube_credentials.sh ${YOUR_ANYLOG_DOCKER_CREDENTIALS}
 ```
 
 3. Deploy AnyLog 
@@ -59,8 +87,9 @@ bash $HOME/deployments/deployment_scripts/deploy_node.sh
 ```
 
 If a user already has a configuration file and does not want to go through the questionnaire, they can utilize the basic
-`docker-compose` command. 
+`docker-compose` or `helm` deployment commands.  
 
+**Docker Deployment**
 ```shell
 cd $HOME/deployments/docker-compose/anylog-${NODE_TYPE}
 
@@ -70,10 +99,29 @@ docker-compose up -d
 # to attach
 docker attach --detach-keys=ctrl-d anylog-${NODE_NAME} 
 ```
+**Kubernetes Deployment**
+```shell
+# install volumes 
+helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz \
+  --name-template ${NODE_NAME}-volume
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
+
+# install node 
+helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz \
+  --name-template ${NODE_NAME}-volume
+  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
+  
+# to attach
+kubectel get pod # get pod name 
+kubectl attach -it pod/${POD_NAME}
+
+# to detach ctrl-p + ctrl-pq
+```
 
 ### Sample Questionare 
 Below is a sample questionnaire for a _Generic_ (nicknamed REST) node. The node will set the environment variables as 
-well as connect to TCP and REST. 
+well as connect to TCP and REST. Information regarding `Kubernetes Metadata` will not appear when deploying a _Docker_ 
+installation of AnyLog. 
 
 ```editorconfig
 anylog@anylog-builder:~$ bash $HOME/deployments/deployment_scripts/deploy_node.sh 
@@ -173,19 +221,39 @@ Section: Advanced Settings
         Enable Local Script [default: false | options: true, false]: 
         Write Data Immediate [default: true | options: true, false]: 
         Threshold Time [default: 60 seconds | options: second, minute, hour, day]: 
-        Threshold Volume [default: 10KB | options: KB, MB, GB]: 
+        Threshold Volume [default: 10KB | options: KB, MB, GB]:
 
-
-Would you like to deploy AnyLog now (y/n)? y
-Creating volume "anylog-rest_anylog-rest-node-anylog" with default driver
-Creating volume "anylog-rest_anylog-rest-node-blockchain" with default driver
-Creating volume "anylog-rest_anylog-rest-node-data" with default driver
-Creating volume "anylog-rest_anylog-rest-node-local-scripts" with default driver
-Pulling anylog-rest-node (anylogco/anylog-network:predevelop)...
-predevelop: Pulling from anylogco/anylog-network
-846c0b181fff: Pull complete
-741be954cf15: Pull complete
-2f2beb7e7388: Pull complete
-fce65e772dd8: Pull complete
-...
+--- Kubernetes Metadata Configurations ---
+Section: Metadata
+        Namespace [default: default]: 
+        Kubernetes pod hostname [default: anylog-node]: 
+        App Name [default: anylog-node-app]: 
+        Pod Name [default: anylog-node-pod]: 
+        Deployment Name [default: anylog-node-deployment]: 
+        Service Name [default: anylog-node-service]: 
+        Configuration Name [default: anylog-node-configmap]: 
+        Node Selector: 
+        Replicas [default: 1]: 
+Section: Image
+        Secret Name [default: imagepullsecret]: 
+        Repository [default: anylogco/anylog-network]: 
+        Deployment Version [default: predevelop | options: develop, predevelop, test]: 
+        Pull Policy [default: IfNotPresent | options: Always, IfNotPresent, Never]: 
+Section: Volume
+        Enable Volumes [default: true | options: true, false]: 
+        --> Volume: anylog_volume
+        Name [default: anylog-rest-anylog-data]: 
+        Path [default: /app/AnyLog-Network/anylog]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
+        --> Volume: blockchain_volume
+        Name [default: anylog-rest-blockchain-data]: 
+        Path [default: /app/AnyLog-Network/blockchain]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
+        --> Volume: data_volume
+        Name [default: anylog-rest-data-data]: 
+        Path [default: /app/AnyLog-Network/data]: 
+        Access Mode [default: ReadWriteOnce | options: ReadWriteOnce, ReadWriteMany, ReadOnlyMany, ReadWriteOncePod]: 
+        Storage Size [default: 1Gi]: 
 ```

@@ -37,7 +37,7 @@ As long as the volume package is still running data would be persistent.
 
 ## Accessing Volumes
 
-Directions for generating personalized scripts can be found in [execute_scripts.md](execute_scripts.md)
+Directions for generating personalized scripts can be found in [execute_scripts.md](../executing_scripts.md#creating-personalized-script-on-kubernetes)
 
 ## Other 
 * [Kubernetes Volume Support](https://kubernetes.io/docs/concepts/storage/volumes/)

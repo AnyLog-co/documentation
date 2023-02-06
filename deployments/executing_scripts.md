@@ -5,9 +5,12 @@ time against the blockchain (or master node).
 
 With that in mind, users may want to deploy their own scripts, in addition to the default scripts; these scripts can
 be things like - complex MQTT client requests, scheduled processes to check disk space or executing a query every so 
-often. These scripts can be added in the [local scripts volume](volumes.md). 
+often. These scripts can be added in the local scripts volume.
 
-## Creating Personalized Script
+Note, When creating personalized scripts on [Kubernetes](#creating-personalized-script-on-kubernetes) there is no need
+to locate the relevant but rather just accessing the (AnyLog node) deployment bash interface.  
+
+## Creating Personalized Script on Docker
 1. Get list of all your volumes
 ```shell
 docker volume ls 
@@ -38,6 +41,56 @@ sudo vim /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scri
 AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
 ```
 
+## Creating Personalized Script on Kubernetes
+1. Access the Kubernetes deployment bash interface  
+```shell
+kubectl exec -it pod/${DEPLOYMENT_POD_NAME} bash
+```
+
+2. cd into scripts directory - this is the `!loca_scripts` variable in AnyLog 
+```shell 
+cd AnyLog-Network/scripts/
+```
+
+3. Either create a new script, or utilize the existing `local_script.al` file to write the your personalized script. 
+When setting the `Enable Local Script` configuration to **true**, the default deployment process will automatically run
+`local_script.al` when starting.
+```shell
+vim deployment_scripts/local_scripts.al 
+```
+
+If _vim_ or other text editor program does not work, users can easily install it. 
+```shell
+# Debian / Ubuntu 
+apt-get -y install vim 
+
+# Alpine 
+apk add vim 
+
+# Redhat / CentOS
+yum -y install vim
+```
+
+4. Once the personalized script has been created, detach from the bash interface and reattach to the AnyLog console. 
+```shell
+# detach: ctrl-p +ctrl-pq 
+kubectl attach -it pod/${DEPLOYMENT_POD_NAME}
+```
+
+5. Once the personalized script has been created, you can manually run it by executing `process` command.
+```anylog 
+AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
+```
+
+
 ## Sample Local Scripts
 In addition to the _default_ deployment scripts, the `sample_code` directory provides examples of utilizing MQTT client
 with either blockchain policies and / or multiple topics within the same call. 
+
+```anylog
+# Shorthand
+AL anylog-node >  ls !local_scripts/sample_code
+
+# Full path 
+AL anylog-node > ls /app/AnyLog-Network/scripts/sample_code 
+```
