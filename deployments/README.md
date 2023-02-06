@@ -46,35 +46,34 @@ By default, the AnyLog image is configured to run as a _REST_ node, which means 
 are running, but no other process is enabled. This allows for users to play with the system with no other services 
 running in the background, but already having the default network configurations.  A basic deployment of an AnyLog REST 
 instance can be  executed using the following line:
+
 ```shell
-docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:develop
+docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm anylogco/anylog-network:predevelop
 ```
 
 
 ## Table of Content
 
-**[Docker](Docker)**
-* [Install Database](Docker/database_configuration.md)
-* [Install Node](Docker/deploying_node.md)
-* [Single Deployment Demo](Docker/single_deployment_demo_network.md)
-* [Docker Volumes](Docker/volumes.md)
-* [Creating AnyLog Scripts](Docker/executing_scripts.md)
+### Deploy AnyLog
+* [Deploy Database(s)](database_configuration.md)
+* [Deploy Node](deploying_node.md)
+* [Execute Personalized Scripts](executing_scripts.md)
+* [Standalone Network](single_deployment_demo_network.md) - Deploy a full network on a single machine
 
-**[Kubernetes](Kubernetes)**
-* [Install Database](Kubernetes/database_configuration.md)
-* [Install Node](Kubernetes/deploying_node.md)
-* [Persistent Data](Kubernetes/volumes.md)
-* [Networking](Kubernetes/networking.md)
-* [Creating AnyLog Scripts](Kubernetes/executing_scripts.md)
-
-**[Networking](Networking%20&%20Security)** - General Networking Information
-* [Nebula](Networking%20&%20Security/nebula.md)
-* [NGINX](Networking%20&%20Security/nginx.md)
-* [AnyLog Authentication](Networking%20&%20Security/anylog_authentication.md)
-
-**[Support](Support)** - Deployment directions for non-AnyLog services 
+### Support 
 * [Cheat Sheet](Support/cheatsheet.md)
+* [AnyLog Authentication](Networking%20&%20Security/anylog_authentication.md)
+* [Setting Up MongoDB](Support/setting_up_mongodb.md)
+
+### Third-Party Apps 
 * [Remote-CLI](Support/Remote-CLI.md)
 * [Grafana](Support/Grafana.md)
 * [EdgeX](Support/EdgeX.md)
-* [Accessing MongoDB via AnyLog](Support/setting_up_mongodb.md)
+* [Nginx](Networking%20&%20Security/nginx.md)
+* [Nebula Overlay](Networking%20&%20Security/nebula.md)
+
+### Other 
+* [Docker Volumes](Networking%20&%20Security/docker_volumes.md)
+* [Kubernetes Volumes](Networking%20&%20Security/kubernetes_volumes.md)
+* [Kubernetes Networking](Networking%20&%20Security/kubernetes_networking.md)
+
