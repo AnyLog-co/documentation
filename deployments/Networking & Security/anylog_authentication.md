@@ -5,10 +5,7 @@ visit [authentication](../../authentication.md) document.
 
 ## Basic Authentication
 
-The basic authentication requires a username and password when accessing a node via _REST_. It has no influence regarding 
-communication between AnyLog nodes (via _TCP_) on a given network. 
-
-To deploy automatically, a user needs to enable the following parameters in configurations, under _Authentication_ section:
+To deploy enable the following parameters in configurations, under _Authentication_ section:
 * set `ENABLE_REST_AUTH` to **true**
 * set `NODE_PASSWORD`
 * set `USER_NAME`
@@ -52,12 +49,10 @@ curl -X GET 10.0.0.1:32048 -U user:password -H "command: get status" -H "User-Ag
 ## Certificate Based Authentication 
 
 Certificate based authentication, can be set for a _node_ or _user_. 
-In addition, there should be a _root_ account that's responsible for managing access for all other members. 
-
-**Disclaimer**: We do not recommend setting up the `root` account on the master node
+In declare a _root_ account that's responsible for managing access for all other members. 
 
 ### Root Authentication & Preset Permissions
-Root user grants permissions to members (nodes and users) - this should be done only on a single AnyLog instance.
+Root user grants permissions to members (nodes and users)
 
 1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/set_params.al)
 presets the configurations values used to configure certificate based authentication. Directions for updating configuration 
@@ -102,12 +97,11 @@ process !local_scripts/authentication/declare_root_member.al
 }}
 ```
 
-At this point the node which declared the has the keys `root` can be used to declare other member in the network, as well
-as their permissions. We recommend having a [node member](#declare-non-root-member) for the node as well.
+The node maintaining `root` can be used to declare other member in the network, as well as their permissions. 
 
 ### Declare non-Root Member
-Except for `root` member policy, all other members must be associated with a subset of permissions of what their
-respective keys can and cannot do. The default scripts provide examples for permissions with [no restrictions](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/no_restrictions_permissions.al) 
+Except for `root` member policy, all other members must be associated with a policy that determines their permissions.
+The default scripts provide examples for permissions with [no restrictions](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/no_restrictions_permissions.al) 
 and with [limited permissions](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/limited_permissions.al).
 The limited permissions allows commands such as: _get_, _sql_ and _blockchain_.
 
@@ -142,9 +136,6 @@ process !local_scripts/authentication/limited_permissions.al
 ```
 
 #### Node Authentication
-The node authentication requires access to **both** the new AnyLog node (_new node_), as-well-as a node with permissions that allows 
-adding a new AnyLog instance to the network (_root node_). If you do not have access to such a node, please work with your administrator
-to connect your node to the network. 
 
 1. [AnyLog-Network/scripts/authentication/set_params.al](https://github.com/AnyLog-co/AnyLog-Network/blob/develop/scripts/authentication/enable_authentication.al)
 presets the configurations values used to configure certificate based authentication; this step needs to be done on **both**
@@ -227,9 +218,7 @@ default password value.
 process !local_scripts/authentication/enable_authentication.al 
 ```
 
-At this point the _new node_, has the correct privileges to communicate with the network, and act as is expected of it.
-If the _new node_ is configured as _REST_, then users can **either** deploy the process(es) for the desired node type
-**or** execute `blockchain sync` in view its privileges, and access other nodes in the network. 
+6. Enable blockchain sync on the new node
 
 ```anylog 
 # blockchain sync
