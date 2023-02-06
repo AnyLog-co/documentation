@@ -28,11 +28,11 @@ The following provides directions for deploying AnyLog using the [demo cluster d
    2. In [anylog_master.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_master.env) & [anylog_query.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_query.env) update
       * NODE_NAME
       * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
+      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
    3. In [anylog_operator1.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator1.env) & [anylog_operator2.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator2.env) update
       * NODE_NAME
       * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
+      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
       * logical database name (_DEFAULT_DBMS_ and _MQTT_TOPIC_DBMS_)
       * _CLUSTER_NAME_
    4. By default, the deployment is set to download anylog-network version: `develop`. To use a different version 
@@ -52,7 +52,7 @@ docker-compose up -d
 
 ### Install EdgeX
 _Operator1_ utilizes a local MQTT client. In our demonstration, we utilize a local EdgeX instance.  
-Directions for deploying a local EdgeX instance can be found [here](../Other%20Tools/EdgeX.md)  
+Directions for deploying a local EdgeX instance can be found [here](Support/EdgeX.md)  
 
 ## Validate Deployment
 * Attaching to an AnyLog node 

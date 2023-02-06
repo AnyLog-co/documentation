@@ -56,14 +56,14 @@ To access Remote-CLI the default URL is [http://${YOUR_LOCAL_IP}:31800]()
 
     **On Kubernetes**
   1. Attach into the active pod -- `kubectl exec -it ${REMOTE_CLI_POD_NAME} bash`
-  2. cd in Remote-CLI (aylog_query/static/json/)
+  2. cd in Remote-CLI (anylog_query/static/json/)
   3. vim into `commands.json`
   4. save 
   5. detach from pod - `ctrl-p` + `ctrl-q` 
   6. Updates should appear on your instance 
 
   
-When using _Kubernetes_, changes done in `commands.json` will not be persistent due to the way [Kubernetes volumes](../Kubernetes/volumes.md) 
+When using _Kubernetes_, changes done in `commands.json` will not be persistent due to the way [Kubernetes volumes](../Networking%20&%20Security/kubernetes_volumes.md) 
 work. 
 
 * Examples of using Remote-CLI can be found in our [northbound connectors](../../northbound%20connectors/remote_cli.md) section

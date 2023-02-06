@@ -31,7 +31,7 @@ Sample mountpoint Path:
 /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scripts/local_script.al
 ```
 
-4. Either create a new script, or utilize the existing `local_script.al` file to write the your personalized script. 
+4. Either create a new script, or utilize the existing `local_script.al` file to write your personalized script. 
 When setting the `Enable Local Script` configuration to **true**, the default deployment process will automatically run
 `local_script.al` when starting. 
 ```shell 
@@ -54,7 +54,7 @@ kubectl exec -it pod/${DEPLOYMENT_POD_NAME} bash
 cd AnyLog-Network/scripts/
 ```
 
-3. Either create a new script, or utilize the existing `local_script.al` file to write the your personalized script. 
+3. Either create a new script, or utilize the existing `local_script.al` file to write your personalized script. 
 When setting the `Enable Local Script` configuration to **true**, the default deployment process will automatically run
 `local_script.al` when starting.
 ```shell

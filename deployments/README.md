@@ -65,7 +65,6 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 
 ### Support 
 * [Cheat Sheet](Support/cheatsheet.md)
-* [AnyLog Authentication](Networking%20&%20Security/anylog_authentication.md)
 * [Setting Up MongoDB](Support/setting_up_mongodb.md)
 
 ### Third-Party Apps 
