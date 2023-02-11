@@ -74,6 +74,9 @@ helm install $HOME/deployments/helm/packages/postgres-14.0-alpine.tgz \
 On machines that will use MongoDB (usually Operator nodes) - make sure MongoDB is installed locally. Our deployments 
 package provides a docker deployment for MongoDB - alternatively a user can deploy / use their own MongoDB database. 
 
+The Docker and Kubernetes deployment scripts for MongoDB come with [mongo-express](https://github.com/mongo-express/mongo-express) 
+Web-based MongoDB admin tool. The username/password or mongo-express is the same as the MongoDB credentials.
+
 The following documentation provides instruction to install MongoDB locally: 
 
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
