@@ -276,3 +276,45 @@ assignment with **if** conditions (details are available in the [conditional exe
    ```anylog
    config_policy = ""
    ```
+
+
+## ANMP Policy
+The AnyLog Network Management Policy (ANMP) are used to modify existing policies. 
+
+The key is a policy ID, the value are attribute names and values that are modified.
+
+**Example**: Map Hostname to IP by modifying the policy
+0. Declare Operator - this step is already done as part of the deployment 
+```anylog
+cluster_id = blockchain get cluster where name = cluster_1 bring.first [cluster][id]
+
+<operator_policy={'operator': {
+   'hostname' : !hostname,
+   'name' : !node_name',
+   'ip': !ip,
+   'company':  !company_name,
+   'port': !anylog_server_port.int,
+   'rest_port': !anylog_rest_port.int,
+   'cluster': !cluster_id
+}}>
+
+
+blockchain insert where policy = !operator_policy and local = true and master = !ledger_conn 
+```
+
+1. Get the policy ID of the Operator policy
+```anylog 
+policy_id = blockchain get operator where name=my_operator and company=AnyLog bring [operator][id]
+```
+
+2. Replace update the node to include **both** public and private IP addresses. 
+```anylog 
+<anmp = {"anmp" : {
+   !policy_id : {
+      "ip" : !external_ip,
+      "local_ip": !ip      
+   }
+}}>
+
+blockchain insert where policy = !anmp and local = true and master = !master_node
+```
