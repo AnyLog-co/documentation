@@ -4,7 +4,7 @@ AnyLog is configured using the AnyLog commands. These commands can be issued on 
 files or within policies that are hosted on a ledger.
 AnyLog provides a series of default scripts which help set up a given node. 
 Using these scripts, users can configure and set environment variables, network and database configurations, 
-declare policies that are stored on a ledger, scheduling a sync time against the blockchain (or master node), 
+declare policies that are stored on a ledger, scheduling a sync time against the blockchain (or a master node), 
 apply mapping on data published on a node, scheduled processes to check disk space, execute a scheduled query and more.   
 
 These scripts can be added in the local scripts' volume or added to the ledger using 
