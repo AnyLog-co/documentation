@@ -112,10 +112,10 @@ The psutil functions are detailed [here](https://psutil.readthedocs.io/en/latest
  
 Usage:
 ```anylog
-get node info [options]
+get node info [options] [attribute name]
 ```
 
-Options are one of the following keys:
+**Options** are one of the following keys:
 
 | Key        | Details  |
 | ------------- | ------------| 
@@ -127,10 +127,15 @@ Options are one of the following keys:
 | disk_io_counters  | System disk I/O statistics. |
 | net_io_counters  | Network I/O statistics. |
 
+**Attribute name** is optional, if provided, the named attribute is returned. 
+
 Examples:
 ```anylog
 get node info disk_io_counters
+get node info disk_io_counters read_count
 get node info net_io_counters
+get node info net_io_counters bytes_recv
+get node info swap_memory free
 ```
 
 
@@ -340,19 +345,23 @@ The following example configures monitoring of 2 topics:
 
 In the examples below, the monitoring commands are assigned to the scheduler for continues monitoring (on each participating/monitored node).
 
-Configuring topic _nodes_
+Monitored topic: **nodes**
 ```anylog
 schedule name = node_status and time = 15 seconds task node_status = get status where format = json
 schedule name = monitor_node and time = 15 seconds task run client 23.239.12.151:2048 monitor Nodes where info = !node_status"
 ```
 
-Configuring topic **Operators**
-**Note**: the command `get operator stat` will be using the variables' _disk_space_ and _cpu_percent_ is assigned with values.
+Monitored topic **Operators**  
+
 ```anylog
-schedule name = disk_space and time = 15 seconds task disk_space = get disk percentage .
-schedule name = cpu_percent and time = 15 seconds task cpu_percent = get node info cpu_percent
-schedule name = get_operator_stat and time = 15 seconds task operator_stat = get operator stat format = json
-schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
+schedule_time = "15 seconds"
+aggregator = 10.0.0.78:7848
+schedule name = get_operator_stat and time = !schedule_time task node_insight = get operator stat format = json
+schedule name = node_status and time = !schedule_time task node_insight[Node Status] = get status where format = json
+schedule name = disk_space and time = !schedule_time task node_insight[Free space %] = get disk percentage .
+schedule name = cpu_percent and time = !schedule_time task node_insight[CPU %] = get node info cpu_percent
+schedule name = network_info and time = !schedule_time task node_insight[Network] = get node info net_io_counters
+schedule name = monitor_operator and time = 15 seconds task run client (!aggregator) monitor operators where info = !node_insight
 ```
 
 
