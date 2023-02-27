@@ -55,7 +55,6 @@ To access Grafana the default URL is [http://${YOUR_LOCAL_IP}:3000]()
 
 1. The default Username and password are: _admin_. Grafana asks the user to change their password when first logging-in
 
-
 2. Once you're logged, you'll be able to connect to AnyLog using their [JSON data source](https://grafana.com/grafana/plugins/simpod-json-datasource/). 
 
-3. For more information & support in terms of utilizing Grafana, visit or [Grafana North-bound documentation](../../northbound%20connectors/using%20grafan
+3. For more information & support in terms of utilizing Grafana, visit or [Grafana North-bound documentation](../../northbound%20connectors/using%20grafana.md)

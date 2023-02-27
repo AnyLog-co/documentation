@@ -1,7 +1,7 @@
 # Accessing MongoDB via AnyLog
 The following is based on the example in `!local_scripts/sample_code/mongodb_process.al`, within AnyLog, to demonstrate 
 accepting videos into AnyLog and storing them in MongoDB (and/or local folder). Directions to install MongoDB can be 
-found [here](database_configuration.md#mongodb). 
+found [here](../database_configuration.md#mongodb). 
 
 1. Connect to MongoDB  
 ```anylog
@@ -62,15 +62,18 @@ blockchain insert where policy=!mapping_policy and local=true and master=!ledger
 ```
 
 4. Set blobs archiver configurations 
+
 ```anylog
 <run blobs archiver where
     dbms=!blobs_dbms and
     folder=!blobs_folder and
     compress=!blobs_compress and
     reuse_blobs=!blobs_reuse
->```
+>
+```
 
 5. Initiate `mqtt client` process with local broker 
+
 ```anylog
 <run mqtt client where  broker=local and port=!anylog_broker_port and log=false and topic=(
   name=anylogedgex-images and 

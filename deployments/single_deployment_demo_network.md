@@ -1,14 +1,14 @@
 # Demo Cluster Deployment 
 
-The following provides directions into deploying AnyLog and its supported tools as a single docker-compos deployment. 
-The docker-compose will deploy the following services:
-* PostgreSQL 
+The following provides directions for deploying AnyLog and its supported tools as a single _docker-compos_ deployment. 
+The deployment will ultimately install 7 docker containers -   
+* PostgresSQL 
 * AnyLog Master 
 * AnyLog Operator I  - receive data through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code) 
 * AnyLog Operator II - receive EdgeX data through a third-party MQTT broker 
 * AnyLog Query 
-* [Remote-CLI](../../northbound%20connectors/remote_cli.md) 
-* [Grafana](../../northbound%20connectors/using%20grafana.md) 
+* [Remote-CLI](../northbound%20connectors/remote_cli.md) 
+* [Grafana](../northbound%20connectors/using%20grafana.md) 
 
 ## Deployment Process
 Download [deployments](https://github.com/AnyLog-co/deployments) and [lfedge-code](https://github.com/AnyLog-co/lfedge-code). 
@@ -28,11 +28,11 @@ The following provides directions for deploying AnyLog using the [demo cluster d
    2. In [anylog_master.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_master.env) & [anylog_query.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_query.env) update
       * NODE_NAME
       * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
+      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
    3. In [anylog_operator1.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator1.env) & [anylog_operator2.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator2.env) update
       * NODE_NAME
       * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgreSQL & changed its credentials
+      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
       * logical database name (_DEFAULT_DBMS_ and _MQTT_TOPIC_DBMS_)
       * _CLUSTER_NAME_
    4. By default, the deployment is set to download anylog-network version: `develop`. To use a different version 
@@ -52,7 +52,7 @@ docker-compose up -d
 
 ### Install EdgeX
 _Operator1_ utilizes a local MQTT client. In our demonstration, we utilize a local EdgeX instance.  
-Directions for deploying a local EdgeX instance can be found [here](../Other%20Tools/EdgeX.md)  
+Directions for deploying a local EdgeX instance can be found [here](Support/EdgeX.md)  
 
 ## Validate Deployment
 * Attaching to an AnyLog node 
@@ -76,7 +76,7 @@ docker attach --detach-keys="ctrl-d" anylog-query-node
 ```shell
 ubuntu@demo:~$ docker attach --detach-keys="ctrl-d" anylog-master-node
 
-AL master-node +> get connections
+AL master-node +> get connections (need to update this to the new format showing binds)
 
 Type      External Address     Local Address        
 ---------|--------------------|--------------------|
