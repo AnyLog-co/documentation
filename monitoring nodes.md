@@ -150,7 +150,7 @@ run client (10.0.0.78:7848) get status
 
 Usage:
 ```anylog
-get status where format = [reply format] include [list of dictionary names]
+get status where format = [reply format] include [dictionary keys]
 ```
 Details:  
 **format** - an optional parameter to define the reply format. specifying **format=json** returns the reply in JSON.   
@@ -168,7 +168,7 @@ disk_percentage = get disk percentage d:\
 ```
 * Getting the status information:
 ```anylog
-AL anylog-node > run client (10.0.0.78:7848) get status include !cpu_percent !cpu_temperature !disk_free !disk_percentage
+run client (10.0.0.78:7848) get status include !cpu_percent !cpu_temperature !disk_free !disk_percentage
 [From Node 10.0.0.78:7848]
 {'status' : 'AnyLog@24.23.250.144:7848 running',
  'cpu_percent' : '6.7',
@@ -179,7 +179,16 @@ AL anylog-node > run client (10.0.0.78:7848) get status include !cpu_percent !cp
 * The keyword **statistics** in the include list adds default statistics to the status info.  
 Example:  
 ```anylog
-get status include statistics
+run client (10.0.0.78:7848) get status include statistics
+[From Node 10.0.0.78:7848]
+{'status' : 'AnyLog@67.169.2.101:7848 running',
+ 'Node name' : 'AnyLog@67.169.2.101:7848',
+ 'Status' : 'Active',
+ 'Start timestamp' : 1677467554,
+ 'Operational time' : ' 0: 0: 0 (H:M:S)',
+ 'Query timestamp' : 1677467554}
+
+
 ```
 
 ## The "get processes" command
