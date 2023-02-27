@@ -179,7 +179,7 @@ AL anylog-node > run client (10.0.0.78:7848) get status include !cpu_percent !cp
 The keyword statistics is adding default statistics to the status info.  
 Example:  
 ```anylog
-"get status include statistics",
+get status include statistics
 ```
 
 ## The "get processes" command
