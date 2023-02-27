@@ -144,11 +144,17 @@ get node info swap_memory free
 A node can issue a `get status` command to any peer in the network. Below is an example of the command and reply:
   
 ```anylog
-AL anylog-node > run client (10.0.0.78:7848) get status
+run client (10.0.0.78:7848) get status
 [From Node 10.0.0.78:7848]  'AnyLog@24.23.250.144:7848 running'
 ```
 
-The `get status` command can be extended to return additional status information.  
+Usage:
+```anylog
+get status where format = [reply format] include [list of dictionary names]
+```
+Optionally, to get the status in JSON, **format=json** is specified. 
+
+Using **include** directive, `get status` is extended to return additional status information.  
 For example, the scheduler can be configured to monitor the CPU utilization, 
 CPU temperature and disk free space and usage. The `get status` command can request to include their values.  
 
@@ -162,7 +168,7 @@ disk_percentage = get disk percentage d:\
 ```
 * Getting the status information:
 ```anylog
-AL anylog-node > run client (10.0.0.78:7848) get status include cpu_percent cpu_temperature disk_free disk_percentage
+AL anylog-node > run client (10.0.0.78:7848) get status include !cpu_percent !cpu_temperature !disk_free !disk_percentage
 [From Node 10.0.0.78:7848]
 {'status' : 'AnyLog@24.23.250.144:7848 running',
  'cpu_percent' : '6.7',
@@ -170,6 +176,11 @@ AL anylog-node > run client (10.0.0.78:7848) get status include cpu_percent cpu_
  'disk_percentage' : '99.05'}
 ```
 
+The keyword statistics is adding default statistics to the status info.  
+Example:  
+```anylog
+"get status include statistics",
+```
 
 ## The "get processes" command
 
