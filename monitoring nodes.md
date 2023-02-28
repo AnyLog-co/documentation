@@ -187,8 +187,6 @@ run client (10.0.0.78:7848) get status include statistics
  'Start timestamp' : 1677467554,
  'Operational time' : ' 0: 0: 0 (H:M:S)',
  'Query timestamp' : 1677467554}
-
-
 ```
 
 ## The "get processes" command

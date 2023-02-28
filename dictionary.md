@@ -22,4 +22,46 @@ configure the scheduler to update the value with percentage of free space every 
 
 In addition, the dictionary is used to construct, maintain and update policies before their persistent storage in the shared metadata.
 
+## Retrieve the dictionary values
+
+The ```get dictionary``` command returns all the dictionary values.  
+Usage:
+```anylog
+get dictionary
+```
+
+A single value is retrieved using the get command as follows:
+```anylog
+get !key_name
+```
+The **key name** prefixed by exclamation point following the get command retrieves the associated value.
+Examples:  
+* Retrieve the path to the archive directory using the following command: ```get !archive_dir```.
+* Retrieve the external IP of the node using the following command:  ```get !external_ip```.
+
+Notes:
+* On the AnyLog CLI, it is sufficient to reference the value without the keyword ```get```. For example: ```!archive_dir```
+and ```!external_ip``` (however issuing the commands through external apps like the AnyLog Remote CLI or cURL requires the ```get``` keyword).
+* In the same manner system variables can be referenced by adding the dollar sign to the key. For example: ```$TMP``` or ```$HOME```.
+* Paths and file names can be referenced by a key followed by a value. For example:  
+```!anylog_path/AnyLog-Network/demo/ha_operator1.al``` will be transformed on each node to the relative path and file name 
+  ```/AnyLog-Network/demo/ha_operator1.al``` within the physical path associated to the key ```!anyLog_path```.
+  
+## Setting the dictionary values
+
+Using the command ```set```, values are associated to keys as follows. 
+A single value is retrieved using the get command as follows:
+```anylog
+set key_name = value
+```
+Examples:
+```anylog
+set config_file = ha_operator1.al
+set default_tcp_port = 45223 
+```
+On the AnyLog CLI, users can ignore the ```set``` command and can assign values to keys in the following manner:
+```anylog
+config_file = ha_operator1.al
+default_tcp_port = 45223 
+```
 
