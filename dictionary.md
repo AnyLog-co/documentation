@@ -34,7 +34,7 @@ A single value is retrieved using the get command as follows:
 ```anylog
 get !key_name
 ```
-The **key name** prefixed by exclamation point following the get command retrieves the associated value.
+The **key_name** prefixed by exclamation point following the get command retrieves the associated value.  
 Examples:  
 * Retrieve the path to the archive directory using the following command: ```get !archive_dir```.
 * Retrieve the external IP of the node using the following command:  ```get !external_ip```.
@@ -54,7 +54,7 @@ process !anylog_path/AnyLog-Network/demo/ha_operator1.al
 ```
 In the example above, the path prefix and file name are fixed: ```AnyLog-Network/demo/ha_operator1.al``` and the path
 prefix is determined by the value assigned to the key ```anylog_path```.  
-The following command retrieves the path prefix on a particular node (and below the command is the value return on a particular node):
+The following command retrieves the path prefix on a particular node (and below the command is the value returned on a particular node):
 ```anylog
 !anylog_path
 
@@ -63,8 +63,8 @@ The following command retrieves the path prefix on a particular node (and below 
   
 ## Setting the dictionary values
 
-Using the command ```set```, values are associated to keys as follows. 
-A single value is retrieved using the get command as follows:
+Using the command ```set```, values are associated to keys.     
+Usage:
 ```anylog
 set key_name = value
 ```
@@ -78,4 +78,6 @@ On the AnyLog CLI, users can ignore the ```set``` command and can assign values 
 config_file = ha_operator1.al
 default_tcp_port = 45223 
 ```
+
+
 
