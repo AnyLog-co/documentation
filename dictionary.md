@@ -47,6 +47,7 @@ and ```!external_ip``` (however issuing the commands through external apps like 
 * Paths and file names can be referenced by a key followed by a value. For example:  
 ```!anylog_path/AnyLog-Network/demo/ha_operator1.al``` will be transformed on each node to the relative path and file name 
   ```/AnyLog-Network/demo/ha_operator1.al``` within the physical path associated to the key ```!anyLog_path```.
+* The examples below ignore the keyword **get**.  
   
 ### Example executing a script file with file name referenced by a key
 The following example executes a script file by calling the command ```process``` (followed by the file's path and name) on the AnyLog CLI. 
@@ -84,7 +85,7 @@ Note: The examples below ignore the keyword **set**.
 ## Setting policies using the dictionary
 
 A policy is a data structure similar to a dictionary which is stored on the shared metadata layer.  
-User the dictionary, it is possible to declare a policy and update the policy sections incrementally.  
+Using the dictionary, it is possible to declare a policy and update the policy sections incrementally.  
 Below are some examples.
 
 ### Using a code block to declare a policy
