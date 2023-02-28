@@ -104,6 +104,8 @@ Note:
 * The policy is assigned to the key **operator_policy** and maintained in the dictionary.
 * Some attribute values are derived from the dictionary (for example the attribute value for **IP** is derived 
   from the value assigned to the key **operator_ip**)
+* Adding a prefix **.int** or **.float** or **.str** to a dictionary key, assigns the value with the specified data type.  
+The default data type is **string**.
   
 The following commands creates the policy incrementally:
 
@@ -115,3 +117,16 @@ The following commands creates the policy incrementally:
   operator_policy[local_ip] = !local_ip
   operator_policy[port] = !operator_port.int 
 ```
+
+The policy is returned by the following command:
+```anylog
+!operator_policy
+```
+
+The policy structure can be tested using the following command:
+```anylog
+json !operator_policy
+```
+
+Additional information on the construction and tertieval of policies is available in the
+[JSON Data Transformation](json%20data%20transformation.md#json-data-transformation) section.
