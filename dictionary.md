@@ -1,13 +1,13 @@
 # The local dictionary
 
 ## Overview
-The local dictionary allows hardware abstraction by associating configuration values that are specific to the hardware used
+The local dictionary allows hardware abstraction by associating configuration values (that are specific to the hardware used)
 to generic keys that are shared across all deployments. The configuration process, the queries and AnyLog commands that are
-issued to each node reference the shared keys which are translated to the specific values which may be different on each node.
-For example: IPs and Ports, paths to files and directories used are referenced by a key name and translated on each node
-to the appropriate value.
+issued to each node reference the shared keys which are translated to the specific values which may be different on each node.  
+For example: IPs and Ports, paths to files and directories are referenced by their assigned key names and translated on each node
+to the appropriate value.  
 Some entries in the dictionary represent default setups and configurations, and users can add or modify entries in
-the dictionary as needed.
+the dictionary as needed.  
 For example, all the directories in the [default folders structure](getting%20started.md#local-directory-structure)
 can be referenced by their keys, whereas in each deployment the physical location of the folders may be different.
 Using this example, users can reference the path to the **archive directory** using the key **!archive_dir**, the
