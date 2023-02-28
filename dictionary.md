@@ -47,6 +47,20 @@ and ```!external_ip``` (however issuing the commands through external apps like 
 ```!anylog_path/AnyLog-Network/demo/ha_operator1.al``` will be transformed on each node to the relative path and file name 
   ```/AnyLog-Network/demo/ha_operator1.al``` within the physical path associated to the key ```!anyLog_path```.
   
+### Example executing a script file
+The following example executes a script file by calling the command ```process``` (followed by the file's path and name) on the AnyLog CLI. 
+```anylog
+process !anylog_path/AnyLog-Network/demo/ha_operator1.al
+```
+In the example above, the path prefix and file name are fixed: ```AnyLog-Network/demo/ha_operator1.al``` and the path
+prefix is determined by the value assigned to the key ```anylog_path```.  
+The following command retrieves the path prefix on a particular node (and below the command is the value return on a particular node):
+```anylog
+!anylog_path
+
+'D:\Node3\al_files'
+```
+  
 ## Setting the dictionary values
 
 Using the command ```set```, values are associated to keys as follows. 
