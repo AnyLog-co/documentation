@@ -11,7 +11,8 @@ the dictionary as needed.
 For example, all the directories in the [default folders structure](getting%20started.md#local-directory-structure)
 can be referenced by their keys, whereas in each deployment the physical location of the folders may be different.
 Using this example, users can reference the path to the **archive directory** using the key **!archive_dir**, the
-path to the **blobs directory** using the key **!blobs_dir*** etc. Whereas the path to each folder can be different on each node.
+path to the **blobs directory** using the key **!blobs_dir** etc. allowing a shared configuration process whereas the 
+physical path to each folder can be different on each node.
 
 
 Users can include in the dictionary any key value pair that is needed to support a process, for example, maintain values
