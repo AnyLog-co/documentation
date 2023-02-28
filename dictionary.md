@@ -41,13 +41,14 @@ Examples:
 
 Notes:
 * On the AnyLog CLI, it is sufficient to reference the value without the keyword ```get```. For example: ```!archive_dir```
+  (the examples below ignore the keyword **get**).
 and ```!external_ip``` (however issuing the commands through external apps like the AnyLog Remote CLI or cURL requires the ```get``` keyword).
 * In the same manner system variables can be referenced by adding the dollar sign to the key. For example: ```$TMP``` or ```$HOME```.
 * Paths and file names can be referenced by a key followed by a value. For example:  
 ```!anylog_path/AnyLog-Network/demo/ha_operator1.al``` will be transformed on each node to the relative path and file name 
   ```/AnyLog-Network/demo/ha_operator1.al``` within the physical path associated to the key ```!anyLog_path```.
   
-### Example executing a script file
+### Example executing a script file with file name referenced by a key
 The following example executes a script file by calling the command ```process``` (followed by the file's path and name) on the AnyLog CLI. 
 ```anylog
 process !anylog_path/AnyLog-Network/demo/ha_operator1.al
@@ -78,6 +79,39 @@ On the AnyLog CLI, users can ignore the ```set``` command and can assign values 
 config_file = ha_operator1.al
 default_tcp_port = 45223 
 ```
+Note: The examples below ignore the keyword **set**.
 
+## Setting policies using the dictionary
 
+A policy is a data structure similar to a dictionary which is stored on the shared metadata layer.  
+User the dictionary, it is possible to declare a policy and update the policy sections incrementally.  
+Below are some examples.
 
+### Using a code block to declare a policy
+
+The following code block declares an operator policy:
+
+```anylog
+<operator_policy = {"operator" : {
+    "name" : "operator1",
+    "cluster" : !cluster_id,
+    "ip" : !operator_ip,
+    "local_ip" : !local_ip,
+    "port" : !operator_port.int    }
+}>
+```
+Note:
+* The policy is assigned to the key **operator_policy** and maintained in the dictionary.
+* Some attribute values are derived from the dictionary (for example the attribute value for **IP** is derived 
+  from the value assigned to the key **operator_ip**)
+  
+The following commands creates the policy incrementally:
+
+```anylog
+  operator_policy = {}
+  operator_policy[name] = "operator1"
+  operator_policy[cluster] = !cluster_id
+  operator_policy[ip] = !operator_ip
+  operator_policy[local_ip] = !local_ip
+  operator_policy[port] = !operator_port.int 
+```
