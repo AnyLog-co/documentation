@@ -70,10 +70,11 @@ Related documentation:
 | [Data Distribution and Configuration](data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
 | [Adding Data to Nodes in the Network](adding%20data.md) | Delivering data to Operators in the network. |
 | [Using MQTT Broker](mqtt.md) | Delivering data to Operators using a MQTT broker. |
-| [Managing Data files](../managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
+| [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
 | [Queries and info requests](queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
-| [Profiling and Monitoring Queries](../profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
-| [Using Grafana](northbound connectors/using grafana.md) | Integrating Grafana to visualize data. |
+| [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
+| [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Integrating Grafana to visualize data. |
+| [Using Edgex](using%20edgex.md#using-edgex) | Integrating with Edgex as a southbound connector. |
  
 ## AnyLog Install
 
