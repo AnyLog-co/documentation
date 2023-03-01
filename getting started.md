@@ -45,7 +45,7 @@ Related documentation:
 
 | Section                                                                                | Information provided  |
 |----------------------------------------------------------------------------------------| ------------| 
-| [Metadata Management](../data%20management/metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
+| [Metadata Management](metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
 | [Metadata Requests](metadata%20requests.md)                                            | Details on how the metadata can be queried. |
 | [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
 
