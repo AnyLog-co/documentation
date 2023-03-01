@@ -119,9 +119,10 @@ The command needs to be issued only once on the physical or virtual machine.
   
 ## Basic operations
 
-### Starting AnyLog from the CLI
+### Initiating Configuring AnyLog instances
 
-Initiating AnyLog depends on the configuration. When AnyLog starts on a node it can be configured in many ways:
+AnyLog is deployed and initiated using Docker or Kubernetes. The way the node operates depends on the configuration.  
+AnyLog can be configured in many ways:
 * Using command line arguments when AnyLog is called. These are a list of AnyLog commands separated by the _and_ keyword.
 * By issuing configuration commands on the command line.
 * By calling a script file that lists the AnyLog configuration commands (calling the command _process_ followed by the path to the script).
