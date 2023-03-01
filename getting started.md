@@ -119,15 +119,25 @@ The command needs to be issued only once on the physical or virtual machine.
   
 ## Basic operations
 
-### Starting AnyLog from the Linux CLI
+### Starting AnyLog from the CLI
 
-From the AnyLog-Network directory issue the following command:
-```anylog
-python3 source/cmd/user_cmd.py [command line arguments]
-```
-The command line arguments are optional and can include a list of AnyLog commands separated by the _and_ keyword.  
-The commands specified in the command line are executed upon initialization of the node and can include configuration and setup instructions.
+Initiating AnyLog depends on the configuration. When AnyLog starts on a node it can be configured in many ways:
+* Using command line arguments when AnyLog is called. These are a list of AnyLog commands separated by the _and_ keyword.
+* By issuing configuration commands on the command line.
+* By calling a script file that lists the AnyLog configuration commands (calling the command _process_ followed by the path to the script).
+* By calling a configuration file that is hosted in a database.  
+* Associating a Configuration Policy with the node. 
 
+Related documentation:
+
+| Section       | Information provided  |
+| ------------- | ------------| 
+| [node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
+| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
+| [Network Setup](examples/Network%20setup.md#network-setup) | A step by step example of a 3 node network deployment. |
+| [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
+
+ 
 If the initialization commands are organized in a script file, call the command _process_ followed by the path to the script. 
 
 ### AnyLog Command Line Interface
