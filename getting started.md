@@ -133,13 +133,10 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
+| [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
 | [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
 | [Network Setup](examples/Network%20setup.md#network-setup) | A step by step example of a 3 node network deployment. |
 | [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
-
- 
-If the initialization commands are organized in a script file, call the command _process_ followed by the path to the script. 
 
 ### AnyLog Command Line Interface
 When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
@@ -153,42 +150,19 @@ The supported commands allow to retrieve and modify configuration, state of diff
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
 
 Exiting and terminating an AnyLog node is by issuing the command `exit node` on the CLI.
-```anylog
-AL anylog-node +> help exit 
-Usage:
-        exit [process type|reset]
-        
-Explanation:
-        exit node - terminate all process and shutdown
-        exit tcp - terminate the TCP listner thread
-        exit rest - terminate the REST listner thread
-        exit scripts - terminate the running scripts
-        exit scheduler - terminate the scheduler process
-        exit workers - terminate the query threads
-
-Examples:
-        exit node
-        exit tcp
-        exit rest
-        exit scripts
-        exit scheduler
-        exit synchronizer
-        exit mqtt
-        exit kafka
-        exit smtp
-        exit workers
-```
 
 ### The help command
-The ***help*** command provides information on AnyLog commands.  
-The help command can be used in multiple ways:
+The ***help*** command provides dynamic information on AnyLog commands.  
+The help command is issued on the CLI and can be used in multiple ways:
+
 * List the commands by typing ***help*** on the CLI.
 ```anylog
 help
 ```
 * List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
   These commands can be listed by typing ***help get***.   
-  Examples:
+  
+Additional Examples:
  ```anylog
 help get 
 help set
@@ -202,21 +176,46 @@ help connect dbms
 help blockchain insert
 help get msg client
 ```
+The help provides the usage, examples, explanation and a link to the relevant documentation.
+For example:
+```anylog
+help blockchain get
 
-* Index that classifies the commands.
+Usage:
+        blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
+
+Explanation:
+        Get the policies or information from the policies that satisfy the search criteria.
+
+Examples:
+        blockchain get *
+        blockchain get operator where dbms = lsl_demo
+        blockchain get cluster where table[dbms] = purpleair and table[name] = air_data bring [cluster][id] separator = ,
+        blockchain get operator bring.table [*] [*][name] [*][ip] [*][port]
+        blockchain get * bring.table.unique [*]
+
+Index:
+        ['blockchain']
+
+Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
+
+Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
+```
+
+* List an index that classifies the commands.
 ```anylog
 help index
 ```
-* Users select an index key and list all commands associated with the index.
+* List commands associated with an index key.
 ```anylog
-help index query
+help index index-key
 ```
 Note: **help index** followed by a key prefix, returns all the AnyLog commands associated with the key prefix.   
 For example:
 ```anylog
 help index s
 ```
-Returns all commands associated with ***s*** in the index prefix: ```script``` ```secure network``` ```streaming```.
+Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
 
 * From the presented list of commands, users list the details of the command of interest as in the examples below:
 ```anylog
