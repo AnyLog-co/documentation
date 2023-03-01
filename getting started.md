@@ -71,7 +71,7 @@ Related documentation:
 | [Mapping Data](mapping%20data%20to%20tables.md) | Transformation of the source data to the destination format. |
 | [Using a Message Broker](message%20broker.md#using-a-message-broker) | Delivering data to Operators using a MQTT broker. |
 | [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
-| [Queries and info requests](queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
+| [Queries to data](queries.md#query-nodes-in-the-network) | Queries to data hosted by nodes in the network. |
 | [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
 | [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Integrating Grafana to visualize data. |
 | [Using Edgex](using%20edgex.md#using-edgex) | Integrating with Edgex as a southbound connector. |
