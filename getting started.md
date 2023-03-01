@@ -319,7 +319,7 @@ blockchain switch network where master = [IP:Port]
 
 Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
-Additional information on the REST API to AnyLOg is available at the following section: [Using REST](using%20rest.md).
+Additional information on the REST API to AnyLog is available at the following section: [Using REST](using%20rest.md).
 
  
 ## Sending messages to peers in the network
@@ -327,7 +327,7 @@ Additional information on the REST API to AnyLOg is available at the following s
 Nodes in the network can send messages to peers in the network. Each message includes a command and sometimes additional data.      
 When a message is received at a node, the node retrieves the command and the data from the message and executes the command.    
 Depending on the command in the message, some messages trigger a reply (for example, a command to derive a status, or a SQL query)
-and some types of commands are only executed on the node (for example, a command to change a state or a command to display a message).    
+and some types of commands are only executed on the destination node (for example, a command to change a state, or a command to display a message).    
 If authentication is disabled, a node will execute all the commands in the incoming messages.   
 If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
 If validation fails, the node will discard the incoming message.  
@@ -383,7 +383,7 @@ Additional information on the blockchain commands is available in the [Blockchai
 
 Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
 Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
-Additional information on the HA processes is available in the [High Availability](high-availability.md#high-availability--ha-) section.
+Additional information on the HA processes is available in the [High Availability](high%20availability.md#high-availability-ha) section.
 
 ## Network security
 
