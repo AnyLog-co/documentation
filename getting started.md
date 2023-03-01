@@ -217,12 +217,6 @@ help index s
 ```
 Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
 
-* From the presented list of commands, users list the details of the command of interest as in the examples below:
-```anylog
-help reset query timer
-help  query destination
-help sql
-```
 
 ### The node dictionary
 
@@ -259,9 +253,7 @@ get !dbms_name
 get dictionary
 ```
 
-The values assigned to key can be tested using an ***if statement*** to trigger conditional execution of ANyLog commands.  
-Details are available in thr [Conditional Execution](anylog%20commands.md#conditional-execution) section. 
-
+The node dictionary is detailed in the [local dictionary](dictionary.md#the-local-dictionary) section.
 
 ### Retrieving environment variables
 
