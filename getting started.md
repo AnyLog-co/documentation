@@ -67,8 +67,8 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [Data Distribution and Configuration](data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
 | [Adding Data to Nodes in the Network](adding%20data.md) | Delivering data to Operators in the network. |
+| [Mapping Dta](mapping%20data%20to%20tables.md) | Transformation of the source data to the destination format. |
 | [Using MQTT Broker](mqtt.md) | Delivering data to Operators using a MQTT broker. |
 | [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
 | [Queries and info requests](queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
