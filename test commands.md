@@ -36,8 +36,8 @@ test table * where dbms = lsl_demo
 
 ## The Test Network Commands
 
-Tests that determine the availability and consistency of nodes in the network.  
-Replies from Test Network Commands are organized in a table structure with a row allocated to each participating node.
+The Test Network Commands determine the availability and consistency of multiple nodes in the network.  
+Replies from the Test Network Commands are organized in a table structure with a row in the table representing each participating node.
 
 ### Test Network
 
