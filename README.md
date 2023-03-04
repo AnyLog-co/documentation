@@ -37,6 +37,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **AnyLog Commands**
   * [Main Commands](anylog%20commands.md)
   * [File Commands](file%20commands.md)
+  * [Test Commands](test%20commands.md)
   * [The dictionary](dictionary.md)
   
 * **Managing Data**
