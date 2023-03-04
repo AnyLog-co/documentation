@@ -26,10 +26,12 @@ Usage:
 ```anylog
 test table [table name] where dbms = [dbms name]
 ```
+If table name is asterisk, all tables of the specified database are tested.
   
-Example:
+Examples:
 ```anylog
 test table ping_sensor where dbms = lsl_demo
+test table * where dbms = lsl_demo
 ```
 
 ## The Test Network Commands
@@ -55,8 +57,15 @@ Example:
 test network metadata version
 ```
 
+### Test Network Table
 
+The test is similar to issuing a [test table](#test-table) command to all the nodes that host the table's data.
 
+Examples:
+```anylog
+test network table ping_sensor where dbms = lsl_demo
+test network table * where dbms = lsl_demo
+```
 
 ## The test suite
 The test suite commands compare query results to a predefined trusted results. Details are available in the 
