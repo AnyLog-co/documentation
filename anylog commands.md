@@ -598,43 +598,6 @@ drop partition * where dbms = purpleair and table = readings
 drop partition where dbms = aiops and table = factualvalue and keep = 5
 ```
 
-
-## Test Command
-
-The ***test*** command executes the requested tests on the current node.  
-
-Options:  
-
-### Test Node
-The ***test node*** command tests the node connections and the local blockchain file.
-
-Example:
-```anylog
-test node
-```
-
-### Test Connection
-The ***test connection*** command tests the given IP and Port to determine if accessible and open.
-
-Example:
-```anylog
-test connection 10.0.0.223:2041
-```
-
-### Test Table
-The ***test table*** command compares the table definition in the local dbms and the blockchain definition of the table.  
-
-Usage:  
-```anylog
-test table [table name] where dbms = [dbms name]
-```
-  
-Example:
-```anylog
-test table ping_sensor where dbms = lsl_demo
-```
-
-
 # Conditional execution
 
 AnyLog supports conditional executions using ***if and else*** statements. 
