@@ -46,13 +46,13 @@ Example:
 test network
 ```
 
-### Test Network Metadata
+### Test Network Metadata Version
 
-The test is similar to issuing a **get metadata version** command to all the nodes in the network.
+The test is similar to issuing a [get metadata version](background%20processes.md#synchronizer-status) command to all the nodes in the network.
    
 Example:
 ```anylog
-test network metadata
+test network metadata version
 ```
 
 
