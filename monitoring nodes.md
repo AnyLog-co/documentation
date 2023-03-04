@@ -390,7 +390,7 @@ monitors status and provides status results to the stdout.
 
 **Usage**:
 ```anylog
-continuous [list of commands]
+continuous [list of commands (comma seperated commands)]
 ```
 
 The allowed commands are detailed below. If the command is longer than a single word, it needs to be enclosed in quotations.
@@ -414,7 +414,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 **Example**:
 
 ```anylog
-continuous cpu "cpu anylog" "cpu postgres" “get operator summary” "get cpu usage"
+continuous cpu, cpu anylog, cpu postgres, get operator summary, get cpu usage
 ```
 
 Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.
