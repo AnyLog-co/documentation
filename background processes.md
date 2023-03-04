@@ -357,7 +357,13 @@ run blockchain sync
 The command will trigger the synchronization process once, within 10 seconds of the call. The following synchronizations will occur as scheduled, according to the configured time interval.
 
 ### Synchronizer status
-The ***get synchronizer*** command provides the synchronizer status with information on the status of the metadata.  
+The **get metadata version** command returns the metadata version ID on the current node.
+Usage:
+```anylog
+get metadata version
+```
+
+The **get synchronizer** command provides the synchronizer status with information on the status of the metadata.  
 
 Example:
 ```anylog

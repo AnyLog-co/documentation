@@ -32,6 +32,29 @@ Example:
 test table ping_sensor where dbms = lsl_demo
 ```
 
+## The Test Network Commands
+
+Tests that determine the availability and consistency of nodes in the network.  
+Replies from Test Network Commands are organized in a table structure with a row allocated to each participating node.
+
+### Test Network
+
+The test is similar to issuing a **get status** command to all the nodes in the network.
+   
+Example:
+```anylog
+test network
+```
+
+### Test Network Metadata
+
+The test is similar to issuing a **get metadata version** command to all the nodes in the network.
+   
+Example:
+```anylog
+test network metadata
+```
+
 
 
 
