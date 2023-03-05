@@ -95,7 +95,7 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.table.sort``` - returns the values in a sorted table format.
     * ```bring.count``` - returns the number of entries that satisfy the result.
     * ```bring.null``` - includes null values in the returned JSON.
-    * ```bring.ip_port``` - return a comma seperated list of IP and ports from the policies that can serve to message the nodes.
+    * ```bring.ip_port``` - return a comma seperated list of IP and ports.
   
 ### Special bring values
 
