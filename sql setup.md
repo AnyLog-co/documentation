@@ -293,6 +293,23 @@ get rows count where dbms = my_dbms
 get rows count where dbms = my_dbms and table = my_table
 ```
 
+### The get data distribution command 
+The `get data distribution` command provides the number of rows in each operator node that hosts the table's data. 
+
+**Usage**:
+```anylog 
+get data distribution where dbms = [dbms name] and table = [table name]
+```  
+
+**Details**:
+* [dbms name] - the name of the database that hosts the table of interest.
+* [table name] - the name of the table of interest.
+  
+**Example**: 
+```anylog
+get data distribution where dbms = lightsanleandro and table = ping_snsor
+```
+
 ### The get partitions command 
 The `get partitions` command details the partition definition for each partitioned table.  
 **Usage**:
