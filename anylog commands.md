@@ -186,7 +186,7 @@ set data distribution where dbms = lsl_demo and table = ping_sensor and remove =
 
 View the distribution definitions using the command:
 ```anylog
-get  data distribution
+get operator data distribution
 ```
 
 ## Reset Command
