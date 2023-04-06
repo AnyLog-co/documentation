@@ -184,16 +184,17 @@ Users can organize multiple test-cases in folders and sub-folders and test all t
 
 Usage:
 ```anylog
-test suite where source = [file path and name] and inform = [destination for messages] and subdir = [true/false] and time = [true/false]
+test suite where source = [file path and name] and inform = [destination for messages] and subdir = [true/false] and time = [true/false] and dest = [destination nodes]
 ``` 
 * Source file name and file type can be prefixed with asterisk to consider only files with the name prefix ot type prefix.  
 * If subdir is set to true, the files in the subdirectories are considered in the process.
 * The value assigned to the **time** key determines if the comparison considers execution time.  
+* The value assigned to **dest** is optional - if included, it specifies the Operator nodes to use.
 
 The following examples process the _test cases_ files identified by the key **source**: 
 ```anylog
 test suite where source = !test_dir/test_*.out and and inform = dbms.qa.testing@!dest_node
-test suite where source = !test_dir/test_*.o* and dest = stdout and subdir = true
+test suite where source = !test_dir/test_*.o* and inform = stdout and subdir = true and dest = 127.32.52.103:20048
 ``` 
 
 
