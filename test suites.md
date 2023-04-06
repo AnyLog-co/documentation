@@ -135,12 +135,18 @@ executes the query and compares the output to the source file.
 
 Usage:
 ```anylog
-test case where source = [file path and name] and inform = [destination for messages] and time = [true/false]
+test case where source = [file path and name] and inform = [destination for messages] and time = [true/false] and dest = [destination nodes]
 ``` 
 
-The value assigned to the **time** key determines if the comparison considers execution time.  
+* The value assigned to the **time** key determines if the comparison considers execution time.
+  
 
-The values assigned to the **inform** key determine where the test results are aggregated. The optional values are detailed 
+* The value assigned to **dest** is optional - if included, it specifies the Operator nodes to use.    
+For example: (127.32.52.103:20048, 127.60.34.43:20048).  
+  If not specifies, all the Operators with relevant data participate in the query process.
+  
+
+* The values assigned to the **inform** key determine where the test results are aggregated. The optional values are detailed 
 in the chart below:    
   
 | value    |  Details                          |

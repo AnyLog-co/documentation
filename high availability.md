@@ -432,7 +432,7 @@ get tsd sync status where table = [tsd table name]
 ```
 Examples:
 ```anylog
-get tsd sync statu
+get tsd sync status
 get tsd sync status where table = tsd_128
 ```
 
