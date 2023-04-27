@@ -52,6 +52,7 @@ def main():
         policy['panel']['name'] = 'Panel %s' % str(int(list(LOCATIONS).index(location)) + 1)
         policy['panel']['city'] = location
         policy['panel']['loc'] = LOCATIONS[location]
+        print(policy)
         status = blockchain.post_policy(conn=args.rest_conn, master_node=args.master_node, policy=policy,
                                               auth=auth, timeout=args.timeout)
 

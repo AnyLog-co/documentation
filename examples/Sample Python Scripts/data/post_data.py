@@ -25,7 +25,7 @@ def __convert_data(data:dict)->str:
 def post_data(conn:str, rest_topic:str, payload:dict)->bool:
     """
     Send data via REST using POST command
-    :ur:
+    :url:
         https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#using-a-post-command
     :requirement:
         an MQTT client that uses a REST connection as a broker
