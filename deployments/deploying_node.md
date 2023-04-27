@@ -2,7 +2,7 @@
 
 The AnyLog instances are using the same code base and differ by the services they provide. 
 The services offered by a node are determined by the configuration applied to the node. 
-For convenience, we named 4 types of nodes which are configured differently to provide different functionalities     
+For convenience, we named 4 types of nodes which are configured differently to provide different functionalities
 (_Master_, _Operator_, _Query_ and _Publisher_), as-well-as a _Generic_ instance configured with commonly used
 services and can be deployed "out-of-the-box" to support many of the edge use cases. 
 
