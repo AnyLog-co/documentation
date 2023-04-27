@@ -228,12 +228,24 @@ Use the following command to retrieve the keys and values in JSON format:
 ```anylog
 get dictionary where format = json
 ```
+Retrieving a group of keys and values with keys that contain a substring is done by specifying the substring as follows:
+ ```anylog
+get dictionary substring
+```
+The following example retrieves all keys with a substring "_dir":
+```anylog
+get dictionary _dir
+```
 
-The following command retrieves a single value:
+The following command retrieves a single value on the CLI:
 ```anylog
 !key
 ```
-
+To retrieve a value assigned to a key using the remote CLI, use the command **get** followed by the key (prefixed with exclamation point).  
+Example:
+```anylog
+get !key
+```
 
 ## The "get env var" command
 
