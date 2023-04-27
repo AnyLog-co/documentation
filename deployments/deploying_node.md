@@ -9,44 +9,6 @@ services and can be deployed "out-of-the-box" to support many of the edge use ca
 In the examples below, users define **system variables** by assigning values to keys. These keys  
 are referenced in the node configuration process to apply a configuration option, or a configuration value.
 
-## Basic Deployment
-When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
-The following are examples of services which are enabled in most deployments:
-* TCP - Allowing the node to join the AnyLog network and communicate with peer nodes.
-* REST - Allowing third party applications and data sources to communicate with an AnyLog node.
-* BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
-
-Our basic deployment example is a _Generic_ node offers TCP and REST services.
-
-Users can extend the deployment to include the following services: 
-* persistent data (volumes) 
-* Message Broker 
-* Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
-
-By default, the _Generic_ node connect to port 2548 for _TCP_ and 2549 for _REST_ .
-
-**Docker Deployment**
-```shell
-docker run --network host -it --detach-keys=ctrl-d \
-  --name anylog-node \
-  [-e NODE_NAME=my-anylog-node \]
-  [-e ANYLOG_SERVER_PORT=32548 \] 
-  [-e ANYLOG_REST_PORT=32549 \] 
-  [-e ANYLOG_BROKER_PORT=2150 \] 
-  [--volume anylog-dir:/app/AnyLog-Network/anylog \]
-  [--volume blockchain-dir:/app/AnyLog-Network/blockchain \]
-  [--volume data-dir:/app/AnyLog-Network/data \]
-  -rm anylogco/anylog-network:predevelop
-```
-
-**Kubernetes Deployment** 
-```shell
-# install volumes 
-helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz
-
-# install node 
-helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
-```
 
 ## Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist
