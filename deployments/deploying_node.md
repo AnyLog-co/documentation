@@ -103,6 +103,7 @@ Deploy Existing Configs [y / n]: n
 AnyLog Build Version [default: predevelop | options: develop, predevelop, test]: predevelop
 
 Section: General
+        License Key:
         Node Name [default: anylog-node]: 
         Company Name [default: New Company]: 
         Location [default: 0.0, 0.0]: 
