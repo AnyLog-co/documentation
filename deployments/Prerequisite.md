@@ -10,7 +10,7 @@
 | Memory footprint      | 100 MB available for the AnyLog process |
 | Databases             | PostgreSQL installed (optional) |
 |                       | SQLite (default, no need to install) |
-|                       | MongoDB (Only if blob storage is needed) |
+|                       | MongoDB installed (Only if blob storage is needed) |
 | CPU                   | Intel, ARM and AMD are supported. |
 |                       | AnyLog can be deployed on a single CPU machine and up to the largest servers (can be deployed on gateways, Raspberry PI, and all the way to the largest multi-core machines).|
 | Storage               | AnyLog supports horizontal scaling - nodes (and storage) are added dynamically as needed, therefore less complexity in scaling considerations. Requirements are based on expected volume and duration of data on each node. AnyLog supports automated archival and transfer to larger nodes (if needed). |
