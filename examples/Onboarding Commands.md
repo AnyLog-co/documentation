@@ -62,7 +62,7 @@ connect dbms system_query where type = sqlite and memory = true # Used for local
 get databases     # 2 system databases - system_query and almgm
 </pre>
 
-# Copy and use the metadata
+## Copy and use the metadata
 <pre>
 run client 23.239.12.151:32348 file get !!blockchain_file !blockchain_file
 blockchain reload metadata
