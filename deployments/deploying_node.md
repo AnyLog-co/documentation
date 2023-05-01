@@ -2,17 +2,18 @@
 
 The AnyLog instances are using the same code base and differ by the services they provide. 
 The services offered by a node are determined by the configuration applied to the node. 
-For convenience, we named 4 types of nodes which are configured differently to provide different functionalities     
+For convenience, we named 4 types of nodes which are configured differently to provide different functionalities
 (_Master_, _Operator_, _Query_ and _Publisher_), as-well-as a _Generic_ instance configured with commonly used
 services and can be deployed "out-of-the-box" to support many of the edge use cases. 
 
 In the examples below, users define **system variables** by assigning values to keys. These keys  
 are referenced in the node configuration process to apply a configuration option, or a configuration value.
 
+<<<<<<< HEAD
 ## Basic Deployment
 When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
 The following are examples of services which are enabled in most deployments:
-* TCP - Allowing the node to join the AnyLog network and communicate with peer nodes.
+* TCP - Allowing the node to join the AnyLog Network and communicate with peer nodes.
 * REST - Allowing third party applications and data sources to communicate with an AnyLog node.
 * BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
 
@@ -47,6 +48,8 @@ helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz
 # install node 
 helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
 ```
+=======
+>>>>>>> e9c7f021943d5b8d4b7dac1d360024013a620092
 
 ## Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist
@@ -141,6 +144,7 @@ Deploy Existing Configs [y / n]: n
 AnyLog Build Version [default: predevelop | options: develop, predevelop, test]: predevelop
 
 Section: General
+        License Key:
         Node Name [default: anylog-node]: 
         Company Name [default: New Company]: 
         Location [default: 0.0, 0.0]: 
