@@ -3,7 +3,12 @@
 For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
 the `system_query` database. To connect `system_query` in  PostgresSQL
 
-```anylog 
+```anylog
+db_ip = 127.0.0.1 
+db_port = 5432 
+db_user = admin 
+db_passwd = passwd
+connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd   
 ```
 
 
