@@ -22,11 +22,11 @@ set streaming condition where dbms = [dbms name] and table = [table name] and li
 ```
 
 Details:
-* `_dbms name_` - the logical database name associated with the data
-* `_table name_` - the logical table name associated with the data
-* `_execution limit_` - (optional) if a value greater than 0 is provided, the limit places a cap on the number of times the "then" command is executed. 
-* `_condition_` - a condition to validate. Details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
-* `_command_` - an AnyLog command.
+* **dbms name** - the logical database name associated with the data
+* **table name** - the logical table name associated with the data
+* **execution limit** - (optional) if a value greater than 0 is provided, the limit places a cap on the number of times the "then" command is executed. 
+* **condition** - a condition to validate. Details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
+* **command** - an AnyLog command.
 
 Examples:  
 ```

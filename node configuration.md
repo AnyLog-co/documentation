@@ -13,7 +13,7 @@ as a program with _if_ conditions and _goto_ statements (details are available i
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
 ## The configuration process 
-COnfiguration is by calling multiple AnyLog commands.
+Configuration is by calling multiple AnyLog commands.
 AnyLog commands can be provided on the CLI or organized in a script file, a JSON file, or a table in a database.    
 A node is configured by calling a group of commands that determine how a node operates.
 

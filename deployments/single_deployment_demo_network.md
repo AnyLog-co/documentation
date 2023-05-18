@@ -23,7 +23,13 @@ bash deployments/docker-compose/docker_install.sh
 
 ### AnyLog Network
 The following provides directions for deploying AnyLog using the [demo cluster deployment](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment) 
-1. (Optional) Update the configurations before deployment 
+1. For all nodes update the `LICENSE_KEY` value
+   *  [master](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_master.env)
+   *  [Operator 1](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_operator1.env) 
+   *  [Operator 2](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_operator2.env)
+   *  [Query](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_query.env)
+
+2. (Optional) Update the configurations before deployment 
    1. In [postgres.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/postgres.env) update _POSTGRES_USER_ & _POSTGRES_PASSWORD_
    2. In [anylog_master.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_master.env) & [anylog_query.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_query.env) update
       * NODE_NAME

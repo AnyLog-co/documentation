@@ -44,7 +44,7 @@ Usually the image will be Ubuntu based, unless stated otherwise.
 
 When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
 The following are the main services which are enabled in most deployments:
-* TCP - Allowing the node to join the ANyLog network and communicate with peer nodes.
+* TCP - Allowing the node to join the AnyLog network and communicate with peer nodes.
 * REST - Allowing third party applications and data sources to communicate with an AnyLog node.
 * BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
   

@@ -45,7 +45,7 @@ Related documentation:
 
 | Section                                                                                | Information provided  |
 |----------------------------------------------------------------------------------------| ------------| 
-| [Metadata Management](../data%20management/metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
+| [Metadata Management](metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
 | [Metadata Requests](metadata%20requests.md)                                            | Details on how the metadata can be queried. |
 | [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
 
@@ -67,13 +67,14 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [Data Distribution and Configuration](data%20distribution%20and%20configuration.md) | The organization of the user data in the network. | 
 | [Adding Data to Nodes in the Network](adding%20data.md) | Delivering data to Operators in the network. |
-| [Using MQTT Broker](mqtt.md) | Delivering data to Operators using a MQTT broker. |
-| [Managing Data files](../managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
-| [Queries and info requests](queries%20and%20info%20requests.md) | Queries to data hosted by nodes in the network. |
-| [Profiling and Monitoring Queries](../profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
-| [Using Grafana](northbound connectors/using grafana.md) | Integrating Grafana to visualize data. |
+| [Mapping Data](mapping%20data%20to%20tables.md) | Transformation of the source data to the destination format. |
+| [Using a Message Broker](message%20broker.md#using-a-message-broker) | Delivering data to Operators using a MQTT broker. |
+| [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
+| [Queries to data](queries.md#query-nodes-in-the-network) | Queries to data hosted by nodes in the network. |
+| [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
+| [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Integrating Grafana to visualize data. |
+| [Using Edgex](using%20edgex.md#using-edgex) | Integrating with Edgex as a southbound connector. |
  
 ## AnyLog Install
 
@@ -118,16 +119,24 @@ The command needs to be issued only once on the physical or virtual machine.
   
 ## Basic operations
 
-### Starting AnyLog from the Linux CLI
+### Initiating Configuring AnyLog instances
 
-From the AnyLog-Network directory issue the following command:
-```anylog
-python3 source/cmd/user_cmd.py [command line arguments]
-```
-The command line arguments are optional and can include a list of AnyLog commands separated by the _and_ keyword.  
-The commands specified in the command line are executed upon initialization of the node and can include configuration and setup instructions.
+AnyLog is deployed and initiated using Docker or Kubernetes. The way the node operates depends on the configuration.  
+AnyLog can be configured in many ways:
+* Using command line arguments when AnyLog is called. These are a list of AnyLog commands separated by the _and_ keyword.
+* By issuing configuration commands on the command line.
+* By calling a script file that lists the AnyLog configuration commands (calling the command _process_ followed by the path to the script).
+* By calling a configuration file that is hosted in a database.  
+* Associating a Configuration Policy with the node. 
 
-If the initialization commands are organized in a script file, call the command _process_ followed by the path to the script. 
+Related documentation:
+
+| Section       | Information provided  |
+| ------------- | ------------| 
+| [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
+| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
+| [Network Setup](examples/Network%20setup.md#network-setup) | A step by step example of a 3 node network deployment. |
+| [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
 ### AnyLog Command Line Interface
 When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
@@ -141,42 +150,19 @@ The supported commands allow to retrieve and modify configuration, state of diff
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
 
 Exiting and terminating an AnyLog node is by issuing the command `exit node` on the CLI.
-```anylog
-AL anylog-node +> help exit 
-Usage:
-        exit [process type|reset]
-        
-Explanation:
-        exit node - terminate all process and shutdown
-        exit tcp - terminate the TCP listner thread
-        exit rest - terminate the REST listner thread
-        exit scripts - terminate the running scripts
-        exit scheduler - terminate the scheduler process
-        exit workers - terminate the query threads
-
-Examples:
-        exit node
-        exit tcp
-        exit rest
-        exit scripts
-        exit scheduler
-        exit synchronizer
-        exit mqtt
-        exit kafka
-        exit smtp
-        exit workers
-```
 
 ### The help command
-The ***help*** command provides information on AnyLog commands.  
-The help command can be used in multiple ways:
+The ***help*** command provides dynamic information on AnyLog commands.  
+The help command is issued on the CLI and can be used in multiple ways:
+
 * List the commands by typing ***help*** on the CLI.
 ```anylog
 help
 ```
 * List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
   These commands can be listed by typing ***help get***.   
-  Examples:
+  
+Additional Examples:
  ```anylog
 help get 
 help set
@@ -190,28 +176,47 @@ help connect dbms
 help blockchain insert
 help get msg client
 ```
+The help provides the usage, examples, explanation and a link to the relevant documentation.
+For example:
+```anylog
+help blockchain get
 
-* Index that classifies the commands.
+Usage:
+        blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
+
+Explanation:
+        Get the policies or information from the policies that satisfy the search criteria.
+
+Examples:
+        blockchain get *
+        blockchain get operator where dbms = lsl_demo
+        blockchain get cluster where table[dbms] = purpleair and table[name] = air_data bring [cluster][id] separator = ,
+        blockchain get operator bring.table [*] [*][name] [*][ip] [*][port]
+        blockchain get * bring.table.unique [*]
+
+Index:
+        ['blockchain']
+
+Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
+
+Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
+```
+
+* List an index that classifies the commands.
 ```anylog
 help index
 ```
-* Users select an index key and list all commands associated with the index.
+* List commands associated with an index key.
 ```anylog
-help index query
+help index index-key
 ```
 Note: **help index** followed by a key prefix, returns all the AnyLog commands associated with the key prefix.   
 For example:
 ```anylog
 help index s
 ```
-Returns all commands associated with ***s*** in the index prefix: ```script``` ```secure network``` ```streaming```.
+Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
 
-* From the presented list of commands, users list the details of the command of interest as in the examples below:
-```anylog
-help reset query timer
-help  query destination
-help sql
-```
 
 ### The node dictionary
 
@@ -248,9 +253,7 @@ get !dbms_name
 get dictionary
 ```
 
-The values assigned to key can be tested using an ***if statement*** to trigger conditional execution of ANyLog commands.  
-Details are available in thr [Conditional Execution](anylog%20commands.md#conditional-execution) section. 
-
+The node dictionary is detailed in the [local dictionary](dictionary.md#the-local-dictionary) section.
 
 ### Retrieving environment variables
 
@@ -316,7 +319,7 @@ blockchain switch network where master = [IP:Port]
 
 Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
-Additional information on the REST API to AnyLOg is available at the following section: [Using REST](using%20rest.md).
+Additional information on the REST API to AnyLog is available at the following section: [Using REST](using%20rest.md).
 
  
 ## Sending messages to peers in the network
@@ -324,7 +327,7 @@ Additional information on the REST API to AnyLOg is available at the following s
 Nodes in the network can send messages to peers in the network. Each message includes a command and sometimes additional data.      
 When a message is received at a node, the node retrieves the command and the data from the message and executes the command.    
 Depending on the command in the message, some messages trigger a reply (for example, a command to derive a status, or a SQL query)
-and some types of commands are only executed on the node (for example, a command to change a state or a command to display a message).    
+and some types of commands are only executed on the destination node (for example, a command to change a state, or a command to display a message).    
 If authentication is disabled, a node will execute all the commands in the incoming messages.   
 If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
 If validation fails, the node will discard the incoming message.  
@@ -380,7 +383,7 @@ Additional information on the blockchain commands is available in the [Blockchai
 
 Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
 Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
-Additional information on the HA processes is available in the [High Availability](high-availability.md#high-availability--ha-) section.
+Additional information on the HA processes is available in the [High Availability](high%20availability.md#high-availability-ha) section.
 
 ## Network security
 

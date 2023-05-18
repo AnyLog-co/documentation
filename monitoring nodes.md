@@ -112,10 +112,10 @@ The psutil functions are detailed [here](https://psutil.readthedocs.io/en/latest
  
 Usage:
 ```anylog
-get node info [options]
+get node info [options] [attribute name]
 ```
 
-Options are one of the following keys:
+**Options** are one of the following keys:
 
 | Key        | Details  |
 | ------------- | ------------| 
@@ -127,23 +127,34 @@ Options are one of the following keys:
 | disk_io_counters  | System disk I/O statistics. |
 | net_io_counters  | Network I/O statistics. |
 
+**Attribute name** is optional, if provided, the named attribute is returned. 
+
 Examples:
 ```anylog
 get node info disk_io_counters
+get node info disk_io_counters read_count
 get node info net_io_counters
+get node info net_io_counters bytes_recv
+get node info swap_memory free
 ```
 
 
 ## The "get status" command
 
-A node can issue a `get status` command to any peer in the network. Below is an example of the command and reply:
+A node can issue a `get status` command to any peer in the network. Below is an example of the command and the returned reply:
   
 ```anylog
-AL anylog-node > run client (10.0.0.78:7848) get status
+run client (10.0.0.78:7848) get status
 [From Node 10.0.0.78:7848]  'AnyLog@24.23.250.144:7848 running'
 ```
 
-The `get status` command can be extended to return additional status information.  
+Usage:
+```anylog
+get status where format = [reply format] include [dictionary keys]
+```
+Details:  
+**format** - an optional parameter to define the reply format. specifying **format=json** returns the reply in JSON.   
+**include** - extends the returned info with additional information.  
 For example, the scheduler can be configured to monitor the CPU utilization, 
 CPU temperature and disk free space and usage. The `get status` command can request to include their values.  
 
@@ -157,7 +168,7 @@ disk_percentage = get disk percentage d:\
 ```
 * Getting the status information:
 ```anylog
-AL anylog-node > run client (10.0.0.78:7848) get status include cpu_percent cpu_temperature disk_free disk_percentage
+run client (10.0.0.78:7848) get status include !cpu_percent !cpu_temperature !disk_free !disk_percentage
 [From Node 10.0.0.78:7848]
 {'status' : 'AnyLog@24.23.250.144:7848 running',
  'cpu_percent' : '6.7',
@@ -165,6 +176,18 @@ AL anylog-node > run client (10.0.0.78:7848) get status include cpu_percent cpu_
  'disk_percentage' : '99.05'}
 ```
 
+* The keyword **statistics** in the include list adds default statistics to the status info.  
+Example:  
+```anylog
+run client (10.0.0.78:7848) get status include statistics
+[From Node 10.0.0.78:7848]
+{'status' : 'AnyLog@67.169.2.101:7848 running',
+ 'Node name' : 'AnyLog@67.169.2.101:7848',
+ 'Status' : 'Active',
+ 'Start timestamp' : 1677467554,
+ 'Operational time' : ' 0: 0: 0 (H:M:S)',
+ 'Query timestamp' : 1677467554}
+```
 
 ## The "get processes" command
 
@@ -205,12 +228,24 @@ Use the following command to retrieve the keys and values in JSON format:
 ```anylog
 get dictionary where format = json
 ```
+Retrieving a group of keys and values with keys that contain a substring is done by specifying the substring as follows:
+ ```anylog
+get dictionary substring
+```
+The following example retrieves all keys with a substring "_dir":
+```anylog
+get dictionary _dir
+```
 
-The following command retrieves a single value:
+The following command retrieves a single value on the CLI:
 ```anylog
 !key
 ```
-
+To retrieve a value assigned to a key using the remote CLI, use the command **get** followed by the key (prefixed with exclamation point).  
+Example:
+```anylog
+get !key
+```
 
 ## The "get env var" command
 
@@ -340,19 +375,23 @@ The following example configures monitoring of 2 topics:
 
 In the examples below, the monitoring commands are assigned to the scheduler for continues monitoring (on each participating/monitored node).
 
-Configuring topic _nodes_
+Monitored topic: **nodes**
 ```anylog
 schedule name = node_status and time = 15 seconds task node_status = get status where format = json
 schedule name = monitor_node and time = 15 seconds task run client 23.239.12.151:2048 monitor Nodes where info = !node_status"
 ```
 
-Configuring topic **Operators**
-**Note**: the command `get operator stat` will be using the variables' _disk_space_ and _cpu_percent_ is assigned with values.
+Monitored topic **Operators**  
+
 ```anylog
-schedule name = disk_space and time = 15 seconds task disk_space = get disk percentage .
-schedule name = cpu_percent and time = 15 seconds task cpu_percent = get node info cpu_percent
-schedule name = get_operator_stat and time = 15 seconds task operator_stat = get operator stat format = json
-schedule name = monitor_operator and time = 15 seconds task run client 23.239.12.151:2048 monitor operators where info = !operator_stat
+schedule_time = "15 seconds"
+aggregator = 10.0.0.78:7848
+schedule name = get_operator_stat and time = !schedule_time task node_insight = get operator stat format = json
+schedule name = node_status and time = !schedule_time task node_insight[Node Status] = get status where format = json
+schedule name = disk_space and time = !schedule_time task node_insight[Free space %] = get disk percentage .
+schedule name = cpu_percent and time = !schedule_time task node_insight[CPU %] = get node info cpu_percent
+schedule name = network_info and time = !schedule_time task node_insight[Network] = get node info net_io_counters
+schedule name = monitor_operator and time = 15 seconds task run client (!aggregator) monitor operators where info = !node_insight
 ```
 
 
@@ -363,7 +402,7 @@ monitors status and provides status results to the stdout.
 
 **Usage**:
 ```anylog
-continuous [list of commands]
+continuous [list of commands (comma seperated commands)]
 ```
 
 The allowed commands are detailed below. If the command is longer than a single word, it needs to be enclosed in quotations.
@@ -387,7 +426,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 **Example**:
 
 ```anylog
-continuous cpu "cpu anylog" "cpu postgres" “get operator summary” "get cpu usage"
+continuous cpu, cpu anylog, cpu postgres, get operator summary, get cpu usage
 ```
 
 Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.

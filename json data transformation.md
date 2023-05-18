@@ -92,10 +92,11 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.recent``` - returns the value from the JSON object with the latest date. If a date is missing from the objects, the last object in the ledger file is returned.  
     * ```bring.json``` - returns the requested keys and values in a JSON format. Additional formatting instructions are ignored.
     * ```bring.table``` - returns the requested keys and values in a table format. The bring command determines the table columns.
+    * ```bring.table.sort``` - returns the values in a sorted table format.
     * ```bring.count``` - returns the number of entries that satisfy the result.
     * ```bring.null``` - includes null values in the returned JSON.
-    * ```bring.table.sort``` - returns the values in a sorted table format.
-    
+    * ```bring.ip_port``` - return a comma seperated list of IP and ports.
+  
 ### Special bring values
 
 * If the `bring` command values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.  
@@ -120,7 +121,10 @@ For example ```bring [operator][name]``` will pull the name value from an Operat
 ```anylog
 blockchain get * bring.table.sort [] [*][name] [*][ip]
 ```
-
+  5. Return an IP port list from all the operators in the USA:   
+```anylog
+blockchain get operator where [country] contains US bring.ip_port
+```
 Note: In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.   
 
 ### Retrieving data from a JSON object
