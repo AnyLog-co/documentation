@@ -26,7 +26,7 @@ as key = value pairs. With multiple option, the keyword _and_ separates between 
 | extend  |True/False | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  | |
 | topic  | A topic string |Topic that will be associated with the data, if the query result-set destination is a broker.  | |
 | committed  | True/False  | With HA enabled - only returns data that is synchronized on cluster nodes.  | False |
-| info  | additional info  | Additional info to the query process. See details below.  |  |
+| info  | additional info  | Additional info to the query process. See details [below](#info).  |  |
 
 
 ### Timezones
@@ -63,8 +63,8 @@ The following chart summarizes the optional values:
 ### Info
 Additional info that is delivered to the participating node.       
 **Adding info to facilitate sreaming:**  
-Streaming mp4 files to an application (like the remote CLI), requires to notify the participating storage nodes which
-is the IP and Port (on each operator node) that would satisfy the streaming request.  
+Streaming mp4 files to an application (like the remote CLI), requires to notify the node which is the target for the streaming,
+which is the IP and Port (on each operator node) that would satisfy the streaming request.  
 To provide the info, the query provides the following info:
 ```anylog 
 info = (dest_ip =[IP of the streaming target], dest_type = [rest/tcp])
