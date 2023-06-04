@@ -1,10 +1,10 @@
 # Onboarding Training
 
-## Onboarding demo commands
-
 The basic AnyLog commands demonstrated in the Onboarding session:
 
-* Help commands - see details in [the help command section](../getting%20started.md#the-help-command).  
+## Help commands 
+    
+    See details in [the help command section](../getting%20started.md#the-help-command).  
     Examples:
     ```anylog 
     help
@@ -13,7 +13,7 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     help run kafka consumer
     ``` 
 
-* Review events - 
+## Review events 
     Multiple logs that track events - logs examples: event log, error log, rest log, query log (needs to be enabled).
   
      Examples:
@@ -22,7 +22,8 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     get error log
     ```   
   
-* The local dictionary - maps local values (like paths names and IPs) to unified names that can be shared across nodes.
+## The local dictionary
+    The local dictionary maps local values (like paths names and IPs) to unified names that can be shared across nodes.
   
     Details are in [the local dictionary section](../dictionary.md#the-local-dictionary).
 
@@ -45,9 +46,9 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     ```   
     Details are in [the local directory structure](../getting%20started.md#local-directory-structure).
   
-* Connecting to a network
+## Connecting to a network
     
-    3 types of connections:
+    3 types of connections:  
     - TCP - to communicate between nodes which are members of the network.
     - REST - to communicate between 3rd parties apps to a node in the network (examples: the Remote CLI, Grafana).
     - Messaging broker - push data from a data source.
@@ -75,7 +76,7 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     get echo queue
     ```  
   
-* Connecting to a DBMS
+## Connecting to a DBMS
     Supported databases: PostgreSQL for larger nodes and SQLite for smaller nodes or data in RAM.
 
     2 system databases:    
@@ -88,15 +89,17 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     get databases
     ```   
 
-* Commands can be issued on the remote CLI:
-
+## The remote CLI:
+    Connection via the REST protocol.  
+    Most commands can be issued on the Remote CLI.    
+    Examples:
     ```anylog 
     get status
     get dictionary
     get databases
     ```   
 
-* The Metadata
+## The Metadata
     
     Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
     and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands)
@@ -118,8 +121,7 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     blockchain get operator where [city] = toronto  bring.ip_port
     ```   
 
-
-* Execute commands on a peer node
+## Execute commands on a peer node
 
     Use the TCP connection to communicate with peers 
     - With a single peer:   run client ip:port
@@ -137,7 +139,15 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     run client 23.239.12.151:32348 file get !!blockchain_file !blockchain_file
     ```
   
-* Monitoring:
+## Monitoring commands:
+
+    Additional info is in the following sections:  
+    - [Monitoring nodes](../monitoring%20nodes.md#monitoring-nodes)
+    - [Alerts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring)
+    - [Monitoring Data](../monitoring%20data.md#monitoring-data)
+    - [Monitoring Calls](..r/monitoring%20calls.md#monitoring-calls-from-external-applications)
+
+
     Examples: 
      ```anylog 
     run client (blockchain get operator where [city] = toronto  bring.ip_port) get status
@@ -172,7 +182,9 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     ```
   
 * Data Query 
-      Examples: 
+      
+     Details are in the [query section](../queries.md).
+     Examples: 
      ```anylog 
     run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
     run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
