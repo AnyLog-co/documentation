@@ -99,7 +99,7 @@ get databases
 
 ## The Metadata
 Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
-and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands)
+and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands).
 
 If the file was retrieved using copy (vs. sync), restart he node or call reload:
 ```anylog 
@@ -139,7 +139,7 @@ Additional info is in the following sections:
 - [Monitoring nodes](../monitoring%20nodes.md#monitoring-nodes)
 - [Alerts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring)
 - [Monitoring Data](../monitoring%20data.md#monitoring-data)
-- [Monitoring Calls](..r/monitoring%20calls.md#monitoring-calls-from-external-applications)
+- [Monitoring Calls](../monitoring%20calls.md#monitoring-calls-from-external-applications)
 
 
 Examples: 
@@ -177,6 +177,7 @@ get data nodes
   
 ## Data Query 
 Details are in the [query section](../queries.md).
+
  Examples: 
  ```anylog 
 run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
