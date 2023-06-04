@@ -1,5 +1,9 @@
 # Onboarding Training
 
+Prerequisite: See details [here](..//deployments/Prerequisite.md)
+
+# Basic AnyLog commands
+
 The basic AnyLog commands demonstrated in the Onboarding session:
 
 ## Help commands 
