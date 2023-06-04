@@ -95,3 +95,93 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     get dictionary
     get databases
     ```   
+
+* The Metadata
+    
+    Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
+    and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands)
+  
+    If the file was retrieved using copy (vs. sync), restart he node or call reload:
+    ```anylog 
+    blockchain reload metadata
+    ```   
+    Example blockchain commands:
+    ```anylog 
+    blockchain get *
+    blockchain get operator
+    
+    blockchain get operator bring.table [operator][name] [operator][city] [operator][ip]  [operator][port] 
+    blockchain get operator where [city] = toronto  bring.table [operator][name] [operator][city] [operator][ip]  [operator][port] 
+    
+    blockchain get operator where [city] = toronto  bring [operator][ip] : [operator][port] separator = ,
+    
+    blockchain get operator where [city] = toronto  bring.ip_port
+    ```   
+
+
+* Execute commands on a peer node
+
+    Use the TCP connection to communicate with peers 
+    - With a single peer:   run client ip:port
+    - With multiple peers:  run client (ip:port, ip:port, ip:port ...)  
+     Examples: 
+     ```anylog 
+    run client 23.239.12.151:32348 get status
+    run client 23.239.12.151:32348 get disk usage .
+    run client 23.239.12.151:32348 get cpu usage
+    ```   
+    
+    Copy the metadata from a peer node - the correct way to do it is to sync with the metadata
+
+    ```anylog 
+    run client 23.239.12.151:32348 file get !!blockchain_file !blockchain_file
+    ```
+  
+* Monitoring:
+    Examples: 
+     ```anylog 
+    run client (blockchain get operator where [city] = toronto  bring.ip_port) get status
+    
+    run client (blockchain get operator where [city] = toronto  bring.ip_port) get disk usage .
+    
+    destination = blockchain get operator where [city] = toronto  bring.ip_port
+    
+    !destination
+    
+    run client (!destination) get status
+    run client (!destination) get disk usage .
+    run client (!destination) get memory info
+    
+    run client (!destination) get processes
+    
+    run client (!destination) get databases
+    
+    help continuous
+    continuous cpu  
+    ```
+  
+* Data setup:
+      Examples: 
+     ```anylog 
+    get virtual tables
+    get tables where dbms = litsanleandro
+    get columns where table = ping_sensor and dbms = litsanleandro
+    
+    get data nodes
+
+    ```
+  
+* Data Query 
+      Examples: 
+     ```anylog 
+    run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
+    run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
+    
+    query status
+    
+    run client () sql edgex format=table "select increments(minute, 1, timestamp), min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value,  count(*) as row_count from rand_data where timestamp >= NOW() - 1 hour;"
+    
+    run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"
+    ```
+  
+    
