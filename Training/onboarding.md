@@ -4,7 +4,7 @@
 
 The basic AnyLog commands demonstrated in the Onboarding session:
 
-* Help commands - see details in [the help command section](#../getting%20started.md#the-help-command).  
+* Help commands - see details in [the help command section](../getting%20started.md#the-help-command).  
     Examples:
     ```anylog 
     help
@@ -24,7 +24,7 @@ The basic AnyLog commands demonstrated in the Onboarding session:
   
 * The local dictionary - maps local values (like paths names and IPs) to unified names that can be shared across nodes.
   
-    Details are in [the local dictionary section](#../dictionary.md#the-local-dictionary).
+    Details are in [the local dictionary section](../dictionary.md#the-local-dictionary).
 
      Examples:
     ```anylog 
@@ -43,7 +43,7 @@ The basic AnyLog commands demonstrated in the Onboarding session:
     ```anylog 
     get dictionary _dir
     ```   
-    Details are in [the local directory structure](#../getting%20started.md#local-directory-structure).
+    Details are in [the local directory structure](../getting%20started.md#local-directory-structure).
   
 * Connecting to a network
     
