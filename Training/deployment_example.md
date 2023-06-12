@@ -18,6 +18,12 @@ docker run -it --detach-keys=ctrl-d \
 --net=host --rm anylogco/anylog-network
 ```
 
+
+If for some reason, the License Key doesn't get enabled: 
+```
+AL > set license where activation_key = !license_key
+```
+
 ## Sample Commmands
 
 * _Help_ functions 
