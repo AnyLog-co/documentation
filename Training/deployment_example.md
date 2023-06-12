@@ -87,8 +87,8 @@ get connections
     bind=true and threads=3>
 
 <run rest server where
-    external_ip=!external_ip and external_port=!anylog_server_port and
-    internal_ip=!ip and internal_port=!anylog_server_port and
+    external_ip=!external_ip and external_port=!anylog_rest_port and
+    internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=false and threads=3 and timeout=30>
 
 # validate the TCP connection, the REST connection and the local blockchain structure.
