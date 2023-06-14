@@ -9,7 +9,6 @@ services and can be deployed "out-of-the-box" to support many of the edge use ca
 In the examples below, users define **system variables** by assigning values to keys. These keys  
 are referenced in the node configuration process to apply a configuration option, or a configuration value.
 
-<<<<<<< HEAD
 ## Basic Deployment
 When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
 The following are examples of services which are enabled in most deployments:
