@@ -286,13 +286,12 @@ set mqtt debug [on/off]
 * off - disables the debug functionality.
 
 #### Flushing source messages
-Users are able to disable the AnyLog processing and flush incoming messages to files.  
+Users are able to disable the AnyLog processing and flush incoming messages to file.    
+The a true value assigned to the key **persist** determines to log the source data.  
 The name of the file is based on the broker ID and the topic associated with the message.    
 The following example subscribes to the topic **anylog** and writes all the incoming messages to a file in the watch directory.  
-Note: In the example below, the topic is assigned with a name (anylog), but there are no mapping instructions such as
-a **bring command** or a **mapping policy**. Therefore, the source data will be written with no changes.  
 ```anylog
-run mqtt client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = anylog
+run mqtt client where broker = local and port = 32150 and log= false and topic = (name = edgexpert-anylog and persist = true and dbms = abc and table = 123)
 ```
 
 #### Updating a log file with messages that were not successfully processed
