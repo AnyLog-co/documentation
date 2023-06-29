@@ -55,9 +55,10 @@ The presentation in this session reviews the following:
         - Deploy a query node
         - Deploy 2 Operator Nodes
      2. Deploy and configure a data generator
-     3. Issue status commands
-     4. Issue metadata commands
-     5. Query data  
+     3. Deploy and configure the Remote CLI
+     4. Issue status commands
+     5. Issue metadata commands
+     6. Query data  
       
 
   
