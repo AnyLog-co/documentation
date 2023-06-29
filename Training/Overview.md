@@ -42,10 +42,12 @@ The presentation in this session reviews the following:
    * A minimum of 10GB of disk space.
    * Each node accessible by IP and Port (remove firewalls limitations).
    * [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
-   the Docker download that’s suitable for your platform)
+   the Docker download that’s suitable for your platform).
 
-   Note: The prerequisites for a customer deployment is available [here](..//deployments/Prerequisite.md).
+   Note: The prerequisites for a customer deployment are available [here](..//deployments/Prerequisite.md).
    
+   Prior to the guided tour, it is recommended to review the the [Session II (Deployment) document](Session%20II%20(Deployment).md).  
+        
    This session will allow users to do the following on their machines:
    
      1. Download, install and configure AnyLog on each node:
