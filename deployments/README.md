@@ -6,7 +6,7 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Configure EdgeX as a data source  
 * Configure Grafana to visualize the data 
 
-We recommend to deploy an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
+We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
 static IPs when deploying a production network.
 
 ## Deployment

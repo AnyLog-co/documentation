@@ -149,12 +149,8 @@ Example:
  ]
 }
 ```
- 
-
 
 ## Usage examples
-
-
 
 The following queries were all executed through the Query node to show that from a single point the user can get 
 not only the data, but also metadata and general machine information.
