@@ -1,4 +1,4 @@
-# Onboarding Training
+# Session I - The Basic Guided Tour
 
 Prerequisite: See details [here](..//deployments/Prerequisite.md).
 

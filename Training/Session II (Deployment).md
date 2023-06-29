@@ -1,6 +1,6 @@
-# Deployment Example 
+# Session II - Deployment of the test network
 
-If you do not have Docker credentials or an AnyLog license key please contanct us at [info@anylog.co](mailto:info@anylog.co) 
+If you do not have Docker credentials or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
 
 ## Starting an Empty Node 
 An Empty node is a node doesn't contains any preset AnyLog services. 

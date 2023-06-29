@@ -6,9 +6,11 @@ This document and the set of referenced documents explain the deployment and con
 This training is using command-line instructions to configure the nodes in the network.**  
 In a customer deployment, these commands are pre-packaged, and associated to a node by one (or more) of these processes:
 1) By maintaining the configuration commands in a local file that is associated to a node.
-2) By dynamically creating a configuration file (for the node) during the Docker deployment, and associating the file with the node.
+2) By dynamically creating a configuration file (for the node) during the Docker deployment.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a policy to a node.
 
+Detailed explanations are available in the AnyLog Documentation. the table of content is available in the 
+[READ ME File](../README.md)
  
 ### Session I - The Basic Guided Tour
  This guided tour introduces you to the basics of AnyLog and its main feature.  
@@ -18,7 +20,8 @@ In a customer deployment, these commands are pre-packaged, and associated to a n
  * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
  * [Onboarding](onboarding.md) - The basic commands that are demonstrated in this training session. 
  
-A presentation that reviews the following:
+The presentation in this session reviews the following:
+
     1. The nodes types
         - Master node (optional)
         - Operators node
@@ -45,14 +48,15 @@ A presentation that reviews the following:
    Note: The prerequisites for a customer deployment is available [here](..//deployments/Prerequisite.md).
    
    This session will allow users to do the following on their machines:
-   1. Download, install and configure AnyLog on each node:
+   
+     1. Download, install and configure AnyLog on each node:
         - Deploy a Master Node
         - Deploy a query node
         - Deploy 2 Operator Nodes
-   2. Deploy and configure a data generator
-   3. Issue status commands
-   4. Issue metadata commands
-   5. Query data  
+     2. Deploy and configure a data generator
+     3. Issue status commands
+     4. Issue metadata commands
+     5. Query data  
       
 
   
