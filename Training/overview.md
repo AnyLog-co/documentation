@@ -17,16 +17,22 @@ In a customer deployment, these commands are pre-packaged, and associated to a n
         a) Master node (optional)  
         b) Operators node  
         c) Query Node   
-    B) The test network to deploy
-    C) The node CLI
-    D) The remote CLI
-    E) Configuration commands
-    F) Status commands
-    G) metadata commands
-    H) Query data
+    B) The test network to deploy  
+    C) The node CLI  
+    D) The remote CLI  
+    E) Configuration commands  
+    F) Status commands  
+    G) metadata commands  
+    H) Query data  
     
 2) Session II - Deployment of the test network
-    a) Deploy a Master Node
-    b) Deploy a query node
+    a) Deploy a Master Node   
+    b) Deploy a query node   
+    c) Deploy 2 Operator Nodes  
+    d) Deploy a data generator  
+    e) Issue status commands  
+    f) Issue metadata commands  
+    g) Query data  
+      
 
   
