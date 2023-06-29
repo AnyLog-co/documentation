@@ -16,7 +16,7 @@ help index streaming
 help run kafka consumer
 ``` 
 
-## Review events 
+## The logged events
 Multiple logs that track events - logs examples: event log, error log, rest log, query log (needs to be enabled).
 
  Examples:

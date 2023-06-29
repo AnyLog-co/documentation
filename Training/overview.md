@@ -9,30 +9,50 @@ In a customer deployment, these commands are pre-packaged, and associated to a n
 2) By dynamically creating a configuration file (for the node) during the Docker deployment, and associating the file with the node.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a policy to a node.
 
-##The training includes 2 sections:
-
-1) Session I - A presentation that reviews the following:
-
-    A) The nodes types    
-        a) Master node (optional)  
-        b) Operators node  
-        c) Query Node   
-    B) The test network to deploy  
-    C) The node CLI  
-    D) The remote CLI  
-    E) Configuration commands  
-    F) Status commands  
-    G) metadata commands  
-    H) Query data  
+ 
+### Session I - The Basic Guided Tour
+ This guided tour introduces you to the basics of AnyLog and its main feature.  
+ This tour uses a single pre-installed node (however, not configured), that guides you through the basic operations.
+ 
+ Prior to the guided tour, it is recommended to review the following documents:
+ * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
+ * [Onboarding](onboarding.md) - The basic commands that are demonstrated in this training session. 
+ 
+A presentation that reviews the following:
+    1. The nodes types
+        - Master node (optional)
+        - Operators node
+        - Query Node   
+    2. The test network to deploy
+    4. The local dictionary
+    5. The node CLI
+    6. The remote CLI
+    7. Configuration commands
+    8. Status commands
+    9. Metadata commands
+    10. Monitoring commands
+    11. Query data  
     
-2) Session II - Deployment of the test network
-    a) Deploy a Master Node   
-    b) Deploy a query node   
-    c) Deploy 2 Operator Nodes  
-    d) Deploy a data generator  
-    e) Issue status commands  
-    f) Issue metadata commands  
-    g) Query data  
+### Session II - Deployment of the test network
+   This guided session will support users to deploy and configure a test network on their machines.  
+   Prior to this session, users are required to prepare 5 machines (physical or virtual) as follows:
+   * A minimum of 256MB of RAM.
+   * A minimum of 10GB of disk space.
+   * Each node accessible by IP and Port (remove firewalls limitations).
+   * [Docker](https://docs.docker.com/) (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access 
+   the Docker download that’s suitable for your platform)
+
+   Note: The prerequisites for a customer deployment is available [here](..//deployments/Prerequisite.md).
+   
+   This session will allow users to do the following on their machines:
+   1. Download, install and configure AnyLog on each node:
+        - Deploy a Master Node
+        - Deploy a query node
+        - Deploy 2 Operator Nodes
+   2. Deploy and configure a data generator
+   3. Issue status commands
+   4. Issue metadata commands
+   5. Query data  
       
 
   
