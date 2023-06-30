@@ -23,15 +23,12 @@ Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
 The configurations files are organized in the static/json folder as a set of JSON files.
 
-### The setting files
+## The configuration files
+
+### The main configuration file
 
 The initial settings for the Remote CLI are determined by the **setting.json** file.
-This JSON file specifies the following:
-* The name of the JSON file that specifies the pre-configured buttons. This file determines
-the commands that are associated with the buttons on the client form.
-* The JSON files that configure the monitoring forms.   
 
- 
 The **setting.json** file includes the following sections:
 * **client** - specifies the default values on the client form allowing the following options:
    * connect_info - specifies the default AnyLog Node client to use.
@@ -42,7 +39,8 @@ The **setting.json** file includes the following sections:
  
 * **certificates** - specifies the certificates to use (if authentication on the AnyLog node is enabled).
 
-* **Monitor** - specifies the JSON files that configure the monitored pages.
+* **Monitor** - specifies the JSON files that configure the monitored pages. Each pair includes a name describing the 
+data monitored, and a file name that specifies what is monitored.
 
 Example:
 ```json
@@ -68,7 +66,8 @@ Example:
 
 ```
 
-The **buttons** configurations are organized as a JSON file.
+### The buttons' configuration file
+
 The name of the file is specified in the **setting.json** file under "client/buttons" ("commands.json" in the example above).
 The info contained in the file includes the following:
 * **button** - The name appearing on the button.
@@ -153,9 +152,17 @@ Example:
 }
 ```
 
+### The monitor configuration file
+
+One or more file names are specified in the **setting.json** file under "Monitor" ("monitor_operators.json" 
+and "monitor_members.json" in the example above).
+
+Each of the file describes the formm that is presented to the user including the thresholds that trigger alerts.
+
+
 ## Usage examples
 
-The following demonstarte commands issued via cURL and their web representation using the Remote CLI:
+The following demonstrate commands issued via cURL and their web representation using the Remote CLI:
 
 ### Return the list of tables supported by the network 
 
