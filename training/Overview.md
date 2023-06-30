@@ -15,11 +15,12 @@ The test network deployed is shown in the following diagram:
 ![deployment diagram](../imgs/deployment_diagram.png)
 
 
-In the test setup, data will be transferred to the Operator nodes, a query that is processed on the Query Node will be satisfied
-as if the entire data set is hosted locally. Therefore, a query will be satisfied from the data hosted on the 2 Operator Nodes
-as if the 2 Operators are a single machine.
+In the test setup, data will be transferred to the 2 Operator nodes, and a query that is processed on the Query Node will be satisfied
+as if the entire data set is hosted locally (a query will be satisfied from the data hosted on the 2 Operator Nodes - 
+as if the 2 Operators are a single machine),
 
-**Note 1:** The table of content to the AnyLog documentation is available in the [READ ME Section](../README.md)
+
+**Note 1:** The table of content to the AnyLog documentation is available in the [README Section](../README.md)
 
 **Note 2:** This training is using command-line instructions to configure the nodes in the network.
 In a customer deployment, these commands are pre-packaged, and associated to a node by one (or more) of these processes:
