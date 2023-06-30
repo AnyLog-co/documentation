@@ -2,6 +2,12 @@
 
 This document and the set of referenced documents explain the deployment and configuration of an AnyLog test network.
 
+AnyLog is deployed using Docker or Kubernetes as a pre-configured software package in isolated containers on nodes.  
+At the same time, each AnyLog node provides an interactive environment allowing to dynamically change configurations, 
+and issue commands and queries. 
+The training reviews the basic operations with AnyLog nodes to allow users to interact with nodes, metadata and data, and 
+to make changes to the default configurations to satisfy proprietary processes, data connectors, and customers needs.
+
 **Note 1:** Detailed explanations are available in the AnyLog Documentation. the table of content is available in the 
 [READ ME File](../README.md)
 
