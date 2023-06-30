@@ -16,7 +16,11 @@ The Remote CLI contains the following:
 
 ## Installing the Remote CLI
 
-Details are available [here](../deployment/Support/Remote-CLI.md).
+Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
+
+https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Remote-CLI.md#remote-cli
+https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md
+../deployments/Support/Remote-CLI.md#remote-cli
 
 ## Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
