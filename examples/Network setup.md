@@ -44,8 +44,10 @@ set anylog home D:\Node
 set authentication off    # Disable users authentication
 run tcp server !ip 2548   # The connection to the network nodes
 run rest server !ip 2549  # Enable REST calls
-connect dbms sqlite !db_user !db_port  system_query memory  # Use SQLite as system dbms
-connect dbms sqlite !db_user !db_port blockchain            # use SQLite for the blockchain ledger
+connect dbms system_query where type = sqlite and memory = true  # Use SQLite as system dbms
+
+ # use PostgreSQL to host the blockchain ledger
+connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 run blockchain sync where source = dbms and time = 30 seconds and dest = file # Copy the blockchain data to a file every 30 seconds
 </pre>
 
@@ -74,10 +76,14 @@ master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MAST
 run tcp server !external_ip !operator_tcp_port !ip !operator_tcp_port # The connection to the network nodes
 run rest server !ip !operator_rest_port # Enable REST calls
 
-connect dbms psql anylog@127.0.0.1:demo 5432 system_query # For AnyLog use: Use SQLite as system dbms
-connect dbms sqlite anylog@127.0.0.1:demo 5432 almgm # For AnyLog use: Local management database
+# Use SQLite as system dbms
+connect dbms system_query where type = sqlite and memory = true
+ 
+# For AnyLog internal tables: Local management database
+connect dbms almgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 
-connect dbms psql anylog@127.0.0.1:demo 5432  lsl_demo  # For the user data: use Postgres for lsl_demo tables
+# For the user data: use Postgres for lsl_demo tables
+connect dbms lsl_demo where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432 and autocommit = false
 
 partition lsl_demo ping_sensor using timestamp by 7 days  # Partition the data of the lsl_demo dbms by time
 
@@ -159,7 +165,9 @@ master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MAST
 run tcp server !external_ip 3548 !ip 3548   # The connection to the network nodes
 run rest server !ip 3549  # Enable REST calls
 
-connect dbms psql anylog@127.0.0.1:demo 5432 system_query # Use SQLite as system dbms
+
+# Use SQLite as system dbms
+connect dbms system_query where type = sqlite and memory = true  # Use SQLite as system dbms
 
  # Sync the blockchain data from the master every 30 seconds
 run blockchain sync where source = master and time = 30 seconds and dest = file and connection = !master_node # Sync the blockchain data
