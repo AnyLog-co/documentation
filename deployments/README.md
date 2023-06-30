@@ -58,6 +58,7 @@ docker run --network host -it --detach-keys="ctrl-d" --name anylog-node --rm any
 ## Table of Content
 
 ### Deploy AnyLog
+* [Network Deployment Example](../training/Session%20II%20(Deployment).md)- Deploy a test network.
 * [Deploy Database(s)](database_configuration.md)
 * [Deploy Node](deploying_node.md)
 * [Execute Personalized Scripts](executing_scripts.md)
