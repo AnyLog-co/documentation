@@ -2,13 +2,14 @@
 
 The following provides directions for deploying AnyLog and its supported tools as a single _docker-compos_ deployment. 
 The deployment will ultimately install 7 docker containers -   
-* PostgresSQL 
+
 * AnyLog Master 
 * AnyLog Operator I  - receive data through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code) 
 * AnyLog Operator II - receive EdgeX data through a third-party MQTT broker 
 * AnyLog Query 
 * [Remote-CLI](../northbound%20connectors/remote_cli.md) 
 * [Grafana](../northbound%20connectors/using%20grafana.md) 
+* PostgresSQL 
 
 ## Deployment Process
 Download [deployments](https://github.com/AnyLog-co/deployments) and [lfedge-code](https://github.com/AnyLog-co/lfedge-code). 
