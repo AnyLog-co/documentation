@@ -13,6 +13,8 @@ data and satisfies data queries.
 
 The test network deployed is shown in the following diagram:
 ![deployment diagram](../imgs/deployment_diagram.png)
+
+
 In the test setup, data will be transferred to the Operator nodes, a query that is processed on the Query Node will be satisfied
 as if the entire data set is hosted locally. Therefore, a query will be satisfied from the data hosted on the 2 Operator Nodes
 as if the 2 Operators are a single machine.
