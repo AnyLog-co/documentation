@@ -16,7 +16,7 @@ The Remote CLI contains the following:
 
 ## Installing the Remote CLI
 
-Details are available [here](../Support/Remote-CLI.md)
+Details are available [here](../../Support/Remote-CLI.md).
 
 ## Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
