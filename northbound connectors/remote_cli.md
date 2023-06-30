@@ -154,10 +154,10 @@ Example:
 
 ### The monitor configuration file
 
-One or more file names are specified in the **setting.json** file under "Monitor" ("monitor_operators.json" 
+One or more file names are specified in the **setting.json** file under "monitor" ("monitor_operators.json" 
 and "monitor_members.json" in the example above).
 
-Each of the file describes the formm that is presented to the user including the thresholds that trigger alerts.
+Each of the file describes the form that is presented to the user including the thresholds that trigger alerts.
 
 
 ## Usage examples
