@@ -24,8 +24,8 @@ Notes:
 - Optional locations for the Grafana .ini file:
   * Winodws Config: `C:\Program Files\GrafanaLabs\grafana\conf\custom.ini`
   * Linux Config: `/etc/grafana/grafana.ini`
-  * For Docker, the Grafana config file name is `grafana.ini`. Depending on the deployment, the file is stored in the Docker volume (if created); or optionally is a hidden file. Details are available in the
-    [Grafana Docker Documentation](https://grafana.com/docs/grafana/latest/installation/docker/).
+  * With Docker, the Grafana config file name is `grafana.ini`. Depending on the deployment, the file is stored in the Docker volume (if created); or optionally is a hidden file.
+    Details are available in the [Grafana Docker Documentation](https://grafana.com/docs/grafana/latest/installation/docker/).
     
 - The Grafana configuration options are explained at the [Setting](https://grafana.com/docs/grafana/latest/auth/grafana/#settings) section. Below are some relevant configurations:  
 
