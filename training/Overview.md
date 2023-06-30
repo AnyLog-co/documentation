@@ -3,21 +3,20 @@
 This document and the set of referenced documents explain the deployment and configuration of an AnyLog test network.
 
 AnyLog is deployed using Docker or Kubernetes as a pre-configured software package.  
-At the same time, each AnyLog node provides an interactive environment allowing to dynamically change configurations, 
-and issue commands and queries. 
-The training reviews the basic operations with AnyLog nodes to allow users to interact with nodes, metadata and data, and 
+At the same time, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
+and issue commands and queries.  
+The training reviews the basic operations with AnyLog nodes allowing users to interact with nodes, metadata and data, and 
 to make changes to the default configurations to satisfy proprietary processes, data connectors, and customers needs.
 
-**Note 1:** Detailed explanations are available in the AnyLog Documentation. the table of content is available in the 
-[READ ME File](../README.md)
+**Note 1:** A table of content of the AnyLog documentation is available in the [READ ME File](../README.md)
 
 **Note 2:** This training is using command-line instructions to configure the nodes in the network.
 In a customer deployment, these commands are pre-packaged, and associated to a node by one (or more) of these processes:
-1) By maintaining the configuration commands in a local file that is associated to a node.
+1) By maintaining configuration commands in a local file that is associated to a node.
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a policy to a node.
  
-**Note 3:** Advanced users can review the [Network setup document](../examples/Network%20setup.md) to deploy a test
+**Note 3:** Advanced users can review the [Network Setup Document](../examples/Network%20setup.md) to deploy a test
 network using the AnyLog CLI without pre-packaged configuration. 
 
 ### Session I - The Basic Guided Tour
@@ -26,7 +25,7 @@ network using the AnyLog CLI without pre-packaged configuration.
  
  Prior to the guided tour, it is recommended to review the following documents:
  * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
- * [Session I](onboarding.md) - This document lists the basic commands that are demonstrated in this training session. 
+ * [Session I](/Session%20I%20(Demo).md#session-i---the-basic-guided-tour) - This document lists the basic commands that are demonstrated in this training session. 
  
 The presentation in this session reviews the following:
 
