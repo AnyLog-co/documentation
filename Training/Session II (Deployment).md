@@ -2,15 +2,60 @@
 
 If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
 
-## Starting an Empty Node 
-An Empty node is a node doesn't contains any preset AnyLog services. 
+## The deployment process
+
+This document describes how to deploy and configure an AnyLog Network. The example provides directions to:
+* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master) 
+* Deploy our Remote CLI - an open source web interface used for querying data 
+* Configure EdgeX as a data source  
+* Configure Grafana to visualize the data 
+
+We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
+static IPs when deploying a production network.
+
+## Nodes deployed
+* Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
+* Operator – A node that hosts the data. For this deployment we will have 2 Operator nodes.
+* Query – A node that coordinates the query process. 
+
+**Deployment Diagram**:
+
+![deployment diagram](../imgs/deployment_diagram.png)
+
+## Deploy the Master Node
+Assign a virtual or physical machine for a Master node and follow these steps:
+1.
+2.
+
+
+## Deploy 2 Operator nodes
+Assign 2 virtual or physical machines as Operator nodes and follow these steps:
+1.
+2.
+
+## Deploy a Query node
+Assign a virtual or physical machine for a Query node and follow these steps:
+
+
+## Deploy the Remote CLI
+
+Instructions to deploy the remote CLI are available [here](../deployments/Support/Remote-CLI.md).
+
+## Deploy a data generator
+
+## Deploy Grafana
+
+Instructions to deploy the remote CLI are available [here](../deployments/Support/Remote-CLI.md).
+
+
+## Basic operations on all nodes 
 
 1. Log into AnyLog Docker Hub
 ```
 docker login -u anyloguser -p ${DOCKER_LOGIN]
 ```
 
-2. Start an Empty Node
+2. Start the Node
 ```
 docker run -it --detach-keys=ctrl-d \
 -e NODE_TYPE=none \
@@ -18,13 +63,60 @@ docker run -it --detach-keys=ctrl-d \
 --net=host --rm anylogco/anylog-network
 ```
 
-
-If for some reason, the License Key doesn't get enabled: 
+3. Set the License Key 
 ```
 AL > set license where activation_key = !license_key
 ```
 
-## Sample Commmands
+4. Disable Authentication
+
+5. Enable the network protocol
+
+```
+<run tcp server where
+    external_ip=!external_ip and external_port=!anylog_server_port and
+    internal_ip=!ip and internal_port=!anylog_server_port and
+    bind=true and threads=3>
+```
+
+6. Enable the REST service
+
+```
+<run rest server where
+    external_ip=!external_ip and external_port=!anylog_rest_port and
+    internal_ip=!ip and internal_port=!anylog_rest_port and
+    bind=false and threads=3 and timeout=30>
+```
+
+## Basic operations on specific nodes
+
+1.  On the Master Node
+* Enable the database services to host the metadata:
+```
+connect dbms ...
+```
+
+2.  On each Operator Node
+* Enable the database services to host the user data:
+```
+connect dbms ...
+```
+* Enable the database services to support HA:
+```
+connect dbms ...
+```
+* Associate each operator with a data source
+  - Operator 1, connecting to data simulator by providing a REST service:
+```
+
+```
+  - Operator 2, connecting to Edgex by providing a broker service:
+```
+
+```
+
+
+## Sample Commands
 
 * _Help_ functions 
 ```
@@ -80,20 +172,6 @@ abc = 123
 # View connections 
 get connections 
 
-# connect to TCP / REST 
-<run tcp server where
-    external_ip=!external_ip and external_port=!anylog_server_port and
-    internal_ip=!ip and internal_port=!anylog_server_port and
-    bind=true and threads=3>
-
-<run rest server where
-    external_ip=!external_ip and external_port=!anylog_rest_port and
-    internal_ip=!ip and internal_port=!anylog_rest_port and
-    bind=false and threads=3 and timeout=30>
-
-# validate the TCP connection, the REST connection and the local blockchain structure.
-test node 
-```
 
 * Database  Configuration 
 ```
