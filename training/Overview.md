@@ -62,7 +62,7 @@ The presentation in this session reviews the following:
    * [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
 
-   Note: The prerequisites for a customer deployment are available [here](../deployments/Prerequisite.md).
+   Note: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
    
    Prior to the guided tour, it is recommended to review the the [Session II (Deployment) document](Session%20II%20(Deployment).md).  
         
