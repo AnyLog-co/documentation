@@ -49,25 +49,28 @@ get dictionary _dir
 ```   
 Details are in [the local directory structure](../getting%20started.md#local-directory-structure).
   
-## Connecting to a network
-3 types of connections:  
-- TCP - to communicate between nodes which are members of the network.
-- REST - to communicate between 3rd parties apps to a node in the network (examples: the Remote CLI, Grafana).
-- Messaging broker - push data from a data source.
+## The communication services
+Each node can offer 3 types of communication services:  
+
+| Service Name   | Service Type |
+| ------------- | ------------- |
+| TCP  | A service allowing the node to send and receive messages from peer nodes using the AnyLog Network Protocol |
+| REST  | A service allowing the node communicate with 3rd parties applications and data sources VIA REST |
+| Messaging  | A message broker service allowing data sources and 3rd parties applications to publish data on the node |
 
 View existing connections:
  ```anylog 
-get connections
+get connections   # command returns no connection
 
 run tcp server where internal_ip = !ip and internal_port = 20048 and external_ip = !external_ip and external_port = 20048 and bind = false and threads = 6
 run rest server where internal_ip = !ip and internal_port = 20049 and external_ip = !external_ip and external_port = 20049 and bind = false
 
-get connections
+get connections     # command returns the details of each communication service
 ```   
 
 Disable authentication:
 ```anylog 
-set authentication off
+set authentication off      # The training ignors authentication of users, nodes and their permissions
 ```   
 
 Enable message queue:
@@ -91,7 +94,7 @@ connect dbms system_query where type = sqlite and memory = true # Used for local
 get databases
 ```   
 
-## The remote CLI:
+## The remote CLI (Demonstrating 3rd party application interacting with the network):
 Connection via the REST protocol.  
 Most commands can be issued on the Remote CLI.    
 Examples:
@@ -105,10 +108,6 @@ get databases
 Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
 and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands).
 
-If the file was retrieved using copy (vs. sync), restart he node or call reload:
-```anylog 
-blockchain reload metadata
-```   
 Example blockchain commands:
 ```anylog 
 blockchain get *
