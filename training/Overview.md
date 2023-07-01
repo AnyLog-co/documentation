@@ -3,12 +3,12 @@
 This document and the set of referenced documents explain the deployment and configuration of an AnyLog test network.
 
 AnyLog is deployed using Docker or Kubernetes as a pre-configured software package.  
-At the same time, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
+to address dynamic and ad-hoc needs, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
 and issue commands and queries.  
 The training reviews the basic operations with AnyLog nodes allowing users to interact with nodes, metadata and data, and 
 to make changes to the default configurations to satisfy proprietary processes, data connectors, and customers needs.
 
-In this training, Session I reviews basic operations and Session II provides the guidance to deploy a network that manages
+In this training, **Session I** reviews basic operations and **Session II** provides the guidance to deploy a network that manages
 data and satisfies data queries.  
 
 The test network deployed is shown in the following diagram:
@@ -20,7 +20,7 @@ as if the entire data set is hosted locally (as if the 2 Operators are a single 
 
 **Note 1:** The table of content to the AnyLog documentation is available in the [README Section](../README.md)
 
-**Note 2:** This training is using command-line instructions to configure the nodes in the network.
+**Note 2:** This training is using the AnyLog command-line to configure the nodes in the network.  
 In a customer deployment, these commands are pre-packaged, and associated to a node by one (or more) of these processes:
 1) By maintaining configuration commands in a local file that is associated to a node.
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
@@ -54,15 +54,15 @@ The presentation in this session reviews the following:
     11. Query data  
     
 ### Session II - Deployment of the test network
-   This guided session will support users to deploy and configure a test network on their machines.  
-   Prior to this session, users are required to prepare 5 machines (physical or virtual) as follows:
+   This session guides users to deploy and configure a test network on their machines.  
+   Prior to this session, users are required to prepare 4 machines (physical or virtual) as follows:
    * A minimum of 256MB of RAM.
    * A minimum of 10GB of disk space.
-   * Each node accessible by IP and Port (remove firewalls limitations).
+   * Each node accessible by IP and Port (remove firewalls restrictions).
    * [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
 
-   Note: The prerequisites for a customer deployment are available [here](..//deployments/Prerequisite.md).
+   Note: The prerequisites for a customer deployment are available [here](../deployments/Prerequisite.md).
    
    Prior to the guided tour, it is recommended to review the the [Session II (Deployment) document](Session%20II%20(Deployment).md).  
         
