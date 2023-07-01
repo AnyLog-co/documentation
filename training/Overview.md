@@ -4,7 +4,11 @@ This document and the referenced documents explain the deployment and configurat
 
 AnyLog is deployed using Docker or Kubernetes as a pre-configured software package.  
 To address dynamic and ad-hoc needs, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
-and issue commands and queries.  
+and issue commands and queries. In addition, the interactive enviornment is supported remotely via REST, users
+can use tools like [cURL](https://curl.se/) or [Postman](../northbound%20connectors/using%20postman.md) as well
+as a [remote CLI](../northbound%20connectors/remote_cli.md) which is an AnyLog web based application allowing simple messaging application to nodes in the AnyLog Network.  
+ 
+ 
 The training reviews the basic operations with AnyLog nodes and guides users to manage, monitor and query nodes, metadata and data.
 This training demonstrates how to make changes to the default configurations to satisfy proprietary processes, data connectors, 
 and specific/domain requirements .
