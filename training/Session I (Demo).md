@@ -55,10 +55,10 @@ Each node can offer 3 types of communication services:
 | Service Name   | Service Type |
 | ------------- | ------------- |
 | TCP  | A service allowing the node to send and receive messages from peer nodes using the AnyLog Network Protocol |
-| REST  | A service allowing the node communicate with 3rd parties applications and data sources VIA REST |
+| REST  | A service allowing the node communicate with 3rd parties applications and data sources using REST |
 | Messaging  | A message broker service allowing data sources and 3rd parties applications to publish data on the node |
 
-View existing connections:
+Enable the TCP and REST services and view existing connections:
  ```anylog 
 get connections   # command returns no connection
 
@@ -122,7 +122,7 @@ blockchain get operator where [city] = toronto  bring.ip_port
 ```   
 
 ## Execute commands on a peer node
-Use the TCP connection to communicate with peers 
+Use the TCP connection to communicate with peers.  
 - With a single peer:   run client ip:port
 - With multiple peers:  run client (ip:port, ip:port, ip:port ...)  
  Examples: 
