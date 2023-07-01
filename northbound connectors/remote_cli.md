@@ -9,7 +9,7 @@ Note: [Using Postman](../using%20postman.md) details the usage of Postman with A
 The Remote CLI contains the following:
 1. A client form to issue commands and queries to nodes in the network.
 2. Preconfigured buttons allowing to issue commands by clicking on buttons. Users preconfigure the buttons to their frequently used commands and queries.
-3. Forms to display and stream video and images.
+3. Forms to display and stream images and video.
 4. A form that collects monitored info from monitored nodes.
 5. A form that translate commands and queries to a) cURL commands, b) QR Codes and c) HTTP requests.
 6. A configuration form.
@@ -19,7 +19,7 @@ The Remote CLI contains the following:
 Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
 
 
-## Configuring the Remote CLI
+# Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
 The configurations files are organized in the static/json folder as a set of JSON files.
 
@@ -31,7 +31,7 @@ The initial settings for the Remote CLI are determined by the **setting.json** f
 
 The **setting.json** file includes the following sections:
 * **client** - specifies the default values on the client form allowing the following options:
-   * connect_info - specifies the default AnyLog Node client to use.
+   * connect_info - specifies the default AnyLog Node to use.
    * buttons - the name of the JSON file that defines the preconfigured buttons options on the client form.
    * help - determines how help is provided when a button is selected and the help option is flagged on the client form:
       - if the value is **open**, the button selection opens the URL that is associated with the button.
@@ -71,10 +71,10 @@ Example:
 The name of the file is specified in the **setting.json** file under "client/buttons" ("commands.json" in the example above).
 The info contained in the file includes the following:
 * **button** - The name appearing on the button.
-* **command** - the command to issue when the button is selected.
-* **type** - the command type (GET or POST).
-* **group** - a category name, allowing users to select buttons by categories.
-* **help_url** - the URL to use if **help** is selected on the client form.
+* **command** - The command to issue when the button is selected.
+* **type** - The command type (GET or POST).
+* **group** - A category name, allowing users to select buttons by categories.
+* **help_url** - The URL to use if **help** is selected on the client form.
 
 Example:
 ```json

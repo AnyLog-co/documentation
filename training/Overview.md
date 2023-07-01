@@ -29,7 +29,7 @@ as if the entire data set is hosted locally (as if the 2 Operators are a single 
 
 **Note 2:** In this training, some configurations are packaged with the software deployed, and some configurations are done
 using the AnyLog command-line.    
-In a customer deployment, all configurations commands are pre-packaged, and associated to a node by one (or more) of these processes:
+In a customer deployment, all configurations are pre-packaged, and associated to a node by one (or more) of these processes:
 1) By maintaining configuration commands in a local file that is associated to a node.
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a configuration policy to a node.
