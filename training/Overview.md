@@ -5,13 +5,15 @@ This document and the set of referenced documents explain the deployment and con
 AnyLog is deployed using Docker or Kubernetes as a pre-configured software package.  
 to address dynamic and ad-hoc needs, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
 and issue commands and queries.  
-The training reviews the basic operations with AnyLog nodes allowing users to interact with nodes, metadata and data, and 
-to make changes to the default configurations to satisfy proprietary processes, data connectors, and customers needs.
+The training reviews the basic operations with AnyLog nodes and guiding users to interact with nodes, metadata and data.
+This training demonstrates how to make changes to the default configurations to satisfy proprietary processes, data connectors, 
+and specific/domain requirements .
 
 In this training, **Session I** reviews basic operations and **Session II** provides the guidance to deploy a network that manages
-data and satisfies data queries.  
+data and satisfies queries.  
 
 The test network deployed is shown in the following diagram:
+
 ![deployment diagram](../imgs/deployment_diagram.png)
 
 
@@ -20,18 +22,19 @@ as if the entire data set is hosted locally (as if the 2 Operators are a single 
 
 **Note 1:** The table of content to the AnyLog documentation is available in the [README Section](../README.md)
 
-**Note 2:** This training is using the AnyLog command-line to configure the nodes in the network.  
-In a customer deployment, these commands are pre-packaged, and associated to a node by one (or more) of these processes:
+**Note 2:** In this training, some configurations are packaged with the software deployed, and some configurations are done
+using the AnyLog command-line.    
+In a customer deployment, all configurations commands are pre-packaged, and associated to a node by one (or more) of these processes:
 1) By maintaining configuration commands in a local file that is associated to a node.
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
-3) By maintaining configuration commands in policies stored in the shared metadata and associating a policy to a node.
+3) By maintaining configuration commands in policies stored in the shared metadata and associating a configuration policy to a node.
  
 **Note 3:** Advanced users can review the [Network Setup Document](../examples/Network%20setup.md) to deploy a test
 network using the AnyLog CLI without pre-packaged configuration. 
 
 ### Session I - The Basic Guided Tour
  This guided tour introduces you to the basics of AnyLog and its main feature.  
- This tour uses a single pre-installed node (however, not configured), that demonstrates the basic operations.
+ This tour uses a single pre-installed node (not configured), that demonstrates the basic operations.
  
  Prior to the guided tour, it is recommended to review the following documents:
  * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
