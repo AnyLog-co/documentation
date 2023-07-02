@@ -67,7 +67,28 @@ Data will be added to the 2 Operator nodes in the following manner:
 
 
 ## Deployment Process
-Download [deployments](https://github.com/AnyLog-co/deployments) and [lfedge-code](https://github.com/AnyLog-co/lfedge-code). 
+
+* Identify the machine assigned to each of the 4 AnyLog Instances.
+
+* On each  machine, download and deploy the AnyLog deployment package using the commands below. 
+```shell
+git clone https://github.com/AnyLog-co/deployments
+bash deployments/docker-compose/docker_install.sh
+```
+**Note:** deployments details are in the - [Deploying a Node](../deploying_node.md) document.
+
+* On 1 Operator Nodes, using the git clone command below, download the LF-Edge code (that includes Edgex) that will be 
+used to generate data.  
+```shell
+git clone https://github.com/AnyLog-co/lfedge-code
+```
+**Note:** deployments details are in the - [lfedge-code](https://github.com/AnyLog-co/lfedge-code) document. 
+Note that the LF-Edge package is not eequired for the second Operator, as the data source used is a 3rd party message broker.
+
+
+
+
+ 
 In addition, install [Docker and docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/docker_install.sh).
 
 ```shell
