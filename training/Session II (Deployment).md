@@ -4,20 +4,19 @@ If you do not have Docker credentials, or an AnyLog license key please contact u
 
 ## Overview
 
-This document describes how to deploy and configure an AnyLog Network. The example provides directions to:
-* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master) 
+This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
+* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master)
+* Deploy and Configure EdgeX as a data source 
 * Deploy our Remote CLI - an open source web interface used for querying data
-* Deploy and Configure Grafana to visualize the data  
-* Deploy and Configure EdgeX as a data source  
 * Deploy and Configure Grafana to visualize the data 
 
 **Deployment Diagram**:
 
 ![deployment diagram](../imgs/deployment_diagram.png)
 
-## prerequisites
+## Prerequisites
 Prior to this session, users are required to prepare:
-* 4 machines (physical or virtual) to host the nodes in the network, with the following:
+* 4 machines (physical or virtual) to host the AnyLog nodes, as follows:
     - A Linux environment.
     - A minimum of 256MB of RAM.
     - A minimum of 10GB of disk space.
@@ -34,7 +33,7 @@ Prior to this session, users are required to prepare:
 **Note 2** We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
- * It Isolate the network for security considerations. 
+ * It Isolate the network addressing security considerations. 
 
 **Note 3** If an overlay network is not used in the training, remove firewalls restrictions to allow the the nodes
 to communicate with peers and with 3rd parties applications.
@@ -54,7 +53,7 @@ Additional information on the types of nodes is in the [Getting Started](../gett
 | Package Name  | Functionality |
 | ------------- | ------------- |
 | [PostgreSQL](https://www.postgresql.org/download/)   | A local database on each node.  |
-| [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code)  | A conector to PLCs and sensors.  |
+| [EdgeX](https://github.com/AnyLog-co/lfedge-code)  | A conector to PLCs and sensors.  |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | A web based interface to the network.  |
 | [Grafana](../northbound%20connectors/using%20grafana.md)   |  A visualization tool. |
 
