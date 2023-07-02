@@ -1,7 +1,9 @@
 # The Remote CLI
 
 The Remote CLI is a web application that offers a REST based GUI that allows to issue commands to nodes in the network.    
-The GUI replaces the need to log to specific nodes by delivering the commands using REST.  
+The GUI extends the command-line-interface offered by each node of the network, by delivering the commands using REST.  
+This functionality allows to interact, using a web based graphical application, with nodes of the network, from a single point
+(and dependent on valid certificates).    
 
 A similar functionality is achieved using [cURL](https://curl.se/) as well as with other tools such as [Postman](https://www.postman.com/).  
 Note: [Using Postman](../using%20postman.md) details the usage of Postman with AnyLog nodes.
@@ -14,10 +16,14 @@ The Remote CLI contains the following:
 5. A form that translate commands and queries to a) cURL commands, b) QR Codes and c) HTTP requests.
 6. A configuration form.
 
+## The server side
+
+Nodes in the network needs to be configured with their REST service enabled.  
+Configuring a node to recieve REST requests is detailed in the [REST Requests](../background%20processes.md#rest-requests) section.
+
 ## Installing the Remote CLI
 
 Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
-
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
