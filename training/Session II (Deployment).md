@@ -54,24 +54,33 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 | Package Name                                        | Nodes Deployed | Functionality | Installation Document | 
 | --------------------------------------------------- | --- | ------------- |-------------- |
 | [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deploying_node.md) |
-| [PostgreSQL](https://www.postgresql.org/download/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install]()|
+| [PostgreSQL](https://www.postgresql.org/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | A data generator                                    | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator Install]()|
 | [Edgex](https://www.edgexfoundry.org/)   | (Optional) Operator Node I |  A connector to PLCs and sensors.  | [EdgeX](https://github.com/AnyLog-co/lfedge-code) |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | Application Node |  A web based interface to the network.  |  |
-| [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Using Grafana](../northbound%20connectors/using%20grafana.md) |
+| [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Using Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 
 ## Data sources
  
 Data will be added to the 2 Operator nodes in the following manner:
  
-* AnyLog Operator I  - receive data as a message broker through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code). 
+* AnyLog Operator I  - 
+  - Install a Python data generator:
+    * [Install Python](https://www.python.org/downloads/)
+    * CLone and install the Data Generator:
+    ```
+    cd $HOME
+    git clone https://github.com/AnyLog-co/Sample-Data-Generator
+    python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
+    ```
+  - Advanced users can use other data generators. For example receive data as a message broker leveraging
+    a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
+    
 * AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker. 
 
 
 ## Deployment Process
-
-* 
 
 * On each  machine, download and deploy the AnyLog deployment package using the commands below. 
 ```shell
