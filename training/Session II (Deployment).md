@@ -31,7 +31,7 @@ Prior to this session, users are required to prepare:
 
 **Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
 
-**Note 2** We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md).
+**Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20&%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
