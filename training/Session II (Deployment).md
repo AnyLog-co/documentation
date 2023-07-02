@@ -53,12 +53,12 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 
 | Package Name                                        | Nodes Deployed | Functionality | Installation Document | 
 | --------------------------------------------------- | --- | ------------- |-------------- |
-| [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deploying_node.md) |
+| [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
 | [PostgreSQL](https://www.postgresql.org/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | A data generator                                    | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator Install]()|
-| [Edgex](https://www.edgexfoundry.org/)   | (Optional) Operator Node I |  A connector to PLCs and sensors.  | [EdgeX](https://github.com/AnyLog-co/lfedge-code) |
+| [Edgex](https://www.edgexfoundry.org/)   | (Optional) Operator Node I |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | Application Node |  A web based interface to the network.  |  |
-| [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Using Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
+| [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 
 ## Data sources
