@@ -44,7 +44,7 @@ to communicate with peers and with 3rd parties applications.
 | Node Name   | Functionality |
 | ------------- | ------------- |
 | Master  | A node that manages the shared metadata (if a blockchain platform is used, this node is redundant). |
-| Operator  |  A node that hosts the data. In this session, we will have 2 Operator nodes. |
+| Operator  |  A node that hosts the data. In this session, users deploy 2 Operator nodes. |
 | Query  | A node that coordinates the query process. |
 
 Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
