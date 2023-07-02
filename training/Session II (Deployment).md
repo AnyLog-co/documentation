@@ -5,10 +5,11 @@ If you do not have Docker credentials, or an AnyLog license key please contact u
 ## Overview
 
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
-* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master)
-* Deploy and Configure [EdgeX](https://www.edgexfoundry.org/) as a data source 
-* Deploy AnyLog's Remote CLI - a web based REST client for querying data, send requests and inspect responses.
-* Deploy and Configure [Grafana](https://grafana.com/) to visualize the data 
+* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
+* Deploy and Configure [PostgreSQL](https://www.postgresql.org/) as a local database on the nodes in the network.
+* Deploy and Configure [EdgeX](https://www.edgexfoundry.org/) as a data source.
+* Deploy AnyLog's [Remote CLI](../northbound%20connectors/remote_cli.md) - a web based REST client for querying data, send requests and inspect responses.
+* Deploy and Configure [Grafana](https://grafana.com/) to visualize the data. 
 
 **Deployment Diagram**:
 
