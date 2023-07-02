@@ -63,14 +63,6 @@ The presentation in this session reviews the following:
     
 ### Session II - Deployment of the test network
    This session guides users to deploy and configure a test network on their machines.  
-   Prior to this session, users are required to prepare 4 machines (physical or virtual) as follows:
-   * A minimum of 256MB of RAM.
-   * A minimum of 10GB of disk space.
-   * Each node accessible by IP and Port (remove firewalls restrictions).
-   * [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
-   the Docker download that’s suitable for your platform).
-
-   Note: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
    
    Prior to the guided tour, it is recommended to review the the [Session II (Deployment) document](Session%20II%20(Deployment).md).  
         

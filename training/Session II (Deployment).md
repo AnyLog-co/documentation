@@ -11,30 +11,60 @@ This document describes how to deploy and configure an AnyLog Network. The examp
 * Deploy and Configure EdgeX as a data source  
 * Deploy and Configure Grafana to visualize the data 
 
-We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md), or some other form of 
-static IPs when deploying a production network.
-
-## Nodes deployed
-* Master – A node that manages the shared metadata (if a blockchain platform is used, this node is redundant).
-* Operator – A node that hosts the data. For this deployment we will have 2 Operator nodes.
-* Query – A node that coordinates the query process. 
-
 **Deployment Diagram**:
 
 ![deployment diagram](../imgs/deployment_diagram.png)
 
-## The deployment process
+## prerequisites
+Prior to this session, users are required to prepare:
+* 4 machines (physical or virtual) to host the nodes in the network, with the following:
+    - A Linux environment.
+    - A minimum of 256MB of RAM.
+    - A minimum of 10GB of disk space.
+* 1 Machine (physical or virtual) for applications that interact with the network, as follows:
+    - Linux or Windows environment.
+    - A minimum of 256MB of RAM.
+    - A minimum of 10GB of disk space.
+* Each node accessible by IP and Port (remove firewalls restrictions).
+* [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
+   the Docker download that’s suitable for your platform).
 
-The following provides directions for deploying AnyLog and its supported tools as a single _docker-compos_ deployment. 
-The deployment will ultimately install 7 docker containers -   
+**Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
 
-* AnyLog Master 
-* AnyLog Operator I  - receive data through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code) 
-* AnyLog Operator II - receive EdgeX data through a third-party MQTT broker 
-* AnyLog Query 
-* [Remote-CLI](../northbound%20connectors/remote_cli.md) 
-* [Grafana](../northbound%20connectors/using%20grafana.md) 
-* PostgresSQL 
+**Note 2** We recommend deploying an overlay network, such as [nebula](Networking%20&%20Security/nebula.md).
+ * It provides a mechanism to maintain static IPs.
+ * It provides the mechanisms to address firewalls limitations.
+ * It Isolate the network for security considerations. 
+
+**Note 3** If an overlay network is not used in the training, remove firewalls restrictions to allow the the nodes
+to communicate with peers and with 3rd parties applications.
+
+## Nodes deployed in the training session
+
+| Node Name   | Functionality |
+| ------------- | ------------- |
+| Master  | A node that manages the shared metadata (if a blockchain platform is used, this node is redundant). |
+| Operator  |  A node that hosts the data. In this session, we will have 2 Operator nodes. |
+| Query  | A node that coordinates the query process. |
+
+Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
+
+## Additional Software Deployed
+
+| Package Name  | Functionality |
+| ------------- | ------------- |
+| [PostgreSQL](https://www.postgresql.org/download/)   | A local database on each node.  |
+| [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code)  | A conector to PLCs and sensors.  |
+| [Remote-CLI](../northbound%20connectors/remote_cli.md)   | A web based interface to the network.  |
+| [Grafana](../northbound%20connectors/using%20grafana.md)   |  A visualization tool. |
+
+## Data sources
+ 
+Data will be added to the 2 Operator nodes in the following manner:
+ 
+* AnyLog Operator I  - receive data as a message broker through a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code). 
+* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker. 
+
 
 ## Deployment Process
 Download [deployments](https://github.com/AnyLog-co/deployments) and [lfedge-code](https://github.com/AnyLog-co/lfedge-code). 
