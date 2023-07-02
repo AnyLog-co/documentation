@@ -130,7 +130,7 @@ kubectl attach -it pod/${POD_NAME}
 # to detach ctrl-p + ctrl-pq
 ```
 
-### Sample Questionare 
+### Sample Questionnaire 
 Below is a sample questionnaire for a _Generic_ node. The node will set the environment variables as 
 well as enable the TCP and REST services. Information regarding `Kubernetes Metadata` will not appear when deploying a _Docker_ 
 installation of AnyLog. 

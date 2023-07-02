@@ -49,6 +49,11 @@ Additional information on the types of nodes is in the [Getting Started](../gett
 
 Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
+## Prerequisites installations:
+* [Docker](https://docs.docker.com/get-docker/)
+* [python](https://www.python.org/downloads/)
+* [dotenv](https://pypi.org/project/python-dotenv/)  
+
 ## Software Packages Deployed
 
 | Package Name                                        | Nodes Deployed | Functionality | Installation Document | 
@@ -66,89 +71,100 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 Data will be added to the 2 Operator nodes in the following manner:
  
 * AnyLog Operator I  - 
-  - Install a Python data generator:
-    * [Install Python](https://www.python.org/downloads/)
-    * CLone and install the Data Generator:
+  - CLone and install the Data Generator:
     ```
     cd $HOME
     git clone https://github.com/AnyLog-co/Sample-Data-Generator
     python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
     ```
+    Note: The Data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
+    
   - Advanced users can use other data generators. For example receive data as a message broker leveraging
     a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
     
 * AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker. 
 
 
-## Deployment Process
+## Deployment Process per Node
 
-* On each  machine, download and deploy the AnyLog deployment package using the commands below. 
-```shell
-git clone https://github.com/AnyLog-co/deployments
-bash deployments/docker-compose/docker_install.sh
-```
-**Note:** deployments details are in the - [Deploying a Node](../deploying_node.md) document.
+The following directions are for a Docker based deployment. However, the same can be applied to Kubernetes. 
 
-* On 1 Operator Nodes, using the git clone command below, download the LF-Edge code (that includes Edgex) that will be 
-used to generate data.  
-```shell
-git clone https://github.com/AnyLog-co/lfedge-code
-```
-**Note:** deployments details are in the - [lfedge-code](https://github.com/AnyLog-co/lfedge-code) document. 
-Note that the LF-Edge package is not eequired for the second Operator, as the data source used is a 3rd party message broker.
-
-
-
-
- 
-In addition, install [Docker and docker-compose](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/docker_install.sh).
-
-```shell
-git clone https://github.com/AnyLog-co/deployments
-
-git clone https://github.com/AnyLog-co/lfedge-code
-
-bash deployments/docker-compose/docker_install.sh
+1. Clone AnyLog Docker / Kubernetes Installation [tool-kit](../deployments/deploying_node.md)
+```shell 
+git clone https://github.com/AnyLog-co/deplotments  
 ```
 
-### AnyLog Network
-The following provides directions for deploying AnyLog using the [demo cluster deployment](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment) 
-1. For all nodes update the `LICENSE_KEY` value
-   *  [master](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_master.env)
-   *  [Operator 1](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_operator1.env) 
-   *  [Operator 2](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_operator2.env)
-   *  [Query](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-demo-network/envs/anylog_query.env)
-
-2. (Optional) Update the configurations before deployment 
-   1. In [postgres.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/postgres.env) update _POSTGRES_USER_ & _POSTGRES_PASSWORD_
-   2. In [anylog_master.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_master.env) & [anylog_query.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_query.env) update
-      * NODE_NAME
-      * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
-   3. In [anylog_operator1.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator1.env) & [anylog_operator2.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/envs/anylog_operator2.env) update
-      * NODE_NAME
-      * COMPANY_NAME
-      * _DB_USER_ & _DB_PASSWORD_ if using PostgresSQL & changed its credentials
-      * logical database name (_DEFAULT_DBMS_ and _MQTT_TOPIC_DBMS_)
-      * _CLUSTER_NAME_
-   4. By default, the deployment is set to download anylog-network version: `develop`. To use a different version 
-(such as `predevelop`) change the _tag_ value in [.env](https://github.com/AnyLog-co/deployments/tree/master/docker-compose/demo-cluster-deployment/.env) file. 
-```dotenv
-# current config: 
-tag=develop
-
-# update to predevelop
-tag=predevelop
+2. Register docker credentials 
+```shell
+bash deployments/installations/docker_install.sh [DOCKER_ACCESS_CODE]
 ```
 
-2. Start Cluster
+3. Deploy Node
+* Deploy an AnyLog instance using a Configuration Tool - Provides a series of questions to decide which services enabled on each AnyLog node. 
 ```shell
+bash deployments/deployment_scripts/deploy_node.sh
+```
+
+* Restarting an Existing AnyLog Instance / Deploy an AnyLog instance, without configuration support 
+```shell
+# master 
+cd deployments/docker-compose/anylog-master
+docker-compose up -d
+
+# operator
+cd deployments/docker-compose/anylog-operator
+docker-compose up -d
+
+# publisher 
+cd deployments/docker-compose/anylog-publisher 
+docker-compose up -d 
+
+# query with remote-cli 
+cd deployments/docker-compose/anylog-query-remote-cli
 docker-compose up -d
 ```
+**Note**: Environment variables are located in `anylog_configs.env` and `.env` in their respected folders. 
 
-### Install EdgeX
-_Operator1_ utilizes a local MQTT client. In our demonstration, we utilize a local EdgeX instance.  
-Directions for deploying a local EdgeX instance can be found [here](Support/EdgeX.md)  
+## Populating Data
+
+To easily populate respected operator node(s), AnyLog [Sample Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
+provides a large array of data types to be used for demonstration purpose. We recommend starting with th _PUT_ command, 
+as it requires  the least amount of work on the user side. 
+
+Note, for conn info, users can specify more than one IP:Port, thus allowing for data to be generated / populated from a 
+single point. 
+
+
+1. Clone Data Generator
+```shell
+cd $HOME
+git clone https://github.com/AnyLog-co/Sample-Data-Generator
+```
+
+2. Install requirements
+```shell
+python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
+```
+
+3. Run data generator 
+* ping sensor / percenagecpu sensor — combination of data that’s of different types
+* trig — timestamp and sin/cos/tan values between -3.14 and 3.14
+* performance — timestamp / random float value
+* opcua — timestamp + about 10 columns of float values
+* power — multiple tables
+  * To generate a Grafana map for the coordinates in power data use: [blockchain_add_policy_simple.py](../examples/Sample%20Python%20Scripts/blockchain/blockchain_add_policy_simple.py)
+  
+  ```shell    
+  $HOME/Sample-Data-Generator/data_generator_generic.py trig put test \
+    --total-rows 1000000 \
+    --batch-size 1000 \
+    --sleep 0.5 \
+    --timezone utc \
+    --enable-timezone-range \
+    --conn 10.0.0.226:32149 \
+    --topic trig_data \
+    --exception  
+  ```
 
 ## Validate Deployment
 * Attaching to an AnyLog node 
