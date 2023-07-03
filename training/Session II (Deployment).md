@@ -6,6 +6,12 @@ If you do not have Docker credentials, or an AnyLog license key please contact u
 
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
 * Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
+* The training is using Docker to deploy the software packages. Note that Kubernetes deployment 
+  is supported and detailed in the referenced documents.
+  
+In this training, users create a configuration file for each node in the network.  
+In most customers deployments, the configurations are pre-packaged with the software deployed on each node.  
+
   
 **Deployment Diagram**:
 
@@ -80,17 +86,15 @@ Data will be added to the 2 Operator nodes in the following manner:
     git clone https://github.com/AnyLog-co/Sample-Data-Generator
     python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
     ```
-    **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
-    **Note 2:** The data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
+    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
+    * **Note 2:** The data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     
   - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
     
 * AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
 
 
-## Deployment Process per Node
-
-The following directions are for a Docker based deployment. However, the same can be applied to Kubernetes. 
+# Deploy an AnyLog Instance on each node
 
 1. Clone AnyLog Docker / Kubernetes Installation [tool-kit](../deployments/deploying_node.md)
 ```shell 
@@ -108,7 +112,8 @@ bash deployments/installations/docker_install.sh [DOCKER_ACCESS_CODE]
 bash deployments/deployment_scripts/deploy_node.sh
 ```
 
-* Restarting an Existing AnyLog Instance / Deploy an AnyLog instance, without configuration support 
+# Start / Restart a deployed node
+ 
 ```shell
 # master 
 cd deployments/docker-compose/anylog-master
@@ -117,10 +122,6 @@ docker-compose up -d
 # operator
 cd deployments/docker-compose/anylog-operator
 docker-compose up -d
-
-# publisher 
-cd deployments/docker-compose/anylog-publisher 
-docker-compose up -d 
 
 # query with remote-cli 
 cd deployments/docker-compose/anylog-query-remote-cli
