@@ -55,11 +55,11 @@ Additional information on the types of nodes is in the [Getting Started](../gett
 
 Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
-## Prerequisites installations:
+## Prerequisites (software installations):
 On each AnyLog node deploy Docker:
 * [Docker](https://docs.docker.com/get-docker/)
   
-In this training, users create a configuration file using a questioner. Therefore, install on each AnyLog node Python and Dotenv:  
+In this training, users create a configuration file using a questioner. Therefore, Python and Dotenv are installed on each AnyLog node :  
 * [Python](https://www.python.org/downloads/)
 * [Dotenv](https://pypi.org/project/python-dotenv/)  
 
@@ -75,28 +75,9 @@ In this training, users create a configuration file using a questioner. Therefor
 | [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 
-## Data sources in the training:
- 
-Data will be added to the 2 Operator nodes in the following manner:
- 
-* AnyLog Operator I  - A data generator 
-  - CLone and install the Data Generator:
-    ```
-    cd $HOME
-    git clone https://github.com/AnyLog-co/Sample-Data-Generator
-    python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
-    ```
-    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
-    * **Note 2:** The data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
-    
-  - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
-    
-* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
-
-
 # Deploy an AnyLog Instance on each node
 
-1. Clone AnyLog Docker / Kubernetes Installation [tool-kit](../deployments/deploying_node.md)
+1. Clone AnyLog deployment (the Docker/Kubernetes Installation documentation is available [here](../deployments/deploying_node.md)).
 ```shell 
 git clone https://github.com/AnyLog-co/deplotments  
 ```
@@ -106,8 +87,9 @@ git clone https://github.com/AnyLog-co/deplotments
 bash deployments/installations/docker_install.sh [DOCKER_ACCESS_CODE]
 ```
 
-3. Deploy Node
-* Deploy an AnyLog instance using a Configuration Tool - Provides a series of questions to decide which services enabled on each AnyLog node. 
+3. Deploy A Node
+* Deploy an AnyLog instance using a Configuration Tool - Provides a series of questions to configure the services 
+  offered on each AnyLog node. 
 ```shell
 bash deployments/deployment_scripts/deploy_node.sh
 ```
@@ -129,15 +111,22 @@ docker-compose up -d
 ```
 **Note**: Environment variables are located in `anylog_configs.env` and `.env` in their respected folders. 
 
-## Populating Data
+# Populating Data
 
-To easily populate respected operator node(s), AnyLog [Sample Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
-provides a large array of data types to be used for demonstration purpose. We recommend starting with the _PUT_ command, 
-as it requires  the least amount of work on the user side. 
+Data will be added to the 2 Operator nodes in the following manner:
+ 
+* AnyLog Operator I  - A data generator creates simulated data on Operator Node I. 
+    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
+    * **Note 2:** The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
+    
+  - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
+    
+* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
 
-Note, for conn info, users can specify more than one IP:Port, thus allowing for data to be generated / populated from a 
-single point. 
+To populate simulated data - AnyLog [Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
+provides options to generate a variety data types used for demonstration and tesing purposes. 
 
+Note: The Data Generator can distribute the generated data to multiple nodes (if the IP:Port of multiple nodes are specified as the destination). 
    
 1. Clone Data Generator
 ```shell
