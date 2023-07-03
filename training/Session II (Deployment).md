@@ -5,26 +5,45 @@ If you do not have Docker credentials, or an AnyLog license key please contact u
 ## Overview
 
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
-* Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
-* The training is using Docker to deploy the software packages. Note that Kubernetes deployment 
-  is supported and detailed in the referenced documents.
-  
-When an AnyLog node starts, it provides services accessible to peer members and 3rd parties applications.  
-Each service is initiated by an AnyLog command, and the command text includes the information that is needed to activate the service.  
-For example, 3rd parties application communicate with AnyLog via REST, to allow messages from 3rd parties applications, 
-the command ```run rest server where ip = 192.168.86.247 and port = 25049``` enables the REST service, and the the details of the command provide the 
-connection information (such as IP and Port).
+Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
 
-The configuration commands can be provided to the AnyLog CLI on each node, or organized in a file and associated to a node,
-or represented as a policy (on the shared metadata) and associated to a node.
-          
+When an edge node is deployed, the software packages needs to be organized on the node with proper configurations.  
+Each AnyLog Node is using the same software stack, however, the nodes in the network are assigned to different roles.
+The main roles are summarized in the table below:
+
+| Node Name (Role)  | Functionality |
+| -------------     | ------------- |
+| Master            | A node that manages the shared metadata (if a blockchain platform is used, this node is redundant). |
+| Operator          |  A node that hosts the data. In this session, users deploy 2 Operator nodes. |
+| Query             | A node that coordinates the query process. |
+
+Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
+  
+The roles are determined by configuration commands which are processed by the each node at startup and enable services 
+offered by the node. The same node may be assigned to multiple roles - there are no restrictions on the services that can be
+offered by a node.
+
+The following table summarizes different supported deployment and configuration options:
+
+| Functionality  | Option         | Comments       |
+| ---------------| -------------- | -------------  |
+| Deployment     | Docker         | Supported      |
+| Deployment     | Kubernetes     | Supported      |
+| Configuration  | AnyLog CLI     | Interactively issuing configuration commands on the CLI    |
+| Configuration  | REST           | Interactively issuing configuration commands via REST    |
+| Configuration  | Script file    | Organizing the configuration command in a file and associating the file to a node |
+| Configuration  | Questionnaire  | Creating configuration file using a questionnaire  |
+| Configuration  | Policy         | Organizing the configuration commands in a policy and associating the policy to a node |
+
+Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
+by disabling a service or enabling a service using the proper commands.  
+
 In this training, nodes will be assigned to a default configuration file.  
+
 Advanced users can generate their own configuration file using a questionnaire, or placing the commands in a file or a policy.
 The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.  
 
-In this training, users will use pre-existing configuration files.
-  
 **Deployment Diagram**:
 
 ![deployment diagram](../imgs/deployment_diagram.png)
@@ -54,14 +73,6 @@ Prior to this session, users are required to prepare:
 to communicate with peers and with 3rd parties applications.
 
 ## Nodes deployed in the training session
-
-| Node Name   | Functionality |
-| ------------- | ------------- |
-| Master  | A node that manages the shared metadata (if a blockchain platform is used, this node is redundant). |
-| Operator  |  A node that hosts the data. In this session, users deploy 2 Operator nodes. |
-| Query  | A node that coordinates the query process. |
-
-Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
 
 ## Associate the training machines with their roles 
 
