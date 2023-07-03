@@ -9,8 +9,10 @@ This document describes how to deploy and configure an AnyLog Network. This guid
 * The training is using Docker to deploy the software packages. Note that Kubernetes deployment 
   is supported and detailed in the referenced documents.
   
-In this training, users create a configuration file for each node in the network.  
+In this training, users create a configuration file for each node in the network using a questionnaire during the deploy process.  
 In most customers deployments, the configurations are pre-packaged with the software deployed on each node.  
+Advanced users can create configuration files by specifying the AnyLog configuration commands in a file (or a metadata policy) 
+and associating the file (or policy) to a node on startup. A detailed example is available in the [Netowrk Setup](../examples/Network%20setup.md) documet.  
 
   
 **Deployment Diagram**:
@@ -59,7 +61,7 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 On each AnyLog node deploy Docker:
 * [Docker](https://docs.docker.com/get-docker/)
   
-In this training, users create a configuration file using a questioner. Therefore, Python and Dotenv are installed on each AnyLog node :  
+In this training, users create a configuration file using a questionnaire. Therefore, Python and Dotenv are installed on each AnyLog node :  
 * [Python](https://www.python.org/downloads/)
 * [Dotenv](https://pypi.org/project/python-dotenv/)  
 
