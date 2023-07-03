@@ -53,7 +53,7 @@ to communicate with peers and with 3rd parties applications.
 
 Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
 
-## AnyLog nodes deployed
+## Associate the training machines with their roles 
 
 Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
@@ -72,7 +72,7 @@ In this training, users create a configuration file using a questionnaire. There
 | [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
 | [PostgreSQL](https://www.postgresql.org/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
-| [Edgex](https://www.edgexfoundry.org/)   | (Optional) Operator Node I |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
+| [Edgex](https://www.edgexfoundry.org/)   | Operator Node I (Optional) |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | Application Node |  A web based interface to the network.  |  |
 | [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
@@ -81,12 +81,12 @@ In this training, users create a configuration file using a questionnaire. There
 
 1. Clone AnyLog deployment (the Docker/Kubernetes Installation documentation is available [here](../deployments/deploying_node.md)).
 ```shell 
-git clone https://github.com/AnyLog-co/deplotments  
+git clone https://github.com/AnyLog-co/deployments  
 ```
 
 2. Register docker credentials 
 ```shell
-bash deployments/installations/docker_install.sh [DOCKER_ACCESS_CODE]
+bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 ```
 
 3. Deploy A Node
