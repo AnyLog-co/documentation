@@ -50,9 +50,12 @@ Additional information on the types of nodes is in the [Getting Started](../gett
 Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
 ## Prerequisites installations:
+On each AnyLog node deploy Docker:
 * [Docker](https://docs.docker.com/get-docker/)
-* [python](https://www.python.org/downloads/)
-* [dotenv](https://pypi.org/project/python-dotenv/)  
+  
+In this training, users create a configuration file using a questioner. Therefore, install on each AnyLog node Python and Dotenv:  
+* [Python](https://www.python.org/downloads/)
+* [Dotenv](https://pypi.org/project/python-dotenv/)  
 
 ## Software Packages Deployed
 
@@ -60,29 +63,29 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 | --------------------------------------------------- | --- | ------------- |-------------- |
 | [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
 | [PostgreSQL](https://www.postgresql.org/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
-| A data generator                                    | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator Install]()|
+| [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator Install]()|
 | [Edgex](https://www.edgexfoundry.org/)   | (Optional) Operator Node I |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | Application Node |  A web based interface to the network.  |  |
 | [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 
-## Data sources
+## Data sources in the training:
  
 Data will be added to the 2 Operator nodes in the following manner:
  
-* AnyLog Operator I  - 
+* AnyLog Operator I  - A data generator 
   - CLone and install the Data Generator:
     ```
     cd $HOME
     git clone https://github.com/AnyLog-co/Sample-Data-Generator
     python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
     ```
-    Note: The Data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
+    **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
+    **Note 2:** The data generator and the source code are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     
-  - Advanced users can use other data generators. For example receive data as a message broker leveraging
-    a local [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
+  - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
     
-* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker. 
+* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
 
 
 ## Deployment Process per Node
@@ -128,13 +131,13 @@ docker-compose up -d
 ## Populating Data
 
 To easily populate respected operator node(s), AnyLog [Sample Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
-provides a large array of data types to be used for demonstration purpose. We recommend starting with th _PUT_ command, 
+provides a large array of data types to be used for demonstration purpose. We recommend starting with the _PUT_ command, 
 as it requires  the least amount of work on the user side. 
 
 Note, for conn info, users can specify more than one IP:Port, thus allowing for data to be generated / populated from a 
 single point. 
 
-
+   
 1. Clone Data Generator
 ```shell
 cd $HOME
