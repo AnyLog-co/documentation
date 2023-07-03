@@ -32,7 +32,7 @@ The following table summarizes different supported deployment and configuration 
 | Configuration  | AnyLog CLI     | Interactively issuing configuration commands on the CLI    |
 | Configuration  | REST           | Interactively issuing configuration commands via REST    |
 | Configuration  | Script file    | Organizing the configuration command in a file and associating the file to a node |
-| Configuration  | Questionnaire  | Creating configuration file using a questionnaire  |
+| Configuration  | Questionnaire  | Creating a configuration file using a questionnaire  |
 | Configuration  | Policy         | Organizing the configuration commands in a policy and associating the policy to a node |
 
 Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
