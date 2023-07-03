@@ -9,11 +9,21 @@ This document describes how to deploy and configure an AnyLog Network. This guid
 * The training is using Docker to deploy the software packages. Note that Kubernetes deployment 
   is supported and detailed in the referenced documents.
   
-In this training, users create a configuration file for each node in the network using a questionnaire during the deploy process.  
-In most customers deployments, the configurations are pre-packaged with the software deployed on each node.  
-Advanced users can create configuration files by specifying the AnyLog configuration commands in a file (or a metadata policy) 
-and associating the file (or policy) to a node on startup. A detailed example is available in the [Netowrk Setup](../examples/Network%20setup.md) documet.  
+When an AnyLog node starts, it provides services accessible to peer members and 3rd parties applications.  
+Each service is initiated by an AnyLog command, and the command text includes the information that is needed to activate the service.  
+For example, 3rd parties application communicate with AnyLog via REST, to allow messages from 3rd parties applications, 
+the command ```run rest server where ip = 192.168.86.247 and port = 25049``` enables the REST service, and the the details of the command provide the 
+connection information (such as IP and Port).
 
+The configuration commands can be provided to the AnyLog CLI on each node, or organized in a file and associated to a node,
+or represented as a policy (on the shared metadata) and associated to a node.
+          
+In this training, nodes will be assigned to a default configuration file.  
+Advanced users can generate their own configuration file using a questionnaire, or placing the commands in a file or a policy.
+The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
+a pre-existing configuration.  
+
+In this training, users will use pre-existing configuration files.
   
 **Deployment Diagram**:
 
