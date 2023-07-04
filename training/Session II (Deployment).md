@@ -40,9 +40,11 @@ by disabling a service or enabling a service using the proper commands.
 
 In this training, nodes will be assigned to a default configuration file.  
 
+
 Advanced users can generate their own configuration file using a questionnaire, or placing the commands in a file or a policy.
-The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
-a pre-existing configuration.  
+* The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
+a pre-existing configuration.
+* The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire.
 
 **Deployment Diagram**:
 
