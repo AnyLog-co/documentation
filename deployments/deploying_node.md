@@ -17,7 +17,7 @@ are referenced in the node configuration process to apply a configuration option
   * For Docker-based Deployment [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts
   * For Kubernetes-based Deployment [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts
 
-For testing purposes we use and _minikube_ and _microk8s_ IaaS; however, other [IaaS](https://kubernetes.io/docs/tasks/tools/)
+For testing purposes we use _minikube_ and _microk8s_ IaaS; however, other [IaaS](https://kubernetes.io/docs/tasks/tools/)
 should work just as well.   
 
 ## Deploying a Node
