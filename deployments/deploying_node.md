@@ -6,8 +6,8 @@ For convenience, we named 4 types of nodes which are configured differently to p
 (_Master_, _Operator_, _Query_ and _Publisher_), as-well-as a _Generic_ instance configured with commonly used
 services and can be deployed "out-of-the-box" to support many of the edge use cases. 
 
-In the examples below, users define **system variables** by assigning values to keys. These keys  
-are referenced in the node configuration process to apply a configuration option, or a configuration value.
+In the examples below, users define **system variables** by assigning values to keys. These keys are referenced in the 
+node configuration process to apply a configuration option, or a configuration value.
 
 ### Requirements
 * For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
