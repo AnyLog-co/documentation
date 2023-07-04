@@ -39,7 +39,7 @@ by disabling a service or enabling a service using the proper commands.
 In this training, nodes will be assigned to a default configuration file.  
 
 
-Advanced users can generate their own configuration file using a questionnaire, or placing the commands in a file or a policy.
+Advanced users can generate their own configuration files using a questionnaire, or placing the commands in files or a policies.
 * The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
 * The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire.
@@ -63,16 +63,17 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 | [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
 | [PostgreSQL](https://www.postgresql.org/)           |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | [MongoDB](https://www.mongodb.com/)           |  A local database for unstructured data.  | [MongoDB Download](https://www.mongodb.com/try/download/community)|
-| [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  |  The data generator is used to generate simulated data in the training session.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
+| [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  |  A data generator that generates simulated data for learning and testing purposes.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
 | [Edgex](https://www.edgexfoundry.org/)              |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
 | [Remote-CLI](../northbound%20connectors/remote_cli.md)   | A web based interface to the network.  |  |
 | [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 **In this session, users will use the following packages:**
 * AnyLog, on each of the 4 network nodes. Configuration will be using the default setting. 
-* Local database is SQLite.
+* Local database is SQLite (and is available by default without dedicated install).
 * Remote CLI - deployed with the Query Node.
 * Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
+* Grafana, on a dedicated node, as an example for an application interacting with the network data.
 
 ## Prerequisites
 Prior to this session, users are required to prepare:
@@ -104,16 +105,16 @@ to communicate with peers and with 3rd parties applications.
 
 ## Deploy the Network Nodes
 
-This training is using the default configuration for every node deployed with 3 exceptions:
+Other than the 3 exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. The AnyLog license key is unique per company.
  2. Your company name (the user company name) is unique.
  3. This setup enables monitoring (the default configuration is disabled).
  
- In this training process, these parameters are modified in the config file of each node (note that in a customer deployment,
- these chagnges to the configuration can be pre-packaged).
+ In this training process, these configuration parameters are modified in the config file of each node (note that in a customer deployment,
+ these configurations can be pre-packaged).
  
 ## Get the Docker credentials and the AnyLog license key   
- If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
+If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
  
 ## Deploy an AnyLog Instance on each node
 
@@ -129,12 +130,40 @@ git clone https://github.com/AnyLog-co/deployments
 bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 ```
 
-3. Deploy A Node
-* Deploy an AnyLog instance using a Configuration Tool - Provides a series of questions to configure the services 
-  offered on each AnyLog node. 
-```shell
-bash deployments/deployment_scripts/deploy_node.sh
-```
+
+## Modify configurations 
+
+On each machine, modify the ```anylog_configs.env``` according to the following instructions:
+
+### On the Master node
+
+1. Enter the file folder:
+   * On the Master node:
+   ```
+   cd deployments/docker-compose/anylog-master 
+   ```
+
+2. Using an editor, enter the file:
+   ```
+   vi anylog_configs.env
+   ```
+   
+3. Update the following values:
+    * LICENSE_KEY with the AnyLog License Key
+    * COMPANY_NAME with your company name
+    * MONITOR_NODES set the value to **true**
+    * MONITOR_NODE_COMPANY with your company name
+    
+4.  Start the node:
+   ```
+   docker-compose up -d 
+   ```
+5. Issue the following command to find the connection info:
+   ```
+   get connection
+   ``` 
+   
+
 
 # Start / Restart a deployed node
  
