@@ -48,13 +48,39 @@ a pre-existing configuration.
 
 ![deployment diagram](../imgs/deployment_diagram.png)
 
+In this test network, data is ingested by the 2 operator nodes. 
+Users interact with the network, by issuing commands and queries to the Query node, and these are satisfied as if 
+the data is hosted on a single database and as if the distributed nodes are a single machine.
+In addition, users will notice that data management and monitoring are automated and activated as a service by the 
+proper configuration commands. 
+
+## The deployed software
+
+The following table summarizes the commonly used packages deployed with AnyLog.  
+
+| Package Name                                        | Functionality | Reference Document | 
+| --------------------------------------------------- | ------------- |-------------- |
+| [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
+| [PostgreSQL](https://www.postgresql.org/)           |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
+| [MongoDB](https://www.mongodb.com/)           |  A local database for unstructured data.  | [MongoDB Download](https://www.mongodb.com/try/download/community)|
+| [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  |  The data generator is used to generate simulated data in the training session.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
+| [Edgex](https://www.edgexfoundry.org/)              |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
+| [Remote-CLI](../northbound%20connectors/remote_cli.md)   | A web based interface to the network.  |  |
+| [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
+
+**In this session, users will use the following packages:**
+* AnyLog, on each of the 4 network nodes. Configuration will be using the default setting. 
+* Local database is SQLite.
+* Remote CLI - deployed with the Query Node.
+* Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
+
 ## Prerequisites
 Prior to this session, users are required to prepare:
 * 4 machines (physical or virtual) to host the AnyLog nodes, as follows:
     - A Linux environment.
     - A minimum of 256MB of RAM.
     - A minimum of 10GB of disk space.
-* 1 Machine (physical or virtual) for applications that interact with the network, as follows:
+* 1 Machine (physical or virtual) for applications that interact with the network (i.e. Grafana), as follows:
     - Linux or Windows environment.
     - A minimum of 256MB of RAM.
     - A minimum of 10GB of disk space.
@@ -72,8 +98,6 @@ Prior to this session, users are required to prepare:
 **Note 3** If an overlay network is not used in the training, remove firewalls restrictions to allow the the nodes
 to communicate with peers and with 3rd parties applications.
 
-## Nodes deployed in the training session
-
 ## Associate the training machines with their roles 
 
 Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
@@ -82,20 +106,9 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 On each AnyLog node deploy Docker:
 * [Docker](https://docs.docker.com/get-docker/)
   
-In this training, users create a configuration file using a questionnaire. Therefore, Python and Dotenv are installed on each AnyLog node :  
-* [Python](https://www.python.org/downloads/)
-* [Dotenv](https://pypi.org/project/python-dotenv/)  
-
-## Software Packages Deployed
-
-| Package Name                                        | Nodes Deployed | Functionality | Reference Document | 
-| --------------------------------------------------- | --- | ------------- |-------------- |
-| [AnyLog](https://www.anylog.co/)                    | All 4 nodes |  The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
-| [PostgreSQL](https://www.postgresql.org/)  | 3 nodes - Master and 2 Operators |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
-| [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  | Operator Node I |  The data generator is used to generate simulated data in the training session.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
-| [Edgex](https://www.edgexfoundry.org/)   | Operator Node I (Optional) |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
-| [Remote-CLI](../northbound%20connectors/remote_cli.md)   | Application Node |  A web based interface to the network.  |  |
-| [Grafana](https://grafana.com/)                     | Application Node |   A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
+* Optional, for advanced users that are interetsed to create the configuration file using a questionnaire:  
+    - [Python](https://www.python.org/downloads/)
+    - [Dotenv](https://pypi.org/project/python-dotenv/)  
 
 
 # Deploy an AnyLog Instance on each node
