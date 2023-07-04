@@ -1,7 +1,5 @@
 # Session II - Deployment of the test network
 
-If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
-
 ## Overview
 
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
@@ -102,20 +100,26 @@ to communicate with peers and with 3rd parties applications.
 
 ## Associate the training machines with their roles 
 
-Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
+* Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
-## Prerequisites (software installations):
-On each AnyLog node deploy Docker:
-* [Docker](https://docs.docker.com/get-docker/)
-  
-* Optional, for advanced users that are interetsed to create the configuration file using a questionnaire:  
-    - [Python](https://www.python.org/downloads/)
-    - [Dotenv](https://pypi.org/project/python-dotenv/)  
+## Deploy the Network Nodes
 
+This training is using the default configuration for every node deployed with 3 exceptions:
+ 1. The AnyLog license key is unique per company.
+ 2. Your company name (the user company name) is unique.
+ 3. This setup enables monitoring (the default configuration is disabled).
+ 
+ In this training process, these parameters are modified in the config file of each node (note that in a customer deployment,
+ these chagnges to the configuration can be pre-packaged).
+ 
+## Get the Docker credentials and the AnyLog license key   
+ If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
+ 
+## Deploy an AnyLog Instance on each node
 
-# Deploy an AnyLog Instance on each node
+Follow these steps on each of the 4 nodes (Master, Query and 3 Operator nodes).
 
-1. Clone AnyLog deployment (the Docker/Kubernetes Installation documentation is available [here](../deployments/deploying_node.md)).
+1. Clone AnyLog deployment.
 ```shell 
 git clone https://github.com/AnyLog-co/deployments  
 ```
