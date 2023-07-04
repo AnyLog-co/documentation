@@ -87,7 +87,7 @@ Prior to this session, users are required to prepare:
     - A minimum of 256MB of RAM.
     - A minimum of 10GB of disk space.
 * Each node accessible by IP and Port (remove firewalls restrictions).
-* [Docker](https://docs.docker.com/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
+* [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
 
 **Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
