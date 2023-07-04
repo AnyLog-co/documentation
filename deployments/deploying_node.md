@@ -13,7 +13,7 @@ are referenced in the node configuration process to apply a configuration option
 * For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
 * For Kubernetes-based Deployment: [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/) & [Helm](https://helm.sh/docs/)  
 
-* For utilizing [Deployment script too] [Python3](https://www.python.org/downloads/)
+* For utilizing Deployment script tool: [Python3](https://www.python.org/downloads/)
   * For Docker-based Deployment [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts
   * For Kubernetes-based Deployment [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts
 
