@@ -9,48 +9,54 @@ services and can be deployed "out-of-the-box" to support many of the edge use ca
 In the examples below, users define **system variables** by assigning values to keys. These keys  
 are referenced in the node configuration process to apply a configuration option, or a configuration value.
 
-## Basic Deployment
-When an AnyLog node is configured, the configuration determines the services that would be offered by the node.  
-The following are examples of services which are enabled in most deployments:
-* TCP - Allowing the node to join the AnyLog Network and communicate with peer nodes.
-* REST - Allowing third party applications and data sources to communicate with an AnyLog node.
-* BROKER - Allowing third party applications to publish data on an AnyLog node (allowing a data source to treat AnyLog as a message broker).
+### Requirements
+* For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
+* For Kubernetes-based Deployment: [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/) & [Helm](https://helm.sh/docs/)  
 
-Our basic deployment example is a _Generic_ node offers TCP and REST services.
+* For utilizing [Deployment script too] [Python3](https://www.python.org/downloads/)
+  * For Docker-based Deployment [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts
+  * For Kubernetes-based Deployment [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts
 
-Users can extend the deployment to include the following services: 
-* persistent data (volumes) 
-* Message Broker 
-* Node name and other [environment variables](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-rest/anylog_configs.env)
+For testing purposes we use and _minikube_ and _microk8s_ IaaS; however, other [IaaS](https://kubernetes.io/docs/tasks/tools/)
+should work just as well.   
 
-By default, the _Generic_ node connect to port 2548 for _TCP_ and 2549 for _REST_ .
+## Deploying a Node
+The following provides directions for installing AnyLog with either _Docker_ with _Docker Compose_ or _Kubernetes_ with 
+_Helm_. The directions provided should be done on each of the nodes being used as part of the network. 
 
-**Docker Deployment**
+### Prepare Node 
+0. Review [Hardware Prerequisite](prerequisite.md) and [Software Requirements](#requirements)
+1. [Contact Us](mailto:info@anylog.co) to get access to our Docker image as well as an AnyLog software license key
+2. Clone the deployment tool kit into your local machine 
+```shell
+git clone https://github.com/AnyLog-co/deployments 
+```
+3. Make sure to install your preffered databases if you are planning to use something other than SQLite. Directions
+can be found [here](deploying_dbms.md)
+4. Log into our Docker repository
+```shell
+# Docker
+bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
+
+# Kubernetes
+bash deployments/installations/kubernetes_credentials.sh [DOCKER_ACCESS_CODE]
+```
+
+### Sand-Box Deployment
+Deployment is usually done via the [Configueration File](#configuration-based-deployment); however, using basic _Docker_
+AnyLog provides the ability to deploy a generic / non-persistant node to play with. Using `-e` docker command can extend
+the generic process to use non-default ports and/or any other [configurations](https://github.com/AnyLog-co/deployments/blob/os-dev/docker-compose/anylog-master/anylog_configs.env) options 
 ```shell
 docker run --network host -it --detach-keys=ctrl-d \
   --name anylog-node \
-  [-e NODE_NAME=my-anylog-node \]
+  -e LICENSE_KEY=XXXX \
   [-e ANYLOG_SERVER_PORT=32548 \] 
   [-e ANYLOG_REST_PORT=32549 \] 
   [-e ANYLOG_BROKER_PORT=2150 \] 
-  [--volume anylog-dir:/app/AnyLog-Network/anylog \]
-  [--volume blockchain-dir:/app/AnyLog-Network/blockchain \]
-  [--volume data-dir:/app/AnyLog-Network/data \]
-  -rm anylogco/anylog-network:predevelop
+  -rm anylogco/anylog-network:latest
 ```
 
-**Kubernetes Deployment** 
-```shell
-# install volumes 
-helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz
-
-# install node 
-helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz
-```
-=======
->>>>>>> e9c7f021943d5b8d4b7dac1d360024013a620092
-
-## Configuration Based Deployment
+### Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist
 with deployment of an AnyLog instance of either _Docker_ or _Kubernetes_. For a _Docker_ instance the deployment script 
 updates the correlating `.env` file of the node. 
@@ -58,77 +64,49 @@ updates the correlating `.env` file of the node.
 **Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
 
-### Requirements
-**Docker**
-* [Docker and docker-compose](https://docs.docker.com/engine/install/)
-* Python3
-  * [dotenv](https://pypi.org/project/python-dotenv/) - Python3 package utilized in the deployment scripts
-
-**Kubernetes**
-* [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/)  
-    * [Helm](https://helm.sh/docs/)
-    * Python3
-      * [yaml](https://pypi.org/project/PyYAML/) - Python3 package utilized in the deployment scripts
-
-For testing purposes we use and _minikube_ and _microk8s_ IaaS; however, other [IaaS](https://kubernetes.io/docs/tasks/tools/)
-should work just as well.   
-
-### Deployment
-1. Download [deployment scripts](https://github.com/AnyLog-co/deployments)
-```shell
-cd $HOME
-git clone https://github.com/AnyLog-co/deployments
-cd $HOME/deployments/
-```
-
-2. Log into AnyLog's Dockerhub - [contact us](mailto:info@anylog.co) if you do not have login credentials
-
-**Docker**
-```shell
-bash $HOME/deployments/installations/docker_credentials.sh ${YOUR_ANYLOG_DOCKER_CREDENTIALS}
-```
-
-**Kubernetes**
-```shell
-bash $HOME/deployments/installations/kube_credentials.sh ${YOUR_ANYLOG_DOCKER_CREDENTIALS}
-```
-
-3. Deploy AnyLog 
+* Using deployment script 
 ```shell
 bash $HOME/deployments/deployment_scripts/deploy_node.sh
 ```
 
-If a user already has a configuration file and does not want to go through the questionnaire, they can utilize the basic
-`docker-compose` or `helm` deployment commands.  
-
-**Docker Deployment**
-```shell
-cd $HOME/deployments/docker-compose/anylog-${NODE_TYPE}
-
-# start a node in detached mode
-docker-compose up -d 
-
-# to attach
-docker attach --detach-keys=ctrl-d anylog-${NODE_NAME} 
-```
-**Kubernetes Deployment**
-```shell
-# install volumes 
-helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz \
-  --name-template ${NODE_NAME}-volume
-  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
-
-# install node 
-helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz \
-  --name-template ${NODE_NAME}-volume
-  --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
+* Manual Deployment - the following example uses _Generic_ node, but the same logic can be applied to any of our nodes.  
+  1. Update Configuration file  
+  ```shell
+  # Docker 
+  vim deployments/docker-compose/anylog-rest/anylog_configs.env
   
-# to attach
-kubectel get pod # get pod name 
-kubectl attach -it pod/${POD_NAME}
+  # Kubernetes 
+  vim helm/sample-configurations/generic_configs.yaml
+  ```
+  
+  2. Deploy Node
+  ```shell
+  # Docker - start a node in detached mode
+  cd deployments/docker-compose/anylog-master/
+  docker-compose up -d
+  
+  # Kubernetes
+  # install volumes 
+  helm install $HOME/deployments/helm/packages/anylog-node-volume-1.22.3.tgz \
+    --name-template ${NODE_NAME}-volume
+    --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \
+  
+  # install node 
+  helm install $HOME/deployments/helm/packages/anylog-node-1.22.3.tgz \
+    --name-template ${NODE_NAME}-volume
+    --values $HOME/deployments/helm/sample-configurations/anylog_${NODE_TYPE}.yaml \ 
+  ```
+  
+  3. To attach / Detach 
+  ```shell
+  # Docker  -- to detach press ctrl+d to detach 
+  docker attach --detach-keys=ctrl-d anylog-generc
+  
+  # to attach -- to detach press ctrl-p followed by ctrl-pq 
+  kubectel get pod # get pod name 
+  kubectl attach -it pod/${POD_NAME}
+  ```
 
-# to detach ctrl-p + ctrl-pq
-```
 
 ### Sample Questionnaire 
 Below is a sample questionnaire for a _Generic_ node. The node will set the environment variables as 

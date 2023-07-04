@@ -1,7 +1,4 @@
-
 # Prerequisite and setup considerations
-
-
 
 | Feature               | Requirement  |
 | --------------------- | ------------| 
@@ -20,8 +17,7 @@
 | Deployment options    | Docker and Kubernetes. |
 
 
-Comments:
-
+**Comments**:
 * Databases: 
   - SQLite recommended for smaller nodes and in-memory data.
   - PostgreSQL recommended for larger nodes.
