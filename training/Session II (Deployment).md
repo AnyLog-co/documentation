@@ -36,13 +36,21 @@ The following table summarizes different supported deployment and configuration 
 Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
 by disabling a service or enabling a service using the proper commands.  
 
-In this training, nodes will be assigned to a default configuration file.  
+In this training, nodes will be generating a default configuration file using a questionnaire. The configuration file
+is organized in a file named **anylog_configs.env** and sored in a folder as follows:
 
+| Node              | Folder |
+| -------------     | ------------- |
+| Master            | deployments/docker-compose/anylog-master |
+| Operator          | deployments/docker-compose/anylog-operator |
+| Query             |  deployments/docker-compose/anylog-query-remote-cli |
 
 Advanced users can generate their own configuration files using a questionnaire, or placing the commands in files or a policies.
 * The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
 * The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire.
+* The [Policies based Configuration](../policies.md#policies-based-configuration) section details how to use 
+policies (placed om the shared metadata layer) to configure nodes in the network.
 
 **Deployment Diagram**:
 
@@ -88,6 +96,10 @@ Prior to this session, users are required to prepare:
 * Each node accessible by IP and Port (remove firewalls restrictions).
 * [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
+* To enable the questionnaire, install the following packages (these packages are redundant for deployments with pre-packaged configurations,
+or if the questionnaire is not used to create the **anylog_configs.env** file):  
+    - [Python](https://www.python.org/downloads/)
+    - [Dotenv](https://pypi.org/project/python-dotenv/)     
 
 **Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
 
@@ -102,6 +114,19 @@ to communicate with peers and with 3rd parties applications.
 ## Associate the training machines with their roles 
 
 * Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
+
+## Static IPs
+AnyLog requires static IPs for the nodes in the network. Some setups are not providing static IPs. There are different ways
+to represent nodes with static IPs through redirection. For example, [Nginx](https://www.nginx.com/) provide the functionality
+and an example of Nginx with Kubernetes is detailed [here](https://kubernetes.github.io/ingress-nginx/examples/static-ip/). 
+
+## The Network ID
+
+* With a Master Node deployment, the network ID is the Master's IP and Port.
+* By default, a node is using its default IP (the IP that identifies the node on the network used) and the Port is 2048.
+ 
+**Note:** If the IP is not known, when the Master node is initiated, the command **get connections** on the node CLI returns
+the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.     
 
 ## Deploy the Network Nodes
 
