@@ -5,8 +5,9 @@
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
 Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
 
-When an edge node is deployed, the software packages needs to be organized on the node with proper configurations.  
-Each AnyLog Node is using the same software stack, however, the nodes in the network are assigned to different roles.
+When an AnyLog node is deployed, the software packages needs to be organized on the node with proper configurations.  
+Each AnyLog Node is using the same software stack, however, the nodes in the network are assigned to different roles, and
+these roles are determined by the configurations.    
 The main roles are summarized in the table below:
 
 | Node Name (Role)  | Functionality |
@@ -36,8 +37,9 @@ The following table summarizes different supported deployment and configuration 
 Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
 by disabling a service or enabling a service using the proper commands.  
 
-In this training, nodes will be generating a default configuration file using a questionnaire. The configuration file
-is organized in a file named **anylog_configs.env** and sored in a folder as follows:
+In this training, nodes will be creating a default configuration file and make minimal modifications using a questionnaire.    
+Users can bypass the questionnaire and make the needed changes in the configuration file - in this training, the 
+configuration file is named **anylog_configs.env** and sored in a folder as follows:
 
 | Node              | Folder |
 | -------------     | ------------- |
