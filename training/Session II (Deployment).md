@@ -87,7 +87,7 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 
 ## Prerequisites
 Prior to this session, users are required to prepare:
-* 4 machines (physical or virtual) to host the AnyLog nodes, as follows:
+* 4 machines (virtual or physical) to host the AnyLog nodes, as follows:
     - A Linux environment.
     - A minimum of 256MB of RAM.
     - A minimum of 10GB of disk space.
