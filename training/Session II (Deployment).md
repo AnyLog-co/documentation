@@ -18,7 +18,7 @@ The main roles are summarized in the table below:
 
 Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
   
-The roles are determined by configuration commands which are processed by the each node at startup and enable services 
+The roles are determined by configuration commands which are processed by each node at startup and enable services 
 offered by the node. The same node may be assigned to multiple roles - there are no restrictions on the services that can be
 offered by a node.
 
@@ -37,7 +37,7 @@ The following table summarizes different supported deployment and configuration 
 Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
 by disabling a service or enabling a service using the proper commands.  
 
-In this training, nodes will be creating a default configuration file and make minimal modifications using a questionnaire.    
+In this training, users will be creating a default configuration file and make minimal modifications using a questionnaire.    
 Users can bypass the questionnaire and make the needed changes in the configuration file - in this training, the 
 configuration file is named **anylog_configs.env** and sored in a folder as follows:
 
@@ -50,9 +50,10 @@ configuration file is named **anylog_configs.env** and sored in a folder as foll
 Advanced users can generate their own configuration files using a questionnaire, or placing the commands in files or a policies.
 * The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
-* The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire.
+* The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire
+that to generate the config file (using a detailed questionnaire that addresses many of the existing setups).
 * The [Policies based Configuration](../policies.md#policies-based-configuration) section details how to use 
-policies (placed om the shared metadata layer) to configure nodes in the network.
+policies (placed on the shared metadata layer) to configure nodes in the network.
 
 **Deployment Diagram**:
 
@@ -79,8 +80,8 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 | [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 **In this session, users will use the following packages:**
-* AnyLog, on each of the 4 network nodes. Configuration will be using the default setting. 
-* Local database is SQLite (and is available by default without dedicated install).
+* AnyLog, on each of the 4 network nodes. Configuration will be using the default setting (other than proprietary info listed below). 
+* Local database is SQLite (and is available by default without a dedicated install).
 * Remote CLI - deployed with the Query Node.
 * Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
 * Grafana, on a dedicated node, as an example for an application interacting with the network data.
@@ -132,13 +133,14 @@ the IPs and ports used - the Network ID is the IP and port assigned to TCP-Exter
 
 ## Deploy the Network Nodes
 
-Other than the 3 exceptions listed below, the AnyLog nodes will be using the default configuration:
+Other than the 4 exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. The AnyLog license key is unique per company.
  2. Your company name (the user company name) is unique.
- 3. This setup enables monitoring (the default configuration is disabled).
+ 3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
+ 3. Enable monitoring (in the default configuration, monitoring is disabled).
  
- In this training process, these configuration parameters are modified in the config file of each node (note that in a customer deployment,
- these configurations can be pre-packaged).
+ In this training process, these configuration parameters are modified in the config file of each node using the questionnaire
+ (note that in a customer deployment, these configurations can be pre-packaged).
  
 ## Get the Docker credentials and the AnyLog license key   
 If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
