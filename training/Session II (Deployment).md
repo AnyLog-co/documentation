@@ -201,14 +201,14 @@ cd deployments/docker-compose/anylog-query-remote-cli
 docker-compose up -d
 ```
 
-## Useful commands
-
 View running containers:
 ```
 docker ps -a 
 ``` 
 
 ### Attach to the process - allowing users to operate on the node CLI:
+
+1. Attach
 ```
 docker attach --detach-keys=ctrl-d [NODE NAME]
 ```
@@ -217,11 +217,11 @@ Nodes names:
 * Operator - **anylog-operator**
 * Query - **anylog-query**
 
-### Detach from the process
+2. Detach from the process (AnyLog remains active)
 
 Using the keys: **ctrl+d**
 
-### Sutdown a node
+3. Shutdown an AnyLog node
 
 On the CLI:
 ```
