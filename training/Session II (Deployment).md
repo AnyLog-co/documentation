@@ -185,17 +185,6 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * MONITOR_NODES set the value to **true**
     * MONITOR_NODE_COMPANY with your company name
     
-3.  Start the node:
-   ```
-   docker-compose up -d 
-   ```
-4. Issue the following command to find the connection info:
-   ```
-   get connection
-   ``` 
-   
-
-
 # Start / Restart a deployed node
  
 ```shell
@@ -211,7 +200,33 @@ docker-compose up -d
 cd deployments/docker-compose/anylog-query-remote-cli
 docker-compose up -d
 ```
-**Note**: Environment variables are located in `anylog_configs.env` and `.env` in their respected folders. 
+
+## Useful commands
+
+View running containers:
+```
+docker ps -a 
+``` 
+
+### Attach to the process - allowing users to operate on the node CLI:
+```
+docker attach --detach-keys=ctrl-d [NODE NAME]
+```
+Nodes names:
+* Master - **anylog-master**
+* Operator - **anylog-operator**
+* Query - **anylog-query**
+
+### Detach from the process
+
+Using the keys: **ctrl+d**
+
+### Sutdown a node
+
+On the CLI:
+```
+exit node
+```
 
 # Populating Data
 
