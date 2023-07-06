@@ -135,7 +135,7 @@ the IPs and ports used - the Network ID is the IP and port assigned to TCP-Exter
 
 Other than the 4 exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. The AnyLog license key is unique per company.
- 2. Your company name (the user company name) is unique.
+ 2. Your company name (the user company name).
  3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
  3. Enable monitoring (in the default configuration, monitoring is disabled).
  
@@ -159,35 +159,37 @@ git clone https://github.com/AnyLog-co/deployments
 bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 ```
 
+## The AnyLog Configuration file
+
+After the install, each node maintains a configuration file named: **anylog_configs.env**.  
+This file is in the following directories:
+
+| Node              | Folder |
+| -------------     | ------------- |
+| Master            | deployments/docker-compose/anylog-master |
+| Operator          | deployments/docker-compose/anylog-operator |
+| Query             |  deployments/docker-compose/anylog-query-remote-cli |
 
 ## Modify configurations 
 
 On each machine, modify the ```anylog_configs.env``` according to the following instructions:
 
-### On the Master node
-
-1. Enter the file folder:
-   * On the Master node:
-   ```
-   cd deployments/docker-compose/anylog-master 
-   ```
-
-2. Using an editor, enter the file:
+1. Using an editor, enter the file:
    ```
    vi anylog_configs.env
    ```
    
-3. Update the following values:
+2. Update the following values:
     * LICENSE_KEY with the AnyLog License Key
     * COMPANY_NAME with your company name
     * MONITOR_NODES set the value to **true**
     * MONITOR_NODE_COMPANY with your company name
     
-4.  Start the node:
+3.  Start the node:
    ```
    docker-compose up -d 
    ```
-5. Issue the following command to find the connection info:
+4. Issue the following command to find the connection info:
    ```
    get connection
    ``` 
