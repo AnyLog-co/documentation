@@ -60,7 +60,7 @@ A node is configured as follows:
 
 Usage:
 ```anylog
-run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
+run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
 
 Options:  
