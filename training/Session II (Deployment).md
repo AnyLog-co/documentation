@@ -13,7 +13,7 @@ The main roles are summarized in the table below:
 | Node Name (Role)  | Functionality |
 | -------------     | ------------- |
 | Master            | A node that manages the shared metadata (if a blockchain platform is used, this node is redundant). |
-| Operator          |  A node that hosts the data. In this session, users deploy 2 Operator nodes. |
+| Operator          | A node that hosts the data. In this session, users deploy 2 Operator nodes. |
 | Query             | A node that coordinates the query process. |
 
 Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
@@ -186,18 +186,38 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
    vi anylog_configs.env
    ```
    
-2. Update the following values:
+2. Update the following values in the anylog_configs.env of each node:
+    **On the Master Node:**
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
     * COMPANY_NAME with your company name.
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     
-    For the Query Node and the 2 Operator nodes, add the ID of the network
+    If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
+    the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
+    to the CLI, and get the Master IP and Port using the command ```get connections```.
+    the ID is the address under TCP/External-address. 
     
+    **On the Query Node:**
+    * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
+    * COMPANY_NAME with your company name.
+    * MONITOR_NODES set the value to **true**.
+    * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
     
-    Note: The Network ID is available in the following manner:  
-    Deploy and start the Master, on the AnyLog CLI issue **get connections**, the ID is the address under TCP/External-address.
+    **On each Operator Node:**
+    * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
+    * COMPANY_NAME with your company name.
+    * MONITOR_NODES set the value to **true**.
+    * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
+    * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
+    * NODE_NAME - currently showing **anylog-operator**, change to:
+        - for operator 1: **anylog-operator_1**
+        - for operator 2: **anylog-operator_2**
+    * CLUSTER_NAME - currently showing **new-company-cluster**. change to your company name (the example below is 
+    using anylog for new-company) and a unique prefix like the example below:
+        - for operator 1: **anylog-cluster_1**
+        - for operator 2: **anylog-cluster_2**
     
 # Start / Restart a deployed node
  
