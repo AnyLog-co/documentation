@@ -186,32 +186,32 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
    vi anylog_configs.env
    ```
    
-2. Update the following values in the anylog_configs.env of each node:
+2. Update the following values in the anylog_configs.env of each node:  
     **On the Master Node:**
-    * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
+    * LICENSE_KEY with the AnyLog License Key (and uncomment the entry).
     * COMPANY_NAME with your company name.
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
     the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
-    to the CLI, and get the Master IP and Port using the command ```get connections```.
-    the ID is the address under TCP/External-address. 
+    to the node. On the CLI - get the Master IP and Port using the command ```get connections```.
+    the Network-ID is the address under TCP/External-address (this value is updated on the config file of the Query and Operators nodes). 
     
-    **On the Query Node:**
+    **On the Query Node:**  
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
     * COMPANY_NAME with your company name.
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
-    * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
+    * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
     
     **On each Operator Node:**
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
     * COMPANY_NAME with your company name.
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
-    * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
-    * NODE_NAME - currently showing **anylog-operator**, change to:
+    * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
+    * NODE_NAME - currently showing **anylog-operator**, change to be unique (and anylog can be replaced with your company name):
         - for operator 1: **anylog-operator_1**
         - for operator 2: **anylog-operator_2**
     * CLUSTER_NAME - currently showing **new-company-cluster**. change to your company name (the example below is 
