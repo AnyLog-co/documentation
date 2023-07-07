@@ -1,6 +1,12 @@
 # Session II - Deployment of the test network
 
-## Overview
+This session includes 3 sections:
+
+1. An [Overview](#overview)
+2. Step by step [install](#install) of a test network
+3. Connecting sample data sources and [Populating Data](#Populating Data)
+
+# Overview
 
 This document describes how to deploy and configure an AnyLog Network. This guided session provides directions to:
 Deploy an  AnyLog Network consisting of  4 nodes (2 operators, 1 query, 1 master).
@@ -85,6 +91,8 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 * Remote CLI - deployed with the Query Node.
 * Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
 * Grafana, on a dedicated node, as an example for an application interacting with the network data.
+
+# Install
 
 ## Prerequisites
 Prior to this session, users are required to prepare:
@@ -219,7 +227,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
         - for operator 1: **anylog-cluster_1**
         - for operator 2: **anylog-cluster_2**
     
-# Start / Restart a deployed node
+## Start / Restart a deployed node
  
 ```shell
 # master 
@@ -240,7 +248,7 @@ View running containers:
 docker ps -a 
 ``` 
 
-### Attach to the process - allowing users to operate on the node CLI:
+##Attach to the process - allowing users to operate on the node CLI:
 
 1. Attach
 ```
@@ -279,7 +287,7 @@ docker-compose down --rmi all     # stop the process + will also remove the imag
 docker-compose down -v --rmi all  # will do all three  
 ```
 
-# Basic initial operations
+## Basic initial operations
 On each node (using the CLI) use the following commands:
 1) View the network services using the command ```get connections```
 2) View the background processes enabled using the command ```get processes```
