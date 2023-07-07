@@ -175,7 +175,7 @@ This file is in the following directories:
 | -------------     | ------------- |
 | Master            | deployments/docker-compose/anylog-master |
 | Operator          | deployments/docker-compose/anylog-operator |
-| Query             |  deployments/docker-compose/anylog-query-remote-cli |
+| Query             |  deployments/docker-compose/anylog-query |
 
 ## Modify configurations 
 
@@ -207,7 +207,7 @@ cd deployments/docker-compose/anylog-operator
 docker-compose up -d
 
 # query with remote-cli 
-cd deployments/docker-compose/anylog-query-remote-cli
+cd deployments/docker-compose/anylog-query
 docker-compose up -d
 ```
 
