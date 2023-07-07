@@ -4,7 +4,7 @@ This session includes 3 sections:
 
 1. An [Overview](#overview)
 2. Step by step [install](#install) of a test network
-3. Connecting sample data sources and [Populating Data](#populating Data)
+3. Connecting sample data sources and [Populating Data](#populating data)
 
 # Overview
 
