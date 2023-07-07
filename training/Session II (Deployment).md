@@ -116,7 +116,7 @@ to communicate with peers and with 3rd parties applications.
 
 ## Associate the training machines with their roles 
 
-* Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
+Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query and 2 Operators).
 
 ## Static IPs
 AnyLog requires static IPs for the nodes in the network. Some setups are not providing static IPs. There are different ways
