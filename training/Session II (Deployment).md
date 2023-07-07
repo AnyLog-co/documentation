@@ -190,10 +190,14 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
     * COMPANY_NAME with your company name
     * MONITOR_NODES set the value to **true**
-    * MONITOR_NODE_COMPANY with your company name
+    * MONITOR_NODE_COMPANY with your company name  
+    
     For the Query Node and the 2 Operator nodes, add the ID of the network
+    
     * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
-    Note: deploy and start the Master, on the AnyLog CLI issue **get connections**, the ID is the address under TCP/External-address.
+    
+    Note: The Network ID is available in the following manner:  
+    Deploy and start the Master, on the AnyLog CLI issue **get connections**, the ID is the address under TCP/External-address.
     
 # Start / Restart a deployed node
  
@@ -241,7 +245,6 @@ On the CLI:
 ```
 exit node
 ```
-
 Terminate a docker process:
 
 In the the docker-compose directory of the node to terminate (Master in the example below):
@@ -256,12 +259,19 @@ docker-compose down --rmi all     # stop the process + will also remove the imag
 docker-compose down -v --rmi all  # will do all three  
 ```
 
+# Basic initial operations
+On each node (using the CLI) use the following commands:
+1) View the network services using the command ```get connections```
+2) View the background processes enabled using the command ```get processes```
+3) Test connectivity to nodes in the network using the command ```test network``` (V sign means active and accessible).
+
+
 # Populating Data
 
 Data will be added to the 2 Operator nodes in the following manner:
  
 * AnyLog Operator I  - A data generator creates simulated data on Operator Node I. 
-    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) preinstalled). 
+    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
     * **Note 2:** The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     
   - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
