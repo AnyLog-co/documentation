@@ -80,7 +80,7 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 | [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 **In this session, users will use the following packages:**
-* AnyLog, on each of the 4 network nodes. Configuration will be using the default setting (other than proprietary info listed below). 
+* AnyLog - on each of the 4 network nodes. Configuration will be using the default setting (other than proprietary info listed below). 
 * Local database is SQLite (and is available by default without a dedicated install).
 * Remote CLI - deployed with the Query Node.
 * Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
@@ -126,7 +126,8 @@ and an example of Nginx with Kubernetes is detailed [here](https://kubernetes.gi
 ## The Network ID
 
 * With a Master Node deployment, the network ID is the Master's IP and Port.
-* By default, a node is using its default IP (the IP that identifies the node on the network used) and the Port is 2048.
+* A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
+(the IP that identifies the node on the network used) and the default port for the Master is 32048.  
  
 **Note:** 
 If the default IP is not known, when the Master node is initiated, the command **get connections** on the node CLI returns
@@ -134,14 +135,13 @@ the IPs and ports used - the Network ID is the IP and port assigned to TCP-Exter
 
 ## Deploy the Network Nodes
 
-Other than the 5 exceptions listed below, the AnyLog nodes will be using the default configuration:
+Other than the exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. The AnyLog license key is unique per company.
  2. Your company name (the user company name).
  3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
  4. Enable monitoring (in the default configuration, monitoring is disabled).
- 5. On the Query node and each of the Operator nodes: IP and Port of the Master (the network ID).
  
- In this training process, these configuration parameters are modified in the config file of each node using the questionnaire
+ In this training, these configuration parameters are modified in the config file of each node.  
  (note that in a customer deployment, these configurations can be pre-packaged).
  
 ## Get the Docker credentials and the AnyLog license key   
@@ -188,9 +188,9 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
    
 2. Update the following values:
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
-    * COMPANY_NAME with your company name
-    * MONITOR_NODES set the value to **true**
-    * MONITOR_NODE_COMPANY with your company name  
+    * COMPANY_NAME with your company name.
+    * MONITOR_NODES set the value to **true**.
+    * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     
     For the Query Node and the 2 Operator nodes, add the ID of the network
     
