@@ -128,16 +128,18 @@ and an example of Nginx with Kubernetes is detailed [here](https://kubernetes.gi
 * With a Master Node deployment, the network ID is the Master's IP and Port.
 * By default, a node is using its default IP (the IP that identifies the node on the network used) and the Port is 2048.
  
-**Note:** If the IP is not known, when the Master node is initiated, the command **get connections** on the node CLI returns
-the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.     
+**Note:** 
+If the default IP is not known, when the Master node is initiated, the command **get connections** on the node CLI returns
+the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
 
 ## Deploy the Network Nodes
 
-Other than the 4 exceptions listed below, the AnyLog nodes will be using the default configuration:
+Other than the 5 exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. The AnyLog license key is unique per company.
  2. Your company name (the user company name).
  3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
- 3. Enable monitoring (in the default configuration, monitoring is disabled).
+ 4. Enable monitoring (in the default configuration, monitoring is disabled).
+ 5. On the Query node and each of the Operator nodes: IP and Port of the Master (the network ID).
  
  In this training process, these configuration parameters are modified in the config file of each node using the questionnaire
  (note that in a customer deployment, these configurations can be pre-packaged).
@@ -152,6 +154,11 @@ Follow these steps on each of the 4 nodes (Master, Query and 3 Operator nodes).
 1. Clone AnyLog deployment.
 ```shell 
 git clone https://github.com/AnyLog-co/deployments  
+```
+
+Note: to re-install, move older install using the following command:
+```
+rm -rf deployments
 ```
 
 2. Register docker credentials 
@@ -180,10 +187,13 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
    ```
    
 2. Update the following values:
-    * LICENSE_KEY with the AnyLog License Key
+    * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
     * COMPANY_NAME with your company name
     * MONITOR_NODES set the value to **true**
     * MONITOR_NODE_COMPANY with your company name
+    For the Query Node and the 2 Operator nodes, add the ID of the network
+    * LEDGER_CONN with the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048)
+    Note: deploy and start the Master, on the AnyLog CLI issue **get connections**, the ID is the address under TCP/External-address.
     
 # Start / Restart a deployed node
  
@@ -212,10 +222,14 @@ docker ps -a
 ```
 docker attach --detach-keys=ctrl-d [NODE NAME]
 ```
-Nodes names:
+**Nodes Names**:
 * Master - **anylog-master**
 * Operator - **anylog-operator**
 * Query - **anylog-query**
+Example:
+```
+docker attach --detach-keys=ctrl-d anylog-master
+```
 
 2. Detach from the process (AnyLog remains active)
 
@@ -226,6 +240,20 @@ Using the keys: **ctrl+d**
 On the CLI:
 ```
 exit node
+```
+
+Terminate a docker process:
+
+In the the docker-compose directory of the node to terminate (Master in the example below):
+```
+ cd deployments/docker-compose/anylog-master
+```
+Do one of the following:
+```
+docker-compose down               # will stop the process 
+docker-compose down -v            # stop the process + will also remove the volume
+docker-compose down --rmi all     # stop the process + will also remove the image 
+docker-compose down -v --rmi all  # will do all three  
 ```
 
 # Populating Data
