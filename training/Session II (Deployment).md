@@ -43,11 +43,12 @@ The following table summarizes different supported deployment and configuration 
 Since configuration is "command based", it is simple to change configurations, and even dynamically (using the CLI),
 by disabling a service or enabling a service using the proper commands.  
 
-In this training, users will be creating a default configuration file and make minimal modifications using a questionnaire.    
-Users can bypass the questionnaire and make the needed changes in the configuration file - in this training, the 
-configuration file is named **anylog_configs.env** and sored in a folder as follows:
+In this training, users will be using the default configuration file, and make some modifications to support their
+proprietary settings.
 
-| Node              | Folder |
+In this session, the configuration file is named **anylog_configs.env** and sored in a folder as follows:
+
+| Node Type         | Folder |
 | -------------     | ------------- |
 | Master            | deployments/docker-compose/anylog-master |
 | Operator          | deployments/docker-compose/anylog-operator |
