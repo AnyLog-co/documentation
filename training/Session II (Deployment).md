@@ -149,6 +149,8 @@ Other than the exceptions listed below, the AnyLog nodes will be using the defau
  2. Your company name (the user company name).
  3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
  4. Enable monitoring (in the default configuration, monitoring is disabled).
+ 5. Provide a unique name to each Operator (i.e.: anylog-operator_1, and anylog-operator_2).
+ 6. Designate on each Operator a unique data cluster (i.e. anylog-cluster_1 and anylog-cluster_2).
  
  In this training, these configuration parameters are modified in the config file of each node.  
  (note that in a customer deployment, these configurations can be pre-packaged).
