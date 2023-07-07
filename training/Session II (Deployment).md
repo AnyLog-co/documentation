@@ -52,7 +52,7 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 | -------------     | ------------- |
 | Master            | deployments/docker-compose/anylog-master |
 | Operator          | deployments/docker-compose/anylog-operator |
-| Query             |  deployments/docker-compose/anylog-query-remote-cli |
+| Query             |  deployments/docker-compose/anylog-query |
 
 Advanced users can generate their own configuration files using a questionnaire, or placing the commands in files or a policies.
 * The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
