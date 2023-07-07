@@ -214,6 +214,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
     to the node. On the CLI - get the Master IP and Port using the command ```get connections```.
     the Network-ID is the address under TCP/External-address (this value is updated on the config file of the Query and Operators nodes). 
+    Use the keys **ctrl+d** to detach from the node. 
     
     **On the Query Node:**  
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
@@ -267,6 +268,8 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
 * Master - **anylog-master**
 * Operator - **anylog-operator**
 * Query - **anylog-query**
+
+
 Example:
 ```
 docker attach --detach-keys=ctrl-d anylog-master
