@@ -54,7 +54,7 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 | Operator          | deployments/docker-compose/anylog-operator |
 | Query             |  deployments/docker-compose/anylog-query |
 
-Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or a policies.
+Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or in policies.
 * The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire
 that to generate the config file.
 * The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
