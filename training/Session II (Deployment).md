@@ -190,6 +190,12 @@ This file is in the following directories:
 
 ## Modify configurations 
 
+### Option 1: Using a questionnaire
+The following section guides through the values to modify in the config file of each node.
+Users can replace this process by a questionnaire that creates the config file with the needed modification. 
+Using the questionnaire is detailed in the [deploying_node](../deployments/deploying_node.md) document.
+
+### Option 2: Modify the config file using an editor
 On each machine, modify the ```anylog_configs.env``` according to the following instructions:
 
 1. Using an editor, enter the file:
