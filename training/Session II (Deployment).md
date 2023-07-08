@@ -371,20 +371,24 @@ Hit "Enter" to see the CLI
 2) Copy the following code block to the CLI:
 ```
 <run mqtt client where broker=driver.cloudmqtt.com and port=18785 and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(
-   name=anylogedgex and 
+   name=anylogedgex-demo and 
    dbms=test and 
    table="bring [sourceName]" and 
-   column.timestamp.timestamp=NOW() and 
-   column.value=(type=int and value="bring [readings][][value])"
+   column.timestamp.timestamp=now and 
+   column.value=(type=int and value="bring [readings][][value]")
 )> 
 ```
+Note: in the command above, the greater than less then signs designate a code-block. 
 
 3) Verify that data is streaming to the node using the following command:
 ```
 get streaming
 ```
 
-## Validate Deployment
+# Validate Deployment
+
+The sample commands below are using the CLI to test the deployment by issuing status commands and data queries.
+Note that results vary based on the data inserted.
 
 * Attaching to an AnyLog node 
 ```shell
@@ -463,17 +467,10 @@ Connection:   Not connected: MQTT_ERR_NO_CONN
      Subscribed Topics:
      Topic       QOS DBMS  Table     Column name Column Type Mapping Function        Optional Policies 
      -----------|---|-----|---------|-----------|-----------|-----------------------|--------|--------|
-     anylogedgex|  0|test|rand_data|timestamp  |timestamp  |now()                  |False   |        |
+     anylogedgex|  0|test |rand_data|timestamp  |timestamp  |now()                  |False   |        |
                 |   |     |         |value      |float      |['[readings][][value]']|False   |        |
 
      
-     Directories Used:
-     Directory Name Location                       
-     --------------|------------------------------|
-     Prep Dir      |/app/AnyLog-Network/data/prep |
-     Watch Dir     |/app/AnyLog-Network/data/watch|
-     Error Dir     |/app/AnyLog-Network/data/error|
-
 AL anylog-operator-node1 +> get streaming 
 
 Flush Thresholds
@@ -541,18 +538,9 @@ row_id insert_timestamp           tsd_name tsd_id timestamp                  val
      5 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.288549       -631 
      6 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.365486        -49 
      7 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.365981 1699705479 
-
-row_id insert_timestamp           tsd_name tsd_id timestamp                  value 
------- -------------------------- -------- ------ -------------------------- ----- 
-     1 2022-07-28 22:58:22.252761      113      1 2022-07-28 22:57:20.004870    35 
-
-row_id insert_timestamp           tsd_name tsd_id timestamp                  value  
------- -------------------------- -------- ------ -------------------------- ------ 
-     1 2022-07-29 00:00:19.696563       59     66 2022-07-29 00:00:15.367675 -25863 
-
-row_id insert_timestamp           tsd_name tsd_id timestamp                  value  
------- -------------------------- -------- ------ -------------------------- ------ 
-     1 2022-07-29 00:00:05.287433      113     61 2022-07-29 00:00:04.050341 -12346 
+     1 2022-07-28 22:58:22.252761      113      1 2022-07-28 22:57:20.004870         35 
+     1 2022-07-29 00:00:19.696563       59     66 2022-07-29 00:00:15.367675     -25863 
+     1 2022-07-29 00:00:05.287433      113     61 2022-07-29 00:00:04.050341     -12346 
 
 {"Statistics":[{"Count": 10,
                 "Time":"00:00:00",
