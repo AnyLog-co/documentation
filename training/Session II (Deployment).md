@@ -268,11 +268,14 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
 * Master - **anylog-master**
 * Operator - **anylog-operator**
 * Query - **anylog-query**
-
-
+ 
 Example:
 ```
 docker attach --detach-keys=ctrl-d anylog-master
+```
+Note: Some setups require to press the "Enter" key to see the AnyLog CLI (with the node name), like the example below:
+```
+AL anylog-query > 
 ```
 
 2. Detach from the process (AnyLog remains active)
@@ -304,6 +307,7 @@ On each node (using the CLI) use the following commands:
 1) View the network services using the command ```get connections```
 2) View the background processes enabled using the command ```get processes```
 3) Test connectivity to nodes in the network using the command ```test network``` (V sign means active and accessible).
+4) Query the metadata ```blockchain get (master,operator,query) bring.table [*] [*][ip] [*][port]```
 
 
 # Populating Data
@@ -311,22 +315,21 @@ On each node (using the CLI) use the following commands:
 Data will be added to the 2 Operator nodes in the following manner:
  
 * AnyLog Operator I  - A data generator creates simulated data on Operator Node I. 
-    * **Note 1:** The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
-    * **Note 2:** The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
-    
-  - Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
+    * The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
+    * The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
+    * Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
     
 * AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
 
 To populate simulated data - AnyLog [Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
-provides options to generate a variety data types used for demonstration and tesing purposes. 
+provides options to generate a variety data types used for demonstration and testing purposes. 
 
 Note: The Data Generator can distribute the generated data to multiple nodes (if the IP:Port of multiple nodes are specified as the destination). 
    
-1. Clone Data Generator
+1. Clone Data Generator`
 ```shell
 cd $HOME
-git clone https://github.com/AnyLog-co/Sample-Data-Generator
+docker run -it --detach-keys=ctrl-d -e HELP=true --rm anylogco/sample-data-generator:latest
 ```
 
 2. Install requirements
