@@ -456,37 +456,12 @@ Note: there is no need to specify the destination node (unless the user needs to
 run client () sql test format=table "select count(*) from ping_sensor"
 run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10" 
 run client () sql test format=table "select increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor where timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC"
-```
-
-
-
-
-
-AL query-node +> run client () sql test format=table "select * from rand_data limit 10;" 
-[0]
-AL query-node +> 
-row_id insert_timestamp           tsd_name tsd_id timestamp                  value      
------- -------------------------- -------- ------ -------------------------- ---------- 
-     1 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:12.078936 2062547502 
-     2 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:15.288161     -21506 
-     3 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:15.365373        -88 
-     4 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:15.365744 1140863460 
-     5 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.288549       -631 
-     6 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.365486        -49 
-     7 2022-07-28 22:58:16.526417       59      2 2022-07-28 22:57:35.365981 1699705479 
-     1 2022-07-28 22:58:22.252761      113      1 2022-07-28 22:57:20.004870         35 
-     1 2022-07-29 00:00:19.696563       59     66 2022-07-29 00:00:15.367675     -25863 
-     1 2022-07-29 00:00:05.287433      113     61 2022-07-29 00:00:04.050341     -12346 
-
-{"Statistics":[{"Count": 10,
-                "Time":"00:00:00",
-                "Nodes": 2}]}
-# detach from AnyLog node - ctrl-d
+sql test format=table and extend=(+node_name as node) "select device_name, timestamp, value,  from ping_sensor where period(minute, 10, now(), timestamp)"
 ```
 
 # Reference Documentation
 
-## Remote CLLI
+## Remote CLI
 * [Deploy the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Remote-CLI.md)
 * [Configure the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md)
 
