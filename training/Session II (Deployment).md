@@ -488,7 +488,7 @@ Flushed Rows     |     9|        |
 Statistics
 DBMS-Table      File Put File Rows Streaming Put Streaming Rows Streaming Cached Immediate Last Process        
 ---------------|--------|---------|-------------|--------------|----------------|---------|-------------------|
-test.rand_data|       0|        0|          846|           846|               8|      824|2022-07-29 00:34:44|
+test.rand_data |       0|        0|          846|           846|               8|      824|2022-07-29 00:34:44|
 
 AL anylog-operator-node1 +> get operator 
 
