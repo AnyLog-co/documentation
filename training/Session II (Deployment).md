@@ -5,7 +5,7 @@ This session includes 4 sections:
 1. An [Overview](#overview)
 2. Step by step [install](#install) of a test network
 3. Connecting sample data sources and [Populating Data](#populating-data)
-4. [Validate Deployment](#validate-deployment) to run commands and queries using the nodes CLIs
+4. [View status and query data from the AnyLog CLI](#view-status-and-query-data-from-the-anylog-cli) to run commands and queries using the nodes CLIs
 5. [Reference Documentation](#reference-documentation) to deploy and configure the Remote CLI and Grafana
 
 # Overview
@@ -133,6 +133,23 @@ Identify the machine assigned to each of the 4 AnyLog Instances (Master, Query a
 AnyLog requires static IPs for the nodes in the network. Some setups are not providing static IPs. There are different ways
 to represent nodes with static IPs through redirection. For example, [Nginx](https://www.nginx.com/) provide the functionality
 and an example of Nginx with Kubernetes is detailed [here](https://kubernetes.github.io/ingress-nginx/examples/static-ip/). 
+
+## Ports to use
+
+Users can configure the nodes to use any valid IP and Port.
+For simplicity, the default setup is associating the same port values to nodes of the same type.  
+The following tables sumerizes the default port values:
+  
+| Node Type         | TCP    |   REST |
+| -------------     | ------ | ------ |
+| Master            | 32048  |  32049 |
+| Operator          | 32148  |  32149 |
+| Query             | 32348  |  32349 |
+
+Note: 
+* The IP and Port designated as TCP is used by the AnyLog protocol when messages are send between nodes of the network. 
+* The IP and Port designated as REST is used to message a node using the REST protocol. 3rd party apps would be using 
+REST to communicate with nodes in the network.
 
 ## The Network ID
 
@@ -273,7 +290,7 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
  
 Example:
 ```
-docker attach --detach-keys=ctrl-d anylog-master
+docker attach --detach-keys=ctrl-d anylog-query-node
 ```
 Note: Some setups require to press the "Enter" key to see the AnyLog CLI (with the node name), like the example below:
 ```
@@ -335,8 +352,18 @@ The destination node or nodes that receive the data are specified with the **CON
 
 Do the following on the node of Operator 1 (note that this process can be deployed on any node as data is transferred to the target node via REST):
 
+Note: In the examples below, the AnyLog nodes are identified as follows:
+```
+Address              Node Type Node Name         Status 
+--------------------|---------|-----------------|------|
+198.74.50.131:32348 |query    |anylog-query     |  V   |
+198.74.50.131:32048 |master   |anylog-master    |  V   |
+198.74.50.131:32148 |operator |anylog-operator_1|  V   |
+178.79.143.174:32148|operator |anylog-operator_2|  V   |
+```
+
 1. Modify the CONN information of the command below to the destination IP and Port of the 2 Operator Nodes.  
-    Note: Use the IP and port on the Operator nodes which are designated as REST/External.
+    **Note: Use the IP and port on the Operator nodes which are designated as REST/External. The default REST/External Port on the Operators nodes is 32149**
 ```shell
 docker run -it --detach-keys=ctrl-d --network host \
    -e DATA_TYPE=ping \
@@ -345,7 +372,7 @@ docker run -it --detach-keys=ctrl-d --network host \
    -e TOTAL_ROWS=100 \
    -e BATCH_SIZE=10 \
    -e SLEEP=0.5 \
-   -e CONN=198.74.50.131:32149,178.79.143.174:32148 \
+   -e CONN=198.74.50.131:32149,178.79.143.174:32149 \
    -e TIMEZONE=utc \
 --rm anylogco/sample-data-generator:latest
 ```
@@ -353,26 +380,13 @@ docker run -it --detach-keys=ctrl-d --network host \
 2. Run the generator  
    Copy the code block (with the IP and Port of the target node) to the OS CLI. 
    
-3. Attach to Operator #1 using the following command:
+## Get data from an external MQTT broker (optional)
+
+1. Attach to Operator #1 using the following command:
 ```
-docker attach --detach-keys="ctrl-d" anylog-operator-node2
+docker attach --detach-keys="ctrl-d" anylog-operator
 Hit "Enter" to see the CLI
 ```   
-4. Verify that data is streaming to the node using the following command:
-```
-get streaming
-```
-   
-## Using the data generator
-   
-The command below will subscribe to data published on a 3rd party broker. It is entered using the CLI, however it can be added
-to the vonfiguration and activated on startup.
-
-1) Attach to Operator #2 using the following command:
-```
-docker attach --detach-keys="ctrl-d" anylog-operator-node2
-Hit "Enter" to see the CLI
-```
 
 2) Copy the following code block to the CLI:
 ```
@@ -386,74 +400,35 @@ Hit "Enter" to see the CLI
 ```
 Note: in the command above, the greater than less then signs designate a code-block. 
 
-3) Verify that data is streaming to the node using the following command:
-```
-get streaming
-```
 
-# Validate Deployment
+# View status and query data from the AnyLog CLI
 
 The sample commands below are using the CLI to test the deployment by issuing status commands and data queries.
 Note that results vary based on the data inserted.
 
-* Attaching to an AnyLog node 
+* Attach to the query node
+
 ```shell
-# master 
-docker attach --detach-keys="ctrl-d" anylog-master-node 
-
-# operator 1 
-docker attach --detach-keys="ctrl-d" anylog-operator-node1
-
-# operator 2
-docker attach --detach-keys="ctrl-d" anylog-operator-node2
-
-# query 
 docker attach --detach-keys="ctrl-d" anylog-query-node
-
-# detach from AnyLog node - ctrl-d
 ```
 
-* View basic configurations -- `get connections`, `get processes` and `get databases`   
+* View basic configurations on the current node:
+`get connections`, `get processes` and `get databases`   
 ```shell
-ubuntu@demo:~$ docker attach --detach-keys="ctrl-d" anylog-master-node
-
-AL master-node +> get connections (need to update this to the new format showing binds)
-
-Type      External Address     Local Address        
----------|--------------------|--------------------|
-TCP      |139.162.200.15:32048|139.162.200.15:32048|
-REST     |139.162.200.15:32049|139.162.200.15:32049|
-Messaging|Not declared        |Not declared        |
-
-AL master-node +> get processes 
-
-    Process         Status       Details                                                                     
-    ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 139.162.200.15:32048, Threads Pool: 6                        |
-    REST           |Running     |Listening on: 139.162.200.15:32049, Threads Pool: 5, Timeout: 30, SSL: None|
-    Operator       |Not declared|                                                                           |
-    Publisher      |Not declared|                                                                           |
-    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
-    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
-    Distributor    |Not declared|                                                                           |
-    Consumer       |Not declared|                                                                           |
-    MQTT           |Not declared|                                                                           |
-    Message Broker |Not declared|No active connection                                                       |
-    SMTP           |Not declared|                                                                           |
-    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
-    Query Pool     |Running     |Threads Pool: 3                                                            |
-    Kafka Consumer |Not declared|                                                                           |
-
-AL master-node +> get databases 
-
-List of DBMS connections
-Logical DBMS         Database Type IP:Port                        Storage
--------------------- ------------- ------------------------------ -------------------------
-blockchain           psql          127.0.0.1:5432                 Persistent
-system_query         sqlite        Local                          MEMORY
-
-# detach from AnyLog node - ctrl-d 
+get connections
+get processes
+get databases
 ```
+
+* view basic configurations on the operators:
+Note: the commands below on the query node can be executed on the CLI of each operator independently.
+```shell
+dest = 198.74.50.131:32148,178.79.143.174:32148   # These are the TCP values (IP:Port) of the operators
+run client (!dest) get connections
+run client (!dest) get processes
+run client (!dest) get databases
+```
+
 
 * Make sure data is coming into Operator node - `get msg client`, `get streaming`, `get operator`
 ```shell
