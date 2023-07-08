@@ -454,8 +454,8 @@ get data nodes
 Note: there is no need to specify the destination node (unless the user needs to force the query to particular nodes).
 ```shell
 run client () sql test format=table "select count(*) from ping_sensor"
-run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10;" 
-
+run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10" 
+run client () sql test format=table "select increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor where timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC"
 ```
 
 
