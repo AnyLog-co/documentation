@@ -420,7 +420,7 @@ get processes
 get databases
 ```
 
-* view basic configurations on the operators:
+* View basic configurations on the operators:
 Note: the commands below on the query node can be executed on the CLI of each operator independently.
 ```shell
 dest = 198.74.50.131:32148,178.79.143.174:32148   # These are the TCP values (IP:Port) of the operators
@@ -429,83 +429,38 @@ run client (!dest) get processes
 run client (!dest) get databases
 ```
 
-
-* Make sure data is coming into Operator node - `get msg client`, `get streaming`, `get operator`
+* View data ingested on the Operator Nodes:
 ```shell
-ubuntu@demo:~$ docker attach --detach-keys="ctrl-d" anylog-operator-node1 
-
-AL anylog-operator-node1 +> get msg client 
-
-Subscription: 0001
-User:         unused
-Broker:       local
-Connection:   Not connected: MQTT_ERR_NO_CONN
-
-     Messages    Success     Errors      Last message time    Last error time      Last Error
-     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
-            843         843           0  2022-07-29 00:34:24
-     
-     Subscribed Topics:
-     Topic       QOS DBMS  Table     Column name Column Type Mapping Function        Optional Policies 
-     -----------|---|-----|---------|-----------|-----------|-----------------------|--------|--------|
-     anylogedgex|  0|test |rand_data|timestamp  |timestamp  |now()                  |False   |        |
-                |   |     |         |value      |float      |['[readings][][value]']|False   |        |
-
-     
-AL anylog-operator-node1 +> get streaming 
-
-Flush Thresholds
-Threshold         Value  Streamer 
------------------|------|--------|
-Default Time     |    60|Running |
-Default Volume   |10,240|        |
-Default Immediate|True  |        |
-Buffered Rows    |     8|        |
-Flushed Rows     |     9|        |
-
-
-Statistics
-DBMS-Table      File Put File Rows Streaming Put Streaming Rows Streaming Cached Immediate Last Process        
----------------|--------|---------|-------------|--------------|----------------|---------|-------------------|
-test.rand_data |       0|        0|          846|           846|               8|      824|2022-07-29 00:34:44|
-
-AL anylog-operator-node1 +> get operator 
-
-Status:     Active
-Time:       1:37:43 (H:M:S)
-Policy:     29ebc0cf136de22b25c3036a32363f65
-Cluster:    e9c30c8935f845a8976ff0f827378b92
-Member:     113
-Statistics JSON files:
-DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
----------------------- ---------------------- ---------- ---------- --------------------
-test                  rand_data                       4         90 2022-07-29 00:34:07
-
-Statistics SQL files:
-DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
----------------------- ---------------------- ---------- ---------- --------------------
-test                  rand_data                       4          0 2022-07-29 00:01:05
-
-Errors summary
-Error Type           Counter DBMS Name Table Name Last Error Last Error Text 
---------------------|-------|---------|----------|----------|---------------|
-Duplicate JSON Files|      0|         |          |         0|               |
-JSON Files Errors   |      0|         |          |         0|               |
-SQL Files Errors    |      0|         |          |         0|               |
-
-# detach from AnyLog node - ctrl-d
+run client (!dest) get streaming
+run client (!dest) get operator
 ```
 
-* Query data -- `get data nodes` and `select * from rand_data limit 10;` 
+* View the logical tables defined (in the entire network):
 ```shell
-ubuntu@demo:~$ docker attach --detach-keys="ctrl-d" anylog-query-node 
+get virtual tables
+```
 
-AL query-node +> get data nodes 
+* View columns in a table:
+```shell
+get columns where dbms = test and table = ping_sensor 
+```
 
-Company DBMS  Table     Cluster ID                       Cluster Status Node Name             Member ID External IP/Port     Local IP/Port        Node Status 
--------|-----|---------|--------------------------------|--------------|---------------------|---------|--------------------|--------------------|-----------|
-AnyLog |test |rand_data|b8517462b22804cfc357c86030e04520|active        |anylog-operator-node2|       59|139.162.200.15:32158|139.162.200.15:32158|active     |
-       |     |         |e9c30c8935f845a8976ff0f827378b92|active        |anylog-operator-node1|      113|139.162.200.15:32148|139.162.200.15:32148|active     |
+* View which are the nodes that host the data:
+```shell
+get data nodes
+```
+
+* Sample queries:
+Note: there is no need to specify the destination node (unless the user needs to force the query to particular nodes).
+```shell
+run client () sql test format=table "select count(*) from ping_sensor"
+run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10;" 
+
+```
+
+
+
+
 
 AL query-node +> run client () sql test format=table "select * from rand_data limit 10;" 
 [0]
