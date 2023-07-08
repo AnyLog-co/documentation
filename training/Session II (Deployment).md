@@ -269,7 +269,7 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
 **Nodes Names**:
 * Master - **anylog-master**
 * Operator - **anylog-operator**
-* Query - **anylog-query**
+* Query - **anylog-query-node**
  
 Example:
 ```
@@ -314,25 +314,29 @@ On each node (using the CLI) use the following commands:
 
 # Populating Data
 
-Data associated to different tables will be added to the 2 Operator nodes in the following manner:
+There are multiple ways to deliver data to nodes in the network, in this session data will be delivered in 2 methods:
  
-* AnyLog Operator I  - A data generator creates simulated data on Operator Node I. 
+* Using a data generator, simulated data will be populated to the 2 operator nodes.  
     * The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
     * The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     * Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
-    
-* AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
+  The data generator will generate data that will be hosted on the 2 operators nodes in a database named **test** and a table named **ping senor**. 
+  
+* Operator I, will subscribe to a 3rd party broker (in addition to data received from the data generator).  
+  The broker delivers data that will be associated with database **test** and 4 tables named **lightout1, lightout2, lightout3, lightout4**
+  
 
 ## Using the data generator 
 
 The data generator generates data and delivers the data via REST to one or more nodes.  
+
 The destination node or nodes that receive the data are specified with the **CONN** parameter on the command line
 (either one or multiple, comma separated IP:Port values).   
 
 Do the following on the node of Operator 1 (note that this process can be deployed on any node as data is transferred to the target node via REST):
 
-1. Modify the CONN information of the command below to the destination IP and Port.  
-    Note: Use the IP and port on the Operator node which are designated as REST/External.
+1. Modify the CONN information of the command below to the destination IP and Port of the 2 Operator Nodes.  
+    Note: Use the IP and port on the Operator nodes which are designated as REST/External.
 ```shell
 docker run -it --detach-keys=ctrl-d --network host \
    -e DATA_TYPE=ping \
@@ -341,7 +345,7 @@ docker run -it --detach-keys=ctrl-d --network host \
    -e TOTAL_ROWS=100 \
    -e BATCH_SIZE=10 \
    -e SLEEP=0.5 \
-   -e CONN=198.74.50.131:32149 \
+   -e CONN=198.74.50.131:32149,178.79.143.174:32148 \
    -e TIMEZONE=utc \
 --rm anylogco/sample-data-generator:latest
 ```
