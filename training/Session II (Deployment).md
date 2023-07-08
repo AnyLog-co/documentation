@@ -1,10 +1,12 @@
 # Session II - Deployment of the test network
 
-This session includes 3 sections:
+This session includes 4 sections:
 
 1. An [Overview](#overview)
 2. Step by step [install](#install) of a test network
 3. Connecting sample data sources and [Populating Data](#populating-data)
+4. [Validate Deployment](#validate-deployment) to run commands and queries using the nodes CLIs
+5. [Reference Documentation](#reference-documentation) to deploy and configure the Remote CLI and Grafana
 
 # Overview
 
@@ -547,3 +549,14 @@ row_id insert_timestamp           tsd_name tsd_id timestamp                  val
                 "Nodes": 2}]}
 # detach from AnyLog node - ctrl-d
 ```
+
+# Reference Documentation
+
+## Remote CLLI
+* [Deploy the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Remote-CLI.md)
+* [Configure the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md)
+
+## Grafana
+* [Deploy Grafana](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Grafana.md)
+* [Configuring Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) 
+
