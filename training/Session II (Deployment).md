@@ -312,7 +312,7 @@ On each node (using the CLI) use the following commands:
 
 # Populating Data
 
-Data will be added to the 2 Operator nodes in the following manner:
+Data associated to different tables will be added to the 2 Operator nodes in the following manner:
  
 * AnyLog Operator I  - A data generator creates simulated data on Operator Node I. 
     * The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
@@ -321,43 +321,71 @@ Data will be added to the 2 Operator nodes in the following manner:
     
 * AnyLog Operator II - receive data by subscribing to a 3rd-party MQTT broker.
 
-To populate simulated data - AnyLog [Data Generator](https://github.com/AnyLog-co/Sample-Data-Generator)
-provides options to generate a variety data types used for demonstration and testing purposes. 
+## Using the data generator 
 
-Note: The Data Generator can distribute the generated data to multiple nodes (if the IP:Port of multiple nodes are specified as the destination). 
+The data generator generates data and delivers the data via REST to one or more nodes.  
+The destination node or nodes that receive the data are specified with the **CONN** parameter on the command line
+(either one or multiple, comma separated IP:Port values).   
+
+Do the following on the node of Operator 1 (note that this process can be deployed on any node as data is transferred to the target node via REST):
+
+1. Modify the CONN information of the command below to the destination IP and Port.  
+    Note: Use the IP and port on the Operator node which are designated as REST/External.
+```shell
+docker run -it --detach-keys=ctrl-d --network host \
+   -e DATA_TYPE=ping \
+   -e INSERT_PROCESS=put \
+   -e DB_NAME=test \
+   -e TOTAL_ROWS=100 \
+   -e BATCH_SIZE=10 \
+   -e SLEEP=0.5 \
+   -e CONN=198.74.50.131:32149 \
+   -e TIMEZONE=utc \
+--rm anylogco/sample-data-generator:latest
+```
+
+2. Run the generator  
+   Copy the code block (with the IP and Port of the target node) to the OS CLI. 
    
-1. Clone Data Generator`
-```shell
-cd $HOME
-docker run -it --detach-keys=ctrl-d -e HELP=true --rm anylogco/sample-data-generator:latest
+3. Attach to Operator #1 using the following command:
+```
+docker attach --detach-keys="ctrl-d" anylog-operator-node2
+Hit "Enter" to see the CLI
+```   
+4. Verify that data is streaming to the node using the following command:
+```
+get streaming
+```
+   
+## Using the data generator
+   
+The command below will subscribe to data published on a 3rd party broker. It is entered using the CLI, however it can be added
+to the vonfiguration and activated on startup.
+
+1) Attach to Operator #2 using the following command:
+```
+docker attach --detach-keys="ctrl-d" anylog-operator-node2
+Hit "Enter" to see the CLI
 ```
 
-2. Install requirements
-```shell
-python3 -m pip install --upgrade -r $HOME/Sample-Data-Generator/requirements.txt
+2) Copy the following code block to the CLI:
+```
+<run mqtt client where broker=driver.cloudmqtt.com and port=18785 and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(
+   name=anylogedgex and 
+   dbms=test and 
+   table="bring [sourceName]" and 
+   column.timestamp.timestamp=NOW() and 
+   column.value=(type=int and value="bring [readings][][value])"
+)> 
 ```
 
-3. Run data generator 
-* ping sensor / percenagecpu sensor — combination of data that’s of different types
-* trig — timestamp and sin/cos/tan values between -3.14 and 3.14
-* performance — timestamp / random float value
-* opcua — timestamp + about 10 columns of float values
-* power — multiple tables
-  * To generate a Grafana map for the coordinates in power data use: [blockchain_add_policy_simple.py](../examples/Sample%20Python%20Scripts/blockchain/blockchain_add_policy_simple.py)
-  
-  ```shell    
-  $HOME/Sample-Data-Generator/data_generator_generic.py trig put test \
-    --total-rows 1000000 \
-    --batch-size 1000 \
-    --sleep 0.5 \
-    --timezone utc \
-    --enable-timezone-range \
-    --conn 10.0.0.226:32149 \
-    --topic trig_data \
-    --exception  
-  ```
+3) Verify that data is streaming to the node using the following command:
+```
+get streaming
+```
 
 ## Validate Deployment
+
 * Attaching to an AnyLog node 
 ```shell
 # master 
