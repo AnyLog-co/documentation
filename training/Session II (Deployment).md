@@ -264,12 +264,12 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
 cd deployments/docker-compose/anylog-master
 docker-compose up -d
 
-# operator
-cd deployments/docker-compose/anylog-operator
-docker-compose up -d
-
 # query
 cd deployments/docker-compose/anylog-query
+docker-compose up -d
+
+# operator
+cd deployments/docker-compose/anylog-operator
 docker-compose up -d
 ```
 
@@ -288,13 +288,13 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
 cd deployments/docker-compose/anylog-master
 docker attach --detach-keys=ctrl-d anylog-master
 
+# query 
+cd deployments/docker-compose/anylog-query
+docker attach --detach-keys=ctrl-d anylog-query-node
+
 # operator
 cd deployments/docker-compose/anylog-operator
 docker attach --detach-keys=ctrl-d anylog-operator
-
-# query with remote-cli 
-cd deployments/docker-compose/anylog-query
-docker attach --detach-keys=ctrl-d anylog-query-node
 ```
 
 **Note**: After the attached command - press the "Enter" key to see the AnyLog CLI, like the example below:
