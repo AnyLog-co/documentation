@@ -286,7 +286,7 @@ docker attach --detach-keys=ctrl-d [NODE NAME]
 
 # master 
 cd deployments/docker-compose/anylog-master
-docker attach --detach-keys=ctrl-d anylog-maste
+docker attach --detach-keys=ctrl-d anylog-master
 
 # operator
 cd deployments/docker-compose/anylog-operator
