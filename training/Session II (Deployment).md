@@ -498,6 +498,8 @@ for example:
 http://198.74.50.131:31800
 ```
 
+Note: On the GUI, select **"Training"** on the **Options** menu for buttons representing the commands and queries of the training.
+
 # Reference Documentation
 
 ## Remote CLI
