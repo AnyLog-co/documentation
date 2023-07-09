@@ -6,7 +6,8 @@ This session includes 4 sections:
 2. A step by step [Install](#install) of a test network
 3. Connecting sample data sources and [Populating Data](#populating-data)
 4. [View status and query data (using the AnyLog Node CLI)](#view-status-and-query-data-using-the-anylog-node-cli)
-5. [Reference Documentation](#reference-documentation) to deploy and configure the Remote CLI and Grafana
+5. [Deploy the Remote CLI](#deploy-the-remote-cli)
+6. [Reference Documentation](#reference-documentation) to deploy and configure the Remote CLI and Grafana
 
 # Overview
 
@@ -496,7 +497,6 @@ for example:
 ```
 http://198.74.50.131:31800
 ```
-
 
 # Reference Documentation
 
