@@ -304,6 +304,8 @@ AL [NODE NAME] >
 Example:
 AL anylog-master +> 
 ```
+Note that the plus sign (+) designates messages in the queue of the node - these messages can be viewed using the command: ```get echo queue```.
+
 
 2. Detach from the process (AnyLog remains active)
 
