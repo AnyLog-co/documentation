@@ -227,7 +227,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     **On the Master Node:**
     * LICENSE_KEY with the AnyLog License Key (and uncomment the entry).
     * COMPANY_NAME with your company name.
-    * MONITOR_NODES set the value to **true**.
+    * Do not change MONITOR_NODES to **true** (as done with the other nodes).
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
@@ -268,7 +268,7 @@ docker-compose up -d
 cd deployments/docker-compose/anylog-operator
 docker-compose up -d
 
-# query with remote-cli 
+# query
 cd deployments/docker-compose/anylog-query
 docker-compose up -d
 ```
@@ -283,17 +283,21 @@ docker ps -a
 1. Attach
 ```
 docker attach --detach-keys=ctrl-d [NODE NAME]
-```
-**Nodes Names**:
-* Master - **anylog-master**
-* Operator - **anylog-operator**
-* Query - **anylog-query-node**
- 
-Example:
-```
+
+# master 
+cd deployments/docker-compose/anylog-master
+docker attach --detach-keys=ctrl-d anylog-maste
+
+# operator
+cd deployments/docker-compose/anylog-operator
+docker attach --detach-keys=ctrl-d anylog-operator
+
+# query with remote-cli 
+cd deployments/docker-compose/anylog-query
 docker attach --detach-keys=ctrl-d anylog-query-node
 ```
-Note: Some setups require to press the "Enter" key to see the AnyLog CLI (with the node name), like the example below:
+
+Note: After the attached command - press the "Enter" key to see the AnyLog CLI (with the node name), like the example below:
 ```
 AL anylog-query > 
 ```
