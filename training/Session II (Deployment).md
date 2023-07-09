@@ -165,15 +165,15 @@ the IPs and ports used - the Network ID is the IP and port assigned to TCP-Exter
 ## Deploy the Network Nodes
 
 Other than the exceptions listed below, the AnyLog nodes will be using the default configuration:
- 1. The AnyLog license key is unique per company.
- 2. Your company name (the user company name).
+ 1. Update the AnyLog license key in every node that joins the network.
+ 2. Update your company name (the user company name) in every node that joins the network.
  3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
- 4. Enable monitoring (in the default configuration, monitoring is disabled).
- 5. Provide a unique name to each Operator (i.e.: anylog-operator_1, and anylog-operator_2).
+ 4. Enable monitoring (in the default configuration, monitoring is disabled). In this training, in every node that joins the network.
+ 5. Provide a unique name to each Operator Node (i.e.: anylog-operator_1, and anylog-operator_2).
  6. Designate on each Operator a unique data cluster (i.e. anylog-cluster_1 and anylog-cluster_2).
  
- In this training, these configuration parameters are modified in the config file of each node.  
- (note that in a customer deployment, these configurations can be pre-packaged).
+ In this training, users will modigy these parameters (using an editor) in the config file of each node.  
+ (note that in a customer deployment, these configurations can be pre-packaged or updated using a questionnaire during the install).
  
 ## Get the Docker credentials and the AnyLog license key   
 If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
