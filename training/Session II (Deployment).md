@@ -339,7 +339,7 @@ There are multiple ways to deliver data to nodes in the network, in this session
     * The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     * Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
     
-  The data generator will generate data that will be hosted on the 2 operators nodes in a database named **test** and a table named **ping senor**. 
+  The data generator will generate data that will be hosted on the 2 operators nodes in a database named **test** and a table named **ping_sensor**. 
   
 * Operator I, will subscribe to a 3rd party broker (in addition to data received from the data generator).  
 
@@ -351,18 +351,16 @@ There are multiple ways to deliver data to nodes in the network, in this session
 The data generator generates data and delivers the data via REST to one or more nodes.  
 
 The destination node or nodes that receive the data are specified with the **CONN** parameter on the command line
-(either one or multiple, comma separated IP:Port values).   
-
-Do the following on the node of Operator 1 (note that this process can be deployed on any node as data is transferred to the target node via REST):
+(either one or multiple destinations specified by a comma separated IP:Port values).   
 
 Note: In the examples below, the AnyLog nodes are identified as follows:
 ```
-Address              Node Type Node Name         Status 
---------------------|---------|-----------------|------|
-198.74.50.131:32348 |query    |anylog-query     |  V   |
-198.74.50.131:32048 |master   |anylog-master    |  V   |
-198.74.50.131:32148 |operator |anylog-operator_1|  V   |
-178.79.143.174:32148|operator |anylog-operator_2|  V   |
+Address              Node Type Node Name         
+--------------------|---------|-----------------|
+198.74.50.131:32348 |query    |anylog-query     |
+198.74.50.131:32048 |master   |anylog-master    |
+198.74.50.131:32148 |operator |anylog-operator_1|
+178.79.143.174:32148|operator |anylog-operator_2|
 ```
 
 1. Modify the CONN information of the command below to the destination IP and Port of the 2 Operator Nodes.  
@@ -416,7 +414,6 @@ docker attach --detach-keys="ctrl-d" anylog-query-node
 ```
 
 * View basic configurations on the current node:
-`get connections`, `get processes` and `get databases`   
 ```shell
 get connections
 get processes
@@ -424,7 +421,7 @@ get databases
 ```
 
 * View basic configurations on the operators:
-Note: the commands below on the query node can be executed on the CLI of each operator independently.
+Note: the commands below are executed on the query node. These commands can be executed on the CLI of each operator independently.
 ```shell
 dest = 198.74.50.131:32148,178.79.143.174:32148   # These are the TCP values (IP:Port) of the operators
 run client (!dest) get connections
