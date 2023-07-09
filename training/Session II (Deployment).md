@@ -89,10 +89,10 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 | [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 **In this session, users will use the following packages:**
-* AnyLog - on each of the 4 network nodes. Configuration will be using the default setting (other than proprietary info listed below). 
+* AnyLog - on each of the 4 network nodes. Configuration will be using the default setting (other than the changes listed below). 
 * Local database is SQLite (and is available by default without a dedicated install).
 * Remote CLI - deployed with the Query Node.
-* Data Generator - deployed on operator I (Operator II will be configured to get data from a 3rd party message broker).
+* Data Generator - deployed on operator I and configured to send data to both - Operator I and Operator II.
 * Grafana, on a dedicated node, as an example for an application interacting with the network data.
 
 # Install
@@ -110,7 +110,7 @@ Prior to this session, users are required to prepare:
 * Each node accessible by IP and Port (remove firewalls restrictions).
 * [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
-* To enable the questionnaire, install the following packages (these packages are redundant for deployments with pre-packaged configurations,
+* To enable the questionnaire (optional), install the following packages (these packages are redundant for deployments with pre-packaged configurations,
 or if the questionnaire is not used to create the **anylog_configs.env** file):  
     - [Python](https://www.python.org/downloads/)
     - [Dotenv](https://pypi.org/project/python-dotenv/)     
@@ -147,16 +147,17 @@ The following tables sumerizes the default port values:
 | Query             | 32348  |  32349 |
 
 Note: 
-* The IP and Port designated as TCP is used by the AnyLog protocol when messages are send between nodes of the network. 
-* The IP and Port designated as REST is used to message a node using the REST protocol. 3rd party apps would be using 
+* The Port designated as TCP is used by the AnyLog protocol when messages are send between nodes of the network. 
+* The Port designated as REST is used to message a node using the REST protocol. 3rd party apps would be using 
 REST to communicate with nodes in the network.
 
 ## The Network ID
 
 * With a Master Node deployment, the network ID is the Master's IP and Port.
 * A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
-(the IP that identifies the node on the network used) and the default port for the Master is 32048.  
- 
+(the IP that identifies the node on the network used) and the ports are set by default as described [above](#ports-to-use).  
+In this setup, the network ID is the IP of the Master and port 32048.
+    
 **Note:** 
 If the default IP is not known, when the Master node is initiated, the command **get connections** on the node CLI returns
 the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
