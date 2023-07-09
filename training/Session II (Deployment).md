@@ -472,8 +472,31 @@ Note: there is no need to specify the destination node (unless the user needs to
 run client () sql test format=table "select count(*) from ping_sensor"
 run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10" 
 run client () sql test format=table "select increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor where timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC"
-sql test format=table and extend=(+node_name as node) "select device_name, timestamp, value,  from ping_sensor where period(minute, 10, now(), timestamp)"
+run client () sql test format=table and extend=(+node_name as node) "select device_name, timestamp, value,  from ping_sensor where period(minute, 10, now(), timestamp)"
 ```
+
+# Deploy the Remote CLI
+
+The Remote CLI is a REST client to send commands and queries and inspect results from nodes in the network.  
+Follow the following steps to deploy and run the Remote CLI:
+
+1. Enter the Remote CLI folder:
+ ```shell
+cd deployments/docker-compose/remote-cli
+```
+2. Start the Remote CLI
+```shell
+docker-compose up -d
+```
+3. Open a browser with the following URL:
+```
+http://[The IP of the Node]:31800
+```
+for example:
+```
+http://198.74.50.131:31800
+```
+
 
 # Reference Documentation
 
