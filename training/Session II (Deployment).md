@@ -3,7 +3,7 @@
 This session includes 4 sections:
 
 1. An [Overview](#overview)
-2. Step by step [install](#install) of a test network
+2. A step by step [Install](#install) of a test network
 3. Connecting sample data sources and [Populating Data](#populating-data)
 4. [View status and query data from the AnyLog CLI](#view-status-and-query-data-from-the-anylog-cli) to run commands and queries using the nodes CLIs
 5. [Reference Documentation](#reference-documentation) to deploy and configure the Remote CLI and Grafana
@@ -401,7 +401,7 @@ Hit "Enter" to see the CLI
 Note: in the command above, the greater than less then signs designate a code-block. 
 
 
-# View status and query data from the AnyLog CLI
+# View status and query data (using the AnyLog Node CLI)
 
 The sample commands below are using the CLI to test the deployment by issuing status commands and data queries.
 Note that results vary based on the data inserted.
