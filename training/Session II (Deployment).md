@@ -438,6 +438,13 @@ run client (!dest) get processes
 run client (!dest) get databases
 ```
 
+Note: Retrieving the IP and ports for a large network can be done with a query to the metadata. For example:
+```shell
+dest = blockchain get operator bring.ip_port
+!dest       # View the retrieved values
+```
+
+
 * View data ingested on the Operator Nodes:
 ```shell
 run client (!dest) get streaming
