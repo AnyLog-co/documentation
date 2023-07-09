@@ -167,12 +167,12 @@ the IPs and ports used - the Network ID is the IP and port assigned to TCP-Exter
 Other than the exceptions listed below, the AnyLog nodes will be using the default configuration:
  1. Update the AnyLog license key in every node that joins the network.
  2. Update your company name (the user company name) in every node that joins the network.
- 3. Add the network ID (the IP and port of the Master) to the Operators and the Query Nodes.
+ 3. Add the network ID (the IP and port of the Master) to the Operators and the Query Node.
  4. Enable monitoring (in the default configuration, monitoring is disabled). In this training, in every node that joins the network.
  5. Provide a unique name to each Operator Node (i.e.: anylog-operator_1, and anylog-operator_2).
  6. Designate on each Operator a unique data cluster (i.e. anylog-cluster_1 and anylog-cluster_2).
  
- In this training, users will modigy these parameters (using an editor) in the config file of each node.  
+ In this training, users will modify these parameters (using an editor) in the config file of each node.  
  (note that in a customer deployment, these configurations can be pre-packaged or updated using a questionnaire during the install).
  
 ## Get the Docker credentials and the AnyLog license key   
@@ -338,9 +338,11 @@ There are multiple ways to deliver data to nodes in the network, in this session
     * The data generator requires [Python](https://www.python.org/downloads/) pre-installed. 
     * The data generator source code and documentation are available on Github: [Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator).
     * Advanced users can use other data generators. For example, by leveraging an [EdgeX deployment](https://github.com/AnyLog-co/lfedge-code).
+    
   The data generator will generate data that will be hosted on the 2 operators nodes in a database named **test** and a table named **ping senor**. 
   
 * Operator I, will subscribe to a 3rd party broker (in addition to data received from the data generator).  
+
   The broker delivers data that will be associated with database **test** and 4 tables named **lightout1, lightout2, lightout3, lightout4**
   
 
