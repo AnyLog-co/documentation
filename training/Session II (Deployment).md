@@ -297,9 +297,12 @@ cd deployments/docker-compose/anylog-query
 docker attach --detach-keys=ctrl-d anylog-query-node
 ```
 
-Note: After the attached command - press the "Enter" key to see the AnyLog CLI (with the node name), like the example below:
+**Note**: After the attached command - press the "Enter" key to see the AnyLog CLI, like the example below:
 ```
-AL anylog-query > 
+AL [NODE NAME] > 
+
+Example:
+AL anylog-master +> 
 ```
 
 2. Detach from the process (AnyLog remains active)
