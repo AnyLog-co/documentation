@@ -390,7 +390,7 @@ docker run -it --detach-keys=ctrl-d --network host \
 2. Run the generator  
    Copy the code block (with the IP and Port of the target node) to the OS CLI. 
    
-## Get data from an external MQTT broker (optional)
+## Connecting to an external MQTT broker (optional)
 
 1. Attach to Operator #1 using the following command:
 ```
