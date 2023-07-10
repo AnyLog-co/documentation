@@ -453,7 +453,7 @@ run client (!dest) get operator
 ```
 
 * Here is an example of issuing a command to an Operator Node using cURL:  
-Note: Use the IP and the REST Port used of the Operator to query.
+Note: Use the IP and the REST Port (32149 is the default) of the Operator to query.
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
 ```
