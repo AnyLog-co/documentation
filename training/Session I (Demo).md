@@ -24,6 +24,16 @@ Multiple logs that track events - logs examples: event log, error log, rest log,
 get event log
 get error log
 ```   
+
+## The node name
+The name on the CLI prompt can be set by the user to identify the node when multiple CLIs are used.
+```anylog 
+node_name = generic
+```   
+Will make the CLI prompt appear as:
+```
+AL generic > 
+```   
   
 ## The local dictionary
 The local dictionary maps local values (like paths names and IPs) to unified names that can be shared across nodes.
