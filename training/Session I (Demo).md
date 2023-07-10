@@ -30,7 +30,7 @@ The name on the CLI prompt can be set by the user to identify the node when mult
 ```anylog 
 node_name = generic
 ```   
-Will make the CLI prompt appear as:
+The assignment above makes the CLI prompt appear as:
 ```
 AL generic > 
 ```   
