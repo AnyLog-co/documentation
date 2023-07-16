@@ -477,12 +477,25 @@ get data nodes
 
 * Sample queries:
 Note: there is no need to specify the destination node (unless the user needs to force the query to particular nodes).
+
+Queries to table ping_sensor (data populated by the data generator):
 ```shell
 run client () sql test format=table "select count(*) from ping_sensor"
 run client (198.74.50.131:32148) sql test format=table "select count(*) from ping_sensor" # Optional - specify the target nodes
 run client () sql test format=table "select insert_timestamp, tsd_name, device_name, timestamp, value  from ping_sensor limit 10" 
 run client () sql test format=table "select increments(minute, 1, timestamp), device_name, min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from ping_sensor where timestamp >= NOW() - 1hour GROUP BY device_name ORDER BY min_ts DESC"
 run client () sql test format=table and extend=(+node_name as node) "select device_name, timestamp, value,  from ping_sensor where period(minute, 10, now(), timestamp)"
+```
+Queries to data from the subscription to the MQTT broker:
+```shell
+run client () sql test format=table "select count(*) from lightout1"
+run client () sql test format=table "select timestamp, value from lightout1 limit 20"
+run client () sql test format=table "select min(value), max(value), avg(value) from lightout1 where timestamp >= now() - 1 day"
+run client () sql test format=table "select min(value), max(value), avg(value)::float(%3) from lightout1 where timestamp >= now() - 1 day"
+
+run client () sql test format=table "select count(*) from lightout2"  
+run client () sql test format=table "select count(*) from lightout3"  
+run client () sql test format=table "select count(*) from lightout4"  
 ```
 
 # Deploy the Remote CLI
