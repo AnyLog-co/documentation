@@ -355,6 +355,8 @@ There are multiple ways to deliver data to nodes in the network, in this session
 
   The broker delivers data that will be associated with database **test** and 4 tables named **lightout1, lightout2, lightout3, lightout4**
   
+* Note: The [Adding Data](../adding%20data.md#adding-data-to-nodes-in-the-network) document explains how data is added to nodes in the network.
+  
 
 ## Using the data generator 
 
