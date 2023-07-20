@@ -78,13 +78,13 @@ anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_d
 
 ## Sending Blockchain Policies
 The [blockchain](blockchain) directory provides examples to send into AnyLog. Unlike data, in which you declare 
-only the Operator REST connection information, for data to be sent via REST, users need to also specify the correlating 
-master (or ledger) TCP connection information. Farther details regarding blockchain can be found: 
+only the Operator REST connection information, for blockchain policies to be declared via REST, users need to also specify 
+the correlating master (or ledger) TCP connection information. Farther details regarding blockchain can be found: 
 * [Blockchain Configuratio](../../blockchain%20configuration.md)
 * [Blockchain Commands](../../blockchain%20commands.md)
 
 ```shell
-anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/blockchain/blockchain_add_policy_simple.py 127.0.0.1:32149 127.0.0.1:32048
+anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/blockchain/blockchain_add_policy_simple.py ${REST_CONN} ${LEDGER_CONN}
 ```
 
 
