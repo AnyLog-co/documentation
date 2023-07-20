@@ -1,5 +1,3 @@
-import datetime
-import json
 import random
 from paho.mqtt import client as mqtt_client
 

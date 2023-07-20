@@ -1,11 +1,18 @@
 import argparse
 import datetime
 import json
+import importlib
 import random
 import re
 import time
 
-import mqtt_data
+is_mqtt = True
+if importlib.import_module("paho.mqtt"):
+    import mqtt_data
+else:
+    is_mqtt = False
+
+
 import post_data
 import put_data
 
@@ -103,6 +110,11 @@ def main():
     parse.add_argument("--insert-process", type=str, default="put", choices=["put", "post", "mqtt"], help="which insert process type to utilize")
     parse.add_argument("--topic", type=str, default="sample-data", help="POST or MQTT topic")
     args = parse.parse_args()
+
+    if args.insert_process == 'mqtt' and is_mqtt is False:
+        print("paho-mqtt not installed. Directions can be found here: https://pypi.org/project/paho-mqtt/")
+        exit(1)
+
 
     conn = args.conn
     auth = ()

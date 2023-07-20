@@ -29,7 +29,7 @@ for the data being used in [send_data.py](data/send_data.py).
 )>
 
 # Sending data via MQTT 
-<run mqtt client where broker = !ip and port = !anylog_rest_port and log=false and topic=(
+<run mqtt client where broker = !ip and port = !anylog_broker_port and log=false and topic=(
     name=sample-data and 
     dbms="bring [db_name]" and 
     table="bring [table]" and 
