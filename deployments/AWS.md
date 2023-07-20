@@ -4,12 +4,16 @@ The following provides directions for using an EC2 AWS instance(s) to configure 
 
 Directions for [deploying an AnyLog Node](deploying_node.md) 
 
+**Terminology**:
+* Node - An AnyLog node that's part of the network (ex. Master, Operator, Query)
+* Instance - An AWS EC2 machine  
+
 ## Create a new AWS instance
 0. Create an account and/or log into [AWS](https://aws.amazon.com/) 
 
-1. Create a [key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html)
+1. Create a [key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) for SSH access into the node. 
 
-2. Create a [new security](https://docs.aws.amazon.com/vpc/latest/userguide/security-groups.html) group per node type. 
+2. Create a [new security group](https://docs.aws.amazon.com/vpc/latest/userguide/security-groups.html) per node type. 
 
 The image below, shows sample configuration for an AnyLog (Operator) node; this includes _SSH_ access, _TCP_ and _REST_, as well 
 as _Broker_ if configured for Operator or Publisher node. 
@@ -23,18 +27,18 @@ as _Broker_ if configured for Operator or Publisher node.
  
 ![image](../imgs/aws_sample_security_group.png)
 
-3. Create a new EC2 instance that's associated with the corresponding _security group_.  
+3. Create a new [EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) that's associated with the corresponding _security group_.  
 
 4. Configure a static IP address 
 
     a. Create an [Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html). 
-This is very important as AWS provides a new IP each time a node is rebooted.
+This is very important as AWS provides a new IP each time an instance is rebooted (unless _elastic IP_ is configured).
 
     b. [Associate Elastic IP with Instance](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html)
 
-5. Repeat steps 3 and 4 for each new AWS instance
+5. Repeat steps 3 and 4 for each new AWS instance. 
 
-When using [different regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html), in the AnyLog config file, TCP binding needs to be disabled. 
+When using [different regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) for the AnyLog nodes, the TCP binding needs to be disabled. 
 
 **Sample Config**: The example shows a subsection of the anylog_configs.env file, with the `TCP_BIND` option disabled. 
 ```.env
