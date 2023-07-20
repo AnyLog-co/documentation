@@ -6,15 +6,17 @@ import random
 import re
 import time
 
-is_mqtt = True
-if importlib.import_module("paho.mqtt"):
-    import mqtt_data
-else:
-    is_mqtt = False
-
-
 import post_data
 import put_data
+
+is_mqtt = False
+try:
+    if importlib.import_module("paho.mqtt"):
+        import mqtt_data
+        is_mqtt = True
+except Exception:
+    pass
+
 
 def __validate_conn_pattern(conns:str)->str:
     """
