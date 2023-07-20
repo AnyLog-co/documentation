@@ -34,10 +34,20 @@ This is very important as AWS provides a new IP each time a node is rebooted.
 
 5. Repeat steps 3 and 4 for each new AWS instance
 
-If you're using a [different regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) 
-for your AnyLog instance, then the TCP binding needs to be enabled. 
+When using [different regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html), in the AnyLog config file, TCP binding needs to be disabled. 
 
-
+**Sample Config**: The example shows a subsection of the anylog_configs.env file, with the `TCP_BIND` option disabled. 
+```.env
+...
+ANYLOG_SERVER_PORT=32048
+# Port address used by AnyLog's REST protocol
+ANYLOG_REST_PORT=32049
+# Port value to be used as an MQTT broker, or some other third-party broker
+#ANYLOG_BROKER_PORT=<NETWORKING_ANYLOG_BROKER_PORT>
+# A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+TCP_BIND=false 
+...
+```
 
  
 
