@@ -35,7 +35,7 @@ This is very important as AWS provides a new IP each time a node is rebooted.
 5. Repeat steps 3 and 4 for each new AWS instance
 
 If you're using a [different regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) 
-for your AnyLog instance, then the TCP binding needs to enabled. 
+for your AnyLog instance, then the TCP binding needs to be enabled. 
 
 
 
