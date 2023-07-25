@@ -3,19 +3,26 @@
 ## Overview
 For AnyLog training, AnyLog provides a data generator that inserts dummy data into predetermined tables on AnyLog nodes.
 The [data generator](https://github.com/AnyLog-co/Sample-Data-Generator) provides different ways to insert data into AnyLog; 
-including REST _POST_ + _PUT_ as well as MQTT Publish. 
+including REST _POST_ and _PUT_ and publish data on an AnyLog (treating the AnyLog node as Broker). 
 
-However, for simplicity reason we recommend that for training to use _PUT_ as the data delivered is automatically assigned 
-to a table without manipulation or modification. 
+The training is using REST (_PUT_ request) to deliver data to Operator nodes in the network.
 
+The data generator generates data in JSON format (the type of data is exemplified below - [sample values](#sample-json)).
+ 
+The flags set in the generator determine the data sets generated. 
+In this document, we provide the call to generate data into 2 tables called **ping_sensor** and **percentagecpu_sensor**.
 
+  
 ## Prerequisites
-The sample data generator can run from anywhere as long as: 
-* The machine it is running from has _Docker_ installed
-* AnyLog (Operator) node receiving the data can communicate with where the data is coming from. To validate: 
-```shell
-curl -X GET ${ANYLOG_NODE_IP}:${ANYLOG_NODE_REST_PORT} -H "command: get status" -H "User-Agent: AnyLog/1.23"
-```
+The sample data generator can run from any machine as long as:
+* The participating nodes (the generator node and the Operator nodes) are able to communicate via REST.
+    Users can validate that the participating nodes are reachable using the ```get status``` command (to each operator).  
+    Example:
+    ```shell
+    curl -X GET ${ANYLOG_NODE_IP}:${ANYLOG_NODE_REST_PORT} -H "command: get status" -H "User-Agent: AnyLog/1.23"
+    ```
+* _Docker_ installed
+ 
 
 ## Docker Deployment 
 * Help 
@@ -67,55 +74,16 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
 
 * Sample calls to send data into AnyLog 
 ```shell
-# send ping data via REST PUT to multiple operator nodes
-docker run -it --detach-keys=ctrl-d --name data-generator --network host \
-   -e DATA_TYPE=ping \
-   -e INSERT_PROCESS=put \ 
-   -e DB_NAME=test \
-   -e TOTAL_ROWS=100 \ 
-   -e BATCH_SIZE=10 \
-   -e SLEEP=0.5 \
-   -e CONN=198.74.50.131:32149,178.79.143.174:32149 \ 
-   -e TIMEZONE=utc \
---rm anylogco/sample-data-generator:latest
-
 # send ping and percentagecpu data via REST POST to an operator nodes
 docker run -it --detach-keys=ctrl-d --name data-generator --network host \
    -e DATA_TYPE=ping,percentagecpu \
-   -e INSERT_PROCESS=post \
+   -e INSERT_PROCESS=put \
    -e DB_NAME=test \
    -e TOTAL_ROWS=100 \
    -e BATCH_SIZE=10 \
    -e SLEEP=0.5 \
    -e CONN=198.74.50.131:32149 \
    -e TIMEZONE=utc \
---rm anylogco/sample-data-generator:latest
-```
-
-* Using print or file _INSERT_PROCESS_. Directions to access files stored in docker volume can be found [here](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/cheatsheet.md).   
-```shell
-# print OPCUA to screen 
-docker run -it --detach-keys=ctrl-d --name data-generator --network host \ 
-   -e DATA_TYPE=opcua \ 
-   -e INSERT_PROCESS=print \ 
-   -e DB_NAME=test \ 
-   -e TOTAL_ROWS=100 \ 
-   -e BATCH_SIZE=10 \ 
-   -e SLEEP=0.5 \ 
-   -e TIMEZONE=local \ 
---rm anylogco/sample-data-generator:latest
-
-# store POWER data into file(s) with performance enabled - notice that unlike other examples, the file insert process 
-# has a volume named data-generator
-docker run -it --detach-keys=ctrl-d --name data-generator --network host \ 
-   -e DATA_TYPE=power \ 
-   -e INSERT_PROCESS=file \ 
-   -e DB_NAME=test \ 
-   -e TOTAL_ROWS=1000 \ 
-   -e BATCH_SIZE=10 \ 
-   -e SLEEP=0.5 \ 
-   -e TIMEZONE=local \ 
-   -v data-generator:/app/Sample-Data-Generator/data/new-data \ 
 --rm anylogco/sample-data-generator:latest
 ```
 
@@ -136,7 +104,7 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
 # Data Type: opcua
   {"dbms": "test2", "table": "opcua_readings", "fic1_pv": -103.29249139515318, "fic1_mv": -227.862187363, "fic1_sv": -48.493873977761645, "lic1_pv": 165.18648883311027, "lic1_mv": -84.59834643031611, "lic1_sv": 174.86936425992465, "fic2_pv": -37.52888216655371, "fic2_mv": 38.63696693385969, "fic2_sv": -182.07962937349504, "lic2_pv": 142.90402691921074, "lic2_mv": -35.64751556177472, "lic2_sv": -62.69296482664739, "fic3_pv": -147.060548270305, "fic3_mv": -57.93928389193016, "fic3_sv": 418.2631932904929, "lic3_pv": 176.7756420678825, "lic3_mv": -61.49695028678772, "lic3_sv": 220.60063882032966, "fic4_pv": -44.66240442407483, "fic4_mv": 11.529102739194443, "fic4_sv": 124.97175098185224, "lic4_pv": 9.507763915723592, "lic4_mv": 30.483647656168543, "lic4_sv": -213.4404433100362, "fic5_pv": -460.10226426203155, "fic5_mv": -72.96099747863087, "fic5_sv": -53.62672940378895, "lic5_pv": -89.93465024402398, "lic5_mv": -20.523831049180885, "lic5_sv": -125.29010564894106, "timestamp": "2022-09-24T14:30:10.575429Z"}
         
-# Data Type: power
+# Data Type: power (to multiple tables: solar, battery, inverter, eswitch, pmu, synchrophasor)
   {"dbms": "test", "table": "solar", "location": "38.89773, -77.03653", "value": 8.43453536493608, "timestamp": "2022-08-27T15:50:12.205323Z"}
   {"dbms": "test", "table": "battery", "location": "38.89773, -77.03653", "value": 9.532695799656166, "timestamp": "2022-08-27T15:50:12.205323Z"}
   {"dbms": "test", "table": "inverter", "location": "38.89773, -77.03653", "value": 20.03601934228979, "timestamp": "2022-08-27T15:50:12.205323Z"}
