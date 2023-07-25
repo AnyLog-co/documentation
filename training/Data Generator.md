@@ -74,7 +74,7 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
 
 * Sample calls to send data into AnyLog 
 ```shell
-# send ping and percentagecpu data via REST POST to an operator nodes
+# send ping and percentagecpu data via REST PUT to an operator nodes
 docker run -it --detach-keys=ctrl-d --name data-generator --network host \
    -e DATA_TYPE=ping,percentagecpu \
    -e INSERT_PROCESS=put \
