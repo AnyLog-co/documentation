@@ -1,7 +1,7 @@
 # Sample Data Generator
 Sample data generators used to insert demo data into AnyLog. 
 
-When using _MQTT_ or REST _POST_to insert data, users need to configure a [MQTT client](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#example) 
+When using _MQTT_ or REST _POST_ to insert data, users need to configure a [MQTT client](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#example) 
 * [Ping or PercentageCPU](https://github.com/AnyLog-co/deployment-scripts/blob/main/scripts/demo_scripts/data_generator_generic_ping_percentage_demo.al)
 * [Power](https://github.com/AnyLog-co/deployment-scripts/blob/main/scripts/demo_scripts/data_generator_generic_power.al)
 * [Performance](https://github.com/AnyLog-co/deployment-scripts/blob/main/scripts/demo_scripts/data_generator_generic_performance.al)
