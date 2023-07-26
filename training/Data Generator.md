@@ -81,7 +81,7 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
    -e TOTAL_ROWS=100 \
    -e BATCH_SIZE=10 \
    -e SLEEP=0.5 \
-   -e CONN=198.74.50.131:32149 \
+   -e CONN=${ANYLOG_OPERATOR_REST_IP}:${ANYLOG_OPERATOR_REST_PORT} \
    -e TIMEZONE=utc \
 --rm anylogco/sample-data-generator:latest
 ```
