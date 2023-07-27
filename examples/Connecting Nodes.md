@@ -17,7 +17,7 @@ The listeners services are enabled by the configuration params. If enabled, the 
 * Data streams (to host on the node or to transfer to a destination node)  
 
 ***Note 1: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***.  
-For example, on AWS associate the ports assigned to each servoce to an Inbound Rule allowing incomming messages on that port.
+For example, on AWS associate the ports assigned to each service to an Inbound Rule allowing incoming messages on that port.
 
 ## Publishing the IPs and Ports
 
@@ -27,8 +27,21 @@ For example, nodes are represented by policies that include their serviced IPs a
 like physical location. With these policies, a process can identify all the nodes located in a city and request the CPU status from the identified nodes.    
 The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.   
 
+If the listeners services are enabled on a node, but are not represented on the shared metadata, the node can be active in the network 
+(to send and receive messages), however, reaching out to the node requires knowledge of the IP and Port of the listener service used. 
 
 ## Associating IPs and Ports to the AnyLog services  
+
+Each service is assigned with one or two addresses which represent the external IP address (Private ) and an Internal IP address (Public).
+The external IP address or Public IP address is the IP address of the router interface that is connected to the Internet (or 
+if there is no router, it is the IP that identifies the machine on the Internet.  
+Internal Addresses are also called Private addresses as they are restricted to private networks.  
+
+Here is a diagram to illustrate the IP address allocation on a typical business network:
+
+![network setup](../imgs/network.png)
+
+
 
 ## The TCP listener - Communicating with peer nodes
 
