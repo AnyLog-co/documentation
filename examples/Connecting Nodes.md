@@ -107,6 +107,14 @@ Examples:
 Examples:
     * Grafana connected to Node 1 will use 198.74.50.131:**32349**
     * The AnyLog Remote CLI connected to Node 1 will use 198.74.50.131:**32349**   
+    
+### Using an Overlay network
+
+Deployments of large scale networks are simpler with an overlay network. The Overlay Network allows for the following:
+ * It provides a mechanism to maintain static IPs.
+ * It provides the mechanisms to address firewalls limitations.
+ * It Isolate the network addressing security considerations. 
+We use [nebula](../deployments/Networking%20&%20Security/nebula.md) as an Overlay Network Example.    
 
 ## The TCP listener - Communicating with peer nodes
 
