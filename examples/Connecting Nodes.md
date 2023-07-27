@@ -63,7 +63,7 @@ This node is reached as follows:
 * From an external app via REST using 198.74.50.131:32349  (leveraging the REST service of the node).
 * From a process that Publish data using 198.74.50.131:32350  (leveraging the messaging service of the node).  
   
-### Node on a local network:
+### Node on a local network
 
 Node 2 in the diagram is on the local network and offers 2 IPs to service incoming messages:
 
@@ -82,11 +82,31 @@ The node will listen to ports 32348, 32349 and 32350  from both IPs (109.155.209
 If a node on the local network (like node 3) is messaging node 2, it will use the Internal Address (198.168.1.4) whereas a 
 node outside the local network (like node 1 of a node on a different local network) will use the External Address (109.155.209.167).
 
-**Note: this type of configuration requires Port Forwarding such that the router can assign the incoming messages to the proper node on the local network.  
+**Note: this type of configuration requires Port Forwarding such that the router can assign the incoming messages to the proper node on the local network.**  
 See [Port Forwarding](https://portforward.com/) for details.  
 
- 
+### The Bind Address 
+The **bind address** is a boolean parameter in the configuration for each type of service (TCP, REST, Messaging).  
+* If the bind is set to **true** - incoming messages are allowed using a single IP and Port (specified in the Bind Address column).
+* If the bind is set to **false** - incoming messages are allowed using any IP reachable to the machine 
+(External and Internal) with the specified port (The Bind Address column will show 0.0.0.0 followed by the allowed port).
 
+### Reaching to nodes using the CLIs
+
+* Use the TCP service when a command is issued from the node CLI.  
+Examples:
+    * The command **get status** issued from Node 1 CLI to node 2 will be as follows:
+        ```
+        run client 109.155.209.167:**32348** get status 
+        ```
+    * The command **get status** issued from Node 3 CLI to node 2 will be as follows:
+        ```
+        run client 198.168.1.4:**32348** get status 
+        ```
+* Use the REST service when a command is issued from a 3rd party application.
+Examples:
+    * Grafana connected to Node 1 will use 198.74.50.131:**32349**
+    * The AnyLog Remote CLI connected to Node 1 will use 198.74.50.131:**32349**   
 
 ## The TCP listener - Communicating with peer nodes
 
