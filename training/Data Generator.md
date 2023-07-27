@@ -72,9 +72,8 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
   --rm anylogco/sample-data-generator:latest
 ```
 
-* Sample calls to send data into AnyLog 
+* Send ping and percentagecpu data via REST _PUT_ into Operator node(s)
 ```shell
-# send ping and percentagecpu data via REST POST to an operator nodes
 docker run -it --detach-keys=ctrl-d --name data-generator --network host \
    -e DATA_TYPE=ping,percentagecpu \
    -e INSERT_PROCESS=put \
@@ -82,7 +81,7 @@ docker run -it --detach-keys=ctrl-d --name data-generator --network host \
    -e TOTAL_ROWS=100 \
    -e BATCH_SIZE=10 \
    -e SLEEP=0.5 \
-   -e CONN=198.74.50.131:32149 \
+   -e CONN=${ANYLOG_OPERATOR_REST_IP}:${ANYLOG_OPERATOR_REST_PORT} \
    -e TIMEZONE=utc \
 --rm anylogco/sample-data-generator:latest
 ```
