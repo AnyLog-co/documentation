@@ -16,16 +16,19 @@ The listeners services are enabled by the configuration params. If enabled, the 
 * AnyLog commands
 * Data streams (to host on the node or to transfer to a destination node)  
 
-***Note 1: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***.  
+**Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.**.  
 For example, on AWS associate the ports assigned to each service to an Inbound Rule allowing incoming messages on that port.
 
 ## Publishing the IPs and Ports
 
-When a node joins the network, it can publish, in the form of a policy on the shared metadata, the IPs and Ports of the services enabled on the node.  
+When a node joins the network, it can publish (in the form of a policy on the shared metadata), the IPs and Ports of the services enabled on the node.  
 This process makes the shared metadata a directory to locate nodes and their serviced IPs and Ports.  
-For example, nodes are represented by policies that include their serviced IPs and Ports including additional relevant information 
+For example, nodes are represented by policies that include their serviced IPs and Ports with additional relevant information 
 like physical location. With these policies, a process can identify all the nodes located in a city and request the CPU status from the identified nodes.    
-The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.   
+The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.
+
+**Note: The IPs used by a node needs to be static as they are published on the shared metadata. Without static
+IPs, their IP addressees can become inconsistent with the published IPs (hosted in the shared metadata)**  
 
 If the listeners services are enabled on a node, but are not represented on the shared metadata, the node can be active in the network 
 (to send and receive messages), however, reaching out to the node requires knowledge of the IP and Port of the listener service used. 
