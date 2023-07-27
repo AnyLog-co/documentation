@@ -17,7 +17,18 @@ The listeners services are enabled by the configuration params. If enabled, the 
 * Data streams (to host on the node or to transfer to a destination node)  
 
 ***Note 1: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***.  
-For example, on AWS associate the ports assigned to each servoce to an Inbound Rule allowing incomming messages on that port. 
+For example, on AWS associate the ports assigned to each servoce to an Inbound Rule allowing incomming messages on that port.
+
+## Publishing the IPs and Ports
+
+When a node joins the network, it can publish, in the form of a policy on the shared metadata, the IPs and Ports of the services enabled on the node.  
+This process makes the shared metadata a directory to locate nodes and their serviced IPs and Ports.  
+For example, nodes are represented by policies that include their serviced IPs and Ports including additional relevant information 
+like physical location. With these policies, a process can identify all the nodes located in a city and request the CPU status from the identified nodes.    
+The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.   
+
+
+## Associating IPs and Ports to the AnyLog services  
 
 ## The TCP listener - Communicating with peer nodes
 
