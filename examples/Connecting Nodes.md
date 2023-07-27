@@ -28,17 +28,17 @@ like physical location. With these policies, a process can identify all the node
 The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.
 
 **Note: The IPs used by a node needs to be static as they are published on the shared metadata. Without static
-IPs, their IP addressees can become inconsistent with the published IPs (hosted in the shared metadata)**  
+IPs, the nodes IP addressees can become inconsistent with their published IPs (hosted in the shared metadata)**  
 
 If the listeners services are enabled on a node, but are not represented on the shared metadata, the node can be active in the network 
 (to send and receive messages), however, reaching out to the node requires knowledge of the IP and Port of the listener service used. 
 
 ## Associating IPs and Ports to the AnyLog services  
 
-Each service is assigned with one or two addresses which represent the external IP address (Private ) and an Internal IP address (Public).
-The external IP address or Public IP address is the IP address of the router interface that is connected to the Internet (or 
-if there is no router, it is the IP that identifies the machine on the Internet.  
-Internal Addresses are also called Private addresses as they are restricted to private networks.  
+Each service is assigned with one or two addresses which represent the External IP address (Public) and an Internal IP address (Private).  
+The External IP address is the IP address that identifies the machine on the Internet or, with a local network, 
+the IP of the router that is connected to the Internet.
+Internal Addresses represent the IPs on a local (private) networks.  
 
 Here is a diagram to illustrate the IP address allocation on a typical business network:
 
