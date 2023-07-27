@@ -41,7 +41,40 @@ Here is a diagram to illustrate the IP address allocation on a typical business 
 
 ![network setup](../imgs/network.png)
 
+The following command and output reflects how the listener services are configured for a node connected to the Internet and
+a node on the local network (behind the router) of the diagram above:
 
+### Node connected to the Internet:
+
+Node 1 in the diagram is connected to the internet and only offers a single IP which is used to message the node.
+The command get connections for Node 1 will show the following:
+
+```
+get connections
+
+Type       External Address    Internal Address    Bind Address        
+---------|-------------------|-------------------|-------------------|
+TCP      |198.74.50.131:32348|198.74.50.131:32348|198.74.50.131:32348|
+REST     |198.74.50.131:32349|198.74.50.131:32349|0.0.0.0:32349      |
+Messaging|198.74.50.131:32350|198.74.50.131:32350|0.0.0.0:32350      |
+```
+This node is reached as follows:
+* From a peer node using 198.74.50.131:32348 (leveraging the TCP service of the node).
+* From an external app via REST using 198.74.50.131:32349  (leveraging the REST service of the node).
+* From a process that Publish data using 198.74.50.131:32350  (leveraging the messaging service of the node).  
+  
+The Bind address   
+### Node on a local network:
+
+```
+get connections
+
+Type      External Address        Internal Address    Bind Address        
+---------|----------------------|-------------------|----------------|
+TCP      |109.155.209.167:32348|198.168.1.4:32348|198.74.50.131:32348|
+REST     |109.155.209.167:32349|198.168.1.4:32349|0.0.0.0:32349      |
+Messaging|109.155.209.167:32350|198.168.1.4:32350|0.0.0.0:32350      |
+```
 
 ## The TCP listener - Communicating with peer nodes
 
