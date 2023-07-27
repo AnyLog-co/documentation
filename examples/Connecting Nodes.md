@@ -46,7 +46,7 @@ a node on the local network (behind the router) of the diagram above:
 
 ### Node connected to the Internet:
 
-Node 1 in the diagram is connected to the internet and only offers a single IP which is used to message the node.
+Node 1 in the diagram is connected to the internet and only offers a single IP to service incoming messages (198.74.50.131).  
 The command get connections for Node 1 will show the following:
 
 ```
@@ -55,26 +55,38 @@ get connections
 Type       External Address    Internal Address    Bind Address        
 ---------|-------------------|-------------------|-------------------|
 TCP      |198.74.50.131:32348|198.74.50.131:32348|198.74.50.131:32348|
-REST     |198.74.50.131:32349|198.74.50.131:32349|0.0.0.0:32349      |
-Messaging|198.74.50.131:32350|198.74.50.131:32350|0.0.0.0:32350      |
+REST     |198.74.50.131:32349|198.74.50.131:32349|198.74.50.131:32349      |
+Messaging|198.74.50.131:32350|198.74.50.131:32350|198.74.50.131:32350      |
 ```
 This node is reached as follows:
 * From a peer node using 198.74.50.131:32348 (leveraging the TCP service of the node).
 * From an external app via REST using 198.74.50.131:32349  (leveraging the REST service of the node).
 * From a process that Publish data using 198.74.50.131:32350  (leveraging the messaging service of the node).  
   
-The Bind address   
 ### Node on a local network:
+
+Node 2 in the diagram is on the local network and offers 2 IPs to service incoming messages:
+
+The command get connections for Node 1 will show the following:
 
 ```
 get connections
 
 Type      External Address        Internal Address    Bind Address        
 ---------|----------------------|-------------------|----------------|
-TCP      |109.155.209.167:32348|198.168.1.4:32348|198.74.50.131:32348|
-REST     |109.155.209.167:32349|198.168.1.4:32349|0.0.0.0:32349      |
-Messaging|109.155.209.167:32350|198.168.1.4:32350|0.0.0.0:32350      |
+TCP      |109.155.209.167:32348|198.168.1.4:32348   |0.0.0.0:32348   |
+REST     |109.155.209.167:32349|198.168.1.4:32349   |0.0.0.0:32349   |
+Messaging|109.155.209.167:32350|198.168.1.4:32350   |0.0.0.0:32350   |
 ```
+The node will listen to ports 32348, 32349 and 32350  from both IPs (109.155.209.167 and 198.168.1.4).
+If a node on the local network (like node 3) is messaging node 2, it will use the Internal Address (198.168.1.4) whereas a 
+node outside the local network (like node 1 of a node on a different local network) will use the External Address (109.155.209.167).
+
+**Note: this type of configuration requires Port Forwarding such that the router can assign the incoming messages to the proper node on the local network.  
+See [Port Forwarding](https://portforward.com/) for details.  
+
+ 
+
 
 ## The TCP listener - Communicating with peer nodes
 
