@@ -11,15 +11,13 @@ This document reviews how the listeners processes are configured. The table belo
 | REST | A listener on a dedicated IP and Port to receive messages from 3rd parties applications.  | [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) |
 | Messaging | A listener on a dedicated IP and Port to data published on the AnyLog node as a message broker.  | [MQTT](https://mqtt.org/)  |
 
-Messages transferred to the TCP or REST listeners can be of the following:
-* A query to retrieve data
-* An AnyLog command to retrieve a state in a node. For example, to retrieve disk space availability or to find how much data was ingested in the last hour.  
-* An AnyLog command to enable a process. For example, to enable a process that monitors data values received from a sensor.
-* An AnyLog command that retrieves or updates policies on the shared metadata layer. For example, a command retrieving the list of participating nodes that manage a sensor data.
+The listeners services are enabled by the configuration params. If enabled, the services would except and reply to the following:
+* Query for data
+* AnyLog commands
+* Data streams (to host on the node or to transfer to a destination node)  
 
-The Messaging listener is enabled such that data can be published on an AnyLog Node like an MQTT broker (and assigned to a topic).
-
-***Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***
+***Note 1: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.***.  
+For example, on AWS associate the ports assigned to each servoce to an Inbound Rule allowing incomming messages on that port. 
 
 ## The TCP listener - Communicating with peer nodes
 
