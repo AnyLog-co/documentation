@@ -36,21 +36,19 @@ If the listeners services are enabled on a node, but are not represented on the 
 ## Associating IPs and Ports to the AnyLog services  
 
 Each service is assigned with one or two addresses which represent the External IP address (Public) and an Internal IP address (Private).  
-The External IP address is the IP address that identifies the machine on the Internet or, with a local network, 
+The External IP address is the IP address that identifies the machine on the Internet, or, with a local network, 
 the IP of the router that is connected to the Internet.
-Internal Addresses represent the IPs on a local (private) networks.  
+Internal Addresses represent the IPs on local (private) networks.  
 
-Here is a diagram to illustrate the IP address allocation on a typical business network:
+The diagram below illustrates the IP address allocation on a typical business network:
 
 ![network setup](../imgs/network.png)
 
-The following command and output reflects how the listener services are configured for a node connected to the Internet and
-a node on the local network (behind the router) of the diagram above:
 
 ### Node connected to the Internet:
 
 Node 1 in the diagram is connected to the internet and only offers a single IP to service incoming messages (198.74.50.131).  
-The command get connections for Node 1 will show the following:
+The command **get connections** for Node 1 will show the following:
 
 ```
 get connections
@@ -58,19 +56,19 @@ get connections
 Type       External Address    Internal Address    Bind Address        
 ---------|-------------------|-------------------|-------------------|
 TCP      |198.74.50.131:32348|198.74.50.131:32348|198.74.50.131:32348|
-REST     |198.74.50.131:32349|198.74.50.131:32349|198.74.50.131:32349      |
-Messaging|198.74.50.131:32350|198.74.50.131:32350|198.74.50.131:32350      |
+REST     |198.74.50.131:32349|198.74.50.131:32349|198.74.50.131:32349|
+Messaging|198.74.50.131:32350|198.74.50.131:32350|198.74.50.131:32350|
 ```
-This node is reached as follows:
-* From a peer node using 198.74.50.131:32348 (leveraging the TCP service of the node).
-* From an external app via REST using 198.74.50.131:32349  (leveraging the REST service of the node).
-* From a process that Publish data using 198.74.50.131:32350  (leveraging the messaging service of the node).  
+This node is reachable as follows:
+* From a peer node using 198.74.50.131:**32348** (the TCP service of the node using port 32348).
+* From an external app via REST using 198.74.50.131:**32349**  (the REST service of the node using port 32349).
+* From a process that Publish data using 198.74.50.131:**32350**  (the messaging service of the node using port 32350).  
   
 ### Node on a local network
 
 Node 2 in the diagram is on the local network and offers 2 IPs to service incoming messages:
 
-The command get connections for Node 1 will show the following:
+The command get connections for Node 2 will show the following:
 
 ```
 get connections
@@ -81,11 +79,11 @@ TCP      |109.155.209.167:32348|198.168.1.4:32348   |0.0.0.0:32348   |
 REST     |109.155.209.167:32349|198.168.1.4:32349   |0.0.0.0:32349   |
 Messaging|109.155.209.167:32350|198.168.1.4:32350   |0.0.0.0:32350   |
 ```
-The node will listen to ports 32348, 32349 and 32350  from both IPs (109.155.209.167 and 198.168.1.4).
+The node will listen to ports 32348, 32349 and 32350  from both IPs (109.155.209.167 and 198.168.1.4).  
 If a node on the local network (like node 3) is messaging node 2, it will use the Internal Address (198.168.1.4) whereas a 
-node outside the local network (like node 1 of a node on a different local network) will use the External Address (109.155.209.167).
+node outside the local network (like node 1) will use the External Address (109.155.209.167).
 
-**Note: this type of configuration requires Port Forwarding such that the router can assign the incoming messages to the proper node on the local network.**  
+**Note: this type of configuration requires Port Forwarding such that the router can assign the incoming messages to the proper node on the local network.** 
 See [Port Forwarding](https://portforward.com/) for details.  
 
 ### The Bind Address 
@@ -96,17 +94,17 @@ The **bind address** is a boolean parameter in the configuration for each type o
 
 ### Reaching to nodes using the CLIs
 
-* Use the TCP service when a command is issued from the node CLI.  
+* A command is issued from the node CLI will be using the TCP service.
 Examples:
-    * The command **get status** issued from Node 1 CLI to node 2 will be as follows:
+    * The command **get status** issued from the CLI of Node 1 to node 2 will be as follows:
         ```
         run client 109.155.209.167:**32348** get status 
         ```
-    * The command **get status** issued from Node 3 CLI to node 2 will be as follows:
+    * The command **get status** issued from the CLI of Node 3 to node 2 will be as follows:
         ```
         run client 198.168.1.4:**32348** get status 
         ```
-* Use the REST service when a command is issued from a 3rd party application.
+* A command issued from a 3rd party application will be using the REST service.
 Examples:
     * Grafana connected to Node 1 will use 198.74.50.131:**32349**
     * The AnyLog Remote CLI connected to Node 1 will use 198.74.50.131:**32349**   
@@ -117,9 +115,11 @@ Deployments of large scale networks are simpler with an overlay network. The Ove
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
+ 
 We use [nebula](../deployments/Networking%20&%20Security/nebula.md) as an Overlay Network Example.    
 
-## The TCP listener - Communicating with peer nodes
+## Configuring the listeners
+### The TCP listener - Communicating with peer nodes
 
 When a node operates, it communicates with peer members of the network.    
 When a node starts, it is configured to listen on a socket associated with an Internet Protocol (IP) address and a port number.  
@@ -130,12 +130,12 @@ A local or internal IP address is used inside a private network to locate the co
 If both are used, then a router needs to be configured with [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding) to redirect messages from the external IP and port 
 to the local IP and port.
 
-## The REST listener - Communicating with 3rd parties applications
+### The REST listener - Communicating with 3rd parties applications
 
 When a node operates, it can be configured to communicate with 3rd party applications using [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).  
 The command that initiate the listener is: ```run rest server``` and is detailed [here](../background%20processes.md#rest-requests).  
 
-## The Messaging Listener - Publishing data on an AnyLog node
+### The Messaging Listener - Publishing data on an AnyLog node
 
 A node can be configured such that applications can treat the node as a [message broker](https://en.wikipedia.org/wiki/Message_broker) allowing data to be published (and assigned to a topic) on the node.  
 Details of the configurations are available [here](../message%20broker.md#using-a-message-broker).
@@ -156,7 +156,7 @@ To exit the AnyLog CLI without terminating the node:
 Note: Messages (i.e. AnyLog commands) that are prefixed with ***run client*** followed by one or more destinations, will be delivered to the destination
 nodes using the AnyLog protocol. The TCP listener configured on each destination node will receive the message, and if needed, a reply message is returned.  
 To validate active and properly configured listener, a node can send a message to its local IP and Port by setting the local IP and Port as the destination (note that
-local processing of an AnyLog command issued on the CLI without the ***run client*** prefix is processed locally, however, without the listener process).  
+local processing of an AnyLog command issued on the CLI without the ***run client*** prefix is processed locally).  
 Destinations can be provided as IP:Port or as a list containing multiple IP:Port within parenthesis separated by a comma.
 
 Note: To message a node on the local network, use the local IP and Port. To message a node which is outside the local network, use the external IP and Port.
@@ -170,7 +170,6 @@ Example reply:
 <pre>
 'test-machine@24.23.250.144:7848 running'
 </pre>
-Note that the IP and Port can specify a different member node, which will return a reply if active. 
 
 ***View the connection information***
 <pre>
