@@ -28,7 +28,7 @@ like physical location. With these policies, a process can identify all the node
 The information contained in each policy is determined by the users such that it represents the information relevant to the specific use cases they support.
 
 **Note: The IPs used by a node needs to be static as they are published on the shared metadata. Without static
-IPs, the nodes IP addressees can become inconsistent with their published IPs (hosted in the shared metadata)**  
+IPs, the nodes IP addressees can become inconsistent with their published IPs (hosted in the shared metadata).**  
 
 If the listeners services are enabled on a node, but are not represented on the shared metadata, the node can be active in the network 
 (to send and receive messages), however, reaching out to the node requires knowledge of the IP and Port of the listener service used. 
@@ -44,6 +44,10 @@ The diagram below illustrates the IP address allocation on a typical business ne
 
 ![network setup](../imgs/network.png)
 
+An external or public IP is used across the entire Internet to locate computer systems and devices.  
+A local or internal IP address is used inside a private network to locate the computers and devices connected to it.  
+If both are used, then a router needs to be configured with [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding) to redirect messages from the external IP and port 
+to the local IP and port.
 
 ### Node connected to the Internet:
 
@@ -68,7 +72,7 @@ This node is reachable as follows:
 
 Node 2 in the diagram is on the local network and offers 2 IPs to service incoming messages:
 
-The command get connections for Node 2 will show the following:
+The command **get connections** for Node 2 will show the following:
 
 ```
 get connections
@@ -94,17 +98,17 @@ The **bind address** is a boolean parameter in the configuration for each type o
 
 ### Reaching to nodes using the CLIs
 
-* A command is issued from the node CLI will be using the TCP service.
+* A command issued from the node CLI will be using the TCP service.  
 Examples:
     * The command **get status** issued from the CLI of Node 1 to node 2 will be as follows:
         ```
-        run client 109.155.209.167:**32348** get status 
+        run client 109.155.209.167:32348 get status 
         ```
     * The command **get status** issued from the CLI of Node 3 to node 2 will be as follows:
         ```
-        run client 198.168.1.4:**32348** get status 
+        run client 198.168.1.4:32348 get status 
         ```
-* A command issued from a 3rd party application will be using the REST service.
+* A command issued from a 3rd party application will be using the REST service.  
 Examples:
     * Grafana connected to Node 1 will use 198.74.50.131:**32349**
     * The AnyLog Remote CLI connected to Node 1 will use 198.74.50.131:**32349**   
@@ -125,10 +129,6 @@ When a node operates, it communicates with peer members of the network.
 When a node starts, it is configured to listen on a socket associated with an Internet Protocol (IP) address and a port number.  
 The command that initiate the listener is: ```run tcp server``` and is detailed [here](../background%20processes.md#the-tcp-server-process).    
 The IP and Port specified can be of a local network or of an external/public network or both:  
-An external or public IP is used across the entire Internet to locate computer systems and devices.  
-A local or internal IP address is used inside a private network to locate the computers and devices connected to it.  
-If both are used, then a router needs to be configured with [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding) to redirect messages from the external IP and port 
-to the local IP and port.
 
 ### The REST listener - Communicating with 3rd parties applications
 
