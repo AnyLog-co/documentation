@@ -1,4 +1,5 @@
 import argparse
+import re
 import requests
 
 LOCATIONS = {
