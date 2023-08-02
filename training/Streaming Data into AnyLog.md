@@ -1,8 +1,8 @@
 # Streaming Data into AnyLog 
 
-The following provides configuration examples to add data to nodes in the network. 
+This document provides configuration examples to data sources. 
 
-**Other Documents**
+**Other Related Documents**
 * [Basic Data Generator](Data%20Generator.md) - How to utilize the generic data generator
 * [Examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) - Examples of sending data into AnyLog 
 * [Understanding Message Broker](../background%20processes.md#message-broker)
@@ -12,14 +12,11 @@ The following provides configuration examples to add data to nodes in the networ
 * [Using Edgex](../using%20edgex.md)
 
 ## Third-Party MQTT Client 
-AnyLog can accept data from third-party message brokers - such as CloudMQTT, Eclipse Mosquitto and Kafka. 
+AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 
 
-In order to process data from message broker, users specify the mapping between the source data and the table's 
+In order to process data from a message broker, users specify the mapping between the source data and the table's 
 schema. The following example demonstrates subscription to a third-party broker (_CloudMQTT_). 
-
-The data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in "test".  
-
-* MQTT Call 
+ 
 ```anylog
 broker = driver.cloudmqtt.com
 port = 18785
@@ -35,8 +32,9 @@ db_name=test
     column.value.float="bring [readings][][value]"
 )>	
 ```
+Note: In the training, the data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in dbms "test".  
 
-* Sample Source Data 
+Sample Source Data: 
 ```json
 {
   "apiVersion":"v2",
@@ -134,7 +132,7 @@ docker run -d --name data-generator --network host \
 --rm anylogco/sample-data-generator:latest &
 ```
 
-To publish data via REST _POST_, make the following changes: 
+To publish data via REST _POST_ (using the simulator), make the following changes: 
 1. In the `run message client`, change _broker_ from **local** to _rest_ and _port_ from **anylog_broker_port** to **anylog_rest_port**
 2. In the sending data, change _DATA_TYPE_ from **mqtt** to **post** and update the _CONN_ info, to the REST connection information
 
