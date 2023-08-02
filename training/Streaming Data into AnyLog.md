@@ -1,6 +1,6 @@
 # Streaming Data into AnyLog 
 
-This document provides configuration examples to data sources. 
+This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
 * [Basic Data Generator](Data%20Generator.md) - How to utilize the generic data generator
