@@ -43,12 +43,10 @@ curl -X POST 127.0.0.1:32149 \
   -d '[{"timestamp": "2023-07-16T22:01:35.531498Z", "value": 0.34818421211998407, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:36.036593Z", "value": 43.03195182458719, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:36.540271Z", "value": 2.7131214097633305, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:37.044805Z", "value": 60.165240674173546, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:37.549647Z", "value": 73.94402366511534, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:38.053755Z", "value": 51.633021025712786, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:38.558580Z", "value": 41.02022743564046, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:39.062021Z", "value": 52.22346461071091, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:39.567019Z", "value": 63.078391396022596, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:40.071045Z", "value": 52.09570154599, "db_name": "test", "table": "sample_data"}]'
 ```
 
-### Python 
+## Python 
 **Prerequisite**:
 1) Python3 
-2) Install the following Python libraries**
-
-**libraries**
+2) Install the folowing Python libraries: 
 * argparse 
 * datetime 
 * json 
@@ -58,7 +56,7 @@ curl -X POST 127.0.0.1:32149 \
 * requests 
 * paho-mqtt (required only if [paho-mqtt](https://pypi.org/project/paho-mqtt/) is used)
 
-
+### Example
 [Python example](data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
 ```shell
 # View help information
@@ -86,14 +84,19 @@ anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_d
 ## Enabling the MQTT Client Service
 When adding data using _POST_ or _MQTT_ publish, enable an AnyLog service that considers the published data.
 
-The command `run mqtt client` enables the service on the AnyLog node. This service allows to map the published data to a target structure.  
+The command `run mqtt client` enables the service on the AnyLog node. This service allows to map the published data to 
+a target structure and is required when data is transferred to the node with REST POST or Published.  
 
+The example below enables the MQTT Client service whereas:
+1. If data is transferred using REST, the IP and Port are using the REST address of the service enabled on the node.
+2. If data is Published, the IP and Port are using the Message Broker address of the service enabled on the node.
+3. DBMS - provides the mapping to retrieve the database name from the source data.
+4. Table - provides the mapping to retrieve the table name from the source data.
+5. column.timestamp.timestamp - provides the mapping to retrieve the timestamp value from the source data.
+6. column.value.float - provides the mapping to retrieve the value from the source data.
 
-In order to send the data in this demo using either _POST_ or _MQTT_, make sure a `run mqtt client` is running on the 
-accepting node. Examples are as follows: 
-* `run mqtt client` for POST
 ```anylog
-<run mqtt client where broker = !ip and port = !anylog_rest_port and user-agent=anylog and log=false and topic=(
+<run mqtt client where broker = !ip and port = !port and user-agent=anylog and log=false and topic=(
     name=sample-data and
     dbms="bring [db_name]" and
     table="bring [table]" and
@@ -101,26 +104,6 @@ accepting node. Examples are as follows:
     column.value.float="bring [value]"
 )>
 ```
-
-* `run mqtt client` for MQTT (broker) 
-```anylog 
-<run mqtt client where broker = !ip and port = !anylog_broker_port and log=false and topic=(
-    name=sample-data and 
-    dbms="bring [db_name]" and 
-    table="bring [table]" and 
-    column.timestamp.timestamp="bring [timestamp]" and 
-    column.value.float="bring [value]"
-)>
-```
-
-## Sending Blockchain Policies
-In addition to sending data via REST (_POST_), AnyLog provides the ability to include [blockchain policies](../../metadata%20management.md#policies). 
-such as a location of a given sensor (as show in the example).  
-
-```shell
-anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/blockchain_add_policy_simple.py ${REST_CONN} ${LEDGER_CONN}
-```
-
 
 
 
