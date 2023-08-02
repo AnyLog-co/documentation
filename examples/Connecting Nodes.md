@@ -3,7 +3,8 @@
 Nodes in the network are connected to peer nodes in the network and to 3rd parties applications.   
 A connected node means that the node is configured with one or more listeners waiting for messages from peer nodes and applications. When messages are received, 
 the node processes the requests included in the messages (assuming proper permissions), and if needed, sends a reply message.  
-This document reviews how the listeners processes are configured. The table below summarizes the listeners types:
+This document reviews how the listeners processes are configured.   
+The table below summarizes the listeners types:
   
 | Listener Name  | Functionality | Protocol/API |
 | ------------- | ---- | --- |
@@ -16,8 +17,8 @@ The listeners services are enabled by the configuration params. If enabled, the 
 * AnyLog commands
 * Data streams (to host on the node or to transfer to a destination node)  
 
-**Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.**.  
-For example, on AWS associate the ports assigned to each service to an Inbound Rule allowing incoming messages on that port.
+**Note: The IP and Ports used by the active listeners on each node needs to be open - remove firewall restrictions as needed.**  
+For example, on AWS associate the ports assigned to each service to an **Inbound Rule** allowing incoming messages on that port.
 
 ## Publishing the IPs and Ports
 
@@ -64,9 +65,9 @@ REST     |198.74.50.131:32349|198.74.50.131:32349|198.74.50.131:32349|
 Messaging|198.74.50.131:32350|198.74.50.131:32350|198.74.50.131:32350|
 ```
 This node is reachable as follows:
-* From a peer node using 198.74.50.131:**32348** (the TCP service of the node using port 32348).
-* From an external app via REST using 198.74.50.131:**32349**  (the REST service of the node using port 32349).
-* From a process that Publish data using 198.74.50.131:**32350**  (the messaging service of the node using port 32350).  
+* From a peer node using 198.74.50.131:**32348** (the TCP service of the node is using port 32348).
+* From an external app via REST using 198.74.50.131:**32349**  (the REST service of the node is using port 32349).
+* From a process that Publish data using 198.74.50.131:**32350**  (the messaging service of the node is using port 32350).  
   
 ### Node on a local network
 
@@ -94,7 +95,7 @@ See [Port Forwarding](https://portforward.com/) for details.
 The **bind address** is a boolean parameter in the configuration for each type of service (TCP, REST, Messaging).  
 * If the bind is set to **true** - incoming messages are allowed using a single IP and Port (specified in the Bind Address column).
 * If the bind is set to **false** - incoming messages are allowed using any IP reachable to the machine 
-(External and Internal) with the specified port (The Bind Address column will show 0.0.0.0 followed by the allowed port).
+(External and Internal) with the specified port (the Bind Address column will show 0.0.0.0 followed by the allowed port).
 
 ### Reaching to nodes using the CLIs
 
@@ -110,8 +111,8 @@ Examples:
         ```
 * A command issued from a 3rd party application will be using the REST service.  
 Examples:
-    * Grafana connected to Node 1 will use 198.74.50.131:**32349**
-    * The AnyLog Remote CLI connected to Node 1 will use 198.74.50.131:**32349**   
+    * Grafana connection to Node 1 will use 198.74.50.131:**32349**
+    * The AnyLog Remote CLI connection to Node 1 will use 198.74.50.131:**32349**   
     
 ### Using an Overlay network
 
@@ -127,13 +128,13 @@ We use [nebula](../deployments/Networking%20&%20Security/nebula.md) as an Overla
 
 When a node operates, it communicates with peer members of the network.    
 When a node starts, it is configured to listen on a socket associated with an Internet Protocol (IP) address and a port number.  
-The command that initiate the listener is: ```run tcp server``` and is detailed [here](../background%20processes.md#the-tcp-server-process).    
-The IP and Port specified can be of a local network or of an external/public network or both:  
+The command that initiate the listener service is: ```run tcp server``` and is detailed [here](../background%20processes.md#the-tcp-server-process).    
+The IP and Port specified can be of a local network or of an external/public network or both.  
 
 ### The REST listener - Communicating with 3rd parties applications
 
 When a node operates, it can be configured to communicate with 3rd party applications using [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).  
-The command that initiate the listener is: ```run rest server``` and is detailed [here](../background%20processes.md#rest-requests).  
+The command that initiate the listener service is: ```run rest server``` and is detailed [here](../background%20processes.md#rest-requests).  
 
 ### The Messaging Listener - Publishing data on an AnyLog node
 
