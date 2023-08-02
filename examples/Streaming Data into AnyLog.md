@@ -9,7 +9,7 @@ Detailed information is available in the following documents:
 * [Message Broker](../message%20broker.md) - Declaring AnyLog as a message broker.
 
 ## Sending Data
-[send_data.py](Sample Python Scripts/data/send_data.py) is a python script to send timestamp & value data (see the example below) into AnyLog node via _REST_ (_POST_ or _PUT_)  or _MQTT_ publish. 
+[send_data.py](Sample%20Python%20Scripts/data/send_data.py) is a python script to send timestamp & value data (see the example below) into AnyLog node via _REST_ (_POST_ or _PUT_)  or _MQTT_ publish. 
 ```json
 {
   "timestamp": "2023-07-16T22:15:16.275270Z", 
@@ -57,7 +57,7 @@ curl -X POST 127.0.0.1:32149 \
     * [paho-mqtt](https://pypi.org/project/paho-mqtt/) (required only if _MQTT_ publish is used)
 
 ### Example
-[Python example](Sample Python Scripts/data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
+[Python example](Sample%20Python%20Scripts/data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
 * View help information
 ```shell
 anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_data.py --help 
