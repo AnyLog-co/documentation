@@ -38,7 +38,7 @@ def __validate_conn_pattern(conns:str)->str:
         if success returns conn
     """
     pattern1 = re.compile(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$')
-    pattern2 = re.compile(r'^\w+:\w+@\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$')
+    # pattern2 = re.compile(r'^\w+:\w+@\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$')
 
     for conn in conns.split(","):
         if not pattern1.match(conn) and not pattern2.match(conn):
