@@ -1,22 +1,23 @@
 # Streaming Data into AnyLog 
 
-The following provides insight into sending data into AnyLog via a message broker. 
+The following provides configuration examples to add data to nodes in the network. 
 
 **Other Documents**
 * [Basic Data Generator](Data%20Generator.md) - How to utilize the generic data generator
 * [Examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) - Examples of sending data into AnyLog 
 * [Understanding Message Broker](../background%20processes.md#message-broker)
 * [Message Broker](../message%20broker.md)
+* [Using REST](../using%20rest.md)
+* [Using Kafka](../using%20kafka.md)
+* [Using Edgex](../using%20edgex.md)
 
 ## Third-Party MQTT Client 
 AnyLog can accept data from third-party message brokers - such as CloudMQTT, Eclipse Mosquitto and Kafka. 
 
-In order to process data from message broker, users must specify the mapping between the data coming in, and how it'll 
-be stored on Operator node(s). The following example accepts data from an active CloudMQTT broker with data coming in via
-an EdgeX process. 
+In order to process data from message broker, users specify the mapping between the source data and the table's 
+schema. The following example demonstrates subscription to a third-party broker (_CloudMQTT_). 
 
-The data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in physical 
-database "test".  
+The data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in "test".  
 
 * MQTT Call 
 ```anylog
@@ -35,7 +36,7 @@ db_name=test
 )>	
 ```
 
-* Sample Data coming in 
+* Sample Source Data 
 ```json
 {
   "apiVersion":"v2",
@@ -59,12 +60,13 @@ db_name=test
 ```
 
 ## Local MQTT broker 
-An AnyLog node can act as its own message broker. In order for that to happen 2 services should be running: 
-1. A local running message broker on the AnyLog node 
-2. A MQTT client against the local broker for data to be mapped with
+An AnyLog node can be configured with a local message broker service.
+   
+The needed configuration:  
+1. Configure a message broker service on the AnyLog node 
+2. Configure an MQTT client process against the local broker with the proper data mapping of the source data.
 
-### Connecting to a Local Message Broker
-**How to Connect to a local Message Broker**: 
+### Enable the Message Broker Service
 ```anylog
 anylog_broker_port=32150 
 broker_bind = false 
@@ -80,17 +82,8 @@ broker_threads = 3
 ```
 
 **Validate local Message Broker is running**: 
-* Prior to running `run message broker`, notice that only _TCP_ and _REST_ connections are configured 
-```anylog
-AL anylog-operator_1 > get connections
 
-Type      External Address    Internal Address    Bind Address        
----------|-------------------|-------------------|-------------------|
-TCP      |198.74.50.131:32148|198.74.50.131:32148|198.74.50.131:32148|
-REST     |198.74.50.131:32149|198.74.50.131:32149|0.0.0.0:32149      |
-Messaging|Not declared       |Not declared       |Not declared       |
-```
-* After running `run message broker`, notice that not only are _TCP_ and _REST_ connections are configured, but also _Messaging_ is configured.  
+After enabling the message broker service, the connection information is validated as follows:  
 ```anylog
 AL anylog-operator_1 > get connections
 
@@ -102,10 +95,11 @@ Messaging|198.74.50.131:32150|198.74.50.131:32150|0.0.0.0:32150      |
 ```
 
 ### Publishing to Message Broker 
-Like with a third-party broker, the AnyLog node needs a `mqtt client` associated with the local message broker. The example 
-below uses the same data as our [data generator](Data%20Generator.md), but uses a local MQTT client to send data into the 
-AnyLog node, rather than REST _PUT_. 
-
+Like with a third-party broker, subscribe to the local broker using the `run message client` command.
+ 
+The example below uses the same data as the [data generator](Data%20Generator.md), but with a the message client subscribed to
+a local message broker. 
+ 
 **Set Message Client**
 ```anylog
 broker = local
@@ -124,11 +118,7 @@ topic_name = ping-percentage
 )> 
 ```
 
-**Sending Data** - make sure to update **CONN** to your MQTT IP + Port 
-* `-d` – detach mode
-* `--name` – docker running container name 
-* `--network` (host) – how the container communicates with the internet 
-* `--rm` – remove container when finished 
+**Sending Data** (using the data simulator) - make sure to update **CONN** to your MQTT IP + Port 
  
 ```shell
 docker run -d --name data-generator --network host \
@@ -144,12 +134,12 @@ docker run -d --name data-generator --network host \
 --rm anylogco/sample-data-generator:latest &
 ```
 
-If you'd like to publish data via REST _PUSH_ instead of local message broker, please make the following changes: 
+To publish data via REST _POST_, make the following changes: 
 1. In the `run message client`, change _broker_ from **local** to _rest_ and _port_ from **anylog_broker_port** to **anylog_rest_port**
 2. In the sending data, change _DATA_TYPE_ from **mqtt** to **post** and update the _CONN_ info, to the REST connection information
 
 ## Support Functionality  
-* `get streaming` - shows the number of rows that came into the node (through REST or MQTT)  per table 
+* `get streaming` - Monitor the number of rows added via REST or MQTT per table
 ```anylog
 AL anylog-operator_1 > get streaming 
 
@@ -175,7 +165,7 @@ test.lightout1           |     0|    0| |       29|       29|     1|        25| 
 test.percentagecpu_sensor|     0|    0| |       47|       47|    15|        15|         10|   46.29|        60|        3|00:00:09    |
 ```
 
-* `get msg client` – shows the number of rows that come into the node through a specific topic, either via MQTT or REST POST. 
+* `get msg client` – Monitor the number of rows added by topic 
 ```anylog
 AL anylog-operator_1 > get msg client 
 
@@ -195,7 +185,7 @@ Connection:   Connected
                      |   |    |                |value      |int        |['[readings][][value]']|False   |        |
 ```
 
-* `get local broker` - Statistics on the local broker (if the data is published to the IP and Port of the node's message broker server).
+* `get local broker` - Monitor the calls to the local broker
 ```anylog
 AL anylog-operator_1 +> get local broker
 
