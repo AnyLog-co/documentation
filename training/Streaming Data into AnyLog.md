@@ -125,10 +125,10 @@ topic_name = ping-percentage
 ```
 
 **Sending Data** - make sure to update **CONN** to your MQTT IP + Port 
-* -d – detach mode
-* --name – docker running container name 
-* --network (host) – connect container to the internet 
-* --rm – remove container when finished 
+* `-d` – detach mode
+* `--name` – docker running container name 
+* `--network` (host) – how the container communicates with the internet 
+* `--rm` – remove container when finished 
  
 ```shell
 docker run -d --name data-generator --network host \
