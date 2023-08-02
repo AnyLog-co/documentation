@@ -85,7 +85,8 @@ anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_d
 When adding data using _POST_ or _MQTT_ publish, enable an AnyLog service that considers the published data.
 
 The command `run mqtt client` enables the service on the AnyLog node. This service allows to map the published data to 
-a target structure and is required when data is transferred to the node with REST POST or Published.  
+a target structure and is required when data is transferred to the node with REST POST or data is published on the node 
+(as if the ANyLog node is a message broker).  
 
 The example below enables the MQTT Client service whereas:
 1. If data is transferred using REST, the IP and Port are using the REST address of the service enabled on the node.
