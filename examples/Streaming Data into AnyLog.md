@@ -73,7 +73,7 @@ options:
   --topic TOPIC         POST or MQTT topic
 ```
 
-* Sample Call using POST command
+* Sample call using POST command
 ```shell
 anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_data.py 127.0.0.1:32149 \
   --db-name test \
