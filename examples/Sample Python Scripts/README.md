@@ -4,34 +4,17 @@ Data can be sent into an AnyLog node via different forms of communication, such 
 Our [adding data](../../adding%20data.md) document provides an explanation for how to add data into an AnyLog node.
 
 ## Sending Data
-### MQTT Client
-As the [adding data](../../adding%20data.md#using-a-post-command) explains, a `run mqtt client` command is required when
-sending data in any form but _REST PUT_ command. This is because all other formats (such as _REST POST_, _MQTT_, _Kafka_,
-etc.) require data to be mapped to a destination format. For the sample data used both the cURL and [python](data/send_data.py)
-examples, the `run mqtt client` is as follows: 
+[send_data.py](data/send_data.py) is a python script to send data into AnyLog via _REST_ (_POST_ or _PUT_)  or via _MQTT_. 
 
-```anylog
-# Sending data via POST 
-<run mqtt client where broker = !ip and port = !anylog_rest_port and user-agent=anylog and log=false and topic=(
-    name=sample-data and 
-    dbms="bring [db_name]" and 
-    table="bring [table]" and 
-    column.timestamp.timestamp="bring [timestamp]" and 
-    column.value.float="bring [value]"
-)>
-
-# Sending data via MQTT 
-<run mqtt client where broker = !ip and port = !anylog_broker_port and log=false and topic=(
-    name=sample-data and 
-    dbms="bring [db_name]" and 
-    table="bring [table]" and 
-    column.timestamp.timestamp="bring [timestamp]" and 
-    column.value.float="bring [value]"
-)>
+The example code sends timestamp / value data, other examples can be found in our [generic data generator](../../training/Data%20Generator.md).
+```json
+{
+  "timestamp": "2023-07-16T22:15:16.275270Z", 
+  "value": 26.760648537459296
+}
 ```
 
-
-### Examples
+## cURL 
 * Send data via REST _PUT_ using cURL
 ```shell
 curl -X PUT 127.0.0.1:32149 \
@@ -53,8 +36,23 @@ curl -X POST 127.0.0.1:32149 \
   -d '[{"timestamp": "2023-07-16T22:01:35.531498Z", "value": 0.34818421211998407, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:36.036593Z", "value": 43.03195182458719, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:36.540271Z", "value": 2.7131214097633305, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:37.044805Z", "value": 60.165240674173546, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:37.549647Z", "value": 73.94402366511534, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:38.053755Z", "value": 51.633021025712786, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:38.558580Z", "value": 41.02022743564046, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:39.062021Z", "value": 52.22346461071091, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:39.567019Z", "value": 63.078391396022596, "db_name": "test", "table": "sample_data"}, {"timestamp": "2023-07-16T22:01:40.071045Z", "value": 52.09570154599, "db_name": "test", "table": "sample_data"}]'
 ```
 
-* [Python example](data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
+### Python 
+**Requirements**
+* argparse 
+* datetime 
+* json 
+* importlib 
+* random 
+* re 
+* requests 
+* paho-mqtt
+
+Except for [paho-mqtt](https://pypi.org/project/paho-mqtt/), which is required only for sending data via MQTT, all 
+requirements should be pre-installed with python3. 
+
+[Python example](data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
 ```shell
+# View help information
 anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_data.py --help 
 positional arguments:
   conn                  Either REST or MQTT connection information
@@ -68,6 +66,7 @@ options:
                         which insert process type to utilize
   --topic TOPIC         POST or MQTT topic
 
+# Sample Call using POST command 
 anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_data.py 127.0.0.1:32149 \
   --db-name test \
   --total-rows 100 \
@@ -76,15 +75,41 @@ anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_d
 ```
 
 
+**Disclaimer**: When adding data using either _POST_ or _MQTT_, AnyLog requires an active `run mqtt client` process to be
+running on the accepting node; in order to map the data coming in with the correct database / table. 
+
+[Adding data](../../adding%20data.md#using-a-post-command) provides more details regarding the command and how it use. 
+
+In order to send the data in this demo using either _POST_ or _MQTT_, make sure a `run mqtt client` is running on the 
+accepting node. Examples are as follows: 
+* `run mqtt client` for POST
+```anylog
+<run mqtt client where broker = !ip and port = !anylog_rest_port and user-agent=anylog and log=false and topic=(
+    name=sample-data and
+    dbms="bring [db_name]" and
+    table="bring [table]" and
+    column.timestamp.timestamp="bring [timestamp]" and
+    column.value.float="bring [value]"
+)>
+```
+
+* `run mqtt client` for MQTT (broker) 
+```anylog 
+<run mqtt client where broker = !ip and port = !anylog_broker_port and log=false and topic=(
+    name=sample-data and 
+    dbms="bring [db_name]" and 
+    table="bring [table]" and 
+    column.timestamp.timestamp="bring [timestamp]" and 
+    column.value.float="bring [value]"
+)>
+```
+
 ## Sending Blockchain Policies
-The [blockchain](blockchain) directory provides examples to send into AnyLog. Unlike data, in which you declare 
-only the Operator REST connection information, for blockchain policies to be declared via REST, users need to also specify 
-the correlating master (or ledger) TCP connection information. Farther details regarding blockchain can be found: 
-* [Blockchain Configuratio](../../blockchain%20configuration.md)
-* [Blockchain Commands](../../blockchain%20commands.md)
+In addition to sending data via REST (_POST_), AnyLog provides the ability to include [blockchain policies](../../metadata%20management.md#policies). 
+such as a location of a given sensor (as show in the example).  
 
 ```shell
-anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/blockchain/blockchain_add_policy_simple.py ${REST_CONN} ${LEDGER_CONN}
+anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/blockchain_add_policy_simple.py ${REST_CONN} ${LEDGER_CONN}
 ```
 
 

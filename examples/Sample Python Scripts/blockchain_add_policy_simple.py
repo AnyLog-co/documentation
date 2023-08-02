@@ -1,4 +1,11 @@
+"""
+The following provides an example of adding policies to the (AnyLog) blockchain via REST.
+The new policies are associated with data coming in via one of the sample data generator options; where we're showing
+both the data coming in, and where that data is coming from.
+"""
+
 import argparse
+import json
 import re
 import requests
 
