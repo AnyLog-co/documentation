@@ -5,8 +5,8 @@ Data can be sent into an AnyLog node via different forms of communication, such 
 Detailed information is available in the following documents:
 * [Adding data](../../adding%20data.md) - an overview on how data is added to AnyLog nodes.
 * [Mapping Data](../../mapping%20data%20to%20tables.md) - Mapping source data to a target format.
-* [REST Calls](../../using%20rest.md) - Using REST calls to deliver data to an AnyLog Node  
-* [Message Broker](../../message%20broker.md) - Declaring AnyLog as a message broker 
+* [REST Calls](../../using%20rest.md) - Using REST calls to deliver data to an AnyLog Node.  
+* [Message Broker](../../message%20broker.md) - Declaring AnyLog as a message broker.
 
 ## Sending Data
 [send_data.py](data/send_data.py) is a python script to send timestamp & value data (see the example below) into AnyLog node via _REST_ (_POST_ or _PUT_)  or _MQTT_. 
@@ -31,8 +31,9 @@ curl -X PUT 127.0.0.1:32149 \
   -d '[{"timestamp": "2023-07-16T22:15:16.275270Z", "value": 26.760648537459296}, {"timestamp": "2023-07-16T22:15:16.779954Z", "value": 99.07731050408944}, {"timestamp": "2023-07-16T22:15:17.282287Z", "value": 99.28450509848346}, {"timestamp": "2023-07-16T22:15:17.786096Z", "value": 80.41027907076285}, {"timestamp": "2023-07-16T22:15:18.290123Z", "value": 32.27699391736516}, {"timestamp": "2023-07-16T22:15:18.794041Z", "value": 44.586993538065876}, {"timestamp": "2023-07-16T22:15:19.296349Z", "value": 97.49718100436169}, {"timestamp": "2023-07-16T22:15:19.796996Z", "value": 14.902283983713582}, {"timestamp": "2023-07-16T22:15:20.299712Z", "value": 85.88924631087048}, {"timestamp": "2023-07-16T22:15:20.803080Z", "value": 15.671337182852396}]'
 ```
 
-* The following cURL request sends data via REST _POST_ into AnyLog node. When using REST _POST_, the accepting AnyLog 
-node needs to enable the MQTT client service. An example can be found under [Enabling the MQTT Client Service](#enabling-the-mqtt-client-service).
+* The following cURL request sends data via REST _POST_ into AnyLog node.   
+  When using REST _POST_, the accepting AnyLog node needs to enable the MQTT client service.  
+  An example can be found under [Enabling the MQTT Client Service](#enabling-the-mqtt-client-service).
 ```shell
 curl -X POST 127.0.0.1:32149 \
   -H "command: data" \
@@ -43,7 +44,11 @@ curl -X POST 127.0.0.1:32149 \
 ```
 
 ### Python 
-**Requirements**
+**Prerequisite**:
+1) Python3 
+2) Install the following Python libraries**
+
+**libraries**
 * argparse 
 * datetime 
 * json 
@@ -51,10 +56,8 @@ curl -X POST 127.0.0.1:32149 \
 * random 
 * re 
 * requests 
-* paho-mqtt
+* paho-mqtt (required only if [paho-mqtt](https://pypi.org/project/paho-mqtt/) is used)
 
-Except for [paho-mqtt](https://pypi.org/project/paho-mqtt/), which is required only for sending data via MQTT, all 
-requirements should be pre-installed with python3. 
 
 [Python example](data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
 ```shell
