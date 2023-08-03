@@ -29,9 +29,11 @@ distributed, and can be kept offline when not being used to add hosts to a Nebul
 
 ## Preparing 
 For simplicity, the following will demonstrate deploying a _Nebula_ overlay network between an AnyLog _Master_, _Operator_
-and _Query_ node respectively on linux machines 
+and _Query_ node respectively on linux machines.
 
-**On Master Node**: 
+The following steps are all done on the same machine, unless stated otherwise
+
+## Prepare Keys per Nebula Node
 0. Make a directory called Nebula - which will be used for all necessary files, unless stated otherwise 
 ```shell
 cd $HOME
@@ -80,6 +82,7 @@ mkdir lighthouse
 # move certificate and key into lighthouse directory 
 mv lighthouse1.crt lighthouse/host.crt 
 mv lighthouse1.key lighthouse/host.key
+cp ca.crt lighthouse/
 
 << comment 
 root@anylog-master:~/nebula# ls -l lighthouse/
@@ -97,8 +100,9 @@ mkdir host1
 ./nebula-cert sign -name "host1" -ip "192.168.100.5/24"
 
 # move certificate and key into host1 directory 
-mv host1.crt lighthouse/host.crt 
-mv host1.key lighthouse/host.key
+mv host1.crt host1/host.crt 
+mv host1.key host1/host.key
+cp ca.crt host1/
 
 <<COMMENT 
 root@anylog-master:~/nebula# ls -l host1/
@@ -118,6 +122,7 @@ mkdir host2
 # move certificate and key into host2 directory 
 mv host2.crt host2/host.crt 
 mv host2.key host2/host.key
+cp ca.crt host2/
 
 <<COMMENT 
 root@anylog-master:~/nebula# ls -l host2/
@@ -127,5 +132,61 @@ total 8
 << COMMENT 
  ```
 
+## Preparing Configuration 
+1. Download _Nebula_ [configuration file](https://github.com/slackhq/nebula/blob/master/examples/config.yml)
+```shell
+cd $HOME/nebula 
+wget https://raw.githubusercontent.com/slackhq/nebula/master/examples/config.yml
+```
 
+2. Copy configuration file into _lighthouse_ directory
+```shell
+cp config.yml lighthouse/
+```
 
+3. In the configuration file ($HOME/nebula/lighthouse/config.yml) make the following changes:
+
+a) Comment out the information for **static_host_map**
+
+b) Enable the lighthouse to be **true**
+
+c) Enable _TCP_ communication in **inbound** configuration for firewall   
+
+```yaml
+...
+
+# The static host map defines a set of hosts with fixed IP addresses on the internet (or any network).
+# A host can have multiple fixed IP addresses defined here, and nebula will try each when establishing a tunnel.
+# The syntax is:
+#   "{nebula ip}": ["{routable ip/dns name}:{routable port}"]
+# Example, if your lighthouse has the nebula IP of 192.168.100.1 and has the real ip address of 100.64.22.11 and runs on port 4242:
+static_host_map:
+  #  "192.168.100.1": ["100.64.22.11:4242"]
+...
+
+lighthouse:
+  # am_lighthouse is used to enable lighthouse functionality for a node. This should ONLY be true on nodes
+  # you have configured to be lighthouses in your network
+  am_lighthouse: true
+
+... 
+
+firewall:
+  ... 
+  outbound:
+    # Allow all outbound traffic from this node
+    - port: any
+      proto: any
+      host: any
+
+  inbound:
+    # Allow icmp between any nebula hosts
+    - port: any
+      proto: icmp
+      host: any
+
+    # Allow icmp between any nebula hosts
+    - port: any
+      proto: tcp
+      host: any
+```
