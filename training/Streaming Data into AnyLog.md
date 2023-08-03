@@ -3,7 +3,7 @@
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* [Examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) 
+* [Python and cURL examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) 
 * [Configuring the Message Broker service](../background%20processes.md#message-broker)
 * [Message Broker](../message%20broker.md)
 * [Using REST](../using%20rest.md)
