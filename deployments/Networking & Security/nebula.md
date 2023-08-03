@@ -11,6 +11,7 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 * [GitHub](https://github.com/slackhq/nebula)
 * [Documentation](https://nebula.defined.net/docs)
 * [Defines' Website](https://www.defined.net/)
+* [Configuring Overlay with AnyLog](Configuring%20Overlay%20with%20AnyLog.md)
 
 ## Terminology 
 _Nebula's_ overlay network requires a minimum of 2 nodes: _lighthouse_ and regular nodes, nicknamed _host_, as well as 
