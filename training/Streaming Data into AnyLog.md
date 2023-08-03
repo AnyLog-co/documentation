@@ -3,13 +3,13 @@
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* [Basic Data Generator](Data%20Generator.md) - How to utilize the generic data generator
-* [Examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) - Examples of sending data into AnyLog 
-* [Understanding Message Broker](../background%20processes.md#message-broker)
+* [Examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) 
+* [Configuring the Message Broker service](../background%20processes.md#message-broker)
 * [Message Broker](../message%20broker.md)
 * [Using REST](../using%20rest.md)
 * [Using Kafka](../using%20kafka.md)
 * [Using Edgex](../using%20edgex.md)
+* [The Data Generator](Data%20Generator.md)
 
 ## Third-Party MQTT Client 
 AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 
