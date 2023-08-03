@@ -9,8 +9,8 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 
 **Documentation**
 * [GitHub](https://github.com/slackhq/nebula)
-* [Documentation](https://nebula.defined.net/docs/d
-* [Defines Website](https://www.defined.net/)
+* [Documentation](https://nebula.defined.net/docs)
+* [Defines' Website](https://www.defined.net/)
 
 ## Terminology 
 _Nebula's_ overlay network requires a minimum of 2 nodes: _lighthouse_ and regular nodes, nicknamed _host_, as well as 
@@ -33,13 +33,13 @@ For simplicity, the following will demonstrate deploying a _Nebula_ overlay netw
 The following steps are all done on the same machine, unless stated otherwise
 
 ## Prepare Keys per Nebula Node
-0. Make a directory called Nebula - which will be used for all necessary files, unless stated otherwise 
+0. Make a directory called `nebula` - which will be used for all necessary files, unless stated otherwise 
 ```shell
 cd $HOME
 mkdir nebula 
 cd $HOME/nebula
 ```
-1. Downloading Nebula & Untar Nebula software - the example below uses the latest version of Nebula, other version can be found [here](https://github.com/slackhq/nebula/releases)   
+1. Downloading Nebula & Untar the Nebula software - the example below uses the latest version of Nebula (for Linux amd64), other version can be found [here](https://github.com/slackhq/nebula/releases)   
 ```shell
 wget https://github.com/slackhq/nebula/releases/download/v1.7.2/nebula-linux-amd64.tar.gz
 tar -xzvf nebula-linux-amd64.tar.gz 
@@ -65,7 +65,7 @@ total 39368
 -rwxr-xr-x 1 1001  123 18811965 Jun  1 15:21 nebula
 -rwxr-xr-x 1 1001  123  7664823 Jun  1 15:21 nebula-cert
 -rw-r--r-- 1 root root 13820988 Jun  1 15:29 nebula-linux-amd64.tar.gz
-<< 
+<< COMMENT
 ```
 
 3. Creating Keys and Certificates - we are creating a Nebula network that uses the subnet `192.168.100.x/24`, and will assign 
@@ -83,7 +83,7 @@ mv lighthouse1.crt lighthouse/host.crt
 mv lighthouse1.key lighthouse/host.key
 cp ca.crt lighthouse/
 
-<< comment 
+<< COMMENT 
 root@anylog-master:~/nebula# ls -l lighthouse/
 total 8
 -rw------- 1 root root 304 Aug  3 01:43 host.crt
@@ -130,6 +130,8 @@ a) Under the _static_host_map_ section, ensure there are no associating IP addre
 b) Under the _lighthouse_ section, set `am_lighthouse` to **true**, and ensure there are no IP addresses under `hosts` parameter.
 
 c) Under the _firewall_ section, make sure the overlay is able to communicate over _TCP_
+
+**Subset of configuration file with relevant changes for _lighthouse_**:
 
 ```yaml
 ...
@@ -198,6 +200,7 @@ b) Under the _lighthouse_ section, set `am_lighthouse` to **false**, and ensure 
 
 c) Under the _firewall_ section, make sure the overlay is able to communicate over _TCP_
 
+**Subset of configuration file with relevant changes for _host_**:
 ```yaml
 ...
 
