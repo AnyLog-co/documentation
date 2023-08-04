@@ -13,7 +13,57 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 * [Installing Nebula](nebula.md)
 
 
-## Deploy AnyLog with OverLay 
+## Deploy AnyLog with OverLay
+
+### Manual Deployment 
+When manually starting a network service (TCP, REST or Message Broker), replace the internal IP address value with the 
+overlay IP address. Notice, without overlay IP the `internal_ip` parameter is set to the local/internal IP address, 
+where with overlay IP the `internal_ip` paramter is set to `overlay_ip`. 
+
+* Without Overlay IP
+```anylog
+# Disabled TCP bind 
+anylog_server_port = 32048 
+tcp_bind = false 
+threads = 3 
+<run tcp server where
+    external_ip=!external_ip and external_port=!anylog_server_port and
+    internal_ip=!ip and internal_port=!anylog_server_port and
+    bind=!tcp_bind and threads=!tcp_threads>
+
+# Enabled TCP bind 
+anylog_server_port = 32048 
+tcp_bind = true 
+threads = 3 
+<run tcp server where
+    external_ip=!ip and external_port=!anylog_server_port and
+    internal_ip=!ip and internal_port=!anylog_server_port and
+    bind=!tcp_bind and threads=!tcp_threads>
+```
+
+* With Overlay IP
+```anylog
+# Disabled TCP bind 
+anylog_server_port = 32048 
+tcp_bind = false 
+threads = 3 
+<run tcp server where
+    external_ip=!external_ip and external_port=!anylog_server_port and
+    internal_ip=!overlay_ip and internal_port=!anylog_server_port and
+    bind=!tcp_bind and threads=!tcp_threads>
+
+# Enabled TCP bind 
+anylog_server_port = 32048 
+tcp_bind = true 
+threads = 3 
+<run tcp server where
+    external_ip=!overlay_ip and external_port=!anylog_server_port and
+    internal_ip=!overlay_ip and internal_port=!anylog_server_port and
+    bind=!tcp_bind and threads=!tcp_threads>
+```
+
+
+### Configuration based deployment
 When deploying with an overlay network, the AnyLog [deployment scripts](https://github.com/AnyLog-co/deployment-scripts) 
 will use the overlay IP address instead of the internal (or local) IP address auto generated on the node. 
 
