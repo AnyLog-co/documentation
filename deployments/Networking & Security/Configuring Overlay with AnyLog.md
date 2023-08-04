@@ -11,7 +11,7 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 * [Installing Nebula](nebula.md)
 * [Network Connectivity Services](../../background%20processes.md#the-tcp-server-process)
 * [Network Configuration](../../network%20configuration.md) - general information regarding how an AnyLog nodes communicates with other members in the network
-* [Network Processing](../../network%20processing.md) - 
+* [Network Processing](../../network%20processing.md) - Processing both data and metadata across the network 
 
 ## Deploy AnyLog with OverLay
 
