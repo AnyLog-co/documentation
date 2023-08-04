@@ -7,8 +7,6 @@ _Nebula_ is a mutually authenticated peer-to-peer overlay network, based on [Noi
 This means that Nebula's overlay network uses certificates to assert a node's IP address, name, and membership within user-defined groups. 
 
 **Documents**
-* [GitHub](https://github.com/slackhq/nebula)
-* [Documentation](https://nebula.defined.net/docs)
 * [Defines' Website](https://www.defined.net/)
 * [Installing Nebula](nebula.md)
 
