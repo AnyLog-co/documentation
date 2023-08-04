@@ -13,7 +13,7 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 * [Network Configuration](../../network%20configuration.md) - general information regarding how an AnyLog nodes communicates with other members in the network
 * [Network Processing](../../network%20processing.md) - Processing both data and metadata across the network 
 
-## Deploy AnyLog with OverLay
+## Deploy AnyLog with Overlay
 
 ### Manual Deployment 
 When manually starting a network service (TCP, REST or Message Broker), replace the internal IP address value with the 
