@@ -17,8 +17,8 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 
 ### Manual Deployment 
 When manually starting a network service (TCP, REST or Message Broker), replace the internal IP address value with the 
-overlay IP address. Notice, without overlay IP the `internal_ip` parameter is set to the local/internal IP address, 
-where with overlay IP the `internal_ip` paramter is set to `overlay_ip`. 
+overlay IP address. Notice, without overlay IP the `internal_ip` parameter is set to the local/internal (**!ip**) IP 
+address, where with overlay IP the `internal_ip` parameter is set to **!overlay_ip**. 
 
 * Without Overlay IP
 ```anylog
