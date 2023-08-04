@@ -195,7 +195,8 @@ cp $HOME/nebula/lighthouse/config.yml $HOME/nebula/host1/
 
 5. In the _host1_ configuration file ($HOME/nebula/host1/config.yml) make the following changes:
 
-a) Under the _static_host_map_ section, ensure the lighthouse is defined in terms of **both** external IP and overlay IP address 
+a) Under the _static_host_map_ section, ensure the lighthouse is defined in terms of **both** external IP (for AWS, the 
+external IP is the _Elastic IP_) and overlay IP address 
 
 b) Under the _lighthouse_ section, set `am_lighthouse` to **false**, and ensure lighthouse (overlay IP) is added to the `hosts` parameter.
 
