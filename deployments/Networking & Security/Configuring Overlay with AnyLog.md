@@ -9,7 +9,9 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 **Documents**
 * [Defines' Website](https://www.defined.net/)
 * [Installing Nebula](nebula.md)
-
+* [Network Connectivity Services](../../background%20processes.md#the-tcp-server-process)
+* [Network Configuration](../../network%20configuration.md) - general information regarding how an AnyLog nodes communicates with other members in the network
+* [Network Processing](../../network%20processing.md) - 
 
 ## Deploy AnyLog with OverLay
 
@@ -17,6 +19,7 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 When manually starting a network service (TCP, REST or Message Broker), replace the internal IP address value with the 
 overlay IP address. Notice, without overlay IP the `internal_ip` parameter is set to the local/internal (**!ip**) IP 
 address, where with overlay IP the `internal_ip` parameter is set to **!overlay_ip**. 
+
 
 * Without Overlay IP
 ```anylog
