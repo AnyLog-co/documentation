@@ -51,7 +51,20 @@ test network
 Users can validate the configuration of the TCP listeners by issuing the **test network** command on the AnyLog CLI. 
 The command retrieves the list of participating AnyLog nodes and their addresses from the metadata and communicates 
 with each node. The output is the list of the member nodes and their addresses. The **V** sighn indicates a reachable node. 
-If the **V** sign is omitted, the node is not configured properly or is not reachable.    
+If the **V** sign is omitted, the node is not configured properly or is not reachable.   
+
+Example command and output:
+<pre>
+AL > test network
+
+Address             Node Type Node Name       Status
+-------------------|---------|---------------|------|
+67.180.101.158:7848|operator |operator1      |   V  |
+67.180.101.158:3048|operator |second_operator|   V  |
+
+</pre>
+
+**V** in the status column idicates that the node is reachable with the Address detailed. 
 
 ### Test Network Metadata Version
 
