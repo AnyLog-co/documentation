@@ -63,6 +63,9 @@ Usage:
 run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
 
+Users can validate the configuration of the TCP listeners in all the nodes in the network by issuing the **test network** command. 
+See details in the [Test Network](../test%20commands.md#test-network) page.
+
 Options:  
 
 | Option        | Explanation   | Default Value |

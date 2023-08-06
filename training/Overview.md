@@ -43,7 +43,8 @@ network using the AnyLog CLI without pre-packaged configuration.
  
  Prior to the guided tour, it is recommended to review the following documents:
  * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
- * [Session I](Session%20I%20(Demo).md) - This document lists the basic commands that are demonstrated in this training session. 
+ * [Session I](Session%20I%20(Demo).md) - This document lists the basic commands that are demonstrated in this training session.
+ * [Connecting Nodes] (../examples/Connected%20Nodes.md) - Configuring nodes to participate in the network and communicate with 3rd parties apps.
  
 The presentation in this session reviews the following:
 
