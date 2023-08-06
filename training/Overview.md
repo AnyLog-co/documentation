@@ -43,9 +43,10 @@ network using the AnyLog CLI without pre-packaged configuration.
  
  Prior to the guided tour, it is recommended to review the following documents:
  * [Getting Started](../getting%20started.md) - An overview of the network, nodes types, deployment, metadata and commands.
- * [Session I](Session%20I%20(Demo).md) - This document lists the basic commands that are demonstrated in this training session.
+ * [The Local Dictionary](../dictionary.md) - Using the nodes's local dictionary. 
  * [Connecting Nodes](../examples/Connecting%20Nodes.md) - Configuring nodes to participate in the network and communicate with 3rd parties apps.
- 
+ * [Session I](Session%20I%20(Demo).md) - This document lists the basic commands that are demonstrated in this training session.
+  
 The presentation in this session reviews the following:
 
     1. The nodes types
@@ -65,7 +66,9 @@ The presentation in this session reviews the following:
 ### Session II - Deployment of the test network
    This session guides users to deploy and configure a test network on their machines.  
    
-   Prior to the guided tour, it is recommended to review the the [Session II (Deployment) document](Session%20II%20(Deployment).md).  
+   Prior to the guided tour, it is recommended to review the the following documents:
+   * [Connectors to Data Sources](Connectors%20to%20Data%20Sources.md) - A detailed guide to connecting the training data sources.
+   * [Session II (Deployment) document](Session%20II%20(Deployment).md) - A step by step deployment of the test network.  
         
    This session will allow users to do the following on their machines:
    
