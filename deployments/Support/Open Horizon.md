@@ -12,7 +12,7 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 * [Documentation](https://open-horizon.github.io/)
 
 
-## Preparing for Deployment
+## Preparing Node for using Open Horizon
 1. On the node Update / Upgrade Node 
 ```shell
 for cmd in update upgrade ; sudo apt-get -y ${cmd} ; done 
@@ -50,4 +50,8 @@ hzn eventlog list -f
 "2022-06-13 21:27:13:   Workload service containers for IBM/ibm.helloworld are up and running."
 <<COMMENT
 ```
+
+At the end of the process the Open Horizon should show a new active node 
+![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
+
 
