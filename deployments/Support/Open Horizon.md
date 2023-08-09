@@ -51,6 +51,14 @@ hzn eventlog list -f
 <<COMMENT
 ```
 
+6. Docker is already installed via HZN, however needs permissions to use not as root
+```shell
+USER=`whoami` 
+sudo groupadd docker 
+sudo usermod -aG docker ${USER} 
+newgrp docker
+```
+
 At the end of the process the Open Horizon should show a new active node 
 ![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
 
