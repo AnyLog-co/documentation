@@ -12,7 +12,7 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 * [Documentation](https://open-horizon.github.io/)
 
 
-## Preparing Node for using Open Horizon
+## Connecting a Machine to Open Horizon
 1. On the node Update / Upgrade Node 
 ```shell
 for cmd in update upgrade ; sudo apt-get -y ${cmd} ; done 
@@ -24,16 +24,14 @@ for cmd in update upgrade ; sudo apt-get -y ${cmd} ; done
 ```shell
 export HZN_ORG_ID=<COMPANY_NAME> 
 
-
-export HZN_EXCHANGE_USER_AUTH="iamapikey:<HZN_EXCHANGE_USER_AUTH>"
-
+export HZN_EXCHANGE_USER_AUTH="iamapikey:<API_KEY>"
 
 export HZN_EXCHANGE_URL=<HZN_EXCHANGE_URL>
 
-export HZN_FSS_CSSURL=<HZN_EXCHANGE_URL>
+export HZN_FSS_CSSURL=<HZN_FSS_CSSURL>
 ```
 
-4. Install _agent_ and provide admin privlages 
+4. Install _agent_ and provide admin privileges 
 ```shell
 curl -u "${HZN_ORG_ID}/${HZN_EXCHANGE_USER_AUTH}" -k -o agent-install.sh ${HZN_FSS_CSSURL}/api/v1/objects/IBM/agent_files/agent-install.sh/data
 
@@ -59,7 +57,9 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
-At the end of the process the Open Horizon should show a new active node 
+At the end of the process the Open Horizon should show a new active node ]
+
 ![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
 
+## Deploy AnyLog via Open Horizon 
 
