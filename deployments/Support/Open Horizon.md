@@ -13,9 +13,16 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 
 
 ## Associate a Machine to Open Horizon
+The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
+following:  
+* Create an API key 
+* Install Horizon CLI (`hzn`)
+* Install Docker 
+* Validate Open Horizon is working by deploying an _Hello World_ package
+
 1. On the node Update / Upgrade Node 
 ```shell
-for cmd in update upgrade ; sudo apt-get -y ${cmd} ; done 
+for cmd in update upgrade ; do sudo apt-get -y ${cmd} ; done 
 ```
 
 2. [Create API Key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key)
@@ -57,6 +64,10 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
+7. (Optional) re-execute update process 
+```shell
+for cmd in update upgrade ; do sudo apt-get -y ${cmd} ; done 
+```
 At the end of the process the Open Horizon should show a new active node 
 
 ![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
@@ -92,6 +103,7 @@ POLICY_BASED_NETWORKING=true
 CONFIG_POLICY_NAME=openhorizon-network-config-policy
 ANYLOG_SERVER_PORT=32148
 ANYLOG_REST_PORT=32149
+# for AWS, the TCP binding should be set to False  
 TCP_BIND=true
 TCP_THREADS=6
 REST_BIND=false
@@ -154,3 +166,72 @@ MONITOR_NODE_COMPANY=<YOUR_COMPANY_NAME>
 5. Publish Service 
 
 ![AnyLog node as a service on Open Horizon](../../imgs/OpenHorizon_published_service.png)
+
+6. Create pattern for the generated service - use default values  
+
+## Deploy AnyLog node via Open Horizon
+1. Unregister Node - this will reset the node from scratch 
+```shell
+hzn unregister -f
+```
+
+2. Download `privileged_node_policy.json` 
+```shell
+cd $HOME/
+wget https://raw.githubusercontent.com/open-horizon/anax/master/cli/samples/privileged_node_policy.json
+```
+
+**File Content**: 
+```json
+{
+  "properties": [
+    {
+      "name": "openhorizon.allowPrivileged",
+      "value": true
+    }
+  ],
+  "constraints": [],
+  "deployment": {
+    "properties": [],
+    "constraints": []
+  },
+  "management": {
+    "properties": [],
+    "constraints": []
+  }
+}
+```
+
+
+3. Start Node 
+```shell
+hzn register --pattern anylog-node --policy privileged_node_policy.json
+```
+
+4. Show output as node is being deployed
+ ```shell
+watch hzn agreement list
+```
+
+**Sample Output** - running node via _Open Horizon_
+```json
+[
+  {
+    "name": "anylog-node_anylog-node_anylog_amd64 merged with anylog-node_anylog-node_anylog_amd64",
+    "current_agreement_id": "21f6ca1a48d9fd65d9777104ba97a71e27552a833103ec5b12c43d1c3bbf987c",
+    "consumer_id": "IBM/agbot",
+    "agreement_creation_time": "2023-08-10 01:52:52 +0000 UTC",
+    "agreement_accepted_time": "2023-08-10 01:53:02 +0000 UTC",
+    "agreement_finalized_time": "2023-08-10 01:53:02 +0000 UTC",
+    "agreement_execution_start_time": "2023-08-10 01:53:04 +0000 UTC",
+    "agreement_data_received_time": "",
+    "agreement_protocol": "Basic",
+    "workload_to_run": {
+      "url": "anylog-node",
+      "org": "anylog",
+      "version": "1.0",
+      "arch": "amd64"
+    }
+  }
+]
+```
