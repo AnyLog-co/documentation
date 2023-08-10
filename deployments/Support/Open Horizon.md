@@ -6,17 +6,16 @@ computing nodes and devices without requiring on-premise administrators.
 
 Open Horizon can be used to easily manage and deploy AnyLog node(s) through their interface.   
 
-* [Platform Website](https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/edge)
-* [IBM](https://developer.ibm.com/components/open-horizon/)
-* [Linux Foundation](https://www.lfedge.org/projects/openhorizon/)
-* [Documentation](https://open-horizon.github.io/)
+* [Open Horizon Website](https://www.lfedge.org/projects/openhorizon/)
+* [IBM Documentation for Open Horizon](https://developer.ibm.com/components/open-horizon/)
+* [Open Source Documentation](https://open-horizon.github.io/)
 
 
 ## Associate a Machine to Open Horizon
 The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
 following:  
-* Create an API key 
-* Install Horizon CLI (`hzn`)
+* [Create an API key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key) 
+* [Install Horizon CLI](https://www.ibm.com/docs/en/eam/4.1?topic=cli-installing-hzn) (`hzn`)
 * Install Docker 
 * Validate Open Horizon is working by deploying an _Hello World_ package
 
@@ -64,15 +63,11 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
-7. (Optional) re-execute update process 
-```shell
-for cmd in update upgrade ; do sudo apt-get -y ${cmd} ; done 
-```
 At the end of the process the Open Horizon should show a new active node 
 
 ![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
 
-## Declare AnyLog node on Open Horizon 
+## Create AnyLog node as a Service on Open Horizon 
 
 1. In the Edge Application Manager, goto _Services_ --> _Add service_ --> _Edge device_
 
@@ -167,7 +162,10 @@ MONITOR_NODE_COMPANY=<YOUR_COMPANY_NAME>
 
 ![AnyLog node as a service on Open Horizon](../../imgs/OpenHorizon_published_service.png)
 
-6. Create pattern for the generated service - use default values  
+6. Create pattern for the generated service - use default values
+
+![Sample Pattern](../../imgs/OpenHorizon_sample_pattern.png)
+
 
 ## Deploy AnyLog node via Open Horizon
 1. Unregister Node - this will reset the node from scratch 
@@ -175,13 +173,7 @@ MONITOR_NODE_COMPANY=<YOUR_COMPANY_NAME>
 hzn unregister -f
 ```
 
-2. Download `privileged_node_policy.json` 
-```shell
-cd $HOME/
-wget https://raw.githubusercontent.com/open-horizon/anax/master/cli/samples/privileged_node_policy.json
-```
-
-**File Content**: 
+2. In the `$HOME` directory, create `privileged_node_policy.json` with the content shown below
 ```json
 {
   "properties": [
@@ -201,7 +193,6 @@ wget https://raw.githubusercontent.com/open-horizon/anax/master/cli/samples/priv
   }
 }
 ```
-
 
 3. Start Node 
 ```shell
