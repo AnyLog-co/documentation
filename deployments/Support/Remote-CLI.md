@@ -12,7 +12,7 @@ cd $HOME/deployments/docker-compose/remote-cli/
 ```shell
 vim .env
 ```
-3. Deploy Grafana 
+3. Deploy Remote-CLI 
 ```shell
 docker-compose up -d
 ``` 
