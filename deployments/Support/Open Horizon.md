@@ -174,6 +174,8 @@ hzn unregister -f
 ```
 
 2. In the `$HOME` directory, create `privileged_node_policy.json` with the content shown below
+
+File is based on [privileged_node_policy.json](https://github.com/open-horizon/anax/blob/master/cli/samples/privileged_node_policy.json)
 ```json
 {
   "properties": [
