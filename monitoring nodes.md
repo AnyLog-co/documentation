@@ -369,7 +369,7 @@ get monitored [topic]
 ### Reset a monitored topic
 
 A node that updates a status associated to a monitored topic will be continuesly included in the output of
-the 'get monitored [topic]' command.  
+the **get monitored [topic]** command.  
 Users can reset the list of nodes assigned to a monitored topic using the following command:  
 
 ```anylog
