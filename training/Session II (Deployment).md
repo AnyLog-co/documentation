@@ -452,6 +452,7 @@ dest = blockchain get operator bring.ip_port
 ```shell
 run client (!dest) get streaming
 run client (!dest) get operator
+run client (!dest) get inserts
 ```
 
 * Here is an example of issuing a command to an Operator Node using cURL:  
