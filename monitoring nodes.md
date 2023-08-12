@@ -366,6 +366,15 @@ The following command retrieves monitored info, for each participating node, on 
 get monitored [topic]
 ```
 
+### Reset a monitored topic
+
+A node that updates a status associated to a monitored topic will be continuesly included in the output of
+the 'get monitored [topic]' command.  
+Users can reset the list of nodes assigned to a monitored topic using the following command:  
+
+```anylog
+reset monitored [topic]
+```
 
 ### Example, configuring a participating node
 
