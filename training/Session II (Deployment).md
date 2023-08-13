@@ -456,8 +456,8 @@ run client (!dest) get inserts
 ```
 
 ### Examples of commands issued to an Operator Node using cURL  
-Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get inserts```).  
-Note 2: Use the IP and the REST Port (32149 is the default) of the Operator to query.  
+Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get inserts```).    
+Note 2: A 3rd party app (like cURL) is communicating with the IP and Port of the REST service enabled on the Node.  
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
 curl -X GET 198.74.51.131:32149 -H "command: get inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
