@@ -456,7 +456,7 @@ run client (!dest) get inserts
 ```
 
 ### Examples of commands issued to an Operator Node using cURL  
-Note 1: These commands return statistics on data delivered to the node (```get streaming``) and data ingested to the local databases (```get inserts).  
+Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get inserts```).  
 Note 2: Use the IP and the REST Port (32149 is the default) of the Operator to query.  
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
@@ -480,7 +480,7 @@ get columns where dbms = test and table = ping_sensor
 get data nodes
 ```
 
-* Sample queries:
+### Sample data queries:
 Note: there is no need to specify the destination node (unless the user needs to force the query to particular nodes).
 
 Queries to table ping_sensor (data populated by the data generator):
