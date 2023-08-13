@@ -455,12 +455,16 @@ run client (!dest) get operator
 run client (!dest) get inserts
 ```
 
-* Here is an example of issuing a command to an Operator Node using cURL:  
-Note: Use the IP and the REST Port (32149 is the default) of the Operator to query.
+### Examples of commands issued to an Operator Node using cURL  
+Note 1: These commands return statistics on data delivered to the node (```get streaming``) and data ingested to the local databases (```get inserts).  
+Note 2: Use the IP and the REST Port (32149 is the default) of the Operator to query.  
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
+curl -X GET 198.74.51.131:32149 -H "command: get inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
 ```
 
+### Examples of commands issued to a Node to retrieve Metadata
+Note: Any member node can satisfy the command.
 * View the logical tables defined (in the entire network):
 ```shell
 get virtual tables
