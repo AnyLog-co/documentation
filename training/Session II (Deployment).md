@@ -279,7 +279,7 @@ View running containers:
 docker ps -a 
 ``` 
 
-##Attach to the process - allowing users to operate on the node CLI:
+## Attach to the process - allowing users to operate on the node CLI:
 
 1. Attach
 ```
