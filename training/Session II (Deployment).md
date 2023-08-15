@@ -369,7 +369,7 @@ operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
     Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
 
 ### Test nodes are accessible
-The command **test network** determines that all the nodes are recognized and accessible (the master node will communicate with each member node).
+The command **test network** determines that all the nodes are recognized and accessible (the Master node will communicate with each member node).
 ```
 AL anylog-master > test network
 
@@ -381,7 +381,6 @@ Address              Node Type Node Name         Status
 178.79.143.174:32148|operator |anylog-operator_2|  V   |
 ```
 Note that the ***V*** sign appears on the status column. Otherwise, the node was not accessible by the address provided (in the first column).    
-The output shows that all nodes are identified and accessible in the network.  
 
 ### Validate the cluster setup 
 In this training the Operator nodes are configured that each table can be managed on any Operator node or on both.  
@@ -397,7 +396,8 @@ anylog-operator_1|497425abfbda8696558a715879ab8e4d|
 anylog-operator_2|4c87fe80fada01e8260c83db82bf0a7c|
 ```
 Note that the cluster ID is different for each Operator. If the cluster ID is identical, then the configuration was not
-assigning a unique name to the CLUSTER_NAME variable in the ```anylog_configs.env``` file
+assigning a unique name to the CLUSTER_NAME variable in the ```anylog_configs.env``` file (for HA, users assign the same
+cluster to different Operator nodes. This setup is outside the scope of this training).
  
 
 # Populating Data
