@@ -356,19 +356,17 @@ on the CLI:
  Note that nodes register themselves as members of the network when they are connected to the network in the first time.
  Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
  when the node is not yet registered.
-```
-AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
+ ```
+ AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
 
-Policy   Name              Ip             External_ip    Port  Rest_port 
---------|-----------------|--------------|--------------|-----|---------|
-operator|anylog-operator_1| 198.74.50.131| 198.74.50.131|32148|    32149|
-query   |anylog-query     | 198.74.50.131| 198.74.50.131|32348|    32349|
-master  |anylog-master    | 198.74.50.131| 198.74.50.131|32048|    32049|
-operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
-
-AL anylog-master > 
-```
-Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
+ Policy   Name              Ip             External_ip    Port  Rest_port 
+ --------|-----------------|--------------|--------------|-----|---------|
+ operator|anylog-operator_1| 198.74.50.131| 198.74.50.131|32148|    32149|
+ query   |anylog-query     | 198.74.50.131| 198.74.50.131|32348|    32349|
+ master  |anylog-master    | 198.74.50.131| 198.74.50.131|32048|    32049|
+ operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
+ ```
+ Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
 
 * **test network** - to determine that all the nodes are recognized and accessible (the master node will communicate with each member node).
 ```
