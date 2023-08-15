@@ -385,7 +385,7 @@ Note that the ***V*** sign appears on the status column. Otherwise, the node was
 
 ### Validate the cluster setup 
 In this training the Operator nodes are configured that each table can be managed on any Operator node or on both.  
-Therefore each Operator was configured with a unique cluster name (CLUSTER_NAME in the ```anylog_configs.env``` file).
+Therefore each Operator was configured with a unique cluster name (CLUSTER_NAME in the ```anylog_configs.env``` file)
  which generated a a unique Cluster ID.
  
  ```
