@@ -352,10 +352,10 @@ The commands below validate that the nodes are configured correctly.
 When the network is running, attach to a node in the network (the example below is using the Master), and issue the following commands
 on the CLI:
 
-* View that all nodes are registered:  
- Note that nodes register themselves as members of the network when they are connected to the network in the first time.
- Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
- when the node is not yet registered.
+### View that all nodes are registered
+Note that nodes register themselves as members of the network when they are connected to the network in the first time.
+Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
+when the node is not yet registered.
 ```
 AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
 
@@ -368,7 +368,8 @@ operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
 ```
     Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
 
-* **test network** - to determine that all the nodes are recognized and accessible (the master node will communicate with each member node).
+### Test nodes are accessible
+The command **test network** determines that all the nodes are recognized and accessible (the master node will communicate with each member node).
 ```
 AL anylog-master > test network
 
@@ -382,7 +383,7 @@ Address              Node Type Node Name         Status
 Note that the ***V*** sign appears on the status column. Otherwise, the node was not accessible by the address provided (in the first column).    
 The output shows that all nodes are identified and accessible in the network.  
 
-* Validate the cluster setup 
+### Validate the cluster setup 
 In this training the Operator nodes are configured that each table can be managed on any Operator node or on both.  
 Therefore each Operator was configured with a unique cluster name (CLUSTER_NAME in the ```anylog_configs.env``` file).
  which generated a a unique Cluster ID.
