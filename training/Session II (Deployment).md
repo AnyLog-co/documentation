@@ -366,7 +366,8 @@ query   |anylog-query     | 198.74.50.131| 198.74.50.131|32348|    32349|
 master  |anylog-master    | 198.74.50.131| 198.74.50.131|32048|    32049|
 operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
 ```
-    Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
+
+Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
 
 ### Test nodes are accessible
 The command **test network** determines that all the nodes are recognized and accessible (the Master node will communicate with each member node).
