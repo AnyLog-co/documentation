@@ -348,15 +348,14 @@ AL anylog-master > run client 198.74.50.131:32148 get status
 ## Validating the setup of the nodes in the network
 In this training, some configuration params were left as default and some were updated by the user (by modifying the
 ```anylog_configs.env``` file or by updating the questionnaire).  
-The commands below validate that the nodes are configured correctly.
-When the network is running, Attach to a node in the network (the example below is using the Master), and issue the following commands
+The commands below validate that the nodes are configured correctly.  
+When the network is running, attach to a node in the network (the example below is using the Master), and issue the following commands
 on the CLI:
 
-* View that all nodes are registered:
-Note that nodes register themselves as members of the network when they are connected to the network in the first time.
-Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
-when the node is not yet registered.
-
+* View that all nodes are registered:  
+ Note that nodes register themselves as members of the network when they are connected to the network in the first time.
+ Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
+ when the node is not yet registered.
 ```
 AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
 
