@@ -336,9 +336,71 @@ docker-compose down -v --rmi all  # will do all three
 On each node (using the CLI) use the following commands:
 1) View the network services using the command ```get connections```
 2) View the background processes enabled using the command ```get processes```
-3) Test connectivity to nodes in the network using the command ```test network``` (V sign means active and accessible).
-4) Query the metadata ```blockchain get (master,operator,query) bring.table [*] [*][ip] [*][port]```
+3) Communicate with peer nodes. The basic command is **get status** (similar to **ping**) which is exemplified below (from the CLI of the master):
+```
+AL anylog-master > run client 198.74.50.131:32148 get status
+ 
+[From Node 198.74.50.131:32148]  
+     'anylog-operator_1@198.74.50.131:32148 running'
 
+```  
+
+## Validating the setup of the nodes in the network
+In this training, some configuration params were left as default and some were updated by the user (by modifying the
+```anylog_configs.env``` file or by updating the questionnaire).  
+The commands below validate that the nodes are configured correctly.
+When the network is running, Attach to a node in the network (the example below is using the Master), and issue the following commands
+on the CLI:
+
+* View that all nodes are registered:
+Note that nodes register themselves as members of the network when they are connected to the network in the first time.
+Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
+when the node is not yet registered.
+
+```
+AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
+
+Policy   Name              Ip             External_ip    Port  Rest_port 
+--------|-----------------|--------------|--------------|-----|---------|
+operator|anylog-operator_1| 198.74.50.131| 198.74.50.131|32148|    32149|
+query   |anylog-query     | 198.74.50.131| 198.74.50.131|32348|    32349|
+master  |anylog-master    | 198.74.50.131| 198.74.50.131|32048|    32049|
+operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
+
+AL anylog-master > 
+```
+Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
+
+* **test network** - to determine that all the nodes are recognized and accessible (the master node will communicate with each member node).
+```
+AL anylog-master > test network
+
+Address              Node Type Node Name         Status 
+--------------------|---------|-----------------|------|
+198.74.50.131:32148 |operator |anylog-operator_1|  V   |
+198.74.50.131:32348 |query    |anylog-query     |  V   |
+198.74.50.131:32048 |master   |anylog-master    |  V   |
+178.79.143.174:32148|operator |anylog-operator_2|  V   |
+```
+Note that the ***V*** sign appears on the status column. Otherwise, the node was not accessible by the address provided (in the first column).    
+The output shows that all nodes are identified and accessible in the network.  
+
+* Validate the cluster setup 
+In this training the Operator nodes are configured that each table can be managed on any Operator node or on both.  
+Therefore each Operator was configured with a unique cluster name (CLUSTER_NAME in the ```anylog_configs.env``` file).
+ which generated a a unique Cluster ID.
+ 
+ ```
+AL anylog-master > blockchain get operator bring.table [operator][name] [operator][cluster]
+
+Name              Cluster                          
+-----------------|--------------------------------|
+anylog-operator_1|497425abfbda8696558a715879ab8e4d|
+anylog-operator_2|4c87fe80fada01e8260c83db82bf0a7c|
+```
+Note that the cluster ID is different for each Operator. If the cluster ID is identical, then the configuration was not
+assigning a unique name to the CLUSTER_NAME variable in the ```anylog_configs.env``` file
+ 
 
 # Populating Data
 
