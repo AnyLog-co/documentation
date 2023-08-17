@@ -6,16 +6,19 @@ This document demonstrates a network setup of 3 nodes:
 * A Query Node - to issue queries to the network
 
 Note: 
-* Configuration is done on the AnyLog command line. To make the configuration persistent, place the configuration in a file and call the file on the AnyLog command line.  
-    Example: 
+* Configuration is done on the AnyLog command line.    
+  
+  To make the configuration persistent, place the configuration in a file and call the file on the AnyLog command line.  
+    Example:   
     The config file is ***operator.al***, and the call is as follows:
     <pre>
-    D:\AnyLog-Code\AnyLog-Network\source\cmd\user_cmd.py process !anylog_path/AnyLog-Network/demo/operator1.al
+    anylog.exe process !anylog_path/AnyLog-Network/demo/operator1.al
     </pre>
     Or, on the AnyLog CLI issue the following command:
     <pre>
     process !anylog_path/AnyLog-Network/demo/operator1.al
     </pre>
+
 * If AnyLog is installed without a package that creates the environment (like Docker), the default directories can be created using the command:
     <pre>
     create work directories
@@ -24,34 +27,64 @@ Note:
     <pre>
      set anylog home [path to AnyLog root]
     </pre>
+  
 * This document demonstrates the following:
 1. Bring 3 AnyLog Instances UP
 2. Configure each node
 3. Push data to the Operator
 4. Run queries from the Query node
+
 * The commands detailed in this doc include the commands to reset an existing setup to delete existing metadata and data files.
+
+## Frequently used commands to monitor settings:
+<pre>
+get dictionary         # Default values in the dictionary
+get dictionary _dir    # Directory setting
+get dictionary ip      # Default ip setting
+get connections        # Active listener services (for TCP, REST, and Broker services)
+</pre>
 
 ## Declaring multiple nodes on the same physical or virtual machine
 
-If the nodes are not isolated, associate a different path to each node.
+If the nodes are not isolated (i.e. not in containers and using the same machine), associate a different home path to each node.
 For example:
 <pre>
-set anylog home D:\Node
+set anylog home D:\Node1
 </pre>
 
 ## Configure the Master Node
 <pre>
 set authentication off    # Disable users authentication
-run tcp server !ip 2548   # The connection to the network nodes
-run rest server !ip 2549  # Enable REST calls
-connect dbms system_query where type = sqlite and memory = true  # Use SQLite as system dbms
 
- # use PostgreSQL to host the blockchain ledger
-connect dbms blockchain where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
-run blockchain sync where source = dbms and time = 30 seconds and dest = file # Copy the blockchain data to a file every 30 seconds
+# networking - if multiple nodes share the IP - use a unique port per node type 
+<run tcp server where
+    external_ip=!external_ip and external_port=32048 and
+    internal_ip=!ip and internal_port=32048 and
+    bind=false and threads=6>
+
+<run rest server where
+    external_ip=!external_ip and external_port=32049 and
+    internal_ip=!ip and internal_port=32049 and
+    bind=false and threads=6>
+
+# Use SQLite as system dbms - needed only if Master is configured to satisfy queries
+connect dbms system_query where type = sqlite and memory = true  
+
+# use a DBMS to host the blockchain ledger
+# For SQLite
+connect dbms blockchain where type=sqlite
+
+# or for PSQL 
+<connect dbms blockchain where 
+   type=psql and 
+   ip=127.0.0.1 and 
+   port=5432
+   user=anylog and
+   password=demo>
+
 </pre>
 
-### Execute the below commands to delete old blockchain data
+### OPTIONAL - Execute the below commands to delete old blockchain data
 
 <pre>
 drop table ledger where dbms = blockchain
@@ -63,6 +96,7 @@ blockchain delete local file
 
 <pre>
 create table ledger where dbms = blockchain                 # Create an internal table
+run blockchain sync where source = dbms and time = 30 seconds and dest = file
 </pre>
 
 ## Configure the Operator Node
@@ -73,16 +107,31 @@ operator_tcp_port = 7848
 operator_rest_port = 7849
 master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MASTER NODE
 
-run tcp server !external_ip !operator_tcp_port !ip !operator_tcp_port # The connection to the network nodes
-run rest server !ip !operator_rest_port # Enable REST calls
+# networking - if multiple nodes share the IP - use a unique port per node type 
+# TCP
+<run tcp server where
+    external_ip=!external_ip and external_port=32048 and
+    internal_ip=!ip and internal_port=32048 and
+    bind=false and threads=6>
+# REST
+<run rest server where
+    external_ip=!external_ip and external_port=32049 and
+    internal_ip=!ip and internal_port=32049 and
+    bind=false and threads=6>
 
 # Use SQLite as system dbms
 connect dbms system_query where type = sqlite and memory = true
  
 # For AnyLog internal tables: Local management database
+# Use SQLite
+connect dbms almgm where type = sqlite
+# OR Use PostgreSQL
 connect dbms almgm where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432
 
-# For the user data: use Postgres for lsl_demo tables
+# For the user data: 
+Use SQLite for lsl_demo tables
+connect dbms lsl_demo where type = sqlite
+OR use PostgreSQL for lsl_demo tables
 connect dbms lsl_demo where type = psql and user = anylog and ip = 127.0.0.1 and password = demo and port = 5432 and autocommit = false
 
 partition lsl_demo ping_sensor using timestamp by 7 days  # Partition the data of the lsl_demo dbms by time
@@ -91,17 +140,17 @@ partition lsl_demo ping_sensor using timestamp by 7 days  # Partition the data o
 run blockchain sync where source = master and time = 30 seconds and dest = file and connection = !master_node
 
 # Configure the node as operator
-run operator where create_table = true and update_tsd_info = true and archive = true and distributor = true and master_node = !master_node
+run operator where create_table = true and update_tsd_info = true and archive = true and distributor = false and master_node = !master_node
 </pre>
 
 
-### Delete all on Operator previous data (ignore error messages if Operator does not have data) 
+### Optional Delete all on Operator previous data (and ignore error messages if Operator does not have data) 
 
 <pre>
-time file drop all
-create table tsd_info where dbms = almgm  # Drop AnyLog Table  
-drop table ping_sensor where dbms = lsl_demo # Drop User table
-blockchain delete local file
+time file drop all                            # Drop internal data ingestion monitoring table
+create table tsd_info where dbms = almgm      # Create AnyLog Internal Table  
+drop table ping_sensor where dbms = lsl_demo  # Drop user table (the table with the user data in this example)
+blockchain delete local file                  # Delete the local copy of the metadata
 </pre>
 
 ### Examples commands to test configuration
@@ -112,7 +161,6 @@ get databases     # Get the list of databases configured
 get processes     # Show background processes enabled
 get dictionary    # Show variables assigned
 !blockchain_file  # shows a variable value
-help get          # shows the get options
 
 run client !master_node get connections  # will show the config on the master
 </pre>
@@ -121,11 +169,11 @@ run client !master_node get connections  # will show the config on the master
 
 <pre>
 # trace level = 3 run tcp server
-< cluster = {"cluster" : {
+<cluster = {"cluster" : {
                 "company" : "anylog",
                 "name"   : "cluster_1"
     }
-} >
+}>
 
 blockchain insert where policy = !cluster and local = true and master = !master_node
 </pre>
@@ -162,12 +210,21 @@ blockchain get operator
 set authentication off    # Disable users authentication
 master_node = 10.0.0.25:2548     # <-- CHANGE to the TCP IP AND PORT of the MASTER NODE
 
-run tcp server !external_ip 3548 !ip 3548   # The connection to the network nodes
-run rest server !ip 3549  # Enable REST calls
+# networking - if multiple nodes share the IP - use a unique port per node type 
+# TCP
+<run tcp server where
+    external_ip=!external_ip and external_port=32048 and
+    internal_ip=!ip and internal_port=32048 and
+    bind=false and threads=6>
+# REST
+<run rest server where
+    external_ip=!external_ip and external_port=32049 and
+    internal_ip=!ip and internal_port=32049 and
+    bind=false and threads=6>
 
+# Use SQLite as system dbms (to manage queries)
+connect dbms system_query where type = sqlite and memory = true  
 
-# Use SQLite as system dbms
-connect dbms system_query where type = sqlite and memory = true  # Use SQLite as system dbms
 
  # Sync the blockchain data from the master every 30 seconds
 run blockchain sync where source = master and time = 30 seconds and dest = file and connection = !master_node # Sync the blockchain data
@@ -218,6 +275,7 @@ File data Example
 ### Examples commands to monitor status and state on the operator node
 
 <pre>
+get inserts
 get operator
 get rows count
 get rows count where group = table
