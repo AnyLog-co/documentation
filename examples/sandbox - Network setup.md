@@ -163,8 +163,6 @@ run scheduler 1
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-
-
 ## Deploy Query
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
