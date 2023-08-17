@@ -1,18 +1,48 @@
 # Network Setup
 
-The following document provides directions to deploy AnyLog nodes manually from scratch.
+The following document provides directions to deploy AnyLog nodes using the node's CLI.
+Alternatively, the configuration script can be organized in a file and processed using the following command:
+```
+process [path and file name with the script]
+```
+For example:  
+```
+process process !anylog_path/AnyLog-Network/demo/ha_master.al
+```
+Note: **!anylog_path** will be substituted for the value assigned to the key **anylog_path** in the dictionary.
 
-Directions for manually restarting a node, with persistent volumes, can be found in [part 2](Network%20setup%20-%20Part%20II.md).   
+## Frequently used commands to monitor settings
+Users are expected to be familiar with the commands and examples listed below:
+<pre>
+get dictionary         # Default values in the dictionary
+get dictionary _dir    # Directory setting
+get dictionary ip      # Default ip setting
+get connections        # Active listener services (for TCP, REST, and Broker services)
+get databases          # Get the list of databases configured
+get processes          # Show background processes enabled
+get dictionary         # Show variables assigned
+get inserts            # Statistics on data ingestion to the local database of an Operator node
+!blockchain_file       # shows a variable value
+run client !master_node get connections  # will show the config on the master
+</pre>
 
-**Other Deployments**: 
-* [Training](../training) - Standard training used for explaining how to use AnyLog
-* [Configuration Based](../deployments/deploying_node.md) - Deploy AnyLog using configuration file with environment variables
-* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations 
 
-## Prepare Node
-To manually deploy an AnyLog instance, users need to deploy node(s) without anything running. Please [contact us](mailto:info@anylog.co) 
-if you do not have access to our Docker hub and/or an active license key. 
+## The root directory and the default directories
+To define the root directory for AnyLog (which is different from the default), use the following command:
+<pre>
+set anylog home [path to AnyLog root]
+</pre>
+If the root directory is changed or AnyLog is installed without a package that creates the work directories, 
+the default directories can be created using the command:
+<pre>
+create work directories
+</pre>
+ 
 
+## Prerequisites
+* Docker hub key
+* Active license key
+ 
 1. Log into AnyLog user
 ```shell
 docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
@@ -22,7 +52,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 following params:
 * `LICENSE_KEY`, otherwise  the AnyLog instance will not be activated
 * Docker container name should be unique 
-* The example shows deployment with [volume configurations](../deployments/Networking%20&%20Security/docker_volumes.md).
+* The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
 ```shell
 docker run -it --detach-keys=ctrl-d --network host \
@@ -37,7 +67,8 @@ docker run -it --detach-keys=ctrl-d --network host \
 ```
 
 ## Deploy Master
-A _master node_ is an alternative option to the blockchain, where metadata will reside on a dedicated AnyLog node. 
+A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
+ a dedicated AnyLog node. 
 
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
@@ -292,7 +323,7 @@ connect dbms blockchain where type=sqlite and memory=true
 ## Deploy Operator
 An _operator node_ is one that's dedicated to hosting user data. When deploying multiple operators there are a few things to keep in mind: 
 * Make sure each cluster has a unique name -- If multiple operators share a cluster, then when querying, results from **only 1** 
-of the operators will be returned. More information can be found in  [high-avilability](../high%20availability.md).    
+of the operators will be returned. More information can be found in  [high-avilability](../../high%20availability.md).    
 * Make sure each operator has a unique name
 * If the operators are on the same physical machine, make sure each operator has unique port values. 
 
