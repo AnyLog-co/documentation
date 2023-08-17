@@ -9,6 +9,11 @@ services and can be deployed "out-of-the-box" to support many of the edge use ca
 In the examples below, users define **system variables** by assigning values to keys. These keys are referenced in the 
 node configuration process to apply a configuration option, or a configuration value.
 
+**Other Deployments**
+* [Empty Node](../examples/Network%20setup%20-%20Part%20I.md) - Manually deploy an AnyLog node 
+* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
+* [Training](../training) - Standard training used for explaining how to use AnyLog
+
 ### Requirements
 * For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
 * For Kubernetes-based Deployment: [Kubernetes Orchestrator](https://kubernetes.io/docs/tasks/tools/) & [Helm](https://helm.sh/docs/)  
@@ -41,11 +46,6 @@ bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 # Kubernetes
 bash deployments/installations/kubernetes_credentials.sh [DOCKER_ACCESS_CODE]
 ```
-
-### Sand-Box Deployment
-* [Empty Node](../examples/Network%20setup%20-%20Part%20I.md) - Manually deploy an AnyLog node 
-* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
-
 
 ### Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist
