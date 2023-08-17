@@ -4,9 +4,10 @@ The following document provides directions to manually restarting an AnyLog node
 
 Directions to deploy AnyLog nodes manually from scratch, can be found in [part 1](Network%20setup%20-%20Part%20I.md)
 
-Other installations: 
+**Other Deployments** 
 * [Training](../training) - Standard training used for explaining how to use AnyLog
-* [Configuration Based](../deployments) - Deploy AnyLog using configuration file with environment variables  
+* [Configuration Based](../deployments/deploying_node.md) - Deploy AnyLog using configuration file with environment variables
+* [Quick Deployment](../deployments/Quick%20Deployment.md) - quick deployment of AnyLog 
 
 ## Prepare Node
 To manually deploy an AnyLog instance, users need to deploy node(s) without anything running. Please [contact us](mailto:info@anylog.co) 
