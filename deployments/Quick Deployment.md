@@ -86,6 +86,6 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-operator-data2:/app/AnyLog-Network/data \
   -v anylog-operator-scripts2:/app/deployment-scripts/scripts \
   -v anylog-operator-test2:/app/deployment-scripts/tests \
---name anylog-operator2 --rm anylogco/anylog-network:test
+--name anylog-operator2 --rm anylogco/anylog-network:latest
 ```
 
