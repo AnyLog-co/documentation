@@ -62,20 +62,30 @@ create work directories
 ```anylog 
 node_name = master-node
 company_name="New Company"
-anylog_server_port=32048 
+anylog_server_port=32048
+anylog_rest_port=32049 
 set tcp_bind=false
+set rest_bind=false
+set rest_ssl=false
 tcp_threads=6 
+rest_threads=6
+rest_timeout=30 
 ledger_conn=127.0.0.1:32048 
 ```
 
-4. Declare TCP connection
+4. Connect to TCP and REST 
 
-**Option 1**: Manually configure TCP connectivity 
+**Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
     internal_ip=!ip and internal_port=!anylog_server_port and
     bind=!tcp_bind and threads=!tcp_threads>
+    
+<run rest server where
+    external_ip=!external_ip and external_port=!anylog_rest_port and
+    internal_ip=!ip and internal_port=!anylog_rest_port and
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout and ssl=!rest_ssl>
 ```
 
 **Option 2**: Configuration base connectivity 
@@ -85,10 +95,10 @@ ledger_conn=127.0.0.1:32048
    "company": !company_name,
    "ip": "!external_ip", 
    "local_ip": "!ip",
-   "port": "!anylog_server_port.int"
+   "port": "!anylog_server_port.int",
+   "rest_port": "!anylog_rest_port.int" 
 }}> 
  
-
 # declare policy 
 blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
