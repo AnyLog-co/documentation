@@ -88,4 +88,5 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-operator-test2:/app/deployment-scripts/tests \
 --name anylog-operator2 --rm anylogco/anylog-network:latest
 ```
+detach from master node using **ctrl-d** commandadd
 
