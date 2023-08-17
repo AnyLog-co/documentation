@@ -2,12 +2,10 @@
 
 The following document provides directions to deploy AnyLog nodes manually from scratch.
 
-Directions for manually restarting a node, with persistent volumes, can be found in [part 2]().   
-
-* An Operator Node - to host the user data
+Directions for manually restarting a node, with persistent volumes, can be found in [part 2](Network%20setup%20-%20Part%20II.md).   
 
 Other installations: 
-* [Training](../training)
+* [Training](../training) - Standard training used for explaining how to use AnyLog
 * [Configuration Based](../deployments) - Deploy AnyLog using configuration file with environment variables  
 
 ## Prepare Node
