@@ -110,7 +110,7 @@ config from policy where id = !policy_id
   "rest_port": !anylog_rest_port
 }}>
 
-# if TCP is true, then stae only the local IP  aaddress
+# if TCP bind is true, then stae only the local IP  aaddress
 <new_policy = {"master": {
   "name": "master-node", 
   "company": !company_name, 
