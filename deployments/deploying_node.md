@@ -43,18 +43,9 @@ bash deployments/installations/kubernetes_credentials.sh [DOCKER_ACCESS_CODE]
 ```
 
 ### Sand-Box Deployment
-Deployment is usually done via the [Configueration File](#configuration-based-deployment); however, using basic _Docker_
-AnyLog provides the ability to deploy a generic / non-persistant node to play with. Using `-e` docker command can extend
-the generic process to use non-default ports and/or any other [configurations](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-master/anylog_configs.env) options 
-```shell
-docker run --network host -it --detach-keys=ctrl-d \
-  --name anylog-node \
-  -e LICENSE_KEY=XXXX \
-  [-e ANYLOG_SERVER_PORT=32548 \] 
-  [-e ANYLOG_REST_PORT=32549 \] 
-  [-e ANYLOG_BROKER_PORT=2150 \] 
-  -rm anylogco/anylog-network:latest
-```
+* [Empty Node](../examples/Network%20setup%20-%20Part%20I.md) - Manually deploy an AnyLog node 
+* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
+
 
 ### Configuration Based Deployment
 AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides users with a series of questions to assist

@@ -7,7 +7,7 @@ Directions for manually restarting a node, with persistent volumes, can be found
 **Other Deployments**: 
 * [Training](../training) - Standard training used for explaining how to use AnyLog
 * [Configuration Based](../deployments/deploying_node.md) - Deploy AnyLog using configuration file with environment variables
-* [Quick Deployment](../deployments/Quick%20Deployment.md) - quick deployment of AnyLog 
+* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations 
 
 ## Prepare Node
 To manually deploy an AnyLog instance, users need to deploy node(s) without anything running. Please [contact us](mailto:info@anylog.co) 

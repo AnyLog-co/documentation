@@ -13,7 +13,8 @@ deploy more generic nodes, using very limited environment configurations.
 
 ## Deployment 
 The following provides directions to deploy a network without too much configuration on a single node. If nodes are not
-on the same physical machine, make sure to update the LEDGER_CONN environment variable when deploying nodes. 
+on the same physical machine, make sure to update the `LEDGER_CONN` environment variable when deploying nodes. When 
+deploying, users can include other [environment variable](Support/sample_config_file.env), but are not required to.  
 
 Please [contact us](mailto:info@anylog.co) if you do not have access to our Docker hub and/or an active license key. 
 
@@ -50,7 +51,7 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-query-test:/app/deployment-scripts/tests \
 --name anylog-query --rm anylogco/anylog-network:latest
 ```
-detach from master node using **ctrl-d** command
+detach from query node using **ctrl-d** command
 
 4. Start Operator Node 1 - 
    * if the node is on different machine from the master node, add the following environment variable `-e LEDGER_CONN=${MASTER_NODE_TCP_CONN_INFO}`
@@ -66,7 +67,7 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-operator-test:/app/deployment-scripts/tests \
 --name anylog-operator --rm anylogco/anylog-network:latest
 ```
-detach from master node using **ctrl-d** command
+detach from operator 1 node using **ctrl-d** command
 
 5. Start Operator Node 2
    * if the node is on different machine from the master node, add the following environment variable `-e LEDGER_CONN=${MASTER_NODE_TCP_CONN_INFO}`
@@ -88,5 +89,5 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-operator-test2:/app/deployment-scripts/tests \
 --name anylog-operator2 --rm anylogco/anylog-network:latest
 ```
-detach from master node using **ctrl-d** commandadd
+detach from operator 2 node using **ctrl-d** command
 
