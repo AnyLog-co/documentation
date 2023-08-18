@@ -355,6 +355,8 @@ run blockchain sync where source=master and time="30 seconds" and dest=file and 
   "rest_port": !anylog_rest_port.int
 }}>
 
+# OR
+
 # if TCP bind is true, then stae only the local IP  aaddress
 <new_policy = {"query": {
   "name": "query-node", 
@@ -516,6 +518,8 @@ Note: **with multiple operators make sure that the Operator name is unique, and 
   "rest_port": !anylog_rest_port.int,
   "cluster": !cluster_id
 }}>
+
+# OR
 
 # if TCP bind is true, then stae only the local IP  aaddress
 <new_policy = {"operator": {
