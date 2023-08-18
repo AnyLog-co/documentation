@@ -44,7 +44,7 @@ A _master node_ is an alternative option to the blockchain, where metadata will 
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Declare directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -57,9 +57,6 @@ set local_scripts = $LOCAL_SCRIPTS
 
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
-
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
-create work directories
 ```
 
 3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
@@ -134,7 +131,7 @@ as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database e
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Declare directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -148,8 +145,6 @@ set local_scripts = $LOCAL_SCRIPTS
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
 
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
-create work directories
 ```
 
 3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
@@ -220,7 +215,7 @@ of the operators will be returned. More information can be found in  [high-avila
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Declare directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -233,9 +228,6 @@ set local_scripts = $LOCAL_SCRIPTS
 
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
-
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
-create work directories
 ```
 
 3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.
