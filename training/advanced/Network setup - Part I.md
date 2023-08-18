@@ -561,7 +561,8 @@ connect dbms almgm where type=sqlite
  
 create table tsd_info where dbms=almgm
 ```
-**Part 2**: `!default_dbms` - this is where user data is resides 
+**Part 2**: Declare the databases histing the user's data
+
 ```anylog
 connect dbms !default_dbms where type=sqlite 
 
@@ -581,16 +582,20 @@ connect dbms !default_dbms where type=sqlite
 ```anylog 
 partition !default_dbms * using insert_timestamp by 1 day
 
+# view databases declared
+get databases
+
 # view partition configurations 
 get partitions
 ```
 
-12. Accept data into AnyLog Operator
+12. Configure and enable the Operator services
+
 ```anylog
-# buffer size until data is inerted 
+# buffer thresholds size and time 
 set buffer threshold where time=60 seconds and volume=10KB and write_immediate=true 
 
-# Writes streaming data to files
+# Enable the streamer service - to writes streaming data to files
 run streamer
 
 # start operator to accept data coming in 
