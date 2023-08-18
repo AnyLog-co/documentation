@@ -228,9 +228,8 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 
 ## Query Configuration
-A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, 
-as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database exists.   
-The following is done through the AnyLog CLI. 
+A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
+database exists. The following is done through the AnyLog CLI. 
 * Attaching to the CLI (node name: `query-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d query-node
@@ -242,7 +241,15 @@ docker attach --detach-keys=ctrl-d query-node
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Disable authentication and enable message queue
+```anylog
+set authentication off    # Disable users authentication
+set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
+```
+Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+The command `get echo queue` retrieves the messages and removes the plus sign.
+
+3. Declare & create directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -259,9 +266,16 @@ set test_dir = $TEST_DIR
 # create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
 create work directories
 ```
-
-3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
+Note: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory needs to be re-declared.   
+Users can view the work directories using the following command:
 ```anylog
+get dictionary _dir
+```
+
+4. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
+```anylog
+node_name = Query              # Adds a name to the CLI prompt
+
 company_name="New Company"
 
 anylog_server_port=32348
@@ -269,7 +283,6 @@ anylog_rest_port=32349
 
 set tcp_bind=false
 set rest_bind=false
-set rest_ssl=false
 
 tcp_threads=6 
 rest_threads=6
@@ -279,7 +292,7 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-4. Connect to TCP and REST
+5. Connect to TCP and REST
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -291,7 +304,7 @@ ledger_conn=127.0.0.1:32048
 <run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
-    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout and ssl=!rest_ssl>
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
 **Option 2**: Configuration base connectivity 
@@ -314,7 +327,7 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-5. run scheduler & blockchain sync
+6. run scheduler & blockchain sync
 ```anylog
 # start scheduler 
 run scheduler 1
@@ -323,16 +336,16 @@ run scheduler 1
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-6. Declare query node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+7. Declare query node policy -- based on the TCP binding, add the relevant _master node_ policy.  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"query": {
   "name": "query-node", 
   "company": !company_name, 
-  "ip': !external_ip, 
+  "ip": !external_ip, 
   "local_ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
 }}>
 
 # if TCP bind is true, then stae only the local IP  aaddress
@@ -340,8 +353,8 @@ run blockchain sync where source=master and time="30 seconds" and dest=file and 
   "name": "query-node", 
   "company": !company_name, 
   "ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
 }}> 
 
 # declare policy 
@@ -349,7 +362,7 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-7. Connect to system_query logical database against in-memory SQLite 
+8. Connect to system_query logical database against in-memory SQLite 
 ```anylog
 # example with SQLite 
 connect dbms blockchain where type=sqlite and memory=true  
@@ -374,7 +387,15 @@ docker attach --detach-keys=ctrl-d operator1-node
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Disable authentication and enable message queue
+```anylog
+set authentication off    # Disable users authentication
+set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
+```
+Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+The command `get echo queue` retrieves the messages and removes the plus sign.
+
+3. Declare & create directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -392,8 +413,10 @@ set test_dir = $TEST_DIR
 create work directories
 ```
 
-3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.
+4. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.
 ```anylog
+node_name = Operator1              # Adds a name to the CLI prompt
+
 company_name="New Company"
 set default_dbms = test
  
@@ -402,7 +425,6 @@ anylog_rest_port=32149
 
 set tcp_bind=false
 set rest_bind=false
-set rest_ssl=false
 
 tcp_threads=6 
 rest_threads=6
@@ -412,7 +434,7 @@ operator_threads=6
 ledger_conn=127.0.0.1:32048 
 ```
 
-4. Connect to TCP and REST 
+5. Connect to TCP and REST 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -424,7 +446,7 @@ ledger_conn=127.0.0.1:32048
 <run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
-    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout and ssl=!rest_ssl>
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
 **Option 2**: Configuration base connectivity 
@@ -447,7 +469,7 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-5. run scheduler & blockchain sync
+6. run scheduler & blockchain sync
 ```anylog
 # start scheduler 
 run scheduler 1
@@ -456,11 +478,11 @@ run scheduler 1
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-6. Create cluster database 
+7. Create cluster database 
 ```anylog
 <new_policy = {"cluster": {
     "company": !company_name,
-    "name": cluster1,
+    "name": "cluster1",
     "dbms": !default_dbms
 }}>
 
@@ -468,21 +490,21 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-7. Get cluster ID
+8. Get cluster ID
 ```anylog
 cluster_id = blockchain get cluster where company=!company_name and name=cluster1 bring.first [*][id] 
 ```
 
-8. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+9. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"operator": {
-  "name": "operator-node", 
+  "name": "operator1-node", 
   "company": !company_name, 
-  "ip': !external_ip, 
+  "ip": !external_ip, 
   "local_ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port,
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int,
   "cluster": !cluster_id
 }}>
 
@@ -491,8 +513,8 @@ cluster_id = blockchain get cluster where company=!company_name and name=cluster
   "name": "operator-node", 
   "company": !company_name, 
   "ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port,
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int,
   "cluster": !cluster_id
 }}> 
 
@@ -501,12 +523,12 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-9. Get operator ID
+10. Get operator ID
 ```anylog
-operator_id = blockchain get operator where name=operator-node and company=!company_name 
+operator_id = blockchain get operator where name=operator1-node and company=!company_name 
 ```
 
-10. Connect to logical database(s)
+11. Connect to logical database(s)
 **Part 1**: `!default_dbms` - this is where user data is resides 
 ```anylog
 connect dbms !default_dbms where type=sqlite 
@@ -537,6 +559,9 @@ create table tsd_info where dbms=almgm
 11. (Optional) Partition the data 
 ```anylog 
 partition !default_dbms * using insert_timestamp by 1 day
+
+# view partition configurations 
+get partitions
 ```
 
 12. Accept data into AnyLog Operator
@@ -588,7 +613,7 @@ curl -X PUT 127.0.0.1:32149 \
   -H "type: json" \
   -H "mode: streaming" \
   -H "User-Agent: AnyLog/1.23" \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
   --data '[{"parentelement": "c3bb3b0c-9440-11e9-b465-d4856454f4ba", "webid": "F1AbEfLbwwL8F6EiShvDV-QH70ADDu7w0CU6RG0ZdSFZFT0ugYrOFixifG1cDF4vF6HjWSwWE9NUEFTUy1MSVRTTFxMSVRTQU5MRUFORFJPXDc3NyBEQVZJU1xQT1AgUk9PTVxBUEMgU01BUlQgWCAzMDAwfFVQU0JBVFRFUllURU1QRVJBVFVSRQ", "device_name": "APC SMART X 3000", "value": 1021, "timestamp": "2019-10-11T17:05:53.1820068Z"},
 {"parentelement": "c3bb3b0c-9440-11e9-b465-d4856454f4ba", "webid": "F1AbEfLbwwL8F6EiShvDV-QH70ADDu7w0CU6RG0ZdSFZFT0ugYrOFixifG1cDF4vF6HjWSwWE9NUEFTUy1MSVRTTFxMSVRTQU5MRUFORFJPXDc3NyBEQVZJU1xQT1AgUk9PTVxBUEMgU01BUlQgWCAzMDAwfFVQU0JBVFRFUllURU1QRVJBVFVSRQ", "device_name": "APC SMART X 3000", "value": 2021, "timestamp": "2019-10-11T17:15:53.1500091Z"},
 {"parentelement": "c3bb3b0c-9440-11e9-b465-d4856454f4ba", "webid": "F1AbEfLbwwL8F6EiShvDV-QH70ADDu7w0CU6RG0ZdSFZFT0ugYrOFixifG1cDF4vF6HjWSwWE9NUEFTUy1MSVRTTFxMSVRTQU5MRUFORFJPXDc3NyBEQVZJU1xQT1AgUk9PTVxBUEMgU01BUlQgWCAzMDAwfFVQU0JBVFRFUllURU1QRVJBVFVSRQ", "device_name": "APC SMART X 3000", "value": 2100, "timestamp": "2019-10-11T17:15:58.1500091Z"},
@@ -620,11 +645,14 @@ run client () sql lsl_demo format = table "select count(*), min(value), max(valu
 
 * Supporting commands to track data coming in
 ```anylog 
-# Statistics on SQL Inserts of data to the local databases.
-get inserts
 
 # Statistics on the streaming processes. 
 get streaming 
+
+# Statistics on SQL Inserts of data to the local databases.
+# Note - depending on the setup, it may take a few seconds until data is pushed from the streaming buffers to the databases.
+get inserts
+
 
 # Information on the Operator processes and configuration. 
 get operator

@@ -352,6 +352,11 @@ The commands below validate that the nodes are configured correctly.
 When the network is running, attach to a node in the network (the example below is using the Master), and issue the following commands
 on the CLI:
 
+### View that the needed processes are enabled on the participating nodes
+```
+AL > run client (blockchain get (operator, master, query) bring.ip_port) get processes
+```
+
 ### View that all nodes are registered
 Note that nodes register themselves as members of the network when they are connected to the network in the first time.
 Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
@@ -370,6 +375,7 @@ operator|anylog-operator_2|178.79.143.174|178.79.143.174|32148|    32149|
 Note that all 4 nodes appear in the output with a unique name and a unique IP + Port string.
 
 ### Test nodes are accessible
+
 The command **test network** determines that all the nodes are recognized and accessible (the Master node will communicate with each member node).
 ```
 AL anylog-master > test network
