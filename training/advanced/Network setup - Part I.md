@@ -230,7 +230,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 ```
 
 
-## Query Configuration
+## Query Node Configuration
 A _query node_ is an AnyLog node configured to satisfy queries.  
 Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
 database is configured.
@@ -377,7 +377,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 connect dbms blockchain where type=sqlite and memory=true  
 ```
 
-## Deploy Operator
+## Operator Node Configuration
 An _operator node_ hosts user data.  
 
 Deployment considerations:
@@ -478,16 +478,7 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-6. run scheduler & blockchain sync
-```anylog
-# start scheduler 
-run scheduler 1
-
-# blockchain sync 
-run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
-```
-
-7. Create cluster database 
+6. Create cluster policy 
 
 Note: **In this setup, create a unique cluster for each participating operator by setting a unique cluster name**
 ```anylog
@@ -498,6 +489,15 @@ Note: **In this setup, create a unique cluster for each participating operator b
 
 blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+```
+
+7. Enable scheduler & blockchain sync
+```anylog
+# start scheduler 
+run scheduler 1
+
+# blockchain sync 
+run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
 8. Get cluster ID
