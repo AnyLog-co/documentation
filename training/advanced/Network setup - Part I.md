@@ -67,7 +67,7 @@ docker run -it --detach-keys=ctrl-d --network host \
 --name ${NODE_TYPE}-node --rm anylogco/anylog-network:latest
 ```
 
-## Master Configuration
+## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
  a dedicated AnyLog node.  
 
@@ -299,7 +299,7 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-5. Connect to TCP and REST
+5.  Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -443,7 +443,7 @@ operator_threads=6
 ledger_conn=127.0.0.1:32048 
 ```
 
-5. Connect to TCP and REST 
+5.  Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
