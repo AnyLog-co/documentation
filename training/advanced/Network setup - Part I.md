@@ -38,39 +38,45 @@ the default directories can be created using the command:
 create work directories
 </pre>
  
-
 ## Prerequisites
 * Docker hub key
 * Active license key
  
-1. Log into AnyLog user
+## Docker deployment process 
+
+1. Log into AnyLog user (on each physical machine)
 ```shell
 docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```
-
-2. Starting a node with nothing on it, this step should be done for **each** AnyLog instance. Make sure to update the 
-following params:
-* `LICENSE_KEY`, otherwise  the AnyLog instance will not be activated
-* Docker container name should be unique 
-* The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
+2. Deploy the Docker container of AnyLog with no preset configurations. This step is done for **each** AnyLog instance.
+    * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
+     for the master node container and **operator-1** for an operator node. 
+    * `LICENSE_KEY` - the AnyLog provided key.
+    * The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
 ```shell
+NODE_TYPE=master
 docker run -it --detach-keys=ctrl-d --network host \
   -e LICENSE_KEY=${ANYLOG_LICENSE_KEY} \
   -e INIT_TYPE=raw  \
-  -v anylog-node-blockchain:/app/AnyLog-Network/anylog \
-  -v anylog-node-blockchain:/app/AnyLog-Network/blockchain \
-  -v anylog-node-data:/app/AnyLog-Network/data \
-  -v anylog-node-scripts:/app/deployment-scripts/scripts \
-  -v  anylog-node-test:/app/deployment-scripts/tests \
---name anylog-node --rm anylogco/anylog-network:latest
+  -v anylog-${NODE_TYPE}-anylog:/app/AnyLog-Network/anylog \
+  -v anylog-${NODE_TYPE}-blockchain:/app/AnyLog-Network/blockchain \
+  -v anylog-${NODE_TYPE}-data:/app/AnyLog-Network/data \
+  -v anylog-${NODE_TYPE}-scripts:/app/deployment-scripts/scripts \
+  -v  anylog-${NODE_TYPE}-test:/app/deployment-scripts/tests \
+--name ${NODE_TYPE}-node --rm anylogco/anylog-network:latest
 ```
 
-## Deploy Master
+## Master Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
- a dedicated AnyLog node. 
+ a dedicated AnyLog node. The following is done through the AnyLog CLI. 
+* Attaching to the CLI (node name: `master-node`)  
+```shell 
+docker attach --detach-keys=ctrl-d master-node
+``` 
+* Detaching from Docker container: `ctrl-d`
 
-1. Set license key - this step is done automatically, if set as environment variable
+1. Set license key - this step is redundant if license key was provided in the [docker deployment process](#docker-deployment-process).
 ```anylog
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
@@ -198,9 +204,14 @@ run scheduler 1
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-## Deploy Query
+## Query Configuration
 A _query node_ is one that's dedicated for issue queries against the network. Any node can act as a query node, 
-as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database exists. 
+as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database exists. The following is done through the AnyLog CLI. 
+* Attaching to the CLI (node name: `query-node`)  
+```shell 
+docker attach --detach-keys=ctrl-d query-node
+``` 
+* Detaching from Docker container: `ctrl-d`
 
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
@@ -326,6 +337,13 @@ An _operator node_ is one that's dedicated to hosting user data. When deploying 
 of the operators will be returned. More information can be found in  [high-avilability](../../high%20availability.md).    
 * Make sure each operator has a unique name
 * If the operators are on the same physical machine, make sure each operator has unique port values. 
+
+The following is done through the AnyLog CLI. 
+* Attaching to the CLI (node name: `operator1-node`)  
+```shell 
+docker attach --detach-keys=ctrl-d operator1-node
+``` 
+* Detaching from Docker container: `ctrl-d`
 
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
