@@ -1,15 +1,15 @@
 # Network Setup
 
-The following document provides directions to deploy AnyLog nodes using the node's CLI.
-Alternatively, the configuration script can be organized in a file and processed using the following command:
+This document details deployment of AnyLog nodes using the CLI (of the participating nodes).  
+Alternatively, the configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
 ```
 process [path and file name with the script]
 ```
 For example:  
 ```
-process process !anylog_path/AnyLog-Network/demo/ha_master.al
+process process !anylog_path/AnyLog-Network/demo/master_script.al
 ```
-Note: **!anylog_path** will be substituted for the value assigned to the key **anylog_path** in the dictionary.
+Whereas `master_script.al` includes the commands and `!anylog_path` is substituted with the value assigned to the key **anylog_path** in the dictionary.
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
