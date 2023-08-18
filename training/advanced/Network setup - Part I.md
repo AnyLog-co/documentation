@@ -586,21 +586,8 @@ run streamer
 ```
 
 ## Validate Network is Up
-Once nodes are up and running, users can validate that everything is working properly using some basic commands, this can
-be done on any of the nodes that are part of the network. 
-
-* `test network` - will validate nodes can communicate with one another
-* `blockchain get *` - will show policies on the network. Based on the directions above, users should see: 
-  * master node policy 
-  * query node policy 
-  * cluster policy 
-  * operator node policy 
-  * if networking is set up via configuration, users should also see a config policy for each node 
-* `get processes` - should be run on each node individually (or via `run client`) to validate which AnyLog services are 
-running on a give
-
-
-
+detaile are available in Session II of the basic training - 
+[Validating the setup of the nodes in the network](../Session%20II%20(Deployment).md#validating-the-setup-of-the-nodes-in-the-network)
 
 ## Inserting & Querying data 
 
