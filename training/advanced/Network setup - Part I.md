@@ -99,7 +99,13 @@ set test_dir = $TEST_DIR
 create work directories
 ```
 
-3. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
+Note: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory needs to be re-declared.   
+Users can view the work directories using the following command:
+```anylog
+get dictionary _dir
+```
+
+3. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
 ```anylog
 company_name="New Company"
 
@@ -117,7 +123,7 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-4. Connect to TCP and REST 
+4. Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
