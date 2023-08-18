@@ -256,7 +256,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The command `get echo queue` retrieves the messages and removes the plus sign.
 
-3. Declare & create directories that are used within AnyLog  
+3. Declare the root directory and create the work directories
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -369,7 +369,7 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-8. Connect to system_query logical database against in-memory SQLite 
+8. Connect to system_query logical database against in-memory SQLite.
 ```anylog
 # example with SQLite 
 connect dbms blockchain where type=sqlite and memory=true  
@@ -393,7 +393,7 @@ Issue the following configuration commands on the AnyLog CLI.
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Disable authentication and enable message queue
+2. Disable authentication and enable message queue.
 ```anylog
 set authentication off    # Disable users authentication
 set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
@@ -401,7 +401,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The command `get echo queue` retrieves the messages and removes the plus sign.
 
-3. Declare & create directories that are used within AnyLog  
+3. Declare the root directory and create the work directories.
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
