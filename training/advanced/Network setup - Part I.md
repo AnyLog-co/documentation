@@ -279,7 +279,7 @@ Users can view the work directories using the following command:
 get dictionary _dir
 ```
 
-4. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.   
+4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services. 
 ```anylog
 node_name = Query              # Adds a name to the CLI prompt
 
@@ -419,7 +419,7 @@ set test_dir = $TEST_DIR
 create work directories
 ```
 
-4. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.
+4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
 
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
