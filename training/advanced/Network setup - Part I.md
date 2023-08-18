@@ -1,6 +1,6 @@
 # Network Setup
 
-This document details deployment of AnyLog nodes using the CLI (of the participating nodes).  
+This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
 Alternatively, the configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
 ```
 process [path and file name with the script]
@@ -10,6 +10,11 @@ For example:
 process !anylog_path/AnyLog-Network/demo/master_script.al
 ```
 Whereas `master_script.al` includes the commands and `!anylog_path` is substituted with the value assigned to the key **anylog_path** in the dictionary.
+
+## Deployment Prerequisites
+* Docker installed
+* Docker hub key
+* Active license key
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
@@ -30,16 +35,12 @@ To define the root directory for AnyLog (if different from the default), use the
 <pre>
 set anylog home [path to AnyLog root]
 </pre>
-If the root directory is changed or AnyLog is installed without a package that creates the work directories, 
-the default directories can be created using the command:
+If the root directory is changed or AnyLog is installed without a package that creates the work directories (once), 
+the work directories can be created (under AnyLog root) using the command:
 <pre>
 create work directories
 </pre>
  
-## Deployment Prerequisites
-* Docker installed
-* Docker hub key
-* Active license key
  
 ## Docker deployment process 
 
@@ -69,12 +70,15 @@ docker run -it --detach-keys=ctrl-d --network host \
 ## Master Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
  a dedicated AnyLog node.  
- The following is done through the AnyLog CLI. 
+
 * Attaching to the CLI (node name: `master-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d master-node
 ``` 
 * Detaching from Docker container: `ctrl-d`
+
+Issue the following configuration commands on the AnyLog CLI. 
+
 
 1. Set license key - this step is redundant if license key was provided in the [docker deployment process](#docker-deployment-process).
 ```anylog
@@ -228,12 +232,15 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 ## Query Configuration
 A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
-database exists. The following is done through the AnyLog CLI. 
+database exists.
+
 * Attaching to the CLI (node name: `query-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d query-node
 ``` 
 * Detaching from Docker container: `ctrl-d`
+
+Issue the following configuration commands on the AnyLog CLI.
 
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
@@ -368,18 +375,22 @@ connect dbms blockchain where type=sqlite and memory=true
 ```
 
 ## Deploy Operator
-An _operator node_ is one that's dedicated to hosting user data. When deploying multiple operators there are a few things to keep in mind: 
+An _operator node_ hosts user data.  
+
+Deployment considerations:
+
 * Make sure each cluster has a unique name -- If multiple operators share a cluster, then when querying, results from **only 1** 
 of the operators will be returned. More information can be found in  [high-avilability](../../high%20availability.md).    
 * Make sure each operator has a unique name
 * If the operators are on the same physical machine, make sure each operator has unique port values. 
 
-The following is done through the AnyLog CLI. 
 * Attaching to the CLI (node name: `operator1-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d operator1-node
 ``` 
 * Detaching from Docker container: `ctrl-d`
+
+Issue the following configuration commands on the AnyLog CLI.
 
 1. Set license key - this step is done automatically, if set as environment variable
 ```anylog
@@ -413,6 +424,7 @@ create work directories
 ```
 
 4. Set params -- variables (ex. `!external_ip`) that are used but not declare are using the _default_ value.
+
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
 
@@ -478,11 +490,12 @@ run blockchain sync where source=master and time="30 seconds" and dest=file and 
 ```
 
 7. Create cluster database 
+
+Note: **In this setup, create a unique cluster for each participating operator by setting a unique cluster name**
 ```anylog
 <new_policy = {"cluster": {
     "company": !company_name,
     "name": "cluster1",
-    "dbms": !default_dbms
 }}>
 
 blockchain prepare policy !new_policy
