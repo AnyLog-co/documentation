@@ -81,7 +81,16 @@ docker attach --detach-keys=ctrl-d master-node
 set license where activation_key = ${ANYLOG_LICENSE_KEY}
 ```
 
-2. Declare & create directories that are used within AnyLog  
+2. Disable authentication and enable message queue
+
+```anylog
+set authentication off    # Disable users authentication
+set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
+```
+Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+The command `get echo queue` retrieves the messages and removes the plus sign.
+
+3. Declare & create directories that are used within AnyLog  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
@@ -105,8 +114,11 @@ Users can view the work directories using the following command:
 get dictionary _dir
 ```
 
-3. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
+4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
 ```anylog
+
+node_name = Master              # Adds a name to the CLI prompt
+
 company_name="New Company"
 
 anylog_server_port=32048
@@ -114,7 +126,6 @@ anylog_rest_port=32049
 
 set tcp_bind=false
 set rest_bind=false
-set rest_ssl=false
 
 tcp_threads=6 
 rest_threads=6
@@ -123,7 +134,7 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-4. Enable the TCP and REST services 
+5. Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -135,7 +146,7 @@ ledger_conn=127.0.0.1:32048
 <run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
-    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout and ssl=!rest_ssl>
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
 **Option 2**: Configuration base connectivity 
@@ -158,25 +169,27 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-5. Declare master node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+6. Declare the master node on the shared metadata  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"master": {
   "name": "master-node", 
   "company": !company_name, 
-  "ip': !external_ip, 
+  "ip": !external_ip, 
   "local_ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
 }}>
+
+# OR
 
 # if TCP bind is true, then stae only the local IP  aaddress
 <new_policy = {"master": {
   "name": "master-node", 
   "company": !company_name, 
   "ip": !ip,
-  "port": !anylog_server_port, 
-  "rest_port": !anylog_rest_port
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
 }}> 
 
 # declare policy 
@@ -184,7 +197,7 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-6. Connect to blockchain logical database and create _ledger_ table
+7. Connect to blockchain logical database and create _ledger_ table
 ```anylog
 # example with SQLite 
 connect dbms blockchain where type=sqlite 
@@ -201,7 +214,7 @@ connect dbms blockchain where type=sqlite
 create table ledger where dbms=blockchain  
 ```
 
-7. run scheduler & blockchain sync
+8. run scheduler & blockchain sync
 ```anylog
 # start scheduler 
 run scheduler 1
