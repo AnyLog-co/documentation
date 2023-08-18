@@ -90,7 +90,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The command `get echo queue` retrieves the messages and removes the plus sign.
 
-3. Declare & create directories that are used within AnyLog  
+3. Declare the root directory and create the work directories  
 ```anylog
 # This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
 anylog_path = $ANYLOG_PATH
