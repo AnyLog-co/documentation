@@ -69,7 +69,8 @@ docker run -it --detach-keys=ctrl-d --network host \
 
 ## Master Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
- a dedicated AnyLog node. The following is done through the AnyLog CLI. 
+ a dedicated AnyLog node.  
+ The following is done through the AnyLog CLI. 
 * Attaching to the CLI (node name: `master-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d master-node
@@ -134,7 +135,27 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-5. Enable the TCP and REST services 
+5. Declare a database to service the metadata table (the _ledger_ table)
+```anylog
+# example with SQLite 
+connect dbms blockchain where type=sqlite 
+
+# OR
+
+# example with PostgresSQL 
+<coneect dbms blockchain where
+  type=psql and
+  ip=127.0.1 and
+  port=5432 and 
+  user=admin and
+  password=passwd>
+  
+# create ledger table 
+create table ledger where dbms=blockchain  
+```
+Note: If SQLite is used, databases are created in `!dbms_dir`. The work directories are created with the command `create work directories`.
+
+6. Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -169,7 +190,15 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-6. Declare the master node on the shared metadata  
+7. run the scheduler & blockchain sync process
+```anylog
+# start scheduler (that service the rule engine)
+run scheduler 1
+
+# blockchain sync 
+run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
+```
+8. Declare the master node on the shared metadata  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"master": {
@@ -197,35 +226,11 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-7. Connect to blockchain logical database and create _ledger_ table
-```anylog
-# example with SQLite 
-connect dbms blockchain where type=sqlite 
-
-# example with PostgresSQL 
-<coneect dbms blockchain where
-  type=psql and
-  ip=127.0.1 and
-  port=5432 and 
-  user=admin and
-  password=passwd>
-  
-# create ledger table 
-create table ledger where dbms=blockchain  
-```
-
-8. run scheduler & blockchain sync
-```anylog
-# start scheduler 
-run scheduler 1
-
-# blockchain sync 
-run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
-```
 
 ## Query Configuration
-A _query node_ is one that's dedicated for issue queries against the network. Any node can act as a query node, 
-as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database exists. The following is done through the AnyLog CLI. 
+A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, 
+as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database exists.   
+The following is done through the AnyLog CLI. 
 * Attaching to the CLI (node name: `query-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d query-node
@@ -567,7 +572,9 @@ be done on any of the nodes that are part of the network.
   * operator node policy 
   * if networking is set up via configuration, users should also see a config policy for each node 
 * `get processes` - should be run on each node individually (or via `run client`) to validate which AnyLog services are 
-running on a given node. 
+running on a give
+
+
 
 
 ## Inserting & Querying data 
