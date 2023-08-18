@@ -7,7 +7,7 @@ process [path and file name with the script]
 ```
 For example:  
 ```
-process process !anylog_path/AnyLog-Network/demo/master_script.al
+process !anylog_path/AnyLog-Network/demo/master_script.al
 ```
 Whereas `master_script.al` includes the commands and `!anylog_path` is substituted with the value assigned to the key **anylog_path** in the dictionary.
 
@@ -15,20 +15,18 @@ Whereas `master_script.al` includes the commands and `!anylog_path` is substitut
 Users are expected to be familiar with the commands and examples listed below:
 <pre>
 get dictionary         # Default values in the dictionary
-get dictionary _dir    # Directory setting
+!blockchain_file       # shows the value assigned to the key blockchain_file
+get dictionary _dir    # The keys and values representing the work directories
 get dictionary ip      # Default ip setting
 get connections        # Active listener services (for TCP, REST, and Broker services)
 get databases          # Get the list of databases configured
 get processes          # Show background processes enabled
-get dictionary         # Show variables assigned
 get inserts            # Statistics on data ingestion to the local database of an Operator node
-!blockchain_file       # shows a variable value
 run client !master_node get connections  # will show the config on the master
 </pre>
 
-
 ## The root directory and the default directories
-To define the root directory for AnyLog (which is different from the default), use the following command:
+To define the root directory for AnyLog (if different from the default), use the following command:
 <pre>
 set anylog home [path to AnyLog root]
 </pre>
@@ -38,7 +36,8 @@ the default directories can be created using the command:
 create work directories
 </pre>
  
-## Prerequisites
+## Deployment Prerequisites
+* Docker installed
 * Docker hub key
 * Active license key
  
