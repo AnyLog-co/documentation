@@ -491,7 +491,7 @@ Note: **In this setup, create a unique cluster for each participating operator b
 ```anylog
 <new_policy = {"cluster": {
     "company": !company_name,
-    "name": "cluster1",
+    "name": "cluster1"
 }}>
 
 blockchain prepare policy !new_policy
