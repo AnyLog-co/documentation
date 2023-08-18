@@ -541,22 +541,15 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 operator_id = blockchain get operator where name=operator1-node and company=!company_name 
 ```
 
-11. Connect to logical database(s)
-**Part 1**: `!default_dbms` - this is where user data is resides 
-```anylog
-connect dbms !default_dbms where type=sqlite 
+11. Associate physical database(s) to logical database(s)
 
-# example with PostgresSQL 
-<coneect dbms !default_dbms where
-  type=psql and
-  ip=127.0.1 and
-  port=5432 and 
-  user=admin and
-  password=passwd>
-```
-**Part 2**: `almgm` logical database and `tsd_info` table - this is used to keep a record of the data coming in 
+**Part 1**: Declare the system tables that track data ingestion.  
+`almgm` is the logical database and `tsd_info` is the table that logs the info on data ingestion.
+ 
 ```anylog
 connect dbms almgm where type=sqlite 
+
+# OR
 
 # example with PostgresSQL 
 <coneect dbms almgm where
@@ -568,6 +561,21 @@ connect dbms almgm where type=sqlite
  
 create table tsd_info where dbms=almgm
 ```
+**Part 2**: `!default_dbms` - this is where user data is resides 
+```anylog
+connect dbms !default_dbms where type=sqlite 
+
+# OR
+
+# example with PostgresSQL 
+<coneect dbms !default_dbms where
+  type=psql and
+  ip=127.0.1 and
+  port=5432 and 
+  user=admin and
+  password=passwd>
+```
+
 
 11. (Optional) Partition the data 
 ```anylog 
