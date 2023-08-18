@@ -156,7 +156,7 @@ connect dbms blockchain where type=sqlite
 # create ledger table 
 create table ledger where dbms=blockchain  
 ```
-Note: If SQLite is used, databases are created in `!dbms_dir`. The work directories are created with the command `create work directories`.
+Note: If SQLite is used, databases are created in `!dbms_dir`. 
 
 6. Enable the TCP and REST services 
 
@@ -231,8 +231,9 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 
 ## Query Configuration
-A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
-database exists.
+A _query node_ is an AnyLog node configured to satisfy queries.  
+Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
+database is configured.
 
 * Attaching to the CLI (node name: `query-node`)  
 ```shell 
@@ -379,11 +380,6 @@ An _operator node_ hosts user data.
 
 Deployment considerations:
 
-* Make sure each cluster has a unique name -- If multiple operators share a cluster, then when querying, results from **only 1** 
-of the operators will be returned. More information can be found in  [high-avilability](../../high%20availability.md).    
-* Make sure each operator has a unique name
-* If the operators are on the same physical machine, make sure each operator has unique port values. 
-
 * Attaching to the CLI (node name: `operator1-node`)  
 ```shell 
 docker attach --detach-keys=ctrl-d operator1-node
@@ -507,7 +503,8 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 cluster_id = blockchain get cluster where company=!company_name and name=cluster1 bring.first [*][id] 
 ```
 
-9. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+9. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy. 
+Note: **with multiple operators make sure that the Operator name is unique, and make sure that the operator is associated with the unique cluster ID**.
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"operator": {
