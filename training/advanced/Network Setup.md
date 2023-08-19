@@ -49,7 +49,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```
 2. Deploy the Docker containers for the AnyLog nodes. This step is done for **each** AnyLog instance.
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
-     for the master node container, **query** for the query node and **operator-1** for an operator node. 
+     for the master node container, **query-1** for a query node and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
     * The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
@@ -94,7 +94,7 @@ With this Docker install, the work directories are declared and created accordin
 values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
 
 In this deployment, 2 additional key value pairs are added to the AnyLog dictionary to identify a directory to host 
-scripts and test files (see the example commands below).  
+scripts and and a directory to host test files (see the example commands below).  
 
 ```anylog
 if $LOCAL_SCRIPTS then set local_scripts = $LOCAL_SCRIPTS
@@ -123,6 +123,15 @@ Different nodes use local databases to manage different tasks. System databases 
 | Query         | system_query  | -----         | Manage query result sets  | The tables are created transparently |
 | Operator      | almgm         | tsd_info      | Monitor data ingestion    | create table tsd_info where dbms=almgm |
 
+### Authentication disabled
+In this setup authentication is disabled on all nodes.
+
+### The message queue 
+The message queue is an internal buffer on each node that stores messages (like error messages or messages from peer nodes).  
+In this setup, the message queue is enabled on all nodes. 
+Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+The cpmmand `echo [mesage text]` will place the message text in the queue.    
+The command `get echo queue` retrieves the messages and removes the plus sign.
  
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
