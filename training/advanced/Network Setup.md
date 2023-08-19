@@ -1,5 +1,11 @@
 # Network Setup
 
+**Table of content**
+[Deployment Prerequisites](#deployment-prerequisites)
+[Frequently used commands](#frequently-used-commands-to-monitor-settings)
+
+
+
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
 Alternatively, the configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
 ```
@@ -29,21 +35,8 @@ get processes          # Show background processes enabled
 get inserts            # Statistics on data ingestion to the local database of an Operator node
 run client !master_node get connections  # will show the config on the master
 ```
-
-## The root directory and the default directories
-To define the root directory for AnyLog (if different from the default), use the following command:
-```anylog 
-set anylog home [path to AnyLog root]
-```
-
-If the root directory is changed or AnyLog is installed without a package that creates the work directories (once), 
-the work directories can be created (under AnyLog root) using the command:
-
-```anylog
-create work directories
-```
  
-## Docker deployment process 
+## Deploy AnyLog using Docker 
 
 1. Log as AnyLog user (on each physical machine)
 ```shell
@@ -68,6 +61,72 @@ docker run -it --detach-keys=ctrl-d --network host \
 --name ${NODE_TYPE}-node --rm anylogco/anylog-network:latest
 ```
 
+### Background Process
+When deploying an AnyLog container, the AnyLog instance needs to be configured such that:
+
+correct paths, and license key gets activated (if set). 
+
+1. Directories get declared and created, with values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
+
+```anylog
+# set env variables
+if $ANYLOG_PATH then set anylog_path = $ANYLOG_PATH
+set anylog home !anylog_path
+if $ANYLOG_ID_DIR then set id_dir = $ANYLOG_ID_DIR
+
+if $BLOCKCHAIN_DIR then
+do set blockchain_dir = $BLOCKCHAIN_DIR
+do set blockchain_file = !blockchain_dir/blockchain.json
+do set blockchain_new = !blockchain_dir/blockchain.new
+do set blockchain_sql = !blockchain_dir/blockchain/blockchain.sql
+
+if $DATA_DIR then  # default: /app/AnyLog-Network/data
+do set data_dir = $DATA_DIR
+do set archive_dir = !data_dir/archive
+do set bkup_dir = !data_dir/bkup
+do set blobs_dir = !data_dir/blobs
+do set bwatch_dir = !data_dir/bwatch
+do set dbms_dir = !data_dir/dbms
+do set distr_dir = !data_dir/distr
+do set err_dir = !data_dir/error
+do set pem_dir = !data_dir/pem
+do set prep_dir = !data_dir/prep
+do set test_dir = !data_dir/test
+do set tmp_dir = !data_dir/tmp
+do set watch_dir = !data_dir/watch
+
+if $LOCAL_SCRIPTS then set local_scripts = $LOCAL_SCRIPTS
+if $TEST_DIR then set test_dir = $TEST_DIR
+
+# create directories 
+create work directories
+```
+**Note**: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory 
+needs to be re-declared. Users can view the work directories using the following command:
+```anylog
+get dictionary _dir
+```
+## The root directory and the default directories
+To define the root directory for AnyLog (if different from the default), use the following command:
+```anylog 
+set anylog home [path to AnyLog root]
+```
+
+If the root directory is changed or AnyLog is installed without a package that creates the work directories (once), 
+the work directories can be created (under AnyLog root) using the command:
+
+```anylog
+create work directories
+```
+
+2. If a license key is set as en enviornment variable during `docker run`, then the AnyLog license key will be set. 
+License key must be set for any other commands to be executed
+
+```anylog
+set license where activation_key = $LICENSE_KEY
+```
+
+
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
  a dedicated AnyLog node.  
@@ -81,12 +140,7 @@ docker attach --detach-keys=ctrl-d master-node
 Issue the following configuration commands on the AnyLog CLI. 
 
 
-1. Set license key - this step is redundant if license key was provided in the [docker deployment process](#docker-deployment-process).
-```anylog
-set license where activation_key = ${ANYLOG_LICENSE_KEY}
-```
-
-2. Disable authentication and enable message queue
+1. Disable authentication and enable message queue
 
 ```anylog
 set authentication off    # Disable users authentication
@@ -95,30 +149,8 @@ set echo queue on         # Some messages are stored in a queue (With off value 
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The command `get echo queue` retrieves the messages and removes the plus sign.
 
-3. Declare the root directory and create the work directories  
-```anylog
-# This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
-anylog_path = $ANYLOG_PATH
 
-# define the root directory for AnyLog
-set anylog home !anylog_path
-
-# This is an ENV variable, that's preset as part of the dockerfile - $LOCAL_SCRIPTS=/app/deployment-scripts/scripts 
-set local_scripts = $LOCAL_SCRIPTS
-
-# This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
-set test_dir = $TEST_DIR
-
-# create work directories that are used by the AnyLog node and processes for local data. 
-create work directories
-```
-Note: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory needs to be re-declared.   
-Users can view the work directories using the following command:
-```anylog
-get dictionary _dir
-```
-
-4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
+2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
 ```anylog
 
 node_name = Master              # Adds a name to the CLI prompt
