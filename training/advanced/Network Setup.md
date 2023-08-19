@@ -3,7 +3,11 @@
 **Table of content**
 [Deployment Prerequisites](#deployment-prerequisites)
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)
-
+[Deploy AnyLog using Docker](#deploy-anylog-using-docker)
+[Deployment comments](#master-node-configuration)
+[Master Node Configuration](#master-node-configuration)
+[Query Node Configuration](#query-node-configuration)
+[Operator Node Configuration](#operator-node-configuration)
 
 
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
@@ -42,7 +46,7 @@ run client !master_node get connections  # will show the config on the master
 ```shell
 docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```
-2. Deploy the Docker container of AnyLog with no preset configurations. This step is done for **each** AnyLog instance.
+2. Deploy the Docker containers for the AnyLog nodes. This step is done for **each** AnyLog instance.
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
      for the master node container and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
@@ -61,50 +65,64 @@ docker run -it --detach-keys=ctrl-d --network host \
 --name ${NODE_TYPE}-node --rm anylogco/anylog-network:latest
 ```
 
-### Background Process
-When deploying an AnyLog container, the AnyLog instance needs to be configured such that:
+## Deployment comments:
 
-correct paths, and license key gets activated (if set). 
+### Setting the work directories
+The work directories store files associated with each node and are listed in the
+[Local Directory Structure](../../getting%20started.md#local-directory-structure) document.
 
-1. Directories get declared and created, with values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
+When an AnyLog node is deployed, the AnyLog dictionary includes keys that represent directory names
+and values that represent the path to each directory.
 
-```anylog
-# set env variables
-if $ANYLOG_PATH then set anylog_path = $ANYLOG_PATH
-set anylog home !anylog_path
-
-if $LOCAL_SCRIPTS then set local_scripts = $LOCAL_SCRIPTS
-if $TEST_DIR then set test_dir = $TEST_DIR
-
-# create directories 
-create work directories
-```
-**Note**: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory 
-needs to be re-declared. Users can view the work directories using the following command:
-```anylog
-get dictionary _dir
-```
-## The root directory and the default directories
 To define the root directory for AnyLog (if different from the default), use the following command:
 ```anylog 
 set anylog home [path to AnyLog root]
 ```
+Declaring the path for **anylog home** will modify the locations of the work directories to be subdirectories 
+of the newly declared **anylog home**.
 
-If the root directory is changed or AnyLog is installed without a package that creates the work directories (once), 
+If the root directory is changed or AnyLog is installed without a package that creates the work directories , 
 the work directories can be created (under AnyLog root) using the command:
 
 ```anylog
 create work directories
 ```
+Note: The **create work directories** command is executed **once** to create the physical directories.
 
-2. If a license key is set as en enviornment variable during `docker run`, then the AnyLog license key will be set. 
-License key must be set for any other commands to be executed
+With this Docker install, the work directories are declared and created according to the 
+values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
 
+In this deployment, 2 additional key value pairs are added to the AnyLog dictionary to identify a directory to host 
+scripts and test files (see the example commands below).  
+
+```anylog
+if $LOCAL_SCRIPTS then set local_scripts = $LOCAL_SCRIPTS
+if $TEST_DIR then set test_dir = $TEST_DIR
+```
+
+Users can view the work directories using the following command:
+```anylog
+get dictionary _dir
+```
+
+### The AnyLog license key
+
+If a license key is set as en environment variable during `docker run`, then the AnyLog license key will be set in the Docker install process.   
+The License key can be provided on the CLI as in the example below:
 ```anylog
 set license where activation_key = $LICENSE_KEY
 ```
 
+### System databases
+Different nodes use local databases to manage different tasks. System databases are declared like users databases and are the following:
 
+| Node Type     | DBMS Name     | Table Name    | Description | Create table command | 
+| ------------- | ------------- | ------------- | ------------------------- |----- |
+| Master        | blockchain    | Ledger        | Host the network metadata | create table ledger where dbms=blockchain |
+| Query         | system_query  | -----         | Manage query result sets  | The tables are created transparently |
+| Operator      | almgm         | tsd_info      | Monitor data ingestion    | create table tsd_info where dbms=almgm |
+
+ 
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
  a dedicated AnyLog node.  

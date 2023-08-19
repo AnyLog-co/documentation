@@ -110,13 +110,16 @@ Directory Structure   Explabnation
     -->local_scripts  [Users scripts]
 ```
 
-Note: The following command creates the work folders if they do not exist:
-```anylog
-create work directories
-```
-The command needs to be issued only once on the physical or virtual machine.
-
-  
+Notes: 
+* The following command creates the work folders if they do not exist:
+    ```anylog
+    create work directories
+    ```
+    The command needs to be issued only once on the physical or virtual machine.
+* The following commands list the directories on an AnyLog node:
+     ```anylog
+    get dictionary _dir
+    ``` 
 ## Basic operations
 
 ### Initiating Configuring AnyLog instances
