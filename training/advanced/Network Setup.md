@@ -146,6 +146,10 @@ Example:
   password=passwd>
 ```
 
+Note:
+* For SQLite, databases are created in `!dbms_dir`
+* The following link includes the info for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql).
+
 ### Authentication disabled
 In this setup authentication is disabled on all nodes.
 
@@ -163,7 +167,7 @@ This document include 2 options:
 1) Policies where bind is false - to support multiple IPs
 2) Policies where bind is true - to support a single IP.  
 
-With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on the same 
+With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on a local  
 network as well as members over the Internet.
  
 ## Master Node Configuration
@@ -207,8 +211,7 @@ ledger_conn=127.0.0.1:32048
 ```
 
 3. Declare a database to service the metadata table (the _ledger_ table)
-* For SQLite, databases are created in `!dbms_dir`
-* Directions for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql)
+
 ```anylog
 connect dbms blockchain where type=sqlite 
 
