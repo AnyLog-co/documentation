@@ -307,16 +307,17 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-6. run scheduler & blockchain sync
+6. Enable the scheduler service
 ```anylog
-# start scheduler 
 run scheduler 1
+```
 
-# blockchain sync 
+7. Enable the metadata sync process
+```anylog 
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-7. Declare query node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+8. Declare query node policy -- based on the TCP binding, add the relevant _query node_ policy.  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"query": {
@@ -344,7 +345,7 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-8. Connect to system_query logical database against in-memory SQLite.
+9. Connect to system_query logical database against in-memory SQLite.
 ```anylog
 # example with SQLite 
 connect dbms blockchain where type=sqlite and memory=true  
@@ -451,7 +452,7 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-6. Create cluster policy 
+6. Create a cluster policy 
 
 Note: **In this setup, create a unique cluster for each participating operator by setting a unique cluster name**
 ```anylog
@@ -464,21 +465,25 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-7. Enable scheduler & blockchain sync
+7. Enable the scheduler service
 ```anylog
 # start scheduler 
 run scheduler 1
+```
 
-# blockchain sync 
+8. Enable the metadata sync service
+```anylog 
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-8. Get cluster ID
+9. Get cluster ID  
+The cluster ID identifies the cluster policy, it is added to the Operator policy when created (see the step below).
 ```anylog
 cluster_id = blockchain get cluster where company=!company_name and name=cluster1 bring.first [*][id] 
 ```
 
-9. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy. 
+10. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+
 Note: **with multiple operators make sure that the Operator name is unique, and make sure that the operator is associated with the unique cluster ID**.
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
@@ -509,12 +514,14 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-10. Get operator ID
+11. Get operator ID
+
+The Operator ID is retrieved and added to the Operator service initialization command (see the Operator init command below).
 ```anylog
 operator_id = blockchain get operator where name=operator1-node and company=!company_name  bring.first [*][id] 
 ```
 
-11. Associate physical database(s) to logical database(s)
+12. Associate physical database(s) to logical database(s)
 
 **Part 1**: Declare the system tables that track data ingestion.  
 `almgm` is the logical database and `tsd_info` is the table that logs the info on data ingestion.
@@ -585,7 +592,7 @@ run streamer
 ```
 
 ## Validate Network is Up
-detaile are available in Session II of the basic training - 
+Details are available in Session II of the basic training - 
 [Validating the setup of the nodes in the network](../Session%20II%20(Deployment).md#validating-the-setup-of-the-nodes-in-the-network)
 
 ## Insert Data using cURL
@@ -609,7 +616,7 @@ run client () sql lsl_demo format = table "select insert_timestamp, device_name,
 run client () sql lsl_demo format = table "select count(*), min(value), max(value) from ping_sensor"
 ```
 
-* Supporting commands to track data coming in
+* Supporting commands to track data streaming and ingestion
 ```anylog 
 
 # Statistics on the streaming processes. 
