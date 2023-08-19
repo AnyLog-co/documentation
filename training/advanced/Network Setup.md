@@ -348,7 +348,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 9. Connect to system_query logical database against in-memory SQLite.
 ```anylog
 # example with SQLite 
-connect dbms blockchain where type=sqlite and memory=true  
+connect dbms system_query where type=sqlite and memory=true  
 ```
 
 ## Operator Node Configuration

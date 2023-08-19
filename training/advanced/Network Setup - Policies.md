@@ -260,9 +260,9 @@ ledger_conn=127.0.0.1:32048
 * Directions for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql) 
 ```anylog
 # example with SQLite 
-connect dbms blockchain where type=sqlite and memory=true 
+connect dbms system_query where type=sqlite and memory=true 
 ```
-**Note**: If SQLite is used, databases are created in `!dbms_dir`. 
+**Note**: If SQLite is used, the SQLite databases are created in `!dbms_dir`. 
  
 4. Enable the TCP and REST services - Configuration base connectivity
 ```anylog
