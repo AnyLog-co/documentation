@@ -598,7 +598,7 @@ set buffer threshold where time=60 seconds and volume=10KB and write_immediate=t
 # Enable the streamer service - to writes streaming data to files
 run streamer
 
-# start operator to accept data coming in 
+# Enable the Operator ingestion service
 <run operator where
     create_table=true and
     update_tsd_info=true and
@@ -615,7 +615,7 @@ run streamer
 detaile are available in Session II of the basic training - 
 [Validating the setup of the nodes in the network](../Session%20II%20(Deployment).md#validating-the-setup-of-the-nodes-in-the-network)
 
-## Inserting & Querying data 
+## Insert Data using cURL
 
 * Inserting 100 rows of data via cURL command  
 ```shell
