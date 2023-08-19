@@ -49,7 +49,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```
 2. Deploy the Docker containers for the AnyLog nodes. This step is done for **each** AnyLog instance.
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
-     for the master node container and **operator-1** for an operator node. 
+     for the master node container, **query** for the query node and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
     * The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
