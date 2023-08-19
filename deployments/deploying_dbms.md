@@ -69,6 +69,15 @@ helm install $HOME/deployments/helm/packages/postgres-14.0-alpine.tgz \
   --values $HOME/deployments/helm/sample-configurations/postgres.yaml 
 ```
 
+**AnyLog Command**: The following provides an example connecting `test` logical to PostgresSQL physical database on AnyLog.   
+```anylog
+<coneect dbms test where
+  type=psql and
+  ip=127.0.1 and
+  port=5432 and
+  user=admin and
+  password=passwd> 
+```
 
 ## MongoDB 
 On machines that will use MongoDB (usually Operator nodes) - make sure MongoDB is installed locally. Our deployments 
@@ -120,4 +129,24 @@ helm install $HOME/deployments/helm/packages/mongodb-volume-4.tgz \
 helm install $HOME/deployments/helm/packages/mongodb-4.tgz \
   --name-template mongo \
   --values $HOME/deployments/helm/sample-configurations/mongodb.yaml 
+```
+
+**AnyLog Command**: The following provides an example connecting `test` logical to MongoDB physical database on AnyLog, 
+for archiving blobs. A SQL-based logical database with the same name (ex. PostgresSQL or SQLite) is a _prerequisite_ 
+and running blobs archiver is a _post-requisite_.   
+```anylog
+<coneect dbms test where
+  type=psql and
+  ip=127.0.1 and
+  port=5432 and
+  user=admin and
+  password=passwd>
+  
+# Archive large objects
+<run blobs archiver where
+    dbms=true and
+    folder=true and
+    compress=!true and
+    reuse_blobs=true
+>
 ```
