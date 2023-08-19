@@ -5,7 +5,7 @@ being set using a blockchain policy.
 
 [Network Setup](Network%20Setup.md) provides the same directions, but with network condifigurations set manually. 
 
-## Docker deployment process
+## Docker Deployment Process
 
 1. Log into AnyLog user (on each physical machine)
 ```shell
@@ -117,7 +117,6 @@ The command `get echo queue` retrieves the messages and removes the plus sign.
 2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
 ```anylog
 node_name = Master              # Adds a name to the CLI prompt
-
 company_name="New Company"
 
 anylog_server_port=32048
@@ -179,6 +178,129 @@ run blockchain sync where source=master and time="30 seconds" and dest=file and 
 # if TCP bind is false, then state both external and local IP addresses 
 <new_policy = {"master": {
   "name": "master-node", 
+  "company": !company_name, 
+  "ip": !external_ip, 
+  "local_ip": !ip,
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
+}}>
+
+# OR
+
+# if TCP bind is true, then stae only the local IP  aaddress
+<new_policy = {"master": {
+  "name": "master-node", 
+  "company": !company_name, 
+  "ip": !ip,
+  "port": !anylog_server_port.int, 
+  "rest_port": !anylog_rest_port.int
+}}> 
+
+# declare policy 
+blockchain prepare policy !new_policy
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+```
+**Note**: There is no need to recreate the policy in a situation where the node restarts itself, and the data is persistent.
+
+## Query Node Configuration
+A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, as long as 
+[system_query](sandbox%20-%20Network%20setup.md#L189-L193) database is configured. 
+
+* Attaching to the CLI (node name: `master-node`)
+```shell
+docker attach --detach-keys=ctrl-d master-node
+```
+* Detaching from Docker container: `ctrl-d`
+
+Issue the following configuration commands on the AnyLog CLI, alternatively you can run:
+```anylog
+process !local_scripts/documentation_deployments/master_configuration.al
+```
+
+* All commands for this script can be run using the following script:
+```anylog
+process !local_scripts/documentation_deployments/master_network_policy.al
+```
+
+* All commands for this script can be run using the following script:
+```anylog
+process !local_scripts/documentation_deployments/query_network_policy.al
+```
+
+1. Disable authentication and enable message queue
+```anylog
+on error ignore           # ignore error messages
+set debug off             # disable debugging, by setting debug to `on` users can view what happens in each step
+set authentication off    # Disable users authentication
+set echo queue on         # Some messages are stored in a queue (otherwise printed to the consul)
+```
+**Note**: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+The command `get echo queue` retrieves the messages and removes the plus sign.
+
+2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
+```anylog
+node_name = Query             # Adds a name to the CLI prompt
+company_name="New Company"
+
+anylog_server_port=32348
+anylog_rest_port=32349
+
+set tcp_bind=false
+set rest_bind=false
+
+tcp_threads=6
+rest_threads=6
+rest_timeout=30
+
+ledger_conn=127.0.0.1:32048
+```
+
+3. Connect to system_query logical database against in-memory SQLite.
+* For SQLite, databases are created in `!dbms_dir`
+* Directions for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql) 
+```anylog
+# example with SQLite 
+connect dbms blockchain where type=sqlite and memory=true 
+```
+**Note**: If SQLite is used, databases are created in `!dbms_dir`. 
+ 
+4. Enable the TCP and REST services - Configuration base connectivity
+```anylog
+<new_policy = {"config": {
+   "name": "anylog-query-network-configs",
+   "company": !company_name,
+   "ip": "!external_ip", 
+   "local_ip": "!ip",
+   "port": "!anylog_server_port.int",
+   "rest_port": "!anylog_rest_port.int" 
+}}>
+
+# declare policy
+blockchain prepare policy !new_policy
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+```
+**Note**: There is no need to recreate the policy in a situation where the node restarts itself, and the data is persistent.  
+
+5. execute policy
+```anylog
+policy_id = blockchain get config where name=anylog-master-network-configs and company=!company_name bring [*][id]
+config from policy where id = !policy_id
+```
+
+6. run the scheduler & blockchain sync process
+```anylog
+# start scheduler (that service the rule engine)
+run scheduler 1
+
+# blockchain sync 
+run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
+```
+
+7. Declare the master node on the shared metadata  
+```anylog
+# if TCP bind is false, then state both external and local IP addresses 
+<new_policy = {"query": {
+  "name": "query-node", 
   "company": !company_name, 
   "ip": !external_ip, 
   "local_ip": !ip,
