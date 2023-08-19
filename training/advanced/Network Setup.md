@@ -505,35 +505,23 @@ The Operator ID is retrieved and added to the Operator service initialization co
 operator_id = blockchain get operator where name=operator1-node and company=!company_name  bring.first [*][id] 
 ```
 
-10. Create the system database
+10. Create the system database **almgm** and **tsd_info** table
 
-**Part 1**: Declare the system tables that track data ingestion.  
-`almgm` is the logical database and `tsd_info` is the table that logs the info on data ingestion.
+almgm` is the logical database and `tsd_info` is the table that logs the info on data ingestion.
  
 ```anylog
 connect dbms almgm where type=sqlite 
 
-
 create table tsd_info where dbms=almgm
 ```
-**Part 2**: Declare the databases hosting the user's data
+11. Declare the databases hosting the user's data
+Note: The user tables are created dynamically according to the ingested data. 
 
 ```anylog
 connect dbms !default_dbms where type=sqlite 
-
-# OR
-
-# example with PostgresSQL 
-<coneect dbms !default_dbms where
-  type=psql and
-  ip=127.0.1 and
-  port=5432 and 
-  user=admin and
-  password=passwd>
 ```
 
-
-11. (Optional) Partition the data 
+12. (Optional) Partition the data 
 ```anylog 
 partition !default_dbms * using insert_timestamp by 1 day
 
@@ -544,7 +532,7 @@ get databases
 get partitions
 ```
 
-12. Configure and enable the Operator services
+13. Configure and enable the Operator services
 
 ```anylog
 # buffer thresholds size and time 
@@ -591,16 +579,15 @@ run client () sql lsl_demo format = table "select insert_timestamp, device_name,
 run client () sql lsl_demo format = table "select count(*), min(value), max(value) from ping_sensor"
 ```
 
-* Supporting commands to track data streaming and ingestion
+* Sample data monitoring
 ```anylog 
 
-# Statistics on the streaming processes. 
-get streaming 
+ 
+get streaming # Statistics on the streaming processes. 
 
 # Statistics on SQL Inserts of data to the local databases.
 # Note - depending on the setup, it may take a few seconds until data is pushed from the streaming buffers to the databases.
 get inserts
-
 
 # Information on the Operator processes and configuration. 
 get operator
