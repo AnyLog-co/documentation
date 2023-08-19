@@ -123,6 +123,29 @@ Different nodes use local databases to manage different tasks. System databases 
 | Query         | system_query  | -----         | Manage query result sets  | The tables are created transparently |
 | Operator      | almgm         | tsd_info      | Monitor data ingestion    | create table tsd_info where dbms=almgm |
 
+### Using PostgreSQL
+
+The example below are provided with SQLite. Users can use PostgreSQL by declaring the dbms **type** to be **psql**
+as follows:
+```anylog
+<coneect dbms [logical dbms name] where
+  type=psql and
+  ip=[IP of PostgreSQL] and
+  port=[PSQL port] and 
+  user=[user name] and
+  password=[user password]>
+```
+Example: 
+
+```anylog
+<coneect dbms almgm where
+  type=psql and
+  ip=127.0.0.1 and
+  port=5432 and 
+  user=admin and
+  password=passwd>
+```
+
 ### Authentication disabled
 In this setup authentication is disabled on all nodes.
 
@@ -132,6 +155,11 @@ In this setup, the message queue is enabled on all nodes.
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The cpmmand `echo [mesage text]` will place the message text in the queue.    
 The command `get echo queue` retrieves the messages and removes the plus sign.
+
+### The bind option in REST, TCP and Message Broker services
+The REST, TCP and Message Broker services can be configured to service one or two IPs.    
+2 IPs are used when a node is communicating with peer on a local network as well as on the Internet.  
+This document include 2 options: Policies where bind is false - to support multiple IPs where bind is true, to support a single IP. 
  
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
@@ -145,18 +173,15 @@ docker attach --detach-keys=ctrl-d master-node
 
 Issue the following configuration commands on the AnyLog CLI. 
 
-
 1. Disable authentication and enable message queue
 
 ```anylog
 set authentication off    # Disable users authentication
 set echo queue on         # Some messages are stored in a queue (With off value (default) printed to the console)
 ```
-Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
-The command `get echo queue` retrieves the messages and removes the plus sign.
 
-
-2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.      
+2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
+      
 ```anylog
 
 node_name = Master              # Adds a name to the CLI prompt
@@ -176,19 +201,17 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-5. Declare a database to service the metadata table (the _ledger_ table)
+3. Declare a database to service the metadata table (the _ledger_ table)
 * For SQLite, databases are created in `!dbms_dir`
 * Directions for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql)
 ```anylog
-# example with SQLite 
 connect dbms blockchain where type=sqlite 
 
 # create ledger table 
 create table ledger where dbms=blockchain  
 ```
  
-
-6. Enable the TCP and REST services - Manually configure TCP and REST connectivity 
+4. Enable the TCP and REST services - Manually configure TCP and REST connectivity 
 ```anylog
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
@@ -201,17 +224,17 @@ create table ledger where dbms=blockchain
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
-7. Enable the Scheduler service
+5. Enable the Scheduler service
 ```anylog
 run scheduler 1  # start scheduler (that service the rule engine)
 ```
 
-8. Enable the metadata sync service
+6. Enable the metadata sync service
 ```anylog
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-9. Declare the master node on the shared metadata  
+7. Declare the Master Node policy on the shared metadata  
 ```anylog
 # if TCP bind is false, then state both external and local IP addresses 
 <new_policy = {"master": {
@@ -253,44 +276,12 @@ docker attach --detach-keys=ctrl-d query-node
 
 Issue the following configuration commands on the AnyLog CLI.
 
-1. Set license key - this step is done automatically, if set as environment variable
-```anylog
-set license where activation_key = ${ANYLOG_LICENSE_KEY}
-```
-
-2. Disable authentication and enable message queue
+1. Disable authentication and enable message queue
 ```anylog
 set authentication off    # Disable users authentication
 set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
 ```
-Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
-The command `get echo queue` retrieves the messages and removes the plus sign.
-
-3. Declare the root directory and create the work directories
-```anylog
-# This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
-anylog_path = $ANYLOG_PATH
-
-# define the root directory for AnyLog
-set anylog home !anylog_path
-
-# This is an ENV variable, that's preset as part of the dockerfile - $LOCAL_SCRIPTS=/app/deployment-scripts/scripts 
-set local_scripts = $LOCAL_SCRIPTS
-
-# This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
-set test_dir = $TEST_DIR
-
-# create work directories that are used by the AnyLog node and processes for local data.
-create work directories
-```
-Note: Creating the work directories needs to be done once for each node. The next time the node starts, 
-only the root directory needs to be re-declared.     
-Users can view the path to the work directories using the following command:
-```anylog
-get dictionary _dir
-```
-
-4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services. 
+2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services. 
 ```anylog
 node_name = Query              # Adds a name to the CLI prompt
 
@@ -310,7 +301,7 @@ rest_timeout=30
 ledger_conn=127.0.0.1:32048 
 ```
 
-5.  Enable the TCP and REST services 
+3.  Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -345,17 +336,17 @@ policy_id = blockchain get config where name=anylog-master-network-configs and c
 config from policy where id = !policy_id
 ```
 
-6. Enable the scheduler service
+4. Enable the scheduler service
 ```anylog
 run scheduler 1
 ```
 
-7. Enable the metadata sync process
+5. Enable the metadata sync process
 ```anylog 
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-8. Declare query node policy -- based on the TCP binding, add the relevant _query node_ policy.  
+6. Declare query node policy -- based on the TCP binding, add the relevant _query node_ policy.  
 ```anylog
 # if TCP bind is false, then state both external and local IP addaresses 
 <new_policy = {"query": {
@@ -383,9 +374,9 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-9. Connect to system_query logical database against in-memory SQLite.
+7. Connect to system_query database (using in-memory SQLite).
 ```anylog
-# example with SQLite 
+# example with SQLite - Note: no need to declare a table 
 connect dbms system_query where type=sqlite and memory=true  
 ```
 
@@ -402,38 +393,13 @@ docker attach --detach-keys=ctrl-d operator1-node
 
 Issue the following configuration commands on the AnyLog CLI.
 
-1. Set license key - this step is done automatically, if set as environment variable
-```anylog
-set license where activation_key = ${ANYLOG_LICENSE_KEY}
-```
-
-2. Disable authentication and enable message queue.
+1. Disable authentication and enable message queue.
 ```anylog
 set authentication off    # Disable users authentication
 set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
 ```
-Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
-The command `get echo queue` retrieves the messages and removes the plus sign.
 
-3. Declare the root directory and create the work directories.
-```anylog
-# This is an ENV variable, that's preset as part of the dockerfile - $ANYLOG_PATH = /app
-anylog_path = $ANYLOG_PATH
-
-# define the root directory for AnyLog
-set anylog home !anylog_path
-
-# This is an ENV variable, that's preset as part of the dockerfile - $LOCAL_SCRIPTS=/app/deployment-scripts/scripts 
-set local_scripts = $LOCAL_SCRIPTS
-
-# This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
-set test_dir = $TEST_DIR
-
-# create work directories that are used by the AnyLog node and processes for local data.
-create work directories
-```
-
-4. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
+2. Update the local dictionary with the key-value pairs that are used to declare the node's functionality and services.
 
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
@@ -455,7 +421,7 @@ operator_threads=6
 ledger_conn=127.0.0.1:32048 
 ```
 
-5.  Enable the TCP and REST services 
+3.  Enable the TCP and REST services 
 
 **Option 1**: Manually configure TCP and REST connectivity 
 ```anylog
@@ -470,27 +436,7 @@ ledger_conn=127.0.0.1:32048
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
-**Option 2**: Configuration base connectivity 
-```anylog
-<new_policy = {"config": {
-   "name": "anylog-operator-network-configs",
-   "company": !company_name,
-   "ip": "!external_ip", 
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int" 
-}}> 
- 
-# declare policy 
-blockchain prepare policy !new_policy
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
-
-# execute policy
-policy_id = blockchain get config where name=anylog-master-network-configs and company=!company_name bring [*][id] 
-config from policy where id = !policy_id
-```
-
-6. Create a cluster policy 
+4. Create a cluster policy 
 
 Note: **In this setup, create a unique cluster for each participating operator by setting a unique cluster name**
 ```anylog
@@ -503,24 +449,24 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-7. Enable the scheduler service
+5. Enable the scheduler service
 ```anylog
 # start scheduler 
 run scheduler 1
 ```
 
-8. Enable the metadata sync service
+6. Enable the metadata sync service
 ```anylog 
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-9. Get cluster ID  
+7. Get cluster ID  
 The cluster ID identifies the cluster policy, it is added to the Operator policy when created (see the step below).
 ```anylog
 cluster_id = blockchain get cluster where company=!company_name and name=cluster1 bring.first [*][id] 
 ```
 
-10. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
+8. Declare operator node policy -- based on the TCP binding, add the relevant _master node_ policy.  
 
 Note: **with multiple operators make sure that the Operator name is unique, and make sure that the operator is associated with the unique cluster ID**.
 ```anylog
@@ -552,14 +498,14 @@ blockchain prepare policy !new_policy
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-11. Get operator ID
+9. Get the operator ID
 
 The Operator ID is retrieved and added to the Operator service initialization command (see the Operator init command below).
 ```anylog
 operator_id = blockchain get operator where name=operator1-node and company=!company_name  bring.first [*][id] 
 ```
 
-12. Associate physical database(s) to logical database(s)
+10. Create the system database
 
 **Part 1**: Declare the system tables that track data ingestion.  
 `almgm` is the logical database and `tsd_info` is the table that logs the info on data ingestion.
@@ -567,19 +513,10 @@ operator_id = blockchain get operator where name=operator1-node and company=!com
 ```anylog
 connect dbms almgm where type=sqlite 
 
-# OR
 
-# example with PostgresSQL 
-<coneect dbms almgm where
-  type=psql and
-  ip=127.0.1 and
-  port=5432 and 
-  user=admin and
-  password=passwd>
- 
 create table tsd_info where dbms=almgm
 ```
-**Part 2**: Declare the databases histing the user's data
+**Part 2**: Declare the databases hosting the user's data
 
 ```anylog
 connect dbms !default_dbms where type=sqlite 
