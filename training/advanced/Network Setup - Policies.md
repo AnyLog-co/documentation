@@ -296,7 +296,7 @@ run scheduler 1
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-7. Declare the master node on the shared metadata  
+7. Declare the query node on the shared metadata  
 ```anylog
 # if TCP bind is false, then state both external and local IP addresses 
 <new_policy = {"query": {
@@ -311,7 +311,7 @@ run blockchain sync where source=master and time="30 seconds" and dest=file and 
 # OR
 
 # if TCP bind is true, then stae only the local IP  aaddress
-<new_policy = {"master": {
+<new_policy = {"query": {
   "name": "master-node", 
   "company": !company_name, 
   "ip": !ip,
