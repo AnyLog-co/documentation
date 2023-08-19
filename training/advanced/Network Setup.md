@@ -1,13 +1,14 @@
 # Network Setup
 
 **Table of content**
-[Deployment Prerequisites](#deployment-prerequisites)
-[Frequently used commands](#frequently-used-commands-to-monitor-settings)
-[Deploy AnyLog using Docker](#deploy-anylog-using-docker)
-[Deployment comments](#master-node-configuration)
-[Master Node Configuration](#master-node-configuration)
-[Query Node Configuration](#query-node-configuration)
-[Operator Node Configuration](#operator-node-configuration)
+
+[Deployment Prerequisites](#deployment-prerequisites)  
+[Frequently used commands](#frequently-used-commands-to-monitor-settings)    
+[Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
+[Deployment comments](#master-node-configuration)  
+[Master Node Configuration](#master-node-configuration)  
+[Query Node Configuration](#query-node-configuration)  
+[Operator Node Configuration](#operator-node-configuration)  
 
 
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
