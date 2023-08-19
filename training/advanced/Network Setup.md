@@ -45,7 +45,7 @@ create work directories
  
 ## Docker deployment process 
 
-1. Log into AnyLog user (on each physical machine)
+1. Log as AnyLog user (on each physical machine)
 ```shell
 docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```

@@ -1,13 +1,12 @@
-## Network Setup
+## Network Setup using policies
 
-The following provides directions to manually deploy an AnyLog of type _master_, _operator_ or _query_ node with network
-being set using a blockchain policy. 
+This document details deployment of AnyLog nodes using policies.    
 
-[Network Setup](Network%20Setup.md) provides the same directions, but with network condifigurations set manually. 
+[Network Setup](Network%20Setup.md) is a similar installation guide, without configuration policies.  
 
 ## Docker Deployment Process
 
-1. Log into AnyLog user (on each physical machine)
+1. Log as AnyLog user (on each physical machine)
 ```shell
 docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
 ```
@@ -32,7 +31,8 @@ docker run -it --detach-keys=ctrl-d --network host \
 ```
 
 ### Background Process
-When deploying an AnyLog container, 2 things happen in the background during start up. The AnyLog gets associated with the
+When deploying an AnyLog container, the AnyLog instance needs to be configured such that:
+
 correct paths, and license key gets activated (if set). 
 
 1. Directories get declared and created, with values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
