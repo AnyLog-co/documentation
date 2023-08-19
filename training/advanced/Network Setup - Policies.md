@@ -1,7 +1,9 @@
 ## Network Setup
 
-The following provides directions for deploying AnyLog a personalized script. Steps in this script are the basis for
-the AnyLog deployment when using the default [deployment scripts](https://github.com/AnyLog-co/deployment-scripts)
+The following provides directions to manually deploy an AnyLog of type _master_, _operator_ or _query_ node with network
+being set using a blockchain policy. 
+
+[Network Setup](Network%20Setup.md) provides the same directions, but with network condifigurations set manually. 
 
 ## Docker deployment process
 
@@ -27,6 +29,16 @@ docker run -it --detach-keys=ctrl-d --network host \
   -v anylog-${NODE_TYPE}-scripts:/app/deployment-scripts/scripts \
   -v  anylog-${NODE_TYPE}-test:/app/deployment-scripts/tests \
 --name ${NODE_TYPE}-node --rm anylogco/anylog-network:latest
+```
+
+### Background Process
+When deploying an AnyLog container, 2 things happen in the background during start up. This is done using the 
+[start_empty_node.al](..%2F..%2F..%2Fdeployment-scripts%2Fscripts%2Frun_scripts%2Fstart_empty_node.al) 
+
+1. Directories get declared and created, with values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
+
+2. If a license key is set as en enviornment variable during `docker run`, then the AnyLog license key will be set. 
+```anylog
 ```
 
 ## Master Node Configuration
