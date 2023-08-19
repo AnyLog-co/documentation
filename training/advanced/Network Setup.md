@@ -163,16 +163,17 @@ create table ledger where dbms=blockchain
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
-7. run the scheduler & blockchain sync process
+7. Enable the Scheduler service
 ```anylog
-# start scheduler (that service the rule engine)
-run scheduler 1
+run scheduler 1  # start scheduler (that service the rule engine)
+```
 
-# blockchain sync 
+8. Enable the metadata sync service
+```anylog
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
 
-8. Declare the master node on the shared metadata  
+9. Declare the master node on the shared metadata  
 ```anylog
 # if TCP bind is false, then state both external and local IP addresses 
 <new_policy = {"master": {
