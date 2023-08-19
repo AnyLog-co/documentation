@@ -115,7 +115,7 @@ set license where activation_key = $LICENSE_KEY
 ```
 
 ### System databases
-Different nodes use local databases to manage different tasks. System databases are declared like users databases and are the following:
+Different nodes use local databases to manage different tasks. System databases are declared like the user databases and are the following:
 
 | Node Type     | DBMS Name     | Table Name    | Description | Create table command | 
 | ------------- | ------------- | ------------- | ------------------------- |----- |
@@ -125,7 +125,7 @@ Different nodes use local databases to manage different tasks. System databases 
 
 ### Using PostgreSQL
 
-The example below are provided with SQLite. Users can use PostgreSQL by declaring the dbms **type** to be **psql**
+The examples below are provided with SQLite. Users can use PostgreSQL by declaring the dbms **type** to be **psql**
 as follows:
 ```anylog
 <coneect dbms [logical dbms name] where
@@ -151,15 +151,20 @@ In this setup authentication is disabled on all nodes.
 
 ### The message queue 
 The message queue is an internal buffer on each node that stores messages (like error messages or messages from peer nodes).  
-In this setup, the message queue is enabled on all nodes. 
-Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
+In this setup, the message queue is enabled on all nodes.   
+Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.  
 The cpmmand `echo [mesage text]` will place the message text in the queue.    
 The command `get echo queue` retrieves the messages and removes the plus sign.
 
 ### The bind option in REST, TCP and Message Broker services
 The REST, TCP and Message Broker services can be configured to service one or two IPs.    
-2 IPs are used when a node is communicating with peer on a local network as well as on the Internet.  
-This document include 2 options: Policies where bind is false - to support multiple IPs where bind is true, to support a single IP. 
+2 IPs are used when a node is communicating with peers on a local network as well as on the Internet.  
+This document include 2 options: 
+1) Policies where bind is false - to support multiple IPs
+2) Policies where bind is true - to support a single IP.  
+
+With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on the same 
+network as well as members over the Internet.
  
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
