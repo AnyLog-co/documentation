@@ -538,7 +538,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 10. Get operator ID
 ```anylog
-operator_id = blockchain get operator where name=operator1-node and company=!company_name 
+operator_id = blockchain get operator where name=operator1-node and company=!company_name  bring.first [*][id] 
 ```
 
 11. Associate physical database(s) to logical database(s)
