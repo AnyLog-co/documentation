@@ -9,7 +9,7 @@ For example:
 ```
 process !anylog_path/AnyLog-Network/demo/master_script.al
 ```
-Whereas `master_script.al` includes the commands and `!anylog_path` is substituted with the value assigned to the key **anylog_path** in the dictionary.
+Whereas `master_script.al` includes the commands and `!anylog_path` is substituted (dynamically) with the value assigned to the key **anylog_path** in the dictionary.
 
 ## Deployment Prerequisites
 * Docker installed
@@ -89,7 +89,7 @@ set license where activation_key = ${ANYLOG_LICENSE_KEY}
 
 ```anylog
 set authentication off    # Disable users authentication
-set echo queue on         # Some messages are stored in a queue (otherwise printed to the consule)
+set echo queue on         # Some messages are stored in a queue (With off value (default) printed to the console)
 ```
 Note: when messages are placed in the queue, the CLI prompt is extended by a plus (+) sign.
 The command `get echo queue` retrieves the messages and removes the plus sign.
@@ -108,7 +108,7 @@ set local_scripts = $LOCAL_SCRIPTS
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
 
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
+# create work directories that are used by the AnyLog node and processes for local data. 
 create work directories
 ```
 
@@ -123,7 +123,7 @@ get dictionary _dir
 
 node_name = Master              # Adds a name to the CLI prompt
 
-company_name="New Company"
+company_name="New Company"     # Update to your company name
 
 anylog_server_port=32048
 anylog_rest_port=32049 
@@ -270,11 +270,12 @@ set local_scripts = $LOCAL_SCRIPTS
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
 
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
+# create work directories that are used by the AnyLog node and processes for local data.
 create work directories
 ```
-Note: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory needs to be re-declared.   
-Users can view the work directories using the following command:
+Note: Creating the work directories needs to be done once for each node. The next time the node starts, 
+only the root directory needs to be re-declared.     
+Users can view the path to the work directories using the following command:
 ```anylog
 get dictionary _dir
 ```
@@ -283,7 +284,7 @@ get dictionary _dir
 ```anylog
 node_name = Query              # Adds a name to the CLI prompt
 
-company_name="New Company"
+company_name="New Company"     # Update to your company name 
 
 anylog_server_port=32348
 anylog_rest_port=32349 
@@ -417,7 +418,7 @@ set local_scripts = $LOCAL_SCRIPTS
 # This is an ENV variable, that's preset as part of the dockerfile - $TEST_DIR=/app/deployment-scripts/tests
 set test_dir = $TEST_DIR
 
-# create directories (such as blockchain, data/watch. anylog) that are used by the AnyLog node 
+# create work directories that are used by the AnyLog node and processes for local data.
 create work directories
 ```
 
@@ -426,7 +427,7 @@ create work directories
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
 
-company_name="New Company"
+company_name="New Company"          # Update to your company name
 set default_dbms = test
  
 anylog_server_port=32148
