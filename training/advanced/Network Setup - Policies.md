@@ -206,15 +206,15 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 A _query node_ is an AnyLog node configured to satisfy queries. Any node can act as a query node, as long as 
 [system_query](sandbox%20-%20Network%20setup.md#L189-L193) database is configured. 
 
-* Attaching to the CLI (node name: `master-node`)
+* Attaching to the CLI (node name: `query-node`)
 ```shell
-docker attach --detach-keys=ctrl-d master-node
+docker attach --detach-keys=ctrl-d query-node
 ```
 * Detaching from Docker container: `ctrl-d`
 
 Issue the following configuration commands on the AnyLog CLI, alternatively you can run:
 ```anylog
-process !local_scripts/documentation_deployments/master_configuration.al
+process !local_scripts/documentation_deployments/query_configuration.al
 ```
 
 * All commands for this script can be run using the following script:
