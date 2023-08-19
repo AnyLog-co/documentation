@@ -116,7 +116,8 @@ Notes:
     create work directories
     ```
     The command needs to be issued only once on the physical or virtual machine.
-* The following commands list the directories on an AnyLog node:
+    
+* The following command list the directories on an AnyLog node:
      ```anylog
     get dictionary _dir
     ``` 
