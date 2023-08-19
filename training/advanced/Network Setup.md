@@ -18,7 +18,7 @@ Whereas `master_script.al` includes the commands and `!anylog_path` is substitut
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
-<pre>
+```anylog
 get dictionary         # Default values in the dictionary
 !blockchain_file       # shows the value assigned to the key blockchain_file
 get dictionary _dir    # The keys and values representing the work directories
@@ -28,19 +28,20 @@ get databases          # Get the list of databases configured
 get processes          # Show background processes enabled
 get inserts            # Statistics on data ingestion to the local database of an Operator node
 run client !master_node get connections  # will show the config on the master
-</pre>
+```
 
 ## The root directory and the default directories
 To define the root directory for AnyLog (if different from the default), use the following command:
-<pre>
+```anylog 
 set anylog home [path to AnyLog root]
-</pre>
+```
+
 If the root directory is changed or AnyLog is installed without a package that creates the work directories (once), 
 the work directories can be created (under AnyLog root) using the command:
-<pre>
+
+```anylog
 create work directories
-</pre>
- 
+```
  
 ## Docker deployment process 
 
@@ -111,7 +112,6 @@ set test_dir = $TEST_DIR
 # create work directories that are used by the AnyLog node and processes for local data. 
 create work directories
 ```
-
 Note: Creating the work directories needs to be done once. The next time the nodes starts, only the root directory needs to be re-declared.   
 Users can view the work directories using the following command:
 ```anylog
@@ -139,28 +139,18 @@ ledger_conn=127.0.0.1:32048
 ```
 
 5. Declare a database to service the metadata table (the _ledger_ table)
+* For SQLite, databases are created in `!dbms_dir`
+* Directions for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql)
 ```anylog
 # example with SQLite 
 connect dbms blockchain where type=sqlite 
 
-# OR
-
-# example with PostgresSQL 
-<coneect dbms blockchain where
-  type=psql and
-  ip=127.0.1 and
-  port=5432 and 
-  user=admin and
-  password=passwd>
-  
 # create ledger table 
 create table ledger where dbms=blockchain  
 ```
-Note: If SQLite is used, databases are created in `!dbms_dir`. 
+ 
 
-6. Enable the TCP and REST services 
-
-**Option 1**: Manually configure TCP and REST connectivity 
+6. Enable the TCP and REST services - Manually configure TCP and REST connectivity 
 ```anylog
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
@@ -173,26 +163,6 @@ Note: If SQLite is used, databases are created in `!dbms_dir`.
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 ```
 
-**Option 2**: Configuration base connectivity 
-```anylog
-<new_policy = {"config": {
-   "name": "anylog-master-network-configs",
-   "company": !company_name,
-   "ip": "!external_ip", 
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int" 
-}}> 
- 
-# declare policy 
-blockchain prepare policy !new_policy
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
-
-# execute policy
-policy_id = blockchain get config where name=anylog-master-network-configs and company=!company_name bring [*][id] 
-config from policy where id = !policy_id
-```
-
 7. run the scheduler & blockchain sync process
 ```anylog
 # start scheduler (that service the rule engine)
@@ -201,9 +171,10 @@ run scheduler 1
 # blockchain sync 
 run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn
 ```
+
 8. Declare the master node on the shared metadata  
 ```anylog
-# if TCP bind is false, then state both external and local IP addaresses 
+# if TCP bind is false, then state both external and local IP addresses 
 <new_policy = {"master": {
   "name": "master-node", 
   "company": !company_name, 
