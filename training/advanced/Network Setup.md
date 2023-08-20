@@ -187,7 +187,7 @@ network as well as members over the Internet.
 
 The configurations below are doing the following:
 * Deploy Docker instances and Docker Volumes. The Docker Volumes are created once when the Docker container is installed.
-* Add Policies to the AnyLog Metadata. The policies are created once and saved in the Metadata layer.
+* Add Policies to the AnyLog Metadata. A policy is created once, stored in the metadata layer and available when the node restarts.
 * Set variables in the node dictionary - this process is done whenever a node restarts.
 * Enable selected services on the node - this is done whenever a node restarts.
 
