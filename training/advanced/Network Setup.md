@@ -9,6 +9,8 @@
 [Master Node Configuration](#master-node-configuration)  
 [Query Node Configuration](#query-node-configuration)  
 [Operator Node Configuration](#operator-node-configuration)  
+[Validate Network](#validate-network-is-up)
+[Insert Data](#insert-data-using-curl)
 
 
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
