@@ -192,6 +192,10 @@ docker attach --detach-keys=ctrl-d master-node
 ``` 
 * Detaching from Docker container: `ctrl-d`
 
+* The steps bellow, can be run using the following script
+```anylog
+process !local_scripts/documentation_deployments/master.al
+```
 Issue the following configuration commands on the AnyLog CLI. 
 
 1. Disable authentication and enable message queue
