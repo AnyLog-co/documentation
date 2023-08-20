@@ -3,7 +3,7 @@
 Users can create **config policies** that are stored in the metadata layer. When a node restarts, the node is configured
 by the instructions in the policy.
 
-This document demonstrate creating and using config policies that represent the setup and configuration detailed in the
+This document demonstrates creating and using config policies that represent the setup and configuration detailed in the
 [Network Setup](Network%20Setup.md) document.  
 
 An overview of is available in the [Configuration Policies](../../policies.md#configuration-policies) section.
@@ -16,6 +16,12 @@ If configuration policies are available, when a node start, issue the following 
 ```anylog
 config from policy where id = [Policy ID] 
 ```
+Example:
+```anylog
+master_policy_id = master_policy_id = blockchain get config where name = master-network-config bring [config][id]
+config from policy where id = !master_policy_id
+```
+
 
 ## Creating the Master Node config policy
 Create the policy on the Master Node.
@@ -24,10 +30,10 @@ Create the policy on the Master Node.
 <new_policy = {"config": {
    "name": "master-network-config",
    "company": !company_name,
-   "ip": "!external_ip",
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int",
+   "ip": !external_ip,
+   "local_ip": !ip,
+   "port": !anylog_server_port.int,
+   "rest_port": !anylog_rest_port.int,
     "script" : [
                 "set authentication off",
                 "set echo queue on",
@@ -51,10 +57,10 @@ Create the policy on the Query Node.
 <new_policy = {"config": {
    "name": "query-network-config",
    "company": !company_name,
-   "ip": "!external_ip",
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int",
+   "ip": !external_ip,
+   "local_ip": !ip,
+   "port": !anylog_server_port.int,
+   "rest_port": !anylog_rest_port.int,
     "script" : [
                 "set authentication off",
                 "set echo queue on",
@@ -94,10 +100,10 @@ and associate it with a key in the dictionary.
 <new_policy = {"config": {
    "name": "operator-network-config",
    "company": !company_name,
-   "ip": "!external_ip",
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int",
+   "ip": !external_ip,
+   "local_ip": !ip,
+   "port": !anylog_server_port.int,
+   "rest_port": !anylog_rest_port.int,
     "script" : [
                 "set authentication off",
                 "set echo queue on",
