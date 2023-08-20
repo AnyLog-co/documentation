@@ -576,8 +576,8 @@ curl -X PUT 127.0.0.1:32149 \
 
 ## Sample Queries
 ```anylog
-run client () sql lsl_demo format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
-run client () sql lsl_demo format = table "select count(*), min(value), max(value) from ping_sensor"
+run client () sql test format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
+run client () sql test format = table "select count(*), min(value), max(value) from ping_sensor"
 ```
 
 ## Sample data info commands - on the Operator Node
