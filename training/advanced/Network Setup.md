@@ -185,13 +185,13 @@ network as well as members over the Internet.
 
 ## Restarting a Node
 
-The configuration below are doing the following:
+The configurations below are doing the following:
 * Deploy Docker instances and Docker Volumes. The Docker Volumes are created once when the Docker container is installed.
 * Add Policies to the AnyLog Metadata. The policies are created once and saved in the Metadata layer.
 * Set variables in the node dictionary - this process is done whenever a node restarts.
-* Enable selected services on the node - this process can be done whenever a node restarts.
+* Enable selected services on the node - this is done whenever a node restarts.
 
-Note: The deployment process in this document, creates policies whenever they are needed. It is advised to separate 
+Note: The deployment process in this document creates policies whenever they are needed. It is advised to separate 
 the creation of the policies from the configuration of a node that restarts.
  
 ## Master Node Configuration
