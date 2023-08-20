@@ -28,8 +28,8 @@ Users can configure each node using the following commands:
 | Node Type     | Command | 
 | ------------- | ------- | 
 | Master        | process !local_scripts/documentation_deployments/master.al |
-| query         | process !local_scripts/documentation_deployments/operator.al |
-| Master        | process !local_scripts/documentation_deployments/operator.al |
+| query         | process !local_scripts/documentation_deployments/query.al |
+| Operator      | process !local_scripts/documentation_deployments/operator.al |
 
 Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
 
