@@ -6,6 +6,7 @@
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)    
 [Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
 [Deployment comments](#master-node-configuration)  
+[Restarting a Node](#restarting-a-node)  
 [Master Node Configuration](#master-node-configuration)  
 [Query Node Configuration](#query-node-configuration)  
 [Operator Node Configuration](#operator-node-configuration)    
@@ -181,6 +182,17 @@ This document include 2 options:
 
 With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on a local  
 network as well as members over the Internet.
+
+## Restarting a Node
+
+The configuration below are doing the following:
+* Deploy Docker instances and Docker Volumes. The Docker Volumes are created once when the Docker container is installed.
+* Add Policies to the AnyLog Metadata. The policies are created once and saved in the Metadata layer.
+* Set variables in the node dictionary - this process is done whenever a node restarts.
+* Enable selected services on the node - this process can be done whenever a node restarts.
+
+Note: The deployment process in this document, creates policies whenever they are needed. It is advised to separate 
+the creation of the policies from the configuration of a node that restarts.
  
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
