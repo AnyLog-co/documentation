@@ -16,11 +16,18 @@ Alternatively, the configuration commands for each node can be organized in a fi
 ```
 process [path and file name with the script]
 ```
-For example:  
-```
-process !anylog_path/AnyLog-Network/demo/master_script.al
-```
-Whereas `master_script.al` includes the commands and `!anylog_path` is substituted (dynamically) with the value assigned to the key **anylog_path** in the dictionary.
+In the examples below, the commands to configure each node are organized in a file.  
+Users can configure each node using the following commands:
+
+
+| Node Type     | Command | 
+| ------------- | ------- | 
+| Master        | process !local_scripts/documentation_deployments/master.al |
+| query         | process !local_scripts/documentation_deployments/operator.al |
+| Master        | process !local_scripts/documentation_deployments/operator.al |
+
+Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
+
 
 ## Deployment Prerequisites
 * Docker installed
