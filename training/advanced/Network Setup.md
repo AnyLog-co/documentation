@@ -219,7 +219,7 @@ set echo queue on         # Some messages are stored in a queue (With off value 
 
 node_name = Master              # Adds a name to the CLI prompt
 
-company_name="New Company"     # Update to your company name
+company_name="my_Company"     # Update to your company name
 
 anylog_server_port=32048
 anylog_rest_port=32049 
@@ -317,7 +317,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 ```anylog
 node_name = Query              # Adds a name to the CLI prompt
 
-company_name="New Company"     # Update to your company name 
+company_name="my_Company"     # Update to your company name 
 
 anylog_server_port=32348
 anylog_rest_port=32349 
@@ -416,7 +416,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
 
-company_name="New Company"          # Update to your company name
+company_name="My_Company"          # Update to your company name
 set default_dbms = test
  
 anylog_server_port=32148
