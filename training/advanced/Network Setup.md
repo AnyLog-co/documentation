@@ -577,10 +577,9 @@ run client () sql lsl_demo format = table "select insert_timestamp, device_name,
 run client () sql lsl_demo format = table "select count(*), min(value), max(value) from ping_sensor"
 ```
 
-* Sample data monitoring
+* Sample data monitoring commands - On the Operator Node
 ```anylog 
 
- 
 get streaming # Statistics on the streaming processes. 
 
 # Statistics on SQL Inserts of data to the local databases.
@@ -595,4 +594,10 @@ get rows count
 
 # Get the count of rows in the specified table or all tables asigned to the specified database, group by table 
 get rows count where group = table
+```
+
+* Data tables monitoring commands - On any node
+```anylog
+get virtual tables          # The list of the logical databases and tables in the network
+get data nodes              # The physical nodes that host each logical table
 ```
