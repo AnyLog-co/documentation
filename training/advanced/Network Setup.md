@@ -311,7 +311,7 @@ ledger_conn=127.0.0.1:32048
 
 3.  Enable the TCP and REST services 
 
-**Option 1**: Manually configure TCP and REST connectivity 
+Configure TCP and REST connectivity 
 ```anylog
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
@@ -322,26 +322,6 @@ ledger_conn=127.0.0.1:32048
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
-```
-
-**Option 2**: Configuration base connectivity 
-```anylog
-<new_policy = {"config": {
-   "name": "anylog-query-network-configs",
-   "company": !company_name,
-   "ip": "!external_ip", 
-   "local_ip": "!ip",
-   "port": "!anylog_server_port.int",
-   "rest_port": "!anylog_rest_port.int" 
-}}> 
- 
-# declare policy 
-blockchain prepare policy !new_policy
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
-
-# execute policy
-policy_id = blockchain get config where name=anylog-master-network-configs and company=!company_name bring [*][id] 
-config from policy where id = !policy_id
 ```
 
 4. Enable the scheduler service
@@ -431,7 +411,7 @@ ledger_conn=127.0.0.1:32048
 
 3.  Enable the TCP and REST services 
 
-**Option 1**: Manually configure TCP and REST connectivity 
+Configure TCP and REST connectivity 
 ```anylog
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
@@ -523,11 +503,12 @@ connect dbms almgm where type=sqlite
 create table tsd_info where dbms=almgm
 ```
 11. Declare the databases hosting the user's data
-Note: The user tables are created dynamically according to the ingested data. 
 
 ```anylog
 connect dbms !default_dbms where type=sqlite 
 ```
+Note 1: The user tables are created dynamically according to the ingested data.  
+Note 2: Repeat the call for each logical database. Note that the physical database (i.e. PSQL or SQLite) can be different for each logical dbms. 
 
 12. (Optional) Partition the data 
 ```anylog 
