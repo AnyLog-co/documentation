@@ -3,6 +3,7 @@
 **Table of content**
 
 [Deployment Prerequisites](#deployment-prerequisites)  
+[Configuring nodes using a script file](#configuring-nodes-using-a-script-file)  
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)    
 [Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
 [Deployment comments](#master-node-configuration)   
@@ -18,7 +19,14 @@
 
 
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
-Alternatively, the configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
+
+## Deployment Prerequisites
+* Docker installed
+* Docker hub key
+* Active license key
+
+## Configuring nodes using a script file
+The configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
 ```
 process [path and file name with the script]
 ```
@@ -34,11 +42,6 @@ Users can configure each node using the following commands:
 
 Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
 
-
-## Deployment Prerequisites
-* Docker installed
-* Docker hub key
-* Active license key
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
