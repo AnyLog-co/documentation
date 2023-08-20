@@ -18,10 +18,9 @@ config from policy where id = [Policy ID]
 ```
 Example:
 ```anylog
-master_policy_id = master_policy_id = blockchain get config where name = master-network-config bring [config][id]
+master_policy_id = blockchain get config where name = master-network-config bring [config][id]
 config from policy where id = !master_policy_id
 ```
-
 
 ## Creating the Master Node config policy
 Create the policy on the Master Node.

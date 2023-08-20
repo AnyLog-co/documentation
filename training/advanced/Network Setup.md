@@ -5,7 +5,7 @@
 [Deployment Prerequisites](#deployment-prerequisites)  
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)    
 [Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
-[Deployment comments](#master-node-configuration)  
+[Deployment comments](#master-node-configuration)   
 [Restarting a Node](#restarting-a-node)  
 [Master Node Configuration](#master-node-configuration)  
 [Query Node Configuration](#query-node-configuration)  
