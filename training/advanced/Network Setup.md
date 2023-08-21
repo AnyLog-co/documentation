@@ -620,7 +620,7 @@ get rows count
 get rows count where group = table
 ```
 
-## Sample tables info commands - On any node
+## Sample tables info commands - on any node
 ```anylog
 get virtual tables          # The list of the logical databases and tables in the network
 get data nodes              # The physical nodes that host each logical table
