@@ -43,7 +43,7 @@ Users can configure each node using the following commands:
 
 Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.  
 
-The outcome of the scripts are the same as CLI configuration of the 3 nodes:
+The outcomes of the scripts are the same as CLI configuration of the 3 nodes:
 [Master Node Configuration](#master-node-configuration), [Query Node Configuration](#query-node-configuration), 
 [Operator Node Configuration](#operator-node-configuration).
 
