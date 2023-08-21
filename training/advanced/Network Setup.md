@@ -41,7 +41,14 @@ Users can configure each node using the following commands:
 | query         | process !local_scripts/documentation_deployments/query.al |
 | Operator      | process !local_scripts/documentation_deployments/operator.al |
 
-Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
+Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.  
+
+The outcome of the scripts are the same as CLI configuration of the 3 nodes:
+[Master Node Configuration](#master-node-configuration), [Query Node Configuration](#query-node-configuration), 
+[Operator Node Configuration](#operator-node-configuration).
+
+Note that the scripts are assuming some predetermined values, for example: ledger_conn=127.0.0.1:32048 which may change
+with specific deployments. These value are detailed in the dictionary setting of each deployed server.
 
 ## Configuring nodes using policies
 Users can create configuration policies for each node and initiate a node by associating the node with the configuration policies.  
