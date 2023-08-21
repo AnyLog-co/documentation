@@ -123,7 +123,7 @@ and associate it with a key in the dictionary.
                 "partition !default_dbms * using insert_timestamp by 1 day",
                 "run scheduler 1",
                 "run blockchain sync where source=master and time=\"30 seconds\" and dest=file and connection=!ledger_conn",
-                "operator_id = blockchain get operator where name=operator1-node and company=!company_name  bring.first [*][id]",
+                "operator_id = blockchain get operator where name=operator1-node bring.first [*][id]",
                 "set buffer threshold where time=60 seconds and volume=10KB and write_immediate=true",
                 " !operator_process"
     ]
