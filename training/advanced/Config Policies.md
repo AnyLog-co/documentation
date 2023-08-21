@@ -16,22 +16,15 @@ If configuration policies are available, when a node start, issue the following 
 ```anylog
 config from policy where id = [Policy ID] 
 ```
-Examples:  
-Master Node:
-```anylog
-policy_id = blockchain get config where name = master-network-config bring [config][id]
-config from policy where id = !policy_id
-```
-Query Node:
-```anylog
-policy_id = blockchain get config where name = query-network-config bring [config][id]
-config from policy where id = !policy_id
-```
-Operator_node:
-```anylog
-policy_id = blockchain get config where name = operator-network-config bring [config][id]
-config from policy where id = !policy_id
-```
+### Examples:
+| Node Type     | Command | 
+| ------------- | ------- | 
+| Master        | policy_id = blockchain get config where name = master-network-config bring [config][id] |
+|               | config from policy where id = !policy_id |
+| query         | policy_id = blockchain get config where name = query-network-config bring [config][id] |
+|               | config from policy where id = !policy_id |
+| Operator      | policy_id = blockchain get config where name = operator-network-config bring [config][id] |
+|               | config from policy where id = !policy_id |
 
 ## Creating the Master Node config policy
 Create the policy on the Master Node.
