@@ -114,6 +114,8 @@ and associate it with a key in the dictionary.
                 "connect dbms almgm where type=sqlite",
                 "connect dbms !default_dbms where type=sqlite",
                 "partition !default_dbms * using insert_timestamp by 1 day",
+                "set buffer threshold where time=60 seconds and volume=10KB and write_immediate=true",
+                "run streamer",
                 "run scheduler 1",
                 "run blockchain sync where source=master and time=\"30 seconds\" and dest=file and connection=!ledger_conn",
                 "operator_id = blockchain get operator where name=operator1-node bring.first [*][id]",
