@@ -3,7 +3,8 @@
 **Table of content**
 
 [Deployment Prerequisites](#deployment-prerequisites)  
-[Configuring nodes using a script file](#configuring-nodes-using-a-script-file)  
+[Configuring nodes using a script file](#configuring-nodes-using-a-script-file)    
+[Configuring nodes using policies](#configuring-nodes-using-policies)  
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)    
 [Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
 [Deployment comments](#master-node-configuration)   
@@ -42,6 +43,11 @@ Users can configure each node using the following commands:
 
 Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
 
+## Configuring nodes using policies
+Users can create configuration policies for each node and initiate a node by associating the node with the configuration policies.  
+The [Config Policies](Config%20Policies.md) document reviews policies that have the same configuration results as
+the CLI configuration detailed in this document (and the configuration using the scripts of section
+[Configuring nodes using a script file](#configuring-nodes-using-a-script-file).   
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
