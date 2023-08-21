@@ -193,8 +193,8 @@ The command `get echo queue` retrieves the messages and removes the plus sign.
 The REST, TCP and Message Broker services can be configured to service one or two IPs.    
 2 IPs are used when a node is communicating with peers on a local network as well as on the Internet.  
 This document include 2 options: 
-1) Policies where bind is false - to support multiple IPs
-2) Policies where bind is true - to support a single IP.  
+1) Policies with bind set to **false** - to support multiple IPs
+2) Policies with bind set to **true** - to support a single IP.  
 
 With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on a local  
 network as well as members over the Internet.
