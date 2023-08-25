@@ -3,9 +3,12 @@
 **Table of content**
 
 [Deployment Prerequisites](#deployment-prerequisites)  
+[Configuring nodes using a script file](#configuring-nodes-using-a-script-file)    
+[Configuring nodes using policies](#configuring-nodes-using-policies)  
 [Frequently used commands](#frequently-used-commands-to-monitor-settings)    
 [Deploy AnyLog using Docker](#deploy-anylog-using-docker)  
-[Deployment comments](#master-node-configuration)  
+[Deployment comments](#master-node-configuration)   
+[Restarting a Node](#restarting-a-node)  
 [Master Node Configuration](#master-node-configuration)  
 [Query Node Configuration](#query-node-configuration)  
 [Operator Node Configuration](#operator-node-configuration)    
@@ -17,7 +20,14 @@
 
 
 This document details deployment of AnyLog nodes using the CLI of the participating nodes.    
-Alternatively, the configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
+
+## Deployment Prerequisites
+* Docker installed
+* Docker hub key
+* Active license key
+
+## Configuring nodes using a script file
+The configuration commands for each node can be organized in a file and processed using the following command (on the CLI):
 ```
 process [path and file name with the script]
 ```
@@ -31,13 +41,20 @@ Users can configure each node using the following commands:
 | query         | process !local_scripts/documentation_deployments/query.al |
 | Operator      | process !local_scripts/documentation_deployments/operator.al |
 
-Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.
+Note that `!local_scripts` is substituted (dynamically) with the value assigned to the key **local_scripts** in the dictionary.  
 
+The outcomes of the scripts are the same as CLI configuration of the 3 nodes:
+[Master Node Configuration](#master-node-configuration), [Query Node Configuration](#query-node-configuration), 
+[Operator Node Configuration](#operator-node-configuration).
 
-## Deployment Prerequisites
-* Docker installed
-* Docker hub key
-* Active license key
+Note that the scripts are assuming some predetermined values, for example: ledger_conn=127.0.0.1:32048 which may change
+with specific deployments. These value are detailed in the dictionary setting of each deployed server.
+
+## Configuring nodes using policies
+Users can create configuration policies for each node and initiate a node by associating the node with the configuration policies.  
+The [Config Policies](Config%20Policies.md) document reviews policies that have the same configuration results as
+the CLI configuration detailed in this document (and the configuration using the scripts of section
+[Configuring nodes using a script file](#configuring-nodes-using-a-script-file).   
 
 ## Frequently used commands to monitor settings
 Users are expected to be familiar with the commands and examples listed below:
@@ -176,11 +193,22 @@ The command `get echo queue` retrieves the messages and removes the plus sign.
 The REST, TCP and Message Broker services can be configured to service one or two IPs.    
 2 IPs are used when a node is communicating with peers on a local network as well as on the Internet.  
 This document include 2 options: 
-1) Policies where bind is false - to support multiple IPs
-2) Policies where bind is true - to support a single IP.  
+1) Policies with bind set to **false** - to support multiple IPs
+2) Policies with bind set to **true** - to support a single IP.  
 
 With option 1, 2 IPs are published in the metadata such that the node can be discovered by members on a local  
 network as well as members over the Internet.
+
+## Restarting a Node
+
+The configurations below are doing the following:
+* Deploy Docker instances and Docker Volumes. The Docker Volumes are created once when the Docker container is installed.
+* Add Policies to the AnyLog Metadata. A policy is created once, stored in the metadata layer and available when the node restarts.
+* Set variables in the node dictionary - this process is done whenever a node restarts.
+* Enable selected services on the node - this is done whenever a node restarts.
+
+Note: The deployment process in this document creates policies whenever they are needed. It is advised to separate 
+the creation of the policies from the configuration of a node that restarts.
  
 ## Master Node Configuration
 A _master node_ is an alternative to the blockchain. With a master node, the metadata is updated into and retrieved from
@@ -207,7 +235,7 @@ set echo queue on         # Some messages are stored in a queue (With off value 
 
 node_name = Master              # Adds a name to the CLI prompt
 
-company_name="New Company"     # Update to your company name
+company_name="My_Company"     # Update to your company name
 
 anylog_server_port=32048
 anylog_rest_port=32049 
@@ -305,7 +333,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 ```anylog
 node_name = Query              # Adds a name to the CLI prompt
 
-company_name="New Company"     # Update to your company name 
+company_name="my_Company"     # Update to your company name 
 
 anylog_server_port=32348
 anylog_rest_port=32349 
@@ -404,7 +432,7 @@ set echo queue on         # Some messages are stored in a queue (otherwise print
 ```anylog
 node_name = Operator1              # Adds a name to the CLI prompt
 
-company_name="New Company"          # Update to your company name
+company_name="My_Company"          # Update to your company name
 set default_dbms = test
  
 anylog_server_port=32148
@@ -599,7 +627,7 @@ get rows count
 get rows count where group = table
 ```
 
-## Sample tables info commands - On any node
+## Sample tables info commands - on any node
 ```anylog
 get virtual tables          # The list of the logical databases and tables in the network
 get data nodes              # The physical nodes that host each logical table

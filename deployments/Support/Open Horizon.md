@@ -108,6 +108,7 @@ REST_SSL=false
 
 DB_TYPE=sqlite
 NOSQL_ENABLE=false
+# for master use 127.0.0.1:${YOUR_PORT} and for everything, repalce 127.0.0.1 with the IP of the master node 
 LEDGER_CONN=<LEDGER_CONN_INFO>
 SYNC_TIME=30 seconds
 BLOCKCHAIN_SOURCE=master
