@@ -1,7 +1,7 @@
 # AnyLog as a _pip_ Package 
 
 ## Deployment Process 
-1. Prerequisite
+1. Prerequisites
  
    **General**
    * [cython](https://pypi.org/project/Cython/)
@@ -30,7 +30,7 @@
     * [numpy](https://pypi.org/project/numpy/) (for alpine - install [py3-numpy](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy))
     * [opencv-python](https://pypi.org/project/opencv-python/) (for alpine - install [py3-opencv](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv))
 
-The requirements script installs all prerequisites.
+The script bekow installs all prerequisites.
 ```shell
 python3 -m pip install --upgrade -r https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/requirements.txt
 ```
