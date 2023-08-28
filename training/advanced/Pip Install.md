@@ -61,3 +61,8 @@ argc = len(argv)
 user_input = user_cmd.UserInput()
 user_input.process_input(arguments=argc, arguments_list=argv) # Start AnyLog with CLI
 ```
+
+4. Enable AnyLog (key valid until November 1, 2023) - for a personalized license key, [contact us](mailto:info@anylog.co) 
+```anylog
+set license where activation_key=01954e0dbfa1b5c1785aed6790a34097c5db148cb78405fd16ae2494045de3e844895851d03e0e599a799d6e6f03cbd2233a5f65a6dfb74832fb1034d5a56d8fa02563061a321da246e7660c4d00b9ea050b5d6fc4c61d7f9d53d58accec0434eb3b0fa98ae9237dfe09a6a75e0c6efcc4bc7860e9e358672b3d93943dbb416c2023-11-01bGuest
+```
