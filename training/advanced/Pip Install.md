@@ -10,7 +10,7 @@ Deploying AnyLog can now be done via _pip install_ rather than just through [doc
    * [ast](https://docs.python.org/3/library/ast.html)
    * [requests](https://pypi.org/project/requests/)
    * [cryptography](https://pypi.org/project/cryptography/)
-   * [jwt](https://pypi.org/project/jwt/) (in alpine we install [py3-jwt](https://pyjwt.readthedocs.io/en/stable/))
+   * [jwt](https://pypi.org/project/jwt/) (for alpine - install [py3-jwt](https://pyjwt.readthedocs.io/en/stable/))
    * [pyOpenSSL](https://pypi.org/project/pyOpenSSL/)
    * [psutil](https://pypi.org/project/psutil/)
    * [python-dateutil](https://pypi.org/project/python-dateutil/)
@@ -29,8 +29,8 @@ Deploying AnyLog can now be done via _pip install_ rather than just through [doc
    * [py4j](https://pypi.org/project/py4j/)
 
     **Images & Video Processing**
-    * [numpy](https://pypi.org/project/numpy/) (in alpine we install [py3-numpy](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy))
-    * [opencv-python](https://pypi.org/project/opencv-python/) (in alpine we install [py3-opencv](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv))
+    * [numpy](https://pypi.org/project/numpy/) (for alpine - install [py3-numpy](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy))
+    * [opencv-python](https://pypi.org/project/opencv-python/) (for alpine - install [py3-opencv](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv))
 
 The requirements script installs all prerequisites.
 ```shell
