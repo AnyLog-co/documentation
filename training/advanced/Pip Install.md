@@ -30,12 +30,16 @@
     * [numpy](https://pypi.org/project/numpy/) (for alpine - install [py3-numpy](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy))
     * [opencv-python](https://pypi.org/project/opencv-python/) (for alpine - install [py3-opencv](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv))
 
-The script bekow installs all prerequisites.
+The script below installs all prerequisites.
 ```shell
 python3 -m pip install --upgrade -r https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/requirements.txt
 ```
 
-2. Install AnyLog as a `pip` package - AnyLog pip package works with python3.10 for Ubuntu and MacOSX, and Python3.11 for Alpine.
+2. Install AnyLog as a `pip` package  
+
+    Note: Use the following Python version:
+    * python3.10 for Ubuntu and MacOSX
+    * Python3.11 for Alpine
 
 Versions of AnyLog can be found in the [Downloads Page](http://173.255.254.34:31900/)
 
