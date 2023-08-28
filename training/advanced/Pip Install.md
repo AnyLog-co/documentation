@@ -1,7 +1,5 @@
 # AnyLog as a _pip_ Package 
 
-Deploying AnyLog can now be done via _pip install_ rather than just through [docker](../../deployments/Quick%20Deployment.md).
-
 ## Deployment Process 
 1. Prerequisite
  
