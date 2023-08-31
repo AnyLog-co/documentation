@@ -286,15 +286,12 @@ docker ps -a
 docker attach --detach-keys=ctrl-d [NODE NAME]
 
 # master 
-cd deployments/docker-compose/anylog-master
 docker attach --detach-keys=ctrl-d anylog-master
 
 # query 
-cd deployments/docker-compose/anylog-query
 docker attach --detach-keys=ctrl-d anylog-query-node
 
 # operator
-cd deployments/docker-compose/anylog-operator
 docker attach --detach-keys=ctrl-d anylog-operator
 ```
 
@@ -331,6 +328,18 @@ docker-compose down -v            # stop the process + will also remove the volu
 docker-compose down --rmi all     # stop the process + will also remove the image 
 docker-compose down -v --rmi all  # will do all three  
 ```
+
+## Validate the updated configuration
+
+
+| Configuration     | Nodes           | Command           | Comments |
+| -------------     | --------------- | ----------------  | ----  |
+| License           | All             | get license       |       |
+| Company Name      | All             | !company_name     |       |
+| Monitoring        | All             | !monitor_nodes    | Shows **true** for Operator and Query, **false** for Master  |
+| Monitored Company | All             | !monitor_node_company   |       |
+| Network ID        | Query, Operator | !ledger_conn      |       |
+| Cluster Name      | Operator        | !cluster_name     |       |
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
