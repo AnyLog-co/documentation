@@ -331,6 +331,9 @@ docker-compose down -v --rmi all  # will do all three
 
 ## Validate the updated configuration
 
+On the CLI of each deployed node validate the following:
+
+1) Correct configuration
 
 | Configuration     | Nodes           | Command           | Comments |
 | -------------     | --------------- | ----------------  | ----  |
@@ -338,8 +341,16 @@ docker-compose down -v --rmi all  # will do all three
 | Company Name      | All             | !company_name     |       |
 | Monitoring        | All             | !monitor_nodes    | Shows **true** for Operator and Query, **false** for Master  |
 | Monitored Company | All             | !monitor_node_company   |       |
-| Network ID        | Query, Operator | !ledger_conn      |       |
+| Network ID        | Query, Operator | !ledger_conn      | This is the IP and Port of thr master     |
 | Cluster Name      | Operator        | !cluster_name     |       |
+
+2) Connectivity between the members of the network  
+
+On each deployed node issue the command:
+```
+test network
+```
+The value in the status sign designates connectivity.
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
