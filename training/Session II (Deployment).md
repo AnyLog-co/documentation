@@ -402,10 +402,10 @@ AL anylog-master > test network
 
 Address              Node Type Node Name         Status 
 --------------------|---------|-----------------|------|
-198.74.50.131:32148 |operator |anylog-operator_1|  V   |
-198.74.50.131:32348 |query    |anylog-query     |  V   |
-198.74.50.131:32048 |master   |anylog-master    |  V   |
-178.79.143.174:32148|operator |anylog-operator_2|  V   |
+198.74.50.131:32148 |operator |anylog-operator_1|  +   |
+198.74.50.131:32348 |query    |anylog-query     |  +   |
+198.74.50.131:32048 |master   |anylog-master    |  +   |
+178.79.143.174:32148|operator |anylog-operator_2|  +   |
 ```
 Note that the ***V*** sign appears on the status column. Otherwise, the node was not accessible by the address provided (in the first column).    
 
