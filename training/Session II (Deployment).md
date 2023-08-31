@@ -350,7 +350,7 @@ On each deployed node issue the command:
 ```
 test network
 ```
-The value in the status sign designates connectivity.
+The value in the status column designates connectivity.
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
