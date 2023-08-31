@@ -195,7 +195,7 @@ rm -rf deployments
 
 2. Register docker credentials 
 ```shell
-bash deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
+bash $HOME/deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 ```
 
 ## The AnyLog Configuration file
