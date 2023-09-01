@@ -213,8 +213,10 @@ This file is in the following directories:
 
 ### Option 1: Using a questionnaire
 The following section guides through the values to modify in the config file of each node.
-Users can replace this process by a questionnaire that creates the config file with the needed modification. 
+Users can replace this process by a questionnaire that creates the config file with the needed modification.  
 Using the questionnaire is detailed in the [deploying_node](../deployments/deploying_node.md) document.
+
+For **AWS deployment**, read the [AWS setup](../deployments/Support/AWS.md) document.
 
 ### Option 2: Modify the config file using an editor
 On each machine, modify the ```anylog_configs.env``` according to the following instructions:
@@ -230,7 +232,9 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * COMPANY_NAME with your company name.
     * Do not change MONITOR_NODES to **true** (as done with the other nodes).
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
-    
+    On AWS:
+    * TCP_BIND set the value to **false**
+       
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
     the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
     to the node. On the CLI - get the Master IP and Port using the command ```get connections```.
@@ -243,6 +247,8 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
+    On AWS:
+    * TCP_BIND set the value to **false**
     
     **On each Operator Node:**
     * LICENSE_KEY with the AnyLog License Key (uncomment the entry).
@@ -257,6 +263,8 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     using anylog for new-company) and a unique prefix like the example below:
         - for operator 1: **anylog-cluster_1**
         - for operator 2: **anylog-cluster_2**
+    On AWS:
+    * TCP_BIND set the value to **false**
     
 ## Start / Restart a deployed node
  
