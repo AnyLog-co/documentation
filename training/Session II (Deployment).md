@@ -232,6 +232,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * COMPANY_NAME with your company name.
     * Do not change MONITOR_NODES to **true** (as done with the other nodes).
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
+    
     On AWS:
     * TCP_BIND set the value to **false**
        
@@ -247,6 +248,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * MONITOR_NODES set the value to **true**.
     * MONITOR_NODE_COMPANY with your company name (make sure its the same name assigned to COMPANY_NAME).
     * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
+    
     On AWS:
     * TCP_BIND set the value to **false**
     
@@ -263,6 +265,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     using anylog for new-company) and a unique prefix like the example below:
         - for operator 1: **anylog-cluster_1**
         - for operator 2: **anylog-cluster_2**
+    
     On AWS:
     * TCP_BIND set the value to **false**
     
