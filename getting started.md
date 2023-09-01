@@ -138,7 +138,7 @@ Related documentation:
 | Section       | Information provided  |
 | ------------- | ------------| 
 | [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
-| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
+| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
 | [Network Setup](training/advanced/Network%20Setup.md) | A step by step example of a network deployment. |
 | [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
