@@ -264,7 +264,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * CLUSTER_NAME - currently showing **new-company-cluster**. change to your company name (the example below is 
     using anylog for new-company) and a unique prefix like the example below:
         - for operator 1: **anylog-cluster_1**
-        - for operator 2: **anylog-cluster_2**
+        - for operator 2: **anylog-cluster_2**  
     
     On AWS:
     * TCP_BIND set the value to **false**
