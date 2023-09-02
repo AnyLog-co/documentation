@@ -227,7 +227,7 @@ Options:
 
 | Option                                                           | Information provided  |
 |------------------------------------------------------------------| ------------|
-| [get node name](#get_node_name)                                  | Return the name assigned to the node including the IP and Port identifying the node. |
+| [get node name](#get-node-name)                                  | Return the name assigned to the node including the IP and Port identifying the node. |
 | [get event log](logging%20events.md#the-event-log)               | Records the Last commands processed by the node. | 
 | [get error log](logging%20events.md#the-error-log)               | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
 | [get file log](#get-logged-instances)                            | Records the last data files processed by the node. |
@@ -331,6 +331,12 @@ Additional information is available at [monitoring nodes](monitoring%20nodes.md#
 | get authentication | Returns ON or OFF depending on the current status. |
 | get encryption | Returns ON or OFF depending on the current status. |
 | get compression | Returns ON or OFF depending on the current status. |
+
+
+### get node name
+Return the node name including the IP and Port that identifies the node.  
+The node name is assigned using the command [set node name](#set-node-name). if a name was not assigned, the name returned is "AnyLog".
+
 
 ## Get servers
 The ***get servers*** command returns information on the Operators hosting data.  
