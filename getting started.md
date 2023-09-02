@@ -138,8 +138,8 @@ Related documentation:
 | Section       | Information provided  |
 | ------------- | ------------| 
 | [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
-| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
-| [Network Setup](examples/Network%20setup.md#network-setup) | A step by step example of a 3 node network deployment. |
+| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
+| [Network Setup](training/advanced/Network%20Setup.md) | A step by step example of a network deployment. |
 | [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
 ### AnyLog Command Line Interface
