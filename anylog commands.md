@@ -114,8 +114,9 @@ The ***set*** commands allows to set variables and configuration parameters.
 
 Options:  
 
-| Option                                                                                                                                             | Explanation  |
-|----------------------------------------------------------------------------------------------------------------------------------------------------| ------------| 
+| Option                                           | Explanation  |
+|--------------------------------------------------| ------------|
+| [set node name [node name]](#set-node-name)       |  Declare the node name. The name appears on the local CLI |
 | [set query mode](#set-query-mode)                                                                                                                  | Setting execution instructions to the issued queries. |
 | [set query log on/off](logging%20events.md#the-query-log)                                                                            | Enable/Disable a log to record the executed queries. |
 | [set query log profile [n] seconds](logging%20events.md#the-query-log)                                                               | Applying the Query Log to queries with execution time higher than threshold.  |
@@ -137,8 +138,20 @@ Options:
 | set consumer mode = [mode]                                                                                                                         | Change the consumer mode of operation. Optional modes are: "active" and "suspend". |
 | set rest timeout [time and time-unit]                                                                                                              |  Sets a time limit for a rest reply. If limit is 0, the process will wait for a reply without timeout. |
 | [set data distribution](#set-data-distribution) where ...                                                                                          |  Define how data is distributed to the storage nodes. |
-| [set streaming condition](streaming%20conditions.md#condition-declaration)                                 |  Declare a condition on streaming data. |
+| [set streaming condition](streaming%20conditions.md#condition-declaration)        |  Declare a condition on streaming data. |
 
+
+#### Set node name
+Declare the node name. The name appears on the CLI prompt.    
+Example:
+```anylog
+set node name Opreator_3
+```
+The CLI prompt will appear as: 
+```anylog
+AL Operator_1 >
+```
+Whereas **AL** stands for AnyLog and **Operator_1** is the assigned name.
 
 #### Set query mode
 
@@ -212,77 +225,78 @@ The get command provides information on hardware state and status, files, resour
 
 Options:  
 
-| Option                                                                                                                                              | Information provided  |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------| ------------| 
-| [get event log](logging%20events.md#the-event-log)                                                                                    | Records the Last commands processed by the node. | 
-| [get error log](logging%20events.md#the-error-log)                                                                                    | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
-| [get file log](#get-logged-instances)                                                                                                               | Records the last data files processed by the node. |
-| [get rest log](#get-logged-instances)                                                                                                               | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
-| [get query log](logging%20events.md#the-query-log)                                                                                    | The last queries processed by the node. Enable this log using the ***set query log*** command|
-| [get processes](®#the-get-processes-command)                                                                                                        | The list of background processes. More details are available in [background processes](background%20processes.md).|
-| get members status                                                                                                                                  | Get status of members nodes that are messaged by this node. |
-| get synchronizer                                                                                                                                    | Information on the blockchain synchronize process. |
-| [get operator](monitoring%20calls.md#get-operator)                                                                                    | Information on the Operator processes. |
-| [get blobs archiver](background%20processes.md#the-blobs-archiver)                                                                                  | Information on the Blobs Archiving processes. |
-| get publisher                                                                                                                                       | Information on the Publisher processes. |
-| get distributor                                                                                                                                     | With HA enabled, information on the distributions of source files to cluster members. |
-| get consumer                                                                                                                                        | With HA enabled, information on pulling source files from cluster members. |
-| [get streaming](monitoring%20calls.md#get-streaming)                                                                                  | Information on streaming data from REST and MQTT calls. |
-| get cluster info                                                                                                                                    | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
-| get tsd info [table name]                                                                                                                           | Information on the synchronization status between the cluster members. |
-| [get rest calls](monitoring%20calls.md#get-rest-calls)                                                                                | Statistical information on the REST calls. |
-| [get rest server info](monitoring%20calls.md#rest-server-configuration)                                                               | Information on the REST server configuration. |
-| [get msg clients](monitoring%20calls.md#get-msg-clients)                                                                              | Information on clients subscribed to topics. |
-| get msg brokers                                                                                                                                     | Information on message brokers and the topics subscribed with each broker. |
-| get local broker                                                                                                                                    | Information on the Message Broker. |
-| [get status](monitoring%20nodes.md#the-get-status-command)                                                                            | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
-| get connections                                                                                                                                     | The list of TCP and REST connections supported by the node. |
-| get machine connections                                                                                                                             | The system-wide socket connection. Users can detail specific port: ```get machine connections where port = [port]```|
-| get platforms                                                                                                                                       | The list connected blockchain platforms. |
-| [get dictionary](../monitoring%20nodes.md#the-get-dictionary-command)                                                                               | The list of the variable names and their assigned values. |
-| [get env var](../monitoring%20nodes.md#the-get-env-var-command)                                                                                     | The environment variables keys and values. |
-| get databases                                                                                                                                       | The list of databases managed on the local node. |
-| get partitions                                                                                                                                      | Information on how data is partitioned on the local databases. |
-| get partitions where dbms = [dbms_name] and table = [table name]                                                                                    | Partition details on a specific table. |
-| get query mode                                                                                                                                      | The query param variables assigned by the command ***set query mode***. |
-| [get query pool](#get-pool-info)                                                                                                                    | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
-| [get tcp pool](#get-pool-info)                                                                                                                      | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
-| [get rest pool](#get-pool-info)                                                                                                                     | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
-| [get msg pool](#get-pool-info)                                                                                                                      | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
-| [get operator pool](#get-pool-info)                                                                                                                 | Details the number of operator threads. The number of threads is set by the command ***run operator***. |
-| get threads                                                                                                                                         | The list of the threads executing users scripts. |
-| get scheduler [n]                                                                                                                                   | Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
-| get hostname                                                                                                                                        | The name assigned to the node. | 
-| get version                                                                                                                                         | The code version. |
-| get git [version/info] [path to github root]                                                                                                        | ***git version*** returns the first 5 digits of the commit used, ***git info*** provides additional information. If path is not specified, the dictionary variable ***!anylog_path*** is used to identify the ***AnyLog-Network*** directory.|
-| get queries time                                                                                                                                    | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
-| get watch directories                                                                                                                               | The list of the Watch directories on the node. |
-| get metadata info                                                                                                                                   | Returns summary info on the metadata including version and time since last update . |
-| get inserts                                                                                                                                         | Statistics on SQL Inserts of data to the local databases. |
-| get database size [database name]                                                                                                                   | The size of the named database in bytes. |
-| get node id                                                                                                                                         | Returns a unique identifier of the node. |
-| get hardware id                                                                                                                                     | Returns a unique identfier of the hardware. |
-| [get servers](#get-servers)                                                                                                                         | Retrurn info on the the servers supporting the table. |
-| get tables for dbms [dbms name]                                                                                                                     | The list of tables of the named database and where the table is declared (local database and/or blockchain) |
+| Option                                                           | Information provided  |
+|------------------------------------------------------------------| ------------|
+| [get node name](#get_node_name)                                  | Return the name assigned to the node including the IP and Port identifying the node. |
+| [get event log](logging%20events.md#the-event-log)               | Records the Last commands processed by the node. | 
+| [get error log](logging%20events.md#the-error-log)               | Records the last commands that returned an error. Adding a list of keywords narrows the output to error events containing the keywords.|
+| [get file log](#get-logged-instances)                            | Records the last data files processed by the node. |
+| [get rest log](#get-logged-instances)                            | Records the REST calls returning an error. Can record all REST calls by setting "set rest log on" |
+| [get query log](logging%20events.md#the-query-log)               | The last queries processed by the node. Enable this log using the ***set query log*** command|
+| [get processes](®#the-get-processes-command)                     | The list of background processes. More details are available in [background processes](background%20processes.md).|
+| get members status                                               | Get status of members nodes that are messaged by this node. |
+| get synchronizer                                                 | Information on the blockchain synchronize process. |
+| [get operator](monitoring%20calls.md#get-operator)               | Information on the Operator processes. |
+| [get blobs archiver](background%20processes.md#the-blobs-archiver)      | Information on the Blobs Archiving processes. |
+| get publisher                                                           | Information on the Publisher processes. |
+| get distributor                                                         | With HA enabled, information on the distributions of source files to cluster members. |
+| get consumer                                                            | With HA enabled, information on pulling source files from cluster members. |
+| [get streaming](monitoring%20calls.md#get-streaming)                    | Information on streaming data from REST and MQTT calls. |
+| get cluster info                                                        | Information on the cluster supported by the node including Cluster ID, Member ID and Operators supporting the cluster. |
+| get tsd info [table name]                                               | Information on the synchronization status between the cluster members. |
+| [get rest calls](monitoring%20calls.md#get-rest-calls)                  | Statistical information on the REST calls. |
+| [get rest server info](monitoring%20calls.md#rest-server-configuration) | Information on the REST server configuration. |
+| [get msg clients](monitoring%20calls.md#get-msg-clients)                | Information on clients subscribed to topics. |
+| get msg brokers                                                         | Information on message brokers and the topics subscribed with each broker. |
+| get local broker                                                           | Information on the Message Broker. |
+| [get status](monitoring%20nodes.md#the-get-status-command)   | Replies with the string 'running' if the node is active. Can be extended to include additional status information | 
+| get connections                                                            | The list of TCP and REST connections supported by the node. |
+| get machine connections                                                    | The system-wide socket connection. Users can detail specific port: ```get machine connections where port = [port]```|
+| get platforms                                                              | The list connected blockchain platforms. |
+| [get dictionary](../monitoring%20nodes.md#the-get-dictionary-command)      | The list of the variable names and their assigned values. |
+| [get env var](../monitoring%20nodes.md#the-get-env-var-command)            | The environment variables keys and values. |
+| get databases                                                              | The list of databases managed on the local node. |
+| get partitions                                                             | Information on how data is partitioned on the local databases. |
+| get partitions where dbms = [dbms_name] and table = [table name]           | Partition details on a specific table. |
+| get query mode                                                             | The query param variables assigned by the command ***set query mode***. |
+| [get query pool](#get-pool-info)                                           | Details the status of query workers assigned by the command ***set threads pool [n]***. The value 0 means thread in rest and 1 processing data.|
+| [get tcp pool](#get-pool-info)                                             | Details the number TCP workers thread that execute peer command. The number of threads is set by the command ***run tcp server***. |
+| [get rest pool](#get-pool-info)                                            | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
+| [get msg pool](#get-pool-info)                                             | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
+| [get operator pool](#get-pool-info)                                        | Details the number of operator threads. The number of threads is set by the command ***run operator***. |
+| get threads                                                                | The list of the threads executing users scripts. |
+| get scheduler [n]                                                          | Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
+| get hostname                                                               | The name assigned to the node. | 
+| get version                                                                | The code version. |
+| get git [version/info] [path to github root]                               | ***git version*** returns the first 5 digits of the commit used, ***git info*** provides additional information. If path is not specified, the dictionary variable ***!anylog_path*** is used to identify the ***AnyLog-Network*** directory.|
+| get queries time                                                           | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
+| get watch directories                                                      | The list of the Watch directories on the node. |
+| get metadata info                                                          | Returns summary info on the metadata including version and time since last update . |
+| get inserts                                                                | Statistics on SQL Inserts of data to the local databases. |
+| get database size [database name]                                          | The size of the named database in bytes. |
+| get node id                                                                | Returns a unique identifier of the node. |
+| get hardware id                                                            | Returns a unique identfier of the hardware. |
+| [get servers](#get-servers)                                                | Retrurn info on the the servers supporting the table. |
+| get tables for dbms [dbms name]                                            | The list of tables of the named database and where the table is declared (local database and/or blockchain) |
 | get table [exist status/local status/blockchain status/rows count/complete status] where name = table_name and dbms = dbms_name                     | Returns information on the specified table |
-| get views for dbms [dbms name]                                                                                                                      | The list of views of the named database. |
-| get files in [dir name] where type = [file type] and hash = [hash value]                                                                            | The list of files in the specified dir that satisfy the optional filter criteria. |
-| get file timestamp [file path and name]                                                                                                             | Get the file's timestamp. |
-| get error [error number]                                                                                                                            | Get the error text for the error number. |
-| get echo queue                                                                                                                                      | Get the queue with the ***echo*** commands and messages. |
-| get files [directory path]                                                                                                                          | Details the files in the specified directory. |
-| get directories [directory path]                                                                                                                    | Details the sub-directories in the specified directory. |
-| get json file structure                                                                                                                             | Details the convention for JSON file name. |
-| get users                                                                                                                                           | The list of users declared using the command ```id add user ...```. |
-| get reply ip                                                                                                                                        | Retrieve the IP address for reply messages. |
-| get archived files [YYYY-MM-DD]                                                                                                                     | List the files archived on the provided date. |
-| get size [dir name] [YYYY-MM-DD]                                                                                                                    | List the size of a directory including sub-directories. |
-| get access [path and file name or directory name]                                                                                                   | Get the access rights to the provided file or directory. |
-| get data nodes                                                                                                                                      | Details the Operators that host each table's data. |
-| [get rows count](monitoring%20nodes.md#monitoring-data-commands)                                                                      | Details the number of rows in all or specified tables.|
-| [get files count](../dat%20manaement/image%20mapping.md#get-files-count)                                                                            | Details the number of files stored in all or specified tables.|
+| get views for dbms [dbms name]                                             | The list of views of the named database. |
+| get files in [dir name] where type = [file type] and hash = [hash value]   | The list of files in the specified dir that satisfy the optional filter criteria. |
+| get file timestamp [file path and name]                                    | Get the file's timestamp. |
+| get error [error number]                                                   | Get the error text for the error number. |
+| get echo queue                                                             | Get the queue with the ***echo*** commands and messages. |
+| get files [directory path]                                                 | Details the files in the specified directory. |
+| get directories [directory path]                                           | Details the sub-directories in the specified directory. |
+| get json file structure                                                    | Details the convention for JSON file name. |
+| get users                                                                  | The list of users declared using the command ```id add user ...```. |
+| get reply ip                                                               | Retrieve the IP address for reply messages. |
+| get archived files [YYYY-MM-DD]                                            | List the files archived on the provided date. |
+| get size [dir name] [YYYY-MM-DD]                                           | List the size of a directory including sub-directories. |
+| get access [path and file name or directory name]                          | Get the access rights to the provided file or directory. |
+| get data nodes                                                             | Details the Operators that host each table's data. |
+| [get rows count](monitoring%20nodes.md#monitoring-data-commands)           | Details the number of rows in all or specified tables.|
+| [get files count](../dat%20manaement/image%20mapping.md#get-files-count)   | Details the number of files stored in all or specified tables.|
 | [get query execution](../profiling%20and%20monitoring%20queries.md#retrieving-the-status-of-queries-being-processed-on-an-operator-node) | Provides the status of queries being executed on an Operator node.|
-| get timezone info                                                                                                                                   | Get the timezone on the local machine. |
+| get timezone info                                                          | Get the timezone on the local machine. |
 | get datetime [date-time function](queries.md#get-datetime-command)                                                                  | Translate a date-time function to the date-time string. |
 | [get streaming conditions](streaming%20conditions.md#condition-declaration)                  | List the conditions assigned to streaming data. |
 
