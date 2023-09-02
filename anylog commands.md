@@ -116,7 +116,7 @@ Options:
 
 | Option                                           | Explanation  |
 |--------------------------------------------------| ------------|
-| [set node name [node name]](#set-node-name)       |  Declare the node name. The name appears on the local CLI |
+| [set node name [node name]](#set-node-name)       |  Declare the node name. The name appears on the local CLI. |
 | [set query mode](#set-query-mode)                                                                                                                  | Setting execution instructions to the issued queries. |
 | [set query log on/off](logging%20events.md#the-query-log)                                                                            | Enable/Disable a log to record the executed queries. |
 | [set query log profile [n] seconds](logging%20events.md#the-query-log)                                                               | Applying the Query Log to queries with execution time higher than threshold.  |
