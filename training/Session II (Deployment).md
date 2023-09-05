@@ -353,7 +353,8 @@ On the CLI of each deployed node validate the following:
 | Monitoring        | All             | !monitor_nodes    | Shows **true** for Operator and Query, **false** for Master  |
 | Monitored Company | All             | !monitor_node_company   |       |
 | Network ID        | Query, Operator | !ledger_conn      | This is the IP and Port of thr master     |
-| Cluster Name      | Operator        | !cluster_name     |       |
+| Node Name         | Operator        | !node_name        | A unique name for each of the 2 Operators     |
+| Cluster Name      | Operator        | !cluster_name     | A unique name for the each of the 2 clusters     |
 
 2) Connectivity between the members of the network  
 
