@@ -98,7 +98,41 @@ AL > 198.74.50.131:32048 >> . get connections
 ```
 The command above is executed on the CLI node (and not assigned to the peer).
 
- 
+Note: a command that starts with **run client** is never assigned, it is always executed on the CLI node.
+
+### Assigning a CLI to multiple peer nodes:
+
+Users can assign a CLI to multiple peers. For example, the example below assigns the CLI to all the operator nodes:
+ ```anylog
+run client (blockchain get operator bring.ip_port)
+```
+A command issued will be executed on all the target nodes.
+
+### Associating peer replies to a key in the dictionary
+
+A reply from peers can be assigned to a key in the dictionary. 
+
+The examples below assume an assigned CLI:
+
+Example 1:
+  ```anylog
+current_status = get status
+```
+The reply from the target node is assigned to the dictionary key **current_status**.
+
+Example 2:
+  ```anylog
+current_status[] = get status
+```
+The reply from target nodes is organized as a list and assigned to the key **current_status**.
+
+Example 3:
+  ```anylog
+current_status[] = get status
+```
+The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
+
+
  
    
 
