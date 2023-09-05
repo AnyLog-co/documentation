@@ -71,14 +71,14 @@ For example:
 ```  
 In the example above, **get inserts** is executed on the target node 198.74.50.131:32048.  
 
-Users can associate the CLI to one or more target nodes as in the examples below:  
+Users can assign a CLI to one or more target nodes as in the examples below:  
 
-### Associating a CLI to a peer node:
+### Assigning a CLI to a peer node:
 ```anylog
  run client 198.74.50.131:32048
 ```  
 The CLI prompt would be extended to show the peer node, and commands are executed on the peer node.  
-Below is an example os issuing a command on an associated peer:
+Below is an example os issuing a command on an assigned peer:
 ```anylog
 AL > 198.74.50.131:32048 >> get connections
 
@@ -91,6 +91,14 @@ REST     |198.74.50.131:32049|198.74.50.131:32049|0.0.0.0:32049      |
 Messaging|Not declared       |Not declared       |Not declared       |
 ```  
 
+When the CLI is assigned, prefix commands that are executed on the current node with a dot (**.**).  
+Example:
+```anylog
+AL > 198.74.50.131:32048 >> . get connections
+```
+The command above is executed on the CLI node (and not assigned to the peer).
+
+ 
  
    
 
