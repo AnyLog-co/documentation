@@ -30,11 +30,15 @@ run tcp server where internal_ip = !ip and internal_port = 20048 and external_ip
 run rest server where internal_ip = !ip and internal_port = 20049 and external_ip = !external_ip and external_port = 20049 and bind = false
 
 set authentication off      # to dsable security
-set echo queue on           # Redirecy messages to a buffer
-get connections             # To print the network connections
+set echo queue on           # Redirect messages to a buffer
+get connections             # To output the network connections
 
 set cli off                 # Disable the CLI
 ```   
+
+# Disabling the CLI
+
+The node CLI was disabled using the **set cli off** command in the [config script above](#using-a-config-file).
 
 # Running AnyLog in the background
 
@@ -43,16 +47,11 @@ Use the following command to deploy AnyLog in the background (Linux):
  nohup python3 -u anylog.py process start.al &
 ```
 Comments:
-
 * **nohup** - Disassociates the command from the terminal so that it continues to run in the background.  
-it redirects standard output (stdout) to a file called **nohup.out** (unless a different output file is specified).
+It redirects standard output (stdout) to a file called **nohup.out** (unless a different output file is specified).
 * **-u** - Output to stdout is not buffered.
-* **process start.al** The AnyLog command that executes the commands in the config file named **start.al** with the 
+* **process start.al** The AnyLog command that executes the commands in the config file named **start.al** with  
 contents as in the [above example](#using-a-config-file).
-
-# Disabling the CLI
-
-The node CLI was disabled using the **set cli off** command in the [config script above](#using-a-config-file).
 
 # View the output of the background process
 
@@ -77,10 +76,16 @@ Users can assign a CLI to one or more target nodes as in the examples below:
 
 ### Assigning a CLI to a peer node:
 ```anylog
- run client 198.74.50.131:32048
+ AL Operator_2 > run client 198.74.50.131:32048
 ```  
-The CLI prompt is extended to show the peer node, and commands are executed on the peer node.  
-Below is an example os issuing a command on an assigned peer:
+The CLI prompt is extended to show the peer node, and commands are executed on the peer node.    
+After the command is issued, the CLI prompt is extended to show the target node and looks as follows:
+
+```anylog
+AL Operator_2 > 198.74.50.131:32048 >> 
+```
+
+Below is an example of issuing a command on an assigned peer:
 ```anylog
 AL Operator_2 > 198.74.50.131:32048 >> get connections
 
