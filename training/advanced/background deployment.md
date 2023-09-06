@@ -1,7 +1,7 @@
 # Deploy AnyLog as a background process 
 
 AnyLog can be deployed as a background process. In this type of deployment, the standard input is disabled,
- and when the node is initiated, it is configured from a script file (or a policy on the shared metadata).
+ and when the node is initiated, it is configured from a script file (or a policy from the shared metadata).
   
 Deployment of an AnyLog as a background process is similar to a foreground process and most deployments 
 enable the TCP service to allow the node to communicate with peer nodes and the REST service such that the node is reachable using REST. 
@@ -15,7 +15,7 @@ This document explains how to deploy and manage an AnyLog instance as a backgrou
 
 ## pip Install Package
 
-Instructions are detailed in the [pip Install Document](Pip Install.md)
+Instructions are detailed in the [pip Install Document](Pip%20Install.md#anylog-as-a-_pip_-package).
 
 ## Using a config file
 
