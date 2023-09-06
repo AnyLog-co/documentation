@@ -1,14 +1,15 @@
 # Deploy AnyLog as a background process 
 
-AnyLog can be deployed as a backround process. In this type of deployment, the standard input is disabled and the 
-the process includes the following:
-* Configure the node from a script file or using a policy on the metadata.
-* Enable the rest service and dynamically interact with the node using REST.
+AnyLog can be deployed as a background process. In this type of deployment, the standard input is disabled,
+ and when the node is initiated, it is configured from a script file (or a policy on the shared metadata).
+  
+Deployment of an AnyLog as a background process is similar to a foreground process and most deployments 
+enable the TCP service to allow the node to communicate with peer nodes and the REST service such that the node is reachable using REST. 
 
 Users can interact with a node using the following:
-* The remote CLI
+* The remote CLI (using REST)
 * cURL, or any app that issues REST request
-* Using the CLI of an AnyLog node which is not running in the background. 
+* Using the CLI of an AnyLog node which is not running in the background (using the TCP service). 
 
 This document explains how to deploy and manage an AnyLog instance as a background process.
 
@@ -19,7 +20,7 @@ Instructions are detailed in the [pip Install Document](Pip Install.md)
 ## Using a config file
 
 The node is configured using a config file that is processed when the node starts.  
-Below is an example of a config file:
+Below is an example of a simple config file:
 
 ```anylog 
 # Enable the TCP service - allowing the node to be a member of the network (allow the node to receive messages from peer nodes)
@@ -57,12 +58,13 @@ The node CLI was disabled using the **set cli off** command in the [config scrip
 
 The standard output (stdout) is redirected to a file called **nohup.out** in the folder with the python code (anylog.py).
 
-The config file of the example includes the **get connections** command, showing in **nohup.out** the IP and Port of the TCP and REST services.
+The config file of the example includes the **get connections** command, therefore **nohup.out** includes the the 
+IP and Port of the TCP and REST services.
 
 ## Using the CLI of a peer node to manage the background node. 
 
 The CLI of any node can be assigned to a different node and remotely interact with the node as a local CLI.  
-**This process assumes propper permissions.**
+**This process assumes proper permissions.**
 
 The basic process is using the **run client (target)** directive that directs the command to a target node.
 For example:
@@ -77,10 +79,10 @@ Users can assign a CLI to one or more target nodes as in the examples below:
 ```anylog
  run client 198.74.50.131:32048
 ```  
-The CLI prompt would be extended to show the peer node, and commands are executed on the peer node.  
+The CLI prompt is extended to show the peer node, and commands are executed on the peer node.  
 Below is an example os issuing a command on an assigned peer:
 ```anylog
-AL > 198.74.50.131:32048 >> get connections
+AL Operator_2 > 198.74.50.131:32048 >> get connections
 
 [From Node 198.74.50.131:32048]
 
@@ -91,18 +93,25 @@ REST     |198.74.50.131:32049|198.74.50.131:32049|0.0.0.0:32049      |
 Messaging|Not declared       |Not declared       |Not declared       |
 ```  
 
-When the CLI is assigned, prefix commands that are executed on the current node with a dot (**.**).  
+When the CLI is assigned, users can disable the assignment by prefixing commands with a dot (**.**).  
 Example:
 ```anylog
-AL > 198.74.50.131:32048 >> . get connections
+AL Operator_2 > 198.74.50.131:32048 >> . get connections
 ```
-The command above is executed on the CLI node (and not assigned to the peer).
+The command above is executed on the CLI node (Operator_2 and not assigned to the peer at 198.74.50.131:32048).
 
 Note: a command that starts with **run client** is never assigned, it is always executed on the CLI node.
 
+### Cancel an assignment
+
+Using a dot sign (**.**) cancels the assignment.
+```anylog
+ run client .
+```  
+ 
 ### Assigning a CLI to multiple peer nodes:
 
-Users can assign a CLI to multiple peers. For example, the example below assigns the CLI to all the operator nodes:
+Users can assign a CLI to multiple peers. For example, the example below assigns the CLI to all operator nodes:
  ```anylog
 run client (blockchain get operator bring.ip_port)
 ```
@@ -122,16 +131,17 @@ The reply from the target node is assigned to the dictionary key **current_statu
 
 Example 2:
   ```anylog
-current_status[] = get status
+current_status[] = get status where format = json
 ```
-The reply from target nodes is organized as a list and assigned to the key **current_status**.
+The reply from the target nodes is organized as a list and assigned to the key **current_status**.
+Each entry in the list has 2 values: 1) the IP and Port of the node executing the command and 2) the reply.
 
 Example 3:
   ```anylog
-current_status[] = get status
+current_status{} = get status where format = json
 ```
 The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
-
+The key in the dictionary is the IP and Port of each target node and the value is the reply from each node.
 
  
    
