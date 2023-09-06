@@ -68,7 +68,7 @@ The CLI of any node can be assigned to a different node and remotely interact wi
 The basic process is using the **run client (target)** directive that directs the command to a target node.
 For example:
 ```anylog
- run client 198.74.50.131:32048 get inserts
+AL Operator_2 > run client 198.74.50.131:32048 get inserts
 ```  
 In the example above, **get inserts** is executed on the target node 198.74.50.131:32048.  
 
@@ -76,7 +76,7 @@ Users can assign a CLI to one or more target nodes as in the examples below:
 
 ### Assigning a CLI to a peer node:
 ```anylog
- AL Operator_2 > run client 198.74.50.131:32048
+AL Operator_2 > run client 198.74.50.131:32048
 ```  
 The CLI prompt is extended to show the peer node, and commands are executed on the peer node.    
 After the command is issued, the CLI prompt is extended to show the target node and looks as follows:
@@ -103,24 +103,32 @@ Example:
 ```anylog
 AL Operator_2 > 198.74.50.131:32048 >> . get connections
 ```
-The command above is executed on the CLI node (Operator_2 and not assigned to the peer at 198.74.50.131:32048).
+The command above is executed on the CLI node (Operator_2) and is not assigned to the peer at 198.74.50.131:32048.
 
 Note: a command that starts with **run client** is never assigned, it is always executed on the CLI node.
 
 ### Cancel an assignment
 
-Using a dot sign (**.**) cancels the assignment.
+Using a dot sign (**.**) as a target node cancels the assignment.
 ```anylog
- run client .
+AL Operator_2 > 198.74.50.131:32048 >>   run client .
+```  
+The CLI prompt will return to be as in the example below:
+```anylog
+AL Operator_2 > 
 ```  
  
 ### Assigning a CLI to multiple peer nodes:
 
 Users can assign a CLI to multiple peers. For example, the example below assigns the CLI to all operator nodes:
  ```anylog
-run client (blockchain get operator bring.ip_port)
+AL Operator_2 > run client (blockchain get operator bring.ip_port)
 ```
-A command issued will be executed on all the target nodes.
+The CLI prompt will represent the assignment:
+ ```anylog
+AL Operator_2 > blockchain get operator bring.ip_port >>
+```
+After the assignment, a command issued on the CLI will be executed on all the target nodes.
 
 ### Associating peer replies to a key in the dictionary
 
