@@ -50,6 +50,7 @@ Comments:
 * **nohup** - Disassociates the command from the terminal so that it continues to run in the background.  
 It redirects standard output (stdout) to a file called **nohup.out** (unless a different output file is specified).
 * **-u** - Output to stdout is not buffered.
+* **anylog.py** - The python script that is calling the installed AnyLog library (detailed in [pip Install Document](Pip%20Install.md#anylog-as-a-_pip_-package)).
 * **process start.al** The AnyLog command that executes the commands in the config file named **start.al** with  
 contents as in the [above example](#using-a-config-file).
 
