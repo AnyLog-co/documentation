@@ -80,7 +80,7 @@ Users can assign a CLI to one or more target nodes as in the examples below:
 AL Operator_2 > run client 198.74.50.131:32048
 ```  
 The CLI prompt is extended to show the peer node, and commands are executed on the peer node.    
-After the command is issued, the CLI prompt is extended to show the target node and looks as follows:
+After the command is issued, the CLI prompt is extended as follows:
 
 ```anylog
 AL Operator_2 > 198.74.50.131:32048 >> 
@@ -121,7 +121,7 @@ AL Operator_2 >
  
 ### Assigning a CLI to multiple peer nodes:
 
-Users can assign a CLI to multiple peers. For example, the example below assigns the CLI to all operator nodes:
+Users can assign a CLI to multiple peers. The example below assigns the CLI to all operator nodes:
  ```anylog
 AL Operator_2 > run client (blockchain get operator bring.ip_port)
 ```
@@ -137,20 +137,20 @@ A reply from peers can be assigned to a key in the dictionary.
 
 The examples below assume an assigned CLI:
 
-Example 1:
+**Example 1:**
   ```anylog
 current_status = get status
 ```
 The reply from the target node is assigned to the dictionary key **current_status**.
 
-Example 2:
+**Example 2:**
   ```anylog
 current_status[] = get status where format = json
 ```
 The reply from the target nodes is organized as a list and assigned to the key **current_status**.
 Each entry in the list has 2 values: 1) the IP and Port of the node executing the command and 2) the reply.
 
-Example 3:
+**Example 3:**
   ```anylog
 current_status{} = get status where format = json
 ```
