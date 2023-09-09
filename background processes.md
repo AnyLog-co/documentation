@@ -332,6 +332,7 @@ Options:
 | source  | The source of the metadata with optional values: 'blockchain' and 'master'.  |
 | dest  | The destination of the metadata such as a file (a local file) or a DBMS (a local DBMS). If dest includes both, the local file and the local DBMS are updated. |
 | connection  | The connection information that is needed to retrieve the data. For a Master node, the IP and Port of the master node.  |
+|             | If connection info is not provided - the connection info is retrieved from the policy of the Master node.  |
 | time  | The frequency of the synchronization.  |
 
 
