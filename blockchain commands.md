@@ -96,7 +96,7 @@ When policies are added, nodes validate the structure of the policies and their 
 updated with a date and time of the update and a [unique ID](#the-policy-id).
 
 ## Retrieving the metadata from a source node
-The following command Retrieves the metadata from a source node:
+The following command retrieves the metadata from a source node:
 ```anylog
 blockchain seed from [ip:port]
 ```
