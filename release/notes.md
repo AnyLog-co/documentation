@@ -17,3 +17,8 @@ Release Date: TBD
    echo queue.
 
 3. If license key is not provided - get status returns a warning on missing license key.    
+
+
+## Bugs fixed:
+
+1. The command **get inserts** ignored data inserted in immediate mode.
