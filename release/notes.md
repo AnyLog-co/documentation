@@ -7,7 +7,7 @@ Release Date: TBD
 2.  Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../training/advanced/background%20deployment.md).
 3.  Map local CLI to a peer node. Details: [Assigning a CLI to a peer node](../training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
 4.  Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node)
-5.  wait command - pauses execution by time and condition.
+5.  wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#)
 6.  create policy command
 7.  blockchain seed command
 

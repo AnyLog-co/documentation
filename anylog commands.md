@@ -739,7 +739,7 @@ else print "Missing configurations for IP and Port to connect to the AnyLog Netw
 else email to my_name@my_company.co where subject = "anylog node" and message = "not connected"
 ```
 
-# The wait Command
+# The Wait Command
 
 The **wait** command pauses execution of the thread until a condition is satisfied, or a time limit is reached.  
 
