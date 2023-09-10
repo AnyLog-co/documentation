@@ -739,4 +739,31 @@ else print "Missing configurations for IP and Port to connect to the AnyLog Netw
 else email to my_name@my_company.co where subject = "anylog node" and message = "not connected"
 ```
 
+# The wait Command
+
+The **wait** command pauses execution of the thread until a condition is satisfied, or a time limit is reached.  
+
+Usage:
+```anylog
+ wait [max wait time in seconds] for [condition]
+```
+
+A common usage is when a node issues a command to peer nodes, some peers reply and some peers are disconnected.  
+The wait command can pause until all (or a threshold) peers reply, but no longer than the max wait time.
+
+Example 1:
+```anylog
+nodes_reply[] = run client (10.0.0.78:3048, 10.0.0.78:7848) get status
+wait 5 for !nodes_reply.len = 2
+```
+In the example above, 2 peer nodes are messages for their status (note: replies are organized in a list).
+The wait command pauses the request for 5 seconds or until the 2 peer nodes reply - whatever comes first.
+
+Example 2:
+```anylog
+nodes_reply{} = run client (blockchain get operator bring.ip_port) get status
+wait 5 for !nodes_reply.len > 5
+```
+In the example above, all the operator nodes are messages for their status (note: replies are organized in a dictionary).
+The wait command pauses the request for 5 seconds or until the 2 peer nodes reply - whatever comes first.
 
