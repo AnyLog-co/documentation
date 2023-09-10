@@ -757,7 +757,7 @@ nodes_reply[] = run client (10.0.0.78:3048, 10.0.0.78:7848) get status
 wait 5 for !nodes_reply.len == 2
 ```
 In the example above, 2 peer nodes are messages for their status (note: replies are organized in a list).  
-The wait command pauses for 5 seconds or until the 2 peer nodes replies are received - whatever comes first.
+The wait command thread pauses for 5 seconds or until the 2 peer nodes replies are received - whichever comes first.
 
 Example 2:
 ```anylog
@@ -765,8 +765,8 @@ nodes_reply{} = run client (blockchain get operator bring.ip_port) get status
 wait 5 for !nodes_reply.len >= 5
 ```
 In the example above, all the operator nodes are messages for their status (note: replies are organized in a dictionary).
-The wait command pauses the request for 5 seconds or until at least 5 nodes reply - whichever comes first.
+The wait command thread pauses for 5 seconds or until at least 5 nodes reply - whichever comes first.
 
 Note: if the wait condition is for partial execution (i.e., 10 nodes are messaged but condition is satisfied when 7 
-replies are received, use the greater than condition as race condition may miss the exact match).
+replies are received), use the greater than condition as race condition may miss the exact match.
 
