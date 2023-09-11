@@ -100,7 +100,7 @@ The following command retrieves the metadata from a source node:
 ```anylog
 blockchain seed from [ip:port]
 ```
-The command I used when a new node starts in an existing network, it allows the new node to sync with an exiting metadata.
+The command is used when a new node starts in an existing network, it allows the new node to sync with an exiting metadata.
 
 ## Query policies
 

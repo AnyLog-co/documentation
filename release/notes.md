@@ -10,7 +10,8 @@ Release Date: TBD
 5.  wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#the-wait-command)
 6.  Create policy command - a command option to declare policies and include default attributes. Details:
     [Creating policies using the Create Policy command](../policies.md#creating-policies-using-the-create-policy-command)
-7.  blockchain seed command
+7.  blockchain seed command pulls the metadata from a source node. Details: [Retrieving the metadata from a source node](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node).
+
 
 ## Changes:
 
