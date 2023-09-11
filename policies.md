@@ -205,8 +205,8 @@ Usage:
 create policy [policy type] [with defaults] where [key value pairs]
 ```
 **policy type** - The type of the policy created (i.e.: master, operator, query, publisher).  
-**with defaults** - Optional keywords to designate to include the default attributes (if not specified in the command key values pairs).  
-**key value pairs** - the list of attribute names and values.
+**with defaults** - Optional keywords to include the default attributes (if not specified in the list of key values pairs).  
+**key value pairs** - A list of key (equals) value pairs, separated with the _"and"_ keyword.
 
 Example:
 
@@ -227,8 +227,8 @@ The command above returns the following policy:
                'member' : 175}}
 ```
 A complete process may have the following sequence:
-1. Retrive the IP and Port of the Master node.
-2. Retrieves ID of the data cluster that is assigned to the new Operator.
+1. Retrieve the IP and Port of the Master node.
+2. Retrieve the ID of the data cluster that is assigned to the new Operator.
 3. Create the new Operator policy.
 4. Add the policy to the metadata.
 
