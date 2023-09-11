@@ -198,7 +198,7 @@ are replaced with their assigned values.
 
 ## Creating policies using the Create Policy command
 
-The create policy command provides a command option to declare policies and include default attributes and values 
+The **create policy** command provides a command option to declare policies and include default attributes and values 
 that are required in the policy.  
 Usage:
 ```anylog

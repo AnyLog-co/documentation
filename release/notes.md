@@ -8,7 +8,8 @@ Release Date: TBD
 3.  Map local CLI to a peer node. Details: [Assigning a CLI to a peer node](../training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
 4.  Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node)
 5.  wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#the-wait-command)
-6.  create policy command
+6.  Create policy command - a command option to declare policies and include default attributes. Details:
+    [Creating policies using the Create Policy command](../policies.md#creating-policies-using-the-create-policy-command)
 7.  blockchain seed command
 
 ## Changes:
