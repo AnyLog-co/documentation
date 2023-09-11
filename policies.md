@@ -196,6 +196,50 @@ Note that some attribute names in the policy are associated with dictionary valu
 ```ip``` is assigned with ```!external_ip``` as its value. When the policy is written to the metadata, the dictionary keys
 are replaced with their assigned values.
 
+## Creating policies using the Create Policy command
+
+The create policy command provides a command option to declare policies and include default attributes and values 
+that are required in the policy.  
+Usage:
+```anylog
+create policy [policy type] [with defaults] where [key value pairs]
+```
+**policy type** - The type of the policy created (i.e.: master, operator, query, publisher).  
+**with defaults** - Optional keywords to designate to include the default attributes (if not specified in the command key values pairs).  
+**key value pairs** - the list of attribute names and values.
+
+Example:
+
+```anylog
+create policy operator with defaults where company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
+```
+The command above returns the following policy:
+```anylog
+     {'operator' : {'company' : 'my_company',
+               'city' : 'San Francisco',
+               'country' : 'USA',
+               'cluster' : '7a00b26006a6ab7b8af4c400a5c47f2a',
+               'name' : 'my_company-operator-1',
+               'ip' : '73.202.142.172',
+               'internal_ip' : '10.0.0.78',
+               'port' : 32148,
+               'rest_port' : 32149,
+               'member' : 175}}
+```
+A complete process may have the following sequence:
+1. Retrive the IP and Port of the Master node.
+2. Retrieves ID of the data cluster that is assigned to the new Operator.
+3. Create the new Operator policy.
+4. Add the policy to the metadata.
+
+An example of a process that creates and adds the policy to the metadata is as follows:
+```anylog
+master_node = blockchain get master bring.ip_port
+cluster_id = blockchain get cluster where name = cluster_1 bring.first [cluster][id]
+new_policy = create policy operator with defaults where company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
+blockchain insert where policy = !new_policy and local = true and master = !master_node 
+```
+
 ## Retrieving policies from the dictionary
 
 The value assigned to a key in the dictionary is retrieved by providing the attribute name prefixed with exclamation point 
