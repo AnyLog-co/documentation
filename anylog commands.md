@@ -149,7 +149,7 @@ set node name Opreator_3
 ```
 The CLI prompt will appear as: 
 ```anylog
-AL Operator_1 >
+AL Operator_3 >
 ```
 Whereas **AL** stands for AnyLog and **Operator_1** is the assigned name.
 
