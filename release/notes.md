@@ -22,7 +22,7 @@ Release Date: TBD
 
 3. If license key is not provided - the **get status** command returns a warning on missing license key.    
 
-4. Option for **min** and **max** values in the ```bring command```: Details: 
+4. Option for **min** and **max** values in the ```bring command```: Details: [The bring keyword](../json%20data%20transformation.md#the-bring-keyword)
 
 ## Bugs fixed:
 
