@@ -22,6 +22,7 @@ Release Date: TBD
 
 3. If license key is not provided - the **get status** command returns a warning on missing license key.    
 
+4. Option for **min** and **max** values in the ```bring command```: Details: 
 
 ## Bugs fixed:
 

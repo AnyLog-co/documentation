@@ -96,6 +96,8 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.count``` - returns the number of entries that satisfy the result.
     * ```bring.null``` - includes null values in the returned JSON.
     * ```bring.ip_port``` - return a comma seperated list of IP and ports.
+    * ```bring.min``` - return the minimum value of an attribute.
+    * ```bring.max``` - return the maximum value of an attribute.
   
 ### Special bring values
 
@@ -184,4 +186,9 @@ blockchain get operator bring.json [operator][ip] [operator][port]
 * The following example returns the number of policies of type 'table'.
 ```anylog
 blockchain get table bring.count
+```
+* The following examples returns the min and max value of the port values assigned to nodes.
+```anylog
+blockchain get (operator, query, publisher, master) bring.min [*][port]
+blockchain get (operator, query, publisher, master) bring.max [*][port]
 ```
