@@ -19,12 +19,15 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 
 ![Edge Xpert Login](../../imgs/edgex_login.png)
 
-3. On the left side of the screen, press _App Services_
+3. On the left-side of the screen, press _App Services_
 
 ![Edge Xpert Homepage](../../imgs/edgex_homepage.png)
 
-4. 
+4. On the right-side of the screen add a _Basic Service_ 
 
+![EdgeX Add Service](../../imgs/edgex_appservice.png)
+
+From this point, configure the service based on the way by which to process the data on AnyLog. 
 
 ## Publishing via PUT 
 
