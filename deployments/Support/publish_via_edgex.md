@@ -14,8 +14,8 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 1. Make sure to install EdgeX and Edge Xpert Management tools
 
 2. In browser goto EdgeXpert login page -  | username and password: admin
-   * URL -  https://${YOUR_IP}:9090 
-   * Username: admin | Password: admin 
+   * **URL**: `https://${YOUR_IP}:9090` 
+   * **Username**: `admin` | **Password**: `admin` 
 ![Edge Xpert login page](../../imgs/edgex_login.png)
 
 3.  
