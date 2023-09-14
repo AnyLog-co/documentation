@@ -53,8 +53,5 @@ unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and 
        * Content-Type: _text/plain_ 
      * **Filter**
        * Device Filter
-
-| Basic Info | Address Info |        Filter         |
-| :---: | :---: |:---------------------:| 
-| ![]() | ![]() | ![Filter](../../img/edgex_appservice_filter.png) | 
-
+    
+![Filter](../../imgs/edgex_appservice_filter.png) | ![Filter](../../imgs/edgex_appservice_filter.png) | ![Filter](../../imgs/edgex_appservice_filter.png)  
