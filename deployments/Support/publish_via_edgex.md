@@ -42,6 +42,7 @@ unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and 
    * **Basic Info** 
      * Name
      * Destination: HTTP
+![Basic Info](../../imgs/edgex_appservice_basic_info.png)
    * **Address Info**
      * Method: PUT 
      * URL
@@ -50,8 +51,8 @@ unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and 
        * dbms
        * table
        * mode: _streaming_
-       * Content-Type: _text/plain_ 
+       * Content-Type: _text/plain_
+![Address Info](../../imgs/edgex_appservice_address_info_put.png)
      * **Filter**
        * Device Filter
-    
-![Filter](../../imgs/edgex_appservice_filter.png) | ![Filter](../../imgs/edgex_appservice_filter.png) | ![Filter](../../imgs/edgex_appservice_filter.png)  
+![Filter](../../imgs/edgex_appservice_filter.png)   
