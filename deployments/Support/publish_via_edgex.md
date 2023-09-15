@@ -3,7 +3,7 @@
 EdgeX (Foundry) is an Open-Source framework that serves as a foundation for building and deploying Internet of Things (IoT)
 edge computing solutions. While Edge Xpert is an enterprise version of _EdgeX_, provided by IoTech System. 
 
-This document will show how to publish data into Anylog via Edge Xpert Management tool.   
+This document will show how to publish data into AnyLog via Edge Xpert Management tool.   
 
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
