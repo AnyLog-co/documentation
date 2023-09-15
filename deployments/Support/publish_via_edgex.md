@@ -115,6 +115,7 @@ return outputObject;
 ![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
 3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via PUT.
+
 ![Save Button](../../imgs/edgex_save.png)
 
 
@@ -125,46 +126,53 @@ AnyLog is able to break down the data into separate tables based on a specific k
 However _PUT_, there's a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog side in order for 
 node to accept the data coming in.  
 
-1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT client (on the same network service) 
+1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
 can have the same topic name.  
 ```anylog 
 # POST 
 <run mqtt client where broker=rest and user-agent=anylog and log=false and topic=(
-  name=anylogedgex-demo and 
+  name=anylogedgex-post and 
   dbms=!company_name.name and 
   table="bring [readings][0][resourceName]" and 
   column.timestamp.timestamp=now and 
-  column.value=(type=float and value="bring [readings][0][value]")>
+  column.value=(type=float and value="bring [readings][0][value]"))>
   
 # MQTT  
 <run mqtt client where broker=local and log=false and topic=(
-  name=anylogedgex-demo and 
+  name=anylogedgex-mqtt and 
   dbms=!company_name.name and 
   table="bring [readings][0][resourceName]" and 
   column.timestamp.timestamp=now and 
-  column.value=(type=float and value="bring [readings][0][value]")>
+  column.value=(type=float and value="bring [readings][0][value]"))>
 ```
 
 2. As shown above, [Create Basic Application Service](#creating-an-application-service)
 
-3. Update Basic App Service
+### POST data into AnyLog 
+1. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: HTTP
+![Basic Information](../../imgs/edgex_post_basic_info.png)
 
 * **Address Info**
   * Method: POST 
   * URL (operator REST service IP and Port)
   * HTTP Request Headers
     * command: data 
-    * topic: anylogedgex-demo
+    * topic: anylogedgex-post
     * User-Agent: AnyLog/1.23,
     * Content-Type: text/plain
-  * For MQTT, there's a need to only declare _Topic Name_
+
+![Address Information](../../imgs/edgex_post_address_info.png)
   
 * **Filter**
   * Device Filter
 
-3. Once the changes are saved, data should automatically be sent into AnyLog via PUT.
+![Filter Value(s)](../../imgs/edgex_put_filter.png)
+
+3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via POST.
+
+![Save Button](../../imgs/edgex_save.png)
 
 
