@@ -72,11 +72,14 @@ From this point, configure the application service(s) based on the way by which 
 ## Publishing via PUT 
 
 Sending data into AnyLog via _PUT_ is probably the easiest as there are no requirements on the AnyLog side. However,
-unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. Additionally, all readings
-that come through the same app-service (via _PUT_), will be stored on the same table. 
+unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. As such, there's a need
+to specify a data format convertor (on EdgeX side) in order for AnyLog to process only the readings. 
 
-1. Locally create EdgeX transformation [JavaScript file](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) that will send only reading values 
-into AnyLog. 
+Note, all readings that come through the same app-service (via _PUT_), will be stored on the same table. 
+
+1. Locally create a [Javascript](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
+that creates a flat JSON object of the data, rather than a nested JSON object. The example provided simply extracts the 
+JSON object in `readings` and sends that data into AnyLog.
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
@@ -123,8 +126,8 @@ return outputObject;
 
 Publishing data to AnyLog via _POST_ and _MQTT_ allows for more comprehensive processing within AnyLog. In other words,
 AnyLog is able to break down the data into separate tables based on a specific key-value pair within the incoming data. 
-However _PUT_, there's a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog side in order for 
-node to accept the data coming in.  
+However, unlike _PUT_, there's a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog side in order for 
+the node to accept the data coming in.  
 
 ### POST data into AnyLog 
 1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
