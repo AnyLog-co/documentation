@@ -133,30 +133,35 @@ After the assignment, a command issued on the CLI will be executed on all the ta
 
 ### Associating peer replies to a key in the dictionary
 
-A reply from peers can be assigned to a key in the dictionary. 
+Reply from peer nodes can be stored in the dictionary using one of the following methods:
+* Using square brackets ([]) that extend the key, the replies are organized in a list. Every entry of in the list is organized  
+  as a pair with the IP and Port of the replying node, and the reply text.
+*  Using curly brackets ({}}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
+   is the IP and Port of the replying node, and the value is the reply text. 
 
-The examples below assume an assigned CLI:
+The examples below assume an [assigned CLI](#assigning-a-cli-to-multiple-peer-nodes). The peer nodes are the 
+target nodes that will execute the command.
 
-**Example 1:**
-  ```anylog
-current_status = get status
-```
-The reply from the target node is assigned to the dictionary key **current_status**.
-
-**Example 2:**
+**Example 1: replies organized as a list**
   ```anylog
 current_status[] = get status where format = json
 ```
 The reply from the target nodes is organized as a list and assigned to the key **current_status**.
-Each entry in the list has 2 values: 1) the IP and Port of the node executing the command and 2) the reply.
+Each entry in the list has 2 values: 1) the IP and Port of the target node and 2) the reply.
 
-**Example 3:**
+**Example 2: replies organized as a dictionary**
   ```anylog
 current_status{} = get status where format = json
 ```
 The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
 The key in the dictionary is the IP and Port of each target node and the value is the reply from each node.
 
- 
-   
+### Validating nodes replies
 
+Users can determine the number of nodes participating in a process by evaluating the status of the replies as follows:
+
+| Key extension | Example                 |  Explanation             |
+| ------------- | ------------------------| ---------------------- |
+| .len          | current_status.len      | The number of elements in the list or dictionary (representative of the number of target nodes).   |
+| .replies      | current_status.replies  | The number of nodes replied to the message.   |
+| .diff         | current_status.diff     | The difference between .len and .replies (representative of the number of nodes that did not reply.  |
