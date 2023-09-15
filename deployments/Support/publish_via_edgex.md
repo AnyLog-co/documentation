@@ -77,9 +77,10 @@ to specify a data format convertor (on EdgeX side) in order for AnyLog to proces
 
 Note, all readings that come through the same app-service (via _PUT_), will be stored on the same table. 
 
-1. Locally create a [Javascript](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
-that creates a flat JSON object of the data, rather than a nested JSON object. The example provided simply extracts the 
-JSON object in `readings` and sends that data into AnyLog.
+1. Locally create a JavaScript script that generates a flat JSON object from the data, as opposed to a nested JSON 
+object. The provided [example](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
+demonstrates how to extract the JSON object within the readings and transmit that data to AnyLog.
+
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
