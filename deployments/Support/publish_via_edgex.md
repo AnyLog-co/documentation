@@ -11,7 +11,7 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 * [Manual Deployment of EdgeX](EdgeX.md)
 
 
-For demonstration, the examples used is **LIGHTOUT** data source, provided by IoTech System.  
+For demonstration, the examples used is **retail-1** data source, provided by IoTech System.  
 ```json
 {
   "apiVersion":"v2",
@@ -57,9 +57,15 @@ For demonstration, the examples used is **LIGHTOUT** data source, provided by Io
    * **URL**: `https://${YOUR_IP}:9090` 
    * **Username**: `admin` | **Password**: `admin`
 
+![Login Screen](../../imgs/edgex_login.png)
+
 3. On the left-side of the screen, press _App Services_
 
+![Xpert Management Homepage](../../imgs/edgex_homepage.png)
+
 4. On the right-side of the screen add a _Basic Service_
+
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
