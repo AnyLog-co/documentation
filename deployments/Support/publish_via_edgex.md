@@ -75,9 +75,10 @@ Sending data into AnyLog via _PUT_ is probably the easiest as there are no requi
 unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. Additionally, all readings
 that come through the same app-service (via _PUT_), will be stored on the same table. 
 
-1. Locally create EdgeX transformation [JavaScript file](edgex_transformation.js) that will send only reading values 
+1. Locally create EdgeX transformation [JavaScript file](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) that will send only reading values 
 into AnyLog. 
-```javascript 
+```javascript
+// file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
 return outputObject;
 ```
@@ -89,6 +90,8 @@ return outputObject;
   * Name
   * Destination: HTTP
 
+![Basic Information](../../imgs/edgex_put_basic_info.png)
+
 * **Address Info**
   * Method: PUT 
   * URL (operator REST service IP and Port)
@@ -99,11 +102,20 @@ return outputObject;
     * mode: _streaming_
     * Content-Type: _text/plain_
 
+![Address Information](../../imgs/edgex_put_address_info.png)
+
+* **Data Format**
+  * JavaScript Transform: edgex_transformation.js 
+
+![Data Format](../../imgs/edgex_put_data_format.png) 
+
 * **Filter**
-  * (edgex_transformation.js)
   * Device Filter
 
-3. Once the changes are saved, data should automatically be sent into AnyLog via PUT.
+![Filter Value(s)](../../imgs/edgex_put_filter.png)
+
+3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via PUT.
+![Save Button](../../imgs/edgex_save.png)
 
 
 ## Publishing via POST & MQTT 
