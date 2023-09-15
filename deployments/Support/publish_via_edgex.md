@@ -148,6 +148,7 @@ can have the same topic name.
 * **Basic Info** 
   * Name
   * Destination: HTTP
+  
 ![Basic Information](../../imgs/edgex_post_basic_info.png)
 
 * **Address Info**
@@ -189,6 +190,7 @@ can have the same topic name.
 * **Basic Info** 
   * Name
   * Destination: MQTT
+  
 ![Basic Information](../../imgs/edgex_mqtt_basic_info.png)
 
 * **Address Info** 
