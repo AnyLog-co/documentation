@@ -10,7 +10,7 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 * [User Guide](https://docs.iotechsys.com/)
 
 
-For demonstration, the examples use LIGHTOUT data source, provided by IoTech System. 
+For demonstration, the examples used is **LIGHTOUT** data source, provided by IoTech System.  
 ```json
 {
    "apiVersion":"v2",
@@ -38,62 +38,96 @@ For demonstration, the examples use LIGHTOUT data source, provided by IoTech Sys
    * **URL**: `https://${YOUR_IP}:9090` 
    * **Username**: `admin` | **Password**: `admin`
 
-![Edge Xpert Login](../../imgs/edgex_login.png)
-
 3. On the left-side of the screen, press _App Services_
 
-![Edge Xpert Homepage](../../imgs/edgex_homepage.png)
-
-4. On the right-side of the screen add a _Basic Service_ 
-
-![EdgeX Add Service](../../imgs/edgex_appservice.png)
+4. On the right-side of the screen add a _Basic Service_
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
 ## Publishing via PUT 
 
 Sending data into AnyLog via _PUT_ is probably the easiest as there are no requirements on the AnyLog side. However,
-unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. Additionally, each _resourceName_
-should have its own _PUT_ process otherwise data will be merged into a single table. 
+unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. Additionally, all readings
+that come through the same app-service (via _PUT_), will be stored on the same table. 
 
-1. As shown above, [Create Basic Application Service](#creating-an-application-service)
-
-![Default Application Service screen](../../imgs/edgex_appservice_default.png)
-
-2. Locally create EdgeX [transformation JavaScript file](edgex_transformation.js) that will send only reading values 
+1. Locally create EdgeX transformation [JavaScript file](edgex_transformation.js) that will send only reading values 
 into AnyLog. 
 ```javascript 
 var outputObject = { value: inputObject.readings[0] };
 return outputObject;
 ```
 
+2. As shown above, [Create Basic Application Service](#creating-an-application-service)
+
 3. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: HTTP
-     
-![Basic Info](../../imgs/edgex_appservice_basic_info.png)
 
 * **Address Info**
   * Method: PUT 
-  * URL
+  * URL (operator REST service IP and Port)
   * HTTP Request Headers
     * type: _json_
-    * dbms
-    * table
+    * dbms (database to store data in)
+    * table (table name)
     * mode: _streaming_
     * Content-Type: _text/plain_
 
-![Address Info](../../imgs/edgex_appservice_address_info_put.png)
-
 * **Filter**
-  * Device Filter 
+  * (edgex_transformation.js)
+  * Device Filter
 
-![Filter](../../imgs/edgex_appservice_filter.png)   
-
-3. Once the 
+3. Once the changes are saved, data should automatically be sent into AnyLog via PUT.
 
 
-## Publishing via POST
+## Publishing via POST & MQTT 
 
-Sending data into AnyLog via _POST_ allows for pre-processing of the data  
+Publishing data to AnyLog via _POST_ and _MQTT_ allows for more comprehensive processing within AnyLog. In other words,
+AnyLog is able to break down the data into separate tables based on a specific key-value pair within the incoming data. 
+However _PUT_, there's a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog side in order for 
+node to accept the data coming in.  
+
+1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT client (on the same network service) 
+can have the same topic name.  
+```anylog 
+# POST 
+<run mqtt client where broker=rest and user-agent=anylog and log=false and topic=(
+  name=anylogedgex-demo and 
+  dbms=!company_name.name and 
+  table="bring [readings][0][resourceName]" and 
+  column.timestamp.timestamp=now and 
+  column.value=(type=int and value="bring [readings][0][value]")>
+  
+# MQTT  
+<run mqtt client where broker=local and log=false and topic=(
+  name=anylogedgex-demo and 
+  dbms=!company_name.name and 
+  table="bring [readings][0][resourceName]" and 
+  column.timestamp.timestamp=now and 
+  column.value=(type=int and value="bring [readings][0][value]")>
+```
+
+2. As shown above, [Create Basic Application Service](#creating-an-application-service)
+
+3. Update Basic App Service
+* **Basic Info** 
+  * Name
+  * Destination: HTTP
+
+* **Address Info**
+  * Method: POST 
+  * URL (operator REST service IP and Port)
+  * HTTP Request Headers
+    * command: data 
+    * topic: anylogedgex-demo
+    * User-Agent: AnyLog/1.23,
+    * Content-Type: text/plain
+  * For MQTT, there's a need to only declare _Topic Name_
+  
+* **Filter**
+  * Device Filter
+
+3. Once the changes are saved, data should automatically be sent into AnyLog via PUT.
+
+
