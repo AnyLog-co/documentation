@@ -8,6 +8,7 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
 * [User Guide](https://docs.iotechsys.com/)
+* [Manual Deployment of EdgeX](EdgeX.md)
 
 
 For demonstration, the examples used is **LIGHTOUT** data source, provided by IoTech System.  
