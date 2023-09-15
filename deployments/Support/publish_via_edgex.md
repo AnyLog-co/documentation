@@ -14,22 +14,40 @@ This document will show how to publish data into Anylog via Edge Xpert Managemen
 For demonstration, the examples used is **LIGHTOUT** data source, provided by IoTech System.  
 ```json
 {
-   "apiVersion":"v2",
-   "id":"74c826c2-795c-4650-87bf-4027bdc16b69",
-   "deviceName":"lighting",
-   "profileName":"LIGHTING_ANYLOG",
-   "sourceName":"LIGHTOUT2",
-   "origin":1694727574230572072,
-   "readings":[{
-     "id":"72bb7f8d-30c6-4d96-a02f-1d83dcf32820",
-     "origin":1694727574230572072,
-     "deviceName":"lighting",
-     "resourceName":"LIGHTOUT2",
-     "profileName":"LIGHTING_ANYLOG",
-     "valueType":"Int16",
-     "value":"0"
-   }]
-}	 
+  "apiVersion":"v2",
+  "id":"ff3013c3-2f96-48b6-ac06-5eeb4cde1ecf",
+  "deviceName":"retail-device-1",
+  "profileName":"RetailVirtualDevice",
+  "sourceName":"FreezerTemp1",
+  "origin":1694737678685722461,
+  "readings":[{
+    "id":"000a2227-0ff8-4534-8131-310a7efcdd47",
+    "origin":1694737678685722461,
+    "deviceName":"retail-device-1",
+    "resourceName":"FreezerTemp1",
+    "profileName":"RetailVirtualDevice",
+    "valueType":"Float32",
+    "units":"F",
+    "value":"3.140839e+01"
+  }]
+}
+{
+  "apiVersion":"v2",
+  "id":"e60989ad-ab59-456e-bb00-b90518ca83e1",
+  "deviceName":"retail-device-1",
+  "profileName":"RetailVirtualDevice",
+  "sourceName":"PeopleCount",
+  "origin":1694737678704913648,
+  "readings":[{
+    "id":"e789d093-0392-4a4e-9890-eee615f647f2",
+    "origin":1694737678704913648,
+    "deviceName":"retail-device-1",
+    "resourceName":"PeopleCount",
+    "profileName":"RetailVirtualDevice",
+    "valueType":"Int32",
+    "value":"48"
+  }]
+}	
 ```
 
 ### Creating an Application Service
@@ -98,7 +116,7 @@ can have the same topic name.
   dbms=!company_name.name and 
   table="bring [readings][0][resourceName]" and 
   column.timestamp.timestamp=now and 
-  column.value=(type=int and value="bring [readings][0][value]")>
+  column.value=(type=float and value="bring [readings][0][value]")>
   
 # MQTT  
 <run mqtt client where broker=local and log=false and topic=(
@@ -106,7 +124,7 @@ can have the same topic name.
   dbms=!company_name.name and 
   table="bring [readings][0][resourceName]" and 
   column.timestamp.timestamp=now and 
-  column.value=(type=int and value="bring [readings][0][value]")>
+  column.value=(type=float and value="bring [readings][0][value]")>
 ```
 
 2. As shown above, [Create Basic Application Service](#creating-an-application-service)
