@@ -133,14 +133,15 @@ After the assignment, a command issued on the CLI will be executed on all the ta
 
 ### Associating peer replies to a key in the dictionary
 
-Reply from peer nodes can be stored in the dictionary using one of the following methods:
-* Using square brackets ([]) that extend the key, the replies are organized in a list. Every entry of in the list is organized  
-  as a pair with the IP and Port of the replying node, and the reply text.
-*  Using curly brackets ({}}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
-   is the IP and Port of the replying node, and the value is the reply text. 
+A user can issue a command to target nodes using the **run client** command or assigning the CLI to one or more nodes.  
 
-The examples below assume an [assigned CLI](#assigning-a-cli-to-multiple-peer-nodes). The peer nodes are the 
-target nodes that will execute the command.
+Reply from the target nodes can be stored in the node's local dictionary using one of the following methods:
+* Using square brackets ([]) that extend the key, the replies are organized in a list. Every list entry is organized
+  as a pair with the IP and Port of the target node, and the reply text.
+* Using curly brackets ({}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
+   are the IP and Port of the target nodes, and the values represent the reply message from each node. 
+
+The examples below assume an [assigned CLI](#assigning-a-cli-to-multiple-peer-nodes). 
 
 **Example 1: replies organized as a list**
   ```anylog
