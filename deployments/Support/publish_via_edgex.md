@@ -157,7 +157,7 @@ can have the same topic name.
   * HTTP Request Headers
     * command: data 
     * topic: anylogedgex-post
-    * User-Agent: AnyLog/1.23,
+    * User-Agent: AnyLog/1.23
     * Content-Type: text/plain
 
 ![Address Information](../../imgs/edgex_post_address_info.png)
