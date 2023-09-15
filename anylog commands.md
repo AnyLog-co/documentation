@@ -749,7 +749,7 @@ Usage:
 ```
 
 A common usage is when a node issues a command to peer nodes, some peers reply and some peers are disconnected.  
-The wait command can pause until all peers reply, but no longer than the max wait time.
+The wait command pauses until all peers reply, but no longer than the max wait time.
 
 Example:
 ```anylog

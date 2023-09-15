@@ -131,6 +131,8 @@ AL Operator_2 > blockchain get operator bring.ip_port >>
 ```
 After the assignment, a command issued on the CLI will be executed on all the target nodes.
 
+Note: Refer to the [wait command](../../anylog%20commands.md#the-wait-command) for aggregating and monitoring replies from peer nodes in the local dictionary. 
+
 ### Exceptions to an assigned CLI
 These commands ignore an assigned CLI:
 * [wait](../../anylog%20commands.md#the-wait-command)
