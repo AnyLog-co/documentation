@@ -757,24 +757,13 @@ Usage:
 ```
 
 A common usage is when a node issues a command to peer nodes, some peers reply and some peers are disconnected.  
-The wait command can pause until all (or a threshold) peers reply, but no longer than the max wait time.
+The wait command pauses until all peers reply, but no longer than the max wait time.
 
-Example 1:
+Example:
 ```anylog
 nodes_reply[] = run client (10.0.0.78:3048, 10.0.0.78:7848) get status
-wait 5 for !nodes_reply.len == 2
+wait 5 for !nodes_reply.diff == 0
 ```
-In the example above, 2 peer nodes are messages for their status (note: replies are organized in a list).  
+In the example above, 2 peer nodes are messaged for their status (note: replies are organized in a list).  
 The wait command thread pauses for 5 seconds or until the 2 peer nodes replies are received - whichever comes first.
-
-Example 2:
-```anylog
-nodes_reply{} = run client (blockchain get operator bring.ip_port) get status
-wait 5 for !nodes_reply.len >= 5
-```
-In the example above, all the operator nodes are messages for their status (note: replies are organized in a dictionary).
-The wait command thread pauses for 5 seconds or until at least 5 nodes reply - whichever comes first.
-
-Note: if the wait condition is for partial execution (i.e., 10 nodes are messaged but condition is satisfied when 7 
-replies are received), use the greater than condition as race condition may miss the exact match.
 
