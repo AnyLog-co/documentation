@@ -131,32 +131,10 @@ AL Operator_2 > blockchain get operator bring.ip_port >>
 ```
 After the assignment, a command issued on the CLI will be executed on all the target nodes.
 
-### Associating peer replies to a key in the dictionary
+Note: Refer to the [wait command](../../anylog%20commands.md#the-wait-command) for aggregating and monitoring replies from peer nodes in the local dictionary. 
 
-A reply from peers can be assigned to a key in the dictionary. 
-
-The examples below assume an assigned CLI:
-
-**Example 1:**
-  ```anylog
-current_status = get status
-```
-The reply from the target node is assigned to the dictionary key **current_status**.
-
-**Example 2:**
-  ```anylog
-current_status[] = get status where format = json
-```
-The reply from the target nodes is organized as a list and assigned to the key **current_status**.
-Each entry in the list has 2 values: 1) the IP and Port of the node executing the command and 2) the reply.
-
-**Example 3:**
-  ```anylog
-current_status{} = get status where format = json
-```
-The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
-The key in the dictionary is the IP and Port of each target node and the value is the reply from each node.
-
- 
-   
+### Exceptions to an assigned CLI
+These commands ignore an assigned CLI:
+* [wait](../../anylog%20commands.md#the-wait-command)
+* help
 

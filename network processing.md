@@ -111,9 +111,8 @@ This command can be also issued as an assignment of the blockchain command to a 
     destination = blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,
     run client (!destination) get disk space .
     ```
-    
-    
-## Messaging reply modes - the 'subset' flag
+   
+## Queries messaging modes - the 'subset' flag
 
 A message can be delivered to one or more nodes. Because of the intermittent nature of the network, some nodes may not be accessible.  
 Users can configure their setup to deliver High Availability by replicating the data between nodes.
@@ -131,6 +130,44 @@ run client (subset = True) sql litsanleandro format = table "select count(*), mi
 run client (dbms = litsanleandro  and table = ping_sensor, subset = trure) get processes
 ```
 
+### Associating peer replies to a key in the dictionary
+
+A user can issue a command to target nodes using the **run client** command or assigning the CLI to one or more nodes.  
+
+Replies from the target nodes can be stored in the node's local dictionary using one of the following methods:
+* Using square brackets ([]) that extend the key, the replies are organized in a list. Every list entry is organized
+  as a pair with the IP and Port of the target node, and the reply text.
+* Using curly brackets ({}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
+   are the IP and Port of the target nodes, and the values represent the reply message from each node. 
+
+The examples below assume an [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-multiple-peer-nodes).
+ 
+**Example 1: replies organized as a list**
+  ```anylog
+current_status[] = get status where format = json
+```
+The reply from the target nodes is organized as a list and assigned to the key **current_status**.
+Each entry in the list has 2 values: 1) the IP and Port of the target node and 2) the reply.
+
+**Example 2: replies organized as a dictionary**
+  ```anylog
+current_status{} = get status where format = json
+```
+The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
+The key in the dictionary is the IP and Port of each target node and the value is the reply from each node.
+
+### Validating nodes replies
+
+Users can determine the number of nodes participating in a process by evaluating the status of the replies as follows:
+
+| Key extension | Example                 |  Explanation             |
+| ------------- | ------------------------| ---------------------- |
+| .len          | current_status.len      | The number of elements in the list or dictionary (representative of the number of target nodes).   |
+| .replies      | current_status.replies  | The number of nodes replied to the message.   |
+| .diff         | current_status.diff     | The difference between .len and .replies (representative of the number of nodes that did not reply.  |
+
+Note: users can issue a **wait** command after the target nodes are messaged to pause execution untill all nodes replied 
+and a time threshold - whichever comes first. Details are available in the [wait command](anylog%20commands.md#the-wait-command) section.
 
 ## Network Configuration
 
