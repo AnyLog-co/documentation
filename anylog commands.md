@@ -657,6 +657,14 @@ if ([condition a]) and/or ([condition b]) then [command]
 else [command]
 ```
 
+## Using dictionary values in the comparison process
+
+Values from the dictionary can be dynamically mapped by extending the key with a dot and the target mapping.  
+These are summarized in the chart below:
+
+
+ 
+
 Note:  
 * By default, comparison treats all values as strings, if data type is specified, the comparison is treating the compared values by their
 data types.  
