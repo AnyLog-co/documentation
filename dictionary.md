@@ -84,8 +84,8 @@ Note: The examples below ignore the keyword **set**.
 
 # Mapping the dictionary values
 
-Values from the dictionary can be dynamically mapped by extending the key with a dot (.) and followed by the mapping type.  
-These are summarized in the chart below:
+Values from the dictionary can be dynamically mapped by extending the key with a dot (.) followed by the mapping type.  
+The mapping options are summarized in the chart below:
 
 | Key Prefix  | Example                 | Comments     |
 | ----------- | ------------------------| ----------- | 
@@ -110,7 +110,7 @@ value1 = "My Company"
 ```
 The example above returns th string: ```my_company```
 
-Note: **.len**, **.replies**, and **.diff** are used when the entry in the dictionary is used to aggregate replies 
+Note: **.len**, **.replies**, and **.diff** are used when the entry in the dictionary aggregates replies 
 from multiple peer nodes. The explanation is available int the 
 [Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
