@@ -88,7 +88,7 @@ what is sent to AnyLog on the EdgeXpert side. Otherwise, AnyLog will store the d
 
 1. Locally, create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
 [sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
-extracts reading values from EdgeXpert, and them sent into AnyLog.
+extracts [reading values](#L15) from EdgeXpert, and them sent into AnyLog.
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
