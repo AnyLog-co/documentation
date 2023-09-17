@@ -86,9 +86,9 @@ database and table.
 Since AnyLog does not perform any data transformation when data comes in via REST PUT, it is up to the user to decide 
 what is sent to AnyLog on the EdgeXpert side. Otherwise, AnyLog will store the data as is.
 
-1. Locally create a JavaScript script that generates a flat JSON object from the data, as opposed to a nested JSON 
-object. The provided [example](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
-demonstrates how to extract the JSON object within the readings and transfer only that data to AnyLog.
+1. Locally, create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
+[sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
+extracts reading values from EdgeXpert, and them sent into AnyLog.
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
