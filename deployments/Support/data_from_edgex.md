@@ -91,9 +91,7 @@ Users specify the database and table assigned to the data in the REST message he
 Since AnyLog does not perform any data transformation when data comes in via REST PUT, it is up to the user to decide 
 what is sent to AnyLog on the EdgeXpert side. 
 
-### 
-
-The following steps are done locally, on your machine
+#### The following steps are done locally, on your machine
 
 1. Locally, create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
 [sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
@@ -104,7 +102,7 @@ var outputObject = { value: inputObject.readings[0] };
 return outputObject;
 ```
 
-The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done entirely on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
@@ -158,8 +156,7 @@ This process is identical to the used when data is published on an AnyLog node a
 The mapping rules are declared using a client service, and a description is available at the
 [run mqtt client](../../message%20broker.md)) section. 
 
-### 
-The following steps are on the AnyLog (operator) node that's receiving the data.
+#### The following steps are on the AnyLog (operator) node that's receiving the data.
 
 1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
 assigned to the data.
@@ -179,7 +176,7 @@ The example below declares the mapping rules on the data detailed above.
 ```
 
 
-The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done entirely on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
@@ -224,8 +221,7 @@ data is transformed, it is stored on the AnyLog operator node(s).
 
 Make sure the following steps are done on each AnyLog node that provides the message broker service:
 
-### 
-The following steps are on the AnyLog (operator) node that's receiving the data.
+#### The following steps are on the AnyLog (operator) node that's receiving the data.
 
 1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
 assigned to the data.
@@ -245,13 +241,13 @@ The example below declares the mapping rules on the data detailed above.
   column.value=(type=float and value="bring [readings][0][value]"))>
 ```
 
-The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done entirely on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
 ![Basic Service location](../../imgs/edgex_basic_service.png)
 
-3. Update Basic App Service
+2. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: MQTT
@@ -269,7 +265,7 @@ The following steps are done entirely on the EdgeXpert GUI interface.
 
 ![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
-4. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via POST.
+3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via POST.
 
 ![Save Button](../../imgs/edgex_save.png)
 
