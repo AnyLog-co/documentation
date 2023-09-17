@@ -119,19 +119,23 @@ run client (!destination) get disk space .
 
 ## Using shortcuts to specify the destination of a TCP message
 
-User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and and the **bring.ip_port** directive.
-The examples above can be represented as in the following example:
+User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and the **bring.ip_port** directive.
+This shortcut representation applies in 2 use cases:
+* With a **run client** command.
+* With an assigned CLI [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
+
+The examples below demonstrate a shortcut (and retrieves the same destination IPs and Ports as in the examples above):
 ```anylog
 run client (operator where [country] contains US) get disk space .
 ```
 This type of shortcut is applied when the information inside the parenthesis is as follows:
-* Starts with one of a keywords that represents a node type: **master**, **query**, **operator**, **publisher**.
+* Starts with one of a keywords that represents a node type: **master**, **query**, **operator**, or a **publisher**.
 * Starts with a parenthesis. The example below returns the IP and Ports of all Operators and Query nodes:
 ```anylog
 run client ((operator,query) where [country] contains US) get cpu usage
 ```
 
-This shortcut also applies for an [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node)
+
 
 ## Queries messaging modes - the 'subset' flag
 
