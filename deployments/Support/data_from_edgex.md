@@ -6,6 +6,7 @@ edge computing solutions. While EdgeXpert is an enterprise version of _EdgeX_, p
 Note: a detailed explanation on how data is added to the AnyLog Network nodes is available at the [adding data](../../adding%20data.md) section.
 
 This document demonstrates how to publish data into AnyLog via EdgeXpert Management tool.   
+Edgex related documentation is available with the links below:
 
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
@@ -57,6 +58,8 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 * To send data to AnyLog via REST, configure the REST service. See details in the [REST Server](../../background%20processes.md#rest-requests) section. 
 * To Treat AnyLog as a message broker, configure the Message Broker service. See details in the [Message Broker](../../background%20processes.md#message-broker) section. 
 
+These services enable the node to receive the data via REST or published data.
+
 ## Creating an Application Service in Edgex
 1. Install EdgeX and EdgeXpert Management tools
 
@@ -76,24 +79,24 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
-## Publishing Data
+## Transferring data from Edgex to AnyLog
 Edgex can transfer data into AnyLog using the following calls:
 * Using REST PUT - this option receives data from Edgex and stores the data in AnyLog without data transformation.
 * Using REST POST - this option receives data from Edgex and stores the data in AnyLog with data transformation.
 * Treating AnyLog as a Message Broker - data transformation is supported.
 
-### Publishing Data into AnyLog via PUT
+Note that users can configure an AnyLog node to receive data from a third-party brokers such as CloudMQTT and Eclipse 
+Mosquitto. This option is detailed [here](../../message%20broker.md#subscribing-to-a-third-party-broker).
 
-Using PUT, configuration is done only on the EdgeXpert platform.
+### Transferring data into AnyLog via PUT
 
-Users specify the database and table assigned to the data in the REST message header. 
+Using PUT, configuration is done only on the EdgeXpert platform:
+* the user determines the data transferred to AnyLog on the Edgex platform.
+* The database and table assigned to the data are specified in the REST message header. 
 
-Since AnyLog does not perform any data transformation when data comes in via REST PUT, it is up to the user to decide 
-what is sent to AnyLog on the EdgeXpert side. 
+#### The following step is done locally, on your machine
 
-#### The following steps are done locally, on your machine
-
-1. Locally, create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
+Create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
 [sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
 extracts reading values from EdgeXpert, and them sent into AnyLog.
 ```javascript
@@ -102,7 +105,7 @@ var outputObject = { value: inputObject.readings[0] };
 return outputObject;
 ```
 
-#### The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
@@ -149,20 +152,20 @@ transformed, it is stored on the AnyLog operator node(s).
 
 In the case of POST, the database and table can be determined from the headers or retrieved from the data received.
 
-The transformation is triggered by associating mapping rules and data to a topic. When the data is recieved, the 
-mapping rules are applied on the data.
+The transformation is triggered by associating mapping rules to a topic. The POST headers include a topic and 
+when the data is recieved in the AnyLog node, the mapping rules assigned to the topic are applied on the data.
 
-This process is identical to the used when data is published on an AnyLog node as a message broker.  
+This process is identical to the procesess used when data is published on an AnyLog node as a message broker.  
 The mapping rules are declared using a client service, and a description is available at the
-[run mqtt client](../../message%20broker.md)) section. 
+[run mqtt client](../../message%20broker.md) section. 
 
-#### The following steps are on the AnyLog (operator) node that's receiving the data.
+#### The following steps are done on the AnyLog (operator) node that's receiving the data
 
-1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
-assigned to the data.
+1. Declare the mapping rules associated to a topic. If the database and table assigned to the data are not included in
+   the headers, the maaping rules need to include the database and table to use.
 
-2. To accept data via REST _POST_, enable the mapping rules using the client service (described in run 
-[mqtt client](../../message%20broker.md)). This service is enabled using the command: `run mqtt client` 
+2. Enable the mapping rules using the client service (described in run [mqtt client](../../message%20broker.md)).   
+   Note: This service is enabled using the command: `run mqtt client` 
 
 The example below declares the mapping rules on the data detailed above.
 ```anylog 
@@ -174,8 +177,7 @@ The example below declares the mapping rules on the data detailed above.
   column.value=(type=float and value="bring [readings][0][value]"))>
 ```
 
-
-#### The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
@@ -210,18 +212,6 @@ The example below declares the mapping rules on the data detailed above.
 
 ### Publishing Data into AnyLog via Message Broker
 
-The AnyLog _message broker_ service using the command `run message broker`.
-
-Note that users can configure an AnyLog  node as a client for third-party brokers such as CloudMQTT and Eclipse Mosquitto.  
-This option is detailed [here](../../message%20broker.md#subscribing-to-a-third-party-broker).
-
-Publishing data into AnyLog via the _message broker_ allows the data to be transformed locally within AnyLog. Once the 
-data is transformed, it is stored on the AnyLog operator node(s).
-
-Make sure the following steps are done on each AnyLog node that provides the message broker service:
-
-#### The following steps are on the AnyLog (operator) node that's receiving the data.
-
 1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
 assigned to the data.
 
@@ -240,7 +230,7 @@ The example below declares the mapping rules on the data detailed above.
   column.value=(type=float and value="bring [readings][0][value]"))>
 ```
 
-#### The following steps are done entirely on the EdgeXpert GUI interface.
+#### The following steps are done on the EdgeXpert GUI interface.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
