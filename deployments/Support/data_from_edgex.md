@@ -77,14 +77,14 @@ Edgex can transfer data into AnyLog using the following calls:
 
 ### Publishing Data into AnyLog via PUT
 
-From an AnyLog perspective, receiving data via REST _PUT_ requires little to no work. 
+From an AnyLog perspective, receiving data via REST _PUT_ requires minimal effort.
 
-For REST _PUT_, the decision which for which (database and) table data will be stored in is based on the header 
-information provided. This means all data that comes through the same EdgeXpert app-service will be store on the same 
+For REST _PUT_, the decision regarding which database and table the data will be stored in is based on the header 
+information provided. This means that all data coming through the same EdgeXpert app-service will be stored in the same 
 database and table.
 
-Since AnyLog does not do any data transformation when data comes in (via REST _PUT_), it is up to the user to decide 
-which sent through to AnyLog, on the EdgeXpert side. Otherwise, AnyLog will store the data as is.      
+Since AnyLog does not perform any data transformation when data comes in via REST PUT, it is up to the user to decide 
+what is sent to AnyLog on the EdgeXpert side. Otherwise, AnyLog will store the data as is.
 
 1. Locally create a JavaScript script that generates a flat JSON object from the data, as opposed to a nested JSON 
 object. The provided [example](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
@@ -133,12 +133,13 @@ return outputObject;
 
 ### Publishing Data into AnyLog via POST
 
-Publishing data into AnyLog via REST _POST_, allows the data to be transformed locally (within Anylog). Once the data is
-transformed, it gets stored on the AnyLog operator node(s). Since AnyLog is processing the data, the data coming in via  
-a single EdgeX app-service can send data into separate (database and) tables.
+Publishing data into AnyLog via REST _POST_ allows the data to be transformed locally within AnyLog. After the data is 
+transformed, it is stored on the AnyLog operator node(s). Because AnyLog processes the data, data from a single EdgeX 
+app-service can be sent to separate databases and tables.
 
-Unlike _PUT_, when using _POST_, there is a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog 
-side in order for the node to accept the data coming in.  
+Unlike _PUT_, when using _POST_, it is necessary to execute the message broker client (as described in [run mqtt client](../../message%20broker.md)) 
+on the AnyLog side for the node to accept incoming data.
+  
 
 1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
 can have the same topic name.  
@@ -183,17 +184,17 @@ can have the same topic name.
 
 ### Publishing Data into AnyLog via Message Broker
 
-AnyLog _message broker_ service act as its own server and client or just a client for third-party brokers (ex. CloudMQTT 
-and Eclipse Mosquitto).
+The AnyLog _message broker_ service can act both as its own server (via `run message broker`) and client, or just as a 
+client for third-party brokers such as CloudMQTT and Eclipse Mosquitto.
 
-Publishing data into AnyLog via _message broker_, allows the data to be transformed locally (within Anylog). Once the 
-data is transformed, it gets stored on the AnyLog operator node(s). Since AnyLog is processing the data, the data coming   
-in via a single EdgeX app-service can be stored into separate (database and) tables.
+Publishing data into AnyLog via the _message broker_ allows the data to be transformed locally within AnyLog. Once the 
+data is transformed, it is stored on the AnyLog operator node(s). Because AnyLog processes the data, data from a single 
+EdgeX app-service can be stored in separate databases and tables.
 
-Like _POST_, when using _message broker_, there is a need to execute [run mqtt client](../../message%20broker.md) 
-on the AnyLog side in order for the node to accept the data coming in. However, unlike REST _POST_, the connection 
-information can either be the node itself (ie act as both server and client), or connecting to a third-party server
-(ex. CloudMQTT or Eclipse Mosquitto), and have the service act onky as a client.  
+Similar to _POST_, when using the _message broker_, you need to execute the MQTT client (as described in run 
+[mqtt client](../../message%20broker.md)) on the AnyLog side for the node to accept incoming data. However, unlike REST 
+_POST_, the connection information can either be the node itself (acting as both server and client) or connecting to a 
+third-party server (such as CloudMQTT or Eclipse Mosquitto), with the service functioning solely as a client.
 
 1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
 can have the same topic name. The example below runs as a local server-client message broker, while the 
