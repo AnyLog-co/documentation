@@ -87,31 +87,52 @@ options to the way the destination nodes are specified:
 * As an empty parenthesis followed by a query. The query includes 2 sections. The first starts with the keyword _sql_ followed by
 a database name (and additional instructions on how to execute the query) and the second is the _select_ statement that includes the table
 name. Using the command (and the metadata), the network protocol determines the nodes that host the data. This process
-    is transparent to the caller.  
-    **Example**:
-    ```anylog
-    run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
-    ```
+is transparent to the caller.  
+**Example**:
+```anylog
+run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
+```
 
 * Specifying the database name and the table name will deliver the command to the nodes that host the specified table.  
-    **Example**:
-    ```anylog
-    run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
-    ```
+**Example**:
+```anylog
+run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
+```
     
 * As a blockchain command that retrieves IP and Ports and formats the destination as a comma separated list.    
-   **Example** (retrieving the disk space of all Operator nodes in the US):
-    ```anylog
-    run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
-    ```
+**Example** (retrieving the disk space of all Operator nodes in the US):
+```anylog
+run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
+```
+
+This blockchain command can be replaced with a specific call to retrieve the list of IPs and Ports:
+```anylog
+run client (blockchain get operator where [country] contains US bring.ip_port) get disk space .
+```
     
 This command can be also issued as an assignment of the blockchain command to a key and referencing the key as the destination:  
-   **Example**:
-    ```anylog
-    destination = blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,
-    run client (!destination) get disk space .
-    ```
-   
+**Example**:
+```anylog
+destination = blockchain get operator where [country] contains US bring.ip_port
+run client (!destination) get disk space .
+```
+
+## Using shortcuts to specify the destination of a TCP message
+
+User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and and the **bring.ip_port** directive.
+The examples above can be represented as in the following example:
+```anylog
+run client (operator where [country] contains US) get disk space .
+```
+This type of shortcut is applied when the information inside the parenthesis is as follows:
+* Starts with one of a keywords that represents a node type: **master**, **query**, **operator**, **publisher**.
+* Starts with a parenthesis. The example below returns the IP and Ports of all Operators and Query nodes:
+```anylog
+run client ((operator,query) where [country] contains US) get cpu usage
+```
+
+This shortcut also applies for an [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node)
+
 ## Queries messaging modes - the 'subset' flag
 
 A message can be delivered to one or more nodes. Because of the intermittent nature of the network, some nodes may not be accessible.  

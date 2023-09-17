@@ -138,3 +138,8 @@ These commands ignore an assigned CLI:
 * [wait](../../anylog%20commands.md#the-wait-command)
 * help
 
+### Using shortcuts with a blockchain command
+When assignment is done using a blockchain command, usere can use shortcuts to describe the assignment.  
+Details are available in the 
+[Using shortcuts to specify the destination of a TCP message](../../network%20processing.md#using-shortcuts-to-specify-the-destination-of-a-tcp-message) section.
+
