@@ -3,7 +3,7 @@
 EdgeX (Foundry) is an Open-Source framework that serves as a foundation for building and deploying Internet of Things (IoT)
 edge computing solutions. While Edge Xpert is an enterprise version of _EdgeX_, provided by IoTech System. 
 
-This document will show how to publish data into AnyLog via Edge Xpert Management tool.   
+This document demonstrates how to publish data into AnyLog via Edge Xpert Management tool.   
 
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
@@ -69,11 +69,18 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
-## Publishing via PUT 
+## Publishing data
+Edgex can transfer data into ANyLog using the following calls:
+* Using REST PUT - this option receives data from Edgex and stores the data in AnyLog without data transformation.
+* Using REST POST - this option receives data from Edgex and stores the data in AnyLog with data transformation.
+* Using Message Broker - AnyLog receives data as a message broker and allows data transformation.
 
-Sending data into AnyLog via _PUT_ is probably the easiest as there are no requirements on the AnyLog side. However,
-unlike _POST_ and _MQTT_, the data wil not be analyzed but rather processed and stored as is. As such, there's a need
-to specify a data format convertor (on EdgeX side) in order for AnyLog to process only the readings. 
+## Publishing via PUT
+
+Specify a data format convertor (on EdgeX side) in order for AnyLog to process only the readings. 
+
+
+On the ANyLog side, the data is organized in a database and table
 
 Note, all readings that come through the same app-service (via _PUT_), will be stored on the same table. 
 
