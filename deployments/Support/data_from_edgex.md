@@ -85,20 +85,20 @@ Edgex can transfer data into AnyLog using the following calls:
 * Using REST POST - this option receives data from Edgex and stores the data in AnyLog with data transformation.
 * Treating AnyLog as a Message Broker - data transformation is supported.
 
-Note that users can configure an AnyLog node to receive data from a third-party brokers such as CloudMQTT and Eclipse 
+Note that users can configure an AnyLog node to receive data from third-party brokers such as CloudMQTT and Eclipse 
 Mosquitto. This option is detailed [here](../../message%20broker.md#subscribing-to-a-third-party-broker).
 
 ### Transferring data into AnyLog via PUT
 
 Using PUT, configuration is done only on the EdgeXpert platform:
-* the user determines the data transferred to AnyLog on the Edgex platform.
+* The user determines the data transferred to AnyLog on the Edgex platform.
 * The database and table assigned to the data are specified in the REST message header. 
 
 #### The following step is done locally, on your machine
 
 Create a JavaScript script that selects the data generated in EdgeXpert to be sent into AnyLog. The provided 
 [sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
-extracts reading values from EdgeXpert, and them sent into AnyLog.
+extracts reading values from EdgeXpert and transfers the readings to an AnyLog node.
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
@@ -148,7 +148,7 @@ return outputObject;
 ### Publishing Data into AnyLog via POST
 
 Publishing data into AnyLog via REST _POST_ allows the data to be transformed locally within AnyLog. After the data is 
-transformed, it is stored on the AnyLog operator node(s).   
+transformed, it is stored on the AnyLog node.   
 
 In the case of POST, the database and table can be determined from the headers or retrieved from the data received.
 
@@ -210,7 +210,7 @@ The example below declares the mapping rules on the data detailed above.
 
 ![Save Button](../../imgs/edgex_save.png)
 
-### Publishing Data into AnyLog via Message Broker
+### Publishing Data into AnyLog using the AnyLog Message Broker service
 
 1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
 assigned to the data.
