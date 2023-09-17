@@ -161,9 +161,8 @@ The mapping rules are declared using a client service, and a description is avai
 1. Declare the mapping rules associated to a topic. The rules need to include the database name and table name that are 
 assigned to the data.
 
-2. Similar to _POST_, when using the _message broker_ service, enable the mapping rules using the client service 
-(described in run [mqtt client](../../message%20broker.md)). This service is enabled using the command: 
-`run mqtt client` 
+2. To accept data via REST _POST_, enable the mapping rules using the client service (described in run 
+[mqtt client](../../message%20broker.md)). This service is enabled using the command: `run mqtt client` 
 
 The example below declares the mapping rules on the data detailed above.
 ```anylog 
