@@ -1,9 +1,9 @@
-# Publishing Data via Edge Xpert Manager
+# Publishing Data via EdgeXpert Manager
 
 EdgeX (Foundry) is an Open-Source framework that serves as a foundation for building and deploying Internet of Things (IoT)
-edge computing solutions. While Edge Xpert is an enterprise version of _EdgeX_, provided by IoTech System. 
+edge computing solutions. While EdgeXpert is an enterprise version of _EdgeX_, provided by IoTech System. 
 
-This document demonstrates how to publish data into AnyLog via Edge Xpert Management tool.   
+This document demonstrates how to publish data into AnyLog via EdgeXpert Management tool.   
 
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
@@ -51,7 +51,7 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 ```
 
 ### Creating an Application Service
-1. Install EdgeX and Edge Xpert Management tools
+1. Install EdgeX and EdgeXpert Management tools
 
 2. In browser goto EdgeXpert login page
    * **URL**: `https://${YOUR_IP}:9090` 
@@ -69,24 +69,26 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
-## Publishing data
-Edgex can transfer data into ANyLog using the following calls:
+## Publishing Data
+Edgex can transfer data into AnyLog using the following calls:
 * Using REST PUT - this option receives data from Edgex and stores the data in AnyLog without data transformation.
 * Using REST POST - this option receives data from Edgex and stores the data in AnyLog with data transformation.
 * Using Message Broker - AnyLog receives data as a message broker and allows data transformation.
 
-## Publishing via PUT
+### Publishing Data into AnyLog via PUT
 
-Specify a data format convertor (on EdgeX side) in order for AnyLog to process only the readings. 
+From an AnyLog perspective, receiving data via REST _PUT_ requires little to no work. 
 
+For REST _PUT_, the decision which for which (database and) table data will be stored in is based on the header 
+information provided. This means all data that comes through the same EdgeXpert app-service will be store on the same 
+database and table.
 
-On the ANyLog side, the data is organized in a database and table
-
-Note, all readings that come through the same app-service (via _PUT_), will be stored on the same table. 
+Since AnyLog does not do any data transformation when data comes in (via REST _PUT_), it is up to the user to decide 
+which sent through to AnyLog, on the EdgeXpert side. Otherwise, AnyLog will store the data as is.      
 
 1. Locally create a JavaScript script that generates a flat JSON object from the data, as opposed to a nested JSON 
 object. The provided [example](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js) 
-demonstrates how to extract the JSON object within the readings and transmit that data to AnyLog.
+demonstrates how to extract the JSON object within the readings and transfer only that data to AnyLog.
 ```javascript
 // file name: edgex_transformation.js
 var outputObject = { value: inputObject.readings[0] };
@@ -129,14 +131,15 @@ return outputObject;
 ![Save Button](../../imgs/edgex_save.png)
 
 
-## Publishing via POST & MQTT 
+### Publishing Data into AnyLog via POST
 
-Publishing data to AnyLog via _POST_ and _MQTT_ allows for more comprehensive processing within AnyLog. In other words,
-AnyLog is able to break down the data into separate tables based on a specific key-value pair within the incoming data. 
-However, unlike _PUT_, there's a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog side in order for 
-the node to accept the data coming in.  
+Publishing data into AnyLog via REST _POST_, allows the data to be transformed locally (within Anylog). Once the data is
+transformed, it gets stored on the AnyLog operator node(s). Since AnyLog is processing the data, the data coming in via  
+a single EdgeX app-service can send data into separate (database and) tables.
 
-### POST data into AnyLog 
+Unlike _PUT_, when using _POST_, there is a need to execute [run mqtt client](../../message%20broker.md) on the AnyLog 
+side in order for the node to accept the data coming in.  
+
 1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
 can have the same topic name.  
 ```anylog 
@@ -178,14 +181,30 @@ can have the same topic name.
 
 ![Save Button](../../imgs/edgex_save.png)
 
-### MQTT data into AnyLog 
+### Publishing Data into AnyLog via Message Broker
+
+AnyLog _message broker_ service act as its own server and client or just a client for third-party brokers (ex. CloudMQTT 
+and Eclipse Mosquitto).
+
+Publishing data into AnyLog via _message broker_, allows the data to be transformed locally (within Anylog). Once the 
+data is transformed, it gets stored on the AnyLog operator node(s). Since AnyLog is processing the data, the data coming   
+in via a single EdgeX app-service can be stored into separate (database and) tables.
+
+Like _POST_, when using _message broker_, there is a need to execute [run mqtt client](../../message%20broker.md) 
+on the AnyLog side in order for the node to accept the data coming in. However, unlike REST _POST_, the connection 
+information can either be the node itself (ie act as both server and client), or connecting to a third-party server
+(ex. CloudMQTT or Eclipse Mosquitto), and have the service act onky as a client.  
+
 1. On AnyLog (operator) side, execute `run mqtt client` - Note, no two MQTT clients (on the same network service) 
-can have the same topic name.  
+can have the same topic name. The example below runs as a local server-client message broker, while the 
+[training script](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/scripts/training/mqtt_call.al) connects to 
+a third party script.
+
 ```anylog
 # MQTT  
 <run mqtt client where broker=local and log=false and topic=(
   name=anylogedgex-mqtt and 
-  dbms=!company_name.name and 
+  dbms=!default_dbms and 
   table="bring [readings][0][resourceName]" and 
   column.timestamp.timestamp=now and 
   column.value=(type=float and value="bring [readings][0][value]"))>
