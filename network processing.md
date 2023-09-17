@@ -102,31 +102,31 @@ run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
 * As a blockchain command that retrieves IP and Ports and formats the destination as a comma separated list.    
 **Example** (retrieving the disk space of all Operator nodes in the US):
 ```anylog
-run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
+run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk usage .
 ```
 
 This blockchain command can be replaced with a specific call to retrieve the list of IPs and Ports:
 ```anylog
-run client (blockchain get operator where [country] contains US bring.ip_port) get disk space .
+run client (blockchain get operator where [country] contains US bring.ip_port) get disk usage .
 ```
     
 This command can be also issued as an assignment of the blockchain command to a key and referencing the key as the destination:  
 **Example**:
 ```anylog
 destination = blockchain get operator where [country] contains US bring.ip_port
-run client (!destination) get disk space .
+run client (!destination) get disk usage .
 ```
 
 ## Using shortcuts to specify the destination of a TCP message
 
-User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and the **bring.ip_port** directive.
+User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and the **bring.ip_port** directive.  
 This shortcut representation applies in 2 use cases:
 * With a **run client** command.
 * With an assigned CLI [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
 
-The examples below demonstrate a shortcut (and retrieves the same destination IPs and Ports as in the examples above):
+The example below demonstrates a shortcut (and retrieves the same destination IPs and Ports as in the examples above):
 ```anylog
-run client (operator where [country] contains US) get disk space .
+run client (operator where [country] contains US) get disk usage .
 ```
 This type of shortcut is applied when the information inside the parenthesis is as follows:
 * Starts with one of a keywords that represents a node type: **master**, **query**, **operator**, or a **publisher**.
@@ -135,6 +135,11 @@ This type of shortcut is applied when the information inside the parenthesis is 
 run client ((operator,query) where [country] contains US) get cpu usage
 ```
 
+## Organizing replies from multiple nodes
+
+Users can associate replies from multiple nodes to a key in the dictionary. It allows to reference the replies and 
+determine which are the nodes that participated in the process.  
+Details are available in the [Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
 
 ## Queries messaging modes - the 'subset' flag
