@@ -163,6 +163,8 @@ can have the same topic name. This process declares the data mapping rules and t
   column.value=(type=float and value="bring [readings][0][value]"))>
 ```
 
+## On the Edgex side
+
 2. As shown above, [Create Basic Application Service](#creating-an-application-service)
 
 3. Update Basic App Service
@@ -208,10 +210,7 @@ Make sure the following steps are done on each AnyLog node that provides the mes
 2. Similar to _POST_, when using the _message broker_ service, enable the mapping rules using the client service (described in run 
 [mqtt client](../../message%20broker.md)). This service is enabled using the command: `run mqtt client` 
 
-Note, no two MQTT clients (on the same network service) 
-can have the same topic name. The example below runs as a local server-client message broker, while the 
-[training script](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/scripts/training/mqtt_call.al) connects to 
-a third party script.
+The example below declares the mapping rules on the data detailed above.
 
 ```anylog
 # MQTT  
