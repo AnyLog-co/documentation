@@ -762,5 +762,7 @@ nodes_reply[] = run client (10.0.0.78:3048, 10.0.0.78:7848) get status
 wait 5 for !nodes_reply.diff == 0
 ```
 In the example above, 2 peer nodes are messaged for their status (note: replies are organized in a list).  
-The wait command thread pauses for 5 seconds or until the 2 peer nodes replies are received - whichever comes first.
+The wait command thread pauses for 5 seconds or until the 2 peer nodes replies are received - whichever comes first.  
 
+Note: Associating replies from peer nodes to a key in the dictionary is detailed in the
+[Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
