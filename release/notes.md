@@ -10,6 +10,7 @@ Release Date: TBD
 5.  wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#the-wait-command)
 6.  Create policy command - a command option to declare policies and include default attributes. Details:
     [Creating policies using the Create Policy command](../policies.md#creating-policies-using-the-create-policy-command)
+7.  Rest requests without a command assume get status. Example: **curl 10.0.0.78:7849** returns: **AnyLog@73.202.142.172:7848 running** 
 
 
 ## Changes:
