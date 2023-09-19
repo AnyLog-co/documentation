@@ -95,6 +95,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
    1. ip – the IP address allowing peer nodes to communicate with the service.
    2. port - the service port.
    3. local_ip – a second IP which can be used to communicate with node (i.e. an IP that identifies the service on a local network). 
+   4. tcp_threads - the number of threads supporting the service (the default number is 6).
       
     If a local_ip is not provided, the service binds to the ip address. if both attributes are provided
     (ip and local_ip), the service would be listening to all messages (regardless of the IP) on the service port.
@@ -106,6 +107,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
    Attributes required:  
    1. rest_ip – (optional) an IP that provides a dedicated address for the REST services.
    2. rest_port - the service port.
+   3. rest_threads - the number of threads supporting the service (the default number is 5).
       
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all REST based requests on the specified port.
 
@@ -114,6 +116,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
    Attributes required:  
    1. broker_ip – (optional) an IP that provides a dedicated address for the broker services.
    2. broker_port -the service port.
+   3. msg_threads - the number of threads supporting the service (the default number is 6).
       
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all Publish requests on the specified port.
 
