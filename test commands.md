@@ -19,6 +19,15 @@ Example:
 test connection 10.0.0.223:2041
 ```
 
+# Test Process
+The test process determines if the named service is enabled.  
+Usage:  
+```anylog
+test process [process name]
+```
+Returns **Running** if the service is enables, otherwise the value returned is **Not declared**.
+The names of the processes are listed in the **get processes** command.
+
 ## Test Table
 The ***test table*** command compares the table schema in the blockchain ledger and the schema in the local table.  
 
