@@ -25,8 +25,8 @@ Usage:
 ```anylog
 test process [process name]
 ```
-Returns **Running** if the service is enables, otherwise the value returned is **Not declared**.  
-The names of the processes are listed in the **get processes** command.
+The command returns **true** if the service is enabled, otherwise the value returned is **false**.  
+Users can retrieve the list of the services using the **get processes** command.
 
 Example:
 ```anylog
