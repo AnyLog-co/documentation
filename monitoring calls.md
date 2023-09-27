@@ -174,37 +174,35 @@ Connection:   Connected to local Message Server
 
 # Get Operator
 
-The Operator service transforms data from a JSON format to a SQL format and adds the data to a local database.    
-The **get operator** command provides information on the process of transforming the JSON to SQL and the ingestion process.
-
-The command returns the info in a table like format unless specifying a JSON format (by adding ```where format = json``` as a suffix).
+The Operator service transforms data from native JSON format to a SQL format and adds the data to a local database.      
+The **get operator** command provides information on the transformation and storage process.
 
 Usage: 
 ```anylog
 get operator [topic] [where format = json]
 ```
 
-* **topic** is optional and is one of the following keywords: config, summary, json, sql, error.
+* **topic** is optional and is one of the following keywords: **config, summary, json, sql, error**.
 * **where format = json** specify the returned info in JSON format.
 
 The table below summarizes the command options:
 
 | Command               | Info returned  |
 | --------------------- | ------------| 
-| get operator          | Returning the info associated with the keywords: **json**, **sql**, **error** - see details below |
+| get operator          | Returning the info associated with the keywords: **json**, **sql**, and **error** - see details below |
 | get operator config   | The relevant configuration parameters |
 | get operator summary  | A summary of the ingestion process |
-| get operator json     | Ingestion info per each table that is serviced by the operator |
+| get operator json     | Ingestion info of the source JSON per each table that is serviced by the operator |
 | get operator sql      | Ingestion info per each partition that is serviced by the operator |
-| get operator error    | The summary of operations failed |
+| get operator error    | A summary of operations failed |
 
 
-**Operator Config**:
+**Attributes returned with Operator Config command**
 
 | Attribute name | Details  |
 | ------------- | ------------| 
-| Status | Indicate if operator processes are enabled |
-| Time | The timestamp when the operator service is enabled and the opOperator activity time |
+| Status | Indicates if the operator service is enabled |
+| Time | The timestamp when the service is enabled and the opOperator activity time |
 | Policy | The ID of the operator poicy |
 | Cluster | The cluster ID assigned to the operator |
 | Member | A unique member ID assigned to the operator as member of the cluster |
