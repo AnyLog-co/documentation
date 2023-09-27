@@ -212,10 +212,11 @@ The table below summarizes the command options:
 | Attribute name | Details  |
 | ------------- | ------------| 
 | Node name | The name of the node processing the data |
-| Timestamp | The current timestamp - for remote uery, it allows to determine that the query was refreshed  |
-| Elapsed Time | The elapsed time since the previous query  |
 | Status | The operator service status |
-| Start timestamp | The cluster ID assigned to the operator |
+| Start timestamp | The timestamp when the service was enabled  |
+| Operational time | The time in which the service is enabled  |
+| Query timestamp | The current timestamp - for a remote query, it allows to determine that the query info was refreshed  |
+| Elapsed Time | The elapsed time since the previous query  |
 | New rows | Number of rows added since previous call to **get operator summary** |
 | Total rows | Number of rows added since the service was enabled |
 | New errors | Number of errors since previous call to **get operator summary** |
