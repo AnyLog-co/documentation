@@ -406,7 +406,7 @@ schedule name = monitor_operator and time = 15 seconds task run client (!aggrega
 
 ## Monitoring Nodes Operations
 
-Users can monitor node status throughout execution periods using the command: _continuous_. The command continuously 
+Users can monitor node status throughout execution periods using the command: **continuous**. The command continuously 
 monitors status and provides status results to the stdout. 
 
 **Usage**:
