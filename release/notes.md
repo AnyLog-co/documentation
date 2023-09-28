@@ -1,8 +1,5 @@
-<html>
-   <mark style="background-color: yellow;">
-      <h2><strong>Version</strong>: 1.3.2309 | <strong>Release Date</strong>: Sept. 27 2023 (Beta)</h2>
-   </mark>
-</htmL>
+
+**Version**: 1.3.2309 | **Release Date**: Sept. 27 2023 (Beta)
 
 ## New Features:
 1.  pip Install. Details: [pip Install](../training/advanced/Pip%20Install.md)
