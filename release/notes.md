@@ -1,8 +1,9 @@
-```html
-<mark style="background-color: yellow;">
-   <h2><strong>Version</strong>: 1.3.2309 | <strong>Release Date</strong>: Sept. 27 2023 (Beta)</h2>
-</mark>
-```
+<html>
+   <mark style="background-color: yellow;">
+      <h2><strong>Version</strong>: 1.3.2309 | <strong>Release Date</strong>: Sept. 27 2023 (Beta)</h2>
+   </mark>
+</htmL>
+
 ## New Features:
 1.  pip Install. Details: [pip Install](../training/advanced/Pip%20Install.md)
 2.  Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../training/advanced/background%20deployment.md).
