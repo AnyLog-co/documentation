@@ -1,5 +1,5 @@
 **Version**: 1.3.2309
-**Release Date**: Sept. 2023 (Beta) 
+**Release Date**: Sept. 27 2023 (Beta) 
 
 ## New Features:
 1.  pip Install. Details: [pip Install](../training/advanced/Pip%20Install.md)
