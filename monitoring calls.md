@@ -189,15 +189,16 @@ The table below summarizes the command options:
 
 | Command               | Info returned  |
 | --------------------- | ------------| 
-| get operator          | Returning the info associated with the keywords: **json**, **sql**, and **error** - see details below |
+| get operator          | Returning the info associated with the keywords: **json**, **sql**, **inserts** and **error** - see details below |
 | get operator config   | The relevant configuration parameters |
 | get operator summary  | A summary of the ingestion process |
 | get operator json     | Ingestion info of the source JSON per each table that is serviced by the operator |
 | get operator sql      | Ingestion info per each partition that is serviced by the operator |
+| get operator inserts  | Inserted rows count by tables serviced by the operator |
 | get operator error    | A summary of operations failed |
 
 
-**Attributes returned with Operator Config command**
+**Get Operator Config**
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -207,7 +208,7 @@ The table below summarizes the command options:
 | Cluster | The cluster ID assigned to the operator |
 | Member | A unique member ID assigned to the operator as member of the cluster |
 
-**Operator Summary**:
+**Get Operator Summary**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -223,7 +224,7 @@ The table below summarizes the command options:
 | Total errors | Number of errors since the service was enabled |
 
 
-**JSON Data information**:
+**Get Operator JSON**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -234,17 +235,42 @@ The table below summarizes the command options:
 | Elapsed time | The time since the last file processed |
 
 
-**SQL Data information**:
+**Get Operator SQL**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
 | DBMS | The name of the dbms associated with data |
-| Table | The name of the table (or partitione if used) associated with data |
+| Table | The name of the table (or partition if used) associated with data |
 | Files | The number of SQL files processed |
 | Immediate | The number of files processed with immediate flag |
 | Elapsed_time | The time of the last file processed |
 
-## Continueos monitoring of the Operator service
+**Get Operator Inserts**:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| DBMS | The name of the dbms associated with data |
+| Table | The name of the table associated with data |
+| First Timestamp | The timestamp of the first insert to the table |
+| Last Timestamp | The timestamp of the last insert to the table |
+| First Insert | The elapsed time from the first insert |
+| Last Insert | The elapsed time from the last insert |
+| Batch Inserts | The number of rows inserted in a buffered mode |
+| Immediate Inserts | The number of rows inserted in an immediate mode |
+
+**Get Operator Error**:
+
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Type | processing mode: JSON or SQL  |
+| Counter | The number of errors |
+| Timestamp | The timestamp of the last error |
+| DBMS Name | The DBMS name associated with the last error |
+| Table Name | The table name associated with the last error |
+| Last Error | The ID of the last error |
+| Last Error Text | The error text message |
+
+## Continuous monitoring of the Operator service
 
 Details are available in the
 [continuous command section](monitoring%20nodes.md#monitoring-nodes-operations)
