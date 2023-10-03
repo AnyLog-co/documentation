@@ -78,7 +78,9 @@ Related documentation:
  
 ## AnyLog Install
 
-AnyLog can be installed from [Docker](deployments/Docker), [Kubernetes](deployments/Kubernetes) or by downloading the codebase from GitHub and calling an installation script.
+AnyLog can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an installation script. 
+Directiomns for deployment can be found [here](deployments). 
+
 Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
