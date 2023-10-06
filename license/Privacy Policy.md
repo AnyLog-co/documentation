@@ -3,7 +3,7 @@
 ## Privacy Policy for Software Downloads
 Last Updated: Oct. 6 2023
 
-1. Introduction
+1. Introduction  
 Thank you for choosing to download and use AnyLog ("the Software"). We value your privacy and are committed to protecting your personal information. This Privacy Policy is intended to explain how we collect, use, disclose, and protect your data when you download and use our Software.
 
 2. Information We Collect  
@@ -22,12 +22,12 @@ Thank you for choosing to download and use AnyLog ("the Software"). We value you
     However, please be aware that no data transmission over the internet or storage system is 100% secure, and we cannot 
     guarantee the absolute security of your information.
     
-5. Third-Party Services
+5. Third-Party Services  
     Our Software may contain links to third-party websites or services that are not under our control. 
     We are not responsible for the privacy practices of these third parties. 
     Please review their privacy policies before using their services.
     
-6. Your Choices
+6. Your Choices  
     You have the right to:
     1. Access and update your Personal Information.
     2. Opt out of marketing communications. 
@@ -46,7 +46,7 @@ Thank you for choosing to download and use AnyLog ("the Software"). We value you
    legal, or regulatory reasons. We will notify you of any material changes by posting the updated Privacy Policy on our 
    website or through the Software.
    
-9. Contact Us
+9. Contact Us  
     If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at info@anylog.co.
 
 **By downloading and using our Software, you consent to the practices described in this Privacy Policy.**
