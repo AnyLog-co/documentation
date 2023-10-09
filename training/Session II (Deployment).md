@@ -53,9 +53,9 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 
 | Node Type         | Folder |
 | -------------     | ------------- |
-| Master            | deployments/docker-compose/anylog-master |
-| Operator          | deployments/docker-compose/anylog-operator |
-| Query             |  deployments/docker-compose/anylog-query |
+| Master            | deployments/training/anylog-master |
+| Operator          | deployments/training/anylog-operator |
+| Query             |  deployments/training/anylog-query |
 
 Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or in policies.
 * The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire
@@ -205,9 +205,9 @@ This file is in the following directories:
 
 | Node              | Folder |
 | -------------     | ------------- |
-| Master            | deployments/docker-compose/anylog-master |
-| Operator          | deployments/docker-compose/anylog-operator |
-| Query             |  deployments/docker-compose/anylog-query |
+| Master            | deployments/training/anylog-master |
+| Operator          | deployments/training/anylog-operator |
+| Query             |  deployments/training/anylog-query |
 
 ## Modify configurations 
 
@@ -273,15 +273,15 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
  
 ```shell
 # master 
-cd deployments/docker-compose/anylog-master
+cd deployments/training/anylog-master
 docker-compose up -d
 
 # query
-cd deployments/docker-compose/anylog-query
+cd deployments/training/anylog-query
 docker-compose up -d
 
 # operator
-cd deployments/docker-compose/anylog-operator
+cd deployments/training/anylog-operator
 docker-compose up -d
 ```
 
@@ -328,9 +328,9 @@ exit node
 ```
 Terminate a docker process:
 
-In the the docker-compose directory of the node to terminate (Master in the example below):
+In the the **training** directory of the node to terminate (Master in the example below):
 ```
- cd deployments/docker-compose/anylog-master
+ cd deployments/training/anylog-master
 ```
 Do one of the following:
 ```
@@ -609,7 +609,7 @@ Follow the following steps to deploy and run the Remote CLI:
 
 1. Enter the Remote CLI folder:
  ```shell
-cd deployments/docker-compose/remote-cli
+cd deployments/training/remote-cli
 ```
 2. Start the Remote CLI
 ```shell
