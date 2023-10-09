@@ -229,6 +229,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
 2. Update the following values in the anylog_configs.env of each node:  
     **On the Master Node:**
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
+    * NODE_NAME is set to anylog-master
     * COMPANY_NAME with your company name.
           
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
@@ -239,6 +240,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     
     **On the Query Node:**  
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
+    * NODE_NAME is set to anylog-query
     * COMPANY_NAME with your company name.
     * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
        
