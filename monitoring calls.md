@@ -172,36 +172,59 @@ Connection:   Connected to local Message Server
      Error Dir     |D:\Node\AnyLog-Network\data\error|
 ```
 
-## Get Operator
+# Get Operator
 
-The `get operator` command provides information on data ingested to the local databases. Data is mapped from a JSON format 
-to a SQL format and added to the local database, the command provides information on the process of transforming the JSON 
-to SQL and the ingestion process.
-
-The command returns the data in a text format. Adding the key-value pair `format = json` returns the info in a JSON structure.
+The Operator service transforms data from native JSON format to a SQL format and adds the data to a local database.      
+The **get operator** command provides information on the transformation and storage process.
 
 Usage: 
 ```anylog
-get operator
-get operator format = json
+get operator [topic] [where format = json]
 ```
 
-The non-JSON reply has 4 sections showing configurations and statistics.
+* **topic** is optional and is one of the following keywords: **config, summary, json, sql, error**.
+* **where format = json** specify the returned info in JSON format.
 
-### Section A attributes
+The table below summarizes the command options:
 
-**Operator Information**:
+| Command               | Info returned  |
+| --------------------- | ------------| 
+| get operator          | Returning the info associated with the keywords: **json**, **sql**, **inserts** and **error** - see details below |
+| get operator config   | The relevant configuration parameters |
+| get operator summary  | A summary of the ingestion process |
+| get operator json     | Ingestion info of the source JSON per each table that is serviced by the operator |
+| get operator sql      | Ingestion info per each partition that is serviced by the operator |
+| get operator inserts  | Inserted rows count by tables serviced by the operator |
+| get operator error    | A summary of operations failed |
+
+
+**Get Operator Config**
 
 | Attribute name | Details  |
 | ------------- | ------------| 
-| Status | Indicate if operator processes are enabled |
-| Time | The Operator activity time |
+| Status | Indicates if the operator service is enabled |
+| Time | The timestamp when the service is enabled and the opOperator activity time |
+| Policy | The ID of the operator poicy |
 | Cluster | The cluster ID assigned to the operator |
 | Member | A unique member ID assigned to the operator as member of the cluster |
 
-### Section B attributes
+**Get Operator Summary**:
 
-**JSON Data information**:
+| Attribute name | Details  |
+| ------------- | ------------| 
+| Node name | The name of the node processing the data |
+| Status | The operator service status |
+| Start timestamp | The timestamp when the service was enabled  |
+| Operational time | The time in which the service is enabled  |
+| Query timestamp | The current timestamp - for a remote query, it allows to determine that the query info was refreshed  |
+| Elapsed Time | The elapsed time since the previous query  |
+| New rows | Number of rows added since previous call to **get operator summary** |
+| Total rows | Number of rows added since the service was enabled |
+| New errors | Number of errors since previous call to **get operator summary** |
+| Total errors | Number of errors since the service was enabled |
+
+
+**Get Operator JSON**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
@@ -209,74 +232,45 @@ The non-JSON reply has 4 sections showing configurations and statistics.
 | Table | The name of the table associated with data |
 | Files | The number of JSON files processed |
 | Immediate | The number of files processed with immediate flag |
-| Last Process | The time of the last file processed |
+| Elapsed time | The time since the last file processed |
 
 
-### Section C attributes:
+**Get Operator SQL**:
 
-**SQL Data information**:
+| Attribute name | Details  |
+| ------------- | ------------| 
+| DBMS | The name of the dbms associated with data |
+| Table | The name of the table (or partition if used) associated with data |
+| Files | The number of SQL files processed |
+| Immediate | The number of files processed with immediate flag |
+| Elapsed_time | The time of the last file processed |
+
+**Get Operator Inserts**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
 | DBMS | The name of the dbms associated with data |
 | Table | The name of the table associated with data |
-| Files | The number of SQL files processed |
-| Immediate | The number of files processed with immediate flag |
-| Last Process | The time of the last file processed |
+| First Timestamp | The timestamp of the first insert to the table |
+| Last Timestamp | The timestamp of the last insert to the table |
+| First Insert | The elapsed time from the first insert |
+| Last Insert | The elapsed time from the last insert |
+| Batch Inserts | The number of rows inserted in a buffered mode |
+| Immediate Inserts | The number of rows inserted in an immediate mode |
 
-### Section D attributes:
-
-Files with failed processes identifying the table and the error.
-
-**Example reply**:
-```anylog
-AL anylog-node > get operator
-Status:     Active
-Time:       0:8:50 (H:M:S)
-Cluster:    7a00b26006a6ab7b8af4c400a5c47f2a
-Member:     61
-Statistics JSON files:
-DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
----------------------- ---------------------- ---------- ---------- --------------------
-aiops                  ai_mv_2                         1          0 2021-11-24 16:41:49
-
-Statistics SQL files:
-DBMS                   TABLE                  FILES      IMMEDIATE  LAST PROCESS
----------------------- ---------------------- ---------- ---------- --------------------
-aiops                  ai_mv_2                         1          0 2021-11-24 16:41:49
-
-Errors summary
-Error Type           Counter DBMS Name Table Name Last Error Last Error Text
---------------------|-------|---------|----------|----------|---------------|
-Duplicate JSON Files|      0|         |          |         0|               |
-JSON Files Errors   |      0|         |          |         0|               |
-SQL Files Errors    |      0|         |          |         0|               |
-```
-
-## Get Operator Summary
-
-The `get operator summary` command provides summary information on the operator processes.  
-Usage
-```anylog
-get operator summary
-get operator summary format = json
-```
-
-The summary call returns info in a table format or in a JSON format.  
-The returned info is the following:
+**Get Operator Error**:
 
 | Attribute name | Details  |
 | ------------- | ------------| 
-| Status | The Operator status - Active or Not Active |
-| Operational | HH:MM:SS indicating how long the operator is operational |
-| Total Rows | The number of rows processed by the Operator (in all logical tables) |
-| Delta Rows | The number of rows processed by the Operator (in all logical tables) since the previous summary call |
-| Errors | The total number of errors (in all logical tables) |
+| Type | processing mode: JSON or SQL  |
+| Counter | The number of errors |
+| Timestamp | The timestamp of the last error |
+| DBMS Name | The DBMS name associated with the last error |
+| Table Name | The table name associated with the last error |
+| Last Error | The ID of the last error |
+| Last Error Text | The error text message |
 
-The `get operator summary` command can be placed on continuous display as follows: 
-```anylog
-continuous "get operator summary"
-```
+## Continuous monitoring of the Operator service
 
 Details are available in the
 [continuous command section](monitoring%20nodes.md#monitoring-nodes-operations)

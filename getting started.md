@@ -78,7 +78,9 @@ Related documentation:
  
 ## AnyLog Install
 
-AnyLog can be installed from [Docker](deployments/Docker), [Kubernetes](deployments/Kubernetes) or by downloading the codebase from GitHub and calling an installation script.
+AnyLog can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an installation script. 
+Directions for deployment can be found [here](deployments). 
+
 Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
@@ -110,13 +112,17 @@ Directory Structure   Explabnation
     -->local_scripts  [Users scripts]
 ```
 
-Note: The following command creates the work folders if they do not exist:
-```anylog
-create work directories
-```
-The command needs to be issued only once on the physical or virtual machine.
-
-  
+Notes: 
+* The following command creates the work folders if they do not exist:
+    ```anylog
+    create work directories
+    ```
+    The command needs to be issued only once on the physical or virtual machine.
+    
+* The following command list the directories on an AnyLog node:
+     ```anylog
+    get dictionary _dir
+    ``` 
 ## Basic operations
 
 ### Initiating Configuring AnyLog instances
@@ -134,8 +140,8 @@ Related documentation:
 | Section       | Information provided  |
 | ------------- | ------------| 
 | [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
-| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment usinf Docker or Kubernetes. |
-| [Network Setup](examples/Network%20setup.md#network-setup) | A step by step example of a 3 node network deployment. |
+| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
+| [Network Setup](training/advanced/Network%20Setup.md) | A step by step example of a network deployment. |
 | [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
 ### AnyLog Command Line Interface

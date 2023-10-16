@@ -95,6 +95,12 @@ Below are the list of commands to add new policies to the ledger:
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
 
+## Retrieving the metadata from a source node
+The following command retrieves the metadata from a source node:
+```anylog
+blockchain seed from [ip:port]
+```
+The command is used when a new node starts in an existing network, it allows the new node to sync with an exiting metadata.
 
 ## Query policies
 

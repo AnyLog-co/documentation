@@ -19,6 +19,21 @@ Example:
 test connection 10.0.0.223:2041
 ```
 
+## Test Process
+The **test process** determines if the named service is enabled.  
+Usage:  
+```anylog
+test process [process name]
+```
+The command returns **true** if the service is enabled, otherwise the value returned is **false**.  
+Users can retrieve the list of the services using the **get processes** command.
+
+Example:
+```anylog
+test process operator
+```
+
+
 ## Test Table
 The ***test table*** command compares the table schema in the blockchain ledger and the schema in the local table.  
 
@@ -46,6 +61,35 @@ The test is similar to issuing a **get status** command to all the nodes in the 
 Example:
 ```anylog
 test network
+```
+
+Users can validate the configuration of the TCP listeners by issuing the **test network** command on the AnyLog CLI. 
+The command retrieves the list of participating AnyLog nodes and their addresses from the metadata and communicates 
+with each node. The output is the list of the member nodes and their addresses. The **+** sign indicates a reachable node. 
+If the **V** sign is omitted, the node is not configured properly or is not reachable.   
+
+Example command and output:
+<pre>
+AL > test network
+
+Address             Node Type Node Name       Status
+-------------------|---------|---------------|------|
+67.180.101.158:7848|operator |operator1      |   +  |
+67.180.101.158:3048|operator |second_operator|   +  |
+
+</pre>
+
+**+** in the status column indicates that the node is reachable with the Address detailed. 
+
+### Test network with [object]
+
+Object can be a node type or an IP and Port to test the connectivity with the specified nodes.
+
+examples:
+```anylog
+test network with master
+test network with operator
+test network with 67.180.101.158:7848
 ```
 
 ### Test Network Metadata Version

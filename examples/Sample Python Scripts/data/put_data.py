@@ -1,8 +1,5 @@
-import datetime
 import json
-import random
 import requests
-
 
 def __convert_data(data:dict)->str:
     """
@@ -23,13 +20,14 @@ def __convert_data(data:dict)->str:
     return json_data
 
 
-def put_data(conn:str, dbms:str, table:str, payload:dict, mode:str='streaming')->bool:
+def put_data(conn:str, auth:tuple, dbms:str, table:str, payload:str, mode:str='streaming')->bool:
     """
     Send data via REST using PUT command
     :url:
         https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#using-a-put-command
     :args:
         conn:str - IP & Port of rest connection
+        auth:tuple - REST authentication
         dbms:str - logical database name
         table:str - table name to store data in
         payload:dict - data to post into AnyLog
@@ -40,7 +38,6 @@ def put_data(conn:str, dbms:str, table:str, payload:dict, mode:str='streaming')-
     :return:
         False if fails, else True
     """
-    status = True
     headers = {
         'type': 'json',
         'dbms': dbms,
@@ -50,29 +47,11 @@ def put_data(conn:str, dbms:str, table:str, payload:dict, mode:str='streaming')-
     }
 
     try:
-        r = requests.put('http://%s' % conn, headers=headers, data=__convert_data(data=payload))
+        r = requests.put('http://%s' % conn, auth=auth, timeout=30, headers=headers, data=__convert_data(data=payload))
     except Exception as e:
         print('Failed to send data via PUT against %s (Error: %s)' % (conn, e))
-        status = False
     else:
         if int(r.status_code) != 200:
-            status = False
             print('Failed to send data via PUT against %s due to network error: %s' % (conn, r.status_code))
 
-    return status
-
-
-if __name__ == '__main__':
-    conn = "172.105.55.143:2049"
-    dbms = "yudash"
-    table = "sample_data"
-    mode = "streaming"
-    data = {
-        'timestamp': datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-        'value': random.random(),
-        'unit': 'Celsius'
-    }
-
-    if put_data(conn=conn, dbms=dbms, table=table, payload=data, mode=mode):
-        print('Success!')
 

@@ -60,8 +60,11 @@ A node is configured as follows:
 
 Usage:
 ```anylog
-run tcp server where external_ip = ![ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
+run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port]] and bind = [true/false] and threads = [threads count]
 ```
+
+Users can validate the configuration of the TCP listeners in all the nodes in the network by issuing the **test network** command. 
+See details in the [Test Network](../test%20commands.md#test-network) page.
 
 Options:  
 
@@ -329,6 +332,7 @@ Options:
 | source  | The source of the metadata with optional values: 'blockchain' and 'master'.  |
 | dest  | The destination of the metadata such as a file (a local file) or a DBMS (a local DBMS). If dest includes both, the local file and the local DBMS are updated. |
 | connection  | The connection information that is needed to retrieve the data. For a Master node, the IP and Port of the master node.  |
+|             | If connection info is not provided - the connection info is retrieved from the policy of the Master node.  |
 | time  | The frequency of the synchronization.  |
 
 

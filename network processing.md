@@ -87,33 +87,62 @@ options to the way the destination nodes are specified:
 * As an empty parenthesis followed by a query. The query includes 2 sections. The first starts with the keyword _sql_ followed by
 a database name (and additional instructions on how to execute the query) and the second is the _select_ statement that includes the table
 name. Using the command (and the metadata), the network protocol determines the nodes that host the data. This process
-    is transparent to the caller.  
-    **Example**:
-    ```anylog
-    run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
-    ```
+is transparent to the caller.  
+**Example**:
+```anylog
+run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
+```
 
 * Specifying the database name and the table name will deliver the command to the nodes that host the specified table.  
-    **Example**:
-    ```anylog
-    run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
-    ```
+**Example**:
+```anylog
+run client (dbms = litsanleandro and table = ping_sensor) get cpu usage
+```
     
 * As a blockchain command that retrieves IP and Ports and formats the destination as a comma separated list.    
-   **Example** (retrieving the disk space of all Operator nodes in the US):
-    ```anylog
-    run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk space .
-    ```
+**Example** (retrieving the disk space of all Operator nodes in the US):
+```anylog
+run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = , ) get disk usage .
+```
+
+This blockchain command can be replaced with a specific call to retrieve the list of IPs and Ports:
+```anylog
+run client (blockchain get operator where [country] contains US bring.ip_port) get disk usage .
+```
     
 This command can be also issued as an assignment of the blockchain command to a key and referencing the key as the destination:  
-   **Example**:
-    ```anylog
-    destination = blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,
-    run client (!destination) get disk space .
-    ```
-    
-    
-## Messaging reply modes - the 'subset' flag
+**Example**:
+```anylog
+destination = blockchain get operator where [country] contains US bring.ip_port
+run client (!destination) get disk usage .
+```
+
+## Using shortcuts to specify the destination of a TCP message
+
+User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and the **bring.ip_port** directive.  
+This shortcut representation applies in 2 use cases:
+* With a **run client** command.
+* With an assigned CLI [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
+
+The example below demonstrates a shortcut (and retrieves the same destination IPs and Ports as in the examples above):
+```anylog
+run client (operator where [country] contains US) get disk usage .
+```
+This type of shortcut is applied when the information inside the parenthesis is as follows:
+* Starts with one of a keywords that represents a node type: **master**, **query**, **operator**, or a **publisher**.
+* Starts with a parenthesis. The example below returns the IP and Ports of all Operators and Query nodes:
+```anylog
+run client ((operator,query) where [country] contains US) get cpu usage
+```
+
+## Organizing replies from multiple nodes
+
+Users can associate replies from multiple nodes to a key in the dictionary. It allows to reference the replies and 
+determine which are the nodes that participated in the process.  
+Details are available in the [Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
+
+
+## Queries messaging modes - the 'subset' flag
 
 A message can be delivered to one or more nodes. Because of the intermittent nature of the network, some nodes may not be accessible.  
 Users can configure their setup to deliver High Availability by replicating the data between nodes.
@@ -131,6 +160,44 @@ run client (subset = True) sql litsanleandro format = table "select count(*), mi
 run client (dbms = litsanleandro  and table = ping_sensor, subset = trure) get processes
 ```
 
+### Associating peer replies to a key in the dictionary
+
+A user can issue a command to target nodes using the **run client** command or assigning the CLI to one or more nodes.  
+
+Replies from the target nodes can be stored in the node's local dictionary using one of the following methods:
+* Using square brackets ([]) that extend the key, the replies are organized in a list. Every list entry is organized
+  as a pair with the IP and Port of the target node, and the reply text.
+* Using curly brackets ({}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
+   are the IP and Port of the target nodes, and the values represent the reply message from each node. 
+
+The examples below assume an [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-multiple-peer-nodes).
+ 
+**Example 1: replies organized as a list**
+  ```anylog
+current_status[] = get status where format = json
+```
+The reply from the target nodes is organized as a list and assigned to the key **current_status**.
+Each entry in the list has 2 values: 1) the IP and Port of the target node and 2) the reply.
+
+**Example 2: replies organized as a dictionary**
+  ```anylog
+current_status{} = get status where format = json
+```
+The reply from target nodes is organized as a dictionary and assigned to the key **current_status**.
+The key in the dictionary is the IP and Port of each target node and the value is the reply from each node.
+
+### Validating nodes replies
+
+Users can determine the number of nodes participating in a process by evaluating the status of the replies as follows:
+
+| Key extension | Example                 |  Explanation             |
+| ------------- | ------------------------| ---------------------- |
+| .len          | current_status.len      | The number of elements in the list or dictionary (representative of the number of target nodes).   |
+| .replies      | current_status.replies  | The number of nodes replied to the message.   |
+| .diff         | current_status.diff     | The difference between .len and .replies (representative of the number of nodes that did not reply.  |
+
+Note: users can issue a **wait** command after the target nodes are messaged to pause execution untill all nodes replied 
+and a time threshold - whichever comes first. Details are available in the [wait command](anylog%20commands.md#the-wait-command) section.
 
 ## Network Configuration
 

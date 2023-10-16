@@ -1,6 +1,6 @@
 # Google Drive
 
-To extract data from AnyLog into Google Drive we recommand using a tool called [Two Minute Reports](https://workspace.google.com/marketplace/app/two_minute_reports/6804555176)
+To extract data from AnyLog into Google Drive we recommend using a tool called [Two Minute Reports](https://workspace.google.com/marketplace/app/two_minute_reports/6804555176)
 which provides the ability to import data via REST, Database, Social Media and other SEO services. 
 
 ## Install 

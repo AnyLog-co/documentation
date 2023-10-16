@@ -32,10 +32,10 @@ Naming a location in a script  is by adding a colon sign as a prefix and suffix 
 ```:process_start:` is an example of a named location that can be referenced by a `goto` command.
   
 ## The help command
-Using the command `_help_` on the AnyLog command line lists all the commands and how they are called.  
-Using the command `_help_` followed by a `_command name_` details how the command is called.  
-Using the command `_help_` followed by the keyword `_example_` and a command name provides an example of how the command is called.  
-Using the command `_help_` followed by the keyword `_text_` and a command name provides an explanation on the command.  
+Using the command `help` on the AnyLog command line lists all the commands and how they are called.  
+Using the command `help` followed by a `command name` details how the command is called.  
+Using the command `help` followed by the keyword `example` and a command name provides an example of how the command is called.  
+Using the command `help` followed by the keyword `text` and a command name provides an explanation on the command.  
 
 ## Using a local database
 An Anylog node can use a local database. The local database is leveraged to support several functionalities:  

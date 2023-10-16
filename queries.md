@@ -3,7 +3,8 @@
 The `run client ()` ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 
 If the parenthesis are left empty, all the nodes with the tables' data receive and process the query. Users can detail 
 specific nodes of interest by providing their IP and Ports.  
-The format of SQL commands is detailed in the [Issuing a SQL command](sql%20setup.md#issuing-a-sql-command-to-a-node-in-the-network) section.
+The format of SQL commands is detailed in the [Issuing a SQL command](sql%20setup.md#issuing-a-sql-command-to-a-node-in-the-network) section.  
+Query examples are available in the [Query Data](examples/Querying%20Data.md) page.
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed 
@@ -26,6 +27,7 @@ as key = value pairs. With multiple option, the keyword _and_ separates between 
 | extend  |True/False | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  | |
 | topic  | A topic string |Topic that will be associated with the data, if the query result-set destination is a broker.  | |
 | committed  | True/False  | With HA enabled - only returns data that is synchronized on cluster nodes.  | False |
+| info  | additional info  | Additional info to the query process. See details [below](#info).  |  |
 
 
 ### Timezones
@@ -58,6 +60,26 @@ The following chart summarizes the optional values:
 | json:output | The output is organized in rows whereas each row is a JSON structure - this format is identical to the data load structure. |
 | json:list | The output is organized in a list, every entry in the list represents a row (use this format with PowerBI).  |
 | table | The output is organized as a table.  |
+
+### Info
+Additional info that is delivered to the participating node.       
+**Adding info to facilitate sreaming:**  
+Streaming mp4 files to an application (like the remote CLI), requires to notify the node which is the target for the streaming,
+which is the IP and Port (on each operator node) that would satisfy the streaming request.  
+To provide the info, the query provides the following info:
+```anylog 
+info = (dest_ip =[IP of the streaming target], dest_type = [rest/tcp])
+``` 
+**dest_ip** - the IP of the process requesting the streaming.   
+**dest_type** - the type of connection for the streaming process.    
+Example:
+```anylog 
+info = (dest_ip =67.180.101.158, dest_type = rest)
+``` 
+Example query:
+```anylog 
+sql edgex info = (dest_ip =67.180.101.158, dest_type = rest) and extend=(+country, +city, @ip, @port, @dbms_name, @table_name) and format = json and timezone = utc  select  file, start_ts::ljust(19), end_ts::ljust(19), num_cars, speed from video order by speed --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)
+``` 
 
 ### Network processing
 Without the `run client` directive, the query will be executed on the local node.  
