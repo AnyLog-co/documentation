@@ -20,7 +20,7 @@ bash $HOME/deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 
 ## Deploy the Master node
 
-#### Update the configs:
+#### Update the configs
 
 In the folder ```deployments/training/anylog-master``` update the ```anylog_configs.env``` file as follows:
 * LICENSE_KEY with the AnyLog License Key (if different than the default).
@@ -44,7 +44,7 @@ Using the keys: **ctrl+d**
 
 ## Deploy the Query node
 
-#### Update the configs:
+#### Update the configs
 
 In the folder ```cd deployments/training/anylog-query``` update the ```anylog_configs.env``` file as follows:
 * LICENSE_KEY with the AnyLog License Key (if different than the default).
@@ -96,7 +96,7 @@ Using the keys: **ctrl+d**
 
 ## Deploy the remote CLI
 
-#### Enter the Remote CLI folder:
+#### Enter the Remote CLI folder
  ```shell
 cd deployments/training/remote-cli
 ```
@@ -105,7 +105,7 @@ cd deployments/training/remote-cli
 docker-compose up -d
 ```
 
-#### Open a browser with the following URL:
+#### Open a browser with the following URL
 ```
 http://[The IP of the Node]:31800
 ```
