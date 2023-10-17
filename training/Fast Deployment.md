@@ -20,31 +20,31 @@ bash $HOME/deployments/installations/docker_credentials.sh [DOCKER_ACCESS_CODE]
 
 ## Deploy the Master node
 
-### Update the configs:
+#### Update the configs:
 
 In the folder ```deployments/training/anylog-master``` update the ```anylog_configs.env``` file as follows:
 * LICENSE_KEY with the AnyLog License Key (if different than the default).
 * NODE_NAME is set to anylog-master
 * COMPANY_NAME with your company name.
 
-### Start the node
+#### Start the node
 
 docker-compose up -d
 
-### Attach & test
+#### Attach & test
 
 docker attach --detach-keys=ctrl-d anylog-master
 
 ** Test the network by issuing the command: **test network** on the AnyLog CLI
 ** Get the Network ID (the IP and Port of the master) - use the command: ```get connections``` to view the IP and Port info.  
 
-### Detach
+#### Detach
 
 Using the keys: **ctrl+d**
 
 ## Deploy the Query node
 
-### Update the configs:
+#### Update the configs:
 
 In the folder ```cd deployments/training/anylog-query``` update the ```anylog_configs.env``` file as follows:
 * LICENSE_KEY with the AnyLog License Key (if different than the default).
@@ -52,17 +52,17 @@ In the folder ```cd deployments/training/anylog-query``` update the ```anylog_co
 * COMPANY_NAME with your company name.
 * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
 
-### Start the node
+#### Start the node
 
 docker-compose up -d
 
-### Attach & test
+#### Attach & test
 
 docker attach --detach-keys=ctrl-d anylog-operator
 
 Test the network by issuing the command: **test network** on the AnyLog CLI
 
-### Detach
+#### Detach
 
 Using the keys: **ctrl+d**
 
@@ -80,32 +80,32 @@ using anylog for new-company) and a unique prefix like the example below:
     - for operator 1: **anylog-cluster_1**
     - for operator 2: **anylog-cluster_2**  
         
-### Start the node
+#### Start the node
 
 docker-compose up -d
 
-### Attach & test
+#### Attach & test
 
 docker attach --detach-keys=ctrl-d anylog-operator
 
 Test the network by issuing the command: **test network** on the AnyLog CLI
 
-### Detach
+#### Detach
 
 Using the keys: **ctrl+d**
 
 ## Deploy the remote CLI
 
-### Enter the Remote CLI folder:
+#### Enter the Remote CLI folder:
  ```shell
 cd deployments/training/remote-cli
 ```
-### Start the Remote CLI
+#### Start the Remote CLI
 ```shell
 docker-compose up -d
 ```
 
-### Open a browser with the following URL:
+#### Open a browser with the following URL:
 ```
 http://[The IP of the Node]:31800
 ```
