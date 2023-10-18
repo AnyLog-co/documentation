@@ -58,7 +58,7 @@ docker-compose up -d
 
 #### Attach & test
 
-docker attach --detach-keys=ctrl-d anylog-operator
+docker attach --detach-keys=ctrl-d anylog-query
 
 Test the network by issuing the command: **test network** on the AnyLog CLI
 
