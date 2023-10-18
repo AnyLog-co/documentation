@@ -35,8 +35,9 @@ docker-compose up -d
 
 docker attach --detach-keys=ctrl-d anylog-master
 
-** Test the network by issuing the command: **test network** on the AnyLog CLI
-** Get the Network ID (the IP and Port of the master) - use the command: ```get connections``` to view the IP and Port info.  
+* Test the network by issuing the command: **test network** on the AnyLog CLI (One node - the Master, is identified).
+* Copy the Network ID (the IP and Port of the master) - use the command: ```get connections``` to view the IP and Port info.
+This network ID is added to the configuration of the member nodes to make them members of the network associated with this master.  
 
 #### Detach
 
@@ -60,7 +61,7 @@ docker-compose up -d
 
 docker attach --detach-keys=ctrl-d anylog-query
 
-Test the network by issuing the command: **test network** on the AnyLog CLI
+Test the network by issuing the command: **test network** on the AnyLog CLI (Two nodes - a Master and a Query node are identified).
 
 #### Detach
 
@@ -88,7 +89,9 @@ docker-compose up -d
 
 docker attach --detach-keys=ctrl-d anylog-operator
 
-Test the network by issuing the command: **test network** on the AnyLog CLI
+Test the network by issuing the command: **test network** on the AnyLog CLI.  
+* With the first Master - Three nodes (a Master, a Query and an Operator node) are identified).
+* With the second Master - Four nodes (a Master, a Query and 2 Operators) are identified.
 
 #### Detach
 
