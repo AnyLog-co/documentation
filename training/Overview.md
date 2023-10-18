@@ -15,16 +15,16 @@ This training demonstrates how to make changes to the default configurations to 
 and specific/domain requirements .
 
 This training includes 2 sessions:
-* [Session I](Session%20I%20(Demo).md) reviews basic operations 
+* [Session I](Session%20I%20(Demo).md) reviews basic operations.
 * [Session II](Session%20II%20(Deployment).md) provides the guidance to deploy a network that manages data and satisfies queries.
 
-The training includes additional documentation to guide users in the training deployment:
+The training includes additional documentation to guide users through the training sessions:
 * [Fast Deployment](Fast%20Deployment.md) is a cheat sheet that lists the instructions detailed in **Session II** and guides users through the
 Test Network deployment.
 * [Connections to Data Sources](Connectors%20to%20Data%20Sources.md) demonstrates how to connect data sources to nodes in the network.
 
 Under the **advanced** folder, users can find the following documents:
-* [Network Setup](advanced/Network%20Setup.md) - Configure a node using the CLI.
+* [Network Setup](advanced/Network%20Setup.md) - A step by step guide to configure a network using the CLI.
 * [Config Policies](advanced/Config%20Policies.md) - Configure a node using policies that are hosted in the global metadata layer.
 * [Pip Install](advanced/Pip%20Install.md) - Install AnyLog as a `pip` package 
 * [Background Deployment](advanced/background%20deployment.md) - Deploy AnyLog as a background process.
@@ -32,7 +32,7 @@ Under the **advanced** folder, users can find the following documents:
 
   
 
-The test network deployed is shown in the following diagram:
+### The test network deployed is shown in the following diagram:
 
 ![deployment diagram](../imgs/deployment_diagram.png)
 
