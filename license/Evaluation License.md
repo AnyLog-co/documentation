@@ -4,7 +4,7 @@ Last updated: 7 Sep.2023
 
 **By downloading or using the AnyLog Software, Customer agrees to be bound by the terms of this Agreement.**
 
-1. OFFERINGS.
+1. General
     1. **Applicable Terms**. The terms of this Agreement govern Customer’s use of the Software.
     2. **Restrictions**. Customer may use the AnyLog Software only for its internal use and for the benefit of its Affiliates. 
     Customer may not resell or sublicense its rights to the Software.
