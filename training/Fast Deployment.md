@@ -29,11 +29,11 @@ In the folder ```deployments/training/anylog-master``` update the ```anylog_conf
 
 #### Start the node
 
-docker-compose up -d
+```docker-compose up -d```
 
 #### Attach & test
 
-docker attach --detach-keys=ctrl-d anylog-master
+```docker attach --detach-keys=ctrl-d anylog-master``` (and hit the Enter key)
 
 * Test the network by issuing the command: **test network** on the AnyLog CLI (One node - the Master, is identified).
 
@@ -68,11 +68,11 @@ In the folder ```cd deployments/training/anylog-query``` update the ```anylog_co
 
 #### Start the node
 
-docker-compose up -d
+```docker-compose up -d```
 
 #### Attach & test
 
-docker attach --detach-keys=ctrl-d anylog-query
+```docker attach --detach-keys=ctrl-d anylog-query``` (and hit the Enter key)
 
 Test the network by issuing the command: **test network** on the AnyLog CLI (Two nodes - a Master and a Query node are identified).
 
@@ -96,11 +96,11 @@ using anylog for new-company) and a unique prefix like the example below:
         
 #### Start the node
 
-docker-compose up -d
+```docker-compose up -d```
 
 #### Attach & test
 
-docker attach --detach-keys=ctrl-d anylog-operator
+```docker attach --detach-keys=ctrl-d anylog-operator```  (and hit the Enter key)
 
 Test the network by issuing the command: **test network** on the AnyLog CLI.  
 * With the first Master - Three nodes (a Master, a Query and an Operator node) are identified).
