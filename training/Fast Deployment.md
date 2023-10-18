@@ -92,7 +92,8 @@ In the folder ```cd deployments/training/anylog-operator``` update the ```anylog
 * CLUSTER_NAME - currently showing **new-company-cluster**. change to your company name (the example below is 
 using anylog for new-company) and a unique prefix like the example below:
     - for operator 1: **anylog-cluster_1**
-    - for operator 2: **anylog-cluster_2**  
+    - for operator 2: **anylog-cluster_2**
+DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
         
 #### Start the node
 
@@ -105,6 +106,9 @@ using anylog for new-company) and a unique prefix like the example below:
 Test the network by issuing the command: **test network** on the AnyLog CLI.  
 * With the first Master - Three nodes (a Master, a Query and an Operator node) are identified).
 * With the second Master - Four nodes (a Master, a Query and 2 Operators) are identified.
+
+Note: In this training session, the operators are configured to pull data from a 3rd party broker. Issue the command 
+```get streaming``` to see the data stream to the node (from the external broker). 
 
 #### Detach
 
