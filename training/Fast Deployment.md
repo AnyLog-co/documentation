@@ -49,7 +49,7 @@ docker attach --detach-keys=ctrl-d anylog-master
     REST     |198.74.50.131:32049|198.74.50.131:32049|0.0.0.0:32049|
     Messaging|Not declared       |Not declared       |Not declared |
     ```
-    The Network ID in the example above is identified by TCP/External-Address and is: 198.74.50.131:32048.  
+    The Network ID in the example above is identified by TCP/External-Address and is: ```198.74.50.131:32048```.  
     This ID is added to each participating node to make it a member of the same network.
 
 #### Detach
