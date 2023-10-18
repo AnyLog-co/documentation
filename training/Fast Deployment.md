@@ -114,6 +114,27 @@ Note: In this training session, the operators are configured to pull data from a
 
 Using the keys: **ctrl+d**
 
+## Example commands and queries on the Query Node
+
+#### View the list of tables
+
+```get virtual tables```
+
+#### View columns in a table
+
+```get columns where dbms = test and table = lightout1 ```
+
+#### Example queries
+
+```shell
+run client () sql test format=table "select count(*) from lightout1"
+run client () sql test format=table "select timestamp, value from lightout1 limit 20"
+```
+
+#### View data distribution (for each table)
+
+```get data nodes```
+
 ## Deploy the remote CLI
 
 #### Enter the Remote CLI folder
