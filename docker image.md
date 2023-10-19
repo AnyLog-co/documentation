@@ -10,10 +10,11 @@ of two parts:
 their base image and adding functionality as needed. This can be things like _MQTT_, _PostgresSQL_, _MongoDB_ and blockchain support 
 (ex. _Etherium_, _Hyperledger_ or even _eos_) 
  
-| Operating System |   Image Tag   | Image Size | 
-| :---: |:-------------:|:----------:|
-| Alpine | latest-alpine |   380MB    |
-| Ubuntu |    latest     |   380MB    | 
+|         Operating System          |   Image Tag   | Image Size | 
+|:---------------------------------:|:-------------:|:----------:|
+|              Alpine               | latest-alpine |   380MB    | 
+|              Ubuntu               |    latest     |   450MB   | 
+| Training (Ubntu with _paho-mqtt_) |    training |   460MB   |
 
 
 ## Anylog Image Explained
