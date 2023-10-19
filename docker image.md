@@ -1,4 +1,4 @@
-# Docker
+# Docker Image
 
 This document aims to provide an overview of the fundamental services offered by AnyLog using a minimal image. 
 AnyLog is designed to minimize its footprint on your machine through Dockerization. The Dockerization process consists 
