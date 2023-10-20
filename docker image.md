@@ -88,7 +88,7 @@ docker build -f Dockerfile.alpine -t anylogco/anylog-network:personalized
 4. Update `.env` and configurations as desired
 ```shell
 # sample ~/deployments/docker-compose/anylog-master/.env 
-BUILD=personalized 
+TAG=personalized 
 CONTAINER_NAME=anylog-master
 NETWORK=host
 INIT_TYPE=prod
