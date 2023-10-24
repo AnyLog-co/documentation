@@ -231,7 +231,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
     * NODE_NAME is set to anylog-master
     * COMPANY_NAME with your company name.
-    * MONITOR_NODES - **true** value will place monitoring rules on the local rule engine.
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
           
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
     the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
@@ -244,7 +244,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * NODE_NAME is set to anylog-query
     * COMPANY_NAME with your company name.
     * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
-    * MONITOR_NODES - **true** value will place monitoring rules on the local rule engine.
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
        
     **On each Operator Node:**
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
@@ -260,7 +260,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
     * ENABLE_MQTT - in the training process, **true** will make the node subscribe to a 3rd party broker. **false** will
     require user configuration as detailed in the section [Connectiong to a 3rd party broker](#connecting-to-an-external-mqtt-broker-optional).
-    * MONITOR_NODES - **true** value will place monitoring rules on the local rule engine.
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
     
 ## Start / Restart a deployed node
  
