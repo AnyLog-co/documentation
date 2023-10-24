@@ -123,7 +123,7 @@ Using the keys: **ctrl+d**
 #### View columns in a table
 Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
 
-```get columns where [dbms name] = test and table = lightout1 ```
+```get columns where dbms = [dbms name] and table = lightout1 ```
 
 #### View data distribution (for each table)
 
