@@ -333,29 +333,14 @@ docker-compose down --rmi all     # stop the process + will also remove the imag
 docker-compose down -v --rmi all  # will do all three  
 ```
 
-## Validate the updated configuration
-
-On the CLI of each deployed node validate the following:
-
-1) Correct configuration
-
-| Configuration     | Nodes           | Command           | Comments |
-| -------------     | --------------- | ----------------  | ----  |
-| License           | All             | get license       |       |
-| Company Name      | All             | !company_name     |       |
-| Monitoring        | All             | !monitor_nodes    | Shows **true** for Operator and Query, **false** for Master  |
-| Monitored Company | All             | !monitor_node_company   |       |
-| Network ID        | Query, Operator | !ledger_conn      | This is the IP and Port of thr master     |
-| Node Name         | Operator        | !node_name        | A unique name for each of the 2 Operators     |
-| Cluster Name      | Operator        | !cluster_name     | A unique name for the each of the 2 clusters     |
-
-2) Connectivity between the members of the network  
+## Validate node is reachable by the network members
 
 On each deployed node issue the command:
 ```
 test network
 ```
-The value in the status column designates connectivity.
+The command returns the list of registered nodes in the network and if the current node is able to communicate
+with the members. For each node, the value in the status column needs to be the plus sign (**+**) that designates connectivity.
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
