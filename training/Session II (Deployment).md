@@ -339,8 +339,9 @@ On each deployed node issue the command:
 ```
 test network
 ```
-The command returns the list of registered nodes in the network and validates the the members are reachable using their 
-published IPs and Ports. For each node, the value in the status column needs to be the plus sign (**+**) that designates connectivity.
+The command returns the list of registered nodes in the network and validates that the members are reachable using their 
+published IPs and Ports. For each node, the value in the status column needs to be the plus sign (**+**) that designates connectivity.    
+if the plus sign is missing, the node is down or not reachable.
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
