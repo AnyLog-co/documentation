@@ -370,7 +370,7 @@ AL > run client (blockchain get (operator, master, query) bring.ip_port) get pro
 
 ### View that all nodes are registered
 Note that nodes register themselves as members of the network when they are connected to the network in the first time.
-Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
+Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happen only once,
 if nodes are joining for the first time and are in the process of registering.
 ```
 AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]
