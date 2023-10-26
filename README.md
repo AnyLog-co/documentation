@@ -21,6 +21,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Content 
 * **Deploy AnyLog**
   * [Getting Started](getting%20started.md)
+  * [Basic AnyLog Deployment](training/)
+    * [Docker Image](docker%20image.md)
   * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
   * [Master Node](master%20node.md)
@@ -30,9 +32,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
   * [Metadata Management](metadata%20management.md)
-  * [Kubernetes & Docker Deployment of AnyLog](deployments)
-    * [Docker Deployment](deployments/Docker)
-    * [Kubernetes Deployment](deployments/Kubernetes)
+  * [Kubernetes & Docker Deployment of AnyLog](deployments) 
   * [Setting Test Suites](test%20suites.md)
   
 * **AnyLog Commands**
@@ -86,7 +86,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 * **Northbound Connectors**
   * [AnyLog Remote-CLI](northbound%20connectors/remote_cli.md)
-  * [AnyLog GUI](northbound%20connectors/using%20the%20gui.md)
   * [Postman](northbound%20connectors/using%20postman.md)
   * [Grafana](northbound%20connectors/using%20grafana.md)
   * [PowerBI](northbound%20connectors/PowerBI.md)
@@ -95,7 +94,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 * **Sample Code**
   * [Python Scripts](examples/Sample%20Python%20Scripts)
-    * [Blockchain](examples/Sample%20Python%20Scripts/blockchain)
+    * [Blockchain](examples/Sample%20Python%20Scripts/blockchain_add_policy_simple.py)
     * [Sending Data](examples/Sample%20Python%20Scripts/data)
   * [cURL Requests](examples/curl.sh)
   * [Configurations Files](examples/Configuration.md)
