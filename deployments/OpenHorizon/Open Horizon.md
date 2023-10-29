@@ -92,19 +92,37 @@ newgrp docker
 At the end of the process, OpenHorizon should show a new active node
 ![OpenHorizon_node_state.png](imgs%2FOpenHorizon_node_state.png)
 
+
+# AnyLog
+By deploying AnyLog, users can monitor Distributed Edge Nodes and Data from a single point, without centralizing the data.
+
+To include AnyLog in your edge deployments, follow this 2 steps process:
+1.	Request a license key from AnyLog using the following link (once) https://anylog.co/download-anylog/.
+2.	Update the service definition for each monitored node monitored node and publish the AnyLog-Node Service.
+
+This process is detailed below. 
+
 ## Associate AnyLog Deployment with OpenHorizon
 
 @Troy - needs to explain how he associated AnyLog with OpenHorizon  
 
 ## Create AnyLog node as a Service on Open Horizon
 
-The following provides directions for deploying an AnyLog Operator & Query via OpenHorizon. 
 
 IBM has deployed a _Master_ node which will be used against `132.177.125.232:32048`. 
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
-2. Update `service.definition.json` configuration file  ([Operator Node](deployments/operator/service.definition.json) | [Query Node](deployments/query/service.definition.json)) with the following: 
+2. Update variables in the `service.definition.json` configuration file at ([Operator Node](deployments/operator/service.definition.json) with the following:
+
+| Variable       | Update with                             | Default Value | Comments     |
+| -------------- | --------------------------------------- |  ------------ | ------------ |
+| LICENSE_KEY    | The Docker Hub key provided by AnyLog   |               |  Request key using [AnyLog Downloads](https://anylog.co/download-anylog) |
+| NODE_TYPE      | operator                                | operator      |  A node configured to host data |
+| NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
+| COMPANY_NAME   | [your company name]                     |               |  For example: ibm |
+| LEDGER_CONN    | 132.177.125.232:32048                   | 132.177.125.232:32048 | The Network ID (the IP and Port of the Master) |
+ 
 * License Key 
 * Node Name (optional)
 * Company Name 

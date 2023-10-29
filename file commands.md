@@ -22,6 +22,7 @@ Operations supported:
 
 
 List files or directories:
+
 | Operation  | ---- | 
 | ------------- | ---- |
 | [get files](#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
