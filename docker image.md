@@ -63,7 +63,7 @@ The following provides an example of a dockerfile with everything installed, Oth
 # Base image:  anylogco/anylog-netwokr:latest-alpine
 #  
 #--------------------------------------------------------------------------------------------#
-FROM anylogco/anylog-netwokr:latest-alpine AS extended_base 
+FROM anylogco/anylog-network:latest-alpine AS extended_base 
 
 RUN apk update && \
     apk add openssl-dev build-base postgresql-libs libffi-dev libressl-dev py3-numpy && \

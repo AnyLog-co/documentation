@@ -231,6 +231,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
     * NODE_NAME is set to anylog-master
     * COMPANY_NAME with your company name.
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
           
     If you don't know the Network ID, [start](#start--restart-a-deployed-node) 
     the master, [attach](#attach-to-the-process---allowing-users-to-operate-on-the-node-cli)
@@ -243,6 +244,7 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     * NODE_NAME is set to anylog-query
     * COMPANY_NAME with your company name.
     * LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
        
     **On each Operator Node:**
     * LICENSE_KEY with the AnyLog License Key (if different than the default).
@@ -255,7 +257,10 @@ On each machine, modify the ```anylog_configs.env``` according to the following 
     using anylog for new-company) and a unique prefix like the example below:
         - for operator 1: **anylog-cluster_1**
         - for operator 2: **anylog-cluster_2**  
-    
+    * DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
+    * ENABLE_MQTT - in the training process, **true** will make the node subscribe to a 3rd party broker. **false** will
+    require user configuration as detailed in the section [Connectiong to a 3rd party broker](#connecting-to-an-external-mqtt-broker-optional).
+    * MONITOR_NODES - Use **true** to place preconfigured monitoring rules on the local rule engine.
     
 ## Start / Restart a deployed node
  
@@ -328,29 +333,15 @@ docker-compose down --rmi all     # stop the process + will also remove the imag
 docker-compose down -v --rmi all  # will do all three  
 ```
 
-## Validate the updated configuration
-
-On the CLI of each deployed node validate the following:
-
-1) Correct configuration
-
-| Configuration     | Nodes           | Command           | Comments |
-| -------------     | --------------- | ----------------  | ----  |
-| License           | All             | get license       |       |
-| Company Name      | All             | !company_name     |       |
-| Monitoring        | All             | !monitor_nodes    | Shows **true** for Operator and Query, **false** for Master  |
-| Monitored Company | All             | !monitor_node_company   |       |
-| Network ID        | Query, Operator | !ledger_conn      | This is the IP and Port of thr master     |
-| Node Name         | Operator        | !node_name        | A unique name for each of the 2 Operators     |
-| Cluster Name      | Operator        | !cluster_name     | A unique name for the each of the 2 clusters     |
-
-2) Connectivity between the members of the network  
+## Validate node is reachable by the network members
 
 On each deployed node issue the command:
 ```
 test network
 ```
-The value in the status column designates connectivity.
+The command returns the list of registered nodes in the network and validates that the members are reachable using their 
+published IPs and Ports. For each node, the value in the status column needs to be the plus sign (**+**) that designates connectivity.    
+if the plus sign is missing, the node is down or not reachable.
 
 ## Basic operations
 On each node (using the CLI) use the following commands:
@@ -379,7 +370,7 @@ AL > run client (blockchain get (operator, master, query) bring.ip_port) get pro
 
 ### View that all nodes are registered
 Note that nodes register themselves as members of the network when they are connected to the network in the first time.
-Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happened only once,
+Therefore, it may take a few seconds for all the nodes to appear in the output, however this would happen only once,
 if nodes are joining for the first time and are in the process of registering.
 ```
 AL anylog-master > blockchain get (master, query, operator) bring.table [*] [*][name] [*][ip] [*][external_ip] [*][port] [*][rest_port]

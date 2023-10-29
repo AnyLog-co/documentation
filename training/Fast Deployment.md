@@ -116,24 +116,29 @@ Using the keys: **ctrl+d**
 
 ## Example commands and queries on the Query Node
 
+Note: In this training, when an operator node is initiated, it is configured to subscribe to data that is published on 
+a 3rd part broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
+
 #### View the list of tables
 
 ```get virtual tables```
 
 #### View columns in a table
+Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
 
-```get columns where dbms = test and table = lightout1 ```
-
-#### Example queries
-
-```shell
-run client () sql test format=table "select count(*) from lightout1"
-run client () sql test format=table "select timestamp, value from lightout1 limit 20"
-```
+```get columns where dbms = [dbms name] and table = lightout1 ```
 
 #### View data distribution (for each table)
 
 ```get data nodes```
+
+#### Example queries
+Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
+
+```shell
+run client () sql [dbms name] format=table "select count(*) from lightout1"
+run client () sql [dbms name] format=table "select timestamp, value from lightout1 limit 20"
+```
 
 ## Deploy the remote CLI
 
