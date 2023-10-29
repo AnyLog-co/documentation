@@ -96,9 +96,10 @@ At the end of the process, OpenHorizon should show a new active node
 # AnyLog
 By deploying AnyLog, users can monitor Distributed Edge Nodes and Data from a single point, without centralizing the data.
 
-To include AnyLog in your edge deployments, follow this 2 steps process:
+To include AnyLog in your edge deployments, follow a 3 steps process:
 1.	Request a license key from AnyLog using the following link (once) https://anylog.co/download-anylog/.
-2.	Update the service definition for each monitored node monitored node and publish the AnyLog-Node Service.
+2.	Update the service definition for each monitored node.
+3. Publish the AnyLog-Node Service for each monitored node.
 
 This process is detailed below. 
 
@@ -108,8 +109,6 @@ This process is detailed below.
 
 ## Create AnyLog node as a Service on Open Horizon
 
-
-IBM has deployed a _Master_ node which will be used against `132.177.125.232:32048`. 
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
@@ -141,5 +140,7 @@ cd deployments/query
 hzn register --pattern anylog-node --policy privileged_node_policy.json
 ```
 
-4. Validate node is running  
+4. Validate that AnyLog is deployed and joined the network using the following cURL command:
+
+curl to the query node + test network
       
