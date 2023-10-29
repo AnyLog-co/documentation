@@ -14,11 +14,14 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 ## Requirements 
 * A physical / virtual machine for each node, as OpenHorizon is unable to deploy more than 1 instance per node 
 * [Machine requirements](https://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-devicehttps://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-device)
+
 **For 64-bit Intel or AMD device or virtual machine:**
+
 * 64-bit Intel or AMD device or virtual machine
 * An internet connection for your device (wired or wifi)
 
 **For Linux on ARM (32-bit):**
+
 * Hardware requirements - Raspberry Pi 3A+, 3B, 3B+, or 4 (preferred), but also supports  A+, B+, 2B, Zero-W, or Zero-WH
 * MicroSD flash card (32 GB preferred)
 * An Internet connection for your device (wired or wifi). Note: Some devices can require extra hardware for supporting wifi.
@@ -94,11 +97,12 @@ At the end of the process, OpenHorizon should show a new active node
 @Troy - needs to explain how he associated AnyLog with OpenHorizon  
 
 ## Create AnyLog node as a Service on Open Horizon
+
 The following provides directions for deploying an AnyLog Operator & Query via OpenHorizon. 
 
-IBM has deployed a _Master_ node which will be used against `132.177.125.232:32048` (REST communication - `132.177.125.232:32049`). 
+IBM has deployed a _Master_ node which will be used against `132.177.125.232:32048`. 
 
-1. via [AnyLog Downloads](https://anylog.co/download-anylog) request access to our _Docker_ repository a 3-month license
+1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
 2. Update `service.definition.json` configuration file  ([Operator Node](deployments/operator/service.definition.json) | [Query Node](deployments/query/service.definition.json)) with the following: 
 * License Key 
