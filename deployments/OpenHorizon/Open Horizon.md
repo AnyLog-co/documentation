@@ -108,9 +108,6 @@ This process is detailed below.
 @Troy - needs to explain how he associated AnyLog with OpenHorizon  
 
 ## Create AnyLog node as a Service on Open Horizon
-The following provides directions for deploying an AnyLog Operator & Query via OpenHorizon. 
-
-IBM has deployed a _Master_ node which will be used against `132.177.125.232:32048` (REST communication - `132.177.125.232:32049`). 
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
@@ -122,7 +119,7 @@ IBM has deployed a _Master_ node which will be used against `132.177.125.232:320
 | NODE_TYPE      | operator                                | operator      |  A node configured to host data |
 | NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
 | COMPANY_NAME   | [your company name]                     |               |  For example: ibm |
-| LEDGER_CONN    | 132.177.125.232:32048                   | 132.177.125.232:32048 | The Network ID (the IP and Port of the Master) |
+| LEDGER_CONN    | 132.177.125.232:32048                   | `132.177.125.232:32048` | The Network ID (the IP and Port of the Master) |
 
 3. Deploy Node - Note, `hzn` is not able to deploy more than a single instance on a given machine 
 ```shell
