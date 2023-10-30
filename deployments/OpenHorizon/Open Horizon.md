@@ -24,7 +24,7 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 
 * Hardware requirements - Raspberry Pi 3A+, 3B, 3B+, or 4 (preferred), but also supports  A+, B+, 2B, Zero-W, or Zero-WH
 * MicroSD flash card (32 GB preferred)
-* An Internet connection for your device (wired or wifi). Note: Some devices can require extra hardware for supporting wifi.
+* An Internet connection for your device (wired or WiFi). Note: Some devices can require extra hardware for supporting wifi.
 
 ## Associating Machine to Open Horizon
 The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
@@ -109,7 +109,6 @@ This process is detailed below.
 
 ## Create AnyLog node as a Service on Open Horizon
 
-
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
 2. Update variables in the `service.definition.json` configuration file at ([Operator Node](deployments/operator/service.definition.json) with the following:
@@ -120,27 +119,73 @@ This process is detailed below.
 | NODE_TYPE      | operator                                | operator      |  A node configured to host data |
 | NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
 | COMPANY_NAME   | [your company name]                     |               |  For example: ibm |
-| LEDGER_CONN    | 132.177.125.232:32048                   | 132.177.125.232:32048 | The Network ID (the IP and Port of the Master) |
- 
-* License Key 
-* Node Name (optional)
-* Company Name 
-* For Operator Node - Cluster Name (optional)
-* For Operator Node - Default DBMS (optional)
-* If you're deploying your own Master node, make sure to update `LEDGER_CONN` value in other node configurations 
+| LEDGER_CONN    | `132.177.125.232:32048`                   | `132.177.125.232:32048` | The Network ID (the IP and Port of the Master) |
 
 3. Deploy Node - Note, `hzn` is not able to deploy more than a single instance on a given machine 
 ```shell
 # Operator Node 
-cd deployments/operator
-hzn register --pattern anylog-node --policy privileged_node_policy.json
+cd ~/service-anylog/deployments/operator/
+hzn register --policy node.policy.json
 
 # Query Node 
-cd deployments/query
-hzn register --pattern anylog-node --policy privileged_node_policy.json
+cd ~/service-anylog/deployments/query/
+hzn register --policy node.policy.json
 ```
 
-4. Validate that AnyLog is deployed and joined the network using the following cURL command:
+4. Validate node is running - the example is of 
+* Validate via `docker log`
+```shell
+docker logs c33bd07d4808467d90fc1ef41ef2bff81d6502d5ca0bfb6b97ce614becda42b6-anylog-node
 
-curl to the query node + test network
-      
+<<COMMENT
+...
+AL anylog-operator1 > 
+    Process         Status       Details                                                                     
+    ---------------|------------|---------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 198.74.50.131:32148, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 198.74.50.131:32149, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Running     |Cluster Member: True, Using Master: 172.105.4.104:32048, Threads Pool: 3   |
+    Publisher      |Not declared|                                                                           |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 132.177.125.232:32048             |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
+    Distributor    |Not declared|                                                                           |
+    Blobs Archiver |Running     |                                                                           |
+    Consumer       |Not declared|                                                                           |
+    MQTT           |Running     |                                                                           |
+    Message Broker |Running     |Listening on: 198.74.50.131:32150, Threads Pool: 5                         |
+    SMTP           |Not declared|                                                                           |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
+    Query Pool     |Running     |Threads Pool: 3                                                            |
+    Kafka Consumer |Not declared|                                                                           |
+
+AL anylog-operator1 > 
+Subscription ID: 0001
+User:         ibglowct
+Broker:       driver.cloudmqtt.com:18785
+Connection:   Connected
+
+     Messages    Success     Errors      Last message time    Last error time      Last Error
+     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
+              0           0           0  
+     
+     Subscribed Topics:
+     Topic            QOS DBMS         Table            Column name Column Type Mapping Function        Optional Policies 
+     ----------------|---|------------|----------------|-----------|-----------|-----------------------|--------|--------|
+     anylogedgex-demo|  0|open_horizon|['[sourceName]']|timestamp  |timestamp  |now()                  |False   |        |
+                     |   |            |                |value      |float      |['[readings][][value]']|False   |        |
+<< 
+```
+
+* Test Network
+```shell
+curl -X GET 127.0.0.1:32149 -H "command: test network"
+
+<<COMMNET
+Address               Node Type Node Name         Status 
+---------------------|---------|-----------------|------|
+132.177.125.232:32048|master   |anylog-master    |  +   |
+129.41.87.0:32348    |query    |openhorizon-query|      |
+198.74.50.131:32148  |operator |anylog-operator1 |  +   |
+<< 
+``` 
+

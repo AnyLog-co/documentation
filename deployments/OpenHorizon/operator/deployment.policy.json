@@ -1,0 +1,33 @@
+{
+  "label": "anylog-node_1.3_amd64 Deployment Policy",
+  "description": "A super-simple sample Horizon Deployment Policy",
+  "service": {
+    "name": "anylog-node",
+    "org": "anylog",
+    "arch": "*",
+    "serviceVersions": [
+      {
+        "version": "1.3",
+        "priority":{}
+      }
+    ]
+  },
+  "properties": [
+  ],
+  "constraints": [
+    "anylog.node == master"
+  ],
+  "userInput": [
+    {
+      "serviceOrgid": "anylog",
+      "serviceUrl": "anylog-node",
+      "serviceVersionRange": "[0.0.0,INFINITY)",
+      "inputs": [
+        {
+          "name": "HW_WHO",
+          "value": "from the EDGE!"
+        }
+      ]
+    }
+  ]
+}

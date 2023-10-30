@@ -1,0 +1,73 @@
+{
+    "org": "anylog",
+    "label": "anylog-node for amd64",
+    "description": "A sample AnyLog service to deploy a Master Node",
+    "documentation": "https://github.com/open-horizon-services/service-anylog/tree/os-dev/README.md",
+    "url": "anylog-node",
+    "version": "1.3",
+    "arch": "amd64",
+    "sharable": "multiple",
+    "requiredServices": [],
+    "userInput": [
+        {
+            "name": "INIT_TYPE",
+            "defaultValue": "training"
+        },
+        {
+            "name": "ANYLOG_PATH",
+            "defaultValue": "/app"
+        },
+        {
+            "name": "LOCAL_SCRIPTS",
+            "defaultValue": "/app/deployment-scripts/training-deployment"
+        },
+        {
+            "name": "TEST_DIR",
+            "defaultValue": "/app/deployment-scripts/test"
+        },
+        {
+            "name": "LICENSE_KEY",
+            "defaultValue":
+        },
+        {
+            "name": "NODE_TYPE",
+            "defaultValue": "query"
+        },
+        {
+            "name": "NODE_NAME",
+            "defaultValue": "anylog-query"
+        },
+        {
+            "name": "COMPANY_NAME",
+            "defaultValue": "Open Horizon"
+        },
+        {
+            "name": "ANYLOG_SERVER_PORT",
+            "defaultValue": "32348"
+        },
+        {
+            "name": "ANYLOG_REST_PORT",
+            "defaultValue": "32349"
+        },
+        {
+            "name": "LEDGER_CONN",
+            "defaultValue": "132.177.125.232:32048"
+        },
+        {
+            "name": "ENABLE_MQTT",
+            "defaultValue": "false"
+        },
+        {
+            "name": "MONITOR_NODES",
+            "defaultValue": "true"
+        }
+    ],
+    "deployment": {
+        "services": {
+            "anylog-node": {
+                "image": "anylogco/anylog-network:beta",
+                "network": "host"
+            }
+        }
+    }
+}
