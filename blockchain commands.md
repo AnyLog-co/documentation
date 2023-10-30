@@ -102,6 +102,8 @@ blockchain seed from [ip:port]
 ```
 The command is used when a new node starts in an existing network, it allows the new node to sync with an exiting metadata.
 
+**[ip:port]** is the IP and Port of any member node on the network to use.
+
 ## Query policies
 
 AnyLog offers commands to query policies.  

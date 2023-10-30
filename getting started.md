@@ -310,7 +310,18 @@ on the same node. Using the following command, users can associate a node to a d
 ```anylog
 set anylog home [path to AnyLog root]
 ```
-AnyLog root is the ***AnyLog-Network*** directory.
+AnyLog root is the ***AnyLog-Network*** directory.  
+
+If AnyLog is assigned to a new root directory, the subdirectories can be created using the 
+**create work directories** command (see details in the [Local directory structure](#local-directory-structure) section).
+
+## The Seed command
+When a new node starts, or when a user wants to connect to a new network on the same root directory, user can retrieve 
+and assign a node to a metadata using the following command:
+```anylog
+seed from [ip:port]
+```
+More details are in the [Blockchain Commands](blockchain%20commands.md#retrieving-the-metadata-from-a-source-node) section.
 
 ### Switching between different master nodes
 
