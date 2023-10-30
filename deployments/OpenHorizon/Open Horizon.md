@@ -119,7 +119,7 @@ This process is detailed below.
 | NODE_TYPE      | operator                                | operator      |  A node configured to host data |
 | NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
 | COMPANY_NAME   | [your company name]                     |               |  For example: ibm |
-| LEDGER_CONN    | 132.177.125.232:32048                   | `132.177.125.232:32048` | The Network ID (the IP and Port of the Master) |
+| LEDGER_CONN    | `132.177.125.232:32048`                   | `132.177.125.232:32048` | The Network ID (the IP and Port of the Master) |
 
 3. Deploy Node - Note, `hzn` is not able to deploy more than a single instance on a given machine 
 ```shell
