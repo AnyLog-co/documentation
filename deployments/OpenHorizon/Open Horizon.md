@@ -146,6 +146,7 @@ This process is detailed below.
 
 | Variable       | Update with                             | Default Value | Comments     |
 | -------------- | --------------------------------------- |  ------------ | ------------ |
+| INIT_TYPE | training | training | Used to decide which AnyLog scripts to use for the deployment |   
 | LICENSE_KEY    | The Docker Hub key provided by AnyLog   |               |  Request key using [AnyLog Downloads](https://anylog.co/download-anylog) |
 | NODE_TYPE      | operator                                | operator      |  A node configured to host data |
 | NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
