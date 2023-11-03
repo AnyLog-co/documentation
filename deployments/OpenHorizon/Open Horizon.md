@@ -216,7 +216,7 @@ curl -X GET 127.0.0.1:32149 -H "command: test network"
 Address               Node Type Node Name         Status 
 ---------------------|---------|-----------------|------|
 132.177.125.232:32048|master   |anylog-master    |  +   |
-129.41.87.0:32348    |query    |openhorizon-query|      |
+129.41.87.0:32348    |query    |openhorizon-query|  +   |
 198.74.50.131:32148  |operator |anylog-operator1 |  +   |
 << 
 ``` 
