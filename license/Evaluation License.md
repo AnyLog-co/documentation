@@ -43,6 +43,7 @@ Last updated: 7 Sep.2023
     2. If User chooses to upgrade to a paid subscription plan, the terms and conditions will be  outlined in a separate agreement.
 
 6. Termination
+
     Company reserves the right to terminate this Agreement and revoke User's access to the Software, with or without cause, at any time.
 
 7. Disclaimer of Warranty
@@ -79,6 +80,7 @@ Last updated: 7 Sep.2023
     trust between the parties. No party has authority to bind the other party.
 
 12. Entire Agreement
+
     This Agreement constitutes the entire agreement between Company and User regarding the Software and supersedes all 
     prior agreements and understandings. For questions or concerns related to this Agreement or the Software, please 
     contact AnyLog at 920 Edgecliff Way, Redwood City CA 94061,United States of America.
@@ -102,8 +104,8 @@ Last updated: 7 Sep.2023
   **The Software (or AnyLog Software)** means, the Software products developed by AnyLog Inc. together with any related 
   software code AnyLog provides that is not subject to a separate license agreement.
 
-  **User** means an employee, contractor, or Third-Party Agent that Customer authorizes to use the Offerings as permitted 
-  under the Agreement, or the individual using the software in the case that the Customer is an individual.
+  **User** means an employee, contractor, or Third-Party Agent that Customer authorizes to use The Software as permitted 
+  under the Agreement, or the individual using The Software in the case that the Customer is an individual.
 
   **Company** means AnyLog. 
 
