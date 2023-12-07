@@ -239,7 +239,7 @@ The following list summarizes the commands supporting the HA processes:
 The command ***get data nodes*** details the Operators that host each table's data.  
 Usage:
 ```anylog
-get data nodes where company = [company name] and dbms = [dbms name] and table = [table name]  
+get data nodes where company = [company name] and dbms = [dbms name] and table = [table name] and sort = (Columns IDs) 
 ```
 
 The where condition is optional. If company name or database name or table name are not provided, the process assumes a 
@@ -249,7 +249,15 @@ The following example lists the operators that host the data of each supported t
 ```anylog
 get data nodes
 ```
-Note: More details are available [here](data%20distribution%20and%20configuration.md#view-data-distribution-policies).
+The following example lists the operators that host the data of a particular table:
+```anylog
+get data nodes where table = ping_sensor
+```
+The following example lists the operators per each table ordered by each table:
+```anylog
+get data nodes where sort = (1,2)
+```
+Note: 1,2 are the columns (in the output table) to consider in the sort (column 1 is DBMS, Column 2 is Table).
 
 ## View the distribution of data to an operator
 
