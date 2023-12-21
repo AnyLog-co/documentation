@@ -1,5 +1,11 @@
 
-**Version**: 1.3.23110 | **Release Date**: Oct.  2 2023 (Official)
+**Version**: 
+
+## New Features
+1. Adding support to gRPC [using gRPC](../using%20grpc.md)
+
+
+**Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
 ## New Features
 1. Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
