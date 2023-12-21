@@ -6,10 +6,10 @@ It is designed to be efficient, scalable, and interoperable across different pro
 gRPC is used in distributed systems, microservices architectures, and client-server applications to enable efficient 
 communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).  
 
-## AnyLog 
+## AnyLog as a gRPC client
 AnyLog can connect as a gRPC client to a gRPC Server to receive the data streams.  
-Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.
-Note, this process bypass the need to use a **.proto** file, as the mapping instructions are represented in the policies.
+Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.  
+Note, this process bypasses the need to use a **.proto** file, as the mapping instructions are represented in the policies.
 
 # Initiating a gRPC client
 The following command initiate a gRPC client on the AnyLog node:
@@ -37,7 +37,7 @@ Example returned info:
 ```anylog
 Connection      Policy Type Policy Name Policy ID
 ---------------|-----------|-----------|--------------------------------|
-127.0.0.1:50051|Mapping    |kuberarmor |deff520f1096bcd054b22b50458a5d1c|
+127.0.0.1:50051|mapping    |kuberarmor |deff520f1096bcd054b22b50458a5d1c|
 ```
 
 # Terminate gRPC connection

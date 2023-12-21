@@ -82,6 +82,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [AnyLog as a Broker](message%20broker.md) 
   * [Using Edgex](using%20edgex.md)
   * [Using Kafka](using%20kafka.md)
+  * [Using gRPC](using%20grpc.md)
   * [Registering OSIsoft's PI](registering%20pi%20in%20the%20anylog%20network.md)
 
 * **Northbound Connectors**
