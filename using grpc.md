@@ -8,14 +8,40 @@ communication between components. Detailed gRPC documentation is available [here
 
 ## AnyLog as a gRPC client
 AnyLog can connect as a gRPC client to a gRPC Server to receive the data streams.  
-Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.  
-Note, this process bypasses the need to use a **.proto** file, as the mapping instructions are represented in the policies.
+Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.
+
+## Setup
+Users define the data extracted from the gRPC server using a "proto file".  
+A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.
+Ths file is compiled to generate 2 grpc files that manage the process between the client and the server.
+
+## Prerequisites
+
+1. Install [grpcio-tools](https://pypi.org/project/grpcio-tools/)
+```shell
+python3 -m pip install --upgrade grpcio-tools
+```
+
+2. Create the [protocol buffer file]  
+    Example file: **dummy.proto**
+
+3. Compile file  
+Example:
+```shell
+python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto
+```
+Notes: 
+* Compile in the proto file (target) directory.  
+* The following files needs to be available in a target directory (if dummy.proto is compiled) :
+    * dummy_pb2.py
+    * dummy_pb2_grpc,py
+
 
 # Initiating a gRPC client
 The following command initiate a gRPC client on the AnyLog node:
 
 ```anylog
-run grpc client where ip = [IP] and port = [port] and policy = [policy id] 
+run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto [proto name] and function = [proto function]
 ```
 
 **Command variables**:
