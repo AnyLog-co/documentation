@@ -12,8 +12,8 @@ Using AnyLog policies, these streams are mapped to a target schema, and the data
 
 ## Setup
 Users define the data extracted from the gRPC server using a "proto file".  
-A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.
-Ths file is compiled to generate 2 grpc files that manage the process between the client and the server.
+A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.  
+This file is compiled to generate 2 **grpc** files that manage the process between the client and the server.
 
 ## Prerequisites
 
@@ -22,26 +22,41 @@ Ths file is compiled to generate 2 grpc files that manage the process between th
 python3 -m pip install --upgrade grpcio-tools
 ```
 
-2. Create the [protocol buffer file]  
-    Example file: **dummy.proto**
+2. Create the protocol buffer file  
+    Example file: **dummy.proto**:
+    ```shell
+    syntax = "proto3";
+    
+    package mygrpc;
+    
+    service SerializeService {
+      rpc GetSampleData (Empty) returns (SampleDataResponse);
+    }
+    
+    message Empty {}
+    
+    message SampleDataResponse {
+      repeated string serialized_data = 1;
+    }
+    ```    
 
 3. Compile file  
-Example:
-```shell
-python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto
-```
-Notes: 
-* Compile in the proto file (target) directory.  
-* The following files needs to be available in a target directory (if dummy.proto is compiled) :
-    * dummy_pb2.py
-    * dummy_pb2_grpc,py
+    Example:
+    ```shell
+    python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto
+    ```
+    Notes: 
+    * Compile in the proto file (target) directory.  
+    * The following files are gennerated in the target directory (if dummy.proto is compiled) :
+        * dummy_pb2.py
+        * dummy_pb2_grpc,py
 
 
 ## Initiating a gRPC client
 The following command initiate a gRPC client on the AnyLog node:
 
 ```anylog
-run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto [proto name] and function = [proto function]
+run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto = [proto name] and function = [proto function]
 ```
 
 **Command variables**:
@@ -51,7 +66,14 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 | ip         | The gRPC server IP. |
 | Port       | The gRPC server port. |
 | policy     | The ID of the mapping policy to apply on the gRPC stream |
+| grpc_dir   | The target directory with the **proto** filr. |
+| proto      | The proto file name (dummy in the example above). |
+| function   | The proto function that is called on the server (**SampleDataResponse** in the proto file example above) |
 
+example:
+```anylog
+ run grpc client where ip = 127.0.0.1 and port = 50051 and policy = deff520f1096bcd054b22b50458a5d1c and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/gRPC and proto = dummy and function = Empty
+```
 
 ## Retrieving the list of gRPC clients
 The following command returns the list of connected gRPC clients on the AnyLog node:
