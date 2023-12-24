@@ -37,7 +37,7 @@ Notes:
     * dummy_pb2_grpc,py
 
 
-# Initiating a gRPC client
+## Initiating a gRPC client
 The following command initiate a gRPC client on the AnyLog node:
 
 ```anylog
@@ -53,7 +53,7 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 | policy     | The ID of the mapping policy to apply on the gRPC stream |
 
 
-# Retrieving the list of gRPC clients
+## Retrieving the list of gRPC clients
 The following command returns the list of connected gRPC clients on the AnyLog node:
 ```anylog
 get grpc clients 
@@ -61,14 +61,14 @@ get grpc clients
 The info returns identifies each client by the connection info (IP and Port) and lists the policy type, name and ID.  
 Example returned info:
 ```anylog
-Connection      Policy Type Policy Name Policy ID
----------------|-----------|-----------|--------------------------------|
-127.0.0.1:50051|mapping    |kuberarmor |deff520f1096bcd054b22b50458a5d1c|
+ID                   Connection      Proto Request Message Policy Type Policy Name Policy ID
+--------------------|---------------|-----|---------------|-----------|-----------|--------------------------------|
+127.0.0.1:50051.test|127.0.0.1:50051|test |MyRequest      |cluster    |cluster_1  |deff520f1096bcd054b22b50458a5d1c|
 ```
 
-# Terminate gRPC connection
+## Terminate gRPC connection
 
-A connection is terminated using the followng command:
+A connection is terminated using the following command:
 ```anylog
 exit grpc [connection]
 ```
@@ -82,4 +82,20 @@ To terminate all gRPC connections, use "all" as the connection string:
 exit grpc all
 ```
 
+## Retrieving the list of gRPC services
+Users can retrieve the list of services offered by the gRPC server.    
+This process requires that the server reflection on the gRPC server is implemented and enabled.   
+Server Reflection (ServerReflectionRequest ) allows clients to query information about services provided by a gRPC server dynamically.
 
+The following command returns the list of gRPC services from the gRPC server:
+```anylog
+get grpc services where conn = [ip:port]
+```
+
+Example returned info:
+```anylog
+gRPC Services
+----------------------------------------|
+grpc.reflection.v1alpha.ServerReflection|
+test.MyService                          |
+```
