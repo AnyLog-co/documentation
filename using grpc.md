@@ -56,23 +56,42 @@ python3 -m pip install --upgrade grpcio-tools
 The following command initiate a gRPC client on the AnyLog node:
 
 ```anylog
-run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto = [proto name] and function = [proto function]
+run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto = [proto name] 
+    and function = [proto function] and request = [request message] and response = [response message] and service = [service name]
+    and value = (key1 = value1 and key2 = value2 ...) and debug = [true/false] and limit = [max events] and dbms = [dbms name] and table = [table name]
+    and ingest = [true /false]
 ```
 
 **Command variables**:
 
-| Key        | Value  | 
-| ---------- | -------| 
-| ip         | The gRPC server IP. |
-| Port       | The gRPC server port. |
-| policy     | The ID of the mapping policy to apply on the gRPC stream |
-| grpc_dir   | The target directory with the **proto** filr. |
-| proto      | The proto file name (dummy in the example above). |
-| function   | The proto function that is called on the server (**SampleDataResponse** in the proto file example above) |
+| Key        | Mandatory | Value  | 
+| ---------- | -------| ------- |
+| ip         | Y | The gRPC server IP. |
+| Port       | Y | The gRPC server port. |
+| policy     | N | The ID of the mapping policy to apply on the gRPC stream |
+| grpc_dir   | Y | The target directory with the **proto** filr. |
+| proto      | Y | The proto file name (dummy in the example above). |
+| function   | Y | The proto function that is called on the server (**SampleDataResponse** in the proto file example above). |
+| request    | Y | The .proto request message. |
+| response   | Y | The .proto response message. |
+| service    | Y | The name of the service  of method definition in the .proto file. |
+| value      | N | One or more attribute name value pairs that update the attributes of the message send (ie.: Filter = system and Type = 5.int). |
+| debug      | N | The value 'true' prints on the node CLI console the data received and processed. The default value is 'false' |
+| limit      | N | Process ends after data events received from the gRPC servers reached the limit. |
+| dbms       | N | A target database name (if not provided by a policy). |
+| table      | N | A target table name (if not provided by a policy). |
+| ingest     | N | The value 'false' ignores data ingestion. The default value is 'true' |
 
-example:
+Examples (the < and > signs designate a code block that can be used on the CLI):
 ```anylog
- run grpc client where ip = 127.0.0.1 and port = 50051 and policy = deff520f1096bcd054b22b50458a5d1c and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/gRPC and proto = dummy and function = Empty
+<run grpc client where ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+    and proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log 
+    and service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false>
+```
+```anylog
+<run grpc client where ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+    and proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and service = LogService 
+    and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false>
 ```
 
 ## Retrieving the list of gRPC clients
