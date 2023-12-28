@@ -11,8 +11,8 @@ AnyLog can connect as a gRPC client to a gRPC Server to receive the data streams
 Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.
 
 ## Setup
-Users define the data extracted from the gRPC server using a "proto file".  
-A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.  
+Users define the data extracted from the gRPC server using a **proto** file.    
+A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.    
 This file is compiled to generate 2 **grpc** files that manage the process between the client and the server.
 
 ## Prerequisites
@@ -99,8 +99,8 @@ The following command returns the list of connected gRPC clients on the AnyLog n
 ```anylog
 get grpc clients 
 ```
-The info returns identifies each client by the connection info (IP and Port) and lists the policy type, name and ID.  
-Example returned info:
+The info returns identifies each client by the connection info (IP and Port) and the proto file name (ID).
+An example of the returned info is below:
 ```anylog
 ID                   Connection      Proto Request Message Policy Type Policy Name Policy ID
 --------------------|---------------|-----|---------------|-----------|-----------|--------------------------------|
