@@ -81,6 +81,7 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 | dbms       | N | A target database name (if not provided by a policy). |
 | table      | N | A target table name (if not provided by a policy). |
 | ingest     | N | The value 'false' ignores data ingestion. The default value is 'true' |
+| add_info   | N | Updates the data retrieved from the server with additional info. For example, **added_info = conn**, includes the connection info. |
 
 Examples (the < and > signs designate a code block that can be used on the CLI):
 ```anylog
@@ -93,6 +94,26 @@ Examples (the < and > signs designate a code block that can be used on the CLI):
     and proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and service = LogService 
     and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false>
 ```
+
+### Options for added_info
+
+If **added_info** is included in the **run grpc client** command, the keys and values are added to the JSON data retrieved from the server.
+The added keys are contained withiin greater than and less than sighns (<key>).
+
+| Key        | Value added to the JSON  | 
+| ---------- | -----------------------------|
+| proto      | The name of the proto file   |
+| request    | The name of the request message in the proto file   |
+| conn       | The IP and Port used   |
+
+Example:
+```anylog
+<run grpc client where ip = 10.0.0.251 and port = 32769 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+and proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and response = Log 
+and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and ingest = false  
+and add_info = conn and add_info = proto and add_info = request>
+```
+
 
 ## Retrieving the list of gRPC clients
 The following command returns the list of connected gRPC clients on the AnyLog node:
