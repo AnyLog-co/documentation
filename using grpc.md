@@ -66,6 +66,7 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 
 | Key        | Mandatory | Value  | 
 | ---------- | -------| ------- |
+| name       | Y | Unique name to identify the gRPC process. |
 | ip         | Y | The gRPC server IP. |
 | Port       | Y | The gRPC server port. |
 | policy     | N | The ID of the mapping policy to apply on the gRPC stream |
@@ -108,7 +109,7 @@ The added keys are contained withiin greater than and less than sighns (<key>).
 
 Example:
 ```anylog
-<run grpc client where ip = 10.0.0.251 and port = 32769 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+<run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
 and proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and response = Log 
 and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and ingest = false  
 and add_info = conn and add_info = proto and add_info = request>
