@@ -66,7 +66,7 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 
 | Key        | Mandatory | Value  | 
 | ---------- | -------| ------- |
-| name       | Y | Unique name to identify the gRPC process. |
+| name       | Y | A unique name to identify the gRPC process. |
 | ip         | Y | The gRPC server IP. |
 | Port       | Y | The gRPC server port. |
 | policy     | N | The ID of the mapping policy to apply on the gRPC stream |
@@ -86,12 +86,12 @@ run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf g
 
 Examples (the < and > signs designate a code block that can be used on the CLI):
 ```anylog
-<run grpc client where ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+<run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
     and proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log 
     and service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false>
 ```
 ```anylog
-<run grpc client where ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
+<run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
     and proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and service = LogService 
     and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false>
 ```
