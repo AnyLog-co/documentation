@@ -12,7 +12,7 @@ The background processes are issued using an initialization script or on the Any
 | [run publisher](background%20processes.md#publisher-process) | A configurable publisher process that sends data to operators for processing |
 | [run blockchain sync](background%20processes.md#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
 | [run scheduler](background%20processes.md#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |
-| [run mqtt client](mqtt.md#using-mqtt-broker) | Initiate a process that pulls data from MQTT brokers |
+| [run msg client](message%20broker.md#using-a-message-broker) | Initiate a process that pulls data from MQTT brokers |
 | [run smtp client](background%20processes.md#smtp-client) | Initiate an SMTP client allowing emails amd sms messages using the Simple Mail Transfer Protocol (SMTP) |
 | [run streamer](background%20processes.md#streamer-process) | Initiate a process to flush streaming data to disk |
 | [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
