@@ -66,7 +66,7 @@ run grpc client where name = [unique name] and ip = [IP] and port = [port] and p
 
 | Key        | Mandatory | Value  | 
 | ---------- | -------| ------- |
-| name       | Y | A unique name to identify the gRPC process. |
+| name       | Y | A unique name to identify the gRPC process. The name serves as the ID of the connection. |
 | ip         | Y | The gRPC server IP. |
 | Port       | Y | The gRPC server port. |
 | policy     | N | The ID of the mapping policy to apply on the gRPC stream |
@@ -98,8 +98,9 @@ Examples (the < and > signs designate a code block that can be used on the CLI):
 
 ### Options for added_info
 
-If **added_info** is included in the **run grpc client** command, the keys and values are added to the JSON data retrieved from the server.
-The added keys are contained withiin greater than and less than sighns (<key>).
+If **added_info** is included in the **run grpc client** command, the keys and values are added to the JSON data retrieved 
+from the server.  
+The added keys (to the JSON struct) are contained within greater than and less than signs (<key>).
 
 | Key        | Value added to the JSON  | 
 | ---------- | -----------------------------|
@@ -124,21 +125,23 @@ get grpc clients
 The info returns identifies each client by the connection info (IP and Port) and the proto file name (ID).
 An example of the returned info is below:
 ```anylog
-ID                   Connection      Proto Request Message Policy Type Policy Name Policy ID
---------------------|---------------|-----|---------------|-----------|-----------|--------------------------------|
-127.0.0.1:50051.test|127.0.0.1:50051|test |MyRequest      |cluster    |cluster_1  |deff520f1096bcd054b22b50458a5d1c|
+
+ID        Connection       Proto     Request Message Policy Type Policy Name Policy ID               Timeouts Data Msg
+---------|----------------|---------|---------------|-----------|-----------|-----------------------|--------|--------|
+health   |10.0.0.251:32769|kubearmor|NonceMessage   |           |           |                       |       0|    1254|
+kubearmor|10.0.0.251:32769|kubearmor|RequestMessage |mapping    |           |kubearmor-system-policy|       0|       0|
 ```
 
 ## Terminate gRPC connection
 
 A connection is terminated using the following command:
 ```anylog
-exit grpc [connection]
+exit grpc [ID]
 ```
-**connection** is the IP:Port string that identifies the server.    
+**ID** is the **name** provided to the connection in the **run grpc client** command.    
 For example, the following command terminates a gRPC process: 
 ```anylog
-exit grpc 127.0.0.1:50051
+exit grpc kubearmor
 ```
 To terminate all gRPC connections, use "all" as the connection string:
 ```anylog
