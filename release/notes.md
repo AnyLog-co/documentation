@@ -3,18 +3,13 @@
 
 ## New Features
 1. Adding support to gRPC [using gRPC](../using%20grpc.md)
-
+2. Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
 
 **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
 ## New Features
 1. Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
 2. Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../high%20availability.md#view-the-distribution-of-data-to-clusters)
-3. Adding support for gRPC **run grpc client**
-4. New command: **get grpc services**
-4. Replace "run mqtt client" with "run msg client"
- 
-
 
 **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
