@@ -263,7 +263,49 @@ To check the status of the Operator process, use the following command:
 ```anylog
 get operator
 ```
-Additional info on the ***get operator*** command is available [here](../monitoring%20calls.md#get-operator)
+Additional info on the ***get operator*** command is available [here](monitoring%20calls.md#get-operator)
+
+### Operator data archival
+
+Data is treated by the Operator as a sequence of log files that are stored in local databases.  
+When a log file is ingested, it is copied to an archive (if the archive configuration option is set to **true** in the AnyLog **run operator** command).    
+The root of the archive folder is assigned to the **archive_dir** kei in the dictionary. Use the following  command to 
+view the path to the archive root:
+```anylog
+get !archive_dir
+```
+
+The structure of the arcival folder is based on partitioning by days (using UTC timezone) and as follows:
+* The root is partitioned by years. Every year contains the year's data.
+* An year folder is partitioned to months. Every month contains the month's data.
+* A month folder is partitioned to days. Every day contains the files processed by the operator in the given day.
+
+#### View archived file
+The following command returns the list of log files archieved on a particular day:
+
+Usage:
+```anylog
+get archived files [YYYY-MM-DD]
+```
+Example:
+```anylog
+get archived files 2024-01-07
+```
+#### Delete archived files
+
+Users can configure a node to delete old archived files.  
+**Always have a proper backup prior to deleting archived data.**
+The command specifies a number of days from which, all files in folders from prior days are deleted.
+
+Usage:
+```anylog
+delete archive where days = [number of days]
+```
+Example:
+```anylog
+delete archive where days = 60
+```
+
 
 ## Publisher Process
 
