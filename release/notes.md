@@ -4,7 +4,7 @@
 ## New Features
 1. Adding support to gRPC [using gRPC](../using%20grpc.md)
 2. Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
-3. **delete archive** command. Details: 
+3. **delete archive** command. Details: [Operator data archival](../background%20processes.md#operator-data-archival). 
 
 **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
