@@ -56,7 +56,7 @@ python3 -m pip install --upgrade grpcio-tools
 The following command initiate a gRPC client on the AnyLog node:
 
 ```anylog
-run grpc client where ip = [IP] and port = [port] and policy = [policy id] anf grpc_dir = [dir path] and proto = [proto name] 
+run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id] and grpc_dir = [dir path] and proto = [proto name] 
     and function = [proto function] and request = [request message] and response = [response message] and service = [service name]
     and value = (key1 = value1 and key2 = value2 ...) and debug = [true/false] and limit = [max events] and dbms = [dbms name] and table = [table name]
     and ingest = [true /false]
