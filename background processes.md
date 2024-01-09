@@ -277,7 +277,7 @@ get !archive_dir
 
 The structure of the archival folder is based on partitioning by days (using UTC timezone) and as follows:
 * The root is partitioned by years. Every year contains the year's data.
-* An year folder is partitioned to months. Every month contains the month's data.
+* Every year folder is partitioned to months. Every month contains the month's data.
 * A month folder is partitioned to days. Every day contains the files processed by the operator in the given day.
 
 #### View archived file
@@ -294,9 +294,13 @@ get archived files 2024-01-07
 #### Delete archived files
 
 Users can configure a node to delete old archived files. This process can be done as a task on the node scheduler -
-see detaails in the [alerts and monitoring section](alerts%20and%20monitoring.md).    
-**Always have a proper backup prior to deleting archived data.**  
-The command specifies a number of days from which, all files in folders from prior days are deleted.
+see detaails in the [alerts and monitoring](alerts%20and%20monitoring.md) section.    
+
+The command specifies a number of days prior to the command issued day, from which, 
+all files in folders from prior days are deleted.   
+For example, if days is set as 10, all the data which was processed before 10 days ago, is deleted. 
+
+Note: **Always have a proper backup prior to deleting archived data.**
 
 Usage:
 ```anylog
