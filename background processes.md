@@ -239,20 +239,18 @@ Options:
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
 | policy  | The ID of the Operator policy.  |  |
-| watch_dir  | The directory monitored by the Operator. Files placed on the Watch directory are processed by the Operator.  | !watch_dir  |
-| bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
-| error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
-| delete_json   | True/False for deletion of the JSON file if processing is successful.  | false |
-| compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | false |
+| company  | A company name to be associated with the data.  |  |
+| compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | true |
 | compress_sql   | True/False to enable/disable compression of the SQL file.  | True |
-| move_json   | True moves the JSON file to the 'bkup' dir if processing is successful.  | false |
-| move_sql   | True moves the SQL file to the 'bkup' dir if processing is successful. The SQL file deleted if move_sql is false.| false |
+| archive_json   | True moves the JSON file to the 'bkup' dir if processing is successful. The JSON file deleted if archive_json is false. | true |
+| archive_sql   | True moves the SQL file to the 'archive' dir if processing is successful. The SQL file deleted if archive_sql is false.| false |
 | limit_tables   | a list of comma separated names within brackets listing the table names to process.  |  |
 | craete_table   |  A True value creates a table if the table doesn\'t exists.  | true |
 | master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 | update_tsd_info   | True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingested.  |  |
 | distributor   | A True value move the data to the directory assigned to the Distributor process.  | distr_dir  |
 | archive   | A True value move the data to the archive directory.  |  |
+
 
 Example:  
 ```anylog
