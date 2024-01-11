@@ -270,8 +270,8 @@ Additional info on the ***get operator*** command is available [here](monitoring
 Data is treated by the Operator as a sequence of log files that are stored in local databases.  
 Every log file has a representation as a JSON file. These files are stored in a special archival and are used in the following processes:
 1) In the process of High Availability, when data is replicated between nodes.
-2) In recovery processes.
-To enable the archival,  set to **true** in the AnyLog **archive_json** option in the **run operator** command.
+2) In recovery processes.  
+To enable the archival,  set the AnyLog **archive_json** option in the **run operator** command to **true**.
 
 The root of the archive folder is assigned to the key **archive_dir** in the dictionary.  
 Use the following command to view the path to the archive root:
@@ -285,14 +285,16 @@ The structure of the archival folder is based on partitioning by days (using UTC
 * A month folder is partitioned to days. Every day contains the files processed by the operator in the given day.
 
 #### Archival of SQL files:
-Depending on the configuration, local databases are updated per every event that reaches the AnyLog node or as a collection of multiple (buffered) events.  
+Depending on the configuration, local databases are updated as follows:
+1. When an event reaches the AnyLog Node
+2. As a collection of multiple (buffered) events.
+
 This behavior is configured by the **set buffer threshold** command - see details in the 
 [Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode) section.  
-The following command determines if streaming data is buffered (value is **false**) or updates the databases without buffering (value is **true**).
-```anylog
-set buffer threshold where write_immediate = [true/false]
-```
-If data is buffered (the value for **write_immediate** is **false**), AnyLog generates a file with the insert statement for each event.  
+* **set buffer threshold where write_immediate = false** - Buffers the streaming data.
+* **set buffer threshold where write_immediate = true** - No buffering, streaming data updates the databases when the data appears on the node.
+
+If data is buffered (the value for **write_immediate** is **false**), AnyLog generates a file with the insert statement for each event in the buffer.    
 Users can archive these files by setting the **archive_sql** flag in the **run operator** command to **true**.    
 Note that these files are not used by the system, and are not generated in all use cases. Unless there is a special reason to collect
 the SQL files, it is recommended to set **archive_sql** to **false**.  
