@@ -70,6 +70,11 @@ Home-page: https://dateutil.readthedocs.io
 Author: Gustavo Niemeyer  
 Author-email: gustavo@niemeyer.net  
 License: Dual License - https://github.com/dateutil/dateutil/blob/master/LICENSE  
-
-
+__________________________________________________
+Name: grpc  
+Version: 1.60.0
+Summary: High performance Remote Procedure Call (RPC) framework 
+Home-page: https://grpc.io/  
+Author: https://github.com/grpc/grpc.io/blob/main/MAINTAINERS.md  
+License: Apache License - https://github.com/grpc/grpc.io/blob/main/LICENSE
 
