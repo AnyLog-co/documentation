@@ -1,5 +1,5 @@
 
-**Version**: 
+**Version**: 1.3.240112 | 
 
 ## New Features
 1. Adding support to gRPC [using gRPC](../using%20grpc.md)
