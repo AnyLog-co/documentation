@@ -15,7 +15,7 @@
 | Network               | Required: a TCP based network (local TCP based networks, over the internet and combinations are supported) |
 |                       | An overlay network is recommended. Most overlay networks can be used transparently. Nebula used as a default overlay network. |
 | Cloud Integration     | Build in integration using REST, Pub-Sub, and Kafka. |
-| Deployment options    | Docker and Kubernetes. |
+| Deployment options    | Executable (can be deployed as a background process), or Docker or Kubernetes. |
 
 
 **Comments**:
