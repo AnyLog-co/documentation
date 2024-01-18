@@ -4,7 +4,8 @@
 | --------------------- | ------------| 
 | Operating System      | Linux (Ubuntu, RedHat, Alpine, Suse) | 
 |                       | Windows |
-| Memory footprint      | 100 MB available for the AnyLog process |
+| Memory footprint      | 100 MB available for the AnyLog deployed without Docker |
+|                       | 300 MB available for AnyLog deployed with Docker |
 | Databases             | PostgreSQL installed (optional) |
 |                       | SQLite (default, no need to install) |
 |                       | MongoDB installed (Only if blob storage is needed) |

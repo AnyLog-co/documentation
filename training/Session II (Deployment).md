@@ -102,7 +102,7 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 Prior to this session, users are required to prepare:
 * 4 machines (virtual or physical) to host the AnyLog nodes, as follows:
     - A Linux environment.
-    - A minimum of 256MB of RAM.
+    - A minimum of 512MB of RAM.
     - A minimum of 10GB of disk space.
 * 1 Machine (physical or virtual) for applications that interact with the network (i.e. Grafana), as follows:
     - Linux or Windows environment.
@@ -116,7 +116,7 @@ or if the questionnaire is not used to create the **anylog_configs.env** file):
     - [Python](https://www.python.org/downloads/)
     - [Dotenv](https://pypi.org/project/python-dotenv/)     
 
-**Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
+**Note 1**: The prerequisites for a customer deployment are available [here](prerequisite.md).
 
 **Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20&%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.

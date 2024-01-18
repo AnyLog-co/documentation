@@ -10,7 +10,7 @@ In the examples below, users define **system variables** by assigning values to 
 node configuration process to apply a configuration option, or a configuration value.
 
 **Other Deployments**
-* [Empty Node](../examples/Network%20setup%20-%20Part%20I.md) - Manually deploy an AnyLog node 
+* [Network Setup](../training/advanced/Network%20Setup.md) - deployment of AnyLog nodes using the CLI of the participating nodes.
 * [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
 * [Training](../training) - Standard training used for explaining how to use AnyLog
 
@@ -30,7 +30,7 @@ The following provides directions for installing AnyLog with either _Docker_ wit
 _Helm_. The directions provided should be done on each of the nodes being used as part of the network. 
 
 ### Prepare Node 
-0. Review [Hardware Prerequisite](prerequisite.md) and [Software Requirements](#requirements)
+0. Review [Hardware Prerequisite](../training/prerequisite.md) and [Software Requirements](#requirements)
 1. [Contact Us](mailto:info@anylog.co) to get access to our Docker image as well as an AnyLog software license key
 2. Clone the deployment tool kit into your local machine 
 ```shell

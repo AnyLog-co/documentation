@@ -1,6 +1,6 @@
 # Session I - The Basic Guided Tour
 
-Prerequisite: See details [here](..//deployments/Prerequisite.md).
+Prerequisite: See details [here](prerequisite.md).
 
 # Basic AnyLog commands
 
