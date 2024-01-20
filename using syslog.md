@@ -66,12 +66,12 @@ The following chart summarizes the command options:
 
 ## Examples:
 
-Example 1 - setting a rule to allow syslog data in BSD format from IP 10.0.0.78 and port 1468.
+### Example 1 - setting a rule to allow syslog data in BSD format from IP 10.0.0.78 and port 1468.
 ```anylog
  set msg rule my_rule if ip = 10.0.0.78 and port = 1468 then dbms = test and table = syslog and syslog = true
 ``` 
 
-Example 2 -
+### Example 2
 
 **Part A** below is a script that takes log entries from the systemd journal that are newer than the time specified in the NOW variable, 
 formats each entry by prefixing it with a specific string, and then sends these formatted entries to a remote server at 
@@ -93,7 +93,7 @@ Additional manipulation of the syslog data can be done using policies assigned t
  set msg rule my_rule if ip = 139.162.126.241 and header = al.sl.header.new_company.syslog then dbms = test and table = syslog and syslog = true
 ``` 
 
-Example 3 - 
+### Example 3 
 
 The following example delivers data with the first entry represents the attributes names and their size.    
 The following script on Mac delivers syslog data, and an example of the first events are shown below.  
