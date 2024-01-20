@@ -62,6 +62,7 @@ The following chart summarizes the command options:
 | syslog           | N          | A True/False value to indicate syslog data. Unless format is specified, the destination structure represents the BSD format of syslog.  |
 | format           | N          | A different format than BSD.  |
 | topic            | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy. |
+| structure        | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.  |
 
 ## Examples:
 
@@ -80,10 +81,6 @@ Linux Example:
 ```shell
    journalctl --since "${NOW}" | awk '{print "al.sl.header.new_company.syslog", $0}' | nc -w 1 73.202.142.172 7850
 ```
-Mac Example:
-```shell
-(log show --info --start '2023-11-30 16:50:00' --end '2023-12-01 16:51:00' | awk '{print "al.sl.header.test.syslog", $0}') | nc -w 1 10.0.0.78 7850
-```
 
 This script will deliver syslog entries to an Operator Node where every entry is prefixed by the string **al.sl.header.new_company.syslog**.
 
@@ -95,6 +92,31 @@ Additional manipulation of the syslog data can be done using policies assigned t
 ```anylog
  set msg rule my_rule if ip = 139.162.126.241 and header = al.sl.header.new_company.syslog then dbms = test and table = syslog and syslog = true
 ``` 
+
+Example 3 - 
+
+The following example delivers data with the first entry represents the attributes names and their size.    
+The following script on Mac delivers syslog data, and an example of the first events are shown below.  
+
+**Part A** example script: 
+```shell
+(log show --info --start '2024-01-01 16:50:00' --end '2024-12-01 16:51:00' | awk '{print "al.sl", $0}') | nc -w 1 10.0.0.78 7850
+```
+
+Example Data:
+```
+al.sl Timestamp                       Thread     Type        Activity             PID    TTL  
+al.sl 2024-01-01 17:51:35.253053-0800 0x4d0c71   Default     0x39223d             482    3    identityservicesd: (Accounts) [com.apple.accounts:core] "New <private> number: 9383095159695522545"
+al.sl 2024-01-01 18:21:54.906182-0800 0x0        Timesync    0x0                  0      0    === system wallclock time adjusted
+al.sl 2024-01-01 19:21:53.868782-0800 0x0        Timesync    0x0                  0      0    === system wallclock time adjusted
+al.sl 2024-01-01 20:12:36.432114-0800 0x4e93dd   Default     0x3aabbc             487    3    networkserviceproxy: (Accounts) [com.apple.accounts:core] "New <private> number: 9383095159695522545"
+```
+
+**Part B** below is a rule on the Operator nodes that applies the header provided in the first event to determine the data structure:
+```anylog
+ set msg rule my_rule if ip = 10.0.0.251 and header = al.sl then dbms = test and table = syslog_mac and structure = included
+``` 
+
 
 ## Get the list of rules
 
