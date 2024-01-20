@@ -72,15 +72,22 @@ Example 1 - setting a rule to allow syslog data in BSD format from IP 10.0.0.78 
 
 Example 2 -
 
-Part A below is a script that takes log entries from the systemd journal that are newer than the time specified in the NOW variable, 
+**Part A** below is a script that takes log entries from the systemd journal that are newer than the time specified in the NOW variable, 
 formats each entry by prefixing it with a specific string, and then sends these formatted entries to a remote server at 
-the specified IP address and port number.
+the specified IP address and port number.   
+
+Linux Example:
 ```shell
    journalctl --since "${NOW}" | awk '{print "al.sl.header.new_company.syslog", $0}' | nc -w 1 73.202.142.172 7850
 ```
+Mac Example:
+```shell
+(log show --info --start '2023-11-30 16:50:00' --end '2023-12-01 16:51:00' | awk '{print "al.sl.header.test.syslog", $0}') | nc -w 1 10.0.0.78 7850
+```
+
 This script will deliver syslog entries to an Operator Node where every entry is prefixed by the string **al.sl.header.new_company.syslog**.
 
-Part B below is a rule on the Operator Node that assigns entries with the prefix **al.sl.header.new_company.syslog**
+**Part B** below is a rule on the Operator Node that assigns entries with the prefix **al.sl.header.new_company.syslog**
 to table **syslog** in database **test**.  
 Users can add additional rules to associate different syslog entries to different tables by the assigned prefix.  
 Additional manipulation of the syslog data can be done using policies assigned to a specified topic.
