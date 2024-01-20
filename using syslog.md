@@ -46,7 +46,7 @@ Notes:
 The following rule accepts SysLog data from one or multiple nodes:
 
 ```anylog
-set msg rule [rule name] if ip = [IP address] and port = [port] and header = [header text] then dbms = [dbms name] and table = [table name] and syslog = [true/false] and format = [data format]
+set msg rule [rule name] if ip = [IP address] and port = [port] and header = [header text] then dbms = [dbms name] and table = [table name] and syslog = [true/false] and format = [data format] and topic = [topic name]
 ```
 
 The following chart summarizes the command options:
@@ -101,7 +101,7 @@ Additional manipulation of the syslog data can be done using policies assigned t
 The following command retrieves the list of rules:
 
 ```anylog
- get msg rules
+get msg rules
 ```
 
 ## Remove a rule
@@ -109,10 +109,10 @@ The following command retrieves the list of rules:
 The following command removes a rule from the list of rules:
 
 ```anylog
- reset  msg rule [rule name]
+reset msg rule [rule name]
 ```
 
 Example:
 ```anylog
- reset  msg rule my_rule
+reset msg rule my_rule
 ```
