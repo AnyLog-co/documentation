@@ -64,6 +64,10 @@ The following chart summarizes the command options:
 | topic            | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy. |
 | structure        | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.  |
 
+Note: If **syslog** option is enabled, column names are pre-determined (by default as BSD or with **format = IETF**). If **syslog**
+option is not enabled, **structure** needs to detail the structure of the source data.   
+**structure = included** designates that the first event describes the structure.
+
 ## Examples:
 
 ### Example 1 - setting a rule to allow syslog data in BSD format from IP 10.0.0.78 and port 1468.
