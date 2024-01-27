@@ -64,9 +64,11 @@ The following chart summarizes the command options:
 | topic            | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy. |
 | structure        | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.  |
 
-Note: If **syslog** option is enabled, column names are pre-determined (by default as BSD or with **format = IETF**). If **syslog**
+Notes: 
+1) If **syslog** option is enabled, column names are pre-determined (by default as BSD or with **format = IETF**). If **syslog**
 option is not enabled, **structure** needs to detail the structure of the source data.   
-**structure = included** designates that the first event describes the structure.
+2) For **SysLog** data stream, enable CR and LF to end of message. 
+3) **structure = included** designates that the first event describes the structure.
 
 ## Examples:
 
@@ -142,3 +144,13 @@ Example:
 ```anylog
 reset msg rule my_rule
 ```
+
+## Enable trace
+The following CLI command will print the source IP and Port that send the data, and a sample of the data received.
+```anylog
+trace level = 2 run message broker
+```
+The trace output includes the first 100 bytes received on each message. If the message received is larger than 100 bytes,
+the printed output includes 3 dots (...) at the suffix of the printed data.  
+Note that a single message may contain multiple events, the trace only outputs the first 100 bytes.  
+Use the **get msg rules** command to determine the number of events processed. 
