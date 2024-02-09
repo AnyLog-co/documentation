@@ -123,11 +123,6 @@ blockchain seed from [ip:port]
 Note: the proper way to provide the metadata to a node is to enable the **blockchain synchronizer** service on the node.  
 This process will update the node continuously with updates to the metadata. Details are available [here](../background%20processes.md#blockchain-synchronizer).
 
-### Test node connectivity with peers
-A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#the-test-network-commands).
-```anylog
-test network
-```
 
 ### Examples of metadata commands:
 ```anylog 
@@ -141,6 +136,12 @@ blockchain get operator where [city] = toronto  bring [operator][ip] : [operator
 
 blockchain get operator where [city] = toronto  bring.ip_port
 ```   
+
+### Test node connectivity with peers
+A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#the-test-network-commands).
+```anylog
+test network
+```
 
 ## Execute commands on a peer node
 Use the TCP connection to communicate with peers.  
