@@ -90,6 +90,12 @@ set echo queue on
 echo this is a test message
 get echo queue
 ```  
+
+# Test node configuration
+A node can validate proper configurations using the **test node** command. See details [here](../test%20commands.md#test-node).
+```anylog
+test node
+```
   
 ## Connecting to a DBMS
 Supported databases: PostgreSQL for larger nodes and SQLite for smaller nodes or data in RAM.
@@ -118,7 +124,19 @@ get databases
 Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
 and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands).
 
-Example blockchain commands:
+### Get metadata from a peer node
+Copy the metadata from a peer node in the network. See details [here](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node).
+```anylog
+blockchain seed from [ip:port]
+```
+
+### Test node connectivity with peers
+A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#the-test-network-commands).
+```anylog
+test network
+```
+
+###Examples of metadata commands:
 ```anylog 
 blockchain get *
 blockchain get operator
