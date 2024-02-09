@@ -1,7 +1,7 @@
 # Session I - The Basic Guided Tour
 
 Prerequisite: See details [here](prerequisite.md).  
-Suggested Reading: [Getting STarted](../getting%20started.md)
+Suggested Reading: [Getting Started](../getting%20started.md).
 
 # Basic AnyLog commands
 
