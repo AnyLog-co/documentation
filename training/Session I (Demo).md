@@ -109,17 +109,7 @@ Connect to a dbms:
 ```anylog 
 connect dbms system_query where type = sqlite and memory = true # Used for local processing
 get databases
-```   
-
-## The remote CLI (Demonstrating 3rd party application interacting with the network):
-Connection via the REST protocol.  
-Most commands can be issued on the Remote CLI.    
-Examples:
-```anylog 
-get status
-get dictionary
-get databases
-```   
+```
 
 ## The Metadata
 Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
@@ -220,3 +210,12 @@ run client () sql edgex format=table "select increments(minute, 1, timestamp), m
 run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"
 ```
 
+## The remote CLI (Demonstrating 3rd party application interacting with the network):
+Connection via the REST protocol.  
+Queries and commands can be issued on the Remote CLI.    
+Examples:
+```anylog 
+get status
+get dictionary
+get databases
+```   
