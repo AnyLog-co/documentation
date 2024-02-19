@@ -183,7 +183,7 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
 # Input in Grafana
 {
   "type": "period", 
-  "time_collumn": "timestamp",
+  "time_column": "timestamp",
   "value_column": "value",
   "grafana" : {
     "format_as" : "timeseries"
@@ -245,4 +245,42 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 
 
 **Other Examples**
-* 
+
+* Extending query to use where conditions
+```json
+# Increments
+{
+  "type": "increments",
+  "time_column": "timestamp",
+  "value_column": "value",
+  "where": "device_name='ADVA FSP3000R7'",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
+}
+          
+# Period
+{
+  "type": "period", 
+  "time_column": "timestamp",
+  "value_column": "value",
+  "where": "device_name='ADVA FSP3000R7'",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
+}
+```
+
+* Extend to specify which _Functions_ without _time_range_ to query 
+```json
+{
+  "type": "period", 
+  "time_column": "timestamp",
+  "value_column": "value",
+  "time_range": false,
+  "functions": ["min", "max", "avg", "count"],
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
+}
+```
