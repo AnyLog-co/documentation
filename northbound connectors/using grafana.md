@@ -83,8 +83,68 @@ While authentication using [SSL Certificates](../authentication.md#using-ssl-cer
 Grafana allows to present data in 2 modes _Time Series_ collects and visualize data values as a function of time, and 
 _Table_ format where data is presented in rows and columns.
 
-AnyLog offers 2 predefined queries and users can modify the default queries or specify additional queries using the 
-_Additional_ JSON Data options on the panel.
+AnyLog offers 2 predefined query types ([_Increments_ and _Period_](#using-the-time-series-data-visualization)) which 
+users can modify or specify additional queries either "as-is" or using _Additional JSON Data_ options on the panel.
+
+**Additional JSON Data** section(s) provides additional information to the query process. The information provided overrides 
+the default behaviour and can pull data from any database managed by AnyLog (as long as the user maintains valid permissions).  
+The additional information is provided using a JSON script with the following attribute names:
+
+<pre>
+dbms            - The name of the logical database to use. Overrides the dbms name in the configuration page.
+table           - The name of the table to use. Overrides the table name in the sql statement.
+type            - The type of the query. The default value is 'sq' and other valid types are: 'increments', 'period' and 'info'.         
+sql             - A sql statement to use.
+details         - An AnyLog command which is not a SQL statement.
+where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
+functions       - A list of SQL functions to use which overwrites the default functions. 
+timezone        - ***utc*** (default) or ***default*** to change time values to local time before the transfer to Grafana.
+time_column     - The name of the time column in the Time Series format.
+value_column    - The name of the value column in the Time Series format.
+time_range      - When using a Table view, determines if the query needs to consider the time range. The default value is 'true'.
+servers         - Replacing the network determined servers with a list of Operators (data hosting servers) to use.
+instructions    - Additional AnyLog query instructions.
+</pre>
+
+
+<img src="../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
+
+### Blockchain based Visualization
+
+**Creating Network Map**
+1. In the _Visualizations_ section, select _Geomap_
+
+2. In the _Metric_  section, select a table name to "query" against
+
+3. Update _Payload_ with the following information
+```json
+{
+    "type" : "map",
+    "member" : ["master", "query", "operator", "publisher"],
+    "metric" : [0,0,0],
+    "attribute" : ["name", "name", "name", "name"]
+}
+```
+
+<img src="../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
+
+
+**Creating Table from Blockchain**
+1. In the _Visualizations_ section, select _Table_
+
+2. In the _Metric_  section, select a table name to "query" against
+
+3. Update _Payload_ with the following information
+```json
+{
+    "type": "info", 
+    "details": "blockchain get operator bring.json [*][cluster] [*][name] [*][company] [*][ip] [*][country] [*][state] [*][city]"
+}
+```
+
+<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+
+### Using the Time-Series Data Visualization
 
 **Increments query** (The default query) is used to retriv statistics on the time series data in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
@@ -122,86 +182,67 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
 ```shell
 # Input in Grafana
 {
-    "type": "period",
-    "time_column": "timestamp", 
-    "value_column": "value",
-    "time_range": false,
-    "where": "device_name='Catalyst 3500XL'",
-    "interval": "1 hour",
-    "grafana" : {
-        "format_as" : "timeseries"
-    }
+  "type": "period", 
+  "time_collumn": "timestamp",
+  "value_column": "value",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
 }
-
 # Query Being Executed
 SELECT 
     max(timestamp) as timestamp, avg(value) as avg_val, min(value) as min_val, max(value) as max_val 
 FROM 
     ping_sensor 
-WHERE 
-    period(hour, 1, '2024-02-19T20:00:10.222Z', timestamp , and device_name='Catalyst 3500XL');
 ```
 
 More information on increments and period types of queries are available in [queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
 
-**Additional JSON Data** section(s) provides additional information to the query process. The information provided overrides 
-the default behaviour and can pull data from any database managed by AnyLog (as long as the user maintains valid permissions).  
-The additional information is provided using a JSON script with the following attribute names:
 
-<pre>
-dbms            - The name of the logical database to use. Overrides the dbms name in the configuration page.
-table           - The name of the table to use. Overrides the table name in the sql statement.
-type            - The type of the query. The default value is 'sq' and other valid types are: 'increments', 'period' and 'info'.         
-sql             - A sql statement to use.
-details         - An AnyLog command which is not a SQL statement.
-where           - A "WHERE" condition added to the SQL statement. Can add filter or other conditions to the executed SQL.
-functions       - A list of SQL functions to use which overwrites the default functions. 
-timezone        - ***utc*** (default) or ***default*** to change time values to local time before the transfer to Grafana.
-time_column     - The name of the time column in the Time Series format.
-value_column    - The name of the value column in the Time Series format.
-time_range      - When using a Table view, determines if the query needs to consider the time range. The default value is 'true'.
-servers         - Replacing the network determined servers with a list of Operators (data hosting servers) to use.
-instructions    - Additional AnyLog query instructions.
-</pre>
+**Increments Graph**
+1. In the _Visualizations_ section, select _Time series_
 
-
-<img src="../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
-
-### Blockchain based Visualization
-
-**Creating Network Map**
-1. In the _Visualizations_ section, select _Geomap_
-
-2. In the _Matric_  section, select a table name to "query" against
+2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
 ```json
 {
-    "type" : "map",
-    "member" : ["master", "query", "operator", "publisher"],
-    "metric" : [0,0,0],
-    "attribute" : ["name", "name", "name", "name"]
+  "type": "increments",
+  "time_column": "timestamp",
+  "value_column": "value",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
 }
 ```
 
-<img src="../imgs/grafana_geomap.png" alt="Network Map" width="50%" height="50%" />
+4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
+opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
+<img src="../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
 
-**Creating Table from Blockchain**
-1. In the _Visualizations_ section, select _Table_
+**Period Graphs**
+1. In the _Visualizations_ section, select _Gauge_
 
-2. In the _Matric_  section, select a table name to "query" against
+2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
 ```json
 {
-    "type": "info", 
-    "details": "blockchain get operator bring.json [*][cluster] [*][name] [*][company] [*][ip] [*][country] [*][state] [*][city]"
+  "type": "period", 
+  "time_column": "timestamp",
+  "value_column": "value",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
 }
 ```
 
-<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
+opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
-### Using the Time-Series Data Visualization
+<img src="../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
 
 
+**Other Examples**
+* 
