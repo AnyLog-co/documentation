@@ -1,97 +1,93 @@
-# Using Grafana
+**# Using Grafana
 
 ## Overview
 
-AnyLog includes a Grafana connector such that Grafana can serve as a visualization tier using a build-in/transparent interface that maps Grafana calls to queries over data maintained in the AnyLog Network.  
-Using HTTP and JSON API, Grafana communicates with AnyLog to retrieve data such that the Grafana visualization can be leveraged.  
+Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
+demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](PowerBI.md), can be found in our 
+[North Bound services](../northbound%20connectors) section.   
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
-## Prerequisites
+## Prerequisites & Links
 
-* Grafana instance installed. Directions to install Grafana can be found [here](../deployments/Support/Grafana.md)
-* An AnyLog Node that provides a REST connection.
-To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
-```run rest server [ip] [port] [max time]```  
-[ip] and [port] are the IP and Port that would be available to REST calls.  
-[max time] is an optional value that determines the max execution time in seconds for a call before being aborted.  
-A 0 value means a call would never be aborted and the default time is 20 seconds.  
-  
-## Configure Grafana
-Change the following configuration options in the .ini configuration file:
-Notes: 
-- You must restart Grafana for any configuration changes to take effect.
-- Optional locations for the Grafana .ini file:
-  * Winodws Config: `C:\Program Files\GrafanaLabs\grafana\conf\custom.ini`
-  * Linux Config: `/etc/grafana/grafana.ini`
-  * With Docker, the Grafana config file name is `grafana.ini`. Depending on the deployment, the file is stored in the Docker volume (if created); or optionally is a hidden file.
-    Details are available in the [Grafana Docker Documentation](https://grafana.com/docs/grafana/latest/installation/docker/).
-    
-- The Grafana configuration options are explained at the [Setting](https://grafana.com/docs/grafana/latest/auth/grafana/#settings) section. Below are some relevant configurations:  
+* An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher. 
+```shell
+docker run --name=grafana \
+  -e GRAFANA_ADMIN_USER=admin \
+  -e GRAFANA_ADMIN_PASSWORD=passwd \
+  -e GF_AUTH_DISABLE_LOGIN_FORM=false \
+  -e GF_AUTH_ANONYMOUS_ENABLED=true \
+  -e GF_SECURITY_ALLOW_EMBEDDING=true \
+  -e GF_INSTALL_PLUGINS=simpod-json-datasource,grafana-worldmap-panel \
+  -e GF_SERVER_HTTP_PORT=3000 \
+  -v grafana-data:/var/lib/grafana \
+  -v grafana-log:/var/log/grafana \
+  -v grafana-config:/etc/grafana \
+  -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
+```
 
-| Section | Parameter | Value  | Details  |
-| ------------- | ------------- | ------------| ------------| 
-| auth  | disable_login_form | false |  'true' hides the Grafana login form. | 
-| auth.anonymous | enabled | true | When true, users are able to view Grafana dashboards without logging-in. They are **not** able to change dashboards. |
-| security | allow_embedding | true | When false, the HTTP header X-Frame-Options: deny will be set in Grafana HTTP responses which will instruct browsers to not allow rendering. |
+* An AnyLog Node that provides a REST connection - To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
+  * [ip] and [port] are the IP and Port that would be available to REST calls.
+  * [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.
+  * A 0 value means a call would never be aborted and the default time is 20 seconds.
+```anylog
+<run rest server where
+    external_ip=!external_ip and external_port=!anylog_rest_port and
+    internal_ip=!ip and internal_port=!anylog_rest_port and
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout
+>
+```
+* [Support](https://grafana.com/docs/grafana/latest/)
 
-## The Grafana API Token 
-Create a [Grafana API Token](https://grafana.com/docs/grafana/latest/http_api/auth/#create-api-token). 
 
-## initiating Grafana 
-* [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
-* Use admin role to create and update dashboards and folders.
- 
-## Establishing a connection
+## Setting Up Grafana 
+1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
 
-Open the Grafana ***Data Sources*** configuration page.
+![Grafana page](../imgs/grafana_login.png) 
 
-* select a JSON data source.
-* On the name tab provide a unique name to the connection.
-* On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
-* On the ***Custom HTTP Headers***, name the default database to use as follows:  
-```al.dbms.[dbms name]```  For example: al.dbms.lsl_demo  
-Declaring the database connects Grafana to the specified database on the HTTP connection and makes the database tables available to query.  
+2. In _Data Sources_ section, create a new JSON data source
+   * select a JSON data source.
+   * On the name tab provide a unique name to the connection.
+   * On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
+   * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
+   the node will be available to query       
+![Grafana Data Source](../imgs/grafana_data_source.png) 
 
-***Notes:***  
-* To interact with a different database, create a new JSON data source and declare a different database name in the headers.  
-* If the ***Custom HTTP Header*** field is empty, all tables from all databases appear for selection on the dashboard (Edit Panel/Metric Selection/pull-down menu).
-* If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.  
+Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
+![Confirmation Message](../imgs/grafana_confirmation.png)
 
-Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.  
-Failure to connect may be the result of one of the following:
-* AnyLog instance is not running or not configured to support REST calls.
-* Wrong IP and Port.
-* Firewalls are not properly configured and make the IP and Port not available.
-* AnyLog is configured with authentication detection that is not being satisfied.
-
-## Enabling Authentication
+### Enabling Authentication
 
 Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
 
 When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
-the Grafana configuration should have _basic auth_ enabled. 
+the Grafana configuration should have _basic auth_ enabled.
 
 ![basic authentication](../imgs/grafana_basic_auth.png)
 
 While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
+
 ![SSL Authentication](../imgs/grafana_auth_image.png)
 
-
+**Notes**: Failure to connect may be the result of one of the following
+* AnyLog instance is not running or not configured to support REST calls.
+* Wrong IP and Port.
+* Firewalls are not properly configured and make the IP and Port not available.
+* AnyLog is configured with authentication detection that is not being satisfied.
+* If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.
 
 ## Using Grafana to visualize AnyLog data
 
-* On the Grafana menu, use the **+** sign to create a new panel.
-* Or, open an existing panel in Edit mode.  
-* On the left side, under the graph location, select ***Query*** and underneath select the AnyLog data source unique name from the pull down list.
-* The Metric window shows the list of tables supported by the database. Select a table from the options provided.
+Grafana allows to present data in 2 modes _Time Series_ collects and visualize data values as a function of time, and 
+_Table_ format where data is presented in rows and columns.
 
-Grafana allows to present data in 2 modes:
-* In a ***Time Series*** format and with reference to the time selection (on the upper right side of the panel).  
-* In a ***Table*** format where data is presented in rows and columns.  
+
+### Blockchain based Visualization
+
+
 
 ## Using the Time Series format
-The time series format collects and visualize data values as a function of time.  
+The time series format   
 AnyLog offers 2 predefined queries and users can modify the default queries or specify additional queries using the ***Additional JSON Data*** options on the panel.    
 
 ### The predefined queries 
@@ -165,7 +161,7 @@ The following example displays the generated query whenever the network is reque
 "time_column" : "timestamp",
 "value_column" : "value",
 "trace_level" : 1
-}
+}           
 </pre>
 
 ## Examples
