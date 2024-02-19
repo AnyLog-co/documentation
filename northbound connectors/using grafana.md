@@ -184,7 +184,7 @@ instructions    - Additional AnyLog query instructions.
 }
 ```
 
-<img src="../imgs/grafana_geomap.png" alt="Network Map" />
+<img src="../imgs/grafana_geomap.png" alt="Network Map" width="50%" height="50%" />
 
 
 **Creating Table from Blockchain**
@@ -199,6 +199,9 @@ instructions    - Additional AnyLog query instructions.
     "details": "blockchain get operator bring.json [*][cluster] [*][name] [*][company] [*][ip] [*][country] [*][state] [*][city]"
 }
 ```
-<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" />
+
+<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="50%" height="50%" />
+
 ### Using the Time-Series Data Visualization
+
 
