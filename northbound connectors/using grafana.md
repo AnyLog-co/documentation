@@ -200,7 +200,7 @@ instructions    - Additional AnyLog query instructions.
 }
 ```
 
-<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="50%" height="50%" />
+<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
 
 ### Using the Time-Series Data Visualization
 
