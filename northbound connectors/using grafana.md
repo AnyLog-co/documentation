@@ -196,7 +196,7 @@ FROM
     ping_sensor 
 ```
 
-More information on increments and period types of queries are available in [queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries%20and%20info%20requests.md).
+More information on increments and period types of queries are available in [queries and info requests](../queries.md#optimized-time-series-data-queries).
 
 
 **Increments Graph**
