@@ -13,7 +13,7 @@ and configure the desired `OVERLAY_IP` value in order to deploy AnyLog with Nebu
 your nodes can be accessed by people using the pre-set certifications.
 
 In order to resolve the issue mentioned above, users can do 2 things:  
-* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#L210)  
+* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#updating-docker-for-nebula)  
 * Directions to secure your network with AnyLog can be found [here](../../secure%20network.md)
 
 **Documentation**
@@ -207,4 +207,83 @@ NEBULA_CONFIG_FILE=/root/deployments/nebula/config_lighthouse.yml
 1. It is recommended to begin with lighthouse(s) and then slowly add in more nodes.
 2. When using Nebula, no 2 nodes can seat on the same physical machine due to the dependecy on _tun_ driver
 
-## Updating Docker for Nebula
+## Personalized Nebula
+While AnyLog does have default certifications for Nebula, users can easily change those out to use their own certifications.
+
+1. Using the directions in the generic [nebula document](nebula.md), complete the following steps: 
+   1. [Prepare personalized keys](nebula.md#prepare-keys-for-nebula-node)
+      1. Downloading Nebula & Untar the Nebula software
+      2. Creating your own certificate authority
+      3. Create keys for lighthouse and nodes -- each set of keys (_host.crt_ and _host.key_) should be in its own directory 
+      that'll be associated with an AnyLog Node 
+   2. [Prepare Configuration](nebula.md#preparing-configuration-) 
+      1. Download [configuration file](https://github.com/slackhq/nebula/blob/master/examples/config.yml)
+      2. make a copy of the configurations into each of the directories associated with AnyLog Node(s)
+      3. Update the configuration file as either [lighthouse](nebula_through_anylog.md#L59) or [node](nebula_through_anylog.md#L102)
+2. For the docker-compose.yml file update the volumes
+    * remove `${NEBULA_CONFIG_FILE}:${ANYLOG_PATH}/nebula/config.yml`
+    * remove `anylog-master-nebula-configs:${ANYLOG_PATH}/nebula/`
+    * manually include new files
+```yaml
+# before
+version: "3"
+services:
+  anylog-master:
+    image: anylogco/anylog-network:${TAG}
+    privileged: true
+    restart: always
+    env_file:
+      - anylog_configs.env
+      - advance_configs.env
+    container_name: ${CONTAINER_NAME}
+    stdin_open: true
+    tty: true
+    network_mode: host
+    environment:
+      - INIT_TYPE=${INIT_TYPE}
+    volumes:
+      - anylog-master-anylog:/app/AnyLog-Network/anylog
+      - anylog-master-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-master-data:/app/AnyLog-Network/data
+      - anylog-master-local-scripts:/app/deployment-scripts
+      - ${NEBULA_CONFIG_FILE}:${ANYLOG_PATH}/nebula/config.yml
+      - anylog-master-nebula-configs:${ANYLOG_PATH}/nebula/
+volumes:
+  anylog-master-anylog:
+  anylog-master-blockchain:
+  anylog-master-data:
+  anylog-master-local-scripts:
+  anylog-master-nebula-configs:
+
+# updated
+version: "3"
+services:
+  anylog-master:
+    image: anylogco/anylog-network:${TAG}
+    privileged: true
+    restart: always
+    env_file:
+      - anylog_configs.env
+      - advance_configs.env
+    container_name: ${CONTAINER_NAME}
+    stdin_open: true
+    tty: true
+    network_mode: host
+    environment:
+      - INIT_TYPE=${INIT_TYPE}
+    volumes:
+      - anylog-master-anylog:/app/AnyLog-Network/anylog
+      - anylog-master-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-master-data:/app/AnyLog-Network/data
+      - anylog-master-local-scripts:/app/deployment-scripts
+      - /home/anyloguser/lighthouse:/app/nebula/
+volumes:
+  anylog-master-anylog:
+  anylog-master-blockchain:
+  anylog-master-data:
+  anylog-master-local-scripts:
+```  
+3. start node 
+```shell
+bash /home/anyloguser/deployments/run.sh docker master up
+```
