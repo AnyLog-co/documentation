@@ -13,7 +13,7 @@ and configure the desired `OVERLAY_IP` value in order to deploy AnyLog with Nebu
 your nodes can be accessed by people using the pre-set certifications.
 
 In order to resolve the issue mentioned above, users can do 2 things:  
-* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#updating-docker-for-nebula)  
+* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#personalized-nebula)  
 * Directions to secure your network with AnyLog can be found [here](../../secure%20network.md)
 
 **Documentation**
