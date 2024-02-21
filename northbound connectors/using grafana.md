@@ -14,7 +14,7 @@ Using Grafana, users can visualize time series data using pre-defined queries an
 ```shell
 docker run --name=grafana \
   -e GRAFANA_ADMIN_USER=admin \
-  -e GRAFANA_ADMIN_PASSWORD=passwd \
+  -e GRAFANA_ADMIN_PASSWORD=admin \
   -e GF_AUTH_DISABLE_LOGIN_FORM=false \
   -e GF_AUTH_ANONYMOUS_ENABLED=true \
   -e GF_SECURITY_ALLOW_EMBEDDING=true \
@@ -52,7 +52,8 @@ docker run --name=grafana \
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query
 
-<img src="../imgs/grafana_data_source.png" alt="Grafana Data Source" width="50%" height="50%" />
+|<img src="../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
+| :---: | :---: |
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
 <img src="../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
