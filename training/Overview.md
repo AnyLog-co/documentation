@@ -5,14 +5,18 @@ This document and the referenced documents explain the deployment and configurat
 AnyLog is deployed using Docker or Kubernetes as a pre-configured software package.  
 To address dynamic and ad-hoc needs, each AnyLog node provides an interactive environment allowing to dynamically change configurations 
 and issue commands and queries. In addition, the interactive environment is extended to send requests and
- inspect responses remotely via REST. Users can use tools like [cURL](https://curl.se/) or [Postman](../northbound%20connectors/using%20postman.md) 
- as well as a [remote CLI](../northbound%20connectors/remote_cli.md) which is an AnyLog web based application allowing 
- intuitive and simple GUI to interact with nodes in the AnyLog Network.  
- 
+inspect responses remotely via REST. Users can use tools like [cURL](https://curl.se/) or [Postman](../northbound%20connectors/using%20postman.md) 
+as well as a [remote CLI](../northbound%20connectors/remote_cli.md) which is an AnyLog web based application allowing 
+intuitive and simple GUI to interact with nodes in the AnyLog Network.  
  
 The training reviews the basic operations with AnyLog nodes and guides users to manage, monitor and query nodes, metadata and data.
 This training demonstrates how to make changes to the default configurations to satisfy proprietary processes, data connectors, 
-and specific/domain requirements .
+and specific/domain requirements.
+
+Prerequisites for AnyLog Nodes are detailed [here](prerequisite.md).   
+Note: **For the training sessions, remove firewalls restrictions and assign each node to a static IP**.  
+A customer deployment will use an Overlay Network and AnyLog security features to assign IPs and make the network secure.
+These processes are ignored in Sessions I and II.
 
 This training includes 2 sessions:
 * [Session I](Session%20I%20(Demo).md) reviews basic operations.
@@ -29,8 +33,6 @@ Under the **advanced** folder, users can find the following documents:
 * [Pip Install](advanced/Pip%20Install.md) - Install AnyLog as a `pip` package 
 * [Background Deployment](advanced/background%20deployment.md) - Deploy AnyLog as a background process.
 
-
-  
 
 ### The test network deployed is shown in the following diagram:
 
