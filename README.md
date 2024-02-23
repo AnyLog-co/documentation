@@ -22,7 +22,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **Deploy AnyLog**
   * [Getting Started](getting%20started.md)
   * [Basic AnyLog Deployment](training/)
-    * [Docker Image](docker%20image.md)
+  * [Docker Image](docker%20image.md)
   * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
   * [Master Node](master%20node.md)
@@ -72,8 +72,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **Security & Authentication**
   * [Authentication](authentication.md)
   * [Secure Network](secure%20network.md)
-    * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
-    * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
+  * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
+  * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
@@ -83,6 +83,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using Edgex](using%20edgex.md)
   * [Using Kafka](using%20kafka.md)
   * [Using gRPC](using%20grpc.md)
+  * [Using SysLog](using%20syslog.md)
   * [Registering OSIsoft's PI](registering%20pi%20in%20the%20anylog%20network.md)
 
 * **Northbound Connectors**
