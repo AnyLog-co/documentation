@@ -1,0 +1,170 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Sample-AnyLog",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a0880a779529bd6c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 520,
+        "y": 440,
+        "wires": [
+            [
+                "406a9f940d4f6031"
+            ]
+        ]
+    },
+    {
+        "id": "406a9f940d4f6031",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "sampple-rand-data",
+        "func": "// Create a new Date object to get the current timestamp\nvar timestamp = new Date();\n\n// Generate a random integer between min (inclusive) and max (inclusive)\nvar min = 1; // replace with your minimum value\nvar max = 100; // replace with your maximum value\n\nvar randomValue = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Create a new object to hold the combined results\nvar combinedResults = {\n    table: \"rand_data\", \n    timestamp: timestamp,\n    value: randomValue\n};\n\n// Set the combined results as the new payload\nmsg.payload = combinedResults;\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 440,
+        "wires": [
+            [
+                "38016a0d2f17327b"
+            ]
+        ]
+    },
+    {
+        "id": "38016a0d2f17327b",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 910,
+        "y": 440,
+        "wires": [
+            [
+                "b356405d9e32bf6c"
+            ]
+        ]
+    },
+    {
+        "id": "b356405d9e32bf6c",
+        "type": "http request",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.105.4.104:32149",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "command",
+                "valueType": "other",
+                "valueValue": "data"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "topic",
+                "valueType": "other",
+                "valueValue": "node-red"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "User-Agent",
+                "valueType": "other",
+                "valueValue": "AnyLog/1.23"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "text/plain"
+            }
+        ],
+        "x": 1090,
+        "y": 440,
+        "wires": [
+            [
+                "3e9b80ba604d9b36",
+                "c2f508703d0cdc00"
+            ]
+        ]
+    },
+    {
+        "id": "3e9b80ba604d9b36",
+        "type": "http response",
+        "z": "f6f2187d.f17ca8",
+        "name": "validate-status",
+        "statusCode": "",
+        "headers": {},
+        "x": 1280,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c2f508703d0cdc00",
+        "type": "trigger",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "10",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 910,
+        "y": 640,
+        "wires": [
+            [
+                "406a9f940d4f6031"
+            ]
+        ]
+    }
+]

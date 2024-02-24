@@ -220,6 +220,7 @@ While AnyLog does have default certifications for Nebula, users can easily chang
       1. Download [configuration file](https://github.com/slackhq/nebula/blob/master/examples/config.yml)
       2. make a copy of the configurations into each of the directories associated with AnyLog Node(s)
       3. Update the configuration file as either [lighthouse](./nebula_through_anylog.md#L59) or [node](./nebula_through_anylog.md#L102)
+      4. Add the _Nebula_ software into 
 2. For the docker-compose.yml file update the volumes
     * remove `${NEBULA_CONFIG_FILE}:${ANYLOG_PATH}/nebula/config.yml`
     * remove `anylog-master-nebula-configs:${ANYLOG_PATH}/nebula/`
@@ -276,7 +277,7 @@ services:
       - anylog-master-blockchain:/app/AnyLog-Network/blockchain
       - anylog-master-data:/app/AnyLog-Network/data
       - anylog-master-local-scripts:/app/deployment-scripts
-      - /home/anyloguser/lighthouse:/app/nebula/
+      - /home/anyloguser/lighthous  e:/app/nebula/
 volumes:
   anylog-master-anylog:
   anylog-master-blockchain:
