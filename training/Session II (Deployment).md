@@ -111,6 +111,21 @@ Prior to this session, users are required to prepare:
 * Each node accessible by IP and Port (remove firewalls restrictions).
 * [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
+```shell
+# install docker & docker-compose via snap
+sudo apt-get -y update
+sudo apt-get -y upgrade 
+sudo snap install docker
+
+# remove sudo requirement when running docker / docker-compose 
+USER=`whoami`
+sudo groupadd docker
+sudo usermod -aG docker ${USER}
+newgrp docker
+
+# restart docker service
+sudo snap restart docker
+```
 * To enable the questionnaire (optional), install the following packages (these packages are redundant for deployments with pre-packaged configurations,
 or if the questionnaire is not used to create the **anylog_configs.env** file):  
     - [Python](https://www.python.org/downloads/)
