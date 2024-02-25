@@ -4,7 +4,7 @@ Syslog is a standardized protocol used for sending and receiving log messages in
 collection and centralization of system logs from various devices and applications for monitoring, analysis, and 
 troubleshooting.
 
-Given its importance to manage your system, AnyLog allows to gather this information (using rsyslog), then querying it in 
+Given its importance to manage any system, AnyLog allows to gather this information (using rsyslog), then querying it in 
 the same manner as other time-series data. This allows to better manage the status of machine(s) more easily and from a 
 single point; as opposed to manually acess each machine separately.
 
