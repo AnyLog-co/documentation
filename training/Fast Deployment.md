@@ -93,7 +93,7 @@ In the folder ```cd deployments/training/anylog-operator``` update the ```anylog
 using anylog for new-company) and a unique prefix like the example below:
     - for operator 1: **anylog-cluster_1**
     - for operator 2: **anylog-cluster_2**
-DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
+* DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
         
 #### Start the node
 
