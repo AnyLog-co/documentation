@@ -177,7 +177,8 @@ Other than the exceptions listed below, the AnyLog nodes will be using the defau
  (note that in a customer deployment, these configurations can be pre-packaged or updated using a questionnaire during the install).
  
 ## Get the Docker credentials and the AnyLog license key   
-If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
+If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co), 
+or get a license key dynamically from [AnyLog Download Page](https://anylog.co/download-anylog/). 
  
 ## Deploy an AnyLog Instance on each node
 
