@@ -530,15 +530,15 @@ dest = blockchain get operator bring.ip_port
 ```shell
 run client (!dest) get streaming
 run client (!dest) get operator
-run client (!dest) get inserts
+run client (!dest) get operator inserts
 ```
 
 ### Examples of commands issued to an Operator Node using cURL  
-Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get inserts```).    
+Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get operator inserts```).    
 Note 2: A 3rd party app (like cURL) is communicating with the IP and Port of the REST service enabled on the Node.  
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
-curl -X GET 198.74.51.131:32149 -H "command: get inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
+curl -X GET 198.74.51.131:32149 -H "command: get operator inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
 ```
 
 ### Examples of commands issued to a Node to retrieve Metadata
