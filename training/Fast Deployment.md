@@ -117,7 +117,7 @@ Using the keys: **ctrl+d**
 ## Example commands and queries on the Query Node
 
 Note: In this training, when an operator node is initiated, it is configured to subscribe to data that is published on 
-a 3rd part broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
+a 3rd party broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
 
 #### View the list of tables
 
