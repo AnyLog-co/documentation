@@ -272,7 +272,6 @@ Options:
 | get queries time                                                           | Statistics on queries execution time. The statistics is configurable by the command ***set query log profile [n] seconds***  |
 | get watch directories                                                      | The list of the Watch directories on the node. |
 | get metadata info                                                          | Returns summary info on the metadata including version and time since last update . |
-| get inserts                                                                | Statistics on SQL Inserts of data to the local databases. |
 | get database size [database name]                                          | The size of the named database in bytes. |
 | get node id                                                                | Returns a unique identifier of the node. |
 | get hardware id                                                            | Returns a unique identfier of the hardware. |
