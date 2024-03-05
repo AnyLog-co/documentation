@@ -59,7 +59,7 @@ Log into Grafana and Declare a _(JSON) Data Source_
 <img src="../imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
 
 
-2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [Kubernetes Alert](kubearmor_alert.json)).
+2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](../examples/grafana_json/edgex_dashboard.json)).
 
 | <img src="../imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /> | <img src="../imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%"/> |
 |:--------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
