@@ -8,6 +8,9 @@ demo BI tool. However, directions for other BI tools, such as [Microsoft's Power
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
+Directions for importing our demo images dashboards can be found in [import grafana dashboard document](import_grafana_dashboard.md)
+
+
 ## Prerequisites & Links
 
 * An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher. 
