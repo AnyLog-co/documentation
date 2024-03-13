@@ -93,7 +93,7 @@ In the folder ```cd deployments/training/anylog-operator``` update the ```anylog
 using anylog for new-company) and a unique prefix like the example below:
     - for operator 1: **anylog-cluster_1**
     - for operator 2: **anylog-cluster_2**
-DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
+* DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
         
 #### Start the node
 
@@ -117,7 +117,7 @@ Using the keys: **ctrl+d**
 ## Example commands and queries on the Query Node
 
 Note: In this training, when an operator node is initiated, it is configured to subscribe to data that is published on 
-a 3rd part broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
+a 3rd party broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
 
 #### View the list of tables
 
