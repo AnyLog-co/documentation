@@ -2,9 +2,8 @@
 
 ## Overview
 
-Each node offers a Command Line Interface (CLI). CLI allows users to interact with the program via the command line or terminal. 
-The CLI is a text-based interface where users can enter commands to execute various functions or operations provided by 
-the AnyLog node or peer nodes.
+Each node offers a Command Line Interface (CLI). The  CLI allows users to interact with the program via the command line or terminal. 
+The CLI is a text-based interface where users can enter commands to execute various functions or operations on the AnyLog node or peer nodes.
 
 Notes: 
 1. If AnyLog is executed as a background process, the CLI functionality is disabled. See details in 
@@ -19,8 +18,8 @@ The node's CLI includes a prompt and by default is as follows:
 ```anylog 
 AL >
 ```
-Users can change the node name using the command **set node name** to associate a CLI with a unique name.  
-For example the following command changes the command prompt:
+Users can change the node name using the command **set node name** to associate a node with a unique name.  
+The node name extends the CLI prompt. For example the following command changes the prompt:
 ```anylog 
 AL >  set node name Operator_3
 AL Operator_3 >
@@ -39,11 +38,13 @@ get echo queue
 
 ## Executing commands on startup
 
-AnyLog commands can be executed on startup by placing the commands as command line arguments. 
-Note: command line arguments are contained in quotations and the keyword **and** separates between multiple commands). 
+AnyLog commands can be executed on startup by placing the commands as command line arguments.  
+Note: command line arguments are contained in quotations and the keyword **and** separates between multiple commands (see example below). 
 
-Alternatively, commands can be placed in a file and using the command **process** the commands in the file are executed.  
-Details on the **process** command are available [here](node%20configuration.md#the-configuration-process)
+Alternatively, commands can be placed in a file and using the command **process**, the commands in the file are executed.  
+Details on the **process** command are available [here](node%20configuration.md#the-configuration-process).  
+Note: Commands can be placed and executed using policies hosted in the shared metadata. Details are available in the 
+[Configuration Policies](policies.md#configuration-policies) section.
 
 In the following example, a file named anylog_setup.al contains the commands that configures the network services for TCP and REST.    
 anylog_setup.al is as follows:
