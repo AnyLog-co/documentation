@@ -349,7 +349,7 @@ If authentication is disabled, a node will execute all the commands in the incom
 If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
 If validation fails, the node will discard the incoming message.  
 
-The format to send a command is the following:
+The format to send a command from the node's CLI is the following:
 ```anylog
 run client (destination) command
 ```
