@@ -59,7 +59,7 @@ and displays the IP and Port for the TCP and REST services.
 python3 anylog.py "process scripts_dir/anylog_setup.al" and "get connections"
 ```
 
-# Executing commands on the local node and on peer nodes
+## Executing commands on the local node and on peer nodes
 
 By default, an AnyLog command is executed on the local node. Adding the keywords **run client** executes the command
 on a target node or nodes. 
@@ -82,6 +82,34 @@ Additional information is in the following sections:
 [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface) and
 [Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network) and
 [Assigning a CLI to a peer node](training/advanced/background%20deployment.md#using-the-cli-of-a-peer-node-to-manage-the-background-node).
+
+
+## Script commands
+
+### The if command
+Scripts can include conditional statements. Details are available in the [Conditional execution](anylog%20commands.md#conditional-execution) section.
+
+### The end script command
+The **end script** command terminates the execution of the script (see an example below)
+
+### The goto command
+Script sections can be labeled, and using the command **goto** followed by a label, the execution shifts to a different 
+(labeled) part of the code. Labeles are required to be at the start of a command line (in the  script) and enclosed by colons.
+
+The following script, demonstrates the usage of the **goto** command. In the example below, the **goto** command
+transfers the execution to the section that satisfies a value set in an environment variable:
+```anylog 
+if $setup_type == query then goto query_node
+else goto operator_node
+
+:query_node:
+connect dbms test where type = sqlite
+end_script
+
+:operator_node:
+connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
+end_script
+```
 
 
 
