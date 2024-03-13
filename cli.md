@@ -42,18 +42,18 @@ AnyLog commands can be executed on startup by placing the commands as command li
 Note: command line arguments are contained in quotations and the keyword **and** separates between multiple commands (see example below). 
 
 Alternatively, commands can be placed in a file and using the command **process**, the commands in the file are executed.  
-Details on the **process** command are available [here](node%20configuration.md#the-configuration-process).  
-Note: Commands can be placed and executed using policies hosted in the shared metadata. Details are available in the 
-[Configuration Policies](policies.md#configuration-policies) section.
+Details on the **process** command are available [here](node%20configuration.md#the-configuration-process).   
+Note: Commands can be organized in policies and stored in the shared metadata. These commands are executed by calling the policies. 
+Details are available in the [Configuration Policies](policies.md#configuration-policies) section.
 
-In the following example, a file named anylog_setup.al contains the commands that configures the network services for TCP and REST.    
-anylog_setup.al is as follows:
+In the following example, a file named *anylog_setup.al* contains the commands that configures the network services for TCP and REST.      
+The commands in anylog_setup.al are as follows:
 ```anylog 
 run tcp server where internal_ip = !ip and internal_port = 7848 and external_ip = !external_ip and external_port = 7848 and bind = false and threads = 6
 run rest server where internal_ip = !ip and internal_port = 7849 and external_ip = !external_ip and external_port = 7849 and bind = false
 ```
 
-The following call starts the node, executes the configuration commands in the anylog_setup.al file (placed in the scripts_dir folder)
+The following call starts the node, executes the configuration commands contained in the *anylog_setup.al* file (placed in the scripts_dir folder)
 and displays the IP and Port for the TCP and REST services. 
 ```anylog 
 python3 anylog.py "process scripts_dir/anylog_setup.al" and "get connections"
@@ -62,11 +62,11 @@ python3 anylog.py "process scripts_dir/anylog_setup.al" and "get connections"
 ## Executing commands on the local node and on peer nodes
 
 By default, an AnyLog command is executed on the local node. Adding the keywords **run client** executes the command
-on a target node or nodes. 
+on a target node or nodes.  
 Note: **run client** means that the command is issued by a node that serves as a client to the network.  
 The command output from the target nodes is returned and displayed on the node from which the command was issued.  
 Examples:  
-A command issued on the current node: 
+A command issued on the local node: 
 ```anylog 
 get processes
 ```
@@ -79,24 +79,24 @@ A command issued on multiple nodes:
 run client (10.0.0.78:7848, 10.0.0.25:2548) get processes
 ```
 Additional information is in the following sections:
-[AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface) and
-[Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network) and
-[Assigning a CLI to a peer node](training/advanced/background%20deployment.md#using-the-cli-of-a-peer-node-to-manage-the-background-node).
+* [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface)
+* [Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network)
+* [Assigning a CLI to a peer node](training/advanced/background%20deployment.md#using-the-cli-of-a-peer-node-to-manage-the-background-node)
 
 
 ## Script commands
 
-### The if command
+### The "if" command
 Scripts can include conditional statements. Details are available in the [Conditional execution](anylog%20commands.md#conditional-execution) section.
 
-### The end script command
+### The "end script" command
 The **end script** command terminates the execution of the script (see an example below)
 
-### The goto command
+### The "goto" command
 Script sections can be labeled, and using the command **goto** followed by a label, the execution shifts to a different 
-(labeled) part of the code. Labeles are required to be at the start of a command line (in the  script) and enclosed by colons.
+(labeled) part of the code. Labels are required to be at the start of a command line (in the  script) and enclosed by colons.
 
-The following script, demonstrates the usage of the **goto** command. In the example below, the **goto** command
+The following script demonstrates the usage of the **goto** command. In the example below, the **goto** command
 transfers the execution to the section that satisfies a value set in an environment variable:
 ```anylog 
 if $setup_type == query then goto query_node
