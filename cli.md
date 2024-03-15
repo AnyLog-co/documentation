@@ -110,6 +110,37 @@ end_script
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 end_script
 ```
+### The "set debug" command
+
+If a script contains **set debug on**, each command that follows is printed including the execution result.
+The command **set debug off** disables the printout.  
+For example, if the anylog_setup.al containing the commands **run tcp server** and **run rest server** includes **set debug on**,
+the execution output would be as follows:
+
+```anylog 
+AL > [] [0002] set debug on --> Success
+AL > [] [0003] run tcp server where internal_ip = !ip and internal_port = 7848 and external_ip = !external_ip and external_port = 7848 and bind = false and threads = 6 --> Success
+AL > [] [0004] run rest server where internal_ip = !ip and internal_port = 7849 and external_ip = !external_ip and external_port = 7849 and bind = false --> Success
+```
+
+## CLI operations
+
+The CLI can operate on values maintained in the local dictionary.     
+Details on the dictionary are available at [The "get dictionary" command](monitoring%20nodes.md#the-get-dictionary-command).
+
+### The "incr" command
+
+The **incr** command considers a variable as an integer and return the result of adding a specified value to the variable.    
+If value is not specified, it is considered to be 1.  
+In the example below, the value set in the variable **b** is 4:
+```anylog 
+a = 1
+b = incr !a 3
+```
+
+# Using th "+" sign on the CLI
+
+The plus sign adds  
 
 
 
