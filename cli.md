@@ -150,7 +150,8 @@ c = !a + !b
 
 ## The "python" command
 
-The **python** commands supports a subset of python operations. If a key from a dictionary is specified, it is replaced with its assigned value.    
+The **python** command supports a subset of python operations with minor differences to the Python languish.  
+When these commands are executed, if a key from a dictionary is specified, it is replaced with its assigned value.    
 Examples:
 ```anylog 
 ip_port = python !ip + ':4028'
