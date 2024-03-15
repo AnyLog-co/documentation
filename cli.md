@@ -138,9 +138,48 @@ a = 1
 b = incr !a 3
 ```
 
-# Using th "+" sign on the CLI
+### Using th "+" sign on the CLI
 
-The plus sign adds  
+The plus sign concatenates dictionary strings.  
+In the example below, the value set in the variable **c** is 1234:
+```anylog 
+a = 12
+b = 34
+c = !a + !b
+```
+
+## the "python" command
+
+The **python** commands supports a subset of python operations. If a key from a dictionary is specified, it is replaced with its assigned value.    
+Examples:
+```anylog 
+ip_port = python !ip + ':4028'
+python 'D:/Node/AnyLog-Network/data/watch/'.rsplit('/',1)[0] + '.out'
+new_dir = python !watch_dir.rsplit('/',1)[0] + '.out'
+```
+In the examples below, if the following values are set:
+```anylog
+a = 12
+b = 45
+```
+And the following commands are executed,
+```anylog
+new_value1 = python !a.str + !b.str
+new_value2 = python !a.int + !b.int
+new_value3 = python !a.float + !b.float
+```
+The results are as follows:
+```anylog
+AL > !new_value1
+'1245'
+AL > !new_value2
+'57'
+AL > !new_value3
+'57.0
+```
+
+
+
 
 
 
