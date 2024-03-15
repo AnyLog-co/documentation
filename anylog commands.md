@@ -153,6 +153,11 @@ AL Operator_3 >
 ```
 Whereas **AL** stands for AnyLog and **Operator_1** is the assigned name.
 
+Use the following command to reset the node name: 
+```anylog
+set node name ""
+```
+
 #### Set query mode
 
 The query mode sets a cap on query execution at the Operator Node by setting a limit on execution time or data volume transferred or both.
