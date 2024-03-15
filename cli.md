@@ -148,7 +148,7 @@ b = 34
 c = !a + !b
 ```
 
-## the "python" command
+## The "python" command
 
 The **python** commands supports a subset of python operations. If a key from a dictionary is specified, it is replaced with its assigned value.    
 Examples:
