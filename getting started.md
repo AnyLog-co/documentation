@@ -152,7 +152,7 @@ node_name = my_node_name
 ```
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
-A more detailed description of the AnyLog CLI is available ine [The AnyLog CLI](cli.md) section. 
+A more detailed description of the AnyLog CLI is available at [The AnyLog CLI](cli.md) section. 
 
 Users issue commands to retrieve and modify configuration, state of different processes, query and update the blockchain data and
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
