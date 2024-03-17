@@ -92,12 +92,12 @@ The command below accepts partial results:
 ```anylog 
 run client (blockchain get operator bring.ip_port, subset = true) get status
 ```
-The commands below organizes the results is a list and a dictionary: 
+The first command below organizes the results in a list and the second in a dictionary: 
 ```anylog 
 nodes_stat[] = run client (blockchain get operator bring.ip_port, subset = true) get status
 nodes_stat{} = run client (blockchain get operator bring.ip_port, subset = true) get status
 ```
-Note: **blockchain get** can be removed from inside the target parenthesis:
+Note: **blockchain get** can be removed from inside the parenthesis:
 ```anylog 
 run client (operator bring.ip_port, subset = true) get status
 ```
@@ -105,7 +105,7 @@ The commands below retrieves the operators nodes in the US
 ```anylog 
 run client (operator where [country] contains US  bring.ip_port, subset = true) get status
 ```
-The commands below retrieves the operators suporting the DBMS litsanleandro and table ping_sensor
+The commands below retrieves the operators supporting the DBMS litsanleandro and table ping_sensor
 ```anylog 
 run client (dbms=litsanleandro, table=ping_sensor) get status
 ```
