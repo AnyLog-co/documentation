@@ -157,6 +157,7 @@ Examples:
 ip_port = python !ip + ':4028'
 python 'D:/Node/AnyLog-Network/data/watch/'.rsplit('/',1)[0] + '.out'
 new_dir = python !watch_dir.rsplit('/',1)[0] + '.out'
+date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
 ```
 In the examples below, if the following values are set:
 ```anylog

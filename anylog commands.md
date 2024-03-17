@@ -414,8 +414,9 @@ rest [operation] where url=[url] and [option] = [value] and [option] = [value] .
 ```
 
 Explanation:  
-When an AnyLog node is running, it offers a REST API. The REST allows to accept REST calls from users and applications (like Grafana) to the Network members.    
-Activating the REST API on a particular node is explained in [REST requests](background%20processes.md#rest-requests).  
+When an AnyLog node is running, it offers a REST API. The REST accepts REST calls from users and applications (like Grafana) to the Network members.    
+Activating the REST API on a particular node is explained in [REST requests](background%20processes.md#rest-requests).
+
 Using the REST command users can issue REST calls between members of the network and between non-members to members of the network.         
 The rest call provides the target URL (of the REST server) and additional values.  
 The URL must be provided, the other key value pairs are optional headers and data values.
@@ -425,11 +426,24 @@ GET - to retrieve data and metadata from the AnyLog Network.
 PUT - to add data to the AnyLog Network. 
 
 Examples:
-```anylog
-'rest get where url = http://10.0.0.159:2049 and type = info and details = "get status"\n'
-'rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"',
-```
 
+1. The following example is using REST **GET** to retrieve the status of an AnyLog node using the REST service:
+    ```anylog
+    rest get where url = http://73.202.142.172:7849 and User-Agent = AnyLog/1.23 and command = "get status"
+    ```
+2. The following example is using REST **POST** to send a message to a  Slack Channel:
+    ```anylog
+    url = "https://hooks.slack.com/services/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"
+
+    date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
+    text_msg = "test at: " + !date_time 
+    message = json {"text": !text_msg}
+    rest post where url = !url and body = !message and headers = "{'Content-Type': 'application/json'}" 
+    ```
+3. The following example is using REST **PUT** to add data to an ANyLog node:
+    ```anylog
+    rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"
+    ```
 
 ### Using REST command to retrieve data from a data source
 
