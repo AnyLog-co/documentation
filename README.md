@@ -21,6 +21,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Content 
 * **Deploy AnyLog**
   * [Getting Started](getting%20started.md)
+  * [The AnyLog CLI](cli.md)  
   * [Basic AnyLog Deployment](training/)
   * [Docker Image](docker%20image.md)
   * [Background Processes](background%20processes.md)
