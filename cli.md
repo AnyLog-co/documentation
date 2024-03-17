@@ -78,6 +78,26 @@ A command issued on multiple nodes:
 ```anylog 
 run client (10.0.0.78:7848, 10.0.0.25:2548) get processes
 ```
+A command issued on nodes identified by a query to the metadata:
+```anylog 
+run client (blockchain get operator bring.ip_port) get status
+```
+The command above terminates if a node does not respond.   
+The command below accepts partial results: 
+```anylog 
+run client (blockchain get operator bring.ip_port, subset = true) get status
+```
+The commands below organizes the results is a list and a dictionary: 
+```anylog 
+nodes_stat[] = run client (blockchain get operator bring.ip_port, subset = true) get status
+nodes_stat{} = run client (blockchain get operator bring.ip_port, subset = true) get status
+```
+Note: **blockchain get** can be removed from inside the target parenthesis:
+```anylog 
+run client (operator bring.ip_port, subset = true) get status
+```
+
+
 Additional information is in the following sections:
 * [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface)
 * [Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network)
