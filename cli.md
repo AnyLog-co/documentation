@@ -65,6 +65,11 @@ By default, an AnyLog command is executed on the local node. Adding the keywords
 on a target node or nodes.  
 Note: **run client** means that the command is issued by a node that serves as a client to the network.  
 The command output from the target nodes is returned and displayed on the node from which the command was issued.  
+Target nodes can be specified in different ways:
+* By their IP and Port.
+* By a lookup from the metadata.
+* By referencing the database and table supported by the nodes.
+
 Examples:  
 A command issued on the local node: 
 ```anylog 
@@ -96,7 +101,14 @@ Note: **blockchain get** can be removed from inside the target parenthesis:
 ```anylog 
 run client (operator bring.ip_port, subset = true) get status
 ```
-
+The commands below retrieves the operators nodes in the US 
+```anylog 
+run client (operator where [country] contains US  bring.ip_port, subset = true) get status
+```
+The commands below retrieves the operators suporting the DBMS litsanleandro and table ping_sensor
+```anylog 
+run client (dbms=litsanleandro, table=ping_sensor) get status
+```
 
 Additional information is in the following sections:
 * [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface)
