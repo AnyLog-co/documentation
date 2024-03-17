@@ -440,9 +440,13 @@ Examples:
     message = json {"text": !text_msg}
     rest post where url = !url and body = !message and headers = "{'Content-Type': 'application/json'}" 
     ```
-3. The following example is using REST **PUT** to add data to an ANyLog node:
+3. The following example is using REST **PUT** to add data to an AnyLog node:
     ```anylog
-    rest put where url = http://10.0.0.25:2049 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"
+    rest put where url = http://10.0.0.78:7849 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"
+    ```
+4. The following example is using REST **VIEW** to retrieve info from the AnyLog node:
+    ```anylog
+    rest view where url = http://10.0.0.78:7849 
     ```
 
 ### Using REST command to retrieve data from a data source
