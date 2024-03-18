@@ -8,9 +8,7 @@ the system; this can be things like CPU utilization, data not coming in or simpl
 
 _Webhooks_ are user-defined _HTTP_ callbacks that enable real-time communication between web applications; they are the
 simplest and fastest way to send messages into third-party applications as it simply uses a _REST_ (post) request as 
-opposed to needing to develop a full application for messaging. 
-
-This example creates a _Webhoook_ for _Slack_ messaging platform, but the same logic can be done for other messaging boards.
+opposed to needing to develop a full application for messaging.
 
 * [Slack](https://api.slack.com/messaging/webhooks)
 * [Discord](https://docs.gitlab.com/ee/user/project/integrations/discord_notifications.html#create-webhook)
@@ -95,6 +93,4 @@ Once sent, an output would appear in the proper Slack channel
 
 **Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
 
-
-### SMS  
 
