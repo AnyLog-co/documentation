@@ -431,7 +431,13 @@ Examples:
     ```anylog
     rest get where url = http://73.202.142.172:7849 and User-Agent = AnyLog/1.23 and command = "get status"
     ```
-2. The following example is using REST **POST** to send a message to a  Slack Channel:
+
+2. The following example is using REST **GET** to retrieve the value assigned to a key using the REST service:
+    ```anylog
+    rest get where url = http://73.202.142.172:7849 and User-Agent = AnyLog/1.23 and command = "get !my_key"
+    ```
+      
+3. The following example is using REST **POST** to send a message to a  Slack Channel:
     ```anylog
     url = "https://hooks.slack.com/services/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"
 
@@ -440,11 +446,11 @@ Examples:
     message = json {"text": !text_msg}
     rest post where url = !url and body = !message and headers = "{'Content-Type': 'application/json'}" 
     ```
-3. The following example is using REST **PUT** to add data to an AnyLog node:
+4. The following example is using REST **PUT** to add data to an AnyLog node:
     ```anylog
     rest put where url = http://10.0.0.78:7849 and dbms = alioi and table = temperature and mode = file and body = "{"value": 50, "timestamp": "2019-10-14T17:22:13.0510101Z"}"
     ```
-4. The following example is using REST **VIEW** to retrieve info from the AnyLog node:
+5. The following example is using REST **VIEW** to retrieve info from the AnyLog node:
     ```anylog
     rest view where url = http://10.0.0.78:7849 
     ```
