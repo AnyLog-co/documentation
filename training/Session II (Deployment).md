@@ -102,7 +102,7 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 Prior to this session, users are required to prepare:
 * 4 machines (virtual or physical) to host the AnyLog nodes, as follows:
     - A Linux environment.
-    - A minimum of 256MB of RAM.
+    - A minimum of 512MB of RAM.
     - A minimum of 10GB of disk space.
 * 1 Machine (physical or virtual) for applications that interact with the network (i.e. Grafana), as follows:
     - Linux or Windows environment.
@@ -111,12 +111,27 @@ Prior to this session, users are required to prepare:
 * Each node accessible by IP and Port (remove firewalls restrictions).
 * [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed (navigate to [Get Docker](https://docs.docker.com/get-docker/) site to access
    the Docker download that’s suitable for your platform).
+```shell
+# install docker & docker-compose via snap
+sudo apt-get -y update
+sudo apt-get -y upgrade 
+sudo snap install docker
+
+# remove sudo requirement when running docker / docker-compose 
+USER=`whoami`
+sudo groupadd docker
+sudo usermod -aG docker ${USER}
+newgrp docker
+
+# restart docker service
+sudo snap restart docker
+```
 * To enable the questionnaire (optional), install the following packages (these packages are redundant for deployments with pre-packaged configurations,
 or if the questionnaire is not used to create the **anylog_configs.env** file):  
     - [Python](https://www.python.org/downloads/)
     - [Dotenv](https://pypi.org/project/python-dotenv/)     
 
-**Note 1**: The prerequisites for a customer deployment are available [here](../deployments/prerequisite.md).
+**Note 1**: The prerequisites for a customer deployment are available [here](prerequisite.md).
 
 **Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20&%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.
@@ -177,7 +192,8 @@ Other than the exceptions listed below, the AnyLog nodes will be using the defau
  (note that in a customer deployment, these configurations can be pre-packaged or updated using a questionnaire during the install).
  
 ## Get the Docker credentials and the AnyLog license key   
-If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co) 
+If you do not have Docker credentials, or an AnyLog license key please contact us at [info@anylog.co](mailto:info@anylog.co), 
+or get a license key dynamically from [AnyLog Download Page](https://anylog.co/download-anylog/). 
  
 ## Deploy an AnyLog Instance on each node
 
@@ -530,15 +546,15 @@ dest = blockchain get operator bring.ip_port
 ```shell
 run client (!dest) get streaming
 run client (!dest) get operator
-run client (!dest) get inserts
+run client (!dest) get operator inserts
 ```
 
 ### Examples of commands issued to an Operator Node using cURL  
-Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get inserts```).    
+Note 1: These commands return statistics on data delivered to the node (```get streaming```) and data ingested to the local databases (```get operator inserts```).    
 Note 2: A 3rd party app (like cURL) is communicating with the IP and Port of the REST service enabled on the Node.  
 ```shell
 curl -X GET 198.74.51.131:32149 -H "command: get streaming" -H "User-Agent: AnyLog/1.23" -w "\n"
-curl -X GET 198.74.51.131:32149 -H "command: get inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
+curl -X GET 198.74.51.131:32149 -H "command: get operator inserts" -H "User-Agent: AnyLog/1.23" -w "\n"
 ```
 
 ### Examples of commands issued to a Node to retrieve Metadata

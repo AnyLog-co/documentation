@@ -152,7 +152,9 @@ node_name = my_node_name
 ```
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
-The supported commands allow to retrieve and modify configuration, state of different processes, query and update the blockchain data and
+A more detailed description of the AnyLog CLI is available at [The AnyLog CLI](cli.md) section. 
+
+Users issue commands to retrieve and modify configuration, state of different processes, query and update the blockchain data and
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
 
 Exiting and terminating an AnyLog node is by issuing the command `exit node` on the CLI.
@@ -349,7 +351,7 @@ If authentication is disabled, a node will execute all the commands in the incom
 If authentication in enabled, the node will validate that the sender is authorized for the messaged command.
 If validation fails, the node will discard the incoming message.  
 
-The format to send a command is the following:
+The format to send a command from the node's CLI is the following:
 ```anylog
 run client (destination) command
 ```

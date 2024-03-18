@@ -4,7 +4,8 @@
 | --------------------- | ------------| 
 | Operating System      | Linux (Ubuntu, RedHat, Alpine, Suse) | 
 |                       | Windows |
-| Memory footprint      | 100 MB available for the AnyLog process |
+| Memory footprint      | 100 MB available for the AnyLog deployed without Docker |
+|                       | 300 MB available for AnyLog deployed with Docker |
 | Databases             | PostgreSQL installed (optional) |
 |                       | SQLite (default, no need to install) |
 |                       | MongoDB installed (Only if blob storage is needed) |
@@ -13,8 +14,9 @@
 | Storage               | AnyLog supports horizontal scaling - nodes (and storage) are added dynamically as needed, therefore less complexity in scaling considerations. Requirements are based on expected volume and duration of data on each node. AnyLog supports automated archival and transfer to larger nodes (if needed). |
 | Network               | Required: a TCP based network (local TCP based networks, over the internet and combinations are supported) |
 |                       | An overlay network is recommended. Most overlay networks can be used transparently. Nebula used as a default overlay network. |
+|                       | Static IP and 3 ports open and accessible on each node (either via an Overlay Network, or without an Overlay). |
 | Cloud Integration     | Build in integration using REST, Pub-Sub, and Kafka. |
-| Deployment options    | Docker and Kubernetes. |
+| Deployment options    | Executable (can be deployed as a background process), or Docker or Kubernetes. |
 
 
 **Comments**:

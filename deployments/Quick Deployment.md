@@ -9,7 +9,7 @@ deploy more generic nodes, using very limited environment configurations.
 **Other Deployments**: 
 * [Training](../training) - Standard training used for explaining how to use AnyLog
 * [Configuration Based](../deployments/deploying_node.md) - Deploy AnyLog using configuration file with environment variables
-* [Empty Node](../examples/Network%20setup%20-%20Part%20I.md) - Manually deploy an AnyLog node 
+* [Empty Node](deploying_node.md) - Manually deploy an AnyLog node 
 
 ## Deployment 
 The following provides directions to deploy a network without too much configuration on a single node. If nodes are not

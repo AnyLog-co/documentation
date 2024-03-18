@@ -50,11 +50,11 @@ whereas rather than specifying an IP and Port of the 3rd party broker, the broke
   
 **Example**:
 ```anylog
-run mqtt client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogEdgeX and dbms=EdgeX and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
+run msg client where broker=local and user=ibglowct and password=MSY4e009J7ts and log=false and topic=(name=anylogEdgeX and dbms=EdgeX and table='bring [device]' and column.timestamp.timestamp=now and column.value.int='bring [readings][][value]' and column.name.str='bring [readings][][name]')
 ```
 
 **Note**: the key value pair `broker=local` replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the `run mqtt client` command and the data mapping instructions are available at the [Subscribing to a Broker](message%20broker.md#subscribing-to-the-topic-) section.  
+Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](message%20broker.md#subscribing-to-the-topic-) section.  
 
 ## Downloading and Configuring EdgeX 
 Our [deployments directions](deployments/Support/EdgeX.md) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
@@ -83,7 +83,7 @@ The following example uses third-party broker to accept random data generator da
 ```shell
 docker attach --detach-keys="ctrl-d" anylog-node
 ```
-2. Execute `run mqtt client`
+2. Execute `run msg client`
 ```anylog
 broker=driver.cloudmqtt.com
 port=18785
@@ -93,7 +93,7 @@ topic_name=anylogEdgeX
 dbms_name=test 
 table_name=rand_data 
 
-<run mqtt client where broker=!broker and port=!port and user=!user and passsword=!password and log=false and topic=(
+<run msg client where broker=!broker and port=!port and user=!user and passsword=!password and log=false and topic=(
     name=!topic_name and 
     dbms=!dbms_name and 
     table=!table_name and 

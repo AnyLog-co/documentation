@@ -1,4 +1,18 @@
 
+**Version**: 1.3.240112 | 
+
+## New Features
+1. Adding support to gRPC [Using gRPC](../using%20grpc.md)
+2. Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
+3. **delete archive** command. Details: [Operator data archival](../background%20processes.md#operator-data-archival). 
+4. Adding support to syslog [Using SysLog](../using%20syslog.md)
+
+**Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
+
+## New Features
+1. Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
+2. Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../high%20availability.md#view-the-distribution-of-data-to-clusters)
+
 **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
 ## New Features:

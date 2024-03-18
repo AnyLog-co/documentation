@@ -12,7 +12,7 @@ The background processes are issued using an initialization script or on the Any
 | [run publisher](background%20processes.md#publisher-process) | A configurable publisher process that sends data to operators for processing |
 | [run blockchain sync](background%20processes.md#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
 | [run scheduler](background%20processes.md#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |
-| [run mqtt client](mqtt.md#using-mqtt-broker) | Initiate a process that pulls data from MQTT brokers |
+| [run msg client](message%20broker.md#using-a-message-broker) | Initiate a process that pulls data from MQTT brokers |
 | [run smtp client](background%20processes.md#smtp-client) | Initiate an SMTP client allowing emails amd sms messages using the Simple Mail Transfer Protocol (SMTP) |
 | [run streamer](background%20processes.md#streamer-process) | Initiate a process to flush streaming data to disk |
 | [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
@@ -239,20 +239,18 @@ Options:
 | Option        | Explanation   | Default Value |
 | ------------- | ------------- | ------------- |
 | policy  | The ID of the Operator policy.  |  |
-| watch_dir  | The directory monitored by the Operator. Files placed on the Watch directory are processed by the Operator.  | !watch_dir  |
-| bkup_dir   | The directory location to store JSON and SQL files that were processed successfully.  | !bkup_dir. |
-| error_dir   | The directory location to store files containing data that failed processing.  | !error_dir. |
-| delete_json   | True/False for deletion of the JSON file if processing is successful.  | false |
-| compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | false |
+| company  | A company name to be associated with the data.  |  |
+| compress_json   | True/False to enable/disable compression of the JSON file if processing is successful.  | true |
 | compress_sql   | True/False to enable/disable compression of the SQL file.  | True |
-| move_json   | True moves the JSON file to the 'bkup' dir if processing is successful.  | false |
-| move_sql   | True moves the SQL file to the 'bkup' dir if processing is successful. The SQL file deleted if move_sql is false.| false |
+| archive_json   | True moves the JSON file to the 'bkup' dir if processing is successful. The JSON file deleted if archive_json is false. | true |
+| archive_sql   | True moves the SQL file to the 'archive' dir if processing is successful. The SQL file deleted if archive_sql is false.| false |
 | limit_tables   | a list of comma separated names within brackets listing the table names to process.  |  |
 | craete_table   |  A True value creates a table if the table doesn\'t exists.  | true |
 | master_node   |  The IP and Port of a Master Node (if a master node is used).  |  |
 | update_tsd_info   | True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingested.  |  |
 | distributor   | A True value move the data to the directory assigned to the Distributor process.  | distr_dir  |
 | archive   | A True value move the data to the archive directory.  |  |
+
 
 Example:  
 ```anylog
@@ -263,7 +261,80 @@ To check the status of the Operator process, use the following command:
 ```anylog
 get operator
 ```
-Additional info on the ***get operator*** command is available [here](../monitoring%20calls.md#get-operator)
+Additional info on the ***get operator*** command is available [here](monitoring%20calls.md#get-operator)
+
+### Operator data archival
+
+#### Archival of the log files:
+
+Data is treated by the Operator as a sequence of log files that are stored in local databases.  
+Every log file has a representation as a JSON file. These files are stored in a special archival and are used in the following processes:
+1) In the process of High Availability, when data is replicated between nodes.
+2) In recovery processes.  
+To enable the archival,  set the AnyLog **archive_json** option in the **run operator** command to **true**.
+
+The root of the archive folder is assigned to the key **archive_dir** in the dictionary.  
+Use the following command to view the path to the archive root:
+```anylog
+get !archive_dir
+```
+
+The structure of the archival folder is based on partitioning by days (using UTC timezone) and as follows:
+* The root is partitioned by years. Every year contains the year's data.
+* Every year folder is partitioned to months. Every month contains the month's data.
+* A month folder is partitioned to days. Every day contains the files processed by the operator in the given day.
+
+#### Archival of SQL files:
+Depending on the configuration, local databases are updated as follows:
+1. When an event reaches the AnyLog Node
+2. As a collection of multiple (buffered) events.
+
+This behavior is configured by the **set buffer threshold** command - see details in the 
+[Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode) section.  
+* **set buffer threshold where write_immediate = false** - Buffers the streaming data.
+* **set buffer threshold where write_immediate = true** - No buffering, streaming data updates the databases when the data appears on the node.
+
+If data is buffered (the value for **write_immediate** is **false**), AnyLog generates a file with the insert statement for each event in the buffer.    
+Users can archive these files by setting the **archive_sql** flag in the **run operator** command to **true**.    
+Note that these files are not used by the system, and are not generated in all use cases. Unless there is a special reason to collect
+the SQL files, it is recommended to set **archive_sql** to **false**.  
+Note: If **archive_sql** is set to **true**, the data is collected in the folder associated with the **bkup_dir** key.  
+Use the following command to view the path to the folder:
+```anylog
+get !bkup_dir
+```
+
+#### View the JSON archived file
+The following command returns the list of log files archieved on a particular day:
+
+Usage:
+```anylog
+get archived files [YYYY-MM-DD]
+```
+Example:
+```anylog
+get archived files 2024-01-07
+```
+#### Delete archived JSON files
+
+Users can configure a node to delete old archived files. This process can be done as a task on the node scheduler -
+see details in the [alerts and monitoring](alerts%20and%20monitoring.md) section.    
+
+The command specifies a number of days prior to the command issued day, from which, 
+all files in folders from prior days are deleted.   
+For example, if days is set as 10, all the data which was processed before 10 days ago, is deleted. 
+
+Note: **Always have a proper backup prior to deleting archived data.**
+
+Usage:
+```anylog
+delete archive where days = [number of days]
+```
+Example:
+```anylog
+delete archive where days = 60
+```
+
 
 ## Publisher Process
 

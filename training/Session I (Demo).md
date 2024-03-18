@@ -1,6 +1,7 @@
 # Session I - The Basic Guided Tour
 
-Prerequisite: See details [here](..//deployments/Prerequisite.md).
+Prerequisite: See details [here](prerequisite.md).  
+Suggested Reading: [Getting Started](../getting%20started.md).
 
 # Basic AnyLog commands
 
@@ -90,6 +91,13 @@ set echo queue on
 echo this is a test message
 get echo queue
 ```  
+
+## Test node configuration
+A node can validate proper configurations using the **test node** command. 
+```anylog
+test node
+```
+Details are available [here](../test%20commands.md#test-node).
   
 ## Connecting to a DBMS
 Supported databases: PostgreSQL for larger nodes and SQLite for smaller nodes or data in RAM.
@@ -102,23 +110,22 @@ Connect to a dbms:
 ```anylog 
 connect dbms system_query where type = sqlite and memory = true # Used for local processing
 get databases
-```   
-
-## The remote CLI (Demonstrating 3rd party application interacting with the network):
-Connection via the REST protocol.  
-Most commands can be issued on the Remote CLI.    
-Examples:
-```anylog 
-get status
-get dictionary
-get databases
-```   
+```
 
 ## The Metadata
 Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
 and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands).
 
-Example blockchain commands:
+### Get metadata from a peer node
+Copy the metadata from a peer node in the network. See details [here](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node).
+```anylog
+blockchain seed from [ip:port]
+```
+Note: the proper way to provide the metadata to a node is to enable the **blockchain synchronizer** service on the node.  
+This process will update the node continuously with updates to the metadata. Details are available [here](../background%20processes.md#blockchain-synchronizer).
+
+
+### Examples of metadata commands:
 ```anylog 
 blockchain get *
 blockchain get operator
@@ -131,22 +138,24 @@ blockchain get operator where [city] = toronto  bring [operator][ip] : [operator
 blockchain get operator where [city] = toronto  bring.ip_port
 ```   
 
+### Test node connectivity with peers
+A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#the-test-network-commands).
+```anylog
+test network
+```
+
 ## Execute commands on a peer node
 Use the TCP connection to communicate with peers.  
 - With a single peer:   run client ip:port
 - With multiple peers:  run client (ip:port, ip:port, ip:port ...)  
+
  Examples: 
  ```anylog 
 run client 23.239.12.151:32348 get status
 run client 23.239.12.151:32348 get disk usage .
 run client 23.239.12.151:32348 get cpu usage
 ```   
-
-Copy the metadata from a peer node - the correct way to do it is to sync with the metadata
-```anylog 
-run client 23.239.12.151:32348 file get !!blockchain_file !blockchain_file
-```
-  
+ 
 ## Monitoring commands:
 Additional info is in the following sections:  
 - [Monitoring nodes](../monitoring%20nodes.md#monitoring-nodes)
@@ -203,3 +212,12 @@ run client () sql edgex format=table "select increments(minute, 1, timestamp), m
 run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"
 ```
 
+## The remote CLI (Demonstrating 3rd party application interacting with the network):
+Connection via the REST protocol.  
+Queries and commands can be issued on the Remote CLI.    
+Examples:
+```anylog 
+get status
+get dictionary
+get databases
+```   

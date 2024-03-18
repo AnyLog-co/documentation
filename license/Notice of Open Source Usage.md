@@ -7,6 +7,8 @@ use portions of a given package.
 The following is a listing of the open source components. This list is provided for your convenience; 
 please read further if you wish to review the copyright notice(s) and the full text of the license associated with each component.
 
+In the event that we accidentally failed to list a required notice, please bring it to our attention through info@anylog.co.
+
 __________________________________________________
 Name: pip  
 Summary: The PyPA recommended tool for installing Python packages.  
@@ -70,6 +72,17 @@ Home-page: https://dateutil.readthedocs.io
 Author: Gustavo Niemeyer  
 Author-email: gustavo@niemeyer.net  
 License: Dual License - https://github.com/dateutil/dateutil/blob/master/LICENSE  
-
-
-
+__________________________________________________
+Name: grpc  
+Version: 1.60.0
+Summary: High performance Remote Procedure Call (RPC) framework 
+Home-page: https://grpc.io/  
+Author: https://github.com/grpc/grpc.io/blob/main/MAINTAINERS.md  
+License: Apache License - https://github.com/grpc/grpc.io/blob/main/LICENSE
+_________________________________________
+Name: pymongo  
+Version: 4.6.0
+Summary: Interfaces for MongoDB
+Home-page: https://pymongo.readthedocs.io/en/stable/
+Contributors: https://pymongo.readthedocs.io/en/stable/contributors.html
+License: Apache License Version 2 - https://github.com/mongodb/mongo-python-driver/blob/master/LICENSE
