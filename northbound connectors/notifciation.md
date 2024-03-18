@@ -55,7 +55,46 @@ This example creates a _Webhoook_ for _Slack_ messaging platform, but the same l
 <img src="../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
 
 
+**Generated URL**: 
 ```URL
 https://hooks.slack.com/services/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
 ```
+
+## Send Notifications via AnyLog
+
+### Slack Webhooks
+AnyLog allows to send cURL requests the [_rest_ command](../anylog%20commands.md#rest-command). Since _Webhooks_ are 
+essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from AnyLog into
+Slack.
+
+1. Create webhook URL as a variable 
+```anylog
+webhook_url = "https://hooks.slack.com/services/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"
+```
+
+2. get percentage of CPU used and current timestamp  
+```anylog
+cpu_percent = get node info cpu_percent
+date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
+```
+
+3. Create payload
+```anylog
+text_msg = !date_time + "  CPU usage: " + !cpu_percent 
+payload = json {"text": !text_msg}
+```
+
+4. Publish information to Slack via _REST_
+```anylog
+rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}" 
+```
+
+Once sent, an output would appear in the proper Slack channel
+
+<img src="../imgs/notification_slack_messsage.png"  height="50%" width="50%" />
+
+**Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
+
+
+### SMS  
 
