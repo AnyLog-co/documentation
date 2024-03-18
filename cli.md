@@ -65,6 +65,11 @@ By default, an AnyLog command is executed on the local node. Adding the keywords
 on a target node or nodes.  
 Note: **run client** means that the command is issued by a node that serves as a client to the network.  
 The command output from the target nodes is returned and displayed on the node from which the command was issued.  
+Target nodes can be specified in different ways:
+* By their IP and Port.
+* By a lookup from the metadata.
+* By referencing the database and table supported by the nodes.
+
 Examples:  
 A command issued on the local node: 
 ```anylog 
@@ -78,6 +83,33 @@ A command issued on multiple nodes:
 ```anylog 
 run client (10.0.0.78:7848, 10.0.0.25:2548) get processes
 ```
+A command issued on nodes identified by a query to the metadata:
+```anylog 
+run client (blockchain get operator bring.ip_port) get status
+```
+The command above terminates if a node does not respond.   
+The command below accepts partial results: 
+```anylog 
+run client (blockchain get operator bring.ip_port, subset = true) get status
+```
+The first command below organizes the results in a list and the second in a dictionary: 
+```anylog 
+nodes_stat[] = run client (blockchain get operator bring.ip_port, subset = true) get status
+nodes_stat{} = run client (blockchain get operator bring.ip_port, subset = true) get status
+```
+Note: **blockchain get** can be removed from inside the parenthesis:
+```anylog 
+run client (operator bring.ip_port, subset = true) get status
+```
+The commands below retrieves the operators nodes in the US 
+```anylog 
+run client (operator where [country] contains US  bring.ip_port, subset = true) get status
+```
+The commands below retrieves the operators supporting the DBMS litsanleandro and table ping_sensor
+```anylog 
+run client (dbms=litsanleandro, table=ping_sensor) get status
+```
+
 Additional information is in the following sections:
 * [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface)
 * [Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network)
