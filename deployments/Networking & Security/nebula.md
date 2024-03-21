@@ -33,7 +33,7 @@ For simplicity, the following will demonstrate deploying a _Nebula_ overlay netw
 
 The following steps are all done on the same machine, unless stated otherwise
 
-## Prepare Keys per Nebula Node
+## Prepare Keys for Nebula Node
 0. Make a directory called `nebula` - which will be used for all necessary files, unless stated otherwise 
 ```shell
 cd $HOME
