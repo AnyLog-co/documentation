@@ -307,7 +307,9 @@ The following are commands that interact with a database that hosts the ledger:
 | blockchain drop table|  Drop the local table (***ledger***) on the local database that maintains metadata information. |  
 | blockchain drop policy [JSON data]| Remove the policy specified by the JSON data from the local database that maintains metadata information. |
 | blockchain drop by host [ip]| Remove all policies that were added from the provided IP. |        
-| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |     
+| blockchain replace policy [policy id] with [new policy]| Replace an existing policy in the local blockchain database. |
+| blockchain state where platform = [platform name]| Returns a number that represents the state of the active contract . |
+
 
 ### Retrieve blockchain data from the local database
 
