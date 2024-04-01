@@ -214,7 +214,7 @@ create policy [policy type] [with defaults] where [key value pairs]
 Example:
 
 ```anylog
-create policy operator with defaults where company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
+create policy operator with defaults where name = operator_name and company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
 ```
 The command above returns the following policy:
 ```anylog
