@@ -1,6 +1,7 @@
 ## **Version**: 1.4 | 
-### New Features
+### Changes
 1. Create EdgeLake branch.
+2. Update **blockchain set account info** call to include the Chain ID. 
 
 ### New Features:
 1. New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).
