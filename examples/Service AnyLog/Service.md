@@ -6,7 +6,7 @@ explains how to deploy AnyLog executable.
 ## Prepare Machine for AnyLog as Servie 
 1. Repeat steps 1-6 in [Executable.md](Executable.md)
  
-2. One of the parameters in the configuration file is `DISABLE_CLI`, which disables the AnyLog CLI from running.
+2. One of the parameters in the (advance) configuration file is `DISABLE_CLI`, which disables the AnyLog CLI from running.
 The parameter is located in the advanced configs of the corresponding node type - example 
 [docker-compose/docker-makefile/master-configs/advance_configs.env](https://github.com/AnyLog-co/docker-compose/blob/main/docker-makefile/master-configs/advance_configs.env).
 
@@ -21,6 +21,8 @@ nohup ~/AnyLog-code/anylog_v1.3.2404_x86_64 process deployment-scripts/node-depl
 ``` 
 
 ## AnyLog as aa Service
+0. Make sure AnyLog is not running in the background 
+
 1. Create service file `/etc/systemd/system/anylog-master.service`
 ```service
 [Unit]

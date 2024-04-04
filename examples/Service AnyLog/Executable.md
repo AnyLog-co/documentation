@@ -21,8 +21,7 @@ python3 -m pip install --upgrade -r ~/AnyLog-code/requirements.txt
 
 3. Download AnyLog - make sure version matches with in terms of Operating System and CPU architecture  
 ```shell
-wget http://173.255.254.34:31900/ubuntu/anylog_v1.3.2404_x86_64 -o ~/AnyLog-code/anylog_v1.3.2404_x86_64
-chmod -x ~/AnyLog-code/anylog_v1.3.2404_x86_64
+curl http://173.255.254.34:31900/ubuntu/anylog_v1.3.2404_x86_64 -o ~/AnyLog-code/anylog_v1.3.2404_x86_64 
 ```
 
 4. Download configurations file
@@ -42,17 +41,19 @@ git clone https:///github.com/AnyLog-co/docker-compose
      the path to `~/AnyLog-code` 
      * `DISABLE_CLI` to _true_ if planned to [run in background](Service.md)
 ```shell
-source ~/AnyLog-code/docker-compose/docker-makefile/master-configs/*.env
+while IFS= read -r line ; do if [[ $line != \#* ]] && [[ $line != "" ]] && [[ "$line" != '=""' ]] ; then export "${line}" ; fi ; done < ~/AnyLog-code/docker-compose/docker-makefile/master-configs/base_configs.env
+while IFS= read -r line ; do if [[ $line != \#* ]] && [[ $line != "" ]] && [[ "$line" != '=""' ]] ; then export "${line}" ; fi ; done < ~/AnyLog-code/docker-compose/docker-makefile/master-configs/advance_configs.env
 ```
 
 6.Download Deployment scripts
 ```shell
-cd ~/AnyLog
+cd ~/AnyLog-code
 git clone https://github.com/AnyLog-co/deployment-scripts
 ```
 
 7. Start AnyLog
 ```shell
-cd ~/AnyLog 
-~/AnyLog-code/anylog_v1.3.2404_x86_64 process deployment-scripts/node-deployment/main.al 
+cd ~/AnyLog-code
+chmod -x anylog_v1.3.2404_x86_64
+./anylog_v1.3.2404_x86_64 process deployment-scripts/node-deployment/main.al 
 ```
