@@ -24,7 +24,7 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 
 * Hardware requirements - Raspberry Pi 3A+, 3B, 3B+, or 4 (preferred), but also supports  A+, B+, 2B, Zero-W, or Zero-WH
 * MicroSD flash card (32 GB preferred)
-* An Internet connection for your device (wired or WiFi). Note: Some devices can require extra hardware for supporting wifi.
+* An Internet connection for your device (wired or WiFi). Note: Some devices can require extra hardware for supporting Wifi.
 
 ## Associating Machine to Open Horizon
 The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
@@ -142,7 +142,7 @@ This process is detailed below.
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
-2. Update variables in the `service.definition.json` configuration file at ([Operator Node](deployments/operator/service.definition.json) with the following:
+2. Update variables in the `service.definition.json` configuration file at ([Operator Node](deployments/operator/service.definition.json)) with the following:
 
 | Variable       | Update with                             | Default Value | Comments     |
 | -------------- | --------------------------------------- |  ------------ | ------------ |

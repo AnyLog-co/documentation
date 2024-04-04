@@ -387,7 +387,7 @@ get publisher
 
 ## Blockchain Synchronizer
 
-A process that periodically connects to the bloackchain platform (or a master node) to update the local copy of the metadata.  
+A process that periodically connects to the blockchain platform (or a master node) to update the local copy of the metadata.  
 This process maintains an updated version of the blockchain data on the local node such that when the node queries the metadata, it is able to satisfy the query locally.    
 The source of the metadata depends on the node configuration and can be a blockchain or a master node.  
 
@@ -405,6 +405,7 @@ Options:
 | connection  | The connection information that is needed to retrieve the data. For a Master node, the IP and Port of the master node.  |
 |             | If connection info is not provided - the connection info is retrieved from the policy of the Master node.  |
 | time  | The frequency of the synchronization.  |
+| platform  | The blockchain platform to use (like ethereum).  |
 
 
 ### Example - synchronizing with a blockchain

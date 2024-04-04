@@ -214,7 +214,7 @@ create policy [policy type] [with defaults] where [key value pairs]
 Example:
 
 ```anylog
-create policy operator with defaults where company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
+create policy operator with defaults where name = operator_name and company = my_company and city = "San Francisco" and country = "USA" and cluster = !cluster_id
 ```
 The command above returns the following policy:
 ```anylog
@@ -365,3 +365,20 @@ policy_id = blockchain get operator where name=my_operator and company=AnyLog br
 
 blockchain insert where policy = !anmp and local = true and master = !master_node
 ```
+
+## Compare Policies
+
+Policies can be compared to determine the different attribute and values.  
+The following command returns a report indicating the differences between the two policies, or between lists of policies.  
+Usage:
+```anylog 
+get policies diff [object 1] [object 2]
+``` 
+Object 1 and Object 2 are policies or lists of policies to compare. 
+When lists are compared, the number of policies in the lists needs to be equal with one exception: 
+If a policy is compared to a list with a single policy, the policy is assumed to be in a list, and the comparison is allowed.  
+Example:
+```anylog 
+get policies diff !policy1 !policy2
+```
+

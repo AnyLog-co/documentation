@@ -1,21 +1,28 @@
+## **Version**: 1.4 | 
+### Changes
+1. Create EdgeLake branch.
+2. Update **blockchain set account info** call to include the Chain ID. 
 
-**Version**: 1.3.240112 | 
+### New Features:
+1. New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).
 
-## New Features
+## **Version**: 1.3.240112 | 
+
+### New Features
 1. Adding support to gRPC [Using gRPC](../using%20grpc.md)
 2. Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
 3. **delete archive** command. Details: [Operator data archival](../background%20processes.md#operator-data-archival). 
 4. Adding support to syslog [Using SysLog](../using%20syslog.md)
 
-**Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
+## **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
-## New Features
+### New Features
 1. Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
 2. Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../high%20availability.md#view-the-distribution-of-data-to-clusters)
 
-**Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
+## **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
-## New Features:
+### New Features:
 1.  pip Install. Details: [pip Install](../training/advanced/Pip%20Install.md)
 2.  Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../training/advanced/background%20deployment.md).
 3.  Map a local CLI to a peer node. Details: [Assigning a CLI to a peer node](../training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
@@ -27,7 +34,7 @@
 8.  REST requests without a command assume get status. Example: `curl 10.0.0.78:7849` returns: **AnyLog@73.202.142.172:7848 running** 
 
 
-## Changes:
+### Changes:
 
 1.  The command: **run blockchain sync where source = master**, if connection info is not provided, connection info is
     retrieved from the policy of the Master Node. Details: [Blockchain Synchronizer](../background%20processes.md#blockchain-synchronizer).
@@ -38,6 +45,6 @@
 
 4. Option for **min** and **max** values in the ```bring command```: Details: [The bring keyword](../json%20data%20transformation.md#the-bring-keyword)
 
-## Bugs fixed:
+### Bugs fixed:
 
 1. The command **get inserts** ignored data inserted in immediate mode.
