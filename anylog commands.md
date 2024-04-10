@@ -269,6 +269,7 @@ Options:
 | [get rest pool](#get-pool-info)                                            | Details the number REST workers thread that execute REST calls. The number of threads is set by the command ***run rest server***. |
 | [get msg pool](#get-pool-info)                                             | Details the number Message Broker workers thread that execute REST calls. The number of threads is set by the command ***run message broker***. |
 | [get operator pool](#get-pool-info)                                        | Details the number of operator threads. The number of threads is set by the command ***run operator***. |
+| [get async pool](#get-pool-info)                                           | Details on the status of the Async message pool. |
 | get threads                                                                | The list of the threads executing users scripts. |
 | get scheduler [n]                                                          | Information on the scheduled tasks. [n] - an optional ID for the scheduler, the default value is 1, 0 is the system scheduler.|
 | get hostname                                                               | The name assigned to the node. | 
@@ -383,6 +384,7 @@ Group names are one of the following:
 | rest | Threads supporting communications with applications |
 | tcp | Threads supporting communications with network peers |
 | msg | Threads supporting the message broker functionalities |
+| async | Pool supporting the Async outgoing messaging |
 
 
 Example 1:
