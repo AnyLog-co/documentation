@@ -384,7 +384,6 @@ Group names are one of the following:
 | tcp | Threads supporting communications with network peers |
 | msg | Threads supporting the message broker functionalities |
 
-
 Example 1:
 ```anylog
 get tcp pool
