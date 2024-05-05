@@ -62,7 +62,8 @@ resolves the location of the relevant data.
 Each query process starts with a node that receives a query from a user or application. This node is called the Query Node.
 The Query Node determines which are the [Operators](#type-of-instances) 
 that host the data that needs to be evaluated to satisfy the query, and delivers the query to these Operators.
-Each of the Operators process the query locally and replies to the Query Node with a result. The Query Node aggregates all the results and returns a unified result to the user or application that issued the query.  
+Each of the Operators process the query locally and replies to the Query Node with a result. 
+The Query Node aggregates all the results and returns a unified result to the user or application that issued the query.  
 
 Related documentation:
 
@@ -149,7 +150,7 @@ Related documentation:
 When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
 The command line prompt appear as `AL >` and it can be changed by issuing the following command on the CLI:
 ```anylog
-node_name = my_node_name
+set node name [node name]
 ```
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
@@ -302,6 +303,15 @@ reset query log
 ## Making a node a member of the network
 
 Connecting a node to the network is explained in [network configuration](network%20configuration.md).
+
+The basic configuration of a node can be done using the command:
+```anylog
+test node
+```
+The following command tests the availability of the network members:
+```anylog
+test network
+```
 
 Users can associate a node to different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks, or they switch between a main-net and a testnet.
