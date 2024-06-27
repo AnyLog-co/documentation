@@ -246,7 +246,7 @@ count(*)
 ***21***
 ```
 
-The example below extracts only the month and year from a datetime string. 
+The example below extracts only the month and year from a datetime string: 
 ```anylog
 AL anylog-node > run client () sql smart_city "SELECT increments(hour, 1, timestamp), max(timestamp)::datetime(%m-%Y) as timestamp , min(a_n_voltage), max(a_n_voltage), avg(a_n_voltage) from bf where timestamp >= now() - 1 day and timestamp <= now()";
 ```
