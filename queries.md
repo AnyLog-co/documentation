@@ -185,6 +185,7 @@ The casting options are detailed in the table below:
 | ljust(x) | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
 | rjust(x) | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
 | format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
+| datetime(format code) | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                    |
 
 **Note**: multiple casting is allowed.  
 
@@ -245,7 +246,11 @@ count(*)
 ***21***
 ```
 
-
+Datetime casting examples:
+The example below extracts only the month and year from a datetime string. 
+```anylog
+AL anylog-node > run client () sql smart_city "SELECT increments(hour, 1, timestamp), max(timestamp)::datetime(%m-%Y) as timestamp , min(a_n_voltage), max(a_n_voltage), avg(a_n_voltage) from bf where timestamp >= now() - 1 day and timestamp <= now()";
+```
 
 ## Get datetime command
 Using the command `get datetime` users can translate a date-time function to the date-time string.  
