@@ -223,7 +223,7 @@ The table below summarizes the command options:
 | Total errors | Number of errors since the service was enabled |
 | Avg. rows/sec | The **Total rows** divided by the **Processing time**  |
 
-**Note:** reset the Summary statistics using the **reset stats** command:
+**Note:** reset the **Operator Summary** statistics using the **reset stats** command:
 
 ```anylog
 reset stats where service = operator and topic = summary
