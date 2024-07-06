@@ -45,11 +45,33 @@ connect dbms [db name] where type = [db type] and user = [db user] and password 
 * [db port] - The database port.
 * [memory] - a bool value to determine memory resident data (if supported by the database).
 * [connection] - Database connection string.
+* [autocommit] - A false value groups multiple statements into a single transaction
+* [unlog] - A true value unlogs tables to not write their changes to the WAL. 
 
 **Note 1**: For SQLite, the logical name of the database can include the path to maintain the data. Otherwise, the database 
 data is maintained, for each table in the database, in the default location defined by `!dbms_dir`.    
 
 **Note 2**: If 'memory' is set to _true_, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgresSQL).
+
+**Note 3** A database assigned with **unlog** will support faster inserts at the cost of data lost in case of a failure.  
+**unlog** is recommended for the **system_query** dbms but not for the users data.
+
+**Configuration support by DBMS**
+
+| Config     | Default  | SQLite  | PostgreSQL  |
+| ---------- | -------- | ------- | ----------  |
+| memory     |  false   |    +    |      -      |
+| autocommit |  true    |    +    |      +      |
+| unlog      |  false   |    -    |      +      |
+
+**Recommended Configuration**
+
+| Config     | system_query  | User DBMS  |
+| ---------- | ------------- | ------- |
+| memory     |  true         |  false  |
+| autocommit |  false        |  false   |
+| unlog      |  true         |  false   |
+
 
 **Examples**:
 ```anylog 
@@ -132,18 +154,27 @@ get databases
 The command provides the list of logical databases and the physical database supporting each logical database.  
 Example output:
 ```anylog
-List of DBMS connections
-Logical DBMS         Database Type IP:Port                        Storage
--------------------- ------------- ------------------------------ -------------------------
-al_smoke_test        psql          127.0.0.1:5432                 Persistent
-almgm                psql          127.0.0.1:5432                 Persistent
-dmci                 psql          127.0.0.1:5432                 Persistent
-system_query         sqlite                                       Memory
+Active DBMS Connections
+Logical DBMS Database Type IP:Port         Configuration             Storage
+------------|-------------|---------------|-------------------------|----------------------------------------------|
+almgm       |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+azure       |psql         |127.0.0.1:5432 |Autocommit Off           |Persistent                                    |
+blobs_azure |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_edgex |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_ntt   |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_test  |mongo        |localhost:27017|                         |Blobs Persistent                              |
+configs     |sqlite       |Local          |Autocommit On            |D:\Node\AnyLog-Network\data\dbms\configs.dbms |
+edgex       |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+flexnode    |sqlite       |Local          |Autocommit On            |D:\Node\AnyLog-Network\data\dbms\flexnode.dbms|
+lsl_demo    |psql         |127.0.0.1:5432 |Autocommit Off, Unflagged|Persistent                                    |
+lsl_demo_ok |psql         |127.0.0.1:5432 |Autocommit Off, Unflagged|Persistent                                    |
+ntt         |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+
 ```
 
 ## The get database size command
 
-The `get database size` command returns the size og the database in bytes.  
+The `get database size` command returns the size of the database in bytes.  
 **Usage**:
 ```anylog 
 get database size [logical dbms name]
