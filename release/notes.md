@@ -2,6 +2,8 @@
 ### Changes
 1. Create EdgeLake branch.
 2. Update **blockchain set account info** call to include the Chain ID. 
+3. Add options to create HTML documents from a query.
+4. Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#connecting-to-a-local-database).
 
 ### New Features:
 1. New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).
