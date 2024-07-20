@@ -262,8 +262,9 @@ AL anylog-node > run client () sql smart_city "SELECT increments(hour, 1, timest
 
 ### Example 5 - Function
 
-The following example replaces, for each returned row, the min_val with the result returned from the following function: ([min_val] + [max_val]) / 2)    
-Note: keys contained in square parenthesis are replaced with the columns values of the row processed. 
+The following example replaces, for each returned row, the min_val with the result returned from the following function:   
+([min_val] + [max_val]) / 2)    
+**Note**: keys contained in square parenthesis are replaced with the columns values of the row processed. 
 ```anylog
 run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function(([min_val] + [max_val]) / 2) as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
 ```
