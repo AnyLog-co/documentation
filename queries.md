@@ -270,10 +270,10 @@ run client () sql power_plant timezone = local SELECT increments(timestamp), max
 
 ### Example 6 - Function with if statement
 
-In the example above, min_val is replaced with the aberage of min_val and max_val.
-
+In the example below, **min_val** is replaced with the string **On** if **min_val** is greater than 10, else, the value returned is the string **Off**. 
+```anylog
 run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function('On' if [min_val] > 10 else 'Off') as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
-
+```
 
 ## Get datetime command
 Using the command `get datetime` users can translate a date-time function to the date-time string.  
