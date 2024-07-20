@@ -177,31 +177,21 @@ run client () sql lsl_demo "select reading_time, speed::float(2) from performanc
 
 The casting options are detailed in the table below:
 
-| Cast  | details                                                                                                                                                                        |
-| ---- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| float(x) | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
-| int | Cast to an _int_.                                                                                                                                                              |
-| str | Cast to a _string_.                                                                                                                                                            |
-| ljust(x) | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
-| rjust(x) | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
+| Cast                    | details                                                                                                                                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| float(x)                | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
+| int                     | Cast to an _int_.                                                                                                                                                              |
+| str                     | Cast to a _string_.                                                                                                                                                            |
+| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
+| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
 | format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
-| datetime(format code) | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                    |
+| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                                   |
+| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
+
 
 **Note**: multiple casting is allowed.  
 
-**Examples**:
-```anylog
-run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
-```
-
-The example above represents the speed as an int and formats the speed value with commas. 
-```anylog
-run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
-```
-The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
-This has the same result as formatting with the formatting string: ***:,.03f***.
-
-
+### Formatting options
 The following chart provides formatting types options:
 
 | Type  | details |
@@ -220,6 +210,24 @@ The following examples provide number formatting with padding for int and float:
 | :.3f | float with digits length  |
 | :08.3f | float with padding zeros  |
 | :8d | int with padding zeros  |
+
+
+## **Examples**:
+
+### Example 1 - Number Format
+```anylog
+run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
+```
+The example above represents the speed as an int and formats the speed value with commas.
+
+### Example 2 - Float Format
+```anylog
+run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
+```
+The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
+This has the same result as formatting with the formatting string: ***:,.03f***.
+
+### Example 3 - Fill Formating
 
 The following queries provides fill formatting examples:
 ```anylog
@@ -245,11 +253,27 @@ count(*)
 --------
 ***21***
 ```
+### Example 4 - Date Formating
 
 The example below extracts only the month and year from a datetime string: 
 ```anylog
 AL anylog-node > run client () sql smart_city "SELECT increments(hour, 1, timestamp), max(timestamp)::datetime(%m-%Y) as timestamp , min(a_n_voltage), max(a_n_voltage), avg(a_n_voltage) from bf where timestamp >= now() - 1 day and timestamp <= now()";
 ```
+
+### Example 5 - Function
+
+The following example replaces, for each returned row, the min_val with the result returned from the following function: ([min_val] + [max_val]) / 2)    
+Note: keys contained in square parenthesis are replaced with the columns values of the row processed. 
+```anylog
+run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function(([min_val] + [max_val]) / 2) as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
+```
+
+### Example 6 - Function with if statement
+
+In the example above, min_val is replaced with the aberage of min_val and max_val.
+
+run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function('On' if [min_val] > 10 else 'Off') as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
+
 
 ## Get datetime command
 Using the command `get datetime` users can translate a date-time function to the date-time string.  
