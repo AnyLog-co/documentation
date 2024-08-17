@@ -187,6 +187,8 @@ The casting options are detailed in the table below:
 | format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
 | datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                                   |
 | function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
+| lstrip                  | Remove leading spaces.                                                                                                                                                         |
+| rstrip                  | Remove trailing spaces.                                                                                                                                                        |
 
 
 **Note**: multiple casting is allowed.  
