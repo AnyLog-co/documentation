@@ -171,8 +171,6 @@ Details are available at the [Test netork Table](test%20commands.md#test-network
 Dropping a table requires to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
 Users can use the command **drop table** to drop a table on a single node or by using the command **drop network table** 
 to drop the table on all the nodes hosting the table's data as well as the shared metadata.  
-Because nodes may not be online, it is recommended to use issue the [test network table](#monitoring-the-status-of-a-table-across-multiple-nodes)
-command before and after the drop.
 
 ### Dropping a table on a single node
 
@@ -191,7 +189,7 @@ drop table tsd_info where dbms = almgm
 ```
 If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
 using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
-[Removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
+[removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
 
 ### Dropping a table on all nodes
 The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,
@@ -204,6 +202,8 @@ Example:
 ```anylog
 drop network table where name = ping_sensor and dbms = lsl_demo and master = 10.0.0.25:2548
 ```
+**Note:** Because nodes may not be online, it is recommended to use issue the [test network table](#monitoring-the-status-of-a-table-across-multiple-nodes)
+command before and after the drop.
 
 ## The get databases command
 
