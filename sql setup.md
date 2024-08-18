@@ -159,9 +159,8 @@ There is no need to declare tables in the `system_query` databases as tables are
  The databases (lsl_demo, blockchain and almgm) are to be declared using the [connect dbms command](#connecting-to-a-local-database)
         
 ## Monitoring the status of a table across multiple nodes
-The test network table command monitors the status of the table accross all nodes that host the table.
-The command will identify all the nodes with the data and compare the table's definition on each node to the table's 
-definition in the metadata.    
+The **test network table** command monitors the status of the table across all nodes that host the table.
+The command identifies the nodes and compares the table's definition on each node to the table's definition in the metadata.    
 Usage:
 ```anylog
 test network table where name = [table name] and dbms = [dbms name]
@@ -169,7 +168,7 @@ test network table where name = [table name] and dbms = [dbms name]
 Details are available at the [Test netork Table](test%20commands.md#test-network-table) section. 
 
 ## Dropping Tables
-Dropping a table may require to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
+Dropping a table requires to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
 Users can use the command **drop table** to drop a table on a single node or by using the command **drop network table** 
 to drop the table on all the nodes hosting the table's data as well as the shared metadata.  
 Because nodes may not be online, it is recommended to use issue the [test network table](#monitoring-the-status-of-a-table-across-multiple-nodes)
