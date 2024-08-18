@@ -33,8 +33,8 @@ Example:
 test process operator
 ```
 
-## Test netork Table
-The ***test network table*** command compares the table schema in the blockchain ledger and the schema in the local table.  
+## Test network Table
+The ***test network table*** command compares the table schema in the blockchain ledger and the schema in the local table.    
 
 Usage:  
 ```anylog
@@ -48,12 +48,10 @@ test network table where name = ping_sensor and dbms = lsl_demo
 test network table where name = * and dbms = lsl_demo
 ```
 
-## The Test Network Commands
+## Test Network
 
-The Test Network Commands determine the availability and consistency of multiple nodes in the network.  
+The Test Network Command determines the availability and consistency of multiple nodes in the network.  
 Replies from the Test Network Commands are organized in a table structure with a row in the table representing each participating node.
-
-### Test Network
 
 The test is similar to issuing a **get status** command to all the nodes in the network.
    
@@ -65,7 +63,7 @@ test network
 Users can validate the configuration of the TCP listeners by issuing the **test network** command on the AnyLog CLI. 
 The command retrieves the list of participating AnyLog nodes and their addresses from the metadata and communicates 
 with each node. The output is the list of the member nodes and their addresses. The **+** sign indicates a reachable node. 
-If the **V** sign is omitted, the node is not configured properly or is not reachable.   
+If the **+** sign is omitted, the node is not configured properly or is not reachable.   
 
 Example command and output:
 <pre>
