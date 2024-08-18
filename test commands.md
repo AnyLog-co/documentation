@@ -33,20 +33,19 @@ Example:
 test process operator
 ```
 
-
-## Test Table
-The ***test table*** command compares the table schema in the blockchain ledger and the schema in the local table.  
+## Test netork Table
+The ***test network table*** command compares the table schema in the blockchain ledger and the schema in the local table.  
 
 Usage:  
 ```anylog
-test table [table name] where dbms = [dbms name]
+test network table where name = [table name] and dbms = [dbms name]
 ```
-If table name is asterisk, all tables of the specified database are tested.
+If table name is asterisk (*), all tables of the specified database are tested.
   
 Examples:
 ```anylog
-test table ping_sensor where dbms = lsl_demo
-test table * where dbms = lsl_demo
+test network table where name = ping_sensor and dbms = lsl_demo
+test network table where name = * and dbms = lsl_demo
 ```
 
 ## The Test Network Commands

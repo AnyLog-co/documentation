@@ -17,7 +17,7 @@ This chapter covers the following topics:
 
 Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#query-nodes-in-the-network) section.
 
-# Configuring a local database
+## Configuring a local database
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
 are [PostgresSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/) and [MongoDB](https://www.mongodb.com/) for blobs storage.   
@@ -141,6 +141,39 @@ There is no need to declare tables in the `system_query` databases as tables are
   ```anylog 
   create table ledger where dbms = blockchain
   ```
+  
+* On any node, users can create a table in the database from the table definition in the ledger using the following call:
+  ```anylog 
+  create table [table name] where dbms = [dbms name]
+  ```
+  If the metadata includes a **table policy** with the specified database and table name, the table will be created on the local database.
+
+### Examples tables created
+
+| Example Command                                | Explanation                                                                                     | Prerequisites            |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------|
+| create table ping_sensor where dbms = lsl_demo | Creates a user table named ping_sensor, columns and indexes are derived from the table's policy | The user DBMS lsl_demo   |
+| create table ledger where dbms = blockchain    | Creates a system table to host the metadata                                                     | The user DBMS blockchain |
+| create table tsd_info where dbms = almgm       | Creates a system table to host High availability information                                    | The user DBMS almgm      |
+        
+ The databases (lsl_demo, blockchain and almgm) are to be declared using the [connect dbms command](#connecting-to-a-local-database)
+        
+## Monitoring the status of a table accross multipe nodes
+The test network table command monitors the status of the table accross all nodes that host the table.
+The command will identify all the nodes with the data and compare the table's definition on each node to the table's 
+definition in the metadata.  
+Usage:
+
+
+## Dropping Tables
+Dropping a table may require to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
+Users can use the command **drop table** to drop a table on a single node or by using the command **drop network table** 
+to drop the table on all the nodes hosting the table's data as well as the shared metadata.  
+Because nodes may not be online, 
+  
+
+
+
 
 
 ## The get databases command
