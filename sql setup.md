@@ -190,6 +190,21 @@ Example:
 ```anylog
 drop table tsd_info where dbms = almgm
 ```
+If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
+using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
+[Removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
+
+### Dropping a table on all nodes
+The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,
+as well as the table's definition in the metadata.  
+Usage:
+```anylog
+drop network table where name = [table name] and dbms = [dbms name] and master = [master_node]
+```
+Example:
+```anylog
+drop network table where name = ping_sensor and dbms = lsl_demo and master = 10.0.0.25:2548
+```
 
 ## The get databases command
 
