@@ -1,17 +1,32 @@
 # Profiling and Monitoring Queries
 
 Queries are profiled and monitored by issuing commands on the AnyLog command prompt or from a REST client.
-
-Profiling is supported by several processes:  
-a. a process providing statistical information on queries execution time.  
-b. a process identifying slow queries.  
-c. a process to identify the SQL used on each participating node.  
+These commands monitor and track the executes queries and allow:
+a. information on queries execution time.  
+b. identifying slow queries.  
+c. identifying the SQL used on each participating node and the execution time on exery participating node.
 
 ## Statistical information
 In order to get statistical information, use the following command to get a summary of the execution time of queries:  
 ```anylog
 get queries time
 ```
+An example reply is below:
+```anylog
+Up to  1 sec.: 43
+Up to  2 sec.: 12
+Up to  3 sec.: 5
+Up to  4 sec.: 1
+Up to  5 sec.: 0
+Up to  6 sec.: 0
+Up to  7 sec.: 0
+Up to  8 sec.: 0
+Up to  9 sec.: 0
+Over   9 sec.: 0
+Total queries: 4
+Time interval: 231 (sec.) : 0:3:51 (H:M:S)
+```
+
 Use the following command to reset the statistical information:
 ```anylog
 reset query timer
@@ -24,8 +39,13 @@ Slow queries can be redirected to the query log with the following AnyLog comman
 set query log profile [n] seconds
 ```
 
-The  `set query log` on records all queries in the query log whereas adding `profile [n] seconds` places in the query 
+The  `set query log on` records all queries in the query log whereas adding `profile [n] seconds` places in the query 
 log only queries with execution time greater or equal to [n] seconds.
+
+The following example places queries with execution time of 5 seconds or higher in the query log:
+```anylog
+set query log profile 5 seconds
+```
 
 To view the slow query log use the following command on the AnyLog command prompt: 
 ```anylog
@@ -56,10 +76,11 @@ Operation is one of the following:
 * status - the query status
 * explain - the generated queries that are processed on each participating node.
 * destination - the list of nodes participating in the query (and associated to the data tables that are queried).
-* id / all - these are optional parameters:
-    - If not provided - the information on the last executed query is returned. 
-    - If ID is provided - the information associated with the job ID is returned.
-    - ALL - The information in the currently executed and recently executed queries are returned.
+
+id / all - these are optional parameters:
+* If not provided - the information on the last executed query is returned. 
+* If ID is provided - the information associated with the job ID is returned.
+* ALL - The information in the currently executed and recently executed queries are returned.
   
 Note: The query status information is maintained in a stack, old information is removed.
 
@@ -80,6 +101,29 @@ Job  ID Output   Run Time Operator              Par Status    Blocks Rows Comman
     |  |        |00:00:00|172.105.13.202:32148 |  0|Completed|     1|   0|                                                                                                    |
     |  |        |00:00:00|                     |  1|Completed|     1|   0|                                                                                                    |
 ```
+
+Values returned:
+
+| Column Name | Details                                                                     |
+|-------------|-----------------------------------------------------------------------------| 
+| Job         | A slot number to contain the query info (500 by default).                   | 
+| ID          | A Unique ID of the query.                                                   |
+| Output      | Where the query output is directed: stdout, rest, DBMS table, file, kafka   |
+| Run Time    | Total time and reply time of each Operator Node by partition.               |
+| Operator    | The IP and Port of each participating Operator.                             |
+| Par         | The Partition ID on each Operator.                                          |
+| Status      | The status of each participating Operator and Partition (see details below) |
+| Blocks      | The nuber of blocks returned.                                               |
+| Rows        | The number of rows returned.                                                |
+| Command     | The Query or Function executed.                                             |
+
+Status options:
+* **Completed** - Reply is completed
+* **Sending** - Message being Send
+* **Delivered** - Message send without an Operator reply
+* **Processing** - Operator is in the process of returning data
+* **Empty Set** - No data satisfies the query
+* **Error** - Operator returned an error
 
 The example below details the destination nodes of the query.
 ```anylog
@@ -116,5 +160,28 @@ If only _node id_ is provided, the query information of the specified node is pr
 ``` 
 
 **Notes**:
-1) The call provides the Operator side information complimentary to the [query status](#command-options-for-monitoring-queries) call that is executed on the Query Node. 
+1) The call provides the Operator side information and is associated to the [query status](#command-options-for-monitoring-queries) call that is executed on the Query Node. 
 2) The information is maintained in a stack, old information is removed.
+
+Example:
+
+The following query is executed on the query node:
+```anylog
+run client () sql lsl_demo format = table "select count(*) from ping_sensor"
+```
+
+The CLI returns **[2]** followed by the query result.  
+The number 2 in brackets represents the Job ID, which can show how the query was executed:
+```anylog
+query status 2
+```
+Users can issue **query status** without the Job ID to see the info on the last query executed. Below is an example:
+````anglog
+Job  ID Output     Run Time Operator       Par Status    Blocks Rows Command
+----|--|----------|--------|--------------|---|---------|------|----|--------------------------------|
+0002| 3|['stdout']|00:00:00|All           |---|Completed|     3|   3|select count(*) from ping_sensor|
+    |  |          |00:00:00|10.0.0.78:7848|  0|Completed|     1|   1|                                |
+    |  |          |00:00:00|              |  1|Completed|     1|   1|                                |
+    |  |          |00:00:00|              |  2|Completed|     1|   1|                                |
+````
+With this info, users can retrieve details on Operator Nodes.
