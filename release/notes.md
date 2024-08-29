@@ -1,3 +1,8 @@
+## **Version**: [be71d3] [2024-08-29 15:18:04] |
+### New Features:
+1. New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)
+2. Increment function without specifying the time range - the time intervals would be provided dynamically.  
+
 ## **Version**: 1.4 | 
 ### Changes
 1. Create EdgeLake branch.

@@ -117,3 +117,65 @@ process from table where name = my_config_2 and dbms = config_dbms and value = a
 ```
 
 Using this setup, an application can manage the AnyLog config script by updating and adding rows in the configuration tables.
+
+## Threads Configuration and Monitoring
+
+Each node is leveraging multiple pools of threads that are associated to support different functionalities.  
+The command **get system threads** outputs the groups, and information on each group:
+
+Usage:
+```anylog
+get system threads where pool = [pool type] and with_details = [true/false] and reset = [true/false]
+```
+Options:
+* pool - The pool name and is one of the following:
+  * TCP - The threads that listen to messages from peer nodes and execute the message requests.
+  * REST - The threads that listen to REST requests from 3rd party applications and execute the REST requests.
+  * Message - The threads that listen to requests from data sources (like MQTT Publish) and execute the requests.
+  * query - A group of threads that process queries on the operator node.
+* with_details - A True value provides statistics on each thread in the pool
+* reset - A True value resets statistics
+
+Example:
+```anylog
+AL > get system threads
+
+Query Pool with 3 threads:                                  [0, 0, 0]
+Message Pool with 6 threads:                                [0, 0, 0, 0, 0, 0]
+TCP Pool with 6 threads:                                    [0, 0, 0, 0, 0, 0]
+REST Pool with 5 threads:                                   [0, 0, 0, 0, 0]
+```
+
+In the example above, the reply shows the number of threads in each group and a flag (on/off) per each thread 
+indicating if the thread is in rest (0 value) or active (1 value).
+
+### Configuring the size of the pools
+
+The following chart details where the number of threads is configured for each pool:
+
+| Pool Name | Configuration                                                                                 |
+|-----------|-----------------------------------------------------------------------------------------------|
+| TCP       | In the TCP service command [run tcp server](background%20processes.md#the-tcp-server-process) |
+| REST      | In the REST service command [run rest server](background%20processes.md#rest-requests)        |
+| Message   | In the Message service command [run message broker](background%20processes.md#message-broker) |
+| Query     | In the **set query pool** command (see below)                                                 |
+
+
+### Configuring the size of Query Pool
+The following command sets the number of threads supporting the queries on each Operator Node:
+```anylog
+set query pool [n]
+```
+[n] is the number of threads (the default value is 3).
+
+### Configuring the number of threads supporting message send
+Users can modify the number of threads that deliver messages from a node to peers. This group of threads allows to send a single message to many nodes:
+```anylog
+set send pool [n]
+```
+[n] is the number of threads (the default value is 10).
+ 
+The following command returns the number of **send threads** configured:
+```anylog
+get send pool [n]
+```
