@@ -120,7 +120,7 @@ Using this setup, an application can manage the AnyLog config script by updating
 
 ## Threads Configuration and Monitoring
 
-Each node is leveraging multiple pools of threads that are associated to support different functionalities.  
+Each node is leveraging multiple pools of threads that are associated with different functionalities.  
 The command **get system threads** outputs the groups, and information on each group:
 
 Usage:
@@ -159,17 +159,19 @@ The following chart details where the number of threads is configured for each p
 | REST      | In the REST service command [run rest server](background%20processes.md#rest-requests)        |
 | Message   | In the Message service command [run message broker](background%20processes.md#message-broker) |
 | Query     | In the **set query pool** command (see below)                                                 |
+| Operator  | In the Operator service command [run operator](background%20processes.md#operator-process).   |
 
+Note: If an Operator is configured with 1 thread, it will not be included in the **get system threads** command output.
 
-### Configuring the size of Query Pool
+### Configuring the size of the Query Pool
 The following command sets the number of threads supporting the queries on each Operator Node:
 ```anylog
 set query pool [n]
 ```
 [n] is the number of threads (the default value is 3).
 
-### Configuring the number of threads supporting message send
-Users can modify the number of threads that deliver messages from a node to peers. This group of threads allows to send a single message to many nodes:
+### Configuring the number of threads supporting "message send" to peer nodes
+Users can modify the number of threads that deliver messages from a node to peers. This group of threads allows to send a single message to many nodes concurrently:
 ```anylog
 set send pool [n]
 ```
