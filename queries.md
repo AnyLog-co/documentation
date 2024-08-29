@@ -189,6 +189,7 @@ The casting options are detailed in the table below:
 | function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
 | lstrip                  | Remove leading spaces.                                                                                                                                                         |
 | rstrip                  | Remove trailing spaces.                                                                                                                                                        |
+| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                                |
 
 
 **Note**: multiple casting is allowed.  
@@ -277,6 +278,17 @@ In the example below, **min_val** is replaced with the string **On** if **min_va
 ```anylog
 run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function('On' if [min_val] > 10 else 'Off') as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
 ```
+
+### Example 7 - return the time difference
+The example belows return time difference:
+```anylog
+run client () sql orics stat = false "select max(insert_timestamp)::timediff(now()) as time_diff FROM r_50"
+{"Query": [{"time_diff": "00:02:33.50343"}]}
+
+run client () sql orics stat = false "select max(insert_timestamp)::timediff('2024-08-29T01:47:32.554411Z') as time_diff FROM r_50"
+{"Query": [{"time_diff": "04:04:33.44671"}]}
+```
+
 
 ## Get datetime command
 Using the command `get datetime` users can translate a date-time function to the date-time string.  
