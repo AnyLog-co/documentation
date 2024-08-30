@@ -3,6 +3,7 @@
 1. New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)
 2. Increment function without specifying the time range - the time intervals would be provided dynamically.  
 3. Configuring the number of threads when a message to peers is send. See details [here](../node%20configuration.md#configuring-the-number-of-threads-supporting-message-send-to-peer-nodes).
+4. Monitor inserts using the command: **trace level = 1 insert 10000** 10,000 is the threshold to print stats on inserts
 
 ## **Version**: 1.4 | 
 ### Changes
