@@ -266,4 +266,28 @@ Attributes returned:
 | Network Time | The operator time to send the data blocks (high value indicates a busy Query Node) |
 
 
+## Profiling
+
+Profiling requires to start the AnyLog instances with a system variable **PROFILER** set to **TRUE**.
+The system variable will trigger the load of the profiling libraries.
+
+The profiler is assigned to the needed processes using the following command:
+
+```anglog
+set profiler [on/off] where target = [process name]
+```
+The profiler output is retrieved using the following command:
+```anglog
+get profiler output where target = [process name]
+```
+Processes that are profiled are detailed in the chart below:
+
+| Process Name | Details                                   |
+|--------------|-------------------------------------------| 
+| operator     | Profile data inserts in the Operator node | 
+| get          | Profile REST GET                          |
+| put          | Profile REST PUT                          |
+| post         | Profile REST POST                         |
+
+
 
