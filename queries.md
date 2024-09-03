@@ -225,7 +225,7 @@ The example above represents the speed as an int and formats the speed value wit
 
 ### Example 2 - Float Format
 ```anylog
-run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
+run client () sql lsl_demo "select reading_time, speed::float(%3) from performance where reading_time >= now() -3d;"
 ```
 The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
 This has the same result as formatting with the formatting string: ***:,.03f***.
