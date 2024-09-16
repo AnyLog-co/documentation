@@ -10,24 +10,25 @@ Query examples are available in the [Query Data](examples/Querying%20Data.md) pa
 The query options are instructions on the format and target location for the result set. The query options are expressed 
 as key = value pairs. With multiple option, the keyword _and_ separates between each key value pair.
 
-| key  | Values Options  | Details     | Default Value |
-| ---- | --------------- | ------------| --------------|
-| format | json / table | The format of the result set | JSON |
-| timezone | utc / local | Timezone used for time values in the result set | local |
-| include | dbms.table | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table` | ignored |
-| drop | True/False | Drops the local output table with the issued query. | True |
-| dest | stdout / rest / dbms / file | Destination of the query result set (i.e. stdout, rest, file) | Set dynamically depending on the interface used |
-| file | file name | File name for the output data |  |
-| table | table name | A table name for the output data. | random table names are assigned to each executing query |
-| stat | True/False | Adds processing statistics to the query output | True |
-| test | True/False | The output is organized as a test output | False |
-| source | file name | A file name that is used in a test process to determine the processing result |  |
-| title | a query title | Added to the test information in the test header |  |
-| max_time  | Number of seconds | Cap the query execution time.  | | 
-| extend  |True/False | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  | |
-| topic  | A topic string |Topic that will be associated with the data, if the query result-set destination is a broker.  | |
-| committed  | True/False  | With HA enabled - only returns data that is synchronized on cluster nodes.  | False |
-| info  | additional info  | Additional info to the query process. See details [below](#info).  |  |
+| key       | Values Options              | Details                                                                                                                                               | Default Value                                           |
+|-----------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| format    | json / table                | The format of the result set                                                                                                                          | JSON                                                    |
+| timezone  | utc / local                 | Timezone used for time values in the result set                                                                                                       | local                                                   |
+| include   | dbms.table                  | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table`                                | ignored                                                 |
+| drop      | True/False                  | Drops the local output table with the issued query.                                                                                                   | True                                                    |
+| dest      | stdout / rest / dbms / file | Destination of the query result set (i.e. stdout, rest, file)                                                                                         | Set dynamically depending on the interface used         |
+| file      | file name                   | File name for the output data                                                                                                                         |                                                         |
+| table     | table name                  | A table name for the output data.                                                                                                                     | random table names are assigned to each executing query |
+| stat      | True/False                  | Adds processing statistics to the query output                                                                                                        | True                                                    |
+| test      | True/False                  | The output is organized as a test output                                                                                                              | False                                                   |
+| source    | file name                   | A file name that is used in a test process to determine the processing result                                                                         |                                                         |
+| title     | a query title               | Added to the test information in the test header                                                                                                      |                                                         |
+| max_time  | Number of seconds           | Cap the query execution time.                                                                                                                         |                                                         | 
+| extend    | True/False                  | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int). |                                                         |
+| topic     | A topic string              | Topic that will be associated with the data, if the query result-set destination is a broker.                                                         |                                                         |
+| info      | additional info             | Additional info to the query process. See details [below](#info).                                                                                     |                                                         |
+| nodes     | main / all                  | With HA enabled - main: executes the query against the operators designated as **main**, all: operattors are selected using round robin               | main                                                   |
+| committed | True/False                  | With HA enabled - only returns data that is synchronized on cluster nodes.                                                                            | False                                                   |
 
 
 ### Timezones
