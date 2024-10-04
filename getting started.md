@@ -8,8 +8,8 @@ This document provides the following:
 
 AnyLog is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the AnyLog Software.    
 Joining a network requires the following steps:  
-1) Install the AnyLog Software on computer instance
-2) Configure a node such that it can join an exiting network (or create a new network).
+1) Install the AnyLog Software on a computer instance.
+2) Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
 
 ## Type of instances
 A node in the network is assigned with one or more roles. The optional roles are the following:  
@@ -19,27 +19,28 @@ A node in the network is assigned with one or more roles. The optional roles are
 | Publisher   | A node that receives data from a data source (i.e. devices, applications) and distributes the data to Operators. | 
 | Operator   | A node that hosts the data and satisfies queries. |
 | Query  | A node that orchestrates a query process. |
-| Master | A node that maintains a complete copy of the metadata and receives updates when the metadata is updated. |
+| Master | A node that hosts the metadata on a ledger and serves the metadata to the peer nodes in the network. |
 
-Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.   
-Enabling the blockchain functionality using the Ethereum blockchain is explained in the [Using Ethereum as a Global Metadata Platform](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) section.
-If a blockchain platform is used, there is no need in a Master node as the metadata is registered on (and is available from) the blockchain.  
-Additional information on a Master Node configuration is available at the section: [Using a Master Node](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform).
+Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
+If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
+Enabling the blockchain functionality using the Ethereum blockchain is explained in the 
+[Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md) section.
+Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
 
 ## The Network MetaData
 The metadata is the network related information that is shared by members of the network.
 The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
-The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node.  
-The interaction with the metadata is not dependent on the repository. When a member node operates, it is configured to use a particular metadata repository and
-there are no operational differences which are dependent on the type of the metadata repository used.
+The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node and the type to use is determined in the configuration.  
+The interaction with the metadata is not dependent on the repository used. When a member node operates, it is configured to use a particular metadata repository and
+there are no operational differences which are dependent on the repository used.
 
 **Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.**
+It allows users to leverage one type of repository, and change to a different type without the need to make changes to their processes and logic.
 
-The nodes in the network are configured to pull the metadata (from the blockchain platform or the master node) periodically (if it was changed) and update a local copy of the metadata on the node.  
-The processing in a node considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform and if a connection 
+The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
+When a node operates, it considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform used. If a connection 
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
 Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).  
-
 
 Related documentation:
 
@@ -61,7 +62,8 @@ resolves the location of the relevant data.
 Each query process starts with a node that receives a query from a user or application. This node is called the Query Node.
 The Query Node determines which are the [Operators](#type-of-instances) 
 that host the data that needs to be evaluated to satisfy the query, and delivers the query to these Operators.
-Each of the Operators process the query locally and replies to the Query Node with a result. The Query Node aggregates all the results and returns a unified result to the user or application that issued the query.  
+Each of the Operators process the query locally and replies to the Query Node with a result. 
+The Query Node aggregates all the results and returns a unified result to the user or application that issued the query.  
 
 Related documentation:
 
@@ -148,7 +150,7 @@ Related documentation:
 When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
 The command line prompt appear as `AL >` and it can be changed by issuing the following command on the CLI:
 ```anylog
-node_name = my_node_name
+set node name [node name]
 ```
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
@@ -301,6 +303,15 @@ reset query log
 ## Making a node a member of the network
 
 Connecting a node to the network is explained in [network configuration](network%20configuration.md).
+
+The basic configuration of a node can be done using the command:
+```anylog
+test node
+```
+The following command tests the availability of the network members:
+```anylog
+test network
+```
 
 Users can associate a node to different networks or configurations. This is a useful functionality for testing when users
 deploy multiple networks, or they switch between a main-net and a testnet.

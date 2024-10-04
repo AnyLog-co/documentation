@@ -407,15 +407,18 @@ schedule name = monitor_operator and time = 15 seconds task run client (!aggrega
 ## Monitoring Nodes Operations
 
 Users can monitor node status throughout execution periods using the command: **continuous**. The command continuously 
-monitors status and provides status results to the stdout. 
+monitors status and provides status results to the stdout.  
+ If a key on the keyboard is hit, continuous terminates.
 
 **Usage**:
 ```anylog
-continuous [list of commands (comma seperated commands)]
+continuous [time] [list of commands (comma seperated commands)]
 ```
+time - wait time in seconds. default value is 5 seconds.
 
-The allowed commands are detailed below. If the command is longer than a single word, it needs to be enclosed in quotations.
+If multiple commands are listed, these are from the commands below. 
 
+If the command is longer than a single word, it needs to be enclosed in quotations.
 
 | Command option | Details  |
 | ------------- | ------------| 
@@ -438,7 +441,7 @@ The allowed commands are detailed below. If the command is longer than a single 
 continuous cpu, cpu anylog, cpu postgres, get operator summary, get cpu usage
 ```
 
-Continuous repeats the monitoring every 5 seconds. If a key on the keyboard is hit, continuous terminates.
-
-
-
+Any command can be listed as a single command. For example, the query below repeats every 10 seconds:
+```anylog
+continuous 10 run client () sql edgex select max(timestamp), count(*) from rand_data where timestamp >= NOW() - 5 minutes
+```

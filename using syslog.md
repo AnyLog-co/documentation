@@ -46,23 +46,24 @@ Notes:
 The following rule accepts SysLog data from one or multiple nodes:
 
 ```anylog
-set msg rule [rule name] if ip = [IP address] and port = [port] and header = [header text] then dbms = [dbms name] and table = [table name] and syslog = [true/false] and format = [data format] and topic = [topic name]
+set msg rule [rule name] if ip = [IP address] and port = [port] and header = [header text] then dbms = [dbms name] and table = [table name] and syslog = [true/false] and extend = ip and format = [data format] and topic = [topic name]
 ```
 
 The following chart summarizes the command options:
 
-| Option           | Mandatory |  Details |
-| ---------------- | ---------  | -------------------------- | 
-| Rule Name        | Y          | A unique name that identifies the rule. |
-| IP               | N          | A source IP that is assigned to the rule. If IP is not provided, the rule will apply to messages from every source IP. |
-| Port             | N          | A source port that is assigned to the rule. If port is not provided, the rule will apply to all ports of from source IPs. |
-| Header           | N          | Assign the rules to messages with a specified header. Note: headers can be added using one of the syslog redirecting tools (see example below). |
-| DBMS             | Y          | A database name that will host the syslog data. Use the command ```get databases``` to see that the database is enabled on the operator node. |
-| Table            | Y          | A table name to host the syslog data on the node. |
-| syslog           | N          | A True/False value to indicate syslog data. Unless format is specified, the destination structure represents the BSD format of syslog.  |
-| format           | N          | A different format than BSD.  |
-| topic            | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy. |
-| structure        | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.  |
+| Option    | Mandatory | Details                                                                                                                                         |
+|-----------| ---------  |-------------------------------------------------------------------------------------------------------------------------------------------------| 
+| Rule Name | Y          | A unique name that identifies the rule.                                                                                                         |
+| IP        | N          | A source IP that is assigned to the rule. If IP is not provided, the rule will apply to messages from every source IP.                          |
+| Port      | N          | A source port that is assigned to the rule. If port is not provided, the rule will apply to all ports of from source IPs.                       |
+| Header    | N          | Assign the rules to messages with a specified header. Note: headers can be added using one of the syslog redirecting tools (see example below). |
+| DBMS      | Y          | A database name that will host the syslog data. Use the command ```get databases``` to see that the database is enabled on the operator node.   |
+| Table     | Y          | A table name to host the syslog data on the node.                                                                                               |
+| syslog    | N          | A True/False value to indicate syslog data. Unless format is specified, the destination structure represents the BSD format of syslog.          |
+| extend    | N          | Additional info added to the JSON data. For example: extend = ip adds the source IP to the JSON data.                                           |
+| format    | N          | A different format than BSD.                                                                                                                    |
+| topic     | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy.         |
+| structure | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.                        |
 
 Notes: 
 1) If **syslog** option is enabled, column names are pre-determined (by default as BSD or with **format = IETF**). If **syslog**

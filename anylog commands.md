@@ -588,7 +588,7 @@ partition lsl_demo ping_sensor using timestamp by month
 partition lsl_demo * using timestamp by month
 ```
 
-## partitions status and configurations
+## Partitions status and configurations
 
 The following command lists the partitions configurations:
 ```anylog

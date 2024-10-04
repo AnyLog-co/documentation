@@ -214,15 +214,20 @@ The table below summarizes the command options:
 | ------------- | ------------| 
 | Node name | The name of the node processing the data |
 | Status | The operator service status |
-| Start timestamp | The timestamp when the service was enabled  |
 | Operational time | The time in which the service is enabled  |
-| Query timestamp | The current timestamp - for a remote query, it allows to determine that the query info was refreshed  |
-| Elapsed Time | The elapsed time since the previous query  |
+| Processing time | The time measured between the first processed row and the last processed row  |
+| Elapsed Time | The elapsed time since the previous call to **get operator summary** command  |
 | New rows | Number of rows added since previous call to **get operator summary** |
 | Total rows | Number of rows added since the service was enabled |
 | New errors | Number of errors since previous call to **get operator summary** |
 | Total errors | Number of errors since the service was enabled |
+| Avg. rows/sec | The **Total rows** divided by the **Processing time**  |
 
+**Note:** reset the **Operator Summary** statistics using the **reset stats** command:
+
+```anylog
+reset stats where service = operator and topic = summary
+```
 
 **Get Operator JSON**:
 

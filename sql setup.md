@@ -17,7 +17,7 @@ This chapter covers the following topics:
 
 Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#query-nodes-in-the-network) section.
 
-# Configuring a local database
+## Configuring a local database
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
 are [PostgresSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/) and [MongoDB](https://www.mongodb.com/) for blobs storage.   
@@ -45,11 +45,33 @@ connect dbms [db name] where type = [db type] and user = [db user] and password 
 * [db port] - The database port.
 * [memory] - a bool value to determine memory resident data (if supported by the database).
 * [connection] - Database connection string.
+* [autocommit] - A false value groups multiple statements into a single transaction
+* [unlog] - A true value unlogs tables to not write their changes to the WAL. 
 
 **Note 1**: For SQLite, the logical name of the database can include the path to maintain the data. Otherwise, the database 
 data is maintained, for each table in the database, in the default location defined by `!dbms_dir`.    
 
 **Note 2**: If 'memory' is set to _true_, the database tables are maintained in RAM (this option is supported by SQLite but not with PostgresSQL).
+
+**Note 3** A database assigned with **unlog** will support faster inserts at the cost of data lost in case of a failure.  
+**unlog** is recommended for the **system_query** dbms but not for the users data.
+
+**Configuration support by DBMS**
+
+| Config     | Default  | SQLite  | PostgreSQL  |
+| ---------- | -------- | ------- | ----------  |
+| memory     |  false   |    +    |      -      |
+| autocommit |  true    |    +    |      +      |
+| unlog      |  false   |    -    |      +      |
+
+**Recommended Configuration**
+
+| Config     | system_query  | User DBMS  |
+| ---------- | ------------- | ------- |
+| memory     |  true         |  false  |
+| autocommit |  false        |  false   |
+| unlog      |  true         |  false   |
+
 
 **Examples**:
 ```anylog 
@@ -119,7 +141,69 @@ There is no need to declare tables in the `system_query` databases as tables are
   ```anylog 
   create table ledger where dbms = blockchain
   ```
+  
+* On any node, users can create a table in the database from the table definition in the ledger using the following call:
+  ```anylog 
+  create table [table name] where dbms = [dbms name]
+  ```
+  If the metadata includes a **table policy** with the specified database and table name, the table will be created on the local database.
 
+### Examples tables created
+
+| Example Command                                | Explanation                                                                                     | Prerequisites            |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------|
+| create table ping_sensor where dbms = lsl_demo | Creates a user table named ping_sensor, columns and indexes are derived from the table's policy | The user DBMS lsl_demo   |
+| create table ledger where dbms = blockchain    | Creates a system table to host the metadata                                                     | The user DBMS blockchain |
+| create table tsd_info where dbms = almgm       | Creates a system table to host High availability information                                    | The user DBMS almgm      |
+        
+ The databases (lsl_demo, blockchain and almgm) are to be declared using the [connect dbms command](#connecting-to-a-local-database)
+        
+## Monitoring the status of a table across multiple nodes
+The **test network table** command monitors the status of the table across all nodes that host the table.
+The command identifies the nodes and compares the table's definition on each node to the table's definition in the metadata.    
+Usage:
+```anylog
+test network table where name = [table name] and dbms = [dbms name]
+```
+Details are available at the [Test netork Table](test%20commands.md#test-network-table) section. 
+
+## Dropping Tables
+Dropping a table requires to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
+Users can use the command **drop table** to drop a table on a single node or by using the command **drop network table** 
+to drop the table on all the nodes hosting the table's data as well as the shared metadata.  
+
+### Dropping a table on a single node
+
+Use the following command to drop the table on a single node:
+```anylog
+drop table [table name] where dbms = [dbms name]
+```
+Example:
+```anylog
+drop table ping_sensor where dbms = lsl_demo
+```
+System tables are dropped in the same way.    
+Example:
+```anylog
+drop table tsd_info where dbms = almgm
+```
+If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
+using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
+[removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
+
+### Dropping a table on all nodes
+The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,
+as well as the table's definition in the metadata.  
+Usage:
+```anylog
+drop network table where name = [table name] and dbms = [dbms name] and master = [master_node]
+```
+Example:
+```anylog
+drop network table where name = ping_sensor and dbms = lsl_demo and master = 10.0.0.25:2548
+```
+**Note:** Because nodes may not be online, it is recommended to use issue the [test network table](#monitoring-the-status-of-a-table-across-multiple-nodes)
+command before and after the drop.
 
 ## The get databases command
 
@@ -132,18 +216,27 @@ get databases
 The command provides the list of logical databases and the physical database supporting each logical database.  
 Example output:
 ```anylog
-List of DBMS connections
-Logical DBMS         Database Type IP:Port                        Storage
--------------------- ------------- ------------------------------ -------------------------
-al_smoke_test        psql          127.0.0.1:5432                 Persistent
-almgm                psql          127.0.0.1:5432                 Persistent
-dmci                 psql          127.0.0.1:5432                 Persistent
-system_query         sqlite                                       Memory
+Active DBMS Connections
+Logical DBMS Database Type IP:Port         Configuration             Storage
+------------|-------------|---------------|-------------------------|----------------------------------------------|
+almgm       |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+azure       |psql         |127.0.0.1:5432 |Autocommit Off           |Persistent                                    |
+blobs_azure |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_edgex |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_ntt   |mongo        |localhost:27017|                         |Blobs Persistent                              |
+blobs_test  |mongo        |localhost:27017|                         |Blobs Persistent                              |
+configs     |sqlite       |Local          |Autocommit On            |D:\Node\AnyLog-Network\data\dbms\configs.dbms |
+edgex       |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+flexnode    |sqlite       |Local          |Autocommit On            |D:\Node\AnyLog-Network\data\dbms\flexnode.dbms|
+lsl_demo    |psql         |127.0.0.1:5432 |Autocommit Off, Unflagged|Persistent                                    |
+lsl_demo_ok |psql         |127.0.0.1:5432 |Autocommit Off, Unflagged|Persistent                                    |
+ntt         |psql         |127.0.0.1:5432 |Autocommit On            |Persistent                                    |
+
 ```
 
 ## The get database size command
 
-The `get database size` command returns the size og the database in bytes.  
+The `get database size` command returns the size of the database in bytes.  
 **Usage**:
 ```anylog 
 get database size [logical dbms name]

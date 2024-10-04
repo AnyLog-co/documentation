@@ -142,8 +142,9 @@ end_script
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 end_script
 ```
-### The "set debug" command
+## The "set debug" command
 
+### display commands and execution results
 If a script contains **set debug on**, each command that follows is printed including the execution result.
 The command **set debug off** disables the printout.  
 For example, if the anylog_setup.al containing the commands **run tcp server** and **run rest server** includes **set debug on**,
@@ -154,6 +155,12 @@ AL > [] [0002] set debug on --> Success
 AL > [] [0003] run tcp server where internal_ip = !ip and internal_port = 7848 and external_ip = !external_ip and external_port = 7848 and bind = false and threads = 6 --> Success
 AL > [] [0004] run rest server where internal_ip = !ip and internal_port = 7849 and external_ip = !external_ip and external_port = 7849 and bind = false --> Success
 ```
+
+### Executing scripts in interactive mode
+Users can execute a script with a pause after the execution of each command.  
+The pause allows to determine the status and variable assignments prior and after the execution of each command.  
+* Use the command **next** to execute the next command.
+* use the command **continue**, to terminate the interactive mode and execute the rest of the commands.
 
 ## CLI operations
 

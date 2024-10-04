@@ -1,7 +1,16 @@
+## **Version**: [be71d3] [2024-08-29 15:18:04] |
+### New Features:
+1. New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)
+2. Increment function without specifying the time range - the time intervals would be provided dynamically.  
+3. Configuring the number of threads when a message to peers is send. See details [here](../node%20configuration.md#configuring-the-number-of-threads-supporting-message-send-to-peer-nodes).
+4. Monitor inserts using the command: **trace level = 1 insert 10000** 10,000 is the threshold to print stats on inserts
+
 ## **Version**: 1.4 | 
 ### Changes
 1. Create EdgeLake branch.
 2. Update **blockchain set account info** call to include the Chain ID. 
+3. Add options to create HTML documents from a query.
+4. Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#connecting-to-a-local-database).
 
 ### New Features:
 1. New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).

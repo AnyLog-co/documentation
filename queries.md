@@ -10,24 +10,25 @@ Query examples are available in the [Query Data](examples/Querying%20Data.md) pa
 The query options are instructions on the format and target location for the result set. The query options are expressed 
 as key = value pairs. With multiple option, the keyword _and_ separates between each key value pair.
 
-| key  | Values Options  | Details     | Default Value |
-| ---- | --------------- | ------------| --------------|
-| format | json / table | The format of the result set | JSON |
-| timezone | utc / local | Timezone used for time values in the result set | local |
-| include | dbms.table | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table` | ignored |
-| drop | True/False | Drops the local output table with the issued query. | True |
-| dest | stdout / rest / dbms / file | Destination of the query result set (i.e. stdout, rest, file) | Set dynamically depending on the interface used |
-| file | file name | File name for the output data |  |
-| table | table name | A table name for the output data. | random table names are assigned to each executing query |
-| stat | True/False | Adds processing statistics to the query output | True |
-| test | True/False | The output is organized as a test output | False |
-| source | file name | A file name that is used in a test process to determine the processing result |  |
-| title | a query title | Added to the test information in the test header |  |
-| max_time  | Number of seconds | Cap the query execution time.  | | 
-| extend  |True/False | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int).  | |
-| topic  | A topic string |Topic that will be associated with the data, if the query result-set destination is a broker.  | |
-| committed  | True/False  | With HA enabled - only returns data that is synchronized on cluster nodes.  | False |
-| info  | additional info  | Additional info to the query process. See details [below](#info).  |  |
+| key       | Values Options              | Details                                                                                                                                               | Default Value                                           |
+|-----------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| format    | json / table                | The format of the result set                                                                                                                          | JSON                                                    |
+| timezone  | utc / local                 | Timezone used for time values in the result set                                                                                                       | local                                                   |
+| include   | dbms.table                  | Allows to treat remote tables with a different name as the table being queried. The value is specified as `dbms.table`                                | ignored                                                 |
+| drop      | True/False                  | Drops the local output table with the issued query.                                                                                                   | True                                                    |
+| dest      | stdout / rest / dbms / file | Destination of the query result set (i.e. stdout, rest, file)                                                                                         | Set dynamically depending on the interface used         |
+| file      | file name                   | File name for the output data                                                                                                                         |                                                         |
+| table     | table name                  | A table name for the output data.                                                                                                                     | random table names are assigned to each executing query |
+| stat      | True/False                  | Adds processing statistics to the query output                                                                                                        | True                                                    |
+| test      | True/False                  | The output is organized as a test output                                                                                                              | False                                                   |
+| source    | file name                   | A file name that is used in a test process to determine the processing result                                                                         |                                                         |
+| title     | a query title               | Added to the test information in the test header                                                                                                      |                                                         |
+| max_time  | Number of seconds           | Cap the query execution time.                                                                                                                         |                                                         | 
+| extend    | True/False                  | Include node variables (which are not in the table data) in the query result set. Example: extend = (@ip, @port.str, @DBMS, @table, !disk_space.int). |                                                         |
+| topic     | A topic string              | Topic that will be associated with the data, if the query result-set destination is a broker.                                                         |                                                         |
+| info      | additional info             | Additional info to the query process. See details [below](#info).                                                                                     |                                                         |
+| nodes     | main / all                  | With HA enabled - main: executes the query against the operators designated as **main**, all: operattors are selected using round robin               | main                                                   |
+| committed | True/False                  | With HA enabled - only returns data that is synchronized on cluster nodes.                                                                            | False                                                   |
 
 
 ### Timezones
@@ -177,30 +178,24 @@ run client () sql lsl_demo "select reading_time, speed::float(2) from performanc
 
 The casting options are detailed in the table below:
 
-| Cast  | details                                                                                                                                                                        |
-| ---- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| float(x) | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
-| int | Cast to an _int_.                                                                                                                                                              |
-| str | Cast to a _string_.                                                                                                                                                            |
-| ljust(x) | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
-| rjust(x) | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
+| Cast                    | details                                                                                                                                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| float(x)                | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
+| int                     | Cast to an _int_.                                                                                                                                                              |
+| str                     | Cast to a _string_.                                                                                                                                                            |
+| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
+| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
 | format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
+| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                                   |
+| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
+| lstrip                  | Remove leading spaces.                                                                                                                                                         |
+| rstrip                  | Remove trailing spaces.                                                                                                                                                        |
+| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                                |
+
 
 **Note**: multiple casting is allowed.  
 
-**Examples**:
-```anylog
-run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
-```
-
-The example above represents the speed as an int and formats the speed value with commas. 
-```anylog
-run client () sql lsl_demo "select reading_time, speed::float("%3") from performance where reading_time >= now() -3d;"
-```
-The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
-This has the same result as formatting with the formatting string: ***:,.03f***.
-
-
+### Formatting options
 The following chart provides formatting types options:
 
 | Type  | details |
@@ -219,6 +214,24 @@ The following examples provide number formatting with padding for int and float:
 | :.3f | float with digits length  |
 | :08.3f | float with padding zeros  |
 | :8d | int with padding zeros  |
+
+
+## **Examples**:
+
+### Example 1 - Number Format
+```anylog
+run client () sql lsl_demo "select reading_time, speed::int::format(":,") from performance where reading_time >= now() -3d;"
+```
+The example above represents the speed as an int and formats the speed value with commas.
+
+### Example 2 - Float Format
+```anylog
+run client () sql lsl_demo "select reading_time, speed::float(%3) from performance where reading_time >= now() -3d;"
+```
+The example above represents the speed as a float, rounded to 3 digits with commas as a thousand separators and padded with zeros.
+This has the same result as formatting with the formatting string: ***:,.03f***.
+
+### Example 3 - Fill Formating
 
 The following queries provides fill formatting examples:
 ```anylog
@@ -244,7 +257,38 @@ count(*)
 --------
 ***21***
 ```
+### Example 4 - Date Formating
 
+The example below extracts only the month and year from a datetime string: 
+```anylog
+AL anylog-node > run client () sql smart_city "SELECT increments(hour, 1, timestamp), max(timestamp)::datetime(%m-%Y) as timestamp , min(a_n_voltage), max(a_n_voltage), avg(a_n_voltage) from bf where timestamp >= now() - 1 day and timestamp <= now()";
+```
+
+### Example 5 - Function
+
+The following example replaces, for each returned row, the min_val with the result returned from the following function:   
+([min_val] + [max_val]) / 2)    
+**Note**: keys contained in square parenthesis are replaced with the columns values of the row processed. 
+```anylog
+run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function(([min_val] + [max_val]) / 2) as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
+```
+
+### Example 6 - Function with if statement
+
+In the example below, **min_val** is replaced with the string **On** if **min_val** is greater than 10, else, the value returned is the string **Off**. 
+```anylog
+run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function('On' if [min_val] > 10 else 'Off') as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
+```
+
+### Example 7 - return the time difference
+The example belows return time difference:
+```anylog
+run client () sql orics stat = false "select max(insert_timestamp)::timediff(now()) as time_diff FROM r_50"
+{"Query": [{"time_diff": "00:02:33.50343"}]}
+
+run client () sql orics stat = false "select max(insert_timestamp)::timediff('2024-08-29T01:47:32.554411Z') as time_diff FROM r_50"
+{"Query": [{"time_diff": "04:04:33.44671"}]}
+```
 
 
 ## Get datetime command
