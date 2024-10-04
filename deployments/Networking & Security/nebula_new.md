@@ -288,19 +288,84 @@ ENABLE_NEBULA=true
 # create new nebula keys
 NEBULA_NEW_KEYS=false
 # whether node is type lighthouse
+IS_LIGHTHOUSE=false
+# Nebula CIDR IP address for itself - the IP component should be the same as the OVERLAY_IP (ex. 10.10.1.15/24) 
+CIDR_OVERLAY_ADDRESS=10.10.1.1/24 
+# Nebula IP address for Lighthouse node (ex. 10.10.1.15) 
+LIGHTHOUSE_IP=10.10.1.1
+# External physical IP of the node associated with Nebula lighthouse
+LIGHTHOUSE_NODE_IP=172.232.20.156
+```
+
+9. Restart AnyLog container with correct certification 
+```shell
+make down ANYLOG_TYPE=query
+make up ANYLOG_TYPE=query
+```
+
+10. Test Node
+
+**Multiple Nodes on one Machine**: 
+When deploying additional AnyLog containers on the same machine, they'll all use the same OVERLAY IP address. 
+1. In advanced configs, set the overlay IP address and update nebula configs as shown below. In general, it is the same
+as the pre-existing configurations of the other AnyLog nodes, but makes sure `NEBULA_NEW_KEYS` is set to _false_. 
+* When seating on the same machine as the lighthouse node
+
+```dotenv
+#--- Networking ---
+# Overlay IP address - if set, will replace local IP address when connecting to network
+OVERLAY_IP=10.10.1.1
+# The number of concurrent threads supporting HTTP requests.
+TCP_THREADS=6
+# Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns timeout error.
+REST_TIMEOUT=30
+...
+ 
+#--- Nebula ---
+# whether to enable Lighthouse
+ENABLE_NEBULA=true
+# create new nebula keys
+NEBULA_NEW_KEYS=false
+# whether node is type lighthouse
 IS_LIGHTHOUSE=true
 # Nebula CIDR IP address for itself - the IP component should be the same as the OVERLAY_IP (ex. 10.10.1.15/24) 
 CIDR_OVERLAY_ADDRESS=10.10.1.1/24 
 # Nebula IP address for Lighthouse node (ex. 10.10.1.15) 
 LIGHTHOUSE_IP=""
 # External physical IP of the node associated with Nebula lighthouse
-LIGHTHOUSE_NODE_IP="" 
+LIGHTHOUSE_NODE_IP=""
 ```
 
-9. Restart AnyLog container with correct certification 
+* When seating on the same machine as another non-lighthouuse node
+```dotenv
+#--- Networking ---
+# Overlay IP address - if set, will replace local IP address when connecting to network
+OVERLAY_IP=10.10.1.31
+# The number of concurrent threads supporting HTTP requests.
+TCP_THREADS=6
+# Timeout in seconds to determine a time interval such that if no response is being returned during the time interval, the system returns timeout error.
+REST_TIMEOUT=30
+...
+ 
+#--- Nebula ---
+# whether to enable Lighthouse
+ENABLE_NEBULA=true
+# create new nebula keys
+NEBULA_NEW_KEYS=false
+# whether node is type lighthouse
+IS_LIGHTHOUSE=false
+# Nebula CIDR IP address for itself - the IP component should be the same as the OVERLAY_IP (ex. 10.10.1.15/24) 
+CIDR_OVERLAY_ADDRESS=10.10.1.1/24 
+# Nebula IP address for Lighthouse node (ex. 10.10.1.15) 
+LIGHTHOUSE_IP=10.10.1.1
+# External physical IP of the node associated with Nebula lighthouse
+LIGHTHOUSE_NODE_IP=172.232.20.156```
+```
+
+2. Deploy AnyLog container
 ```shell
-make down ANYLOG_TYPE=queryy
-make up ANYLOG_TYPE=queryy
+make up ANYLOG_TYPE=[NODE_TYPE]
 ```
 
-10. Test Node
+3. Test node
+
