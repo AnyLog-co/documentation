@@ -129,7 +129,14 @@ LIGHTHOUSE_NODE_IP=""
 ```
 
 **Copy Keys**: Steps are all done via the lighthouse node
-1. Locate path for nebula volume
+1. For each new node, generate private key and certificate on the lighthouse node 
+```shell
+make exec ANYLOG_TYPE=generic
+cd $ANYLOG_PATH/nebula
+./nebula-cert sign -name "new-node" -ip "${CIDR_OVERLAY_ADDRESS}"
+```
+
+2. Locate path for nebula volume
 ```shell        
 docker volume inspect docker-makefile_nebula-overlay 
 <<COMMENT
@@ -151,7 +158,7 @@ docker volume inspect docker-makefile_nebula-overlay
 << 
 ```
 
-2. Locate ca.crt in nebula volume
+3. Locate ca.crt in nebula volume
 ```shell
 sudo ls -l  /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data
 <<COMMENT
@@ -169,11 +176,15 @@ drwxr-xr-x 2 root root     4096 Oct  4 21:12 archive_certs
 -rwxr-xr-x 1 1001  127  7675668 Jan  8  2024 nebula-cert
 -rw-r--r-- 1 root root     1589 Oct  4 21:12 nebula.log
 -rw-r--r-- 1 root root 13906330 Jan  8  2024 nebula.tar.gz
+-rw------- 1 root root      300 Oct  5 00:48 new-node.crt # <-- public key generated for new node in step 1
+-rw------- 1 root root      127 Oct  5 00:48 new-node.key # <-- public key generated for new node in step 1
 -rw-r--r-- 1 root root      843 Oct  4 21:12 node.yml
 ```
 
-3. scp `ca.crt` to other nodes that'll be part of the network
+4. scp `ca.crt` and node key and certificate for new node. Notice _node_ key and certification are renamed to _host_. 
 ```shell 
+sudo scp /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data/node.crt [user_name]@[ip]:~/host.crt
+sudo scp /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data/node.key [user_name]@[ip]:~/host.key  
 sudo scp /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data/ca.crt [user_name]@[ip]:~/
 ```
 
@@ -262,6 +273,8 @@ docker volume inspect docker-makefile_nebula-overlay
 6. Copy `ca.crt` into nebula volume 
 ```shell
 sudo cp $HOME/ca.crt /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data
+sudo cp $HOME/host.key /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data
+sudo cp $HOME/host.crt /var/lib/docker/volumes/docker-makefile_nebula-overlay/_data
 ```
 
 7. Update `.env` configuration files (docker-compose/docker-makefile/.env) to deploy AnyLog 
