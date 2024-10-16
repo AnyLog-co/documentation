@@ -173,8 +173,17 @@ LIGHTHOUSE_NODE_IP=172.232.250.209
 make up ANYLOG_TYPE=query
 ```
 
-3. Validate node is working with overlay 
-on the blockchain. 
+3. To validate overlay is running properly, users can attach into the AnyLog docker container and run `get status` 
+against the generic / lighthouse node.
+```anylog
+EL anylog-query +> run client (10.10.1.1:32548) get status 
+
+[From Node 10.10.1.1:32548] 
+
+'anylog-node@10.10.1.1:32548 running'
+```
+
+4. Validate node is configured properly
 ```shell
 make test-node
 
