@@ -97,7 +97,8 @@ LIGHTHOUSE_NODE_IP=""
 make up ANYLOG_TYPE=generic
 ```
 
-3. Validate node is working with overlay
+3. Validate node is working with overlay - the reason blockchain fails is that a generic node does not declare itseelf 
+against a master of blockchain. 
 ```shell    
 make test-node
 
@@ -211,6 +212,21 @@ gRPC           |Not declared|                                                   
 
 ### Communication Between Nodes
 The following example shows that a request sent from the query node to the operator uses the overlay IP addresses
+
+**Node Communication**: On the query node, check which nodes on the network the query node can communicate with
+```anylog
+EL anylog-query +> test network 
+                                                                      
+Test Network
+[****************************************************************]
+
+EL anylog-query +> 
+Address          Node Type Node Name       Status 
+----------------|---------|---------------|------|
+10.10.1.10:32048|master   |anylog-master  |  +   |
+10.10.1.31:32348|query    |anylog-query   |  +   |
+10.10.1.21:32148|operator |anylog-operator|  +   |
+```
 
 **Sample Query**:
 ```anylog 
