@@ -3,18 +3,32 @@
 AnyLog Network, which is available with both EdgeLake and Enterprise uses layer-2 logic to publish data onto the 
 blockchain. The following demonstrates two nodes on [Optimism](https://www.optimism.io/) test network.
 
- The steps provided below are automatically executed when deloying EdgeLake & EdgeLake enterprise via a AnyLog's deployment 
+ The steps provided below are automatically executed when deploying EdgeLake & EdgeLake enterprise via a AnyLog's deployment 
  processes. 
 
 ### Configurations 
+
+The following are environment params used by EdgeLake & EdgeLake Enterprise to deploy an instance that's either part of the 
+blockchain network or a local master node.
+
+* `BLOCKCHAIN_SOURCE` (default: master) - Source of where the data is coming from. When set to _master_, then the 
+deployment-scripts process will deploy using the master node. In all other cases, the deployment scripts will use the 
+blockchain network provided. 
+* `BLOCKCHAIN_DESTINATION` - Where will the copy of the blockchain be stored locally
 * `SYNC_TIME` (default: 30 seconds) - How often to sync from blockchain
-* `BLOCKCHAIN_SOURCE` (default: master) - Source of where the data is coming from. When `LOCAL_BLOCKCHAIN` is set to _false_, 
-value should be set to _blockchain_
+
 * `PROVIDER` (default: infura) - SubQuery network participant who is responsible for serving RPC queries for blockchain 
 data to their customers. We're using [infura](https://www.infura.io/)
-* `PLATFORM` (default: optimism) - Blockchain to use. We're using an off-chain extension ([layer-2]()) 
+* `PLATFORM` (default: optimism) - Blockchain to use. We're using an off-chain extension (layer-2) 
 blockchain named <a herf="https://www.optimism.io/" target="_blank">Optimism</a>
-* `BLOCKCHAIN_DESTINATION` - Where will the copy of the blockchain be stored locally
+* `CONTRACT` (default: 0x8fD816a62e8E7985154248019520915778eB4013) - Smart Contract ID. Smart contracts are self-executing 
+programmable contracts that nodes interact with and use to store the source of truth. There's a need for only 1 smart contract 
+to maintain a network. As such, users can either join ours **or** create their own.
+
+To automatically create your own smart contract, simply specify generate in the contract value when running EdgeLake for 
+the first time. Once a contract is created, update your dotenv configuration file(s) to utilize this new contract each 
+time you're deploying/restarting node(s). 
+
 * `PRIVATE_KEY` & `PUBLIC_KEY` - keys to access crypto wallet(s)
 * `CHAIN_ID` - Wallet ID
 
