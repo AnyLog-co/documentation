@@ -113,7 +113,7 @@ At this point AnyLog should be connected to the Optimism blockchain.
 
 2. Insert policy onto the blockchain
 ```anylog
-blockchain commit to !platform !test_policy
+blockchain insert where policy=!new_policy and local=true and blockchain=!platform
 ```
  
 **Update Policies**: 
