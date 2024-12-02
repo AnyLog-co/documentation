@@ -41,7 +41,7 @@ NODE_NAME=anylog-node
 COMPANY_NAME=New Company
 
 # Disable AnyLog's CLI interface
-DISABLE_CLI=false
+DISABLE_CLI=true
 
 #--- Networking ---
 # Port address used by AnyLog's TCP protocol to communicate with other nodes in the network
