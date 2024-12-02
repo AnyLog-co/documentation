@@ -100,7 +100,7 @@ rest_timeout=30
 
  
 
-3. Create a service file that executes AnyLog with the appropriate start-up script 
+**Step 3**: Create a service file that executes AnyLog with the appropriate start-up script 
 * Utilizing pre-existing deployment-scripts
 ```editorconfig
 [Unit]
