@@ -201,11 +201,10 @@ After=network.target
 
 [Service]
 ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process /home/user/anylog/basic_deployment.al
-ExecStartPost=/usr/bin/python3 /home/user/anylog/deployment_script.py [OPTIONAL PARAMS]
+ExecStartPost=/usr/bin/python3 /home/user/anylog/deployment_script.py 127.0.0.1:32549 --configs /home/user/anylog/anylog_configs.envs
 Restart=always
 User=root
 Group=root
-EnvironmentFile=/home/user/anylog/anylog_configs.env
 
 [Install]
 WantedBy=multi-user.target
