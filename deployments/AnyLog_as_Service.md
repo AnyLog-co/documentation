@@ -135,3 +135,10 @@ Group=root
 [Install]
 WantedBy=multi-user.target
 ```
+
+**Step 4**: Upload & Starat Service
+```shell
+sudo systemctl daemon-reload
+sudo systemctl restart anylog-service.service
+sudo service anylog-service status
+```
