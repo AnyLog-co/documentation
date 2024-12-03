@@ -129,10 +129,10 @@ sudo service anylog-service status
 * cURL commands
 ```shell
 # get status 
-curl -X GET 127.0.0.1::32549
+curl -X GET 127.0.0.1:32549
 
 # get processes 
-curl -X GET 127.0.0.1::32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
+curl -X GET 127.0.0.1:32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
 ```
 
 ### Deploy for REST-based Deployment 
@@ -227,9 +227,9 @@ sudo service anylog-service status
 * cURL commands
 ```shell
 # get status 
-curl -X GET 127.0.0.1::32549
+curl -X GET 127.0.0.1:32549
 
 # get processes 
-curl -X GET 127.0.0.1::32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
+curl -X GET 127.0.0.1:32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
 ```
 
