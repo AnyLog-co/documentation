@@ -75,6 +75,18 @@ Below are the list of commands to add new policies to the ledger:
 When policies are added, nodes validate the structure of the policies and their content. In addition, when policies are added, the policies are
 updated with a date and time of the update and a [unique ID](#the-policy-id).
 
+## Updating policies
+
+AnyLog offers a command to update existing policies on the blockchain ledger. It is important to note that the policy id must pre-exist, on the blockchain, or else an error will be returned. AnyLog uses the provided policy id in the command argument, so a command error will be returned if the policy id in the JSON policy does not match the provided policy id argument.
+
+| **Command** | **Platform Updated** |  **Details** |
+| ------------ | ------------------------------------ | --- | 
+| [blockchain update](#the-blockchain-update-command) [policy and ledger platforms information] | All that are specified | Add a new policy to the ledger in one or more blockchain platform. |
+| `blockchain update to ethereum [policy_id] [policy]`           | Blockchain platform (i.e. Ethereum) | Update an existing policy in the blockchain platform. |
+
+AnyLog validates the structure of the policies and their content. In addition, policies are
+updated with a date and time of the update uses the provided [unique ID](#the-policy-id).
+
 ## Delete policies
 
 AnyLog offers a set of commands to delete policies from the ledger.
