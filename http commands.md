@@ -17,7 +17,7 @@ Details on the AnyLog REST service are available [here](anylog%20commands.md#res
 http://[ip]:[port]/?User-Agent=[version]?into=[output format]?pdf=[true/false]?html=[html instructions]?destination=[network]?command=[AnyLog Command]"
 ```
 
-## Explanation:
+## Explanation
 The question mark separates between the different values delivered to the node. The options are detailed below:
 
 * http://[ip]:[port]
@@ -41,7 +41,44 @@ The question mark separates between the different values delivered to the node. 
   * The AnyLog command to execute.
   * For example, a SQL query like: ```command=sql lsl_demo format=table "select timestamp, value from ping_sensor"```
 
-## Example:
+## Example
 ```anglog
 http://10.0.0.78:7849/?User-Agent=AnyLog/1.23?into=html?pdf=true?html={ ^head^ : { ^include^ : [^<title>AnyLog</title>^] } }?destination=network?command=sql lsl_demo format=table "select timestamp, value from ping_sensor"
 ```
+
+## Using the Remote CLI to construct http requests
+
+Using the "Code" option on the Remote CLI, CLI commands are transformed to HTTP requests.
+
+### Example:
+1. Place a command on the Remote CLI. Example: ```sql lsl_demo format = table "select timestamp, value from ping_sensor "```
+2. Flag the Network box.
+3. Select the "Code" option
+4. Copy the following JSON to the "Input Data/JSON" box:
+  ```
+{ "head" : {
+            "include" : ["<title>AnyLog</title>"],
+            "style" : {
+                    ".center-title" : {
+                        "display" : "flex;",
+                        "flex-direction" : "column;",
+                        "align-items" : "center;",
+                        "justify-content" : "center;",
+                        "height" : "100vh;",
+                        "margin" : "0;",
+                        "color" : "blue;",
+                        "font-size" : "2em;",
+                        "text-align" : "center;"
+                        }
+                    }
+            },
+  "body" : {
+		"include" : ["<div class='center-title'", "<h1>AnyLog</h1>", "</div>"]
+
+	}
+}
+```
+5. From the dropdown menu select "Text"
+
+The HTTP command reflects the query and the output format. This command can be placed on a browser to issue the query and output the result in HTML.
+
