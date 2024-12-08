@@ -1,3 +1,7 @@
+## **Version**: [a4924f] [2024-12-07 16:49:46] /
+### New Features:
+1. HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../http%20commands.md). 
+
 ## **Version**: [be71d3] [2024-08-29 15:18:04] |
 ### New Features:
 1. New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)
