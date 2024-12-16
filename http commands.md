@@ -72,11 +72,10 @@ Using the "Code" option on the Remote CLI, CLI commands are transformed to HTTP 
                         }
                     }
             },
-  "body" : {
-		"include" : ["<div class='center-title'", "<h1>AnyLog</h1>", "</div>"]
-
-	}
-}
+          "top" : {
+  	          "include" : ["<div class='center-title'", "<h1>AnyLog</h1>", "</div>"]
+          }
+  }
 ```
 5. From the dropdown menu select "Text"
 
