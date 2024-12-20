@@ -189,11 +189,15 @@ When a file is added to the database, a file name and the hash value of the file
 
 A file can be added and assigned to a table in a blobs database using the following command:
 ```anylog
-file store where dbms = [dbms_name] and table = [table name] and hash = [hash value] and file = [path and file name]
+file store where hash = [hash value] and file = [path and file name]
 ```
+* [hash value] - can be any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included.
+* [path and file name] - The file name needs to include the database name and the table name that will host the file, and are in the following format: 
+                        [dbms_name].[table_name].file_name.
+
 Example:
 ```anylog
-file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/device12atpeak.bin
+file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/my_file.my_table.device12atpeak.bin
 ```
 
 Note: the following example returns the hash value of a file:
@@ -486,7 +490,7 @@ get rows count where dbms = blobs_edgex and table = image
 ### Delete a file or a group of files
 ```anylog
   file remove where dbms = blobs_edgex and table = videos and id = 9439d99e6b0157b11bc6775f8b0e2490.png
-  ile remove where dbms = blobs_edgex and table  = image
+  file remove where dbms = blobs_edgex and table  = image
   file remove where dbms = blobs_edgex and table = image and date  = 220723
 ```
   

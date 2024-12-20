@@ -48,7 +48,58 @@ http://10.0.0.78:7849/?User-Agent=AnyLog/1.23?into=html?pdf=true?html={ ^head^ :
 
 ## Using the Remote CLI to construct http requests
 
-Using the "Code" option on the Remote CLI, CLI commands are transformed to HTTP requests.
+Using the "Code" option on the Remote CLI, CLI commands are transformed to HTTP requests.  
+The Remote CLI can translate a user command and selected options to an HTTP command (as well as a QR code).  
+Users can modify the HTML structure by updating the <head> and <body> sections using a JSON structure that defines the HTML changes as follows:
+
+* Changes to the head are included in the HTML <head> section.
+* Changes at the top of the body are placed under the top section of the <body>.
+* Changes at the bottom of the body are placed under the bottom section of the <body>.
+* 
+## Example:
+1. Enter a command on the Remote CLI, e.g., sql lsl_demo format = table "select timestamp, value from ping_sensor"
+2. Select the "Network" checkbox.
+3. Choose the "Code" option.
+4. Paste the following JSON into the "Input Data/JSON" box:
+```anglog
+{
+  "head": {
+    "include": ["<title>AnyLog</title>"],
+    "style": {
+      ".center-title": {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "justify-content": "center",
+        "height": "100vh",
+        "margin": "0",
+        "color": "blue",
+        "font-size": "2em",
+        "text-align": "center"
+      }
+    }
+  },
+  "body": {
+    "top": {
+      "include": ["<div class='center-title'>", "<h1>AnyLog</h1>", "</div>"]
+    }
+  }
+}
+
+```
+5. From the dropdown menu, select "Text."
+6. Select the **Generate** option.
+
+The http command printed (as well as the QR Code) will deliver the report.
+
+
+
+
+Uses are able to modify the HTML by updating the html **head** and **body** sections using a JSON struct that describes the HTML changes as follows:
+* Changes to the **head** are added in the HTML head section.
+* Changes at the top of the **body** are represented under **top** in **body**.
+* Changes at the bottom of the **body** are represented under **bottom** in **body**.
+
 
 ### Example:
 1. Place a command on the Remote CLI. Example: ```sql lsl_demo format = table "select timestamp, value from ping_sensor "```
@@ -57,25 +108,27 @@ Using the "Code" option on the Remote CLI, CLI commands are transformed to HTTP 
 4. Copy the following JSON to the "Input Data/JSON" box:
   ```
 { "head" : {
-            "include" : ["<title>AnyLog</title>"],
-            "style" : {
-                    ".center-title" : {
-                        "display" : "flex;",
-                        "flex-direction" : "column;",
-                        "align-items" : "center;",
-                        "justify-content" : "center;",
-                        "height" : "100vh;",
-                        "margin" : "0;",
-                        "color" : "blue;",
-                        "font-size" : "2em;",
-                        "text-align" : "center;"
-                        }
-                    }
-            },
-          "top" : {
-  	          "include" : ["<div class='center-title'", "<h1>AnyLog</h1>", "</div>"]
-          }
+          "include" : ["<title>AnyLog</title>"],
+          "style" : {
+                  ".center-title" : {
+                      "display" : "flex;",
+                      "flex-direction" : "column;",
+                      "align-items" : "center;",
+                      "justify-content" : "center;",
+                      "height" : "100vh;",
+                      "margin" : "0;",
+                      "color" : "blue;",
+                      "font-size" : "2em;",
+                      "text-align" : "center;"
+                      }
+                  }
+          },
+"body" : {
+    "top" : {
+  	        "include" : ["<div class='center-title'", "<h1>AnyLog</h1>", "</div>"]
+    }
   }
+}
 ```
 5. From the dropdown menu select "Text"
 
