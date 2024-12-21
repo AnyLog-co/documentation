@@ -157,15 +157,19 @@ The above example only copies files with **bl** as a file name prefix and ***js*
 
 Files can be copied to a specified folder using the **file to** command:
 ```anylog
-file to where to [path and file name] where source = [path and file name]
+file to [path and file name] where source = [path and file name]
 ```
 This command is similar to the copy commands, however, when issuing the command using HTTP, the source file can be specified by the -F option.  
-This command is frequently used to copy config files into nodes when users deploy nodes from remote nodes.  
-Example:
+This command is frequently used to copy config files into nodes when users deploy nodes from remote nodes.    
+Examples:
+1) Using the CLI:
+```anylog
+file to !prep_dir/testdata2.txt where source = !prep_dir/testdata.txt
+```
+2) Using REST:
 ```anylog
 curl -X POST -H \"command: file to !my_dest\" -F \"file=@testdata.txt\" http://10.0.0.78:7849
 ```
-
 
 ## Move a file
 Move the source file to a destination directory on the local node.  
