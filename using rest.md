@@ -72,7 +72,7 @@ curl --location --request POST '10.0.0.78:7849' \
 --header 'command: reset error log'
 ```
 
-The following example is using HTTP request to copy a configuration file to an AnyLog node and process the file.
+The following example is using HTTP request to copy a configuration file to an AnyLog node and process the file.  
 Details on the **file store** command are available [here](image%20mapping.md#insert-a-file-to-a-local-database)
 ```anylog
 curl -X POST -H "command: file to where dest = !demo_dir/operator_28.al" -F "file=@new_config.al" http://10.0.0.78:7849

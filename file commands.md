@@ -160,7 +160,8 @@ Files can be copied to a specified folder using the **file to** command:
 file to [path and file name] where source = [path and file name]
 ```
 This command is similar to the copy commands, however, when issuing the command using HTTP, the source file can be specified by the -F option.  
-This command is frequently used to copy config files into nodes when users deploy nodes from remote nodes.    
+This command is frequently used to copy config files into nodes when users deploy nodes remotely.  
+
 Examples:
 1) Using the CLI:
 ```anylog

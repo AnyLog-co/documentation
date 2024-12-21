@@ -2,8 +2,8 @@
 ## **Version**: [024a85] [2024-12-21 13:31:31]
 ### New Features:
 1. A new command: **file to** - write a file to a specified directory, using CLI or via REST. 
-   Details are in [Copy a file to a folder](../file%20commands.md#copy-a-file-to-a-folder).  
-   This command can be used to remotely copy configurations to a node. Example is available in the [using rest](../using%20rest.md#examples) section.
+   Details are in [Copy a file to a folder](../file%20commands.md#copy-a-file-to-a-folder) section.  
+   This command can be used to remotely copy configurations to a node. An example is available in the [using rest](../using%20rest.md#examples) section.
 2. The command **process** is supported using REST PUT.
 ### Changes
 1. The required structure for the file name in the **file store** command is optional. 
