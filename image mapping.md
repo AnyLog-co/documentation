@@ -189,31 +189,39 @@ When a file is added to the database, a file name and the hash value of the file
 
 A file can be added and assigned to a table in a blobs database using the following command:
 ```anylog
-file store where hash = [hash value] and file = [path and file name] and dest = [path and file name]
+file store where dbms = [dbms name] and table = [table name] and hash = [hash value] and source = [path and file name] and dest = [path and file name]
 ```
 Explanation:
 
-| Command Option | Details                                                                                                                      |
-|----------------|------------------------------------------------------------------------------------------------------------------------------|
-| hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included     |
-| file           | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow)     |
-| dest           | The destination file (path and name) - if written to a file on disk                                                          |
-| dbms           | The database name - if organized in a database (and the database name is not specified in the file name - see example below) |
-| table          | The table name - if organized in a database (and the table name is not specified in the file name - see example below)       |
+| Command Option | Details                                                                                                                  |
+|----------------|--------------------------------------------------------------------------------------------------------------------------|
+| dbms           | The database name - The database name                                                                                    |
+| table          | The table name                                                                                                           |
+| hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included |
+| source         | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow) |
+| dest           | The file name provided to file in the blobs database - if file is provided using REST with the -F option                 |
 
+The dbms and table name can be provided using one of the following options:
+* Provided explicitly in the command line.
+* As an extension to the file name. If the dbms and table names are not specified in the command line, 
+ it is expected that these values would be embedded in the file name using the following format:  [dbms_name].[table name].[file name]
 
 Examples:
-1) Where the database name (my_dbms) and table name (my_table) are included in the file name
+1) In the example below, the database and table names are specified in the command.
 ```anylog
-file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/my_dbms.my_table.device12atpeak.bin
+file store where dbms = admin and table = test and source = !prep_dir/testdata.txt
 ```
-2) Where file is copied to a destination
+2) In the example below, the database name and table name are extracted from the file name: **admin** and **files** respectively.
 ```anylog
-file store where file = !prep_dir/root.json and dest = !prep_dir/process.json
+ file store where source = !prep_dir/admin.files.test.txt
+ ```
+3) Using a REST call, the source file is specified in the -F option. This option requiers to specify the name of the file in the blobs storage:
+```anylog
+curl -X POST -H "command: file store where dbms = admin and table = files and dest = file_rest " -F "file=@testdata.txt" http://10.0.0.78:7849
 ```
-**Notes:** 
 
-* For the hash variable, a user can calculate the hash value of a file using the command **file hash** 
+**Note:** 
+For the hash variable, a user can calculate the hash value of a file using the command **file hash** 
 ```anylog
 file hash !prep_dir/device12atpeak.bin
 ```
@@ -227,28 +235,6 @@ Use the following command to disable the trace outputs:
 ```anylog
 trace level = 0 file store
 ```
-
-3) Using a REST call, the source file is specified in the -F option:
-```anylog
-curl -X POST -H "command: file store where dest = !prep_dir/file_data.txt" -F "file=@my_data.txt" http://10.0.0.78:7849
-```
-
-
-
-
-**Note:** A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with options to copy files on the same node and between nodes).  
-
-
-**Using Trace**  
-To trace a failure, the following command outputs the failure error to stdout:
-```anylog
-trace level = 1 file store
-```
-Use the following command to disable the trace outputs:
-```anylog
-trace level = 0 file store
-```
-
 
 ### Retrieve a blob file from a different node
 
