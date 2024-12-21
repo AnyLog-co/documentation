@@ -199,7 +199,7 @@ Explanation:
 | table          | The table name                                                                                                           |
 | hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included |
 | source         | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow) |
-| dest           | The file name provided to file in the blobs database - if file is provided using REST with the -F option                 |
+| dest           | The file name assigned in the blobs database - (required when the file is provided using REST with the -F option         |
 
 The dbms and table name can be provided using one of the following options:
 * Provided explicitly in the command line.
