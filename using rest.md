@@ -26,14 +26,29 @@ AnyLog commands are supported using the _HTTP_ methods `GET`, `PUT` and `POST`.
 * _PUT_ is used to add data to nodes in the network.  
 * _POST_ is used as a default method to execute all other AnyLog commands.  
 
-### The AnyLog commands supported by GET
+### The AnyLog commands supported by REST
 
-| HTTP Method   | AnyLog commands  | Comments | 
-| ------------- | -----------------|  ------|
-| GET           | sql              | Issue queries to data hosted by nodes of the network network |
-|               | get              | Retrieve information from nodes members of the network |
-|               | blockchain get   | Query the metadata |
-|               | help             | Help on the ANyLog commands |
+| AnyLog command | HTTP Method       | Comments                                                                       | 
+|----------------|-------------------|--------------------------------------------------------------------------------|
+| GET            | sql               | Issue queries to data hosted by nodes of the network network                   |
+| GET            | help              | Help on the AnyLog commands                                                    |
+| GET            | get               | Retrieve information from nodes members of the network                         |
+| GET            | blockchain get    | Query the metadata that is considered by the node                              |
+| GET            | blockchain read   | Query the disk image of the metadata                                           |
+| POST           | blockchain drop   | Drop a policy                                                                  |
+| GET            | query status      | Retrieve the status of the currently or previous executed queries              |
+| GET            | query explain     | Explain how the currently or previous queries are processed                    |
+| GET            | query destination | Detail the participating nodes in each query                                   |
+| GET            | job status        | Retrieve status info on jobs assigned to the rule engine                       |
+| GET            | job active        | Retrieve status info on the currebly executed jobs assigned to the rule engine |
+| POST           | job run           | Execute a specific job assigned to the rule engine                             |
+| POST           | job stop          | Stop the execution of a specific job assigned to the rule engine               |
+| GET            | file get          | Copy a file from a remote node to the local node                               |
+| GET            | file retrieve     | Retrieve a file or files from the designated database                          |
+| POST           | file store        | Insert a file into the blobs dbms                                              |
+| GET            | test              | Issue a test command                                                           |
+| POST           | reset             | Issue a reset command                                                          |
+| POST           | process           | process an AnyLog script file                                                  |
 
 #### Examples
 
@@ -50,28 +65,22 @@ curl --location --request GET '10.0.0.78:7849' \
 --header 'command: blockchain get operator where company = anylog'
 ```
 
-
-### Using PUT to add data to nodes in the network.
-
-Details are provided in  the section [Data transfer using a REST API](adding%20data.md#data-transfer-using-a-rest-api).
-
-
-### Using POST request to execute an AnyLog commands
-
-POST supports all other commands. Some examples are:
-
-| HTTP Method   | AnyLog commands  | Comments | 
-| ------------- | -----------------|  ------|
-| POST          | set              | Set values or change status |
-|               | reset            | Reset values or status |
-|               | blockchain       | Manage metadata commands (note the `blockchain get` is supported using GET.  |
-
-#### Example
 ```anylog
 curl --location --request POST '10.0.0.78:7849' \
 --header 'User-Agent: AnyLog/1.23' \
 --header 'command: reset error log'
 ```
+
+The following example is using HTTP request to copy a configuration file to an AnyLog node and process the file:
+```anylog
+curl -X POST -H "command: file store where dest = !demo_dir/operator_28.al" -F "file=@new_config.al" http://10.0.0.78:7849
+curl -X POST -H "command: process !demo_dir\operator_28.al" http://10.0.0.78:7849
+```
+
+
+### Using PUT to add data to nodes in the network.
+
+Details are provided in  the section [Data transfer using a REST API](adding%20data.md#data-transfer-using-a-rest-api).
 
 ## Headers setup
 
@@ -87,12 +96,12 @@ The header setup for GET and POST is the following:
 
 * Options for _destination_:
 
-| Option     | Comment                                                                                                                                                                | 
-| ---------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-| A comma separated IPs and Ports | The command will be delivered on all the specified destinations.                                                                                                       
-| local | The destination is the connected node.                                                                                                                                 |
-| Not specified | Same as local.                                                                                                                                                         |
-| network | For SQL queries, if destination is **network**, the network protocol will resolve the destination based on a database name and a table name derived from the command. |
+| Option                           | Comment                                                                                                                                                               | 
+|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+|  A comma separated IPs and Ports | The command will be delivered on all the specified destinations.                                                                                                      |                                                                                                      
+| local                            | The destination is the connected node.                                                                                                                                |
+| Not specified                    | Same as local.                                                                                                                                                        |
+| network                          | For SQL queries, if destination is **network**, the network protocol will resolve the destination based on a database name and a table name derived from the command. |
 
 * Options _User-Agent_:  
 Needs to specify "AnyLog" as the product followed by the version. 
