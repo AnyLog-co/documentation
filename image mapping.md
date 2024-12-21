@@ -278,7 +278,7 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
     * As a message broker - the new data is published on AnyLog node as a Broker.  
       Example:  
       ```anylog
-      run message broker !external_ip 7850 !ip 7850 6
+      run message broker where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
       ```
       Details on configuration of AnyLog as a broker are available [here](message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
     * As a Blobs Archiver - this process loads the images into blobs database (such as MongoDB).  
@@ -420,7 +420,7 @@ The following command will display the policy info: `!mapping_policy`
  
 Use the following command to update the metadata with the policy of the example above:  
 ```anylog
-blockchain insert where policy = !mapping_policy and local = false  and master = !master_node
+blockchain insert where policy = !mapping_policy and local = true  and master = !master_node
 ``` 
 Use the following command to view the update of the metadata with the new policy:
 ```anylog
@@ -432,7 +432,7 @@ The new data will be published to a topic called images and the command below as
 _images_ topic with the policy above such that when the data is published, the data is mapped according to the mapping policy.
 
 ```anylog
-run mqtt client where broker=local and log=false and topic=( name=images and policy = id_image_mapping)
+run mqtt msg where broker=local and log=false and topic=( name=images and policy = id_image_mapping)
 ``` 
 
 ### Publish the data
@@ -504,6 +504,7 @@ get rows count where dbms = blobs_edgex and table = image
 
 ### Retrieve a file
 ```anylog
+  file retrieve where dbms = edgex and table = images and dest = !prep_dir and limit = 10
   file retrieve where dbms = blobs_edgex and table = images and id = 07da45a366e5778fc7d34bf231bddcfa.png and dest = !prep_dir
 ```
 
