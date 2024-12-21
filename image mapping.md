@@ -218,8 +218,8 @@ curl -X POST -H "command: file store where dest = !prep_dir/file_data.txt" -F "f
 
 
 **Notes:** 
-* A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with copy options on the same node and remote nodes).  
-* User can calculate the hash value of a file using the command **file hash** 
+* A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with options to copy files on the same node and between nodes).  
+* For the hash variable, a user can calculate the hash value of a file using the command **file hash** 
 ```anylog
 file hash !prep_dir/device12atpeak.bin
 ```
