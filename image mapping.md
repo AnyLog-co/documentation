@@ -211,18 +211,33 @@ file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a6
 ```anylog
 file store where file = !prep_dir/root.json and dest = !prep_dir/process.json
 ```
+**Notes:** 
+
+* For the hash variable, a user can calculate the hash value of a file using the command **file hash** 
+```anylog
+file hash !prep_dir/device12atpeak.bin
+```
+
+**Using Trace**  
+To trace a failure, the following command outputs the failure error to stdout:
+```anylog
+trace level = 1 file store
+```
+Use the following command to disable the trace outputs:
+```anylog
+trace level = 0 file store
+```
+
 3) Using a REST call, the source file is specified in the -F option:
 ```anylog
 curl -X POST -H "command: file store where dest = !prep_dir/file_data.txt" -F "file=@my_data.txt" http://10.0.0.78:7849
 ```
 
 
-**Notes:** 
-* A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with options to copy files on the same node and between nodes).  
-* For the hash variable, a user can calculate the hash value of a file using the command **file hash** 
-```anylog
-file hash !prep_dir/device12atpeak.bin
-```
+
+
+**Note:** A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with options to copy files on the same node and between nodes).  
+
 
 **Using Trace**  
 To trace a failure, the following command outputs the failure error to stdout:

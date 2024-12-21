@@ -151,6 +151,21 @@ run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 ```
 The above example only copies files with **bl** as a file name prefix and ***js*** as a prefix to the file type.  
 
+
+## Copy a file to a folder
+
+Files can be copied to a specified folder using the **file to** command:
+```anylog
+file to where to [path and file name] where source = [path and file name]
+```
+This command is similar to the copy commands, however, when issueing the command using HTTP, the source file can be specified by the -F option.  
+This command is frequently used to copy config files into nodes when users deploy nodes from remote nodes.  
+Example:
+```anylog
+curl -X POST -H \"command: file to !my_dest\" -F \"file=@testdata.txt\" http://10.0.0.78:7849
+```
+
+
 ## Move a file
 Move the source file to a destination directory on the local node.  
 Usage:
