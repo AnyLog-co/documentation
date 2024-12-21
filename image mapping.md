@@ -189,18 +189,37 @@ When a file is added to the database, a file name and the hash value of the file
 
 A file can be added and assigned to a table in a blobs database using the following command:
 ```anylog
-file store where hash = [hash value] and file = [path and file name]
+file store where hash = [hash value] and file = [path and file name] and dest = [path and file name]
 ```
-* [hash value] - can be any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included.
-* [path and file name] - The file name needs to include the database name and the table name that will host the file, and are in the following format: 
-                        [dbms_name].[table_name].file_name.
+Explanation:
 
-Example:
+| Command Option | Details                                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------|
+| hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included     |
+| file           | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow)     |
+| dest           | The destination file (path and name) - if written to a file on disk                                                          |
+| dbms           | The database name - if organized in a database (and the database name is not specified in the file name - see example below) |
+| table          | The table name - if organized in a database (and the table name is not specified in the file name - see example below)       |
+
+
+Examples:
+1) Where the database name (my_dbms) and table name (my_table) are included in the file name
 ```anylog
-file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/my_file.my_table.device12atpeak.bin
+file store where dbms = blobs_edgex and table = video and hash = ce2ee27c4d192a60393c5aed1628c96b and file = !prep_dir/my_dbms.my_table.device12atpeak.bin
+```
+2) Where file is copied to a destination
+```anylog
+file store where file = !prep_dir/root.json and dest = !prep_dir/process.json
+```
+3) Using a REST call, the source file is specified in the -F option:
+```anylog
+curl -X POST -H "command: file store where dest = !prep_dir/file_data.txt" -F "file=@my_data.txt" http://10.0.0.78:7849
 ```
 
-Note: the following example returns the hash value of a file:
+
+**Notes:** 
+* A second option for file copy is with the [file copy](file%20commands.md#copy-a-file-on-the-local-node) command (with copy options on the same node and remote nodes).  
+* User can calculate the hash value of a file using the command **file hash** 
 ```anylog
 file hash !prep_dir/device12atpeak.bin
 ```
