@@ -46,6 +46,7 @@ AnyLog commands are supported using the _HTTP_ methods `GET`, `PUT` and `POST`.
 | GET            | file get          | Copy a file from a remote node to the local node                               |
 | GET            | file retrieve     | Retrieve a file or files from the designated database                          |
 | POST           | file store        | Insert a file into the blobs dbms                                              |
+| POST           | file to           | copy a file to a folder                                                        |
 | GET            | test              | Issue a test command                                                           |
 | POST           | reset             | Issue a reset command                                                          |
 | POST           | process           | process an AnyLog script file                                                  |
@@ -74,9 +75,10 @@ curl --location --request POST '10.0.0.78:7849' \
 The following example is using HTTP request to copy a configuration file to an AnyLog node and process the file.
 Details on the **file store** command are available [here](image%20mapping.md#insert-a-file-to-a-local-database)
 ```anylog
-curl -X POST -H "command: file store where dest = !demo_dir/operator_28.al" -F "file=@new_config.al" http://10.0.0.78:7849
+curl -X POST -H "command: file to where dest = !demo_dir/operator_28.al" -F "file=@new_config.al" http://10.0.0.78:7849
 curl -X POST -H "command: process !demo_dir\operator_28.al" http://10.0.0.78:7849
 ```
+Details are available at the [file to](file%20commands.md#copy-a-file-to-a-folder) section.
 
 
 ### Using PUT to add data to nodes in the network.
