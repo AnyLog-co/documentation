@@ -20,10 +20,11 @@ In OPC UA, namespaces are used to organize and uniquely identify nodes in the ad
 Each namespace is assigned a unique index (e.g., ns=0, ns=1, ns=2), which is used in Node IDs.  
 Example Node ID: ns=1;s=TemperatureSensor.
 
-Retieving the namespaces is with the following command:
+Retrieving the namespaces is with the following command:
 ```anylog
 get opcua namespace where url = [connect string] and user = [username] and password = [password]
 ```
+Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
 * [username] - the username required by the OPC UA server for access.
 * [password] - the password associated with the username.
@@ -47,7 +48,7 @@ The navigation starts from the root of the tree, unless the user specifies a nod
 
 The Tree structure is explored with the following command:
 ```anylog
-get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and user = [username] and password = [password] and ...
+get opcua struct where url = [connect string] and user = [username] and password = [password] and ...
 ```
   
 The following tables summarizes the command variables:
@@ -80,3 +81,20 @@ Examples:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and node="ns=6;s=MyObjectsFolder" and attributes = *
     ```
+   
+## The OPCUA Values
+
+Node values are retrieved with the following command:
+```anylog
+get opcua values where url = [connect string] and user = [username] and password = [password] and node = [node id]
+```
+Details:
+* [connect string] - The url specifies the endpoint of the OPC UA server.
+* [username] - the username required by the OPC UA server for access.
+* [password] - the password associated with the username.
+* [node] - one or multiple node IDs.
+
+Example:
+```anylog
+get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+```
