@@ -90,11 +90,60 @@ get opcua values where url = [connect string] and user = [username] and password
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
-* [username] - the username required by the OPC UA server for access.
-* [password] - the password associated with the username.
-* [node] - one or multiple node IDs.
+* [username] - The username required by the OPC UA server for access.
+* [password] - The password associated with the username.
+* [node] - One or multiple node IDs.
 
 Example:
 ```anylog
 get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+```
+
+## Pulling data from OPCUA continuously
+
+The command **run opcua client*** pulls data from OPCUA continuously and streams the data into a database on the local node:
+```anylog
+run opcua client where url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+```
+ 
+The following tables summarizes the command variables:
+
+| keyword   | Details                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------| 
+| url       | The url specifies the endpoint of the OPC UA server.                                         |
+| username  | the username required by the OPC UA server for access.                                       |
+| password  | the password associated with the username.                                                   |
+| frequency | Read frequency in seconds or a fraction of seconds using hz (i.e.: 10 hz).                   |
+| node      | ID of one or multiple nodes that their value is retrieved.                                   |
+| policy    | If nodes are not specified on the CLI, the policy determines the nodes and the table to use. |
+| dbms      | The database to host the data (if not specified in a policy).                                |
+| table     | The table to host the data (if not specified in a policy).                                   |
+| topic     | If data is processed through the local broker.                                               |
+
+
+Example:
+```anylog
+run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+```
+Note: Multiple OPCUA client can be declared on the same node.
+
+## Client status
+
+The following command provides the info on the OPCUA Client processes:
+```anylog
+get opcua client
+```
+
+## Exit OPCUA Client
+
+The following command terminates a client process:
+```anylog
+exit opcua client [client name]
+```
+The client name is the policy ID if a policy is used or **[dbms name].[table name]**.
+If the client name is **all**, all clients are terminated.
+Examples:
+```anylog
+exit opcua all
+exit opua nov.rig8
 ```
