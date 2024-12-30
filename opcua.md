@@ -140,7 +140,7 @@ The following command terminates a client process:
 ```anylog
 exit opcua client [client name]
 ```
-The client name is the policy ID if a policy is used or **[dbms name].[table name]**.
+The client name is the policy ID or **[dbms name].[table name]**.  
 If the client name is **all**, all clients are terminated.
 Examples:
 ```anylog
