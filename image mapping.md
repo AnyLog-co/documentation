@@ -193,13 +193,13 @@ file store where dbms = [dbms name] and table = [table name] and hash = [hash va
 ```
 Explanation:
 
-| Command Option | Details                                                                                                                  |
-|----------------|--------------------------------------------------------------------------------------------------------------------------|
-| dbms           | The database name - The database name                                                                                    |
-| table          | The table name                                                                                                           |
-| hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included |
-| source         | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow) |
-| dest           | The file name assigned in the blobs database - (required when the file is provided using REST with the -F option         |
+| Command Option | Details                                                                                                                               |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| dbms           | The database name - The database name                                                                                                 |
+| table          | The table name                                                                                                                        |
+| hash           | Any unique value provided by the user. If a value is not specified, the hash of the file will be calculated and included              |
+| source         | The source file (path and name) - note: with a REST call, the file can be transferred using -F option (see example blow)              |
+| dest           | The file name assigned in the blobs database. The **dest** option is required when the file is provided using REST with the -F option |
 
 The dbms and table name can be provided using one of the following options:
 * Provided explicitly in the command line.
