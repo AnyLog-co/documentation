@@ -1,4 +1,8 @@
 
+## **Version** [c03b82] [2025-01-02 12:30:17]
+### New Features:
+1. OPCUA support. Details: [OPCUA](../opcua.md) 
+
 ## **Version**: [024a85] [2024-12-21 13:31:31]
 ### New Features:
 1. A new command: **file to** - write a file to a specified directory, using CLI or via REST. 
