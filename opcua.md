@@ -63,6 +63,9 @@ The following tables summarizes the command variables:
 | attributes | Attribute names to consider or * for all                                                  |
 | limit      | Limit the Tree traversal by the number of nodes to visit                                  |
 | depth      | Limit the Tree traversal by the depth                                                     |
+| class      | Filter the Tree traversal to show only nodes in the listed class                          |
+| output     | The target for the output stream (stdout or a file name)                                  |
+| format     | The format of the output stream                                                           |
 
 Examples:
 1. Traversal from the root and limit by 10 nodes:
@@ -81,7 +84,11 @@ Examples:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and node="ns=6;s=MyObjectsFolder" and attributes = *
     ```
-   
+5. Traversal from a the root, limit by depth 4 and filter by classes "variable" and "object"
+    ```anylog
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and depth = 4 and class = variable and class = object
+    ```
+      
 ## The OPCUA Values
 
 Node values are retrieved with the following command:
