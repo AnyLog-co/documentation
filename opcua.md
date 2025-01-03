@@ -66,6 +66,9 @@ The following tables summarizes the command variables:
 | class      | Filter the Tree traversal to show only nodes in the listed class                          |
 | output     | The target for the output stream (stdout or a file name).                                 |
 | format     | The format of the output                                                                  |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command              |
+| dbms       | If output generates "run_client" - the table name of the "run client" command             |
+| table      | If output generates "run_client" - the dbms name of the "run client" command              |
 
 **Format options:**
 * **tree** - the OPC-UA tree structure (default)
@@ -101,6 +104,10 @@ Examples:
 7. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **get opcua value** command.
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = get_value
+    ```
+8. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **run opcua client** command.
+    ```anylog
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = my_dbms and table = my_table and frequency = 10 and limit = 10
     ```
       
 ## The Get OPCUA Values Command
