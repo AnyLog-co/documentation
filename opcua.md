@@ -64,15 +64,25 @@ The following tables summarizes the command variables:
 | limit      | Limit the Tree traversal by the number of nodes to visit                                  |
 | depth      | Limit the Tree traversal by the depth                                                     |
 | class      | Filter the Tree traversal to show only nodes in the listed class                          |
-| output     | The target for the output stream (stdout or a file name)                                  |
-| format     | The format of the output stream                                                           |
+| output     | The target for the output stream (stdout or a file name).                                 |
+| format     | The format of the output                                                                  |
+
+**Format options:**
+* **tree** - the OPC-UA tree structure (default)
+* **stats** - statiscs counting the number of entries in each class.
+* **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
+* **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
 
 Examples:
 1. Traversal from the root and limit by 10 nodes:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and limit = 10
     ```
-2. Traversal from the root and limit by depth:
+2. Traversal from the root, output is directed to a file:
+    ```anylog
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = !prep_dir/opcua_tree.txt and limit = 10
+    ```
+3. Traversal from the root and limit by depth:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and depth = 4
     ```
@@ -84,12 +94,12 @@ Examples:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and node="ns=6;s=MyObjectsFolder" and attributes = *
     ```
-5. Traversal from a the root, limit by depth 4 and filter by classes "variable" and "object"
+6. Traversal from the root, limit by depth 4 and filter by classes "variable" and "object"
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and depth = 4 and class = variable and class = object
     ```
       
-## The OPCUA Values
+## The Get OPCUA Values Command
 
 Node values are retrieved with the following command:
 ```anylog
