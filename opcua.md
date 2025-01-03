@@ -98,6 +98,10 @@ Examples:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and depth = 4 and class = variable and class = object
     ```
+7. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **get opcua value** command.
+    ```anylog
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = get_value
+    ```
       
 ## The Get OPCUA Values Command
 
