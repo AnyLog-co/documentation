@@ -1,13 +1,13 @@
 
 ## **Version** [139b43] [2025-01-04 14:23:39]
-1. Add **license** policy.
-Usage example:
-Creating the policy:
+1. Add **license** policy.    
+    Usage example:  
+    Creating the policy:  
    ```
    license_number_key = af043d39675e85e5c9d74999dfd123de2e54e6ed4f1fe9bed04b8ce7754826c89aa1adfb562b18d49f7c4a336ecedadb3c3ca43f88a7d3f4644b6424c5f6ba9217bede0bbcdc94094af9f6e213aa247ccb3ed5f77b794f68df07a62552ac0c6d9c67e406fe6213d6145d7c3d2c127e99906dffebd1c34c12b259719d80e6fcb3
    policy = create policy license where company = AnyLogCo. and expiration = 2025-03-01 and type = beta and activation_key = !license_key 
    ```
-Updating the policy:
+    Updating the policy:
    ```
    blockchain insert where policy = !policy and local = true and master = !master_node
    ```
