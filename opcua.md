@@ -120,11 +120,21 @@ Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
 * [username] - The username required by the OPC UA server for access.
 * [password] - The password associated with the username.
+* [include] - Additional attributes that are returned with the value.
 * [node] - One or multiple node IDs.
+
+The include options:
+* id - the id of the attribute
+* name - The attribute name
+* source_timestamp - The timestamp of the value as determined by the data source (e.g., a sensor or device).
+* server_timestamp - The timestamp assigned by the OPC UA server when the data value was received or processed.
+* status_code - The status of the value (e.g., Good, Bad, Uncertain).
+
+Note: if **include** is assigned with the keyword **all**, all attributes are included in the output.
 
 Example:
 ```anylog
-get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
 ```
 
 ## Pulling data from OPCUA continuously
