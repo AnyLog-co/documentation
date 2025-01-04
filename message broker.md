@@ -197,12 +197,12 @@ Setting and viewing the thresholds is explained at [Setting and retrieving thres
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
 
 **Terminating Clients**  
-* To terminate all the Msg Clients use the command:
+To terminate one or all Msg Clients, use the following command:
 ```anylog
 exit msg client [ID/all]
 ```
 * **ID** - Represents the client ID.
-* **all** Exits all clients.  
+* **all** - Exits all clients.  
 
 Examples:
 ```anylog
