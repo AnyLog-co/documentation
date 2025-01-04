@@ -199,11 +199,11 @@ By default, the node assigns the value 60 seconds to the time threshold and 10,0
 **Terminating Clients**  
 * To terminate all the Msg Clients use the command: 
 ```anylog
-exit mqtt
+exit msg client all
 ```
-* To terminate a particular client use the command (_n_ is the client ID):
+* To terminate a particular client use the command (**n** is the client ID):
 ```anylog
-exit mqtt [n]
+exit msg client all
 ```
 
 ### View client status
