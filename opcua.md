@@ -163,7 +163,11 @@ Example:
 ```anylog
 run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
 ```
-Note: Multiple OPCUA client can be declared on the same node.
+Notes: 
+1. Multiple OPCUA client can be declared on the same node.
+2. Each row is added with 2 columns:
+   * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
+   * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the OPCUA.
 
 ## Client status
 
