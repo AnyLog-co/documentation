@@ -107,7 +107,7 @@ Examples:
     ```
 8. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **run opcua client** command.
     ```anylog
-    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = my_dbms and table = my_table and frequency = 10 and limit = 10
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = nov and table = sensor and frequency = 10 and limit = 10
     ```
       
 ## The Get OPCUA Values Command
