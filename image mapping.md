@@ -217,7 +217,9 @@ file store where dbms = admin and table = test and source = !prep_dir/testdata.t
  ```
 3) Using a REST call, the source file is specified in the -F option. This option requiers to specify the name of the file in the blobs storage:
 ```anylog
-curl -X POST -H "command: file store where dbms = admin and table = files and dest = file_rest"  -H "Content-Type: application/octet-stream" -F "file=@testdata.txt" http://10.0.0.78:7849 
+curl -X POST -H "command: file store where dbms = admin and table = files and dest = file_rest"  -F "file=@testdata.txt" http://10.0.0.78:7849
+
+For binary data include: -H "Content-Type: application/octet-stream" 
 ```
 
 **Note:** 
