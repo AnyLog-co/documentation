@@ -1,5 +1,6 @@
 
 ## **Version** [139b43] [2025-01-04 14:23:39]
+### New Features:
 1. Add **license** policy.    
     Usage example:  
     Creating the policy:  
@@ -11,6 +12,8 @@
    ```
    blockchain insert where policy = !policy and local = true and master = !master_node
    ```
+### Changes
+1. Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../message%20broker.md#processing-messages-and-terminating-a-subscription).
 
 ## **Version** [c03b82] [2025-01-02 12:30:17]
 ### New Features:
