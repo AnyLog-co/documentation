@@ -12,6 +12,11 @@
    ```
    blockchain insert where policy = !policy and local = true and master = !master_node
    ```
+   Retrieving the License:
+   ```
+   blockchain get license bring.last [license][activation_key] "{'company':'"  [license][company] "','expiration':'"  [license][expiration] "','type':'" [license][type] "'}"
+   ```
+#
 ### Changes
 1. Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../message%20broker.md#processing-messages-and-terminating-a-subscription).
 
