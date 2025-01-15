@@ -163,8 +163,8 @@ docker run -it -d \
 sql edgex info = (dest_type = rest) and extend=(+country, +city, @ip, @port, @dbms_name, @table_name) and format = json and timezone = utc  select  file, start_ts::ljust(19), end_ts::ljust(19), people_count, confidence from people_counter     where start_ts >= NOW() - 1 hour and end_ts <= NOW() order by people_count, confidence --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)
 ```
 <div style="display: flex; align-items: center; justify-content: center;">
-  <img src="../imgs/blobs_img1.png" width="30%" height="50%" style="margin-right: 10px;" />
-  <img src="../imgs/blobs_img2.png" width="30%" height="50%" />
+  <img src="../imgs/blobs_img1.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
+  <img src="../imgs/blobs_img2.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
 </div>
 
 Within the query command there's an _info_ component (`info=(dest_type=rest)`), this informs thee operator returning the 
