@@ -53,23 +53,23 @@ get opcua struct where url = [connect string] and user = [username] and password
   
 The following tables summarizes the command variables:
 
-| keyword    | Details                                                                                   |
-|------------|-------------------------------------------------------------------------------------------| 
-| url        | The url specifies the endpoint of the OPC UA server.                                      |
-| username   | the username required by the OPC UA server for access.                                    |
-| password   | the password associated with the username.                                                |
-| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable |
-| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited. |
-| attributes | Attribute names to consider or * for all                                                  |
-| limit      | Limit the Tree traversal by the number of nodes to visit                                  |
-| depth      | Limit the Tree traversal by the depth.                                                    |
-| class      | Filter the Tree traversal to show only nodes in the listed class.                         |
-| output     | The target for the output stream (stdout or a file name).                                 |
-| format     | The format of the output (see details below).                                             |
-| frequency  | If output generates "run_client" - the frequency of the "run client" command              |
-| dbms       | If output generates "run_client" - the table name of the "run client" command             |
-| table      | If output generates "run_client" - the dbms name of the "run client" command              |
-| validate   | A boolean value to enable reading the value from each visited node (see details below).   |
+| keyword    | Details                                                                                        |
+|------------|------------------------------------------------------------------------------------------------| 
+| url        | The url specifies the endpoint of the OPC UA server.                                           |
+| username   | the username required by the OPC UA server for access.                                         |
+| password   | the password associated with the username.                                                     |
+| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable      |
+| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.      |
+| attributes | Attribute names to consider or * for all                                                       |
+| limit      | Limit the Tree traversal by the number of nodes to visit                                       |
+| depth      | Limit the Tree traversal by the depth.                                                         |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                              |
+| output     | The target for the output stream (stdout or a file name).                                      |
+| format     | The format of the output (see details below).                                                  |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command                   |
+| dbms       | If output generates "run_client" - the table name of the "run client" command                  |
+| table      | If output generates "run_client" - the dbms name of the "run client" command                   |
+| validate   | A boolean value. If set to True, the value from each visited node is read (see details below). |
 
 **Format options:**
 * **tree** - the OPC-UA tree structure (default)
@@ -77,14 +77,15 @@ The following tables summarizes the command variables:
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
 
-**The validate option:**
-The default value is **false**. If value is set to **true**, the value of each considered node is read during the traversal.   
-If the read fails:
-* if **format** is set to **get_value** or **run_client** the node is not considered.
-* In other cases, the output includes a **validate** attributes which is assigned with the value **success** or **failure**.
-* The summary chart includes a counter for the number of nodes that failed to generate a value.
+**The validate option:**  
+* The default value is **false**. 
+* If value is set to **true**, the value of each considered node is read during the traversal.
+* If the read fails:
+  * if **format** is set to **get_value** or **run_client** the node is not considered.
+  * In other cases, the output includes a **validate** attributes which is assigned with the value **success** or **failure**.
+  * The summary chart includes a counter for the number of nodes that failed to generate a value.
 
-Examples:
+**Examples:**
 1. Traversal from the root and limit by 10 nodes:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and output = stdout and limit = 10
