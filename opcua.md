@@ -62,19 +62,27 @@ The following tables summarizes the command variables:
 | type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited. |
 | attributes | Attribute names to consider or * for all                                                  |
 | limit      | Limit the Tree traversal by the number of nodes to visit                                  |
-| depth      | Limit the Tree traversal by the depth                                                     |
-| class      | Filter the Tree traversal to show only nodes in the listed class                          |
+| depth      | Limit the Tree traversal by the depth.                                                    |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                         |
 | output     | The target for the output stream (stdout or a file name).                                 |
-| format     | The format of the output                                                                  |
+| format     | The format of the output (see details below).                                             |
 | frequency  | If output generates "run_client" - the frequency of the "run client" command              |
 | dbms       | If output generates "run_client" - the table name of the "run client" command             |
 | table      | If output generates "run_client" - the dbms name of the "run client" command              |
+| validate   | A boolean value to enable reading the value from each visited node (see details below).   |
 
 **Format options:**
 * **tree** - the OPC-UA tree structure (default)
-* **stats** - statiscs counting the number of entries in each class.
+* **stats** - statistics counting the number of entries in each class.
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
+
+**The validate option:**
+The default value is **false**. If value is set to **true**, the value of each considered node is read during the traversal.   
+If the read fails:
+* if **format** is set to **get_value** or **run_client** the node is not considered.
+* In other cases, the output includes a **validate** attributes which is assigned with the value **success** or **failure**.
+* The summary chart includes a counter for the number of nodes that failed to generate a value.
 
 Examples:
 1. Traversal from the root and limit by 10 nodes:
