@@ -140,7 +140,7 @@ blockchain insert where policy=!new_policy and local=true and blockchain=optimis
 
 ## Publishing & Query Data
 <a href="https://github.com/AnyLog-co/Sample-Data-Generator" target="_blank">Sample Data Generator</a> is a tool 
-allowing to send AnyLog/EdgeLake different types of data via REST, MQTT, Kafka and others, as well viewing different  
+allowing to send AnyLog/EdgeLake different types of data via REST, MQTT, Kafka and others, as well viewing different 
 data set via a REST server (ie browser). 
 
 1. Publish data into AnyLog/EdgeLake via MQTT
