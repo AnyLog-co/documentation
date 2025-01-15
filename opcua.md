@@ -122,6 +122,13 @@ Details:
 * [password] - The password associated with the username.
 * [include] - Additional attributes that are returned with the value.
 * [node] - One or multiple node IDs.
+* [nodes] - Providing a list of nodes, separated by comma, within square brackets.
+* [method] - 2 optional values:
+  * **collection** - The default, a single read pulls the values of all the listed nodes.
+  * **individual** - Each value is read individually, this option is used to identify the ID of the node causing the failures.
+* [failures] - A boolean value to determine the data collected. This option requires **method** to be set as **individual**.
+  * **false** - The default value - data from successful and failed reads are collected.
+  * **true** - Only failed reads are collected.
 
 The include options:
 * id - the id of the attribute
@@ -132,11 +139,18 @@ The include options:
 
 Note: if **include** is assigned with the keyword **all**, all attributes are included in the output.
 
-Example:
+Example 1:
 ```anylog
 get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
 ```
-
+Example 2, using a comma seperated list of nodes:
+```anylog
+get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
+```
+Example 3, identifying failed reads:
+```anylog
+get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and method = individual and failures = true and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
+```
 ## Pulling data from OPCUA continuously
 
 The command **run opcua client*** pulls data from OPCUA continuously and streams the data into a database on the local node:
@@ -153,16 +167,22 @@ The following tables summarizes the command variables:
 | password  | the password associated with the username.                                                   |
 | frequency | Read frequency in seconds or a fraction of seconds using hz (i.e.: 10 hz).                   |
 | node      | ID of one or multiple nodes that their value is retrieved.                                   |
+| nodes     | Providing a list of nodes, separated by comma, within square brackets.                       |
 | policy    | If nodes are not specified on the CLI, the policy determines the nodes and the table to use. |
 | dbms      | The database to host the data (if not specified in a policy).                                |
 | table     | The table to host the data (if not specified in a policy).                                   |
 | topic     | If data is processed through the local broker.                                               |
 
 
-Example:
+Example 1:
 ```anylog
 run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
 ```
+Example 2:
+```anylog
+run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+```
+
 Notes: 
 1. Multiple OPCUA client can be declared on the same node.
 2. Each row is added with 2 columns:
