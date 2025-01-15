@@ -167,7 +167,7 @@ sql edgex info = (dest_type = rest) and extend=(+country, +city, @ip, @port, @db
   <img src="../imgs/blobs_img2.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
 </div>
 
-d
+
 Within the query command there's an _info_ component (`info=(dest_type=rest)`), this informs thee operator returning the 
 data to allow viewing via streaming of the result. If _info_ componnt is not part of the query, then the generated 
 blob(s) selected will be stored on the query node . 
