@@ -1,3 +1,61 @@
+
+## **Version** [139b43] [2025-01-04 14:23:39]
+### New Features:
+1. Add **license** policy.    
+Usage example:  
+Creating the policy:  
+```
+license_number_key = "af043d39675e85e5c9d74999dfd123de2e54e6ed4f1fe9bed04b8ce7754826c89aa1adfb562b18d49f7c4a336ecedadb3c3ca43f88a7d3f4644b6424c5f6ba9217bede0bbcdc94094af9f6e213aa247ccb3ed5f77b794f68df07a62552ac0c6d9c67e406fe6213d6145d7c3d2c127e99906dffebd1c34c12b259719d80e6fcb3"
+policy = create policy license where company = AnyLogCo. and expiration = 2025-03-01 and type = beta and activation_key = !license_number_key   # create the policy to a variable called "policy"
+```
+Updating the policy:
+```
+blockchain insert where policy = !policy and local = true and master = !master_node
+```
+Retrieving the License:
+```
+blockchain get license bring.last [license][activation_key] "{'company':'"  [license][company] "','expiration':'"  [license][expiration] "','type':'" [license][type] "'}"
+```
+2. Extending string operations
+Supporting: !param_name[from_offset:to_offset]  
+Example to create a ploicy from a license key:
+```
+license_key = "af043d39675e85e5c9d74999dfd123de2e54e6ed4f1fe9bed04b8ce7754826c89aa1adfb562b18d49f7c4a336ecedadb3c3ca43f88a7d3f4644b6424c5f6ba9217bede0bbcdc94094af9f6e213aa247ccb3ed5f77b794f68df07a62552ac0c6d9c67e406fe6213d6145d7c3d2c127e99906dffebd1c34c12b259719d80e6fcb3{'c
+ompany':'AnyLogCo.','expiration':'2025-03-01','type':'beta'}"       # Note: maintain the quotations to avoid formatting of the string
+
+key_part = !license_key[:256]       # Extract the key from the license
+info_part = !license_key[256:]      # Extract the JSON part from the license
+
+json !info_part     # Print the json part
+
+company = from !info_part bring [company]       # Extract the company name
+expiration = from !info_part bring [expiration]    # Extract the expiration date
+type = from !info_part bring [type]          # Extract the license type
+
+policy = create policy license where company = !company. and expiration = !expiration and type = !type and activation_key = !license_key   # create the policy to a variable called "policy"
+
+```
+### Changes
+1. Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../message%20broker.md#processing-messages-and-terminating-a-subscription).
+
+## **Version** [c03b82] [2025-01-02 12:30:17]
+### New Features:
+1. OPCUA support. Details: [OPCUA](../opcua.md) 
+
+## **Version**: [024a85] [2024-12-21 13:31:31]
+### New Features:
+1. A new command: **file to** - write a file to a specified directory, using CLI or via REST. 
+   Details are in [Copy a file to a folder](../file%20commands.md#copy-a-file-to-a-folder) section.  
+   This command can be used to remotely copy configurations to a node. An example is available in the [using rest](../using%20rest.md#examples) section.
+2. The command **process** is supported using REST PUT.
+### Changes
+1. The required structure for the file name in the **file store** command is optional. 
+   See details in the [Insert a file to a local database](../image%20mapping.md#insert-a-file-to-a-local-database) section. 
+
+## **Version**: [a4924f] [2024-12-07 16:49:46] /
+### New Features:
+1. HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../http%20commands.md). 
+
 ## **Version**: [be71d3] [2024-08-29 15:18:04] |
 ### New Features:
 1. New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)

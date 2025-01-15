@@ -6,19 +6,20 @@ The ***remote node*** is identified by the IP and Port declared in the [run tcp 
 
 Operations supported:
 
-| Operation  | ---- | 
-| ------------- | ---- |
-| [file decompress](#compress-and-decompress-a-file) | Decompress a file. |
-| [file compress](#compress-and-decompress-a-file) | Compress a file. |
-| [file copy](#copy-files-between-nodes-in-the-network) | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| [file delete](#delete-a-file) | Delete a file. |
-| file deliver | Copy archived data from a remote node. |
-| [file get](#file-copy-from-a-remote-node-to-a-local-node) | Copy a file or files from a remote node to the local node. |
-| [file hash](#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file. |
-| [file move](#move-a-file) | Move a file to a different location on the local node. |
-| [file test](#test-if-a-file-exists) | Test if a file exists. |
-| [file encode](#encode-and-decode-a-file) | Apply base64 encoding. |
-| [file decode](#encode-and-decode-a-file) | Apply base64 decoding. |
+| Operation                                                                | ----                                                                                                                    | 
+|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [file decompress](#compress-and-decompress-a-file)                       | Decompress a file.                                                                                                      |
+| [file compress](#compress-and-decompress-a-file)                         | Compress a file.                                                                                                        |
+| [file copy](#copy-files-between-nodes-in-the-network)                    | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| [file to](#copy-a-file-to-a-folder) | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
+| [file delete](#delete-a-file)                                            | Delete a file.                                                                                                          |
+| file deliver                                                             | Copy archived data from a remote node.                                                                                  |
+| [file get](#file-copy-from-a-remote-node-to-a-local-node)                | Copy a file or files from a remote node to the local node.                                                              |
+| [file hash](#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
+| [file move](#move-a-file)                                                | Move a file to a different location on the local node.                                                                  |
+| [file test](#test-if-a-file-exists)                                      | Test if a file exists.                                                                                                  |
+| [file encode](#encode-and-decode-a-file)                                 | Apply base64 encoding.                                                                                                  |
+| [file decode](#encode-and-decode-a-file)                                 | Apply base64 decoding.                                                                                                  |
 
 
 List files or directories:
@@ -150,6 +151,26 @@ The above example copies all the files from the directory assigned to the key **
 run client 10.0.0.78:2048 file get !!prep_dir/bl*.js* !temp_dir/
 ```
 The above example only copies files with **bl** as a file name prefix and ***js*** as a prefix to the file type.  
+
+
+## Copy a file to a folder
+
+Files can be copied to a specified folder using the **file to** command:
+```anylog
+file to [path and file name] where source = [path and file name]
+```
+This command is similar to the copy commands, however, when issuing the command using HTTP, the source file can be specified by the -F option.  
+This command is frequently used to copy config files into nodes when users deploy nodes remotely.  
+
+Examples:
+1) Using the CLI:
+```anylog
+file to !prep_dir/testdata2.txt where source = !prep_dir/testdata.txt
+```
+2) Using REST:
+```anylog
+curl -X POST -H \"command: file to !my_dest\" -F \"file=@testdata.txt\" http://10.0.0.78:7849
+```
 
 ## Move a file
 Move the source file to a destination directory on the local node.  

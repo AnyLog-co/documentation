@@ -40,6 +40,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Main Commands](anylog%20commands.md)
   * [File Commands](file%20commands.md)
   * [Test Commands](test%20commands.md)
+  * [http commands](http%20commands.md)
   * [The dictionary](dictionary.md)
   
 * **Managing Data**
@@ -86,6 +87,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using gRPC](using%20grpc.md)
   * [Using SysLog](using%20syslog.md)
   * [Registering OSIsoft's PI](registering%20pi%20in%20the%20anylog%20network.md)
+  * [OPC-UA](opcua.md)
 
 * **Northbound Connectors**
   * [AnyLog Remote-CLI](northbound%20connectors/remote_cli.md)
