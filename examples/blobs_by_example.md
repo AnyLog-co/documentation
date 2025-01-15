@@ -10,6 +10,7 @@ explanation of blob management, refer to the [image mapping document](../image%2
 include PDFs, images, and videos. Due to their size and format, blobs cannot be effectively stored in standard SQL 
 databases. Instead, they are managed using NoSQL solutions (e.g., MongoDB) or file-based storage systems.
 
+
 ## Node Setup 
 The following directions are automatically done using user provided configurations when deploying via docker-compose. 
 
@@ -58,4 +59,21 @@ blobs_edgex |mongo        |user  |127.0.0.1:27017|                              
 edgex       |sqlite       |user  |Local          |Autocommit On, Fsync full (after each write)|/app/AnyLog-Network/data/dbms/edgex.dbms     |
 ```
 
-3. Grant 
+3. Enable blobs archiving service
+```anylog 
+<run blobs archiver where
+    dbms=true and
+    folder=false and
+    compress=true and
+    reuse_blobs=true
+>
+```
+
+
+## Accept data 
+The process of accepting data is combined of two parts, data mapping and subscribing to the policy. 
+
+From this point, the directions will utilize the logic for getting image data from 
+<a href="https://github.com/AnyLog-co/Sample-Data-Generator" target="_blank">Sample Data Generator</a>. 
+Mapping for other data-sets can be found in 
+<a href="https://github.com/AnyLog-co/deployment-scripts/tree/main/demo-scripts" target="_blank">deployment-scripts/demo-scripts</a>. 
