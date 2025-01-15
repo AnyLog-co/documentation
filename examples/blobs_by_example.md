@@ -10,7 +10,6 @@ explanation of blob management, refer to the [image mapping document](../image%2
 include PDFs, images, and videos. Due to their size and format, blobs cannot be effectively stored in standard SQL 
 databases. Instead, they are managed using NoSQL solutions (e.g., MongoDB) or file-based storage systems.
 
-
 ## Node Setup 
 The following directions are automatically done using user provided configurations when deploying via docker-compose. 
 
@@ -69,11 +68,74 @@ edgex       |sqlite       |user  |Local          |Autocommit On, Fsync full (aft
 >
 ```
 
-
 ## Accept data 
 The process of accepting data is combined of two parts, data mapping and subscribing to the policy. 
 
-From this point, the directions will utilize the logic for getting image data from 
+From this point, the directions will utilize the logic for getting people video data from 
 <a href="https://github.com/AnyLog-co/Sample-Data-Generator" target="_blank">Sample Data Generator</a>. 
 Mapping for other data-sets can be found in 
 <a href="https://github.com/AnyLog-co/deployment-scripts/tree/main/demo-scripts" target="_blank">deployment-scripts/demo-scripts</a>. 
+
+1. Create a mapping policy 
+```anylog
+policy_id = people-videos
+
+<new_policy = {
+    "mapping": {
+        "id": !policy_id,
+        "dbms": "bring [dbms]",
+        "table": "bring [table]",
+        "schema": {
+            "timestamp": {
+                "type": "timestamp",
+                "default": "now()"
+            },
+            "start_ts": {
+                "type": "timestamp",
+                "bring": "[start_ts]"
+            },
+            "end_ts": {
+                "type": "timestamp",
+                "bring": "[end_ts]"
+            },
+            "file": {
+                "blob": true,
+                "bring": "[file_content]",
+                "extension": "mp4",
+                "apply": "base64decoding",
+                "hash": "md5",
+                "type": "varchar"
+            },
+            "people_count": {
+                "bring": "[count]",
+                "type": "int"
+            },
+            "confidence": {
+                "bring": "[confidence]",
+                "type": "float"
+            }
+        }
+    }
+}>
+```
+
+2. Declare policy 
+```anylog
+blockchain prepare policy !new_policy
+
+# when using a master node  
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+
+# when using a real blockchain (ex. optimismm) 
+blockchain insert where policy=!new_policy and local=true and blockchain=optimism 
+ ```
+
+3. Declare a run MQTT client to accept the data based on policy for mapping  
+```anylog
+<run msg client where broker=local and port=!anylog_broker_port and log=fals and topic=(
+    name=!policy_id and 
+    policy=!policy_id
+)>  
+```
+
+## Publishing data
