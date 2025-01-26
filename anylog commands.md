@@ -787,10 +787,20 @@ Usage:
  wait [max wait time in seconds] for [condition]
 ```
 
+**Condition** can be one of the following:
+* An if condition, i.e.: if X == Y, whereas a true value terminates the wait.
+* Using the keyword **sync** to allow a sync of the metadata before terminating the wait.
+
 A common usage is when a node issues a command to peer nodes, some peers reply and some peers are disconnected.  
 The wait command pauses until all peers reply, but no longer than the max wait time.
 
-Example:
+**Example 1** - Wait by a timer:
+```anylog
+wait 3 
+```
+In the example above, execution will pause for 3 seconds.
+
+**Example 2** - Wait by an if condition:
 ```anylog
 nodes_reply[] = run client (10.0.0.78:3048, 10.0.0.78:7848) get status
 wait 5 for !nodes_reply.diff == 0
@@ -800,3 +810,15 @@ The wait command thread pauses for 5 seconds or until the 2 peer nodes replies a
 
 Note: Associating replies from peer nodes to a key in the dictionary is detailed in the
 [Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
+
+**Example 3** - Wait for sync
+
+```anylog
+wait 35 for sync 
+```
+
+In the example above, execution will wait for the shortest time of: a) a metadata sync, and b) 25 seconds.
+
+Notes:
+1. it is advised to declare a max wait time which is larger than the sync time, allowing to the sync to operate, but terminate if the sync is disabled.
+2. It is advised to use the command in consecutive blockchain update with delete operations to avoid race conditions.
