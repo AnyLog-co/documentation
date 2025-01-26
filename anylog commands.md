@@ -817,7 +817,7 @@ Note: Associating replies from peer nodes to a key in the dictionary is detailed
 wait 35 for sync 
 ```
 
-In the example above, execution will wait for the shortest time of: a) a metadata sync, and b) 25 seconds.
+In the example above, execution will wait for the shortest time of: a) a metadata sync, and b) 35 seconds.
 
 Notes:
 1. it is advised to declare a max wait time which is larger than the sync time, allowing to the sync to operate, but terminate if the sync is disabled.
