@@ -1,0 +1,28 @@
+<pre class="code-frame"><code style="textcolor: black;">
+<b>Directory Structure                 Explabnation</b>
+-------------------                 -----------------------------------------
+/app [EdgeLake Root]
+├── EdgeLake                        [Directory containing authentication keys and passwords]
+│   ├── blockchain                  [A JSON file representing the metadata relevant to the node]
+│   └── data                        [Users data and intermediate data processed by this node]
+│       ├── archive                 [The root directory of and archival directory]
+│       ├── bkup                    [Optional location for backup of user data]
+│       ├── blobs                   [Directory containing unstructured data]
+│       ├── dbms                    [Optional location for persistent database data. If using SQLite, used for persistent SQLIte data]
+│       ├── distr                   [Directory used in the High Availability processes]
+│       ├── error                   [The storage location for new data that failed database storage]
+│       ├── pem                     [Directory containing keys and certificates]
+│       ├── prep                    [Directory for system intermediate data]
+│       ├── test                    [Directory location for output data of test queries]
+│       ├── watch                   [Directory monitored by the system, data files placed in the directory are being processed]
+│       └── bwatch                  [Directory monitored by the system, managing unstructured data]
+├── deployment-scripts              [Directory consisting of scripts used to deploy & test EdgeLake]
+│   ├── demo-scripts                [Directory consisting of examples for running different processes / services]
+│   ├── grpc                        [Directory consisting of examples for compiling <i>gRPC</i> proto file and accepting data from KubeArmor]
+│   ├── node-deployment             [Directory consisting of scripts that utilize user-defined configurations in order to deploy different node types]
+│   │   ├── database                [Directory consisting of scripts to deploy database(s) based on configurations and node type]
+│   │   └── policies                [Directory consisting of different policy definitions for both configurations and cluster / node policies]
+│   ├── test-network-local-scripts  [Directory consisting of scripts used by AnyLog's demo / test network setup]
+│   └── tests                       [Directory consisting of using test cases]
+└── edgelake_v0.0.0_x86_64          [compiled code of either EdgeLake or AnyLog. Namimg slightly changes based on version / CPU architecture]
+</code></pre>
