@@ -39,6 +39,7 @@ exclude:
    - vendor/cache/
    - vendor/gems/
    - vendor/ruby/
+   - vendor/anchor_headings.html
  # specific to the theme website:
    - bin/
    - lib/
