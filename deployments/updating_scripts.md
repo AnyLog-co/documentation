@@ -156,7 +156,7 @@ services:
     container_name: anylog-${ANYLOG_TYPE}
     stdin_open: true
     tty: true
-    # optionally add an entrypoint if different from - for example we want to run the AnyLog process without any prep
+    # optionally add an entrypoint if different from default - for example we want to run the AnyLog process without any prep
     entrypoint: ["/bin/sh", "-c", "chmod +x ${ANYLOG_PATH}/${APP_NAME} && ${ANYLOG_PATH}/${APP_NAME} process $ANYLOG_PATH/deployment-scripts/node-deployment/main.al"]
     ports:
       - ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT}
