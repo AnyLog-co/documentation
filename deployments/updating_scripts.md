@@ -76,10 +76,6 @@ kubectl attach -it pod/${DEPLOYMENT_POD_NAME}
 AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
 ```
 
-
-
- 
-
 ### Accessing the volume
 1. Get list of all your volumes
 ```shell
@@ -111,3 +107,73 @@ sudo vim /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scri
 AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
 ```
 
+
+Both the exec and volume-based changes allow you to modify or update any script within AnyLog. Note that you may need 
+to restart the relevant service(s) after making changes for them to take effect
+
+
+## Personalized deployment-scripts
+This is  a more comprehensive process that requires changes to the docker-compose file(s). However, unlike [extending deploymnet-scripts](#extending-deployment-scripts),
+this allows for full customization of the node from the start. 
+
+1. Create volume
+```shell
+docker volume create anylog-node-local-scripts
+```
+
+2. Inside the volume add deployment-scripts
+```shell
+root@localhost:~/docker-compose# docker volume inspect anylog-node-local-scripts
+[
+    {
+        "CreatedAt": "2025-02-13T21:49:56Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/anylog-node-local-scripts/_data",
+        "Name": "anylog-node-local-scripts",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+root@localhost:~/docker-compose# cd /var/lib/docker/volumes/anylog-node-local-scripts/_data
+root@localhost:/var/lib/docker/volumes/anylog-node-local-scripts/_data# git clone https://github.com/AnyLog-co/deployment-scripts 
+root@localhost:/var/lib/docker/volumes/anylog-node-local-scripts/_data# mv deployment-scripts/* . 
+root@localhost:/var/lib/docker/volumes/anylog-node-local-scripts/_data# rm -rf deployment-scripts 
+```
+
+3. Update docker-compose file 
+```yaml
+# changes based on docker-compose 
+services:
+  anylog-${ANYLOG_TYPE}:
+    image: ${IMAGE}:${TAG}
+    restart: always
+    env_file:
+      -  ../docker-makefile/${ANYLOG_TYPE}-configs/base_configs.env
+      - ../docker-makefile/${ANYLOG_TYPE}-configs/advance_configs.env
+      - .env
+    container_name: anylog-${ANYLOG_TYPE}
+    stdin_open: true
+    tty: true
+    # optionally add an entrypoint if different from - for example we want to run the AnyLog process without any prep
+    entrypoint: ["/bin/sh", "-c", "chmod +x ${ANYLOG_PATH}/${APP_NAME} && ${ANYLOG_PATH}/${APP_NAME} process $ANYLOG_PATH/deployment-scripts/node-deployment/main.al"]
+    ports:
+      - ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT}
+      - ${ANYLOG_REST_PORT}:${ANYLOG_REST_PORT}
+    volumes:
+      - anylog-${ANYLOG_TYPE}-anylog:/app/AnyLog-Network/anylog
+      - anylog-${ANYLOG_TYPE}-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-${ANYLOG_TYPE}-data:/app/AnyLog-Network/data
+      - anylog-node-local-scripts:/app/deployment-scripts
+      - nebula-overlay:/app/nebula
+volumes:
+  anylog-${ANYLOG_TYPE}-anylog:
+  anylog-${ANYLOG_TYPE}-blockchain:
+  anylog-${ANYLOG_TYPE}-data:
+  anylog-node-local-scripts:
+    external: true
+  nebula-overlay:
+```
+
+4. Start node using the `up` command either via Makefile (if still applicable) or via `docker compose` command  
