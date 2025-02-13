@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-gemspec name: "anylog-specs"
+gemspec name: "edgelake-specs"
 gemspec
 
 gem "jekyll-github-metadata", ">= 2.15"

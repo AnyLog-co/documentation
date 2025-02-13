@@ -13,18 +13,18 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: AnyLog Documentation
+title: EdgeLake
 email: support@anylog.co
 description: "Your data lake on the edge"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: https://anylog.co # the base hostname & protocol for your site, e.g. http://example.com
-favicon: "/docs/imgs/anylog_logo.png"
-twitter_username: "anylog-co"
-github_username:  AnyLog-co
-repository: AnyLog-co/AnyLog-Network # for github-metadata
+url: https://lfedge.org/projects/edgelake/ # the base hostname & protocol for your site, e.g. http://example.com
+favicon: "/imgs/edgelake.ico"
+twitter_username: ""
+github_username:  edgelake
+repository: edgelake/edgelake # for github-metadata
 
-permalink: pretty
-#remote_theme: pmarsceill/just-the-docs
+#permalink: pretty
+remote_theme: pmarsceill/just-the-docs
 
 exclude:
  # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
@@ -34,12 +34,10 @@ exclude:
    - Gemfile
    - Gemfile.lock
    - node_modules/
-   - vendor/
    - vendor/bundle/
    - vendor/cache/
    - vendor/gems/
    - vendor/ruby/
-   - vendor/anchor_headings.html
  # specific to the theme website:
    - bin/
    - lib/
