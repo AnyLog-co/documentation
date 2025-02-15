@@ -62,7 +62,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Streaming Conditions](streaming%20conditions.md)
   * [Logging Events](logging%20events.md)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
-  * [Monitoring Data](monitoring%20data.md)
+  * [Aggregations](aggreagations.md)
   * [Monitoring File Status](managing%20data%20files%20status.md)
     
 * **Querying Data**
