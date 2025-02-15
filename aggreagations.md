@@ -34,14 +34,14 @@ set aggregation where dbms = [dbms name] and table = [table name] intervals = [c
 
 Example: 
 ```anylog
-data monitor where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
+set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
 ```
 
 ## Retrieve aggregations
 
-The command `get data monitored` retrieves the monitored data.   
+The command `get aggregations` retrieves the monitored data.   
 **Example**:  
 ```anylog
-get data monitored
-get data monitored where dbms = dmci and table = sensor_reading
+get aggregations
+get aggregations where dbms = dmci and table = sensor_reading
 ```
