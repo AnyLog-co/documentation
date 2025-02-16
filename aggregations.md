@@ -49,11 +49,21 @@ set aggregations thresholds where dbms = [dbms name] and table = [table name] an
 
 ## Reset aggregations
 
-The command `reset aggregations` removed the aggregation declarations.    
+The command `reset aggregations` removed the aggregation declarations.      
+Usage:
 ```anylog
 reset aggregations where dbms = [dbms name] and table = [table name]
 ```
 If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
+
+## Aggregation scripts
+
+The command `set aggregations script` declares a rule or a command that is issued against the streaming data.    
+Usage:
+```anylog
+set aggregations script where dbms = lsl_demo and table = ping_sensor and script = if [value] < aggregation[max] then streaming data ignore event
+```
+Assigning multiple rules and commands to a single table is allowed. 
 
 ## Retrieve aggregations
 
