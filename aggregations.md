@@ -61,7 +61,7 @@ If table name is not provided, aggregations associated with all the tables assig
 The command `set aggregations script` declares a rule or a command that is issued against the streaming data.    
 Usage:
 ```anylog
-set aggregations script where dbms = lsl_demo and table = ping_sensor and script = if [value] < aggregation[max] then streaming data ignore event
+set aggregations script where dbms = lsl_demo and table = ping_sensor and script = streaming data update bounds
 ```
 Assigning multiple rules and commands to a single table is allowed. 
 
@@ -97,6 +97,6 @@ lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 
 The following command retrieves the aggregation declarations:
 ```anylog
-get aggregations where declarations = true
-get aggregations where dbms = lsl_demo and table = ping_sensor and declarations = true
+get aggregations where config = true
+get aggregations where dbms = lsl_demo and table = ping_sensor and config = true
 ```
