@@ -36,6 +36,24 @@ Example:
 ```anylog
 set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value and format = [table/json]
 ```
+## Declaring Thresholds
+
+Users can declare thresholds on each stream. These thresholds can be referenced by the rule engine to impact the processing 
+of the stream and trigger operations that consider the thresholds.
+
+Usage:
+```anylog
+set aggregations thresholds where dbms = [dbms name] and table = [table name] and and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
+```
+
+
+## Reset aggregations
+
+The command `reset aggregations` removed the aggregation declarations.    
+```anylog
+reset aggregations where dbms = [dbms name] and table = [table name]
+```
+If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
 
 ## Retrieve aggregations
 
@@ -65,12 +83,10 @@ lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 | Max             | The Max value processed in the interval.                                                                                                       |
 | Avg             | The Average value processed in the interval.                                                                                                   |
 
+## Retrieve aggregations declarations
 
-## Reset aggregations
-
-The command `reset aggregations` removed the aggregation declarations.    
+The following command retrieves the aggregation declarations:
 ```anylog
-reset aggregations where dbms = [dbms name] and table = [table name]
+get aggregations where declarations = true
+get aggregations where dbms = lsl_demo and table = ping_sensor and declarations = true
 ```
-If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
-
