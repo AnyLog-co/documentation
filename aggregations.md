@@ -107,7 +107,7 @@ The following command retrieves the most recent value:
 ```anylog
 get aggregations where dbms = [dbms name] and table = [table name] and function = [function name]
 ```
-function name is one of the following: min, max, count, avg
+The function name is one of the following: **min, max, count, avg**
 
 Example:
 ```anylog
