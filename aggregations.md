@@ -97,6 +97,6 @@ lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 
 The following command retrieves the aggregation declarations:
 ```anylog
-get aggregations where config = true
-get aggregations where dbms = lsl_demo and table = ping_sensor and config = true
+get aggregations config
+get aggregations config where dbms = lsl_demo and table = ping_sensor
 ```
