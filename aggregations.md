@@ -1,8 +1,22 @@
 # Aggregation Functions
 
-Aggregation functions summarize streaming data over a time interval. Users can define the time interval and the number of intervals
-per each table to allow continues aggregations. The aggregated values can be queried or used to impact the database updates and monitoring. 
-   
+Aggregation functions summarize streaming data over a time interval. Users define (per table) the time interval and the number of intervals
+per each table to allow continues aggregations. The aggregated values can be queried or used to impact the database updates and monitoring.
+
+Aggregation functions are used to summarize streaming data over a specified time interval. These functions process incoming 
+data continuously, computing key statistics such as counts, sums, averages, or max/min values over defined periods.    
+Users define, per table, the length of time interval and the number of intervals to maintain.    
+
+## How They Work:
+* Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
+* Users define the number of intervals to maintain.
+* The system continuously aggregates incoming data within each interval.
+* Aggregated results are stored in tables, where each table can have multiple intervals.
+* Aggregated values can be used in real-time for:
+  * Querying the current trends
+  * Triggering alerts or monitoring changes
+  * dImpacting database updates (e.g., adjusting thresholds dynamically)
+
 ## Declaring Aggregations
 
 Using the command `set aggregation` users can track data streamed to a node for storage and processing. This type of 
