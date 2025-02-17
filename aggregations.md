@@ -100,3 +100,16 @@ The following command retrieves the aggregation declarations:
 get aggregations config
 get aggregations config where dbms = lsl_demo and table = ping_sensor
 ```
+
+## Retrieve the most recent value
+
+The following command retrieves the most recent value:
+```anylog
+get aggregations where dbms = [dbms name] and table = [table name] and function = [function name]
+```
+function name is one of the following: min, max, count, avg
+
+Example:
+```anylog
+get aggregations where dbms = lsl_demo and table = ping_sensor and function = max
+```
