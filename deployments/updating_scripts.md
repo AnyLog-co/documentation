@@ -43,14 +43,14 @@ kubectl exec -it pod/${DEPLOYMENT_POD_NAME} bash
 
 2. cd into scripts directory - this is the `!loca_scripts` variable in AnyLog 
 ```shell 
-cd AnyLog-Network/scripts/
+cd AnyLog-Network/deployment-scripts/node-deployment
 ```
 
 3. Either create a new script, or utilize the existing `local_script.al` file to write your personalized script. 
 When setting the `Enable Local Script` configuration to **true**, the default deployment process will automatically run
 `local_script.al` when starting.
 ```shell
-vim deployment_scripts/local_scripts.al 
+vim local_script.al 
 ```
 
 If _vim_ or other text editor program does not work, users can easily install it. 
@@ -73,7 +73,7 @@ kubectl attach -it pod/${DEPLOYMENT_POD_NAME}
 
 5. Once the personalized script has been created, you can manually run it by executing `process` command.
 ```anylog 
-AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
+AL anylog-node > process !local_scripts/local_script.al
 ```
 
 ### Accessing the volume
@@ -104,7 +104,7 @@ sudo vim /var/lib/docker/volumes/anylog-node-local-scripts/_data/deployment_scri
 
 5. Once the personalized script has been created, you can manually run it by executing `process` command.
 ```shell
-AL anylog-node > process !local_scripts/deployment_scripts/local_script.al
+AL anylog-node > process !local_scripts/local_script.al
 ```
 
 
