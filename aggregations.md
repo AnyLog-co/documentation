@@ -58,8 +58,7 @@ of the stream and trigger operations that consider the thresholds.
 Usage:
 ```anylog
 set aggregations thresholds where dbms = [dbms name] and table = [table name] and and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
-```
-
+ ```
 
 ## Reset aggregations
 
@@ -70,14 +69,31 @@ reset aggregations where dbms = [dbms name] and table = [table name]
 ```
 If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
 
-## Aggregation scripts
+## Aggregation encoding
 
-The command `set aggregations script` declares a rule or a command that is issued against the streaming data.    
+The command `set aggregations encoding` applies encoding on the values in the time interval     
 Usage:
 ```anylog
-set aggregations script where dbms = lsl_demo and table = ping_sensor and script = streaming data update bounds
+set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and encoding = [encoding type] and tolerance = [value]
 ```
-Assigning multiple rules and commands to a single table is allowed. 
+
+**Encoding types:**
+
+* None - No encoding (default).
+* bounds - all entries in the time interval are replaced with a single entry representing: start date and time, end date and time, min, max, average, count.
+* arle - Approximated Run-Length Encoding, the entries in the time interval are represented in a sequence of entries. Each entry includes:
+  * start date and time
+  * end date and time
+  * avg_value - average of grouped values
+  * counter
+      
+ **tolerance**
+Allowable difference between consecutive values while treating them as part of the same group or segment.    
+Tolerance is represented as percentage difference. 
+Example:
+```anylog
+set aggregations encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
+```
 
 ## Retrieve aggregations
 
