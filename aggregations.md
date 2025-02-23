@@ -11,11 +11,12 @@ Users define, per table, the length of time interval and the number of intervals
 * Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
 * Users define the number of intervals to maintain.
 * The system continuously aggregates incoming data within each interval.
-* Aggregated results are stored in tables, where each table can have multiple intervals.
 * Aggregated values can be used in real-time for:
   * Querying the current trends
   * Triggering alerts or monitoring changes
   * dImpacting database updates (e.g., adjusting thresholds dynamically)
+
+Users can replace the source data with encoding. With high volumes of data streams, encoding reduces the volumes of data processed. 
 
 ## Declaring Aggregations
 
@@ -62,7 +63,7 @@ set aggregations thresholds where dbms = [dbms name] and table = [table name] an
 
 ## Reset aggregations
 
-The command `reset aggregations` removed the aggregation declarations.      
+The command `reset aggregations` deletes the aggregation declarations.      
 Usage:
 ```anylog
 reset aggregations where dbms = [dbms name] and table = [table name]
@@ -71,11 +72,11 @@ If table name is not provided, aggregations associated with all the tables assig
 
 ## Aggregation encoding
 
-The command `set aggregations encoding` applies encoding on the values in the time interval.  
+The command `set aggregations encoding` applies encoding on the values assigned to each time interval.  
 The encoding is represented by a new data set associated to a new schema (described below, for each type of encoding).  
 The table name with the encoding format is using the original table name, prefixed by the encoding type.  
-For example, if the source data is assigned to a table named **my_table** and the encoding type is arle, 
-the table with the encoded data is called **alre_my_table**.
+For example, if the source data is assigned to a table named **my_table** and the encoding type is **arle**, 
+the table with the encoded data is called **arle_my_table**.
 
 Usage:
 ```anylog
@@ -85,6 +86,8 @@ set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and enc
 **Encoding types:**
 
 * None - No encoding (default).
+
+
 * bounds - all entries in the time interval are replaced with a single entry representing: 
   * **timestamp** - The earliest date and time of the entries represented in the interval.
   * **end_interval** - The latest date and time of the entries represented in the interval.
@@ -101,7 +104,7 @@ set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and enc
   * **events** - The number of events recorded within the time interval.
       
  **tolerance**  
-Allowable difference between consecutive values while treating them as part of the same group or segment.    
+With Approximated Run-Length Encoding, allowable difference between consecutive values while treating them as part of the same group or segment.    
 Tolerance is represented as percentage difference. 
 
 Example:
