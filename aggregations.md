@@ -71,7 +71,12 @@ If table name is not provided, aggregations associated with all the tables assig
 
 ## Aggregation encoding
 
-The command `set aggregations encoding` applies encoding on the values in the time interval     
+The command `set aggregations encoding` applies encoding on the values in the time interval.  
+The encoding is represented by a new data set associated to a new schema (described below, for each type of encoding).  
+The table name with the encoding format is using the original table name, prefixed by the encoding type.  
+For example, if the source data is assigned to a table named **my_table** and the encoding type is arle, 
+the table with the encoded data is called **alre_my_table**.
+
 Usage:
 ```anylog
 set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and encoding = [encoding type] and tolerance = [value]
