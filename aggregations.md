@@ -80,16 +80,25 @@ set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and enc
 **Encoding types:**
 
 * None - No encoding (default).
-* bounds - all entries in the time interval are replaced with a single entry representing: start date and time, end date and time, min, max, average, count.
+* bounds - all entries in the time interval are replaced with a single entry representing: 
+  * **timestamp** - The earliest date and time of the entries represented in the interval.
+  * **end_interval** - The latest date and time of the entries represented in the interval.
+  * **min_val** - The lowest value recorded within the time interval.
+  * **max_val** - The highest value recorded within the time interval.
+  * **avg_val** - The average of the values recorded within the time interval.
+  * **events** - The number of events recorded within the time interval.
+
+
 * arle - Approximated Run-Length Encoding, the entries in the time interval are represented in a sequence of entries. Each entry includes:
-  * start date and time
-  * end date and time
-  * avg_value - average of grouped values
-  * counter
+  * **timestamp** - The earliest date and time of the entries represented in the interval.
+  * **end_interval** - The latest date and time of the entries represented in the interval.
+  * **avg_val** - average of grouped values.
+  * **events** - The number of events recorded within the time interval.
       
- **tolerance**
+ **tolerance**  
 Allowable difference between consecutive values while treating them as part of the same group or segment.    
 Tolerance is represented as percentage difference. 
+
 Example:
 ```anylog
 set aggregations encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
