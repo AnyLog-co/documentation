@@ -2,6 +2,7 @@
 ## AnyLog Version: 1.3.2401 [d6c050] [2025-02-16 13:59:47]
 ### New Features:
 1. Aggregations over user data. Details: [Aggregations](../aggregations.md)
+2. New AnyLog command: **subprocess** to run shell scripts.
 
 ## AnyLog Version: 1.3.2401 [6665e9] [2025-01-26 14:14:09]
 ### New Features:
