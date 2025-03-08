@@ -1,4 +1,8 @@
 
+## AnyLog Version: 1.3.2401 [d9321d] [2025-03-07 18:19:06]
+### New Features:
+1. Using DNS names:
+
 ## AnyLog Version: 1.3.2401 [d6c050] [2025-02-16 13:59:47]
 ### New Features:
 1. Aggregations over user data. Details: [Aggregations](../aggregations.md)
