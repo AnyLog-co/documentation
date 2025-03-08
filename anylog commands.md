@@ -407,13 +407,13 @@ The command lists the threads and provides, for each thread:
 
 ## Get DNS Name
 
-The command **get dns name** returns the name assigned to an IP address using the Domain Name System (DNS).
+The command **get dns name** returns the name assigned to an IP address using the Domain Name System (DNS).     
 Usage:
 
 ```anylog
 get dns name where ip = [local or external ip]
 ```
-If IP is not provided, the external (global IP) of the node is used.
+If IP is not provided, the external (global IP) of the node is used and the global DNS is returned.
 
 Examples:
 ```anylog
@@ -431,10 +431,7 @@ Note: by default the local dictionary assigns the IPs and DNS values to the foll
 | dns          | The local DNS       |
 | external_dns | The global DNS      |    
 
-These values can be retrieved using the following command:
-```anylog
-get dictionary ip dns
-```
+
 
 ## REST Command
 
