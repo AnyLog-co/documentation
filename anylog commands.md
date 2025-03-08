@@ -431,6 +431,10 @@ Note: by default the local dictionary assigns the IPs and DNS values to the foll
 | dns          | The local DNS       |
 | external_dns | The global DNS      |    
 
+Note: The following commands can use IP values or DNS name interchangeably:
+* [run trc server](background%20processes.md#the-tcp-server-process)
+* [run rest server](background%20processes.md#rest-requests)
+* [run message broker](background%20processes.md#message-broker)
 
 
 ## REST Command
