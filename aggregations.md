@@ -129,16 +129,16 @@ lsl_demo|ping_sensor|       0|0:3:0|      0.35|   21|  2|2,221|413.38|
 lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 ```
 
-| Column Returned | Details                                                                                                                                        |
-|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------| 
-| DBMS            | The database name.                                                                                                                             | 
-| Table           | The table name.                                                                                                                                | 
-| Interval        | The sequential ID of the interval, if time in **set aggregation** command is set to 1 minute, the data added from second 20 to 29 is Inteval 2 |
-| H:M:S           | The time elapsed since the interval data was processed (to the current interval)                                                               |
-| Count           | The number of rows (readings) processed in the interval.                                                                                       |
-| Min             | The Min value processed in the interval.                                                                                                       |
-| Max             | The Max value processed in the interval.                                                                                                       |
-| Avg             | The Average value processed in the interval.                                                                                                   |
+| Column Returned | Details                                                                                                                                           |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------| 
+| DBMS            | The database name.                                                                                                                                | 
+| Table           | The table name.                                                                                                                                   | 
+| Interval        | The sequential ID of the interval, if time in **set aggregation** command is set to 1 minute, the data added from second 180 to 240 is Interval 2 |
+| H:M:S           | The time elapsed since the interval data was processed (to the current interval)                                                                  |
+| Count           | The number of rows (readings) processed in the interval.                                                                                          |
+| Min             | The Min value processed in the interval.                                                                                                          |
+| Max             | The Max value processed in the interval.                                                                                                          |
+| Avg             | The Average value processed in the interval.                                                                                                      |
 
 ## Retrieve aggregations declarations
 
