@@ -36,21 +36,28 @@ value:
 
 Usage: 
 ```anylog
-set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] and value_column = [value column name]
+set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] and time_column = [time column name] and value_column = [value column name]
 ```
 
-| Command option | Default  | Details  |
-| ------------- | ------------| ------------| 
-| dbms  |  |  The name of the database that hosts the table's data. | 
-| table  |  |The data table name. If table name is not provided, all the tables associated to the database are monitored using the database definitions.| 
-| intervals | 10 | The number of intervals to keep. |
-| time | 1 minute | The length of the interval expressed in one of the following: seconds, minutes, hours, days. |
-| value_column | value | The name of the column being monitored (the column name in the tablr that hosts the data). |
+| Command option | Default   | Details                                                                                                                                     |
+|----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------| 
+| dbms           |           | The name of the database that hosts the table's data.                                                                                       | 
+| table          |           | The data table name. If table name is not provided, all the tables associated to the database are monitored using the database definitions. | 
+| intervals      | 10        | The number of intervals to keep.                                                                                                            |
+| time           | 1 minute  | The length of the interval expressed in one of the following: seconds, minutes, hours, days.                                                |
+| time_column    | timestamp | The name of the time column.                                                                                                                |
+| value_column   | value     | The name of the column being monitored.                                                                                                     |
 
 Example: 
 ```anylog
 set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value and format = [table/json]
 ```
+**Note:**
+The **set aggregations** command enables aggregation on a stream of data identifies by the DBMS and Table assigned to the stream.
+  It can be followed by a one or more commands that determine additional fnctionalities such as:
+   * [Declaring Thresholds](#declaring-thresholds) that can be referenced in the rule engine.
+   * [Aggregation Encoding](#aggregation-encoding) that provide compression to the data stream.
+
 ## Declaring Thresholds
 
 Users can declare thresholds on each stream. These thresholds can be referenced by the rule engine to impact the processing 
