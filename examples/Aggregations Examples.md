@@ -112,5 +112,5 @@ get aggregations where dbms = examples and table = compression
 ### Query the aggregation Data
 
 ```anylog
-run client () sql examples format = table "select * from compressions"
+run client () sql examples format = table "select timestamp, end_interval, avg_value, events from arle_compression"
 ```
