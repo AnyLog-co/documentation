@@ -1,21 +1,17 @@
 # Aggregations Examples
 
-This document provides examples of aggregations. The commands details are available in the [Aggregations Sections](../aggregations.md)
+This document provides examples of aggregations. The commands details are available in the [Aggregations Section](../aggregations.md).
 
-Prerequisite: 
-* AnyLog node deployed
-* The tables **intervals** and **compression** are not declared (as the table structure is defined by the aggregation declaration and not by the source data).
-* Data Generator deployed
 
 ## Configuring Bounds Aggregations
 
 In **bounds aggregations** all entries in the time interval are replaced with a single entry.
 
-The following commands declare the following:
+The following commands declare bounds aggregation over the table's data:
 
 * A database name **examples** using SQLite.
 * An aggregation table named **intervals**.
-* Apply **bounds encoding** on the table's data (modify the source data structure to include Min, Max, Avg and Count for every time interval)
+* Apply **bounds encoding** on the table's data (modify the source data structure to include Min, Max, Avg and Count for every time interval).
 * Inserting data into **intervals**.
 
 ### Declare the DBMS
@@ -33,7 +29,7 @@ set aggregations where dbms = examples and table = intervals and time_column = t
 ### Apply bounds encoding
 
 ```anylog
-set aggregations encoding where dbms = examples and table = intervals and encoding = bounds and tolerance = 10
+set aggregations encoding where dbms = examples and table = intervals and encoding = bounds
 ```
 
 ### Retrieve the declarations
@@ -56,10 +52,10 @@ get aggregations where dbms = examples and table = intervals
 ```anylog
 run client () sql examples format = table and timezone = pt "select timestamp, end_interval, min_val, max_val, avg_val, events from bounds_intervals"
 ```
-Note: the table name is prefixed with the keywords **"bounds_"**
+Note: the table name in the database is prefixed with the keywords **"bounds_"**
 
-### Query the most recent velue
-The function name is one of the following: **min, max, count, avg**
+### Query the most recent value
+The function name is one of the following: **min, max, count, avg**.
 
 ```anylog
 get aggregations where dbms = examples and table = intervals and function = max
@@ -67,9 +63,9 @@ get aggregations where dbms = examples and table = intervals and function = max
 
 ## Configuring arle Aggregations
 
-arle - Approximated Run-Length Encoding, the entries in the time interval are represented in one or more entries, each entry represents multiple similar values. 
+ARLE - Approximated Run-Length Encoding, the entries in the time interval are represented in one or more entries, each entry represents multiple similar values. 
 
-The following commands declare the following:
+The following commands declare ARLE compression over the table's data:
 
 * A database name **examples** using SQLite.
 * An aggregation table named **compression**.
@@ -93,6 +89,7 @@ set aggregations where dbms = examples and table = compression and time_column =
 ```anylog
 set aggregations encoding where dbms = examples and table = compression and encoding = arle and tolerance = 10
 ```
+Note: tolerance 10 means that 10% deviation from the initial value is considered unchanged value.
 
 ### Retrieve the declarations
 ```anylog
@@ -113,4 +110,11 @@ get aggregations where dbms = examples and table = compression
 
 ```anylog
 run client () sql examples format = table "select timestamp, end_interval, avg_value, events from arle_compression"
+```
+
+### Query the most recent value
+The function name is one of the following: **min, max, count, avg**.
+
+```anylog
+get aggregations where dbms = examples and table = intervals and function = max
 ```
