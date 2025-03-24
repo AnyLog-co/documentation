@@ -36,13 +36,14 @@ set aggregations where dbms = examples and table = intervals and time_column = t
 set aggregations encoding where dbms = examples and table = intervals and encoding = bounds and tolerance = 10
 ```
 
+### Retrieve the declarations
+```anylog
+get aggregations config where dbms = examples and table = intervals
+```
+
 ### Insert Data
 
-Using the AnyLog data generator, issue the following command:
-
-```anylog
-
-```
+Using the data source, add data to the **intervals** table
 
 ### View the memory representation of the aggregations
 
@@ -53,9 +54,16 @@ get aggregations where dbms = examples and table = intervals
 ### Query the aggregation Data
 
 ```anylog
-run client () sql examples format = table select ... 
+run client () sql examples format = table and timezone = pt "select timestamp, end_interval, min_val, max_val, avg_val, events from bounds_intervals"
 ```
+Note: the table name is prefixed with the keywords **"bounds_"**
 
+### Query the most recent velue
+The function name is one of the following: **min, max, count, avg**
+
+```anylog
+get aggregations where dbms = examples and table = intervals and function = max
+```
 
 ## Configuring arle Aggregations
 
@@ -83,17 +91,17 @@ set aggregations where dbms = examples and table = compression and time_column =
 ### Apply arle encoding
 
 ```anylog
-set aggregations encoding where dbms = examples and table = compression and encoding = bounds and tolerance = 10
+set aggregations encoding where dbms = examples and table = compression and encoding = arle and tolerance = 10
 ```
 
+### Retrieve the declarations
+```anylog
+get aggregations config where dbms = examples and table = compression
+```
 
 ### Insert Data
 
-Using the AnyLog data generator, issue the following command:
-
-```anylog
-
-```
+Using the data source, add data to the **intervals** table.
 
 ### View the memory representation of the aggregations
 
@@ -104,5 +112,5 @@ get aggregations where dbms = examples and table = compression
 ### Query the aggregation Data
 
 ```anylog
-run client () sql examples format = table select ... 
+run client () sql examples format = table "select * from compressions"
 ```
