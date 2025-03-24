@@ -2,6 +2,11 @@
 
 This document provides examples of aggregations. The commands details are available in the [Aggregations Sections](../aggregations.md)
 
+Prerequisite: 
+* AnyLog node deployed
+* The tables **intervals** and **compression** are not declared (as the table structure is defined by the aggregation declaration and not by the source data).
+* Data Generator deployed
+
 ## Configuring Bounds Aggregations
 
 In **bounds aggregations** all entries in the time interval are replaced with a single entry.
@@ -78,7 +83,7 @@ set aggregations where dbms = examples and table = compression and time_column =
 ### Apply arle encoding
 
 ```anylog
-set aggregations encoding where dbms = examples and table = intervals and encoding = bounds and tolerance = 10
+set aggregations encoding where dbms = examples and table = compression and encoding = bounds and tolerance = 10
 ```
 
 
@@ -93,7 +98,7 @@ Using the AnyLog data generator, issue the following command:
 ### View the memory representation of the aggregations
 
 ```anylog
-get aggregations where dbms = examples and table = intervals
+get aggregations where dbms = examples and table = compression
 ```
 
 ### Query the aggregation Data
