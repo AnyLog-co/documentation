@@ -5,7 +5,9 @@ per each table to allow continues aggregations. The aggregated values can be que
 
 Aggregation functions are used to summarize streaming data over a specified time interval. These functions process incoming 
 data continuously, computing key statistics such as counts, sums, averages, or max/min values over defined periods.    
-Users define, per table, the length of time interval and the number of intervals to maintain.    
+Users define, per table, the length of time interval and the number of intervals to maintain.   
+
+Note: deployment examples are in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
 
 ## How They Work:
 * Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
@@ -36,7 +38,7 @@ value:
 
 Usage: 
 ```anylog
-set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] and time_column = [time column name] and value_column = [value column name]
+set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] and time_column = [time column name] and value_column = [value column name] and format = [table/json]
 ```
 
 | Command option | Default   | Details                                                                                                                                     |
@@ -50,7 +52,7 @@ set aggregation where dbms = [dbms name] and table = [table name] intervals = [c
 
 Example: 
 ```anylog
-set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value and format = [table/json]
+set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
 ```
 **Note:**
 The **set aggregations** command enables aggregation on a stream of data identifies by the DBMS and Table assigned to the stream.
