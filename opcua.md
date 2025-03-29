@@ -218,3 +218,63 @@ Examples:
 exit opcua all
 exit opua nov.rig8
 ```
+
+## Example - Declaring OPC UA with aggregations
+
+Aggregation functions summarize streaming data over a time interval. See details in the [Aggregation](aggregations.md) section.
+
+The following are the needed configuration steps:
+
+### Identify the time and value attribute names
+
+To apply aggregation on the OPCUA, users need to identify the time column and value column retrieved from the OPC UA connector.      
+If the AnyLog OPC UA service is used, the time column is called **timestamp** and users can retrieve the column name using the get 
+opcua values with **include = all** or **include = name**.
+
+Example:
+```anylog
+get opcua values where url = opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and node = "ns=3;i=1002" and include = name
+
+OPCUA Nodes values
+name   value
+------|----------|
+random|-0.5909728|
+```
+The call above shows that the column name for "ns=3;i=1002" is **random**.
+
+### Apply aggregation on the OPC UA columns and assign a database and table
+
+```anylog
+set aggregations where dbms = nov and table = table_2 and time_column = timestamp and value_column = random
+```
+
+### Declare the aggregation menthod (optional)
+The following example will replace the OPC UA source data with an aggregation function:
+```anylog
+set aggregations encoding where dbms = nov and table = table_2 and encoding = bounds
+```
+
+### Validate the aggregation declarations
+```anylog
+get aggregations
+get aggregations config
+```
+
+### Start the OPC UA service
+```anylog
+<run opcua client where 
+   url=opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and 
+   node = "ns=3;i=1002" and 
+   frequency=25 and 
+   dbms=nov and 
+   table=table_2> 
+```
+
+### Validate processing
+```anylog
+get opcua client
+get aggregations
+get streaming
+get operator
+```
+
