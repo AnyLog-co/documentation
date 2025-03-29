@@ -281,7 +281,5 @@ get operator
 
 ### Validate data
 ```anylog
-run client () sql nov select timestamp, min, max, count, avg from bounds_table_2 order by timestamp desc limit 10  
+run client () sql nov format = table select timestamp::ljust(19), end_interval::ljust(19), min_val, max_val, avg_val, events from bounds_table_2 order by timestamp desc limit 10  
 ```
-
-run client () sql nov select * from bounds_table_2
