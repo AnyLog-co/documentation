@@ -227,9 +227,9 @@ The following are the needed configuration steps:
 
 ### Identify the time and value attribute names
 
-To apply aggregation on the OPCUA, users need to identify the time column and value column retrieved from the OPC UA connector.      
-If the AnyLog OPC UA service is used, the time column is called **timestamp** and users can retrieve the column name using the get 
-opcua values with **include = all** or **include = name**.
+To apply aggregation on the OPC UA, users need to identify the names of the time attribute and the value attribute retrieved from the OPC UA connector.      
+If the AnyLog OPC UA service is used, the time attribute name is **timestamp** and users can retrieve the value attribute name using the ```get 
+opcua values``` command with **include = all** or **include = name**.
 
 Example:
 ```anylog

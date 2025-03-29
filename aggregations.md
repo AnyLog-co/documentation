@@ -7,7 +7,9 @@ Aggregation functions are used to summarize streaming data over a specified time
 data continuously, computing key statistics such as counts, sums, averages, or max/min values over defined periods.    
 Users define, per table, the length of time interval and the number of intervals to maintain.   
 
-Note: deployment examples are in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
+Notes: 
+1. Deployment examples are in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
+2. Example of aggregations applied on data retrieved by the AnyLog OPC UA service is available in the [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
 
 ## How They Work:
 * Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
