@@ -1,3 +1,10 @@
+# AnyLog Release notes
+
+
+## AnyLog Version: 1.3.2501-beta3 [7ec215] [2025-03-30 16:52:26]
+### New Features:
+1. New command to configure output table width: set output table width 250
+2. New Functionality for String Substring Operations. Details: [Special Bring Values](../json%20data%20transformation.md#special-bring-values)
 
 ## AnyLog Version: 1.3.2401 [d9321d] [2025-03-07 18:19:06]
 ### New Features:
