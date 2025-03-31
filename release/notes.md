@@ -5,6 +5,7 @@
 ### New Features:
 1. New command to configure output table width: set output table width 250
 2. New Functionality for String Substring Operations. Details: [Special Bring Values](../json%20data%20transformation.md#special-bring-values)
+3. Severe error messages (boxed) are now printed on the node in RED.
 
 ## AnyLog Version: 1.3.2401 [d9321d] [2025-03-07 18:19:06]
 ### New Features:
