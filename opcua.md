@@ -8,8 +8,8 @@ OPC Unified Architecture (OPC UA) is a robust, platform-independent communicatio
 for secure and reliable data exchange between devices, systems, and applications. 
 Designed as an evolution of the OPC Classic standard, OPC UA provides cross-platform compatibility and supports 
 advanced features like real-time data access, historical data retrieval, and event notifications. 
-Its architecture emphasizes security with built-in encryption, authentication, and access control, making it ideal for modern i
-ndustrial IoT and Industry 4.0 environments. By enabling seamless interoperability across diverse hardware and software,
+Its architecture emphasizes security with built-in encryption, authentication, and access control, making it ideal for modern 
+industrial IoT and Industry 4.0 environments. By enabling seamless interoperability across diverse hardware and software,
 OPC UA simplifies the integration and scalability of complex industrial systems.
 
 Users can issue requests and configure their nodes to act as clients, pulling data from an OPC-UA interface.
@@ -53,26 +53,28 @@ get opcua struct where url = [connect string] and user = [username] and password
   
 The following tables summarizes the command variables:
 
-| keyword    | Details                                                                                        |
-|------------|------------------------------------------------------------------------------------------------| 
-| url        | The url specifies the endpoint of the OPC UA server.                                           |
-| username   | the username required by the OPC UA server for access.                                         |
-| password   | the password associated with the username.                                                     |
-| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable      |
-| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.      |
-| attributes | Attribute names to consider or * for all                                                       |
-| limit      | Limit the Tree traversal by the number of nodes to visit                                       |
-| depth      | Limit the Tree traversal by the depth.                                                         |
-| class      | Filter the Tree traversal to show only nodes in the listed class.                              |
-| output     | The target for the output stream (stdout or a file name).                                      |
-| format     | The format of the output (see details below).                                                  |
-| frequency  | If output generates "run_client" - the frequency of the "run client" command                   |
-| dbms       | If output generates "run_client" - the table name of the "run client" command                  |
-| table      | If output generates "run_client" - the dbms name of the "run client" command                   |
-| validate   | A boolean value. If set to True, the value from each visited node is read (see details below). |
+| keyword    | Details                                                                                            |
+|------------|----------------------------------------------------------------------------------------------------| 
+| url        | The url specifies the endpoint of the OPC UA server.                                               |
+| username   | the username required by the OPC UA server for access.                                             |
+| password   | the password associated with the username.                                                         |
+| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable          |
+| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.          |
+| attributes | Attribute names to consider or * for all                                                           |
+| limit      | Limit the Tree traversal by the number of nodes to visit                                           |
+| depth      | Limit the Tree traversal by the depth.                                                             |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                                  |
+| output     | The target for the output stream (stdout or a file name).                                          |
+| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'. | 
+| format     | The format of the output (see details below).                                                      |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command                       |
+| dbms       | If output generates "run_client" - the table name of the "run client" command                      |
+| table      | If output generates "run_client" - the dbms name of the "run client" command                       |
+| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).     |
 
 **Format options:**
-* **tree** - the OPC-UA tree structure (default)
+* **tree** - the OPC-UA tree structure (default).
+* **path** - strings represnting the full path.
 * **stats** - statistics counting the number of entries in each class.
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
