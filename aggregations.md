@@ -168,7 +168,7 @@ get aggregations by time where dbms = nov and table = table_3
 get aggregations by time where dbms = nov and table = table_3 and format = json and function = min and function = max  
 ```
 
-Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
+### Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
 
 * **type** - "aggregations"
 * **servers** - the target server IP and Port. Only a single server is allowed per each dashboard.
@@ -185,6 +185,7 @@ Example Payload:
 }
 ```
 
+Note: Grafana configuration is detailed in the [Using Grafana](northbound%20connectors/using%20grafana.md) section.
 
 ## Retrieve aggregations declarations
 
