@@ -151,15 +151,15 @@ lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 | Max             | The Max value processed in the interval.                                                                                                          |
 | Avg             | The Average value processed in the interval.                                                                                                      |
 
-## Retrieve aggregations by dates
+## Retrieve aggregations by date and time
 
-The following command retrieve aggregations and represents the date and time for each interval.
+The following command retrieves the intervals summaries by date and time.
 ```anylog
 get aggregations by time where dbms = [dbms name] and table = [table name] and format = [table/json] and function = [function name]
 ```
 Notes:
-* The function can be repeated for multiple functions, and the options are: cunt, min, max, avg.
-* If function is not specified, all functions are returned.
+* **function name** can be repeated for multiple functions, and the options are: cunt, min, max, avg.
+* If a function is not specified, all functions are returned.
 * The default format is 'table'
 
 Example:
@@ -171,7 +171,7 @@ get aggregations by time where dbms = nov and table = table_3 and format = json 
 ### Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
 
 * **type** - "aggregations"
-* **servers** - the target server IP and Port. Only a single server is allowed per each dashboard.
+* **servers** - the target server IP and Port. Only a single server is allowed per each Payload.
 * **functions** - the list of aggregation function to call (optional)
 
 Example Payload: 
