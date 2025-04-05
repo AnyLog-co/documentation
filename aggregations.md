@@ -151,7 +151,7 @@ lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
 | Max             | The Max value processed in the interval.                                                                                                          |
 | Avg             | The Average value processed in the interval.                                                                                                      |
 
-## Retrieve aggregations by date and time
+## Retrieve aggregations by time
 
 The following command retrieves the intervals summaries by date and time.
 ```anylog
