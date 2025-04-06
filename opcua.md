@@ -120,7 +120,7 @@ The following tables summarizes the command variables:
     ```
 8. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **run opcua client** command.
     ```anylog
-    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = nov and table = sensor and frequency = 10 and limit = 10
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and name = opcua_nov and dbms = nov and table = sensor and frequency = 10 and limit = 10
     ```
 9. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output the path of each variable node
     ```anylog
@@ -179,13 +179,14 @@ get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer a
 
 The command **run opcua client*** pulls data from OPCUA continuously and streams the data into a database on the local node:
 ```anylog
-run opcua client where url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+run opcua client where name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
 ```
  
 The following tables summarizes the command variables:
 
 | keyword   | Details                                                                                      |
 |-----------|----------------------------------------------------------------------------------------------| 
+| name      | A unique connection name.                                                                    |
 | url       | The url specifies the endpoint of the OPC UA server.                                         |
 | username  | the username required by the OPC UA server for access.                                       |
 | password  | the password associated with the username.                                                   |
@@ -200,11 +201,11 @@ The following tables summarizes the command variables:
 
 Example 1:
 ```anylog
-run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+run opcua client where  name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
 ```
 Example 2:
 ```anylog
-run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+run opcua client where name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
 ```
 
 Notes: 
@@ -278,6 +279,7 @@ get aggregations config
 ### Start the OPC UA service
 ```anylog
 <run opcua client where 
+   name = opcua_connect1 and
    url=opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and 
    node = "ns=3;i=1002" and 
    frequency=25 and 
@@ -330,7 +332,7 @@ process !tmp_dir/my_file.out
 ```
 ### Generate the command to read the tags data
 ```anylog
- get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3
+ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3 and name = opcua_nov
 ```
 Notes:
 * The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
