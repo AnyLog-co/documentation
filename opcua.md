@@ -298,3 +298,46 @@ get operator
 ```anylog
 run client () sql nov format = table select timestamp::ljust(19), end_interval::ljust(19), min_val, max_val, avg_val, events from bounds_table_2 order by timestamp desc limit 10  
 ```
+
+## Example - Creating Policies from OPCUA and pulling data
+
+The first step is to create policies that represent the tags to manage. These policies define the structure and semantics of the tags, including their names,
+data types, and relationships. Once defined, the policies are published to the blockchain.    
+These policies serve to mapp table names to tag information and vice versa. 
+This enables the system to automatically interpret and organize incoming data from OPC UA or other sources, 
+aligning it with the defined structure for seamless querying, validation, and distribution across the network.
+
+### Generate the policies
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
+```
+These policies are stored in a file: **!tmp_dir/my_file.out** and the format is like the example below:
+```anylog
+{'tag': {'class': 'variable',
+         'datatype': 'Boolean',
+         'dbms': 'my_dbms',
+         'nodeid': 'LS1002H_AlarmSetpoint',
+         'ns': 2,
+         'parent': 'ALARM_TAGS',
+         'path': 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH '
+                 'XTR/Resources/Application/GlobalVars/ALARM_TAGS/LS1002H_AlarmSetpoint',
+         'table': 't39'}}
+```
+
+### Load the file to the metadata
+```anylog
+process !tmp_dir/my_file.out
+```
+### Generate the command to read the tags data
+```anylog
+ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and table = my_table and dbms = my_dbms and frequency = 3
+```
+The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**
+
+### execute the command
+```anylog
+process !tmp_dir/my_file.out
+```
+
+This process pulls the data using OPCUA and assigns the data to the tables according to the info in the policies.
+
