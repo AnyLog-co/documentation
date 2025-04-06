@@ -26,7 +26,7 @@ get opcua namespace where url = [connect string] and user = [username] and passw
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
-* [username] - the username required by the OPC UA server for access.
+* [user] - the username required by the OPC UA server for access.
 * [password] - the password associated with the username.
 
 Example:
@@ -56,7 +56,7 @@ The following tables summarizes the command variables:
 | keyword    | Details                                                                                                                              |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------| 
 | url        | The url specifies the endpoint of the OPC UA server.                                                                                 |
-| username   | the username required by the OPC UA server for access.                                                                               |
+| user       | the username required by the OPC UA server for access.                                                                               |
 | password   | the password associated with the username.                                                                                           |
 | node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable                                            |
 | type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.                                            |
@@ -142,7 +142,7 @@ get opcua values where url = [connect string] and user = [username] and password
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
-* [username] - The username required by the OPC UA server for access.
+* [user] - The username required by the OPC UA server for access.
 * [password] - The password associated with the username.
 * [include] - Additional attributes that are returned with the value.
 * [node] - One or multiple node IDs.
@@ -188,7 +188,7 @@ The following tables summarizes the command variables:
 |-----------|----------------------------------------------------------------------------------------------| 
 | name      | A unique connection name.                                                                    |
 | url       | The url specifies the endpoint of the OPC UA server.                                         |
-| username  | the username required by the OPC UA server for access.                                       |
+| user      | the username required by the OPC UA server for access.                                       |
 | password  | the password associated with the username.                                                   |
 | frequency | Read frequency in seconds or a fraction of seconds using hz (i.e.: 10 hz).                   |
 | node      | ID of one or multiple nodes that their value is retrieved.                                   |
