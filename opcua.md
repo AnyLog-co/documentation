@@ -53,28 +53,30 @@ get opcua struct where url = [connect string] and user = [username] and password
   
 The following tables summarizes the command variables:
 
-| keyword    | Details                                                                                            |
-|------------|----------------------------------------------------------------------------------------------------| 
-| url        | The url specifies the endpoint of the OPC UA server.                                               |
-| username   | the username required by the OPC UA server for access.                                             |
-| password   | the password associated with the username.                                                         |
-| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable          |
-| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.          |
-| attributes | Attribute names to consider or * for all                                                           |
-| limit      | Limit the Tree traversal by the number of nodes to visit                                           |
-| depth      | Limit the Tree traversal by the depth.                                                             |
-| class      | Filter the Tree traversal to show only nodes in the listed class.                                  |
-| output     | The target for the output stream (stdout or a file name).                                          |
-| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'. | 
-| format     | The format of the output (see details below).                                                      |
-| frequency  | If output generates "run_client" - the frequency of the "run client" command                       |
-| dbms       | If output generates "run_client" - the table name of the "run client" command                      |
-| table      | If output generates "run_client" - the dbms name of the "run client" command                       |
-| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).     |
+| keyword    | Details                                                                                                                              |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------| 
+| url        | The url specifies the endpoint of the OPC UA server.                                                                                 |
+| username   | the username required by the OPC UA server for access.                                                                               |
+| password   | the password associated with the username.                                                                                           |
+| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable                                            |
+| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.                                            |
+| attributes | Attribute names to consider or * for all                                                                                             |
+| limit      | Limit the Tree traversal by the number of nodes to visit                                                                             |
+| depth      | Limit the Tree traversal by the depth.                                                                                               |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                                                                    |
+| output     | The target for the output stream (stdout or a file name).                                                                            |
+| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                   | 
+| format     | The format of the output (see details below).                                                                                        |
+| target     | the variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command                                                         |
+| dbms       | If output generates "run_client" - the table name of the "run client" command                                                        |
+| table      | If output generates "run_client" - the dbms name of the "run client" command                                                         |
+| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).                                       |
 
 **Format options:**
 * **tree** - the OPC-UA tree structure (default).
-* **path** - strings represnting the full path.
+* **path** - strings representing the full path.
+* **policy** - generating a policy representing the tag. If 
 * **stats** - statistics counting the number of entries in each class.
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
@@ -120,7 +122,18 @@ The following tables summarizes the command variables:
     ```anylog
     get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = nov and table = sensor and frequency = 10 and limit = 10
     ```
-      
+9. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output the path of each variable node
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = path and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms
+    ```
+10. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output a policy for each visited variable node.
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms 
+     ```
+11. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output **blockchain insert** command for every generated policy. Output is written to the specified file.
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out 
+     ```
 ## The Get OPCUA Values Command
 
 Node values are retrieved with the following command:
