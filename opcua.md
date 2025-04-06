@@ -330,13 +330,15 @@ process !tmp_dir/my_file.out
 ```
 ### Generate the command to read the tags data
 ```anylog
- get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and table = my_table and dbms = my_dbms and frequency = 3
+ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3
 ```
-The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**
+Notes:
+* The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
+* The **table** name is not specified as it will be derived from the policies (based on the namespace and node id).
 
 ### execute the command
 ```anylog
-process !tmp_dir/my_file.out
+process !tmp_dir/my_run_cmd.out 
 ```
 
 This process pulls the data using OPCUA and assigns the data to the tables according to the info in the policies.
