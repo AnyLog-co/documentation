@@ -303,11 +303,11 @@ run client () sql nov format = table select timestamp::ljust(19), end_interval::
 
 ## Example - Creating Policies from OPCUA and pulling data
 
-The first step is to create policies that represent the tags to manage. These policies define the structure and semantics of the tags, including their names,
-data types, and relationships. Once defined, the policies are published to the blockchain.    
-These policies serve to map table names to tag information and vice versa. 
-This enables the system to automatically interpret and organize incoming data from OPC UA or other sources, 
-aligning it with the defined structure for seamless querying, validation, and distribution across the network.
+The first step is to create policies that represent the tags to be managed. 
+These policies define the structure and semantics of the tags, including their names, data types, and relationships.   
+Once defined, the policies are published to the blockchain. They serve as a mapping between table names and tag information, and vice versa.    
+This enables the system to automatically interpret and organize incoming data from OPC UA or other sources, aligning it 
+with the defined structure for seamless querying, validation, and distribution across the network.
 
 ### Generate the policies
 ```anylog
