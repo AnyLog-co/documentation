@@ -67,7 +67,7 @@ The following tables summarizes the command variables:
 | output     | The target for the output stream (stdout or a file name).                                                                            |
 | append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                   | 
 | format     | The format of the output (see details below).                                                                                        |
-| target     | the variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| target     | The variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
 | frequency  | If output generates "run_client" - the frequency of the "run client" command                                                         |
 | dbms       | If output generates "run_client" - the table name of the "run client" command                                                        |
 | table      | If output generates "run_client" - the dbms name of the "run client" command                                                         |
@@ -76,7 +76,7 @@ The following tables summarizes the command variables:
 **Format options:**
 * **tree** - the OPC-UA tree structure (default).
 * **path** - strings representing the full path.
-* **policy** - generating a policy representing the tag. If 
+* **policy** - generating a policy representing the tag. If target is specified, output is "blockchain insert" command for every policy. 
 * **stats** - statistics counting the number of entries in each class.
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
