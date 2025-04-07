@@ -338,7 +338,7 @@ Notes:
 * The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
 * The **table** name is not specified as it will be derived from the policies (based on the namespace and node id).
 
-### execute the command
+### Execute the command
 ```anylog
 process !tmp_dir/my_run_cmd.out 
 ```
