@@ -68,6 +68,7 @@ The following tables summarizes the command variables:
 | append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                   | 
 | format     | The format of the output (see details below).                                                                                        |
 | target     | The variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| schema     | A bollean value. If set to True, output includes, for each tag, the table's schema.                                                  |
 | frequency  | If output generates "run_client" - the frequency of the "run client" command                                                         |
 | dbms       | If output generates "run_client" - the table name of the "run client" command                                                        |
 | table      | If output generates "run_client" - the dbms name of the "run client" command                                                         |
@@ -311,9 +312,9 @@ with the defined structure for seamless querying, validation, and distribution a
 
 ### Generate the policies
 ```anylog
-get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
+get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and schema = true and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
 ```
-These policies are stored in a file: **!tmp_dir/my_file.out** and the format is like the example below:
+These tag policies are stored in a file: **!tmp_dir/my_file.out** and the format is like the example below:
 ```anylog
 {'tag': {'class': 'variable',
          'datatype': 'Boolean',
@@ -325,6 +326,21 @@ These policies are stored in a file: **!tmp_dir/my_file.out** and the format is 
                  'XTR/Resources/Application/GlobalVars/ALARM_TAGS/LS1002H_AlarmSetpoint',
          'table': 't39'}}
 ```
+If **schema** is set to **true**, the output includes, for every tag, the table's schema associated with the tag.  
+Example:
+```anylog
+ {'table' : {'name' : 't39',
+             'dbms' : 'nov',
+             'create' : 'CREATE TABLE IF NOT EXISTS t39(row_id SERIAL PRIMARY KEY,  inser'
+                        't_timestamp TIMESTAMP NOT NULL DEFAULT NOW(),  tsd_name CHAR(3),'
+                        '  tsd_id INT,  timestamp timestamp not null default now(),  valu'
+                        'e bool ); CREATE INDEX t39_timestamp_index ON t39(timestamp); CR'
+                        'EATE INDEX t39_insert_timestamp_index ON t39(insert_timestamp);',
+             'source' : 'OPCUA Interface',
+             'id' : '040197b7eed831dddb1b3fd910d86deb',
+             'date' : '2025-04-09T00:09:53.406292Z',
+             'ledger' : 'local'}}]
+```
 
 ### Load the file to the metadata
 ```anylog
@@ -332,7 +348,7 @@ process !tmp_dir/my_file.out
 ```
 ### Generate the command to read the tags data
 ```anylog
- get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3 and name = opcua_nov
+ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3 and name = opcua_nov
 ```
 Notes:
 * The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
