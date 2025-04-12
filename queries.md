@@ -338,20 +338,54 @@ sql edgex format=table "select min(timestamp), max(timestamp), count(value) from
 ````
 
 ### The Increment Function
-The `increments` functions considers data in increments of time (i.e. every 5 minutes) within a time range (i.e. between 
-October 15, 2019 and October 16, 2019).`date-column` is the column name of the column that determines the date and time to consider. The `time-interval` and `units` (of time-interval) determine the time increments to consider (i.e. every 2 days) 
-and the `time-range` is determined in the where clause.
+The `increments` function is used to segment time-series data into fixed, contiguous time intervals (e.g., every 5 minutes, every hour, every day).    
+It enables time-based analysis and aggregation by generating a synthetic column representing the start of each time bucket.
 
 **Usage**:
 ```anylog
-increments (time-interval, units, date-column)
+increments (units, time-interval, date-column)
 ```
+**increments Parameters Explained**:  
+The increments function helps divide time-series data into uniform time buckets. It takes three key parameters:
+1. unit:
+   * Type: String
+   * Description: Specifies the unit of time to use for the interval.
+   * Valid options:
+     * second
+     * minute
+     * hours
+     * days
+     * weeks
+     * month
+     * year
+   * Examples:
+     * minute → minute buckets
+     * day' → daily buckets
+2. time-interval:
+    * Type: Integer
+    * Description: Defines the size of each time bucket.
+    * Examples:
+      * 5 — creates buckets every 5 units (e.g., 5 minutes if units is 'minutes')
+      * 1 — creates buckets of 1 unit length (e.g., 1 hour if units is 'hours')
+3. date-column
+    * Type: String (column name)
+    * Description: The name of the column in the table that contains date or timestamp values. This column determines how each row is assigned to a time bucket.
+    * Requirements: Must contain a valid datetime column name - Typically used in the WHERE clause to define a time-range.
+
+Increment Example:
+```sql
+increments('event_time', 10, 'minutes')
+```
+Assigns each row to a 10-minute bucket based on its event_time.
+
+### Optimizing the increment string
+
 **Example**: 
 ```anylog
-sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data" 
+sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data where timestamp >= '2025-04-08 17:30:19.390017' and timestamp <= '2025-04-08 19:12:01.229118'" 
 ```
 
-#### Examples:
+## Query Examples:
 
 1) Consider the last minute of reading from ping_sensor  
 ```
