@@ -409,9 +409,14 @@ select increments(timestamp, 1000), min(timestamp), max(timestamp), count(value)
 ```
 Explanation: Automatically computes the best time interval and unit (e.g., 1 hour, 2 days) to return ~1000 data points between April 8 and April 9.
 
-### The get increment params command
+**Performance Considerations:**
+To determine the best increment parameters, the system needs an estimate of the number of rows that fall within the specified time range.
+If the underlying database supports row estimation (e.g., PostgreSQL, via EXPLAIN), then this estimate is used to avoid exact count.
+If the database does not support estimates, a full SELECT COUNT(*) query is executed, which may have performance implications on large datasets.
 
-The get increments params command calculates the optimal parameters for the increments function based on a specified column, time range, and desired number of data points.
+### The get increments params command
+
+The **get increments params** command calculates the optimal parameters for the increments function based on a specified column, time range, and desired number of data points.
 It is used to dynamically determine the most appropriate time_interval and time_unit to apply when aggregating time-series data.
 
 This is especially useful for visualization systems that need to control the number of rows returned in time-based queries.

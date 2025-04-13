@@ -1,5 +1,7 @@
 # AnyLog Release notes
-
+## AnyLog Version:  1.3.2501-beta3 [3fd820] [2025-04-12 17:47:39]
+### New Features:
+1. Optimized increments function. Details: [Increments Optimized Version](../queries.md#increments-optimized-version)  
 
 ## AnyLog Version: 1.3.2501-beta3 [7ec215] [2025-03-30 16:52:26]
 ### New Features:
