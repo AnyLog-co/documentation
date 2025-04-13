@@ -345,7 +345,7 @@ It enables time-based analysis and aggregation by generating a synthetic column 
 ```anylog
 increments (units, time-interval, date-column)
 ```
-**increments Parameters Explained**:  
+**Increments Parameters Explained**:  
 The increments function helps divide time-series data into uniform time buckets. It takes three key parameters:
 1. unit:
    * Type: String
@@ -360,21 +360,21 @@ The increments function helps divide time-series data into uniform time buckets.
      * year
    * Examples:
      * minute → minute buckets
-     * day' → daily buckets
+     * day → daily buckets
 2. time-interval:
     * Type: Integer
     * Description: Defines the size of each time bucket.
     * Examples:
-      * 5 — creates buckets every 5 units (e.g., 5 minutes if units is 'minutes')
-      * 1 — creates buckets of 1 unit length (e.g., 1 hour if units is 'hours')
+      * 5 — creates buckets every 5 units (e.g., 5 minutes if units is 'minute')
+      * 1 — creates buckets of 1 unit length (e.g., 1 hour if units is 'hour')
 3. date-column
     * Type: String (column name)
     * Description: The name of the column in the table that contains date or timestamp values. This column determines how each row is assigned to a time bucket.
-    * Requirements: Must contain a valid datetime column name - Typically used in the WHERE clause to define a time-range.
+    * Requirements: Must contain a valid datetime column name - typically used in the WHERE clause to define a time-range.
 
 Increment Example:
 ```sql
-increments('event_time', 10, 'minutes')
+increments(event_time, 10, minute)
 ```
 Assigns each row to a 10-minute bucket based on its event_time.
 
@@ -384,8 +384,8 @@ sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), ma
 ```
 
 ### Increments Optimized Version
-The optimized increments function simplifies time-based bucketing by automatically determining    
-the appropriate time interval and unit needed to return an approximate number of evenly spaced data points over a given time range.
+The optimized increments function simplifies time-based bucketing by automatically determining the appropriate time interval   
+and unit needed to return an approximate number of evenly spaced data points over a given time range.
 
 Usage:
 ```sql
