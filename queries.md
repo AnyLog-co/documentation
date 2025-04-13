@@ -409,6 +409,34 @@ select increments(timestamp, 1000), min(timestamp), max(timestamp), count(value)
 ```
 Explanation: Automatically computes the best time interval and unit (e.g., 1 hour, 2 days) to return ~1000 data points between April 8 and April 9.
 
+### The get increment params command
+
+The get increments params command calculates the optimal parameters for the increments function based on a specified column, time range, and desired number of data points.
+It is used to dynamically determine the most appropriate time_interval and time_unit to apply when aggregating time-series data.
+
+This is especially useful for visualization systems that need to control the number of rows returned in time-based queries.
+
+Usage:
+```
+get increments params where dbms = [dbms name] 
+                        and table = [table name] 
+                        and column = [column name] 
+                        and where = [where condition] 
+                        and data_points = [int] 
+                        and format = [table/json]
+```
+**Parameters:**
+* dbms (string): The name of the DBMS (data source) where the target table resides.
+* table (string): The name of the table containing the time-series data.
+* column (string): The name of the timestamp or datetime column used for time-based bucketing.
+* where (string): A condition specifying the time range and any other filters to apply to the data. This helps define the time span for which increment parameters are calculated.
+* data_points (integer): The desired number of time buckets (data points) to be returned when using increments.
+* format (string): The output format: either "table" for a tabular result or "json" for machine-readable output.
+
+**Example**: 
+```anylog
+get increments params where dbms = my_dbms and table = t13 and column = timestamp and where = "timestamp >= '2025-04-08 17:30:19.390017' and timestamp <= '2025-04-08 19:12:01.229118'"
+```
 
 ## Query Examples:
 
