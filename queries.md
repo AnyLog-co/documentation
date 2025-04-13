@@ -378,12 +378,37 @@ increments('event_time', 10, 'minutes')
 ```
 Assigns each row to a 10-minute bucket based on its event_time.
 
-### Optimizing the increment string
-
 **Example**: 
 ```anylog
 sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data where timestamp >= '2025-04-08 17:30:19.390017' and timestamp <= '2025-04-08 19:12:01.229118'" 
 ```
+
+### Increments Optimized Version
+The optimized increments function simplifies time-based bucketing by automatically determining    
+the appropriate time interval and unit needed to return an approximate number of evenly spaced data points over a given time range.
+
+Usage:
+```sql
+increments(number_of_points, date_column)
+```
+**Parameters:**
+* number_of_points (integer): The approximate number of data points (or time buckets) the user wants in the result set. The system will divide the overall time span into this number of equally sized intervals.
+* date_column (string): The name of the column containing timestamp or datetime values. This column is used to calculate the time span and assign each row to the appropriate time bucket.
+
+**Note:** The optimized version requires to specify the WHERE clause filtering the date_column.
+
+How it works:
+1. The total time span is determined based on the WHERE clause filtering the date_column.
+2. An estimated row count within that time range is used to compute the appropriate time interval and unit.
+3. The goal is to select a time granularity that yields approximately number_of_points time buckets.
+4. The result is a synthetic column that represents the start time of each computed bucket.
+
+**Example query with optimized increments:** 
+```sql
+select increments(timestamp, 1000), min(timestamp), max(timestamp), count(value) from t13 where timestamp >= '2025-04-08' and timestamp < '2025-04-09'
+```
+Explanation: Automatically computes the best time interval and unit (e.g., 1 hour, 2 days) to return ~1000 data points between April 8 and April 9.
+
 
 ## Query Examples:
 
