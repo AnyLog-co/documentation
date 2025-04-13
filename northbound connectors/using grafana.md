@@ -179,10 +179,13 @@ WHERE
 LIMIT 2128;
 ```
 **Specifying the data points**  
-Adding data_points to the payload will optimize the increments function by dynamically calculating the appropriate 
-time_interval and time_unit based on the estimated number of rows within the specified time range.     
+Adding **data_points** to the payload will optimize the increments function by dynamically calculating the appropriate 
+time_interval and time_unit based on the estimated number of rows within the specified time range.       
 This ensures that the query returns approximately the requested number of time buckets, balancing performance, readability, 
-and visual resolution—especially useful for dashboards and analytics platforms where consistent data granularity is essential.
+and visual resolution—especially useful for dashboards and analytics platforms where consistent data granularity is essential.    
+**Notes:**  
+* If **data_point** are not specified, the Grafana **Interval** in the **Query options** is used.
+* Grafana's **limit** in the **Query options** is added to each query and if the number of returned rows exceed the limit, a subset of the result set is returned.
 
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
