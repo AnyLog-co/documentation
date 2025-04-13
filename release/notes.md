@@ -3,7 +3,7 @@
 ### New Features:
 1. Optimized increments function. Details: [Increments Optimized Version](../queries.md#increments-optimized-version)  
 2. A new AnyLog command: **get increments params**. Details: [get-increments-params-command](../queries.md#the-get-increments-params-command)
-3. A new option to optimize data pounts returned in Grafana. Details: 
+3. A new option to optimize data pounts returned in Grafana. Details: [Using the Time-Series Data Visualization](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
 
 ## AnyLog Version: 1.3.2501-beta3 [7ec215] [2025-03-30 16:52:26]
 ### New Features:
