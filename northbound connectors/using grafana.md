@@ -150,9 +150,10 @@ instructions    - Additional AnyLog query instructions.
 
 ### Using the Time-Series Data Visualization
 
-**Increments query** (The default query) is used to retriv statistics on the time series data in the selected time 
-range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
-average are collected for each interval and graphically presented.  
+**Increments query** (The default query) is used to query statistics on time intervals in the selected time 
+range. Depending on the number of data point requested, the time range is divided to intervals and the min, max, average   
+and count are applied on each interval.  
+Detailed description of the **increment** query is available in the [increment section](../queries.md#the-increment-function).
 
 **Example**:
 ```shell
@@ -162,7 +163,8 @@ average are collected for each interval and graphically presented.
   "time_column": "timestamp",
   "value_column": "value",
   "grafana": {
-    "format_as": "timeseries"
+    "format_as": "timeseries",
+    "data_points": 1000
   }
 }
 
@@ -176,11 +178,21 @@ WHERE
   timestamp >= '2024-02-19T19:42: 02.133Z' and timestamp <= '2024-02-19T19:57:02.133Z' 
 LIMIT 2128;
 ```
+**Specifying the data points**  
+Adding **data_points** to the payload will optimize the increments function by dynamically calculating the appropriate 
+time_interval and time_unit based on the estimated number of rows within the specified time range.       
+This ensures that the query returns approximately the requested number of time buckets, balancing performance, readability, 
+and visual resolution—especially useful for dashboards and analytics platforms where consistent data granularity is essential.    
+**Notes:**  
+* If **data_point** are not specified, the Grafana **Interval** in the **Query options** is used.
+* Grafana's **limit** in the **Query options** is added to each query and if the number of returned rows exceed the limit, a subset of the result set is returned.
+
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
 derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
+Detailed description of the **period** query is available in the [period section](../queries.md#the-period-function).
 
 **Example**: 
 ```shell

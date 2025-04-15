@@ -338,20 +338,107 @@ sql edgex format=table "select min(timestamp), max(timestamp), count(value) from
 ````
 
 ### The Increment Function
-The `increments` functions considers data in increments of time (i.e. every 5 minutes) within a time range (i.e. between 
-October 15, 2019 and October 16, 2019).`date-column` is the column name of the column that determines the date and time to consider. The `time-interval` and `units` (of time-interval) determine the time increments to consider (i.e. every 2 days) 
-and the `time-range` is determined in the where clause.
+The `increments` function is used to segment time-series data into fixed, contiguous time intervals (e.g., every 5 minutes, every hour, every day).    
+It enables time-based analysis and aggregation by generating a synthetic column representing the start of each time bucket.
 
 **Usage**:
 ```anylog
-increments (time-interval, units, date-column)
+increments (units, time-interval, date-column)
 ```
+**Increments Parameters Explained**:  
+The increments function helps divide time-series data into uniform time buckets. It takes three key parameters:
+1. unit:
+   * Type: String
+   * Description: Specifies the unit of time to use for the interval.
+   * Valid options:
+     * second
+     * minute
+     * hours
+     * days
+     * weeks
+     * month
+     * year
+   * Examples:
+     * minute → minute buckets
+     * day → daily buckets
+2. time-interval:
+    * Type: Integer
+    * Description: Defines the size of each time bucket.
+    * Examples:
+      * 5 — creates buckets every 5 units (e.g., 5 minutes if units is 'minute')
+      * 1 — creates buckets of 1 unit length (e.g., 1 hour if units is 'hour')
+3. date-column
+    * Type: String (column name)
+    * Description: The name of the column in the table that contains date or timestamp values. This column determines how each row is assigned to a time bucket.
+    * Requirements: Must contain a valid datetime column name - typically used in the WHERE clause to define a time-range.
+
+Increment Example:
+```sql
+increments(event_time, 10, minute)
+```
+Assigns each row to a 10-minute bucket based on its event_time.
+
 **Example**: 
 ```anylog
-sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data" 
+sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data where timestamp >= '2025-04-08 17:30:19.390017' and timestamp <= '2025-04-08 19:12:01.229118'" 
 ```
 
-#### Examples:
+### Increments Optimized Version
+The optimized increments function simplifies time-based bucketing by automatically determining the appropriate time interval   
+and unit needed to return an approximate number of evenly spaced data points over a given time range.
+
+Usage:
+```sql
+increments(number_of_points, date_column)
+```
+**Parameters:**
+* number_of_points (integer): The approximate number of data points (or time buckets) the user wants in the result set. The system will divide the overall time span into this number of equally sized intervals.
+* date_column (string): The name of the column containing timestamp or datetime values. This column is used to calculate the time span and assign each row to the appropriate time bucket.
+
+**Note:** The optimized version requires to specify the WHERE clause filtering the date_column.
+
+How it works:
+1. The total time span is determined based on the WHERE clause filtering the date_column.
+2. An estimated row count within that time range is used to compute the appropriate time interval and unit.
+3. The goal is to select a time granularity that yields approximately number_of_points time buckets.
+4. The result is a synthetic column that represents the start time of each computed bucket.
+
+**Example query with optimized increments:** 
+```sql
+select increments(timestamp, 1000), min(timestamp), max(timestamp), count(value) from t13 where timestamp >= '2025-04-08' and timestamp < '2025-04-09'
+```
+Explanation: Automatically computes the best time interval and unit (e.g., 1 hour, 2 days) to return ~1000 data points between April 8 and April 9.
+
+### The get increments params command
+
+The **get increments params** command calculates the optimal parameters for the increments function based on a specified column, time range, and desired number of data points.
+It is used to dynamically determine the most appropriate time_interval and time_unit to apply when aggregating time-series data.
+
+This is especially useful for visualization systems that need to control the number of rows returned in time-based queries.
+
+Usage:
+```
+get increments params where dbms = [dbms name] 
+                        and table = [table name] 
+                        and column = [column name] 
+                        and where = [where condition] 
+                        and data_points = [int] 
+                        and format = [table/json]
+```
+**Parameters:**
+* dbms (string): The name of the DBMS (data source) where the target table resides.
+* table (string): The name of the table containing the time-series data.
+* column (string): The name of the timestamp or datetime column used for time-based bucketing.
+* where (string): A condition specifying the time range and any other filters to apply to the data. This helps define the time span for which increment parameters are calculated.
+* data_points (integer): The desired number of time buckets (data points) to be returned when using increments.
+* format (string): The output format: either "table" for a tabular result or "json" for machine-readable output.
+
+**Example**: 
+```anylog
+get increments params where dbms = my_dbms and table = t13 and column = timestamp and where = "timestamp >= '2025-04-08 17:30:19.390017' and timestamp <= '2025-04-08 19:12:01.229118'"
+```
+
+## Query Examples:
 
 1) Consider the last minute of reading from ping_sensor  
 ```

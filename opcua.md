@@ -8,8 +8,8 @@ OPC Unified Architecture (OPC UA) is a robust, platform-independent communicatio
 for secure and reliable data exchange between devices, systems, and applications. 
 Designed as an evolution of the OPC Classic standard, OPC UA provides cross-platform compatibility and supports 
 advanced features like real-time data access, historical data retrieval, and event notifications. 
-Its architecture emphasizes security with built-in encryption, authentication, and access control, making it ideal for modern i
-ndustrial IoT and Industry 4.0 environments. By enabling seamless interoperability across diverse hardware and software,
+Its architecture emphasizes security with built-in encryption, authentication, and access control, making it ideal for modern 
+industrial IoT and Industry 4.0 environments. By enabling seamless interoperability across diverse hardware and software,
 OPC UA simplifies the integration and scalability of complex industrial systems.
 
 Users can issue requests and configure their nodes to act as clients, pulling data from an OPC-UA interface.
@@ -26,7 +26,7 @@ get opcua namespace where url = [connect string] and user = [username] and passw
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
-* [username] - the username required by the OPC UA server for access.
+* [user] - the username required by the OPC UA server for access.
 * [password] - the password associated with the username.
 
 Example:
@@ -53,26 +53,31 @@ get opcua struct where url = [connect string] and user = [username] and password
   
 The following tables summarizes the command variables:
 
-| keyword    | Details                                                                                        |
-|------------|------------------------------------------------------------------------------------------------| 
-| url        | The url specifies the endpoint of the OPC UA server.                                           |
-| username   | the username required by the OPC UA server for access.                                         |
-| password   | the password associated with the username.                                                     |
-| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable      |
-| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.      |
-| attributes | Attribute names to consider or * for all                                                       |
-| limit      | Limit the Tree traversal by the number of nodes to visit                                       |
-| depth      | Limit the Tree traversal by the depth.                                                         |
-| class      | Filter the Tree traversal to show only nodes in the listed class.                              |
-| output     | The target for the output stream (stdout or a file name).                                      |
-| format     | The format of the output (see details below).                                                  |
-| frequency  | If output generates "run_client" - the frequency of the "run client" command                   |
-| dbms       | If output generates "run_client" - the table name of the "run client" command                  |
-| table      | If output generates "run_client" - the dbms name of the "run client" command                   |
-| validate   | A boolean value. If set to True, the value from each visited node is read (see details below). |
+| keyword    | Details                                                                                                                              |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------| 
+| url        | The url specifies the endpoint of the OPC UA server.                                                                                 |
+| user       | the username required by the OPC UA server for access.                                                                               |
+| password   | the password associated with the username.                                                                                           |
+| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable                                            |
+| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.                                            |
+| attributes | Attribute names to consider or * for all                                                                                             |
+| limit      | Limit the Tree traversal by the number of nodes to visit                                                                             |
+| depth      | Limit the Tree traversal by the depth.                                                                                               |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                                                                    |
+| output     | The target for the output stream (stdout or a file name).                                                                            |
+| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                   | 
+| format     | The format of the output (see details below).                                                                                        |
+| target     | The variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| schema     | A bollean value. If set to True, output includes, for each tag, the table's schema.                                                  |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command                                                         |
+| dbms       | If output generates "run_client" - the table name of the "run client" command                                                        |
+| table      | If output generates "run_client" - the dbms name of the "run client" command                                                         |
+| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).                                       |
 
 **Format options:**
-* **tree** - the OPC-UA tree structure (default)
+* **tree** - the OPC-UA tree structure (default).
+* **path** - strings representing the full path.
+* **policy** - generating a policy representing the tag. If target is specified, output is "blockchain insert" command for every policy. 
 * **stats** - statistics counting the number of entries in each class.
 * **get_value** - generating a [get opcua value command](#the-get-opcua-values-command) with the tree visited in the **get opcua struct** command.   
 * **run_client** - generating a [run opcua client command](#pulling-data-from-opcua-continuously) with the tree visited in the **get opcua struct** command.
@@ -116,9 +121,20 @@ The following tables summarizes the command variables:
     ```
 8. Traversal from a new root (from node "ns=6;s=MyObjectsFolder"), considering only variables, and output the visited nodes to a **run opcua client** command.
     ```anylog
-    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and dbms = nov and table = sensor and frequency = 10 and limit = 10
+    get opcua struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node="ns=6;s=MyObjectsFolder" and class = variable and format = run_client and name = opcua_nov and dbms = nov and table = sensor and frequency = 10 and limit = 10
     ```
-      
+9. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output the path of each variable node
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = path and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms
+    ```
+10. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output a policy for each visited variable node.
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms 
+     ```
+11. Traversal from a new root (from node "ns=2;s=DeviceSet"), considering only variables, and output **blockchain insert** command for every generated policy. Output is written to the specified file.
+    ```anylog
+     get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and limit = 100 and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out 
+     ```
 ## The Get OPCUA Values Command
 
 Node values are retrieved with the following command:
@@ -127,7 +143,7 @@ get opcua values where url = [connect string] and user = [username] and password
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
-* [username] - The username required by the OPC UA server for access.
+* [user] - The username required by the OPC UA server for access.
 * [password] - The password associated with the username.
 * [include] - Additional attributes that are returned with the value.
 * [node] - One or multiple node IDs.
@@ -164,15 +180,16 @@ get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer a
 
 The command **run opcua client*** pulls data from OPCUA continuously and streams the data into a database on the local node:
 ```anylog
-run opcua client where url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+run opcua client where name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
 ```
  
 The following tables summarizes the command variables:
 
 | keyword   | Details                                                                                      |
 |-----------|----------------------------------------------------------------------------------------------| 
+| name      | A unique connection name.                                                                    |
 | url       | The url specifies the endpoint of the OPC UA server.                                         |
-| username  | the username required by the OPC UA server for access.                                       |
+| user      | the username required by the OPC UA server for access.                                       |
 | password  | the password associated with the username.                                                   |
 | frequency | Read frequency in seconds or a fraction of seconds using hz (i.e.: 10 hz).                   |
 | node      | ID of one or multiple nodes that their value is retrieved.                                   |
@@ -185,11 +202,11 @@ The following tables summarizes the command variables:
 
 Example 1:
 ```anylog
-run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+run opcua client where  name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
 ```
 Example 2:
 ```anylog
-run opcua client where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+run opcua client where name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
 ```
 
 Notes: 
@@ -218,3 +235,129 @@ Examples:
 exit opcua all
 exit opua nov.rig8
 ```
+
+## Example - Declaring OPC UA with aggregations
+
+Aggregation functions summarize streaming data over a time interval. See details in the [Aggregation](aggregations.md) section.
+
+The following are the needed configuration steps:
+
+### Identify the time and value attribute names
+
+To apply aggregation on the OPC UA, users need to identify the names of the time attribute and the value attribute retrieved from the OPC UA connector.      
+If the AnyLog OPC UA service is used, the time attribute name is **timestamp** and users can retrieve the value attribute name using the ```get 
+opcua values``` command with **include = all** or **include = name**.
+
+Example:
+```anylog
+get opcua values where url = opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and node = "ns=3;i=1002" and include = name
+
+OPCUA Nodes values
+name   value
+------|----------|
+random|-0.5909728|
+```
+The call above shows that the column name for "ns=3;i=1002" is **random**.
+
+### Apply aggregation on the OPC UA columns and assign a database and table
+
+```anylog
+set aggregations where dbms = nov and table = table_2 and time_column = timestamp and value_column = random
+```
+
+### Declare the aggregation menthod (optional)
+The following example will replace the OPC UA source data with an aggregation function:
+```anylog
+set aggregations encoding where dbms = nov and table = table_2 and encoding = bounds
+```
+
+### Validate the aggregation declarations
+```anylog
+get aggregations
+get aggregations config
+```
+
+### Start the OPC UA service
+```anylog
+<run opcua client where 
+   name = opcua_connect1 and
+   url=opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and 
+   node = "ns=3;i=1002" and 
+   frequency=25 and 
+   dbms=nov and 
+   table=table_2> 
+```
+
+### Validate processing
+```anylog
+get opcua client
+get aggregations
+get aggregations where dbms = nov and table = table_2
+get streaming
+get operator
+```
+
+### Validate data
+```anylog
+run client () sql nov format = table select timestamp::ljust(19), end_interval::ljust(19), min_val, max_val, avg_val, events from bounds_table_2 order by timestamp desc limit 10  
+```
+
+## Example - Creating Policies from OPCUA and pulling data
+
+The first step is to create policies that represent the tags to be managed. 
+These policies define the structure and semantics of the tags, including their names, data types, and relationships.   
+Once defined, the policies are published to the blockchain. They serve as a mapping between table names and tag information, and vice versa.    
+This enables the system to automatically interpret and organize incoming data from OPC UA or other sources, aligning it 
+with the defined structure for seamless querying, validation, and distribution across the network.
+
+### Generate the policies
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = policy  and schema = true and node = "ns=2;s=DeviceSet" and class = variable and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
+```
+These tag policies are stored in a file: **!tmp_dir/my_file.out** and the format is like the example below:
+```anylog
+{'tag': {'class': 'variable',
+         'datatype': 'Boolean',
+         'dbms': 'my_dbms',
+         'nodeid': 'LS1002H_AlarmSetpoint',
+         'ns': 2,
+         'parent': 'ALARM_TAGS',
+         'path': 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH '
+                 'XTR/Resources/Application/GlobalVars/ALARM_TAGS/LS1002H_AlarmSetpoint',
+         'table': 't39'}}
+```
+If **schema** is set to **true**, the output includes, for every tag, the table's schema associated with the tag.  
+Example:
+```anylog
+ {'table' : {'name' : 't39',
+             'dbms' : 'nov',
+             'create' : 'CREATE TABLE IF NOT EXISTS t39(row_id SERIAL PRIMARY KEY,  inser'
+                        't_timestamp TIMESTAMP NOT NULL DEFAULT NOW(),  tsd_name CHAR(3),'
+                        '  tsd_id INT,  timestamp timestamp not null default now(),  valu'
+                        'e bool ); CREATE INDEX t39_timestamp_index ON t39(timestamp); CR'
+                        'EATE INDEX t39_insert_timestamp_index ON t39(insert_timestamp);',
+             'source' : 'OPCUA Interface',
+             'id' : '040197b7eed831dddb1b3fd910d86deb',
+             'date' : '2025-04-09T00:09:53.406292Z',
+             'ledger' : 'local'}}]
+```
+
+### Load the file to the metadata
+```anylog
+process !tmp_dir/my_file.out
+```
+### Generate the command to read the tags data
+```anylog
+ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and format = run_client  and node = "ns=2;s=DeviceSet" and class = variable and output = !tmp_dir/my_run_cmd.out and dbms = my_dbms and frequency = 3 and name = opcua_nov
+```
+Notes:
+* The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
+* The **table** name is not specified as it will be derived from the policies (based on the namespace and node id).
+
+### Execute the command
+```anylog
+process !tmp_dir/my_run_cmd.out 
+```
+
+This process pulls the data using OPCUA and assigns the data to the tables according to the info in the policies.
+

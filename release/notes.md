@@ -1,3 +1,24 @@
+# AnyLog Release notes
+## AnyLog Version:  1.3.2501-beta3 [3fd820] [2025-04-12 17:47:39]
+### New Features:
+1. Optimized increments function. Details: [Increments Optimized Version](../queries.md#increments-optimized-version)  
+2. A new AnyLog command: **get increments params**. Details: [get-increments-params-command](../queries.md#the-get-increments-params-command)
+3. A new option to optimize data pounts returned in Grafana. Details: [Using the Time-Series Data Visualization](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
+
+## AnyLog Version: 1.3.2501-beta3 [7ec215] [2025-03-30 16:52:26]
+### New Features:
+1. New command to configure output table width: set output table width 250
+2. New Functionality for String Substring Operations. Details: [Special Bring Values](../json%20data%20transformation.md#special-bring-values)
+3. Severe error messages (boxed) are now printed on the node in RED.
+
+## AnyLog Version: 1.3.2401 [d9321d] [2025-03-07 18:19:06]
+### New Features:
+1. Using DNS names. Details: [Get DNS Name](../anylog%20commands.md#get-dns-name)
+
+## AnyLog Version: 1.3.2401 [d6c050] [2025-02-16 13:59:47]
+### New Features:
+1. Aggregations over user data. Details: [Aggregations](../aggregations.md)
+2. New AnyLog command: **subprocess** to run shell scripts.
 
 ## AnyLog Version: 1.3.2401 [6665e9] [2025-01-26 14:14:09]
 ### New Features:

@@ -99,12 +99,30 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.min``` - return the minimum value of an attribute.
     * ```bring.max``` - return the maximum value of an attribute.
   
-### Special bring values
 
-* If the `bring` command values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.  
-For example ```bring [operator][name]``` will pull the name value from an Operator policy.  
-* If an asterisk sign is used, it is replaced with the policy type. For example, in an Operator policy, ```[*][name]``` is the same as  ```[operator][name]```.    
-* Empty brackets ```[]``` designate the policy type.
+
+### Special Bring Values
+* **Basic Usage:**
+  If the **bring** command values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.
+  For example, ```bring [operator][name]``` will pull the name value from an Operator policy.
+
+
+* **Wildcard Usage:**
+  If an asterisk (*) sign is used, it is replaced with the policy type. For example, in an Operator policy, ```[*][name]``` is the same as ```[operator][name]```.
+
+
+* **Empty Brackets:**
+  Empty brackets ([]) designate the policy processed.
+
+
+* **Substring Operations:**
+  These special operations allow to retrieve specific substrings based on certain conditions.  
+  The operations inside the parentheses are applied on the value extracted by the key.
+  * rfind(substr) - finds the last occurrence of a specific substring (substr) within a string. It returns the substring starting from the last occurrence of substr to the end of the string.
+  * find(substr) - finds the first occurrence of a specific substring (substr) within a string. It returns the substring starting from the beginning of the string to the first occurrence of substr.
+  * prefix(n) - returns the first n characters of the string, essentially providing a truncated version from the start of the string.
+  * suffix(n) - returns the last n characters of the string, essentially providing a truncated version from the end of the string.
+
   
 ### Examples:
   1. Return policy info in a table structure:
@@ -195,4 +213,11 @@ blockchain get table bring.count
 ```anylog
 blockchain get (operator, query, publisher, master) bring.min [*][port]
 blockchain get (operator, query, publisher, master) bring.max [*][port]
+```
+* The following examples return substrings.
+```anylog
+blockchain get tag bring.table [tag][table] [tag][path(rfind(/))]
+blockchain get tag bring.table [tag][table] [tag][path(find(/))]
+blockchain get tag bring.table [tag][table] [tag][path(suffix(10))]
+blockchain get tag bring.table [tag][table] [tag][path(prefix(10))]
 ```
