@@ -65,5 +65,6 @@ or Years) and the number of units of the time interval (i.e. 3 days - whereas ti
 4. Create a new Analytics
 <img src="../imgs/qlik8.png" height=50% width=50% />
 
-5. Create a graph based on the given Dimensions 
+5. Create a graph based on the given Dimensions
 <img src="../imgs/qlik9_period.png" height=50% width=50% />
+
