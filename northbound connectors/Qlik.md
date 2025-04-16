@@ -32,8 +32,8 @@ time intervals (e.g., every 5 minutes, every hour, every day).
 2. In the headers section add the following params: 
     * **command**: `sql nov format=json and stat=false and include=(t2) and extend=(@table_name) "select increments(second, 1, timestamp), min(timestamp) as timestamp, min(value) as min_val, avg(value) as avg_val, max(value) as max_val from t1 WHERE timestamp >= NOW() - 15 minutes ORDER BY timestamp"`
     * **User-Agent**: `AnyLog/1.23`
-    * "destination": `network`
-<img src="../imgs/qlik6_increments.png" height=50% width=50% />
+    * **destination**: `network`
+<img src="../imgs/qlik6.png" height=50% width=50% />
 
 3. Validate the data and continue 
 <img src="../imgs/qlik7_increments.png" height=50% width=50% />
@@ -43,3 +43,27 @@ time intervals (e.g., every 5 minutes, every hour, every day).
 
 5. Create a graph based on the given Dimensions 
 <img src="../imgs/qlik9_increments.png" height=50% width=50% />
+
+## Period Data 
+The [period function](../queries.md#the-period-function) finds the first occurrence of data before or at a specified 
+date (and if a filter-criteria is specified, the occurrence needs to satisfy the filter-criteria) and considers the 
+readings in a period of time which is measured by the type of the time interval (Minutes, Hours, Days, Weeks, Months 
+or Years) and the number of units of the time interval (i.e. 3 days - whereas time-interval is day and unit is 3).
+
+1. For the URL specify the REST IP and port of the node to send the request against
+<img src="../imgs/qlik5.png" height=50% width=50% />
+ 
+2. In the headers section add the following params: 
+    * **command**: `sql nov format=json and stat=false and include=(t2) and extend=(@table_name) "select timestamp, value from t1 where period(minute, 1, now(), timestamp) order by timestamp"`
+    * **User-Agent**: `AnyLog/1.23`
+    * **destination**: `network`
+<img src="../imgs/qlik6.png" height=50% width=50% />
+
+3. Validate the data and continue 
+<img src="../imgs/qlik7_period.png" height=50% width=50% />
+
+4. Create a new Analytics
+<img src="../imgs/qlik8.png" height=50% width=50% />
+
+5. Create a graph based on the given Dimensions 
+<img src="../imgs/qlik9_period.png" height=50% width=50% />
