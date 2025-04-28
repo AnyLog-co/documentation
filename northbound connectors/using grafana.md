@@ -155,7 +155,7 @@ range. Depending on the number of data point requested, the time range is divide
 and count are applied on each interval.  
 Detailed description of the **increment** query is available in the [increment section](../queries.md#the-increment-function).
 
-**Example**:
+**Example 1**:
 ```shell
 # Input in Grafana 
 {
@@ -186,6 +186,37 @@ and visual resolution—especially useful for dashboards and analytics platforms
 **Notes:**  
 * If **data_point** are not specified, the Grafana **Interval** in the **Query options** is used.
 * Grafana's **limit** in the **Query options** is added to each query and if the number of returned rows exceed the limit, a subset of the result set is returned.
+
+**Example 2**:
+```shell
+# Input in Grafana 
+{
+  "type": "increments",
+  "time_column": "timestamp",
+  "value_column": "value",
+  "extend" : ["@table_name"],
+  "include" : ["t98"],
+  "grafana": {
+    "format_as": "timeseries"
+  }
+}
+
+# Query Being Executed
+run client () sql nov timezone = utc and pass_through = false and include = (t98) and extend = (@dbms_name,@table_name)
+SELECT 
+  increments(timestamp), max(timestamp) as timestamp, avg(value) as avg_val, min(value) as min_val, max(value) as max_val
+FROM 
+  t99 
+WHERE 
+  where timestamp >= '2025-03-29T03:25:12.296Z' and timestamp <= '2025-04-28T03:25:12.297Z'
+LIMIT 1271;
+```
+**Adding 'include' and 'extend' to the payload**  
+The **include** attribute allows the query to treat multiple tables as a single logical source.    
+For instance, in Example 2, querying table t99 with an include on t98 results in data from both tables being retrieved and processed together.      
+The **extend** attribute appends metadata from the source node to the returned dataset.    
+In Example 2, extend organizes the results by grouping entries under their respective table names, preserving source context within the response.    
+Comprehensive specifications for **include** and **extend** are provided in the [Query Options](../queries.md#query-options) section.
 
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
