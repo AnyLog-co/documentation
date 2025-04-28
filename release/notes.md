@@ -1,4 +1,12 @@
 # AnyLog Release notes
+
+## AnyLog Version: 1.3.2504 [673f50] [2025-04-27 20:15:35]
+### New features
+1.  Adding **extend** and **include** options to the Grafana payload. See details in [example 2 in Using Grafana documentation](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
+
+### Bugs Fixed
+1. Rejecting tag policies (with OPC-UA) with duplicate String ID or Int ID. 
+
 ## AnyLog Version:  1.3.2501-beta3 [3fd820] [2025-04-12 17:47:39]
 ### New Features:
 1. Optimized increments function. Details: [Increments Optimized Version](../queries.md#increments-optimized-version)  
