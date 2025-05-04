@@ -53,26 +53,26 @@ get opcua struct where url = [connect string] and user = [username] and password
   
 The following tables summarizes the command variables:
 
-| keyword    | Details                                                                                                                              |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------| 
-| url        | The url specifies the endpoint of the OPC UA server.                                                                                 |
-| user       | the username required by the OPC UA server for access.                                                                               |
-| password   | the password associated with the username.                                                                                           |
-| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable                                            |
-| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.                                            |
-| attributes | Attribute names to consider or * for all                                                                                             |
-| limit      | Limit the Tree traversal by the number of nodes to visit                                                                             |
-| depth      | Limit the Tree traversal by the depth.                                                                                               |
-| class      | Filter the Tree traversal to show only nodes in the listed class.                                                                    |
-| output     | The target for the output stream (stdout or a file name).                                                                            |
-| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                   | 
-| format     | The format of the output (see details below).                                                                                        |
-| target     | The variables in a 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
-| schema     | A bollean value. If set to True, output includes, for each tag, the table's schema.                                                  |
-| frequency  | If output generates "run_client" - the frequency of the "run client" command                                                         |
-| dbms       | If output generates "run_client" - the table name of the "run client" command                                                        |
-| table      | If output generates "run_client" - the dbms name of the "run client" command                                                         |
-| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).                                       |
+| keyword    | Details                                                                                                                                |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------| 
+| url        | The url specifies the endpoint of the OPC UA server.                                                                                   |
+| user       | the username required by the OPC UA server for access.                                                                                 |
+| password   | the password associated with the username.                                                                                             |
+| node       | Define a different root by providing the node id: examples: 'ns=0;i= i=84 or s=MyVariable                                              |
+| type       | Type of nodes to consider: Object, Variable etc. If not specified, all types are visited.                                              |
+| attributes | Attribute names to consider or * for all                                                                                               |
+| limit      | Limit the Tree traversal by the number of nodes to visit                                                                               |
+| depth      | Limit the Tree traversal by the depth.                                                                                                 |
+| class      | Filter the Tree traversal to show only nodes in the listed class.                                                                      |
+| output     | The target for the output stream (stdout or a file name).                                                                              |
+| append     | If output is directed to a file, a 'true' value appends to the file. The default value is 'false'.                                     | 
+| format     | The format of the output (see details below).                                                                                          |
+| target     | The variables in the 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| schema     | A boolean value. If set to True, output includes, for each tag, the table's schema.                                                    |
+| frequency  | If output generates "run_client" - the frequency of the "run client" command                                                           |
+| dbms       | If output generates "run_client" - the table name of the "run client" command                                                          |
+| table      | If output generates "run_client" - the dbms name of the "run client" command                                                           |
+| validate   | A boolean value. If set to True, the value from each visited node is read (see details below).                                         |
 
 **Format options:**
 * **tree** - the OPC-UA tree structure (default).

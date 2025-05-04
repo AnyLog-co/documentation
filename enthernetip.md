@@ -30,22 +30,33 @@ This command enables users to query both system-level and user-defined tags, mak
 
 ### Command Variables
 
-| Keyword    | Details                                                                |
-|------------|------------------------------------------------------------------------|
-| `url`      | The IP address of the target PLC or EtherNet/IP device.                |
-| `slot`     | The slot number of the target controller (used in multi-slot chassis). |
-| `user`     | Username, if the PLC requires authentication.                          |
-| `password` | Password for authentication.                                           |
-| `limit`    | Limit the number of tags or objects returned in the response.          |
-| `prefix`   | Limit the tags to a path that satisfies the prefix string.            |
+| Keyword    | Details                                                                                                                               |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `url`      | The IP address of the target PLC or EtherNet/IP device.                                                                               |
+| `slot`     | The slot number of the target controller (used in multi-slot chassis).                                                                |
+| `user`     | Username, if the PLC requires authentication.                                                                                         |
+| `password` | Password for authentication.                                                                                                          |
+| `limit`    | Limit the number of tags or objects returned in the response.                                                                         |
+| `prefix`   | Limit the tags to a path that satisfies the prefix string.                                                                            |
+| `output`   | The target for the output stream (stdout or a file name).                                                                             |
+| `format`   | The format of the output (see details below).                                                                                         |
+| `target`   | The variables in the 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| `schema`   | A boolean value. If set to True, output includes, for each tag, the table's schema. |
+
+A boolean value. If set to True, output includes, for each tag, the table's schema.
 
 
+Examples:
+
+```anylog
+get etherip struct where url = 127.0.0.1 and format = policy  and schema = true and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
+```
 
 ## The Get PLC Values Command
 Tag values are retrieved with the following command:
 
 ```anylog
-get plc values where type = etherip and url = [connect string] and user = [username] and password = [password] and node = [node id]
+get plc values where type = [connector type] and url = [connect string] and user = [username] and password = [password] and node = [node id]
 ```
 
 Details:
