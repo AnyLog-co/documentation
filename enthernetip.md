@@ -43,8 +43,6 @@ This command enables users to query both system-level and user-defined tags, mak
 | `target`   | The variables in the 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
 | `schema`   | A boolean value. If set to True, output includes, for each tag, the table's schema. |
 
-A boolean value. If set to True, output includes, for each tag, the table's schema.
-
 
 Examples:
 
