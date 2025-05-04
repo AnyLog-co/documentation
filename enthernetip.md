@@ -63,7 +63,7 @@ get etherip struct where url = 127.0.0.1 and format = get_value
 ```
 The following example outputs a **run plc client** command (see details [below](#the-run-plc-client-command)):
 ```anylog
-get etherip struct where url = 127.0.0.1 and format = run_client and frequency = 1 and name = etherip_reads
+get etherip struct where url = 127.0.0.1 and format = run_client and frequency = 1 and name = etherip_reads and dbms = my_dbms
 ```
 The following example outputs tag policies and tables policies to enable streaming of the PLC data to local databases 
 ```anylog
@@ -131,3 +131,59 @@ Notes:
 2. Each row is added with 2 columns:
    * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
    * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the OPCUA.
+
+
+## Example - Creating Policies from EtherNet/IP and pulling data
+
+The first step is to create policies that represent the tags to be managed. 
+These policies define the structure and semantics of the tags, including their names, data types, and relationships.   
+Once defined, the policies are published to the blockchain. They serve as a mapping between table names and tag information, and vice versa.    
+This enables the system to automatically interpret and organize incoming data from OPC UA or other sources, aligning it 
+with the defined structure for seamless querying, validation, and distribution across the network.
+
+### Generate the policies
+```anylog
+get etherip struct where url = 127.0.0.1 and format = policy  and schema = true and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
+```
+These tag policies are stored in a file: **!tmp_dir/my_file.out** and the format is like the example below:
+```anylog
+ {'tag' : {'protocol' : 'etherip',
+           'ns' : 0,
+           'dbms' : 'my_dbms',
+           'table' : 't101',
+           'datatype' : 'boolean',
+           'node_sid' : 'BOOL',
+           'id' : '0e17856bdb914cdfe338eff3485ef366',
+           'date' : '2025-05-04T18:07:54.695893Z',
+           'ledger' : 'local'}}]
+```
+If **schema** is set to **true**, the output includes, for every tag, the table's schema associated with the tag.  
+Example:
+```anylog
+{"table": {"name": "t109", 
+           "dbms": "my_dbms", 
+              "create": "CREATE TABLE IF NOT EXISTS t109(row_id SERIAL PRIMARY KEY,  insert_timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
+              tsd_name CHAR(3),  tsd_id INT,  timestamp timestamp not null default now(),  value varchar ); 
+              CREATE INDEX t109_timestamp_index ON t109(timestamp); CREATE INDEX t109_insert_timestamp_index ON t109(insert_timestamp);", 
+              "source": "ETHERIP Interface"}}
+```
+
+### Load the file to the metadata
+```anylog
+process !tmp_dir/my_file.out
+```
+### Generate the command to read the tags data
+```anylog
+get etherip struct where url = 127.0.0.1 and format = run_client and frequency = 1 and name = etherip_reads and dbms = nov
+```
+Notes:
+* The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
+* The **table** name is not specified as it will be derived from the policies (based on the namespace and node id).
+
+### Execute the command
+```anylog
+process !tmp_dir/my_run_cmd.out 
+```
+
+This process pulls the data using OPCUA and assigns the data to the tables according to the info in the policies.
+
