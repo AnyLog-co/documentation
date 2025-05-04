@@ -46,6 +46,15 @@ This command enables users to query both system-level and user-defined tags, mak
 
 Examples:
 
+The following example outputs the PLC tags and their current value:
+```anylog
+get etherip struct where url = 127.0.0.1 and read = true
+```
+The following example outputs a **get plc values** command (see details [below](#the-get-plc-values-command)):
+```anylog
+get etherip struct where url = 127.0.0.1 and format = get_value 
+```
+The following example outputs tag policies and tables policies to enable streaming of the PLC data to local databases 
 ```anylog
 get etherip struct where url = 127.0.0.1 and format = policy  and schema = true and dbms = my_dbms and target = "local = true and master = !master_node" and output = !tmp_dir/my_file.out
 ```
