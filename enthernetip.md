@@ -30,19 +30,26 @@ This command enables users to query both system-level and user-defined tags, mak
 
 ### Command Variables
 
-| Keyword    | Details                                                                                                                               |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `url`      | The IP address of the target PLC or EtherNet/IP device.                                                                               |
-| `slot`     | The slot number of the target controller (used in multi-slot chassis).                                                                |
-| `user`     | Username, if the PLC requires authentication.                                                                                         |
-| `password` | Password for authentication.                                                                                                          |
-| `limit`    | Limit the number of tags or objects returned in the response.                                                                         |
-| `prefix`   | Limit the tags to a path that satisfies the prefix string.                                                                            |
-| `output`   | The target for the output stream (stdout or a file name).                                                                             |
-| `format`   | The format of the output (see details below).                                                                                         |
-| `target`   | The variables in the 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
-| `schema`   | A boolean value. If set to True, output includes, for each tag, the table's schema. |
+| Keyword     | Details                                                                                                                                |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `url`       | The IP address of the target PLC or EtherNet/IP device.                                                                                |
+| `slot`      | The slot number of the target controller (used in multi-slot chassis).                                                                 |
+| `user`      | Username, if the PLC requires authentication.                                                                                          |
+| `password`  | Password for authentication.                                                                                                           |
+| `limit`     | Limit the number of tags or objects returned in the response.                                                                          |
+| `prefix`    | Limit the tags to a path that satisfies the prefix string.                                                                             |
+| `output`    | The target for the output stream (stdout or a file name).                                                                              |
+| `format`    | The format of the output (see details below).                                                                                          |
+| `target`    | The variables in the 'blockchain insert commands'. This option is used with 'format = policy' to generate 'blockchain insert' commands |
+| `schema`    | A boolean value. If set to True, output includes, for each tag, the table's schema.                                                    |
+| `frequency` | Specifying the reading frequency in Hz, with **format = run_client**.                                                                  |
+| `name`      | Specifying a process name when with **format = run_client** option.                                                                    |
 
+Format options:
+* tree - the OPC-UA tree structure (default).
+* policy - generating a policy representing the tag. If target is specified, output is "blockchain insert" command for every policy.
+* get_value - generating a [get plc value](#the-get-plc-values-command) command with the tags visited in the **get plc struct** command.
+* run_client - generating a [run plc client](#the-run-plc-client-command) command with the tags visited in the **get plc struct** command.
 
 Examples:
 
@@ -53,6 +60,10 @@ get etherip struct where url = 127.0.0.1 and read = true
 The following example outputs a **get plc values** command (see details [below](#the-get-plc-values-command)):
 ```anylog
 get etherip struct where url = 127.0.0.1 and format = get_value 
+```
+The following example outputs a **run plc client** command (see details [below](#the-run-plc-client-command)):
+```anylog
+get etherip struct where url = 127.0.0.1 and format = run_client and frequency = 1 and name = etherip_reads
 ```
 The following example outputs tag policies and tables policies to enable streaming of the PLC data to local databases 
 ```anylog
@@ -81,3 +92,42 @@ get plc values where type = etherip and url = 127.0.0.1 and node = CombinedChlor
 
 get plc values where type = etherip and url = 127.0.0.1 and nodes = ["CombinedChlorinatorAI.PV", "STRUCT.Status"]
 ```
+
+## The Run PLC Client Command
+
+The command **run plc client*** pulls data from the PLC continuously and streams the data into a database on the local node:
+```anylog
+run opcua client where name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+```
+ 
+The following tables summarizes the command variables:
+
+| keyword   | Details                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------| 
+| name      | A unique connection name.                                                                    |
+| url       | The url specifies the endpoint of the OPC UA server.                                         |
+| user      | the username required by the OPC UA server for access.                                       |
+| password  | the password associated with the username.                                                   |
+| frequency | Read frequency in seconds or a fraction of seconds using hz (i.e.: 10 hz).                   |
+| node      | ID of one or multiple nodes that their value is retrieved.                                   |
+| nodes     | Providing a list of nodes, separated by comma, within square brackets.                       |
+| policy    | If nodes are not specified on the CLI, the policy determines the nodes and the table to use. |
+| dbms      | The database to host the data (if not specified in a policy).                                |
+| table     | The table to host the data (if not specified in a policy).                                   |
+| topic     | If data is processed through the local broker.                                               |
+
+
+Example 1:
+```anylog
+run plc client where type = etherip and name = my_etherip and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+```
+Example 2:
+```anylog
+run plc client where type = etherip and name = my_etherip and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+```
+
+Notes: 
+1. Multiple OPCUA client can be declared on the same node.
+2. Each row is added with 2 columns:
+   * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
+   * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the OPCUA.
