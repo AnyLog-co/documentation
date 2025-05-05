@@ -97,7 +97,7 @@ get plc values where type = etherip and url = 127.0.0.1 and nodes = ["CombinedCh
 
 The command **run plc client*** pulls data from the PLC continuously and streams the data into a database on the local node:
 ```anylog
-run opcua client where name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+run plc client where type = etherip and name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
 ```
  
 The following tables summarizes the command variables:
@@ -132,7 +132,7 @@ Notes:
 1. Multiple clients can be declared on the same node.
 2. Each row is added with 2 columns:
    * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
-   * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the OPCUA.
+   * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the PLC.
 
 
 ## Example - Creating Policies from EtherNet/IP and pulling data
@@ -179,7 +179,7 @@ process !tmp_dir/my_file.out
 get etherip struct where url = 127.0.0.1 and format = run_client and frequency = 1 and name = etherip_reads and dbms = nov
 ```
 Notes:
-* The [run opcua client](#pulling-data-from-opcua-continuously) command is stored in a file: **!tmp_dir/my_file.out**.
+* The [run plc client](#the-run-plc-client-command) command is stored in a file: **!tmp_dir/my_file.out**.
 * The **table** name is not specified as it will be derived from the policies (based on the namespace and node id).
 
 ### Execute the command
@@ -187,5 +187,5 @@ Notes:
 process !tmp_dir/my_run_cmd.out 
 ```
 
-This process pulls the data using OPCUA and assigns the data to the tables according to the info in the policies.
+This process pulls the data using EtherNet/IP and assigns the data to the tables according to the info in the policies.
 
