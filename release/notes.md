@@ -1,5 +1,11 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta1 [d483ae] [2025-05-05 10:35:06]
+### New features
+1. Adding EtherNet/IP connector. See details in [EtherNet/IP](../enthernetip.md)
+### Updates
+1. Making the OPCUA call consistent with EtherNet/IP - [opcua](../opcua.md)
+
 ## AnyLog Version: 1.3.2504 [673f50] [2025-04-27 20:15:35]
 ### New features
 1.  Adding **extend** and **include** options to the Grafana payload. See details in [example 2 in Using Grafana documentation](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).

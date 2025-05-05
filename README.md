@@ -88,6 +88,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using SysLog](using%20syslog.md)
   * [Registering OSIsoft's PI](registering%20pi%20in%20the%20anylog%20network.md)
   * [OPC-UA](opcua.md)
+  * [EtherNet/IP](enthernetip.md)
 
 * **Northbound Connectors**
   * [AnyLog Remote-CLI](northbound%20connectors/remote_cli.md)
