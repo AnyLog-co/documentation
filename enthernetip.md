@@ -117,17 +117,19 @@ The following tables summarizes the command variables:
 | topic     | If data is processed through the local broker.                                               |
 
 
-Example 1:
+Example 1 - listing individual tags:
 ```anylog
-run plc client where type = etherip and name = my_etherip and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+run plc client where type = etherip and name = etherip_reads and url = 127.0.0.1 and frequency = 1 and dbms = my_dbms and node = FreeChlorinatorAI.PV and node = CombinedChlorinatorAI.PV
 ```
-Example 2:
+Example 2 - providing a list of tags:
 ```anylog
-run plc client where type = etherip and name = my_etherip and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+<run plc client where type = etherip and name = etherip_reads and url = 127.0.0.1 and frequency = 1 and dbms = my_dbms and nodes =
+["BOOL","SINT","INT","DINT","REAL","STRING","STRUCT.Temp","STRUCT.Status","ARRAY_INT","ARRAY_BOOL","ARRAY_STRING","TIMER.ACC"
+,"TIMER.PRE","COUNTER.ACC","COUNTER.PRE","DATE_TIME","ATSNormalRdyDI","CombinedChlorinatorAI.PV","FreeChlorinatorAI.PV"]>
 ```
 
 Notes: 
-1. Multiple OPCUA client can be declared on the same node.
+1. Multiple clients can be declared on the same node.
 2. Each row is added with 2 columns:
    * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
    * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the OPCUA.
