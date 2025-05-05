@@ -139,7 +139,7 @@ The following tables summarizes the command variables:
 
 Node values are retrieved with the following command:
 ```anylog
-get opcua values where url = [connect string] and user = [username] and password = [password] and node = [node id]
+get plc values where type = opcua and url = [connect string] and user = [username] and password = [password] and node = [node id]
 ```
 Details:
 * [connect string] - The url specifies the endpoint of the OPC UA server.
@@ -166,21 +166,21 @@ Note: if **include** is assigned with the keyword **all**, all attributes are in
 
 Example 1:
 ```anylog
-get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
+get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
 ```
 Example 2, using a comma seperated list of nodes:
 ```anylog
-get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
+get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
 ```
 Example 3, identifying failed reads:
 ```anylog
-get opcua values where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and method = individual and failures = true and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
+get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and method = individual and failures = true and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
 ```
 ## Pulling data from OPCUA continuously
 
 The command **run opcua client*** pulls data from OPCUA continuously and streams the data into a database on the local node:
 ```anylog
-run opcua client where name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
+run plc client where type = opcua and name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
 ```
  
 The following tables summarizes the command variables:
@@ -202,11 +202,11 @@ The following tables summarizes the command variables:
 
 Example 1:
 ```anylog
-run opcua client where  name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
+run plc client where type = opcua and name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
 ```
 Example 2:
 ```anylog
-run opcua client where name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
+run plc client where type = opcua and name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and nodes = ["ns=0;i=2257","ns=0;i=2258"]
 ```
 
 Notes: 
@@ -219,21 +219,21 @@ Notes:
 
 The following command provides the info on the OPCUA Client processes:
 ```anylog
-get opcua client
+get plc client
 ```
 
 ## Exit OPCUA Client
 
 The following command terminates a client process:
 ```anylog
-exit opcua client [client name]
+exit plc client [client name]
 ```
 The client name is the policy ID or **[dbms name].[table name]**.  
 If the client name is **all**, all clients are terminated.
 Examples:
 ```anylog
-exit opcua all
-exit opua nov.rig8
+exit plc all
+exit plc nov.rig8
 ```
 
 ## Example - Declaring OPC UA with aggregations
@@ -250,7 +250,7 @@ opcua values``` command with **include = all** or **include = name**.
 
 Example:
 ```anylog
-get opcua values where url = opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and node = "ns=3;i=1002" and include = name
+get plc values where type = opcua and url = opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and node = "ns=3;i=1002" and include = name
 
 OPCUA Nodes values
 name   value
@@ -279,7 +279,8 @@ get aggregations config
 
 ### Start the OPC UA service
 ```anylog
-<run opcua client where 
+<run plc client where
+   type = opcua and 
    name = opcua_connect1 and
    url=opc.tcp://uademo.prosysopc.com:53530/OPCUA/SimulationServer and 
    node = "ns=3;i=1002" and 
@@ -290,7 +291,7 @@ get aggregations config
 
 ### Validate processing
 ```anylog
-get opcua client
+get plc client
 get aggregations
 get aggregations where dbms = nov and table = table_2
 get streaming
