@@ -1,5 +1,8 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta4 [168405] [2025-05-12 21:13:37]
+### New features
+1. Adding an option to return a list of objects from the metadata. Example: blockchain get tag bring.list [tag][dbms] . [tag][table]
 ## AnyLog Version: 1.3.2504-beta1 [d483ae] [2025-05-05 10:35:06]
 ### New features
 1. Adding EtherNet/IP connector. See details in [EtherNet/IP](../enthernetip.md)
