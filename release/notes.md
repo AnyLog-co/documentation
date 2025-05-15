@@ -5,7 +5,7 @@
 1. Debug Method Using the ```trace method``` Command:
     Use the following format to enable or disable tracing of specific methods:  
     ```trace method [on/off] [method name]```
-    Examples:
+2. Examples:
     * Enable trace of TCP messages sent from the node: ```trace method on tcp out```
     * Disable trace of TCP messages sent from the node: ```trace method off tcp out```
     * Enable trace of TCP messages received by the node: ```trace method on tcp in```
