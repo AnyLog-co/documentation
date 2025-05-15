@@ -3,7 +3,7 @@
 ## AnyLog Version: 1.3.2504-beta4 [8247f1] [2025-05-14 19:53:24]
 ### New features
 1. Debug Method Using the ```trace method``` Command:
-    Use the following format to enable or disable tracing of specific methods:
+    Use the following format to enable or disable tracing of specific methods:  
     ```trace method [on/off] [method name]```
     Examples:
     * Enable trace of TCP messages sent from the node: ```trace method on tcp out```
