@@ -1,5 +1,16 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta4 [8247f1] [2025-05-14 19:53:24]
+### New features
+1. Debug Method Using the ```trace method``` Command:
+    Use the following format to enable or disable tracing of specific methods:
+    ```trace method [on/off] [method name]```
+    Examples:
+    * Enable trace of TCP messages sent from the node: ```trace method on tcp out```
+    * Disable trace of TCP messages sent from the node: ```trace method off tcp out```
+    * Enable trace of TCP messages received by the node: ```trace method on tcp in```
+    * Disable trace of TCP messages received by the node: ```trace method off tcp in```
+
 ## AnyLog Version: 1.3.2504-beta4 [168405] [2025-05-12 21:13:37]
 ### New features
 1. Adding an option to return a list of objects from the metadata. Example: blockchain get tag bring.list [tag][dbms] . [tag][table]
