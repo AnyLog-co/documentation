@@ -72,6 +72,20 @@ A user can configure a node to use a different reply address in one of the follo
 a) Request peers to reply using a different address.  
 b) Request peers to determine the reply address from the message socket.
 
+### Get the list of NICs
+
+Usage:
+```anylog
+get nics list
+```
+
+Retrieves and displays a list of all network interfaces (NICs) on the system along with their:
+* Name – the friendly name of the network interface
+* Speed – reported link speed in Mbps (may be 0 or 4294 if unknown)
+* Is Up – indicates whether the NIC is active (True) or not (False)
+
+This function helps users identify which interfaces are usable for networking, diagnostics, or configuration tasks.
+
 ### Set Internal IP via Network Interface
 
 Usage:
