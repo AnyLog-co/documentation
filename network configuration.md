@@ -91,7 +91,7 @@ Usage:
 ```anylog
 set internal ip with [interface_name]
 ```
-Description
+**Description:**    
 Automatically sets the AnyLog node's internal IP address based on the IP associated with the specified network interface (NIC).
 
 This internal IP is used for all internal communications between nodes (TCP messaging).
@@ -109,6 +109,11 @@ enp0s3 - Ethernet interface on PCI bus 0, slot 3.
 * When deploying on VMs or hardware where IPs are dynamically assigned.
 * To avoid hardcoding IP addresses in configuration files.
 * For scripts or automated deployments that target known NICs.
+
+**Example:**  
+```anylog
+set internal ip with enp0s8
+```
 
 **Notes:**
 * If the specified interface does not exist or has no IPv4 address, the command will fail silently or fall back to 127.0.0.1.
