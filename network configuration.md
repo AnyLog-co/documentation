@@ -72,6 +72,33 @@ A user can configure a node to use a different reply address in one of the follo
 a) Request peers to reply using a different address.  
 b) Request peers to determine the reply address from the message socket.
 
+### Set Internal IP via Network Interface
+
+Usage:
+```anylog
+set internal ip with [interface_name]
+```
+Description
+Automatically sets the AnyLog node's internal IP address based on the IP associated with the specified network interface (NIC).
+
+This internal IP is used for all internal communications between nodes (TCP messaging).
+
+**Parameters:**
+[interface_name] The name of the network interface (e.g., enp0s3, eth0, wlan0).
+
+**Default:**  
+enp0s3 - Ethernet interface on PCI bus 0, slot 3.
+
+**When to Use:**
+* When deploying on VMs or hardware where IPs are dynamically assigned.
+* To avoid hardcoding IP addresses in configuration files.
+* For scripts or automated deployments that target known NICs.
+
+**Notes:**
+* If the specified interface does not exist or has no IPv4 address, the command will fail silently or fall back to 127.0.0.1.
+* Use ```ip addr show``` or ```ifconfig``` to determine available NICs on the host machine.
+
+
 ### Setting a different IP address for replies 
 Using the `set reply ip` command, user can direct a node sending a message, to receive the reply on a different IP address.    
 Usage:
