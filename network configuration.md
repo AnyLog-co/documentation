@@ -103,7 +103,10 @@ Use ```get !ip``` or ```!ip``` to see the updated value.
 [interface_name] The name of the network interface (e.g., enp0s3, eth0, wlan0).
 
 **Default:**  
-enp0s3 - Ethernet interface on PCI bus 0, slot 3.
+Set to the default IP using the following command:
+```anylog
+set internal ip with default
+```
 
 **When to Use:**
 * When deploying on VMs or hardware where IPs are dynamically assigned.
