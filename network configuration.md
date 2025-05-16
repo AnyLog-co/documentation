@@ -78,7 +78,6 @@ Usage:
 ```anylog
 get nics list
 ```
-
 Retrieves and displays a list of all network interfaces (NICs) on the system along with their:
 * Name – the friendly name of the network interface
 * Speed – reported link speed in Mbps (may be 0 or 4294 if unknown)
