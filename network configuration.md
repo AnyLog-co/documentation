@@ -96,6 +96,9 @@ Automatically sets the AnyLog node's internal IP address based on the IP associa
 
 This internal IP is used for all internal communications between nodes (TCP messaging).
 
+If the **set internal ip** call is successful, The value of **ip** in the dictionary is modifoed to the new local IP value.    
+Use ```get !ip``` or ```!ip``` to see the updated value. 
+
 **Parameters:**
 [interface_name] The name of the network interface (e.g., enp0s3, eth0, wlan0).
 
