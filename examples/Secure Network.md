@@ -273,7 +273,7 @@ This policy needs to be signed by the root user.
     }
 }>
 private_key = get private key where keys_file = root_keys
-permissions = id sign !permissions where key = !private_key and password = 123
+permissions = id sign !permissions where key = !private_key and password = abc
 json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
