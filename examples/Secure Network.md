@@ -67,7 +67,7 @@ master_node = 10.0.0.25:2048        # Replace with the proper address
 Use the following commands to configure the master node:
 <pre> 
 set authentication off
-connect dbms sqlite !db_user !db_port blockchain
+connect dbms blockchain3 where type = sqlite and user = !db_user and port = !db_port
 </pre>
 
 Use the following commands to delete all policies on a master node:
