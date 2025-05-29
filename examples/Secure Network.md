@@ -70,7 +70,7 @@ set authentication off
 connect dbms blockchain where type = sqlite and user = !db_user and port = !db_port
 </pre>
 
-Use the following commands to delete all policies on a master node:
+Use the following commands on an operator node to delete all policies on a master node:
 <pre> 
 run client !master_node "drop table ledger where dbms = blockchain"
 run client !master_node "create table ledger where dbms = blockchain"
