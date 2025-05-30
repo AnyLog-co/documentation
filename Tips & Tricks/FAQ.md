@@ -147,7 +147,10 @@ Please visit [prerequisite.md](../training/prerequisite.md) for farther details.
 
 ### How do I monitor the health and status of nodes in the AnyLog network?
 
-AnyLog (and EdgeLake) have alert and monitoring capabilities thaat  
+AnyLog (and EdgeLake) have alert and monitoring capabilities that both on the machine level (ex. CPU, RAM, Network I/O and disk usage)
+as well as on the data level. 
+
+Details can be found in [alerts and monitoring.md](../alerts%20and%20monitoring.md).
 
 ### What is the difference between blockchain abstraction in EdgeLake and AnyLog Enterprise?
 
@@ -156,50 +159,8 @@ AnyLog (and EdgeLake) have alert and monitoring capabilities thaat
 
 
 ### Is it possible to upgrade EdgeLake to AnyLog Enterprise?
+
 Since AnyLog builds on top of EdgeLake and a node its services based on user-defined configurations, update is as simple
 as updating the image name in the docker-compose file from `anylogco/edgelake` to `anylogco/anylog-network`.
 
 Directions for upgrading can be found [here](). 
-
-
-## Common Issues
-* Attempting to run a query and getting an error message
-
-**Error Type 1**: `Failed to load table metadata from blockchain` 
-
-```AnyLog
-AL query +> run client () sql my_db "select count(*) from t1;"
-Failed to load table metadata from blockchain
-AL query +> get error log
-ID     Count Thread     Time                     Type  Text                                                                                                 
-------|-----|----------|------------------------|-----|----------------------------------------------------------------------------------------------------|
-702271|    1|MainThread|Mon May 26 20:52:20 2025|Error|Failed to retrieve table definition from metadata policy for table: 'my_db.t1'                      |
-702272|    1|MainThread|Mon May 26 20:52:20 2025|Error|Failed to get metadata info from Table Policy with DBMS: 'my_db' and Table: 't1'                    |
-702273|    1|MainThread|Mon May 26 20:52:20 2025|Error|(Failed: Failed to load table metadata from blockchain) run client () sql my_db "select count(*) fro|
-      |     |          |                        |     |m t1;"                                                                                              |
-```
-
-In this situation, the metadata information is yet to be accessible usually due to buffer / blockchain sync time, time between the nodes. 
-This issue resolves itself once data is processed and node is synced against the blockchain.
-    
-**Error Type 2**: `Local query database not available: 'system_query'`
-
-```AnyLog
-AL query +> run client () sql my_db "select count(*) from t1;" 
-AL query +> DBMS not open
-AL query +> get error log 
-ID     Count Thread     Time                     Type  Text                                                                     
-------|-----|----------|------------------------|-----|--------------------------------------------------------------------------|
-698413|    1|MainThread|Mon May 26 20:45:56 2025|Error|Local query database not available: 'system_query'                        |
-698414|    1|MainThread|Mon May 26 20:45:56 2025|Error|(Failed: DBMS not open) run client () sql my_db "select count(*) from t1;"|
-```
-
-In this situation, the user is missing the `system_query` logical database, which is used to aggregate results from operator node(s).
-Details can be found in [SQL Setup](../sql%20setup.md#system-databases-and-system-tables).
-
-```AnyLog
-connect dbms system_query where type=sqlite and memory=true
-```
-
-
-* Why is data result in consistent? 
