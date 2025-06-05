@@ -67,10 +67,10 @@ master_node = 10.0.0.25:2048        # Replace with the proper address
 Use the following commands to configure the master node:
 <pre> 
 set authentication off
-connect dbms sqlite !db_user !db_port blockchain
+connect dbms blockchain where type = sqlite and user = !db_user and port = !db_port
 </pre>
 
-Use the following commands to delete all policies on a master node:
+Use the following commands on an operator node to delete all policies on a master node:
 <pre> 
 run client !master_node "drop table ledger where dbms = blockchain"
 run client !master_node "create table ledger where dbms = blockchain"
@@ -273,7 +273,7 @@ This policy needs to be signed by the root user.
     }
 }>
 private_key = get private key where keys_file = root_keys
-permissions = id sign !permissions where key = !private_key and password = 123
+permissions = id sign !permissions where key = !private_key and password = abc
 json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
