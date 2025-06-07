@@ -14,20 +14,47 @@ This command pulls data from a specified source node on a scheduled basis.
 
 ### 📌 Usage:
 ```anylog
-run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false] and dbms = [dbms name] and table = [table name]
+run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false] and dbms = [dbms name] and table = [table name] and stdout = [true/false]
 ```
 
 Parameters
 
-| Parameter   | Default | Description                                                                 |
-|-------------|---------|-----------------------------------------------------------------------------|
-| type        |         | The type of data to pull (e.g., `syslog`, `eventlog`, `modbus`)             |
-| source      |         | The network identifier of the data source (`localhost` or a remote IP)      |
-| frequency   |         | Interval in seconds between pulls (e.g., `5`)                               |
-| continuous  | False   | If `true`, pulls continuously as long as data is available, ignoring frequency |
-| dbms        |         | The name of the target DBMS instance where the data will be inserted         |
-| table       |         | The name of the target table within the DBMS                                |
+| Parameter | Default | Description                                                                                                    |
+|-----------|---------|----------------------------------------------------------------------------------------------------------------|
+| type      |         | The type of data to pull (e.g., `syslog`, `eventlog`, `modbus`)                                                |
+| source    |         | The network identifier of the data source (`localhost` or a remote IP)                                         |
+| frequency |         | Interval in seconds between pulls (e.g., `5`)                                                                  |
+| continuous | False   | If `true`, pulls continuously as long as data is available, ignoring frequency                                 |
+| dbms      |         | The name of the target DBMS instance where the data will be inserted                                           |
+| table     |         | The name of the target table within the DBMS                                                                   |
+| stdout   | False   | If `true`, a single read result will be printed to the console (stdout) instead of being inserted into a table |
 
+Notes:  
+* Use `stdout = true` when you want to test the pull behavior or inspect the output without writing to a database.
+* When `stdout = true`, only **one** data read is performed and the result is printed to the terminal or log. The pull does **not continue** even if `continuous = true`.
+
+## Associating the pulled data with a topic
+
+In the context of a scheduled pull, the topic = (...) clause maps the data retrieved by the pull process 
+into a topic that can be associated with mapping instructions.
+
+Example:
+
+```anylog
+<run scheduled pull where 
+  type = eventlog 
+  and source = localhost 
+  and frequency = 1 
+  and topic = (
+    name = eventlog 
+    and dbms = my_dbms 
+    and table = my_table  
+    and column.timestamp.timestamp = "bring [timestamp]" 
+    and column.value.int = "bring [message]"
+  )>
+```
+
+Using a **topic** is optional. Details of the **topic** params are available [here](message%20broker.md#the-topic-params).
 
 ## Scheduled pull of Windows Event Log
 
