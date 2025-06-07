@@ -14,11 +14,7 @@ This command pulls data from a specified source node on a scheduled basis.
 
 ### 📌 Usage:
 ```anylog
-run scheduled pull 
-where type = [data_type] 
-  and source = [IP or hostname] 
-  and frequency = [seconds] 
-  and continuous = [true/false]
+run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false]
 ```
 
 Parameters
@@ -48,4 +44,33 @@ Usage:
 run scheduled pull where type = eventlog and source = localhost and frequency = 1
 ```
 
+### Filtering by Event Type
+
+For Windows even log, users can optionally filter events by their **type** using the `event_type` parameter.
+
+### Supported Values for `event_type`
+
+You may specify one or more of the following event types using lowercase and underscores instead of spaces:
+
+| Value             | Description                          |
+|------------------|--------------------------------------|
+| `error`           | Logs that indicate significant problems or failures |
+| `warning`         | Logs that indicate potential issues or conditions to watch |
+| `information`     | Logs that record normal operations and successful activity |
+| `audit_success`   | Security-related logs for successful operations (e.g., login success) |
+| `audit_failure`   | Security-related logs for failed operations (e.g., login failure) |
+| `all`             | No filtering; pulls all available event types |
+
+### 🔧 Usage Examples
+
+#### Pull only error logs:
+
+```anylog
+<run scheduled pull 
+where type = eventlog 
+  and source = localhost 
+  and frequency = 5
+  and continuous = false 
+  and event_type = error>
+```
 
