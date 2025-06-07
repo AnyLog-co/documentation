@@ -132,3 +132,20 @@ scheduled pull tasks on the node. It provides insight into the configuration and
 | `Error`       | Error message or empty if no error occurred                                            |
 | `Elapsed Time`| Run time since the scheduled pull process was started                                  |
 
+## Command: `exit pull`
+
+The `exit pull` command is used to **terminate scheduled pull processes** that are currently running on the node.
+
+### 🔧 Usage
+
+#### 🔹 Terminate all running pull processes:
+```anylog
+exit pull all
+```
+
+####  Terminate a specific pull process by name:
+```anylog
+exit pull [process name]
+```
+Replace [process_name] with the name assigned to the pull task (as defined in run scheduled pull).
+
