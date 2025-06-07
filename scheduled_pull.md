@@ -36,7 +36,7 @@ Notes:
 ## Associating the pulled data with a topic
 
 In the context of a scheduled pull, the topic = (...) clause maps the data retrieved by the pull process 
-into a topic that can be associated with mapping instructions.
+into a topic that is associated with mapping instructions.
 
 Example:
 
