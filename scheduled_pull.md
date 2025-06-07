@@ -14,20 +14,21 @@ This command pulls data from a specified source node on a scheduled basis.
 
 ### 📌 Usage:
 ```anylog
-run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false] and dbms = [dbms name] and table = [table name] and stdout = [true/false]
+run scheduled pull where name = [process name] and type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false] and dbms = [dbms name] and table = [table name] and stdout = [true/false]
 ```
 
 Parameters
 
-| Parameter | Default | Description                                                                                                    |
-|-----------|---------|----------------------------------------------------------------------------------------------------------------|
-| type      |         | The type of data to pull (e.g., `syslog`, `eventlog`, `modbus`)                                                |
-| source    |         | The network identifier of the data source (`localhost` or a remote IP)                                         |
-| frequency |         | Interval in seconds between pulls (e.g., `5`)                                                                  |
+| Parameter  | Default | Description                                                                                                    |
+|------------|---------|----------------------------------------------------------------------------------------------------------------|
+| name       |         | A unique process name                                                                                          |
+| type       |         | The type of data to pull (e.g., `syslog`, `eventlog`, `modbus`)                                                |
+| source     |         | The network identifier of the data source (`localhost` or a remote IP)                                         |
+| frequency  |         | Interval in seconds between pulls (e.g., `5`)                                                                  |
 | continuous | False   | If `true`, pulls continuously as long as data is available, ignoring frequency                                 |
-| dbms      |         | The name of the target DBMS instance where the data will be inserted                                           |
-| table     |         | The name of the target table within the DBMS                                                                   |
-| stdout   | False   | If `true`, a single read result will be printed to the console (stdout) instead of being inserted into a table |
+| dbms       |         | The name of the target DBMS instance where the data will be inserted                                           |
+| table      |         | The name of the target table within the DBMS                                                                   |
+| stdout     | False   | If `true`, a single read result will be printed to the console (stdout) instead of being inserted into a table |
 
 Notes:  
 * Use `stdout = true` when you want to test the pull behavior or inspect the output without writing to a database.
@@ -42,6 +43,7 @@ Example:
 
 ```anylog
 <run scheduled pull where 
+  name = locallog 
   type = eventlog 
   and source = localhost 
   and frequency = 1 
@@ -97,7 +99,8 @@ You may specify one or more of the following event types using lowercase and und
 
 ```anylog
 <run scheduled pull 
-where type = eventlog 
+  where name = err_log
+  and type = eventlog 
   and source = localhost 
   and frequency = 5
   and continuous = false 
@@ -105,4 +108,27 @@ where type = eventlog
   dbms = sensor_data
   and table = event_log>
 ```
+
+## Command: `get scheduled pull`
+
+The `get scheduled pull` command retrieves the status and runtime statistics of active or previously defined 
+scheduled pull tasks on the node. It provides insight into the configuration and current state of each pull process.
+
+### 🔄 Output Fields
+
+| Field         | Description                                                                            |
+|---------------|----------------------------------------------------------------------------------------|
+| `Name`        | The user-defined name of the scheduled pull process                                    |
+| `Type`        | The type of data source being pulled (e.g., `eventlog`, `syslog`, `modbus`)            |
+| `Source`      | The network identifier of the source (`localhost` or a remote IP)                      |
+| `Frequency`   | The polling interval in seconds (if `continuous` is false)                             |
+| `Continuous`  | Indicates whether the pull runs continuously (`true`) or on a timed interval (`false`) |
+| `Topic`       | Logical name for the topic configuration, if specified                                 |
+| `DBMS`        | Target DBMS where pulled data is inserted                                              |
+| `Table`       | Target table within the specified DBMS                                                 |
+| `Status`      | The current state of the pull process (`running`, `terminated`, `exit`)                |
+| `Pull Count`  | The number of times the pull process has executed                                      |
+| `Event Count` | The number of events successfully pulled and processed                                 |
+| `Error`       | Error message or empty if no error occurred                                            |
+| `Elapsed Time`| Run time since the scheduled pull process was started                                  |
 
