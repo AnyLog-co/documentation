@@ -67,10 +67,10 @@ master_node = 10.0.0.25:2048        # Replace with the proper address
 Use the following commands to configure the master node:
 <pre> 
 set authentication off
-connect dbms sqlite !db_user !db_port blockchain
+connect dbms blockchain where type = sqlite and user = !db_user and port = !db_port
 </pre>
 
-Use the following commands to delete all policies on a master node:
+Use the following commands on an operator node to delete all policies on a master node:
 <pre> 
 run client !master_node "drop table ledger where dbms = blockchain"
 run client !master_node "create table ledger where dbms = blockchain"
@@ -273,7 +273,7 @@ This policy needs to be signed by the root user.
     }
 }>
 private_key = get private key where keys_file = root_keys
-permissions = id sign !permissions where key = !private_key and password = 123
+permissions = id sign !permissions where key = !private_key and password = abc
 json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
@@ -348,9 +348,9 @@ blockchain insert where policy = !assignment and local = true  and master = !mas
 ```
 
 ### Step 11 - Provide the local password
-The local password protects sensitive info on each node and is provided whenever the node restarts.  
+The local password protects sensitive information on each node and is provided whenever the node restarts.  
 In this demo, each node's private key is stored locally and protected by the local password.  
-In the example below, the password 123 is assigned to operator 1 and 456 is assigned to operator 2.      
+In the example below, the password 123 is assigned to operator 1, and 456 is assigned to operator 2.      
 
 On CLI(oper.1):
 <pre> 
@@ -363,13 +363,13 @@ set local password = 456
 </pre>
 
 Note:
-* If a local password exists, an error is returned if the nodes restarts, and the node is provided with incorrect password.
-* If the local password is lost, all the relevant files in the ***keys directory*** needs to be deleted, and the 
-  node needs to be assigned with new keys and a new assignment policy. 
+* If a local password exists, an error is returned if the node restarts, and the node is provided with an incorrect password.
+* If the local password is lost, all the relevant files in the ***keys directory*** need to be deleted, and the 
+  node needs to be assigned new keys and a new assignment policy. 
 
 ### Step 12 - Save the node's private key 
 The private key can be stored on the node and protected using the local password.  
-The following examples stores the private key on each node:
+The following examples store the private key on each node:
 
 On CLI(oper.1):
 <pre> 
@@ -385,7 +385,7 @@ Note: The key is stored in a file called ***auth.id*** in the ***keys directory*
 
 ### Step 13 - Enable authentication
 Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
-When a node receives a message, the message is signed by the private key of the sender (the key of tje node or the user sending the message).   
+When a node receives a message, the message is signed by the private key of the sender (the key of the node or the user sending the message).   
 The receiving node will first use the public key of the sender to authenticate the sender. Next it will consider the permission 
 policies to determine that the sender is authorized to the type of message received. Authorization is determined if it
 is granted by the root user, or by a user which is in a chain of permitted authorizations that is derived from the root user.  
