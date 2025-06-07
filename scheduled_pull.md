@@ -14,17 +14,20 @@ This command pulls data from a specified source node on a scheduled basis.
 
 ### 📌 Usage:
 ```anylog
-run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false]
+run scheduled pull where type = [data_type] and source = [IP or hostname] and frequency = [seconds] and continuous = [true/false] and dbms = [dbms name] and table = [table name]
 ```
 
 Parameters
 
-| Parameter | Default | Description                                                          |
-|-----------|---------|----------------------------------------------------------------------| 
-| type      |         | The type of data to pull (e.g., syslog)                              |
-| source    |         | The network identifier of the data source (localhost or a remote IP) |
-| frequency |         | Interval in seconds between pulls (e.g., 5)                          |
-| continuous | False  | If true, pulls continuously as long as data is available, ignoring frequency  |
+| Parameter   | Default | Description                                                                 |
+|-------------|---------|-----------------------------------------------------------------------------|
+| type        |         | The type of data to pull (e.g., `syslog`, `eventlog`, `modbus`)             |
+| source      |         | The network identifier of the data source (`localhost` or a remote IP)      |
+| frequency   |         | Interval in seconds between pulls (e.g., `5`)                               |
+| continuous  | False   | If `true`, pulls continuously as long as data is available, ignoring frequency |
+| dbms        |         | The name of the target DBMS instance where the data will be inserted         |
+| table       |         | The name of the target table within the DBMS                                |
+
 
 ## Scheduled pull of Windows Event Log
 
@@ -41,7 +44,7 @@ Using the **run scheduled pull** command, users can pull the Windows event log f
 
 Usage:
 ```anylog
-run scheduled pull where type = eventlog and source = localhost and frequency = 1
+run scheduled pull where type = eventlog and source = localhost and frequency = 1 and dbms = sensor_data and table = event_log
 ```
 
 ### Filtering by Event Type
@@ -71,6 +74,8 @@ where type = eventlog
   and source = localhost 
   and frequency = 5
   and continuous = false 
-  and event_type = error>
+  and event_type = error
+  dbms = sensor_data
+  and table = event_log>
 ```
 
