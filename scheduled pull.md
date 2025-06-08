@@ -73,7 +73,7 @@ Using the **run scheduled pull** command, users can pull the Windows event log f
 
 Usage:
 ```anylog
-run scheduled pull where name = local_events and type = eventlog and source = localhost and frequency = 1 and dbms = sensor_data and table = event_log
+run scheduled pull where name = [unique name] and type = eventlog and source = [localhost or IP] and frequency = [seconds] and event_type = [windows event type] and dbms = [dbms name] and table = [table name]
 ```
 
 ### Filtering by Event Type
@@ -93,9 +93,24 @@ You may specify one or more of the following event types using lowercase and und
 | `audit_failure`   | Security-related logs for failed operations (e.g., login failure) |
 | `all`             | No filtering; pulls all available event types |
 
+**Note:** The default value is **error**.
+
 ### 🔧 Usage Examples
 
-#### Pull only error logs:
+#### Pull only error log:
+
+```anylog
+<run scheduled pull 
+  where name = error_log
+  and type = eventlog 
+  and source = localhost 
+  and frequency = 5
+  and continuous = false 
+  and dbms = local_logs
+  and table = error_log>
+```
+
+#### Pull error and warning logs:
 
 ```anylog
 <run scheduled pull 
@@ -105,6 +120,7 @@ You may specify one or more of the following event types using lowercase and und
   and frequency = 5
   and continuous = false 
   and event_type = error
+  and event_type = warning
   and dbms = local_logs
   and table = error_log>
 ```
