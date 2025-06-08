@@ -73,7 +73,7 @@ Using the **run scheduled pull** command, users can pull the Windows event log f
 
 Usage:
 ```anylog
-run scheduled pull where type = eventlog and source = localhost and frequency = 1 and dbms = sensor_data and table = event_log
+run scheduled pull where name = local_events and type = eventlog and source = localhost and frequency = 1 and dbms = sensor_data and table = event_log
 ```
 
 ### Filtering by Event Type
@@ -105,8 +105,8 @@ You may specify one or more of the following event types using lowercase and und
   and frequency = 5
   and continuous = false 
   and event_type = error
-  dbms = sensor_data
-  and table = event_log>
+  and dbms = local_logs
+  and table = error_log>
 ```
 
 ## Command: `get scheduled pull`
