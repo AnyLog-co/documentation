@@ -1,6 +1,7 @@
 # Deploying AnyLog
 
 ## Requirements 
+* Request login and license credentials via <a href="https://www.anylog.network/download" target="_blank">AnyLog website</a>
 * <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a> with docker-compose
 * <a herf="https://www.gnu.org/software/make/" target="_blank">make</a>  
 ```shell
@@ -38,7 +39,7 @@ cd $HOME/docker-compose
 
 2. Login to AnyLog's docker repository
 ```shell
-make login ANYLOG_TYPE=a24356db46c91412a00e2a630f9264ebd5b7602b7d8649fee12928ae86356254003808d6094169657bb337161d8e8619df982d22bbe587b8de5442bc8d852c83217e7f34b17bc5accedeca247d27bb02edfaa7f26753a85e996840454a4b2be80917d82c151df03ad0b225c5e62d4ed66fd108671683fb8c1a1a14ac34d3b771{'company':'Guest','expiration':'2025-09-01','type':'beta'}
+make login ANYLOG_TYPE=[AnyLog Docker login]
 ```
 
 3. Configure Node - Details can be found in [docker-compose's readme](https://github.com/AnyLog-co/docker-compose?tab=readme-ov-file#configuration-files-breakdown)
