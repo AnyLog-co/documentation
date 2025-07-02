@@ -1,8 +1,32 @@
 # Deploying AnyLog
 
 ## Requirements 
-* Container software - either <a href="https://www.bing.com/search?pglt=297&q=install+podman&cvid=71faea9a64e0412da01e1df640e013ca&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOTIGCAEQABhAMgYIAhAAGEAyBggDEAAYQDIGCAQQABhAMgYIBRAAGEAyBggGEAAYQDIGCAcQABhAMgYICBAAGEDSAQgyMjc0ajBqMagCALACAA&FORM=ANNTA1&PC=LCTS" target="_blank">Podman</a> with podman-compose or <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a> with docker-compose
+* <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a> with docker-compose
 * <a herf="https://www.gnu.org/software/make/" target="_blank">make</a>  
+```shell
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y make docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Grant non-root user permissions to use docker
+USER=`whoami`
+sudo groupadd docker 
+sudo usermod -aG docker ${USER} 
+newgrp docker
+```
+
+AnyLog is also deployed via Podman and Kubernetes. 
 
 ## Steps
 
