@@ -1,0 +1,64 @@
+:root {
+  --primary-blue: #0d6efd;
+  --white: #ffffff;
+  --dark-blue: #212150;
+  --light-gray: #f8f9fa;
+  --text-color: #212529;
+  --accent-success: #198754;
+  --accent-error: #dc3545;
+}
+
+/* Body background & text */
+body {
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+}
+
+/* Links */
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+/* Sidebar */
+.sidebar,
+.sidebar a {
+  background-color: var(--dark-blue) !important;
+  color: var(--white) !important;
+}
+.sidebar a:hover {
+  color: var(--accent-success) !important; /* Optional: AnyLog blue */
+  text-decoration: underline;
+}
+
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-blue);
+}
+
+/* Code blocks */
+pre, code {
+  background-color: #e9ecef;
+  color: var(--text-color);
+}
+
+/* Buttons or badges if any */
+.btn-primary {
+  background-color: var(--primary-blue);
+  border: none;
+  color: white;
+}
+.btn-success {
+  background-color: var(--accent-success);
+  border: none;
+  color: white;
+}
+.btn-error {
+  background-color: var(--accent-error);
+  border: none;
+  color: white;
+}
