@@ -2,21 +2,19 @@
 
 * Getting Started
   * [Getting Started](getting%20started.md)
+  * [Quick Deployment](deployments/Quick%20Deployment.md)
   * [Deploying AnyLog](Deploying_AnyLog.md)
-  * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
-  * [SQL Setup](sql%20setup.md)
-  * [Registering Pi in the AnyLog Network](registering%20pi%20in%20the%20anylog%20network.md)
+  * [AnyLog-as-a-Service](deployments/AnyLog_as_Service.md)
 
 * Core Concepts
   * [Authentication](authentication.md)
   * [Node Configuration](node%20configuration.md)
-  * [Master Node](master%20node.md)
+  * [Metadata (Master) Node](master%20node.md)
   * [Metadata Management](metadata%20management.md)
   * [Policies](policies.md)
   * [Mapping Data to Tables](mapping%20data%20to%20tables.md)
   * [Logging Events](logging%20events.md)
   * [Image Mapping](image%20mapping.md)
-  * [Index](index.html)
 
 * CLI and Commands
   * [CLI](cli.md)
@@ -24,7 +22,7 @@
   * [File Commands](file%20commands.md)
   * [HTTP Commands](http%20commands.md)
   * [Test Commands](test%20commands.md)
-  * [Blockchain Commands](blockchain%20commands.md)
+  * [Updating Script](deployments/updating_scripts.md)
 
 * Data & Querying
   * [Adding Data](adding%20data.md)
@@ -42,6 +40,7 @@
   * [Secure Network](secure%20network.md)
 
 * Blockchain
+  * [Blockchain Commands](blockchain%20commands.md)
   * [Using Ethereum](using%20ethereum.md)
   * [Blockchain Configuration](blockchain%20configuration.md)
   * [Blockchain Demo](blockchain_demo.md)
@@ -50,23 +49,22 @@
   * [Network Configuration](network%20configuration.md)
   * [Network Processing](network%20processing.md)
   * [High Availability](high%20availability.md)
+  * [Message Broker](message%20broker.md)
 
-* External Connectors
-  * [Using Kafka](using%20kafka.md)
-  * [Using GRPC](using%20grpc.md)
+* External Connectors & Integrations
   * [Using REST](using%20rest.md)
   * [Using Syslog](using%20syslog.md)
-  * [Message Broker](message%20broker.md)
+  * [Using Kafka](using%20kafka.md)
+  * [Using gRPC](using%20grpc.md)
+  * [Using EdgeX](using%20edgex.md)
+  * [EtherNet/IP](enthernetip.md)
+  * [OPCUA](opcua.md)
+  * [Node-RED](node_red.md)
 
 * Background Processes
   * [Background Processes](background%20processes.md)
   * [Scheduled Pull](scheduled%20pull.md)
 
-* Integrations
-  * [Using EdgeX](using%20edgex.md)
-  * [EnthernetIP](enthernetip.md)
-  * [OPCUA](opcua.md)
-  * [Node-RED](node_red.md)
 
 * Deployments
   * [Overview](deployments/README.md)
@@ -86,3 +84,14 @@
     * [Kubernetes Volumes](deployments/Networking%20&%20Security/kubernetes_volumes.md)
     * [Nebula](deployments/Networking%20&%20Security/nebula.md)
     * [Nebula New](deployments/Netw)*
+
+* [Northbound Connectors](northbound%20connectors)
+  * [Qlik](northbound%20connectors/Qlik.md)
+  * [Remote-CLI](northbound%20connectors/remote_cli.md)
+  * [Grafana](northbound%20connectors/using%20grafana.md)
+  * [Using Postman](northbound%20connectors/using%20postman.md)
+  * [PowerBI](northbound%20connectors/PowerBI.md)
+  * [Postgres Connector](northbound%20connectors/postgres%20connector.md)
+  * [Google](northbound%20connectors/Google.md) 
+
+- [:octocat: View All Docs on GitHub](https://github.com/AnyLog-co/documentation)
