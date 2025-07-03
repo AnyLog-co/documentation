@@ -83,9 +83,8 @@
     * [Kubernetes Networking](deployments/Networking%20&%20Security/kubernetes_networking.md)
     * [Kubernetes Volumes](deployments/Networking%20&%20Security/kubernetes_volumes.md)
     * [Nebula](deployments/Networking%20&%20Security/nebula.md)
-    * [Nebula New](deployments/Netw)*
 
-* [Northbound Connectors](northbound%20connectors)
+* Northbound Connectors
   * [Qlik](northbound%20connectors/Qlik.md)
   * [Remote-CLI](northbound%20connectors/remote_cli.md)
   * [Grafana](northbound%20connectors/using%20grafana.md)
