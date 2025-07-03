@@ -1,5 +1,9 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
+### New features
+1. Manage Windows Event Log. Detaile [Run Scheduled Pull](../scheduled%20pull.md)
+
 ## AnyLog Version: 1.3.2504-beta7 [009f60] [2025-05-15 21:02:36]
 ### New features
 1. Debug Method Using the ```trace method``` Command:
