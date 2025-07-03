@@ -1,5 +1,7 @@
 <div align="center">
+  <a href="https://anylog.network" target="_blank">
     <img src="imgs/anylog_logo.png" />
+  </a>
 <br/>
 </div>
 <div align="justified"><br/>AnyLog is a Real-Time Visibility and Management platform for distributed edge data, 
