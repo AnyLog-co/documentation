@@ -1,49 +1,80 @@
 # Getting Started
  
-This document provides the following:
-* A high level summary of the main functionalities supported by the AnyLog Network.   
-* Explanations on how to install, configure and run AnyLog instances. 
+Welcome to AnyLog! This guide will help you install, configure, and run AnyLog nodes with various roles and features.
+* [What is AnyLog](#what-is-anylog)
+  * [EdgeLake vs AnyLog](#edgelake-vs-anylog)
+  * [Agent Types](#agent-types)
+  * [Master vs Blockchain](#master-node-vs-blockchain)
+* [The Network Metadata](#the-network-metadata)
+  * [Metadata Synchronization](#metadata-synchronization)
+* [The Data](#the-data)
 
-## About AnyLog
+## What is AnyLog
 
-AnyLog is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the AnyLog Software.    
-Joining a network requires the following steps:  
-1) Install the AnyLog Software on a computer instance.
-2) Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
+**AnyLog** is a decentralized network for managing **IoT and time-series data** across distributed environments. It 
+enables real-time data ingestion, storage, and querying by connecting independent compute nodes—each running the AnyLog 
+software—that coordinate through metadata and shared protocols.
 
-## Type of instances
-A node in the network is assigned with one or more roles. The optional roles are the following:  
+### EdgeLake vs. AnyLog
 
-| Node Type     | Role  |
-| ----------- | ------------| 
-| Publisher   | A node that receives data from a data source (i.e. devices, applications) and distributes the data to Operators. | 
-| Operator   | A node that hosts the data and satisfies queries. |
-| Query  | A node that orchestrates a query process. |
-| Master | A node that hosts the metadata on a ledger and serves the metadata to the peer nodes in the network. |
+**EdgeLake** is the **open-source and free** version of the AnyLog platform. It provides a managed, zero-maintenance experience, making it ideal for organizations seeking the benefits of edge computing and decentralized data control **without the complexity of managing infrastructure**.
 
-Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
-If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
-Enabling the blockchain functionality using the Ethereum blockchain is explained in the 
-[Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md) section.
-Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
+**EdgeLake offers:**
+* Turnkey node deployment at the edge or in the cloud  
+* Zero-maintenance operation (automatic updates, monitoring, configuration)  
+* Scalable pricing — starting at **$1 per device/month**  
+* Real-time SQL and REST API access from any node  
+* Built-in dashboards and analytics  
 
-## The Network MetaData
-The metadata is the network related information that is shared by members of the network.
-The metadata includes information about the network members, their permissions, the logical representation of the data and how the data is distributed.  
-The metadata is stored in a repository which is accessible to all the nodes in the network. The repository can be a blockchain or a master node and the type to use is determined in the configuration.  
-The interaction with the metadata is not dependent on the repository used. When a member node operates, it is configured to use a particular metadata repository and
-there are no operational differences which are dependent on the repository used.
+**AnyLog (Enterprise)** includes everything in EdgeLake, with additional features such as:
+* Advanced security and authentication  
+* Federated data aggregation and model training  
+* Real-time support and SLA options  
 
-**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.**
-It allows users to leverage one type of repository, and change to a different type without the need to make changes to their processes and logic.
+### Agent Types
 
-The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
-When a node operates, it considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform used. If a connection 
-to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
-Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).  
+Each node in the network can be assigned one or more roles, depending on its configuration. The optional roles are:
 
-Related documentation:
+| **Role**                   | **Description**                                                               | **Notes**                                                          |
+|----------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Operator**               | Stores and manages data in a local SQL database; responds to local queries    |                                                                    |
+| **Query**                  | Orchestrates and distributes queries across the network for unified analytics |                                                                    |
+| **Master / Metadata Node** | Manages global metadata and coordinates nodes in non-blockchain setups        | Not required if using blockchain (e.g., Ethereum) for metadata     |
+| **Publisher**              | Ingests data from devices or applications and forwards it to Operator nodes   | AnyLog-specific — not supported in the open-source version         |
 
+### Master Node vs. Blockchain
+
+Using a **Master or Metadata node** is optional. It is used to maintain global metadata when the network does **not** 
+utilize a blockchain. If nodes are associated with a blockchain (e.g., Ethereum), the Master node is **not required**, 
+and the network remains fully decentralized.
+* See [Using Ethereum as a Global Metadata Platform](using%20ethereum.md) for details on blockchain-based metadata.  
+* For Master node setup instructions, refer to [Using a Master Node](master%20node.md).
+
+## The Network Metadata
+The metadata is the network related information that is shared among members of the network. This includes: 
+* Details about network members 
+* Permissions and access control 
+* Logical representation of data 
+* Information on how data is distributed
+
+The metadata is stored in a repository that is accessible to all nodes. This repository can be either a blockchain 
+(e.g., Ethereum) or a Master node, as specified in the node’s configuration.
+
+Interaction with the metadata is identical regardless of the repository type. This abstraction allows users to switch 
+between a Master node and a blockchain without changing their logic or processes. For consistency, both the documentation 
+and the system refer to the metadata repository as “the blockchain,” even when a Master node is used.
+
+### Metadata synchronization
+Each node maintains a local copy of the metadata. A background process periodically checks the configured repository for 
+updates and pulls changes if necessary. 
+
+During operation, the node uses its local metadata copy. This ensures that:
+* Node behavior is independent of the metadata source (blockchain or Master node)
+* Nodes continue operating even if the connection to the metadata repository is temporarily lost
+
+For more details, see: [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer)
+
+**Related Documentation**:
 | Section                                                                                | Information provided  |
 |----------------------------------------------------------------------------------------| ------------| 
 | [Metadata Management](metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
