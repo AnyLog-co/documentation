@@ -22,11 +22,16 @@ cloud providers, applications, or hardware platforms.
 To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 
-<div align="center"><img src="imgs/deployment_diagram.png" alt="AnyLog Deployment Diagram" width="600" align="center" />
-<p align="justified">Figure: A sample AnyLog deployment showing two data storage operators, a query agent, and a metadata agent (master node) 
-(which can be replaced by a blockchain layer). This setup delivers a cloud-like experience at the edge, making real-time 
-IoT data accessible from anywhere, at any time and for any use case—without the need to move data or commit to specific 
-cloud providers, applications, or hardware.</p></div>
+<div style="text-align: center;">
+  <img src="imgs/deployment_diagram.png" alt="AnyLog Deployment Diagram" width="600" />
+</div>
+
+<p align="justify">
+  <strong>Figure:</strong> A sample AnyLog deployment showing two data storage operators, a query agent, and a metadata agent (master node)
+  (which can be replaced by a blockchain layer). This setup delivers a cloud-like experience at the edge, making real-time
+  IoT data accessible from anywhere, at any time, and for any use case—without the need to move data or commit to specific
+  cloud providers, applications, or hardware.
+</p>
 
 
 ## Table of Content 

@@ -8,14 +8,13 @@
   --accent-error: #dc3545;
 }
 
-/* Body background & text */
+/* Body & Typography */
 body {
   background-color: var(--light-gray);
   color: var(--text-color);
   font-family: "Inter", sans-serif;
 }
 
-/* Links */
 a {
   color: var(--primary-blue);
   text-decoration: none;
@@ -23,30 +22,41 @@ a {
 a:hover {
   text-decoration: underline;
 }
-/* Sidebar */
+
+/* Sidebar Styling */
 .sidebar,
 .sidebar a {
   background-color: var(--dark-blue) !important;
   color: var(--white) !important;
 }
 .sidebar a:hover {
-  color: var(--accent-success) !important; /* Optional: AnyLog blue */
+  color: var(--accent-success) !important;
   text-decoration: underline;
 }
 
-
-/* Headers */
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
   color: var(--dark-blue);
 }
 
-/* Code blocks */
-pre, code {
-  background-color: #e9ecef;
-  color: var(--text-color);
+/* Code Blocks: scrollable, nicely styled */
+pre {
+  background: #f4f4f4;
+  border-left: 4px solid var(--primary-blue);
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 6px;
+}
+code {
+  background: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 0.95em;
+  color: #d63384;
 }
 
-/* Buttons or badges if any */
+/* Buttons or badges */
 .btn-primary {
   background-color: var(--primary-blue);
   border: none;
