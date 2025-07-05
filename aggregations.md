@@ -40,25 +40,29 @@ value:
 
 Usage: 
 ```anylog
-set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] and time_column = [time column name] and value_column = [value column name] and format = [table/json]
+set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] 
+      and time_column = [time column name] and value_column = [value column name]
+      and target_dbms = [target dbms name] and target_table = [target table name]
 ```
 
-| Command option | Default   | Details                                                                                                                                     |
-|----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------| 
-| dbms           |           | The name of the database that hosts the table's data.                                                                                       | 
-| table          |           | The data table name. If table name is not provided, all the tables associated to the database are monitored using the database definitions. | 
-| intervals      | 10        | The number of intervals to keep.                                                                                                            |
-| time           | 1 minute  | The length of the interval expressed in one of the following: seconds, minutes, hours, days.                                                |
-| time_column    | timestamp | The name of the time column.                                                                                                                |
-| value_column   | value     | The name of the column being monitored.                                                                                                     |
+| Command option | Default     | Details                                                                                                                                     |
+|----------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------| 
+| dbms           |             | The name of the database that hosts the table's data.                                                                                       | 
+| table          |             | The data table name. If table name is not provided, all the tables associated to the database are monitored using the database definitions. | 
+| intervals      | 10          | The number of intervals to keep.                                                                                                            |
+| time           | 1 minute    | The length of the interval expressed in one of the following: seconds, minutes, hours, days.                                                |
+| time_column    | "timestamp" | The name of the time column.                                                                                                                |
+| value_column   | "value"     | The name of the column being monitored.                                                                                                     |
+| target_dbms    | [dbms]      | The name of the dbms to host the aggregation data. Defaults to the same as the source dbms if not provided.                                 |
+| target_table   | [table]     | The name of the table to host the aggregation data. Defaults to the same as the source table.                                                                                        |
 
 Example: 
 ```anylog
-set aggregations where dbms = dmci and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
+set aggregations where dbms = dmci and table = sensor_table and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
 ```
 **Note:**
 The **set aggregations** command enables aggregation on a stream of data identifies by the DBMS and Table assigned to the stream.
-  It can be followed by a one or more commands that determine additional fnctionalities such as:
+  It can be followed by a one or more commands that determine additional functionalities such as:
    * [Declaring Thresholds](#declaring-thresholds) that can be referenced in the rule engine.
    * [Aggregation Encoding](#aggregation-encoding) that provide compression to the data stream.
 
@@ -77,9 +81,10 @@ set aggregations thresholds where dbms = [dbms name] and table = [table name] an
 The command `reset aggregations` deletes the aggregation declarations.      
 Usage:
 ```anylog
-reset aggregations where dbms = [dbms name] and table = [table name]
+reset aggregations where dbms = [dbms name] and table = [table name] and value_column = [column name]
 ```
-If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
+* If table name is not provided, aggregations associated with all the tables assigned to the database are removed.
+* If column name is not provided, aggregations associated with all the columns assigned to the table are removed.
 
 ## Aggregation encoding
 
@@ -123,27 +128,37 @@ Example:
 set aggregations encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
 ```
 
-## Retrieve aggregations
+## 📥 Retrieve Aggregations
 
-The command `get aggregations` retrieves the monitored data.   
-**Example**:  
+The command `get aggregations` retrieves the monitored data configured via the `set aggregation` command.
+
+### 🔧 Usage Examples
+
 ```anylog
-get aggregations
-get aggregations where dbms = lsl_demo and table = ping_sensor
+get aggregations 
+get aggregations where dbms = orics
+get aggregations where dbms = orics and table = r_50
+get aggregations where dbms = orics and table = r_50 and value_column = seal_storage
 ```
+Each command filters the aggregation definitions based on the provided criteria (dbms, table, and value_column).
 
-The following example shows the retuned info to a **get aggregation** command:
+### Sample output
 ```anylog
-DBMS     Table       interval H:M:S Events/sec Count Min Max   Avg
---------|-----------|--------|-----|----------|-----|---|-----|------|
-lsl_demo|ping_sensor|       0|0:3:0|      0.35|   21|  2|2,221|413.38|
-lsl_demo|ping_sensor|       1|0:2:0|      0.35|   21| 21|3,221|256.24|
-```
 
+DBMS  Target DBMS Table Target Table          Vlue Column      interval H:M:S       Events/sec Count Min     Max     Avg
+-----|-----------|-----|---------------------|----------------|--------|-----------|----------|-----|-------|-------|-------|
+orics|orics_agg  |r_50 |r_50_seal_storage    |seal_storage    |       0|0:3:0      |      0.17|   10| 11.020| 93.030| 39.064|
+orics|orics_agg  |r_50 |r_50_heater1_temp    |heater1_temp    |       0|0:0:0      |      0.17|   10|103.010|299.290|202.909|
+orics|orics_agg  |r_50 |r_50_heater1_setpoint|heater1_setpoint|---     |Not Started|---       |    0|---    |---    |---    |
+orics|orics      |r_50 |r_50                 |value           |---     |Not Started|---       |    0|---    |---    |---    |
+```
 | Column Returned | Details                                                                                                                                           |
 |-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------| 
-| DBMS            | The database name.                                                                                                                                | 
-| Table           | The table name.                                                                                                                                   | 
+| DBMS            | The name of the source database.                                                                                                                  |
+| Target DBMS	    | The database where the aggregated data is stored.                                                                                                | 
+| Table           | The name of the source table being monitored.                                                                                                     |
+| Target Table    | The name of the table that stores the aggregated results.                                                                                         |
+| Value Column    | TThe column being aggregated (e.g., temperature, pressure, etc.).                                                                                    | 
 | Interval        | The sequential ID of the interval, if time in **set aggregation** command is set to 1 minute, the data added from second 180 to 240 is Interval 2 |
 | H:M:S           | The time elapsed since the interval data was processed (to the current interval)                                                                  |
 | Count           | The number of rows (readings) processed in the interval.                                                                                          |
