@@ -204,12 +204,12 @@ Example Payload:
 
 Note: Grafana configuration is detailed in the [Using Grafana](northbound%20connectors/using%20grafana.md) section.
 
-## Retrieve aggregations declarations
+## Retrieve aggregation configurations
 
 The following command retrieves the aggregation declarations:
 ```anylog
-get aggregations config
-get aggregations config where dbms = lsl_demo and table = ping_sensor
+get aggregation configs
+get aggregation configs where dbms = lsl_demo and table = ping_sensor
 ```
 
 ## Retrieve the most recent value
@@ -224,3 +224,22 @@ Example:
 ```anylog
 get aggregations where dbms = lsl_demo and table = ping_sensor and function = max
 ```
+
+## Retrieve aggregation tables
+
+The `get aggregation tables` command provides information about the ingestion of aggregation tables into the local database.
+
+### Description
+This command retrieves metadata and ingestion status for tables used in aggregations. 
+It monitors the ingestion process of aggregated data from streaming sources into the local database.
+
+
+### Usage
+```anylog
+get aggregation tables where dbms = [dbms name] and table = [table name]
+```
+### Example
+```anylog
+get aggregation tables where dbms = orics and table = r_50
+```
+
