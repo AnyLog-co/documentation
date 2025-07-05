@@ -168,19 +168,21 @@ orics|orics      |r_50 |r_50                 |value           |---     |Not Star
 
 ## Retrieve aggregations by time
 
-The following command retrieves the intervals summaries by date and time.
+The command `get aggregations by time` retrieves the interval summaries **by date and time**.
+
 ```anylog
-get aggregations by time where dbms = [dbms name] and table = [table name] and format = [table/json] and function = [function name]
+get aggregations by time where dbms = [dbms name] and table = [table name] and value_column = [column name] and format = [table/json] and function = [function name]
 ```
 Notes:
+* **value_column** specifies the column being aggregated (e.g., temperature, pressure).
 * **function name** can be repeated for multiple functions, and the options are: cunt, min, max, avg.
 * If a function is not specified, all functions are returned.
 * The default format is 'table'
 
-Example:
+Examples:
 ```anylog
-get aggregations by time where dbms = nov and table = table_3
-get aggregations by time where dbms = nov and table = table_3 and format = json and function = min and function = max  
+get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage
+get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max  
 ```
 
 ### Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
