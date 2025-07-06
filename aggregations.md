@@ -243,3 +243,36 @@ get aggregation tables where dbms = [dbms name] and table = [table name]
 get aggregation tables where dbms = orics and table = r_50
 ```
 
+## Set Ingestion Frequency for Aggregation Tables
+
+The `set ingestion in aggregations` command allows you to modify or stop the ingestion frequency of aggregation tables in the local database.
+
+
+### Usage
+```anylog
+set ingestion in aggregations where dbms = [dbms name] and table = [table name] and frequency = [frequency] and interval = [interval]
+```
+
+### Description
+This command controls how frequently the system ingests data from aggregation tables. It can:
+* Enable continuous real-time ingestion
+* Configure time-based ingestion
+* Stop ingestion for specific tables
+
+If dbms and table are omitted, the command applies globally to all aggregation tables.
+
+### Parameters
+
+| Name       | Required | Type        | Description                                                                 |
+|------------|----------|-------------|-----------------------------------------------------------------------------|
+| `dbms`     | No       | `string`    | Name of the DBMS. If omitted, applies to all DBMSs.                        |
+| `table`    | No       | `string`    | Name of the table. If omitted, applies to all tables in the specified DBMS.|
+| `frequency`| Yes      | `string`    | Ingestion mode. Options: `continuous`, `time`, or `none`.                  |
+| `interval` | Conditionally (if `frequency = time`) | `int` (with time unit) | Time interval for ingestion (e.g., seconds, minutes). Ignored for other modes. |
+
+### Examples
+```anylog
+set ingestion in aggregations where dbms = orics and table = r_50 and frequency = continuous
+set ingestion in aggregations where dbms = orics and frequency = time and interval = 1 minute
+set ingestion in aggregations where dbms = orics and table = r_50 and frequency = none   # Stop Ingestion
+```
