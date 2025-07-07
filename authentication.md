@@ -634,4 +634,4 @@ The client is configured using the following files:
 2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
-An example of Postman configuration is available at [using postman](using%20postman.md#how-too-use-postman-as-the-query-interface).
+An example of Postman configuration is available at [using postman](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
