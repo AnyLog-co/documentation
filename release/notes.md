@@ -2,7 +2,7 @@
 
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command
-1. The command "flush buffers" forces streaming data to be pushed to the database ignoring the buffer and time threshold.
+1. The command "flush buffers" forces streaming data to be pushed to the database ignoring the buffer fill and time thresholds.
 
 ## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
 ### New features
