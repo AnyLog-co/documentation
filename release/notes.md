@@ -1,5 +1,9 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
+### New Command
+1. The command "flush buffers" forces streaming data to be pushed to the database ignoring the buffer and time threshold.
+
 ## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
 ### New features
 1. Manage Windows Event Log. Detaile [Run Scheduled Pull](../scheduled%20pull.md)
