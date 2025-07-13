@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AnyLog Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Docsify theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles/custom.css" />
+
+  <!-- PrismJS Syntax Highlighter CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/prismjs/themes/prism.css" />
+
+  <style>html { scroll-behavior: smooth; }</style>
+</head>
+<body>
+  <div id="app">Loading...</div>
+
+  <script>
+    window.$docsify = {
+      name: 'AnyLog Docs',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search...',
+        noData: 'No results!',
+      },
+      executeScript: true,
+    };
+  </script>
+
+  <!-- Docsify + Plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- PrismJS core + additional languages -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+</body>
+</html>
