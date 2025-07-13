@@ -1,9 +1,0 @@
-{
-    "services": [
-        {
-            "org": "anylog",
-            "url": "anylog-node",
-            "variables": {}
-        }
-    ]
-}
