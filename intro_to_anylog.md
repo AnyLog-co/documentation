@@ -75,6 +75,7 @@ Each node in the AnyLog network can assume one or more functional roles based on
 </div>
 <p align="center"><strong>Figure:</strong> The diagram illustrates available services within AnyLog/EdgeLake. The node's services and logical databases determine its role.</p>
 <br/><br/>
+
 ### Master Node vs. Blockchain
 
 A **Master node**—also referred to as a **Metadata node**—serves as the centralized repository for network metadata **only in deployments that do not use a blockchain**. The metadata includes information about node roles, data schemas, access policies, and routing rules. The Master node keeps this metadata synchronized and accessible to other nodes in the network.
