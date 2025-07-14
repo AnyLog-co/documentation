@@ -6,6 +6,7 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
   * [EdgeLake vs. AnyLog](#edgelake-vs-anylog)
 * [Agent Types](#agent-types)
   * [Master Node vs. Blockchain](#master-node-vs-blockchain)
+  * [Operator Node](#operator-node)
 * [Network Metadata Management](#network-metadata-management)
   * [Metadata Synchronization](#metadata-synchronization)
   * [Querying and Updating Metadata](#querying-and-updating-metadata)
@@ -39,7 +40,7 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
 
 ## Agent Types
 
-Each node can assume one or more roles based on its configuration. The primary roles include:
+Each node in the AnyLog network can assume one or more functional roles based on its configuration. These roles are designed to enable distributed data storage, query processing, ingestion, and coordination—each playing a unique part in the overall system architecture.
 
 | **Role**                   | **Description**                                                               | **Notes**                                                          |
 |----------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -60,6 +61,26 @@ A **Master (Metadata) node** is used to maintain metadata **only when the blockc
 
 - See [Using Ethereum as a Global Metadata Platform](using_ethereum.md) for blockchain-based setup.
 - See [Using a Master Node](master_node.md) for traditional metadata coordination.
+
+### Operator Node
+
+An **Operator node** is responsible for managing and storing data locally in a SQL database. It ingests data either directly or via a Publisher node and stores it according to the network’s metadata and schema mapping. Each Operator can use a supported backend database such as **PostgreSQL** or **SQLite**, based on deployment scale and performance needs.
+
+Operators are the foundation of the network’s decentralized storage model. Each Operator node processes queries that target data it hosts. This ensures that even as data is distributed across multiple nodes, individual queries can be executed locally and efficiently. The Operator role is typically present on every node that manages data, and nodes can be configured to act as Operators exclusively or alongside other roles.
+
+### Query Node
+
+A **Query node** acts as a coordinator for executing distributed queries across multiple Operator nodes. When a user or application submits a query, the Query node analyzes the request, identifies the relevant Operators that host the needed data, and dispatches sub-queries to them. Each Operator processes its part of the query and sends back results, which are then aggregated by the Query node into a single response.
+
+This role is essential for providing a unified view over a distributed data network. It abstracts away the complexity of locating and querying individual data sources, allowing clients to interact with the network as if it were a single, federated database. Query nodes can operate independently or be co-located with other roles depending on the deployment architecture.
+
+For a node to act as a query node, all that's needed is enabling `system_query` logical database.
+
+### Publisher Node
+
+A **Publisher node** is responsible for ingesting raw data from external sources such as IoT devices, sensors, or applications. Once data is received, the Publisher formats it and forwards it to the appropriate Operator nodes based on the metadata and routing rules defined in the system.
+
+Publisher nodes are particularly useful in environments with high-frequency data sources or devices that push updates to the edge of the network. While **not supported in EdgeLake**, the Publisher role is available in the enterprise version of AnyLog and can be instrumental in offloading preprocessing and routing tasks from the Operators, enabling greater scalability and cleaner separation of responsibilities.
 
 ---
 
