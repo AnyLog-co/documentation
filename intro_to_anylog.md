@@ -91,15 +91,15 @@ Each node maintains a local copy of the metadata and runs a background process t
 
 | Section | Description |
 |---------|-------------|
-| [Metadata Management](metadata%20management.md#managing-metadata) | Overview of metadata structures and protocols |
-| [Metadata Requests](metadata%20requests.md) | API and CLI tools for querying metadata |
-| [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) | Setting up Ethereum as a metadata store |
+| [Metadata Management](metadata_management.md#managing-metadata) | Overview of metadata structures and protocols |
+| [Metadata Requests](metadata_requests.md) | API and CLI tools for querying metadata |
+| [Using Ethereum](using_ethereum.md#using-ethereum-as-a-global-metadata-platform) | Setting up Ethereum as a metadata store |
 
 ### Querying and Updating Metadata
 
 You can query and update metadata via the same set of **blockchain commands**, whether the metadata is on a blockchain or a Master node.
 
-🔗 See: [Blockchain Commands](blockchain%20commands.md)
+🔗 See: [Blockchain Commands](blockchain_commands.md)
 
 ---
 
@@ -124,14 +124,14 @@ Despite being distributed, the system provides a **unified query interface**. Qu
 
 | Section | Description |
 |---------|-------------|
-| [Adding Data to Nodes](adding%20data.md) | How data is ingested across the network |
-| [Mapping Data](mapping%20data%20to%20tables.md) | Schema transformations and data normalization |
-| [Using a Message Broker](message%20broker.md#using-a-message-broker) | Integrating with MQTT brokers |
-| [Managing Data Files](managing%20data%20files%20status.md) | Monitoring data lifecycle and status |
+| [Adding Data to Nodes](adding_data.md) | How data is ingested across the network |
+| [Mapping Data](mapping_data_to_tables.md) | Schema transformations and data normalization |
+| [Using a Message Broker](message_broker.md#using-a-message-broker) | Integrating with MQTT brokers |
+| [Managing Data Files](managing_data_files_status.md) | Monitoring data lifecycle and status |
 | [Querying Data](queries.md#query-nodes-in-the-network) | Executing distributed SQL queries |
-| [Query Profiling](profiling%20and%20monitoring%20queries.md) | Performance tuning and diagnostics |
-| [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Visualization of metrics via Grafana |
-| [Using EdgeX](using%20edgex.md#using-edgex) | Integration with EdgeX southbound connectors |
+| [Query Profiling](profiling_and_monitoring_queries.md) | Performance tuning and diagnostics |
+| [Using Grafana](northbound_connectors/using_grafana.md#using-grafana) | Visualization of metrics via Grafana |
+| [Using EdgeX](using_edgex.md#using-edgex) | Integration with EdgeX southbound connectors |
 
 ---
 
@@ -142,7 +142,7 @@ Nodes can be configured to **dynamically replicate data** for resilience and fai
 - Queries are automatically redirected to a backup node
 - New nodes can be provisioned to restore redundancy
 
-🔗 More: [High Availability (HA)](high%20availability.md#high-availability-ha)
+🔗 More: [High Availability (HA)](high_availability.md#high-availability-ha)
 
 ---
 
