@@ -7,6 +7,8 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
 * [Agent Types](#agent-types)
   * [Master Node vs. Blockchain](#master-node-vs-blockchain)
   * [Operator Node](#operator-node)
+  * [Query Node](#query-node)
+  * [Publisher Node](#publisher-node)
 * [Network Metadata Management](#network-metadata-management)
   * [Metadata Synchronization](#metadata-synchronization)
   * [Querying and Updating Metadata](#querying-and-updating-metadata)
@@ -23,6 +25,25 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
 ### EdgeLake vs. AnyLog
 
 **EdgeLake** is the **open-source** and **free** version of the AnyLog platform. It provides a managed, zero-maintenance experience, ideal for organizations seeking decentralized data control without infrastructure complexity.
+
+|                              |                                                              EdgeLake                                                               | Enterprise | 
+|:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|:----------:|
+|      Virtual edge layer      |                                                                  ✅                                                                  |     ✅      |
+|         Rule engine          |                                                                  ✅                                                                  |     ✅      |
+| Policy-based data management |                                                                  ✅                                                                  |     ✅      |
+|       Node management        |                                                                  ✅                                                                  |     ✅      |
+| Unified APIs, CLIs, Admin UI |                                                                  ✅                                                                  |     ✅      |
+|   Supported IoT connectors   |                                                                  ✅                                                                  |     ✅      |
+|        Publisher Node        |                                                                  ❌                                                                  |     ✅      | 
+|    Blockchain abstraction    |                                                               Add-on                                                                |     ✅      |
+|         Aggregations         |                                                                  ❌                                                                  |     ✅      |
+|      Security protocol       |                                                                  ❌                                                                  |     ✅      |
+|    High Availability (HA)    |                                                                  ❌                                                                  |     ✅      |
+|         Test Suites          |                                                                  ❌                                                                  |    ✅      |
+|           Training           |                                                                  ❌                                                                  |     ✅      |
+|      Technical Support       | <a href="https://join.slack.com/t/edgelake/shared_invite/zt-37zgw1gwx-9qpkSIRmG_~Dz7aBz8GRLg" target="_blank">Limited via Slack</a> |     ✅      |
+
+
 
 **EdgeLake Highlights:**
 - Turnkey node deployment (edge or cloud)
@@ -53,11 +74,13 @@ Each node in the AnyLog network can assume one or more functional roles based on
   <img src="imgs/Block_Diagram.png" alt="AnyLog/EdgeLake Components Diagram" width="600" />
 </div>
 
-<p align="justify"><strong>Figure:</strong> The diagram illustrates available services within AnyLog/EdgeLake. The node's services and logical databases determine its role.</p>
+<p align="center"><strong>Figure:</strong> The diagram illustrates available services within AnyLog/EdgeLake. The node's services and logical databases determine its role.</p>
 
 ### Master Node vs. Blockchain
 
-A **Master (Metadata) node** is used to maintain metadata **only when the blockchain is not used**. In a blockchain-enabled network (e.g., Ethereum), the Master node is **not required**, and the metadata layer remains fully decentralized.
+A **Master node**—also referred to as a **Metadata node**—serves as the centralized repository for network metadata **only in deployments that do not use a blockchain**. The metadata includes information about node roles, data schemas, access policies, and routing rules. The Master node keeps this metadata synchronized and accessible to other nodes in the network.
+
+When the network is configured to use a blockchain platform such as **Ethereum**, the Master node becomes unnecessary. In this case, the blockchain acts as a decentralized metadata layer, providing immutability, transparency, and distributed consensus. All nodes can synchronize metadata directly from the blockchain, and the metadata remains consistent and tamper-proof.
 
 - See [Using Ethereum as a Global Metadata Platform](using_ethereum.md) for blockchain-based setup.
 - See [Using a Master Node](master_node.md) for traditional metadata coordination.
