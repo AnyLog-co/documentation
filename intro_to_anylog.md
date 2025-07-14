@@ -1,0 +1,168 @@
+# Introduction to the AnyLog Platform
+
+Welcome to AnyLog! This guide will help you install, configure, and run AnyLog nodes with various roles and features.
+
+* [What is AnyLog](#what-is-anylog)
+  * [EdgeLake vs. AnyLog](#edgelake-vs-anylog)
+* [Agent Types](#agent-types)
+  * [Master Node vs. Blockchain](#master-node-vs-blockchain)
+* [Network Metadata Management](#network-metadata-management)
+  * [Metadata Synchronization](#metadata-synchronization)
+  * [Querying and Updating Metadata](#querying-and-updating-metadata)
+* [Data Storage & Management](#data-storage--management)
+  * [High Availability](#high-availability)
+* [Network Security](#network-security)
+
+---
+
+## What is AnyLog
+
+**AnyLog** is a decentralized platform for managing **IoT and time-series data** across distributed environments. It enables real-time data ingestion, storage, and querying by connecting independent compute nodes—each running the AnyLog software—that coordinate via metadata and shared protocols.
+
+### EdgeLake vs. AnyLog
+
+**EdgeLake** is the **open-source** and **free** version of the AnyLog platform. It provides a managed, zero-maintenance experience, ideal for organizations seeking decentralized data control without infrastructure complexity.
+
+**EdgeLake Highlights:**
+- Turnkey node deployment (edge or cloud)
+- Zero-maintenance operation (auto-updates, monitoring, configuration)
+- Scalable pricing — starts at **$1/device/month**
+- Real-time SQL and REST API access from any node
+- Built-in dashboards and analytics
+
+**AnyLog (Enterprise)** includes everything in EdgeLake, with additional capabilities:
+- Advanced security and authentication
+- Federated data aggregation and ML model training
+- Real-time support with SLA options
+
+---
+
+## Agent Types
+
+Each node can assume one or more roles based on its configuration. The primary roles include:
+
+| **Role**                   | **Description**                                                               | **Notes**                                                          |
+|----------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Operator**               | Stores and manages data in a local SQL database; responds to local queries    |                                                                    |
+| **Query**                  | Orchestrates distributed queries across the network                           |                                                                    |
+| **Master / Metadata Node** | Maintains global metadata in non-blockchain setups                            | Not needed if using a blockchain (e.g., Ethereum)                 |
+| **Publisher**              | Ingests data and forwards it to Operator nodes                                | Not supported in EdgeLake                                          |
+
+<div style="text-align: center;">
+  <img src="imgs/Block_Diagram.png" alt="AnyLog/EdgeLake Components Diagram" width="600" />
+</div>
+
+<p align="justify"><strong>Figure:</strong> The diagram illustrates available services within AnyLog/EdgeLake. The node's services and logical databases determine its role.</p>
+
+### Master Node vs. Blockchain
+
+A **Master (Metadata) node** is used to maintain metadata **only when the blockchain is not used**. In a blockchain-enabled network (e.g., Ethereum), the Master node is **not required**, and the metadata layer remains fully decentralized.
+
+- See [Using Ethereum as a Global Metadata Platform](using_ethereum.md) for blockchain-based setup.
+- See [Using a Master Node](master_node.md) for traditional metadata coordination.
+
+---
+
+## Network Metadata Management
+
+The **metadata** stores network-related information shared among all nodes:
+
+- Node roles and configuration
+- Permissions and access control
+- Logical schema of the data
+- Data distribution and routing info
+
+The metadata repository can be:
+- A **blockchain** (e.g., Ethereum), or
+- A centralized **Master node**
+
+Interaction with the metadata is identical across both options. Internally, AnyLog refers to the metadata repository as **"the blockchain"**, even when using a Master node.
+
+### Metadata Synchronization
+
+Each node maintains a local copy of the metadata and runs a background process to periodically synchronize with the metadata repository. This allows:
+
+- Continued operation if the central repository is temporarily unavailable
+- Independence from the source of metadata
+
+🔗 See [Blockchain Synchronizer](background_processes.md#blockchain-synchronizer) for technical details.
+
+**Related Documentation**:
+
+| Section | Description |
+|---------|-------------|
+| [Metadata Management](metadata%20management.md#managing-metadata) | Overview of metadata structures and protocols |
+| [Metadata Requests](metadata%20requests.md) | API and CLI tools for querying metadata |
+| [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform) | Setting up Ethereum as a metadata store |
+
+### Querying and Updating Metadata
+
+You can query and update metadata via the same set of **blockchain commands**, whether the metadata is on a blockchain or a Master node.
+
+🔗 See: [Blockchain Commands](blockchain%20commands.md)
+
+---
+
+## Data Storage & Management
+
+Data is stored on **Operator nodes**, each using a local SQL database. AnyLog currently supports:
+
+- [PostgreSQL](https://www.postgresql.org/) — recommended for large-scale nodes and data volumes  
+- [SQLite](https://www.sqlite.org/index.html) — ideal for small, embedded, or in-memory deployments
+
+Despite being distributed, the system provides a **unified query interface**. Query nodes automatically discover the relevant Operator nodes, distribute the query, and aggregate results.
+
+### Query Process Flow
+
+1. A **Query node** receives a request.
+2. It determines which **Operators** hold the relevant data.
+3. The query is forwarded to those Operators.
+4. Each Operator processes its portion and replies.
+5. The Query node aggregates the results and sends them back to the requester.
+
+**Related Documentation**:
+
+| Section | Description |
+|---------|-------------|
+| [Adding Data to Nodes](adding%20data.md) | How data is ingested across the network |
+| [Mapping Data](mapping%20data%20to%20tables.md) | Schema transformations and data normalization |
+| [Using a Message Broker](message%20broker.md#using-a-message-broker) | Integrating with MQTT brokers |
+| [Managing Data Files](managing%20data%20files%20status.md) | Monitoring data lifecycle and status |
+| [Querying Data](queries.md#query-nodes-in-the-network) | Executing distributed SQL queries |
+| [Query Profiling](profiling%20and%20monitoring%20queries.md) | Performance tuning and diagnostics |
+| [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Visualization of metrics via Grafana |
+| [Using EdgeX](using%20edgex.md#using-edgex) | Integration with EdgeX southbound connectors |
+
+---
+
+### High Availability
+
+Nodes can be configured to **dynamically replicate data** for resilience and failover. In case of a node failure:
+
+- Queries are automatically redirected to a backup node
+- New nodes can be provisioned to restore redundancy
+
+🔗 More: [High Availability (HA)](high%20availability.md#high-availability-ha)
+
+---
+
+## Network Security
+
+AnyLog supports multiple layers of security:
+
+- **Node Authentication**  
+  Each node has a public/private key pair. Messages include the public key and a digital signature to verify authenticity.
+
+- **User Authentication**  
+  Users may also be assigned key pairs and treated like nodes during authentication.
+
+- **Basic Authentication**  
+  Nodes can require username/password for command execution.
+
+- **Certificate-Based SSL**  
+  The platform supports client-server certificate authentication for secure connections.
+
+- **Message Encryption**  
+  Messages between nodes can be encrypted for confidentiality.
+
+🔐 See [User Authentication](authentication.md) for implementation details.
