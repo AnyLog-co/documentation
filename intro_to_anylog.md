@@ -48,7 +48,6 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
 **EdgeLake Highlights:**
 - Turnkey node deployment (edge or cloud)
 - Zero-maintenance operation (auto-updates, monitoring, configuration)
-- Scalable pricing — starts at **$1/device/month**
 - Real-time SQL and REST API access from any node
 - Built-in dashboards and analytics
 
