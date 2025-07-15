@@ -26,7 +26,6 @@ to predefine the services for each Pod.
 |                      RAM                      |                                                               2 GB or more                                                               | 
 |                      CPU                      |                                                                2 or more                                                                 |
 |                  Networking                   |             Network connectivity between machines in cluster<br/><br/>Unique hostname / MAC address for every physical node              | 
-|                                               |                                                                                                                                          | 
 | Other | <a href="https://www.geeksforgeeks.org/linux-unix/how-to-permanently-disable-swap-in-linux/" target="_blank">Disable swap on machine</a> |  
 
 
