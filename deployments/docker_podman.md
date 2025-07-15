@@ -1,6 +1,7 @@
 # Docker / Podman Installation 
 
-AnyLog's go-to deployment is using via _Docker_ or _Podman_ 
+AnyLog's preferred deployment method is through **Docker** or **Podman**. This guide covers everything from installing 
+prerequisites to deploying and managing nodes, and is structured to support both seasoned engineers and first-time users.
 
 * [Requirements](#requirements)
   * [Install Docker](#install-docker)
@@ -16,9 +17,9 @@ AnyLog's go-to deployment is using via _Docker_ or _Podman_
 
 ## Requirements
 
-* [Docker](#install-docker) or [Podman](#install-podman) - the two are interchangeable from our perspective 
-* <a href="https://linux.die.net/man/1/make#:~:text=This%20man%20page%20is%20an%20extract%20of%20the,is%20made%20from%20the%20Texinfo%20source%20file%20make.texi." target="_blank">Make</a> 
-* Our <a href="https://github.com/AnyLog-co/docker-compose" target="_blank">docker-compose</a> repository
+* [Docker](#install-docker) or [Podman](#install-podman) - the two are interchangeable from AnyLog's perspective
+* <a href="https://linux.die.net/man/1/make#:~:text=This%20man%20page%20is%20an%20extract%20of%20the,is%20made%20from%20the%20Texinfo%20source%20file%20make.texi." target="_blank">Make</a> (installed by default on most Unix systems)
+* Clone our <a href="https://github.com/AnyLog-co/docker-compose" target="_blank">docker-compose repository</a>
 ```shell
 git clone https://github.com/AnyLog-co/docker-compose
 ```
@@ -26,8 +27,8 @@ git clone https://github.com/AnyLog-co/docker-compose
 ### Install Docker
 
 Directions for install Docker can be found on their [official website](https://docs.docker.com/engine/install/), 
-and the directions are used for an Ubuntu installation 
 
+Installation instructions for Docker (Ubuntu example):
 ```shell
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -52,14 +53,11 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 
-
-
-
 ### Install Podman
 
 Directions for install Podman can be found on their [official website](https://podman.io/docs/installation), 
-and the directions are used for an Ubuntu installation 
 
+Installation instructions for Podman (Ubuntu example):
 ```shell
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -144,11 +142,21 @@ Common variables you can override:
 --- 
 
 ### Enable Remote-CLI
-The default _docker-compose_ can be extended to install [_Remote-CLI_](northbound%20connectors/remote_cli.md) as part 
-of the same (Query node) deployment. This is important when querying blob data, as the two containers - Remote-CLI and 
-AnyLog agent need to have a shared file.
 
-To enable the Remote-CLI, simply set `REMOTE_CLI=true` in the advanced configurations file. 
+The **[_Remote-CLI_](northbound%20connectors/remote_cli.md)** is an open-source GUI tool developed by AnyLog for 
+interacting with nodes using REST APIs. While tools like Postman can be used for standard SQL queries, Remote-CLI offers 
+dedicated capabilities tailored to the AnyLog environment—particularly for handling blob (binary large object) data.
+
+One of Remote-CLI’s key features is its ability to retrieve blob data via a shared local directory between itself and 
+the target AnyLog node. Because of this, both services must run on the same machine and have access to the same file 
+system path.
+
+Remote-CLI can be deployed independently, or more commonly, alongside an AnyLog node—typically a Query node. The 
+default `docker-compose` setup supports this bundled deployment. To enable Remote-CLI in a containerized environment, 
+simply set `REMOTE_CLI=true` in the advanced configuration file for the node.
+
+This setup ensures you get a visual interface for exploring the network, running SQL queries, and managing blob data 
+with minimal setup effort.
 
 ### Single Machine Deployment
 Users may want to deploy multiple agents of the same type (usually Operator) on the same machine.
@@ -176,6 +184,7 @@ make up ANYLOG_TYPE=operator
 make up ANYLOG_TYPE=operator2
 ```
 
+---
 
 ## Advanced Docker Support
 
