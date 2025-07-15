@@ -102,6 +102,20 @@ make up ANYLOG_TYPE=[NODE_TYPE]
 make up ANYLOG_TYPE=master
 ```
 
+6. Attach to node
+```shell
+cd $HOME/docker-compose
+make attach ANYLOG_TYPE=[NODE_TYPE]
+
+# - OR - 
+
+docker attach --detach-keys=ctrl-d [NODE_NAME]
+
+# to detach - ctrl-d 
+```
+
+Directions for how to use the CLI can be found [here](cli.md)
+
 ### `make` Commands
 
 The docker-compose repository uses the `make` functionality in order to remove the need for users to manually execute 
