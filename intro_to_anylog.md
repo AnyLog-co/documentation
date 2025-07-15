@@ -44,7 +44,6 @@ Welcome to AnyLog! This guide will help you install, configure, and run AnyLog n
 |      Technical Support       | <a href="https://join.slack.com/t/edgelake/shared_invite/zt-37zgw1gwx-9qpkSIRmG_~Dz7aBz8GRLg" target="_blank">Limited via Slack</a> |     ✅      |
 
 
-
 **EdgeLake Highlights:**
 - Turnkey node deployment (edge or cloud)
 - Zero-maintenance operation (auto-updates, monitoring, configuration)
