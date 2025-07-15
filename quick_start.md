@@ -7,11 +7,15 @@ AnyLog / EdgeLake can be deployed using a variety of deployment options.
   * [Requirements](#requirements) 
   * [Configurations](#configuration)
   * [Docker / Podman](deployments/docker_podman.md)
-  * [Kubernetes](deployments/k8s.md) 
+  * [Kubernetes](deployments/kubernetes.md) 
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
   * [Pip Package](deployments/Pip_Install.md)
   * VirtualBox
-  * [Third-Party Deployments](#third-party-deployments)
+  * **Third-Party Deployments** - AnyLog / EdgeLake is supported by third-party orchestrators such as
+    * IBM's OpenHorizon
+    * Dell NativeEdge
+    * Intel Tiber 
+    * Zededa / Eve Orchestrator
 * [Agent Components](#agent-components)
   * [Local Directories](#local-directory-structure)
   * [Services & Databases](#services--databases)
@@ -26,8 +30,8 @@ AnyLog is a network of agents that allows you to manage real-time and IoT data d
 
 To demonstrate the capabilities of AnyLog / EdgeLake, we recommend deploying a network of four agents, as shown in the diagram below.
 * 1 Master node 
-* 2 Operators 
-* 1 Query 
+* 1 Query node
+* 2 Operator nodes
 
 These nodes can be deployed across multiple machines or run as four separate containers on a single machine.
 1. Each container must be assigned unique ports.
@@ -197,6 +201,7 @@ DEPLOY_LOCAL_SCRIPT=false
 # Run code in debug mode
 DEBUG_MODE=false
 ```
+> In the configurations, the value of `LEDGER_CONN` needs to be the  TCP connection information that can reach the master node.
 
 **Advanced Configurations**: 
 ```dotenv
@@ -288,16 +293,6 @@ LIGHTHOUSE_IP=""
 # External physical IP of te node associated with Nebula lighthouse
 LIGHTHOUSE_NODE_IP=""
 ```
-
-### Third-Party Deployments
-
-AnyLog / EdgeLake is supported by third-party orchestrators such as
-* IBM's OpenHorizon
-* Dell NativeEdge
-* Intel Tiber 
-* Zededa / Eve Orchestrator
-
-
 
 --- 
 
