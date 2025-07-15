@@ -42,9 +42,6 @@ These nodes can be deployed across multiple machines or run as four separate con
   <img src="imgs/deployment_diagram.png" alt="AnyLog Deployment Diagram" width="600" />
 </div>
 
-
-
-
 --- 
 
 ## Deployment Options
