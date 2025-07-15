@@ -6,7 +6,7 @@ AnyLog / EdgeLake can be deployed using a variety of deployment options.
 * [Deployment Options](#deployment-options)
   * [Requirements](#requirements) 
   * [Configurations](#configuration)
-  * [Docker / Podman](deployments/docker-compose.md)
+  * [Docker / Podman](deployments/docker_podman.md)
   * [Kubernetes](deployments/k8s.md) 
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
   * [Pip Package](deployments/Pip_Install.md)
