@@ -12,8 +12,10 @@ directly as a service.
 * [Requirements](#requirements)
 * [Deploying AnyLog](#deploying-anylog-as-a-service)
   * [Setting Up the Machine](#prep-environment)
+    * [Networking](#default-ports)
   * [Deploying AnyLog](#deploy-using-deployment-scripts)
   * [Deploying AnyLog vis REST](#deploy-using-rest)
+* [Validate Agent is Running](#validate-agent)
 
 --- 
 
@@ -37,6 +39,8 @@ directly as a service.
 --- 
 
 ---
+
+--- 
 
 ## Deploying AnyLog as a Service
 
@@ -82,6 +86,22 @@ the pre-existing deployment-scripts, and deploying AnyLog entirely via REST.
 <br/>
 To disable the CLI, simply update configurations to have `DISABLE_CLI=true`
 
+#### Default Ports
+
+When deploying AnyLog / EdgeLake one thing to be aware of is there 3 network configurations used to communicate between 
+and with the network. Just like containers, each service of AnyLog  / EdgeLake agent should have unique ports when 
+deploying multiple agents on the same machine. 
+
+* **TCP Service** - Used for communicating with other AnyLog / EdgeLake agents in the network
+* **REST Service** - Used for communicating with a specific AnyLog / EdgeLake agent via the REST-API. 
+* **Message Broker** - Built-in topic-based consumer. Currently supporting _MQTT_ and _Kafka_ messaging.  
+
+| | TCP Service | REST Service | Message Broker (optional) | 
+| :---: | :---: | :---: |:-------------------------:| 
+| Master | 32048 | 32049 |                           |
+| Operator | 32148 | 32149 | 32150 | 
+| Query | 32348 | 32349 | | 
+| Publisher | 32248 | 32249 | 32250 |
 
 ### Deploy using Deployment Scripts
 1. Create a service file 
@@ -92,7 +112,7 @@ Description=My Executable Service
 After=network.target
 
 [Service]
-ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process /home/user/deployment-scripts/node-deployment/main.al
+ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process /home/user/anylog/deployment-scripts/node-deployment/main.al
 Restart=always
 User=root
 Group=root
@@ -110,82 +130,64 @@ sudo systemctl enable anylog-service.service # this step will allow it to start 
 sudo systemctl restart anylog-service.service
 ```
 
-### Deploying AnyLog via REST
+### Deploying Empty Node
 
+One of the Key services on AnyLog / EdgeLake is the [API interface](../third-party/REST_API.md), which allows for users
+to interact with the AnyLog / EdgeLake via REST.
 
-3. Validate Service 
-* Service status
+#### Prep Environment
+
+1. Request a trial license via <a href="https://anylog.network/download" target="_blank">Download Page</a>
+
+2. Download AnyLog binary image - a full list of images can be found <a href="http://45.33.11.32/" target="blank">here</a>
 ```shell
-sudo service anylog-service status
+mkdir $HOME/anylog/
+cd $HOME/anylog
+wget http://45.33.11.32/anylog_v0.0.0_x86_64
+sudo chmod -R 750 $HOME/anylog/anylog_v0.0.0_x86_64
 ```
 
-* cURL commands
-```shell
-# get status 
-curl -X GET 127.0.0.1:32549
-
-# get processes 
-curl -X GET 127.0.0.1:32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
-```
-
-### Deploy for REST-based Deployment 
-The following demonstrates deploying AnyLog as a service with only TCP and REST communications configured, allowing users 
-to deploy their node 100% via REST.
-
-1. Prepare a deployment script that setups networking configurations to the AnyLog instance.
-```anylog 
-# file path: $HOME/anylog/basic_deployment.al
+3. Create an AnyLog script that connects to TCP, REST and (optionally) Message Broker
+```anylog
+# file name: $HOME/anylog/my_script.al
+# ignore any error messages that arise from script
 on error ignore 
-:prep-instance: 
-# disable CLI 
+# enable echo queue  
+set echo queue on 
+# disable interactive mode
 set cli off
 
-# disable authentication 
-set authentication off
-
-:set-params:
-anylog_server_port=32548
-anylog_rest_port=32549 
-tcp_bind = false
-rest_bind = false
-tcp_threads=3
-rest_threads=3
-rest_timeout=30
-
-:tcp-conn: 
-on error goto tcp-conn-error
- <run tcp server where
+# set networking params 
+set tcp_bind  = true 
+tcp_threads = 6
+set rest_bind = false 
+rest_threads = 6
+# REST internal timeout 
+rest_timeout = 30 
+set broker_bind = false 
+broker_threads = 6
+ 
+# TCP Service 
+<run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
-    internal_ip=!ip and internal_port=!anylog_server_port and
+    internal_ip=!overlay_ip and internal_port=!anylog_server_port and
     bind=!tcp_bind and threads=!tcp_threads>
 
-:rest-conn: 
-on error goto rest-conn-error
+# REST Service
 <run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
 
-:end-script: 
-end script 
-
-:tcp-conn-error: 
-print "Failed to configure TCP connection" 
-goto end-script 
-
-:rest-conn-error: 
-print "Failed to configure REST connection" 
-goto end-script 
+# Message Broker service 
+<run message broker where
+    external_ip=!external_ip and external_port=!anylog_broker_port and
+    internal_ip=!ip and internal_port=!anylog_broker_port and
+    bind=!broker_bind and threads=!broker_threads>
 ```
 
-4. Using <a href="https://github.com/AnyLog-Co/AnyLog-API" target="_blank">AnyLog API</a> calls, create a program that 
-initiates a set of services for the node. 
-```shell
-# set permissions for API script 
-chmod +x /home/user/anylog/deployment_script.py 
-```
-
-5. Create a service file 
+#### Deploy Node 
+1. Create a service file
 ```editorconfig
 # file path: /etc/systemd/system/anylog-service.service
 [Unit]
@@ -193,8 +195,7 @@ Description=My Executable Service
 After=network.target
 
 [Service]
-ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process /home/user/anylog/basic_deployment.al
-ExecStartPost=/usr/bin/python3 /home/user/anylog/deployment_script.py 127.0.0.1:32549 --configs /home/user/anylog/anylog_configs.envs
+ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process $HOME/anylog/my_script.al
 Restart=always
 User=root
 Group=root
@@ -203,25 +204,48 @@ Group=root
 WantedBy=multi-user.target
 ```
 
-6. Start service 
-```shell
-sudo systemctl daemon-reload
-sudo systemctl enable anylog-service.service # this step will allow it to start at reboot
-sudo systemctl restart anylog-service.service
-```
-
-7. Validate Service 
+2. Validate Service 
 * Service status
 ```shell
 sudo service anylog-service status
 ```
 
-* cURL commands
-```shell
-# get status 
-curl -X GET 127.0.0.1:32549
+---
 
-# get processes 
-curl -X GET 127.0.0.1:32549 -H "command: get prcoesses" -H "User-Agent: AnyLog/1.23"
+## Validate Agent
+
+When deploying AnyLog / EdgeLake as a service, there's no CLI to communicate with the network, hence the need for A 
+REST-API. As such there' are 4 basic commands that can be used to validate whether a node is running, and whether it's 
+able to communicate with the rest of the network.
+
+* `get status` - this is a basic command that validate the user can communicate with the agent via REST 
+```shell
+# basic command: 
+curl -X GET [IP]:[Port] 
+
+# backend process (as a command):
+curl -X GET [IP]:[REST_Port] \
+  -H "command: get status" \
+  -H "User-Agent: AnyLog/1.23" 
 ```
 
+* `get processes` - check which services are enabled on the node
+```shell
+curl -X GET [IP]:[REST_Port] \
+  -H "command: get processes" \
+  -H "User-Agent: AnyLog/1.23"
+```
+
+* `test node` -  validate agent communication for TCP and REST
+```shell
+curl -X GET [IP]:[REST_Port] \
+  -H "command: test node" \
+  -H "User-Agent: AnyLog/1.23"
+```
+
+* `test network` -  validate communication with all other agents in the network
+```shell
+curl -X GET [IP]:[REST_Port] \
+  -H "command: test network" \
+  -H "User-Agent: AnyLog/1.23"
+```
