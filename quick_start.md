@@ -9,7 +9,7 @@ AnyLog / EdgeLake can be deployed using a variety of deployment options.
   * [Docker / Podman](deployments/docker_podman.md)
   * [Kubernetes](deployments/kubernetes.md) 
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
-  * [Pip Package](deployments/Pip_Install.md)
+  * [Pip Package](deployments/Anylog_as_Pip_pkg.md)
   * VirtualBox
   * **Third-Party Deployments** - AnyLog / EdgeLake is supported by third-party orchestrators such as
     * IBM's OpenHorizon
