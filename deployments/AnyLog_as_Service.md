@@ -38,10 +38,6 @@ directly as a service.
 
 --- 
 
----
-
---- 
-
 ## Deploying AnyLog as a Service
 
 ### Prep Environment
@@ -105,12 +101,12 @@ deploying multiple agents on the same machine.
 
 ### Deploy using Deployment Scripts
 1. Create a service file 
+
 ```editorconfig
 # file path: /etc/systemd/system/anylog-service.service
 [Unit]
 Description=My Executable Service
 After=network.target
-
 [Service]
 ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process /home/user/anylog/deployment-scripts/node-deployment/main.al
 Restart=always
@@ -118,7 +114,6 @@ User=root
 Group=root
 # this path should be for updated based on  docker-compose/docker-makefiles/[node-type]/*.env
 EnvironmentFile=/home/user/anylog/anylog_configs.env
-
 [Install]
 WantedBy=multi-user.target
 ```
@@ -128,6 +123,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable anylog-service.service # this step will allow it to start at reboot
 sudo systemctl restart anylog-service.service
+sudo systemctl status anylog-service.service
 ```
 
 ### Deploying Empty Node
@@ -156,7 +152,6 @@ on error ignore
 set echo queue on 
 # disable interactive mode
 set cli off
-
 # set networking params 
 set tcp_bind  = true 
 tcp_threads = 6
@@ -166,19 +161,16 @@ rest_threads = 6
 rest_timeout = 30 
 set broker_bind = false 
 broker_threads = 6
- 
 # TCP Service 
 <run tcp server where
     external_ip=!external_ip and external_port=!anylog_server_port and
     internal_ip=!overlay_ip and internal_port=!anylog_server_port and
     bind=!tcp_bind and threads=!tcp_threads>
-
 # REST Service
 <run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
-    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>
-
+    bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout>s
 # Message Broker service 
 <run message broker where
     external_ip=!external_ip and external_port=!anylog_broker_port and
@@ -193,21 +185,21 @@ broker_threads = 6
 [Unit]
 Description=My Executable Service
 After=network.target
-
 [Service]
 ExecStart=/home/user/anylog/anylog_v0.0.0_x86_64 process $HOME/anylog/my_script.al
 Restart=always
 User=root
 Group=root
-
 [Install]
 WantedBy=multi-user.target
 ```
 
-2. Validate Service 
-* Service status
+2. Start service 
 ```shell
-sudo service anylog-service status
+sudo systemctl daemon-reload
+sudo systemctl enable anylog-service.service # this step will allow it to start at reboot
+sudo systemctl restart anylog-service.service
+sudo systemctl status anylog-service.services
 ```
 
 ---
@@ -220,10 +212,6 @@ able to communicate with the rest of the network.
 
 * `get status` - this is a basic command that validate the user can communicate with the agent via REST 
 ```shell
-# basic command: 
-curl -X GET [IP]:[Port] 
-
-# backend process (as a command):
 curl -X GET [IP]:[REST_Port] \
   -H "command: get status" \
   -H "User-Agent: AnyLog/1.23" 
