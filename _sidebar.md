@@ -5,3 +5,5 @@
   * [Kubernetes](deployments/kubernetes.md) 
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
   * [Pip Package](deployments/Anylog_as_Pip_pkg.md)
+* [AnyLog CLI](CLI.md)
+* 

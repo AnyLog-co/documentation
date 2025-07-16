@@ -97,7 +97,6 @@ make login ANYLOG_TYPE=[DOCKER_PASSWORD]
 ```shell
 cd $HOME/docker-compose
 make up ANYLOG_TYPE=[NODE_TYPE]
-
 # example
 make up ANYLOG_TYPE=master
 ```
@@ -105,14 +104,9 @@ make up ANYLOG_TYPE=master
 6. Attach to node
 ```shell
 cd $HOME/docker-compose
-make attach ANYLOG_TYPE=[NODE_TYPE]
-
-# - OR - 
-
-docker attach --detach-keys=ctrl-d [NODE_NAME]
-
-# to detach - ctrl-d 
+make attach ANYLOG_TYPE=[NODE_TYPE] 
 ```
+> to detach - ctrl-d
 
 Directions for how to use the CLI can be found [here](cli.md)
 
@@ -190,10 +184,8 @@ cp -r $HOME/docker-compose/docker-compose/anylog-operator $HOME/docker-compose/d
 ```shell
 cd $HOME/docker-compose
 make up ANYLOG_TYPE=[NODE_TYPE]
-
 # deploy operator 1
 make up ANYLOG_TYPE=operator
-
 # deploy operator 2
 make up ANYLOG_TYPE=operator2
 ```
