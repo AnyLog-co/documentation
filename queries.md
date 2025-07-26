@@ -298,9 +298,6 @@ run client () sql lsl_demo "select max(insert_timestamp), min(insert_timestamp):
 
 run client () sql lsl_demo "select max(insert_timestamp) as max, min(insert_timestamp)::timediff(max) as diff from ping_sensor"
 
-run client () sql lsl_demo format = table "select min(insert_timestamp)::function('[time]' + ' - ' + '[diff]') as time, max(insert_timestamp)::timediff(max) as diff from ping_sensor"
-
-
 ```
 
 
