@@ -35,6 +35,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Metadata Management](metadata%20management.md)
   * [Kubernetes & Docker Deployment of AnyLog](deployments) 
   * [Setting Test Suites](test%20suites.md)
+  * [Launching Helpers](helpers.md#using-helpers)
   
 * **AnyLog Commands**
   * [Main Commands](anylog%20commands.md)
@@ -64,6 +65,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
   * [Aggregations](aggregations)
   * [Monitoring File Status](managing%20data%20files%20status.md)
+  * [DYnamic Statistcs](helpers.md#-dynamic-monitoring-of-internal-processes)
     
 * **Querying Data**
   * [Data Queries](queries.md)
