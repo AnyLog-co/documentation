@@ -87,5 +87,10 @@ helper psql 1 get dynamic stats where name = operator.json
 helper psql 1 get dynamic stats where name = operator.sql
 ```
 
+The following example queries the time difference between first and last row:
+```anglog
+run client () sql lsl_demo format = table "select max(insert_timestamp) as max, min(insert_timestamp)::timediff(max) as diff from ping_sensor"
+```
+
 
 

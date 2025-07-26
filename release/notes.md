@@ -1,5 +1,10 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
+### New Commands
+1. The command ```run helpers``` initiates AnyLog helper processes. [Details](../helpers.md)
+2. The command ```get dynamic stats``` provides info on internal processes. [Details](../helpers.md#-dynamic-monitoring-of-internal-processes)
+
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command
 1. The command "flush buffers" forces streaming data to be pushed to the database ignoring the buffer fill and time thresholds.
