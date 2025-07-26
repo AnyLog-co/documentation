@@ -272,6 +272,11 @@ The following example replaces, for each returned row, the min_val with the resu
 ```anylog
 run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function(([min_val] + [max_val]) / 2) as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
 ```
+The following example concatenates columns:
+```anylog
+run client () sql lsl_demo format = table "select min(insert_timestamp)::function(' - ' + '[min]' + ' - ') as min, max(insert_timestamp) as max from ping_sensor"
+```
+    
 
 ### Example 6 - Function with if statement
 
@@ -281,13 +286,21 @@ run client () sql power_plant timezone = local SELECT increments(timestamp), max
 ```
 
 ### Example 7 - return the time difference
-The example belows return time difference:
+The examples belows return time difference:
 ```anylog
 run client () sql orics stat = false "select max(insert_timestamp)::timediff(now()) as time_diff FROM r_50"
 {"Query": [{"time_diff": "00:02:33.50343"}]}
 
 run client () sql orics stat = false "select max(insert_timestamp)::timediff('2024-08-29T01:47:32.554411Z') as time_diff FROM r_50"
 {"Query": [{"time_diff": "04:04:33.44671"}]}
+
+run client () sql lsl_demo "select max(insert_timestamp), min(insert_timestamp)::timediff(max(insert_timestamp)) as diff from ping_sensor"
+
+run client () sql lsl_demo "select max(insert_timestamp) as max, min(insert_timestamp)::timediff(max) as diff from ping_sensor"
+
+run client () sql lsl_demo format = table "select min(insert_timestamp)::function('[time]' + ' - ' + '[diff]') as time, max(insert_timestamp)::timediff(max) as diff from ping_sensor"
+
+
 ```
 
 
