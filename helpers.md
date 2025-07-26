@@ -23,7 +23,12 @@ run helpers where type = [helper type] and count = [helpers count]
 run helpers where type = psql and count = 2
 ```
 
-## Interacting with a helper
+## Reset helpers stats:
+
+The following command resets the helpers info:
+```anylog
+reset dynamic stats
+```
 
 ## 🤝 Interacting with a Helper via the Main Process
 
