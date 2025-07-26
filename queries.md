@@ -302,7 +302,7 @@ run client () sql lsl_demo "select max(insert_timestamp) as max, min(insert_time
 
 
 ## Get datetime command
-Using the command `get datetime` users can translate a date-time function to the date-time string.  
+Using the command `get datetime` users can translate a date-time function to the date-time string.    
 **Usage**:
 ```anylog
 get datetime timezone [date-time function]
