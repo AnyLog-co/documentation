@@ -47,6 +47,21 @@ helper psql 1 get dynamic stats where name = operator.sql
 helper psql 1 get dynamic stats where name = operator.json
 ```
 
+## Terminating the helper process
+The following command terminates the helper process:
+```anylog
+helper [helper type] [helper ID] exit node
+```
+The following command terminates all helpers:
+```anylog
+helper * * exit node
+```
+**Example:**
+```anylog
+helper psql 1 exit node
+```
+
+
 # 📊 Dynamic monitoring of internal processes
 
 The `get dynamic stats` command retrieves **live execution metadata** about a specific operation running in the main or helper processes
