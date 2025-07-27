@@ -30,6 +30,16 @@ The following command resets the helpers info:
 reset dynamic stats
 ```
 
+## 🧭 Retrieve the list of active helpers
+
+The `get helpers` command provides a list of currently active helper processes running under the current AnyLog node. 
+It returns the types of helpers and how many instances of each are active.
+
+**Example:**
+```anylog
+get helpers
+```
+
 ## 🤝 Interacting with a Helper via the Main Process
 
 Once helper processes are launched (using `run helpers`), you can **communicate with them directly** through the main
