@@ -85,10 +85,11 @@ get dynamic stats where name = [monitored topic]
 
 **Monitored Topics:**
 
-| Topic Key     | Helper Type | Description              |
-|---------------|-------------|--------------------------|
-| operator.json | psql        | The JSON processing time |
-| operator.sql  | psql        | The SQL processing time  |
+| Topic Key     | Helper Type | Description                                           |
+|---------------|-------------|-------------------------------------------------------|
+| operator.json | psql        | The JSON processing time                              |
+| operator.sql  | psql        | The SQL processing time                               |
+| operator.jql  | psql        | The SQL processing time directly from JSON conversion |
 
 
 **Examples:**
