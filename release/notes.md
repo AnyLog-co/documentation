@@ -1,7 +1,7 @@
 # AnyLog Release notes
 
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
-1. New options for ```get columns``` command. [Details]()
+1. New options for ```get columns``` command. [Details](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-columns-command)
 
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
