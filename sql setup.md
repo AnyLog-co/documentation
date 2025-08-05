@@ -355,13 +355,13 @@ get columns where dbms = [dbms name] and table = [table name] and format = [tabl
 ```
 Command options:
 
-| Info Type | Explanation                                                                                                              |
-|-----------|--------------------------------------------------------------------------------------------------------------------------|
-| dbms      | The name of the dbms to query                                                                                            | 
-| table     | The name of the table to query                                                                                           |
-| sys_col   | Bool value: true - include system columns (default), false - ignore system columns                                       |
-| type      | One or multiple data types to project, default - all data types are projected                                            |
-| format    | The output format. Options: Table (default), Json, List (a list of columns, used to project values in Grafana dashboards |
+| Info Type | Explanation                                                                                                                           |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| dbms      | The name of the dbms to query                                                                                                         | 
+| table     | The name of the table to query                                                                                                        |
+| sys_col   | Bool value: true - include system columns (default), false - ignore system columns                                                    |
+| type      | One or multiple data types to project, default - all data types are projected                                                         |
+| format    | The output format. Options: **table** (default), **json**, **list** (a list of columns, used to project values in Grafana dashboards) |
 
 
 **Examples**: 
