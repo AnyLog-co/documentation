@@ -351,13 +351,25 @@ get table complete status where name = ping_sensor and dbms = anylog
 The `get columns` command provides the list of columns names and data types for the named table.  
 **Usage**:
 ```anylog 
-get columns where dbms = [dbms name] and table = [table name] and format = [output format]
-```  
-The format determines the output format. The format options are _table_ (the default value) and _json_. 
+get columns where dbms = [dbms name] and table = [table name] and format = [table/json/list] and sys_col = [true/false] and type = [data types to project]
+```
+Command options:
+
+| Info Type | Explanation                                                                                                              |
+|-----------|--------------------------------------------------------------------------------------------------------------------------|
+| dbms      | The name of the dbms to query                                                                                            | 
+| table     | The name of the table to query                                                                                           |
+| sys_col   | Bool value: true - include system columns (default), false - ignore system columns                                       |
+| type      | One or multiple data types to project, default - all data types are projected                                            |
+| format    | The output format. Options: Table (default), Json, List (a list of columns, used to project values in Grafana dashboards |
+
+
 **Examples**: 
 ```anylog
 get columns where dbms = aiops and table = ping_sensor
 get columns where dbms = aiops and table = ping_sensor and format = json
+get columns where dbms = aiops and table = ping_sensor and format = json and sys_col = false
+get columns where dbms=lsl_demo and table=ping_sensor and sys_col = false and type = int and type = "character varying" and format = list
 ```
 
 

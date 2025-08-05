@@ -1,5 +1,8 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
+1. New options for ```get columns``` command. [Details]()
+
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
 1. The command ```run helpers``` initiates AnyLog helper processes. [Details](../helpers.md)
