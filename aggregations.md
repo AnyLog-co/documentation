@@ -182,7 +182,9 @@ Command options:
 | value_column |                          | One or more column names. The asterisks (*) retrieves all table columns                               |
 | function     | count, avg, min, max     | One or more of the aggregation function. Each function can be extended by casting (see details below) |
 | timezone     | local (of the edge node) | The timezone for the timestamp value.                                                                 |
-| format       | table                    | The returned format - table or JSON                                                                  |
+| format       | table                    | The returned format - table or JSON                                                                   |
+| limit        | 0 (no limit)             | The number of entries projected. Limit 1 returns the latest values                                    |
+
 
 **Examples:**
 ```anylog
@@ -190,6 +192,7 @@ get aggregations by time where dbms = nov and table = table_3 and value_column =
 get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max
 get aggregations by time where dbms = orics and table = r_50 and value_column = cy_min and value_column = outfeed_conv_i and function = min and function = max and function = avg and function = count and format = json
 get aggregations by time where dbms = orics and table = r_50 and value_column = *  
+get aggregations by time where dbms = orics and table = r_50 and value_column = *  and limit = 1
 ```
 
 **Casting:**
@@ -202,15 +205,13 @@ get aggregations by time where dbms = orics and table = r_50 and value_column = 
 ```
 
 
-
-
 ### Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
 
 * **type** - "aggregations"
 * **servers** - the target server IP and Port. Only a single server is allowed per each Payload.
 * **functions** - the list of aggregation function to call (optional)
 
-Example Payload: 
+**Example Payload:** 
 ```anylog
 {
   "servers": [
@@ -218,6 +219,18 @@ Example Payload:
   ],
   "type": "aggregations",
   "functions" : ["min", "max"]
+}
+```
+**Example Payload:** 
+```anylog
+{
+    "type": "aggregations",
+    "functions" : ["min", "max", "avg", "count"],
+    "table": "r_50",
+    "timestamp_column": "timestamp",
+    "value_column": ["filler_cyc_time", "run_hours"],
+    "servers": "10.0.0.78:7848",
+    "limit" : 0
 }
 ```
 
