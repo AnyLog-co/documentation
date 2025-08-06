@@ -171,19 +171,38 @@ orics|orics      |r_50 |r_50                 |value           |---     |Not Star
 The command `get aggregations by time` retrieves the interval summaries **by date and time**.
 
 ```anylog
-get aggregations by time where dbms = [dbms name] and table = [table name] and value_column = [column name] and format = [table/json] and function = [function name]
+get aggregations by time where dbms = [dbms name] and table = [table name] and value_column = [column name] and function = [function name] and limit = [limit] and format = [table/json]  
 ```
-Notes:
-* **value_column** specifies the column being aggregated (e.g., temperature, pressure).
-* **function name** can be repeated for multiple functions, and the options are: cunt, min, max, avg.
-* If a function is not specified, all functions are returned.
-* The default format is 'table'
+Command options:
 
-Examples:
+| Option       | Default                  | Details                                                                                               |
+|--------------|--------------------------|-------------------------------------------------------------------------------------------------------|
+| DBMS         |                          | Database name                                                                                         |
+| Table        |                          | Table name                                                                                            |
+| value_column |                          | One or more column names. The asterisks (*) retrieves all table columns                               |
+| Function     | count, avg, min, max     | One or more of the aggregation function. Each function can be extended by casting (see details below) |
+| Timezone     | local (of the edge node) | The timezone for the timestamp value.                                                                 |
+| format       | table                    | The returned format - table or JSON                                                                  |
+
+**Examples:**
 ```anylog
 get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage
-get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max  
+get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max
+get aggregations by time where dbms = orics and table = r_50 and value_column = cy_min and value_column = outfeed_conv_i and function = min and function = max and function = avg and function = count and format = json
+get aggregations by time where dbms = orics and table = r_50 and value_column = *  
 ```
+
+**Casting:**
+
+Functions can be extended using casting (like columns and functions in a query). See details in the [Cast Data](https://github.com/AnyLog-co/documentation/blob/master/queries.md#cast-data) section.
+
+**Example:**
+```anylog
+get aggregations by time where dbms = orics and table = r_50 and value_column = cy_min and function = min::int and function = max and function = avg::float(3) and function = count and format = json
+```
+
+
+
 
 ### Aggregations can be called fom the Grafana Dashboard by specifying the following in the Payload section:
 
