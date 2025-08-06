@@ -177,11 +177,11 @@ Command options:
 
 | Option       | Default                  | Details                                                                                               |
 |--------------|--------------------------|-------------------------------------------------------------------------------------------------------|
-| DBMS         |                          | Database name                                                                                         |
-| Table        |                          | Table name                                                                                            |
+| dbms         |                          | Database name                                                                                         |
+| table        |                          | Table name                                                                                            |
 | value_column |                          | One or more column names. The asterisks (*) retrieves all table columns                               |
-| Function     | count, avg, min, max     | One or more of the aggregation function. Each function can be extended by casting (see details below) |
-| Timezone     | local (of the edge node) | The timezone for the timestamp value.                                                                 |
+| function     | count, avg, min, max     | One or more of the aggregation function. Each function can be extended by casting (see details below) |
+| timezone     | local (of the edge node) | The timezone for the timestamp value.                                                                 |
 | format       | table                    | The returned format - table or JSON                                                                  |
 
 **Examples:**
