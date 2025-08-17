@@ -708,19 +708,20 @@ A false result triggers the execution of the commands following the ***else*** k
 AnyLog supports the following conditions:
 
 
-| Sign       | Details                                                               | Comments     |
-|------------|-----------------------------------------------------------------------| ---------- | 
-| ==         | Equal                                                                 |            |
-| !=         | Not Equal                                                             |            |
-| <          | Less than                                                             |            |
-| <=         | Less than or equal to                                                 |            |
-| >          | Greater than                                                          |            |
-| >=         | Greater than or equal to                                              |            |
-|            | Is defined                                                            | No sign - Returns True if the variable is defined in the local dictionary |
-| not        | Is not defined                                                        | Returns True if the variable is not defined in the local dictionary |
-| contains   | Includes the provided substring using case insensitive comparison     | if X contains Y - Returns True if X and Y are strings and Y is a substring of X  |
-| startswith | Starts with the provided substring using case-insensitive comparison  | if X startswith Y - Returns True if X and Y are strings and X starts with Y  |
-| endswith   | Ends with the provided substring using case-insensitive comparison    | if X endswith Y - Returns True if X and Y are strings and X ends with Y |
+| Sign       | Details                                                              | Comments                                                                                          |
+|------------|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------| 
+| ==         | Equal                                                                |                                                                                                   |
+| !=         | Not Equal                                                            |                                                                                                   |
+| <          | Less than                                                            |                                                                                                   |
+| <=         | Less than or equal to                                                |                                                                                                   |
+| >          | Greater than                                                         |                                                                                                   |
+| >=         | Greater than or equal to                                             |                                                                                                   |
+|            | Is defined                                                           | No sign - Returns True if the variable is defined in the local dictionary                         |
+| not        | Is not defined                                                       | Returns True if the variable is not defined in the local dictionary                               |
+| contains   | Includes the provided substring using case insensitive comparison    | if X contains Y - Returns True if X and Y are strings and Y is a substring of X                   |
+| startswith | Starts with the provided substring using case-insensitive comparison | if X startswith Y - Returns True if X and Y are strings and X starts with Y                       |
+| endswith   | Ends with the provided substring using case-insensitive comparison   | if X endswith Y - Returns True if X and Y are strings and X ends with Y                           |
+| childfrom  | Determine if a path is an immediate child of a parent path           | Return True if x is an immediate child of Y, else False. The Path separator is the last char of Y |
 
 Multiple conditions within parenthesis are allowed with an "_and_" or "_or_" keyword separation.  
 The allowed structure is the following:
@@ -787,7 +788,12 @@ a = if not !a
 ```anylog
 if !company_name includes "anylog"
 ```
-
+```anylog
+if !path startswith root/
+```
+```anylog
+if !path childfrom root/
+```
 
 ## Multiple do - then instruction
 

@@ -1,5 +1,8 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta22 [69bf12] [2025-08-16 19:18:49]
+1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../anylog%20commands.md#conditional-execution)
+
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
 1. New options for ```get columns``` command. [Details](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-columns-command)
 

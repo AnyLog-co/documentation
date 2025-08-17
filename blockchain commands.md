@@ -184,7 +184,7 @@ the name from the Operator policy. The following example evaluates attribute val
      ```anylog
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
     ```
- Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
+Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
 Examples:
 ```anylog
@@ -192,6 +192,8 @@ blockchain get operator where dbms = lsl_demo
 blockchain get operator where dbms = lsl_demo and ip = 24.23.250.144
 blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
 blockchain get operator where [name] == operator11 or [name] ==  operator1 bring [*][name]
+blockchain get tag where [path] startwith 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH XTR/Resources/Application/GlobalVars/ALARM_TAGS' bring.table.sort [tag][path]
+blockchain get tag where [path] childfrom 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH XTR/Resources/Application/GlobalVars/ALARM_TAGS' bring.table.sort [tag][path]
 ```
 
 ### Formatting retrieved data 
