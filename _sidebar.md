@@ -7,4 +7,6 @@
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
   * [Pip Package](deployments/Anylog_as_Pip_pkg.md)
 * [AnyLog CLI](CLI.md)
-* 
+* [FAQ](FAQ.md)
+* Advanced
+  * [Upgrading AnyLog](deployments/upgrade_anylog.md)

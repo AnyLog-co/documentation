@@ -94,7 +94,7 @@
 To align with common documentation practices:
 
 ### Introduction
-- What is *AnyLog*?
+- What is *AnyLog*? -- [intro_to_anylog.md](intro_to_anylog.md) 
 - Key Concepts (Nodes, Blockchain, Query, P2P)
 - Architecture
 - Whitepapers
@@ -104,8 +104,8 @@ To align with common documentation practices:
 - Two machines (networked)
 
 ### Installation
-- System Requirements
-- Docker Hub Access
+- System Requirements -- [prerequisite.md](prerequisite.md)
+- Docker Hub Access 
 - License Activation
 - Configuration Basics
 
