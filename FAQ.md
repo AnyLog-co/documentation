@@ -13,13 +13,13 @@ capabilities.
 EdgeLake is the open-source version of AnyLog. It provides the core components allowing users to manage their data at 
 the edge, but does not include features like security and high-availability. 
 
-* Is **it possible to migrate from EdgeLake to AnyLog or AnyLog to EdgeLake?** 
+* **Is it possible to migrate from EdgeLake to AnyLog or AnyLog to EdgeLake?** 
 
 Yes. Since AnyLog is built on top of EdgeLake switching from EdgeLake to AnyLog is done near seamlessly.  
 
 Users simply need to update their desired docker image and get an [AnyLog license](https://anylog.network/download). 
 
-* Is AnyLog/EdgeLake open-source?
+* **Is AnyLog/EdgeLake open-source?**
 
 EdgeLake is 100% free and open-source, while AnyLog is a license-based program. 
 
@@ -36,13 +36,11 @@ machine, on-premises, edge and cloud.
 EdgeLake is an open-source software that's part of the [Linux Foundation Edge Group](https://lfedge.org/projects/edgelake/). 
 You can learn more about EdgeLake and try it on its [GitHub](https://github.com/EdgeLake)
 
-* What are the system requirements for AnyLog/EdgeLake?
+* **What are the system requirements for AnyLog/EdgeLake?**
 
 In general, AnyLog / EdgeLake image has a footprint of about 100MB and supported on both arm and am64. 
 However, a dockorized image is about 700MB due to the associated requirements. Please viti [Prerequisite](prerequisite.md) to get 
 for farther details 
-
-
 
 * **How can I try AnyLog?** 
 
@@ -67,7 +65,7 @@ AnyLog has 4 major types of nodes:
 
 Note: The Publisher node is only available in AnyLog and is not part of the EdgeLake deployment.
 
-* What are the differences between different node types? 
+* **What are the differences between different node types?** 
 
 A node type is defined by 2 things: 
 * the services enabled
@@ -90,14 +88,14 @@ based on user-defined configurations.
 The only exception is that Operator and Publisher services can run on the same machine but must be deployed in separate
 containers.
 
-* Can multiple node types run on the same machine?
+* **Can multiple node types run on the same machine?**
 
 Yes. AnyLog / EdgeLake multiple agents can can run on the same machine. 
 
 In fact, since AnyLog/EdgeLake is a service based, users can enable multiple databases and services on the same agent 
 creating a single container that can act as multiple node types.
 
-* Can nodes be dynamically reconfigured?
+* **Can nodes be dynamically reconfigured?**
 
 Yes. Because AnyLog is service-based, a node’s services can be enabled or disabled as needed.
 
@@ -105,7 +103,7 @@ Caveat: For Operator nodes that are part of a cluster, data (files) and query re
 to the cluster’s policies. This means that while you can reconfigure services, the node’s role within the cluster will 
 still affect how it handles data and queries.
 
-* Can nodes be moved to another machine or network location?
+* **Can nodes be moved to another machine or network location?**
 
 Yes, but with some considerations.
 
@@ -131,13 +129,13 @@ individual user and overall network.
 In addition, third-party applications can interact with the network via API calls without needing to know where the 
 data resides. 
 
-* Which programming languages or APIs are supported?
+* **Which programming languages or APIs are supported?**
 
 AnyLog and EdgeLake provide a REST-based API, allowing users to interact with nodes, execute queries, and integrate 
 with third-party applications. No special programming language is required—any language that can make HTTP requests can 
 communicate with the API.
 
-* What is the ideal network setup? Why? 
+* **What is the ideal network setup? Why?** 
 
 Our base network setup consists of 2 operator nodes each residing on a different cluster, associated with it are a 
 query node and master node if you do not want to use a blockchain. 
@@ -151,7 +149,7 @@ different clusters.
 
 ## High-Availability & Data Management
 
-* What's AnyLog's High Availability?
+* **What's AnyLog's High Availability?**
 
 To achieve [highly availability](high_availability.md) (HA), AnyLog nodes are configured such that multiple _Operators_ 
 maintain copies of the data. Using this setup, if an _Operator_ fails, the data is available on surviving Operator(s) 
@@ -164,7 +162,7 @@ AnyLog’s High Availability (HA) process has two key components:
 * Cluster Policy logic for operator node connectivity 
 * Data assertion to ensure replication without duplication
 
-* What are Clusters and why are they important? 
+* **What are Clusters and why are they important?** 
 
 Cluster_ are logical blockchain policies used to manage groups of operator nodes. 
 
@@ -173,7 +171,7 @@ could have one or multiple Operator nodes associated with it, and based on the c
 share their data with.
 
 
-* What happens is an Operator node fails? 
+* **What happens is an Operator node fails?** 
 
 There are 2 types of operator nodes - a node that's receiving the data from the device and a node that's just keeping a 
 copy of the data. 
@@ -185,7 +183,7 @@ That said... If the operator node that's receiving data from devices is the one 
 able to view historical data, until the data-generator is reconfigured to send data **or** the origianl operator comes 
 back.
 
-* What happens if a full cluster group fails? 
+* **What happens if a full cluster group fails?** 
 
 In enterprise or edge-based deployments, network connectivity isn’t always guaranteed (e.g., in mining or remote 
 operations). To address this, AnyLog’s cluster-based HA logic ensures data is replicated across multiple operator nodes.
@@ -194,7 +192,7 @@ To further mitigate potential network issues, we recommend that operator nodes w
 separate network segments. This way, if one segment experiences a failure, the other nodes remain accessible and 
 maintain data availability.
 
-* How does AnyLog handle network partitions or split-brain scenarios?
+* **How does AnyLog handle network partitions or split-brain scenarios?**
 
 **Bidirectional Operators** – All Operators can send and receive data, so replication and query handling continue even 
 if some nodes are disconnected.
@@ -203,33 +201,32 @@ if some nodes are disconnected.
 based on a cluster's internal rules. This ensures continuous operation and prevents split-brain issues.
 
 
-* How often does data get copied between operators? 
+* **How often does data get copied between operators?** 
 
 The operator sharing the data distributes new data across other operators in the cluster every few minutes. 
 This guarantees close-to continuous data consistency across the operators in the cluster and strong eventual 
 consistency.
 
-* Can I manually trigger replication or resync between nodes?
+* **Can I manually trigger replication or resync between nodes?**
 
-Currently the answer is no, but it is something we plean to implement in the near future. 
+Currently, the answer is no, but it is something we plean to implement in the near future. 
 
-
-* How does AnyLog guarantee replication without duplication? 
+* **How does AnyLog guarantee replication without duplication?** 
 
 Each operator node keeps a record of its own data and the data it had received from other operators.
 
 This record is then used to guarantee removal of duplication  and that data has been transferred between nodes. 
 
-* What can I do with the replication metadata? 
+* **What can I do with the replication metadata?** 
 
 Yes - The metadata information guaranteeing replication without duplication is accessible on a logical database called 
 `almgm`. Users can utilize it to validate consensus between the data and the node, as well as across the nodes in the 
 same clusters.
 
-* What is the consistency model?
+* **What is the consistency model?**
 
 
-* Are there any other details about High Availability I should know? 
+* **Are there any other details about High Availability I should know?** 
 
 Yes. A cluster (and its associated operator nodes(s)) may have 1 or more tables associated with it. Multiple cluster 
 groups can share the same logical database.table, and in such a case queries executed on the network would return 
@@ -237,17 +234,17 @@ results from multiple sources (cluster groups) containing the relevant informati
 
 ## Security 
 
-* How is data encrypted at rest and in transit?
+* **How is data encrypted at rest and in transit?**
 
-* How are user permissions managed?
+* **How are user permissions managed?**
 
-* Is there audit logging for node activity?
+* **Is there audit logging for node activity?**
 
-* Can third-party applications access data securely?
-Yes.  
+* **Can third-party applications access data securely?**
+Yes. AnyLog's security protocol   
 
 ## Blockchain Layer 
-* What's the difference between metadata and blockchain? 
+* **What's the difference between metadata and blockchain?** 
 
 The blockchain is a platform to manage immutable data, ie data that cannot be changed. 
  
@@ -255,12 +252,12 @@ Metadata (policies) is the data residing on the blockchain. In the case of AnyLo
 node information, model locations and inferences (for Federated Learning) and other infrastructure information the uses 
 deems fit for the blockchain.
 
-* What role does blockchain play in AnyLog?
+* **What role does blockchain play in AnyLog?**
 
 
-* Which consensus mechanism is used?
+* **Which consensus mechanism is used?**
 
-* Can blockchain be disabled for private deployments?
+* **Can blockchain be disabled for private deployments?**
 
 Yes. If a user does not want to use a public blockchain he has 2 options. He can either use the master node, which is 
 recommended for POCs and we plan to have a private blockchain option as well to use in the future.
