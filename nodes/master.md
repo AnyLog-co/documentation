@@ -1,7 +1,5 @@
 # Using a Master Node
 
-## Overview
-
 A Master Node stores the metadata information in a local database and serves as a replacement to a blockchain.    
 Any member node can serve as a master - a Master Node is a node that is considered by members of the network as a node that maintains an updated copy of the metadata.      
 That means that member nodes are in agreement to reflect updates of the metadata with the Master Node and nodes will update their local copy of the metadata from the metadata maintained by the Master Node.

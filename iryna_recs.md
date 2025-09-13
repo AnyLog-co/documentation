@@ -112,7 +112,7 @@ To align with common documentation practices:
 
 ### Node Types
 - Edge Node
-- Coordinator Node
+- [Coordinator Node](nodes/master.md)
 - Query Node
 - Blockchain Node
 

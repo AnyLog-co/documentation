@@ -6,6 +6,7 @@
   * [Kubernetes](deployments/kubernetes.md) 
   * [AnyLog as Service](deployments/AnyLog_as_Service.md)
   * [Pip Package](deployments/Anylog_as_Pip_pkg.md)
+  * [Upgrading AnyLog](deployments/upgrade_anylog.md)
 * [AnyLog CLI](CLI.md)
   * [Master Node](nodes/master.md)
   * [Operator Node](nodes/operator.md) 
@@ -15,8 +16,7 @@
   * [Aggregation](monitoring/aggregations.md)
   * [Deploying Aggregations](monitoring/deploy_aggregations.md)
 * [FAQ](FAQ.md)
-* Advanced
-  * [Upgrading AnyLog](deployments/upgrade_anylog.md)
+
 
 <!-- Social Links -->
 <div class="sidebar-social">
