@@ -95,11 +95,12 @@ To align with common documentation practices:
 
 ### Introduction
 - What is *AnyLog*? -- [intro_to_anylog.md](intro_to_anylog.md) 
-- Key Concepts (Nodes, Blockchain, Query, P2P)
-- Architecture
+- Key Concepts (Nodes, Blockchain, Query, P2P) - Look @ [FAQ](FAQ.md)
+- [Architecture](intro_to_anylog.md)
 - Whitepapers
 
 ### Quick Start
+- [Quick Start](quick_start.md) - this is very big! we need to break this down 
 - One machine (Windows / macOS / Ubuntu)
 - Two machines (networked)
 
@@ -127,14 +128,14 @@ To align with common documentation practices:
 - Security & Encryption
 - Scaling a multi-node setup
 - Monitoring
-- Updating or Restarting Nodes
+- [Updating or Restarting Nodes](deployments/upgrade_anylog.md)
 
 ### Troubleshooting
 - Common Errors
 - Logs Explained
-- FAQs
+- [FAQs](FAQ.md)
 
 ### Resources
-- Video Tutorials
-- Community & Support
+- Video Tutorials <-  added icon
+- Community & Support <-  added icon
 - Legal Links

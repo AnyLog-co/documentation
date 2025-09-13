@@ -25,13 +25,32 @@ a:hover {
 
 /* Sidebar Styling */
 .sidebar,
-.sidebar a {
+.sidebar a,
+.sidebar-footer {
   background-color: var(--dark-blue) !important;
   color: var(--white) !important;
 }
+
+/* Sidebar links hover */
 .sidebar a:hover {
   color: var(--accent-success) !important;
   text-decoration: underline;
+}
+
+/* Sidebar toggle and hamburger */
+.sidebar-mask {
+  background-color: var(--dark-blue) !important; /* overlay behind sidebar */
+}
+/* Sidebar toggle (hamburger button area) */
+.sidebar-toggle {
+  background-color: var(--dark-blue) !important; /* button background */
+  border: var(--dark-blue) !important;
+  box-shadow: var(--dark-blue) !important;
+}
+
+/* The 3 bars inside hamburger */
+.sidebar-toggle .bar {
+  background-color: var(--white) !important; /* white bars */
 }
 
 /* Headings */
@@ -39,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--dark-blue);
 }
 
-/* Code Blocks: scrollable, nicely styled */
+/* Code Blocks */
 pre {
   background: #f4f4f4;
   border-left: 4px solid var(--primary-blue);
@@ -71,4 +90,23 @@ code {
   background-color: var(--accent-error);
   border: none;
   color: white;
+}
+
+/* Sidebar Social Icons */
+.sidebar-social {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #444;
+}
+
+.sidebar-social a {
+  margin: 0 5px;
+  font-size: 1.5em;
+  color: black;
+  transition: color 0.3s;
+}
+
+.sidebar-social a:hover {
+  color: var(--accent-success);
 }

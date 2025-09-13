@@ -48,7 +48,7 @@ Please visit our [Download Page](https://anylog.network/download) to download an
 
 * **How can I reach the AnyLog Team?**
    * Email us at [support@anylog.network](mailto:support@anylog.network)
-   * Join [EdgeLake Slack](SLACK DOWN - NEED LINK)
+   * Join [EdgeLake Slack](https://join.slack.com/t/edgelake/shared_invite/zt-37zgw1gwx-9qpkSIRmG_~Dz7aBz8GRLg)
 
 ## Architecture
 
