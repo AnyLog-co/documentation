@@ -13,6 +13,7 @@
   * [Query Node](nodes/query.md) 
   * [Publisher Node](nodes/publisher.md) 
 * Monitoring
+  * 
   * [Aggregation](monitoring/aggregations.md)
   * [Deploying Aggregations](monitoring/deploy_aggregations.md)
 * [FAQ](FAQ.md)

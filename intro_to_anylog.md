@@ -128,7 +128,7 @@ Each node maintains a local copy of the metadata and runs a background process t
 - Continued operation if the central repository is temporarily unavailable
 - Independence from the source of metadata
 
-🔗 See [Blockchain Synchronizer](background_processes.md#blockchain-synchronizer) for technical details.
+🔗 See [Blockchain Synchronizer](advanced/background_processes.md#blockchain-synchronizer) for technical details.
 
 **Related Documentation**:
 
