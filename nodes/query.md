@@ -29,8 +29,20 @@ REST service is used to communicate with the node from outside AnyLog / EdgeLake
     bind=false and threads=3 and timeout=30> 
 ```
 
+2. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
+copy of the blockchain ledger every X seconds.
 
-2. Declare `system_query` - when memory or unlogged is set to **True**, then the results of the query are not guaranteed 
+```anylog
+<run blockchain sync where 
+    source=master and 
+    time="30 seconds" and 
+    dest=file and 
+    connection=!ledger_conn>
+```
+> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
+
+
+3. Declare `system_query` - when memory or unlogged is set to **True**, then the results of the query are not guaranteed 
 if the database crashes. However, having the logical database in memory performance is much faster as the data isn't 
 commited.
 
@@ -48,17 +60,6 @@ connect dbms system_query where type=sqlite and memory=true
     unlog=true>
 ```
 
-3. Run a regular blockchain sync to regularly get a copy of the data 
-
-```anylog
-<run blockchain sync where 
-    source=master and 
-    time="30 seconds" and 
-    dest=file and 
-    connection=!ledger_conn>
-```
-> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
-
 
 4. (Optional) Create & publish a policy with information about the query node 
 * **Step 1**: Create policy 
@@ -68,8 +69,8 @@ connect dbms system_query where type=sqlite and memory=true
     company="My Company" and 
     ip=!external_ip and
     local_ip=!ip and 
-    port=!anylog_server_port and
-    ret_port=!anylog_rest_port>
+    port=32348 and
+    ret_port=32349>
 ```
 
 If TCP bind is **True** then use the following policy: 
@@ -78,8 +79,8 @@ If TCP bind is **True** then use the following policy:
     name=query-node and 
     company="My Company" and 
     ip=!ip and 
-    port=!anylog_server_port and
-    ret_port=!anylog_rest_port>
+    port=32348 and
+    rest_port=32349>
 ```
 
 

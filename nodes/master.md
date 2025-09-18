@@ -32,13 +32,25 @@ with. Please review our [security]() section for farther details.
     bind=false and threads=3> 
 ```
 
-2. Create a logical database called `blockchain`
+2. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
+copy of the blockchain ledger every X seconds.
+
+```anylog
+<run blockchain sync where 
+    source=master and 
+    time="30 seconds" and 
+    dest=file and 
+    connection=!ledger_conn>
+```
+> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
+
+
+3. Create a logical database called `blockchain`
 
 **When using SQLite**:
 ```anylog 
 connect dbms blockchain where type=sqlite
 ```
-
 
 **Using using PostgresSQL**:
 ```anylog 
@@ -50,12 +62,12 @@ connect dbms blockchain where type=sqlite
     password=[db password]>
 ```
 
-3. Create a table called `ledger` within `blockchain` database - the table definition is hardcoded within AnyLog / EdgeLake code. 
+4. Create a table called `ledger` within `blockchain` database - the table definition is hardcoded within AnyLog / EdgeLake code. 
 ```anylog
 create table ledger where dbms=blockchain
 ```
 
-4. (Optional) Create & publish a policy with information about the master node 
+5. (Optional) Create & publish a policy with information about the master node 
 * **Step 1**: Create policy 
 ```anylog
 <new_policy = create policy master where 
@@ -75,14 +87,13 @@ If TCP bind is **True** then use the following policy
     port=32048>
 ```
 
-
 * **Step 2**: Publish policy
 ```anylog
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 > `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
 
-5. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
+6. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
 copy of the blockchain ledger every X seconds.
 ```anylog
 <run blockchain sync where 

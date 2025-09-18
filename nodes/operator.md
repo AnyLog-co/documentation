@@ -21,7 +21,20 @@ manage data partitioning and shared distribution (high-availability for AnyLog).
     bind=false and threads=3> 
 ```
 
-2. Declare Cluster Policy
+2. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
+copy of the blockchain ledger every X seconds.
+
+```anylog
+<run blockchain sync where 
+    source=master and 
+    time="30 seconds" and 
+    dest=file and 
+    connection=!ledger_conn>
+```
+> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
+
+
+3. Declare Cluster Policy
 * **Step 1**: Create policy 
 ```anylog
 <new_policy = create policy cluster where 
@@ -34,7 +47,7 @@ manage data partitioning and shared distribution (high-availability for AnyLog).
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
 
-3. Declare Operator policy
+4. Declare Operator policy
 * **Step 1**: Get cluster policy ID - Operators that are part of an HA configuration with one another will have the same
 Cluster ID. While operators that that are not part of the same HA configuration should have unique cluster IDs.  
 ```anylog 
@@ -67,10 +80,9 @@ If TCP bind is **True** then use the following policy:
 ```anylog
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
-> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
 
 
-4. Create logical database(s) to store data 
+5. Create logical database(s) to store data 
 * Create `almgm.tsd_info` logical table and database - this is used to keep a record of the data flowing in, both in 
 order to not have repeating data (files) and when sharing data across operators for high-availability
 
@@ -91,7 +103,7 @@ create table tsd_info where dbms=almgm
 create table tsd_info where dbms=almgm
 ```
 
-5. Connect to local database - this is where real-time /device data will be stored
+6. Connect to local database - this is where real-time /device data will be stored
 
 **SQLite database**
 ```anylog 
@@ -119,7 +131,7 @@ the system automatically recognizes it as `[DB Name]_blobs`.
     password=[DB password]> 
 ```
 
-6. Accept blobs data 
+7. Accept blobs data 
 ```anylog
 <run blobs archiver where
     dbms=!mydb and
@@ -130,7 +142,7 @@ the system automatically recognizes it as `[DB Name]_blobs`.
 ```
 > `reuse_blobs` means that if an image repeats itself (identical hash value) then reuse rather than save duplicate 
 
-7. (Optional) For AnyLog **only**, enable high-availability (HA). This includes sending data to other operators that reside 
+8. (Optional) For AnyLog **only**, enable high-availability (HA). This includes sending data to other operators that reside 
 in the same cluster group, and accepting data from operators that reside in the same cluster group. The logical database 
 `almgm` (from step  4) makes sure the same data isn't being repeatedly ping-ponged between operators. 
 ```anylog 
@@ -139,9 +151,11 @@ run data consumer where start_date="-30"
 ```
 > `start_date` is number of days back to start consuming data from other operators from 
 
-8. Run the actual operator service
+9. Run the actual operator service
 ```anylog 
 operator_id = blockchain get operator where cluster=!cluster_id and name=my-operator1 and company="My Company" bring.last [*][id]
+
+run streamer 
 
 <run operator where 
     create_table=true and update_tsd_info=true and 
@@ -151,3 +165,29 @@ operator_id = blockchain get operator where cluster=!cluster_id and name=my-oper
     threads=6>
 ```
 
+
+## Data Partitioning
+We recommend partitioning data into smaller tables (timestamp-based) in order for queries to **not** scan the entire data
+when looking for information. 
+
+Partitioning can be done in a general sense against the entire database, and then all the tables would be partitioned in
+the same time range **OR** by table, and then (each) table is partitioned based on its own needs. 
+
+**Partition entire Database**
+```anylog 
+partition mydb * using insert_timestamp by 14 days
+ ```
+
+**Partition by Table**
+```anylog 
+partition mydb rand_data using insert_timestamp by 14 days
+ ```
+
+**Automatically Clean Partitions older than**
+```anylog
+<schedule time="1 day" and name="Drop Partitions" task 
+    drop partition where dbms=mydb and table=* and keep=3>
+```
+> Example keeps about 42 days of data (or 6 weeks)
+> 
+>
