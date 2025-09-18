@@ -27,9 +27,9 @@ with. Please review our [security]() section for farther details.
 1. Enable TCP service 
 ```anylog
 <run tcp server where 
-    external_ip=!external_ip and external_port=!anylog_server_port and 
-    internal_ip=!ip and internal_port=!anylog_server_port and 
-    bind=!tcp_bind and threads=!tcp_threads> 
+    external_ip=!external_ip and external_port=32048 and 
+    internal_ip=!ip and internal_port=32048 and 
+    bind=false and threads=3> 
 ```
 
 2. Create a logical database called `blockchain`
@@ -61,15 +61,26 @@ create table ledger where dbms=blockchain
 <new_policy = create policy master where 
     name=master-node and 
     company="My Company" and 
-    ip=!ip and 
+    ip=!external_ip and
+    local_ip=!ip and
     port=!anylog_server_port>
 ```
+
+If TCP bind is **True** then use the following policy
+```anylog
+<new_policy = create policy master where 
+    name=master-node and 
+    company="My Company" and 
+    ip=!ip and
+    port=32048>
+```
+
 
 * **Step 2**: Publish policy
 ```anylog
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 ```
-`!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
+> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
 
 5. Enable synchronization - this is a separate service that is to run on all nodes, allowing them to consistently get a 
 copy of the blockchain ledger every X seconds.

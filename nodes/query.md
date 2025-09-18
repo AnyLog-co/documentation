@@ -12,8 +12,25 @@ any AnyLog / EdgeLake agent can run as a query node. When deploying via containe
 in the configurations.
 
 ## Configuring a Query Node
+0. Make sure machines in the network can communicate with one another. If they're able to communicate over the local IP 
+(`!ip`) then it's recommended to set binding to True, else binding should be False for TCP. 
 
-1. Declare `system_query` - when memory or unlogged is set to **True**, then the results of the query are not guaranteed 
+1. Enable TCP and REST services - The TCP service is used to communicate between AnyLog / EdgeLake instances while
+REST service is used to communicate with the node from outside AnyLog / EdgeLake via REST. 
+```anylog
+<run tcp server where 
+    external_ip=!external_ip and external_port=32348 and 
+    internal_ip=!ip and internal_port=32348 and 
+    bind=true and threads=3>
+
+<run rest server where 
+    external_ip=!external_ip and external_port=32349 and 
+    internal_ip=!ip and internal_port=32349 and 
+    bind=false and threads=3 and timeout=30> 
+```
+
+
+2. Declare `system_query` - when memory or unlogged is set to **True**, then the results of the query are not guaranteed 
 if the database crashes. However, having the logical database in memory performance is much faster as the data isn't 
 commited.
 
@@ -31,7 +48,7 @@ connect dbms system_query where type=sqlite and memory=true
     unlog=true>
 ```
 
-2. Run a regular blockchain sync to regularly get a copy of the data 
+3. Run a regular blockchain sync to regularly get a copy of the data 
 
 ```anylog
 <run blockchain sync where 
@@ -40,11 +57,22 @@ connect dbms system_query where type=sqlite and memory=true
     dest=file and 
     connection=!ledger_conn>
 ```
-`!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
+> `!ledger_conn` is the TCP service IP and Port for the master node. Directions for using the blockchain can be found [here]().
 
 
-3. (Optional) Create & publish a policy with information about the query node 
+4. (Optional) Create & publish a policy with information about the query node 
 * **Step 1**: Create policy 
+```anylog
+<new_policy = create policy query where 
+    name=query-node and 
+    company="My Company" and 
+    ip=!external_ip and
+    local_ip=!ip and 
+    port=!anylog_server_port and
+    ret_port=!anylog_rest_port>
+```
+
+If TCP bind is **True** then use the following policy: 
 ```anylog
 <new_policy = create policy query where 
     name=query-node and 
@@ -53,6 +81,7 @@ connect dbms system_query where type=sqlite and memory=true
     port=!anylog_server_port and
     ret_port=!anylog_rest_port>
 ```
+
 
 * **Step 2**: Publish policy
 ```anylog
