@@ -62,7 +62,8 @@ cluster_id = blockchain get cluster where name=my-cluster and company="My Compan
     cluster=!cluster_id and 
     ip=!external_ip and
     local_ip=!ip and
-    port=!anylog_server_port>
+    port=32148 and 
+    rest_port=32149>
 ```
 
 If TCP bind is **True** then use the following policy: 
@@ -72,7 +73,8 @@ If TCP bind is **True** then use the following policy:
     company="My Company" and 
     cluster=!cluster_id and 
     ip=!ip and
-    port=32148>
+    port=32148 and 
+    rest_port=32149>
 ```
 
 
@@ -134,7 +136,7 @@ the system automatically recognizes it as `[DB Name]_blobs`.
 7. Accept blobs data 
 ```anylog
 <run blobs archiver where
-    dbms=!mydb and
+    dbms=mydb and
     folder=[true - if not stroed to mongo | false - if stored to mongo] and
     compress=true and
     reuse_blobs=true  
@@ -153,10 +155,12 @@ run data consumer where start_date="-30"
 
 9. Run the actual operator service
 ```anylog 
-operator_id = blockchain get operator where cluster=!cluster_id and name=my-operator1 and company="My Company" bring.last [*][id]
-
+<operator_id = blockchain get operator where 
+    cluster=!cluster_id and 
+    name=my-operator1 and 
+    company="My Company" 
+    bring.last [*][id]>    
 run streamer 
-
 <run operator where 
     create_table=true and update_tsd_info=true and 
     compress_json=true and compress_sql=true and 

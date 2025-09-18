@@ -22,7 +22,6 @@ REST service is used to communicate with the node from outside AnyLog / EdgeLake
     external_ip=!external_ip and external_port=32348 and 
     internal_ip=!ip and internal_port=32348 and 
     bind=true and threads=3>
-
 <run rest server where 
     external_ip=!external_ip and external_port=32349 and 
     internal_ip=!ip and internal_port=32349 and 
@@ -46,11 +45,13 @@ copy of the blockchain ledger every X seconds.
 if the database crashes. However, having the logical database in memory performance is much faster as the data isn't 
 commited.
 
-```anylog
-# connect to system_query using sqlite 
+**SQLite**:
+```anylog 
 connect dbms system_query where type=sqlite and memory=true 
+```
 
-# connect to system_query using PostgresSQL 
+**PostgresSQL**:
+```anylog
 <connect dbms system_query where 
     type=psql and 
     ip=127.0.0.1 and 
@@ -70,7 +71,7 @@ connect dbms system_query where type=sqlite and memory=true
     ip=!external_ip and
     local_ip=!ip and 
     port=32348 and
-    ret_port=32349>
+    rest_port=32349>
 ```
 
 If TCP bind is **True** then use the following policy: 

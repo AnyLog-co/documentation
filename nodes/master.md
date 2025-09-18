@@ -75,7 +75,8 @@ create table ledger where dbms=blockchain
     company="My Company" and 
     ip=!external_ip and
     local_ip=!ip and
-    port=!anylog_server_port>
+    port=32048 and 
+    rest_port=32049>
 ```
 
 If TCP bind is **True** then use the following policy
@@ -84,7 +85,8 @@ If TCP bind is **True** then use the following policy
     name=master-node and 
     company="My Company" and 
     ip=!ip and
-    port=32048>
+    port=32048 and 
+    rest_port=32049>
 ```
 
 * **Step 2**: Publish policy
@@ -100,7 +102,7 @@ copy of the blockchain ledger every X seconds.
     source=master and 
     time="30 seconds" and 
     dest=file and
-    connection=!ledger_conn
+    connection=!ledger_conn>
 ```
 
 ## Synchronizing a local copy of the blockchain

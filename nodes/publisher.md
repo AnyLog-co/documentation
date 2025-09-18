@@ -42,7 +42,7 @@ copy of the blockchain ledger every X seconds.
     ip=!external_ip and
     local_ip=!ip and 
     port=32248 and
-    ret_port=32249>
+    rest_port=32249>
 ```
 
 If TCP bind is **True** then use the following policy: 
@@ -52,7 +52,7 @@ If TCP bind is **True** then use the following policy:
     company="My Company" and 
     ip=!ip and 
     port=32248 and
-    ret_port=32249>
+    rest_port=32249>
 ```
 
 * **Step 2**: Publish policy
@@ -65,6 +65,7 @@ All other AnyLog / EdgeLake services can coexist on the same agent.
 
 ```shell
 run streamer 
+
 <run publisher where 
   archive_json=true and compress_json=true and 
   archive_sql=true and compress_sql=true and 
