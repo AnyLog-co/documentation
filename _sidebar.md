@@ -12,8 +12,10 @@
   * [Operator Node](nodes/operator.md) 
   * [Query Node](nodes/query.md) 
   * [Publisher Node](nodes/publisher.md) 
-* Monitoring
-  * 
+* [Monitoring](monitoring/monitoring.md)
+  * [Node Monitoring]()
+  * [Syslog Monitoring]()
+  * [Docker Monitoring]()
   * [Aggregation](monitoring/aggregations.md)
   * [Deploying Aggregations](monitoring/deploy_aggregations.md)
 * [FAQ](FAQ.md)

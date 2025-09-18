@@ -193,5 +193,3 @@ partition mydb rand_data using insert_timestamp by 14 days
     drop partition where dbms=mydb and table=* and keep=3>
 ```
 > Example keeps about 42 days of data (or 6 weeks)
-> 
->
