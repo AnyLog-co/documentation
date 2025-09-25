@@ -1,5 +1,8 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
+1. New command: ```file from``` - Return a file via REST. [Details](../file%20commands.md#return-a-file-via-rest)
+
 ## AnyLog Version: 1.3.2504-beta22 [69bf12] [2025-08-16 19:18:49]
 1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../anylog%20commands.md#conditional-execution)
 
