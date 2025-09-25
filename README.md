@@ -50,6 +50,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Mapping data to tables](mapping%20data%20to%20tables.md)
   * [JSON Data Transformation](json%20data%20transformation.md)
   * [Storing Images](image%20mapping.md)
+  * [Bucket Data Management](bucket%20data%20management.md)
   
 * **Managing Metadata**
   * [Blockchain Commands](blockchain%20commands.md)
