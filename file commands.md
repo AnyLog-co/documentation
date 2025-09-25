@@ -12,7 +12,7 @@ Operations supported:
 | [file compress](#compress-and-decompress-a-file)                         | Compress a file.                                                                                                        |
 | [file copy](#copy-files-between-nodes-in-the-network)                    | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
 | [file to](#copy-a-file-to-a-folder)                                      | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
-| [file from](#copy-a-file-to-a-folder)                                    | Return the file content to a REST request                                                                               |
+| [file from](#return-a-file-via-rest)                                  | Return the file content to a REST request                                                                               |
 | [file delete](#delete-a-file)                                            | Delete a file.                                                                                                          |
 | file deliver                                                             | Copy archived data from a remote node.                                                                                  |
 | [file get](#file-copy-from-a-remote-node-to-a-local-node)                | Copy a file or files from a remote node to the local node.                                                              |
