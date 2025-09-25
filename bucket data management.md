@@ -16,7 +16,7 @@ Operations supported:
 |-----------------------------------------------------|--------------------------------------------------------|
 | [bucket provider connect](#bucket-provider-connect) | Connect to bucket object store.                        |
 | [get bucket groups](#get-bucket-groups)             | View all bucket groups.                                |
-| [get bucket directories](#get-bucket-directories)   | View all buckets by group.                             | 
+| [get bucket names](#get-bucket-names)    | View all buckets by group.                             | 
 | [bucket create](#bucket-create)                     | Create bucket.                                         | 
 | [get bucket files](#get-bucket-files)               | List all files from bucket.                            |
 | [bucket file upload](#bucket-file-upload)           | Upload file to bucket.                                 |
@@ -47,11 +47,11 @@ Displays a list of logically defined bucket group by name.
 get bucket groups
 ```
 
-<a id="get-bucket-directories"></a>
-### Get Bucket Directories
+<a id="get-bucket-names"></a>
+### Get All Bucket Names
 List all buckets defined or available to the group
 ```bash
-get bucket directories where group = [group_name]
+get bucket names where group = [group_name]
 ```
 | Parameter                                                                  | -                         | 
 |----------------------------------------------------------------------------|---------------------------|
@@ -156,7 +156,7 @@ get bucket groups
 bucket create where group = my_group and name = my-bucket
 
 #Step 4 - view all buckets by group
-get bucket directories where group = my_group
+get bucket names where group = my_group
 
 #Step 5 - view all files in bucket or by prefix
 get bucket files where group = my_group and name = my-bucket and prefix = dir1 and format = json
