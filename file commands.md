@@ -11,7 +11,8 @@ Operations supported:
 | [file decompress](#compress-and-decompress-a-file)                       | Decompress a file.                                                                                                      |
 | [file compress](#compress-and-decompress-a-file)                         | Compress a file.                                                                                                        |
 | [file copy](#copy-files-between-nodes-in-the-network)                    | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| [file to](#copy-a-file-to-a-folder) | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
+| [file to](#copy-a-file-to-a-folder)                                      | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
+| [file from](#copy-a-file-to-a-folder)                                    | Return the file content to a REST request                                                                               |
 | [file delete](#delete-a-file)                                            | Delete a file.                                                                                                          |
 | file deliver                                                             | Copy archived data from a remote node.                                                                                  |
 | [file get](#file-copy-from-a-remote-node-to-a-local-node)                | Copy a file or files from a remote node to the local node.                                                              |
@@ -170,6 +171,21 @@ file to !prep_dir/testdata2.txt where source = !prep_dir/testdata.txt
 2) Using REST:
 ```anylog
 curl -X POST -H \"command: file to !my_dest\" -F \"file=@testdata.txt\" http://10.0.0.78:7849
+```
+
+## Return a file via REST
+Retrieve the raw bytes of any file (text or binary) over HTTP.
+
+Usage:
+```anylog
+file from [path and file name]
+```
+
+Request (cURL)
+```anylog
+curl --location 'http://10.0.0.78:7849' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: file from D:\Node\AnyLog-Network\data\tmp\bchain_file.json'
 ```
 
 ## Move a file
