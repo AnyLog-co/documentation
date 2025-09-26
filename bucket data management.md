@@ -28,6 +28,9 @@ Operations supported:
 ### Bucket Provider Connect
 Defines a logical connection to a named bucket object storage. For access to Akave, please contact the AnyLog team.
 
+*Note* that `group` is a logical definition of a connection to an object storage location. If you define two different groups
+that connect to the same `endpoint_url`, `access_key`, and `secret_key`, then queries to either group will return the same object storage view. 
+
 ```bash
 bucket provider connect where group = [group_name] and provider = [provider] and id = 123 and access_key = [access_key] and secret_key = [secret_key] and region = [region] and endpoint_url = [endpoint_url]
 ```
