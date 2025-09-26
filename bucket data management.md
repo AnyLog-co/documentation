@@ -136,15 +136,15 @@ bucket file delete where group = [group_name] and name = [bucket_name] and key =
 ### Bucket Drop
 Delete bucket. Note that you cannot delete an empty bucket; however, we've added support to delete all files within the command.
 ```bash
-bucket drop where group = [group_name] and name = [bucket_name] and deleteAllFiles = [true/false]  
-bucket drop where group = [group_name] and name = [bucket_name] and deleteAllFiles = false  # will only delete an empty bucket
-bucket drop where group = [group_name] and name = [bucket_name] and deleteAllFiles = true  # will delete a non-empty bucket
+bucket drop where group = [group_name] and name = [bucket_name] and delete_all = [true/false]  
+bucket drop where group = [group_name] and name = [bucket_name] and delete_all = false  # will only delete an empty bucket
+bucket drop where group = [group_name] and name = [bucket_name] and delete_all = true  # will delete a non-empty bucket
 ```
-| Parameter      | -                                            | 
-|----------------|----------------------------------------------|
-| group          | Logical connection name                      |
-| name           | Bucket name                                  |
-| deleteAllFiles | Boolean parameter to delete non-empty bucket |
+| Parameter    | -                                            | 
+|--------------|----------------------------------------------|
+| group        | Logical connection name                      |
+| name         | Bucket name                                  |
+| delete_all   | Boolean parameter to delete non-empty bucket |
 
 <a id="examples"></a>
 # Examples
@@ -179,9 +179,9 @@ bucket file delete where group = my_group and name = my-bucket and key = test2.t
 #Step 8 - get file metadata
 get bucket file info where group = my_group and name = my-bucket and key = test2.txt
 
-#Step 9 - drop/delete bucket (note that you cannot delete a non-empty bucket. to delete non-empty bucket, set deleteAllFiles = true)
-bucket drop where group = my_group and name = my-bucket and deleteAllFiles = false
-bucket drop where group = my_group and name = my-bucket and deleteAllFiles = true
+#Step 9 - drop/delete bucket (note that you cannot delete a non-empty bucket. to delete non-empty bucket, set delete_all = true)
+bucket drop where group = my_group and name = my-bucket and delete_all = false
+bucket drop where group = my_group and name = my-bucket and delete_all = true
 ```
 
 
