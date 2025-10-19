@@ -206,6 +206,7 @@ See details and examples in the [JSON data transformation](json%20data%20transfo
 Join and Merge are operations that combine results from two policy queries, but they differ in how they structure the combined output.
 
 Join preserves both source objects as separate, side-by-side entities within the result (e.g., { "bucket": {...}, "operator": {...} }).
+
 Merge integrates fields from the second query directly into the first, producing a single, flattened object (e.g., { "bucket": {"name":..., "operator":..., "company":..., "ip":...,}} ).
 
 ### JOIN
