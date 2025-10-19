@@ -181,7 +181,7 @@ criteria. Attribute name value pairs are referenced using square brackets, for e
 the name from the Operator policy. The following example evaluates attribute values of the policy example in the 
 [Metadata Section](#the-metadata):
 
-     ```anylog
+    ```anylog
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
     ```
 Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
@@ -196,12 +196,89 @@ blockchain get tag where [path] startwith 'Root/Objects/DeviceSet/WAGO 750-8210 
 blockchain get tag where [path] childfrom 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH XTR/Resources/Application/GlobalVars/ALARM_TAGS' bring.table.sort [tag][path]
 ```
 
+
 ### Formatting retrieved data 
 
 The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
 See details and examples in the [JSON data transformation](json%20data%20transformation.md#json-data-transformation) section.
 
-### Setting command destination from policies
+## Join & Merge Operations
+
+Join and Merge both combine results from two policy queries, but the output structure differs.
+
+### JOIN
+
+Keeps both entities separate.  
+Join returns a combined result where the LHS (left-hand side) entity and RHS (right-hand side) entity remain separate, 
+namespaced objects in each returned policy.
+
+Example:
+```anylog
+blockchain get bucket where name = my_bucket join (blockchain get operator where name = [bucket][operator])
+```
+In this example, the attribute value 'operator' in the policy of type bucket, is used to pull the operator policy 
+and the new policy includes 2 root attributes, the first with the bucket entries and the second with operator entries.
+
+Output:
+```anylog
+[
+  {
+    "bucket": {...},
+    "operator": {...}
+  }
+]
+```
+Returns both objects side by side.
+
+Note:
+* If no RHS match → record omitted (inner join behavior).
+* Path interpolation: square-bracket paths like [bucket][operator] are resolved against the current LHS record before the RHS is executed.
+
+### MERGE
+
+Flattens the second result into the first.
+
+Example
+```anylog
+blockchain get bucket where name = bucket1 merge (blockchain get operator where name = [bucket][operator])
+```
+Output:
+```anylog
+[
+  {
+    "bucket": {
+      "name":"bucket1",
+      "operator":"operator1",
+      "company":"AnyLog",
+      "ip":"24.5.219.50",
+      "port":7848
+    }
+  }
+]
+```
+Note:
+* Merge inlines RHS fields into the LHS object.
+* LHS wins on key conflicts.
+* If no RHS match → LHS unchanged (left merge behavior).
+
+### Formatted examples with join & merge
+
+The following example returns information from the bucket and operator policies:
+```anylog
+# Returned in a table structure
+blockchain get bucket where name = bucket1 join (blockchain get operator where name = [bucket][operator]) bring.table [bucket][name] [bucket][operator] [operator][ip] [operator][port]
+# Returned in a JSON structure
+blockchain get bucket where name = bucket1 join (blockchain get operator where name = [bucket][operator]) bring.json [bucket][name] [bucket][operator] [operator][ip] [operator][port]
+```
+The following example returns information from the merged bucket policy:
+```anylog
+# Returned in a table structure
+blockchain get bucket where name = bucket1 merge (blockchain get operator where name = [bucket][operator]) bring.table [bucket][name] [bucket][operator] [bucket][ip] [bucket][port]
+# Returned in a JSON structure
+blockchain get bucket where name = bucket1 merge (blockchain get operator where name = [bucket][operator]) bring.json [bucket][name] [bucket][operator] [bucket][ip] [bucket][port]
+```
+
+## Setting command destination from policies
 
 A common usage of policies is to determine the destination of a command or a query (in case of a query, to overwrite the network protocol's destination).    
 The process evaluates policies by some criteria and sets a command destination to the IPs and ports detailed in the policies that satisfies the criteria.   
