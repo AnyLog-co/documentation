@@ -135,7 +135,6 @@ Usage:
 blockchain get [policy type] [where] [where conditions] [bring] [bring command instructions]
 ```
 
-
 Explanation:
 The `blockchain get` command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
 * _policy_ type - the key at the root of the JSON representing the policy.
