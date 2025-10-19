@@ -1,5 +1,8 @@
 # AnyLog Release notes
 
+## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
+1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../blockchain%20commands.md#join--merge-operations)
+
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
 1. New command: ```file from``` - Return a file via REST. [Details](../file%20commands.md#return-a-file-via-rest)
 
