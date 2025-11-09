@@ -178,19 +178,21 @@ run client () sql lsl_demo "select reading_time, speed::float(2) from performanc
 
 The casting options are detailed in the table below:
 
-| Cast                    | details                                                                                                                                                                        |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cast                    | details                                                                                                                                                               |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | float(x)                | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
-| int                     | Cast to an _int_.                                                                                                                                                              |
-| str                     | Cast to a _string_.                                                                                                                                                            |
-| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
-| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
-| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
-| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                                   |
-| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
-| lstrip                  | Remove leading spaces.                                                                                                                                                         |
-| rstrip                  | Remove trailing spaces.                                                                                                                                                        |
-| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                                |
+| int                     | Cast to an _int_.                                                                                                                                                     |
+| str                     | Cast to a _string_.                                                                                                                                                   |
+| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                         |
+| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                        |
+| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                    |
+| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                          |
+| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                 |
+| lstrip                  | Remove leading spaces.                                                                                                                                                |
+| rstrip                  | Remove trailing spaces.                                                                                                                                               |
+| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                       |
+| replace(old by new)     | Replace a substring once.                                                                                                                                             |
+
 
 
 **Note**: multiple casting is allowed.  
