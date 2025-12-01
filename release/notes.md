@@ -1,8 +1,9 @@
 # AnyLog Release notes
 
-AnyLog Version: 1.4.2510-beta3 [3c06a5] [2025-11-23 12:57:58]
+AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ### New Features
 1. MCP Server functionalities
+2. Connector to Akave
 ### New Commands
 1. ```get mcp status``` - Returns information on the MCP clients connected to the node.
 2. ```get node resources``` - Returns info on the resources available to the node.
