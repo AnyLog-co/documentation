@@ -178,20 +178,21 @@ run client () sql lsl_demo "select reading_time, speed::float(2) from performanc
 
 The casting options are detailed in the table below:
 
-| Cast                    | details                                                                                                                                                               |
-|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cast                    | details                                                                                                                                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | float(x)                | Cast to a _float_ value. x represents rounding to x digits after the decimal point. Adding the percent sigh (**%**) before the digits adds comma separation and padding zeros. |
-| int                     | Cast to an _int_.                                                                                                                                                     |
-| str                     | Cast to a _string_.                                                                                                                                                   |
-| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                         |
-| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                        |
-| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                    |
-| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                          |
-| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                 |
-| lstrip                  | Remove leading spaces.                                                                                                                                                |
-| rstrip                  | Remove trailing spaces.                                                                                                                                               |
-| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                       |
-| replace(old by new)     | Replace a substring once.                                                                                                                                             |
+| int                     | Cast to an _int_.                                                                                                                                                              |
+| str                     | Cast to a _string_.                                                                                                                                                            |
+| ljust(x)                | Cast to a _left-justified string_ with a given X-bytes width.                                                                                                                  |
+| rjust(x)                | Cast to a _right-justified_ string with a given X-bytes width.                                                                                                                 |
+| format(formatting type) | Apply formatting instructions on the column value.                                                                                                                             |
+| datetime(format code)   | Apply formatting instructions on a date-time value. The process parse the datetime string and extract using the format code.                                                   |
+| function(expression)    | Execute a function and replace the column value with the result returned by the function. See examples 5 and 6 below.                                                          |
+| lstrip                  | Remove leading spaces.                                                                                                                                                         |
+| rstrip                  | Remove trailing spaces.                                                                                                                                                        |
+| timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                                |
+| timezone                | Change the timezone - if the format of a timestamp column is modified by casting, the query timezone will not apply, but the casting timezone will apply.                      |
+| replace(old by new)     | Replace a substring once.                                                                                                                                                      |
 
 
 
@@ -302,6 +303,14 @@ run client () sql lsl_demo "select max(insert_timestamp) as max, min(insert_time
 
 ```
 
+### Example 8 - timezone and datetime
+The example below changes the timezone and modified the time format:
+```anylog
+< run client ()  sql new_company format=table and stat=false SELECT increments(second, 1, timestamp), 
+        min(timestamp)::timezone(local)::datetime('%d-%b-%Y %H:%M') as min_ts, max(timestamp)::timezone(local)::datetime('%d-%b-%Y %H:%M') as max_ts, 
+        min(value) as min_val, avg(value)::float(3) as avg_val, max(value) as max_val FROM rand_data 
+    WHERE timestamp >= '2024-12-20 00:00:00' AND timestamp <= '2025-01-10 23:59:59' ORDER BY min_ts DESC LIMIT 1>
+```
 
 ## Get datetime command
 Using the command `get datetime` users can translate a date-time function to the date-time string.    

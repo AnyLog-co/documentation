@@ -6,6 +6,8 @@ AnyLog Version: 1.4.2510-beta3 [3c06a5] [2025-11-23 12:57:58]
 ### New Commands
 1. ```get mcp status``` - Returns information on the MCP clients connected to the node.
 2. ```get node resources``` - Returns info on the resources available to the node.
+### New Features
+1.  Add timezone to query casting options
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
 1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../blockchain%20commands.md#join--merge-operations)
