@@ -193,8 +193,8 @@ test suite where source = [file path and name] and inform = [destination for mes
 
 The following examples process the _test cases_ files identified by the key **source**: 
 ```anylog
-test suite where source = !test_dir/test_*.out and and inform = dbms.qa.testing@!dest_node
-test suite where source = !test_dir/test_*.o* and inform = stdout and subdir = true and dest = 127.32.52.103:20048
+test suite where source = !test_dir/test_*.out and inform = dbms.qa.testing@!dest_node
+test suite where source = !test_dir/test_*.out and inform = stdout and subdir = true and dest = 127.32.52.103:20048
 ``` 
 
 

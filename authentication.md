@@ -618,7 +618,7 @@ Make the following files available in the _pem_ directory:
 
 Deploy AnyLog with SSL enabled using the following command: 
 ```anylog
-run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
+run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
 ```
 
 Use the following command to retrieve the REST server configuration:
