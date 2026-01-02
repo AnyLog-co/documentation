@@ -197,4 +197,7 @@ test suite where source = !test_dir/test_*.out and inform = dbms.qa.testing@!des
 test suite where source = !test_dir/test_*.out and inform = stdout and subdir = true and dest = 127.32.52.103:20048
 ``` 
 
+## Example
+
+A detailed example is available in [test suite example](examples/TestSuite.md)
 
