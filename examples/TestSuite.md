@@ -65,6 +65,10 @@ Below are 50 rows - file should be named: ```cos.pp_pm.json```
 run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_1.out and title = "Data set #1 - Sabetha Q1" SELECT monitor_id, AVG(powerfactor) as avg_powerfactor, MIN(powerfactor) as min_powerfactor, MAX(powerfactor) as max_powerfactor  FROM pp_pm  WHERE timestamp > '2025-01-01 00:00:00'  GROUP BY monitor_id  ORDER BY max_powerfactor desc
 # order by Avg
 run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_2.out and title = "Data set #1 - Sabetha Q2" SELECT monitor_id, AVG(powerfactor) as avg_powerfactor, MIN(powerfactor) as min_powerfactor, MAX(powerfactor) as max_powerfactor  FROM pp_pm  WHERE timestamp > '2025-01-01 00:00:00'  GROUP BY monitor_id  ORDER BY avg_powerfactor
+# increments & order by Max
+run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_3.out and title = "Data set #1 - Sabetha Q3" "SELECT increments(minute, 1, timestamp), monitor_id, min(timestamp), max(timestamp), MAX(b_n_voltage) as max_b_n_voltage FROM pp_pm WHERE insert_timestamp > '20250101' GROUP BY monitor_id  ORDER BY max_b_n_voltage"
+# increments & order by AVG
+run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_4.out and title = "Data set #1 - Sabetha Q4" "SELECT increments(minute, 1, timestamp), monitor_id, min(timestamp), max(timestamp), AVG(b_n_voltage) as max_b_n_voltage FROM pp_pm WHERE insert_timestamp > '20250101' GROUP BY monitor_id  ORDER BY max_b_n_voltage"
 ```
 
 ## Rerun and validate a single query
