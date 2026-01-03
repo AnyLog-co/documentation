@@ -69,7 +69,46 @@ run client () sql cos format = json and stat=true and test = true and  file = !t
 run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_3.out and title = "Data set #1 - Sabetha Q3" "SELECT increments(minute, 1, timestamp), monitor_id, min(timestamp), max(timestamp), MAX(b_n_voltage) as max_b_n_voltage FROM pp_pm WHERE insert_timestamp > '20250101' GROUP BY monitor_id  ORDER BY max_b_n_voltage"
 # increments & order by AVG
 run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_4.out and title = "Data set #1 - Sabetha Q4" "SELECT increments(minute, 1, timestamp), monitor_id, min(timestamp), max(timestamp), AVG(b_n_voltage) as max_b_n_voltage FROM pp_pm WHERE insert_timestamp > '20250101' GROUP BY monitor_id  ORDER BY max_b_n_voltage"
+# filter with and : count should be 9
+run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_5.out and title = "Data set #1 - Sabetha Q5"  "SELECT MAX(a_n_voltage) as max_voltage, MIN(a_n_voltage) as min_voltage, AVG(a_n_voltage) as avg_voltage, COUNT(a_n_voltage) as count_voltage from pp_pm where a_n_voltage < 739 and a_n_voltage > 700"
+# filter with or : count should be 41
+run client () sql cos format = json and stat=true and test = true and  file = !test_dir\query_6.out and title = "Data set #1 - Sabetha Q6"  "SELECT MAX(a_n_voltage) as max_voltage, MIN(a_n_voltage) as min_voltage, AVG(a_n_voltage) as avg_voltage, COUNT(a_n_voltage) as count_voltage from pp_pm where a_n_voltage >= 739 or a_n_voltage <= 700"
 ```
+
+```anylog
+<run client () sql cos 
+    format = json and stat=true and test = true 
+    and  file = !test_dir\query_7.out 
+    and title = "Data set #1 - Sabetha Q7"
+    SELECT monitor_id,
+    AVG(a_n_voltage) as avg_a_voltage,
+    AVG(b_n_voltage) as avg_b_voltage,
+    AVG(c_n_voltage) as avg_c_voltage,
+    MAX(a_n_voltage) as max_voltage,
+    MIN(a_n_voltage) as min_voltage
+FROM pp_pm
+where a_n_voltage > 500 OR a_n_voltage < 200
+GROUP BY monitor_id
+ORDER BY max_voltage DESC;>
+```
+
+```anylog
+<run client () sql cos 
+    format = json and stat=true and test = true 
+    and  file = !test_dir\query_8.out 
+    and title = "Data set #1 - Sabetha Q8"
+    SELECT monitor_id,
+    AVG(a_n_voltage) as avg_a_voltage,
+    AVG(b_n_voltage) as avg_b_voltage,
+    AVG(c_n_voltage) as avg_c_voltage,
+    MAX(a_n_voltage) as max_voltage,
+    MIN(a_n_voltage) as min_voltage
+FROM pp_pm
+where a_n_voltage > 500 OR a_n_voltage < 200
+GROUP BY monitor_id
+ORDER BY avg_a_voltage DESC;>
+```
+
 
 ## Rerun and validate a single query
 
