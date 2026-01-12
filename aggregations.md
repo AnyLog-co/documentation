@@ -1,15 +1,41 @@
 # Aggregation Functions
 
-Aggregation functions summarize streaming data over a time interval. Users define (per table) the time interval and the number of intervals
-per each table to allow continues aggregations. The aggregated values can be queried or used to impact the database updates and monitoring.
+Aggregation functions summarize streaming data over defined time intervals. For each table, users configure the interval
+duration and the number of intervals to retain, enabling continuous, rolling aggregations.
 
-Aggregation functions are used to summarize streaming data over a specified time interval. These functions process incoming 
-data continuously, computing key statistics such as counts, sums, averages, or max/min values over defined periods.    
-Users define, per table, the length of time interval and the number of intervals to maintain.   
+As data is ingested, aggregation functions continuously compute statistics such as count, sum, average, minimum,
+and maximum for each interval. The resulting aggregated values can be queried directly or used to influence database updates,
+alerts, and monitoring logic.
+
+This approach enables efficient real-time analytics on streaming data without requiring downstream batch processing or data centralization.
 
 Notes: 
 1. Deployment examples are in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
 2. Example of aggregations applied on data retrieved by the AnyLog OPC UA service is available in the [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
+
+## Aggregations withh DBMS operations 
+
+Aggregations can replace the database ingestion of source data or co-exist with database write operations.
+Use the following command to enable or disable database ingestion for the source data:
+
+Usage:
+
+```anylog
+set aggregation ingest where dbms = [dbms name] and table = [table name] and status = [true/false]
+```
+
+To review the aggregation ingest status, use the following command:
+```anylog
+get aggregation ingest
+```
+
+Notes:
+* ingest enables or disables direct database ingestion (of the source data) for the specified table.
+* The default value for ***status*** is ***true*** (database operations are enabled).
+* When disabled, only the aggregation results for each column can be persisted.
+
+This allows aggregation-driven storage, reduced write load, and real-time summarized data.
+
 
 ## How They Work:
 * Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
