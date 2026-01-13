@@ -16,12 +16,13 @@ Notes:
 ## Aggregations withh DBMS operations 
 
 Aggregations can replace the database ingestion of source data or co-exist with database write operations.
-Use the following command to enable or disable database ingestion for the source data:
+The aggregation service mapps the source data to a summary of the entries in a time segment and the following command
+enables or disables database ingestion for the source data and derived data:
 
 Usage:
 
 ```anylog
-set aggregation ingest where dbms = [dbms name] and table = [table name] and status = [true/false]
+set aggregation ingest where dbms = [dbms name] and table = [table name] and source = [true/false] and derived = [true/false]
 ```
 
 To review the aggregation ingest status, use the following command:
@@ -84,10 +85,10 @@ set aggregation where dbms = [dbms name] and table = [table name] intervals = [c
 
 Example: 
 ```anylog
-set aggregations where dbms = dmci and table = sensor_table and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
+set aggregation where dbms = dmci and table = sensor_table and intervals = 10 and time = 1 minute and time_column = timestamp and value_column = value
 ```
 **Note:**
-The **set aggregations** command enables aggregation on a stream of data identifies by the DBMS and Table assigned to the stream.
+The **set aggregation** command enables aggregation on a stream of data identifies by the DBMS and Table assigned to the stream.
   It can be followed by a one or more commands that determine additional functionalities such as:
    * [Declaring Thresholds](#declaring-thresholds) that can be referenced in the rule engine.
    * [Aggregation Encoding](#aggregation-encoding) that provide compression to the data stream.
@@ -99,7 +100,7 @@ of the stream and trigger operations that consider the thresholds.
 
 Usage:
 ```anylog
-set aggregations thresholds where dbms = [dbms name] and table = [table name] and and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
+set aggregation thresholds where dbms = [dbms name] and table = [table name] and and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
  ```
 
 ## Reset aggregations
