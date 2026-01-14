@@ -3,40 +3,57 @@
 Aggregation functions summarize streaming data over defined time intervals. For each table, users configure the interval
 duration and the number of intervals to retain, enabling continuous, rolling aggregations.
 
-As data is ingested, aggregation functions continuously compute statistics such as count, sum, average, minimum,
-and maximum for each interval. The resulting aggregated values can be queried directly or used to influence database updates,
+As data is ingested, aggregation functions continuously compute statistics such as **count, sum, average, minimum,
+and maximum** for each interval. The resulting aggregated values can be queried directly or used to influence database updates,
 alerts, and monitoring logic.
 
 This approach enables efficient real-time analytics on streaming data without requiring downstream batch processing or data centralization.
 
-Notes: 
-1. Deployment examples are in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
-2. Example of aggregations applied on data retrieved by the AnyLog OPC UA service is available in the [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
+## Notes
 
-## Aggregations withh DBMS operations 
+1. Deployment examples are available in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
+2. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
+   [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
 
-Aggregations can replace the database ingestion of source data or co-exist with database write operations.
-The aggregation service mapps the source data to a summary of the entries in a time segment and the following command
-enables or disables database ingestion for the source data and derived data:
+## Aggregations and DBMS Operations
+
+Aggregations can be configured to support different data-processing modes:
+
+- **Source data ingestion enabled**  (default)
+  Raw (source) data continues to be written to the database while aggregations are computed in parallel.
+
+- **Source data ingestion disabled** 
+  Raw (source) data is not written to the database while aggregations are computed in parallel.
+
+- **In memory Aggregation** (default)   
+  Aggregations maintained **in memory only**
+
+- **Aggregation ingestion enabled** (default)   
+  Aggregations written to the database
+
+These modes allow users to balance storage cost, write volume, and query granularity while preserving real-time insight.
 
 Usage:
-
 ```anylog
 set aggregation ingest where dbms = [dbms name] and table = [table name] and source = [true/false] and derived = [true/false]
 ```
+Notes:
+* **source** controls ingestion of raw (source) data.
+* **derived** controls ingestion of aggregation results.
+* Defaults: 
+  * source = true
+  * derived = false
+* When source ingestion is disabled, only aggregation results can be persisted.
 
-To review the aggregation ingest status, use the following command:
+* This enables aggregation-driven storage, reduced write load, and real-time summarized data.
+
+## View Aggregation Ingest Declaration
+
+Usage:
 ```anylog
 get aggregation ingest
 ```
-
-Notes:
-* ingest enables or disables direct database ingestion (of the source data) for the specified table.
-* The default value for ***status*** is ***true*** (database operations are enabled).
-* When disabled, only the aggregation results for each column can be persisted.
-
-This allows aggregation-driven storage, reduced write load, and real-time summarized data.
-
+The command above returns the mode of database operation for source and derived data.
 
 ## How They Work:
 * Users define a time interval (e.g., 1 minute, 5 minutes, or hourly).
@@ -45,31 +62,37 @@ This allows aggregation-driven storage, reduced write load, and real-time summar
 * Aggregated values can be used in real-time for:
   * Querying the current trends
   * Triggering alerts or monitoring changes
-  * dImpacting database updates (e.g., adjusting thresholds dynamically)
+  * Impacting database updates
 
-Users can replace the source data with encoding. With high volumes of data streams, encoding reduces the volumes of data processed. 
+For high-volume data streams, aggregation encoding can replace raw data with compressed representations, significantly
+reducing data volume.
 
 ## Declaring Aggregations
 
-Using the command `set aggregation` users can track data streamed to a node for storage and processing. This type of 
-monitoring considers the tables that contain the data and the monitoring aggregates information on the streaming values 
-within predefined time intervals. Intervals are time segments for which the following are monitored on a predefined column 
-value:
+Using the command `set aggregation` users can track data streamed to a node.   
 
-| Monitored value option | Details  |
-| ------------- | ------------| 
-| Min  | The lowest value recorded within the time interval. | 
-| Max  | The highest value recorded within the time interval. | 
-| Avg | The average value within the time interval. |
-| Count | The number of events recorded within the time interval. |
-| Events/sec | The number of events recorded divided by the number of seconds in the interval. |
+Monitoring applies per DBMS and table, aggregating values from a specified column across predefined time intervals.
+
+### Aggregated Metrics
+| Monitored value option | Details                 |
+| ------------- |----------------------------------| 
+| Min  | Lowest value recorded in the interval     | 
+| Max  | Highest value recorded in the interval    | 
+| Avg | Average value in the interval              |
+| Count | Number of events in the interval         |
+| Events/sec | Count divided by interval duration  |
 
 
 Usage: 
 ```anylog
-set aggregation where dbms = [dbms name] and table = [table name] intervals = [counter] and time = [interval time] 
-      and time_column = [time column name] and value_column = [value column name]
-      and target_dbms = [target dbms name] and target_table = [target table name]
+set aggregation where dbms = [dbms name]
+      and table = [table name]
+      and intervals = [count]
+      and time = [interval time]
+      and time_column = [time column name]
+      and value_column = [value column name]
+      and target_dbms = [target dbms name]
+      and target_table = [target table name]
 ```
 
 | Command option | Default     | Details                                                                                                                                     |
@@ -100,7 +123,7 @@ of the stream and trigger operations that consider the thresholds.
 
 Usage:
 ```anylog
-set aggregation thresholds where dbms = [dbms name] and table = [table name] and and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
+set aggregation thresholds where dbms = [dbms name] and table = [table name] and column = [column name] and min = [min value] and max = [max value] and avg = [average value] and count = [events count] 
  ```
 
 ## Reset aggregations
@@ -130,7 +153,6 @@ set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and enc
 
 * None - No encoding (default).
 
-
 * bounds - all entries in the time interval are replaced with a single entry representing: 
   * **timestamp** - The earliest date and time of the entries represented in the interval.
   * **end_interval** - The latest date and time of the entries represented in the interval.
@@ -152,20 +174,20 @@ Tolerance is represented as percentage difference.
 
 Example:
 ```anylog
-set aggregations encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
+set aggregation encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
 ```
 
 ## 📥 Retrieve Aggregations
 
-The command `get aggregations` retrieves the monitored data configured via the `set aggregation` command.
+The command `get aggregation` retrieves the monitored data configured via the `set aggregation` command.
 
 ### 🔧 Usage Examples
 
 ```anylog
-get aggregations 
-get aggregations where dbms = orics
-get aggregations where dbms = orics and table = r_50
-get aggregations where dbms = orics and table = r_50 and value_column = seal_storage
+get aggregation 
+get aggregation where dbms = orics
+get aggregation where dbms = orics and table = r_50
+get aggregation where dbms = orics and table = r_50 and value_column = seal_storage
 ```
 Each command filters the aggregation definitions based on the provided criteria (dbms, table, and value_column).
 
@@ -195,7 +217,7 @@ orics|orics      |r_50 |r_50                 |value           |---     |Not Star
 
 ## Retrieve aggregations by time
 
-The command `get aggregations by time` retrieves the interval summaries **by date and time**.
+The command `get aggregation by time` retrieves the interval summaries **by date and time**.
 
 ```anylog
 get aggregations by time where dbms = [dbms name] and table = [table name] and value_column = [column name] and function = [function name] and limit = [limit] and format = [table/json]  
@@ -215,11 +237,11 @@ Command options:
 
 **Examples:**
 ```anylog
-get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage
-get aggregations by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max
-get aggregations by time where dbms = orics and table = r_50 and value_column = cy_min and value_column = outfeed_conv_i and function = min and function = max and function = avg and function = count and format = json
-get aggregations by time where dbms = orics and table = r_50 and value_column = *  
-get aggregations by time where dbms = orics and table = r_50 and value_column = *  and limit = 1
+get aggregation by time where dbms = nov and table = table_3 and value_column = seal_storage
+get aggregation by time where dbms = nov and table = table_3 and value_column = seal_storage and format = json and function = min and function = max
+get aggregation by time where dbms = orics and table = r_50 and value_column = cy_min and value_column = outfeed_conv_i and function = min and function = max and function = avg and function = count and format = json
+get aggregation by time where dbms = orics and table = r_50 and value_column = *  
+get aggregation by time where dbms = orics and table = r_50 and value_column = *  and limit = 1
 ```
 
 **Casting:**
@@ -228,7 +250,7 @@ Functions can be extended using casting (like columns and functions in a query).
 
 **Example:**
 ```anylog
-get aggregations by time where dbms = orics and table = r_50 and value_column = cy_min and function = min::int and function = max and function = avg::float(3) and function = count and format = json
+get aggregation by time where dbms = orics and table = r_50 and value_column = cy_min and function = min::int and function = max and function = avg::float(3) and function = count and format = json
 ```
 
 
@@ -275,13 +297,13 @@ get aggregation configs where dbms = lsl_demo and table = ping_sensor
 
 The following command retrieves the most recent value:
 ```anylog
-get aggregations where dbms = [dbms name] and table = [table name] and function = [function name]
+get aggregation where dbms = [dbms name] and table = [table name] and function = [function name]
 ```
 The function name is one of the following: **min, max, count, avg**
 
 Example:
 ```anylog
-get aggregations where dbms = lsl_demo and table = ping_sensor and function = max
+get aggregation where dbms = lsl_demo and table = ping_sensor and function = max
 ```
 
 ## Retrieve aggregation tables
