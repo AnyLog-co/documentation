@@ -99,8 +99,9 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.ip_port``` - return a comma seperated list of IP and ports.
     * ```bring.min``` - return the minimum value of an attribute.
     * ```bring.max``` - return the maximum value of an attribute.
+    * ```bring.list``` - return the requested attributes as a list.
+    * ```bring.children``` - Return the immediate children of a policy by retrieving all policies whose 'parent' attribute matches the parent policy's 'id' attribute.
   
-
 
 ### Special Bring Values
 * **Basic Usage:**
@@ -153,6 +154,10 @@ blockchain get operator where [country] contains US bring.ip_port
   7. Return a list of values (each value in the list is the dbms and table values from the policy, seperated by a comma):   
 ```anylog
 blockchain get tag bring.list [tag][dbms] . [tag][table]
+```
+  8. Return the immediate children of a policy:   
+```anylog
+blockchain get *  where [id] = "sub"  bring.children.table.sort(0) [*][parent] [*] [*][id] [*][parent] [*][namespace]
 ```
 Note: In the 3rd example, if address is not included in the policy, the returned JSON includes the key "address" with an empty value.   
 
