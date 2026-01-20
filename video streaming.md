@@ -18,7 +18,7 @@ The system supports the following video protocols:
 
 ## Basic Initialization Structure
 
-### 1. Database Connection
+### 1. Bob Database Connection
 ```
 connect dbms <database_name> 
   where type = mongo 
@@ -36,145 +36,119 @@ connect dbms <database_name>
 - `user`: Database username
 - `password`: Database password
 
-### 2. Video Configuration Variables
+### 2. SQL Database Connection
 ```
-video_url = "<video_source_url>"
-video_host = <host_ip>
-video_port = <port_number>
+connect dbms <database_name> 
+  where type = psql 
+  and ip = <ip_address> 
+  and port = <port_number> 
+  and user = <username> 
+  and password = <password>
+```
+
+**Parameters:**
+- `database_name`: Name of the database (e.g., "customers")
+- `type`: Database type (e.g., "psql")
+- `ip`: Database IP address (e.g., "127.0.0.1")
+- `port`: Database port number (e.g., 27017)
+- `user`: Database username
+- `password`: Database password
+
+### 3. Video Configuration Variables
+```
+video_url = "<video_source_url>"   # URL from which to consume video stream
+video_host = <host_ip>             # IP to display consumed video
+video_port = <port_number>         # Port to display consumed video
+video_table = <video_table>        # video database table name 
 ```
 
 **Parameters:**
 - `video_url`: Source URL (e.g., YouTube URL, RTSP stream, local file path)
-- `video_host`: Host IP for video display (e.g., "127.0.0.1")
+- `video_host`: Host IP for video display (e.g., "127.0.0.1" or "0.0.0.0")
 - `video_port`: Port for video display (e.g., 8888)
-
-### 3. Enable Detection
+- `video_table`: SQL DB table name
+e.g.,
 ```
-set enable_detections = true
-set default_dbms = <database_name>
-```
-
-## Function Imports
-
-### Display Function (cv2_stream_imshow)
-```
-import function 
-  where import_name = imshow 
-  and lib = external_lib.video_processing.cv2_stream_imshow 
-  and method = init_class
-
-set function params 
-  where import_name = imshow 
-  and param_name = port 
-  and param_type = int 
-  and param_value = !video_port
-
-set function params 
-  where import_name = imshow 
-  and param_name = host 
-  and param_value = !video_host
+video_url = "https://www.youtube.com/watch?v=rnXIjl_Rzy4"
+video_host = 127.0.0.1
+video_port = 8888
+video_table=video_table
 ```
 
-**Parameters:**
-- `import_name`: Reference name for the function
-- `lib`: Library path for the display module
-- `method`: Initialization method
-- `port`: Display port (integer)
-- `host`: Display host IP
-
-### Detection Function (YOLO)
+### 4. Import built-in video streaming libraries
 ```
-import function 
-  where import_name = initiate_yolo 
-  and lib = external_lib.frame_modeling.yolo_detection 
-  and method = init_class
+import function where import_name = imshow and lib = external_lib.video_processing.cv2_stream_imshow and method = init_class
+set function params where import_name = imshow and param_name = port and param_type = int and param_value = !video_port
+set function params where import_name = imshow and param_name = host and param_value = !video_host
 ```
 
-#### YOLO Configuration Parameters
+### 5. [Optional] Enable Detection
+To enable detection, deploy YOLO model in docker container. 
+See this [README](https://github.com/AnyLog-co/AnyLog-Video-Inference-Models/blob/main/README.md) for instructions.
+Note that AnyLog offloads inference to a gRPC server. This server can run on the same physical machine or on a different machine. 
 
-**Module Type:**
+#### Connect to gRPC server
+This creates an AnyLog-managed gRPC client that can call your YOLOv5 inference service. You’re pointing AnyLog at the directory that contains the generated protobuf/stub files (or the .proto + generated outputs, depending on your setup), then telling it which service, RPC function, and request/response message types to use.
+
+| Parameter  | Example value                                                        | What it does                                                                                    |
+| ---------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `name`     | `yolov5`                                                             | Logical name for this gRPC client in AnyLog                                                     |
+| `ip`       | `127.0.0.1`                                                          | gRPC server host/IP (localhost in your case)                                                    |
+| `port`     | `50051`                                                              | gRPC server port                                                                                |
+| `grpc_dir` | `/Users/roy/Github-Repos/AnyLog-Network/external_lib/frame_modeling` | Path AnyLog uses to locate protobuf definitions / generated stubs (your `infer_pb2*` artifacts) |
+| `proto`    | `infer`                                                              | Proto “module” / base filename (e.g., `infer.proto` → `infer_pb2.py`)                           |
+| `service`  | `InferenceService`                                                   | gRPC service name inside the proto                                                              |
+| `function` | `PredictStream`                                                      | RPC method to invoke (here: stream-stream)                                                      |
+| `request`  | `PredictRequest`                                                     | Request message type name                                                                       |
+| `response` | `PredictResponse`                                                    | Response message type name                                                                      |
+| `debug`    | `false`                                                              | Enables/disables extra logging (request/response details)                                       |
+| `invoke`   | `true`                                                               | If `true`, AnyLog will attempt to initialize and invoke/connect immediately                     |
+
+AnyLog command
 ```
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_type 
-  and param_value = darknet
+<run grpc client where name=yolov5 and ip = 127.0.0.1 and port = 50051 and grpc_dir = /Users/roy/Github-Repos/AnyLog-Network/external_lib/frame_modeling 
+and proto = infer and function = PredictStream and request = "PredictRequest" and response = "PredictResponse" 
+and service = InferenceService and debug = false and invoke = true>
 ```
 
-**Classes (Detection Categories):**
-```
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = classes 
-  and param_type = list 
-  and param_value = []
-```
-- Empty list `[]` means detect all available classes
-- Can specify specific classes to detect
 
-**Model Weights:**
-```
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_path1 
-  and param_value = <path_to_weights_file>
-```
-- Example: `/path/to/yolov4-tiny.weights`
+In AnyLog operator connect to a  video stream, set the following values in the CLI:
+| Field                  | Value             | Comment                                                                  |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------ |
+| name                   | `youtube`         |                                                                          |
+| protocol               | `https`           |                                                                          |
+| interface              | `url`             |                                                                          |
+| address                | `!video_url`      |                                                                          |
+| video_dbms             | `customers`       |                                                                          |
+| video_table            | `video_table`     |                                                                          |
+| detection_dbms         | `customers`       | DBMS where detections are written to                                     |
+| detection_table        | `detection_table` | Table to store inference results managed in `detection_dbms`             |
+| detection_column       | `person`          | Detection column; column names are the inference predictions             |
+| detection_column       | `car`             | Inference model outputs `"car"`                                          |
+| detection_column       | `truck`           | Inference model outputs `"truck"`                                        |
+| detection_column       | `bus`             | Inference model outputs `"bus"`                                          |
+| recording_segment_time | `1`               | Record 1-minute clips                                                    |
+| detection_ignore_time  | `10`              | Time to ignore multiple detections if they have the same value (seconds) |
 
-**Model Configuration:**
+Example command:
 ```
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_path2 
-  and param_value = <path_to_config_file>
-```
-- Example: `/path/to/yolov4-tiny.cfg`
-
-**COCO Names:**
-```
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = coco_path 
-  and param_value = <path_to_coco_names>
-```
-- Example: `/path/to/coco.names`
-
-## Video Connection Configuration
-
-### Connection Command
-```xml
-<video connect 
-  where name = <connection_name>
-  and protocol = <protocol_type>
-  and interface = <interface_type>
-  and address = <video_source>
-  and video_dbms = <video_database>
-  and video_table = <video_table_name>
-  and detection_dbms = <detection_database>
-  and detection_table = <detection_table_name>
-  and detection_column = <object_type_1>
-  and detection_column = <object_type_2>
-  and detection_column = <object_type_3>
-  and recording_segment_time = <minutes>
-  and detection_ignore_time = <seconds>
+<video connect where
+    name = youtube and
+    protocol = https and
+    interface = url and
+    address = !video_url and
+    video_dbms = customers and
+    video_table = video_table and
+    detection_dbms = customers and
+    detection_table = detection_table and
+    detection_column = person and
+    detection_column = car and
+    detection_column = truck and
+    detection_column = bus and
+    recording_segment_time = 1 and
+    detection_ignore_time = 10
 >
 ```
-
-### Connection Parameters
-
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `name` | Unique identifier for the connection | "youtube" |
-| `protocol` | Connection protocol | "https", "rtsp", "rtmp" |
-| `interface` | Interface type | "url" |
-| `address` | Video source address | YouTube URL, RTSP URL, file path |
-| `video_dbms` | Database for video metadata | "customers" |
-| `video_table` | Table for video data | "video_table" |
-| `detection_dbms` | Database for detection results | "customers" |
-| `detection_table` | Table for detection data | "detection_table" |
-| `detection_column` | Object types to detect | "person", "car", "truck", "bus" |
-| `recording_segment_time` | Video segment duration in minutes | 1, 5, 10 |
-| `detection_ignore_time` | Seconds to ignore repeated detections | 10 |
-
 ### Detection Columns
 Multiple detection columns can be specified to track different object types:
 ```
@@ -184,25 +158,35 @@ and detection_column = truck
 and detection_column = bus
 ```
 
+### Setup no inference on video stream
+```
+<video connect where
+    name = youtube and
+    protocol = https and
+    interface = url and
+    address = !video_url and
+    video_dbms = customers and
+    video_table = video_table and
+>
+```
+
+
 ## Running the Video Stream
 
 ### Start Stream Command
+No detection
 ```
-run video stream 
-  where name = <connection_name>
-  and import_detect = <detection_function_name>
-  and import_display = <display_function_name>
+run video stream where name = youtube and import_display = imshow
 ```
-
-**Parameters:**
-- `name`: Connection name (matches the name in video connect)
-- `import_detect`: Detection function reference (e.g., "initiate_yolo")
-- `import_display`: Display function reference (e.g., "imshow")
+With detection
+```
+run video stream where name = youtube and import_display = imshow and grpc_name = yolov5
+```
 
 ## Complete Example
 
 ```
-# 1. Connect to database
+# 1. Connect to blobs database
 connect dbms customers 
   where type = mongo 
   and ip = 127.0.0.1 
@@ -210,87 +194,73 @@ connect dbms customers
   and user = demo 
   and password = passwd
 
+# 2. Connect to SQL database
+connect dbms customers 
+  where type = psql 
+  and ip = 127.0.0.1 
+  and port = 5432 
+  and user = demo 
+  and password = passwd
+
 # 2. Set video variables
 video_url = "https://www.youtube.com/watch?v=rnXIjl_Rzy4"
 video_host = 127.0.0.1
 video_port = 8888
+video_table=video_table
 
-# 3. Enable detections
-set enable_detections = true
-set default_dbms = customers
+# 3. Import display function
 
-# 4. Import display function
-import function 
-  where import_name = imshow 
-  and lib = external_lib.video_processing.cv2_stream_imshow 
-  and method = init_class
+import function where import_name = imshow and lib = external_lib.video_processing.cv2_stream_imshow and method = init_class
 
-set function params 
-  where import_name = imshow 
-  and param_name = port 
-  and param_type = int 
-  and param_value = !video_port
+set function params where import_name = imshow and param_name = port and param_type = int and param_value = !video_port
 
-set function params 
-  where import_name = imshow 
-  and param_name = host 
-  and param_value = !video_host
+set function params where import_name = imshow and param_name = host and param_value = !video_host
 
-# 5. Import detection function
-import function 
-  where import_name = initiate_yolo 
-  and lib = external_lib.frame_modeling.yolo_detection 
-  and method = init_class
-
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_type 
-  and param_value = darknet
-
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = classes 
-  and param_type = list 
-  and param_value = []
-
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_path1 
-  and param_value = /path/to/yolov4-tiny.weights
-
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = module_path2 
-  and param_value = /path/to/yolov4-tiny.cfg
-
-set function params 
-  where import_name = initiate_yolo 
-  and param_name = coco_path 
-  and param_value = /path/to/coco.names
-
-# 6. Create video connection
-<video connect 
-  where name = youtube
-  and protocol = https
-  and interface = url
-  and address = !video_url
-  and video_dbms = customers
-  and video_table = video_table
-  and detection_dbms = customers
-  and detection_table = detection_table
-  and detection_column = person
-  and detection_column = car
-  and detection_column = truck
-  and detection_column = bus
-  and recording_segment_time = 1
-  and detection_ignore_time = 10
+# 4a. Create video connection (no inference)
+<video connect where
+    name = youtube and
+    protocol = https and
+    interface = url and
+    address = !video_url and
+    video_dbms = customers and
+    video_table = video_table and
 >
 
-# 7. Run the stream
-run video stream 
-  where name = youtube
-  and import_detect = initiate_yolo
-  and import_display = imshow
+# 4b. Connect gRPC client and Create video connection with inference
+<run grpc client where name=yolov5 and ip = 127.0.0.1 and port = 50051 and grpc_dir = /Users/roy/Github-Repos/AnyLog-Network/external_lib/frame_modeling 
+and proto = infer and function = PredictStream and request = "PredictRequest" and response = "PredictResponse" 
+and service = InferenceService and debug = false and invoke = true>
+
+<video connect where
+    name = youtube and
+    protocol = https and
+    interface = url and
+    address = !video_url and
+    video_dbms = customers and
+    video_table = video_table and
+    detection_dbms = customers and
+    detection_table = detection_table and
+    detection_column = person and
+    detection_column = car and
+    detection_column = truck and
+    detection_column = bus and
+    recording_segment_time = 1 and
+    detection_ignore_time = 10
+>
+
+# 5a. Run the stream (no inference)
+
+run video stream where name = youtube and import_display = imshow
+
+# 5b. Run the stream (with inference)
+run video stream where name = youtube and import_display = imshow and grpc_name = yolov5
+
+# 6. View stream in browser
+http://!video_host:!video_port/stream/youtube
+
+# 6. Stop video stream
+exit video where name = youtube
+
 ```
 
 ## Key Features
@@ -317,18 +287,9 @@ run video stream
 2. **Display Thread**: Shows frames in real-time window
 3. **Storage Thread**: Writes frames to disk in segments
 
-## Required Libraries
-- `av` (PyAV): Video/audio container handling
-- `cv2` (OpenCV): Computer vision and display
-- `numpy`: Array operations
-- External detection libraries (e.g., YOLO/Darknet)
-
 ## Error Handling
 The system includes comprehensive error handling for:
 - Connection failures
-- Library import issues
-- Detection model errors
-- Frame processing errors
 - File write failures
 
 ## Statistics Tracking
