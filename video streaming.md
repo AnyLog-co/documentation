@@ -209,22 +209,26 @@ sql customers info = (dest_type = rest) and extend=(+node_name, @ip, @port, @dbm
 
 ```
 # 1. Connect to blobs database
-connect dbms customers 
+<connect dbms customers 
   where type = mongo 
   and ip = 127.0.0.1 
   and port = 27017 
   and user = demo 
-  and password = passwd
+  and password = passwd>
 
 # 2. Connect to SQL database
-connect dbms customers 
+<connect dbms customers 
   where type = psql 
   and ip = 127.0.0.1 
   and port = 5432 
   and user = demo 
-  and password = passwd
+  and password = passwd>
 
 # 2. Set video variables
+# :sample-urls:
+#   - Abbey Road London: https://www.youtube.com/watch?v=57w2gYXjRic
+#   - Times Square: https://www.youtube.com/watch?v=rnXIjl_Rzy4
+#   - twitch : https://www.twitch.tv/citywalking4k
 video_url = "https://www.youtube.com/watch?v=rnXIjl_Rzy4"
 video_host = 127.0.0.1
 video_port = 8888
@@ -249,7 +253,7 @@ set function params where import_name = imshow and param_name = host and param_v
 >
 
 # 4b. Connect gRPC client and Create video connection with inference
-<run grpc client where name=yolov5 and ip = 127.0.0.1 and port = 50051 and grpc_dir = /Users/roy/Github-Repos/AnyLog-Network/external_lib/frame_modeling 
+<run grpc client where name=yolov5 and ip = 127.0.0.1 and port = 50051 and grpc_dir = /app/AnyLog-Network/external_lib/frame_modeling 
 and proto = infer and function = PredictStream and request = "PredictRequest" and response = "PredictResponse" 
 and service = InferenceService and debug = false and invoke = true>
 
