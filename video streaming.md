@@ -194,6 +194,17 @@ Kill display server and stop processing video stream data
 exit video where name = [logical name]
 ```
 
+### 9. Query video data example
+Query no inference
+```sql
+sql customers info = (dest_type = rest) and extend=(+node_name, @ip, @port, @dbms_name, @table_name, +video_table) and format = json and timezone = utc  select file, timestamp from video_table order by timestamp DESC --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using video_table and file using file)
+```
+Query with inference
+```sql
+sql customers info = (dest_type = rest) and extend=(+node_name, @ip, @port, @dbms_name, @table_name, +video_table) and format = json and timezone = utc  select file, timestamp, car, truck, bus, person from detection_table order by timestamp DESC --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using video_table and file using file)
+```
+
+
 ## Complete Example
 
 ```
