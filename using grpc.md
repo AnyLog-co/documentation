@@ -83,17 +83,18 @@ run grpc client where name = [unique name] and ip = [IP] and port = [port] and p
 | table      | N | A target table name (if not provided by a policy). |
 | ingest     | N | The value 'false' ignores data ingestion. The default value is 'true' |
 | add_info   | N | Updates the data retrieved from the server with additional info. For example, **added_info = conn**, includes the connection info. |
+| invoke     | N | Whether the gRPC client is invoked by a process in AnyLog. |
 
 Examples (the < and > signs designate a code block that can be used on the CLI):
 ```anylog
 <run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
     and proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log 
-    and service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false>
+    and service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false and invoke = [true / false]>
 ```
 ```anylog
 <run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
     and proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and service = LogService 
-    and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false>
+    and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false and invoke = [true / false] >
 ```
 
 ### Options for added_info
