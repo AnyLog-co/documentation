@@ -111,6 +111,7 @@ and proto = infer and function = PredictStream and request = "PredictRequest" an
 and service = InferenceService and debug = false and invoke = true>
 ```
 
+### 6. Video connect
 
 In AnyLog operator connect to a  video stream, set the following values in the CLI:
 | Field                  | Value             | Comment                                                                  |
@@ -149,7 +150,7 @@ Example command:
     detection_ignore_time = 10
 >
 ```
-### Detection Columns
+#### Detection Columns
 Multiple detection columns can be specified to track different object types:
 ```
 and detection_column = person
@@ -158,7 +159,7 @@ and detection_column = truck
 and detection_column = bus
 ```
 
-### Setup no inference on video stream
+#### Setup no inference on video stream
 ```
 <video connect where
     name = youtube and
@@ -171,9 +172,9 @@ and detection_column = bus
 ```
 
 
-## Running the Video Stream
+### 7. Running the Video Stream
 
-### Start Stream Command
+#### Start Stream Command
 No detection
 ```
 run video stream where name = youtube and import_display = imshow
@@ -181,6 +182,16 @@ run video stream where name = youtube and import_display = imshow
 With detection
 ```
 run video stream where name = youtube and import_display = imshow and grpc_name = yolov5
+```
+
+View video at 
+
+`http://!video_host:!video_port/stream/[video_connect_name]`
+
+### 8. Exit video stream
+Kill display server and stop processing video stream data
+```
+exit video where name = [logical name]
 ```
 
 ## Complete Example
