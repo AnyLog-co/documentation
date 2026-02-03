@@ -45,12 +45,12 @@ show json file structure
 The name segments are treated as follows:
  
 ```anylog
-dbms name       - The logical database to contain the file data.
-table name      - The logical table to contain the file data.
-data source     - A unique ID to identify the data source (i.e. an ID of the sensor).
-hash value      - A hash value that identifies the file. 
-instructions    - An ID of a policy that determines the mapping of the file data to the table's structure.
-json            - The content of data inside the file is of JSON data.
+dbms name       - The logical database to contain the file data. [mandatory field]
+table name      - The logical table to contain the file data.  [mandatory field]
+data source     - A unique ID to identify the data source (i.e. an ID of the sensor).  [optional field]
+hash value      - A hash value that identifies the file. [optional field]
+instructions    - An ID of a policy that determines the mapping of the file data to the table's structure. [optional field]
+json            - The content of data inside the file is of JSON data. [optional field]
 ```
 
 Users can determine the hash value of a file by issuing the command:
