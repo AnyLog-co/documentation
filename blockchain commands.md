@@ -281,6 +281,39 @@ blockchain get bucket where name = bucket1 merge (blockchain get operator where 
 blockchain get bucket where name = bucket1 merge (blockchain get operator where name = [bucket][operator]) bring.json [bucket][name] [bucket][operator] [bucket][ip] [bucket][port]
 ```
 
+## Retrieving root policies
+
+The following command retrieves ***root policies***:
+```anylog 
+blockchain get root policies
+```
+* A ***root policy*** is a policy that does not reference a parent policy (i.e., it has no parent attribute).
+* A ***child policy*** is a policy that references a parent via the parent attribute.
+
+```
+[{"uns" : {"name" : "Enterprise_B",
+           "namespace" : "Enterprise_B",
+           "source_node" : "AnyLog@24.5.219.50:7848",
+           "id" : "00ddf175fe3e88c1339a2d24426a12d0",
+           "date" : "2026-02-02T23:15:37.737284Z",
+           "ledger" : "local"}},
+ {"uns" : {"name" : "Metric",
+           "namespace" : "Enterprise_B/Metric",
+           "source_node" : "AnyLog@24.5.219.50:7848",
+           "dbms" : "proveit",
+           "table" : "metric_1",
+           "parent" : "00ddf175fe3e88c1339a2d24426a12d0",
+           "id" : "13c6b37e9159a9debf7a5b4fbf68ad37",
+           "date" : "2026-02-02T23:15:39.038982Z",
+           "ledger" : "local"}}]
+```
+In the example above:  
+* Enterprise_B is a root policy because it has no parent attribute.
+* Metric is a child policy because it references Enterprise_B via the parent field.
+
+Root policies define the ***top-level structure***, while child policies extend that structure by 
+inheriting and specializing behavior or metadata.
+
 ## Setting command destination from policies
 
 A common usage of policies is to determine the destination of a command or a query (in case of a query, to overwrite the network protocol's destination).    
