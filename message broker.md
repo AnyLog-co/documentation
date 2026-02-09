@@ -8,7 +8,9 @@ There are 3 ways to configure a node:
 In all cases, user are able to do the following:
 
 * Users can subscribe and retrieve data from one or more topics in a  broker.
-* Users can publish data to a topic  in a broker.
+* Users can publish data directly to an AnyLog node which is configured as a broker.
+* When configured as a message broker, an AnyLog node can automatically generate UNS policies that describe data relationships, 
+enabling hierarchical navigation of data through the Unified Namespace. See details in the [UNS Section](#generating-a-unified-namespace-uns-policies).
 
 # Subscribing to a third party broker
 
@@ -395,6 +397,7 @@ get streaming
 get msg brokers
 ```
  
+* * *
 
 # Configuring an AnyLog node as a message broker
 
@@ -472,7 +475,57 @@ get local broker
 mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
 ```
 
-# AnyLog as a broker receiving REST commands 
+# Generating a Unified Namespace (UNS) policies
+
+If the AnyLog node is configured as a message broker, a special flag (***dynamic = true***) enables automatic generation of UNS policies that describe data relationships. 
+These policies allow users to navigate the data hierarchically using UNS-based relationships.
+
+Notes:
+* There are no mapping instructions or mapping policies in this mode; table names are generated automatically from the topics.
+* ***If the data is in JSON format***, the entire JSON object is ingested: attribute names are mapped to column names, and attribute values to column values.
+* ***If the data is not in JSON format***, the system derives column names from the topic structure (the last segment of each topic).
+In this mode, users must enable the ***UNS Streamer***. This service periodically writes the updated data.
+
+Example configuration:
+
+```anylog
+BROKER = "virtualfactory.proveit.services"
+PORT = 1883
+USERNAME = "proveitreadonly"
+PASSWORD = "proveitreadonlypassword"
+default_dbms = my_dbms
+
+<run msg client where 
+	broker = !BROKER and port=!PORT and 
+	user = !USERNAME and password = !PASSWORD and 
+	master_node = 10.0.0.185:2548 and
+	topic = (
+		name="Enterprise B/Site1/#" and 
+		dbms=proveit and 
+		dynamic = true 
+	)>
+```
+
+## Enabling the UNS Streamer
+
+If data is published at the column level, the UNS Streamer periodically writes the streaming data to files, 
+allowing multiple columns to be combined into tables.
+
+Usage:
+
+```anylog
+run uns streamer where frequency = [time in seconds]
+```
+
+Examples:
+```anylog
+run uns streamer
+run uns streamer where frequency = 3
+```
+
+* * *
+
+# AnyLog as a broker receiving REST commands
 
 This option allows mapping of data streamed to AnyLog using the REST API to the needed schema based on a provided topic.
 This option requires 2 special settings:  
