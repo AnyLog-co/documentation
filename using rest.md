@@ -10,6 +10,13 @@ AnyLog supports multiple types of calls via REST:
 * [Specifying commands in the message URL](#specifying-commands-in-the-message-url)
 * [Specifying commands in the message body](#specifying-commands-in-the-message-body)
 
+## Trace REST calls
+
+Users can trace the REST calls using the following command:
+
+```anylog
+trace level = 1 run rest server
+```
 
 ## Specifying commands and process instructions using headers
 ## #Prerequisites
