@@ -5,6 +5,7 @@ AnyLog Version: 1.4.2510-beta3 [e0d9e1] [2026-03-08 17:52:24]
 1. New options for issuing AnyLog commands via REST: 
     * [Specifying commands in the message URL](../using%20rest.md#specifying-commands-in-the-message-url)
     * [Specifying commands in the message body](../using%20rest.md#specifying-commands-in-the-message-body)
+
 AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../blockchain%20commands.md#retrieving-root-policies)
 ### New Features
 1. New command option: **blockchain get root policies**  
