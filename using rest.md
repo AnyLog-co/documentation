@@ -5,27 +5,23 @@
 Users can interact with the nodes in the network using REST.  
 Using REST, users can execute AnyLog commands over _HTTP_ on any node in the network that is configured to satisfy REST requests.
 
-## Prerequisites
+AnyLog supports multiple types of calls via REST:
+* [Specifying commands and process instructions using headers](#specifying-commands-and-process-instructions-using-headers)
+* [Specifying commands in the message URL](#specifying-commands-in-the-message-url)
+* [Specifying commands in the message body](#specifying-commands-in-the-message-body)
+
+
+## Specifying commands and process instructions using headers
+## #Prerequisites
 
 * A REST client software like [cURL](https://man7.org/linux/man-pages/man1/curl.1.html) or [Postman](https://www.postman.com/).
 * An AnyLog Node that provides a REST connection.
 To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
 ```anylog
-run rest server [ip] [port] [max time]
+run rest server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and timeout = 0 and threads = [threads count] and ssl = [true/false] and ca_org = [certificate authority name] and server_org = [sergver organization name]
 ```
-
-[ip] and [port] are the IP and Port that would be available to REST calls.  
-[max time] is an optional value that determines the max execution time in seconds for a call before being aborted.  
-A 0 value means a call would never be aborted and the default time is 20 seconds.    
-Additional information on the REST API is available at the section [REST requests](background%20processes.md#rest-requests).
+The command details are avaiable [here](background%20processes.md#rest-requests)
   
-## HTTP methods supported
-
-AnyLog commands are supported using the _HTTP_ methods `GET`, `PUT` and `POST`.  
-* _GET_ is used to retrieve information.  
-* _PUT_ is used to add data to nodes in the network.  
-* _POST_ is used as a default method to execute all other AnyLog commands.  
-
 ### The AnyLog commands supported by REST
 
 | AnyLog command | HTTP Method       | Comments                                                                       | 
@@ -85,7 +81,7 @@ Details are available at the [file to](file%20commands.md#copy-a-file-to-a-folde
 
 Details are provided in  the section [Data transfer using a REST API](adding%20data.md#data-transfer-using-a-rest-api).
 
-## Headers setup
+### Headers setup
 
 The header setup for the PUT command is detailed in the section [Configuring the Sender Node](adding%20data.md#configuring-the-sender-node--a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network--).  
 The header setup for GET and POST is the following:
@@ -99,12 +95,12 @@ The header setup for GET and POST is the following:
 
 * Options for _destination_:
 
-| Option                           | Comment                                                                                                                                                               | 
-|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-|  A comma separated IPs and Ports | The command will be delivered on all the specified destinations.                                                                                                      |                                                                                                      
-| local                            | The destination is the connected node.                                                                                                                                |
-| Not specified                    | Same as local.                                                                                                                                                        |
-| network                          | For SQL queries, if destination is **network**, the network protocol will resolve the destination based on a database name and a table name derived from the command. |
+| Option                            | Comment                                                                                                                                                               | 
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| A comma separated IPs and Ports   | The command will be delivered on all the specified destinations.                                                                                                      |                                                                                                      
+| local                             | The destination is the connected node.                                                                                                                                |
+| Not specified                     | Same as local.                                                                                                                                                        |
+| network                           | For SQL queries, if destination is **network**, the network protocol will resolve the destination based on a database name and a table name derived from the command. |
 
 * Options _User-Agent_:  
 Needs to specify "AnyLog" as the product followed by the version. 
@@ -136,16 +132,16 @@ curl --location --request POST '172.18.12.129:2149' \
             “member” : 111669}}>'
 ``` 
 
-## Subscribing to REST calls 
+### Subscribing to REST calls 
 
 Users can associate REST calls with topics and subscribe to the topics such that when data is added, the subscription logic applies to the data.  
 This process is done as follows:
 
-1. Define a MQTT client, assign the broker to _REST_ and identify the User-Agent on the rest calls.     
+1. Define a message client, assign the broker to _REST_ and identify the User-Agent on the rest calls.     
    
    Example: 
   ```anylog
-  <run mqtt client where broker=rest and 
+  <run msg client where broker=rest and 
     user-agent = anylog and 
     topic = (
         name = opcua and 
@@ -171,3 +167,105 @@ curl --location --request POST '10.0.0.78:7849' \
  {"dbms" : "dmci", "table" : "fic16", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"},
  {"dbms" : "dmci", "table" : "ai_mv", "value": 501, "ts": "2019-10-14T17:22:13.050101Z"}]'
 ```
+
+
+## Specifying commands in the message URL
+
+Users can embed commands and instructions directly in the **message URL** instead of specifying them in HTTP headers.  
+This provides a simple way to issue REST requests from environments where setting headers is not convenient (for example, browsers or simple REST clients).
+
+In this method, parameters that normally appear in the headers—such as `User-Agent`, `destination`, and `command`—are included in the URL.
+
+Each `?` in the URL represents a **header directive** and is interpreted by the AnyLog REST server as a header key-value pair.
+
+### Syntax
+```AnyLog
+http://<node_ip>:<port>/?<header>=<value>?<header>=<value>?<header>=<value>
+```
+
+Example 1  – Retrieve node status:
+```AnyLog
+http://10.0.0.78:7849/?User-Agent  = AnyLog/1.23 ? command = get status
+```
+Equivalent request using HTTP headers:
+
+```anylog
+curl --request GET '10.0.0.78:7849' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: get status'
+```
+
+Example 2 – Execute a SQL query across the network
+
+```AnyLog
+http://10.0.0.78:7849/?User-Agent  = AnyLog/1.23 ? destination = network ? command = sql lsl_demo format = table select * from ping_sensor
+```
+This request executes a SQL query across the network:
+
+```AnyLog
+sql lsl_demo format=table select * from ping_sensor```
+```
+Parameters interpreted from the URL:
+
+| URL Parameter | Equivalent Header                                   |
+|---------------|-----------------------------------------------------|
+| User-Agent    | AnyLog/1.23                                         |
+| destination   | network                                             |
+| command       | sql lsl_demo format=table select * from ping_sensor |
+
+
+## Specifying commands in the message body
+
+When using the **POST** HTTP method, users can include commands directly in the **message body** instead of using headers or URL parameters.
+
+In this approach, the message body contains a **JSON structure** describing the command to execute.  
+The AnyLog REST server parses the JSON payload and executes the corresponding AnyLog command.
+
+### JSON structure
+
+The message body supports the following key–value pairs:
+
+| Key | Description |
+|---|---|
+| `command` | An AnyLog command to execute. |
+| `dbms` | The database name used for executing a SQL statement. |
+| `sql` | The SQL statement to execute on the specified database. |
+
+The commands derived from these fields are interpreted and executed by the AnyLog node receiving the request.
+
+---
+
+### Example 1 – Executing an AnyLog command
+
+```anylog
+curl --location --request POST 'http://10.0.0.78:7849' \
+--header 'Content-Type: application/json' \
+--data '{
+  "command": "get status"
+}'
+```
+This request executes the following AnyLog command on the node:
+```anylog
+get status
+```
+
+Example 2 – Executing a SQL query
+```anylog
+curl --location --request POST 'http://10.0.0.78:7849' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dbms": "lsl_demo",
+  "sql": "select * from ping_sensor"
+}'
+```
+This request executes the SQL command:
+```anylog
+sql lsl_demo select * from ping_sensor
+```
+
+Notes:
+* The request must use the POST method.
+* The body must be formatted as valid JSON.
+
+
+
