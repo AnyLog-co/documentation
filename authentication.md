@@ -523,20 +523,20 @@ id generate certificate request where [command options]
 
 The command options:
 
-| Option        | Explanation  |
-| ------------- | ------------|
-| password  | A password to protect the generated private key. |
-| country  | The [two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the country where your organization is located. |
-| locality  | Province, region, county or state (e.g. West Sussex, Normandy, New Jersey). |
-| state  | Town, city, village. |
-| org  | Organization name.|
-| alt_names  | An extension to the X.509 specification that allows specifying additional host names for a single SSL certificate.|
-| hostname  | The URL representing the node that issues the CR.|
-| ip  | The IP of the node that issues the CR.|
+| Option       | Explanation                                                                                                                          |
+| ------------ |--------------------------------------------------------------------------------------------------------------------------------------|
+| password  | A password to protect the generated private key.                                                                                     |
+| country  | The [two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the country where your organization is located.      |
+| locality  | Province, region, county or state (e.g. West Sussex, Normandy, New Jersey).                                                          |
+| state  | Town, city, village.                                                                                                                 |
+| org  | Organization name.                                                                                                                   |
+| alt_name  | One or more IPs - An extension to the X.509 specification that allows specifying additional host names for a single SSL certificate. |
+| hostname  | The URL representing the node that issues the CR.                                                                                    |
+| ip  | The IP of the node that issues the CR.                                                                                               |
 
 Example:
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_names = 127.0.0.1 and hostname =  acme.co and ip = "192.56.76.4"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and allt_name = 10.0.0.78 and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
 ```
 
 When the command is issued 2 files are generated:  
@@ -580,7 +580,7 @@ When the command is issued 1 file is generated:
 The following example generates generate certificate request for the AnyLog node.
 
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_names = 127.0.0.1 and hostname =  anylog.co and ip = "192.38.78.8"
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and hostname =  anylog.co and ip = "192.38.78.8"
 ```
 
 Signing the CR using the CA private key:
@@ -635,3 +635,60 @@ The client is configured using the following files:
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
 An example of Postman configuration is available at [using postman](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
+
+
+## Examples using https 
+
+### Generating certificates:
+
+```anylog
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
+
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 10.0.0.78 and hostname =  acme.co and ip = "10.0.0.78"
+
+id sign certificate request where ca_org = AnyLog and server_org = "Acme Inc"
+
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and alt_name = 24.5.219.50 and hostname =  anylog.co and ip = "10.0.0.78"
+
+id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
+
+```
+
+### cURL command using certificate
+
+```shell
+curl --location --request GET https://10.0.0.78:7849 \
+  --header "User-Agent: AnyLog/1.23" \
+  --header "command: get status" \
+  --cert "/mnt/d/Node/AnyLog-Network/data/pem/server-acme-inc-public-key.crt" \
+  --key "/mnt/d/Node/AnyLog-Network/data/pem/server-acme-inc-private-key.key" \
+  --cacert "/mnt/d/Node/AnyLog-Network/data/pem/ca-anylog-public-key.crt" \
+  --max-time 30 -w "\n"
+```
+
+### Python calls using https
+
+```
+import requests
+url = "https://10.0.0.78:7849"
+
+headers = {
+    "User-Agent": "AnyLog/1.23",
+    "command": "get status"
+}
+
+response = requests.get(
+    url,
+    headers=headers,
+    cert=(
+        "D:/Node/AnyLog-Network/data/pem/server-acme-inc-public-key.crt",
+        "D:/Node/AnyLog-Network/data/pem/server-acme-inc-private-key.key"
+    ),
+    verify="D:/Node/AnyLog-Network/data/pem/ca-anylog-public-key.crt",
+    timeout=30
+)
+
+print("Status Code:", response.status_code)
+print("Response Body:")
+print(response.text)
+```
