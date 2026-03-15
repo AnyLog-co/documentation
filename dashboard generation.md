@@ -4,12 +4,12 @@
 
 This guide explains how to ask an LLM (Claude) to generate an HTML dashboard that queries data from an AnyLog node. Four connection modes are supported:
 
-| Mode | Description | Use When |
-|------|-------------|----------|
-| **Direct HTTP** | Command embedded in the URL, called directly from the browser | Node is accessible over HTTP on the local network |
-| **Direct POST** | AnyLog headers and command delivered as JSON in the POST body, called directly from the browser | Node is accessible over HTTP and POST is preferred over URL embedding |
-| **POST to Flask Proxy** | Browser POSTs to a local Flask proxy which forwards to AnyLog using mTLS | Node requires mTLS certificates or HTTPS |
-| **CLI** | Returns the native AnyLog command string for manual testing | Verifying a query before building a dashboard |
+| Mode | Description                                                                                     | Use When |
+|------|-------------------------------------------------------------------------------------------------|----------|
+| **Direct HTTP** | Command embedded in the URL, called directly from the browser                                   | Node is accessible over HTTP on the local network |
+| **Direct POST** | AnyLog headers and command delivered as JSON in the POST body, called directly from the browser | Node is accessible over HTTP and POST |
+| **POST to Flask Proxy** | Browser POSTs to a local Flask proxy which forwards to AnyLog using Mutual TLS          | Node requires mTLS certificates or HTTPS |
+| **CLI** | Returns the native AnyLog command string for manual testing                                     | Verifying a query before building a dashboard |
 
 ---
 
