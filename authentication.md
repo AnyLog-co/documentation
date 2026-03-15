@@ -659,7 +659,7 @@ id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
 ```shell
 curl --location --request GET https://10.0.0.78:7849 \
   --header "User-Agent: AnyLog/1.23" \
-  --header "command: get status" \
+  --header "command: get status where format = json" \
   --cert "/mnt/d/Node/AnyLog-Network/data/pem/server-acme-inc-public-key.crt" \
   --key "/mnt/d/Node/AnyLog-Network/data/pem/server-acme-inc-private-key.key" \
   --cacert "/mnt/d/Node/AnyLog-Network/data/pem/ca-anylog-public-key.crt" \
@@ -674,7 +674,7 @@ url = "https://10.0.0.78:7849"
 
 headers = {
     "User-Agent": "AnyLog/1.23",
-    "command": "get status"
+    "command": "get status where format = json"
 }
 
 response = requests.get(
