@@ -1,0 +1,324 @@
+# AnyLog Dashboard Generation Guide
+
+## Overview
+
+This guide explains how to ask an LLM (Claude) to generate an HTML dashboard that queries data from an AnyLog node. Two connection modes are supported — **direct HTTP** (no proxy) and **HTTPS via the AnyLog Flask proxy**. A **CLI mode** is also available for testing commands before building a dashboard.
+
+---
+
+## How to Ask for a Dashboard
+
+### The Minimum Required Information
+
+Every dashboard request must include all of the following:
+
+| Information | Why It's Needed | Example |
+|-------------|----------------|---------|
+| **Connection type** | Determines how the dashboard calls AnyLog | `direct HTTP` or `Flask proxy` |
+| **Node address** | The IP and port of the AnyLog node | `24.5.219.50:7849` |
+| **Database name** | The AnyLog database (dbms) to query | `agg_anotherpeak` |
+| **Table name** | The table to query | `battery_pack_logs_gcurrent` |
+| **What data to show** | The SQL query intent | `last 10 rows` |
+| **Response format** | Tells the LLM how to parse the response | `json:list` |
+| **Editable node** | Whether the user can change the node at runtime | `yes / no` |
+
+---
+
+### The Ideal Prompt Template
+
+```
+Create an HTML dashboard that uses <connection type> against AnyLog node <IP>:<PORT>
+to show <query description> from dbms <database> and table <table>.
+The AnyLog response is in json:list format — an array of JSON objects.
+Allow the user to change the node address in the dashboard.
+```
+
+---
+
+## Testing with the AnyLog CLI Before Building a Dashboard
+
+Before building a dashboard it is useful to verify the query works correctly by running it on the AnyLog CLI first. Ask the LLM to return the native AnyLog CLI command for any query.
+
+**What to say:**
+```
+Show me the AnyLog CLI command to query the last 10 rows from dbms agg_anotherpeak
+and table battery_pack_logs_gcurrent.
+```
+
+**What you get back — a command to paste directly into the AnyLog CLI:**
+```
+sql agg_anotherpeak format = json:list and stat = false SELECT * FROM battery_pack_logs_gcurrent ORDER BY timestamp DESC LIMIT 10
+```
+
+**Other CLI testing examples:**
+
+| What to say | CLI command returned |
+|-------------|---------------------|
+| `"Show me the CLI command to get node status"` | `get status where format = mcp` |
+| `"Show me the CLI command to list all tables in dbms agg_anotherpeak"` | `blockchain get (table) where dbms = agg_anotherpeak bring.json.unique [*][name]` |
+| `"Show me the CLI command to count rows in battery_pack_logs_gcurrent"` | `sql agg_anotherpeak format = json:list and stat = false SELECT COUNT(*) FROM battery_pack_logs_gcurrent` |
+
+**Recommended testing workflow:**
+
+1. Ask for the **CLI command** → paste into the AnyLog CLI → verify data comes back correctly
+2. Ask for the **HTTP URL** → paste into a browser → verify the same data comes back
+3. Ask for the **dashboard** → the LLM builds it using the same verified command
+
+This ensures the query is correct before any dashboard code is generated, avoiding debugging caused by bad SQL or wrong table/dbms names.
+
+---
+
+## Connection Types
+
+### 1. Direct HTTP (no proxy)
+
+The dashboard calls the AnyLog node directly. Headers and the command are embedded in the URL.
+
+- Use when: the dashboard and the AnyLog node are on the same network, or the node is publicly accessible over HTTP.
+- Say: **"use a direct HTTP call"**
+
+The URL format is:
+```
+http://<IP>:<PORT>/?User-Agent=AnyLog/1.23?destination=network?command=<command>
+```
+
+Example JavaScript `fetch` call in the dashboard:
+```javascript
+const cmd  = `sql agg_anotherpeak format = json:list and stat = false SELECT * FROM battery_pack_logs_gcurrent ORDER BY timestamp DESC LIMIT 10`;
+const url  = `http://24.5.219.50:7849/?User-Agent=AnyLog/1.23?destination=network?command=${encodeURIComponent(cmd)}`;
+
+const res  = await fetch(url);
+const text = await res.text();
+const rows = JSON.parse('[' + text.trim().replace(/,\s*$/, '') + ']');
+```
+
+**Example prompt:**
+```
+Create an HTML dashboard using a direct HTTP call to AnyLog node 24.5.219.50:7849.
+Show the last 10 rows from dbms agg_anotherpeak and table battery_pack_logs_gcurrent.
+The response is in json:list format.
+Allow the user to change the node address.
+```
+
+---
+
+### 2. HTTPS via Flask Proxy (`anylog_proxy.py`)
+
+For secure connections (mTLS), the dashboard calls the **AnyLog Flask proxy** (`anylog_proxy.py`), which holds the certificates and forwards requests to the AnyLog node over HTTPS.
+
+- Use when: the AnyLog node requires mTLS certificates, or the connection must go through a secure proxy.
+- Say: **"use the AnyLog Flask proxy"**
+
+#### How the proxy works
+
+The proxy is a lightweight Flask server (`anylog_proxy.py`) that:
+- Holds the mTLS certificates (`--cert`, `--key`, `--cacert`)
+- Exposes a single endpoint: `POST /api/query`
+- Accepts `{ "url": "<node url>", "command": "<anylog command>" }` in the request body
+- Forwards the request to the AnyLog node using mTLS
+- Returns the JSON response to the dashboard
+
+#### Starting the proxy
+
+```bash
+pip install flask flask-cors requests
+
+python anylog_proxy.py \
+    --cert   /path/to/server-acme-inc-public-key.crt \
+    --key    /path/to/server-acme-inc-private-key.key \
+    --cacert /path/to/ca-anylog-public-key.crt \
+    --port   5000
+```
+
+The proxy runs at `http://localhost:5000` by default. The dashboard is also served from the proxy at `http://localhost:5000`.
+
+#### How the dashboard calls the proxy
+
+```javascript
+const PROXY   = 'http://localhost:5000';
+const NODE    = 'https://24.5.219.50:7849';
+const command = 'sql agg_anotherpeak format = json:list and stat = false SELECT * FROM battery_pack_logs_gcurrent ORDER BY timestamp DESC LIMIT 10';
+
+const res  = await fetch(`${PROXY}/api/query`, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ url: NODE, command: command })
+});
+
+const data = await res.json();
+const rows = Array.isArray(data) ? data : (data.raw ? [] : [data]);
+```
+
+> **Note:** The proxy parses the AnyLog response and returns it as JSON — the dashboard does not need to handle raw text parsing when using the proxy.
+
+#### Example prompt
+```
+Create an HTML dashboard using the AnyLog Flask proxy at http://localhost:5000.
+The AnyLog node is at https://24.5.219.50:7849.
+Show the last 10 rows from dbms agg_anotherpeak and table battery_pack_logs_gcurrent.
+The response is in json:list format.
+Allow the user to change both the proxy address and the node address.
+```
+
+#### Proxy health check
+
+```
+GET http://localhost:5000/api/health
+```
+
+Response:
+```json
+{
+  "status": "ok",
+  "cert":   "/path/to/cert.crt",
+  "key":    "/path/to/key.key",
+  "cacert": "/path/to/ca.crt"
+}
+```
+
+---
+
+### 3. CLI Only
+
+Returns the native AnyLog command string for manual execution on the node CLI. Used for testing before building a dashboard — see the **Testing with the AnyLog CLI** section above.
+
+- Say: **"show me the AnyLog CLI command"**
+
+---
+
+## AnyLog Response Format
+
+AnyLog SQL queries using `format = json:list` return rows as JSON objects separated by commas and newlines, wrapped in `[ ]`:
+
+```json
+ [{"row_id": 11, "timestamp": "2026-03-11 21:27:41", "avg_val": -0.125, "events": 8},
+{"row_id": 10, "timestamp": "2026-03-11 21:26:32", "avg_val": -0.125, "events": 8},
+{"row_id": 9,  "timestamp": "2026-03-11 21:25:24", "avg_val": -0.125, "events": 8}]
+```
+
+**Direct HTTP dashboards** must read the response as text and parse manually:
+```javascript
+const text = await res.text();
+const rows = JSON.parse('[' + text.trim().replace(/,\s*$/, '') + ']');
+```
+
+**Flask proxy dashboards** receive already-parsed JSON from the proxy — no manual parsing needed.
+
+Always include `"json:list format"` in your prompt so the LLM generates the correct parsing logic for whichever connection type you use.
+
+---
+
+## Optional Dashboard Features
+
+| Feature | What to say |
+|---------|-------------|
+| Editable node address | `"allow the user to change the node address"` |
+| Editable proxy address | `"allow the user to change the proxy address"` |
+| Auto-refresh | `"auto-refresh every 30 seconds"` |
+| Debug panel | `"include a debug panel showing the URL sent, the raw response, and any errors"` |
+| Summary statistics | `"show summary statistics above the table"` |
+| Specific columns only | `"show only the timestamp, avg_val and events columns"` |
+| Time filter | `"show data from the last 24 hours"` |
+| Multiple tables | `"show data from table A and table B side by side"` |
+
+---
+
+## Common Mistakes and How to Avoid Them
+
+### Query returns wrong data or no data
+
+**Cause:** The SQL query or dbms/table names are wrong.
+
+**Fix:** Always test with the **CLI command first** before building the dashboard. Ask: `"Show me the AnyLog CLI command for <your query>"`, run it on the CLI, and confirm data is returned before asking for the dashboard.
+
+### Direct HTTP dashboard fails to parse the response
+
+**Cause:** The LLM used `res.json()` directly, which fails because AnyLog's `json:list` response has leading whitespace or non-standard formatting.
+
+**Fix:** Always mention `"json:list format"` in the prompt so the LLM reads the response as text first and wraps it in `[ ]` before parsing.
+
+### Node address is hardcoded and cannot be changed
+
+**Cause:** The LLM hardcoded the node address without making it editable.
+
+**Fix:** Always include `"allow the user to change the node address"` in your prompt.
+
+### Flask proxy dashboard posts to the wrong endpoint
+
+**Cause:** The LLM called the proxy incorrectly.
+
+**Fix:** Specify `"use the AnyLog Flask proxy"` in your prompt. The proxy endpoint is always `POST /api/query` with body `{ "url": "<node>", "command": "<command>" }`.
+
+### Dashboard shows an error but it's unclear why
+
+**Cause:** No visibility into what was sent or received.
+
+**Fix:** Add `"include a debug panel"` to your prompt. It shows the exact URL or request body used, the raw response, the parse result, and the error message.
+
+---
+
+## Full Example Prompts
+
+### Step 1 — Test on CLI first
+```
+Show me the AnyLog CLI command to query the last 10 rows from dbms agg_anotherpeak
+and table battery_pack_logs_gcurrent.
+```
+
+### Step 2 — Verify via HTTP in the browser
+```
+Show me the HTTP URL to query the last 10 rows from dbms agg_anotherpeak
+and table battery_pack_logs_gcurrent against node 24.5.219.50:7849.
+```
+
+### Step 3a — Build direct HTTP dashboard
+```
+Create an HTML dashboard using a direct HTTP call to AnyLog node 24.5.219.50:7849.
+Show the last 10 rows from dbms agg_anotherpeak and table battery_pack_logs_gcurrent.
+The response is in json:list format.
+Allow the user to change the node address.
+Include a debug panel showing the URL sent, the raw response, and any errors.
+```
+
+### Step 3b — Build Flask proxy dashboard
+```
+Create an HTML dashboard using the AnyLog Flask proxy at http://localhost:5000.
+The AnyLog node is at https://24.5.219.50:7849.
+Show the last 10 rows from dbms agg_anotherpeak and table battery_pack_logs_gcurrent.
+The response is in json:list format.
+Allow the user to change both the proxy address and the node address.
+Include a debug panel showing the request body sent to the proxy, the raw response, and any errors.
+```
+
+---
+
+## Quick Reference Card
+
+```
+✅ Recommended workflow:
+   1. Ask for the CLI command → test on AnyLog CLI
+   2. Ask for the HTTP URL   → test in a browser
+   3. Ask for the dashboard  → build with confidence
+
+✅ Always specify in the dashboard prompt:
+   - Connection type:  "direct HTTP"  or  "Flask proxy"
+   - Node address:     IP:PORT  (e.g. 24.5.219.50:7849)
+   - Database:         dbms name
+   - Table:            table name
+   - Query:            what data to show
+   - Format:           "json:list format"
+   - Editable node:    "allow the user to change the node address"
+
+✅ For Flask proxy, also specify:
+   - Proxy address:    e.g. http://localhost:5000
+   - "allow the user to change the proxy address"
+
+✅ Recommended additions:
+   - "include a debug panel" — makes failures easy to diagnose
+   - "auto-refresh every N seconds" — for live data monitoring
+
+✅ Flask proxy endpoint:
+   - POST /api/query
+   - Body: { "url": "<node url>", "command": "<anylog command>" }
+   - Health: GET /api/health
+```

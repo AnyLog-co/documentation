@@ -74,6 +74,10 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
   * [Querying Across the Network](network%20processing.md)
 
+* **Managing Video**
+  * [video streaming](video%20streaming.md)
+
+
 * **Security & Authentication**
   * [Authentication](authentication.md)
   * [Secure Network](secure%20network.md)
@@ -101,6 +105,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [PowerBI](northbound%20connectors/PowerBI.md)
   * [Google Drive](northbound%20connectors/Google.md)
   * [Generic Connector](northbound%20connectors/postgres%20connector.md)
+  * [Dashboard Generation](dashboard%20generation)
 
 * **Sample Code**
   * [Python Scripts](examples/Sample%20Python%20Scripts)
