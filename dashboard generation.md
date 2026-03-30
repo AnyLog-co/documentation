@@ -32,13 +32,26 @@ Every dashboard request must include all of the following:
 ### Prompt Template
 
 ```
-Create an HTML dashboard that uses <connection type> against AnyLog node <IP>:<PORT>
-to show <query description> from dbms <database> and table <table>.
-The AnyLog response is in json:list format — an array of JSON objects.
-Allow the user to change the node address in the dashboard.
-```
+Create a client-side HTML dashboard that connects directly to an AnyLog node at <IP>:<PORT>.
 
----
+Response formats:
+
+For data queries, the AnyLog response is in json:list format, meaning an array of JSON objects.
+For metadata queries (for example, UNS queries), the response is a list of JSON objects.
+
+Requirements:
+
+1) The dashboard must allow the user to edit the AnyLog node address (IP:PORT) in the UI.
+2) Prefer an increment query over a SQL query whenever the requested data can be retrieved that way.
+3) If multiple values or projections can be retrieved in one SELECT, use a single statement instead of one statement per field.
+4) Log every request sent to AnyLog and every response received in a section of the dashboard.
+5) If a request fails, display in a section of the dashboard:
+a. the full cURL equivalent of the request,
+b. the returned error value,
+c. the returned error message.
+
+Generate the full dashboard code and include the AnyLog request construction and response-handling logic.   
+```
 
 ## Recommended Workflow — Test Before You Build
 
