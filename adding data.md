@@ -217,15 +217,15 @@ Command details are available [here](monitoring%20calls.md#get-streaming).
 
 With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key _topic_. If a topic value is not provided, the default topic is used.  
-The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
+The default topic is the first topic described in the command ```run msg client ... ```. Command Details are available 
 in the [Subscribing to REST calls](using%20rest.md#subscribing-to-rest-calls) section.
 
 **MQTT Call**: 
 
-In order to view the data sent via POST, the user needs to first specify the `run mqtt client` command. The following 
+In order to view the data sent via POST, the user needs to first specify the `run msg client` command. The following 
 example is correlated to the sample POST commands.  
 ```
-<run mqtt client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
+<run msg client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
   name=new_data and 
   dbms=bring [dbms] and 
   table=bring [table] and 
