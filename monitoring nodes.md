@@ -168,7 +168,7 @@ disk_percentage = get disk percentage d:\
 ```
 * Getting the status information:
 ```anylog
-run client (10.0.0.78:7848) get status where include = !cpu_percent and include = !cpu_temperature and include = !disk_free and include = !disk_percentage
+run client (10.0.0.78:7848) get status where include = !!cpu_percent and include = !!cpu_temperature and include = !!disk_free and include = !!disk_percentage
 [From Node 10.0.0.78:7848]
 {'status' : 'AnyLog@24.23.250.144:7848 running',
  'cpu_percent' : '6.7',
