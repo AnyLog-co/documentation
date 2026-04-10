@@ -53,6 +53,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Metadata Management](metadata%20management.md)
   * [Kubernetes & Docker Deployment of AnyLog](deployments) 
   * [Setting Test Suites](test%20suites.md)
+  * [Launching Helpers](helpers.md#using-helpers)
   
 * **AnyLog Commands**
   * [Main Commands](anylog%20commands.md)
@@ -67,6 +68,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Mapping data to tables](mapping%20data%20to%20tables.md)
   * [JSON Data Transformation](json%20data%20transformation.md)
   * [Storing Images](image%20mapping.md)
+  * [Bucket Data Management](bucket%20data%20management.md)
   
 * **Managing Metadata**
   * [Blockchain Commands](blockchain%20commands.md)
@@ -82,12 +84,17 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
   * [Aggregations](aggregations)
   * [Monitoring File Status](managing%20data%20files%20status.md)
+  * [DYnamic Statistcs](helpers.md#-dynamic-monitoring-of-internal-processes)
     
 * **Querying Data**
   * [Data Queries](queries.md)
   * [SQL Setup](sql%20setup.md)
   * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
   * [Querying Across the Network](network%20processing.md)
+
+* **Managing Video**
+  * [video streaming](video%20streaming.md)
+
 
 * **Security & Authentication**
   * [Authentication](authentication.md)
@@ -116,6 +123,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [PowerBI](northbound%20connectors/PowerBI.md)
   * [Google Drive](northbound%20connectors/Google.md)
   * [Generic Connector](northbound%20connectors/postgres%20connector.md)
+  * [Dashboard Generation](dashboard%20generation)
 
 * **Sample Code**
   * [Python Scripts](examples/Sample%20Python%20Scripts)

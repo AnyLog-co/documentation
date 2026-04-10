@@ -45,12 +45,12 @@ show json file structure
 The name segments are treated as follows:
  
 ```anylog
-dbms name       - The logical database to contain the file data.
-table name      - The logical table to contain the file data.
-data source     - A unique ID to identify the data source (i.e. an ID of the sensor).
-hash value      - A hash value that identifies the file. 
-instructions    - An ID of a policy that determines the mapping of the file data to the table's structure.
-json            - The content of data inside the file is of JSON data.
+dbms name       - The logical database to contain the file data. [mandatory field]
+table name      - The logical table to contain the file data.  [mandatory field]
+data source     - A unique ID to identify the data source (i.e. an ID of the sensor).  [optional field]
+hash value      - A hash value that identifies the file. [optional field]
+instructions    - An ID of a policy that determines the mapping of the file data to the table's structure. [optional field]
+json            - The content of data inside the file is of JSON data. [optional field]
 ```
 
 Users can determine the hash value of a file by issuing the command:
@@ -217,15 +217,15 @@ Command details are available [here](monitoring%20calls.md#get-streaming).
 
 With the POST command, the data is mapped to a destination format. The mapping is determined by the topic which is provided 
 in the headers as the value for the key _topic_. If a topic value is not provided, the default topic is used.  
-The default topic is the first topic described in the command ```run mqtt client ... ```. Command Details are available 
+The default topic is the first topic described in the command ```run msg client ... ```. Command Details are available 
 in the [Subscribing to REST calls](using%20rest.md#subscribing-to-rest-calls) section.
 
 **MQTT Call**: 
 
-In order to view the data sent via POST, the user needs to first specify the `run mqtt client` command. The following 
+In order to view the data sent via POST, the user needs to first specify the `run msg client` command. The following 
 example is correlated to the sample POST commands.  
 ```
-<run mqtt client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
+<run msg client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
   name=new_data and 
   dbms=bring [dbms] and 
   table=bring [table] and 

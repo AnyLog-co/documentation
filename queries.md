@@ -191,6 +191,9 @@ The casting options are detailed in the table below:
 | lstrip                  | Remove leading spaces.                                                                                                                                                         |
 | rstrip                  | Remove trailing spaces.                                                                                                                                                        |
 | timediff                | Return time difference between date and time returned from the databse and a date and time string (or now()). The returned format is HH:MM:SS.f                                |
+| timezone                | Change the timezone - if the format of a timestamp column is modified by casting, the query timezone will not apply, but the casting timezone will apply.                      |
+| replace(old by new)     | Replace a substring once.                                                                                                                                                      |
+
 
 
 **Note**: multiple casting is allowed.  
@@ -272,6 +275,11 @@ The following example replaces, for each returned row, the min_val with the resu
 ```anylog
 run client () sql power_plant timezone = local SELECT increments(timestamp), max(timestamp) as timestamp , min(a_current)::function(([min_val] + [max_val]) / 2) as min_val , avg(a_current) as avg_val , max(a_current) as max_val from bf where timestamp >= '2024-07-19T18:57:46.909Z' and timestamp <= '2024-07-20T00:57:46.909Z' and (id=1 ) limit 861;
 ```
+The following example concatenates columns:
+```anylog
+run client () sql lsl_demo format = table "select min(insert_timestamp)::function(' - ' + '[min]' + ' - ') as min, max(insert_timestamp) as max from ping_sensor"
+```
+    
 
 ### Example 6 - Function with if statement
 
@@ -281,18 +289,31 @@ run client () sql power_plant timezone = local SELECT increments(timestamp), max
 ```
 
 ### Example 7 - return the time difference
-The example belows return time difference:
+The examples belows return time difference:
 ```anylog
 run client () sql orics stat = false "select max(insert_timestamp)::timediff(now()) as time_diff FROM r_50"
 {"Query": [{"time_diff": "00:02:33.50343"}]}
 
 run client () sql orics stat = false "select max(insert_timestamp)::timediff('2024-08-29T01:47:32.554411Z') as time_diff FROM r_50"
 {"Query": [{"time_diff": "04:04:33.44671"}]}
+
+run client () sql lsl_demo "select max(insert_timestamp), min(insert_timestamp)::timediff(max(insert_timestamp)) as diff from ping_sensor"
+
+run client () sql lsl_demo "select max(insert_timestamp) as max, min(insert_timestamp)::timediff(max) as diff from ping_sensor"
+
 ```
 
+### Example 8 - timezone and datetime
+The example below changes the timezone and modified the time format:
+```anylog
+< run client ()  sql new_company format=table and stat=false SELECT increments(second, 1, timestamp), 
+        min(timestamp)::timezone(local)::datetime('%d-%b-%Y %H:%M') as min_ts, max(timestamp)::timezone(local)::datetime('%d-%b-%Y %H:%M') as max_ts, 
+        min(value) as min_val, avg(value)::float(3) as avg_val, max(value) as max_val FROM rand_data 
+    WHERE timestamp >= '2024-12-20 00:00:00' AND timestamp <= '2025-01-10 23:59:59' ORDER BY min_ts DESC LIMIT 1>
+```
 
 ## Get datetime command
-Using the command `get datetime` users can translate a date-time function to the date-time string.  
+Using the command `get datetime` users can translate a date-time function to the date-time string.    
 **Usage**:
 ```anylog
 get datetime timezone [date-time function]

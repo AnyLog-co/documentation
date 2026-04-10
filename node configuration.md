@@ -125,7 +125,7 @@ The command **get system threads** outputs the groups, and information on each g
 
 Usage:
 ```anylog
-get system threads where pool = [pool type] and with_details = [true/false] and reset = [true/false]
+get system threads where pool = [pool type] and details = [true/false] and reset = [true/false]
 ```
 Options:
 * pool - The pool name and is one of the following:
@@ -133,7 +133,7 @@ Options:
   * REST - The threads that listen to REST requests from 3rd party applications and execute the REST requests.
   * Message - The threads that listen to requests from data sources (like MQTT Publish) and execute the requests.
   * query - A group of threads that process queries on the operator node.
-* with_details - A True value provides statistics on each thread in the pool
+* details - A True value provides statistics on each thread in the pool
 * reset - A True value resets statistics
 
 Example:

@@ -290,4 +290,11 @@ Processes that are profiled are detailed in the chart below:
 | post         | Profile REST POST                         |
 
 
+### Example:
+Set environment Variable: ```PROFILER=true```
 
+```anglog
+set profiler on where target = operator         # Start operator profiling
+set profiler off where target = operator        # Stop profiling
+get profiler output where target = operator     # Get profiling output
+```

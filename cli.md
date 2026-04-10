@@ -177,14 +177,26 @@ a = 1
 b = incr !a 3
 ```
 
-### Using th "+" sign on the CLI
+### Using the `+` Sign on the CLI
 
-The plus sign concatenates dictionary strings.  
-In the example below, the value set in the variable **c** is 1234:
-```anylog 
+The `+` sign in the CLI is useful for building strings from AnyLog variables, such as `!my_var`, and from system environment variables, such as `$MY_VAR`.
+
+The `+` sign concatenates strings and variable values.
+
+In the example below, the value assigned to **c** is `1234`:
+
+```anylog
 a = 12
 b = 34
 c = !a + !b
+```
+
+Additionally, you can concatenate set environment variables. In the example below, the variable **c** is `127.0.0.1:5432/status`:
+```anylog
+export PATH=/status
+a = 127.0.0.1
+b = 5432
+c = !a + : + !b + $PATH
 ```
 
 ## The "python" command
