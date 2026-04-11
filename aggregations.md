@@ -37,8 +37,8 @@ In practice:
 
 Two commands provide different perspectives on the aggregated data:
 
-* ```get aggregation``` - Displays results organized by aggregation (processing) time intervals.
-* ```get aggregation by time``` - Displays results ordered by the source data timestamps, allowing analysis based on 
+* [get aggregation](#-retrieve-aggregations) - Displays results organized by aggregation (processing) time intervals.
+* [get aggregation by time](#retrieve-aggregations-by-time) - Displays results ordered by the source data timestamps, allowing analysis based on 
 the original event time rather than processing time.
 
 ## Notes
@@ -211,7 +211,7 @@ Example:
 set aggregation encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
 ```
 
-## 📥 Retrieve Aggregations
+## Retrieve Aggregations
 
 The command `get aggregation` retrieves the aggregation definitions and runtime statistics configured with 
 the `set aggregation` command.
