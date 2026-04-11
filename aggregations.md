@@ -179,13 +179,31 @@ set aggregation encoding where dbms = lsl_demo_ok and table = rand_table and enc
 
 ## 📥 Retrieve Aggregations
 
-The command `get aggregation` retrieves the monitored data configured via the `set aggregation` command.
+The command `get aggregation` retrieves the aggregation definitions and runtime statistics configured with 
+the `set aggregation` command.
+
+### Syntax
+```anylog
+get aggregation [where <condition>]
+```
+
+### Supported Filter Options
+
+| Keyword | Description                                                             |
+|---------|-------------------------------------------------------------------------| 
+| dbms    | The name of the source DBMS processed in the aggregation.               |
+| table   | TThe name of the source table processed in the aggregation.             |
+| value_column    | The name of the value column processed in the aggregation.              |
+| format    | Output format. Supported values: table or json. Default is table.       |
+| function | Aggregation function requested. Supported values: min, max, avg, count. |
+| round    | If set to true, rounds min, max, and avg values to 3 decimal digits.    |
+
 
 ### 🔧 Usage Examples
 
 ```anylog
 get aggregation 
-get aggregation where dbms = orics
+get aggregation where dbms = orics and round = true
 get aggregation where dbms = orics and table = r_50
 get aggregation where dbms = orics and table = r_50 and value_column = seal_storage
 ```
