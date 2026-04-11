@@ -9,10 +9,44 @@ alerts, and monitoring logic.
 
 This approach enables efficient real-time analytics on streaming data without requiring downstream batch processing or data centralization.
 
+## Aggregation time intervals
+
+Aggregation intervals define how streaming data is grouped and processed before database ingestion. 
+Each interval represents a time window during which incoming data is collected and evaluated by the 
+aggregation functions (e.g., min, max, avg, count).
+
+### Key Concepts
+* **Processing-Time Based**  
+Aggregation intervals are determined by the system’s processing timeline (when data is received), not by the timestamp within the source data.
+* **Data Grouping**  
+All streaming data received during a given interval is grouped together and processed as a single unit, regardless 
+of the original timestamp embedded in the data.
+** **Independence from Source Time**  
+Although it is generally assumed that source data timestamps increase over time, this is not guaranteed.      
+In practice:
+  * Data may arrive out of order
+  * Multiple records with similar or identical timestamps may be processed in different aggregation intervals
+  * Late-arriving data may be included in a later interval, even if its timestamp is earlier
+  
+### Implications
+* Aggregation results reflect when data was processed, not strictly when it was generated.
+* The same logical time range (based on source timestamps) may be split across multiple aggregation intervals.
+*Accurate time-based analysis using source timestamps may require additional handling.
+
+### Viewing Aggregation Results
+
+Two commands provide different perspectives on the aggregated data:
+
+* ```get aggregation``` - Displays results organized by aggregation (processing) time intervals.
+* ```get aggregation by time``` - Displays results ordered by the source data timestamps, allowing analysis based on 
+the original event time rather than processing time.
+
 ## Notes
 
-1. Deployment examples are available in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
-2. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
+1. Aggregation intervals are designed for efficient real-time processing of streaming data. However, because they rely 
+on processing time rather than source time, users should be aware of potential differences when analyzing time-sensitive data.
+2. Deployment examples are available in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
+3. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
    [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
 
 ## Aggregations and DBMS Operations
