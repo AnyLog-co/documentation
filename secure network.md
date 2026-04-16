@@ -156,8 +156,38 @@ The following chart details the processes demonstrated:
 |12    | CLI(opr.1.2) |Save the node's private key | The node's private key is saved locally and protected by the local password  |
 |13    | CLI(opr.1.2) |Enable authentication | Enable authentication of messages from users and nodes  |
 
+### (Optional) Step 0 - Connect to TPM
+Follow the instructions in [Connecting AnyLog to the Software TPM](./software%20tpm.md#connecting-anylog-to-the-software-tpm)
+Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
+
+Opr.1
+```anylog
+tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir1
+tpm_port = 8001
+tpm_ip = $INET_IP
+tpm_base_url = !tpm_ip + : + !tpm_port
+tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+```
+Opr.2
+```anylog
+tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir2
+tpm_port = 8002
+tpm_ip = $INET_IP
+tpm_base_url = !tpm_ip + : + !tpm_port
+tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+```
+master
+```anylog
+tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir3
+tpm_port = 8003
+tpm_ip = $INET_IP
+tpm_base_url = !tpm_ip + : + !tpm_port
+tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+```
+
 ### Step 1 - Generate keys for the Root User
 
+Opr.1
 ```anylog
 id create keys where password = abc and keys_file = root_keys
 ```
@@ -180,12 +210,22 @@ In the example, we add a name (rachel) to the policy. It allows to reference the
     "type" : "root",  
     "name"  : "rachel"  
     }  
-}>  
+}>
+```
+If not using a TPM get the root private key from encrypted file
+```anylog
 private_key = get private key where keys_file = root_keys
-member = id sign !member where key = !private_key and password = abc
+id sign !member where key = !private_key and password = abc
+```
+If using TPM, we just specify the root_key and password in the `id sign` call
+```anylog
+id sign !member where key = root_keys and password = abc
+```
+Continue with the following commands
+```anylog
 json !member    # View the policy including the signature and public key
 blockchain insert where policy = !member and local = true  and master = !master_node
-```  
+```
 
 ### Step 3 - Generate keys to nodes
 
@@ -214,7 +254,11 @@ Create a member policy to the 2 operator nodes.
     "name" : "server south"
     }
 }>
-member = id sign !member where password = demo1
+# If TPM not enabled 
+id sign !member where password = demo1
+# If TPM enabled
+id sign !member where key = node and password = demo1
+
 json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
@@ -227,7 +271,11 @@ blockchain insert where policy = !member and local = true  and master = !master_
     "name" : "server north"
     }
 }>
-member = id sign !member where password = demo2
+# If TPM not enabled 
+id sign !member where password = demo2
+# If TPM enabled
+id sign !member where key = node and password = demo2
+
 json !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
@@ -253,8 +301,12 @@ id create keys where password = 123 and keys_file = roy
     "name"  : "roy"
     }
 }>
+# If TPM not enabled 
 private_key = get private key where keys_file = roy
-member = id sign !member where key = !private_key and password = 123
+id sign !member where key = !private_key and password = 123
+# If TPM enabled
+id sign !member where key = roy and password = 123
+
 !member
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```
@@ -262,7 +314,8 @@ blockchain insert where policy = !member and local = true  and master = !master_
 ### Step 7 - Create a permission policy with no restrictions
 
 **Use CLI(oper.1)** to create a permission policy that has no restrictions.  
-This policy enables all commands and allows to operate with all databases.
+This policy enables all commands and allows to operate with all databases.  
+It must be signed by the root_key.
 ```anylog
 <permissions = {"permissions" : {
     "name" : "no restrictions",
@@ -270,6 +323,7 @@ This policy enables all commands and allows to operate with all databases.
     "enable" : ["*"]
     }
 }>
+id sign !member where key = rooy_keys and password = abc
 blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
 
@@ -286,9 +340,13 @@ member_user = blockchain get member where name = roy bring ['member']['public_ke
         "members"  : [!member_user]
         }
 }>
+# If TPM not enabled
 private_key = get private key where keys_file = root_keys
-assignment = id sign !assignment where key = !private_key and password = abc
-!assignment 
+id sign !assignment where key = !private_key and password = abc
+# If TPM enabled
+id sign !assignment where key = root_keys and password = abc
+
+json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
 ```
 
@@ -308,9 +366,13 @@ Notes:
     "disable" : ["get node id"]
     }
 }>
+# If TPM not enabled 
 private_key = get private key where keys_file = roy
-permissions = id sign !permissions where key = !private_key and password = 123
-!permissions 
+id sign !permissions where key = !private_key and password = 123
+# If TPM is enabled
+id sign !permissions where key = roy and password = 123
+
+json !permissions 
 blockchain insert where policy = !permissions and local = true  and master = !master_node
 ```
 Notes:
@@ -336,8 +398,12 @@ permission_id =  blockchain get permissions where name = "node basic permissions
         "members"  : [!member_node1, !member_node2]
         }
 }>
+# If TPM not enabled
 private_key = get private key where keys_file = roy
-assignment = id sign !assignment where key = !private_key and password = 123
+id sign !assignment where key = !private_key and password = 123
+# If TPM enabled
+id sign !assignment where key = roy and password = 123
+
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node
 ```
@@ -358,20 +424,25 @@ set local password = 456
 ```
 
 Note:
-* If a local password exists, an error is returned if the nodes restarts, and the node is provided with incorrect password.
-* If the local password is lost, all the relevant files in the _keys directory_ needs to be deleted, and the 
-  node needs to be assigned with new keys and a new assignment policy. 
+* [for file-based key management] If a local password exists, an error is returned if the nodes restarts, and the node is provided with incorrect password.
+* [for file-based key management] If the local password is lost, all the relevant files in the _keys directory_ needs to be deleted, and the 
+  node needs to be assigned with new keys and a new assignment policy.
+* [for tpm-based key management] If password is forgotten to each key, then delete the node key from the tpm shared directory and generate a new node key.
+
 
 ### Step 12 - Save the node's private key 
+**Only if file-based key management**  
 The private key can be stored on the node and protected using the local password.  
 The following examples stores the private key on each node:
 
 On CLI(oper.1):
+**Only if file-based key management**
 ```anylog
 set private password = demo1 in file
 ```
 
 On CLI(oper.2):
+**Only if file-based key management**
 ```anylog 
 set private password = demo2 in file
 ```
@@ -414,8 +485,12 @@ On CLI(master)
     "name"  : "master_node"  
     }  
 }>  
+# If TPM not enabled 
 private_key = get private key
-member = id sign !member where key = !private_key and password = masterpswd
+id sign !member where key = !private_key and password = masterpswd
+# If TPM enabled
+id sign !member where key = node and password = masterpswd
+
 json !member    # View the policy including the signature and public key
 blockchain insert where policy = !member and local = true  and master = !master_node
 ```  
@@ -428,8 +503,12 @@ On CLI(opr.1)
     "enable" : [ "file", "event", "echo", "print"]
     }
 }>
+# If TPM not enabled
 private_key = get private key where keys_file = roy
-permissions = id sign !permissions where key = !private_key and password = 123
+id sign !permissions where key = !private_key and password = 123
+# If TPM enabled
+id sign !permissions where key = roy and password = 123
+
 json !permissions 
 blockchain insert where policy = !permissions and local = true  and master = !master_node
 ```
@@ -446,8 +525,12 @@ member_node = blockchain get member where name = master_node bring ['member']['p
         "members"  : [!member_node]
         }
 }>
+# If TPM not enabled
 private_key = get private key where keys_file = roy
-assignment = id sign !assignment where key = !private_key and password = 123
+id sign !assignment where key = !private_key and password = 123
+# If TPM enabled
+id sign !assignment where key = roy and password = 123
+
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node  
 ```
@@ -507,7 +590,7 @@ On CLI(oper.2):
  run client 10.0.0.78:7848 get status
  run client 10.0.0.78:7848 echo 'hello world'
  run client 10.0.0.78:7848 get status
- run client 10.0.0.78:7848 show databases
+ run client 10.0.0.78:7848 get databases
 ```
 ### Examples denied messages
 **On CLI(oper.1)**:
@@ -585,7 +668,7 @@ blockchain insert where policy = !member and local = true  and master = !master_
     }
 }>
 private_key = get private key where keys_file = roy
-permissions = id sign !permissions where key = !private_key and password = 123
+id sign !permissions where key = !private_key and password = 123
 json !permissions 
 blockchain insert where policy = !permissions and local = true  and master = !master_node
 ```
@@ -603,7 +686,7 @@ permission_id = blockchain get permissions where name = "application basic permi
         }
 }>
 private_key = get private key where keys_file = roy
-assignment = id sign !assignment where key = !private_key and password = 123
+id sign !assignment where key = !private_key and password = 123
 json !assignment 
 blockchain insert where policy = !assignment and local = true  and master = !master_node
 ```
