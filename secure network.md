@@ -61,8 +61,8 @@ If a blockchain is used, the master node configuration is ignored.
 Use the following commands to configure each operator node:
 ```anylog
 set authentication off
-master_node = 10.0.0.25:2048        # Replace with the proper address
 ```
+Note that `!ledger_conn` is the ip:port of the master node 
 
 Use the following commands to configure the master node:
 ```anylog 
@@ -72,9 +72,9 @@ connect dbms sqlite !db_user !db_port blockchain
 
 Use the following commands to delete all policies on a master node:
 ```anylog 
-run client !master_node "drop table ledger where dbms = blockchain"
-run client !master_node "create table ledger where dbms = blockchain"
-run client !master_node "blockchain delete local file"
+run client !ledger_conn "drop table ledger where dbms = blockchain"
+run client !ledger_conn "create table ledger where dbms = blockchain"
+run client !ledger_conn "blockchain delete local file"
 ```
 
 Use the following command to delete the local blockchain file on each operator node:
@@ -224,7 +224,7 @@ id sign !member where key = root_keys and password = abc
 Continue with the following commands
 ```anylog
 json !member    # View the policy including the signature and public key
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```
 
 ### Step 3 - Generate keys to nodes
@@ -260,7 +260,7 @@ id sign !member where password = demo1
 id sign !member where key = node and password = demo1
 
 json !member
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```
 **Use CLI(oper.2)** to create the member policy of operator #2:
 ```anylog
@@ -277,7 +277,7 @@ id sign !member where password = demo2
 id sign !member where key = node and password = demo2
 
 json !member
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```
 
 ### Step 5 - Generate keys to a user
@@ -308,7 +308,7 @@ id sign !member where key = !private_key and password = 123
 id sign !member where key = roy and password = 123
 
 !member
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```
 
 ### Step 7 - Create a permission policy with no restrictions
@@ -323,9 +323,20 @@ It must be signed by the root_key.
     "enable" : ["*"]
     }
 }>
-id sign !member where key = rooy_keys and password = abc
-blockchain insert where policy = !permissions and local = true  and master = !master_node 
 ```
+If TPM not enabled
+```anylog
+private_key = get private key where keys_file = root_keys
+id sign !permissions where key = !private_key and password = abc
+```
+If TPM enabled
+```anylog
+id sign !permissions where key = root_keys and password = abc
+```
+```anylog
+blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
+``` 
+
 
 ### Step 8 - Assign privileges to a user
 **Use CLI(oper.1)** - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
@@ -347,7 +358,7 @@ id sign !assignment where key = !private_key and password = abc
 id sign !assignment where key = root_keys and password = abc
 
 json !assignment 
-blockchain insert where policy = !assignment and local = true  and master = !master_node  
+blockchain insert where policy = !assignment and local = true  and master = !ledger_conn  
 ```
 
 Notes: 
@@ -373,7 +384,7 @@ id sign !permissions where key = !private_key and password = 123
 id sign !permissions where key = roy and password = 123
 
 json !permissions 
-blockchain insert where policy = !permissions and local = true  and master = !master_node
+blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ```
 Notes:
 1) The policy example permits operating on all databases except a database called lsl_demo.
@@ -405,7 +416,7 @@ id sign !assignment where key = !private_key and password = 123
 id sign !assignment where key = roy and password = 123
 
 json !assignment 
-blockchain insert where policy = !assignment and local = true  and master = !master_node
+blockchain insert where policy = !assignment and local = true  and master = !ledger_conn
 ```
 
 ### Step 11 - Provide the local password
@@ -486,13 +497,12 @@ On CLI(master)
     }  
 }>  
 # If TPM not enabled 
-private_key = get private key
-id sign !member where key = !private_key and password = masterpswd
+id sign !member where password = masterpswd
 # If TPM enabled
 id sign !member where key = node and password = masterpswd
 
 json !member    # View the policy including the signature and public key
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```  
 ### Create a permission policy for the master node
 On CLI(opr.1) 
@@ -510,7 +520,7 @@ id sign !permissions where key = !private_key and password = 123
 id sign !permissions where key = roy and password = 123
 
 json !permissions 
-blockchain insert where policy = !permissions and local = true  and master = !master_node
+blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ```
 ### Assign privileges to the master node
 On CLI(oper.1)
@@ -532,7 +542,7 @@ id sign !assignment where key = !private_key and password = 123
 id sign !assignment where key = roy and password = 123
 
 json !assignment 
-blockchain insert where policy = !assignment and local = true  and master = !master_node  
+blockchain insert where policy = !assignment and local = true  and master = !ledger_conn  
 ```
 
 ### Provide the local password
@@ -656,7 +666,7 @@ public_key = get public string where keys_file = !pem_dir/server-acme-inc-public
 }>
 
 # No need to sign this policy
-blockchain insert where policy = !member and local = true  and master = !master_node
+blockchain insert where policy = !member and local = true  and master = !ledger_conn
 ```
 
 ### Generate a Permission Policy for 3rd patties applications:
@@ -670,7 +680,7 @@ blockchain insert where policy = !member and local = true  and master = !master_
 private_key = get private key where keys_file = roy
 id sign !permissions where key = !private_key and password = 123
 json !permissions 
-blockchain insert where policy = !permissions and local = true  and master = !master_node
+blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ```
 
 ### Assign the Permission Policy to the Member Policy
@@ -688,7 +698,7 @@ permission_id = blockchain get permissions where name = "application basic permi
 private_key = get private key where keys_file = roy
 id sign !assignment where key = !private_key and password = 123
 json !assignment 
-blockchain insert where policy = !assignment and local = true  and master = !master_node
+blockchain insert where policy = !assignment and local = true  and master = !ledger_conn
 ```
 
 ### Query permissions by a public 

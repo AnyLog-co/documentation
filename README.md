@@ -80,6 +80,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 * **Security & Authentication**
   * [Authentication](authentication.md)
+  * [Software TPM](software%20tpm.md)
   * [Secure Network](secure%20network.md)
   * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
   * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
