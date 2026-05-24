@@ -536,4 +536,29 @@ Adding a node is by [configuring an AnyLog Instance](#configuring-an-operator-no
 a [policy](#the-operator-policy) that associates the Operator to the cluster.       
 The added Operator will automatically synchronize with the cluster peers to create on the newly added node a complete set of the cluster's data.
 
+## Cluster Validation Commands
+
+AnyLog provides cluster validation commands to verify that cluster metadata and local TSD table definitions are synchronized across the network.
+
+These commands are used to validate high-availability cluster consistency, detect configuration mismatches, and identify missing peer representations.
+
+### test node cluster
+
+Validates the cluster configuration of the local node.  
+This command returns the node’s local TSD tables with its blockchain cluster metadata information.
+
+Usage:
+```anylog
+test node cluster
+```
+
+### test network clusters
+
+Validates cluster consistency across the entire network.    
+This command executes test node cluster on all operator nodes and analyzes the results collectively.
+
+Usage:
+```anylog
+test network clusters
+```
 
