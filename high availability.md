@@ -542,7 +542,7 @@ AnyLog provides cluster validation commands to verify that cluster metadata and 
 
 These commands are used to validate high-availability cluster consistency, detect configuration mismatches, and identify missing peer representations.
 
-### test node cluster
+### Test node cluster
 
 Validates the cluster configuration of the local node.  
 This command returns the node’s local TSD tables with its blockchain cluster metadata information.
@@ -552,7 +552,7 @@ Usage:
 test node cluster
 ```
 
-### test network clusters
+### Test network clusters
 
 Validates cluster consistency across the entire network.    
 This command executes test node cluster on all operator nodes and analyzes the results collectively.
