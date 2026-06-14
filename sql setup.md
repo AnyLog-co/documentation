@@ -323,7 +323,6 @@ If the database name is an asterisk (`*`), all locally declared tables are liste
 
 ```anylog
 get local tables where dbms = dmci
-get local tables where dbms = *
 get local tables where dbms = aiops and format = json
 ```
 
@@ -350,7 +349,6 @@ If the database name is an asterisk (`*`), all tables declared in the global met
 
 ```anylog
 get global tables where dbms = dmci
-get global tables where dbms = *
 get global tables where dbms = aiops and format = json
 ```
 
