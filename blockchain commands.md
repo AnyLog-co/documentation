@@ -328,7 +328,7 @@ example:
 ```anylog 
 blockchain get root policies include cluster uns
 ```
-The example above returns only root policies of type cluster and uns:
+The example above returns only root policies of type cluster and uns.
 
 **Exclude specific policy types**
 Usage:
@@ -339,7 +339,7 @@ example:
 ```anylog 
 blockchain get root policies exclude cluster
 ```
-Return all root policies except cluster policies:
+Return all root policies except cluster policies.
 
 The include and exclude options operate on policy types and can be used to focus the output on specific policies
 or remove policies that are not relevant to the current task.
