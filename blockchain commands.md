@@ -314,6 +314,36 @@ In the example above:
 Root policies define the ***top-level structure***, while child policies extend that structure by 
 inheriting and specializing behavior or metadata.
 
+### Filtering root policies
+
+The command supports filtering by policy type using the include and exclude keywords.
+
+**Include only specific policy types**
+Usage:
+```anylog 
+blockchain get root policies include [space separated policies types]
+```
+
+example:
+```anylog 
+blockchain get root policies include cluster uns
+```
+The example above returns only root policies of type cluster and uns:
+
+**Exclude specific policy types**
+Usage:
+```anylog 
+blockchain get root policies exclude [space separated policies types]
+```
+example:
+```anylog 
+blockchain get root policies exclude cluster
+```
+Return all root policies except cluster policies:
+
+The include and exclude options operate on policy types and can be used to focus the output on specific policies
+or remove policies that are not relevant to the current task.
+
 ## Setting command destination from policies
 
 A common usage of policies is to determine the destination of a command or a query (in case of a query, to overwrite the network protocol's destination).    
