@@ -1,5 +1,9 @@
 # AnyLog Release notes
 
+AnyLog Version: 1.5.2605 [2026-06-12 18:37:39]
+### New Features
+1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../sql%20setup.md#the-metadata) 
+
 AnyLog Version: 1.4.2510-beta3 [e0d9e1] [2026-03-08 17:52:24]
 ### New Features
 1. New options for issuing AnyLog commands via REST: 

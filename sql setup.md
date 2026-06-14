@@ -297,9 +297,70 @@ Details on how to query multiple data from multiple nodes are available in the s
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 
 users and applications can query the metadata to determine the databases, tables and columns for each table.
 
+Note: A table may exist locally on a node, but it becomes visible to the AnyLog network only after it is declared in the shared metadata layer. 
+Tables registered in the shared metadata can be automatically discovered and queried across the network.
+
+### The get local tables command
+
+The `get local tables` command lists the tables maintained by the named database on the local node only.
+
+**Usage**:
+
+```anylog
+get local tables where dbms = [dbms name] and format = [format type]
+```
+
+Details:
+
+* `[dbms name]` - The logical name of the database maintaining the tables.
+* `[format type]` - An optional parameter to specify the format of the reply. The format options are `table` (default) and `json`.
+
+The output presents every table assigned to the named database that is physically declared on the local node.
+
+If the database name is an asterisk (`*`), all locally declared tables are listed.
+
+**Examples**:
+
+```anylog
+get local tables where dbms = dmci
+get local tables where dbms = *
+get local tables where dbms = aiops and format = json
+```
+
+### The get global tables command
+
+The `get global tables` command lists the tables declared in the global metadata layer (blockchain) for the named database.
+
+**Usage**:
+
+```anylog
+get global tables where dbms = [dbms name] and format = [format type]
+```
+
+Details:
+
+* `[dbms name]` - The logical name of the database maintaining the tables.
+* `[format type]` - An optional parameter to specify the format of the reply. The format options are `table` (default) and `json`.
+
+The output presents every table declared in the global metadata layer for the named database, regardless of whether the table exists on the local node.
+
+If the database name is an asterisk (`*`), all tables declared in the global metadata layer are listed.
+
+**Examples**:
+
+```anylog
+get global tables where dbms = dmci
+get global tables where dbms = *
+get global tables where dbms = aiops and format = json
+```
+
+
 ### The get tables command
 
-The `get tables` command lists the tables maintained by the named database.    
+The `get tables` command lists the tables maintained by the named database.  
+The command combines the results of `get local tables` and `get global tables`, indicating whether each table exists locally,
+globally, or both.
+
 **Usage**:
 ```anylog 
 get tables where dbms = [dbms name] and format = [format type]
