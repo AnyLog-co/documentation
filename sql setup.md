@@ -317,8 +317,6 @@ Details:
 
 The output presents every table assigned to the named database that is physically declared on the local node.
 
-If the database name is an asterisk (`*`), all locally declared tables are listed.
-
 **Examples**:
 
 ```anylog
@@ -342,8 +340,6 @@ Details:
 * `[format type]` - An optional parameter to specify the format of the reply. The format options are `table` (default) and `json`.
 
 The output presents every table declared in the global metadata layer for the named database, regardless of whether the table exists on the local node.
-
-If the database name is an asterisk (`*`), all tables declared in the global metadata layer are listed.
 
 **Examples**:
 
