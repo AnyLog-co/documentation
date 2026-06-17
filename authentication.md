@@ -536,7 +536,7 @@ The command options:
 
 Example:
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and allt_name = 10.0.0.78 and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
 ```
 
 When the command is issued 2 files are generated:  
