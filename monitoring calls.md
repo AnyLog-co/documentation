@@ -1,3 +1,9 @@
+---
+title: "Monitoring calls from external applications"
+description: ""
+layout: page
+source_path: "monitoring calls.md"
+---
 # Monitoring calls from external applications
 
 ## REST server configuration

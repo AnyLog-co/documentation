@@ -1,3 +1,9 @@
+---
+title: "AnyLog Network"
+description: ""
+layout: page
+source_path: "README.md"
+---
 # AnyLog Network 
 
 <div align="center">
@@ -22,7 +28,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **Deploy AnyLog**
   * [Getting Started](getting%20started.md)
   * [The AnyLog CLI](cli.md)  
-  * [Basic AnyLog Deployment](training/)
+  * [Basic AnyLog Deployment](training/overview.md)
   * [Docker Image](docker%20image.md)
   * [Background Processes](background%20processes.md)
   * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
@@ -33,7 +39,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
   * [Metadata Management](metadata%20management.md)
-  * [Kubernetes & Docker Deployment of AnyLog](deployments) 
+  * [Kubernetes & Docker Deployment of AnyLog](deployments/README.md) 
   * [Setting Test Suites](test%20suites.md)
   * [Launching Helpers](helpers.md#using-helpers)
   
@@ -64,9 +70,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Streaming Conditions](streaming%20conditions.md)
   * [Logging Events](logging%20events.md)
   * [Alerts & Monitoring](alerts%20and%20monitoring.md)
-  * [Aggregations](aggregations)
+  * [Aggregations](aggregations.md)
   * [Monitoring File Status](managing%20data%20files%20status.md)
-  * [DYnamic Statistcs](helpers.md#-dynamic-monitoring-of-internal-processes)
+  * [DYnamic Statistcs](helpers.md#dynamic-monitoring-of-internal-processes)
     
 * **Querying Data**
   * [Data Queries](queries.md)
@@ -82,8 +88,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Authentication](authentication.md)
   * [Software TPM](software%20tpm.md)
   * [Secure Network](secure%20network.md)
-  * [Using NGINX as Proxy](deployments/Networking%20&%20Security/nginx.md)
-  * [Using Nebula as Overlay Network](deployments/Networking%20&%20Security/nebula.md)
+  * [Using NGINX as Proxy](deployments/Networking%20%26%20Security/nginx.md)
+  * [Using Nebula as Overlay Network](deployments/Networking%20%26%20Security/nebula.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
@@ -103,14 +109,14 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [AnyLog Remote-CLI](northbound%20connectors/remote_cli.md)
   * [Postman](northbound%20connectors/using%20postman.md)
   * [Grafana](northbound%20connectors/using%20grafana.md)
-  * [PowerBI](northbound%20connectors/PowerBI.md)
+  * [PowerBI](northbound%20connectors/powerbi.md)
   * [Google Drive](northbound%20connectors/Google.md)
-  * [Generic Connector](northbound%20connectors/postgres%20connector.md)
-  * [Dashboard Generation](dashboard%20generation)
+  * [Generic Connector](northbound%20connectors/Postgres%20Connector.md)
+  * [Dashboard Generation](dashboard%20generation.md)
 
 * **Sample Code**
   * [Python Scripts](examples/Sample%20Python%20Scripts)
     * [Blockchain](examples/Sample%20Python%20Scripts/blockchain_add_policy_simple.py)
     * [Sending Data](examples/Sample%20Python%20Scripts/data)
   * [cURL Requests](examples/curl.sh)
-  * [Configurations Files](examples/Configuration.md)
+  * [Configurations Files](examples/configuration.md)

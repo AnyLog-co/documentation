@@ -1,3 +1,9 @@
+---
+title: "Prerequisite and setup considerations"
+description: ""
+layout: page
+source_path: "training/prerequisite.md"
+---
 # Prerequisite and setup considerations
 
 | Feature               | Requirement  |

@@ -1,3 +1,9 @@
+---
+title: "Securing the Network"
+description: ""
+layout: page
+source_path: "secure network.md"
+---
 # Securing the Network
 
 ## Overview
@@ -157,7 +163,7 @@ The following chart details the processes demonstrated:
 |13    | CLI(opr.1.2) |Enable authentication | Enable authentication of messages from users and nodes  |
 
 ### (Optional) Step 0 - Connect to TPM
-Follow the instructions in [Connecting AnyLog to the Software TPM](./software%20tpm.md#connecting-anylog-to-the-software-tpm)
+Follow the instructions in [Connecting AnyLog to the Software TPM](software%20tpm.md#connecting-anylog-to-the-software-tpm)
 Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
 
 Opr.1

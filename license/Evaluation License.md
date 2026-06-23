@@ -1,3 +1,9 @@
+---
+title: "Evaluation License"
+description: ""
+layout: page
+source_path: "license/Evaluation License.md"
+---
 ANYLOG SOFTWARE EVALUATION AGREEMENT
 
 Last updated: 7 Sep.2023

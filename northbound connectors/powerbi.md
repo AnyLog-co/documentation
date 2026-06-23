@@ -1,3 +1,9 @@
+---
+title: "AnyLog with PowerBI + Microsoft Office Suite"
+description: ""
+layout: page
+source_path: "northbound connectors/PowerBI.md"
+---
 # AnyLog with PowerBI + Microsoft Office Suite 
 
 The following provides insight as to how to generate graphs and images using [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/downloads/) with data from AnyLog. 

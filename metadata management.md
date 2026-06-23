@@ -1,3 +1,9 @@
+---
+title: "Managing Metadata"
+description: ""
+layout: page
+source_path: "metadata management.md"
+---
 # Managing Metadata
 
 ## Overview

@@ -1,9 +1,15 @@
+---
+title: "Streaming Data into AnyLog"
+description: ""
+layout: page
+source_path: "training/Connectors to Data Sources.md"
+---
 # Streaming Data into AnyLog 
 
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* [Python and cURL examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20into%20AnyLog.md) 
+* [Python and cURL examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20Into%20Anylog.md) 
 * [Configuring the Message Broker service](../background%20processes.md#message-broker)
 * [Message Broker](../message%20broker.md)
 * [Using REST](../using%20rest.md)

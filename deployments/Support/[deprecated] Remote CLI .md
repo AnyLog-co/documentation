@@ -1,3 +1,9 @@
+---
+title: "Remote-CLI"
+description: ""
+layout: page
+source_path: "deployments/Support/Remote-CLI.md"
+---
 # Remote-CLI
 AnyLog's Remote-CLI is an open-source web interface for executing REST request(s) against the network. 
 
@@ -63,7 +69,7 @@ To access Remote-CLI the default URL is [http://${YOUR_LOCAL_IP}:31800]()
   6. Updates should appear on your instance 
 
   
-When using _Kubernetes_, changes done in `commands.json` will not be persistent due to the way [Kubernetes volumes](../Networking%20&%20Security/kubernetes_volumes.md) 
+When using _Kubernetes_, changes done in `commands.json` will not be persistent due to the way [Kubernetes volumes](../Networking%20%26%20Security/kubernetes%20volumes.md) 
 work. 
 
 * Examples of using Remote-CLI can be found in our [northbound connectors](../../northbound%20connectors/remote_cli.md) section

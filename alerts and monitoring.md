@@ -1,3 +1,9 @@
+---
+title: "Alerts and Monitoring"
+description: ""
+layout: page
+source_path: "alerts and monitoring.md"
+---
 # Alerts and Monitoring
 
 Nodes in the network can be configured to repeatably execute tasks.   
@@ -201,7 +207,7 @@ task run where scheduler = [scheduler id] and id = [task id]
 
 ## Sending messages
 Users can invoke emails and sms messages when thresholds or alerting conditions are met.  
-To facilitate messages, declare the _SMTP_ client process. Details are available at [run smtp client](../deploying%20nodes%20&%20AnyLog%20CLI/background%20processes.md#smtp-client).
+To facilitate messages, declare the _SMTP_ client process. Details are available at [run smtp client](background%20processes.md#smtp-client).
 
 ### Sending an email
 **Usage**:
@@ -327,6 +333,5 @@ The summary table is configured as a data source to Grafana to monitor and alert
 
 ## Example - Monitoring CPU usage
 
-The section [Organizing statistics in a database table](monitoring%20nodes.md#organizing-statistics-in-a-database-table)
+The section [Organizing statistics in a database table](monitoring%20nodes.md#organizing-node-status-in-a-database-table)
 details how to organize operational statistics (like CPU utilization) in a table.
-

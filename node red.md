@@ -1,3 +1,9 @@
+---
+title: "Node-RED"
+description: ""
+layout: page
+source_path: "node red.md"
+---
 # Node-RED 
 
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool designed for connecting hardware devices, 

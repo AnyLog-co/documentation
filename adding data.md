@@ -1,3 +1,9 @@
+---
+title: "Adding Data to Nodes in the Network"
+description: ""
+layout: page
+source_path: "adding data.md"
+---
 # Adding Data to Nodes in the Network
  
 AnyLog hosts the data on nodes in the network that are configured as Operators (Operators nodes are sometimes called Contractors).

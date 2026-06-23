@@ -1,3 +1,9 @@
+---
+title: "Network Setup"
+description: ""
+layout: page
+source_path: "training/advanced/Network Setup.md"
+---
 # Network Setup
 
 **Table of content**
@@ -80,7 +86,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
      for the master node container, **query-1** for a query node and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
-    * The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
+    * The example shows deployment with [volume configurations](../../deployments/Networking%20%26%20Security/docker%20volumes.md).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
 ```shell
 NODE_TYPE=master
@@ -177,7 +183,7 @@ Example:
 
 Note:
 * For SQLite, databases are created in `!dbms_dir`
-* The following link includes the info for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql).
+* The following link includes the info for deploying a [PostgresSQL database](../../deployments/deploying%20dbms.md#postgressql).
 
 ### Authentication disabled
 In this setup authentication is disabled on all nodes.
@@ -313,7 +319,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 ## Query Node Configuration
 A _query node_ is an AnyLog node configured to satisfy queries.  
-Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
+Any node can act as a query node, as long as [system_query](#system-databases) 
 database is configured.
 
 * Attaching to the CLI (node name: `query-node`)  

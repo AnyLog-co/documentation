@@ -1,3 +1,9 @@
+---
+title: "Deploy AnyLog Executable"
+description: ""
+layout: page
+source_path: "examples/Service AnyLog/Executable.md"
+---
 # Deploy AnyLog Executable
 
 The following provides step-by-step directions for installing AnyLog (executable) on _Ubuntu 22.04 LTS_.    

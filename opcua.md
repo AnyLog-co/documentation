@@ -1,3 +1,9 @@
+---
+title: "Using OPC-UA"
+description: ""
+layout: page
+source_path: "opcua.md"
+---
 
 
 # Using OPC-UA

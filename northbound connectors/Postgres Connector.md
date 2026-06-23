@@ -1,3 +1,9 @@
+---
+title: "PSQL Connector & Tableau Visualization"
+description: ""
+layout: page
+source_path: "northbound connectors/postgres connector.md"
+---
 # PSQL Connector & Tableau Visualization
   
 For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 

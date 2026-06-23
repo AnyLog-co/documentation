@@ -1,3 +1,9 @@
+---
+title: "Configuration Policies"
+description: ""
+layout: page
+source_path: "training/advanced/Config Policies.md"
+---
 # Configuration Policies
 
 Users can create **config policies** that are stored in the metadata layer. When a node restarts, the node is configured

@@ -1,3 +1,9 @@
+---
+title: "Using REST"
+description: ""
+layout: page
+source_path: "using rest.md"
+---
 # Using REST
 
 ## Overview
@@ -90,7 +96,7 @@ Details are provided in  the section [Data transfer using a REST API](adding%20d
 
 ### Headers setup
 
-The header setup for the PUT command is detailed in the section [Configuring the Sender Node](adding%20data.md#configuring-the-sender-node--a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network--).  
+The header setup for the PUT command is detailed in the section [Configuring the Sender Node](adding%20data.md#configuring-the-sender-node-a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network).  
 The header setup for GET and POST is the following:
 
 | Key        | Value  |
@@ -273,6 +279,5 @@ sql lsl_demo select * from ping_sensor
 Notes:
 * The request must use the POST method.
 * The body must be formatted as valid JSON.
-
 
 

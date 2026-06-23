@@ -1,3 +1,9 @@
+---
+title: "Getting Started"
+description: ""
+layout: page
+source_path: "getting started.md"
+---
 # Getting Started
  
 This document provides the following:
@@ -24,8 +30,8 @@ A node in the network is assigned with one or more roles. The optional roles are
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
 If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
 Enabling the blockchain functionality using the Ethereum blockchain is explained in the 
-[Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md) section.
-Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
+[Using Ethereum as a Global Metadata Platform](using%20ethereum.md) section.
+Additional information on a Master Node configuration is available at the section: [Using a Master Node](master%20node.md).
 
 ## The Network MetaData
 The metadata is the network related information that is shared by members of the network.
@@ -81,7 +87,7 @@ Related documentation:
 ## AnyLog Install
 
 AnyLog can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an installation script. 
-Directions for deployment can be found [here](deployments). 
+Directions for deployment can be found [here](deployments/README.md). 
 
 Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
@@ -142,7 +148,7 @@ Related documentation:
 | Section       | Information provided  |
 | ------------- | ------------| 
 | [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
-| [Deploying a node](deployments/deploying_node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
+| [Deploying a node](deployments/deploying%20node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
 | [Network Setup](training/advanced/Network%20Setup.md) | A step by step example of a network deployment. |
 | [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
@@ -207,9 +213,9 @@ Examples:
 Index:
         ['blockchain']
 
-Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
+Link: blockchain%20commands.md#query-policies
 
-Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
+Link: blockchain%20commands.md
 ```
 
 * List an index that classifies the commands.
@@ -432,5 +438,3 @@ Additional information is available in the [User Authentication](authentication.
 
 
   
-
-

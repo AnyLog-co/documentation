@@ -1,3 +1,9 @@
+---
+title: "Aggregation Functions"
+description: ""
+layout: page
+source_path: "aggregations.md"
+---
 # Aggregation Functions
 
 Aggregation functions summarize streaming data over defined time intervals. For each table, users configure the interval
@@ -298,7 +304,7 @@ get aggregation by time where dbms = orics and table = r_50 and value_column = *
 
 **Casting:**
 
-Functions can be extended using casting (like columns and functions in a query). See details in the [Cast Data](https://github.com/AnyLog-co/documentation/blob/master/queries.md#cast-data) section.
+Functions can be extended using casting (like columns and functions in a query). See details in the [Cast Data](queries.md#cast-data) section.
 
 **Example:**
 ```anylog

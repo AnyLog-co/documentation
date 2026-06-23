@@ -1,3 +1,9 @@
+---
+title: "System Notification"
+description: ""
+layout: page
+source_path: "northbound connectors/notifciation.md"
+---
 # System Notification 
 
 AnyLog provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 

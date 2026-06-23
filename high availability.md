@@ -1,3 +1,9 @@
+---
+title: "High Availability (HA)"
+description: ""
+layout: page
+source_path: "high availability.md"
+---
 # High Availability (HA)
 
 To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data.

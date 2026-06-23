@@ -1,3 +1,9 @@
+---
+title: "SQL setup, management and configuration"
+description: ""
+layout: page
+source_path: "sql setup.md"
+---
 # SQL setup, management and configuration
 
 ## Overview

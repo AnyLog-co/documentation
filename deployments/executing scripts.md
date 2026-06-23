@@ -1,3 +1,9 @@
+---
+title: "Executing Script"
+description: ""
+layout: page
+source_path: "deployments/executing scripts.md"
+---
 # Executing Script
 
 AnyLog is configured using the AnyLog commands. These commands can be issued on the AnyLog CLI, or organized in script 

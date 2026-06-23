@@ -1,3 +1,9 @@
+---
+title: "Streaming Data into AnyLog"
+description: ""
+layout: page
+source_path: "examples/Streaming Data into AnyLog.md"
+---
 # Streaming Data into AnyLog 
 
 Data can be sent into an AnyLog node via different forms of communication, such as: _REST_, _MQTT_ and _Kafka_.
@@ -108,6 +114,5 @@ The example below enables the MQTT Client service whereas:
     column.value.float="bring [value]"
 )>
 ```
-
 
 

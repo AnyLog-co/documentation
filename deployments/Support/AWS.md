@@ -1,8 +1,14 @@
+---
+title: "AWS Setup"
+description: ""
+layout: page
+source_path: "deployments/Support/AWS.md"
+---
 # AWS Setup
 
 The following provides directions for using an EC2 AWS instance(s) to configure and deploy AnyLog.  
 
-Directions for [deploying an AnyLog Node](../deploying_node.md) 
+Directions for [deploying an AnyLog Node](../deploying%20node.md) 
 
 **Terminology**:
 * Node - An AnyLog node that's part of the network (ex. Master, Operator, Query)

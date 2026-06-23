@@ -1,3 +1,9 @@
+---
+title: "Session II - Deployment of the test network"
+description: ""
+layout: page
+source_path: "training/Session II (Deployment).md"
+---
 # Session II - Deployment of the test network
 
 This session includes 4 sections:
@@ -58,9 +64,9 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 | Query             |  deployments/training/anylog-query |
 
 Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or in policies.
-* The [deploying_node](../deployments/deploying_node.md) document is a guide to deploy a network using a questionnaire
+* The [deploying_node](../deployments/deploying%20node.md) document is a guide to deploy a network using a questionnaire
 that to generate the config file.
-* The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
+* The [Network Setup](advanced/Network%20Setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
 * The [Policies based Configuration](../policies.md#policies-based-configuration) section details how to use 
 policies (placed on the shared metadata layer) to configure nodes in the network.
@@ -81,7 +87,7 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 
 | Package Name                                        | Functionality | Reference Document | 
 | --------------------------------------------------- | ------------- |-------------- |
-| [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying_node.md) |
+| [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying%20node.md) |
 | [PostgreSQL](https://www.postgresql.org/)           |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | [MongoDB](https://www.mongodb.com/)           |  A local database for unstructured data.  | [MongoDB Download](https://www.mongodb.com/try/download/community)|
 | [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  |  A data generator that generates simulated data for learning and testing purposes.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
@@ -133,7 +139,7 @@ or if the questionnaire is not used to create the **anylog_configs.env** file):
 
 **Note 1**: The prerequisites for a customer deployment are available [here](prerequisite.md).
 
-**Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20&%20Security/nebula.md).
+**Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20%26%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
@@ -230,7 +236,7 @@ This file is in the following directories:
 ### Option 1: Using a questionnaire
 The following section guides through the values to modify in the config file of each node.
 Users can replace this process by a questionnaire that creates the config file with the needed modification.  
-Using the questionnaire is detailed in the [deploying_node](../deployments/deploying_node.md) document.
+Using the questionnaire is detailed in the [deploying_node](../deployments/deploying%20node.md) document.
 
 For **AWS deployment**, read the [AWS setup](../deployments/Support/AWS.md) document.
 
@@ -624,10 +630,9 @@ Note: On the GUI, select **"Training"** on the **Options** menu for buttons repr
 # Reference Documentation
 
 ## Remote CLI
-* [Deploy the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Remote-CLI.md)
-* [Configure the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md)
+* [Deploy the Remote CLI](../deployments/Support/%5Bdeprecated%5D%20Remote%20CLI%20.md)
+* [Configure the Remote CLI](../northbound%20connectors/remote_cli.md)
 
 ## Grafana
-* [Deploy Grafana](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Grafana.md)
-* [Configuring Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) 
-
+* [Deploy Grafana](../deployments/Support/grafana.md)
+* [Configuring Grafana](../northbound%20connectors/using%20grafana.md) 

@@ -1,3 +1,9 @@
+---
+title: "The AnyLog CLI"
+description: ""
+layout: page
+source_path: "cli.md"
+---
 # The AnyLog CLI
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+title: "Deploying a Node"
+description: ""
+layout: page
+source_path: "deployments/deploying node.md"
+---
 # Deploying a Node
 
 The AnyLog instances are using the same code base and differ by the services they provide. 
@@ -11,8 +17,8 @@ node configuration process to apply a configuration option, or a configuration v
 
 **Other Deployments**
 * [Network Setup](../training/advanced/Network%20Setup.md) - deployment of AnyLog nodes using the CLI of the participating nodes.
-* [Quick Deployment](Quick%20Deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
-* [Training](../training) - Standard training used for explaining how to use AnyLog
+* [Quick Deployment](quick%20deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
+* [Training](../training/overview.md) - Standard training used for explaining how to use AnyLog
 
 ### Requirements
 * For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
@@ -37,7 +43,7 @@ _Helm_. The directions provided should be done on each of the nodes being used a
 git clone https://github.com/AnyLog-co/deployments 
 ```
 3. Make sure to install your preffered databases if you are planning to use something other than SQLite. Directions
-can be found [here](deploying_dbms.md)
+can be found [here](deploying%20dbms.md)
 4. Log into our Docker repository
 ```shell
 # Docker
@@ -52,7 +58,7 @@ AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides
 with deployment of an AnyLog instance of either _Docker_ or _Kubernetes_. For a _Docker_ instance the deployment script 
 updates the correlating `.env` file of the node. 
 
-**Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your
+**Disclaimer**: The deployment scripts do not [deploy physical database](deploying%20dbms.md). Make sure your
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
 
 * Using deployment script 

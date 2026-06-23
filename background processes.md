@@ -1,3 +1,9 @@
+---
+title: "Background Processes"
+description: ""
+layout: page
+source_path: "background processes.md"
+---
 # Background Processes
 
 Background processes are optional processes that if activated, are running using dedicated threads according to the user specifications.
@@ -64,7 +70,7 @@ run tcp server where external_ip = [ip] and external_port = [port] and internal_
 ```
 
 Users can validate the configuration of the TCP listeners in all the nodes in the network by issuing the **test network** command. 
-See details in the [Test Network](../test%20commands.md#test-network) page.
+See details in the [Test Network](test%20commands.md#test-network) page.
 
 Options:  
 
@@ -168,7 +174,7 @@ Users can modify the processing by associating ***Instructions Policies*** to th
 
 #### The mapping process
 The JSON file name follows a convention that uniquely identifies the file and determines the processes that assign the JSON data to a table.  
-The file naming convention is detailed at the [The file naming convention](../managing%20data%20files%20status.md#the-file-naming-convention) section.
+The file naming convention is detailed at the [The file naming convention](managing%20data%20files%20status.md#the-file-naming-convention) section.
 From the file name, the logical database and table names are determined. In addition, the file name optionaly includes the ID of the Mapping Instructions.  
 Mapping instructions are detailed in the [mapping data to tables section.](mapping%20data%20to%20tables.md)  
 
@@ -180,7 +186,7 @@ Interaction with the data maintained by **tsd_info** is by the command ```time f
 The command provides the functionality to create the table and retrieve the data maintained in the table.    
 The information maintained by **tsd_info** is leveraged to trace source data, source devices, and to support the
 High Availability (HA) processes. Info on the ```time file``` is available at the 
-[Time File commands](../managing%20data%20files%20status.md#time-file-commands) section.
+[Time File commands](managing%20data%20files%20status.md#time-file-commands) section.
 
 #### The Operator policy
 Every Operator Node is assigned with a policy that provides the operator info and associates the operator with a Cluster policy (see below).      
@@ -664,4 +670,3 @@ Terminating the broker process is with the following command:
 ```anylog
 exit broker
 ```
-

@@ -1,14 +1,20 @@
+---
+title: "Using Grafana"
+description: ""
+layout: page
+source_path: "northbound connectors/using grafana.md"
+---
 # Using Grafana
 
 ## Overview
 
 Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
-demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](PowerBI.md), can be found in our 
-[North Bound services](../northbound%20connectors) section.   
+demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](powerbi.md), can be found in our 
+North Bound services section.   
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
-Directions for importing our demo images dashboards can be found in [import grafana dashboard document](import_grafana_dashboard.md)
+Directions for importing our demo images dashboards can be found in [import grafana dashboard document](Import%20Grafana%20Dashboard.md)
 
 
 ## Prerequisites & Links

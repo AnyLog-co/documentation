@@ -1,3 +1,9 @@
+---
+title: "Privacy @ AnyLog"
+description: ""
+layout: page
+source_path: "license/Privacy Policy.md"
+---
 # Privacy @ AnyLog
 
 ## Privacy Policy for Software Downloads

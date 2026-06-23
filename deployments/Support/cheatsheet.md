@@ -1,3 +1,9 @@
+---
+title: "Cheat Sheet"
+description: ""
+layout: page
+source_path: "deployments/Support/cheatsheet.md"
+---
 # Cheat Sheet 
 ## Basic Commands
 ### Docker

@@ -1,3 +1,9 @@
+---
+title: "Google Drive"
+description: ""
+layout: page
+source_path: "northbound connectors/Google.md"
+---
 # Google Drive
 
 To extract data from AnyLog into Google Drive we recommend using a tool called [Two Minute Reports](https://workspace.google.com/marketplace/app/two_minute_reports/6804555176)
@@ -27,7 +33,7 @@ which provides the ability to import data via REST, Database, Social Media and o
 ## Executing REST Request
 
 1. Once that's completed launch _Two Minute Reports_: _Extensions_ → _Two Minute_Reports_ → Launch
-![path](../imgs/googledrive_execute_step1)
+![path](../imgs/googledrive_execute_step1.png)
 **Note**: _Two Minute Reports_ works best when only a single account is logged in.
 
 

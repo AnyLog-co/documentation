@@ -1,3 +1,9 @@
+---
+title: "HTTP Commands"
+description: ""
+layout: page
+source_path: "http commands.md"
+---
 # HTTP Commands
 
 AnyLog HTTP commands are used to interact with the AnyLog platform via HTTP requests, enabling users to query data, 

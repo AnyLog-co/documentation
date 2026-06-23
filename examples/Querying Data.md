@@ -1,3 +1,9 @@
+---
+title: "Querying Data"
+description: ""
+layout: page
+source_path: "examples/Querying Data.md"
+---
 # Querying Data
 
 This document provides examples of queries to retrieve data from the AnyLog Network.  

@@ -1,3 +1,9 @@
+---
+title: "Managing SysLog data with AnyLog"
+description: ""
+layout: page
+source_path: "using syslog.md"
+---
 # Managing SysLog data with AnyLog
 
 ## SysLog Formats

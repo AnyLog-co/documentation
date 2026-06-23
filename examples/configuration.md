@@ -1,3 +1,9 @@
+---
+title: "Configuration Examples"
+description: ""
+layout: page
+source_path: "examples/Configuration.md"
+---
 # Configuration Examples
 
 This document provides configuration examples.
@@ -29,7 +35,7 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) section).
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../background%20processes.md#rest-requests) section).
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
@@ -71,7 +77,7 @@ If an Opertaor node is configured with archive option enabled, data that is stre
 files, compressed, and stored in the archival directory by ingestion date.  
 The default archival directory is ```AnyLog-Network\data\archive```  
 If needed, these files can be copied to an AnyLog ***watch*** directory to be ingested to a new database.
-Details are availabel in [Placing data in the WATCH directory](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#placing-data-in-the-watch-directory) section.
+Details are availabel in [Placing data in the WATCH directory](../adding%20data.md#placing-data-in-the-watch-directory) section.
 
 #### Partitioning of data
 
@@ -79,7 +85,7 @@ A table that is managed by AnyLog can be partitioned by time.
 The ***Partition Command*** id detailed [here](../anylog%20commands.md#partition-command).  
 Partitions can be dropped by naming the partitions, or by requesting to drop the oldest partition, or by a request to
 keep N number of partition, or to drop old partitions as long as disk space is lower than threshold.  
-The ***Drop Partition*** command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command)
+The ***Drop Partition*** command is detailed [here](../anylog%20commands.md#drop-partition-command)
 
 These processes can be placed on the AnyLog scheduler to be repeated periodically.  
 For example, a table is partitioned by day and the scheduler is executed daily to remove the oldest partition if disk space 
@@ -241,7 +247,7 @@ connect dbms !default_dbms where type=psql and user = !db_user and password = !d
 
 Notes: 
 1) ***These policies are declared once*** and the below policies declarations can be moved to a dedicated script file that is called once when the node is installed.
-2) Details on blockchain commands are available in the [blockchain commands](./blockchain%20commands.md#blockchain-commands) section. 
+2) Details on blockchain commands are available in the [blockchain commands](../blockchain%20commands.md#blockchain-commands) section. 
 
 In a ***standalone*** contiguration the node serves multiple roles. We use a seperate policy for each role.  
 If only one role is configured, only the policy that determines the configured role is needed.
@@ -328,7 +334,7 @@ schedule time = 1 day and name = "Remove Old Partitions" task drop partition whe
 </pre>
 
 Notes: 
-1) [This example](..//alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
+1) [This example](../alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
 2) ```get scheduler 1``` returns the tasks assigned to scheduler #1.
 
 
@@ -363,7 +369,7 @@ run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=a
 
 #### Start the Operator processes
 These are the processes that based on the ingested data, create the schemas and update the databases.    
-Details are available in the [Operator Process](background%20processes.md#operator-process) section.
+Details are available in the [Operator Process](../background%20processes.md#operator-process) section.
  
 <pre>
 run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node
@@ -506,5 +512,3 @@ set script autoexec.json [script data]    # Use POST in the REST call
     ]
 }
 ```
-
-

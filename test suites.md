@@ -1,3 +1,9 @@
+---
+title: "The Test Suite"
+description: ""
+layout: page
+source_path: "test suites.md"
+---
 # The Test Suite
 
 Nodes in the network can consider queries and their outputs as test cases and group the test cases in test suites.   
@@ -199,5 +205,5 @@ test suite where source = !test_dir/test_*.out and inform = stdout and subdir = 
 
 ## Example
 
-A detailed example is available in [test suite example](examples/TestSuite.md)
+A detailed example is available in [test suite example](examples/testsuite.md)
 

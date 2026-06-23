@@ -1,3 +1,9 @@
+---
+title: "Using Ethereum as a Global Metadata Platform"
+description: ""
+layout: page
+source_path: "using ethereum.md"
+---
 # Using Ethereum as a Global Metadata Platform
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+title: "Policies based Metadata"
+description: ""
+layout: page
+source_path: "policies.md"
+---
 # Policies based Metadata
 
 AnyLog maintains the metadata in a ledger. The metadata is organized as a collection of objects, called policies. A 

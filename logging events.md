@@ -1,3 +1,9 @@
+---
+title: "Logging Events"
+description: ""
+layout: page
+source_path: "logging events.md"
+---
 # Logging Events
 
 Each node maintains buffers to record events and errors such that users and applications are able to retrieve the recent 

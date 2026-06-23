@@ -1,3 +1,9 @@
+---
+title: "Streaming Conditions"
+description: ""
+layout: page
+source_path: "streaming conditions.md"
+---
 # Streaming Conditions
 
 Streaming conditions are conditions that are applied on streaming data in each node.  

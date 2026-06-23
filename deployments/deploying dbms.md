@@ -1,3 +1,9 @@
+---
+title: "contains only username and password"
+description: ""
+layout: page
+source_path: "deployments/deploying dbms.md"
+---
  # Database Configuration
 Physical databases are a pluggable component. The configuration assigns a logical database to a physical database.
 The command [connect dbms](../sql%20setup.md#connecting-to-a-local-database) associates a logical database with a 
@@ -89,7 +95,7 @@ Web-based MongoDB admin tool. The username/password or mongo-express is the same
 The following documentation provides instruction to install MongoDB locally: 
 
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
-* [Accepting MongoDB data on AnyLog](Support/setting_up_mongodb.md)
+* [Accepting MongoDB data on AnyLog](Support/configuring%20mongodb.md)
 
 1. (Optional) Update configurations
    * username / password 
