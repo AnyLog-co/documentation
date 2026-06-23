@@ -10,7 +10,7 @@ AnyLog is a platform that allows to manage data across multiple (edge) innstance
 centralized (on the cloud). 
 
 Right now, the "standard" deployment process consists of a docker container that runs either via 
-[Docker](/docs/deployments/quick-deployment/) or [Kubernetes](/docs/deployments/deploying_node/). However, under certain conditions, such as
+[Docker](quick%20deployment.md) or [Kubernetes](deploying%20node.md). However, under certain conditions, such as
 lack of space or regulatory requirements, network constraints, etc, users may select to install AnyLog (or EdgeLake) 
 directly as a service.
 

@@ -9,13 +9,13 @@ source_path: "node configuration.md"
 Node configuration includes the update of the local dictionary, and the initiation of processes:  
 1) Updating the local dictionary - Updating the local dictionary of a node with the values that are needed by the node processes.
 2) Initiating processes - Initiating the processes that determine how the node operates (detailed explanations of the 
-   processes are available in the [Background Processes](/docs/background-processes/#background-processes) section).
+   processes are available in the [Background Processes](background%20processes.md#background-processes) section).
 
 The AnyLog configuration can be done in different ways:  
-* Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](/docs/using-rest/#using-rest) section).  
+* Dynamically issuing REST calls (with AnyLog commands) from an application (issuing REST calls to an AnyLog node is explained in the [Using REST](using%20rest.md#using-rest) section).  
 * By a script file that contains AnyLog commands. The advantage in a script file is that it can be organized
-as a program with _if_ conditions and _goto_ statements (details are available in the [Configuration Examples](/docs/examples/configuration/#configuration-examples) section).
-* By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](/docs/examples/configuration/#configuring-a-node-with-a-json-file) section).
+as a program with _if_ conditions and _goto_ statements (details are available in the [Configuration Examples](examples/configuration.md#configuration-examples) section).
+* By a JSON file the contains AnyLog commands (using a JSON file to configure a node is demonstrated in the [Configuring a node with a JSON file](examples/configuration.md#configuring-a-node-with-a-json-file) section).
 * Using a table in a database that contains the AnyLog command as detailed below.    
 
 ## The configuration process 
@@ -161,11 +161,11 @@ The following chart details where the number of threads is configured for each p
 
 | Pool Name | Configuration                                                                                 |
 |-----------|-----------------------------------------------------------------------------------------------|
-| TCP       | In the TCP service command [run tcp server](/docs/background-processes/#the-tcp-server-process) |
-| REST      | In the REST service command [run rest server](/docs/background-processes/#rest-requests)        |
-| Message   | In the Message service command [run message broker](/docs/background-processes/#message-broker) |
+| TCP       | In the TCP service command [run tcp server](background%20processes.md#the-tcp-server-process) |
+| REST      | In the REST service command [run rest server](background%20processes.md#rest-requests)        |
+| Message   | In the Message service command [run message broker](background%20processes.md#message-broker) |
 | Query     | In the **set query pool** command (see below)                                                 |
-| Operator  | In the Operator service command [run operator](/docs/background-processes/#operator-process).   |
+| Operator  | In the Operator service command [run operator](background%20processes.md#operator-process).   |
 
 Note: If an Operator is configured with 1 thread, it will not be included in the **get system threads** command output.
 

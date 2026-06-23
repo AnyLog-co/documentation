@@ -24,7 +24,7 @@ This process initiates a client that subscribes to a list of topics registered o
 When a new message is added to the broker and associated with the subscribed topic, the broker will push the message to the AnyLog instance.        
 On the AnyLog instance, messages are mapped to JSON structures and aggregated to files that are treated according to the configuration of the node. 
 For example, the data can be ingested to a local database or send to a different node.    
-The message data on the AnyLog instance is treated as **streaming data**, this process is explained at [File Mode and Streaming Mode](/docs/adding-data/#file-mode-and-streaming-mode).
+The message data on the AnyLog instance is treated as **streaming data**, this process is explained at [File Mode and Streaming Mode](adding%20data.md#file-mode-and-streaming-mode).
 
 ## The command structure
 ```anylog
@@ -97,7 +97,7 @@ The following params are provided for each topic:
 The `bring` command is an AnyLog command that extracts data from a JSON structure.   
 The message data is structured in JSON and the `bring` command is applied to the message to retrieve the needed data.  
 The `bring` command is used in the same way it is being used in the blockchain commands.    
-The command usage is explained at: [JSON Data Transformation](/docs/json-data-transformation/#json-data-transformation).  
+The command usage is explained at: [JSON Data Transformation](json%20data%20transformation.md#json-data-transformation).  
 
 **Mapping the Message Data**  
 Values pulled from the message determine the database, table, columns and the columns values to update. 
@@ -200,8 +200,8 @@ The time thresholds are enforced by the _Streaming_ process. To enable the strea
 ```anylog
 run streamer 
 ``` 
-More information on the Streamer process is available at the [Streamer Process](/docs/background-processes/#streamer-process) section.    
-Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](/docs/adding-data/#setting-and-retrieving-thresholds-for-a-streaming-mode).      
+More information on the Streamer process is available at the [Streamer Process](background%20processes.md#streamer-process) section.    
+Setting and viewing the thresholds is explained at [Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).      
 By default, the node assigns the value 60 seconds to the time threshold and 10,000 bytes to the volume threshold.  
 
 **Terminating Clients**  
@@ -355,7 +355,7 @@ CloudMQTT are managed Mosquitto servers in the cloud. Mosquitto implements the M
 ```anylog
 run streamer 
 ``` 
-Info on the **run streamer** command is available in the [Streamer Process](/docs/background-processes/#streamer-process) in the [Background Processes](/docs/background-processes/) section.
+Info on the **run streamer** command is available in the [Streamer Process](background%20processes.md#streamer-process) in the [Background Processes](background%20processes.md) section.
 
 ### Subscribing to the topic:
 
@@ -407,8 +407,8 @@ get msg brokers
 
 # Configuring an AnyLog node as a message broker
 
-By enabling the AnyLog [Message Broker](/docs/background-processes/#message-broker) functionality on a particular node, 
-the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [Using EdgeX](/docs/using-edgex/#using-edgex) section.
+By enabling the AnyLog [Message Broker](background%20processes.md#message-broker) functionality on a particular node, 
+the AnyLog node can serve as an MQTT Broker. A detailed example is available in the [Using EdgeX](using%20edgex.md#using-edgex) section.
 
 Any AnyLog node can be configured with a [Message Broker](https://en.wikipedia.org/wiki/Message_broker) functionality.  
 By configuring a node as message broker, data can be transferred from a client to an AnyLog node without dependency on a third party message broker platform.  
@@ -416,9 +416,9 @@ By configuring a node as message broker, data can be transferred from a client t
 The process of using an AnyLog node as a message broker is similar to the process of using a third party message broker and is as follows:
 * Configuring an AnyLog node as a message broker
 * Subscribing to the published topics and mapping the data to the needed schema - this process is using the same command options as the [Subscribing to a third party broker](#subscribing-to-a-third-party-broker) process.
-* The [Streamer Process](/docs/background-processes/#streamer-process) needs to be enabled.
+* The [Streamer Process](background%20processes.md#streamer-process) needs to be enabled.
 
-A detailed configuration example is available in the examples section - [Broker Setup](/docs/examples/broker-setup/#setting-anylog-as-a-message-broker).
+A detailed configuration example is available in the examples section - [Broker Setup](examples/Broker%20Setup.md#setting-anylog-as-a-message-broker).
 
 ## The message broker configuration
 
@@ -426,8 +426,8 @@ The AnyLog node serving as the broker is configured as follows:
 ```anylog
 run message broker [ip] [port] [local ip] [Local port] [threads]
 ```
-Details on the `run message broker` command are available at the [Message Broker](/docs/background-processes/#message-broker)
-section in the [Background Processes](/docs/background-processes/#background-processes) document.
+Details on the `run message broker` command are available at the [Message Broker](background%20processes.md#message-broker)
+section in the [Background Processes](background%20processes.md#background-processes) document.
 
 ## Subscription to topics published on the AnyLog node
 Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  

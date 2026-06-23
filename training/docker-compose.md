@@ -267,7 +267,7 @@ make up ANYLOG_TYPE=master
 ## Extending docker-compose
 
 ### Enable Remote-CLI
-The default _docker-compose_ can be extended to install [_Remote-CLI_](/docs/northbound-connectors/remote_cli/) as part 
+The default _docker-compose_ can be extended to install [_Remote-CLI_](../northbound%20connectors/remote_cli.md) as part 
 of the same (Query node) deployment. This is important when querying blob data.
 
 **Steps**

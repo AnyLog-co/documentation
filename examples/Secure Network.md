@@ -35,7 +35,7 @@ The Key-Based Authentication enables the following:
 ^Note: A private key and a public key can be assigned to users - it allows for administrators to operate on the node's CLI
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
-The relevant AnyLog commands are detailed in the section [Node Authentication](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#node-authentication).  
+The relevant AnyLog commands are detailed in the section [Node Authentication](../authentication.md#node-authentication).  
 
 
 ## Key-Based-Authentication deployment example
@@ -570,7 +570,7 @@ run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the comman
 ## Using certificates
 
 This process makes AnyLog a Certificate Authority (CA) that issues Client Certificates to 3rd parties applications.   
-This process id detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) section.  
+This process id detailed in the [Using SSL Certificates](../authentication.md#using-ssl-certificates) section.  
 Client Certificates enable the following:  
 * Only clients holding certificates can communicate with the network nodes.
 * A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
@@ -591,7 +591,7 @@ get rest server info
 
 ### Example
 
-The following example assumes that the example certificates detailed in the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) 
+The following example assumes that the example certificates detailed in the [Using SSL Certificates](../authentication.md#using-ssl-certificates) 
 section are available in the pem directory (!pem_dir). 
 
 ### Generate a Member Policy representing the issued certificate:
@@ -651,7 +651,7 @@ blockchain get member bring.table [] [*][name] [*][type] [*][public_key]      # 
 
 ### Query permissions for members
 
-The command [get permissions](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#permission-group)
+The command [get permissions](../authentication.md#permission-group)
 returns the permissions assigned to member policies in the network.
 
 Examples:  
@@ -681,7 +681,7 @@ Use the Setting Tab to configure the REST calls as follows:
 
 ### Example of a third part application - Grafana
 
-Note: Configuring Grafana is detailed in the [Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) section.  
+Note: Configuring Grafana is detailed in the [Using Grafana](../northbound%20connectors/using%20grafana.md) section.  
 
 To use Certificate, update the Grafana JSON data source page as follows:
 * Update the AnyLog URL to use HTTPS (Encrypted Connection).

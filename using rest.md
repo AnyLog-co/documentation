@@ -33,7 +33,7 @@ To configure an AnyLog Node to satisfy REST calls, issue the following command o
 ```anylog
 run rest server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and timeout = 0 and threads = [threads count] and ssl = [true/false] and ca_org = [certificate authority name] and server_org = [sergver organization name]
 ```
-The command details are avaiable [here](/docs/background-processes/#rest-requests)
+The command details are avaiable [here](background%20processes.md#rest-requests)
   
 ### The AnyLog commands supported by REST
 
@@ -82,21 +82,21 @@ curl --location --request POST '10.0.0.78:7849' \
 ```
 
 The following example is using HTTP request to copy a configuration file to an AnyLog node and process the file.  
-Details on the **file store** command are available [here](/docs/image-mapping/#insert-a-file-to-a-local-database)
+Details on the **file store** command are available [here](image%20mapping.md#insert-a-file-to-a-local-database)
 ```anylog
 curl -X POST -H "command: file to where dest = !demo_dir/operator_28.al" -F "file=@new_config.al" http://10.0.0.78:7849
 curl -X POST -H "command: process !demo_dir\operator_28.al" http://10.0.0.78:7849
 ```
-Details are available at the [file to](/docs/file-commands/#copy-a-file-to-a-folder) section.
+Details are available at the [file to](file%20commands.md#copy-a-file-to-a-folder) section.
 
 
 ### Using PUT to add data to nodes in the network.
 
-Details are provided in  the section [Data transfer using a REST API](/docs/adding-data/#data-transfer-using-a-rest-api).
+Details are provided in  the section [Data transfer using a REST API](adding%20data.md#data-transfer-using-a-rest-api).
 
 ### Headers setup
 
-The header setup for the PUT command is detailed in the section [Configuring the Sender Node](/docs/adding-data/#configuring-the-sender-node-a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network).  
+The header setup for the PUT command is detailed in the section [Configuring the Sender Node](adding%20data.md#configuring-the-sender-node-a-client-node-which-is-not-necessarily-a-member-of-the-anylog-network).  
 The header setup for GET and POST is the following:
 
 | Key        | Value  |
@@ -167,7 +167,7 @@ This process is done as follows:
     
   Notes:  
   a) The User-Agent request header is a characteristic string that lets servers and network peers identify the application, operating system, vendor, and/or version of the requesting user agent.  
-  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](/docs/message-broker/) section.
+  b) Details on the `rum mqtt client` command are available in the [Using MQTT Broker](message%20broker.md) section.
 
 2. Issue REST calls to the AnyLog node.  
    Example:  

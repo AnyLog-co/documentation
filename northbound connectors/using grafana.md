@@ -9,12 +9,12 @@ source_path: "northbound connectors/using grafana.md"
 ## Overview
 
 Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
-demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](/docs/northbound-connectors/powerbi/), can be found in our 
-[North Bound services](../northbound%20connectors) section.   
+demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](powerbi.md), can be found in our 
+North Bound services section.   
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
-Directions for importing our demo images dashboards can be found in [import grafana dashboard document](/docs/northbound-connectors/import-grafana-dashboard/)
+Directions for importing our demo images dashboards can be found in [import grafana dashboard document](Import%20Grafana%20Dashboard.md)
 
 
 ## Prerequisites & Links
@@ -52,7 +52,7 @@ docker run --name=grafana \
 ## Setting Up Grafana 
 1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
 
-<img src="/assets/external-docs/imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+<img src="../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
 
 2. In _Data Sources_ section, create a new JSON data source
    * select a JSON data source.
@@ -61,24 +61,24 @@ docker run --name=grafana \
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query
 
-|<img src="/assets/external-docs/imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="/assets/external-docs/imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
+|<img src="../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
 | :---: | :---: |
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
-<img src="/assets/external-docs/imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
+<img src="../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
 
 ### Enabling Authentication
 
-Enabling authentication is explained at [Authenticating HTTP requests](/docs/authentication/#Authenticating-http-requests).
+Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
 
-When authentication only REST requests via _username_ and _password_ ([basic authentication](/docs/authentication/#enabling-basic-authentication-in-a-node-in-the-network)) 
+When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
 the Grafana configuration should have _basic auth_ enabled.
 
-<img src="/assets/external-docs/imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
+<img src="../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
 
-While authentication using [SSL Certificates](/docs/authentication/#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
+While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
 
-<img src="/assets/external-docs/imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
+<img src="../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
 
 **Notes**: Failure to connect may be the result of one of the following
 * AnyLog instance is not running or not configured to support REST calls.
@@ -117,7 +117,7 @@ instructions    - Additional AnyLog query instructions.
 </pre>
 
 
-<img src="/assets/external-docs/imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
+<img src="../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 
 ### Blockchain based Visualization
 
@@ -136,7 +136,7 @@ instructions    - Additional AnyLog query instructions.
 }
 ```
 
-<img src="/assets/external-docs/imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
+<img src="../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
 
 
 **Creating Table from Blockchain**
@@ -152,14 +152,14 @@ instructions    - Additional AnyLog query instructions.
 }
 ```
 
-<img src="/assets/external-docs/imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
 
 ### Using the Time-Series Data Visualization
 
 **Increments query** (The default query) is used to query statistics on time intervals in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max, average   
 and count are applied on each interval.  
-Detailed description of the **increment** query is available in the [increment section](/docs/queries/#the-increment-function).
+Detailed description of the **increment** query is available in the [increment section](../queries.md#the-increment-function).
 
 **Example 1**:
 ```shell
@@ -222,14 +222,14 @@ The **include** attribute allows the query to treat multiple tables as a single 
 For instance, in Example 2, querying table t99 with an include on t98 results in data from both tables being retrieved and processed together.      
 The **extend** attribute appends metadata from the source node to the returned dataset.    
 In Example 2, extend organizes the results by grouping entries under their respective table names, preserving source context within the response.    
-Comprehensive specifications for **include** and **extend** are provided in the [Query Options](/docs/queries/#query-options) section.
+Comprehensive specifications for **include** and **extend** are provided in the [Query Options](../queries.md#query-options) section.
 
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
 derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
-Detailed description of the **period** query is available in the [period section](/docs/queries/#the-period-function).
+Detailed description of the **period** query is available in the [period section](../queries.md#the-period-function).
 
 **Example**: 
 ```shell
@@ -249,7 +249,7 @@ FROM
     ping_sensor 
 ```
 
-More information on increments and period types of queries are available in [queries and info requests](/docs/queries/#optimized-time-series-data-queries).
+More information on increments and period types of queries are available in [queries and info requests](../queries.md#optimized-time-series-data-queries).
 
 
 **Increments Graph**
@@ -272,7 +272,7 @@ More information on increments and period types of queries are available in [que
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
-<img src="/assets/external-docs/imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
+<img src="../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
 
 **Period Graphs**
 1. In the _Visualizations_ section, select _Gauge_
@@ -294,7 +294,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
-<img src="/assets/external-docs/imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
+<img src="../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
 
 
 **Other Examples**

@@ -9,10 +9,10 @@ source_path: "json data transformation.md"
 Using command line instructions, users can transform JSON data to target structures.    
 Examples of usage:
 * Retrieve needed values from JSON objects.
-* Retrieve needed values from the ledger policies. Details ate available at the [Query policies](/docs/blockchain-commands/#query-policies) 
-section in the [Blockchain commands](/docs/blockchain-commands/#blockchain-commands) documentation. 
-* Map source JSON data to a target structure - Details are available at the [Bring Command](/docs/message-broker/#bring-command)
-section in the [Message Broker](/docs/message-broker/#using-a-message-broker) documentation.
+* Retrieve needed values from the ledger policies. Details ate available at the [Query policies](blockchain%20commands.md#query-policies) 
+section in the [Blockchain commands](blockchain%20commands.md#blockchain-commands) documentation. 
+* Map source JSON data to a target structure - Details are available at the [Bring Command](message%20broker.md#bring-command)
+section in the [Message Broker](message%20broker.md#using-a-message-broker) documentation.
 
 
 ## Creating JSON Objects and Policies

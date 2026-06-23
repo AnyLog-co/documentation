@@ -8,7 +8,7 @@ source_path: "file commands.md"
 
 The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.  
 In the examples below, the ***local node*** is the node where the command is executed. 
-The ***remote node*** is identified by the IP and Port declared in the [run tcp server](/docs/background-processes/#the-tcp-server-process) process.
+The ***remote node*** is identified by the IP and Port declared in the [run tcp server](background%20processes.md#the-tcp-server-process) process.
 
 Operations supported:
 

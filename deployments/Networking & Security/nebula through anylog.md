@@ -19,14 +19,14 @@ and configure the desired `OVERLAY_IP` value in order to deploy AnyLog with Nebu
 your nodes can be accessed by people using the pre-set certifications.
 
 In order to resolve the issue mentioned above, users can do 2 things:  
-* [Personalize Nebula](/docs/deployments/networking-and-security/nebula/) & [Updating Docker for Nebula](#personalized-nebula)  
-* Directions to secure your network with AnyLog can be found [here](/docs/secure-network/)
+* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#personalized-nebula)  
+* Directions to secure your network with AnyLog can be found [here](../../secure%20network.md)
 
 **Documentation**
 * [GitHub](https://github.com/slackhq/nebula)
 * [Documentation](https://nebula.defined.net/docs)
 * [Defines' Website](https://www.defined.net/)
-* [Configuring Overlay with AnyLog](/docs/deployments/networking-and-security/configuring-overlay-with-anylog/)
+* [Configuring Overlay with AnyLog](Configuring%20Overlay%20with%20AnyLog.md)
 
 ## Deploying with pre-set Nebula 
 

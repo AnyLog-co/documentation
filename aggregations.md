@@ -51,9 +51,9 @@ the original event time rather than processing time.
 
 1. Aggregation intervals are designed for efficient real-time processing of streaming data. However, because they rely 
 on processing time rather than source time, users should be aware of potential differences when analyzing time-sensitive data.
-2. Deployment examples are available in the [Aggregations Examples](/docs/examples/aggregations-examples/) section.
+2. Deployment examples are available in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
 3. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
-   [Declaring OPC UA with Aggregations](/docs/opcua/#example---declaring-opc-ua-with-aggregations) section.
+   [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
 
 ## Aggregations and DBMS Operations
 
@@ -304,7 +304,7 @@ get aggregation by time where dbms = orics and table = r_50 and value_column = *
 
 **Casting:**
 
-Functions can be extended using casting (like columns and functions in a query). See details in the [Cast Data](https://github.com/AnyLog-co/documentation/blob/master/queries.md#cast-data) section.
+Functions can be extended using casting (like columns and functions in a query). See details in the [Cast Data](queries.md#cast-data) section.
 
 **Example:**
 ```anylog
@@ -341,7 +341,7 @@ get aggregation by time where dbms = orics and table = r_50 and value_column = c
 }
 ```
 
-Note: Grafana configuration is detailed in the [Using Grafana](/docs/northbound-connectors/using-grafana/) section.
+Note: Grafana configuration is detailed in the [Using Grafana](northbound%20connectors/using%20grafana.md) section.
 
 ## Retrieve aggregation configurations
 

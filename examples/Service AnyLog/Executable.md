@@ -45,7 +45,7 @@ git clone https:///github.com/AnyLog-co/docker-compose
    * **advance_configs.env**
      * Directories (`ANYLOG_PATH`, `LOCAL_SCRIPTS`, `TEST_DIR`) - when deploying AnyLog as executable we recommend setting 
      the path to `~/AnyLog-code` 
-     * `DISABLE_CLI` to _true_ if planned to [run in background](/docs/examples/service-anylog/service/)
+     * `DISABLE_CLI` to _true_ if planned to [run in background](Service.md)
 ```shell
 while IFS= read -r line ; do if [[ $line != \#* ]] && [[ $line != "" ]] && [[ "$line" != '=""' ]] ; then export "${line}" ; fi ; done < ~/AnyLog-code/docker-compose/docker-makefile/master-configs/base_configs.env
 while IFS= read -r line ; do if [[ $line != \#* ]] && [[ $line != "" ]] && [[ "$line" != '=""' ]] ; then export "${line}" ; fi ; done < ~/AnyLog-code/docker-compose/docker-makefile/master-configs/advance_configs.env

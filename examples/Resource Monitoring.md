@@ -10,7 +10,7 @@ source_path: "examples/Resource Monitoring.md"
 Resources in the network can be monitored in different ways. Resources include nodes that are members of the network as well as devices that generate data and are connected to members of the network.  
 
 Below are examples of deploying monitoring over different resource.  
-Additional information is available in the [monitoring nodes section](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes).
+Additional information is available in the [monitoring nodes section](../monitoring%20nodes.md#monitoring-nodes).
 
 
 ## Monitoring data ingestion

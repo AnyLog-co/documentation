@@ -10,7 +10,7 @@ AnyLog / EdgeLake enables storage of both SQL and non-SQL data, such as images, 
 non-SQL data, storage options include file-based systems or NoSQL databases like MongoDB.
 
 This document provides step-by-step instructions for deploying and managing blob data. For a detailed architectural 
-explanation of blob management, refer to the [image mapping document](/docs/image-mapping/).
+explanation of blob management, refer to the [image mapping document](../image%20mapping.md).
 
 **What are blobs**: Binary Large Objects (BLOBs) are collections of binary data stored as single entities. Examples 
 include PDFs, images, and videos. Due to their size and format, blobs cannot be effectively stored in standard SQL 
@@ -164,13 +164,13 @@ docker run -it -d \
 --network host --rm anylogco/sample-data-generator:latest
 ```
 
-2. via [Remote-CLI](/docs/northbound-connectors/remote_cli/), query people data
+2. via [Remote-CLI](../northbound%20connectors/remote_cli.md), query people data
 ```anylog 
 sql edgex info = (dest_type = rest) and extend=(+country, +city, @ip, @port, @dbms_name, @table_name) and format = json and timezone = utc  select  file, start_ts::ljust(19), end_ts::ljust(19), people_count, confidence from people_counter     where start_ts >= NOW() - 1 hour and end_ts <= NOW() order by people_count, confidence --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)
 ```
 <div style="display: flex; align-items: center; justify-content: center;">
-  <img src="/assets/external-docs/imgs/blobs_img1.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
-  <img src="/assets/external-docs/imgs/blobs_img2.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
+  <img src="../imgs/blobs_img1.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
+  <img src="../imgs/blobs_img2.png" width="30%" height="30%" style="margin-left: 10px;" style="margin-right: 10px;" />
 </div>
 
 

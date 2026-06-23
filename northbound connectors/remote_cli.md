@@ -25,7 +25,7 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](/docs/background-processes/#rest-requests) section.
+Configuring a node to recieve REST requests is detailed in the [REST Requests](../background%20processes.md#rest-requests) section.
 
 ## Installing the Remote CLI
 
@@ -183,7 +183,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get databases](/assets/external-docs/imgs/remote_cli_get_databases.png)
+![get databases](../imgs/remote_cli_get_databases.png)
 
 ### Return columns in a given table 
 
@@ -193,7 +193,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get columns](/assets/external-docs/imgs/remote_cli_get_columns.png)
+![get columns](../imgs/remote_cli_get_columns.png)
 
 ### Return Operators nodes associated to a company
 
@@ -203,7 +203,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![view operators in blockchain](/assets/external-docs/imgs/remote_cli_blockchain_operators.png)
+![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png)
 
 ### Get the list of nodes that host the data (for each table)
 
@@ -213,7 +213,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Data Nodes](/assets/external-docs/imgs/remote_cli_data_nodes.png)
+![Data Nodes](../imgs/remote_cli_data_nodes.png)
 
 ### Query the last 90 seconds of data
 
@@ -223,7 +223,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 90 seconds of data](/assets/external-docs/imgs/remote_cli_select_last_90sec.png)
+![Last 90 seconds of data](../imgs/remote_cli_select_last_90sec.png)
 
 ### Query the last 10 minutes of data including the source node
 
@@ -233,4 +233,4 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 10 minutes of data](/assets/external-docs/imgs/remote_cli_select_last_10min.png)
+![Last 10 minutes of data](../imgs/remote_cli_select_last_10min.png)

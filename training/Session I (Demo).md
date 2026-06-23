@@ -6,15 +6,15 @@ source_path: "training/Session I (Demo).md"
 ---
 # Session I - The Basic Guided Tour
 
-Prerequisite: See details [here](/docs/training/prerequisite/).  
-Suggested Reading: [Getting Started](/docs/getting-started/).
+Prerequisite: See details [here](prerequisite.md).  
+Suggested Reading: [Getting Started](../getting%20started.md).
 
 # Basic AnyLog commands
 
 The basic AnyLog commands demonstrated in the Onboarding session:
 
 ## Help commands 
-See details in [the help command section](/docs/getting-started/#the-help-command).  
+See details in [the help command section](../getting%20started.md#the-help-command).  
 Examples:
 ```anylog 
 help
@@ -45,7 +45,7 @@ AL generic >
 ## The local dictionary
 The local dictionary maps local values (like paths names and IPs) to unified names that can be shared across nodes.
 
-Details are in [the local dictionary section](/docs/dictionary/#the-local-dictionary).
+Details are in [the local dictionary section](../dictionary.md#the-local-dictionary).
 
  Examples:
 ```anylog 
@@ -64,7 +64,7 @@ Use the local dictionary to see the local folders' setup:
 ```anylog 
 get dictionary _dir
 ```   
-Details are in [the local directory structure](/docs/getting-started/#local-directory-structure).
+Details are in [the local directory structure](../getting%20started.md#local-directory-structure).
   
 ## The communication services
 Each node can offer 3 types of communication services:  
@@ -103,7 +103,7 @@ A node can validate proper configurations using the **test node** command.
 ```anylog
 test node
 ```
-Details are available [here](/docs/test-commands/#test-node).
+Details are available [here](../test%20commands.md#test-node).
   
 ## Connecting to a DBMS
 Supported databases: PostgreSQL for larger nodes and SQLite for smaller nodes or data in RAM.
@@ -119,16 +119,16 @@ get databases
 ```
 
 ## The Metadata
-Details are available in [Managing Metadata](/docs/metadata-management/#managing-metadata)
-and [Blockchain Commands](/docs/blockchain-commands/#blockchain-commands).
+Details are available in [Managing Metadata](../metadata%20management.md#managing-metadata)
+and [Blockchain Commands](../blockchain%20commands.md#blockchain-commands).
 
 ### Get metadata from a peer node
-Copy the metadata from a peer node in the network. See details [here](/docs/blockchain-commands/#retrieving-the-metadata-from-a-source-node).
+Copy the metadata from a peer node in the network. See details [here](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node).
 ```anylog
 blockchain seed from [ip:port]
 ```
 Note: the proper way to provide the metadata to a node is to enable the **blockchain synchronizer** service on the node.  
-This process will update the node continuously with updates to the metadata. Details are available [here](/docs/background-processes/#blockchain-synchronizer).
+This process will update the node continuously with updates to the metadata. Details are available [here](../background%20processes.md#blockchain-synchronizer).
 
 
 ### Examples of metadata commands:
@@ -145,7 +145,7 @@ blockchain get operator where [city] = toronto  bring.ip_port
 ```   
 
 ### Test node connectivity with peers
-A process to validate that the node can communicate with peers in the network. See details [here](/docs/test-commands/#test-network).
+A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#test-network).
 ```anylog
 test network
 ```
@@ -164,10 +164,10 @@ run client 23.239.12.151:32348 get cpu usage
  
 ## Monitoring commands:
 Additional info is in the following sections:  
-- [Monitoring nodes](/docs/monitoring-nodes/#monitoring-nodes)
-- [Alerts and Monitoring](/docs/alerts-and-monitoring/#alerts-and-monitoring)
+- [Monitoring nodes](../monitoring%20nodes.md#monitoring-nodes)
+- [Alerts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring)
 - [Monitoring Data](../examples/Data%20Monitoring.md#data-monitoring)
-- [Monitoring Calls](/docs/monitoring-calls/#monitoring-calls-from-external-applications)
+- [Monitoring Calls](../monitoring%20calls.md#monitoring-calls-from-external-applications)
 
 
 Examples: 
@@ -204,7 +204,7 @@ get data nodes
 ```
   
 ## Data Query 
-Details are in the [query section](/docs/queries/).
+Details are in the [query section](../queries.md).
 
  Examples: 
  ```anylog 

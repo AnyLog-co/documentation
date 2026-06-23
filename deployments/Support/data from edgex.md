@@ -9,7 +9,7 @@ source_path: "deployments/Support/data from edgex.md"
 EdgeX (Foundry) is an Open-Source framework that serves as a foundation for building and deploying Internet of Things (IoT)
 edge computing solutions. While EdgeXpert is an enterprise version of _EdgeX_, provided by IoTech System. 
 
-Note: a detailed explanation on how data is added to the AnyLog Network nodes is available at the [adding data](/docs/adding-data/) section.
+Note: a detailed explanation on how data is added to the AnyLog Network nodes is available at the [adding data](../../adding%20data.md) section.
 
 This document demonstrates how to publish data into AnyLog via EdgeXpert Management tool.   
 Edgex related documentation is available with the links below:
@@ -17,7 +17,7 @@ Edgex related documentation is available with the links below:
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
 * [User Guide](https://docs.iotechsys.com/)
-* [Manual Deployment of EdgeX](/docs/deployments/support/edgex/)
+* [Manual Deployment of EdgeX](edgex.md)
 
 
 For demonstration, the examples used is **retail-1** data source, provided by IoTech System.  
@@ -61,8 +61,8 @@ For demonstration, the examples used is **retail-1** data source, provided by Io
 
 ## AnyLog Prerequisites
 
-* To send data to AnyLog via REST, configure the REST service. See details in the [REST Server](/docs/background-processes/#rest-requests) section. 
-* To Treat AnyLog as a message broker, configure the Message Broker service. See details in the [Message Broker](/docs/background-processes/#message-broker) section. 
+* To send data to AnyLog via REST, configure the REST service. See details in the [REST Server](../../background%20processes.md#rest-requests) section. 
+* To Treat AnyLog as a message broker, configure the Message Broker service. See details in the [Message Broker](../../background%20processes.md#message-broker) section. 
 
 These services enable the node to receive the data via REST or published data.
 
@@ -73,15 +73,15 @@ These services enable the node to receive the data via REST or published data.
    * **URL**: `https://${YOUR_IP}:9090` 
    * **Username**: `admin` | **Password**: `admin`
 
-![Login Screen](/assets/external-docs/imgs/edgex_login.png)
+![Login Screen](../../imgs/edgex_login.png)
 
 3. On the left-side of the screen, press _App Services_
 
-![Xpert Management Homepage](/assets/external-docs/imgs/edgex_homepage.png)
+![Xpert Management Homepage](../../imgs/edgex_homepage.png)
 
 4. On the right-side of the screen add a _Basic Service_
 
-![Basic Service location](/assets/external-docs/imgs/edgex_basic_service.png)
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 From this point, configure the application service(s) based on the way by which to process the data on AnyLog.
 
@@ -92,7 +92,7 @@ Edgex can transfer data into AnyLog using the following calls:
 * Treating AnyLog as a Message Broker - data transformation is supported.
 
 Note that users can configure an AnyLog node to receive data from third-party brokers such as CloudMQTT and Eclipse 
-Mosquitto. This option is detailed [here](/docs/message-broker/#subscribing-to-a-third-party-broker).
+Mosquitto. This option is detailed [here](../../message%20broker.md#subscribing-to-a-third-party-broker).
 
 ### Transferring data into AnyLog via PUT
 
@@ -115,14 +115,14 @@ return outputObject;
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
-![Basic Service location](/assets/external-docs/imgs/edgex_basic_service.png)
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 2. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: HTTP
 
-![Basic Information](/assets/external-docs/imgs/edgex_put_basic_info.png)
+![Basic Information](../../imgs/edgex_put_basic_info.png)
 
 * **Address Info**
   * Method: PUT 
@@ -134,21 +134,21 @@ return outputObject;
     * mode: _streaming_
     * Content-Type: _text/plain_
 
-![Address Information](/assets/external-docs/imgs/edgex_put_address_info.png)
+![Address Information](../../imgs/edgex_put_address_info.png)
 
 * **Data Format**
   * JavaScript Transform: edgex_transformation.js 
 
-![Data Format](/assets/external-docs/imgs/edgex_put_data_format.png) 
+![Data Format](../../imgs/edgex_put_data_format.png) 
 
 * **Filter**
   * Device Filter
 
-![Filter Value(s)](/assets/external-docs/imgs/edgex_put_filter.png)
+![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
 3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via PUT.
 
-![Save Button](/assets/external-docs/imgs/edgex_save.png)
+![Save Button](../../imgs/edgex_save.png)
 
 
 ### Publishing Data into AnyLog via POST
@@ -163,14 +163,14 @@ when the data is recieved in the AnyLog node, the mapping rules assigned to the 
 
 This process is identical to the procesess used when data is published on an AnyLog node as a message broker.  
 The mapping rules are declared using a client service, and a description is available at the
-[run mqtt client](/docs/message-broker/) section. 
+[run mqtt client](../../message%20broker.md) section. 
 
 #### The following steps are done on the AnyLog (operator) node that's receiving the data
 
 1. Declare the mapping rules associated to a topic. If the database and table assigned to the data are not included in
    the headers, the maaping rules need to include the database and table to use.
 
-2. Enable the mapping rules using the client service (described in run [mqtt client](/docs/message-broker/)).   
+2. Enable the mapping rules using the client service (described in run [mqtt client](../../message%20broker.md)).   
    Note: This service is enabled using the command: `run mqtt client` 
 
 The example below declares the mapping rules on the data detailed above.
@@ -187,14 +187,14 @@ The example below declares the mapping rules on the data detailed above.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
-![Basic Service location](/assets/external-docs/imgs/edgex_basic_service.png)
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 2. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: HTTP
   
-![Basic Information](/assets/external-docs/imgs/edgex_post_basic_info.png)
+![Basic Information](../../imgs/edgex_post_basic_info.png)
 
 * **Address Info**
   * Method: POST 
@@ -205,16 +205,16 @@ The example below declares the mapping rules on the data detailed above.
     * User-Agent: AnyLog/1.23
     * Content-Type: text/plain
 
-![Address Information](/assets/external-docs/imgs/edgex_post_address_info.png)
+![Address Information](../../imgs/edgex_post_address_info.png)
   
 * **Filter**
   * Device Filter
 
-![Filter Value(s)](/assets/external-docs/imgs/edgex_put_filter.png)
+![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
 3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via POST.
 
-![Save Button](/assets/external-docs/imgs/edgex_save.png)
+![Save Button](../../imgs/edgex_save.png)
 
 ### Publishing Data into AnyLog using the AnyLog Message Broker service
 
@@ -222,7 +222,7 @@ The example below declares the mapping rules on the data detailed above.
 assigned to the data.
 
 2. Similar to _POST_, when using the _message broker_ service, enable the mapping rules using the client service 
-(described in run [mqtt client](/docs/message-broker/)). This service is enabled using the command: 
+(described in run [mqtt client](../../message%20broker.md)). This service is enabled using the command: 
 `run mqtt client` 
 
 The example below declares the mapping rules on the data detailed above.
@@ -240,29 +240,29 @@ The example below declares the mapping rules on the data detailed above.
 
 1. [Create Basic Application Service](#creating-an-application-service)
 
-![Basic Service location](/assets/external-docs/imgs/edgex_basic_service.png)
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 2. Update Basic App Service
 * **Basic Info** 
   * Name
   * Destination: MQTT
   
-![Basic Information](/assets/external-docs/imgs/edgex_mqtt_basic_info.png)
+![Basic Information](../../imgs/edgex_mqtt_basic_info.png)
 
 * **Address Info** 
   * URL (operator Message Broker service IP and Port)
   * Topic
 
-![Address Information](/assets/external-docs/imgs/edgex_mqtt_address_info.png)
+![Address Information](../../imgs/edgex_mqtt_address_info.png)
   
 * **Filter**
   * Device Filter
 
-![Filter Value(s)](/assets/external-docs/imgs/edgex_put_filter.png)
+![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
 3. Once the changes are saved (at the bottom of the screen), data should automatically be sent into AnyLog via POST.
 
-![Save Button](/assets/external-docs/imgs/edgex_save.png)
+![Save Button](../../imgs/edgex_save.png)
 
 
 

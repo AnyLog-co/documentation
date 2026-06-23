@@ -152,9 +152,9 @@ databases on each Operator maintain a complete data set and all the Operators su
 
 | Command        | Functionality  | 
 | ---------- | -------| 
-| [run operator](/docs/background-processes/#operator-process) | Enables the process that ingests data to the local databases. |
-| [run data distributor](/docs/background-processes/#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
-| [run data consumer](/docs/background-processes/#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
+| [run operator](background%20processes.md#operator-process) | Enables the process that ingests data to the local databases. |
+| [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
+| [run data consumer](background%20processes.md#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
 
 Example:
 
@@ -450,7 +450,7 @@ get tsd sync status
 get tsd sync status where table = tsd_128
 ```
 
-Additional information on the time file commands is available at the [Time File Commands](/docs/managing-data-files-status/#time-file-commands) section.
+Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.
 
 
 ## Cluster databases
@@ -519,7 +519,7 @@ A listed file name:
 ```
 The archive directory is determined by the first 6 digits of the last field in the file name (the name segment before the file type 
 representing the file ingestion date and time - 210404201021 in the example below).  
-Details on file naming are available at the [file naming convention](/docs/managing-data-files-status/#the-file-naming-convention) section.
+Details on file naming are available at the [file naming convention](managing%20data%20files%20status.md#the-file-naming-convention) section.
 
 ## Query execution
 
@@ -532,7 +532,7 @@ The following command provides information on the queries being executed, their 
 ```anylog
 query status
 ```
-Additional information is available in [Command options for profiling and monitoring queries](/docs/profiling-and-monitoring-queries/#command-options-for-monitoring-queries).
+Additional information is available in [Command options for profiling and monitoring queries](profiling%20and%20monitoring%20queries.md#command-options-for-monitoring-queries).
 
 ## Adding Operator Nodes to a Cluster
 

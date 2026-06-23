@@ -10,7 +10,7 @@ source_path: "blockchain commands.md"
 AnyLog maintains the metadata in a ledger. The metadata is organized as a collection of objects, called policies. A 
 policy is a JSON structure with a single key at the root. The root key is called the Policy Type.
 
-An overview of the structure of the policies is available in the [Policies based Metadata](/docs/policies/#policies-based-metadata) section.
+An overview of the structure of the policies is available in the [Policies based Metadata](policies.md#policies-based-metadata) section.
 
 ### Interacting with the blockchain data
 For a node to be active, it needs to maintain a local copy of the ledger in a local JSON file.
@@ -40,14 +40,14 @@ The difference is only in the configuration that determine the location of the g
 ## Maintaining the global copy on a blockchain platform
 
 Using a blockchain platform requires the following :
-1. Connecting to the blockchain platform. The following command connects to the blockchain platform, Details are available [here](/docs/using-ethereum/#connecting-to-ethereum). 
+1. Connecting to the blockchain platform. The following command connects to the blockchain platform, Details are available [here](using%20ethereum.md#connecting-to-ethereum). 
 ```anylog
 blockchain connect to [platform name] where [connection parameters]
 ```
      
 2. Updating the blockchain platform with new policies using the commands [blockchain insert](#the-blockchain-insert-command) or `blockchain push`.
 
-3. [Configuring synchronization](/docs/blockchain-configuration/) against the blockchain platform.  
+3. [Configuring synchronization](blockchain%20configuration.md) against the blockchain platform.  
 
 ## Executing the blockchain commands
 The blockchain commands can be executed on each node of the cluster and operate on the blockchain platform or the master node 
@@ -130,7 +130,7 @@ Queries detail filter criteria to return the needed policies in JSON format and 
 Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command _from_ and is explained at the
-section called: [The 'From JSON Object Bring' command](/docs/json-data-transformation/#the-from-json-object-bring-command).
+section called: [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
 
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
@@ -189,7 +189,7 @@ the name from the Operator policy. The following example evaluates attribute val
     ```anylog
     [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
     ```
-Conditional execution is detailed [here](/docs/anylog-commands/#conditional-execution). 
+Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
 Examples:
 ```anylog
@@ -205,7 +205,7 @@ blockchain get tag where [path] childfrom 'Root/Objects/DeviceSet/WAGO 750-8210 
 ### Formatting retrieved data 
 
 The ***bring*** command can be added to a blockchain ***get*** command such that ***get*** retrieves metadata in a JSON format and the keyword ***bring*** operates on the retrieved JSON data.  
-See details and examples in the [JSON data transformation](/docs/json-data-transformation/#json-data-transformation) section.
+See details and examples in the [JSON data transformation](json%20data%20transformation.md#json-data-transformation) section.
 
 ## Join & Merge Operations
 
@@ -399,9 +399,9 @@ Command details:
 | Key | Value | 
 | ------------ | ------------------------------------ |
 | policy          | A json policy that is added to the ledger                                                                                                                                                  |
-| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](/docs/using-ethereum/#using-ethereum-as-a-global-metadata-platform)).                                                                         |
+| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
 | local           | A true/false value to determine an update to the local copy of the ledger. The default value is True                               |
-| master          | The IP and Port value of a master node (configuring a master node is detailed in [this doc](/docs/master-node/#using-a-master-node).) |
+| master          | The IP and Port value of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
 
 Using the ***blockchain insert*** command, all the specified ledgers are updated. The common configuration would include the local ledger and 
 either a blockchain platform (like Ethereum) or a master node.  
@@ -431,8 +431,8 @@ Command details:
 | Key | Value | 
 | ------------ | ------------------------------------ |
 | id  | The Policy ID|
-| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](/docs/using-ethereum/#using-ethereum-as-a-global-metadata-platform)).                                                                         |
-| master          | The IP and Port of a master node (configuring a master node is detailed in [this doc](/docs/master-node/#using-a-master-node).) |
+| blockchain      | A connected blockchain platform (i.e. Ethereum, and see Ethereum connection info in [this doc](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)).                                                                         |
+| master          | The IP and Port of a master node (configuring a master node is detailed in [this doc](master%20node.md#using-a-master-node).) |
 | local           | A true/false value to determine an update to the local copy of the ledger. The default value is True    |
 
 Examples:
@@ -442,7 +442,7 @@ blockchain delete policy where policy_id = !policy_id and local = true and block
 ```
 
 ## Copying policies representing the metadata to the local ledger
-The local representation of the blockchain file is updated continuously if the [blockchain synchronization](/docs/background-processes/#blockchain-synchronizer) 
+The local representation of the blockchain file is updated continuously if the [blockchain synchronization](background%20processes.md#blockchain-synchronizer) 
 process is enabled.  
 If the blockchain sync process is disabled, and the local blockchain file is updated or copied from a different node, the command ***blockchain load metadata*** 
 will force the node to use the updated local file.  
@@ -491,7 +491,7 @@ run client (!master_node) file get !!blockchain_file !blockchain_file
 Notes:
 * `blockchain_file` is configured to the path and file name of the ledger.
 * The double exclamation points (!!) determine to derive the value of the key `blockchain_file` on the target node (127.45.35.12).
-* Details on the ***file get*** command are available [here](/docs/file-commands/#file-copy-from-a-remote-node-to-a-local-node).
+* Details on the ***file get*** command are available [here](file%20commands.md#file-copy-from-a-remote-node-to-a-local-node).
 * With synchronization enabled, this process is done continuously as configured and is not required to be triggered by the user. 
 
 ### Removing policies from a master node

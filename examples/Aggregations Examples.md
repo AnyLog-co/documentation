@@ -6,7 +6,7 @@ source_path: "examples/Aggregations Examples.md"
 ---
 # Aggregations Examples
 
-This document provides examples of aggregations. The commands details are available in the [Aggregations Section](/docs/aggregations/).
+This document provides examples of aggregations. The commands details are available in the [Aggregations Section](../aggregations.md).
 
 
 ## Configuring Bounds Aggregations

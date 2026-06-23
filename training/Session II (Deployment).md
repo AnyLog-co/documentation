@@ -31,7 +31,7 @@ The main roles are summarized in the table below:
 | Operator          | A node that hosts the data. In this session, users deploy 2 Operator nodes. |
 | Query             | A node that coordinates the query process. |
 
-Additional information on the types of nodes is in the [Getting Started](/docs/getting-started/) document.
+Additional information on the types of nodes is in the [Getting Started](../getting%20started.md) document.
   
 The roles are determined by configuration commands which are processed by each node at startup and enable services 
 offered by the node. The same node may be assigned to multiple roles - there are no restrictions on the services that can be
@@ -64,16 +64,16 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 | Query             |  deployments/training/anylog-query |
 
 Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or in policies.
-* The [deploying_node](/docs/deployments/deploying_node/) document is a guide to deploy a network using a questionnaire
+* The [deploying_node](../deployments/deploying%20node.md) document is a guide to deploy a network using a questionnaire
 that to generate the config file.
 * The [Network Setup](advanced/Network%20Setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
-* The [Policies based Configuration](/docs/policies/#policies-based-configuration) section details how to use 
+* The [Policies based Configuration](../policies.md#policies-based-configuration) section details how to use 
 policies (placed on the shared metadata layer) to configure nodes in the network.
 
 **Deployment Diagram**:
 
-![deployment diagram](/assets/external-docs/imgs/deployment_diagram.png)
+![deployment diagram](../imgs/deployment_diagram.png)
 
 In this test network, data is ingested by the 2 operator nodes. 
 Users interact with the network, by issuing commands and queries to the Query node, and these are satisfied as if 
@@ -87,12 +87,12 @@ The following table summarizes the commonly used packages deployed with AnyLog.
 
 | Package Name                                        | Functionality | Reference Document | 
 | --------------------------------------------------- | ------------- |-------------- |
-| [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](/docs/deployments/deploying_node/) |
+| [AnyLog](https://www.anylog.co/)                    | The AnyLog software package on each node.  | [Deploying a Node](../deployments/deploying%20node.md) |
 | [PostgreSQL](https://www.postgresql.org/)           |  A local database.  | [PostgreSQL Install](https://www.postgresql.org/download/)|
 | [MongoDB](https://www.mongodb.com/)           |  A local database for unstructured data.  | [MongoDB Download](https://www.mongodb.com/try/download/community)|
 | [A data generator](https://github.com/AnyLog-co/Sample-Data-Generator)  |  A data generator that generates simulated data for learning and testing purposes.  | [Data Generator READ.ME](https://github.com/AnyLog-co/Sample-Data-Generator/blob/master/README.md)|
 | [Edgex](https://www.edgexfoundry.org/)              |  A connector to PLCs and sensors.  | [EdgeX](https://docs.edgexfoundry.org/2.1/getting-started/quick-start/) |
-| [Remote-CLI](/docs/northbound-connectors/remote_cli/)   | A web based interface to the network.  |  |
+| [Remote-CLI](../northbound%20connectors/remote_cli.md)   | A web based interface to the network.  |  |
 | [Grafana](https://grafana.com/)                     |  A visualization tool. | [Get Started with Grafana](https://grafana.com/get/?plcmt=top-nav&cta=downloads&tab=self-managed) |
 
 **In this session, users will use the following packages:**
@@ -137,9 +137,9 @@ or if the questionnaire is not used to create the **anylog_configs.env** file):
     - [Python](https://www.python.org/downloads/)
     - [Dotenv](https://pypi.org/project/python-dotenv/)     
 
-**Note 1**: The prerequisites for a customer deployment are available [here](/docs/training/prerequisite/).
+**Note 1**: The prerequisites for a customer deployment are available [here](prerequisite.md).
 
-**Note 2** We recommend deploying an overlay network, such as [nebula](/docs/deployments/networking-and-security/nebula/).
+**Note 2** We recommend deploying an overlay network, such as [nebula](../deployments/Networking%20%26%20Security/nebula.md).
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
@@ -236,9 +236,9 @@ This file is in the following directories:
 ### Option 1: Using a questionnaire
 The following section guides through the values to modify in the config file of each node.
 Users can replace this process by a questionnaire that creates the config file with the needed modification.  
-Using the questionnaire is detailed in the [deploying_node](/docs/deployments/deploying_node/) document.
+Using the questionnaire is detailed in the [deploying_node](../deployments/deploying%20node.md) document.
 
-For **AWS deployment**, read the [AWS setup](/docs/deployments/support/aws/) document.
+For **AWS deployment**, read the [AWS setup](../deployments/Support/AWS.md) document.
 
 ### Option 2: Modify the config file using an editor
 On each machine, modify the ```anylog_configs.env``` according to the following instructions:
@@ -455,7 +455,7 @@ There are multiple ways to deliver data to nodes in the network, in this session
 
   The broker delivers data that will be associated with database **test** and 4 tables named **lightout1, lightout2, lightout3, lightout4**
   
-* Note: The [Adding Data](/docs/adding-data/#adding-data-to-nodes-in-the-network) document explains how data is added to nodes in the network.
+* Note: The [Adding Data](../adding%20data.md#adding-data-to-nodes-in-the-network) document explains how data is added to nodes in the network.
   
 
 ## Using the data generator 
@@ -630,9 +630,9 @@ Note: On the GUI, select **"Training"** on the **Options** menu for buttons repr
 # Reference Documentation
 
 ## Remote CLI
-* [Deploy the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Remote-CLI.md)
-* [Configure the Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md)
+* [Deploy the Remote CLI](../deployments/Support/%5Bdeprecated%5D%20Remote%20CLI%20.md)
+* [Configure the Remote CLI](../northbound%20connectors/remote_cli.md)
 
 ## Grafana
-* [Deploy Grafana](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Grafana.md)
-* [Configuring Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) 
+* [Deploy Grafana](../deployments/Support/grafana.md)
+* [Configuring Grafana](../northbound%20connectors/using%20grafana.md) 

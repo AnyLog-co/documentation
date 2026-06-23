@@ -17,11 +17,11 @@ This chapter covers the following topics:
 * [Configuring a local database](#configuring-a-local-database) on a node
 * [System databases and system tables](#system-databases-and-system-tables) configured on nodes. 
 * Issuing a [SQL command](#sql-commands) to the local database
-* Issuing a [SQL query](/docs/queries/#query-nodes-in-the-network) to the local database
+* Issuing a [SQL query](queries.md#query-nodes-in-the-network) to the local database
 * The [metadata layer](#the-metadata)
 * Monitoring the tables in a local database
 
-Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](/docs/queries/#query-nodes-in-the-network) section.
+Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#query-nodes-in-the-network) section.
 
 ## Configuring a local database
 
@@ -171,7 +171,7 @@ Usage:
 ```anylog
 test network table where name = [table name] and dbms = [dbms name]
 ```
-Details are available at the [Test netork Table](/docs/test-commands/#test-network-table) section. 
+Details are available at the [Test netork Table](test%20commands.md#test-network-table) section. 
 
 ## Dropping Tables
 Dropping a table requires to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
@@ -195,7 +195,7 @@ drop table tsd_info where dbms = almgm
 ```
 If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
 using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
-[removing policies from a master node](/docs/blockchain-commands/#removing-policies-from-a-master-node) section.
+[removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
 
 ### Dropping a table on all nodes
 The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,
@@ -297,7 +297,7 @@ run client () sql [dbms name] [query options] [select statement]
 **Note 1**: The SQL queries that are supported by the network protocol are limited to a subset of queries.
 **Note 2**: The network protocol also supports pre-defined functions.
 
-Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](/docs/queries/#query-nodes-in-the-network).
+Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](queries.md#query-nodes-in-the-network).
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 

@@ -49,7 +49,7 @@ Commercial support is available at
 </html> 
 ```
 * Using the browser the output would look something like this
-![nginx welcome message](/assets/external-docs/imgs/nginx_welcome_message.png)
+![nginx welcome message](../../imgs/nginx_welcome_message.png)
 
 ## Configuring 
 1. Remove default files – we will recreate them in the following steps 

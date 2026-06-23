@@ -15,7 +15,7 @@ making it flexible for various applications in data management and analytics.
 
 ## Prerequisites
 Enabled REST service. The HTTP Commands are issued via the REST interface, which is required to be enabled. 
-Details on the AnyLog REST service are available [here](/docs/anylog-commands/#rest-command).
+Details on the AnyLog REST service are available [here](anylog%20commands.md#rest-command).
 
 ## Usage
 

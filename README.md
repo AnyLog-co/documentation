@@ -7,7 +7,7 @@ source_path: "README.md"
 # AnyLog Network 
 
 <div align="center">
-    <img src="/assets/external-docs/imgs/anylog_logo.png" />
+    <img src="imgs/anylog_logo.png" />
 </div> 
 
 AnyLog provides Real-Time Visibility and Management of Distributed Edge Data, Applications and Infrastructure.   
@@ -26,97 +26,97 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 ## Table of Content 
 * **Deploy AnyLog**
-  * [Getting Started](/docs/getting-started/)
-  * [The AnyLog CLI](/docs/cli/)  
-  * [Basic AnyLog Deployment](training/)
-  * [Docker Image](/docs/docker-image/)
-  * [Background Processes](/docs/background-processes/)
-  * [Starting an AnyLog Instance](/docs/starting-an-anylog-instance/)
-  * [Master Node](/docs/master-node/)
-  * [Node Configuration](/docs/node-configuration/)  
-  * [Network Configuration](/docs/network-configuration/)
-  * [Network Processing](/docs/network-processing/)  
-  * [Using REST](/docs/using-rest/)
-  * [Managing Data File Status](/docs/managing-data-files-status/)
-  * [Metadata Management](/docs/metadata-management/)
-  * [Kubernetes & Docker Deployment of AnyLog](deployments) 
-  * [Setting Test Suites](/docs/test-suites/)
-  * [Launching Helpers](/docs/helpers/#using-helpers)
+  * [Getting Started](getting%20started.md)
+  * [The AnyLog CLI](cli.md)  
+  * [Basic AnyLog Deployment](training/overview.md)
+  * [Docker Image](docker%20image.md)
+  * [Background Processes](background%20processes.md)
+  * [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
+  * [Master Node](master%20node.md)
+  * [Node Configuration](node%20configuration.md)  
+  * [Network Configuration](network%20configuration.md)
+  * [Network Processing](network%20processing.md)  
+  * [Using REST](using%20rest.md)
+  * [Managing Data File Status](managing%20data%20files%20status.md)
+  * [Metadata Management](metadata%20management.md)
+  * [Kubernetes & Docker Deployment of AnyLog](deployments/README.md) 
+  * [Setting Test Suites](test%20suites.md)
+  * [Launching Helpers](helpers.md#using-helpers)
   
 * **AnyLog Commands**
-  * [Main Commands](/docs/anylog-commands/)
-  * [File Commands](/docs/file-commands/)
-  * [Test Commands](/docs/test-commands/)
-  * [http commands](/docs/http-commands/)
-  * [The dictionary](/docs/dictionary/)
+  * [Main Commands](anylog%20commands.md)
+  * [File Commands](file%20commands.md)
+  * [Test Commands](test%20commands.md)
+  * [http commands](http%20commands.md)
+  * [The dictionary](dictionary.md)
   
 * **Managing Data**
-  * [Adding Data](/docs/adding-data/)
-  * [Metadata Requests](/docs/metadata-requests/)
-  * [Mapping data to tables](/docs/mapping-data-to-tables/)
-  * [JSON Data Transformation](/docs/json-data-transformation/)
-  * [Storing Images](/docs/image-mapping/)
-  * [Bucket Data Management](/docs/bucket-data-management/)
+  * [Adding Data](adding%20data.md)
+  * [Metadata Requests](metadata%20requests.md)
+  * [Mapping data to tables](mapping%20data%20to%20tables.md)
+  * [JSON Data Transformation](json%20data%20transformation.md)
+  * [Storing Images](image%20mapping.md)
+  * [Bucket Data Management](bucket%20data%20management.md)
   
 * **Managing Metadata**
-  * [Blockchain Commands](/docs/blockchain-commands/)
-  * [Policies](/docs/policies/#policies-based-metadata)  
-  * [Blockchain Configuration](/docs/blockchain-configuration/)
-  * [Using Ethereum](/docs/using-ethereum/)
+  * [Blockchain Commands](blockchain%20commands.md)
+  * [Policies](policies.md#policies-based-metadata)  
+  * [Blockchain Configuration](blockchain%20configuration.md)
+  * [Using Ethereum](using%20ethereum.md)
  
 * **Monitoring AnyLog**
-  * [General Monitoring](/docs/monitoring-calls/) 
-  * [Monitoring Nodes](/docs/monitoring-nodes/)
-  * [Streaming Conditions](/docs/streaming-conditions/)
-  * [Logging Events](/docs/logging-events/)
-  * [Alerts & Monitoring](/docs/alerts-and-monitoring/)
-  * [Aggregations](/docs/aggregations/)
-  * [Monitoring File Status](/docs/managing-data-files-status/)
-  * [DYnamic Statistcs](/docs/helpers/#dynamic-monitoring-of-internal-processes)
+  * [General Monitoring](monitoring%20calls.md) 
+  * [Monitoring Nodes](monitoring%20nodes.md)
+  * [Streaming Conditions](streaming%20conditions.md)
+  * [Logging Events](logging%20events.md)
+  * [Alerts & Monitoring](alerts%20and%20monitoring.md)
+  * [Aggregations](aggregations.md)
+  * [Monitoring File Status](managing%20data%20files%20status.md)
+  * [DYnamic Statistcs](helpers.md#dynamic-monitoring-of-internal-processes)
     
 * **Querying Data**
-  * [Data Queries](/docs/queries/)
-  * [SQL Setup](/docs/sql-setup/)
-  * [Profile & Monitor Queries](/docs/profiling-and-monitoring-queries/)
-  * [Querying Across the Network](/docs/network-processing/)
+  * [Data Queries](queries.md)
+  * [SQL Setup](sql%20setup.md)
+  * [Profile & Monitor Queries](profiling%20and%20monitoring%20queries.md)
+  * [Querying Across the Network](network%20processing.md)
 
 * **Managing Video**
-  * [video streaming](/docs/video-streaming/)
+  * [video streaming](video%20streaming.md)
 
 
 * **Security & Authentication**
-  * [Authentication](/docs/authentication/)
-  * [Software TPM](/docs/software-tpm/)
-  * [Secure Network](/docs/secure-network/)
-  * [Using NGINX as Proxy](/docs/deployments/networking-and-security/nginx/)
-  * [Using Nebula as Overlay Network](/docs/deployments/networking-and-security/nebula/)
+  * [Authentication](authentication.md)
+  * [Software TPM](software%20tpm.md)
+  * [Secure Network](secure%20network.md)
+  * [Using NGINX as Proxy](deployments/Networking%20%26%20Security/nginx.md)
+  * [Using Nebula as Overlay Network](deployments/Networking%20%26%20Security/nebula.md)
 
 * **High-Availability (HA)**
-  * [high availability](/docs/high-availability/)
+  * [high availability](high%20availability.md)
 
 * **Southbound Connectors**
-  * [AnyLog as a Broker](/docs/message-broker/) 
-  * [Using Edgex](/docs/using-edgex/)
-  * [Using Kafka](/docs/using-kafka/)
-  * [Using gRPC](/docs/using-grpc/)
-  * [Using SysLog](/docs/using-syslog/)
-  * [Registering OSIsoft's PI](/docs/registering-pi-in-the-anylog-network/)
-  * [OPC-UA](/docs/opcua/)
-  * [EtherNet/IP](/docs/enthernetip/)
-  * [Scheduled Pull](/docs/scheduled-pull/)
+  * [AnyLog as a Broker](message%20broker.md) 
+  * [Using Edgex](using%20edgex.md)
+  * [Using Kafka](using%20kafka.md)
+  * [Using gRPC](using%20grpc.md)
+  * [Using SysLog](using%20syslog.md)
+  * [Registering OSIsoft's PI](registering%20pi%20in%20the%20anylog%20network.md)
+  * [OPC-UA](opcua.md)
+  * [EtherNet/IP](enthernetip.md)
+  * [Scheduled Pull](scheduled%20pull.md)
 
 * **Northbound Connectors**
-  * [AnyLog Remote-CLI](/docs/northbound-connectors/remote_cli/)
-  * [Postman](/docs/northbound-connectors/using-postman/)
-  * [Grafana](/docs/northbound-connectors/using-grafana/)
-  * [PowerBI](/docs/northbound-connectors/powerbi/)
-  * [Google Drive](/docs/northbound-connectors/google/)
-  * [Generic Connector](/docs/northbound-connectors/postgres-connector/)
-  * [Dashboard Generation](/docs/dashboard-generation/)
+  * [AnyLog Remote-CLI](northbound%20connectors/remote_cli.md)
+  * [Postman](northbound%20connectors/using%20postman.md)
+  * [Grafana](northbound%20connectors/using%20grafana.md)
+  * [PowerBI](northbound%20connectors/powerbi.md)
+  * [Google Drive](northbound%20connectors/Google.md)
+  * [Generic Connector](northbound%20connectors/Postgres%20Connector.md)
+  * [Dashboard Generation](dashboard%20generation.md)
 
 * **Sample Code**
   * [Python Scripts](examples/Sample%20Python%20Scripts)
-    * [Blockchain](/assets/external-docs/examples/sample-python-scripts/blockchain_add_policy_simple.py)
+    * [Blockchain](examples/Sample%20Python%20Scripts/blockchain_add_policy_simple.py)
     * [Sending Data](examples/Sample%20Python%20Scripts/data)
-  * [cURL Requests](/assets/external-docs/examples/curl.sh)
-  * [Configurations Files](/docs/examples/configuration/)
+  * [cURL Requests](examples/curl.sh)
+  * [Configurations Files](examples/configuration.md)

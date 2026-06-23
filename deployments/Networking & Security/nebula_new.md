@@ -51,7 +51,7 @@ within the network.
 
 For a unique or custom CIDR value, AnyLog will generate new lighthouse keys as needed. However, it is the user's 
 responsibility to transfer the appropriate keys (e.g., host certificates) to each node to ensure they are associated 
-with the overlay network. Alternatively, users can also opt to deploy their own [Nebula](/docs/deployments/networking-and-security/nebula/) or any other overlay 
+with the overlay network. Alternatively, users can also opt to deploy their own [Nebula](nebula.md) or any other overlay 
 network. In such case, only the `OVERLAY_IP` environment variable needs to be set to integrate with the AnyLog deployment.
 
 ### Requirements

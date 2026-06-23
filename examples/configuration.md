@@ -35,7 +35,7 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests) section).
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../background%20processes.md#rest-requests) section).
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
@@ -69,7 +69,7 @@ Multiple options are available to backup, archive and remove old data.
 
 Declare a second operator node associated with an existing cluster. The second node will be dynamically updated with the
 data assigned to the cluster.  
-This process is detailed in the [High Availability (HA)](/docs/high-availability/#high-availability-ha) section.
+This process is detailed in the [High Availability (HA)](../high%20availability.md#high-availability-ha) section.
 
 #### Archival of data
 
@@ -77,26 +77,26 @@ If an Opertaor node is configured with archive option enabled, data that is stre
 files, compressed, and stored in the archival directory by ingestion date.  
 The default archival directory is ```AnyLog-Network\data\archive```  
 If needed, these files can be copied to an AnyLog ***watch*** directory to be ingested to a new database.
-Details are availabel in [Placing data in the WATCH directory](https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#placing-data-in-the-watch-directory) section.
+Details are availabel in [Placing data in the WATCH directory](../adding%20data.md#placing-data-in-the-watch-directory) section.
 
 #### Partitioning of data
 
 A table that is managed by AnyLog can be partitioned by time.  
-The ***Partition Command*** id detailed [here](/docs/anylog-commands/#partition-command).  
+The ***Partition Command*** id detailed [here](../anylog%20commands.md#partition-command).  
 Partitions can be dropped by naming the partitions, or by requesting to drop the oldest partition, or by a request to
 keep N number of partition, or to drop old partitions as long as disk space is lower than threshold.  
-The ***Drop Partition*** command is detailed [here](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#drop-partition-command)
+The ***Drop Partition*** command is detailed [here](../anylog%20commands.md#drop-partition-command)
 
 These processes can be placed on the AnyLog scheduler to be repeated periodically.  
 For example, a table is partitioned by day and the scheduler is executed daily to remove the oldest partition if disk space 
 is under a threshold.
 
-Configuring the scheduler is detailed in the [Monitoring Nodes](/docs/monitoring-nodes/#monitoring-nodes) section.
+Configuring the scheduler is detailed in the [Monitoring Nodes](../monitoring%20nodes.md#monitoring-nodes) section.
 
 #### Backup Partition
 
 Users can leverage the [archival directory](#archival-of-data) for the data backup.  
-Alternatively, uses can actively archive a partition using the [backup table](/docs/anylog-commands/#backup-command) 
+Alternatively, uses can actively archive a partition using the [backup table](../anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
 
@@ -110,7 +110,7 @@ Notes:
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
 If authentication is enabled, there are different layers that can be leveraged: passwords, signature of messages, and certificates.  
-Details are available in the [Users Authentication](/docs/authentication/#users-authentication) section.
+Details are available in the [Users Authentication](../authentication.md#users-authentication) section.
 
 <pre>
 set authentication off
@@ -160,7 +160,7 @@ partition_keep = 6
 
 #### Declare the root folder for the AnyLog files
 AnyLog maintains scripts, configurations and data in different folders.  
-The default folders structure is detailed in the a [local directory structure](/docs/getting-started/#local-directory-structure) section.
+The default folders structure is detailed in the a [local directory structure](../getting%20started.md#local-directory-structure) section.
 The command below declares the path to the root folder (to the AnyLog-Network folder).  
   
 <pre>
@@ -177,7 +177,7 @@ create work directories
 
 #### Making the node a member of the AnyLog Network
 The node is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
-Details are available in the [TCP Server process](/docs/background-processes/#rest-requests) section.  
+Details are available in the [TCP Server process](../background%20processes.md#rest-requests) section.  
 
 <pre>
 run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
@@ -186,7 +186,7 @@ run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 #### Enabling REST requests
 3rd parties applications communicate with members of the network using REST requests.  
 The node is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
-Details are available in the [REST requests](/docs/background-processes/#rest-requests) section.
+Details are available in the [REST requests](../background%20processes.md#rest-requests) section.
 
 <pre>
 run rest server !ip !anylog_rest_port
@@ -195,7 +195,7 @@ run rest server !ip !anylog_rest_port
 
 #### Metadata
 The nodes are configured to periodically retrieve the metadata (from a blockchain platform or a master node) and host it locally.   
-Details are available in the [Blockchain Synchronizer](/docs/background-processes/#blockchain-synchronizer) section.
+Details are available in the [Blockchain Synchronizer](../background%20processes.md#blockchain-synchronizer) section.
 
 <pre>
 run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node
@@ -204,7 +204,7 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
 
 #### Configuring the local database
 The local database is used to store the user data and in some cases system data.  
-Details are available in the [configuring a local database](/docs/sql-setup/#configuring-a-local-database) section.  
+Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.  
 The sections below configure the system databases and an example of a user database.  
 The command ```get databases``` returns the list of connected databases.
 
@@ -306,7 +306,7 @@ do blockchain insert where policy=!new_policy and local=true and master=!master_
 
 #### Initiating the scheduler
 AnyLog commands can be placed on the scheduler and be executed periodically.  
-The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](/docs/alerts-and-monitoring/#alerts-and-monitoring) section.
+The command below initiates a scheduler. Additional information is available in the [Alrts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring) section.
 
 <pre>
 run scheduler 1         # Note: users can define multiple schedulers - 1 indicates scheduler #1. Scheduler #0 is a system scheduler.
@@ -314,7 +314,7 @@ run scheduler 1         # Note: users can define multiple schedulers - 1 indicat
 
 #### Data Partitioning
 Data that is hosted in the local database can be partioned by date.     
-Details are available in the [Partition Command](/docs/anylog-commands/#partition-command) section.  
+Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.  
 Note: The example below sets partition to all the tables in the database. It assumes same column name for the date column.  
 However, if column names are different or partition interval is different - partition can be declared at a table level.
 
@@ -325,8 +325,8 @@ partition !default_dbms * using !partition_column by !partition_interval
 
 #### Removal of old data
 Using the scheduler, a process is triggered periodically and removes old partitions.
-The [Drop Partition Command](/docs/anylog-commands/#drop-partition-command) is used to remove old partitions.  
-Setting scheduled tasks is explained in the [Adding tasks to the scheduler](/docs/alerts-and-monitoring/#adding-tasks-to-the-scheduler) section.  
+The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
+Setting scheduled tasks is explained in the [Adding tasks to the scheduler](../alerts%20and%20monitoring.md#adding-tasks-to-the-scheduler) section.  
 In the example below, the command ```drop partition where ...``` is placed on the scheduler to be executed daily.
 
 <pre>
@@ -334,12 +334,12 @@ schedule time = 1 day and name = "Remove Old Partitions" task drop partition whe
 </pre>
 
 Notes: 
-1) [This example](/docs/alerts-and-monitoring/#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
+1) [This example](../alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
 2) ```get scheduler 1``` returns the tasks assigned to scheduler #1.
 
 
 #### Configure data processing functionality
-Note: Details on the streamer process are available in the [Streamer Process](/docs/background-processes/#streamer-process) section.
+Note: Details on the streamer process are available in the [Streamer Process](../background%20processes.md#streamer-process) section.
 
 <pre>
 set buffer threshold where write_immediate = true   # When data is ingested, the local database is updated with no wait time.
@@ -348,8 +348,8 @@ run streamer                                        # Enable a dedicated thread 
 
 #### Configure a process to map source data to the table structure
 Allowing data to be treated based on a topic declaration - as if the AnyLog node is an MQTT broker.  
-Details on the mapping process are available in the [Using Post Command](/docs/adding-data/#using-a-post-command) section 
-and the [Subscribing to REST calls](/docs/using-rest/#subscribing-to-rest-calls) section.
+Details on the mapping process are available in the [Using Post Command](../adding%20data.md#using-a-post-command) section 
+and the [Subscribing to REST calls](../using%20rest.md#subscribing-to-rest-calls) section.
 
 
 <pre>
@@ -512,4 +512,3 @@ set script autoexec.json [script data]    # Use POST in the REST call
     ]
 }
 ```
-

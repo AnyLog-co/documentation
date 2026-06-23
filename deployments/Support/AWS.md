@@ -8,7 +8,7 @@ source_path: "deployments/Support/AWS.md"
 
 The following provides directions for using an EC2 AWS instance(s) to configure and deploy AnyLog.  
 
-Directions for [deploying an AnyLog Node](/docs/deployments/deploying_node/) 
+Directions for [deploying an AnyLog Node](../deploying%20node.md) 
 
 **Terminology**:
 * Node - An AnyLog node that's part of the network (ex. Master, Operator, Query)
@@ -31,7 +31,7 @@ as _Broker_ if configured for Operator or Publisher node.
 * **Generic / REST Node**: Default TCP: 32548 | Default REST: 32549 | (Default) Broker: 32550
 
  
-![image](/assets/external-docs/imgs/aws_sample_security_group.png)
+![image](../../imgs/aws_sample_security_group.png)
 
 3. Create a new [EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) that's associated with the corresponding _security group_.  
 

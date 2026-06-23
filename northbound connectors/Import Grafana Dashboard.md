@@ -6,21 +6,21 @@ source_path: "northbound connectors/Import Grafana Dashboard.md"
 ---
 # Importing AnyLog related dashboards into Grafana
 
-Instructions to create and manage your Grafana instance with AnyLog, can be found in [Using Grafana](/docs/northbound-connectors/using-grafana/) 
+Instructions to create and manage your Grafana instance with AnyLog, can be found in [Using Grafana](using%20grafana.md) 
 
 
 The following document provides 3 sample Grafana dashboards
-* [Network Map](/assets/external-docs/examples/grafana_json/network_summary.json) - The dashboard consists of a map showing all the nodes 
+* [Network Map](../examples/grafana_json/network_summary.json) - The dashboard consists of a map showing all the nodes 
 in the network, a list of operator nodes and a list of  tables supported in the network.
 
-![grafana_network_map.png](/assets/external-docs/imgs/grafana_network_map.png)
+![grafana_network_map.png](../imgs/grafana_network_map.png)
 
   
-* [EdgeX Diagram](../examples) - The dashboard consists of a line graph demonstrating min/avg/max, as well gages showing 
+* [EdgeX Diagram](../examples/grafana_json/edgex_dashboard.json) - The dashboard consists of a line graph demonstrating min/avg/max, as well gages showing 
 the overall number of rows as well as the number of rows per node. The content for these widgets is via our third-party
 MQTT client sample connection.  
 
-![grafana_edgex_dashboard.png](/assets/external-docs/imgs/grafana_edgex_dashboard.png)
+![grafana_edgex_dashboard.png](../imgs/grafana_edgex_dashboard.png)
 
 ## Setting Up Grafana
 
@@ -46,7 +46,7 @@ Log into Grafana and Declare a _(JSON) Data Source_
    * URL: http://localhost:3000/ 
    * username: admin | password: admin
 
-<img src="/assets/external-docs/imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+<img src="../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
 
 2. In _Data Sources_ section, create a new JSON data source
    * select a JSON data source.
@@ -55,19 +55,19 @@ Log into Grafana and Declare a _(JSON) Data Source_
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all AnyLog hosted databases will be available to a query process.
 
 
-|<img src="/assets/external-docs/imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="/assets/external-docs/imgs/grafana_datasource_configuration.png" alt="Data Source Config" /> | 
+|<img src="../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../imgs/grafana_datasource_configuration.png" alt="Data Source Config" /> | 
 | :---: | :---: |
 
 
 ## Uploading Dashboard
 
 1. In a new Dashboard goto the _Settings_  
-<img src="/assets/external-docs/imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
+<img src="../imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
 
 
-2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](/assets/external-docs/examples/grafana_json/edgex_dashboard.json)).
+2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](../examples/grafana_json/edgex_dashboard.json)).
 
-| <img src="/assets/external-docs/imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /> | <img src="/assets/external-docs/imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%"/> |
+| <img src="../imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /> | <img src="../imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%"/> |
 |:--------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
 
 3. Save Changes
@@ -77,7 +77,7 @@ Log into Grafana and Declare a _(JSON) Data Source_
 
 | Before |                                After                                |
 | :---: |:-------------------------------------------------------------------:|
-| <img src="/assets/external-docs/imgs/grafana_no_dashboard.png" alt="No Dashboards" /> | <img src="/assets/external-docs/imgs/grafana_new_dashboard.png" alt="New Dashboard" /> | 
+| <img src="../imgs/grafana_no_dashboard.png" alt="No Dashboards" /> | <img src="../imgs/grafana_new_dashboard.png" alt="New Dashboard" /> | 
 
 5. For each of the widgets update the following information:
    * Data Source 
@@ -87,4 +87,4 @@ Once these changes are saved, the outcome should look something like this:
 
 |          View when accessing Dashboard          |                             Update Data Source                              | Update Metric Value | Outcome | 
 |:-----------------------------------------------:|:---------------------------------------------------------------------------:| :---: | :---:  |
-| ![Edit Widget](/assets/external-docs/imgs/grafana_edit_button.png) | ![grafana_update_datasource.png](/assets/external-docs/imgs/grafana_update_datasource.png) | ![grafana_update_table.png](/assets/external-docs/imgs/grafana_update_table.png) | ![grafana_outcome.png](/assets/external-docs/imgs/grafana_outcome.png) |   
+| ![Edit Widget](../imgs/grafana_edit_button.png) | ![grafana_update_datasource.png](../imgs/grafana_update_datasource.png) | ![grafana_update_table.png](../imgs/grafana_update_table.png) | ![grafana_outcome.png](../imgs/grafana_outcome.png) |   

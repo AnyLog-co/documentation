@@ -38,12 +38,12 @@ run client (destination) blockchain push [JSON data]
 `_destination_` - the IP and Port of the master node.
 _JSON data_ - the policy to update.
 
-Additional information on the blockchain commands is available at [blockchain commands](/docs/blockchain-commands/).
+Additional information on the blockchain commands is available at [blockchain commands](blockchain%20commands.md).
 
 ## Synchronizing a local copy of the blockchain
 
 Nodes maintain a local copy of the blockchain in a JSON file. The file name and location is declared in the local dictionary using `_!blockchain_file_`.    
 A node can enable a synchronization process. This process periodically pulls the blockchain data from the local database of the Master Node to the local blockchain file on the target node (the node that is executing the sync process).    
-The synchronization process is detailed at [blockchain synchronizer](/docs/background-processes/#blockchain-synchronizer).  
+The synchronization process is detailed at [blockchain synchronizer](background%20processes.md#blockchain-synchronizer).  
 
 

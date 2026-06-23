@@ -94,7 +94,7 @@ The non JSON reply has 2 sections showing configurations and statistics.
 # Get MSG Clients
 
 The `get msg clients` command provides statistics and details on the mapping of data to the tables structures.  
-The mapping is done using the command `run mqtt client`, details are available at the [AnyLog as a broker receiving REST commands](/docs/message-broker/#anylog-as-a-broker-receiving-rest-commands) section.
+The mapping is done using the command `run mqtt client`, details are available at the [AnyLog as a broker receiving REST commands](message%20broker.md#anylog-as-a-broker-receiving-rest-commands) section.
 
 Usage: 
 ```anylog
@@ -284,6 +284,6 @@ reset stats where service = operator and topic = summary
 ## Continuous monitoring of the Operator service
 
 Details are available in the
-[continuous command section](/docs/monitoring-nodes/#monitoring-nodes-operations)
+[continuous command section](monitoring%20nodes.md#monitoring-nodes-operations)
 
 

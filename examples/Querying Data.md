@@ -7,7 +7,7 @@ source_path: "examples/Querying Data.md"
 # Querying Data
 
 This document provides examples of queries to retrieve data from the AnyLog Network.  
-An explanation of the query syntax is detailed in the [Query nodes in the network](/docs/queries/) page. 
+An explanation of the query syntax is detailed in the [Query nodes in the network](../queries.md) page. 
 
 ### Executing Queries - General Consideration
    

@@ -9,13 +9,13 @@ source_path: "examples/Streaming Data into AnyLog.md"
 Data can be sent into an AnyLog node via different forms of communication, such as: _REST_, _MQTT_ and _Kafka_.
 
 Detailed information is available in the following documents:
-* [Adding data](/docs/adding-data/) - an overview on how data is added to AnyLog nodes.
-* [Mapping Data](/docs/mapping-data-to-tables/) - Mapping source data to a target format.
-* [REST Calls](/docs/using-rest/) - Using REST calls to deliver data to an AnyLog Node.  
-* [Message Broker](/docs/message-broker/) - Declaring AnyLog as a message broker.
+* [Adding data](../adding%20data.md) - an overview on how data is added to AnyLog nodes.
+* [Mapping Data](../mapping%20data%20to%20tables.md) - Mapping source data to a target format.
+* [REST Calls](../using%20rest.md) - Using REST calls to deliver data to an AnyLog Node.  
+* [Message Broker](../message%20broker.md) - Declaring AnyLog as a message broker.
 
 ## Sending Data
-[send_data.py](/assets/external-docs/examples/sample-python-scripts/data/send_data.py) is a python script to send timestamp & value data (see the example below) into AnyLog node via _REST_ (_POST_ or _PUT_)  or _MQTT_ publish. 
+[send_data.py](Sample%20Python%20Scripts/data/send_data.py) is a python script to send timestamp & value data (see the example below) into AnyLog node via _REST_ (_POST_ or _PUT_)  or _MQTT_ publish. 
 ```json
 {
   "timestamp": "2023-07-16T22:15:16.275270Z", 
@@ -23,7 +23,7 @@ Detailed information is available in the following documents:
 }
 ```
 
-Other examples can be found in our [generic data generator](/docs/training/data-generator/).
+Other examples can be found in our [generic data generator](../training/Data%20Generator.md).
 
 ## cURL 
 * The following cURL request sends data via REST _PUT_ into AnyLog node.
@@ -63,7 +63,7 @@ curl -X POST 127.0.0.1:32149 \
     * [paho-mqtt](https://pypi.org/project/paho-mqtt/) (required only if _MQTT_ publish is used)
 
 ### Example
-[Python example](/assets/external-docs/examples/sample-python-scripts/data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
+[Python example](Sample%20Python%20Scripts/data/send_data.py) is an interactive tool to publish data into AnyLog via _REST_ or _MQTT_
 * View help information
 ```shell
 anyloguser$ python3 ~/Documentation/examples/Sample\ Python\ Scripts/data/send_data.py --help 
@@ -114,6 +114,5 @@ The example below enables the MQTT Client service whereas:
     column.value.float="bring [value]"
 )>
 ```
-
 
 

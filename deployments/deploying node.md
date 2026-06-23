@@ -16,9 +16,9 @@ In the examples below, users define **system variables** by assigning values to 
 node configuration process to apply a configuration option, or a configuration value.
 
 **Other Deployments**
-* [Network Setup](/docs/training/advanced/network-setup/) - deployment of AnyLog nodes using the CLI of the participating nodes.
-* [Quick Deployment](/docs/deployments/quick-deployment/) - Deploy an AnyLog with preset services, with limited environment configurations
-* [Training](../training) - Standard training used for explaining how to use AnyLog
+* [Network Setup](../training/advanced/Network%20Setup.md) - deployment of AnyLog nodes using the CLI of the participating nodes.
+* [Quick Deployment](quick%20deployment.md) - Deploy an AnyLog with preset services, with limited environment configurations
+* [Training](../training/overview.md) - Standard training used for explaining how to use AnyLog
 
 ### Requirements
 * For Docker-based Deployment: [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) 
@@ -36,14 +36,14 @@ The following provides directions for installing AnyLog with either _Docker_ wit
 _Helm_. The directions provided should be done on each of the nodes being used as part of the network. 
 
 ### Prepare Node 
-0. Review [Hardware Prerequisite](/docs/training/prerequisite/) and [Software Requirements](#requirements)
+0. Review [Hardware Prerequisite](../training/prerequisite.md) and [Software Requirements](#requirements)
 1. [Contact Us](mailto:info@anylog.co) to get access to our Docker image as well as an AnyLog software license key
 2. Clone the deployment tool kit into your local machine 
 ```shell
 git clone https://github.com/AnyLog-co/deployments 
 ```
 3. Make sure to install your preffered databases if you are planning to use something other than SQLite. Directions
-can be found [here](/docs/deployments/deploying_dbms/)
+can be found [here](deploying%20dbms.md)
 4. Log into our Docker repository
 ```shell
 # Docker

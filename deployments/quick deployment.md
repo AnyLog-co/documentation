@@ -13,14 +13,14 @@ into the database. Since this can be confusing for some, there's the docker imag
 deploy more generic nodes, using very limited environment configurations. 
 
 **Other Deployments**: 
-* [Training](../training) - Standard training used for explaining how to use AnyLog
-* [Configuration Based](/docs/deployments/deploying_node/) - Deploy AnyLog using configuration file with environment variables
-* [Empty Node](/docs/deployments/deploying_node/) - Manually deploy an AnyLog node 
+* [Training](../training/overview.md) - Standard training used for explaining how to use AnyLog
+* [Configuration Based](deploying%20node.md) - Deploy AnyLog using configuration file with environment variables
+* [Empty Node](deploying%20node.md) - Manually deploy an AnyLog node 
 
 ## Deployment 
 The following provides directions to deploy a network without too much configuration on a single node. If nodes are not
 on the same physical machine, make sure to update the `LEDGER_CONN` environment variable when deploying nodes. When 
-deploying, users can include other [environment variable](/assets/external-docs/deployments/support/sample_config_file.env), but are not required to.  
+deploying, users can include other [environment variable](Support/sample_config_file.env), but are not required to.  
 
 Please [contact us](mailto:info@anylog.co) if you do not have access to our Docker hub and/or an active license key. 
 
@@ -96,4 +96,3 @@ docker run -it --detach-keys=ctrl-d --network host \
 --name anylog-operator2 --rm anylogco/anylog-network:latest
 ```
 detach from operator 2 node using **ctrl-d** command
-

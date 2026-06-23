@@ -30,8 +30,8 @@ A node in the network is assigned with one or more roles. The optional roles are
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
 If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
 Enabling the blockchain functionality using the Ethereum blockchain is explained in the 
-[Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md) section.
-Additional information on a Master Node configuration is available at the section: [Using a Master Node](https://github.com/AnyLog-co/documentation/blob/master/master%20node.md).
+[Using Ethereum as a Global Metadata Platform](using%20ethereum.md) section.
+Additional information on a Master Node configuration is available at the section: [Using a Master Node](master%20node.md).
 
 ## The Network MetaData
 The metadata is the network related information that is shared by members of the network.
@@ -46,15 +46,15 @@ It allows users to leverage one type of repository, and change to a different ty
 The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
 When a node operates, it considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform used. If a connection 
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
-Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](/docs/background-processes/#blockchain-synchronizer).  
+Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).  
 
 Related documentation:
 
 | Section                                                                                | Information provided  |
 |----------------------------------------------------------------------------------------| ------------| 
-| [Metadata Management](/docs/metadata-management/#managing-metadata) | Details on the network metadata and related processes. | 
-| [Metadata Requests](/docs/metadata-requests/)                                            | Details on how the metadata can be queried. |
-| [Using Ethereum](/docs/using-ethereum/#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
+| [Metadata Management](metadata%20management.md#managing-metadata) | Details on the network metadata and related processes. | 
+| [Metadata Requests](metadata%20requests.md)                                            | Details on how the metadata can be queried. |
+| [Using Ethereum](using%20ethereum.md#using-ethereum-as-a-global-metadata-platform)                                                       | Using Ethereum as a global metadata platform. |
 
 ## The Data
 The users data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
@@ -75,21 +75,21 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [Adding Data to Nodes in the Network](/docs/adding-data/) | Delivering data to Operators in the network. |
-| [Mapping Data](/docs/mapping-data-to-tables/) | Transformation of the source data to the destination format. |
-| [Using a Message Broker](/docs/message-broker/#using-a-message-broker) | Delivering data to Operators using a MQTT broker. |
-| [Managing Data files](/docs/managing-data-files-status/) | Monitoring data managed by Operator nodes. |
-| [Queries to data](/docs/queries/#query-nodes-in-the-network) | Queries to data hosted by nodes in the network. |
-| [Profiling and Monitoring Queries](/docs/profiling-and-monitoring-queries/) | Identifying and profiling slow queries. |
-| [Using Grafana](/docs/northbound-connectors/using-grafana/#using-grafana) | Integrating Grafana to visualize data. |
-| [Using Edgex](/docs/using-edgex/#using-edgex) | Integrating with Edgex as a southbound connector. |
+| [Adding Data to Nodes in the Network](adding%20data.md) | Delivering data to Operators in the network. |
+| [Mapping Data](mapping%20data%20to%20tables.md) | Transformation of the source data to the destination format. |
+| [Using a Message Broker](message%20broker.md#using-a-message-broker) | Delivering data to Operators using a MQTT broker. |
+| [Managing Data files](managing%20data%20files%20status.md) | Monitoring data managed by Operator nodes. |
+| [Queries to data](queries.md#query-nodes-in-the-network) | Queries to data hosted by nodes in the network. |
+| [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md) | Identifying and profiling slow queries. |
+| [Using Grafana](northbound%20connectors/using%20grafana.md#using-grafana) | Integrating Grafana to visualize data. |
+| [Using Edgex](using%20edgex.md#using-edgex) | Integrating with Edgex as a southbound connector. |
  
 ## AnyLog Install
 
 AnyLog can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an installation script. 
-Directions for deployment can be found [here](deployments). 
+Directions for deployment can be found [here](deployments/README.md). 
 
-Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](/docs/starting-an-anylog-instance/).
+Starting AnyLog from the command line is demonstrated in the section: [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md).
 
 ## Local directory structure
 
@@ -147,10 +147,10 @@ Related documentation:
 
 | Section       | Information provided  |
 | ------------- | ------------| 
-| [Node configuration](/docs/node-configuration/#node-configuration) | Details on the configuration process. |
-| [Deploying a node](/docs/deployments/deploying_node/#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
-| [Network Setup](/docs/training/advanced/network-setup/) | A step by step example of a network deployment. |
-| [Configuration Policies](/docs/policies/#configuration-policies) | Policy based configuration. |
+| [Node configuration](node%20configuration.md#node-configuration) | Details on the configuration process. |
+| [Deploying a node](deployments/deploying%20node.md#deploying-a-node) | Basic deployment using Docker or Kubernetes. |
+| [Network Setup](training/advanced/Network%20Setup.md) | A step by step example of a network deployment. |
+| [Configuration Policies](policies.md#configuration-policies) | Policy based configuration. |
 
 ### AnyLog Command Line Interface
 When a node starts, it provides the **AnyLog Command Line Interface** (AnyLog CLI).  
@@ -160,7 +160,7 @@ set node name [node name]
 ```
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
-A more detailed description of the AnyLog CLI is available at [The AnyLog CLI](/docs/cli/) section. 
+A more detailed description of the AnyLog CLI is available at [The AnyLog CLI](cli.md) section. 
 
 Users issue commands to retrieve and modify configuration, state of different processes, query and update the blockchain data and
 issue SQL queries to data stored locally and data that is stored by other members of the network.    
@@ -213,9 +213,9 @@ Examples:
 Index:
         ['blockchain']
 
-Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
+Link: blockchain%20commands.md#query-policies
 
-Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
+Link: blockchain%20commands.md
 ```
 
 * List an index that classifies the commands.
@@ -269,7 +269,7 @@ get !dbms_name
 get dictionary
 ```
 
-The node dictionary is detailed in the [local dictionary](/docs/dictionary/#the-local-dictionary) section.
+The node dictionary is detailed in the [local dictionary](dictionary.md#the-local-dictionary) section.
 
 ### Retrieving environment variables
 
@@ -283,14 +283,14 @@ To view the list of active processes issue the following command:
 ```anylog
 get processes
 ```
-More information on the background processes is available the [background processes](/docs/background-processes/) section.
+More information on the background processes is available the [background processes](background%20processes.md) section.
 
 ### The dynamic logs
 Every node maintains 4 dynamic logs that capture different types of events:
 * The event log - registers the executed commands
 * The error log - registers the commands that failed to execute.
 * The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
-Additional information is available at [Profiling and Monitoring Queries](/docs/profiling-and-monitoring-queries/#profiling-and-monitoring-queries)
+Additional information is available at [Profiling and Monitoring Queries](profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
 ```anylog
@@ -308,7 +308,7 @@ reset query log
 
 ## Making a node a member of the network
 
-Connecting a node to the network is explained in [network configuration](/docs/network-configuration/).
+Connecting a node to the network is explained in [network configuration](network%20configuration.md).
 
 The basic configuration of a node can be done using the command:
 ```anylog
@@ -340,12 +340,12 @@ and assign a node to a metadata using the following command:
 ```anylog
 seed from [ip:port]
 ```
-More details are in the [Blockchain Commands](/docs/blockchain-commands/#retrieving-the-metadata-from-a-source-node) section.
+More details are in the [Blockchain Commands](blockchain%20commands.md#retrieving-the-metadata-from-a-source-node) section.
 
 ### Switching between different master nodes
 
 Users may need to switch between different master nodes.
-The following command makes the [blockchain synchronizer process](/docs/background-processes/#blockchain-synchronizer)
+The following command makes the [blockchain synchronizer process](background%20processes.md#blockchain-synchronizer)
  connect to a different master node:
 ```anylog
 blockchain switch network where master = [IP:Port]
@@ -355,7 +355,7 @@ blockchain switch network where master = [IP:Port]
 
 Users can execute the AnyLog commands by sending the commands via REST to a node in the network.  
 A node receiving REST requests interprets and executes the command regardless if the command is issued on the CLI or via REST.   
-Additional information on the REST API to AnyLog is available at the following section: [Using REST](/docs/using-rest/).
+Additional information on the REST API to AnyLog is available at the following section: [Using REST](using%20rest.md).
 
  
 ## Sending messages to peers in the network
@@ -377,7 +377,7 @@ run client (destination) command
  delivered to one or more destination nodes and is executed on the destination nodes.    
 
 **(destination)** - the destination nodes identified by the IP and Port assigned to their
-[TCP Server configuration](/docs/background-processes/#the-tcp-server-process).
+[TCP Server configuration](background%20processes.md#the-tcp-server-process).
 Destination can be represented in any of the following ways:
 * As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: `(139.162.126.241 2048, 172.105.13.202 2048)`    
 * For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  `10.0.0.78:20348`  
@@ -407,19 +407,19 @@ The example below returns the CPU usage from all the Operator nodes in the US:
 run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage
 ```
 
-Additional information is available at [Queries and info requests to the AnyLog Network](/docs/queries/#query-nodes-in-the-network).
+Additional information is available at [Queries and info requests to the AnyLog Network](queries.md#query-nodes-in-the-network).
 
 ## Querying and updating metadata in the blockchain
 
 The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
-Additional information on the blockchain commands is available in the [Blockchain commands](/docs/blockchain-commands/) section.
+Additional information on the blockchain commands is available in the [Blockchain commands](blockchain%20commands.md) section.
 
 ## High Availability (HA)
 
 Users can configure nodes in the network to dynamically and transparently replicate hosted data to maintain multiple copies of the data.    
 Using this approach, if a node fails, queries are directed to a surviving node and a new node can be assigned to replace the failed node.  
-Additional information on the HA processes is available in the [High Availability](/docs/high-availability/#high-availability-ha) section.
+Additional information on the HA processes is available in the [High Availability](high%20availability.md#high-availability-ha) section.
 
 ## Network security
 
@@ -434,9 +434,7 @@ provided to the sender and determines if the sender is authorized as needed.
 * Certificate - The network can provide certificates to Clients and Servers and configured such that connection to clients use SSL with client and server Certificate Authentication.
 * Encryption - Message send between nodes in the network can be encrypted.  
 
-Additional information is available in the [User Authentication](/docs/authentication/) section.
+Additional information is available in the [User Authentication](authentication.md) section.
 
 
   
-
-

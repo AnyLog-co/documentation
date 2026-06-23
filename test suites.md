@@ -92,7 +92,7 @@ analyze output where file = !test_dir/test_file3.out and source = !test_dir/test
 
 ## Directing a query output to a file and organizing the output in a test format
 
-Using the [query options](/docs/queries/#query-options), 
+Using the [query options](queries.md#query-options), 
 the query output can be directed to a file and organized as a test format.  
    
 The following key-value pairs (added to the query in the query options section) are used to direct the query to a file in a test format:
@@ -205,5 +205,5 @@ test suite where source = !test_dir/test_*.out and inform = stdout and subdir = 
 
 ## Example
 
-A detailed example is available in [test suite example](/docs/examples/testsuite/)
+A detailed example is available in [test suite example](examples/testsuite.md)
 
