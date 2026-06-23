@@ -1,3 +1,9 @@
+---
+title: "Managing SysLog data with AnyLog"
+description: ""
+layout: page
+source_path: "using syslog.md"
+---
 # Managing SysLog data with AnyLog
 
 ## SysLog Formats
@@ -38,7 +44,7 @@ Users can configure an AnyLog node to host SysLog messages. The process requires
   
 Notes: 
 1) Use the command **get connections** to identify the Messaging IP and Port on the Message Service in the AnyLog Node.
-2) Use the command [run message broker](background%20processes.md#message-broker) to configure a message broker service.
+2) Use the command [run message broker](/docs/background-processes/#message-broker) to configure a message broker service.
 
 
 ## Setting a rule to accept SysLog data

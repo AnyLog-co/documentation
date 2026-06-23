@@ -1,7 +1,13 @@
+---
+title: "Updating Scripts"
+description: ""
+layout: page
+source_path: "deployments/updating scripts.md"
+---
 # Updating Scripts
 
 AnyLog is configured using the AnyLog commands. These commands can be issued on the AnyLog CLI, or organized in script 
-files that can either be standalone or part of something called [configuration policies](../policies.md#configuration-policies).
+files that can either be standalone or part of something called [configuration policies](/docs/policies/#configuration-policies).
 
 These scripts configure an empty AnyLog instance to do everything from setting configuring the node and declaring its 
 policies on the network, to more personalized things such as connecting to north and south-bound services. 

@@ -1,7 +1,13 @@
+---
+title: "Managing Data files"
+description: ""
+layout: page
+source_path: "managing data files status.md"
+---
 # Managing Data files
 
 Publisher nodes and devices are configured to send data to Operator nodes. Operators receive the data as JSON files or organize the data in JSON files.  
-Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](adding%20data.md#adding-data-to-nodes-in-the-network).  
+Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](/docs/adding-data/#adding-data-to-nodes-in-the-network).  
 If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
 
 The JSON files follow a naming convention that include metadata information on the data contained in the file and is explained below.

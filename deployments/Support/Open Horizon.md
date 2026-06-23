@@ -1,3 +1,9 @@
+---
+title: "Open Horizon"
+description: ""
+layout: page
+source_path: "deployments/Support/Open Horizon.md"
+---
 # Open Horizon 
 
 Open Horizon is a platform for managing the service software lifecycle of containerized workloads and related machine 
@@ -65,7 +71,7 @@ newgrp docker
 
 At the end of the process the Open Horizon should show a new active node 
 
-![Open Horizon node status](../../imgs/OpenHorizon_node_state.png)
+![Open Horizon node status](/assets/external-docs/imgs/openhorizon_node_state.png)
 
 ## Create AnyLog node as a Service on Open Horizon 
 
@@ -73,7 +79,7 @@ At the end of the process the Open Horizon should show a new active node
 
 2. Fill-out device image information. [Contact us](mailto:info@anylog.co) for Docker Username and password 
 
-![Device Information](../../imgs/OpenHorizon_device_info.png)
+![Device Information](/assets/external-docs/imgs/openhorizon_device_info.png)
 
 3. Configure variables - based on [configuration file](https://github.com/AnyLog-co/deployments/blob/master/docker-compose/anylog-operator/anylog_configs.env)
 ```dotenv
@@ -157,15 +163,15 @@ MONITOR_NODE_COMPANY=<YOUR_COMPANY_NAME>
 
 4. Under _Set deployment options_, declare container name and **enable** "Host network mode" 
 
-![Deployment Options](../../imgs/OpenHorizon_deployment_options.png)
+![Deployment Options](/assets/external-docs/imgs/openhorizon_deployment_options.png)
 
 5. Publish Service 
 
-![AnyLog node as a service on Open Horizon](../../imgs/OpenHorizon_published_service.png)
+![AnyLog node as a service on Open Horizon](/assets/external-docs/imgs/openhorizon_published_service.png)
 
 6. Create pattern for the generated service - use default values
 
-![Sample Pattern](../../imgs/OpenHorizon_sample_pattern.png)
+![Sample Pattern](/assets/external-docs/imgs/openhorizon_sample_pattern.png)
 
 
 ## Deploy AnyLog node via Open Horizon

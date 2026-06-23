@@ -1,3 +1,9 @@
+---
+title: "Managing Metadata"
+description: ""
+layout: page
+source_path: "metadata management.md"
+---
 # Managing Metadata
 
 ## Overview
@@ -9,7 +15,7 @@ A node in the network interacts with 2 layers of metadata:
 * With a global metadata layer shared by all the members of the network.
 
 This document provides an overview on the global metadata layer.  
-The document [metadata requests](metadata%20requests.md#metadata-requests) 
+The document [metadata requests](/docs/metadata-requests/#metadata-requests) 
 provides an overview of the local metadata layer.
 
 ## The global metadata
@@ -73,7 +79,7 @@ If authentication is enabled, the attributes _public_key_ and _signature_ are ad
 These are sets of command that allow to update and query the metadata layer.   
 The blockchain command are issued to a metadata repository which can be on the local node (either as a JSON file or hosted in a database), a master-node or a blockchain platform.  
  
-The _blockchain commands_ are detailed in the [blockchain commands section](blockchain%20commands.md).
+The _blockchain commands_ are detailed in the [blockchain commands section](/docs/blockchain-commands/).
 
 ### Updating a blockchain
 
@@ -156,7 +162,7 @@ In the above script:
 
 ## Periodically synchronizing the local copy of the metadata with a blockchain or a master node
 
-Details are available at the section [Blockchain Synchronizer](background%20processes.md#blockchain-synchronizer).
+Details are available at the section [Blockchain Synchronizer](/docs/background-processes/#blockchain-synchronizer).
 
 ## Using a local database
 

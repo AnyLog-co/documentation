@@ -1,7 +1,13 @@
+---
+title: "EdgeX"
+description: ""
+layout: page
+source_path: "deployments/Support/EdgeX.md"
+---
 # EdgeX
 The demo is using [EdgeX](https://www.edgexfoundry.org/) random data generator, with data being sent over their  
 _app-service-mqtt_. The contents that  changes are set to **BOLD**. For general information of Edgex, in terms of AnyLog,
-please review [EdgeX Usage](../../using%20edgex.md).
+please review [EdgeX Usage](/docs/using-edgex/).
 
 ### Steps 
 1. Clone [lfedge-code](https://github.com/AnyLog-co/lfedge-code)

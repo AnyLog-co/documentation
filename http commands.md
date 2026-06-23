@@ -1,3 +1,9 @@
+---
+title: "HTTP Commands"
+description: ""
+layout: page
+source_path: "http commands.md"
+---
 # HTTP Commands
 
 AnyLog HTTP commands are used to interact with the AnyLog platform via HTTP requests, enabling users to query data, 
@@ -9,7 +15,7 @@ making it flexible for various applications in data management and analytics.
 
 ## Prerequisites
 Enabled REST service. The HTTP Commands are issued via the REST interface, which is required to be enabled. 
-Details on the AnyLog REST service are available [here](anylog%20commands.md#rest-command).
+Details on the AnyLog REST service are available [here](/docs/anylog-commands/#rest-command).
 
 ## Usage
 

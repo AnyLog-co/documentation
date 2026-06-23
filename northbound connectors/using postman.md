@@ -1,3 +1,9 @@
+---
+title: "Sending Queries and Commands to the AnyLog Network with Postman"
+description: ""
+layout: page
+source_path: "northbound connectors/using postman.md"
+---
 # Sending Queries and Commands to the AnyLog Network with Postman
  
 Postman is an API platform for building and using APIs. It can serve as a tool to issue AnyLog Commands to nodes in the 

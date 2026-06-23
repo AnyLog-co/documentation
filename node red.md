@@ -1,3 +1,9 @@
+---
+title: "Node-RED"
+description: ""
+layout: page
+source_path: "node red.md"
+---
 # Node-RED 
 
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool designed for connecting hardware devices, 
@@ -9,14 +15,14 @@ The following provides an example of sending sample data, of timestamp and value
 1. Install [Node-Red](https://nodered.org/docs/getting-started/local)
 
 
-2. Create a [new flow](examples/node_red_sample_flow.json) that consists of the following components: 
+2. Create a [new flow](/assets/external-docs/examples/node_red_sample_flow.json) that consists of the following components: 
    * _Inject_ 
    * _function_
    * _JSON_
    * _HTTP request_ & _HTTP response_
    * _Trigger_ to repeat the process every N seconds 
    
-![Sample Node-Red Flow](imgs/node_red_flow.png)
+![Sample Node-Red Flow](/assets/external-docs/imgs/node_red_flow.png)
 
 
 3. Create a function that generates a timestamp and value, then stores those into a "dictionary" that also includes a table name
@@ -49,7 +55,7 @@ return msg
    * User-Agent - AnyLog/1.23
    * Content-Type - text/plain
 
-![Node-RED POST configurations](imgs/node_red_http_request.png)
+![Node-RED POST configurations](/assets/external-docs/imgs/node_red_http_request.png)
 
 5. On the AnyLog Operator side, create a new `run mqtt client` process against the REST port
 ```anylog

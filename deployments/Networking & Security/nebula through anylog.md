@@ -1,3 +1,9 @@
+---
+title: "Nebula Through AnyLog"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/nebula through anylog.md"
+---
 # Nebula Through AnyLog
 
 AnyLog uses overlay networks in order to have nodes that are distributed on separated subnetworks to act as if they're all
@@ -13,14 +19,14 @@ and configure the desired `OVERLAY_IP` value in order to deploy AnyLog with Nebu
 your nodes can be accessed by people using the pre-set certifications.
 
 In order to resolve the issue mentioned above, users can do 2 things:  
-* [Personalize Nebula](nebula.md) & [Updating Docker for Nebula](#personalized-nebula)  
-* Directions to secure your network with AnyLog can be found [here](../../secure%20network.md)
+* [Personalize Nebula](/docs/deployments/networking-and-security/nebula/) & [Updating Docker for Nebula](#personalized-nebula)  
+* Directions to secure your network with AnyLog can be found [here](/docs/secure-network/)
 
 **Documentation**
 * [GitHub](https://github.com/slackhq/nebula)
 * [Documentation](https://nebula.defined.net/docs)
 * [Defines' Website](https://www.defined.net/)
-* [Configuring Overlay with AnyLog](Configuring%20Overlay%20with%20AnyLog.md)
+* [Configuring Overlay with AnyLog](/docs/deployments/networking-and-security/configuring-overlay-with-anylog/)
 
 ## Deploying with pre-set Nebula 
 

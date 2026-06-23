@@ -1,3 +1,9 @@
+---
+title: "Data Monitoring"
+description: ""
+layout: page
+source_path: "examples/Data Monitoring.md"
+---
 # Data Monitoring
 
 Data can be monitored in different ways and in different stages of the data processing as summarized by the following table:

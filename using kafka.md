@@ -1,10 +1,16 @@
+---
+title: "Using Kafka"
+description: ""
+layout: page
+source_path: "using kafka.md"
+---
 # Using Kafka
 
 ## Overview
 
 Nodes in the AnyLog Network interact with Kafka in 2 ways:
 * AnyLog serves as a Data Producer to Kafka - any result set of a query can be directed to a Kafka instance.   
-* AnyLog is a Data Consumer - Kafka serves as a [message broker](message%20broker.md#using-a-message-broker) that transfers data to the network nodes.  
+* AnyLog is a Data Consumer - Kafka serves as a [message broker](/docs/message-broker/#using-a-message-broker) that transfers data to the network nodes.  
   
 ## Prerequisites
 
@@ -30,7 +36,7 @@ Note:
 ## AnyLog serves as a Data Consumer
 
 Each node in the AnyLog Network can be configured as a data consumer.  
-The flow of data from a Kafka instance to the network is detailed in [The Southbound Connectors Diagram](adding%20data.md#the-southbound-connectors-diagram).
+The flow of data from a Kafka instance to the network is detailed in [The Southbound Connectors Diagram](/docs/adding-data/#the-southbound-connectors-diagram).
 
 The command `run kafka consumer` initiates a process that serves as a client that subscribes to one or more topics 
 and consume published messages by pulling data from the Kafka instance.
@@ -50,7 +56,7 @@ run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earlies
 | reset      | Determines the offset policy. Optional values are _latest_ or _earliest_| _latest_ |
 | topic      | One or more topics with mapping instructions.| |
 
-Details on the topic declaration and mapping instructions are available [here](message%20broker.md#the-topic-params).  
+Details on the topic declaration and mapping instructions are available [here](/docs/message-broker/#the-topic-params).  
 
 **Example**:
 ```anylog
@@ -62,7 +68,7 @@ run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest a
 
 | Command                                                          | Info provided  |
 |------------------------------------------------------------------| -------|
-| [get processes](monitoring%20nodes.md#the-get-processes-command) | Background processes to determine if Kafka is enabled |
-| [get msg client](monitoring%20calls.md#get-msg-clients)          | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
-| [get streaming](monitoring%20calls.md#get-streaming)             | Data consumed from brokers associated to dbms tables |
-| [get operator](monitoring%20calls.md#get-operator)               | Statistics on ingestion of data to database tables |
+| [get processes](/docs/monitoring-nodes/#the-get-processes-command) | Background processes to determine if Kafka is enabled |
+| [get msg client](/docs/monitoring-calls/#get-msg-clients)          | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
+| [get streaming](/docs/monitoring-calls/#get-streaming)             | Data consumed from brokers associated to dbms tables |
+| [get operator](/docs/monitoring-calls/#get-operator)               | Statistics on ingestion of data to database tables |

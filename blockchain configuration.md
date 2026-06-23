@@ -1,3 +1,9 @@
+---
+title: "Blockchain Configuration"
+description: ""
+layout: page
+source_path: "blockchain configuration.md"
+---
 # Blockchain Configuration
 
 Nodes in the network can be configured to synchronize their local metadata with a global metadata hosted by a blockchain platform.
@@ -9,14 +15,14 @@ blockchain platform and how to configure to continuously receive metadata update
 
 Notes:
 * Using the blockchain as a metadata platform requires a contract that manages the metadata information. The initial contract setup
-with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](using%20ethereum.md).
+with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](/docs/using-ethereum/).
 * The published metadata is represented as Policies which are detailed in the [Policies](deploying nodes & AnyLog CLI/metadata management.md#policies) section.
 * The examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
 
 ## Prerequisites
 
 * An AnyLog contract on the blockchain platform. The contract manages the metadata policies (publishing the contract is detailed at 
-  [Publish the AnyLog contract on the blockchain](using%20ethereum.md#publish-the-anylog-contract-on-the-blockchain)).
+  [Publish the AnyLog contract on the blockchain](/docs/using-ethereum/#publish-the-anylog-contract-on-the-blockchain)).
 * The blockchain connection and contract information.
 * An anylog instance to configure.
 

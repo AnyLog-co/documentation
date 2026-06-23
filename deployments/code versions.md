@@ -1,3 +1,9 @@
+---
+title: "Code Versions"
+description: ""
+layout: page
+source_path: "deployments/code versions.md"
+---
 
 ## AnyLog Versions
 AnyLog has 3 major versions, each version is built on both _Ubuntu:20.04_ with _python:3.9-alpine_. 

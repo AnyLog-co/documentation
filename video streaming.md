@@ -1,3 +1,9 @@
+---
+title: "AnyLog Video Streaming Configuration Guide"
+description: ""
+layout: page
+source_path: "video streaming.md"
+---
 # AnyLog Video Streaming Configuration Guide
 
 ## Overview

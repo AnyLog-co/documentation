@@ -1,3 +1,9 @@
+---
+title: "Alerts and Monitoring"
+description: ""
+layout: page
+source_path: "alerts and monitoring.md"
+---
 # Alerts and Monitoring
 
 Nodes in the network can be configured to repeatably execute tasks.   
@@ -327,6 +333,6 @@ The summary table is configured as a data source to Grafana to monitor and alert
 
 ## Example - Monitoring CPU usage
 
-The section [Organizing statistics in a database table](monitoring%20nodes.md#organizing-statistics-in-a-database-table)
+The section [Organizing statistics in a database table](/docs/monitoring-nodes/#organizing-statistics-in-a-database-table)
 details how to organize operational statistics (like CPU utilization) in a table.
 

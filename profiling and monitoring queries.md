@@ -1,3 +1,9 @@
+---
+title: "Profiling and Monitoring Queries"
+description: ""
+layout: page
+source_path: "profiling and monitoring queries.md"
+---
 # Profiling and Monitoring Queries
 
 Queries are profiled and monitored by issuing commands on the AnyLog command prompt or from a REST client.

@@ -1,3 +1,9 @@
+---
+title: "Using EdgeX"
+description: ""
+layout: page
+source_path: "using edgex.md"
+---
 # Using EdgeX
 
 ## Overview
@@ -14,7 +20,7 @@ whereas the broker can be any third party broker or an AnyLog node that is confi
 ### Integration with a third party broker
 EdgeX can be configured with a third party MQTT broker. Examples of MQTT brokers are the open source [Eclipse Mosquitto](https://mosquitto.org/) project 
 and [CloudMQTT](https://www.cloudmqtt.com/) that provides an MQTT broker (using Mosquitto) as a service.  
-Configuring AnyLog to pull data from a third party MQTT broker is explained in the AnyLog [Using MQTT Broker](message%20broker.md#using-a-message-broker) section.
+Configuring AnyLog to pull data from a third party MQTT broker is explained in the AnyLog [Using MQTT Broker](/docs/message-broker/#using-a-message-broker) section.
 
 ### Sending MQTT data to an AnyLog instance
 
@@ -25,11 +31,11 @@ By configuring a node as message broker, data can be delivered from EdgeX direct
 
 As detailed below, EdgeX is configured to send the data to a message broker and an AnyLog instance is configured as a Message Broker.  
 The AnyLog node receiving the data can be an Operator node that hosts the data or a Publisher node that delivers the data to one or multiple Operator nodes 
-(the [getting started](getting%20started.md#type-of-instances) document details the types of nodes participating in the AnyLog Network). 
+(the [getting started](/docs/getting-started/#type-of-instances) document details the types of nodes participating in the AnyLog Network). 
 
 ## Prerequisites
 
-* An Anylog node configured as a [Message Broker](background%20processes.md#message-broker).
+* An Anylog node configured as a [Message Broker](/docs/background-processes/#message-broker).
 * An EdgeX platform configured to publish the device data on an AnyLog node as the message broker.
 
 ## Configuring AnyLog
@@ -41,11 +47,11 @@ The AnyLog node receiving the data needs to be configured as follows:
 ```anylog
 run message broker [ip] [port] [local ip] [Local port] [threads]
 ```
-Details on the run `message broker` command are available at the [Message Broker](background%20processes.md#message-broker)
-section in the [Background Processes](background%20processes.md#background-processes) document.
+Details on the run `message broker` command are available at the [Message Broker](/docs/background-processes/#message-broker)
+section in the [Background Processes](/docs/background-processes/#background-processes) document.
 
 * Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed structure.  
-This process is identical to the [subscription process to 3rd parties MQTT brokers](message%20broker.md#subscribing-to-a-third-party-broker) 
+This process is identical to the [subscription process to 3rd parties MQTT brokers](/docs/message-broker/#subscribing-to-a-third-party-broker) 
 whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the keyword _local_.  
   
 **Example**:
@@ -54,10 +60,10 @@ run msg client where broker=local and user=ibglowct and password=MSY4e009J7ts an
 ```
 
 **Note**: the key value pair `broker=local` replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](message%20broker.md#subscribing-to-the-topic-) section.  
+Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](/docs/message-broker/#subscribing-to-the-topic-) section.  
 
 ## Downloading and Configuring EdgeX 
-Our [deployments directions](deployments/Support/EdgeX.md) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
+Our [deployments directions](/docs/deployments/support/edgex/) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
 through a third-party broker.
 
 1. Clone docker-compose file(s)
@@ -65,7 +71,7 @@ through a third-party broker.
 git clone https://github.com/AnyLog-co/lfedge-code
 ```
 2. Deploy EdgeX with [random data generator](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesRandomDeviceService/#edgex-apis-related-to-random-integer-device-service) - by default the node is sending data into third-party CloudMQTT broker, using 
-`anylogedgex` topic. Please review [deployment directions](deployments/Support/EdgeX.md) to configure MQTT as 
+`anylogedgex` topic. Please review [deployment directions](/docs/deployments/support/edgex/) to configure MQTT as 
 you see fit.  
 ```shell  
 cd lfedge-code/edgex

@@ -1,3 +1,9 @@
+---
+title: "Install & Configure Nginx"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/nginx.md"
+---
 # Install & Configure Nginx 
 Nginx is a web server that can act as a proxy. Nginx allows static IP addresses, rather than virtual IPs  that Kubernetes 
 generates each time the pod gets deployed. Nginx (or other proxy service) needs to be installed and configured on all 
@@ -43,7 +49,7 @@ Commercial support is available at
 </html> 
 ```
 * Using the browser the output would look something like this
-![nginx welcome message](../../imgs/nginx_welcome_message.png)
+![nginx welcome message](/assets/external-docs/imgs/nginx_welcome_message.png)
 
 ## Configuring 
 1. Remove default files – we will recreate them in the following steps 

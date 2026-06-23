@@ -1,3 +1,9 @@
+---
+title: "Bucket Commands"
+description: ""
+layout: page
+source_path: "bucket data management.md"
+---
 # Bucket Commands
 
 The ***bucket*** command provides a means to push (upload) and pull (download) files from a bucket object storage.

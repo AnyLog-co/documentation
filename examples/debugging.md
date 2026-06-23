@@ -1,3 +1,9 @@
+---
+title: "Debugging"
+description: ""
+layout: page
+source_path: "examples/Debugging.md"
+---
 # Debugging
 
 Debugging details different processes as they accrue and monitor processes that are not executing properly

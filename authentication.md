@@ -1,7 +1,13 @@
+---
+title: "Users and nodes Authentication, making the data secure"
+description: ""
+layout: page
+source_path: "authentication.md"
+---
 # Users and nodes Authentication, making the data secure
 
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies.  
-For a detailed demo setup of a secured network refer to the document [Securing the Network](examples/Secure%20Network.md).   
+For a detailed demo setup of a secured network refer to the document [Securing the Network](/docs/examples/secure-network/).   
 These commands detailed in this document facilitate a framework that provides the following functionality:  
 a) Authenticates messages send from nodes to peer nodes.  
 b) Authenticates messages which are sent from nodes to peers with privileges assigned to users.  
@@ -13,7 +19,7 @@ The network provides 2 layers of authentications:
 1) Node Authentications - These are processes to authenticate users and processes delivering messages from one node to another
    and authenticate policies registered on the blockchain.  
    The messages that are authenticated are using the TCP server processes and related calls. 
-   Details on the TCP based processes are available in the [TCP Server process](background%20processes.md#the-tcp-server-process) section.
+   Details on the TCP based processes are available in the [TCP Server process](/docs/background-processes/#the-tcp-server-process) section.
    Message Authentication is based on issuing a private key and a public key to nodes and users. Messages are signed by the private 
    key of the sender (a user or a node) and validating the senders, at the destination nodes, using their public key and 
    policies providing the authorized functionalities.
@@ -24,7 +30,7 @@ The network provides 2 layers of authentications:
    For example:
    * Grafana calls issuing a REST request to a node in the network.
    * cURL request to a node in the network.
-   Details on REST requests are available in the [REST requests](background%20processes.md#rest-requests) section.
+   Details on REST requests are available in the [REST requests](/docs/background-processes/#rest-requests) section.
    Authentication is based on one of the following methods:
    * Usernames and passwords that are kept on the destination node.
      Details are available [below](#users-authentication)
@@ -441,7 +447,7 @@ Basic authentication is enabled using the following procedure:
 1. On the AnyLog node:  
     a. Provide the [local password](#The-local-password) (if it was not yet provided) using the command: ```set local password = [the local passoword]```   
     b. Enable user authentication using the command: ```set user authentication on```.          
-    c. Update the list of permitted users using the command: [id add user](authentication.md#add-users).  
+    c. Update the list of permitted users using the command: [id add user](/docs/authentication/#add-users).  
 2. When the REST call is sent, include the following key-value pair in the header:
 ```anylog
 key - "Authorization"  

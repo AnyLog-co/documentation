@@ -1,3 +1,9 @@
+---
+title: "Connecting nodes"
+description: ""
+layout: page
+source_path: "examples/Connecting Nodes.md"
+---
 # Connecting nodes
 
 Nodes in the network are connected to peer nodes in the network and to 3rd parties applications.   
@@ -43,7 +49,7 @@ Internal Addresses represent the IPs on local (private) networks.
 
 The diagram below illustrates the IP address allocation on a typical business network:
 
-![network setup](../imgs/network.png)
+![network setup](/assets/external-docs/imgs/network.png)
 
 An external or public IP is used across the entire Internet to locate computer systems and devices.  
 A local or internal IP address is used inside a private network to locate the computers and devices connected to it.  
@@ -121,28 +127,28 @@ Deployments of large scale networks are simpler with an overlay network. The Ove
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
  
-We use [nebula](../deployments/Networking%20&%20Security/nebula.md) as an Overlay Network Example.    
+We use [nebula](/docs/deployments/networking-and-security/nebula/) as an Overlay Network Example.    
 
 ## Configuring the listeners
 ### The TCP listener - Communicating with peer nodes
 
 When a node operates, it communicates with peer members of the network.    
 When a node starts, it is configured to listen on a socket associated with an Internet Protocol (IP) address and a port number.  
-The command that initiate the listener service is: ```run tcp server``` and is detailed [here](../background%20processes.md#the-tcp-server-process).    
+The command that initiate the listener service is: ```run tcp server``` and is detailed [here](/docs/background-processes/#the-tcp-server-process).    
 The IP and Port specified can be of a local network or of an external/public network or both.  
 
 Users can validate the configuration of the TCP listeners by issuing the **test network** command. See details in the
-[Test Network](../test%20commands.md#test-network) page.
+[Test Network](/docs/test-commands/#test-network) page.
 
 ### The REST listener - Communicating with 3rd parties applications
 
 When a node operates, it can be configured to communicate with 3rd party applications using [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).  
-The command that initiate the listener service is: ```run rest server``` and is detailed [here](../background%20processes.md#rest-requests).  
+The command that initiate the listener service is: ```run rest server``` and is detailed [here](/docs/background-processes/#rest-requests).  
 
 ### The Messaging Listener - Publishing data on an AnyLog node
 
 A node can be configured such that applications can treat the node as a [message broker](https://en.wikipedia.org/wiki/Message_broker) allowing data to be published (and assigned to a topic) on the node.  
-Details of the configurations are available [here](../message%20broker.md#using-a-message-broker).
+Details of the configurations are available [here](/docs/message-broker/#using-a-message-broker).
 
 ## Test peer connection
 Use the AnyLog Command Line Interface (CLI) to test the connection.  

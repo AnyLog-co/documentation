@@ -1,3 +1,9 @@
+---
+title: "Using OPC-UA"
+description: ""
+layout: page
+source_path: "opcua.md"
+---
 
 
 # Using OPC-UA
@@ -238,7 +244,7 @@ exit plc nov.rig8
 
 ## Example - Declaring OPC UA with aggregations
 
-Aggregation functions summarize streaming data over a time interval. See details in the [Aggregation](aggregations.md) section.
+Aggregation functions summarize streaming data over a time interval. See details in the [Aggregation](/docs/aggregations/) section.
 
 The following are the needed configuration steps:
 

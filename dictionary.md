@@ -1,3 +1,9 @@
+---
+title: "The local dictionary"
+description: ""
+layout: page
+source_path: "dictionary.md"
+---
 # The local dictionary
 
 ## Overview
@@ -8,7 +14,7 @@ For example: IPs and Ports, paths to files and directories are referenced by the
 to the appropriate value.  
 Some entries in the dictionary represent default setups and configurations, and users can add or modify entries in
 the dictionary as needed.  
-For example, all the directories in the [default folders structure](getting%20started.md#local-directory-structure)
+For example, all the directories in the [default folders structure](/docs/getting-started/#local-directory-structure)
 can be referenced by their keys, whereas in each deployment the physical location of the folders may be different.
 Using this example, users can reference the path to the **archive directory** using the key **!archive_dir**, the
 path to the **blobs directory** using the key **!blobs_dir** etc. allowing a shared configuration process whereas the 
@@ -112,7 +118,7 @@ The example above returns th string: ```my_company```
 
 Note: **.len**, **.replies**, and **.diff** are used when the entry in the dictionary aggregates replies 
 from multiple peer nodes. The explanation is available int the 
-[Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
+[Associating peer replies to a key in the dictionary](/docs/network-processing/#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
 
 ## Setting policies using the dictionary
@@ -163,4 +169,4 @@ json !operator_policy
 ```
 
 Additional information on the construction and tertieval of policies is available in the
-[JSON Data Transformation](json%20data%20transformation.md#json-data-transformation) section.
+[JSON Data Transformation](/docs/json-data-transformation/#json-data-transformation) section.

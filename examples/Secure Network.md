@@ -1,3 +1,9 @@
+---
+title: "Securing the Network"
+description: ""
+layout: page
+source_path: "examples/Secure Network.md"
+---
 # Securing the Network
 
 ## Overview

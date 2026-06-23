@@ -1,3 +1,9 @@
+---
+title: "Test commands"
+description: ""
+layout: page
+source_path: "test commands.md"
+---
 # Test commands
 
 The **test commands** determine the consistency of and availability of the data, metadata and processes in the network.
@@ -91,7 +97,7 @@ test network with 67.180.101.158:7848
 
 ### Test Network Metadata Version
 
-The test is similar to issuing a [get metadata version](background%20processes.md#synchronizer-status) command to all the nodes in the network.
+The test is similar to issuing a [get metadata version](/docs/background-processes/#synchronizer-status) command to all the nodes in the network.
    
 Example:
 ```anylog
@@ -110,17 +116,17 @@ test network table * where dbms = lsl_demo
 
 ## The test suite
 The test suite commands compare query results to a predefined trusted results. Details are available in the 
-[Test Suite](test%20suites.md#the-test-suite) section.  
+[Test Suite](/docs/test-suites/#the-test-suite) section.  
 **The Test Suite commands:**   
-[test case](test%20suites.md#the-test-case-command)  
+[test case](/docs/test-suites/#the-test-case-command)  
 [test suite](est%20suites.md#the-test-suite-command)  
 
 ## High Availability Tests
-Tests relating to High Availability are detailed in the [High Availability](high%20availability.md#high-availability-ha) section.  
+Tests relating to High Availability are detailed in the [High Availability](/docs/high-availability/#high-availability-ha) section.  
 **The HA test commands:**  
-[test cluster setup](high%20availability.md#testing-the-node-configuration-for-ha)    
-[test cluster data](high%20availability.md#cluster-synchronization-status)  
-[test cluster databases](high%20availability.md#cluster-databases)  
-[test cluster partitions](high%20availability.md#cluster-databases)  
-[test cluster setup](high%20availability.md#testing-the-node-configuration-for-ha)  
+[test cluster setup](/docs/high-availability/#testing-the-node-configuration-for-ha)    
+[test cluster data](/docs/high-availability/#cluster-synchronization-status)  
+[test cluster databases](/docs/high-availability/#cluster-databases)  
+[test cluster partitions](/docs/high-availability/#cluster-databases)  
+[test cluster setup](/docs/high-availability/#testing-the-node-configuration-for-ha)  
 

@@ -1,3 +1,9 @@
+---
+title: "Persistent Data"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/docker volumes.md"
+---
 # Persistent Data
 
 ## Persistent Volumes in AnyLog Deployment 

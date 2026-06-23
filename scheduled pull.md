@@ -1,3 +1,9 @@
+---
+title: "Scheduled Pull"
+description: ""
+layout: page
+source_path: "scheduled pull.md"
+---
 # Scheduled Pull
 
 ## Overview
@@ -56,7 +62,7 @@ Example:
   )>
 ```
 
-Using a **topic** is optional. Details of the **topic** params are available [here](message%20broker.md#the-topic-params).
+Using a **topic** is optional. Details of the **topic** params are available [here](/docs/message-broker/#the-topic-params).
 
 ## Scheduled pull of Windows Event Log
 
@@ -64,7 +70,7 @@ Unlike Linux or Unix-based systems, Windows does not use the syslog protocol to 
 Instead, it uses a proprietary system called the Windows Event Log, which stores structured event records internally 
 and does not natively support sending logs over the network in real-time.
 
-Details on servicing Syslog data to AnyLog in a Unix system is available at [Using Syslog](using%20syslog.md) document.  
+Details on servicing Syslog data to AnyLog in a Unix system is available at [Using Syslog](/docs/using-syslog/) document.  
 
 As a result, log data on Windows must be accessed via APIs, such as the Windows Event Log API, rather than being 
 pushed out like syslog messages.

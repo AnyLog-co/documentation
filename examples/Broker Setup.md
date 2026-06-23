@@ -1,3 +1,9 @@
+---
+title: "Setting AnyLog as a Message Broker"
+description: ""
+layout: page
+source_path: "examples/Broker Setup.md"
+---
 # Setting AnyLog as a Message Broker
 
 This document demonstrates the following:
@@ -8,11 +14,11 @@ This document demonstrates the following:
 
 Additional information:
 * Subscribing to a third party message broker and configuring AnyLog as a message broker
-  is detailed in [Using a Message Broker](../message%20broker.md#using-a-message-broker).
-* Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
-* Configuring a node as a message broker is detailed in [Message Broker](..//background%20processes.md#message-broker).
+  is detailed in [Using a Message Broker](/docs/message-broker/#using-a-message-broker).
+* Adding data is detailed in [Adding Data to Nodes in the Network](/docs/adding-data/#adding-data-to-nodes-in-the-network).
+* Configuring a node as a message broker is detailed in [Message Broker](/docs/background-processes/#message-broker).
 
-Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](../adding%20data.md#the-southbound-connectors-diagram).
+Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](/docs/adding-data/#the-southbound-connectors-diagram).
 Note
 
 

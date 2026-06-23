@@ -1,3 +1,9 @@
+---
+title: "The AnyLog CLI"
+description: ""
+layout: page
+source_path: "cli.md"
+---
 # The AnyLog CLI
 
 ## Overview
@@ -7,10 +13,10 @@ The CLI is a text-based interface where users can enter commands to execute vari
 
 Notes: 
 1. If AnyLog is executed as a background process, the CLI functionality is disabled. See details in 
-[Deploy AnyLog as a background process](training/advanced/background%20deployment.md) section.
+[Deploy AnyLog as a background process](/docs/training/advanced/background-deployment/) section.
    
 2. Most commans can be executed using the Remote CLI, details are available in the 
-   [Remote CLI](northbound%20connectors/remote_cli.md) section.
+   [Remote CLI](/docs/northbound-connectors/remote_cli/) section.
    
 
 ## The command prompt
@@ -24,7 +30,7 @@ The node name extends the CLI prompt. For example the following command changes 
 AL >  set node name Operator_3
 AL Operator_3 >
 ```
-Details are available [here](anylog%20commands.md#set-node-name).
+Details are available [here](/docs/anylog-commands/#set-node-name).
 
 A prompt extended by a plus (+) sign indicates a message in the buffer queue.
 For example:
@@ -42,9 +48,9 @@ AnyLog commands can be executed on startup by placing the commands as command li
 Note: command line arguments are contained in quotations and the keyword **and** separates between multiple commands (see example below). 
 
 Alternatively, commands can be placed in a file and using the command **process**, the commands in the file are executed.  
-Details on the **process** command are available [here](node%20configuration.md#the-configuration-process).   
+Details on the **process** command are available [here](/docs/node-configuration/#the-configuration-process).   
 Note: Commands can be organized in policies and stored in the shared metadata. These commands are executed by calling the policies. 
-Details are available in the [Configuration Policies](policies.md#configuration-policies) section.
+Details are available in the [Configuration Policies](/docs/policies/#configuration-policies) section.
 
 In the following example, a file named *anylog_setup.al* contains the commands that configures the network services for TCP and REST.      
 The commands in anylog_setup.al are as follows:
@@ -111,15 +117,15 @@ run client (dbms=litsanleandro, table=ping_sensor) get status
 ```
 
 Additional information is in the following sections:
-* [AnyLog Command Line Interface](getting%20started.md#anylog-command-line-interface)
-* [Sending messages to peers in the network](getting%20started.md#sending-messages-to-peers-in-the-network)
-* [Assigning a CLI to a peer node](training/advanced/background%20deployment.md#using-the-cli-of-a-peer-node-to-manage-the-background-node)
+* [AnyLog Command Line Interface](/docs/getting-started/#anylog-command-line-interface)
+* [Sending messages to peers in the network](/docs/getting-started/#sending-messages-to-peers-in-the-network)
+* [Assigning a CLI to a peer node](/docs/training/advanced/background-deployment/#using-the-cli-of-a-peer-node-to-manage-the-background-node)
 
 
 ## Script commands
 
 ### The "if" command
-Scripts can include conditional statements. Details are available in the [Conditional execution](anylog%20commands.md#conditional-execution) section.
+Scripts can include conditional statements. Details are available in the [Conditional execution](/docs/anylog-commands/#conditional-execution) section.
 
 ### The "end script" command
 The **end script** command terminates the execution of the script (see an example below)
@@ -165,7 +171,7 @@ The pause allows to determine the status and variable assignments prior and afte
 ## CLI operations
 
 The CLI can operate on values maintained in the local dictionary.     
-Details on the dictionary are available at [The "get dictionary" command](monitoring%20nodes.md#the-get-dictionary-command).
+Details on the dictionary are available at [The "get dictionary" command](/docs/monitoring-nodes/#the-get-dictionary-command).
 
 ### The "incr" command
 

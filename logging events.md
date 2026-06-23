@@ -1,3 +1,9 @@
+---
+title: "Logging Events"
+description: ""
+layout: page
+source_path: "logging events.md"
+---
 # Logging Events
 
 Each node maintains buffers to record events and errors such that users and applications are able to retrieve the recent 
@@ -111,4 +117,4 @@ set query log profile 6 seconds
 ```anylog
 set query log off
 ```
-Additional details are available in the [Identifying slow queries](profiling%20and%20monitoring%20queries.md#identifying-slow-queries) section. 
+Additional details are available in the [Identifying slow queries](/docs/profiling-and-monitoring-queries/#identifying-slow-queries) section. 

@@ -1,3 +1,9 @@
+---
+title: "Configuring Overlay Network with AnyLog"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/Configuring Overlay with AnyLog.md"
+---
 # Configuring Overlay Network with AnyLog
 Deploying an overlay network onto of AnyLog allows for a unified network, even when nodes are spread across physical 
 locations with different subnetworks. For testing purposes, we had used _Nebula_, an open-source overlay network 
@@ -8,10 +14,10 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 
 **Documents**
 * [Defines' Website](https://www.defined.net/)
-* [Installing Nebula](nebula.md)
-* [Network Connectivity Services](../../background%20processes.md#the-tcp-server-process)
-* [Network Configuration](../../network%20configuration.md) - general information regarding how an AnyLog nodes communicates with other members in the network
-* [Network Processing](../../network%20processing.md) - Processing both data and metadata across the network 
+* [Installing Nebula](/docs/deployments/networking-and-security/nebula/)
+* [Network Connectivity Services](/docs/background-processes/#the-tcp-server-process)
+* [Network Configuration](/docs/network-configuration/) - general information regarding how an AnyLog nodes communicates with other members in the network
+* [Network Processing](/docs/network-processing/) - Processing both data and metadata across the network 
 
 ## Deploy AnyLog with Overlay
 

@@ -1,3 +1,9 @@
+---
+title: "Overlay Networks"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/nebula.md"
+---
 # Overlay Networks
 
 AnyLog uses overlay networks in order to have nodes that are distributed on separated subnetworks to act as if they're all
@@ -11,7 +17,7 @@ This means that Nebula's overlay network uses certificates to assert a node's IP
 * [GitHub](https://github.com/slackhq/nebula)
 * [Documentation](https://nebula.defined.net/docs)
 * [Defines' Website](https://www.defined.net/)
-* [Configuring Overlay with AnyLog](Configuring%20Overlay%20with%20AnyLog.md)
+* [Configuring Overlay with AnyLog](/docs/deployments/networking-and-security/configuring-overlay-with-anylog/)
 
 ## Terminology 
 _Nebula's_ overlay network requires a minimum of 2 nodes: _lighthouse_ and regular nodes, nicknamed _host_, as well as 

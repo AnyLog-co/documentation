@@ -1,3 +1,9 @@
+---
+title: "Network Setup"
+description: ""
+layout: page
+source_path: "training/advanced/Network Setup.md"
+---
 # Network Setup
 
 **Table of content**
@@ -52,7 +58,7 @@ with specific deployments. These value are detailed in the dictionary setting of
 
 ## Configuring nodes using policies
 Users can create configuration policies for each node and initiate a node by associating the node with the configuration policies.  
-The [Config Policies](Config%20Policies.md) document reviews policies that have the same configuration results as
+The [Config Policies](/docs/training/advanced/config-policies/) document reviews policies that have the same configuration results as
 the CLI configuration detailed in this document (and the configuration using the scripts of section
 [Configuring nodes using a script file](#configuring-nodes-using-a-script-file).   
 
@@ -80,7 +86,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
      for the master node container, **query-1** for a query node and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
-    * The example shows deployment with [volume configurations](../../deployments/Networking%20&%20Security/docker_volumes.md).
+    * The example shows deployment with [volume configurations](/docs/deployments/networking-and-security/docker_volumes/).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
 ```shell
 NODE_TYPE=master
@@ -99,7 +105,7 @@ docker run -it --detach-keys=ctrl-d --network host \
 
 ### Setting the work directories
 The work directories store files associated with each node and are listed in the
-[Local Directory Structure](../../getting%20started.md#local-directory-structure) document.
+[Local Directory Structure](/docs/getting-started/#local-directory-structure) document.
 
 When an AnyLog node is deployed, the AnyLog dictionary includes keys that represent directory names
 and values that represent the path to each directory.
@@ -120,7 +126,7 @@ create work directories
 Note: The **create work directories** command is executed **once** to create the physical directories.
 
 With this Docker install, the work directories are declared and created according to the 
-values that are preset in the [Dockerfile](../../deployments/Support/Dockerfile).
+values that are preset in the [Dockerfile](/assets/external-docs/deployments/support/dockerfile).
 
 In this deployment, 2 additional key value pairs are added to the AnyLog dictionary to identify a directory to host 
 scripts and and a directory to host test files (see the example commands below).  
@@ -177,7 +183,7 @@ Example:
 
 Note:
 * For SQLite, databases are created in `!dbms_dir`
-* The following link includes the info for deploying a [PostgresSQL database](../../deployments/deploying_dbms.md#postgressql).
+* The following link includes the info for deploying a [PostgresSQL database](/docs/deployments/deploying_dbms/#postgressql).
 
 ### Authentication disabled
 In this setup authentication is disabled on all nodes.

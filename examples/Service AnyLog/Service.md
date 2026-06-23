@@ -1,10 +1,16 @@
+---
+title: "Configure as Service"
+description: ""
+layout: page
+source_path: "examples/Service AnyLog/Service.md"
+---
 # Configure as Service
 
-The process of deploying AnyLog as a service is built on the information in [Executable.md](Executable.md), which 
+The process of deploying AnyLog as a service is built on the information in [Executable.md](/docs/examples/service-anylog/executable/), which 
 explains how to deploy AnyLog executable. 
 
 ## Prepare Machine for AnyLog as Servie 
-1. Repeat steps 1-6 in [Executable.md](Executable.md)
+1. Repeat steps 1-6 in [Executable.md](/docs/examples/service-anylog/executable/)
  
 2. One of the parameters in the (advance) configuration file is `DISABLE_CLI`, which disables the AnyLog CLI from running.
 The parameter is located in the advanced configs of the corresponding node type - example 

@@ -1,12 +1,18 @@
+---
+title: "Configuration Policies"
+description: ""
+layout: page
+source_path: "training/advanced/Config Policies.md"
+---
 # Configuration Policies
 
 Users can create **config policies** that are stored in the metadata layer. When a node restarts, the node is configured
 by the instructions in the policy.
 
 This document demonstrates creating and using config policies that represent the setup and configuration detailed in the
-[Network Setup](Network%20Setup.md) document.  
+[Network Setup](/docs/training/advanced/network-setup/) document.  
 
-An overview of is available in the [Configuration Policies](../../policies.md#configuration-policies) section.
+An overview of is available in the [Configuration Policies](/docs/policies/#configuration-policies) section.
 
 Note: The config policies can be created on an arbitrary node, however, in this document, we assume the policies
 are created on the target node such that we can reference the dictionary keys rather than their associated values.

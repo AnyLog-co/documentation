@@ -1,3 +1,9 @@
+---
+title: "Executing Script"
+description: ""
+layout: page
+source_path: "deployments/executing scripts.md"
+---
 # Executing Script
 
 AnyLog is configured using the AnyLog commands. These commands can be issued on the AnyLog CLI, or organized in script 
@@ -8,7 +14,7 @@ declare policies that are stored on a ledger, scheduling a sync time against the
 apply mapping on data published on a node, scheduled processes to check disk space, execute a scheduled query and more.   
 
 These scripts can be added in the local scripts' volume or added to the ledger using 
-[configuration policies](../policies.md#configuration-policies) or using a combination of both.
+[configuration policies](/docs/policies/#configuration-policies) or using a combination of both.
 
 The example below details deployment using Docker or Kubernetes.
 

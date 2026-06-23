@@ -1,6 +1,12 @@
+---
+title: "Example Test suite"
+description: ""
+layout: page
+source_path: "examples/TestSuite.md"
+---
 # Example Test suite
 
-Documentation is available in the [test suites section](../test%20suites.md)
+Documentation is available in the [test suites section](/docs/test-suites/)
 
 ## Data Set
 

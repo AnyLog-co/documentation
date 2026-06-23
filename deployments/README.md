@@ -1,24 +1,30 @@
+---
+title: "Table of Content"
+description: ""
+layout: page
+source_path: "deployments/README.md"
+---
 # Table of Content
 
 ### Deploy AnyLog
 * [Network Deployment Example](../training/Session%20II%20(Deployment).md)- Deploy a test network.
 * [Deploy Database(s)](database_configuration.md)
-* [Deploy Node](deploying_node.md)
-* [Execute Personalized Scripts](executing_scripts.md)
+* [Deploy Node](/docs/deployments/deploying_node/)
+* [Execute Personalized Scripts](/docs/deployments/executing_scripts/)
 
 ### Support 
-* [Cheat Sheet](Support/cheatsheet.md)
-* [Setting Up MongoDB](Support/setting_up_mongodb.md)
+* [Cheat Sheet](/docs/deployments/support/cheatsheet/)
+* [Setting Up MongoDB](/docs/deployments/support/setting_up_mongodb/)
 
 ### Third-Party Apps 
-* [Remote-CLI](Support/Remote-CLI.md)
-* [Grafana](Support/Grafana.md)
-* [EdgeX](Support/EdgeX.md)
-* [Nginx](Networking%20&%20Security/nginx.md)
-* [Nebula Overlay](Networking%20&%20Security/nebula.md)
+* [Remote-CLI](/docs/deployments/support/remote-cli/)
+* [Grafana](/docs/deployments/support/grafana/)
+* [EdgeX](/docs/deployments/support/edgex/)
+* [Nginx](/docs/deployments/networking-and-security/nginx/)
+* [Nebula Overlay](/docs/deployments/networking-and-security/nebula/)
 
 ### Other 
-* [Docker Volumes](Networking%20&%20Security/docker_volumes.md)
-* [Kubernetes Volumes](Networking%20&%20Security/kubernetes_volumes.md)
-* [Kubernetes Networking](Networking%20&%20Security/kubernetes_networking.md)
+* [Docker Volumes](/docs/deployments/networking-and-security/docker_volumes/)
+* [Kubernetes Volumes](/docs/deployments/networking-and-security/kubernetes_volumes/)
+* [Kubernetes Networking](/docs/deployments/networking-and-security/kubernetes_networking/)
 

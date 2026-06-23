@@ -1,3 +1,9 @@
+---
+title: "Software TPM for AnyLog"
+description: ""
+layout: page
+source_path: "software tpm.md"
+---
 # Software TPM for AnyLog
 
 This document summarizes the software TPM implementation used with AnyLog and explains how to deploy it with the [`AnyLog-TPM`](../../AnyLog-TPM) offering and connect it to an AnyLog node.
@@ -310,7 +316,7 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
-- [Authentication](authentication.md)
-- [Secure Network](secure%20network.md)
-- [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
-- [Node Configuration](node%20configuration.md)
+- [Authentication](/docs/authentication/)
+- [Secure Network](/docs/secure-network/)
+- [Starting an AnyLog Instance](/docs/starting-an-anylog-instance/)
+- [Node Configuration](/docs/node-configuration/)

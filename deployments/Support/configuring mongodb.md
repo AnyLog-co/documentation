@@ -1,3 +1,9 @@
+---
+title: "Accessing MongoDB via AnyLog"
+description: ""
+layout: page
+source_path: "deployments/Support/configuring mongodb.md"
+---
 # Accessing MongoDB via AnyLog
 The following is based on the example in `!local_scripts/sample_code/mongodb_process.al`, within AnyLog, to demonstrate 
 accepting videos into AnyLog and storing them in MongoDB (and/or local folder). Directions to install MongoDB can be 

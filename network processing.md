@@ -1,3 +1,9 @@
+---
+title: "Network Processing"
+description: ""
+layout: page
+source_path: "network processing.md"
+---
 # Network Processing
 
 ## overview
@@ -35,7 +41,7 @@ The AnyLog Network Protocol deploys 2 layers of messaging:
 Users and applications can query data or state by sending a request to a node in the network using REST. 
 The node receiving the reply will process the request and if needed, return a reply to the caller. 
   
-The [Querying Data](examples/Querying Data.md#querying-data) section provides examples of issuing queries to retrieve 
+The [Querying Data](/docs/examples/querying-data/#querying-data) section provides examples of issuing queries to retrieve 
 data using REST.
 
 The following example is a cURL call to determine the status of a node:
@@ -122,7 +128,7 @@ run client (!destination) get disk usage .
 User can reference the metadata from a **run client** command by ignoring the **blockchain get** keywords and the **bring.ip_port** directive.  
 This shortcut representation applies in 2 use cases:
 * With a **run client** command.
-* With an assigned CLI [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
+* With an assigned CLI [assigned CLI](/docs/training/advanced/background-deployment/#assigning-a-cli-to-a-peer-node).
 
 The example below demonstrates a shortcut (and retrieves the same destination IPs and Ports as in the examples above):
 ```anylog
@@ -139,7 +145,7 @@ run client ((operator,query) where [country] contains US) get cpu usage
 
 Users can associate replies from multiple nodes to a key in the dictionary. It allows to reference the replies and 
 determine which are the nodes that participated in the process.  
-Details are available in the [Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
+Details are available in the [Associating peer replies to a key in the dictionary](/docs/network-processing/#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
 
 ## Queries messaging modes - the 'subset' flag
@@ -170,7 +176,7 @@ Replies from the target nodes can be stored in the node's local dictionary using
 * Using curly brackets ({}) that extend the key, the replies are organized in a dictionary. The keys in the dictionary
    are the IP and Port of the target nodes, and the values represent the reply message from each node. 
 
-The examples below assume an [assigned CLI](training/advanced/background%20deployment.md#assigning-a-cli-to-multiple-peer-nodes).
+The examples below assume an [assigned CLI](/docs/training/advanced/background-deployment/#assigning-a-cli-to-multiple-peer-nodes).
  
 **Example 1: replies organized as a list**
   ```anylog
@@ -197,7 +203,7 @@ Users can determine the number of nodes participating in a process by evaluating
 | .diff         | current_status.diff     | The difference between .len and .replies (representative of the number of nodes that did not reply.  |
 
 Note: users can issue a **wait** command after the target nodes are messaged to pause execution untill all nodes replied 
-and a time threshold - whichever comes first. Details are available in the [wait command](anylog%20commands.md#the-wait-command) section.
+and a time threshold - whichever comes first. Details are available in the [wait command](/docs/anylog-commands/#the-wait-command) section.
 
 ## Network Configuration
 
@@ -230,8 +236,8 @@ Usage:
 ```anylog
 run rest server [ip] [port] where timeout = [timeout] and threads = [threads count] and ssl = [true/false]
 ```
-More details on the REST API are available at [using rest](using%20rest.md#using-rest).  
-More details on setting a node as a REST server is available at [background processes](background%20processes.md#rest-requests).  
+More details on the REST API are available at [using rest](/docs/using-rest/#using-rest).  
+More details on setting a node as a REST server is available at [background processes](/docs/background-processes/#rest-requests).  
 
 ## Configuring a TCP server process
 This process makes each node a member in the AnyLog Network and allows communication between peers in the network.  
@@ -245,7 +251,7 @@ run tcp server [ip] [port] [threads]
 * [local ip] [local port] - Optional parameters to indicate an IP and Port that are accessible from a local network.  
 * [threads] - An optional parameter for the number of workers threads that process requests which are send to the provided IP and Port. The default value is 6.
 
-Additional information is available in the [Background Processes](background%20processes.md#the-tcp-server-process) section. 
+Additional information is available in the [Background Processes](/docs/background-processes/#the-tcp-server-process) section. 
 
 ### The Source Address
 When the command `run tcp server` is initiated, the node dedicates a process to listen to incoming messages on the declared IP and Port.

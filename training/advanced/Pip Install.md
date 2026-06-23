@@ -1,3 +1,9 @@
+---
+title: "AnyLog as a _pip_ Package"
+description: ""
+layout: page
+source_path: "training/advanced/Pip Install.md"
+---
 # AnyLog as a _pip_ Package 
 
 ## Deployment Process 

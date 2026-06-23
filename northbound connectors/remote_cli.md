@@ -1,3 +1,9 @@
+---
+title: "The Remote CLI"
+description: ""
+layout: page
+source_path: "northbound connectors/remote_cli.md"
+---
 # The Remote CLI
 
 The Remote CLI is a web application that offers a REST based GUI that allows to issue commands to nodes in the network.    
@@ -19,11 +25,11 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](../background%20processes.md#rest-requests) section.
+Configuring a node to recieve REST requests is detailed in the [REST Requests](/docs/background-processes/#rest-requests) section.
 
 ## Installing the Remote CLI
 
-Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
+Details are available [here](/docs/deployments/support/remote-cli/#remote-cli).
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
@@ -177,7 +183,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get databases](../imgs/remote_cli_get_databases.png)
+![get databases](/assets/external-docs/imgs/remote_cli_get_databases.png)
 
 ### Return columns in a given table 
 
@@ -187,7 +193,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get columns](../imgs/remote_cli_get_columns.png)
+![get columns](/assets/external-docs/imgs/remote_cli_get_columns.png)
 
 ### Return Operators nodes associated to a company
 
@@ -197,7 +203,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png)
+![view operators in blockchain](/assets/external-docs/imgs/remote_cli_blockchain_operators.png)
 
 ### Get the list of nodes that host the data (for each table)
 
@@ -207,7 +213,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Data Nodes](../imgs/remote_cli_data_nodes.png)
+![Data Nodes](/assets/external-docs/imgs/remote_cli_data_nodes.png)
 
 ### Query the last 90 seconds of data
 
@@ -217,7 +223,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 90 seconds of data](../imgs/remote_cli_select_last_90sec.png)
+![Last 90 seconds of data](/assets/external-docs/imgs/remote_cli_select_last_90sec.png)
 
 ### Query the last 10 minutes of data including the source node
 
@@ -227,4 +233,4 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 10 minutes of data](../imgs/remote_cli_select_last_10min.png)
+![Last 10 minutes of data](/assets/external-docs/imgs/remote_cli_select_last_10min.png)

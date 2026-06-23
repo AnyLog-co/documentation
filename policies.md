@@ -1,3 +1,9 @@
+---
+title: "Policies based Metadata"
+description: ""
+layout: page
+source_path: "policies.md"
+---
 # Policies based Metadata
 
 AnyLog maintains the metadata in a ledger. The metadata is organized as a collection of objects, called policies. A 
@@ -36,7 +42,7 @@ master node is used, the master node is configured such that the ledger is store
 New policies are added to the ledger, and when a new policy is added, it updates the global metadata layer (the global copy).
 As every node continuously synchronizes the local copy with the global copy, evey update will appear on the local copy 
 of every member node. Synchronization is enabled with the `run blockchain sync` command. 
-Details are available [here](background%20processes.md#blockchain-synchronizer).  
+Details are available [here](/docs/background-processes/#blockchain-synchronizer).  
 
 ## The Policy ID
 When a Policy is added to the metadata, one of the fields describing the object is an ID field.  
@@ -90,7 +96,7 @@ the policy.
 Below are the needed attributes for the networking services.
 
 1. **TCP service** - The TCP service makes a node a member of the network. It is equivalent to configure the node using
-the command [run tcp server](background%20processes.md#the-tcp-server-process).  
+the command [run tcp server](/docs/background-processes/#the-tcp-server-process).  
    Attributes required:  
    1. ip – the IP address allowing peer nodes to communicate with the service.
    2. port - the service port.
@@ -103,7 +109,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
    
 
 2. **REST Service** - The REST service communicates with applications and data generators (like sensors). It is equivalent 
-   to configure the node using the command [run rest server](background%20processes.md#rest-requests).   
+   to configure the node using the command [run rest server](/docs/background-processes/#rest-requests).   
    Attributes required:  
    1. rest_ip – (optional) an IP that provides a dedicated address for the REST services.
    2. rest_port - the service port.
@@ -112,7 +118,7 @@ the command [run tcp server](background%20processes.md#the-tcp-server-process).
     Note that if an IP is provided, the node binds to the IP, otherwise it will receive all REST based requests on the specified port.
 
 3. **Broker Service** - These services communicate with data generators (like sensors) using Publish-Subscribe functionalities.
-   It is equivalent to configure the node using the command [run messsage broker](background%20processes.md#message-broker).   
+   It is equivalent to configure the node using the command [run messsage broker](/docs/background-processes/#message-broker).   
    Attributes required:  
    1. broker_ip – (optional) an IP that provides a dedicated address for the broker services.
    2. broker_port -the service port.
@@ -184,13 +190,13 @@ or retrieved from the shared metadata layer.
 The (single) root key in a policy is the 'policy type', it allows identifying and classifying policies by their type and facilitates
 search where query and filtering processes are assigned to a group of policies identified by their type.
 
-Adding and retrieving policies from the shared metadata layer is described in the [Blockchain Commands](blockchain%20commands.md#blockchain-commands) section.
+Adding and retrieving policies from the shared metadata layer is described in the [Blockchain Commands](/docs/blockchain-commands/#blockchain-commands) section.
  
 ## Declaring a policy using a code block
 
-Using a code block, users can describe a policy on the [AnyLog Command Line (CLI)](getting%20started.md#anylog-command-line-interface).  
+Using a code block, users can describe a policy on the [AnyLog Command Line (CLI)](/docs/getting-started/#anylog-command-line-interface).  
 The code block assigns a policy to a key, is contained between less than and greater than signs and can be copied to the AnyLog CLI.  
-When the copy is done, the key is assigned with the policy and maintained in the [local dictionary](getting%20started.md#the-node-dictionary).
+When the copy is done, the key is assigned with the policy and maintained in the [local dictionary](/docs/getting-started/#the-node-dictionary).
 
 Using the code block example [above](#policies-based-configuration), when the code block is copied to the CLI, the policy is assigned to the key ```config_policy```.
 This process updates the node's dictionary with the key and value such that the value (policy) can be referenced using the key (see the examples below).
@@ -278,7 +284,7 @@ Returns:
 Note that the value assigned to the key ```ip``` is set to be 73.222.38.83 which is the dictionary value assigned 
 to the key ```external_ip```.
 
-The **json** command is detailed in the section [Transforming JSON representatives to JSON Objects](json%20data%20transformation.md#transforming-json-representatives-to-json-objects).
+The **json** command is detailed in the section [Transforming JSON representatives to JSON Objects](/docs/json-data-transformation/#transforming-json-representatives-to-json-objects).
 
 ## Retrieving and formatting attributes from policies
 
@@ -289,7 +295,7 @@ The following example retrieves the name, IPs and Port from the config policy to
 from !config_policy bring.table [config][name] [config][ip] [config][local_ip] [config][port]
 ```
 
-The **from** command is detailed in the section [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
+The **from** command is detailed in the section [The 'From JSON Object Bring' command](/docs/json-data-transformation/#the-from-json-object-bring-command).
 
 ## Declaring a policy using set commands
 
@@ -315,7 +321,7 @@ set policy config_policy [config][script] + 'set authentication off' and [config
 Notes:
 1. The policy attribute values can be assigned in a single command or using multiple **set policy** commands
 that reference the same policy name (```config_policy``` in the example above). This property allows to condition the 
-assignment with **if** conditions (details are available in the [conditional execution](anylog%20commands.md#conditional-execution) section.
+assignment with **if** conditions (details are available in the [conditional execution](/docs/anylog-commands/#conditional-execution) section.
 2. A dictionary is assigned to a key using the signs: {}
 3. A list is assigned to a key using the sign: [] and entries are added to the list using the plus (+) sign as in the example above.
 4. Removing entries from the local dictionary is by assigning a null string to the key in the dictionary. The example below 

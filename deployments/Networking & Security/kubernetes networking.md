@@ -1,3 +1,9 @@
+---
+title: "Kubernetes Networking"
+description: ""
+layout: page
+source_path: "deployments/Networking & Security/kubernetes networking.md"
+---
 # Kubernetes Networking
 
 Kubernetes Orchestrator generates a unique virtual IP each time a node is deployed. 
@@ -12,7 +18,7 @@ Once set, the network connectivity will be done with the virtual IP address for 
 local_ip will be set to the service name; which other members on the Kubernetes cluster can utilize.
 
 When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/) or other proxy service, as well as our
-[configuration policy](../../policies.md).
+[configuration policy](/docs/policies/).
 
 Directions for using Kubernetes Cluster Networking can be found [here](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
@@ -30,7 +36,7 @@ The following chart summarizes the setup:
 | REST             | Vritul IP   | Virtual IP | `run rest server...`    |
 | TCP              | External IP | Virtual IP | `run message broker...` |
 
-Farther details regarding things like binding and thread count can be found in our [networking section](../../network%20configuration.md)
+Farther details regarding things like binding and thread count can be found in our [networking section](/docs/network-configuration/)
 
 ## Sample Node Policy for Kubernetes
 The following provides a basic example of both the configuration policy, as-well-as a (master) node policy. 

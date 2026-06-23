@@ -1,3 +1,9 @@
+---
+title: "Background Processes"
+description: ""
+layout: page
+source_path: "background processes.md"
+---
 # Background Processes
 
 Background processes are optional processes that if activated, are running using dedicated threads according to the user specifications.
@@ -6,17 +12,17 @@ The background processes are issued using an initialization script or on the Any
 
 | Command               | functionality  |
 | --------------------- | ------------| 
-| [run tcp server](background%20processes.md#the-tcp-server-process) | A listener for the AnyLog Peer-to-Peer Messaging  |
-| [run rest server](background%20processes.md#rest-requests) | A listener for REST Request from users and applications from nodes that are not members of the network |
+| [run tcp server](/docs/background-processes/#the-tcp-server-process) | A listener for the AnyLog Peer-to-Peer Messaging  |
+| [run rest server](/docs/background-processes/#rest-requests) | A listener for REST Request from users and applications from nodes that are not members of the network |
 | [run operator](#operator-process) | A configurable operator process that ingests data to the local tables |
-| [run publisher](background%20processes.md#publisher-process) | A configurable publisher process that sends data to operators for processing |
-| [run blockchain sync](background%20processes.md#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
-| [run scheduler](background%20processes.md#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |
-| [run msg client](message%20broker.md#using-a-message-broker) | Initiate a process that pulls data from MQTT brokers |
-| [run smtp client](background%20processes.md#smtp-client) | Initiate an SMTP client allowing emails amd sms messages using the Simple Mail Transfer Protocol (SMTP) |
-| [run streamer](background%20processes.md#streamer-process) | Initiate a process to flush streaming data to disk |
-| [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
-| [run data consumer](background%20processes.md#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
+| [run publisher](/docs/background-processes/#publisher-process) | A configurable publisher process that sends data to operators for processing |
+| [run blockchain sync](/docs/background-processes/#blockchain-synchronizer) | A configurable process to periodically pull from the blockchain platform (or master node) to update a local copy of the metadata |
+| [run scheduler](/docs/background-processes/#scheduler-process) | Initiate a scheduler to periodically monitor state of events and data  |
+| [run msg client](/docs/message-broker/#using-a-message-broker) | Initiate a process that pulls data from MQTT brokers |
+| [run smtp client](/docs/background-processes/#smtp-client) | Initiate an SMTP client allowing emails amd sms messages using the Simple Mail Transfer Protocol (SMTP) |
+| [run streamer](/docs/background-processes/#streamer-process) | Initiate a process to flush streaming data to disk |
+| [run data distributor](/docs/background-processes/#invoking-the-data-distributor-process) | A process that synchronizes data between different operators of the same cluster |
+| [run data consumer](/docs/background-processes/#invoking-the-data-consumer-process) | A process that retrieves data to make the local databases consistent among operators of the same cluster |
 | [run message broker](#message-broker) | A process that receives data from 3rd parties platforms using supported protocols |
 
 ## View the status of the Background Processes
@@ -31,7 +37,7 @@ Detailed information on each process can be retrieved using the ***get commands*
 get operator
 ```
 
-The ***get*** command options are detailed in [Get Command](anylog%20commands.md#get-command) section.
+The ***get*** command options are detailed in [Get Command](/docs/anylog-commands/#get-command) section.
  
 ## Process termination
 
@@ -102,8 +108,8 @@ If a local IP and Port is specified, the listener process will use the local IP 
 router connected to the external networks needs to redirect the messages send to the External IP and Port to the Local IP and Port ([Port Forwarding](https://en.wikipedia.org/wiki/Port_forwarding)).  
 
 Additional information is available in the following sections:
-* [Network Configuration](network%20configuration.md#network-configuration)
-* [Connecting Nodes](examples/Connecting%20Nodes.md)
+* [Network Configuration](/docs/network-configuration/#network-configuration)
+* [Connecting Nodes](/docs/examples/connecting-nodes/)
  
 ## REST requests
 
@@ -130,7 +136,7 @@ Options:
 | server_org  | The name assigned to the AnyLog node. This name needs to match the name in the node's key files (server-SERVER-ORG-public-key.crt) and (server-SERVER-ORG-private-key.key) |   |
 
 Notes:
-* If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](authentication.md#using-ssl-certificates).
+* If ssl is set to True, connection is using HTTPS and authentication requires Certificates. These are explained in the section [Using SSL Certificates](/docs/authentication/#using-ssl-certificates).
 * The following command provides the info on how the REST server is configured:
     ```anylog
     get rest server info
@@ -151,9 +157,9 @@ Notes:
 exit rest
 ```
 Additional information is available in the following sections:
-* [Network Configuration](network%20configuration.md#network-configuration)
-* [Connecting Nodes](examples/Connecting%20Nodes.md)   
-* [Using SSL](authentication.md#using-ssl-certificates) 
+* [Network Configuration](/docs/network-configuration/#network-configuration)
+* [Connecting Nodes](/docs/examples/connecting-nodes/)   
+* [Using SSL](/docs/authentication/#using-ssl-certificates) 
 
 ## Operator Process
 
@@ -170,7 +176,7 @@ Users can modify the processing by associating ***Instructions Policies*** to th
 The JSON file name follows a convention that uniquely identifies the file and determines the processes that assign the JSON data to a table.  
 The file naming convention is detailed at the [The file naming convention](../managing%20data%20files%20status.md#the-file-naming-convention) section.
 From the file name, the logical database and table names are determined. In addition, the file name optionaly includes the ID of the Mapping Instructions.  
-Mapping instructions are detailed in the [mapping data to tables section.](mapping%20data%20to%20tables.md)  
+Mapping instructions are detailed in the [mapping data to tables section.](/docs/mapping-data-to-tables/)  
 
 #### Recording file ingested
 This is an optional process to recod the details of the ingested files.
@@ -261,7 +267,7 @@ To check the status of the Operator process, use the following command:
 ```anylog
 get operator
 ```
-Additional info on the ***get operator*** command is available [here](monitoring%20calls.md#get-operator)
+Additional info on the ***get operator*** command is available [here](/docs/monitoring-calls/#get-operator)
 
 ### Operator data archival
 
@@ -290,7 +296,7 @@ Depending on the configuration, local databases are updated as follows:
 2. As a collection of multiple (buffered) events.
 
 This behavior is configured by the **set buffer threshold** command - see details in the 
-[Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode) section.  
+[Setting and retrieving thresholds for a Streaming Mode](/docs/adding-data/#setting-and-retrieving-thresholds-for-a-streaming-mode) section.  
 * **set buffer threshold where write_immediate = false** - Buffers the streaming data.
 * **set buffer threshold where write_immediate = true** - No buffering, streaming data updates the databases when the data appears on the node.
 
@@ -318,7 +324,7 @@ get archived files 2024-01-07
 #### Delete archived JSON files
 
 Users can configure a node to delete old archived files. This process can be done as a task on the node scheduler -
-see details in the [alerts and monitoring](alerts%20and%20monitoring.md) section.    
+see details in the [alerts and monitoring](/docs/alerts-and-monitoring/) section.    
 
 The command specifies a number of days prior to the command issued day, from which, 
 all files in folders from prior days are deleted.   
@@ -420,7 +426,7 @@ run blockchain sync where source = blockchain and platform = ethereum and time =
 run blockchain sync where source = master and time = 1 minute and dest = file and connection = !ip_port
 ```
 
-Information on Master Node configuration is available at [master node](master%20node.md).
+Information on Master Node configuration is available at [master node](/docs/master-node/).
 
 ### Forcing synchronization
 
@@ -484,7 +490,7 @@ run scheduler
 ```
 This command will allow users to declare tasks that will be executed periodically.
 
-The details of assigning tasks to the scheduler are available at the section [Alerts and Monitoring](alerts%20and%20monitoring.md#alerts-and-monitoring).
+The details of assigning tasks to the scheduler are available at the section [Alerts and Monitoring](/docs/alerts-and-monitoring/#alerts-and-monitoring).
 
 ## HA Process
 
@@ -493,7 +499,7 @@ The HA process is supported by 2 processes:
 2. Data Consumer - The Operator participates in a process that continuously validates the completeness of the data set on his local database and if data is missing, it pulls the data from the peer members of the cluster.    
 
 The Distributor Process copies data placed in a distribution directory to the Cluster Members. It manages 2 types of files:
-1.  Archived Data - files that include the data of specific partitions. These files were generated using the [backup command](anylog%20commands.md#backup-command).
+1.  Archived Data - files that include the data of specific partitions. These files were generated using the [backup command](/docs/anylog-commands/#backup-command).
 2.  Source Data - Files delivered to the node by a Publisher and are maintained on a local database.  
 This table summarizes the file types and their destination:
 
@@ -583,13 +589,13 @@ get blobs archiver
 
 The ***MQTT Client*** process provides a mechanism to subscribe to topics of a MQTT broker. When  messages are received,
 the client retrieves the message and transforms the incoming messages to data structures that are processed by the node.    
-Details on the MQTT Client process are available at the [Using a Message Broker](message%20broker.md#using-a-message-broker) section.
+Details on the MQTT Client process are available at the [Using a Message Broker](/docs/message-broker/#using-a-message-broker) section.
 
 ## SMTP Client
 
 The ***SMTP Client*** process initiates an SMTP client facilitating emails and SMS messages using the Simple Mail Transfer Protocol (SMTP).
 Sending emails and SMS messages serves to alert and monitor the status of nodes and the data hosted by nodes.  
-Details on how emails and SMS messages are triggered ate available in the [Alerts and Monitoring](alerts%20and%20monitoring.md#alerts-and-monitoring) section.
+Details on how emails and SMS messages are triggered ate available in the [Alerts and Monitoring](/docs/alerts-and-monitoring/#alerts-and-monitoring) section.
 
 The following command initiates the SMTP client:
 ```anylog
@@ -624,7 +630,7 @@ run streamer where prep_dir = [path to prep directory] and watch_dir = [path to 
 
 If prep_dir, watch_dir and err_dir and not specified, the default locations are used.    
 To view the default paths used, use the command ```get dictionary```.  
-The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](adding%20data.md#setting-and-retrieving-thresholds-for-a-streaming-mode).
+The streaming data thresholds are explained at [Setting and retrieving thresholds for a Streaming Mode](/docs/adding-data/#setting-and-retrieving-thresholds-for-a-streaming-mode).
 
 To check the status of the Streamer Process, use the following command:
 ```anylog
@@ -654,7 +660,7 @@ Options:
 | bind  |  A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs).  | true  |
 | threads  | The number of concurrent threads supporting HTTP requests. | 6  |
 
-An example of configuring AnyLog as an MQTT message broker is available at the section [Using EdgeX](using%20edgex.md#using-edgex).
+An example of configuring AnyLog as an MQTT message broker is available at the section [Using EdgeX](/docs/using-edgex/#using-edgex).
 
 To check the status of the Message Broker, use the following command:
 ```anylog

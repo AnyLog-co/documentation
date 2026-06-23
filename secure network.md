@@ -1,3 +1,9 @@
+---
+title: "Securing the Network"
+description: ""
+layout: page
+source_path: "secure network.md"
+---
 # Securing the Network
 
 ## Overview
@@ -29,7 +35,7 @@ The Key-Based Authentication enables the following:
 ^Note: A private key and a public key can be assigned to users - it allows for administrators to operate on the node's CLI
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
-The relevant AnyLog commands are detailed in the section [Node Authentication](authentication.md#node-authentication).  
+The relevant AnyLog commands are detailed in the section [Node Authentication](/docs/authentication/#node-authentication).  
 
 
 ## Key-Based-Authentication deployment example
@@ -157,7 +163,7 @@ The following chart details the processes demonstrated:
 |13    | CLI(opr.1.2) |Enable authentication | Enable authentication of messages from users and nodes  |
 
 ### (Optional) Step 0 - Connect to TPM
-Follow the instructions in [Connecting AnyLog to the Software TPM](./software%20tpm.md#connecting-anylog-to-the-software-tpm)
+Follow the instructions in [Connecting AnyLog to the Software TPM](/docs/software-tpm/#connecting-anylog-to-the-software-tpm)
 Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
 
 Opr.1
@@ -630,7 +636,7 @@ run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the comman
 ## Using certificates
 
 This process makes AnyLog a Certificate Authority (CA) that issues Client Certificates to 3rd parties applications.   
-This process id detailed in the [Using SSL Certificates](authentication.md#using-ssl-certificates) section.  
+This process id detailed in the [Using SSL Certificates](/docs/authentication/#using-ssl-certificates) section.  
 Client Certificates enable the following:  
 * Only clients holding certificates can communicate with the network nodes.
 * A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
@@ -651,7 +657,7 @@ get rest server info
 
 ### Example
 
-The following example assumes that the example certificates detailed in the [Using SSL Certificates](authentication.md#using-ssl-certificates) 
+The following example assumes that the example certificates detailed in the [Using SSL Certificates](/docs/authentication/#using-ssl-certificates) 
 section are available in the pem directory (!pem_dir). 
 
 ### Generate a Member Policy representing the issued certificate:
@@ -728,7 +734,7 @@ Use the Setting Tab to configure the REST calls as follows:
 
 ### Example of a third part application - Grafana
 
-Note: Configuring Grafana is detailed in the [Using Grafana](northbound%20connectors/using%20grafana.md) section.  
+Note: Configuring Grafana is detailed in the [Using Grafana](/docs/northbound-connectors/using-grafana/) section.  
 
 To use Certificate, update the Grafana JSON data source page as follows:
 * Update the AnyLog URL to use HTTPS (Encrypted Connection).
@@ -738,6 +744,6 @@ To use Certificate, update the Grafana JSON data source page as follows:
     * Update the ***Client Cert*** with the content of the `server-acme-inc-public-key.crt` file.
     * Update the ***Client Key*** with the content of the `server-acme-inc-private-key.key` file.
 
-![Grafana Authentication Example](imgs/grafana_auth_image.png)
+![Grafana Authentication Example](/assets/external-docs/imgs/grafana_auth_image.png)
 
 With this setup, _Save_ & _Test_ needs to return a green message with the text: **Data Source is working**.

@@ -1,3 +1,9 @@
+---
+title: "Open Horizon"
+description: ""
+layout: page
+source_path: "deployments/OpenHorizon/Open Horizon.md"
+---
 # Open Horizon 
 
 Open Horizon is a platform for managing the service software lifecycle of containerized workloads and related machine 
@@ -90,7 +96,7 @@ newgrp docker
 ```
 
 At the end of the process, OpenHorizon should show a new active node
-![OpenHorizon_node_state.png](imgs%2FOpenHorizon_node_state.png)
+![OpenHorizon_node_state.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_node_state.png)
 
 
 # AnyLog
@@ -111,7 +117,7 @@ This process is detailed below.
 
 3. Declare _AnyLog_ as a device image - Docker login credentials are received using: [AnyLog Downloads](https://anylog.co/download-anylog)
 
-![OpenHorizon_device_info.png](imgs%2FOpenHorizon_device_info.png)
+![OpenHorizon_device_info.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_device_info.png)
 
 4. Configure Service variables 
 * `INIT_TYPE` (**value**: training) - Which AnyLog scripts to use for the deployment 
@@ -125,18 +131,18 @@ This process is detailed below.
 * `ENABLE_MQTT` (**value**: true) - Enable receiving data from a remote MQTT broker 
 * `ENABLE_MONITORING` (**value**: true) - Enable monitoring of the Node 
 
-![OpenHorizon_serivce_info.png](imgs%2FOpenHorizon_serivce_info.png)
+![OpenHorizon_serivce_info.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_serivce_info.png)
 
 5. Under "Deployment Options", Enable _Host Network Mode_
 
-![OpenHorizon_deployment_options.png](imgs%2FOpenHorizon_deployment_options.png)
+![OpenHorizon_deployment_options.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_deployment_options.png)
 
 6. Save changes - you should see "anylog-node" as a published service 
 
-![OpenHorizon_published_service.png](imgs%2FOpenHorizon_published_service.png)
+![OpenHorizon_published_service.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_published_service.png)
 
 7. Create an AnyLog pattern 
-![OpenHorizon_sample_pattern.png](imgs%2FOpenHorizon_sample_pattern.png)
+![OpenHorizon_sample_pattern.png](/assets/external-docs/deployments/openhorizon/imgs/openhorizon_sample_pattern.png)
 
 ## Create AnyLog node as a Service on Open Horizon
 

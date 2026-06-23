@@ -1,10 +1,16 @@
+---
+title: "Query nodes in the network"
+description: ""
+layout: page
+source_path: "queries.md"
+---
 # Query nodes in the network
 
 The `run client ()` ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 
 If the parenthesis are left empty, all the nodes with the tables' data receive and process the query. Users can detail 
 specific nodes of interest by providing their IP and Ports.  
-The format of SQL commands is detailed in the [Issuing a SQL command](sql%20setup.md#issuing-a-sql-command-to-a-node-in-the-network) section.  
-Query examples are available in the [Query Data](examples/Querying%20Data.md) page.
+The format of SQL commands is detailed in the [Issuing a SQL command](/docs/sql-setup/#issuing-a-sql-command-to-a-node-in-the-network) section.  
+Query examples are available in the [Query Data](/docs/examples/querying-data/) page.
   
 ## Query options
 The query options are instructions on the format and target location for the result set. The query options are expressed 

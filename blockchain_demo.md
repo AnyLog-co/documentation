@@ -1,3 +1,9 @@
+---
+title: "Blockchain Demo"
+description: ""
+layout: page
+source_path: "blockchain_demo.md"
+---
 # Blockchain Demo 
 
 AnyLog Network, which is available with both EdgeLake and Enterprise uses layer-2 logic to publish data onto the 
@@ -44,9 +50,9 @@ each transaction from tens of dollars to pennies if not less.
 Optimism blockchain. 
 
 ### Links 
-* [Blockchain Commands](blockchain%20commands.md)
-* [Blockchain Configuration.md](blockchain%20configuration.md)
-* [policies.md](policies.md)
+* [Blockchain Commands](/docs/blockchain-commands/)
+* [Blockchain Configuration.md](/docs/blockchain-configuration/)
+* [policies.md](/docs/policies/)
 
 ## Sepolia for Optimism as Blockchain
 1. Specify [infura](https://www.infura.io/) as our RPC provider and connect to it. 
@@ -134,7 +140,7 @@ blockchain insert where policy=!new_policy and local=true and blockchain=!platfo
 
 Generally speaking, content that's stored on a blockchain is non-fungible (ie cannot change). However, nodes that are 
 part of the AnyLog network can have configuration changes - such as: node ownership, network information, permissions or 
-simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](policies.md/#anmp-policy)
+simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](/docs/policies/#anmp-policy)
 in order to modify existing policies. 
 
 

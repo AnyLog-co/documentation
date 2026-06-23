@@ -1,3 +1,9 @@
+---
+title: "Resource Monitoring"
+description: ""
+layout: page
+source_path: "examples/Resource Monitoring.md"
+---
 
 # Resource Monitoring
 

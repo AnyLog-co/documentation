@@ -1,3 +1,9 @@
+---
+title: "Syslog with AnyLog"
+description: ""
+layout: page
+source_path: "deployments/syslog.md"
+---
 # Syslog with AnyLog 
 
 Syslog is a standardized protocol used for sending and receiving log messages in a computer network. It facilitates the 
