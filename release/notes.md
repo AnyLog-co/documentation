@@ -34,7 +34,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1.  Add timezone to query casting options. [Details](/docs/queries/#example-8---timezone-and-datetime)
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
-1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](/docs/blockchain-commands/#join--merge-operations)
+1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](/docs/blockchain-commands/#join-merge-operations)
 
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
 1. New command: ```file from``` - Return a file via REST. [Details](/docs/file-commands/#return-a-file-via-rest)
@@ -48,7 +48,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
 1. (A) The command ```run helpers``` initiates AnyLog helper processes. [Details](/docs/helpers/)
-2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](/docs/helpers/#-dynamic-monitoring-of-internal-processes)
+2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](/docs/helpers/#dynamic-monitoring-of-internal-processes)
 
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command

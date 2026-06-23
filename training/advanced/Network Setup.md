@@ -86,7 +86,7 @@ docker login -u anyloguser -p ${ANYLOG_DOCKER_PASSWORD}
     * `NODE_TYPE` represents a unique name for each container, and its corresponding volumes. For example, use **master** 
      for the master node container, **query-1** for a query node and **operator-1** for an operator node. 
     * `LICENSE_KEY` - the AnyLog provided key.
-    * The example shows deployment with [volume configurations](/docs/deployments/networking-and-security/docker_volumes/).
+    * The example shows deployment with [volume configurations](/docs/deployments/networking-and-security/docker-volumes/).
 This configuration is  optional; however, if used, make sure naming is unique per volume per container.    
 ```shell
 NODE_TYPE=master
@@ -319,7 +319,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 ## Query Node Configuration
 A _query node_ is an AnyLog node configured to satisfy queries.  
-Any node can act as a query node, as long as [system_query](sandbox%20-%20Network%20setup.md#L189-L193) 
+Any node can act as a query node, as long as [system_query](#system-databases) 
 database is configured.
 
 * Attaching to the CLI (node name: `query-node`)  

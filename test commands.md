@@ -119,7 +119,7 @@ The test suite commands compare query results to a predefined trusted results. D
 [Test Suite](/docs/test-suites/#the-test-suite) section.  
 **The Test Suite commands:**   
 [test case](/docs/test-suites/#the-test-case-command)  
-[test suite](est%20suites.md#the-test-suite-command)  
+[test suite](test%20suites.md#the-test-suite-command)  
 
 ## High Availability Tests
 Tests relating to High Availability are detailed in the [High Availability](/docs/high-availability/#high-availability-ha) section.  
@@ -129,4 +129,3 @@ Tests relating to High Availability are detailed in the [High Availability](/doc
 [test cluster databases](/docs/high-availability/#cluster-databases)  
 [test cluster partitions](/docs/high-availability/#cluster-databases)  
 [test cluster setup](/docs/high-availability/#testing-the-node-configuration-for-ha)  
-

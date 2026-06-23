@@ -36,13 +36,13 @@ List files or directories:
 | [get files](#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
 | [get directories](#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
 
-Operations on files stored in a dedicated database (details are available in the [Image Mapping](../data%20management/image%20mapping.md#image-mapping) document):
+Operations on files stored in a dedicated database (details are available in the [Image Mapping](image%20mapping.md#image-mapping) document):
 
 | Operation  | ---- | 
 | ------------- | ---- |
-| [file remove](../data%20management/image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
-| [file retrieve](../data%20management/image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
-| [file Store](../data%20management/image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
+| [file remove](image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
+| [file retrieve](image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
+| [file Store](image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
 
 ## Files names
 

@@ -14,7 +14,7 @@ demo BI tool. However, directions for other BI tools, such as [Microsoft's Power
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
-Directions for importing our demo images dashboards can be found in [import grafana dashboard document](/docs/northbound-connectors/import_grafana_dashboard/)
+Directions for importing our demo images dashboards can be found in [import grafana dashboard document](/docs/northbound-connectors/import-grafana-dashboard/)
 
 
 ## Prerequisites & Links

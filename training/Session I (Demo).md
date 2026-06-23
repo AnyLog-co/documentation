@@ -145,7 +145,7 @@ blockchain get operator where [city] = toronto  bring.ip_port
 ```   
 
 ### Test node connectivity with peers
-A process to validate that the node can communicate with peers in the network. See details [here](/docs/test-commands/#the-test-network-commands).
+A process to validate that the node can communicate with peers in the network. See details [here](/docs/test-commands/#test-network).
 ```anylog
 test network
 ```
@@ -166,7 +166,7 @@ run client 23.239.12.151:32348 get cpu usage
 Additional info is in the following sections:  
 - [Monitoring nodes](/docs/monitoring-nodes/#monitoring-nodes)
 - [Alerts and Monitoring](/docs/alerts-and-monitoring/#alerts-and-monitoring)
-- [Monitoring Data](../monitoring%20data.md#monitoring-data)
+- [Monitoring Data](../examples/Data%20Monitoring.md#data-monitoring)
 - [Monitoring Calls](/docs/monitoring-calls/#monitoring-calls-from-external-applications)
 
 

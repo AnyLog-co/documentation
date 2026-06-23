@@ -58,7 +58,7 @@ AnyLog's [deployment scripts](https://github.com/AnyLog-co/deployments) provides
 with deployment of an AnyLog instance of either _Docker_ or _Kubernetes_. For a _Docker_ instance the deployment script 
 updates the correlating `.env` file of the node. 
 
-**Disclaimer**: The deployment scripts do not [deploy physical database](database_configuration.md). Make sure your
+**Disclaimer**: The deployment scripts do not [deploy physical database](deploying%20dbms.md). Make sure your
 non-SQLite database(s) is deployed prior to starting your AnyLog instance.   
 
 * Using deployment script 

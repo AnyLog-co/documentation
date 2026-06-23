@@ -104,7 +104,7 @@ set node authentication off
 ## Creating private and public keys 
 
 A private key and a public key are issued for each node that is a member of the network. The public key is assigned with 
-privileges (see the [assignment policy](...) below) that determine if a command sent from the node to a peer can be executed on the peer node.
+privileges (see the [permission group](#permission-group) below) that determine if a command sent from the node to a peer can be executed on the peer node.
 In addition, users can be issued with a private and a public key. Setting users with keys assigns privileges to individual 
 users such that, when a user is issuing commands to peer nodes, the privileges granted to the user determine if a command is
 processed, rather than the privileges granted to the node.  

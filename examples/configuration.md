@@ -247,7 +247,7 @@ connect dbms !default_dbms where type=psql and user = !db_user and password = !d
 
 Notes: 
 1) ***These policies are declared once*** and the below policies declarations can be moved to a dedicated script file that is called once when the node is installed.
-2) Details on blockchain commands are available in the [blockchain commands](./blockchain%20commands.md#blockchain-commands) section. 
+2) Details on blockchain commands are available in the [blockchain commands](../blockchain%20commands.md#blockchain-commands) section. 
 
 In a ***standalone*** contiguration the node serves multiple roles. We use a seperate policy for each role.  
 If only one role is configured, only the policy that determines the configured role is needed.
@@ -369,7 +369,7 @@ run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=a
 
 #### Start the Operator processes
 These are the processes that based on the ingested data, create the schemas and update the databases.    
-Details are available in the [Operator Process](background%20processes.md#operator-process) section.
+Details are available in the [Operator Process](../background%20processes.md#operator-process) section.
  
 <pre>
 run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node
@@ -512,5 +512,4 @@ set script autoexec.json [script data]    # Use POST in the REST call
     ]
 }
 ```
-
 

@@ -66,7 +66,7 @@ In this session, the configuration file is named **anylog_configs.env** and sore
 Note that users can generate their own configuration files using a questionnaire, or placing the commands in files or in policies.
 * The [deploying_node](/docs/deployments/deploying_node/) document is a guide to deploy a network using a questionnaire
 that to generate the config file.
-* The [Netowrk Setup](../examples/Network%20setup.md) document is a step by step guide to deploy an AnyLog network without 
+* The [Network Setup](advanced/Network%20Setup.md) document is a step by step guide to deploy an AnyLog network without 
 a pre-existing configuration.
 * The [Policies based Configuration](/docs/policies/#policies-based-configuration) section details how to use 
 policies (placed on the shared metadata layer) to configure nodes in the network.
@@ -636,4 +636,3 @@ Note: On the GUI, select **"Training"** on the **Options** menu for buttons repr
 ## Grafana
 * [Deploy Grafana](https://github.com/AnyLog-co/documentation/blob/master/deployments/Support/Grafana.md)
 * [Configuring Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md) 
-

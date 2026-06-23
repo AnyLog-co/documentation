@@ -72,7 +72,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Alerts & Monitoring](/docs/alerts-and-monitoring/)
   * [Aggregations](/docs/aggregations/)
   * [Monitoring File Status](/docs/managing-data-files-status/)
-  * [DYnamic Statistcs](/docs/helpers/#-dynamic-monitoring-of-internal-processes)
+  * [DYnamic Statistcs](/docs/helpers/#dynamic-monitoring-of-internal-processes)
     
 * **Querying Data**
   * [Data Queries](/docs/queries/)

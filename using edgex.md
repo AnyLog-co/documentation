@@ -60,7 +60,7 @@ run msg client where broker=local and user=ibglowct and password=MSY4e009J7ts an
 ```
 
 **Note**: the key value pair `broker=local` replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](/docs/message-broker/#subscribing-to-the-topic-) section.  
+Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](/docs/message-broker/#subscribing-to-the-topic) section.  
 
 ## Downloading and Configuring EdgeX 
 Our [deployments directions](/docs/deployments/support/edgex/) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
@@ -111,5 +111,4 @@ table_name=rand_data
 ```anylog
 get msg client
 ```
-
 

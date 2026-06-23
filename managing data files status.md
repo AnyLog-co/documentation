@@ -8,7 +8,7 @@ source_path: "managing data files status.md"
 
 Publisher nodes and devices are configured to send data to Operator nodes. Operators receive the data as JSON files or organize the data in JSON files.  
 Sending data to nodes in the network is explained at [Adding Data to Nodes in the Network](/docs/adding-data/#adding-data-to-nodes-in-the-network).  
-If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution and Configuration](data%20distribution%20and%20configuration.md#data-distribution-and-configuration).
+If an Operator is associated with a cluster, it will distribute the JSON files to the cluster members. This process provides HA and is explained at [Data Distribution](high%20availability.md#the-data-distribution).
 
 The JSON files follow a naming convention that include metadata information on the data contained in the file and is explained below.
 Each Operator node maintains a set of tables to record information on each JSON file processed. The information in these tables allow to monitor the following:  
@@ -159,4 +159,3 @@ This command will update the status fields in a _tsd_info_ entry with the specif
 ```anylog 
 time file update 6c78d0b005a86933ba44573c09365ad5 "From Publisher 778299-2" "File delivered to backup"
 ```
-

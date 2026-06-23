@@ -57,7 +57,7 @@ In a customer deployment, all configurations are pre-packaged, and associated to
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a configuration policy to a node.
  
-**Note 3:** Advanced users can review the [Network Setup Document](../examples/Network%20setup.md) to deploy a test
+**Note 3:** Advanced users can review the [Network Setup Document](advanced/Network%20Setup.md) to deploy a test
 network using the AnyLog CLI without pre-packaged configuration. 
 
 ### Session I - The Basic Guided Tour

@@ -148,7 +148,7 @@ This process is detailed below.
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
-2. Update variables in the `service.definition.json` configuration file at ([Operator Node](deployments/operator/service.definition.json)) with the following:
+2. Update variables in the `service.definition.json` configuration file at ([Operator Node](operator/service.definition.json)) with the following:
 
 | Variable       | Update with                             | Default Value | Comments     |
 | -------------- | --------------------------------------- |  ------------ | ------------ |
@@ -226,4 +226,3 @@ Address               Node Type Node Name         Status
 198.74.50.131:32148  |operator |anylog-operator1 |  +   |
 << 
 ``` 
-

@@ -11,7 +11,7 @@ Kubernetes Orchestrator generates a unique virtual IP each time a node is deploy
 Since communication between nodes is policy based, AnyLog cannot have a new virtual IP each time a node is deployed. 
 
 As such, the configuration file, for Kubernetes, has a configuration called `KUBERNETES_SERVICE_IP` which should be set 
-to the service name of the deployment. When using the [deployment scripts](deploying_node.md), this step is done 
+to the service name of the deployment. When using the [deployment scripts](../deploying%20node.md), this step is done 
 automatically. 
 
 Once set, the network connectivity will be done with the virtual IP address for local IP. However, on the blockchain the 
@@ -72,4 +72,3 @@ Kubernetes service IP (`anylog-master-service`) will be set to `local_ip`.
   "proxy_ip" : "10.0.0.183",
 }}
 ```
-

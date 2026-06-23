@@ -58,7 +58,7 @@ To view the slow query log use the following command on the AnyLog command promp
 get query log
 ```
 
-Additional details are available in the [Query Log](../monitoring/logging%20events.md#the-query-log) section.
+Additional details are available in the [Query Log](logging%20events.md#the-query-log) section.
 
 ## Command options for monitoring queries
 

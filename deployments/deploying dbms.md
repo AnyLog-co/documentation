@@ -95,7 +95,7 @@ Web-based MongoDB admin tool. The username/password or mongo-express is the same
 The following documentation provides instruction to install MongoDB locally: 
 
 * [Install MongoDB](https://www.linode.com/docs/guides/mongodb-community-shell-installation/)
-* [Accepting MongoDB data on AnyLog](/docs/deployments/support/setting_up_mongodb/)
+* [Accepting MongoDB data on AnyLog](/docs/deployments/support/configuring-mongodb/)
 
 1. (Optional) Update configurations
    * username / password 

@@ -21,7 +21,7 @@ This document explains how to deploy and manage an AnyLog instance as a backgrou
 
 ## pip Install Package
 
-Instructions are detailed in the [pip Install Document](/docs/training/advanced/pip-install/#anylog-as-a-_pip_-package).
+Instructions are detailed in the [pip Install Document](/docs/training/advanced/pip-install/#anylog-as-a-pip-package).
 
 ## Using a config file
 
@@ -56,7 +56,7 @@ Comments:
 * **nohup** - Disassociates the command from the terminal so that it continues to run in the background.  
 It redirects standard output (stdout) to a file called **nohup.out** (unless a different output file is specified).
 * **-u** - Output to stdout is not buffered.
-* **anylog.py** - The python script that is calling the installed AnyLog library (detailed in [pip Install Document](/docs/training/advanced/pip-install/#anylog-as-a-_pip_-package)).
+* **anylog.py** - The python script that is calling the installed AnyLog library (detailed in [pip Install Document](/docs/training/advanced/pip-install/#anylog-as-a-pip-package)).
 * **process start.al** - The AnyLog command to process the commands in the config file named **start.al**. A sample
  config file is in the [example above](#using-a-config-file).
 
@@ -148,4 +148,3 @@ These commands ignore an assigned CLI:
 When assignment is done using a blockchain command, usere can use shortcuts to describe the assignment.  
 Details are available in the 
 [Using shortcuts to specify the destination of a TCP message](/docs/network-processing/#using-shortcuts-to-specify-the-destination-of-a-tcp-message) section.
-
