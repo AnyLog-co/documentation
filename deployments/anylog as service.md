@@ -1,10 +1,16 @@
+---
+title: "AnyLog as a Service"
+description: ""
+layout: page
+source_path: "deployments/AnyLog_as_Service.md"
+---
 # AnyLog as a Service
 
 AnyLog is a platform that allows to manage data across multiple (edge) innstances as if they're 
 centralized (on the cloud). 
 
 Right now, the "standard" deployment process consists of a docker container that runs either via 
-[Docker](Quick%20Deployment.md) or [Kubernetes](deploying_node.md). However, under certain conditions, such as
+[Docker](quick%20deployment.md) or [Kubernetes](deploying%20node.md). However, under certain conditions, such as
 lack of space or regulatory requirements, network constraints, etc, users may select to install AnyLog (or EdgeLake) 
 directly as a service.
 

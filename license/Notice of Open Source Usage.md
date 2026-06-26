@@ -1,3 +1,9 @@
+---
+title: "Notice Of Open Source Usage"
+description: ""
+layout: page
+source_path: "license/Notice of Open Source Usage.md"
+---
 Notice of Open Source Usage
 
 The following copyright statements and licenses apply to various open-source software packages (or portions thereof) that 

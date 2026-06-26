@@ -1,3 +1,9 @@
+---
+title: "Data Monitoring"
+description: ""
+layout: page
+source_path: "examples/Data Monitoring.md"
+---
 # Data Monitoring
 
 Data can be monitored in different ways and in different stages of the data processing as summarized by the following table:
@@ -7,9 +13,9 @@ Data can be monitored in different ways and in different stages of the data proc
 | --- | ------------- | ------------- |   ---------- | ---------- |
 | 1 | When monitored value is provided to the AnyLog node | data monitor where ... |  get data monitored  ||
 | 2 | When data is ingested to files |  |  get rows count  ||
-| 3 | When data is ingested to files |  |    | [By issuing a query](https://github.com/AnyLog-co/documentation/blob/master/examples/Querying%20Data.md) |
+| 3 | When data is ingested to files |  |    | [By issuing a query](Querying%20Data.md) |
 
-Additional information is available in the [monitoring data section](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20data.md#monitoring-data)
+Additional information is available in the [monitoring data section](Data%20Monitoring.md#data-monitoring)
 
 
 ## Initiate Data Monitoring

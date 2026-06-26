@@ -1,4 +1,15 @@
+---
+title: "AnyLog Release notes"
+description: ""
+layout: page
+source_path: "release/notes.md"
+---
 # AnyLog Release notes
+
+AnyLog Version: 1.5.2605 [2026-06-12 18:37:39]
+### New Features
+1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../sql%20setup.md#the-metadata) 
+2. Add **include** and **exclude** options to the command ```blockchain get root policies``` - See details [here](../blockchain%20commands.md#filtering-root-policies)
 
 AnyLog Version: 1.4.2510-beta3 [e0d9e1] [2026-03-08 17:52:24]
 ### New Features
@@ -23,7 +34,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1.  Add timezone to query casting options. [Details](../queries.md#example-8---timezone-and-datetime)
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
-1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../blockchain%20commands.md#join--merge-operations)
+1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../blockchain%20commands.md#join-merge-operations)
 
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
 1. New command: ```file from``` - Return a file via REST. [Details](../file%20commands.md#return-a-file-via-rest)
@@ -32,12 +43,12 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../anylog%20commands.md#conditional-execution)
 
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
-1. (AE) New options for ```get columns``` command. [Details](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#the-get-columns-command)
+1. (AE) New options for ```get columns``` command. [Details](../sql%20setup.md#the-get-columns-command)
 
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
 1. (A) The command ```run helpers``` initiates AnyLog helper processes. [Details](../helpers.md)
-2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](../helpers.md#-dynamic-monitoring-of-internal-processes)
+2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](../helpers.md#dynamic-monitoring-of-internal-processes)
 
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command
@@ -170,7 +181,7 @@ policy = create policy license where company = !company. and expiration = !expir
 1. (AE) Create EdgeLake branch.
 2. Update **blockchain set account info** call to include the Chain ID. 
 3. (AE) Add options to create HTML documents from a query.
-4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#connecting-to-a-local-database).
+4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](../sql%20setup.md#connecting-to-a-local-database).
 
 ### New Features:
 1. (AE) New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).

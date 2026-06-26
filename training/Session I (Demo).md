@@ -1,3 +1,9 @@
+---
+title: "Session I - The Basic Guided Tour"
+description: ""
+layout: page
+source_path: "training/Session I (Demo).md"
+---
 # Session I - The Basic Guided Tour
 
 Prerequisite: See details [here](prerequisite.md).  
@@ -139,7 +145,7 @@ blockchain get operator where [city] = toronto  bring.ip_port
 ```   
 
 ### Test node connectivity with peers
-A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#the-test-network-commands).
+A process to validate that the node can communicate with peers in the network. See details [here](../test%20commands.md#test-network).
 ```anylog
 test network
 ```
@@ -160,7 +166,7 @@ run client 23.239.12.151:32348 get cpu usage
 Additional info is in the following sections:  
 - [Monitoring nodes](../monitoring%20nodes.md#monitoring-nodes)
 - [Alerts and Monitoring](../alerts%20and%20monitoring.md#alerts-and-monitoring)
-- [Monitoring Data](../monitoring%20data.md#monitoring-data)
+- [Monitoring Data](../examples/Data%20Monitoring.md#data-monitoring)
 - [Monitoring Calls](../monitoring%20calls.md#monitoring-calls-from-external-applications)
 
 

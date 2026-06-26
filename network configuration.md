@@ -1,9 +1,15 @@
+---
+title: "Network Configuration"
+description: ""
+layout: page
+source_path: "network configuration.md"
+---
 # Network Configuration
 
 The following provides general information regarding how an AnyLog nodes communicates with other members in the network, 
 as well as third-party applications.
 
-Information regarding configuring _NGINX_ and/or an overlay network (_nebula_) can be found [here](deployments/Networking & Security) 
+Information regarding configuring _NGINX_ and/or an overlay network (_nebula_) can be found [here](deployments/Networking%20%26%20Security/Configuring%20Overlay%20with%20AnyLog.md) 
 
 ## Overview
 
@@ -194,4 +200,3 @@ Example:
 ```anylog
 curl --location --request VIEW 24.23.250.144:2049
 ```
-

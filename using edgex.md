@@ -1,3 +1,9 @@
+---
+title: "Using EdgeX"
+description: ""
+layout: page
+source_path: "using edgex.md"
+---
 # Using EdgeX
 
 ## Overview
@@ -54,10 +60,10 @@ run msg client where broker=local and user=ibglowct and password=MSY4e009J7ts an
 ```
 
 **Note**: the key value pair `broker=local` replace the assignment of an IP and port (when 3rd parties brokers are used).    
-Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](message%20broker.md#subscribing-to-the-topic-) section.  
+Details on the `run msg client` command and the data mapping instructions are available at the [Subscribing to a Broker](message%20broker.md#subscribing-to-the-topic) section.  
 
 ## Downloading and Configuring EdgeX 
-Our [deployments directions](deployments/Support/EdgeX.md) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
+Our [deployments directions](deployments/Support/edgex.md) provide details for deploying EdgeX with data being sent into AnyLog via [message broker](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesAddingMQTTDevice/); either directly or
 through a third-party broker.
 
 1. Clone docker-compose file(s)
@@ -65,7 +71,7 @@ through a third-party broker.
 git clone https://github.com/AnyLog-co/lfedge-code
 ```
 2. Deploy EdgeX with [random data generator](https://docs.edgexfoundry.org/1.3/examples/Ch-ExamplesRandomDeviceService/#edgex-apis-related-to-random-integer-device-service) - by default the node is sending data into third-party CloudMQTT broker, using 
-`anylogedgex` topic. Please review [deployment directions](deployments/Support/EdgeX.md) to configure MQTT as 
+`anylogedgex` topic. Please review [deployment directions](deployments/Support/edgex.md) to configure MQTT as 
 you see fit.  
 ```shell  
 cd lfedge-code/edgex
@@ -105,5 +111,4 @@ table_name=rand_data
 ```anylog
 get msg client
 ```
-
 

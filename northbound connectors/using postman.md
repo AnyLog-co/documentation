@@ -1,3 +1,9 @@
+---
+title: "Sending Queries and Commands to the AnyLog Network with Postman"
+description: ""
+layout: page
+source_path: "northbound connectors/using postman.md"
+---
 # Sending Queries and Commands to the AnyLog Network with Postman
  
 Postman is an API platform for building and using APIs. It can serve as a tool to issue AnyLog Commands to nodes in the 
@@ -19,7 +25,7 @@ To run AnyLog queries using Postman without SSL enabled, follow the following st
 
 ### With SSL
 
-For SSL, the explanation on generating the needed files is available at the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) section.
+For SSL, the explanation on generating the needed files is available at the [Using SSL Certificates](../authentication.md#using-ssl-certificates) section.
 
 To run AnyLog queries using Postman with SSL enabled, follow the following steps:
 1. Follow steps 1-3 above

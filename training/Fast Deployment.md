@@ -1,3 +1,9 @@
+---
+title: "Fast Deployment of the Test Network"
+description: ""
+layout: page
+source_path: "training/Fast Deployment.md"
+---
 # Fast Deployment of the Test Network
 
 This document lists the deployment steps to bring a network of 4 nodes (master, query and 2 operators nodes) and a remote CLI.    

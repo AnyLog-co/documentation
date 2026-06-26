@@ -1,3 +1,9 @@
+---
+title: "Publishing Data via EdgeXpert Manager"
+description: ""
+layout: page
+source_path: "deployments/Support/data from edgex.md"
+---
 # Publishing Data via EdgeXpert Manager
 
 EdgeX (Foundry) is an Open-Source framework that serves as a foundation for building and deploying Internet of Things (IoT)
@@ -11,7 +17,7 @@ Edgex related documentation is available with the links below:
 * [EdgeX Foundry](https://www.edgexfoundry.org/)
 * [IoTech System](https://www.iotechsys.com/)
 * [User Guide](https://docs.iotechsys.com/)
-* [Manual Deployment of EdgeX](EdgeX.md)
+* [Manual Deployment of EdgeX](edgex.md)
 
 
 For demonstration, the examples used is **retail-1** data source, provided by IoTech System.  

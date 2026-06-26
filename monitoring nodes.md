@@ -1,3 +1,9 @@
+---
+title: "Monitoring nodes"
+description: ""
+layout: page
+source_path: "monitoring nodes.md"
+---
 # Monitoring nodes
 
 Nodes in the network can collect and monitor information on data and state. The collected information can be retrieved from the 

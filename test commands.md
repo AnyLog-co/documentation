@@ -1,3 +1,9 @@
+---
+title: "Test commands"
+description: ""
+layout: page
+source_path: "test commands.md"
+---
 # Test commands
 
 The **test commands** determine the consistency of and availability of the data, metadata and processes in the network.
@@ -113,7 +119,7 @@ The test suite commands compare query results to a predefined trusted results. D
 [Test Suite](test%20suites.md#the-test-suite) section.  
 **The Test Suite commands:**   
 [test case](test%20suites.md#the-test-case-command)  
-[test suite](est%20suites.md#the-test-suite-command)  
+[test suite](test%20suites.md#the-test-suite-command)  
 
 ## High Availability Tests
 Tests relating to High Availability are detailed in the [High Availability](high%20availability.md#high-availability-ha) section.  
@@ -123,4 +129,3 @@ Tests relating to High Availability are detailed in the [High Availability](high
 [test cluster databases](high%20availability.md#cluster-databases)  
 [test cluster partitions](high%20availability.md#cluster-databases)  
 [test cluster setup](high%20availability.md#testing-the-node-configuration-for-ha)  
-

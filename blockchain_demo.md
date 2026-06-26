@@ -1,3 +1,9 @@
+---
+title: "Blockchain Demo"
+description: ""
+layout: page
+source_path: "blockchain_demo.md"
+---
 # Blockchain Demo 
 
 AnyLog Network, which is available with both EdgeLake and Enterprise uses layer-2 logic to publish data onto the 
@@ -134,7 +140,7 @@ blockchain insert where policy=!new_policy and local=true and blockchain=!platfo
 
 Generally speaking, content that's stored on a blockchain is non-fungible (ie cannot change). However, nodes that are 
 part of the AnyLog network can have configuration changes - such as: node ownership, network information, permissions or 
-simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](policies.md/#anmp-policy)
+simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](policies.md#anmp-policy)
 in order to modify existing policies. 
 
 

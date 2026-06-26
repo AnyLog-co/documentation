@@ -1,3 +1,9 @@
+---
+title: "Configure as Service"
+description: ""
+layout: page
+source_path: "examples/Service AnyLog/Service.md"
+---
 # Configure as Service
 
 The process of deploying AnyLog as a service is built on the information in [Executable.md](Executable.md), which 

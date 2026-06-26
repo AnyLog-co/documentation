@@ -1,3 +1,9 @@
+---
+title: "Users and nodes Authentication, making the data secure"
+description: ""
+layout: page
+source_path: "authentication.md"
+---
 # Users and nodes Authentication, making the data secure
 
 A set of authentication commands (described in this document) provides the mechanisms to authenticate users, nodes, messages and policies.  
@@ -98,7 +104,7 @@ set node authentication off
 ## Creating private and public keys 
 
 A private key and a public key are issued for each node that is a member of the network. The public key is assigned with 
-privileges (see the [assignment policy](...) below) that determine if a command sent from the node to a peer can be executed on the peer node.
+privileges (see the [permission group](#permission-group) below) that determine if a command sent from the node to a peer can be executed on the peer node.
 In addition, users can be issued with a private and a public key. Setting users with keys assigns privileges to individual 
 users such that, when a user is issuing commands to peer nodes, the privileges granted to the user determine if a command is
 processed, rather than the privileges granted to the node.  
@@ -536,7 +542,7 @@ The command options:
 
 Example:
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and allt_name = 10.0.0.78 and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
 ```
 
 When the command is issued 2 files are generated:  
@@ -634,7 +640,7 @@ The client is configured using the following files:
 2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
-An example of Postman configuration is available at [using postman](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
+An example of Postman configuration is available at [using postman](northbound%20connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
 
 
 ## Examples using https 

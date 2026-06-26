@@ -1,3 +1,9 @@
+---
+title: "Metadata Requests"
+description: ""
+layout: page
+source_path: "metadata requests.md"
+---
 # Metadata Requests
 
 Nodes in the network interact with a global metadata layer that manages and synchronizes the data views and processes among 

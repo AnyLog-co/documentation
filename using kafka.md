@@ -1,3 +1,9 @@
+---
+title: "Using Kafka"
+description: ""
+layout: page
+source_path: "using kafka.md"
+---
 # Using Kafka
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+title: "AnyLog Dashboard Generation Guide"
+description: ""
+layout: page
+source_path: "dashboard generation.md"
+---
 # AnyLog Dashboard Generation Guide
 
 ## Overview

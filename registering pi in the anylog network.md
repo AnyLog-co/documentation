@@ -1,3 +1,9 @@
+---
+title: "Registering PI in the AnyLog Network"
+description: ""
+layout: page
+source_path: "registering pi in the anylog network.md"
+---
 # Registering PI in the AnyLog Network
 
 This document explains how PI data is mapped to a relational schema such that SQL queries can consider the data stored in PI.    

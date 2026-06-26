@@ -1,3 +1,9 @@
+---
+title: "Onboarding"
+description: ""
+layout: page
+source_path: "examples/Onboarding Commands.md"
+---
 # Onboarding
 
 This document contains the example commands demonstrated in the Onboarding Presentation.

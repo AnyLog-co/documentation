@@ -1,3 +1,9 @@
+---
+title: "Mapping Data"
+description: ""
+layout: page
+source_path: "mapping data to tables.md"
+---
 # Mapping Data
 
 This document considers the mapping process as a transformation process applied to the source data (provided in a JSON format),
@@ -21,7 +27,7 @@ Examples of mapping policies are provided [below](#creating-the-mapping-instruct
 
 Pulling the needed values from the source data is done using the `_bring_` command. A `_bring_` command 
 includes keys and transformation logic that is applied to the source JSON data to construct the destination format. 
-Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json%20data%20transformation.md#the--from-json-object-bring-command) section.  
+Details of the `_bring_` command are available in  [The "From JSON Object Bring" command](json%20data%20transformation.md#the-from-json-object-bring-command) section.  
 The `_bring_` commands are associated with source data in the following ways:
 1) The `run mqtt client` command associates the source data published with a topic to a `_bring_` command that provides the mapping logic. 
    This option is detailed [here](message%20broker.md#the-command-structure).
@@ -410,4 +416,3 @@ get broker
   ]
 }]>
 ```
-

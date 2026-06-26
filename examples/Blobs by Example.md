@@ -1,3 +1,9 @@
+---
+title: "Blobs by Example"
+description: ""
+layout: page
+source_path: "examples/Blobs by Example.md"
+---
 # Blobs by Example 
 
 AnyLog / EdgeLake enables storage of both SQL and non-SQL data, such as images, videos, and other file formats. For 

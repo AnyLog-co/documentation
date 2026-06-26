@@ -1,3 +1,9 @@
+---
+title: "EtherNet/IP"
+description: ""
+layout: page
+source_path: "enthernetip.md"
+---
 # EtherNet/IP
 
 ## Overview

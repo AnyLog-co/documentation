@@ -1,3 +1,9 @@
+---
+title: "Quick Deployment"
+description: ""
+layout: page
+source_path: "deployments/Quick Deployment.md"
+---
 ## Quick Deployment 
 
 Using the [deployment scripts](https://github.com/AnyLog-co/deployment-scripts), users are able to configure their node 
@@ -7,9 +13,9 @@ into the database. Since this can be confusing for some, there's the docker imag
 deploy more generic nodes, using very limited environment configurations. 
 
 **Other Deployments**: 
-* [Training](../training) - Standard training used for explaining how to use AnyLog
-* [Configuration Based](../deployments/deploying_node.md) - Deploy AnyLog using configuration file with environment variables
-* [Empty Node](deploying_node.md) - Manually deploy an AnyLog node 
+* [Training](../training/overview.md) - Standard training used for explaining how to use AnyLog
+* [Configuration Based](deploying%20node.md) - Deploy AnyLog using configuration file with environment variables
+* [Empty Node](deploying%20node.md) - Manually deploy an AnyLog node 
 
 ## Deployment 
 The following provides directions to deploy a network without too much configuration on a single node. If nodes are not
@@ -90,4 +96,3 @@ docker run -it --detach-keys=ctrl-d --network host \
 --name anylog-operator2 --rm anylogco/anylog-network:latest
 ```
 detach from operator 2 node using **ctrl-d** command
-

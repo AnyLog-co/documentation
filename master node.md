@@ -1,3 +1,9 @@
+---
+title: "Using a Master Node"
+description: ""
+layout: page
+source_path: "master node.md"
+---
 # Using a Master Node
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+title: "Blockchain commands"
+description: ""
+layout: page
+source_path: "blockchain commands.md"
+---
 # Blockchain commands
 
 ## The metadata
@@ -124,7 +130,7 @@ Queries detail filter criteria to return the needed policies in JSON format and 
 Alternatively, the process can be split to a process that retrieves the needed policies and use a second command to apply the formatting instructions on the derived policies.  
 For example, a search may request for all the operators supporting a table and then issue a second search against the retrieved operators for their IP and Port information.  
 The second search is using the command _from_ and is explained at the
-section called: [The 'From JSON Object Bring' command](json%20data%20transformation.md#the--from-json-object-bring-command).
+section called: [The 'From JSON Object Bring' command](json%20data%20transformation.md#the-from-json-object-bring-command).
 
 Queries are done in 2 steps:
 * Using the command ```blockchain get``` - retrieving the JSON objects that satisfy the search criteria.
@@ -313,6 +319,36 @@ In the example above:
 
 Root policies define the ***top-level structure***, while child policies extend that structure by 
 inheriting and specializing behavior or metadata.
+
+### Filtering root policies
+
+The command supports filtering by policy type using the include and exclude keywords.
+
+**Include only specific policy types**
+Usage:
+```anylog 
+blockchain get root policies include [space separated policies types]
+```
+
+example:
+```anylog 
+blockchain get root policies include cluster uns
+```
+The example above returns only root policies of type cluster and uns.
+
+**Exclude specific policy types**
+Usage:
+```anylog 
+blockchain get root policies exclude [space separated policies types]
+```
+example:
+```anylog 
+blockchain get root policies exclude cluster
+```
+Return all root policies except cluster policies.
+
+The include and exclude options operate on policy types and can be used to focus the output on specific policies
+or remove policies that are not relevant to the current task.
 
 ## Setting command destination from policies
 
@@ -524,5 +560,4 @@ Note: This process is redundant if the update of the new policies was done using
 | blockchain test cluster [conditions] | Provid an analysis of the \'cluster\' policies. |  
 | blockchain prepare policy [JSON data] | Adds an ID and a date attributes to an existing policy. |  
 | blockchain wait where [condition] | Pause current process until the local copy of the blockchain is updated with the policy (with a time threshold limit which is based on the sync time of the synchronizer). |
-
 

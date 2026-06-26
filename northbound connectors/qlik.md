@@ -1,3 +1,9 @@
+---
+title: "Qlik"
+description: ""
+layout: page
+source_path: "northbound connectors/Qlik.md"
+---
 # Qlik
 
 Qlik is a data integration, analytics, and artificial intelligence platform. Using their <a href="https://help.qlik.com/en-US/connectors/Subsystems/REST_connector_help/Content/Connectors_REST/REST-connector.htm" target="_blank">REST connector plugin</a>, 

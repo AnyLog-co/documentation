@@ -1,3 +1,9 @@
+---
+title: "Starting an AnyLog Instance"
+description: ""
+layout: page
+source_path: "starting an anylog instance.md"
+---
 # Starting an AnyLog Instance
 
 An AnyLog instance is initiated by calling AnyLog on the OS command line.  

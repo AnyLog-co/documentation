@@ -1,3 +1,9 @@
+---
+title: "Query nodes in the network"
+description: ""
+layout: page
+source_path: "queries.md"
+---
 # Query nodes in the network
 
 The `run client ()` ([detailed below](#network-processing)) directs the query to the relevant nodes in the network. 

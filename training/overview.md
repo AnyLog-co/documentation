@@ -1,3 +1,9 @@
+---
+title: "Training Overview"
+description: ""
+layout: page
+source_path: "training/Overview.md"
+---
 # Training Overview
 
 This document and the referenced documents explain the deployment and configuration of an AnyLog test network.
@@ -25,7 +31,7 @@ This training includes 2 sessions:
 The training includes additional documentation to guide users through the training sessions:
 * [Fast Deployment](Fast%20Deployment.md) is a cheat sheet that lists the instructions detailed in **Session II** and guides users through the
 Test Network deployment.
-* [Connections to Data Sources](Connectors%20to%20Data%20Sources.md) demonstrates how to connect data sources to nodes in the network.
+* [Connections to Data Sources](Connectors%20To%20Data%20Sources.md) demonstrates how to connect data sources to nodes in the network.
 
 Under the **advanced** folder, users can find the following documents:
 * [Network Setup](advanced/Network%20Setup.md) - A step by step guide to configure a network using the CLI.
@@ -51,7 +57,7 @@ In a customer deployment, all configurations are pre-packaged, and associated to
 2) By dynamically creating a configuration file (for the node) during the Docker deployment.
 3) By maintaining configuration commands in policies stored in the shared metadata and associating a configuration policy to a node.
  
-**Note 3:** Advanced users can review the [Network Setup Document](../examples/Network%20setup.md) to deploy a test
+**Note 3:** Advanced users can review the [Network Setup Document](advanced/Network%20Setup.md) to deploy a test
 network using the AnyLog CLI without pre-packaged configuration. 
 
 ### Session I - The Basic Guided Tour
@@ -84,7 +90,7 @@ The presentation in this session reviews the following:
    This session guides users to deploy and configure a test network on their machines.  
    
    Prior to the guided tour, it is recommended to review the the following documents:
-   * [Connectors to Data Sources](Connectors%20to%20Data%20Sources.md) - A detailed guide to connecting the training data sources.
+   * [Connectors to Data Sources](Connectors%20To%20Data%20Sources.md) - A detailed guide to connecting the training data sources.
    * [Session II (Deployment) document](Session%20II%20(Deployment).md) - A step by step deployment of the test network.  
         
    This session will allow users to do the following on their machines:

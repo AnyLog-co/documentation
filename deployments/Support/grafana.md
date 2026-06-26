@@ -1,3 +1,9 @@
+---
+title: "Grafana"
+description: ""
+layout: page
+source_path: "deployments/Support/Grafana.md"
+---
 # Grafana 
 
 Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize to demonstrate data coming 

@@ -1,3 +1,9 @@
+---
+title: "The local dictionary"
+description: ""
+layout: page
+source_path: "dictionary.md"
+---
 # The local dictionary
 
 ## Overview

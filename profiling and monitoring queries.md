@@ -1,3 +1,9 @@
+---
+title: "Profiling and Monitoring Queries"
+description: ""
+layout: page
+source_path: "profiling and monitoring queries.md"
+---
 # Profiling and Monitoring Queries
 
 Queries are profiled and monitored by issuing commands on the AnyLog command prompt or from a REST client.
@@ -52,7 +58,7 @@ To view the slow query log use the following command on the AnyLog command promp
 get query log
 ```
 
-Additional details are available in the [Query Log](../monitoring/logging%20events.md#the-query-log) section.
+Additional details are available in the [Query Log](logging%20events.md#the-query-log) section.
 
 ## Command options for monitoring queries
 

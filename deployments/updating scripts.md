@@ -1,3 +1,9 @@
+---
+title: "Updating Scripts"
+description: ""
+layout: page
+source_path: "deployments/updating scripts.md"
+---
 # Updating Scripts
 
 AnyLog is configured using the AnyLog commands. These commands can be issued on the AnyLog CLI, or organized in script 

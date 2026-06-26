@@ -1,3 +1,9 @@
+---
+title: "JSON Data Transformation"
+description: ""
+layout: page
+source_path: "json data transformation.md"
+---
 # JSON Data Transformation
 
 Using command line instructions, users can transform JSON data to target structures.    

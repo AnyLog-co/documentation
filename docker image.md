@@ -1,3 +1,9 @@
+---
+title: "Docker Image"
+description: ""
+layout: page
+source_path: "docker image.md"
+---
 # Docker Image
 
 This document aims to provide an overview of the fundamental services offered by AnyLog using a minimal image. 

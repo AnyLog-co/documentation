@@ -1,3 +1,9 @@
+---
+title: "Deploy AnyLog"
+description: ""
+layout: page
+source_path: "training/docker-compose.md"
+---
 # Deploy AnyLog 
 
 ## Requirements

@@ -1,3 +1,9 @@
+---
+title: "Connecting nodes"
+description: ""
+layout: page
+source_path: "examples/Connecting Nodes.md"
+---
 # Connecting nodes
 
 Nodes in the network are connected to peer nodes in the network and to 3rd parties applications.   
@@ -121,7 +127,7 @@ Deployments of large scale networks are simpler with an overlay network. The Ove
  * It provides the mechanisms to address firewalls limitations.
  * It Isolate the network addressing security considerations. 
  
-We use [nebula](../deployments/Networking%20&%20Security/nebula.md) as an Overlay Network Example.    
+We use [nebula](../deployments/Networking%20%26%20Security/nebula.md) as an Overlay Network Example.    
 
 ## Configuring the listeners
 ### The TCP listener - Communicating with peer nodes
