@@ -2,9 +2,9 @@
 
 * Getting Started
   * [Getting Started](getting%20started.md)
-  * [Quick Deployment](deployments/Quick%20Deployment.md)
+  * [Quick Deployment](09-examples-training/deployments/Quick%20Deployment.md)
   * [Deploying AnyLog](Deploying_AnyLog.md)
-  * [AnyLog-as-a-Service](deployments/AnyLog_as_Service.md)
+  * [AnyLog-as-a-Service](09-examples-training/deployments/AnyLog_as_Service.md)
 
 * Core Concepts
   * [Authentication](authentication.md)
@@ -22,7 +22,7 @@
   * [File Commands](file%20commands.md)
   * [HTTP Commands](http%20commands.md)
   * [Test Commands](test%20commands.md)
-  * [Updating Script](deployments/updating_scripts.md)
+  * [Updating Script](09-examples-training/deployments/updating_scripts.md)
 
 * Data & Querying
   * [Adding Data](adding%20data.md)
@@ -66,28 +66,28 @@
   * [Scheduled Pull](scheduled%20pull.md)
 
 * Deployments
-  * [Overview](deployments/README.md)
-  * [Quick Deployment](deployments/Quick%20Deployment.md)
-  * [AnyLog as a Service](deployments/AnyLog_as_Service.md)
-  * [Deploying Node](deployments/deploying_node.md)
-  * [Deploying DBMS](deployments/deploying_dbms.md)
-  * [Executing Scripts](deployments/executing_scripts.md)
-  * [Code Versions](deployments/code%20versions.md)
-  * [Updating Scripts](deployments/updating_scripts.md)
-  * [Syslog](deployments/syslog.md)
+  * [Overview](09-examples-training/deployments/README.md)
+  * [Quick Deployment](09-examples-training/deployments/Quick%20Deployment.md)
+  * [AnyLog as a Service](09-examples-training/deployments/AnyLog_as_Service.md)
+  * [Deploying Node](09-examples-training/deployments/deploying_node.md)
+  * [Deploying DBMS](09-examples-training/deployments/deploying_dbms.md)
+  * [Executing Scripts](09-examples-training/deployments/executing_scripts.md)
+  * [Code Versions](09-examples-training/deployments/code%20versions.md)
+  * [Updating Scripts](09-examples-training/deployments/updating_scripts.md)
+  * [Syslog](09-examples-training/deployments/syslog.md)
 
   * Networking & Security
-    * [Overlay with AnyLog](deployments/Networking%20&%20Security/Configuring%20Overlay%20with%20AnyLog.md)
-    * [Docker Volumes](deployments/Networking%20&%20Security/docker_volumes.md)
-    * [Kubernetes Networking](deployments/Networking%20&%20Security/kubernetes_networking.md)
-    * [Kubernetes Volumes](deployments/Networking%20&%20Security/kubernetes_volumes.md)
-    * [Nebula](deployments/Networking%20&%20Security/nebula.md)
-    * [Nebula New](deployments/Networking%20&%20Security/nebula_new.md)
-    * [Nebula Through AnyLog](deployments/Networking%20&%20Security/nebula_through_anylog.md)
-    * [NGINX](deployments/Networking%20&%20Security/nginx.md)
+    * [Overlay with AnyLog](09-examples-training/deployments/Networking%20&%20Security/Configuring%20Overlay%20with%20AnyLog.md)
+    * [Docker Volumes](09-examples-training/deployments/Networking%20&%20Security/docker_volumes.md)
+    * [Kubernetes Networking](09-examples-training/deployments/Networking%20&%20Security/kubernetes_networking.md)
+    * [Kubernetes Volumes](09-examples-training/deployments/Networking%20&%20Security/kubernetes_volumes.md)
+    * [Nebula](09-examples-training/deployments/Networking%20&%20Security/nebula.md)
+    * [Nebula New](09-examples-training/deployments/Networking%20&%20Security/nebula_new.md)
+    * [Nebula Through AnyLog](09-examples-training/deployments/Networking%20&%20Security/nebula_through_anylog.md)
+    * [NGINX](09-examples-training/deployments/Networking%20&%20Security/nginx.md)
 
   * OpenHorizon
-    * [Open Horizon Overview](deployments/OpenHorizon/Open%20Horizon.md)
+    * [Open Horizon Overview](09-examples-training/deployments/OpenHorizon/Open%20Horizon.md)
 
 * Northbound Connectors
   * [Qlik](northbound%20connectors/Qlik.md)
