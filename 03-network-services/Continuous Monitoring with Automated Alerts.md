@@ -25,7 +25,7 @@ get node info cpu_percent  # CPU usage
 get disk free .         # available disk space
 ```
 
-See <a href="{{ '/docs/Getting-Started/get-commands/' | relative_url }}">Get Commands</a> for the full reference.
+See [Get Commands](anylog%20commands.md#get-command) for the full reference.
 
 ---
 
@@ -48,7 +48,7 @@ continuous 10 run client () sql my_data select max(timestamp), count(*) from pin
 
 ## Scheduler-based monitoring
 
-The scheduler runs tasks periodically without manual intervention. See <a href="{{ '/docs/Network-Services/background-services/#scheduler' | relative_url }}">Background Services — Scheduler</a> for how to start it.
+The scheduler runs tasks periodically without manual intervention. See [Background Services](scheduled%20pull.md#scheduled-pull) for how to start it.
 
 ### Schedule a monitoring task
 
