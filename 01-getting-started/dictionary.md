@@ -88,6 +88,56 @@ default_tcp_port = 45223
 ```
 Note: The examples below ignore the keyword **set**.
 
+# Referencing values in a list of dictionaries
+
+A dictionary key can be assigned to a list of JSON objects.     
+For example:
+```anylog
+<tables_info = [ 
+    {"dbms" : "my_dbms1", "table" : "my_table1"}, 
+    {"dbms" : "my_dbms2", "table" : "my_table2"} 
+    ]
+>
+```
+The list entry can be retrieved by referencing the key name and the list index:
+```anylog
+!tables_info[1]
+```
+returns:
+```anylog
+{ "dbms" : "my_dbms2", "table" : "my_table2" }
+```
+When referencing a value inside the objects in the list, the attribute name is placed before the index:
+```anylog
+!tables_info.table[1]
+```
+returns:
+```anylog
+"my_table2"
+```
+The following syntax is not supported:
+```anylog
+!tables_info[1].table
+```
+This command returns:
+```anylog
+Unrecognized Command
+```
+## Using list values in a script loop
+
+A for loop can iterate over the entries in the list and use [+] to reference the current list index.
+
+Example script:
+```anylog
+for loop start where list = !tables_info 
+
+run client () sql !tables_info.dbms[+] select count(*) from !tables_info.table[+] 
+
+for loop end
+```
+In this example, [+] is assigned the values from 0 to the end of the list.   
+For every entry in tables_info, the script executes the SQL command using the dbms and table values from the current list entry.
+
 # Mapping the dictionary values
 
 Values from the dictionary can be dynamically mapped by extending the key with a dot (.) followed by the mapping type.  
