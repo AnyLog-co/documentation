@@ -137,7 +137,7 @@ reset streaming conditions where dbms = my_data
 
 The SMTP client sends emails and SMS messages triggered by streaming conditions or scheduled tasks. Enable it first:
 
-> **Gmail accounts:** The `password` field must be a Google <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your account password. See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | relative_url }}">Background Services — SMTP</a> for details.
+> **Gmail accounts:** The `password` field must be a Google <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your account password. See [Background Services — SMTP](Background%20Services.md#smtp-client) for details.
 
 ```anylog
 run smtp client where email = alerts@company.com and password = mypassword and ssl = true
@@ -149,7 +149,7 @@ email to recipient@company.com where subject = "Alert" and message = "Node disk 
 sms to 6508147334 where gateway = tmomail.net and subject = "Alert" and message = "Threshold exceeded"
 ```
 
-See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | relative_url }}">Background Services — SMTP</a>.
+See [Background Services — SMTP](Background%20Services.md#smtp-client).
 
 ---
 
@@ -157,7 +157,8 @@ See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | rela
 
 AnyLog can send alerts to third-party services by issuing outbound `rest post` requests from streaming conditions, scheduled tasks, or the CLI. This works with any service that accepts an HTTP POST with a JSON body — including <a href="https://core.telegram.org/bots/api" target="_blank">Telegram</a>, <a href="https://pushover.net/api" target="_blank">Pushover</a>, Slack webhooks, and custom endpoints.
 
-See <a href="{{ '/docs/Querying-Data-Northbound/notification/' | relative_url }}">Notification Services</a> for Slack setup and additional examples.
+Querying%20Data.md#querying-data
+See [Notification Services](Querying%20Data.md#querying-data) for Slack setup and additional examples.
 
 ### Telegram
 
