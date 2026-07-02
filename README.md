@@ -51,7 +51,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Using REST](using%20rest.md)
   * [Managing Data File Status](managing%20data%20files%20status.md)
   * [Metadata Management](metadata%20management.md)
-  * [Kubernetes & Docker Deployment of AnyLog](09-examples-training/deployments) 
+  * [Kubernetes & Docker Deployment of AnyLog](ORPHANS/x09-examples-training/deployments) 
   * [Setting Test Suites](test%20suites.md)
   * [Launching Helpers](helpers.md#using-helpers)
   
@@ -99,8 +99,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **Security & Authentication**
   * [Authentication](authentication.md)
   * [Secure Network](secure%20network.md)
-  * [Using NGINX as Proxy](09-examples-training/deployments/Networking%20&%20Security/nginx.md)
-  * [Using Nebula as Overlay Network](09-examples-training/deployments/Networking%20&%20Security/nebula.md)
+  * [Using NGINX as Proxy](ORPHANS/x09-examples-training/deployments/Networking%20&%20Security/nginx.md)
+  * [Using Nebula as Overlay Network](ORPHANS/x09-examples-training/deployments/Networking%20&%20Security/nebula.md)
 
 * **High-Availability (HA)**
   * [high availability](high%20availability.md)
