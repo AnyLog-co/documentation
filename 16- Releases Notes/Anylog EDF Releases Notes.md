@@ -6,6 +6,10 @@ source_path: "release/Anylog EDF Releases Notes.md"
 ---
 # AnyLog Release notes
 
+AnyLog Version: 1.5.2605 [2026-06-30 18:35:19]
+### New Features
+1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see [details](../dictionary.md#referencing-values-in-a-list-of-dictionaries).
+
 AnyLog Version: 1.5.2605 [2026-06-12 18:37:39]
 ### New Features
 1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../sql%20setup.md#the-metadata) 
