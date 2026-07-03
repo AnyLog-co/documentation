@@ -6,11 +6,11 @@ Legend:
 
 ## Getting Started / Onboarding
 
-| best | duplicate (01-09) | anylog-docs | edgelake-docs |
-|---|---|---|---|
-| `edgelake-docs/getting_started.md` ✓ | `01-getting-started/getting started.md`, `dictionary.md` (has a "Local Dictionary" section covering this) | `Getting-Started/getting-started.md` | — |
-| `edgelake-docs/training/quick_start.md` | `01-getting-started/Fast Deployment.md`? (check overlap) | `Getting-Started/quick-start.md` | — |
-| `edgelake-docs/training/fast_deployment.md` | `01-getting-started/Fast Deployment.md` | — | — |
+| best                                              | duplicate (01-09) | anylog-docs | edgelake-docs |
+|---------------------------------------------------|---|---|---|
+| ~~`edgelake-docs/getting_started.md` ✓~~           | ~~`01-getting-started/getting started.md`, `dictionary.md` (has a "Local Dictionary" section covering this)~~ | ~~`Getting-Started/getting-started.md`~~ | — |
+| `edgelake-docs/training/quick_start.md`           | `01-getting-started/Fast Deployment.md`? (check overlap) | `Getting-Started/quick-start.md` | — |
+| `edgelake-docs/training/fast_deployment.md`       | `01-getting-started/Fast Deployment.md` | — | — |
 | `anylog-docs/Getting-Started/installing-anylog.md` | `01-getting-started/Deploying_AnyLog.md`, `docker image.md`, `starting an anylog instance.md`, `registering pi in the anylog network.md` | `install-ova.md`, `deployment-scripts.md` | — |
 | `anylog-docs/Getting-Started/anylog-as-service.md` | `01-getting-started/anylog as service.md`, `Executable.md`, `Service.md` | — | — |
 
