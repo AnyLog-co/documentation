@@ -40,7 +40,8 @@ layout: page
 
 # Getting Started
 
-Welcome to AnyLog! This guide introduces the platform's architecture, node types, and metadata model, then covers the core CLI operations you'll use to run and manage a node.
+Welcome to AnyLog! This guide introduces the platform's architecture, node types, and metadata model, then covers the 
+core CLI operations you'll use to run and manage a node.
 
 * [What is AnyLog](#what-is-anylog)
 * [EdgeLake vs AnyLog](#edgelake-vs-anylog)
@@ -64,21 +65,29 @@ Welcome to AnyLog! This guide introduces the platform's architecture, node types
 
 ## What is AnyLog
 
-**AnyLog** is a decentralized network for managing **IoT and time-series data** across distributed environments. It enables real-time data ingestion, storage, and querying by connecting independent compute nodes — each running the AnyLog software — that coordinate through shared metadata and protocols.
+**AnyLog** is a decentralized network for managing **IoT and time-series data** across distributed environments. It 
+enables real-time data ingestion, storage, and querying by connecting independent compute nodes — each running the 
+AnyLog software — that coordinate through shared metadata and protocols.
 
-When deployed on edge nodes, AnyLog forms a peer-to-peer (P2P) network in which each node contributes data and compute resources. Applications access distributed IoT data through a **single query point**, as if the data were stored on one system.
+When deployed on edge nodes, AnyLog forms a peer-to-peer (P2P) network in which each node contributes data and compute 
+resources. Applications access distributed IoT data through a **single query point**, as if the data were stored on one 
+system.
 
 The architecture consists of two complementary layers:
 * **Physical layer** — manages and processes data locally on edge nodes.
 * **Virtualized data layer** — provides unified access to distributed datasets across the network.
 
-Together, these layers create a cloud-like architecture for distributed edge and IoT data — enabling real-time access without moving data and without locking organizations into a specific cloud, application, or hardware vendor.
+Together, these layers create a cloud-like architecture for distributed edge and IoT data — enabling real-time access 
+without moving data and without locking organizations into a specific cloud, application, or hardware vendor.
 
 ---
 
 ## EdgeLake vs AnyLog
 
-<a href="https://github.com/EdgeLake/EdgeLake" target="_blank">EdgeLake</a> is the **open-source, free** version of AnyLog, distributed by the Linux Foundation. It provides a managed, zero-maintenance experience — most, but not all, of AnyLog's functionality — and is ideal for teams that want the benefits of edge computing and decentralized data control without managing infrastructure.
+<a href="https://github.com/EdgeLake/EdgeLake" target="_blank">EdgeLake</a> is the **open-source, free** version of AnyLog, 
+distributed by the Linux Foundation. It provides a managed, zero-maintenance experience — most, but not all, of AnyLog's 
+functionality — and is ideal for teams that want the benefits of edge computing and decentralized data control without 
+managing infrastructure.
 
 **EdgeLake offers:**
 * Turnkey node deployment at the edge or in the cloud
@@ -87,25 +96,27 @@ Together, these layers create a cloud-like architecture for distributed edge and
 * Real-time SQL and REST API access from any node
 * Built-in dashboards and analytics
 
-| Feature | EdgeLake | AnyLog |
-|---|---|---|
+| Feature | EdgeLake          | AnyLog |
+|---|-------------------|---|
 | Cost | Free / Open-Source | Subscription |
-| Virtual edge layer | ✅ | ✅ |
-| Rule engine | ✅ | ✅ |
-| Policy-based data management | ✅ | ✅ |
-| Node management | ✅ | ✅ |
-| Unified APIs, CLIs, Admin UI | ✅ | ✅ |
-| Supported IoT connectors | ✅ | ✅ |
-| Blockchain abstraction | ✅ | ✅ |
-| MCP Integration | ✅ | ✅ |
-| Aggregations | ❌ | ✅ |
-| Automated Unified Namespace (UNS) | ❌ | ✅ |
-| Security protocol & High Availability (HA) | ❌ | ✅ |
-| Publisher node role | ❌ | ✅ |
+| Virtual edge layer | ✅                 | ✅ |
+| Rule engine | ✅                 | ✅ |
+| Policy-based data management | ✅                 | ✅ |
+| Node management | ✅                 | ✅ |
+| Unified APIs, CLIs, Admin UI | ✅                 | ✅ |
+| Supported IoT connectors | ✅                 | ✅ |
+| Blockchain abstraction | ✅                 | ✅ |
+| MCP Integration | limited           | ✅ |
+| Aggregations | ❌                 | ✅ |
+| Automated Unified Namespace (UNS) | ❌                 | ✅ |
+| Security protocol & High Availability (HA) | ❌                 | ✅ |
+| Publisher node role | ❌                 | ✅ |
 
-**AnyLog (Enterprise)** includes everything in EdgeLake plus: advanced security and authentication, federated data aggregation and model training, and real-time support with SLA options.
+**AnyLog (Enterprise)** includes everything in EdgeLake plus: advanced security and authentication, federated data 
+aggregation and model training, and real-time support with SLA options.
 
-Note: EdgeLake supports **MongoDB** as an additional Operator database option (for unstructured data) alongside PostgreSQL and SQLite — see [The Data](#the-data).
+Note: EdgeLake supports **MongoDB** as an additional Operator database option (for unstructured data) alongside 
+PostgreSQL and SQLite — see [The Data](#the-data).
 
 ---
 
@@ -125,7 +136,8 @@ Note: EdgeLake supports **MongoDB** as an additional Operator database option (f
 
 ## Node Types
 
-AnyLog uses a single codebase across all node types. With the exception of Operator and Publisher — which are mutually exclusive on the same node — any node can run any combination of services simultaneously.
+AnyLog uses a single codebase across all node types. With the exception of Operator and Publisher — which are mutually 
+exclusive on the same node — any node can run any combination of services simultaneously.
 
 | Node type | Role | Key characteristic |
 |---|---|---|
@@ -216,9 +228,15 @@ See [Query](../04- Core Concepts/A- Agent Services/Query.md).
 
 ### Traditional vs. AnyLog Approach
 
-**Traditional approach:** Data travels from sensors → edge hardware → cloud before it's accessible to applications. "Real-time" dashboards often carry a significant hidden delay, and accessing edge data typically requires proprietary software tightly coupled to specific devices.
+**Traditional approach:** Data travels from sensors → edge hardware → cloud before it's accessible to applications. 
+"Real-time" dashboards often carry a significant hidden delay, and accessing edge data typically requires proprietary 
+software tightly coupled to specific devices.
 
-**With AnyLog / EdgeLake:** Each edge data server becomes an operator node, directly part of the queryable network. Multiple operator nodes together form a virtual data lake. Applications connect to a single query node — not to each data source individually — and AnyLog handles locating and retrieving the data using blockchain metadata. This removes the complexity of managing multiple connections, eliminates the need to know where data physically resides, and dramatically reduces latency.
+**With AnyLog / EdgeLake:** Each edge data server becomes an operator node, directly part of the queryable network. 
+Multiple operator nodes together form a virtual data lake. Applications connect to a single query node — not to each data 
+source individually — and AnyLog handles locating and retrieving the data using blockchain metadata. This removes the 
+complexity of managing multiple connections, eliminates the need to know where data physically resides, and dramatically 
+reduces latency.
 
 ### Application-Facing Architecture
 
@@ -233,7 +251,8 @@ See [Query](../04- Core Concepts/A- Agent Services/Query.md).
  Op. I]  Op. II]  Historical Op.]
 ```
 
-The application connects only to the query node. AnyLog routes each request to the appropriate operator(s) automatically, returning a unified result regardless of how many nodes or locations are involved.
+The application connects only to the query node. AnyLog routes each request to the appropriate operator(s) automatically, 
+returning a unified result regardless of how many nodes or locations are involved.
 
 ---
 
@@ -245,15 +264,25 @@ The metadata is the network-related information shared among members of the netw
 * Logical representation of data
 * Information on how data is distributed
 
-The metadata is stored in a repository accessible to all nodes — either a **blockchain** (e.g., Ethereum) or a **Master node** — as specified in the node's configuration. Interaction with the metadata is identical regardless of repository type, which lets you switch between a Master node and a blockchain without changing logic or process. For consistency, both the documentation and the system refer to the metadata repository as "the blockchain," even when a Master node is used.
+The metadata is stored in a repository accessible to all nodes — either a **blockchain** (e.g., Ethereum) or a 
+**Master node** — as specified in the node's configuration. Interaction with the metadata is identical regardless of 
+repository type, which lets you switch between a Master node and a blockchain without changing logic or process. For 
+consistency, both the documentation and the system refer to the metadata repository as "the blockchain," even when a 
+Master node is used.
 
-**Data is not stored on the blockchain.** Raw data lives on operator nodes. The blockchain stores only metadata — node policies, table definitions, cluster assignments, and similar configuration records. Because the ledger is non-mutable, it ensures trust and consistency among all participants without a single point of failure. Operator, Query, and Publisher nodes synchronize their configurations via the blockchain, so the network self-organizes as nodes join or leave.
+**Data is not stored on the blockchain.** Raw data lives on operator nodes. The blockchain stores only metadata — node 
+policies, table definitions, cluster assignments, and similar configuration records. Because the ledger is non-mutable, 
+it ensures trust and consistency among all participants without a single point of failure. Operator, Query, and Publisher 
+nodes synchronize their configurations via the blockchain, so the network self-organizes as nodes join or leave.
 
-The metadata is organized as **policies** — each a JSON structure associated with a type (e.g. security, member, distribution). Policies are updated dynamically by the network protocol (for example, when a node joins) or by users through APIs or the CLI.
+The metadata is organized as **policies** — each a JSON structure associated with a type (e.g. security, member, 
+distribution). Policies are updated dynamically by the network protocol (for example, when a node joins) or by users 
+through APIs or the CLI.
 
 ### Metadata Synchronization
 
-Each node maintains a local copy of the metadata. A background process periodically checks the configured repository for updates and pulls changes if necessary. During operation, the node uses its local copy, which ensures:
+Each node maintains a local copy of the metadata. A background process periodically checks the configured repository for 
+updates and pulls changes if necessary. During operation, the node uses its local copy, which ensures:
 * Node behavior is independent of the metadata source (blockchain or Master node)
 * Nodes continue operating even if the connection to the metadata repository is temporarily lost
 
@@ -322,7 +351,8 @@ Applications never need to know where data is physically stored — the AnyLog n
 
 ## Install
 
-AnyLog can be installed via Docker, Kubernetes, or by downloading the codebase from GitHub and running an installation script.
+AnyLog can be installed via Docker, Kubernetes, or by downloading the codebase from GitHub and running an installation 
+script.
 
 * Deployment options: [Deployment Options](../03- Installation & Deployment/A- Deployment Options/Deploying a Node.md)
 * Prerequisites: [Prerequisite](Prerequisite.md)
@@ -361,7 +391,9 @@ Directory Structure   Explanation
     -->local_scripts  [User scripts]
 ```
 
-> **EdgeLake note:** the default Docker layout nests everything under `/app`, with node data under `/app/EdgeLake/` and deployment scripts under `/app/deployment-scripts/`. The subfolder names and purpose (`archive`, `bkup`, `blobs`, `dbms`, `distr`, `error`, `pem`, `prep`, `test`, `watch`, `bwatch`) are identical to the AnyLog layout above.
+> **EdgeLake note:** the default Docker layout nests everything under `/app`, with node data under `/app/EdgeLake/` and 
+> deployment scripts under `/app/deployment-scripts/`. The subfolder names and purpose (`archive`, `bkup`, `blobs`, `dbms`, 
+> `distr`, `error`, `pem`, `prep`, `test`, `watch`, `bwatch`) are identical to the AnyLog layout above.
 
 **Notes:**
 * Create the work folders (only needs to be run once per machine):
@@ -401,7 +433,8 @@ When a node starts, it provides the **AnyLog CLI**. The prompt appears as `AL >`
 ```anylog
 set node name [node name]
 ```
-Use the CLI to interact with the current node or peer nodes — retrieving/modifying configuration and process state, querying/updating the blockchain, and issuing SQL queries to local or network-wide data. Exit with `exit node`.
+Use the CLI to interact with the current node or peer nodes — retrieving/modifying configuration and process state, 
+querying/updating the blockchain, and issuing SQL queries to local or network-wide data. Exit with `exit node`.
 
 See: [The AnyLog CLI](../12- Commands & CLI/CLI.md).
 
@@ -458,7 +491,8 @@ The `help` command provides dynamic information on AnyLog commands.
 
 ### The Node Dictionary
 
-Every node maintains a dictionary mapping keys to values. Reference a key with a leading `!` instead of specifying its value directly.
+Every node maintains a dictionary mapping keys to values. Reference a key with a leading `!` instead of specifying its 
+value directly.
 
 * Assign a value:
   ```anylog
@@ -543,7 +577,8 @@ You may have multiple [directory setups](#local-directory-structure) on the same
 ```anylog
 set anylog home [path to AnyLog root]
 ```
-`AnyLog root` is the `AnyLog-Network` directory. If assigned to a new root, recreate subdirectories with `create work directories` (see [Local Directory Structure](#local-directory-structure)).
+`AnyLog root` is the `AnyLog-Network` directory. If assigned to a new root, recreate subdirectories with `create work directories` 
+(see [Local Directory Structure](#local-directory-structure)).
 
 ---
 
@@ -557,7 +592,8 @@ seed from [ip:port]
 
 ### Switching Between Different Master Nodes
 
-Make the [blockchain synchronizer process](../04- Core Concepts/Background Processes.md#blockchain-synchronizer) connect to a different master node:
+Make the [blockchain synchronizer process](../04- Core Concepts/Background Processes.md#blockchain-synchronizer) 
+connect to a different master node:
 ```anylog
 blockchain switch network where master = [IP:Port]
 ```
@@ -566,7 +602,8 @@ blockchain switch network where master = [IP:Port]
 
 ## Using the REST API to Issue AnyLog Commands
 
-Commands can be executed by sending them via REST to a node in the network — a node interprets and executes commands identically whether issued via CLI or REST.
+Commands can be executed by sending them via REST to a node in the network — a node interprets and executes commands 
+identically whether issued via CLI or REST.
 
 See: [Using REST](../07- Connectors & Integrations/B- Southbound Interfaces/Using REST.md#using-rest).
 
@@ -574,7 +611,10 @@ See: [Using REST](../07- Connectors & Integrations/B- Southbound Interfaces/Usin
 
 ## Sending Messages to Peers in the Network
 
-Nodes can send messages — each including a command and, sometimes, data — to peers. Depending on the command, some messages trigger a reply (e.g. status request, SQL query); others execute only on the destination (e.g. change state, display message). If authentication is enabled, the receiving node validates the sender is authorized for the command before executing; unauthorized messages are discarded.
+Nodes can send messages — each including a command and, sometimes, data — to peers. Depending on the command, some 
+messages trigger a reply (e.g. status request, SQL query); others execute only on the destination (e.g. change state, 
+display message). If authentication is enabled, the receiving node validates the sender is authorized for the command 
+before executing; unauthorized messages are discarded.
 
 Format:
 ```anylog
@@ -613,7 +653,8 @@ See: [Queries and Info Requests to the AnyLog Network](../06- Data Management/B-
 
 ## Querying and Updating Metadata in the Blockchain
 
-The network's global metadata — stored in a blockchain or a Master Node — can be queried and updated (regardless of platform) using the **blockchain commands**.
+The network's global metadata — stored in a blockchain or a Master Node — can be queried and updated (regardless of 
+platform) using the **blockchain commands**.
 
 See: [Blockchain Commands](../12- Commands & CLI/A- Command Categories/Blockchain Commands.md).
 
@@ -621,7 +662,8 @@ See: [Blockchain Commands](../12- Commands & CLI/A- Command Categories/Blockchai
 
 ## High Availability (HA)
 
-Nodes can be configured to dynamically and transparently replicate hosted data across multiple copies. If a node fails, queries are redirected to a surviving node, and a replacement node can be assigned.
+Nodes can be configured to dynamically and transparently replicate hosted data across multiple copies. If a node fails, 
+queries are redirected to a surviving node, and a replacement node can be assigned.
 
 See: [High Availability](../04- Core Concepts/High Availability.md#high-availability-ha).
 
@@ -642,7 +684,8 @@ See: [User Authentication](../05- Networking & Security/Authentication.md).
 
 ## Open Items — Link Audit
 
-The following references from the source documents don't yet have a confirmed home in the numbered doc tree. Resolve before treating this page as final:
+The following references from the source documents don't yet have a confirmed home in the numbered doc tree. Resolve 
+before treating this page as final:
 
 1. **Master Node setup page** — no dedicated numeric doc found. Candidates: `03- Installation & Deployment/A- Deployment Options/Node Configuration.md` or `Deploying a Node.md`.
 2. **"Using EdgeX" link** — ambiguous between `03- Installation & Deployment/C- Cloud & Edge Deployments/EdgeX Foundry Integration.md` and `07- Connectors & Integrations/B- Southbound Interfaces/Using MQTT (EdgeX).md`.
