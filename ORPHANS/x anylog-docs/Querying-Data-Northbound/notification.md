@@ -1,213 +1,126 @@
 ---
-title: Alerts & Messaging
-description: Send email, SMS, and webhook notifications from scheduled tasks or streaming conditions.
+title: Notification Services
+description: Utilizing node / data insight to notify users of the state of either data (from sensors) or physical node  
 layout: page
 ---
 <!--
 ## Changelog
 - 2026-04-17 | Created document
-- 2026-05-29 | Rewrote document to better different notification / scheduler options
--->
+- 2026-06-22 | Gmail App Password requirement and rest post calls 
+--> 
 
-AnyLog can send email, SMS, and webhook notifications when thresholds are crossed or conditions are met. Messages are 
-triggered from <a href="{{ '/docs/Monitoring/scheduler/' | relative_url }}">scheduled tasks</a> or 
-<a href="{{ '/docs/Monitoring/node-monitoring/#streaming-conditions-real-time-alerts' | relative_url }}">streaming conditions</a>.
+AnyLog provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
+the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped / created.
 
----
 
-## Quick reference
+## Setting up Webhooks
 
-```anylog
-run smtp client where email = [address] and password = [pwd] and ssl = true   # enable SMTP
+_Webhooks_ are user-defined _HTTP_ callbacks that enable real-time communication between web applications; they are the
+simplest and fastest way to send messages into third-party applications as it simply uses a _REST_ (post) request as 
+opposed to needing to develop a full application for messaging.
 
-email to [address] where subject = [text] and message = [text]                # send email
-sms to [phone] where gateway = [gateway] and subject = [text] and message = [text]  # send SMS
+* [Slack](https://api.slack.com/messaging/webhooks)
+* [Telegram](https://core.telegram.org/bots/api)
+* [Pushover](https://pushover.net/api)
+* [Discord](https://docs.gitlab.com/ee/user/project/integrations/discord_notifications.html#create-webhook)
+* [Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet)
+* [Google Hangouts](https://developers.google.com/workspace/chat/quickstart/webhooks)
 
-rest post where url = [webhook-url] and body = [json-payload] and headers = "{'Content-Type': 'application/json'}"  # webhook
+
+### Steps
+1. Go https://api.slack.com/apps/ 
+2. Under _Create_, Create an app from manifest 
+
+| <img src="../../assets/img/notification_slack_your_app.png" height="75%" width="75%" /> | <img src="../../assets/img/notification_slack_manifest.png" height="75%" width="75%" /> | 
+|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+
+3. Select the preferred channel 
+
+<img src="../../assets/img/notification_slack_workspace.png" height="50%" width="50%" />
+
+
+4. Press continue / next till the end 
+
+5. Select _Incoming Webhooks_
+
+<img src="../../assets/img/notification_slack_webhook.png" height="50%" width="50%" />
+
+6. Enable Webhooks
+
+<img src="../../assets/img/notification_slack_enable_webhooks.png" height="50%" width="50%" />
+
+7. At the bottom, add _Webbook_ to workspace
+
+<img src="../../assets/img/notification_slack_create_webhook.png" height="50%" width="50%" />
+
+
+8. Select which channel in Slack to send messages to 
+
+
+<img src="../../assets/img/notification_slack_select_channel.png" height="50%" width="50%" />
+
+9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in AnyLog
+
+<img src="../../assets/img/notification_slack_webhook_generated.png" height="50%" width="50%" />
+
+
+**Generated URL**: 
+```URL
+https://hooks.slack.com/services/T9EB83JTF/B06Q4F5R0QK/<token> 
 ```
 
----
+## Send Notifications via AnyLog
 
-## Enabling the SMTP client
+### Slack Webhooks
+AnyLog allows to send cURL requests the <a href="{{ '/docs/Querying-Data-Northbound/anylog%20commands/#rest-command' | relative_url }}">_rest_ command</a>. Since _Webhooks_ are 
+essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from AnyLog into
+Slack.
 
-Start the SMTP client before issuing any `email` or `sms` commands:
-
+1. Create webhook URL as a variable 
 ```anylog
-run smtp client where email = alerts@company.com and password = mypassword and ssl = true
+webhook_url = "https://hooks.slack.com/services/T9EB83JTF/<token>"
 ```
 
-See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | relative_url }}">Background Services — SMTP</a> for full configuration options.
-
----
-
-## Sending email
-
+2. get percentage of CPU used and current timestamp  
 ```anylog
-email to [receiver email] where subject = [subject] and message = [message text]
-```
-
-| Option | Explanation | Default |
-| --- | --- | --- |
-| `receiver email` | Destination address | — |
-| `subject` | Subject line text | `AnyLog Alert` |
-| `message` | Body text | `AnyLog Network Alert from Node: [node name]` |
-
-Multiple `message` options appear as separate lines in the email body:
-
-```anylog
-email to admin@company.com where subject = "High CPU Alert" and message = "CPU utilization exceeded threshold" and message = "Reporting node: 10.0.0.5 (Operator-West)"
-```
-
----
-
-## Sending SMS
-
-```anylog
-sms to [phone number] where gateway = [sms gateway] and subject = [subject] and message = [message text]
-```
-
-| Option | Explanation | Default |
-| --- | --- | --- |
-| `phone number` | Destination phone number | — |
-| `gateway` | SMS carrier email gateway | — |
-| `subject` | Subject line text | `AnyLog Alert` |
-| `message` | Message text | `AnyLog Network Alert from Node: [node name]` |
-
-Example with T-Mobile:
-```anylog
-sms to 6508147334 where gateway = tmomail.net and subject = "Threshold exceeded" and message = "Sensor value above limit"
-```
-
-### US carrier gateways
-
-| Carrier | Gateway |
-| --- | --- |
-| AT&T | `txt.att.net` |
-| Sprint | `messaging.sprintpcs.com` |
-| T-Mobile | `tmomail.net` |
-| Verizon | `vtext.com` |
-| Boost Mobile | `myboostmobile.com` |
-| Metro PCS | `mymetropcs.com` |
-| Tracfone | `mmst5.tracfone.com` |
-| U.S. Cellular | `email.uscc.net` |
-| Virgin Mobile | `vmobl.com` |
-
-A full carrier list is available at the [SMS gateway reference](https://kb.sandisk.com/app/answers/detail/a_id/17056/).
-
----
-
-## Triggering alerts from scheduled tasks
-
-Combine a condition check with messaging inside a scheduled task:
-
-```anylog
-# Alert if disk space drops below 1 GB, then suppress for 1 day
-schedule time = 5 minutes and name = "Monitor Space" task process !scripts_dir/monitor_space.al
-```
-
-Where `monitor_space.al` contains:
-
-```anylog
-disk_free = get disk free !monitored_drive
-if !disk_free < 1000000000 then
-do email to admin@company.com where subject = "Disk Space Alert" and message = "Disk drive is under threshold"
-do sms to 6505550000 where gateway = tmomail.net and subject = "Disk Space Alert" and message = "Disk drive is under threshold"
-do task init where name = "Monitor Space" and start = +1d
-```
-
-The `task init` call at the end pushes the task's next start time forward by one day, preventing the alert from re-firing every 5 minutes. See <a href="{{ '/docs/Monitoring/scheduler/' | relative_url }}">Scheduler & Scheduled Tasks</a> for details on `task init`.
-
----
-
-## Webhooks
-
-Webhooks are HTTP callbacks that deliver messages into third-party applications using a single REST POST — no custom integration required. AnyLog sends webhook notifications using the `rest` command.
-
-Supported platforms and their setup guides:
-
-- [Slack](https://api.slack.com/messaging/webhooks)
-- [Discord](https://docs.gitlab.com/ee/user/project/integrations/discord_notifications.html#create-webhook)
-- [Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
-- [Google Chat](https://developers.google.com/workspace/chat/quickstart/webhooks)
-
-### Send a webhook notification
-
-Once you have a webhook URL from your platform, use the `rest` command to POST a message:
-
-```anylog
-# Store the webhook URL
-webhook_url = "https://hooks.slack.com/services/T9EB83JTF/B06Q4F5R0QK/..."
-
-# Build the payload (Slack uses "text"; Discord, Teams, and Google Chat use "content")
 cpu_percent = get node info cpu_percent
 date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
-text_msg = !date_time + "  CPU usage: " + !cpu_percent
+```
+
+3. Create payload
+```anylog
+text_msg = !date_time + "  CPU usage: " + !cpu_percent 
 payload = json {"text": !text_msg}
-
-# POST to Slack
-rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}"
 ```
 
-> **Note:** Discord, Microsoft Teams, and Google Chat use `content` as the payload key instead of `text`.
+4. Publish information to Slack via _REST_
+```anylog
+rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}" 
+```
 
-### Use in a scheduled task
+Once sent, an output would appear in the proper Slack channel
+
+<img src="../../assets/img/notification_slack_messsage.png"  height="50%" width="50%" />
+
+**Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
+
+### Telegram
+
+Create a bot via <a href="https://t.me/BotFather" target="_blank">@BotFather</a> to obtain an `API_TOKEN`. Use your `CHAT_ID` (or a group chat ID) as the destination for messages.
 
 ```anylog
-schedule time = 15 seconds and name = "CPU webhook" task
-do cpu_percent = get node info cpu_percent
-do date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
-do text_msg = !date_time + "  CPU usage: " + !cpu_percent
-do payload = json {"text": !text_msg}
-do rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}"
+rest post where url = https://api.telegram.org/bot[API_TOKEN]/sendMessage and headers = {"Content-Type": "application/json"} and body = {"chat_id":"[CHAT_ID]","text":"Door ALARM"}
 ```
 
-See <a href="{{ '/docs/anylog-commands/#rest-command' | relative_url }}">AnyLog Commands — REST</a> for full `rest` command syntax.
+The `text` field in the body can be any alert message. Use this command directly, in a scheduled task, or as the action in a <a href="{{ '/docs/Monitoring-Operations/node-monitoring/#streaming-conditions-real-time-alerts' | relative_url }}">streaming condition</a>.
 
----
+### Pushover
 
-## Triggering alerts from streaming conditions
-
-Streaming conditions evaluate incoming data rows in real time, before they are written to the database. Use them for low-latency alerting without polling.
-
-### Set a condition
+Register at <a href="https://pushover.net/" target="_blank">pushover.net</a> to obtain an application `API_TOKEN` and a user or group `USER/GROUP_ID`.
 
 ```anylog
-set streaming condition where dbms = [dbms] and table = [table] and limit = [n] if [condition] then [command]
+rest post where url = https://api.pushover.net/1/messages.json and headers = {"Content-Type":"application/json"} and body = {"token":"[API_TOKEN]","user":"[USER/GROUP_ID]","message":"Test 1"}
 ```
 
-| Option | Explanation |
-| --- | --- |
-| `limit` | Maximum number of times the action fires. `0` = unlimited |
-| `condition` | Expression evaluated against each incoming row, e.g. `[value] > 100` |
-| `command` | Any AnyLog command — email, SMS, SQL insert, etc. |
+Replace `message` with your alert text. Pushover also supports optional fields such as `title`, `priority`, and `sound` — see the <a href="https://pushover.net/api#messages" target="_blank">Pushover API</a> for the full list.
 
-Examples:
-
-```anylog
-# SMS alert, fires at most 2 times
-set streaming condition where dbms = my_data and table = sensors and limit = 2 if [value] > 85 then sms to 6508147334 where gateway = tmomail.net and subject = "High temp alert" and message = "Value exceeded 85"
-
-# Email alert for negative readings
-set streaming condition where dbms = my_data and table = sensors if [value] < 0 then email to alerts@company.com where subject = "Below zero" and message = "Sensor reading is negative"
-
-# Write error rows to a separate table
-set streaming condition where dbms = my_data and table = sensors if [status] == "error" then run client () sql my_data "insert into errors values (!timestamp, !device, !value)"
-```
-
-### View conditions
-
-```anylog
-get streaming conditions
-get streaming conditions where dbms = my_data
-get streaming conditions where dbms = my_data and table = sensors
-```
-
-### Remove conditions
-
-```anylog
-# Remove a specific condition by ID
-reset streaming conditions where dbms = my_data and table = sensors and id = [condition-id]
-
-# Remove all conditions on a database
-reset streaming conditions where dbms = my_data
-```
