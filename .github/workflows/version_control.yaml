@@ -2,6 +2,8 @@ name: Update Docs Table of Contents
 
 on:
   push:
+    branches:
+      - os-dev
     paths:
       - '01-*/**'
       - '02-*/**'
