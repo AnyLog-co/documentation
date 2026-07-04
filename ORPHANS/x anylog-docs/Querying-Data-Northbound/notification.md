@@ -6,7 +6,6 @@ layout: page
 <!--
 ## Changelog
 - 2026-04-17 | Created document
-- 2026-06-22 | Gmail App Password requirement and rest post calls 
 --> 
 
 AnyLog provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
@@ -123,4 +122,5 @@ rest post where url = https://api.pushover.net/1/messages.json and headers = {"C
 ```
 
 Replace `message` with your alert text. Pushover also supports optional fields such as `title`, `priority`, and `sound` — see the <a href="https://pushover.net/api#messages" target="_blank">Pushover API</a> for the full list.
+
 

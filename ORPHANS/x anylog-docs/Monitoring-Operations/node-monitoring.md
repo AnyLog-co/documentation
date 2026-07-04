@@ -6,7 +6,6 @@ layout: page
 <!--
 ## Changelog
 - 2026-04-17 | Created document
-- 2026-06-22 | Gmail App Password requirement and rest post calls 
 --> 
 
 AnyLog provides multiple layers of monitoring: real-time inspection via `get` commands, continuous polling via the `continuous` command, scheduler-driven metrics collection, streaming conditions for real-time alerting, and aggregator nodes for network-wide visibility.
@@ -138,8 +137,6 @@ reset streaming conditions where dbms = my_data
 
 The SMTP client sends emails and SMS messages triggered by streaming conditions or scheduled tasks. Enable it first:
 
-> **Gmail accounts:** The `password` field must be a Google <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your account password. See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | relative_url }}">Background Services — SMTP</a> for details.
-
 ```anylog
 run smtp client where email = alerts@company.com and password = mypassword and ssl = true
 ```
@@ -151,40 +148,6 @@ sms to 6508147334 where gateway = tmomail.net and subject = "Alert" and message 
 ```
 
 See <a href="{{ '/docs/Network-Services/background-services/#smtp-client' | relative_url }}">Background Services — SMTP</a>.
-
----
-
-## Alerts via REST POST
-
-AnyLog can send alerts to third-party services by issuing outbound `rest post` requests from streaming conditions, scheduled tasks, or the CLI. This works with any service that accepts an HTTP POST with a JSON body — including <a href="https://core.telegram.org/bots/api" target="_blank">Telegram</a>, <a href="https://pushover.net/api" target="_blank">Pushover</a>, Slack webhooks, and custom endpoints.
-
-See <a href="{{ '/docs/Querying-Data-Northbound/notification/' | relative_url }}">Notification Services</a> for Slack setup and additional examples.
-
-### Telegram
-
-Create a bot via <a href="https://t.me/BotFather" target="_blank">@BotFather</a> to obtain an `API_TOKEN`, and get your `CHAT_ID` from the bot or chat you want to notify.
-
-```anylog
-rest post where url = https://api.telegram.org/bot[API_TOKEN]/sendMessage and headers = {"Content-Type": "application/json"} and body = {"chat_id":"[CHAT_ID]","text":"Door ALARM"}
-```
-
-In a streaming condition:
-```anylog
-set streaming condition where dbms = my_data and table = sensors if [status] == "alarm" then rest post where url = https://api.telegram.org/bot[API_TOKEN]/sendMessage and headers = {"Content-Type": "application/json"} and body = {"chat_id":"[CHAT_ID]","text":"Door ALARM"}
-```
-
-### Pushover
-
-Register at <a href="https://pushover.net/" target="_blank">pushover.net</a> to obtain an application `API_TOKEN` and a user or group `USER/GROUP_ID`.
-
-```anylog
-rest post where url = https://api.pushover.net/1/messages.json and headers = {"Content-Type":"application/json"} and body = {"token":"[API_TOKEN]","user":"[USER/GROUP_ID]","message":"Test 1"}
-```
-
-In a streaming condition:
-```anylog
-set streaming condition where dbms = my_data and table = sensors if [value] > 85 then rest post where url = https://api.pushover.net/1/messages.json and headers = {"Content-Type":"application/json"} and body = {"token":"[API_TOKEN]","user":"[USER/GROUP_ID]","message":"High temp alert: value exceeded 85"}
-```
 
 ---
 
