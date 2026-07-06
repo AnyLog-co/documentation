@@ -142,9 +142,9 @@ blockchain get [policy type] [where] [where conditions] [bring] [bring command i
 ```
 
 Explanation:
-The `blockchain get` command retrieves one the policies that satisfy the search criteria from the local copy of the ledger.  
+The `blockchain get` command retrieves one or more policies that satisfy the search criteria from the local copy of the ledger.  
 * _policy_ type - the key at the root of the JSON representing the policy.
-* _where_ conditions - reference the policy values that are evaluated to determine if the policy is selected.
+* _where_ conditions - define the filtering criteria used to select matching policies.
 * _bring_ command - determined the retrieved data and formatting options.  
 
 ### Selecting the policy type
@@ -172,34 +172,48 @@ blockchain get *
 
 ### The where condition
 
-The where condition is provided in one of 2 ways:  
-* As a list of attribute name value pairs, expressed as ***name = value*** (or ***name with value*** to validate a value in a list) separated by the ***and*** keyword.   
-The list of attribute name (key) value pairs in the where conditions is provided as follows:
-    ```anylog
-    key1 = value1 and key2 = value2 and key3 = value3 and ... keyN = valueN
-    ```
-    A key represents the path in the policy to the tested value, for example ***[operator][name]*** is the path to the name value in the operator policy.  
-    Note that the root name in the path does not have to be enclosed with square brackets: ***[operator][name]*** is equivalent to ***operator[name]***.
+The **where** clause defines the selection criteria used to identify the policies to return.     
+It can be specified in one of the following ways:
 
-* As a ***conditional execution*** whereas policy values are evaluated to determine if these values satisfy the search 
-criteria. Attribute name value pairs are referenced using square brackets, for example ***[operator][name]*** will pull 
-the name from the Operator policy. The following example evaluates attribute values of the policy example in the 
-[Metadata Section](#the-metadata):
+* **Attribute name-value pairs** using comparison operators such as **=**, **with value**, **is declared**, and **not declared**. Multiple conditions are separated by the **and** keyword.
+
+    The general syntax is:
 
     ```anylog
-    [operator][country] == USA and ([operator][country] == "San Francisco" or [operator][country] == "San Jose")
+    key1 = value1 and key2 = value2 and ... keyN = valueN
     ```
-Conditional execution is detailed [here](anylog%20commands.md#conditional-execution). 
 
-Examples:
-```anylog
-blockchain get operator where dbms = lsl_demo
-blockchain get operator where dbms = lsl_demo and ip = 24.23.250.144
-blockchain get cluster where table[dbms] = purpleair and table[name] = cos_data bring [cluster][id] separator = ,
-blockchain get operator where [name] == operator11 or [name] ==  operator1 bring [*][name]
-blockchain get tag where [path] startwith 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH XTR/Resources/Application/GlobalVars/ALARM_TAGS' bring.table.sort [tag][path]
-blockchain get tag where [path] childfrom 'Root/Objects/DeviceSet/WAGO 750-8210 PFC200 G2 4ETH XTR/Resources/Application/GlobalVars/ALARM_TAGS' bring.table.sort [tag][path]
-```
+    A key represents the path to an attribute in the policy. For example, **[operator][name]** references the **name** attribute in an **operator** policy. The root policy name does not need to be enclosed in square brackets, therefore **[operator][name]** is equivalent to **operator[name]**.
+
+    The supported operators are:
+
+    | **Operator**            | **Description** |
+    |-------------------------| --------------- |
+    | `==`                    | Tests whether an attribute matches a specified value. |
+    | conditional expressions | ==, !=, <, >, contains, startswith, childfrom, etc. |
+    | `is declared`           | Tests whether the specified attribute exists in the current policy. |
+    | `not declared`          | Tests whether the specified attribute does not exist in the current policy. |
+
+    Examples:
+
+    ```anylog
+    blockchain get operator where dbms = lsl_demo
+    blockchain get * where id = 9366aa4bdc199b0025423dcad4add876
+    blockchain get cluster where parent is declared
+    blockchain get cluster where parent not declared
+    blockchain get cluster where [parent] not declared and name = power-plant
+    ```
+
+* **Conditional expressions**, where policy attributes are evaluated using expressions. Attribute values are referenced using square brackets. For example, **[operator][name]** retrieves the **name** value from an **operator** policy.
+
+    The following example evaluates policy values:
+
+    ```anylog
+    [operator][country] == "USA" and ([operator][city] == "San Francisco" or [operator][city] == "San Jose")
+    ```
+
+    Conditional expressions support comparison, logical, string, arithmetic, and other operators. 
+* See the [Conditional Execution](anylog%20commands.md#conditional-execution) section for the complete syntax and list of supported operators.
 
 
 ### Formatting retrieved data 

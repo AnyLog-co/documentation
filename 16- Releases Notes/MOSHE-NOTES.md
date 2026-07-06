@@ -6,6 +6,10 @@ source_path: "release/notes.md"
 ---
 # AnyLog Release notes
 
+AnyLog Version: 2.0.2606 (ms-dev - 4bd615 [2026-07-06 00:02:19])
+1. Add ```is declared``` and ```not declared``` to blockchain get
+2. New command to get a unique id (in the config process).
+
 AnyLog Version: 1.5.2605 [2026-06-30 18:35:19]
 ### New Features
 1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see [details](../dictionary.md#referencing-values-in-a-list-of-dictionaries).
