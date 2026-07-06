@@ -1,5 +1,5 @@
 ---
-title: D- Monitoring & Alerts
+title: Monitoring & Alerts
 description: Monitor node health, data volumes, resource usage, and configure automated alerts and scheduled tasks.
 layout: page
 ---
