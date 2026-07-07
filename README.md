@@ -39,10 +39,17 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Contents
 
 * **01- Getting Started**
+  * [deployment-scripts](01-%20Getting%20Started/deployment-scripts.md)
+  * [Executable](01-%20Getting%20Started/Executable.md)
   * [Getting Started](01-%20Getting%20Started/Getting%20Started.md)
+  * [install-ova](01-%20Getting%20Started/install-ova.md)
+  * [installing-anylog](01-%20Getting%20Started/installing-anylog.md)
   * [Overview](01-%20Getting%20Started/Overview.md)
   * [Prerequisite](01-%20Getting%20Started/Prerequisite.md)
   * [Quick Deployment Guide](01-%20Getting%20Started/Quick%20Deployment%20Guide.md)
+  * [quick-start](01-%20Getting%20Started/quick-start.md)
+  * [Service](01-%20Getting%20Started/Service.md)
+  * [starting an anylog instance](01-%20Getting%20Started/starting%20an%20anylog%20instance.md)
 * **02- Training & Tutorials**
   * [Connectors To Data Sources](02-%20Training%20%26%20Tutorials/Connectors%20To%20Data%20Sources.md)
   * [Data Generator](02-%20Training%20%26%20Tutorials/Data%20Generator.md)
@@ -57,6 +64,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Config Policies](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Config%20Policies.md)
     * [Network Setup](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Network%20Setup.md)
     * [Pip Install](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Pip%20Install.md)
+    * **samples**
 * **03- Installation & Deployment**
   * **A- Deployment Options**
     * [Code Versions](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/Code%20Versions.md)
@@ -71,15 +79,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Docker Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/Docker%20Volumes.md)
     * [Kubernetes Networking](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/Kubernetes%20Networking.md)
     * [Kubernetes Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/Kubernetes%20Volumes.md)
-  * **C- Cloud & Edge Deployments**
-    * [AWS Deployment](03-%20Installation%20%26%20Deployment/C-%20Cloud%20%26%20Edge%20Deployments/AWS%20Deployment.md)
-    * [EdgeX Foundry Integration](03-%20Installation%20%26%20Deployment/C-%20Cloud%20%26%20Edge%20Deployments/EdgeX%20Foundry%20Integration.md)
-    * **Open-Horizon**
-      * [Open Horizon](03-%20Installation%20%26%20Deployment/C-%20Cloud%20%26%20Edge%20Deployments/Open-Horizon/Open%20Horizon.md)
-      * **imgs**
-      * **master**
-      * **operator**
-      * **query**
+  * **C- Cloud**
+    * [AWS Deployment](03-%20Installation%20%26%20Deployment/C-%20Cloud/AWS%20Deployment.md)
   * **D- Networking & Security**
     * [Configuring Overlay with AnyLog](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/Configuring%20Overlay%20with%20AnyLog.md)
     * [Nebula Networking](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/Nebula%20Networking.md)
@@ -89,7 +90,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **04- Core Concepts**
   * [Background Processes](04-%20Core%20Concepts/Background%20Processes.md)
   * [Bucket Data Management](04-%20Core%20Concepts/Bucket%20Data%20Management.md)
-  * [High Availability](04-%20Core%20Concepts/High%20Availability.md)
   * [Metadata Management](04-%20Core%20Concepts/Metadata%20Management.md)
   * [Policies](04-%20Core%20Concepts/Policies.md)
   * **A- Agent Services**
@@ -97,6 +97,13 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Operator](04-%20Core%20Concepts/A-%20Agent%20Services/Operator.md)
     * [Publisher](04-%20Core%20Concepts/A-%20Agent%20Services/Publisher.md)
     * [Query](04-%20Core%20Concepts/A-%20Agent%20Services/Query.md)
+  * **B- Network-Services**
+    * [background-services](04-%20Core%20Concepts/B-%20Network-Services/background-services.md)
+    * [blockchain](04-%20Core%20Concepts/B-%20Network-Services/blockchain.md)
+    * [messaging-services](04-%20Core%20Concepts/B-%20Network-Services/messaging-services.md)
+    * [network-configurations](04-%20Core%20Concepts/B-%20Network-Services/network-configurations.md)
+    * [node-architecture](04-%20Core%20Concepts/B-%20Network-Services/node-architecture.md)
+    * [policies-metadata](04-%20Core%20Concepts/B-%20Network-Services/policies-metadata.md)
 * **05- Networking & Security**
   * [Authentication](05-%20Networking%20%26%20Security/Authentication.md)
   * [Network Processing](05-%20Networking%20%26%20Security/Network%20Processing.md)
@@ -122,102 +129,141 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Querying Data](06-%20Data%20Management/C-%20Data%20Examples/Querying%20Data.md)
   * **D- Monitoring & Alerts**
     * [Alerts & Monitoring](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Alerts%20%26%20Monitoring.md)
+    * [Continuous Monitoring with Automated Alerts](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Continuous%20Monitoring%20with%20Automated%20Alerts.md)
     * [Logging Events](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Logging%20Events.md)
     * [Managing Data Files Status](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Managing%20Data%20Files%20Status.md)
     * [Monitoring Calls](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Monitoring%20Calls.md)
-    * [Continuous Monitoring with Automated Alerts](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Continuous%20Monitoring%20with%20Automated%20Alerts.md)
     * [Monitoring Nodes](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Monitoring%20Nodes.md)
-* **07- Connectors & Integrations**
-  * **A- Northbound Connectors**
-    * [Google Drive Connector](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Google%20Drive%20Connector.md)
-    * [Importing Grafana Dashboard](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Importing%20Grafana%20Dashboard.md)
-    * [Notifications](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Notifications.md)
-    * [Postgres Connector](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Postgres%20Connector.md)
-    * [Postman Integration](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Postman%20Integration.md)
-    * [Power BI Connector](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Power%20BI%20Connector.md)
-    * [Qlik Connector](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Qlik%20Connector.md)
-    * [Using Grafana](07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Using%20Grafana.md)
-  * **B- Southbound Interfaces**
-    * [configuring mongodb](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/configuring%20mongodb.md)
-    * [EtherNet IP](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/EtherNet%20IP.md)
-    * [MODBUS](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/MODBUS.md)
-    * [OPC UA Integration](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/OPC%20UA%20Integration.md)
-    * [Using GRPC](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/Using%20GRPC.md)
-    * [Using Kafka](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/Using%20Kafka.md)
-    * [Using MQTT (EdgeX)](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/Using%20MQTT%20%28EdgeX%29.md)
-    * [Using REST](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/Using%20REST.md)
-    * [Using Syslog](07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/Using%20Syslog.md)
-  * **C- Messages Brokers**
-    * [Broker Setup Example](07-%20Connectors%20%26%20Integrations/C-%20Messages%20Brokers/Broker%20Setup%20Example.md)
-    * [Message Broker Setup](07-%20Connectors%20%26%20Integrations/C-%20Messages%20Brokers/Message%20Broker%20Setup.md)
-  * **D- Deployment tools**
-    * [Barbara](07-%20Connectors%20%26%20Integrations/D-%20Deployment%20tools/Barbara.md)
-    * [DELL Distributed Private Cloud](07-%20Connectors%20%26%20Integrations/D-%20Deployment%20tools/DELL%20Distributed%20Private%20Cloud.md)
-    * [IBM IEAM (Edge Application Manager)](07-%20Connectors%20%26%20Integrations/D-%20Deployment%20tools/IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
-    * [Open Horizon](07-%20Connectors%20%26%20Integrations/D-%20Deployment%20tools/Open%20Horizon.md)
-* **08- Visualization & Dashboards**
-  * [LLM Dashboard Generation](08-%20Visualization%20%26%20Dashboards/LLM%20Dashboard%20Generation.md)
-  * [Node Red](08-%20Visualization%20%26%20Dashboards/Node%20Red.md)
+  * **E- High Availability**
+    * [High Availability](06-%20Data%20Management/E-%20High%20Availability/High%20Availability.md)
+* **07- Southbound Interfaces**
+  * [data-ingestion](07-%20Southbound%20Interfaces/data-ingestion.md)
+  * [live-data-generator](07-%20Southbound%20Interfaces/live-data-generator.md)
+  * [node-monitoring](07-%20Southbound%20Interfaces/node-monitoring.md)
+  * [southbound-overview](07-%20Southbound%20Interfaces/southbound-overview.md)
+  * [Using Syslog](07-%20Southbound%20Interfaces/Using%20Syslog.md)
+  * **A- Direct - Built-in connectors (protocols AnyLog natively accepts from devices)**
+    * [DNP3](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/DNP3.md)
+    * [etherip](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/etherip.md)
+    * [EtherNet IP](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/EtherNet%20IP.md)
+    * [grpc](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/grpc.md)
+    * [MODBUS](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/MODBUS.md)
+    * [OPC UA Integration](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/OPC%20UA%20Integration.md)
+    * [opcua](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/opcua.md)
+    * [Using GRPC](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/Using%20GRPC.md)
+    * [video-streaming](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/video-streaming.md)
+  * **B- Third-party applications — external apps that push data to AnyLog**
+    * [EdgeX Foundry Integration](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/EdgeX%20Foundry%20Integration.md)
+    * [edgex](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/edgex.md)
+    * [kubearmor](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/kubearmor.md)
+    * [node-red](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/node-red.md)
+    * [telegraf](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/telegraf.md)
+    * [Using Kafka](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/Using%20Kafka.md)
+    * [Using MQTT (EdgeX)](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/Using%20MQTT%20%28EdgeX%29.md)
+  * **C- REST**
+    * [mapping-policies](07-%20Southbound%20Interfaces/C-%20REST/mapping-policies.md)
+    * [Using REST](07-%20Southbound%20Interfaces/C-%20REST/Using%20REST.md)
+* **08- Northbound Connectors**
+  * [northbound-overview](08-%20Northbound%20Connectors/northbound-overview.md)
+  * [notification](08-%20Northbound%20Connectors/notification.md)
+  * [Notifications](08-%20Northbound%20Connectors/Notifications.md)
+  * [postgres-connector](08-%20Northbound%20Connectors/postgres-connector.md)
+  * [Postman Integration](08-%20Northbound%20Connectors/Postman%20Integration.md)
+  * [PowerBI](08-%20Northbound%20Connectors/PowerBI.md)
+  * [Qlik](08-%20Northbound%20Connectors/Qlik.md)
+  * [queries](08-%20Northbound%20Connectors/queries.md)
+  * [sql-setup](08-%20Northbound%20Connectors/sql-setup.md)
+  * **A- BI external tools — use AnyLog's REST (or gRPC) API as their data source`**
+    * [Google Drive Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Google%20Drive%20Connector.md)
+    * [Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Importing%20Grafana%20Dashboard.md)
+    * [Power BI Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Power%20BI%20Connector.md)
+    * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Qlik%20Connector.md)
+    * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Using%20Grafana.md)
+* **09- Integrations**
+  * **A- Databases**
+    * [configuring mongodb](09-%20Integrations/A-%20Databases/configuring%20mongodb.md)
+    * [Postgres Connector](09-%20Integrations/A-%20Databases/Postgres%20Connector.md)
+  * **B- Messages Brokers**
+    * [Broker Setup Example](09-%20Integrations/B-%20Messages%20Brokers/Broker%20Setup%20Example.md)
+    * [Message Broker Setup](09-%20Integrations/B-%20Messages%20Brokers/Message%20Broker%20Setup.md)
+  * **C- Deployment tools**
+    * [Barbara](09-%20Integrations/C-%20Deployment%20tools/Barbara.md)
+    * [DELL Distributed Private Cloud](09-%20Integrations/C-%20Deployment%20tools/DELL%20Distributed%20Private%20Cloud.md)
+    * [IBM IEAM (Edge Application Manager)](09-%20Integrations/C-%20Deployment%20tools/IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
+    * **Open-Horizon (IBM)**
+      * [Open Horizon](09-%20Integrations/C-%20Deployment%20tools/Open-Horizon%20%28IBM%29/Open%20Horizon.md)
+      * **imgs**
+      * **master**
+      * **operator**
+      * **query**
+* **10- Visualization & Dashboards**
+  * [LLM Dashboard Generation](10-%20Visualization%20%26%20Dashboards/LLM%20Dashboard%20Generation.md)
+  * [Node Red](10-%20Visualization%20%26%20Dashboards/Node%20Red.md)
   * **A- Grafana**
-    * [Grafana Setup](08-%20Visualization%20%26%20Dashboards/A-%20Grafana/Grafana%20Setup.md)
-* **09- EDM tool (Edge Data Manager)**
-  * [EDM](09-%20EDM%20tool%20%28Edge%20Data%20Manager%29/EDM.md)
-* **10- MCP & LLMs**
-  * [MCP](10-%20MCP%20%26%20LLMs/MCP.md)
-* **11- UNS (Unified Name Spaces)**
-  * [Custom UNS (data stream, ISA-95)](11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-custom.md)
-  * [UNS](11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
-* **12- Commands & CLI (Command Line Interface)**
-  * [CLI](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/CLI.md)
-  * [Commands cheatsheet](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/Commands%20cheatsheet.md)
+    * [Grafana Setup](10-%20Visualization%20%26%20Dashboards/A-%20Grafana/Grafana%20Setup.md)
+* **11- EDM tool (Edge Data Manager)**
+  * [EDM](11-%20EDM%20tool%20%28Edge%20Data%20Manager%29/EDM.md)
+  * [remote-gui](11-%20EDM%20tool%20%28Edge%20Data%20Manager%29/remote-gui.md)
+* **12- MCP & LLMs**
+  * [mcp](12-%20MCP%20%26%20LLMs/mcp.md)
+* **13- UNS (Unified Name Spaces)**
+  * [UNS-custom](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-custom.md)
+  * [UNS](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
+* **14- Commands & CLI (Command Line Interface)**
+  * [CLI](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/CLI.md)
+  * [Commands cheatsheet](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/Commands%20cheatsheet.md)
+  * [get-cmds](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/get-cmds.md)
+  * [node-status](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/node-status.md)
   * **A- Command Categories**
-    * [Anylog Commands](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Anylog%20Commands.md)
-    * [Blockchain Commands](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Blockchain%20Commands.md)
-    * [File Commands](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/File%20Commands.md)
-    * [HTTP Commands](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/HTTP%20Commands.md)
-    * [Test Commands](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Test%20Commands.md)
-* **13- Development & Scripting**
+    * [Anylog Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Anylog%20Commands.md)
+    * [Blockchain Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Blockchain%20Commands.md)
+    * [File Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/File%20Commands.md)
+    * [HTTP Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/HTTP%20Commands.md)
+    * [Test Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Test%20Commands.md)
+* **15- Development & Scripting**
+  * [background processes](15-%20Development%20%26%20Scripting/background%20processes.md)
+  * [scheduler](15-%20Development%20%26%20Scripting/scheduler.md)
   * **A- Scripting**
-    * [Executing Scripts](13-%20Development%20%26%20Scripting/A-%20Scripting/Executing%20Scripts.md)
+    * [Executing Scripts](15-%20Development%20%26%20Scripting/A-%20Scripting/Executing%20Scripts.md)
     * **Sample Go Scripts**
     * **Sample Python Scripts**
       * **data**
   * **B- Debugging**
-    * [Debugging](13-%20Development%20%26%20Scripting/B-%20Debugging/Debugging.md)
+    * [Debugging](15-%20Development%20%26%20Scripting/B-%20Debugging/Debugging.md)
   * **C- APIs**
-    * [Python APIs](13-%20Development%20%26%20Scripting/C-%20APIs/Python%20APIs.md)
-* **14- Examples & Use Cases**
-  * [Connecting Nodes](14-%20Examples%20%26%20Use%20Cases/Connecting%20Nodes.md)
-  * [Data Monitoring](14-%20Examples%20%26%20Use%20Cases/Data%20Monitoring.md)
-  * [Onboarding Commands](14-%20Examples%20%26%20Use%20Cases/Onboarding%20Commands.md)
-  * [Resource Monitoring](14-%20Examples%20%26%20Use%20Cases/Resource%20Monitoring.md)
-  * [Video Streaming](14-%20Examples%20%26%20Use%20Cases/Video%20Streaming.md)
-* **15- Support & Troubleshooting**
-  * [common_issues](15-%20Support%20%26%20Troubleshooting/common_issues.md)
-  * [Issue Networking_MTU_size](15-%20Support%20%26%20Troubleshooting/Issue%20Networking_MTU_size.md)
-  * [troubleshooting](15-%20Support%20%26%20Troubleshooting/troubleshooting.md)
-* **16- Releases Notes**
-  * [Anylog EDF Releases Notes](16-%20Releases%20Notes/Anylog%20EDF%20Releases%20Notes.md)
-  * [Anylog EDF SOURCE-CHANGELOGS](16-%20Releases%20Notes/Anylog%20EDF%20SOURCE-CHANGELOGS.md)
-  * [DEPLOYMENT_SCRIPTS-CHANGELOGS](16-%20Releases%20Notes/DEPLOYMENT_SCRIPTS-CHANGELOGS.md)
-  * [DOCKER_COMPOSE-CHANGELOG](16-%20Releases%20Notes/DOCKER_COMPOSE-CHANGELOG.md)
-  * [MOSHE-NOTES](16-%20Releases%20Notes/MOSHE-NOTES.md)
-  * [OPENSOURCE-NOTICE](16-%20Releases%20Notes/OPENSOURCE-NOTICE.md)
-* **17- Appendices**
+    * [Python APIs](15-%20Development%20%26%20Scripting/C-%20APIs/Python%20APIs.md)
+* **16- Examples & Use Cases**
+  * [Connecting Nodes](16-%20Examples%20%26%20Use%20Cases/Connecting%20Nodes.md)
+  * [Data Monitoring](16-%20Examples%20%26%20Use%20Cases/Data%20Monitoring.md)
+  * [Onboarding Commands](16-%20Examples%20%26%20Use%20Cases/Onboarding%20Commands.md)
+  * [Resource Monitoring](16-%20Examples%20%26%20Use%20Cases/Resource%20Monitoring.md)
+  * [Video Streaming](16-%20Examples%20%26%20Use%20Cases/Video%20Streaming.md)
+* **17- Support & Troubleshooting**
+  * [common_issues](17-%20Support%20%26%20Troubleshooting/common_issues.md)
+  * [Issue Networking_MTU_size](17-%20Support%20%26%20Troubleshooting/Issue%20Networking_MTU_size.md)
+  * [troubleshooting](17-%20Support%20%26%20Troubleshooting/troubleshooting.md)
+* **18- Releases Notes**
+  * [Anylog EDF Releases Notes](18-%20Releases%20Notes/Anylog%20EDF%20Releases%20Notes.md)
+  * [Anylog EDF SOURCE-CHANGELOGS](18-%20Releases%20Notes/Anylog%20EDF%20SOURCE-CHANGELOGS.md)
+  * [DEPLOYMENT_SCRIPTS-CHANGELOGS](18-%20Releases%20Notes/DEPLOYMENT_SCRIPTS-CHANGELOGS.md)
+  * [DOCKER_COMPOSE-CHANGELOG](18-%20Releases%20Notes/DOCKER_COMPOSE-CHANGELOG.md)
+  * [MOSHE-NOTES](18-%20Releases%20Notes/MOSHE-NOTES.md)
+  * [OPENSOURCE-NOTICE](18-%20Releases%20Notes/OPENSOURCE-NOTICE.md)
+* **19- Appendices**
   * **A- Legal & Licensing**
-    * [Evaluation License](17-%20Appendices/A-%20Legal%20%26%20Licensing/Evaluation%20License.md)
-    * [Notice of Open Source Usage](17-%20Appendices/A-%20Legal%20%26%20Licensing/Notice%20of%20Open%20Source%20Usage.md)
-    * [Privacy Policy](17-%20Appendices/A-%20Legal%20%26%20Licensing/Privacy%20Policy.md)
+    * [Evaluation License](19-%20Appendices/A-%20Legal%20%26%20Licensing/Evaluation%20License.md)
+    * [Notice of Open Source Usage](19-%20Appendices/A-%20Legal%20%26%20Licensing/Notice%20of%20Open%20Source%20Usage.md)
+    * [Privacy Policy](19-%20Appendices/A-%20Legal%20%26%20Licensing/Privacy%20Policy.md)
   * **B- Blockchain Integration**
-    * [Blockchain (internet) Configuration](17-%20Appendices/B-%20Blockchain%20Integration/Blockchain%20%28internet%29%20Configuration.md)
-    * [Blockchain Demo](17-%20Appendices/B-%20Blockchain%20Integration/Blockchain%20Demo.md)
-    * [Using Ethereum](17-%20Appendices/B-%20Blockchain%20Integration/Using%20Ethereum.md)
+    * [Blockchain (internet) Configuration](19-%20Appendices/B-%20Blockchain%20Integration/Blockchain%20%28internet%29%20Configuration.md)
+    * [Blockchain Demo](19-%20Appendices/B-%20Blockchain%20Integration/Blockchain%20Demo.md)
+    * [Using Ethereum](19-%20Appendices/B-%20Blockchain%20Integration/Using%20Ethereum.md)
   * **C- Reference Materials**
-    * [configuration](17-%20Appendices/C-%20Reference%20Materials/configuration.md)
-    * [dictionary](17-%20Appendices/C-%20Reference%20Materials/dictionary.md)
-    * [FAQ](17-%20Appendices/C-%20Reference%20Materials/FAQ.md)
-    * [helpers](17-%20Appendices/C-%20Reference%20Materials/helpers.md)
-    * [image mapping](17-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
-    * [sql setup](17-%20Appendices/C-%20Reference%20Materials/sql%20setup.md)
-    * [streaming conditions](17-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
+    * [configuration](19-%20Appendices/C-%20Reference%20Materials/configuration.md)
+    * [dictionary](19-%20Appendices/C-%20Reference%20Materials/dictionary.md)
+    * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
+    * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
+    * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
+    * [sql setup](19-%20Appendices/C-%20Reference%20Materials/sql%20setup.md)
+    * [streaming conditions](19-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
 <!-- TOC:END -->
