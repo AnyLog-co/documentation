@@ -2,13 +2,14 @@
 title: Modbus TCP
 description: Pull coils, discrete inputs, and holding/input registers from Modbus TCP devices into AnyLog using run plc client.
 layout: page
+source_path: "MODBUS.md"
 ---
 <!--
 ## Changelog
 - 2026-05-08 | Created document
 -->
 
-AnyLog can act as a **Modbus TCP client** (over **hostname** and **port**, typically port **502**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [OPC-UA](/docs/managing-data-southbound/opcua/) and [EtherNet/IP](/docs/managing-data-southbound/etherip/).
+AnyLog can act as a **Modbus TCP client** (over **hostname** and **port**, typically port **502**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [OPC-UA](OPC%20UA%20Integration.md#continuous-data-pull) and [EtherNet/IP](EtherNet%20IP.md#the-run-plc-client-command).
 
 ---
 
@@ -116,7 +117,7 @@ run plc client where type = modbus and
 
 **Table names** follow the **same pattern** as plain **`dynamic = true`** (client **`name`** plus map **`name`**, e.g. **`fdev11_desk_lamp`** for the example above). Under UNS, the **read value** is usually stored in a **column named like the tag**—the map **`name`** (here **`desk_lamp`**), not a generic **`value`** column.
 
-With **`namespace`**, table and column layout follow **UNS policies**. **`namespace`** and **`master_node`** drive how tables are registered in the UNS. See [Unified Namespace](/docs/managing-data-southbound/UNS/) for background.
+With **`namespace`**, table and column layout follow **UNS policies**. **`namespace`** and **`master_node`** drive how tables are registered in the UNS. See [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md) for background.
 
 ---
 
@@ -140,7 +141,7 @@ With **`namespace`**, table and column layout follow **UNS policies**. **`namesp
 
 ## Related
 
-- [Data Ingestion (Southbound)](/docs/managing-data-southbound/southbound-overview/)
-- [Unified Namespace](/docs/managing-data-southbound/UNS/)
-- [OPC-UA](/docs/managing-data-southbound/opcua/)
-- [EtherNet/IP](/docs/managing-data-southbound/etherip/)
+- [Adding Data to Nodes in the Network](../../06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md#the-southbound-connectors-diagram)
+- [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
+- [OPC-UA](OPC%20UA%20Integration.md)
+- [EtherNet/IP](EtherNet%20IP.md)
