@@ -125,6 +125,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Logging Events](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Logging%20Events.md)
     * [Managing Data Files Status](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Managing%20Data%20Files%20Status.md)
     * [Monitoring Calls](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Monitoring%20Calls.md)
+    * [Continuous Monitoring with Automated Alerts](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Continuous%20Monitoring%20with%20Automated%20Alerts.md)
     * [Monitoring Nodes](06-%20Data%20Management/D-%20Monitoring%20%26%20Alerts/Monitoring%20Nodes.md)
 * **07- Connectors & Integrations**
   * **A- Northbound Connectors**
@@ -164,6 +165,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **10- MCP & LLMs**
   * [MCP](10-%20MCP%20%26%20LLMs/MCP.md)
 * **11- UNS (Unified Name Spaces)**
+  * [Custom UNS (data stream, ISA-95)](11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-custom.md)
   * [UNS](11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
 * **12- Commands & CLI (Command Line Interface)**
   * [CLI](12-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/CLI.md)

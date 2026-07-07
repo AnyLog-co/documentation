@@ -17,6 +17,8 @@ Nodes can be configured with one or more schedulers. The schedulers are identifi
 schedulers #1 and higher are for users scheduled tasks. 
 Each Scheduler contains the tasks to execute and the time interval associated with each task.  
 
+For a consolidated guide covering continuous polling, streaming alerts, aggregator setup, and scheduled monitoring tasks, see [Continuous Monitoring with Automated Alerts](Continuous%20Monitoring%20with%20Automated%20Alerts.md).
+
 ## Invoking a scheduler
 
 The scheduler is initiated using the following command:
