@@ -180,9 +180,4 @@ sql new_company "select * from kafka_demo"
 docker stop kafka-dev
 ```
 
-| Command                                                          | Info provided  |
-|------------------------------------------------------------------| -------|
-| [get processes](monitoring%20nodes.md#the-get-processes-command) | Background processes to determine if Kafka is enabled |
-| [get msg client](monitoring%20calls.md#get-msg-clients)          | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
-| [get streaming](monitoring%20calls.md#get-streaming)             | Data consumed from brokers associated to dbms tables |
-| [get operator](monitoring%20calls.md#get-operator)               | Statistics on ingestion of data to database tables |
+The `--rm` flag on `docker run` removes the container automatically when it stops.
