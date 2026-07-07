@@ -10,6 +10,8 @@ layout: page
 
 AnyLog provides multiple layers of monitoring: real-time inspection via `get` commands, continuous polling via the `continuous` command, scheduler-driven metrics collection, streaming conditions for real-time alerting, and aggregator nodes for network-wide visibility.
 
+For per-command reference (`get status`, `get node info`, `get dictionary`, aggregator setup, and more), see [Monitoring Nodes](monitoring%20nodes.md#monitoring-nodes).
+
 ---
 
 ## Quick reference

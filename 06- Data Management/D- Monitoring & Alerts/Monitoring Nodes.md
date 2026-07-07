@@ -8,7 +8,9 @@ source_path: "Monitoring Nodes.md"
 
 Nodes in the network can collect and monitor information on data and state. The collected information can be retrieved from the 
 node, or [collected in a database](#Organizing-node-status-in-a-database-table) or send to an 
-[aggregator node](#Organizing-nodes-status-in-an-aggregator-node) where data from multiple nodes is aggregated and available to query.  
+[aggregator node](#Organizing-nodes-status-in-an-aggregator-node) where data from multiple nodes is aggregated and available to query.
+
+For a consolidated guide covering continuous monitoring, scheduled tasks, streaming alerts, and aggregator setup, see [Continuous Monitoring with Automated Alerts](continuous%20monitoring%20with%20automated%20alerts.md).
 
 Examples of information monitored:
 * Data ingested to local databases and data volumes in the tables.

@@ -53,7 +53,7 @@ the original event time rather than processing time.
 on processing time rather than source time, users should be aware of potential differences when analyzing time-sensitive data.
 2. Deployment examples are available in the [Aggregations Examples](examples/Aggregations%20Examples.md) section.
 3. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
-   [Declaring OPC UA with Aggregations](opcua.md#example---declaring-opc-ua-with-aggregations) section.
+   [OPC-UA with aggregations](../../07-%20Connectors%20%26%20Integrations/B-%20Southbound%20Interfaces/OPC%20UA%20Integration.md#opc-ua-with-aggregations) section.
 
 ## Aggregations and DBMS Operations
 
