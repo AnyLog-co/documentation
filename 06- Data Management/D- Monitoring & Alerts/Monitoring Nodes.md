@@ -8,7 +8,9 @@ source_path: "Monitoring Nodes.md"
 
 Nodes in the network can collect and monitor information on data and state. The collected information can be retrieved from the 
 node, or [collected in a database](#Organizing-node-status-in-a-database-table) or send to an 
-[aggregator node](#Organizing-nodes-status-in-an-aggregator-node) where data from multiple nodes is aggregated and available to query.  
+[aggregator node](#Organizing-nodes-status-in-an-aggregator-node) where data from multiple nodes is aggregated and available to query.
+
+For a consolidated guide covering continuous monitoring, scheduled tasks, streaming alerts, and aggregator setup, see [Continuous Monitoring with Automated Alerts](Continuous%20Monitoring%20with%20Automated%20Alerts.md).
 
 Examples of information monitored:
 * Data ingested to local databases and data volumes in the tables.
@@ -16,7 +18,7 @@ Examples of information monitored:
 
 Notes: 
 * Some functionalities require psutil installed.
-* To support continues monitoring, monitoring tasks are placed on the _scheduler_. The scheduler functionality is explained at [Alerts and Monitoring](alerts%20and%20monitoring.md#alerts-and-monitoring).
+* To support continues monitoring, monitoring tasks are placed on the _scheduler_. The scheduler functionality is explained at [Alerts and Monitoring](Alerts%20%26%20Monitoring.md#alerts-and-monitoring).
 
 ## Monitoring data commands
 
@@ -274,9 +276,9 @@ The tables' data is partitioned by date such that data of the previous day is re
 
 1) Background processes to enable:
 
-* [Streamer](background%20processes.md#streamer-process) such that the data is flushed to disk.
-* [Operator](background%20processes.md#operator-process) for the flushed data to be ingested to the table.
-* [Scheduler](alerts%20and%20monitoring.md#invoking-a-scheduler) to process scheduled tasks.
+* [Streamer](../../04-%20Core%20Concepts/Background%20Processes.md#streamer) such that the data is flushed to disk.
+* [Operator](../../04-%20Core%20Concepts/Background%20Processes.md#operator-service) for the flushed data to be ingested to the table.
+* [Scheduler](Alerts%20%26%20Monitoring.md#invoking-a-scheduler) to process scheduled tasks.
 
 
 1) Connect to a SQLite database. The logical database name is `monitor`.
@@ -289,7 +291,7 @@ connect dbms monitor where type=sqlite
 partition dmci ping_sensor using timestamp by 1 day
 ```
 
-Note: Partition command is detailed [here](anylog%20commands.md#partition-command).
+Note: Partition command is detailed [here](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#partition-command).
 
 3) Using the scheduler, collect _CPU utilization_ every 15 seconds
 ```anylog
@@ -303,7 +305,7 @@ schedule time = 1 day and start = +1d and name = "Drop 1 day CPU data" task drop
 ```
 
 Note:
-* Drop partition command is detailed [here](anylog%20commands.md#drop-partition-command).
+* Drop partition command is detailed [here](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#drop-partition-command).
 * As partition name is not specified, only the oldest partition is dropped and the active partition is never dropped.
 
  

@@ -2,6 +2,7 @@
 title: Continuous Monitoring with Automated Alerts 
 description: Monitor node health, data volumes, resource usage, and configure automated alerts and scheduled tasks.
 layout: page
+source_path: "Continuous Monitoring with Automated Alerts.md"
 ---
 <!--
 ## Changelog
@@ -9,6 +10,8 @@ layout: page
 --> 
 
 AnyLog provides multiple layers of monitoring: real-time inspection via `get` commands, continuous polling via the `continuous` command, scheduler-driven metrics collection, streaming conditions for real-time alerting, and aggregator nodes for network-wide visibility.
+
+For per-command reference (`get status`, `get node info`, `get dictionary`, aggregator setup, and more), see [Monitoring Nodes](Monitoring%20Nodes.md#monitoring-nodes). For scheduler tasks, repeatable queries, and email/SMS alerts, see [Alerts and Monitoring](Alerts%20%26%20Monitoring.md#alerts-and-monitoring).
 
 ---
 
@@ -25,13 +28,13 @@ get node info cpu_percent  # CPU usage
 get disk free .         # available disk space
 ```
 
-See [Get Commands](anylog%20commands.md#get-command) for the full reference.
+See [Get Commands](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#get-command) for the full reference.
 
 ---
 
 ## Continuous monitoring
 
-`continuous` repeats a set of commands on a fixed interval. Press any key to stop.
+`continuous` repeats a set of commands on a fixed interval. Press any key to stop. See [Monitoring Nodes — continuous command](Monitoring%20Nodes.md#monitoring-nodes-operations) for the full command list.
 
 ```anylog
 continuous [seconds] [command1], [command2], ...
@@ -48,7 +51,7 @@ continuous 10 run client () sql my_data select max(timestamp), count(*) from pin
 
 ## Scheduler-based monitoring
 
-The scheduler runs tasks periodically without manual intervention. See [Background Services](scheduled%20pull.md#scheduled-pull) for how to start it.
+The scheduler runs tasks periodically without manual intervention. See [Alerts and Monitoring](Alerts%20%26%20Monitoring.md#invoking-a-scheduler) for how to start it.
 
 ### Schedule a monitoring task
 
@@ -65,6 +68,8 @@ schedule time = 5 minutes and name = "Row count" task get rows count where dbms 
 
 ### Store metrics in a database
 
+Store collected metrics in a local table using the scheduler. See [Monitoring Nodes — Organizing node status in a database table](Monitoring%20Nodes.md#organizing-node-status-in-a-database-table) for a full walkthrough.
+
 First, connect a database and partition the table:
 ```anylog
 connect dbms monitor where type = sqlite
@@ -76,12 +81,14 @@ Then schedule collection:
 schedule time = 15 seconds and name = "Store CPU" task get node info cpu_percent into dbms = monitor and table = cpu_percent
 ```
 
-Automate cleanup:
+Automate cleanup (see [partition](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#partition-command) and [drop partition](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#drop-partition-command) commands):
 ```anylog
 schedule time = 1 day and start = +1d and name = "Drop old CPU" task drop partition where dbms = monitor and table = cpu_percent
 ```
 
 ### View and manage scheduled tasks
+
+See [Alerts and Monitoring — View scheduled commands](Alerts%20%26%20Monitoring.md#view-scheduled-commands) and [Managing Tasks](Alerts%20%26%20Monitoring.md#managing-tasks) for pausing, resuming, and removing tasks.
 
 ```anylog
 get scheduler
@@ -92,7 +99,7 @@ get scheduler 1
 
 ## Streaming conditions (real-time alerts)
 
-Streaming conditions evaluate incoming data in real time and trigger actions when conditions are met — without querying the database.
+Streaming conditions evaluate incoming data in real time and trigger actions when conditions are met — without querying the database. See [Streaming Conditions](../../17-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md) for additional details.
 
 ### Set a condition
 
@@ -137,7 +144,7 @@ reset streaming conditions where dbms = my_data
 
 The SMTP client sends emails and SMS messages triggered by streaming conditions or scheduled tasks. Enable it first:
 
-> **Gmail accounts:** The `password` field must be a Google <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your account password. See [Background Services — SMTP](Background%20Services.md#smtp-client) for details.
+> **Gmail accounts:** The `password` field must be a Google <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your account password. See [Background Processes — SMTP](../../04-%20Core%20Concepts/Background%20Processes.md#smtp-client) for details.
 
 ```anylog
 run smtp client where email = alerts@company.com and password = mypassword and ssl = true
@@ -149,7 +156,7 @@ email to recipient@company.com where subject = "Alert" and message = "Node disk 
 sms to 6508147334 where gateway = tmomail.net and subject = "Alert" and message = "Threshold exceeded"
 ```
 
-See [Background Services — SMTP](Background%20Services.md#smtp-client).
+See [Background Processes — SMTP](../../04-%20Core%20Concepts/Background%20Processes.md#smtp-client) and [Alerts and Monitoring — Sending messages](Alerts%20%26%20Monitoring.md#sending-messages).
 
 ---
 
@@ -157,8 +164,7 @@ See [Background Services — SMTP](Background%20Services.md#smtp-client).
 
 AnyLog can send alerts to third-party services by issuing outbound `rest post` requests from streaming conditions, scheduled tasks, or the CLI. This works with any service that accepts an HTTP POST with a JSON body — including <a href="https://core.telegram.org/bots/api" target="_blank">Telegram</a>, <a href="https://pushover.net/api" target="_blank">Pushover</a>, Slack webhooks, and custom endpoints.
 
-Querying%20Data.md#querying-data
-See [Notification Services](Querying%20Data.md#querying-data) for Slack setup and additional examples.
+See [Notifications](../../07-%20Connectors%20%26%20Integrations/A-%20Northbound%20Connectors/Notifications.md#slack-webhooks) for Slack setup and additional examples.
 
 ### Telegram
 
@@ -190,7 +196,7 @@ set streaming condition where dbms = my_data and table = sensors if [value] > 85
 
 ## Aggregator node
 
-An aggregator node collects status pushed from multiple nodes, providing a network-wide view without requiring a database. It stores only the **current** status, not historical data.
+An aggregator node collects status pushed from multiple nodes, providing a network-wide view without requiring a database. It stores only the **current** status, not historical data. See [Monitoring Nodes — Organizing nodes status in an aggregator node](Monitoring%20Nodes.md#organizing-nodes-status-in-an-aggregator-node) for configuration examples.
 
 ### On each monitored node
 
@@ -223,7 +229,7 @@ monitor [topic] where ip = [node-ip] and name = [node-name] and info = [json-str
 
 ## Logging
 
-AnyLog maintains several logs that can be queried on the CLI:
+AnyLog maintains several logs that can be queried on the CLI. See [Logging Events](Logging%20Events.md) for details on each log type.
 
 ```anylog
 get error log               # system errors
@@ -248,6 +254,8 @@ reset event log
 
 ## Data node visibility
 
+Commands for inspecting data across Operator nodes and local tables. See [Monitoring Nodes — Monitoring data commands](Monitoring%20Nodes.md#monitoring-data-commands) and [Monitoring Calls — Get Operator](Monitoring%20Calls.md#get-operator).
+
 ```anylog
 get data nodes              # all Operator nodes and the tables they host
 get rows count              # row counts across all local tables
@@ -255,6 +263,8 @@ get operator                # local operator ingestion stats
 get operator inserts        # insert counts per table
 get operator summary        # summary of operator activity
 ```
+
+Use [Monitoring Calls — Get Streaming](Monitoring%20Calls.md#get-streaming) to inspect buffer status per table.
 
 Query row counts across the network:
 ```anylog
@@ -277,4 +287,4 @@ get node info net_io_counters bytes_recv
 get os process anylog
 ```
 
-See <a href="{{ '/docs/Getting-Started/get-commands/#resource-monitoring' | relative_url }}">Get Commands — Resource monitoring</a> for the full list.
+See [Get Commands](../../12-%20Commands%20%26%20CLI%20(Command%20Line%20Interface)/A-%20Command%20Categories/Anylog%20Commands.md#get-command) and [Monitoring Nodes](Monitoring%20Nodes.md#monitoring-state-commands) for the full list.
