@@ -25,8 +25,8 @@ requiring large-scale data movement.
 From AnyLog's point of view, a UNS is metadata about the actual data stored on the blockchain. It is up to the 
 user to decide how and where to use it within their infrastructure.
 
-<a href="../../imgs/uns_mqtt_tree.svg" target="_blank" rel="noopener">
-  <img src="../../imgs/uns_mqtt_tree.svg" alt="MQTT data struct">
+<a href="../imgs/uns_mqtt_tree.svg" target="_blank" rel="noopener">
+  <img src="../imgs/uns_mqtt_tree.svg" alt="MQTT data struct">
 </a>
 ---
 
@@ -180,7 +180,7 @@ a chart for the selected metric. Hovering a leaf surfaces the **`uns`** policy: 
 **`m2/pl1/dev2/altitude`**), **`dbms`** (**`new_company`**), **`table`** (**`altitude_2`**), and 
 **`source_node`** (**`op1@192.168.1.88:32148`**), consistent with ingestion from the operator on **`192.168.1.88`**.
 
-<img src="../../imgs/uns_dynamic_item_details.png" alt="Dynamic UNS in the web UI: tree m2/pl1/dev2, Item Details for temperature, policy tooltip on altitude" width="75%" />
+<img src="../imgs/uns_dynamic_item_details.png" alt="Dynamic UNS in the web UI: tree m2/pl1/dev2, Item Details for temperature, policy tooltip on altitude" width="75%" />
 
 The **`#`** multi-level wildcard subscribes to every topic under `M2/PL1/` (for example `M2/PL1/temperature` with a 
 scalar payload). Replace host, ports, topic prefix, **`dbms`**, and **`master_node`** with the values for your 
