@@ -5,9 +5,9 @@ layout: page
 visibility: public
 version: open source
 tags:
-    - notification
-    - northbound 
-    - rest
+- notification
+- northbound 
+- rest
 ---
 <!--
 ## Changelog
