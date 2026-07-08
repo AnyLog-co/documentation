@@ -158,6 +158,9 @@ As such, while the process could be automated, the configurations need to be man
 For example, insight regarding the amount of space left on the disk would probably need a notification to the IT
 department, while a faucet being turned off would need to notify a water engineer.
 
+* <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/notifications/row_count.al" target="_blank">Row Count</a> - Scan all the tables on the blockchain (based on the metadata) and check the row count
+* <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/notifications/smart_city_sensor_state.al" target="_blank">Check sensor</a> - If a sensor is expected to return a static value, send a notification if said value changes
+
 ### The Script
 
 1. Define params — these need to be defined per process
