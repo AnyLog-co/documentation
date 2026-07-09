@@ -37,37 +37,37 @@ opposed to needing to develop a full application for messaging.
 1. Go https://api.slack.com/apps/ 
 2. Under _Create_, Create an app from manifest 
 
-| <img src="../../assets/img/notification_slack_your_app.png" height="75%" width="75%" /> | <img src="../../assets/img/notification_slack_manifest.png" height="75%" width="75%" /> | 
+| <img src="../imgs/notification_slack_your_app.png" height="75%" width="75%" /> | <img src="../imgs/notification_slack_manifest.png" height="75%" width="75%" /> | 
 |:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
 
 3. Select the preferred channel 
 
-<img src="../../assets/img/notification_slack_workspace.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_workspace.png" height="50%" width="50%" />
 
 
 4. Press continue / next till the end 
 
 5. Select _Incoming Webhooks_
 
-<img src="../../assets/img/notification_slack_webhook.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_webhook.png" height="50%" width="50%" />
 
 6. Enable Webhooks
 
-<img src="../../assets/img/notification_slack_enable_webhooks.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
 
 7. At the bottom, add _Webbook_ to workspace
 
-<img src="../../assets/img/notification_slack_create_webhook.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
 
 
 8. Select which channel in Slack to send messages to 
 
 
-<img src="../../assets/img/notification_slack_select_channel.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
 
 9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in AnyLog
 
-<img src="../../assets/img/notification_slack_webhook_generated.png" height="50%" width="50%" />
+<img src="../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
 
 
 **Generated URL**: 
@@ -106,7 +106,7 @@ rest post where url = !webhook_url and body = !payload and headers = "{'Content-
 
 Once sent, an output would appear in the proper Slack channel
 
-<img src="../../assets/img/notification_slack_messsage.png"  height="50%" width="50%" />
+<img src="../imgs/notification_slack_messsage.png"  height="50%" width="50%" />
 
 **Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
 
