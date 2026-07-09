@@ -20,7 +20,7 @@ As such the document covers a few things:
 2. [The connection between AnyLog & `deployment-scripts`](#what-happens-in-the-docker-container)
 3. [Patches & Versions updates](#patches--version-updates)
 
-<img src="../imgs/deployment_stack_layers.png" height="25%" width="25%" />
+<img src="../imgs/deployment_stack_layers.png" height="50%" width="50%" />
 
 The document discusses AnyLog, but the same logic also works when deploying EdgeLake. 
 
