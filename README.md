@@ -181,6 +181,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Qlik%20Connector.md)
     * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Using%20Grafana.md)
 * **09- Integrations**
+  * [deployment process](09-%20Integrations/deployment%20process.md)
   * **A- Databases**
     * [configuring mongodb](09-%20Integrations/A-%20Databases/configuring%20mongodb.md)
     * [Postgres Connector](09-%20Integrations/A-%20Databases/Postgres%20Connector.md)
