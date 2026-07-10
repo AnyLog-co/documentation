@@ -34,40 +34,51 @@ opposed to needing to develop a full application for messaging.
 
 
 ### Steps
-1. Go https://api.slack.com/apps/ 
-2. Under _Create_, Create an app from manifest 
-
-| <img src="../imgs/notification_slack_your_app.png" height="75%" width="75%" /> | <img src="../imgs/notification_slack_manifest.png" height="75%" width="75%" /> | 
-|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
-
-3. Select the preferred channel 
-
-<img src="../imgs/notification_slack_workspace.png" height="50%" width="50%" />
-
-
-4. Press continue / next till the end 
-
-5. Select _Incoming Webhooks_
-
-<img src="../imgs/notification_slack_webhook.png" height="50%" width="50%" />
-
-6. Enable Webhooks
-
-<img src="../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
-
-7. At the bottom, add _Webbook_ to workspace
-
-<img src="../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
-
-
-8. Select which channel in Slack to send messages to 
-
-
-<img src="../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
-
-9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in AnyLog
-
-<img src="../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
+<ol>
+  <li>
+    Go to <a href="https://api.slack.com/apps/" target="_blank">https://api.slack.com/apps/</a>.
+  </li>
+  <li>
+    Under <i>Create</i>, create an app from manifest.
+    <table>
+      <tr>
+        <td align="center"><img src="../imgs/notification_slack_your_app.png" height="75%" width="75%" /></td>
+        <td align="center"><img src="../imgs/notification_slack_manifest.png" height="75%" width="75%" /></td>
+      </tr>
+    </table>
+  </li>
+  <li>
+    Select the preferred channel.
+    <br />
+    <img src="../imgs/notification_slack_workspace.png" height="50%" width="50%" />
+  </li>
+  <li>Press continue / next till the end.</li>
+  <li>
+    Select <i>Incoming Webhooks</i>.
+    <br />
+    <img src="../imgs/notification_slack_webhook.png" height="50%" width="50%" />
+  </li>
+  <li>
+    Enable Webhooks.
+    <br />
+    <img src="../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
+  </li>
+  <li>
+    At the bottom, add <i>Webhook</i> to the workspace.
+    <br />
+    <img src="../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
+  </li>
+  <li>
+    Select which channel in Slack to send messages to.
+    <br />
+    <img src="../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
+  </li>
+  <li>
+    When done, you should see a <i>webhook</i> URL. This will be used as part of your REST request in AnyLog.
+    <br />
+    <img src="../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
+  </li>
+</ol>
 
 
 **Generated URL**: 
