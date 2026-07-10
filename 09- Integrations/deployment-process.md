@@ -9,6 +9,14 @@ tags:
 - integration
 ---
 
+<!--
+Changed in this revision:
+- No content changes to this file — the review found no factual issues to fix here.
+- Added this changelog comment for consistency with the other two docs in this set.
+- Open item, not yet verified: confirm ../imgs/deployment_stack_layers.png actually resolves at that relative path
+  before publishing.
+-->
+
 # Deployment Integration
 
 The following document describes the relationship between the compiled source code (ie AnyLog agent) and deployment-scripts
