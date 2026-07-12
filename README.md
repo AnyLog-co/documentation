@@ -39,7 +39,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Contents
 
 * **01- Getting Started**
-  * [deployment-scripts](01-%20Getting%20Started/deployment-scripts.md)
+  * [deployment-scripts](00- archive/01/deployment-scripts.md)
   * [Executable](01-%20Getting%20Started/Executable.md)
   * [Getting Started](01-%20Getting%20Started/Getting%20Started.md)
   * [install-ova](01-%20Getting%20Started/install-ova.md)

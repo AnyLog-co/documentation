@@ -1,8 +1,12 @@
 ---
 title: "Deploy AnyLog Executable"
-description: ""
+description: Directions on how to deploy AnyLog as an executable directly on the machine, rather than via Docker.   
 layout: page
 source_path: "examples/Service AnyLog/Executable.md"
+visibility: private
+tags:
+  - getting-started
+  - install
 ---
 # Deploy AnyLog Executable
 

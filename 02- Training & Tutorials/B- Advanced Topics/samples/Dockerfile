@@ -61,7 +61,7 @@ WORKDIR $ANYLOG_PATH
 RUN mkdir -p $ANYLOG_HOME/source $ANYLOG_HOME/docker_files && \
     git clone -b os-dev https://github.com/AnyLog-co/deployment-scripts && \
     rm -rf $ANYLOG_PATH/deployment-scripts/.idea \
-           $ANYLOG_PATH/deployment-scripts/archive 
+           $ANYLOG_PATH/deployment-scripts/00- archive
 
 COPY source/* $ANYLOG_HOME/source
 COPY docker_files/setup.py $ANYLOG_HOME/docker_files/setup.py 
