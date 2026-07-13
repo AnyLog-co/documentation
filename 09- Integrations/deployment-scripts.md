@@ -1,22 +1,29 @@
 ---
-title: Deployment Scripts Overview
-description: How the deployment-scripts repository works — why it exists, how policies and scripts communicate, and the process vs thread execution model.
+title: Deployment Scripts — Integration Reference
+description: Internals reference — why deployment-scripts exists, how policies and scripts communicate, and the execution model behind them.
 layout: page
 visibility: public
 version: open source
 tags:
-- install
+- getting-started
 - integration
 ---
 
 <!--
-Changed in this revision:
-- Fixed typo in sample config policy JSON: `brokr_threads` -> `broker_threads`
-- Added missing `.int` casts on `rest_port` and `broker_port` in the sample policy, to match what config_policy_networking.al actually does
-- Restored `blockchain.md` to the repository tree (it exists in node-deployment/ but had been dropped from a prior edit)
-- Fixed "a agent" -> "an agent"
-- Added a cross-link to deployment-process.md (build/runtime mechanics) and customizing-scripts.md (how to write/point at your own scripts)
-- Reframed the process vs thread section to make explicit that it exists mainly for people who plan to write or modify their own scripts
+- 2026-07-09 | Changed in this revision:
+    - Fixed heading level: "Last resort: forking the shipped scripts directly" was a sub-heading (###) under option 3;
+      promoted to a top-level option (##) since it's a fourth choice, not a detail of option 3
+    - Added an explicit cross-link to deployment-process.md next to the condensed table, so the two tables don't
+    silently drift out of sync if the build logic changes
+    - Expanded the "entry script isn't named main.al" section into two concrete, copy-pasteable overrides:
+    one for docker-compose, one for `docker run` — including the tradeoff of bypassing deploy_anylog.sh's
+  other setup steps when you do this
+- 2026-07-09 | Changed in this revision:
+    - customizing-scripts.md was retired (merged into deployment-process.md). The cross-link at the top now
+      points to deployment-process.md's "Pointing at Your Own Deployment-Scripts" / entry-point-override
+      sections instead.
+    - No other content changes — this file remains the internals/mechanics reference (policy/script
+      communication, process vs thread). That content stays here rather than moving to deployment-process.md.
 -->
 
 # AnyLog / EdgeLake Deployment Scripts — How They Work
@@ -38,8 +45,8 @@ The core idea: separate what an agent should be (declared once, as config) from 
 once, reused everywhere).
 
 For the full build-time/runtime mechanics of *how* this repo actually gets loaded into a container (default image, host
-bind mount, reclone-at-startup, or a secondary container), see [Deployment Integration](deployment-process.md). If you
-want to write, update, or point at your own copy of these scripts, see [Customizing Deployment Scripts](customizing-scripts.md).
+bind mount, reclone-at-startup, or a secondary container), how to point at your own repo, and how to override the entry
+point, see [Deployment Integration](deployment-process.md).
 
 **Repository Structure**
 ```
@@ -97,10 +104,10 @@ Everything starts with one command:
 
 ```bash
 # AnyLog
-python3 anylog.py process deployment-scripts/node-deployment/main.al
+./anylog_node process deployment-scripts/node-deployment/main.al
 
 # EdgeLake
-python3 edgelake.py process deployment-scripts/node-deployment/main.al
+./edgelake_node process deployment-scripts/node-deployment/main.al
 ```
 
 When main initiates it does the following steps:
@@ -141,7 +148,7 @@ A **policy** is a piece of declarative JSON, published to the AnyLog blockchain/
       'if !operator_id and !blockchain_source != master then run operator where ...',
       'process !anylog_path/deployment-scripts/southbound-monitoring/config_monitoring_policy.al',
       'process !anylog_path/deployment-scripts/southbound-industrial/industrial_policy.al',
-      'if !deploy_local_script == true then process !local_scripts/local_script.al',
+      'if !deploy_local_script == true then process !local_scripts/node-deployment/local_script.al',
       'if !is_edgelake == false then process !local_scripts/policies/license_policy.al'
     ],
     'id' : '2e54c04ce4e1241d41e68cbbd31a2469',
@@ -185,7 +192,7 @@ licensing).
 
 The reason this repository cares about `process` vs. `thread` at all isn't academic — it matters the moment you go from
 *using* the default deployment scripts to *writing or modifying your own* (see
-[Customizing Deployment Scripts](customizing-scripts.md)). Every script you add has to make the same choice every
+[Deployment Integration](deployment-process.md)). Every script you add has to make the same choice every
 built-in script makes: does this need to block until it's done, or can it run alongside everything else?
 
 Both commands do the same basic thing — **run the commands in a script file** — but they differ in *how* that execution
@@ -230,9 +237,3 @@ and step B are independent and both need to run continuously/concurrently, `thre
 
 There's an exception to the rule though — when running a process in a scheduled manner, as the deployment-scripts do
 with monitoring, each command runs in its own thread otherwise the CLI would not be accessible to the user most of the time.
-
-
-## Customization: Extending Without Breaking the Defaults
-
-Please visit [Customizing Deployment Scripts](customizing-scripts.md) for a more detailed description on how to create your own deployment
-process.

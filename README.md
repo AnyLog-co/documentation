@@ -39,7 +39,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Contents
 
 * **01- Getting Started**
-  * [deployment-scripts](00- archive/01/deployment-scripts.md)
+  * [deployment-scripts](01-%20Getting%20Started/deployment-scripts.md)
   * [Executable](01-%20Getting%20Started/Executable.md)
   * [Getting Started](01-%20Getting%20Started/Getting%20Started.md)
   * [install-ova](01-%20Getting%20Started/install-ova.md)
@@ -181,7 +181,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Qlik%20Connector.md)
     * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Using%20Grafana.md)
 * **09- Integrations**
-  * [deployment process](09-%20Integrations/deployment%20process.md)
+  * [deployment-process](09-%20Integrations/deployment-process.md)
+  * [deployment-scripts](09-%20Integrations/deployment-scripts.md)
   * **A- Databases**
     * [configuring mongodb](09-%20Integrations/A-%20Databases/configuring%20mongodb.md)
     * [Postgres Connector](09-%20Integrations/A-%20Databases/Postgres%20Connector.md)

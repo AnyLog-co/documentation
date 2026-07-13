@@ -11,10 +11,16 @@ tags:
 
 <!--
 Changed in this revision:
-- No content changes to this file — the review found no factual issues to fix here.
-- Added this changelog comment for consistency with the other two docs in this set.
-- Open item, not yet verified: confirm ../imgs/deployment_stack_layers.png actually resolves at that relative path
-  before publishing.
+- Merged customizing-scripts.md into this file; that file is now retired. Two pieces moved over:
+  1. A practical framing sentence added right after the Stage A table ("if you've created your own repo
+     with the same structure, option 3 or 2 is usually the one you want...") — everything else in that
+     table was already an exact duplicate of Stage A, so only the missing framing was worth carrying over.
+  2. A new "Overriding the Entry Point" section (docker-compose / docker run examples for when your custom
+     entry script isn't named main.al) — this was genuinely new content, not duplicated anywhere else.
+- customizing-scripts.md's local_script.al walkthrough was NOT carried over — it's already covered (in more
+  detail, with both the auto-run and manual-apply paths) in 01- Getting Started's deployment-scripts.md.
+- Open item, not yet verified: confirm ../imgs/deployment_stack_layers.png actually resolves at that relative
+  path before publishing.
 -->
 
 # Deployment Integration
@@ -26,11 +32,33 @@ As such the document covers a few things:
 
 1. [How to deploy AnyLog (simple)](#initial-deployment)
 2. [The connection between AnyLog & `deployment-scripts`](#what-happens-in-the-docker-container)
-3. [Patches & Versions updates](#patches--version-updates)
+3. [Overriding the Entry Point](#overriding-the-entry-point)
+4. [Patches & Versions updates](#patches--version-updates)
 
 <img src="../imgs/deployment_stack_layers.png" height="50%" width="50%" />
 
 The document discusses AnyLog, but the same logic also works when deploying EdgeLake. 
+
+## The break between AnyLog and deployment-scripts
+
+A running node is really two independent pieces:
+
+```
+┌─────────────────────────────────┐
+│  AnyLog / EdgeLake binary       │  ← the engine — compiled, never edited
+├─────────────────────────────────┤
+│  deployment-scripts (git repo)  │  ← the configuration — yours to read, fork, or customize
+└─────────────────────────────────┘
+```
+
+- **The binary** is the compiled AnyLog/EdgeLake runtime. It knows how to execute commands and `.al` script files, but
+it doesn't know anything about *what* to run on its own.
+- **`deployment-scripts`** is what tells the binary what to actually do — which services to start, which database
+to connect, which policies to publish. It's plain text, not compiled, and it's designed to be read, forked, or edited.
+
+This split is why you never need to rebuild the AnyLog image just to change how a node behaves — you only need to
+change the scripts it's pointed at.
+
 
 ## Initial Deployment
 
@@ -65,6 +93,10 @@ The build script picks one of four modes, in order:
 | 2 | `DEPLOYMENTS_REPO` is set and is an existing **local directory** on the host | **Host bind mount.** Compose is rewritten to mount that directory directly at `/app/deployment-scripts`, and the named volume + init-service references are stripped out entirely. Fully static — no cloning, no copying. |
 | 3 | `DEPLOYMENTS_REPO` is an `http://` or `https://` **URL** | **Reclone at startup.** No volume is mounted at all at build time; the agent clones the repo itself when it starts (see Stage B below). |
 | 4 | `DEPLOYMENTS_REPO` is set but matches none of the above (e.g. a docker image reference) | **Secondary deployment-scripts container.** A one-shot helper service is injected into the compose file: `image: ${DEPLOYMENTS_REPO}:${DEPLOYMENTS_BRANCH}`, which copies `/app/deployment-scripts` out of that image into the shared `${CONTAINER_NAME}-local-scripts` named volume, then exits. The main service waits on it (`condition: service_completed_successfully`) before starting. |
+
+So if you've simply created your own repo with the same structure, **option 3** (or **option 2**, if it's a local
+directory) is usually the one you want — point `DEPLOYMENTS_REPO`/`DEPLOYMENTS_BRANCH` at it and the rest of the
+machinery (volumes, cloning) is handled for you.
 
 > The same build script also has an unrelated block detecting `DOCKER_SOCKET` and setting `DOCKER_GID` (for Docker-in-Docker 
 > support). That's a separate concern from deployment-scripts selection.
@@ -109,6 +141,55 @@ fi
 
 *(The "download the repo as a docker container, `DEPLOYMENTS_BRANCH` as the tag" behavior from the original description 
 is real — it's Option 4 above, implemented at build time as a helper compose service rather than inside this runtime script.)*
+
+---
+
+## Overriding the Entry Point
+
+Pointing `DEPLOYMENTS_REPO`/`DEPLOYMENTS_BRANCH` at your own repo (Stage A above) determines *which copy* of
+deployment-scripts loads — but the container's `ENTRYPOINT` (`/app/deploy_anylog.sh`) separately hardcodes the path it
+runs once that repo is in place:
+
+```bash
+${ANYLOG_PATH}/${APP_NAME} process $ANYLOG_PATH/deployment-scripts/node-deployment/main.al
+```
+
+This path is fixed in the entrypoint script itself — it doesn't follow `$LOCAL_SCRIPTS`/`$ANYLOG_PATH` the way
+`main.al`'s *internal* references do. So if your own repo's entry script isn't named `main.al`, you have two options:
+
+**Simplest — no override needed:** name (or copy) your custom entry script to `node-deployment/main.al` within your
+repo. The entrypoint picks it up with zero further changes, regardless of which Stage A option loaded your repo.
+
+**If you need a genuinely different filename**, override the container's entrypoint so it calls your script's actual
+path instead of the hardcoded one. This bypasses `deploy_anylog.sh`'s other setup steps (OpenBao secret fetch,
+version/arch detection, deployment-scripts resolution, the Kubernetes `/etc/hosts` patch, etc.) — only do this if
+you've already handled those yourself, or if you maintain your own modified copy of `deploy_anylog.sh` that still does
+them before calling your script.
+
+*Docker Compose:*
+```yaml
+services:
+  anylog-node:
+    image: your-anylog-image
+    environment:
+      - ANYLOG_PATH=/app
+      - APP_NAME=anylog_v1.0.0_x86_64   # or however your image derives this
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - >
+        ${ANYLOG_PATH}/${APP_NAME} process ${ANYLOG_PATH}/deployment-scripts/node-deployment/my_custom_main.al
+```
+
+*Docker Run:*
+```bash
+docker run \
+  --entrypoint /bin/bash \
+  your-anylog-image \
+  -c '${ANYLOG_PATH}/${APP_NAME} process ${ANYLOG_PATH}/deployment-scripts/node-deployment/my_custom_main.al'
+```
+
+Both forms replace `deploy_anylog.sh` entirely for that container, so double-check you don't need anything it would
+otherwise have done for you before reaching this line.
 
 ---
 
