@@ -580,7 +580,7 @@ Client Certificates enable the following:
 
 Notes:
 This setup allows Secure Socket Layer (SSL) between a server (AnyLog Node) and a client (the 3rd party application).
-Bekow is an example of the Server Side (AnyLog) REST sockets configuration to allow SSL Certificates: 
+Below is an example of the Server Side (AnyLog) REST sockets configuration to allow SSL Certificates: 
 <pre> 
 run rest server !ip !rest_port where timeout = 0 and threads = 6 and ssl = true and ca_org = AnyLog and server_org = "Node 128"
 </pre>
