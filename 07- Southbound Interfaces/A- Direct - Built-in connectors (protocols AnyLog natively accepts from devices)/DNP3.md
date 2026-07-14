@@ -1,6 +1,15 @@
-# DNP3
+---
+title: DNP3
+description: Pull data from DNP3 outstations into AnyLog as master over TCP or TLS using run plc client.
+layout: page
+source_path: "DNP3.md"
+---
+<!--
+## Changelog
+- 2026-07-14 | Created document
+-->
 
-AnyLog can act as a **DNP3 master** over **TCP** or **TLS** (using **hostname** and **port**, default **20000**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [Modbus](https://github.com/AnyLog-co/documentation/blob/pre-develop/07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20(protocols%20AnyLog%20natively%20accepts%20from%20devices)/MODBUS.md), OPC UA, and EtherNet/IP.
+AnyLog can act as a **DNP3 master** over **TCP** or **TLS** (using **hostname** and **port**, default **20000**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [Modbus](MODBUS.md), [OPC-UA](OPC UA Integration.md#continuous-data-pull), and [EtherNet/IP](../EtherNet%20IP.md#the-run-plc-client-command).
 
 ---
 
@@ -70,7 +79,7 @@ Optional **TLS** (all three PEM paths required when `enable_tls = true`):
 
 Alias: **`get dnp3 values`** (same keywords).
 
-With TLS (certificates from `certs/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
+With TLS (certificates from `DNP3_certificates/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
 
 ```anylog
 <get dnp3 values where
@@ -79,9 +88,9 @@ With TLS (certificates from `certs/ca_chain/` — see [DNP3 Out Station Testing]
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = certs/ca_chain/anylogDNP3ca.cert and
-    tls_cert = certs/ca_chain/master1.cert and
-    tls_key = certs/ca_chain/master1.key and
+    tls_ca = DNP3_certificates/ca_chain/anylogDNP3ca.cert and
+    tls_cert = DNP3_certificates/ca_chain/master1.cert and
+    tls_key = DNP3_certificates/ca_chain/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
@@ -147,7 +156,9 @@ run plc client where type = dnp3 and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 ```
 
-**Table names** follow the same pattern as plain **`dynamic = true`** (client **`name`** plus map **`name`**). Under UNS, layout follows **UNS policies** — see [Unified Namespace](https://github.com/AnyLog-co/documentation/tree/pre-develop/11-%20UNS%20%28Unified%20Name%20Spaces%29) in the AnyLog documentation.
+**Table names** follow the **same pattern** as plain **`dynamic = true`** (client **`name`** plus map **`name`**, e.g. **`dnp3_uns_analog_0`** for the example above). Under UNS, the **read value** is usually stored in a **column named like the tag**—the map **`name`** (here **`analog_0`**), not a generic **`value`** column.
+
+With **`namespace`**, table and column layout follow **UNS policies**. **`namespace`** and **`master_node`** drive how tables are registered in the UNS. See [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md) for background.
 
 ---
 
@@ -201,7 +212,7 @@ c = counter, b = binary, d = doublebit, a = analog, o = octet string, 'quit' = e
 Generate test certificates first:
 
 ```bash
-cd certs/ca_chain
+cd DNP3_certificates/ca_chain
 bash create_certificates.sh
 ```
 
@@ -215,12 +226,12 @@ From the opendnp3 build directory, start the TLS demo with three PEM paths (CA, 
 ```bash
 cd ~/opendnp3/build
 ./outstation-tls-demo \
-  /path/to/AnyLog-Network/certs/ca_chain/anylogDNP3ca.cert \
-  /path/to/AnyLog-Network/certs/ca_chain/outstation1.cert \
-  /path/to/AnyLog-Network/certs/ca_chain/outstation1.key
+  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/anylogDNP3ca.cert \
+  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/outstation1.cert \
+  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/outstation1.key
 ```
 
-Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). AnyLog master uses the **master** certificate files from the same CA chain:
+Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). AnyLog master uses the **master** certificate files from the same CA chain.
 
 Example AnyLog one-shot read:
 
@@ -231,14 +242,14 @@ Example AnyLog one-shot read:
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = certs/ca_chain/anylogDNP3ca.cert and
-    tls_cert = certs/ca_chain/master1.cert and
-    tls_key = certs/ca_chain/master1.key and
+    tls_ca = DNP3_certificates/ca_chain/anylogDNP3ca.cert and
+    tls_cert = DNP3_certificates/ca_chain/master1.cert and
+    tls_key = DNP3_certificates/ca_chain/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
 
-More detail: [certs/ca_chain/README.md](certs/ca_chain/README.md).
+More detail: [DNP3_certificates/ca_chain/README.md](DNP3_certificates/ca_chain/README.md).
 
 ### Third-party simulator
 
@@ -263,3 +274,13 @@ Another option is a commercial DNP3 outstation simulator, for example the [Freyr
 | `namespace` | UNS path (DNP3 + **`dynamic = true`** only) |
 | `master_node` | Required when **`namespace`** is set |
 | `enable_tls`, `tls_ca`, `tls_cert`, `tls_key` | Optional TLS (all three PEM paths required) |
+
+---
+
+## Related
+
+- [Adding Data to Nodes in the Network](../../06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md#the-southbound-connectors-diagram)
+- [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
+- [Modbus](MODBUS.md)
+- [OPC-UA](OPC UA Integration.md)
+- [EtherNet/IP](../EtherNet%20IP.md)
