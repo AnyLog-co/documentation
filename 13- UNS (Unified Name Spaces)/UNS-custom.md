@@ -3,11 +3,17 @@ title: Custom UNS (data stream, ISA-95)
 description: Example of hand-authored UNS policies for a data_stream_isa95 hierarchy with ISA-95 metadata, inserts, and blockchain queries
 layout: page
 source_path: "UNS-custom.md"
+tags:
+- UNS
+- MCP
+- example
 ---
 
 <!--
 ## Changelog
 - 2026-04-22 | Initial UNS_custom example (data_stream_isa95 root, stream1, d1/d2 devices)
+- 2026-07-14 | Reconciled duplicate copies (13- UNS/UNS-custom.md and 12- MCP & LLMs/ZZZ UNS-custom.md) into one
+              canonical version; no content differences found, only link-syntax cosmetics
 -->
 
 This page records an end-to-end pattern: define **`uns`** policy dictionaries, insert them on the blockchain with **`blockchain insert`**, then verify with **`blockchain get uns`**. Parent IDs from earlier inserts are reused for child policies.

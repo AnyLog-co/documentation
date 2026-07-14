@@ -3,60 +3,66 @@ title: Unified Namespace
 description: How AnyLog generates and manages a Unified Namespace (UNS) for operational data
 layout: page
 source_path: "UNS.md"
+tags:
+- UNS
+- MCP
+
 ---
 
 <!--
 ## Changelog
 - 2026-04-18 | Created document; covers UNS concept, auto-generated vs user-defined, dynamic=true ingestion, and UNS policy structure
 - 2026-04-25 | hyperlinks
+- 2026-07-14 | Reconciled duplicate copies (13- UNS/UNS.md and 12- MCP & LLMs/ZZZ UNS.md) into one canonical version;
+              fixed a duplicated "see" in the Auto-Generated vs. User-Defined section
 -->
 
 # Unified Namespace
 
-A <a href="https://www.iiot.university/blog/what-is-uns%3F" target="_blank">Unified Namespace (UNS)</a> is a modeling 
-tool for organizing and representing physical or logical assets in a structured hierarchy — similar in purpose to 
-Historian Asset Frameworks, but designed for decentralized, real-time operational environments.
+A [Unified Namespace (UNS)](https://www.iiot.university/blog/what-is-uns%3F) is a modeling tool for organizing and
+representing physical or logical assets in a structured hierarchy — similar in purpose to Historian Asset
+Frameworks, but designed for decentralized, real-time operational environments.
 
-Unlike traditional architectures where operational data must be centralized before it becomes broadly accessible, 
-AnyLog's UNS enables systems to interact with data as it is generated across the network. This creates a single, 
-consistent view of operational data that can be accessed by multiple applications simultaneously — without 
+Unlike traditional architectures where operational data must be centralized before it becomes broadly accessible,
+AnyLog's UNS enables systems to interact with data as it is generated across the network. This creates a single,
+consistent view of operational data that can be accessed by multiple applications simultaneously — without
 requiring large-scale data movement.
 
-From AnyLog's point of view, a UNS is metadata about the actual data stored on the blockchain. It is up to the 
+From AnyLog's point of view, a UNS is metadata about the actual data stored on the blockchain. It is up to the
 user to decide how and where to use it within their infrastructure.
 
-<a href="../imgs/uns_mqtt_tree.svg" target="_blank" rel="noopener">
-  <img src="../imgs/uns_mqtt_tree.svg" alt="MQTT data struct">
-</a>
+![MQTT data struct](../imgs/uns_mqtt_tree.svg)
+
 ---
 
 ## Auto-Generated vs. User-Defined
 
 AnyLog supports two approaches to UNS creation, which can be used independently or together.
 
-**Auto-generated UNS** — when data arrives dynamically via MQTT, OPC-UA, or other formats, AnyLog builds a 
-hierarchical structure automatically from the topic or path of the incoming data. This lets users drill down 
+**Auto-generated UNS** — when data arrives dynamically via MQTT, OPC-UA, or other formats, AnyLog builds a
+hierarchical structure automatically from the topic or path of the incoming data. This lets users drill down
 the namespace tree to find any data point without any manual configuration.
 
-**User-defined UNS** — users can define their own hierarchical structure explicitly. This supports data sources 
-that don't arrive dynamically and gives teams the ability to model assets in a way that reflects their own 
+**User-defined UNS** — users can define their own hierarchical structure explicitly. This supports data sources
+that don't arrive dynamically and gives teams the ability to model assets in a way that reflects their own
 organizational or project structure. This is an ability most historians do not support.
 
-The UNS structure can follow a rigid standard like <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard" target="_blank">ISA-95</a>, 
-or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a type of metadata, both approaches can 
-coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
+The UNS structure can follow a rigid standard like [ISA-95](https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard),
+or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a type of metadata, both approaches
+can coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
 
-For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see [Custom UNS (data stream, ISA-95)](UNS-custom.md).
+For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see
+[Custom UNS (data stream, ISA-95)](UNS-custom.md).
 
 ---
 
 ## Ingesting Data with `dynamic=true`
 
-When setting `dynamic=true` in a `run msg client` command, the MQTT message client switches from mapping-based 
+When setting `dynamic=true` in a `run msg client` command, the MQTT message client switches from mapping-based
 processing to scalar-value processing — similar to how OPC-UA data is handled.
 
-In this mode, AnyLog expects each incoming message to carry a **single scalar value** (integer, float, string, 
-or boolean) rather than a full JSON payload. The topic path itself becomes the namespace, and AnyLog 
+In this mode, AnyLog expects each incoming message to carry a **single scalar value** (integer, float, string,
+or boolean) rather than a full JSON payload. The topic path itself becomes the namespace, and AnyLog
 automatically generates a UNS hierarchy from it.
 
 ```anylog
@@ -71,18 +77,20 @@ automatically generates a UNS hierarchy from it.
     )>
 ```
 
-In the example above, the `#` wildcard subscribes to all topics under `Enterprise C/tff/PCV7X`. 
+In the example above, the `#` wildcard subscribes to all topics under `Enterprise C/tff/PCV7X`.
 
-Each arriving message — for example `Enterprise C/tff/PCV7X/percent` with value `50` — is stored directly using the 
-topic path as the namespace address, with no mapping policy required. 
+Each arriving message — for example `Enterprise C/tff/PCV7X/percent` with value `50` — is stored directly using the
+topic path as the namespace address, with no mapping policy required.
 
-`dynamic=true` topic configuration tells the message client to not only store the data, but also automatically crate
-a UNS structure for it as part of the the blockchain's metadata. 
-
+`dynamic=true` topic configuration tells the message client to not only store the data, but also automatically
+create a UNS structure for it as part of the blockchain's metadata.
 
 ### Example: ProveIt virtual factory (authenticated MQTT)
 
-The **ProveIt** demo MQTT broker **`virtualfactory.proveit.services`** exposes read-only credentials. Point **`master_node`** at your AnyLog master (here **`192.168.1.88:32048`**). Use **`dynamic=true`** on topic **`Enterprise B/Metric/input/#`** and logical DBMS **`new_company_b`** (connect that DBMS on the operator before starting the client, if needed).
+The **ProveIt** demo MQTT broker **`virtualfactory.proveit.services`** exposes read-only credentials. Point
+**`master_node`** at your AnyLog master (here **`192.168.1.88:32048`**). Use **`dynamic=true`** on topic
+**`Enterprise B/Metric/input/#`** and logical DBMS **`new_company_b`** (connect that DBMS on the operator before
+starting the client, if needed).
 
 ```anylog
 <run msg client where
@@ -98,10 +106,10 @@ The **ProveIt** demo MQTT broker **`virtualfactory.proveit.services`** exposes r
 
 ### Example: Mosquitto (dev) on a LAN broker
 
-<a href="https://mosquitto.org/" target="_blank">Mosquitto</a> is a common MQTT broker for local development. In this 
-pattern, Mosquitto listens on **`192.168.1.88:1883`**, and the AnyLog **master** (ledger) is reachable 
-at **`192.168.1.88:32048`**. Connect the logical DBMS on the operator, then start the message client with 
-**`dynamic=true`** so topic paths under **`M2/PL1/`** drive auto-generated UNS and storage under **`new_company`**.
+[Mosquitto](https://mosquitto.org/) is a common MQTT broker for local development. In this pattern, Mosquitto
+listens on **`192.168.1.88:1883`**, and the AnyLog **master** (ledger) is reachable at **`192.168.1.88:32048`**.
+Connect the logical DBMS on the operator, then start the message client with **`dynamic=true`** so topic paths
+under **`M2/PL1/`** drive auto-generated UNS and storage under **`new_company`**.
 
 ```anylog
 connect dbms new_company where type = sqlite
@@ -118,8 +126,8 @@ connect dbms new_company where type = sqlite
     )>
 ```
 
-With the <a href="https://mosquitto.org/download/" target="_blank">Mosquitto clients</a> installed, you can publish 
-scalar payloads to the same broker for testing (`-m` is the message body, `-t` is the topic):
+With the [Mosquitto clients](https://mosquitto.org/download/) installed, you can publish scalar payloads to the
+same broker for testing (`-m` is the message body, `-t` is the topic):
 
 ```bash
 mosquitto_pub -p 1883 -h 192.168.1.88 -m 98.3 -t M2/PL1/DEV1/power
@@ -127,8 +135,8 @@ mosquitto_pub -p 1883 -h 192.168.1.88 -m 1 -t M2/PL1/DEV1/active
 mosquitto_pub -p 1883 -h 192.168.1.88 -m "stopped" -t M2/PL1/DEV1/status
 ```
 
-On the operator, **`get msg client`** shows the subscription, message counters, and how **`dynamic=true`** materialized 
-topics into tables under **`new_company`**:
+On the operator, **`get msg client`** shows the subscription, message counters, and how **`dynamic=true`**
+materialized topics into tables under **`new_company`**:
 
 ```text
 AL op1 > get msg client
@@ -155,8 +163,8 @@ Connection:   Connected
 AL op1 >
 ```
 
-**`get streaming`** shows streaming statistics for the same dynamic tables (rows staged, buffer fill, time until the 
-next process cycle):
+**`get streaming`** shows streaming statistics for the same dynamic tables (rows staged, buffer fill, time until
+the next process cycle):
 
 ```text
 AL op1 > get streaming
@@ -174,16 +182,17 @@ new_company.altitude_1|     0|    0| |       10|       10|     0|         0|    
 AL op1 >
 ```
 
-In the **Remote GUI**, the same dynamic hierarchy appears as a drill-down tree — for example **`Root / m2 / pl1 / dev2`** 
-with leaves such as **`altitude`**, **`power`**, and **`temperature`**. **Item Details** shows recent scalar samples and 
-a chart for the selected metric. Hovering a leaf surfaces the **`uns`** policy: **`namespace`** (for example 
-**`m2/pl1/dev2/altitude`**), **`dbms`** (**`new_company`**), **`table`** (**`altitude_2`**), and 
-**`source_node`** (**`op1@192.168.1.88:32148`**), consistent with ingestion from the operator on **`192.168.1.88`**.
+In the **Remote GUI**, the same dynamic hierarchy appears as a drill-down tree — for example
+**`Root / m2 / pl1 / dev2`** with leaves such as **`altitude`**, **`power`**, and **`temperature`**. **Item
+Details** shows recent scalar samples and a chart for the selected metric. Hovering a leaf surfaces the **`uns`**
+policy: **`namespace`** (for example **`m2/pl1/dev2/altitude`**), **`dbms`** (**`new_company`**), **`table`**
+(**`altitude_2`**), and **`source_node`** (**`op1@192.168.1.88:32148`**), consistent with ingestion from the
+operator on **`192.168.1.88`**.
 
-<img src="../imgs/uns_dynamic_item_details.png" alt="Dynamic UNS in the web UI: tree m2/pl1/dev2, Item Details for temperature, policy tooltip on altitude" width="75%" />
+![Dynamic UNS in the web UI: tree m2/pl1/dev2, Item Details for temperature, policy tooltip on altitude](../imgs/uns_dynamic_item_details.png)
 
-The **`#`** multi-level wildcard subscribes to every topic under `M2/PL1/` (for example `M2/PL1/temperature` with a 
-scalar payload). Replace host, ports, topic prefix, **`dbms`**, and **`master_node`** with the values for your 
+The **`#`** multi-level wildcard subscribes to every topic under `M2/PL1/` (for example `M2/PL1/temperature` with
+a scalar payload). Replace host, ports, topic prefix, **`dbms`**, and **`master_node`** with the values for your
 environment (you can use **`master_node = !ledger_conn`** if that is already set in the dictionary).
 
 | Mode | Input format | Schema required | UNS generated |
@@ -198,8 +207,8 @@ environment (you can use **`master_node = !ledger_conn`** if that is already set
 
 ## UNS Policy Structure
 
-Whether auto-generated or user-defined, each level of the namespace hierarchy is represented as a `uns` policy 
-stored on the blockchain. Each policy captures the node's name, its full namespace path, its level in the 
+Whether auto-generated or user-defined, each level of the namespace hierarchy is represented as a `uns` policy
+stored on the blockchain. Each policy captures the node's name, its full namespace path, its level in the
 hierarchy, and — at the lower levels — the database and table where the data lives.
 
 ### Hierarchy levels
@@ -278,29 +287,29 @@ The following shows the UNS policies generated for `Enterprise C / tff / PCV7X /
 }
 ```
 
-Each policy links to its parent via `parent` (the parent policy's `id`), forming a traversable tree. Because 
-these policies live on the blockchain, the hierarchy is immutable and consistent for any consumer — whether 
-that's an analyst, a monitoring dashboard, or an AI agent — regardless of whether the underlying device has 
+Each policy links to its parent via `parent` (the parent policy's `id`), forming a traversable tree. Because
+these policies live on the blockchain, the hierarchy is immutable and consistent for any consumer — whether
+that's an analyst, a monitoring dashboard, or an AI agent — regardless of whether the underlying device has
 changed its name, IP address, or hardware vendor.
 
 ---
 
 ## Why This Matters
 
-The practical value of UNS becomes clearest when thinking about who — or what — is consuming the data. 
-People are generally forgiving about data formats, but AI and automation systems perform significantly better 
+The practical value of UNS becomes clearest when thinking about who — or what — is consuming the data.
+People are generally forgiving about data formats, but AI and automation systems perform significantly better
 when data is returned in a consistent, predictable structure.
 
 AnyLog addresses this in two ways:
 
-All data retrieval from nodes happens through SQL queries against the network. The interface is always the same 
-regardless of what's underneath — whether blob data stored in S3-compatible buckets or time-series data in 
+All data retrieval from nodes happens through SQL queries against the network. The interface is always the same
+regardless of what's underneath — whether blob data stored in S3-compatible buckets or time-series data in
 SQLite or PostgresSQL.
 
-The UNS lives in the metadata layer on the blockchain, which means it is guaranteed to be present and 
-consistent for anyone querying the system. This allows both users and AI agents to reliably drill down to 
-information about a specific device or sensor — even if that device has changed its name, IP, or manufacturer 
+The UNS lives in the metadata layer on the blockchain, which means it is guaranteed to be present and
+consistent for anyone querying the system. This allows both users and AI agents to reliably drill down to
+information about a specific device or sensor — even if that device has changed its name, IP, or manufacturer
 (for example, switching from a Siemens PLC to a Schneider).
 
-Combining this with AnyLog's decentralized architecture removes the bottleneck of routing data through a 
+Combining this with AnyLog's decentralized architecture removes the bottleneck of routing data through a
 central platform, so analytics can happen where the data lives, at the speed it is being generated.
