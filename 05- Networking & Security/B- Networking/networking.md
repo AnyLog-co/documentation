@@ -1,3 +1,19 @@
+---
+title: AnyLog Networking
+description: How to choose NETWORK_TYPE and NIC_TYPE, and how binding controls which addresses an AnyLog agent accepts connections from.
+layout: page
+visibility: public
+version: open source
+tags:
+- networking
+- configuration
+- getting-started
+---
+ 
+<!--
+## Changelog
+- 2026-07-13 | Created document
+-->
 # AnyLog Networking
 
 Networking is a critical component of AnyLog, as it's the part that connects agents together to form the Edge Data 

@@ -1,3 +1,22 @@
+---
+title: Certificate Authority (CA)
+description: What a Nebula mesh's Certificate Authority does, why it's a separate concern from the lighthouse, and how to handle the CA key safely.
+layout: page
+visibility: hidden
+version: open source
+tags:
+- networking
+- security
+- nebula
+- third-party
+- index
+---
+ 
+<!--
+## Changelog
+- 2026-07-13 | Created document
+-->
+
 # Certificate Authority (CA)
 
 > This document assumes familiarity with Nebula's lighthouse/host roles, covered in 

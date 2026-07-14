@@ -1,3 +1,21 @@
+---
+title: Overlay Networking
+description: What an overlay network is, why AnyLog uses Nebula as a worked example, and how to deploy Nebula as a lighthouse or as a host.
+layout: page
+visibility: public
+version: open source
+tags:
+- networking
+- security
+- nebula
+- third-party
+---
+ 
+<!--
+## Changelog
+- 2026-07-13 | Created document
+-->
+
 # Overlay Networking
 
 An overlay network is a virtual network built on top of an existing physical network, allowing logical communication 
