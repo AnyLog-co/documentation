@@ -316,7 +316,7 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
-- [Authentication](../../03-%20Installation%20&%20Deployment/Authentication.md)
+- [Authentication](../A-%20Buit-in%20Authentication/Authentication.md)
 - [Secure Network](secure%20network.md)
 - [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
 - [Node Configuration](node%20configuration.md)

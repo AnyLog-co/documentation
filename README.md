@@ -79,7 +79,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Pip Install](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Pip%20Install.md)
     * **samples**
 * **03- Installation & Deployment**
-  * [Authentication](03-%20Installation%20%26%20Deployment/Authentication.md)
   * [Network Processing](03-%20Installation%20%26%20Deployment/Network%20Processing.md)
   * [Networking](03-%20Installation%20%26%20Deployment/Networking.md)
   * [Securing the Network](03-%20Installation%20%26%20Deployment/Securing%20the%20Network.md)
@@ -116,7 +115,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [node-architecture](04-%20Core%20Concepts/B-%20Network-Services/node-architecture.md)
     * [policies-metadata](04-%20Core%20Concepts/B-%20Network-Services/policies-metadata.md)
 * **05- Networking & Security**
-  * **A- Built-in Authentication**
+  * **A- Buit-in Authentication**
+    * [Authentication-policies](05-%20Networking%20%26%20Security/A-%20Buit-in%20Authentication/Authentication-policies.md)
+    * [Authentication](05-%20Networking%20%26%20Security/A-%20Buit-in%20Authentication/Authentication.md)
   * **A- Trusted Platform Module (TPM)**
     * [Software TPM](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/Software%20TPM.md)
     * [TMP Configuration](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/TMP%20Configuration.md)
@@ -284,6 +285,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
     * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
     * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
+    * [milvusdb](19-%20Appendices/C-%20Reference%20Materials/milvusdb.md)
     * [sql setup](19-%20Appendices/C-%20Reference%20Materials/sql%20setup.md)
     * [streaming conditions](19-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
 <!-- TOC:END -->
