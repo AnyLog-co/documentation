@@ -62,6 +62,14 @@ blockchain get uns where name = data_stream_isa95
 
 **Intermediate:** use **`parent = 70f1b1a895f1d71b37ba12166514dc9d`** for the next level.
 
+This parent value is copied from the id returned by the blockchain get uns query above, not chosen or retyped by hand — a
+nd that lookup step is mandatory, not a convenience. Because id is assigned automatically on insert, it can't be 
+predicted in advance or safely reused from a previous run; the only reliable source for a level's id is querying it back 
+after that level's own policy has actually been inserted. Skipping the lookup and reusing a remembered or guessed value 
+is exactly how a parent reference silently stops matching any real policy, breaking the tree from that level down. 
+The same lookup-then-use pattern applies at every hand-off below.
+
+
 ---
 
 ## `stream1` (site / stream branch, L3)

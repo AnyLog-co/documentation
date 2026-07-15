@@ -292,6 +292,16 @@ these policies live on the blockchain, the hierarchy is immutable and consistent
 that's an analyst, a monitoring dashboard, or an AI agent — regardless of whether the underlying device has
 changed its name, IP address, or hardware vendor.
 
+The id on each policy is assigned automatically by AnyLog when the policy is signed and inserted, based on a hash of the 
+policy's own content. While it's technically possible to define id yourself, it's not recommended when working with 
+UNS — id is the connection between layers, and parent is nothing more than a copy of the level above's actual assigned 
+id. If a parent value is hand-typed, guessed, or reused from another policy's id, the UNS structure can end up broken or 
+incomplete. From a user's point of view, the UNS is simply its namespace hierarchy; underneath, that hierarchy exists 
+only because each level is wired to the next through id and parent.
+
+ 
+
+
 ---
 
 ## Why This Matters

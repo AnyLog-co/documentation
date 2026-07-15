@@ -25,10 +25,10 @@ work streams that have since been actively worked on and are mid-flight.
 - ⬜ **Not yet done:** write up the EDM/Remote-GUI content that was removed from `UNS.md` — it needs a home in
   `remote-gui.md`, including the known issue that the Remote-GUI's UNS view currently hardcodes the recognized
   timestamp column name (use `insert_timestamp`, not custom names, until fixed).
-- ⬜ **Not yet done:** add the reserved-`id` blockchain caveat (AnyLog assigns `id` automatically; don't supply
+- ✅ **Not yet done:** add the reserved-`id` blockchain caveat (AnyLog assigns `id` automatically; don't supply
   your own; uniqueness is content-hash based) to `04- Core Concepts/blockchain.md` — surfaced from a customer
   email, never written up.
-- ⬜ Actually place `UNS.md`, `UNS-dynamic-custom-example.md`, and `UNS-custom.md` on disk (currently only
+- ✅ Actually place `UNS.md`, `UNS-dynamic-custom-example.md`, and `UNS-custom.md` on disk (currently only
   produced as outputs; not confirmed copied into `13- UNS (Unified Name Spaces)/`), and delete the two `ZZZ`
   duplicates from `12- MCP & LLMs/` once confirmed superseded.
 
