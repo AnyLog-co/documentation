@@ -105,7 +105,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [node-architecture](04-%20Core%20Concepts/B-%20Network-Services/node-architecture.md)
     * [policies-metadata](04-%20Core%20Concepts/B-%20Network-Services/policies-metadata.md)
 * **05- Networking & Security**
-  * [Authentication](05-%20Networking%20%26%20Security/Authentication.md)
+  * [Authentication](03- Installation & Deployment/Authentication.md)
   * [Network Processing](05-%20Networking%20%26%20Security/Network%20Processing.md)
   * [Securing the Network](05-%20Networking%20%26%20Security/Securing%20the%20Network.md)
   * [Syslog integration](05-%20Networking%20%26%20Security/Syslog%20integration.md)
@@ -113,9 +113,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Software TPM](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/Software%20TPM.md)
     * [TMP Configuration](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/TMP%20Configuration.md)
   * **B- Networking**
-    * [networking](05-%20Networking%20%26%20Security/B-%20Networking/networking.md)
-    * [overlay-certificate-authority](05-%20Networking%20%26%20Security/B-%20Networking/overlay-certificate-authority.md)
-    * [overlay-network](05-%20Networking%20%26%20Security/B-%20Networking/overlay-network.md)
+    * [networking](00- archive/05- Networking & Security/B- Networking/networking.md)
+    * [overlay-certificate-authority](00- archive/05- Networking & Security/B- Networking/overlay-certificate-authority.md)
+    * [overlay-network](00- archive/05- Networking & Security/B- Networking/overlay-network.md)
 * **06- Data Management**
   * **A- Data Ingestion**
     * [Adding Data](06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md)
