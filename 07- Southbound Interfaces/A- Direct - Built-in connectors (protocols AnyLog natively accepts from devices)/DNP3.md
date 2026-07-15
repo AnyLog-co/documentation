@@ -7,9 +7,15 @@ source_path: "DNP3.md"
 <!--
 ## Changelog
 - 2026-07-14 | Created document
+- 2026-07-14 | Updated TLS certificate references to point to the new DNP3 TLS Test Certificates document
+              (the previous 05- Networking & Security/C- DNP3 certificates/ directory, which committed actual
+              key material, is being removed). Added cross-references to the new companion documents covering
+              scripted deployment and reusable mapping policies.
 -->
 
 AnyLog can act as a **DNP3 master** over **TCP** or **TLS** (using **hostname** and **port**, default **20000**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [Modbus](MODBUS.md), [OPC-UA](OPC UA Integration.md#continuous-data-pull), and [EtherNet/IP](../EtherNet%20IP.md#the-run-plc-client-command).
+
+For a production-style deployment of a DNP3 connection from a standing script (rather than one-off CLI commands), see [Deploying a DNP3 Connector via Script](Deploying%20a%20DNP3%20Connector%20via%20Script.md). For reusing a single point map across multiple outstations instead of repeating it inline, see [DNP3 Mapping Policies](DNP3-Mapping-Policies.md).
 
 ---
 
@@ -51,6 +57,9 @@ Supported **`type`** values (case-insensitive; spaces/underscores ignored):
 | `Counter` | 20 / 6 |
 | `DoubleBit` or `DoubleBitBinary` | 3 / 2 |
 
+`map` can be written inline, as shown throughout this page, or declared once as a reusable policy on the
+blockchain and referenced across multiple connections — see [DNP3 Mapping Policies](DNP3-Mapping-Policies.md).
+
 Optional **TLS** (all three PEM paths required when `enable_tls = true`):
 
 | Keyword | Meaning |
@@ -79,7 +88,7 @@ Optional **TLS** (all three PEM paths required when `enable_tls = true`):
 
 Alias: **`get dnp3 values`** (same keywords).
 
-With TLS (certificates from `05- Networking & Security/C- DNP3 certificates/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
+With TLS (see [DNP3 TLS Test Certificates](../../05-%20Networking%20&%20Security/DNP3-tls-test-certificates.md) for generating a chain to use here, and [DNP3 Out Station Testing](#dnp3-out-station-testing) below for running a matching test outstation):
 
 ```anylog
 <get dnp3 values where
@@ -88,9 +97,9 @@ With TLS (certificates from `05- Networking & Security/C- DNP3 certificates/ca_c
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
-    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
+    tls_ca = /path/to/your/working/dir/anylogDNP3ca.cert and
+    tls_cert = /path/to/your/working/dir/master1.cert and
+    tls_key = /path/to/your/working/dir/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
@@ -160,6 +169,8 @@ run plc client where type = dnp3 and
 
 With **`namespace`**, table and column layout follow **UNS policies**. **`namespace`** and **`master_node`** drive how tables are registered in the UNS. See [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md) for background.
 
+For a full example combining this with a scripted deployment and a reusable mapping policy (rather than an inline `map` array), see [Deploying a DNP3 Connector via Script](Deploying%20a%20DNP3%20Connector%20via%20Script.md).
+
 ---
 
 ## DNP3 Out Station Testing
@@ -209,10 +220,10 @@ c = counter, b = binary, d = doublebit, a = analog, o = octet string, 'quit' = e
 
 ### TLS outstation
 
-Generate test certificates first:
+Generate a test CA chain first — see [DNP3 TLS Test Certificates](../../05-%20Networking%20&%20Security/DNP3-tls-test-certificates.md) for the full script and instructions. Run it in a working directory of your own, outside this repository:
 
 ```bash
-cd "05- Networking & Security/C- DNP3 certificates/ca_chain"
+mkdir -p ~/dnp3-tls-test && cd ~/dnp3-tls-test
 bash create_certificates.sh
 ```
 
@@ -226,9 +237,9 @@ From the opendnp3 build directory, start the TLS demo with three PEM paths (CA, 
 ```bash
 cd ~/opendnp3/build
 ./outstation-tls-demo \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/anylogDNP3ca.cert \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.cert \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.key
+  ~/dnp3-tls-test/anylogDNP3ca.cert \
+  ~/dnp3-tls-test/outstation1.cert \
+  ~/dnp3-tls-test/outstation1.key
 ```
 
 Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). AnyLog master uses the **master** certificate files from the same CA chain.
@@ -242,14 +253,14 @@ Example AnyLog one-shot read:
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
-    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
+    tls_ca = ~/dnp3-tls-test/anylogDNP3ca.cert and
+    tls_cert = ~/dnp3-tls-test/master1.cert and
+    tls_key = ~/dnp3-tls-test/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
 
-More detail: [DNP3 TLS test certificates](../../05-%20Networking%20%26%20Security/C-%20DNP3%20certificates/ca_chain/README.md).
+More detail, including the full generation script: [DNP3 TLS Test Certificates](../../05-%20Networking%20&%20Security/DNP3-tls-test-certificates.md).
 
 ### Third-party simulator
 
@@ -270,7 +281,7 @@ Another option is a commercial DNP3 outstation simulator, for example the [Freyr
 | `dbms` | Target DBMS |
 | `table` | Wide-table ingest; omit with **`dynamic = true`** |
 | `dynamic` | `true` for per-map tables or UNS |
-| `map` | JSON array of points |
+| `map` | JSON array of points, inline or resolved from a [mapping policy](DNP3-Mapping-Policies.md) |
 | `namespace` | UNS path (DNP3 + **`dynamic = true`** only) |
 | `master_node` | Required when **`namespace`** is set |
 | `enable_tls`, `tls_ca`, `tls_cert`, `tls_key` | Optional TLS (all three PEM paths required) |
@@ -281,6 +292,9 @@ Another option is a commercial DNP3 outstation simulator, for example the [Freyr
 
 - [Adding Data to Nodes in the Network](../../06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md#the-southbound-connectors-diagram)
 - [Unified Namespace](../../11-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
+- [DNP3 TLS Test Certificates](../../05-%20Networking%20&%20Security/DNP3-tls-test-certificates.md) — generating a local CA chain for TLS testing
+- [Deploying a DNP3 Connector via Script](Deploying%20a%20DNP3%20Connector%20via%20Script.md) — a production-style `.al` deployment script, parameters, and error handling
+- [DNP3 Mapping Policies](DNP3-Mapping-Policies.md) — reusing a point map across multiple connections instead of repeating it inline
 - [Modbus](MODBUS.md)
 - [OPC-UA](OPC UA Integration.md)
 - [EtherNet/IP](../EtherNet%20IP.md)
