@@ -148,6 +148,35 @@ end_script
 connect dbms sensor_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 end_script
 ```
+
+### The "for loop" command
+
+The ```for loop``` command iterates over every element in a list. During each iteration, the current element is made available 
+through the loop index (+). The loop continues until all list elements have been processed.
+
+Syntax:
+```anylog 
+for loop start where list = <list_variable>
+    <commands>
+for loop end
+```
+Inside the loop, use the + index to reference the current element and the value of + is automatically updated on each iteration.
+
+Example:
+```anylog 
+query_result = run client () sql cos format=json:list and stat=false "select * from pp_pm where period(minute, 1, now(), timestamp) limit 3;"
+
+wait 5 for !query_result        # Wait up to 5 secnds
+
+for loop start where list = !query_result
+	print !query_result[+]
+for loop end
+```
+
+Notes
+* The loop executes once for every element in the specified list.
+* If the list is empty, the commands inside the loop are not executed.
+
 ## The "set debug" command
 
 ### display commands and execution results
