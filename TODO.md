@@ -40,7 +40,7 @@ work streams that have since been actively worked on and are mid-flight.
 - ✅ Wrote the worked-example sub-file (13-step 2-operator demo + certificate example) — placed on disk, **but
   saved as `Authentication-policies.md` instead of the originally planned `Policy-Based Users and Keys —
   Example.md`.**
-- 🟡 **Needs a decision, then a fix:** the folder was created as `05- Networking & Security/A- Buit-in
+- ✅ **Needs a decision, then a fix:** the folder was created as `05- Networking & Security/A- Buit-in
   Authentication/` — typo (`Buit-in` → `Built-in`), and it collides with `A- Trusted Platform Module (TPM)` —
   two folders both using letter `A`. Once you confirm the intended folder name and letter, I'll fix:
   - The 4 links in `Securing the Network.md` pointing at `.../Built-in Authentication/...`
