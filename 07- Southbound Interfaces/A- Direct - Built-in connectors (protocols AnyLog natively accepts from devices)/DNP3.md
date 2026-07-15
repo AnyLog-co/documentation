@@ -79,7 +79,7 @@ Optional **TLS** (all three PEM paths required when `enable_tls = true`):
 
 Alias: **`get dnp3 values`** (same keywords).
 
-With TLS (certificates from `DNP3_certificates/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
+With TLS (certificates from `05- Networking & Security/C- DNP3 certificates/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
 
 ```anylog
 <get dnp3 values where
@@ -88,9 +88,9 @@ With TLS (certificates from `DNP3_certificates/ca_chain/` — see [DNP3 Out Stat
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = DNP3_certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = DNP3_certificates/ca_chain/master1.cert and
-    tls_key = DNP3_certificates/ca_chain/master1.key and
+    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
+    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
+    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
@@ -212,7 +212,7 @@ c = counter, b = binary, d = doublebit, a = analog, o = octet string, 'quit' = e
 Generate test certificates first:
 
 ```bash
-cd DNP3_certificates/ca_chain
+cd "05- Networking & Security/C- DNP3 certificates/ca_chain"
 bash create_certificates.sh
 ```
 
@@ -226,9 +226,9 @@ From the opendnp3 build directory, start the TLS demo with three PEM paths (CA, 
 ```bash
 cd ~/opendnp3/build
 ./outstation-tls-demo \
-  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/anylogDNP3ca.cert \
-  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/outstation1.cert \
-  /path/to/AnyLog-Network/DNP3_certificates/ca_chain/outstation1.key
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/anylogDNP3ca.cert \
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.cert \
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.key
 ```
 
 Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). AnyLog master uses the **master** certificate files from the same CA chain.
@@ -242,14 +242,14 @@ Example AnyLog one-shot read:
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = DNP3_certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = DNP3_certificates/ca_chain/master1.cert and
-    tls_key = DNP3_certificates/ca_chain/master1.key and
+    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
+    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
+    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
 
-More detail: [DNP3_certificates/ca_chain/README.md](DNP3_certificates/ca_chain/README.md).
+More detail: [DNP3 TLS test certificates](../../05-%20Networking%20%26%20Security/C-%20DNP3%20certificates/ca_chain/README.md).
 
 ### Third-party simulator
 

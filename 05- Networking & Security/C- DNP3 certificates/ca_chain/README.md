@@ -5,7 +5,7 @@ Lab CA chain for mutual TLS between an AnyLog DNP3 **master** and an **outstatio
 ## Generate
 
 ```bash
-cd certs/ca_chain
+cd "05- Networking & Security/C- DNP3 certificates/ca_chain"
 bash create_certificates.sh
 ```
 
@@ -24,9 +24,9 @@ Use paths relative to your working directory when running AnyLog, for example:
 
 | Keyword | Path |
 |---------|------|
-| `tls_ca` | `certs/ca_chain/anylogDNP3ca.cert` |
-| `tls_cert` | `certs/ca_chain/master1.cert` |
-| `tls_key` | `certs/ca_chain/master1.key` |
+| `tls_ca` | `05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert` |
+| `tls_cert` | `05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert` |
+| `tls_key` | `05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key` |
 
 ## Outstation (TLS server)
 
@@ -44,11 +44,13 @@ After `bash create_certificates.sh`, from `~/opendnp3/build`:
 
 ```bash
 ./outstation-tls-demo \
-  /path/to/AnyLog-Network/certs/ca_chain/anylogDNP3ca.cert \
-  /path/to/AnyLog-Network/certs/ca_chain/outstation1.cert \
-  /path/to/AnyLog-Network/certs/ca_chain/outstation1.key
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/anylogDNP3ca.cert \
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.cert \
+  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.key
 ```
 
 Plain TCP (no TLS): `./outstation-demo` from the same directory.
 
 **For testing only** — do not reuse these keys in production.
+
+See also: [DNP3](../../07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/DNP3.md#dnp3-out-station-testing).
