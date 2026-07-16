@@ -79,7 +79,7 @@ Optional **TLS** (all three PEM paths required when `enable_tls = true`):
 
 Alias: **`get dnp3 values`** (same keywords).
 
-With TLS (certificates from `05- Networking & Security/C- DNP3 certificates/ca_chain/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
+With TLS (certificates from `/path/to/certs/` — see [DNP3 Out Station Testing](#dnp3-out-station-testing)):
 
 ```anylog
 <get dnp3 values where
@@ -88,9 +88,9 @@ With TLS (certificates from `05- Networking & Security/C- DNP3 certificates/ca_c
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
-    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
+    tls_ca = /path/to/certs/anylogDNP3ca.cert and
+    tls_cert = /path/to/certs/master1.cert and
+    tls_key = /path/to/certs/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
@@ -207,7 +207,7 @@ Enter one or more measurement changes then press <enter>
 c = counter, b = binary, d = doublebit, a = analog, o = octet string, 'quit' = exit
 ```
 
-### TLS outstation
+### AnyLog Master Station and outstation with TLS enabled
 
 Generate test certificates first:
 
@@ -218,7 +218,7 @@ bash create_certificates.sh
 
 | Side | CA (peer) | Certificate | Private key |
 |------|-----------|-------------|-------------|
-| AnyLog master | `anylogDNP3ca.cert` | `master1.cert` | `master1.key` |
+| AnyLog Master Station | `anylogDNP3ca.cert` | `master1.cert` | `master1.key` |
 | Outstation | `anylogDNP3ca.cert` | `outstation1.cert` | `outstation1.key` |
 
 From the opendnp3 build directory, start the TLS demo with three PEM paths (CA, outstation certificate, outstation private key):
@@ -226,12 +226,12 @@ From the opendnp3 build directory, start the TLS demo with three PEM paths (CA, 
 ```bash
 cd ~/opendnp3/build
 ./outstation-tls-demo \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/anylogDNP3ca.cert \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.cert \
-  /path/to/documentation-anylog-co/"05- Networking & Security/C- DNP3 certificates/ca_chain"/outstation1.key
+  /path/to/certs/anylogDNP3ca.cert \
+  /path/to/certs/outstation1.cert \
+  /path/to/certs/outstation1.key
 ```
 
-Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). AnyLog master uses the **master** certificate files from the same CA chain.
+Same link ids and port as plain TCP (**master_id = 1**, **outstation_id = 10**, port **20001**). The AnyLog Master Station uses the **master** certificate files from the same CA chain.
 
 Example AnyLog one-shot read:
 
@@ -242,9 +242,9 @@ Example AnyLog one-shot read:
     master_id = 1 and
     outstation_id = 10 and
     enable_tls = true and
-    tls_ca = 05- Networking & Security/C- DNP3 certificates/ca_chain/anylogDNP3ca.cert and
-    tls_cert = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.cert and
-    tls_key = 05- Networking & Security/C- DNP3 certificates/ca_chain/master1.key and
+    tls_ca = /path/to/certs/anylogDNP3ca.cert and
+    tls_cert = /path/to/certs/master1.cert and
+    tls_key = /path/to/certs/master1.key and
     map = [{"name":"analog_0","type":"Analog","index":0}]
 >
 ```
