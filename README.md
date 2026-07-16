@@ -155,6 +155,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **07- Southbound Interfaces**
   * [data-ingestion](07-%20Southbound%20Interfaces/data-ingestion.md)
   * [southbound-overview](07-%20Southbound%20Interfaces/southbound-overview.md)
+  * **A- Direct - Built-in connectors (protocols AnyLog natively accepts from devices)**
+    * [DNP3](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/DNP3.md)
   * **A- Direct Connectors Generic**
     * [message-broker](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/message-broker.md)
     * [Using REST](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/Using%20REST.md)
@@ -185,6 +187,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [forwarding-data](08-%20Northbound%20Connectors/forwarding-data.md)
   * [northbound-overview](08-%20Northbound%20Connectors/northbound-overview.md)
   * [notifications](08-%20Northbound%20Connectors/notifications.md)
+  * [queries](08-%20Northbound%20Connectors/queries.md)
   * **A- BI external tools — Grafana**
     * [Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Grafana/Importing%20Grafana%20Dashboard.md)
     * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Grafana/Using%20Grafana.md)
@@ -285,5 +288,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
     * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
     * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
+    * [minio](19-%20Appendices/C-%20Reference%20Materials/minio.md)
     * [streaming conditions](19-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
 <!-- TOC:END -->
