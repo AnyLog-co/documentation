@@ -2,7 +2,7 @@
 title: "DNP3 Mapping Policies — Reusing a Schema Across Connections"
 description: Storing a DNP3 point map once as a blockchain policy and reusing it across multiple connections, instead of repeating the map JSON inline
 layout: page
-source_path: "DNP3-Mapping-Policies.md"
+source_path: "DNP3 - Mapping-Policies.md"
 ---
 
 <!--
@@ -82,7 +82,7 @@ blockchain insert where policy = !new_policy and local = true and master = !ledg
 ```
 
 (A full deployment script wraps this with signing and error handling — see
-[Deploying a DNP3 Connector via Script](Deploying a DNP3 Connector via Script.md#prep-policy--build-a-new-mapping-policy)
+[Deploying a DNP3 Connector via Script](DNP3 - Deploying Connector via Script.md#prep-policy--build-a-new-mapping-policy)
 for the complete pattern, including the check-then-create flow that avoids republishing an identical policy on
 every run.)
 
@@ -140,5 +140,5 @@ array shown throughout [DNP3](DNP3.md) remains simpler.
 ## See also
 
 - [DNP3](DNP3.md) — the underlying `get plc values`/`run plc client` command reference
-- [Deploying a DNP3 Connector via Script](Deploying a DNP3 Connector via Script.md) — a full deployment
+- [Deploying a DNP3 Connector via Script](DNP3 - Deploying Connector via Script.md) — a full deployment
   script using this pattern, with TLS branching and error handling

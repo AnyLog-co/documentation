@@ -2,7 +2,7 @@
 title: "Deploying a DNP3 Connector via Script"
 description: Walking through a production-style .al deployment script for a DNP3 southbound connection — parameters, policy reuse, TLS branching, and error handling
 layout: page
-source_path: "Deploying a DNP3 Connector via Script.md"
+source_path: "DNP3 - Deploying Connector via Script.md"
 ---
 
 <!--
@@ -20,7 +20,7 @@ reusable blockchain policy rather than duplicated in every script. This page wal
 sample script, `dnp3_connector.al`.
 
 For the reusable-mapping-policy pattern itself (the `dnp3` policy type this script checks for and creates), see
-[DNP3 Mapping Policies — Reusing a Schema Across Connections](DNP3-Mapping-Policies.md).
+[DNP3 Mapping Policies — Reusing a Schema Across Connections](DNP3 - Mapping-Policies.md).
 
 Run the script with:
 
@@ -225,4 +225,4 @@ At minimum, change in `:set-params:`:
 If you're deploying several identical or near-identical outstations (for example, several substations with the
 same point layout), give them the same `base_namespace`/`dnp_name` pattern deliberately, so later deployments hit
 the `:check-policy:` fast path and reuse the schema already published by the first one, rather than re-declaring
-it. See [DNP3 Mapping Policies](DNP3-Mapping-Policies.md) for more on this reuse pattern.
+it. See [DNP3 Mapping Policies](DNP3 - Mapping-Policies.md) for more on this reuse pattern.
