@@ -90,16 +90,16 @@ Still need diffing and (once confirmed identical) deletion:
 - [✅] `07-.../ZZZ using-kafka.md` vs `Using Kafka.md`
 - [✅] `07-.../ZZZ using rest.md` vs `Using REST.md`
 - [✅] `07-.../ZZZ syslog.md` vs `Using Syslog.md`
-- [ ] `08- Northbound Connectors/.../ZZZ Google.md` vs `Google Drive Connector.md`
-- [ ] `08-.../ZZZ grafana.md` + `ZZZ import-grafana-dashboard.md` vs `Using Grafana.md` / `Importing Grafana Dashboard.md`
-- [ ] `08-.../zzz- notification.md` **and** `zzz- Notifications.md` vs `notifications.md`
-- [ ] `19- Appendices/.../ZZZ FAQ.md` vs `FAQ.md`
+- [✅] `08- Northbound Connectors/.../ZZZ Google.md` vs `Google Drive Connector.md`
+- [✅] `08-.../ZZZ grafana.md` + `ZZZ import-grafana-dashboard.md` vs `Using Grafana.md` / `Importing Grafana Dashboard.md`
+- [✅] `08-.../zzz- notification.md` **and** `zzz- Notifications.md` vs `notifications.md`
+- [✅] `19- Appendices/.../ZZZ FAQ.md` vs `FAQ.md`
 - [ ] `99- INTERNAL & DRAFT sections/[deprecated] Remote CLI .md` vs `remote_cli.md` — one is explicitly marked
       deprecated; confirm and delete
 
 ### 2.2 Cross-section duplicates and fragmentation
 
-- [ ] `08- Northbound Connectors/postgres-connector.md` vs `09- Integrations/A- Databases/Postgres Connector.md`
+- [✅] `08- Northbound Connectors/postgres-connector.md` vs `09- Integrations/A- Databases/Postgres Connector.md`
       — verified verbatim duplicate; delete one, cross-link from the other.
 - [ ] Migrate unique commands from `19- Appendices/C- Reference Materials/sql setup.md` (`get local tables`,
       `get global tables`, `get data distribution`, `get table [info type]`, `test network table`,
