@@ -1,169 +1,289 @@
 ---
-title: "Managing SysLog data with AnyLog"
-description: ""
+title: Syslog
+description: Ingest BSD and IETF syslog messages from Linux, Mac, and network devices directly into AnyLog.
 layout: page
-source_path: "using Syslog integration.md"
+source_path: "Using Syslog.md"
 ---
-# Managing SysLog data with AnyLog
+<!--
+## Changelog
+- 2026-04-17 | Created document
+- 2026-04-26 | updated to explain how to change syslog configs to get the data
+- 2026-07-14 | Merged three overlapping syslog docs (ZZZ syslog.md, Using Syslog.md, Syslog integration.md) into
+              this single canonical file. Backbone is ZZZ syslog.md (the most current/complete of the three,
+              despite its misleading ZZZ filename). Folded in: the field-by-field BSD/IETF breakdown from
+              Using Syslog.md (more useful for readers unfamiliar with syslog than a table alone), and the
+              tsd_name/tsd_id partition-metadata columns from Syslog integration.md's sample query output
+              (real schema detail missing from the trimmed sample elsewhere). The other two source files are
+              now retired — nothing in them isn't covered here.
+-->
 
-## SysLog Formats
+<a href="https://en.wikipedia.org/wiki/Syslog" target="_blank">Syslog</a> is a standardized protocol for sending and
+receiving log messages across a network. AnyLog can act as a syslog receiver, accepting messages from any host that
+supports TCP syslog output, storing them as queryable time-series data alongside all other data in the network —
+letting you monitor and troubleshoot the status of many machines from a single point rather than checking each one
+separately.
 
-SysLog is delivered from each machine in one of 2 formats:
-* The traditional BSD (Berkeley Software Distribution) format, specified in RFC 3164.
-* The newer IETF (Internet Engineering Task Force) format, specified in RFC 5424.
+---
 
+## Syslog formats
 
-### BSD format includes the following attributes:
+Syslog is delivered from each machine in one of two formats:
 
-1. **Priority**: Enclosed in angle brackets (< and >). It's a numeric value that combines the facility and severity (e.g., <34>).
-2. **Timestamp**: Immediately follows the priority. It's typically in the format MMM dd hh:mm:ss (e.g., Jan 12 23:34:56).
-3. **Hostname or IP Address**: Follows the timestamp. It's the name or IP address of the device that sent the message.
-4. **Tag**: Often a process name or application identifier, potentially followed by a process ID in square brackets (e.g., sshd[3268]).
-5. **Message**: The actual log message text, following the tag.
+| Format | Standard | Timestamp | Key fields |
+|---|---|---|---|
+| BSD | RFC 3164 | `MMM dd hh:mm:ss` | Priority, Timestamp, Hostname, Tag (process + PID), Message |
+| IETF | RFC 5424 | ISO 8601 | Priority, Version, Timestamp, Hostname, Application, PID, Message ID, Structured Data, Message |
 
+### BSD format fields
 
-### IETF Format 
+1. **Priority** — enclosed in angle brackets (`<` and `>`); a numeric value combining facility and severity (e.g. `<34>`).
+2. **Timestamp** — immediately follows the priority, typically `MMM dd hh:mm:ss` (e.g. `Jan 12 23:34:56`).
+3. **Hostname or IP address** — the name or IP of the device that sent the message.
+4. **Tag** — often a process name or application identifier, potentially followed by a process ID in square brackets (e.g. `sshd[3268]`).
+5. **Message** — the actual log message text, following the tag.
 
-1. **Priority**: Similar to the BSD format, enclosed in angle brackets.
-2. **Version**: A single digit indicating the syslog protocol version (e.g., 1).
-3. **Timestamp**: More precise than BSD format, often in the ISO 8601 format.
-4. **Hostname**: As in BSD format.
-5. **Application**: The name of the application or process generating the message.
-6. **Process ID (PID)**: The PID of the process.
-7. **Message ID**: A unique identifier for the type of message.
-8. **Structured Data**: Enclosed in square brackets, containing key-value pairs for additional data.
-9. **Message**: The actual log message text.
+### IETF format fields
 
+1. **Priority** — same as BSD, enclosed in angle brackets.
+2. **Version** — a single digit indicating the syslog protocol version (e.g. `1`).
+3. **Timestamp** — more precise than BSD, typically ISO 8601.
+4. **Hostname** — as in BSD format.
+5. **Application** — the name of the application or process generating the message.
+6. **Process ID (PID)** — the PID of the process.
+7. **Message ID** — a unique identifier for the type of message.
+8. **Structured data** — enclosed in square brackets, key-value pairs for additional data.
+9. **Message** — the actual log message text.
 
-## Configure the AnyLog SysLog service
+---
 
-Users can configure an AnyLog node to host SysLog messages. The process requires the following:
-* Set a rule to accept SysLog messages (see details below).
-* Configure the SysLog output protocol to use TCP.
-* Direct the output to the Messaging Service of the target AnyLog Node 
-  
-Notes: 
-1) Use the command **get connections** to identify the Messaging IP and Port on the Message Service in the AnyLog Node.
-2) Use the command [run message broker](background%20processes.md#message-broker) to configure a message broker service.
+## Prerequisites
 
+1. Physical machine — install and start rsyslog
 
-## Setting a rule to accept SysLog data
-
-The following rule accepts SysLog data from one or multiple nodes:
-
-```anylog
-set msg rule [rule name] if ip = [IP address] and port = [port] and header = [header text] then dbms = [dbms name] and table = [table name] and syslog = [true/false] and extend = ip and format = [data format] and topic = [topic name]
+```shell
+sudo apt-get -y update
+sudo apt -y install rsyslog
+sudo service rsyslog start
 ```
 
-The following chart summarizes the command options:
+2. Validate rsyslog is running:
 
-| Option    | Mandatory | Details                                                                                                                                         |
-|-----------| ---------  |-------------------------------------------------------------------------------------------------------------------------------------------------| 
-| Rule Name | Y          | A unique name that identifies the rule.                                                                                                         |
-| IP        | N          | A source IP that is assigned to the rule. If IP is not provided, the rule will apply to messages from every source IP.                          |
-| Port      | N          | A source port that is assigned to the rule. If port is not provided, the rule will apply to all ports of from source IPs.                       |
-| Header    | N          | Assign the rules to messages with a specified header. Note: headers can be added using one of the syslog redirecting tools (see example below). |
-| DBMS      | Y          | A database name that will host the syslog data. Use the command ```get databases``` to see that the database is enabled on the operator node.   |
-| Table     | Y          | A table name to host the syslog data on the node.                                                                                               |
-| syslog    | N          | A True/False value to indicate syslog data. Unless format is specified, the destination structure represents the BSD format of syslog.          |
-| extend    | N          | Additional info added to the JSON data. For example: extend = ip adds the source IP to the JSON data.                                           |
-| format    | N          | A different format than BSD.                                                                                                                    |
-| topic     | N          | A topic to assign to the syslog data. Data that is assigned to a topic is treated like MQTT data and can be manipulated using a policy.         |
-| structure | N          | If the value is assigned is **included**, the structure of the data is provided by the first event. See example 3 below.                        |
-
-Notes: 
-1) If **syslog** option is enabled, column names are pre-determined (by default as BSD or with **format = IETF**). If **syslog**
-option is not enabled, **structure** needs to detail the structure of the source data.   
-2) For **SysLog** data stream, enable CR and LF to end of message. 
-3) **structure = included** designates that the first event describes the structure.
-
-## Examples:
-
-### Example 1 - setting a rule to allow syslog data in BSD format from IP 10.0.0.78 and port 1468.
-```anylog
- set msg rule my_rule if ip = 10.0.0.78 and port = 1468 then dbms = test and table = syslog and syslog = true
-``` 
-
-### Example 2
-
-**Part A** below is a script that takes log entries from the systemd journal that are newer than the time specified in the NOW variable, 
-formats each entry by prefixing it with a specific string, and then sends these formatted entries to a remote server at 
-the specified IP address and port number.   
-
-Linux Example:
 ```shell
-   journalctl --since "${NOW}" | awk '{print "al.sl.header.new_company.syslog", $0}' | nc -w 1 73.202.142.172 7850
+tail -f /var/log/syslog
 ```
 
-This script will deliver syslog entries to an Operator Node where every entry is prefixed by the string **al.sl.header.new_company.syslog**.
+**Expected output**:
+```
+Feb 25 02:55:47 localhost systemd[1]: Started User Manager for UID 0.
+Feb 25 02:55:47 localhost systemd[1]: Started Session 197 of User root.
+Feb 25 02:55:52 localhost systemd-udevd[400]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Feb 25 02:55:53 localhost dbus-daemon[31261]: AppArmor D-Bus mediation is enabled
+...
+```
 
-**Part B** below is a rule on the Operator Node that assigns entries with the prefix **al.sl.header.new_company.syslog**
-to table **syslog** in database **test**.  
-Users can add additional rules to associate different syslog entries to different tables by the assigned prefix.  
-Additional manipulation of the syslog data can be done using policies assigned to a specified topic.
+> The same steps apply to <a href="https://www.syslog-ng.com/" target="_blank">syslog-ng</a> if preferred over rsyslog.
+
+3. AnyLog node — start the message broker
+
+The message broker is the TCP listener that receives syslog traffic. AnyLog's TCP service is dedicated to
+communication between AnyLog nodes and cannot be used for external data ingestion — the message broker is the
+correct service for receiving data from outside the network. Start it on the operator or publisher node:
 
 ```anylog
- set msg rule my_rule if ip = 139.162.126.241 and header = al.sl.header.new_company.syslog then dbms = test and table = syslog and syslog = true
-``` 
+<run message broker where
+    external_ip = !external_ip and external_port = !anylog_broker_port and
+    internal_ip = !ip and internal_port = !anylog_broker_port and
+    bind = !broker_bind and threads = !broker_threads>
+```
 
-### Example 3 
+Check which port to direct syslog output to:
 
-The following example delivers data with the first entry represents the attributes names and their size.    
-The following script on Mac delivers syslog data, and an example of the first events are shown below.  
+```anylog
+get connections
+```
 
-**Part A** example script: 
+4. AnyLog node — configure partitioning (recommended)
+
+Due to the volume of syslog data, partition the table and schedule automatic cleanup:
+
+```anylog
+connect dbms monitoring where type=sqlite
+partition monitoring syslog using insert_timestamp by 12 hours
+schedule time = 12 hours and name = "Drop Partition Sync - Syslog" task drop partition where dbms = !default_dbms and table = syslog and keep = 3
+```
+
+---
+
+## Connect rsyslog to AnyLog
+
+Add the following lines to the bottom of `/etc/rsyslog.conf`, replacing `DESTINATION_IP` and `DESTINATION_PORT`
+with the AnyLog operator or publisher IP and message broker port:
+
+```
+$template remote-incoming-logs, "/var/log/remote/%HOSTNAME%.log"
+*.* ?remote-incoming-logs
+*.* action(type="omfwd" target="{DESTINATION_IP:-127.0.0.1}" port="{DESTINATION_PORT:-32150}" protocol="tcp")
+```
+
+Restart rsyslog to apply:
+
 ```shell
+sudo service rsyslog restart
+```
+
+---
+
+## Set a syslog rule
+
+Rules tell AnyLog how to route and parse incoming syslog messages:
+
+```anylog
+set msg rule [rule name] if ip = [source IP] and port = [port] and header = [header text] then dbms = [dbms] and table = [table] and syslog = [true/false] and extend = ip and format = [format] and topic = [topic]
+```
+
+| Option | Required | Description |
+|---|---|---|
+| `rule name` | ✅ | Unique name for this rule |
+| `ip` | — | Source IP to match — omit to match all IPs |
+| `port` | — | Source port to match — omit to match all ports |
+| `header` | — | Match messages with a specific prefix string |
+| `dbms` | ✅ | Target logical database |
+| `table` | ✅ | Target table |
+| `syslog` | — | `true` — parse as BSD syslog. Set `format = IETF` for RFC 5424 |
+| `extend` | — | Add extra fields — `extend = ip` adds the source IP |
+| `format` | — | Override default format: `IETF` for RFC 5424 |
+| `topic` | — | Route through the msg client mapping layer (like MQTT) |
+| `structure` | — | `included` — first message event defines the column schema |
+
+> When `syslog = true`, column names are pre-determined by the format (BSD by default).
+> When `syslog` is not set, use `structure = included` so the first event defines the schema.
+
+---
+
+## Examples
+
+### Example 1 — rsyslog from a specific host
+
+Basic rule accepting BSD syslog from a specific host:
+
+```anylog
+set msg rule syslog_rule if ip = !ip then dbms = !default_dbms and table = syslog and syslog = true
+```
+
+### Example 2 — Linux journalctl via netcat with a header prefix
+
+Pipe `journalctl` output to AnyLog, prefixing each line with a custom header:
+
+```bash
+journalctl --since "${NOW}" | awk '{print "al.sl.header.new_company.syslog", $0}' | nc -w 1 10.0.0.78 7850
+```
+
+Rule on the operator matching the prefix:
+
+```anylog
+set msg rule my_rule if ip = 10.0.0.50 and header = al.sl.header.new_company.syslog then dbms = test and table = syslog and syslog = true
+```
+
+### Example 3 — Mac syslog with dynamic structure from first event
+
+```bash
 (log show --info --start '2024-01-01 16:50:00' --end '2024-12-01 16:51:00' | awk '{print "al.sl", $0}') | nc -w 1 10.0.0.78 7850
 ```
 
-Example Data:
+The first event contains the column headers:
 ```
-al.sl Timestamp                       Thread     Type        Activity             PID    TTL  
-al.sl 2024-01-01 17:51:35.253053-0800 0x4d0c71   Default     0x39223d             482    3    identityservicesd: (Accounts) [com.apple.accounts:core] "New <private> number: 9383095159695522545"
-al.sl 2024-01-01 18:21:54.906182-0800 0x0        Timesync    0x0                  0      0    === system wallclock time adjusted
-al.sl 2024-01-01 19:21:53.868782-0800 0x0        Timesync    0x0                  0      0    === system wallclock time adjusted
-al.sl 2024-01-01 20:12:36.432114-0800 0x4e93dd   Default     0x3aabbc             487    3    networkserviceproxy: (Accounts) [com.apple.accounts:core] "New <private> number: 9383095159695522545"
+al.sl Timestamp                       Thread     Type        Activity             PID    TTL
+al.sl 2024-01-01 17:51:35.253053-0800 0x4d0c71   Default     0x39223d             482    3   ...
 ```
 
-**Part B** below is a rule on the Operator nodes that applies the header provided in the first event to determine the data structure:
+Rule using `structure = included`:
+
 ```anylog
- set msg rule my_rule if ip = 10.0.0.251 and header = al.sl then dbms = test and table = syslog_mac and structure = included
-``` 
+set msg rule my_rule if ip = 10.0.0.251 and header = al.sl then dbms = test and table = syslog_mac and structure = included
+```
 
+---
 
-## Get the list of rules
+## Validate
 
-The following command retrieves the list of rules:
+### Check the rule is active and receiving data
 
 ```anylog
 get msg rules
 ```
 
-## Remove a rule
+Expected output:
 
-The following command removes a rule from the list of rules:
-
-```anylog
-reset msg rule [rule name]
+```
+Name        IF            IF    IF      THEN        THEN   THEN    THEN   THEN       Batches Events Errors Error Msg
+            Source IP     Port  Header  DBMS        Table  SysLog  Topic  Structure
+-----------|-------------|-----|-------|-----------|------|-------|------|----------|-------|------|------|---------|
+syslog_rule|10.0.0.78    |*    |       |new_company|syslog|True   |      |          |     18|    32|     0|         |
 ```
 
-Example:
-```anylog
-reset msg rule my_rule
+### Trigger test data
+
+Run an update/upgrade on the monitored machine to generate syslog activity:
+
+```shell
+sudo apt-get -y update
+sudo apt-get -y upgrade
 ```
 
-## Enable trace
-The following CLI command outputs the source IP and Port that delivers the data, and a sample of the data received.
+### Query the data
+
+From a query node:
+
+```anylog
+-- row count
+run client () sql new_company format=table "select count(*) from syslog"
+
+-- sample rows
+run client () sql new_company "select * from syslog limit 10"
+```
+
+Sample output (including the `tsd_name`/`tsd_id` partition-metadata columns AnyLog adds automatically):
+
+```json
+{"Query":[
+  {"row_id":1,
+   "insert_timestamp":"2024-02-25 03:18:35.023262",
+   "tsd_name":"131",
+   "tsd_id":4610,
+   "priority":38,
+   "timestamp":"2024-02-25 03:17:27.000000",
+   "hostname":"localhost",
+   "tag":"sshd[32839]:",
+   "message":"Invalid user lighthouse from 10.0.0.100 port 45126"},
+  {"row_id":2,
+   "insert_timestamp":"2024-02-25 03:18:35.023262",
+   "tsd_name":"131",
+   "tsd_id":4610,
+   "priority":85,
+   "timestamp":"2024-02-25 03:17:27.000000",
+   "hostname":"localhost",
+   "tag":"sshd[32839]:",
+   "message":"pam_unix(sshd:auth): check pass; user unknown"}
+]}
+```
+
+---
+
+## Manage and debug
+
+```anylog
+get msg rules                  -- list all active rules and event counts
+reset msg rule [rule name]     -- remove a rule
+```
+
+Enable trace to see the source IP, port, and first 100 bytes of each incoming message:
+
 ```anylog
 trace level = 2 run message broker
 ```
-The trace output includes the first 100 bytes received on each message. If the message received is larger than 100 bytes,
-the printed output includes 3 dots (...) at the suffix of the printed data.  
 
 Example trace output:
-```anylog
-[Message Broker Received 1650 Bytes] [Source: 10.0.0.78:1468] [Data: <134>Jan 26 17:30:10 DESKTOP-8TT8CKJ SyslogGen This is a test message generated by Kiwi SyslogGen    ...]
-```
 
-Note that a single message may contain multiple events, the trace only outputs the first 100 bytes.  
-Use the **get msg rules** command to determine the number of events processed. 
+```
+[Message Broker Received 1650 Bytes] [Source: 10.0.0.78:1468] [Data: <134>Jan 26 17:30:10 DESKTOP sshd[3268] User login...]
+```

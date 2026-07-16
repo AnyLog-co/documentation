@@ -1,11 +1,26 @@
 ---
-title: "Using OPC-UA"
+title: OPC-UA
 description: Configure AnyLog as an OPC-UA client to explore a server, read values, pull data continuously, apply aggregations, and manage tags with policies.
 layout: page
 source_path: "OPC UA Integration.md"
 ---
-
-# Using OPC-UA
+<!--
+## Changelog
+- 2026-04-17 | Created document (as opcua.md)
+- 2026-07-14 | Merged the two overlapping OPC-UA docs (opcua.md and OPC UA Integration.md) into this single file.
+              Backbone is OPC UA Integration.md — unlike the equivalent EtherNet/IP merge, it was the more
+              complete of the two here, not the terser one. It covers two options opcua.md's table omitted
+              entirely (`attributes`, `append`), explains the `validate` option's exact failure-handling
+              behavior (absent from opcua.md), explains the address-space tree model itself (Objects/Types/Views
+              folders), and has a fuller aggregations walkthrough (shows the actual query result, includes a
+              `get aggregations config` step) and a richer, more concrete policy example. Nothing in opcua.md
+              was found to be missing from this file, so nothing was folded forward from it — it's fully
+              superseded rather than merged from. Kept as one file rather than split into an explainer +
+              example (contrast with UNS/Authentication): the worked-example sections here (aggregations,
+              policy-based tag management) are short, tightly-scoped walkthroughs proportional to the rest of
+              the page, not a separate large scenario — same shape as DNP3.md and etherip.md, both of which
+              keep their policy-management walkthrough inline.
+-->
 
 OPC Unified Architecture (OPC UA) is a robust, platform-independent industrial communication protocol with built-in
 security (encryption, authentication, and access control), widely used in industrial automation for secure and reliable
@@ -182,9 +197,9 @@ run plc client where type = opcua and name = [unique name] and url = [connect st
 | Option | Description |
 |---|---|
 | `name` | A unique connection name. |
-| `url` | OPC UA server endpoint. |
+| `url` | The endpoint of the OPC UA server. |
 | `user` / `password` | Credentials required by the server. |
-| `frequency` | Read frequency in seconds, or a fraction of seconds using hz (e.g. `10 hz`). |
+| `frequency` | Read frequency in seconds, or a fraction of a second using hz (e.g. `10 hz`). |
 | `node` | ID of one or more nodes whose value is retrieved. |
 | `nodes` | A comma-separated list of nodes within square brackets. |
 | `policy` | If nodes are not specified on the CLI, the policy determines the nodes and the table to use. |

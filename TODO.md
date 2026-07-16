@@ -82,14 +82,14 @@ Still need diffing and (once confirmed identical) deletion:
 
 - [ ] `01- Getting Started/ZZZ getting-started.md` vs `Getting Started.md`
 - [ ] `03- Installation & Deployment/A- Deployment Options/ZZZ anylog-as-service.md` vs `Deploying Anylog as a Service.md`
-- [ ] `03-.../D- Networking & Security/ZZZ nebula through anylog.md` + `ZZZ nebula_new.md` vs `Nebula Networking.md`
+- [✅] `03-.../D- Networking & Security/ZZZ nebula through anylog.md` + `ZZZ nebula_new.md` vs `Nebula Networking.md`
 - [ ] `06- Data Management/B- Query & Aggregations/ZZZ aggregations.md` vs `Aggregations.md`
 - [ ] `06-.../D- Monitoring & Alerts/ZZZ node-monitoring.md` vs `Monitoring Nodes.md`
 - [ ] `06-.../E- High Availability/ZZZ high-availability.md` vs `High Availability.md`
 - [ ] `07- Southbound Interfaces/.../ZZZ data from edgex.md` vs `EdgeX Foundry Integration.md`
-- [ ] `07-.../ZZZ using-kafka.md` vs `Using Kafka.md`
-- [ ] `07-.../ZZZ using rest.md` vs `Using REST.md`
-- [ ] `07-.../ZZZ syslog.md` vs `Using Syslog.md`
+- [✅] `07-.../ZZZ using-kafka.md` vs `Using Kafka.md`
+- [✅] `07-.../ZZZ using rest.md` vs `Using REST.md`
+- [✅] `07-.../ZZZ syslog.md` vs `Using Syslog.md`
 - [ ] `08- Northbound Connectors/.../ZZZ Google.md` vs `Google Drive Connector.md`
 - [ ] `08-.../ZZZ grafana.md` + `ZZZ import-grafana-dashboard.md` vs `Using Grafana.md` / `Importing Grafana Dashboard.md`
 - [ ] `08-.../zzz- notification.md` **and** `zzz- Notifications.md` vs `notifications.md`
