@@ -200,6 +200,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [deployment-scripts](09-%20Integrations/deployment-scripts.md)
   * **A- Databases**
     * [configuring mongodb](09-%20Integrations/A-%20Databases/configuring%20mongodb.md)
+    * [milvusdb](09-%20Integrations/A-%20Databases/milvusdb.md)
     * [Postgres Connector](09-%20Integrations/A-%20Databases/Postgres%20Connector.md)
   * **B- Messages Brokers**
     * [Broker Setup Example](09-%20Integrations/B-%20Messages%20Brokers/Broker%20Setup%20Example.md)
@@ -284,6 +285,5 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
     * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
     * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
-    * [milvusdb](19-%20Appendices/C-%20Reference%20Materials/milvusdb.md)
     * [streaming conditions](19-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
 <!-- TOC:END -->
