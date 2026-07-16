@@ -10,6 +10,9 @@ source_path: "Query Data.md"
               full reference in 08- Northbound Connectors/queries.md (query options, casts, formatting) — this
               page covers run client (), the REST/curl equivalent, and period/increments, then hands off to the
               full reference for everything else.
+- 2026-07-14 | Added a "Before you start" pointer to Databases & Tables' discovery commands (get virtual
+              tables, get data nodes, get columns) — useful to know what actually exists before writing a query
+              against it, but out of scope for this page itself.
 -->
 
 # Introduction to Querying Data
@@ -24,6 +27,13 @@ than plain SQL.
 For the complete reference — every query option, every cast, every output format — see
 [Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md). This page is deliberately narrower:
 enough to get a first real query running and understand what you're looking at.
+
+**Before you start:** the examples below assume you already know which database/table you're querying. If you
+don't — or you just want to confirm a table actually has data before writing a query against it — see
+[Databases & Tables — Discovering what exists](Databases%20%26%20Tables.md#discovering-what-exists) for
+`get virtual tables` (what tables exist) and `get data nodes` (which nodes host them), and
+[...Inspecting and monitoring](Databases%20%26%20Tables.md#get-columns--schema-of-a-table) for `get columns`
+(a table's actual column names/types).
 
 ---
 
@@ -158,6 +168,6 @@ Same query, same result, two different doors.
 
 This page covered enough to run and read real queries. For everything else — casting and formatting columns
 (`::float(2)`, `::datetime(...)`), the full list of query options (`stat`, `max_time`, `timezone`, HA-related
-`nodes`/`committed`), discovering what tables/columns exist before you query them, and the auto-sized
-`increments` variant — see the full reference:
-[Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md).
+`nodes`/`committed`), and the auto-sized `increments` variant — see the full reference:
+[Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md). For finding out what tables/columns
+exist before you query them, see [Databases & Tables](Databases%20%26%20Tables.md).

@@ -1,6 +1,6 @@
 ---
 title: "Databases & Tables"
-description: Connecting logical databases to physical storage, creating and dropping tables, partitioning, and inspecting/monitoring table state across the network.
+description: Connecting logical databases to physical storage, creating and dropping tables, partitioning, discovering what exists, and inspecting/monitoring table state across the network.
 layout: page
 source_path: "Databases & Tables.md"
 ---
@@ -12,8 +12,14 @@ source_path: "Databases & Tables.md"
               options, system databases, and the get local/global/table/columns/rows/distribution family of
               inspection commands, but never migrated forward). This page is the canonical version; both
               sql-setup.md files can be retired/redirected here. Querying the data itself (SELECT syntax,
-              period/increments, run client ()) is deliberately out of scope — see Introduction to Querying
-              Data (Training & Tutorials) and queries.md (Northbound Connectors) for that.
+              period/increments, run client ()) is deliberately out of scope — see Query Data (Training &
+              Tutorials) and queries.md (Northbound Connectors) for that.
+- 2026-07-14 | Fixed relative links (this file lives in 02- Training & Tutorials, one level deep, not two as
+              originally assumed) and corrected the querying on-ramp's actual filename (Query Data.md, not
+              "Introduction to Querying Data.md"). Pulled the "Discover tables and columns" content (get
+              virtual tables, get data nodes) forward from queries.md's own discovery section, since it's
+              about what tables/nodes exist rather than about querying — added under Inspecting and monitoring,
+              alongside the get columns command that was already here.
 -->
 
 # Databases & Tables
@@ -29,10 +35,10 @@ lower-power/edge nodes), [PostgreSQL](https://www.postgresql.org/) (for stronger
 production), and [MongoDB](https://www.mongodb.com/) (blob storage only). A node can use different physical
 databases for different logical databases at the same time.
 
-This page covers the lifecycle: connecting/disconnecting, creating/dropping tables, partitioning, inspecting and
-monitoring what's declared where, and backup/archival. For running queries against the data once it's there, see
-[Introduction to Querying Data](../../02-%20Training%20%26%20Tutorials/Introduction%20to%20Querying%20Data.md)
-(on-ramp) or [Querying Data (Northbound)](../../08-%20Northbound%20Connectors/queries.md) (full reference).
+This page covers the lifecycle: connecting/disconnecting, creating/dropping tables, partitioning, discovering
+and inspecting what's declared where, and backup/archival. For running queries against the data once it's there,
+see [Query Data](Query%20Data.md) (on-ramp) or
+[Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md) (full reference).
 
 ---
 
@@ -250,6 +256,31 @@ schedule time = 1 day and start = +1d and name = "Drop old data" task drop parti
 
 ---
 
+## Discovering what exists
+
+Before querying or managing a table, it's often useful to check what's actually out there across the network —
+which tables are registered, and which nodes host each one.
+
+### `get virtual tables` — every table known to the network
+
+```anylog
+get virtual tables
+get virtual tables where table = ping_sensor
+```
+
+This is the network-wide view — tables registered in the shared metadata, regardless of which physical node(s)
+actually hold their data.
+
+### `get data nodes` — which nodes host a given table
+
+```anylog
+get data nodes
+get data nodes where table = ping_sensor
+get data nodes where sort = (1,2)    # sort by DBMS (col 1), table (col 2)
+```
+
+---
+
 ## Inspecting and monitoring
 
 ### `get databases` — what's connected
@@ -349,6 +380,10 @@ get table complete status where name = ping_sensor and dbms = anylog
 get columns where dbms = [dbms name] and table = [table name] and format = [table|json|list] and sys_col = [true/false] and type = [data types to project]
 ```
 
+> The first four columns AnyLog adds to every table — `row_id`, `insert_timestamp`, `tsd_name`, `tsd_id` — are
+> for internal data management. They're included by default (see `sys_col` below); you can safely ignore them
+> in your own `SELECT` statements.
+
 | Option | Description |
 |---|---|
 | `sys_col` | `true` (default) includes the internal `row_id`/`insert_timestamp`/`tsd_name`/`tsd_id` columns; `false` hides them |
@@ -413,7 +448,7 @@ delete archive where days = 60
 
 ## See also
 
-- [Introduction to Querying Data](../../02-%20Training%20%26%20Tutorials/Introduction%20to%20Querying%20Data.md) — a
-  beginner walkthrough of actually querying the tables this page shows you how to set up
-- [Querying Data (Northbound)](../../08-%20Northbound%20Connectors/queries.md) — the full query reference
+- [Query Data](Query%20Data.md) — a beginner walkthrough of actually querying the tables this page shows you
+  how to set up
+- [Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md) — the full query reference
 - [Aggregations](../06-%20Data%20Management/B-%20Query%20&%20Aggregations/Aggregations.md)
