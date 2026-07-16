@@ -10,10 +10,20 @@ layout: page
 - 2026-04-24 | there was an issue with the REST POST of commands example 
 - 2026-04-25 | REST GET via browser support 
 - 2026-04-25 | hyperlink support
+- 2026-07-14 | Merged from ZZZ using rest.md: folded the AnyLog-command-to-HTTP-method reference table directly
+              into the HTTP method mapping section (most commands work as GET or POST; a few are POST-only),
+              and added the `trace level = 1 run rest server` debug command. ZZZ using rest.md is now safe to
+              delete.
 -->
 
 Any AnyLog node with the REST service enabled, can receive commands and data over HTTP. This lets external applications, 
 dashboards, and scripts interact with the network without running AnyLog themselves.
+
+Trace REST calls hitting a node with:
+
+```anylog
+trace level = 1 run rest server
+```
 
 ---
 
@@ -25,6 +35,36 @@ dashboards, and scripts interact with the network without running AnyLog themsel
 | `GET` (query string) | Browser-native GET — command and options passed as `?key=value?key=value` parameters |
 | `POST` | All commands (alternative to GET) and data publishing via topic mapping |
 | `PUT` | Publish time-series data directly to a node |
+
+### The AnyLog commands supported by REST
+
+Most commands can be issued as either `GET` or `POST` — see [POST as an alternative to GET](#post-as-an-alternative-to-get)
+for that pattern. A handful are `POST`-only, since they change state on the node rather than just retrieving it.
+
+| AnyLog command | HTTP Method | Comments |
+|---|---|---|
+| `sql` | GET / POST | Issue queries to data hosted by nodes of the network |
+| `help` | GET / POST | Help on the AnyLog commands |
+| `get` | GET / POST | Retrieve information from nodes that are members of the network |
+| `blockchain get` | GET / POST | Query the metadata that is considered by the node |
+| `blockchain read` | GET / POST | Query the disk image of the metadata |
+| `blockchain insert` | POST | Add a new policy to the blockchain |
+| `blockchain drop` | POST | Drop a policy |
+| `query status` | GET / POST | Retrieve the status of the currently or previously executed queries |
+| `query explain` | GET / POST | Explain how the currently or previously executed queries are processed |
+| `query destination` | GET / POST | Detail the participating nodes in each query |
+| `job status` | GET / POST | Retrieve status info on jobs assigned to the rule engine |
+| `job active` | GET / POST | Retrieve status info on the currently executing jobs assigned to the rule engine |
+| `job run` | POST | Execute a specific job assigned to the rule engine |
+| `job stop` | POST | Stop the execution of a specific job assigned to the rule engine |
+| `file get` | GET / POST | Copy a file from a remote node to the local node |
+| `file retrieve` | GET / POST | Retrieve a file or files from the designated database |
+| `file store` | POST | Insert a file into the blobs dbms |
+| `file to` | POST | Copy a file to a folder |
+| `test` | GET / POST | Issue a test command |
+| `reset` | POST | Issue a reset command |
+| `process` | POST | Process an AnyLog script file |
+| data insertion | POST / PUT | Publish new data into the operator node |
 
 ---
 
@@ -288,6 +328,15 @@ preflight that AnyLog nodes are not configured to answer.
 
 Essentially, `AnyLog-Agent` is a custom header that both sides control, so the node can explicitly whitelist it and 
 browsers can set it without restriction.
+
+> **Note on `AnyLog-Agent` vs `User-Agent` here specifically:** the GET examples on this page (both above and the
+> "GET style" example just below) send the identity value as a real HTTP header — `-H 'User-Agent: ...'` or
+> `-H 'AnyLog-Agent: ...'` — and per [Headers and the AnyLog-Agent](#headers-and-the-anylog-agent), the node treats
+> either header name identically. The POST-as-GET body below is different: `-d` sends a JSON payload, not headers,
+> so the identity value is just a plain JSON key inside that body rather than an actual HTTP header. In that
+> context, use the key name `AnyLog-Agent` — not `User-Agent` — as shown in the example. Don't conflate the two:
+> "either name works" applies to real headers on a GET call; the JSON-body key on a POST-as-GET call is
+> `AnyLog-Agent` specifically.
 
 **GET style**:
 * basic `get status`
