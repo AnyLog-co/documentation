@@ -154,8 +154,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [data-ingestion](07-%20Southbound%20Interfaces/data-ingestion.md)
   * [southbound-overview](07-%20Southbound%20Interfaces/southbound-overview.md)
   * **A- Direct Connectors Generic**
-    * [mapping-policies](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/mapping-policies.md)
-    * [mqtt](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/mqtt.md)
+    * [message-broker](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/message-broker.md)
     * [Using REST](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/Using%20REST.md)
   * **B- Third-party applications — external apps that push data to AnyLog**
     * [EdgeX Foundry Integration](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/EdgeX%20Foundry%20Integration.md)
