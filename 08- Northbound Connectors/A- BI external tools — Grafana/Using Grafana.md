@@ -9,7 +9,7 @@ source_path: "northbound connectors/Using Grafana.md"
 ## Overview
 
 Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
-demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](Power BI Connector.md), can be found in our 
+demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](../A-%20BI%20external%20tools%20—%20use%20AnyLog's%20REST%20(or%20gRPC)%20API%20as%20their%20data%20source%60/Power%20BI%20Connector.md), can be found in our 
 North Bound services section.   
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.

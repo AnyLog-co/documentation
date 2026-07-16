@@ -179,22 +179,21 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [grpc](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/grpc.md)
     * [Using GRPC](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/Using%20GRPC.md)
 * **08- Northbound Connectors**
+  * [forwarding-data](08-%20Northbound%20Connectors/forwarding-data.md)
   * [northbound-overview](08-%20Northbound%20Connectors/northbound-overview.md)
   * [notifications](08-%20Northbound%20Connectors/notifications.md)
-  * [postgres-connector](08-%20Northbound%20Connectors/postgres-connector.md)
-  * [Postman Integration](08-%20Northbound%20Connectors/Postman%20Integration.md)
-  * [PowerBI](08-%20Northbound%20Connectors/PowerBI.md)
-  * [Qlik](08-%20Northbound%20Connectors/Qlik.md)
   * [queries](08-%20Northbound%20Connectors/queries.md)
   * [sql-setup](08-%20Northbound%20Connectors/sql-setup.md)
-  * [zzz- notification](08-%20Northbound%20Connectors/zzz-%20notification.md)
-  * [zzz- Notifications](08-%20Northbound%20Connectors/zzz-%20Notifications.md)
-  * **A- BI external tools — use AnyLog's REST (or gRPC) API as their data source`**
-    * [Google Drive Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Google%20Drive%20Connector.md)
-    * [Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Importing%20Grafana%20Dashboard.md)
-    * [Power BI Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Power%20BI%20Connector.md)
-    * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Qlik%20Connector.md)
-    * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Using%20Grafana.md)
+  * **A- BI external tools — Grafana**
+    * [Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Grafana/Importing%20Grafana%20Dashboard.md)
+    * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Grafana/Using%20Grafana.md)
+  * **A- BI external tools — Office**
+    * [Google Drive Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Office/Google%20Drive%20Connector.md)
+    * [MS Office Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Office/MS%20Office%20Connector.md)
+    * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Office/Qlik%20Connector.md)
+  * **A- BI Tools — Generic**
+    * [postgres-connector](08-%20Northbound%20Connectors/A-%20BI%20Tools%20%E2%80%94%20Generic/postgres-connector.md)
+    * [Postman Integration](08-%20Northbound%20Connectors/A-%20BI%20Tools%20%E2%80%94%20Generic/Postman%20Integration.md)
 * **09- Integrations**
   * [deployment-process](09-%20Integrations/deployment-process.md)
   * [deployment-scripts](09-%20Integrations/deployment-scripts.md)

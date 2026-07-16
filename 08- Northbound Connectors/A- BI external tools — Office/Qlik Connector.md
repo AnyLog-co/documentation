@@ -1,9 +1,20 @@
 ---
 title: "Qlik"
-description: ""
+description: Demonstration on how to connect between AnyLog and Qlik BI REST service
 layout: page
 source_path: "northbound connectors/Qlik.md"
 ---
+<!--
+## Changelog
+- 2026-04-17 | Created document
+- 2026-07-14 | Merged the two overlapping Qlik docs (Qlik.md and Qlik Connector.md) into this single file.
+              Base is Qlik Connector.md — its images use working <img> tags, where Qlik.md's use a broken
+              Jekyll-era `!<a href="{{ relative_url }}">` construct that doesn't render as an image. Fixed one
+              typo carried in Qlik Connector.md ("QLik" -> "Qlik"). Kept Qlik.md's fuller Period function
+              explanation (the filter-criteria caveat and the worked "3 days" example), which Qlik Connector.md
+              was missing.
+-->
+
 # Qlik
 
 Qlik is a data integration, analytics, and artificial intelligence platform. Using their <a href="https://help.qlik.com/en-US/connectors/Subsystems/REST_connector_help/Content/Connectors_REST/REST-connector.htm" target="_blank">REST connector plugin</a>, 
@@ -11,7 +22,7 @@ users are able to pull data from AnyLog/EdgeLake and use it to generate insight 
 
 ## Requirements 
 1. An active AnyLog network 
-2. A subscription with QLik 
+2. A subscription with Qlik 
 
 ## Preparing the Environment   
 1. From _Home_ goto _Create_
@@ -73,4 +84,3 @@ or Years) and the number of units of the time interval (i.e. 3 days - whereas ti
 
 5. Create a graph based on the given Dimensions
 <img src="../imgs/qlik9_period.png" height=50% width=50% />
-
