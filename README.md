@@ -115,9 +115,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [node-architecture](04-%20Core%20Concepts/B-%20Network-Services/node-architecture.md)
     * [policies-metadata](04-%20Core%20Concepts/B-%20Network-Services/policies-metadata.md)
 * **05- Networking & Security**
-  * **A- Buit-in Authentication**
-    * [Authentication-policies](05-%20Networking%20%26%20Security/A-%20Buit-in%20Authentication/Authentication-policies.md)
-    * [Authentication](05-%20Networking%20%26%20Security/A-%20Buit-in%20Authentication/Authentication.md)
+  * **A- Built-in Authentication**
+    * [Authentication-policies](05-%20Networking%20%26%20Security/A-%20Built-in%20Authentication/Authentication-policies.md)
+    * [Authentication](05-%20Networking%20%26%20Security/A-%20Built-in%20Authentication/Authentication.md)
   * **A- Trusted Platform Module (TPM)**
     * [Software TPM](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/Software%20TPM.md)
     * [TMP Configuration](05-%20Networking%20%26%20Security/A-%20Trusted%20Platform%20Module%20%28TPM%29/TMP%20Configuration.md)
@@ -126,8 +126,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [NGINX Configuration](05-%20Networking%20%26%20Security/B-%20Networking/NGINX%20Configuration.md)
     * [overlay-certificate-authority](05-%20Networking%20%26%20Security/B-%20Networking/overlay-certificate-authority.md)
     * [overlay-network](05-%20Networking%20%26%20Security/B-%20Networking/overlay-network.md)
-  * **C- DNP3 certificates**
-    * **ca_chain**
 * **06- Data Management**
   * **A- Data Ingestion**
     * [Adding Data](06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md)
@@ -154,20 +152,11 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [High Availability](06-%20Data%20Management/E-%20High%20Availability/High%20Availability.md)
 * **07- Southbound Interfaces**
   * [data-ingestion](07-%20Southbound%20Interfaces/data-ingestion.md)
-  * [live-data-generator](07-%20Southbound%20Interfaces/live-data-generator.md)
-  * [node-monitoring](07-%20Southbound%20Interfaces/node-monitoring.md)
   * [southbound-overview](07-%20Southbound%20Interfaces/southbound-overview.md)
-  * [Using Syslog](07-%20Southbound%20Interfaces/Using%20Syslog.md)
-  * **A- Direct - Built-in connectors (protocols AnyLog natively accepts from devices)**
-    * [DNP3](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/DNP3.md)
-    * [etherip](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/etherip.md)
-    * [EtherNet IP](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/EtherNet%20IP.md)
-    * [grpc](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/grpc.md)
-    * [MODBUS](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/MODBUS.md)
-    * [OPC UA Integration](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/OPC%20UA%20Integration.md)
-    * [opcua](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/opcua.md)
-    * [Using GRPC](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/Using%20GRPC.md)
-    * [video-streaming](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/video-streaming.md)
+  * **A- Direct Connectors Generic**
+    * [mapping-policies](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/mapping-policies.md)
+    * [mqtt](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/mqtt.md)
+    * [Using REST](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/Using%20REST.md)
   * **B- Third-party applications — external apps that push data to AnyLog**
     * [EdgeX Foundry Integration](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/EdgeX%20Foundry%20Integration.md)
     * [edgex](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/edgex.md)
@@ -176,9 +165,23 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [telegraf](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/telegraf.md)
     * [Using Kafka](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/Using%20Kafka.md)
     * [Using MQTT (EdgeX)](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/Using%20MQTT%20%28EdgeX%29.md)
-  * **C- REST**
-    * [mapping-policies](07-%20Southbound%20Interfaces/C-%20REST/mapping-policies.md)
-    * [Using REST](07-%20Southbound%20Interfaces/C-%20REST/Using%20REST.md)
+  * **C- Direct Connectors Monitoring**
+    * [node-monitoring](07-%20Southbound%20Interfaces/C-%20Direct%20Connectors%20Monitoring/node-monitoring.md)
+    * [Using Syslog](07-%20Southbound%20Interfaces/C-%20Direct%20Connectors%20Monitoring/Using%20Syslog.md)
+  * **D- Direct Connectors Industrial**
+    * [Deploying a DNP3 Connector via Script](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/Deploying%20a%20DNP3%20Connector%20via%20Script.md)
+    * [DNP3-Mapping-Policies](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/DNP3-Mapping-Policies.md)
+    * [DNP3](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/DNP3.md)
+    * [etherip](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/etherip.md)
+    * [EtherNet IP](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/EtherNet%20IP.md)
+    * [MODBUS](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/MODBUS.md)
+    * [OPC UA Integration](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/OPC%20UA%20Integration.md)
+    * [opcua](07-%20Southbound%20Interfaces/D-%20Direct%20Connectors%20Industrial/opcua.md)
+  * **E- Direct Connectors Media**
+    * [video-streaming](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20Media/video-streaming.md)
+  * **E- Direct Connectors RPC**
+    * [grpc](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/grpc.md)
+    * [Using GRPC](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/Using%20GRPC.md)
 * **08- Northbound Connectors**
   * [northbound-overview](08-%20Northbound%20Connectors/northbound-overview.md)
   * [notifications](08-%20Northbound%20Connectors/notifications.md)
@@ -262,6 +265,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **17- Support & Troubleshooting**
   * [common_issues](17-%20Support%20%26%20Troubleshooting/common_issues.md)
   * [Issue Networking_MTU_size](17-%20Support%20%26%20Troubleshooting/Issue%20Networking_MTU_size.md)
+  * [live-data-generator](17-%20Support%20%26%20Troubleshooting/live-data-generator.md)
   * [troubleshooting](17-%20Support%20%26%20Troubleshooting/troubleshooting.md)
 * **18- Releases Notes**
   * [Anylog EDF Releases Notes](18-%20Releases%20Notes/Anylog%20EDF%20Releases%20Notes.md)
