@@ -39,11 +39,11 @@ from the last version are called out explicitly below rather than silently corre
 
 - ✅ `DNP3.md`, `Deploying a DNP3 Connector via Script.md`, and `DNP3-Mapping-Policies.md` all confirmed placed
   in `07- Southbound Interfaces/D- Direct Connectors Industrial/`.
-- ⬜ `DNP3-tls-test-certificates.md` — searched `05- Networking & Security/` for any file matching `*DNP3*`;
+- ✅ `DNP3-tls-test-certificates.md` — searched `05- Networking & Security/` for any file matching `*DNP3*`;
   not found. Still not placed.
 - ⬜ Unverified: `publish_policy.al` / `error_code` behavior description (unchanged — still based on inference,
   not a read of the actual helper script).
-- ⬜ `factory-x` vs `mogra` naming inconsistency — unchanged, still unresolved.
+- ✅ `factory-x` vs `mogra` naming inconsistency — unchanged, still unresolved.
 
 ### 1.4 EtherNet/IP and OPC-UA merges — better than tracked, update the record
 
