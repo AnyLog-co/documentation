@@ -303,7 +303,7 @@ id create keys where password = 123 and keys_file = roy
 
 ```anylog
 <member = {"member" : {
-    "id"   : "user_001",
+    "id"   : "node_001",
     "type" : "user",
     "name"  : "roy"
     }
