@@ -116,6 +116,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [networking](05-%20Networking%20%26%20Security/B-%20Networking/networking.md)
     * [overlay-certificate-authority](05-%20Networking%20%26%20Security/B-%20Networking/overlay-certificate-authority.md)
     * [overlay-network](05-%20Networking%20%26%20Security/B-%20Networking/overlay-network.md)
+  * **C- DNP3 certificates**
+    * [DNP3 TLS test certificates](05-%20Networking%20%26%20Security/C-%20DNP3%20certificates/ca_chain/README.md)
 * **06- Data Management**
   * **A- Data Ingestion**
     * [Adding Data](06-%20Data%20Management/A-%20Data%20Ingestion/Adding%20Data.md)
