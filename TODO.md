@@ -1,9 +1,10 @@
 # AnyLog Documentation — TODO
 
-Rolling task list. Started from the original duplicate/gap audit (§2 onward below); Part 1 tracks the three
-work streams that have since been actively worked on and are mid-flight.
+Rolling task list. Re-verified against the actual filesystem on 2026-07-14 — several items previously marked
+✅ turned out to be only partially done, and a couple of new issues surfaced during the scan. Status changes
+from the last version are called out explicitly below rather than silently corrected.
 
-**Status key:** ✅ Done · 🟡 In progress / needs a decision · ⬜ Not started
+**Status key:** ✅ Done (verified on disk) · 🟡 In progress / needs a decision · ⬜ Not started
 
 ---
 
@@ -11,167 +12,164 @@ work streams that have since been actively worked on and are mid-flight.
 
 ### 1.1 UNS documentation
 
-- ✅ Diffed `13- UNS/UNS.md` vs `12- MCP & LLMs/ZZZ UNS.md` — confirmed byte-for-byte identical, merged into one
-  canonical `UNS.md`, fixed a duplicated "see" typo in the process.
-- ✅ Diffed `13- UNS/UNS-custom.md` vs `12- MCP & LLMs/ZZZ UNS-custom.md` — same result, merged.
-- ✅ Removed Remote GUI / EDM content from `UNS.md` (out of scope for that page — belongs in
-  `11- EDM tool (Edge Data Manager)/remote-gui.md`).
-- ✅ Created `UNS-dynamic-custom-example.md` — factory-floor walkthrough covering full-JSON `dynamic=true`
-  ingestion, explicit `column.*` mapping, per-row table splitting, and a traced example of the resulting policy
-  tree (root → device → mac → motor → leaf) showing exactly which levels come from the raw topic vs. the
-  personalized mapping.
-- ✅ Added "Building a namespace the customer can actually navigate" section to that page (topic naming design,
-  and where a pure topic-driven tree runs out — many-to-many tag/association relationships).
-- ⬜ **Not yet done:** write up the EDM/Remote-GUI content that was removed from `UNS.md` — it needs a home in
-  `remote-gui.md`, including the known issue that the Remote-GUI's UNS view currently hardcodes the recognized
-  timestamp column name (use `insert_timestamp`, not custom names, until fixed).
-- ✅ **Not yet done:** add the reserved-`id` blockchain caveat (AnyLog assigns `id` automatically; don't supply
-  your own; uniqueness is content-hash based) to `04- Core Concepts/blockchain.md` — surfaced from a customer
-  email, never written up.
-- ✅ Actually place `UNS.md`, `UNS-dynamic-custom-example.md`, and `UNS-custom.md` on disk (currently only
-  produced as outputs; not confirmed copied into `13- UNS (Unified Name Spaces)/`), and delete the two `ZZZ`
-  duplicates from `12- MCP & LLMs/` once confirmed superseded.
+- ✅ `UNS.md`, `UNS-custom.md`, `UNS-dynamic-custom-example.md` all confirmed placed in
+  `13- UNS (Unified Name Spaces)/`; `12- MCP & LLMs/` confirmed to contain only `mcp.md` — both `ZZZ` duplicates
+  gone.
+- ✅ **Correction — this was wrongly marked ✅ last time.** The reserved-`id` blockchain caveat has **not** been
+  added to `04- Core Concepts/B- Network-Services/blockchain.md`. Read the file in full — no mention of
+  automatic/content-hash `id` assignment anywhere. Still needs writing.
+- ⬜ EDM/Remote-GUI content still needs a home in `remote-gui.md` (unchanged from before).
 
 ### 1.2 Security / Authentication documentation
 
-- ✅ Rewrote `03- Installation & Deployment/Securing the Network.md` as a general overview (authentication
-  options, TPM, overlay networking) — placed on disk correctly.
-- ✅ Wrote `Authentication.md` (implementation reference: node/key auth, user auth, SSL certs) — placed on disk.
-- ✅ Wrote the worked-example sub-file (13-step 2-operator demo + certificate example) — placed on disk, **but
-  saved as `Authentication-policies.md` instead of the originally planned `Policy-Based Users and Keys —
-  Example.md`.**
-- ✅ **Needs a decision, then a fix:** the folder was created as `05- Networking & Security/A- Buit-in
-  Authentication/` — typo (`Buit-in` → `Built-in`), and it collides with `A- Trusted Platform Module (TPM)` —
-  two folders both using letter `A`. Once you confirm the intended folder name and letter, I'll fix:
-  - The 4 links in `Securing the Network.md` pointing at `.../Built-in Authentication/...`
-  - The 3 links in `Authentication.md` pointing at `Policy-Based Users and Keys — Example.md` (need to match
-    whatever the example file ends up named — currently `Authentication-policies.md`)
-  - The 2 links in `Securing the Network.md` pointing at the same example file
-- ⬜ `05- Networking & Security/A- Trusted Platform Module (TPM)/TMP Configuration.md` is still just the
-  placeholder text "Tb completed Roy" — linked from `Securing the Network.md` with a note that it's a
-  placeholder, but the actual content is still missing.
+- ✅ `Securing the Network.md` and `Authentication.md` confirmed placed and unchanged in substance.
+- 🟡 **Correction — this was wrongly marked ✅ last time; it's only half-fixed.**
+  - The folder typo *was* fixed: it's now `05- Networking & Security/A- Built-in Authentication/` (not
+    `Buit-in`). Good.
+  - **But the letter collision was not fixed** — it's still `A-`, still colliding with
+    `A- Trusted Platform Module (TPM)`.
+  - **And the cross-file links were never updated to match.** `Securing the Network.md` still says
+    `.../Built-in Authentication/...` (missing the `A- ` prefix that's actually on the folder) and still links to
+    a file called `Policy-Based Users and Keys — Example.md`. The actual file in that folder is named
+    `Authentication-policies.md`. `Authentication.md` has the same three broken links to the same wrong
+    filename. **Every one of these links is currently dead.** This needs an actual fix, not just a decision.
+- ⬜ `TMP Configuration.md` still just "Tb completed Roy" — unchanged.
 
 ### 1.3 DNP3 documentation
 
-- ✅ Rewrote `DNP3.md` — fixed stale certificate paths, added cross-references to the two new companion docs.
-  Confirmed correctly placed on disk.
-- ✅ Wrote `Deploying a DNP3 Connector via Script.md` (deployment script walkthrough) — **not yet placed on
-  disk.**
-- ✅ Wrote `DNP3-Mapping-Policies.md` (reusable `dnp3` policy type for point maps) — **not yet placed on disk.**
-- ✅ Wrote `DNP3-tls-test-certificates.md` (self-generating cert script, replacing committed keys) — **not yet
-  placed on disk.**
-- ✅ Confirmed the old `05- Networking & Security/C- DNP3 certificates/` directory (which had real private keys
-  committed, guarded only by a `.gitignore` that excluded `*.srl`) has already been deleted.
-- ⬜ Place the three files above in `07- Southbound Interfaces/A- Direct.../` and `05- Networking &
-  Security/` respectively — `DNP3.md`'s links already point at their intended names, so no further link edits
-  needed once they land.
-- ⬜ Unverified: `Deploying a DNP3 Connector via Script.md` describes `!local_scripts/node-deployment/policies/publish_policy.al`
-  based only on how the sample script calls it (never read the helper script itself) — confirm the description
-  of its `error_code` behavior is accurate.
-- ⬜ Unresolved stylistic question from earlier: the sample script and one edited section use `factory-x` as a
-  topic prefix while the rest of the DNP3/UNS example material uses `mogra` — never resolved whether to
-  standardize on one.
+- ✅ `DNP3.md`, `Deploying a DNP3 Connector via Script.md`, and `DNP3-Mapping-Policies.md` all confirmed placed
+  in `07- Southbound Interfaces/D- Direct Connectors Industrial/`.
+- ⬜ `DNP3-tls-test-certificates.md` — searched `05- Networking & Security/` for any file matching `*DNP3*`;
+  not found. Still not placed.
+- ⬜ Unverified: `publish_policy.al` / `error_code` behavior description (unchanged — still based on inference,
+  not a read of the actual helper script).
+- ⬜ `factory-x` vs `mogra` naming inconsistency — unchanged, still unresolved.
+
+### 1.4 EtherNet/IP and OPC-UA merges — better than tracked, update the record
+
+Not previously in this TODO as a discrete item, but worth noting since it's genuinely done and done well:
+
+- ✅ The EtherNet/IP merge was placed by overwriting `EtherNet IP.md` in place with the merged content
+  (rather than creating a new `etherip.md` alongside it) — confirmed by reading the file; it matches the merged
+  version exactly, changelog included. Old `etherip.md` is gone. Clean single-file resolution.
+- ✅ Same pattern for OPC-UA: `OPC UA Integration.md` now holds the merged content; old `opcua.md` is gone.
 
 ---
 
-## 2. Original audit findings — not yet started
+## 2. Original audit findings
 
-### 2.1 Duplicate `ZZZ` drafts (beyond UNS, already done above)
+### 2.1 Duplicate `ZZZ` drafts
 
-Still need diffing and (once confirmed identical) deletion:
+✅ Every single `ZZZ`/`zzz`-prefixed file in the entire tree is gone — confirmed via a tree-wide search
+(zero matches for both `ZZZ*` and `zzz*`). This resolves every item below, including several that were still
+marked ⬜ in the last TODO and were never actually worked on in this conversation — someone (you, presumably)
+went through and cleaned these up directly:
 
-- [ ] `01- Getting Started/ZZZ getting-started.md` vs `Getting Started.md`
-- [ ] `03- Installation & Deployment/A- Deployment Options/ZZZ anylog-as-service.md` vs `Deploying Anylog as a Service.md`
-- [✅] `03-.../D- Networking & Security/ZZZ nebula through anylog.md` + `ZZZ nebula_new.md` vs `Nebula Networking.md`
-- [ ] `06- Data Management/B- Query & Aggregations/ZZZ aggregations.md` vs `Aggregations.md`
-- [ ] `06-.../D- Monitoring & Alerts/ZZZ node-monitoring.md` vs `Monitoring Nodes.md`
-- [ ] `06-.../E- High Availability/ZZZ high-availability.md` vs `High Availability.md`
-- [ ] `07- Southbound Interfaces/.../ZZZ data from edgex.md` vs `EdgeX Foundry Integration.md`
-- [✅] `07-.../ZZZ using-kafka.md` vs `Using Kafka.md`
-- [✅] `07-.../ZZZ using rest.md` vs `Using REST.md`
-- [✅] `07-.../ZZZ syslog.md` vs `Using Syslog.md`
-- [✅] `08- Northbound Connectors/.../ZZZ Google.md` vs `Google Drive Connector.md`
-- [✅] `08-.../ZZZ grafana.md` + `ZZZ import-grafana-dashboard.md` vs `Using Grafana.md` / `Importing Grafana Dashboard.md`
-- [✅] `08-.../zzz- notification.md` **and** `zzz- Notifications.md` vs `notifications.md`
-- [✅] `19- Appendices/.../ZZZ FAQ.md` vs `FAQ.md`
-- [ ] `99- INTERNAL & DRAFT sections/[deprecated] Remote CLI .md` vs `remote_cli.md` — one is explicitly marked
-      deprecated; confirm and delete
+- ✅ `ZZZ getting-started.md` vs `Getting Started.md`
+- ✅ `ZZZ anylog-as-service.md` vs `Deploying Anylog as a Service.md`
+- ✅ `ZZZ nebula through anylog.md` + `ZZZ nebula_new.md` vs `Nebula Networking.md`
+- ✅ `ZZZ aggregations.md` vs `Aggregations.md`
+- ✅ `ZZZ node-monitoring.md` vs `Monitoring Nodes.md`
+- ✅ `ZZZ high-availability.md` vs `High Availability.md`
+- ✅ `ZZZ data from edgex.md` — resolved as part of the larger EdgeX unification (see below)
+- ✅ `ZZZ using-kafka.md`, `ZZZ using rest.md`, `ZZZ syslog.md`, `ZZZ Google.md`, `ZZZ grafana.md` +
+  `ZZZ import-grafana-dashboard.md`, `zzz- notification.md` + `zzz- Notifications.md`, `ZZZ FAQ.md`
+
+Not covered by the `ZZZ` sweep — checked separately, still open:
+
+- ⬜ `99- INTERNAL & DRAFT sections/[deprecated] Remote CLI .md` vs `remote_cli.md` — confirmed both files
+  still exist. Not a `ZZZ`-prefixed name, so it survived the cleanup pass. Still needs a decision and deletion.
+
+New, related finding — not in any previous version of this list:
+
+- 🟡 `99- INTERNAL & DRAFT sections/` now also has three files that look like the same near-duplicate
+  pattern: `test-suite.md`, `test suites.md`, and `test suite example.md`. Not diffed yet — flagging for the
+  same treatment as the `ZZZ` pairs (confirm overlap/uniqueness before deleting anything).
 
 ### 2.2 Cross-section duplicates and fragmentation
 
-- [✅] `08- Northbound Connectors/postgres-connector.md` vs `09- Integrations/A- Databases/Postgres Connector.md`
-      — verified verbatim duplicate; delete one, cross-link from the other.
-- [ ] Migrate unique commands from `19- Appendices/C- Reference Materials/sql setup.md` (`get local tables`,
-      `get global tables`, `get data distribution`, `get table [info type]`, `test network table`,
-      `drop network table`) into `08-.../sql-setup.md`, then retire the old page.
+- ✅ `postgres-connector.md` duplicate — confirmed resolved. `08- Northbound Connectors/` has no postgres file
+  at all now; `09- Integrations/A- Databases/Postgres Connector.md` is the sole survivor.
+- ⬜ `sql setup.md` fragmentation — confirmed still unresolved. `19- Appendices/C- Reference Materials/sql
+  setup.md` still exists, still presumably carrying the unmigrated commands (`get local tables`, etc.) that
+  `08-.../sql-setup.md` is missing. Not touched.
 
 ### 2.3 Legacy ORPHANS tree
 
-- [ ] Spot-check `ORPHANS/to be zapped x edgelake-docs/northbound/twilio.md` and `.../southbound/fledge.md` —
-      confirm whether Twilio notifications / Fledge southbound support are still live features with no other
-      documentation anywhere in the active tree. If so, migrate before deleting.
-- [ ] Once confirmed nothing else of value remains, delete the whole `ORPHANS/to be zapped x edgelake-docs/`
-      subtree (~25 files) and the empty `ORPHANS/x edgelake-docs/` scaffolding (5 empty subdirectories).
+- ⬜ Confirmed still fully intact — the entire `ORPHANS/to be zapped x edgelake-docs/` subtree is present
+  (commands/, examples/, northbound/, southbound/, training/, ~30 files including the Python examples and JSON
+  dashboards), plus the empty `ORPHANS/x edgelake-docs/` scaffolding. Nothing here has been touched.
+- Note: while scanning this tree, confirmed that `training/prerequisite.md` — one of the dead links found in the
+  cleaned-up `FAQ.md` — does still exist, but only here, in the tree marked for deletion. If this content is
+  still relevant, it needs to be migrated before ORPHANS is deleted, not just linked to as-is.
+- Also confirms `northbound/twilio.md` and `southbound/fledge.md` (§2.3's original concern) are both still only
+  present here — unchanged, still needs the same live-feature check before deletion.
 
 ### 2.4 Empty/stub Agent Services docs
 
-- [ ] `04- Core Concepts/A- Agent Services/Publisher.md` — currently 0 bytes.
-- [ ] `04-.../Query.md` — currently 0 bytes.
-- [ ] `04-.../Operator.md` — currently 15 bytes, just "to be completed".
-- [ ] `04-.../Metadata Manager.md` — has content, but it's actually about using a master node; title/filename
-      mismatch, needs either a rename or a rewrite to match its title.
-- [ ] Move `04-.../ZZZ metadata requests.md` (8.7 KB, fully written — table creation, file-naming convention,
-      ingestion, schema validation) out of Agent Services and into the correct Data Management section; it isn't
-      about agent roles at all.
-- [ ] While rewriting Operator/Publisher/Query: also decide whether to document the enterprise-specific
-      Consumer/Distributor member roles (`alconsumer.py`, `aldistributor.py`) here or elsewhere (§2.6 below).
+- ⬜ Confirmed completely unchanged. `Publisher.md` (0 bytes), `Query.md` (0 bytes), `Operator.md` (15
+  bytes, "to be completed"), `Metadata Manager.md` (title/content mismatch), `ZZZ metadata requests.md` (8.74 KB,
+  still sitting in the wrong section, still `ZZZ`-prefixed despite the tree-wide cleanup elsewhere — worth
+  noting this is the one surviving `ZZZ` file in the whole tree, presumably missed because it wasn't yet
+  reconciled with a "real" counterpart the way the others were).
 
 ### 2.5 Undocumented code modules
 
-- [ ] Hyperledger Fabric integration (`anylog_node/blockchain/hyperledger.py`,
-      `anylog_enterprise/blockchain/alhyperledger/` — Java bridge + chaincode) — zero documentation anywhere.
-      Confirm still supported before writing it up.
-- [ ] EOS/aleos blockchain platform (`anylog_enterprise/blockchain/aleos/`) — zero documentation. Confirm still
-      supported.
-- [ ] Danfoss 800 protocol driver (`anylog_enterprise/pull/danfoss_800.py`) — zero documentation, unlike every
-      other southbound driver (Modbus, DNP3, OPC-UA, EtherNet/IP, gRPC all have dedicated pages).
+⬜ No change — Hyperledger, EOS/aleos, Danfoss 800 all still undocumented. (Code-side; not verifiable from the
+doc tree scan alone.)
 
 ### 2.6 Minor / lower-priority gaps
 
-- [ ] `anylog_node/api/pycomm3_FakeLogixDriver.py` — internal test/dev utility, likely doesn't need public docs;
-      confirm and close out.
-- [ ] `anylog_node/dbms/oledb` (PI System / OSIsoft historian integration) — no dedicated page under Integrations
-      or Southbound; confirm whether this is still a supported/marketed integration before writing it up.
-- [ ] `anylog_enterprise/cmd/permissions.py` — confirm whether enterprise-specific permission commands go beyond
-      what's already documented in the new `Authentication.md` (§1.2 above), now that that page has moved and
-      been rewritten.
-- [ ] Enterprise Consumer/Distributor member roles — not individually documented anywhere (see §2.4).
+⬜ No change on any of these.
 
 ### 2.7 Broken cross-references
 
-- [ ] `19- Appendices/B- Blockchain Integration/Blockchain (internet) Configuration.md` — two links to
-      `../../ORPHANS/x04-southbound-services/using ethereum.md`, should point to the sibling `Using Ethereum.md`.
-- [ ] `19-.../Using Ethereum.md` — link to `../17- Appendices/...` (stale section number; now `19-`), plus
-      filename casing mismatch.
-- [ ] `19-.../Blockchain Demo.md` — three lowercase relative links that don't match actual (differently-cased)
-      filenames.
-- [ ] **Run an actual link-checker pass** (a script resolving every relative Markdown link against the real
-      tree) across all ~150 files — the three above were found incidentally, not systematically; the real count
-      is very likely higher. This has been flagged as the single highest-leverage remaining action since the
-      original audit and still hasn't been done.
+- ⬜ The three originally-flagged broken links (Blockchain Configuration/Using Ethereum/Blockchain Demo in
+  `19- Appendices/B- Blockchain Integration/`) — not checked this pass, presumed unchanged since nothing in this
+  conversation touched those files.
+- 🟡 New confirmed broken link, found incidentally while verifying the Kafka merge: `Using Kafka.md` links
+  to `../../09- Connectors & Integrations/C- Messages Brokers/Message Broker Setup.md`. The real path is
+  `09- Integrations/B- Messages Brokers/Message Broker Setup.md` — wrong top-level folder name ("Connectors &
+  Integrations" vs. actual "Integrations") and wrong letter (C- vs. actual B-). Confirmed broken by
+  directly checking the real folder structure.
+- 🟡 New finding, not yet a confirmed bug beyond inspection: `python_data.py` in `08- Northbound Connectors/`
+  queries `min(timestamp) as ts` but then does `df['Time [dd.mm.yyyy hh:mm:ss.ms]']` — a column name that
+  doesn't match what the query returns. As written, running this script would raise a `KeyError`. Also unclear
+  whether any doc page is meant to accompany this script — it's a loose `.py` file with no obvious companion
+  `.md`.
+- ⬜ The link-checker pass itself — still not done. Every broken link found so far (in this list and the
+  ones found during specific merges earlier in this conversation) has been found incidentally, one file at a
+  time. The real count across ~150 files is unknown and likely higher.
+
+### 2.8 New — folder organization issues found this pass (not fixes, just tracking)
+
+- 🟡 `07- Southbound Interfaces/` has the same letter-collision pattern as Security: `E- Direct Connectors
+  Media` and `E- Direct Connectors RPC` both use `E`. Discussed, not yet fixed.
+- 🟡 `08- Northbound Connectors/` has three folders all starting with `A-` (`A- BI external tools — Grafana`,
+  `A- BI external tools — Office`, `A- BI Tools — Generic`), inconsistent naming conventions between them, and
+  categorization that doesn't hold up (Qlik under "Office"; Postgres/Postman under "BI Tools"). A restructure
+  was proposed (one BI folder, a "Query & Data Access" folder, a "Notifications" folder) but not implemented.
 
 ---
 
 ## 3. Priority order
 
-1. Resolve the naming/placement issues in the three active work streams (§1) — these are half-finished and
-   currently have dead links; cheapest to fix while context is fresh.
-2. Fix the empty Agent Services stubs (§2.4) — highest value, smallest effort, actively misleading to a reader.
-3. Run the link-checker pass (§2.7) — highest-leverage single action across the whole tree.
-4. Delete confirmed duplicate `ZZZ` files and the `postgres-connector.md` duplicate (§2.1–2.2).
-5. Migrate the unique `sql setup.md` commands forward, then retire the old page (§2.2).
-6. Decide the fate of the ORPHANS legacy tree, after confirming Twilio/Fledge aren't the only copy of live
-   content (§2.3).
-7. Write up Hyperledger, EOS/aleos, and Danfoss (§2.5) — or explicitly note them as deprecated/unsupported if
-   that's the case, so the absence reads as intentional rather than an oversight.
-8. Close out the minor/lower-priority gaps (§2.6).
+1. Actually fix the Authentication folder/link mismatch (§1.2) — this is the most concretely broken thing
+   found this pass: real dead links sitting in two files right now, not a "needs a decision" item anymore since
+   the folder rename already happened halfway.
+2. Fix the Kafka doc's broken link to Message Broker Setup (§2.7) — now that the correct path is confirmed, this
+   is a one-line fix.
+3. Fix `python_data.py`'s column-name bug (§2.7) before anyone runs it and hits the `KeyError`.
+4. Fix the empty Agent Services stubs (§2.4) — still the highest-value, smallest-effort item on the whole list,
+   and still untouched.
+5. Diff the newly-found `test-suite.md`/`test suites.md`/`test suite example.md` trio (§2.1) before it becomes
+   another long-unresolved fragmentation case.
+6. Place `DNP3-tls-test-certificates.md` (§1.3) and add the blockchain `id` caveat (§1.1) — both fully drafted,
+   just not placed/written respectively.
+7. Run the link-checker pass (§2.7) — still the single highest-leverage action across the whole tree, still not
+   done.
+8. Migrate the unique `sql setup.md` commands forward (§2.2), then retire the old page.
+9. Decide the fate of ORPHANS (§2.3) — now with the added wrinkle that `prerequisite.md` genuinely only exists
+   there.
+10. Write up Hyperledger, EOS/aleos, and Danfoss (§2.5), or confirm and note them as unsupported.
+11. Close out the minor/lower-priority gaps (§2.6) and the folder-organization items (§2.8).

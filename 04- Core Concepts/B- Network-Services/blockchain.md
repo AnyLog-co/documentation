@@ -136,13 +136,20 @@ When inserted locally, the policy gets `"ledger": "local"`. Once confirmed on th
 
 ```anylog
 blockchain prepare policy !my_policy          # add ID and date fields
-run client (!master_node) blockchain push !my_policy
+blockchain insert where policy=!new_policy and local=true and master=!master_npode
 ```
+
+> Each policy has a unique id, which can either be manually defined or automatically assigned based on a hash of the 
+> policy's content. Since the id must be unique, we recommend letting AnyLog assign it automatically, unless the policy 
+> is one you'll reference manually and often — where a short, readable ID is easier to work with than an auto-generated 
+> hash (e.g. a schedule policy used to monitor nodes).
+
 
 Wait for the update to be confirmed on the local copy:
 ```anylog
 is_updated = blockchain wait for !my_policy
 ```
+
 
 ### Other insert commands
 
