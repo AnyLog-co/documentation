@@ -143,12 +143,12 @@ one level at a time:
 curl -X GET http://192.168.86.29:32149 -H "command: blockchain get root policies exclude cluster" -H "User-Agent: AnyLog/1.23" | jq
 ```
 ```json
-[{"uns": {"name": "mogra", "namespace": "mogra", "dbms": "mydb", "table": "mogra_1",
+[{"uns": {"name": "factory-x", "namespace": "factory-x", "dbms": "mydb", "table": "factory-x_1",
           "id": "c7e14e59ed39a83555b044d9bdf5174b", "ledger": "global"}}]
 ```
 
 ```bash
-# Child of mogra — the next raw topic segment
+# Child of factory-x — the next raw topic segment
 curl -X GET http://192.168.86.29:32149 -H "command: blockchain get uns where parent=c7e14e59ed39a83555b044d9bdf5174b bring.first" -H "User-Agent: AnyLog/1.23" | jq
 ```
 ```json
