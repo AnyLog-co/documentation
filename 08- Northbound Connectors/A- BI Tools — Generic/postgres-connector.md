@@ -1,27 +1,41 @@
 ---
-title: PostgresSQL Connector
-description: Direct connection into PostgresSQL in order to gather insight from AnyLog data 
+title: "PostgreSQL Connector & Tableau Visualization"
+description: Connecting system_query to PostgreSQL so tools that only support a PostgreSQL connector (not REST) — e.g. Tableau — can pull AnyLog query results.
 layout: page
+source_path: "postgres-connector.md"
 ---
 <!--
 ## Changelog
-- 2026-04-17 | Created document
---> 
-  
-For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
-the `system_query` database. To connect `system_query` in  PostgresSQL
+- 2026-04-17 | Created document (as postgres-connector.md, Northbound Connectors)
+- (unknown) | A second copy was created under 09- Integrations/A- Databases/Postgres Connector.md — confirmed
+              on comparison to be the same content, not a distinct storage-layer topic. That copy used working
+              Markdown links/images; this one used broken Jekyll-era syntax. Retired the duplicate.
+- 2026-07-14 | Merged into one file, kept in Northbound Connectors (this is a northbound/query-consumption
+              topic — Tableau pulling query results — not about PostgreSQL as AnyLog's storage backend, which
+              is a separate topic covered in Databases & Tables.md). Fixed the "Full list of SQL options" link
+              to point at the current Query Data.md (the old queries.md this pointed to has been retired and
+              merged there). Left the "to run in repeat" link flagged rather than guessed — "alerts and
+              monitoring.md" doesn't exist anywhere in the current tree; it only survives inside the ORPHANS
+              legacy subtree marked for deletion, so this was already a dead link before this merge.
+-->
+
+# PostgreSQL Connector & Tableau Visualization
+
+For software that doesn't support REST requests, but does support a PostgreSQL connector, graphs can be
+generated through the `system_query` database. To connect `system_query` to PostgreSQL:
 
 ```anylog
-db_ip = 127.0.0.1 
-db_port = 5432 
-db_user = admin 
+db_ip = 127.0.0.1
+db_port = 5432
+db_user = admin
 db_passwd = passwd
-connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd   
+connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd
 ```
 
+## Setting up Postgres
 
-## Setting up Postgres 
 0. [Install Postgres](https://www.postgresqltutorial.com/install-postgresql/)
+
 ```bash
 docker run -d --network host \
   --name anylog-psql \
@@ -31,10 +45,12 @@ docker run -d --network host \
   --rm postgres:14.0-alpine
 ```
 
-Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-allow-remote-user-access-in-postgresql.html#:~:text=%20How%20to%20Allow%20Remote%20User%20Access%20in,manages%20a%20remote%20access%20file%2C%20to...%20More%20) - if Postgres (_north-bound_) connector is on a separate machine.
-1. locate and open`data/postgresql.conf` & open it
+Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-allow-remote-user-access-in-postgresql.html) if the Postgres (north-bound) connector is on a separate machine.
+
+1. Locate and open `data/postgresql.conf`:
+
     ```bash
-    anylog@anylog-2004:~$ docker volume inspect pgdata 
+    anylog@anylog-2004:~$ docker volume inspect pgdata
     [
         {
             "CreatedAt": "2022-01-18T00:46:23Z",
@@ -46,46 +62,57 @@ Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-al
             "Scope": "local"
         }
     ]
-    
+
     anylog@anylog-2004:~$ sudo ls /var/lib/docker/volumes/pgdata/_data
-    [sudo] password for anylog: 
+    [sudo] password for anylog:
     base    pg_commit_ts  pg_hba.conf    pg_logical    pg_notify    pg_serial     pg_stat      pg_subtrans  pg_twophase  pg_wal   postgresql.auto.conf  postmaster.opts
     global  pg_dynshmem   pg_ident.conf  pg_multixact  pg_replslot  pg_snapshots  pg_stat_tmp  pg_tblspc    PG_VERSION   pg_xact  postgresql.conf       postmaster.pid
-    
+
     anylog@anylog-2004:~$ sudo vim /var/lib/docker/volumes/pgdata/_data/postgresql.conf
     ```
-    
-2. Allow Remote Access - uncomment `listen_address` and set to "*"
+
+2. Allow remote access — uncomment `listen_addresses` and set it to `*`:
+
     ```configs
     listen_addresses = '*'
                                         # comma-separated list of addresses;
                                         # defaults to 'localhost'; use '*' for all
     ```
-    
-3. Grant Remote Access - add the following line at the bottom of `data/pg_hba.conf`
+
+3. Grant remote access — add the following line at the bottom of `data/pg_hba.conf`:
+
     ```configs
     host    all             new_user           27.147.176.2/32       md5
     ```
-   
-4. Restart PostgresSQL instance
+
+4. Restart the PostgreSQL instance:
+
     ```bash
     docker restart anylog-psql
     ```
 
-## Executing Query
-0. On AnyLog connect `system_query` to Postgres database 
+## Executing a query
+
+0. On AnyLog, connect `system_query` to the Postgres database:
+
 ```anylog
 connect dbms psql anylog@127.0.0.1:demo 5432 system_query
 ```
 
-1. Execute query - <a href="{{ '/docs/Querying-Data-Northbound/alerts%20and%20monitoring/#repeatable-queries' | relative_url }}">to run in repeat</a>
+1. Execute a query:
+
 ```anylog
 AL aiops-single-node > run client () sql aiops format=table and table=new_table and drop=true "select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day"
 ```
 
-2. Utilize explain query to view how the results are generated
+> To run a query like this on a repeating schedule, see repeatable queries — the original reference for this
+> (`alerts and monitoring.md`) doesn't resolve in the current doc tree; confirm the current location before
+> relying on this pointer.
+
+2. Use `query explain` to see how the result was generated:
+
 ```anylog
-AL aiops-single-node > query explain 
+AL aiops-single-node > query explain
 
 07 Remote DBMS    : aiops
 07 Remote Table   : fic11_mv
@@ -94,32 +121,37 @@ AL aiops-single-node > query explain
 07 Local Create   : create table new_table (increments_1_trunc timestamp without time zone, increments_1_extract integer, min_2 timestamp without time zone, min_3 double precision, SUM__value numeric, COUNT__value integer, max_5 double precision);
 07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract
 ```
-Disclaimer: <a href="{{ '/docs/Querying-Data-Northbound/queries/#query-options' | relative_url }}">Full list of SQL options</a>
 
-## Extract Data onto Tableau
-1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
-2. Under _Data_ → _Data Sources_ select PostgresSQL connector type 
+For the full list of SQL query options, see [Query Data — Query options](../../02-%20Training%20%26%20Tutorials/Query%20Data.md#query-options).
 
-| !<a href="{{ '/docs/assets/img/tableau_img2a.png/' | relative_url }}">data</a> | !<a href="{{ '/docs/assets/img/tableau_img2b.png/' | relative_url }}">data source</a> |
+## Extracting data into Tableau
+
+1. [Download & install Tableau](https://www.tableau.com/products/desktop/download)
+2. Under **Data** → **Data Sources**, select the PostgreSQL connector type:
+
+| ![data](../../imgs/tableau_img2a.png) | ![data source](../../imgs/tableau_img2b.png) |
 | --- | --- |
 
-3. Fill-out the information to connect to database & Press "Ok"
-!<a href="{{ '/docs/assets/img/tableau_img3.png/' | relative_url }}">connection information</a>
+3. Fill out the connection information and press "OK":
 
+![connection information](../../imgs/tableau_img3.png)
 
-4. Double-click on the table you want to use (in this case `new_table`) and goto worksheet
-!<a href="{{ '/docs/assets/img/tableau_img4.png/' | relative_url }}">prep worksheet data</a>
+4. Double-click on the table you want to use (in this case `new_table`) and go to the worksheet:
 
+![prep worksheet data](../../imgs/tableau_img4.png)
 
-## Generating Graphs
+## Generating graphs
 
-The `system_query` database gathers (query) results from the different AnyLog instances to generate a unified dataset for 
-the user. As such, generating graphs from the final results is a bit complicated. 
-   * Min 2 - is column `MIN(timestamp)`
-   * Min 3 - is column `MIN(value)`
-   * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column `AVG(value)`
-   * MAX 5 - is column `MAX(value)`
-!<a href="{{ '/docs/assets/img/tableau_img5.png/' | relative_url }}">column explanation</a>
+The `system_query` database gathers query results from the different AnyLog instances to generate a unified
+dataset. Because of that, mapping the final result columns to something readable takes a little translation:
 
-To generate a graph, use "Min 2" as _Columns_ and all others for _Rows_
-!<a href="{{ '/docs/assets/img/tableau_img6.png/' | relative_url }}">generated image</a>
+- **Min 2** is the `MIN(timestamp)` column
+- **Min 3** is the `MIN(value)` column
+- **SUM(SUM__VALUE) / COUNT(new_table_count)** is the `AVG(value)` column
+- **Max 5** is the `MAX(value)` column
+
+![column explanation](../../imgs/tableau_img5.png)
+
+To generate a graph, use "Min 2" as **Columns** and all the others as **Rows**:
+
+![generated image](../../imgs/tableau_img6.png)
