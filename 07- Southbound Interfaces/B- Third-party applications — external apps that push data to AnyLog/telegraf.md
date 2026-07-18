@@ -7,7 +7,7 @@ layout: page
 <!--
 ## Changelog
 - 2026-04-17 | Created document
-- 2026-04-18 | Simplified to Telegraf setup only; mapping details moved to mapping-Policies.md
+- 2026-04-18 | Simplified to Telegraf setup only; mapping details moved to mapping-01 Policies.md
 - 2026-04-21 | Remove title (#Telegraf) 
 - 2026-04-25 | hyperlinks
 -->

@@ -4,6 +4,16 @@ description: Configure AnyLog as a Kafka consumer to ingest data, or as a produc
 layout: page
 source_path: "Using Kafka.md"
 ---
+
+### 📜 Change Log
+ **Date**   | **Name** | **Change**       | **Version** |
+ |------------|--|------------------|----------|
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
+
+
+
 # Using Kafka
 
 AnyLog interacts with Kafka in two directions:

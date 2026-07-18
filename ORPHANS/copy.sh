@@ -83,7 +83,7 @@ if [ -d "deployments/Networking & Security" ]; then
 else
   echo "MISSING: deployments/Networking & Security/*" | tee -a "$MISSING_LOG"
 fi
-# known exact duplicate of Securing the Network.md -> park for review instead of overwriting
+# known exact duplicate of 03 Securing the Network.md -> park for review instead of overwriting
 safe_mv "examples/Secure Network.md" "$DEST_REVIEW"
 
 echo "== 04-southbound-services =="

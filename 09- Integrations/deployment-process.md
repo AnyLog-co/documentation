@@ -18,7 +18,7 @@ Changed in this revision:
   2. A new "Overriding the Entry Point" section (docker-compose / docker run examples for when your custom
      entry script isn't named main.al) — this was genuinely new content, not duplicated anywhere else.
 - customizing-scripts.md's local_script.al walkthrough was NOT carried over — it's already covered (in more
-  detail, with both the auto-run and manual-apply paths) in 01- Getting Started's deployment-scripts.md.
+  detail, with both the auto-run and manual-apply paths) in 01- Getting Started's 04 Deployment Scripts.md.
 - Open item, not yet verified: confirm ../imgs/deployment_stack_layers.png actually resolves at that relative
   path before publishing.
 -->
