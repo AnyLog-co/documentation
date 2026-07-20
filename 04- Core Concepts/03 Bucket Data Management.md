@@ -16,6 +16,7 @@ The ***bucket*** command provides a means to push (upload) and pull (download) f
 See [examples](#examples) below.
 
 ## 🌐 Supported Backends
+- **MinIO** (S3-compatible — see [MinIO object storage](../19- Appendices/C- Reference Materials/minio.md)).  
 - **Akave Cloud** (currently supported for file object management).  
 - **AWS S3** (the API is AWS-compatible, but direct support is not yet fully tested. Official AWS support will be extended soon).  
 
@@ -44,7 +45,7 @@ Defines a logical connection to a named bucket object storage. For access to Aka
 that connect to the same `endpoint_url`, `access_key`, and `secret_key`, then queries to either group will return the same object storage view. 
 
 ```bash
-bucket provider connect where group = [group_name] and provider = [provider] and id = 123 and access_key = [access_key] and secret_key = [secret_key] and region = [region] and endpoint_url = [endpoint_url]
+bucket provider connect where group = [group_name] and provider = [minio|akave] and id = [access_key] and password = [secret_key] and endpoint_url = [endpoint_url] and region = [region]
 ```
 | Parameter                                                                  | -                                 | 
 |----------------------------------------------------------------------------|-----------------------------------|
