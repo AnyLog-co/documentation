@@ -1,6 +1,6 @@
 ---
-title: "Deploying AnylogEDF with EIAM IBM"
-description: ""
+title: "Anylog EDM"
+description: "deployment configuration and usage"
 layout: page
 source_path: ""
 ---
@@ -15,4 +15,4 @@ source_path: ""
 
 
 
-to be completed MARK
+to be completed

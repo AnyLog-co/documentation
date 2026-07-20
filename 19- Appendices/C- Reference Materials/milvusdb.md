@@ -1,3 +1,21 @@
+---
+title: "Milvus Vector Database"
+description: ""
+layout: page
+source_path: ""
+---
+
+### 📜 Change Log
+ **Date**   | **Name**       | **Change**         | **Version** |
+ |------------|----------------|------------------|----------|
+ |            |                |                  |          |
+ | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
+
+
+
+
 # Milvus vector database
 
 AnyLog integrates **Milvus** as a **Vector Database** for semantic vector search, metadata filtering, and document embeddings.

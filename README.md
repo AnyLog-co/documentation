@@ -187,8 +187,8 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Qlik%20Connector.md)
     * [Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/Using%20Grafana.md)
 * **09- Integrations**
-  * [deployment-process](09-%20Integrations/deployment-process.md)
-  * [deployment-scripts](09-%20Integrations/deployment-scripts.md)
+  * [deployment-process](09- Integrations/01 deployment-process.md)
+  * [deployment-scripts](09- Integrations/02 deployment-scripts.md)
   * **A- Databases**
     * [configuring mongodb](09-%20Integrations/A-%20Databases/configuring%20mongodb.md)
     * [Postgres Connector](09-%20Integrations/A-%20Databases/Postgres%20Connector.md)
@@ -211,18 +211,18 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * **A- Grafana**
     * [Grafana Setup](10-%20Visualization%20%26%20Dashboards/A-%20Grafana/Grafana%20Setup.md)
 * **11- EDM tool (Edge Data Manager)**
-  * [EDM](11-%20EDM%20tool%20%28Edge%20Data%20Manager%29/EDM.md)
-  * [remote-gui](11-%20EDM%20tool%20%28Edge%20Data%20Manager%29/remote-gui.md)
+  * [EDM](11- EDM tool (Edge Data Manager)/02 EDM.md)
+  * [remote-gui](11- EDM tool (Edge Data Manager)/01 remote-gui.md)
 * **12- MCP & LLMs**
-  * [mcp](12-%20MCP%20%26%20LLMs/mcp.md)
+  * [mcp](12- MCP & LLMs/01 mcp.md)
 * **13- UNS (Unified Name Spaces)**
   * [UNS-custom](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-custom.md)
   * [UNS](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
 * **14- Commands & CLI (Command Line Interface)**
-  * [CLI](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/CLI.md)
+  * [CLI](14- Commands & CLI (Command Line Interface)/02 CLI.md)
   * [Commands cheatsheet](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/Commands%20cheatsheet.md)
-  * [get-cmds](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/get-cmds.md)
-  * [node-status](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/node-status.md)
+  * [get-cmds](14- Commands & CLI (Command Line Interface)/03 get-cmds.md)
+  * [node-status](14- Commands & CLI (Command Line Interface)/04 node-status commands.md)
   * **A- Command Categories**
     * [Anylog Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Anylog%20Commands.md)
     * [Blockchain Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Blockchain%20Commands.md)
@@ -231,7 +231,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Test Commands](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/A-%20Command%20Categories/Test%20Commands.md)
 * **15- Development & Scripting**
   * [background processes](15-%20Development%20%26%20Scripting/background%20processes.md)
-  * [scheduler](15-%20Development%20%26%20Scripting/scheduler.md)
+  * [scheduler](15- Development & Scripting/02 scheduler.md)
   * **A- Scripting**
     * [Executing Scripts](15-%20Development%20%26%20Scripting/A-%20Scripting/Executing%20Scripts.md)
     * **Sample Go Scripts**
@@ -248,16 +248,16 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [Resource Monitoring](16-%20Examples%20%26%20Use%20Cases/Resource%20Monitoring.md)
   * [Video Streaming](16-%20Examples%20%26%20Use%20Cases/Video%20Streaming.md)
 * **17- Support & Troubleshooting**
-  * [common_issues](17-%20Support%20%26%20Troubleshooting/common_issues.md)
+  * [common_issues](17- Support & Troubleshooting/02 common_issues.md)
   * [Issue Networking_MTU_size](17-%20Support%20%26%20Troubleshooting/Issue%20Networking_MTU_size.md)
-  * [troubleshooting](17-%20Support%20%26%20Troubleshooting/troubleshooting.md)
+  * [troubleshooting](17- Support & Troubleshooting/01 troubleshooting.md)
 * **18- Releases Notes**
   * [Anylog EDF Releases Notes](18-%20Releases%20Notes/Anylog%20EDF%20Releases%20Notes.md)
   * [Anylog EDF SOURCE-CHANGELOGS](18-%20Releases%20Notes/Anylog%20EDF%20SOURCE-CHANGELOGS.md)
-  * [DEPLOYMENT_SCRIPTS-CHANGELOGS](18-%20Releases%20Notes/DEPLOYMENT_SCRIPTS-CHANGELOGS.md)
-  * [DOCKER_COMPOSE-CHANGELOG](18-%20Releases%20Notes/DOCKER_COMPOSE-CHANGELOG.md)
+  * [DEPLOYMENT_SCRIPTS-CHANGELOGS](18- Releases Notes/03 AnylogEDF DEPLOYMENT_SCRIPTS-CHANGELOGS.md)
+  * [DOCKER_COMPOSE-CHANGELOG](18- Releases Notes/04 AnylogEDF DOCKER_COMPOSE-CHANGELOG.md)
   * [MOSHE-NOTES](18-%20Releases%20Notes/MOSHE-NOTES.md)
-  * [OPENSOURCE-NOTICE](18-%20Releases%20Notes/OPENSOURCE-NOTICE.md)
+  * [OPENSOURCE-NOTICE](19- Appendices/A- Legal & Licensing/AnylogEDF used OPENSOURCE-NOTICE.md)
 * **19- Appendices**
   * **A- Legal & Licensing**
     * [Evaluation License](19-%20Appendices/A-%20Legal%20%26%20Licensing/Evaluation%20License.md)
@@ -268,9 +268,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [Blockchain Demo](19-%20Appendices/B-%20Blockchain%20Integration/Blockchain%20Demo.md)
     * [Using Ethereum](19-%20Appendices/B-%20Blockchain%20Integration/Using%20Ethereum.md)
   * **C- Reference Materials**
-    * [configuration](19-%20Appendices/C-%20Reference%20Materials/configuration.md)
+    * [configuration](19- Appendices/C- Reference Materials/configuration examples.md)
     * [dictionary](19-%20Appendices/C-%20Reference%20Materials/dictionary.md)
-    * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
+    * [FAQ](17- Support & Troubleshooting/02 FAQ 4 troubleshooting.md)
     * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
     * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
     * [sql setup](19-%20Appendices/C-%20Reference%20Materials/sql%20setup.md)

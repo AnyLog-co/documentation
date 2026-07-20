@@ -2,7 +2,7 @@
 title: "Using EdgeX"
 description: ""
 layout: page
-source_path: "using EdgeX Foundry Integration.md"
+source_path: "using 03-1 EdgeX Foundry Integration example.md"
 ---
 
 ### 📜 Change Log

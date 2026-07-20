@@ -44,7 +44,7 @@ NUMERIC_DIR_PATTERN = re.compile(r"^\d")
 
 # Top-level numeric folders excluded anyway (e.g. internal drafts, still "99-").
 EXCLUDE_TOP_LEVEL_DIRS = {
-    "99- INTERNAL & DRAFT sections",
+    "99- INTERNAL & DRAFT sections (NOT publicly visible)",
 }
 
 # Individual files excluded even inside included folders (drafts, etc.)

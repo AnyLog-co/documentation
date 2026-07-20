@@ -4,6 +4,15 @@ description: ""
 layout: page
 source_path: "Message 02 Broker Setup Example.md"
 ---
+
+### 📜 Change Log
+ **Date**   | **Name** | **Change** | **Version** |
+ |------------|--|------------|----------|
+ | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
+
+
 # Using a Message Broker
 
 There are 3 ways to configure a node:

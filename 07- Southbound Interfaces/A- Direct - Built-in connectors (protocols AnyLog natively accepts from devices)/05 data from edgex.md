@@ -2,7 +2,7 @@
 title: "Publishing Data via EdgeXpert Manager"
 description: ""
 layout: page
-source_path: "deployments/Support/data from EdgeX Foundry Integration.md"
+source_path: "deployments/Support/data from 03-1 EdgeX Foundry Integration example.md"
 ---
 
 ### 📜 Change Log
