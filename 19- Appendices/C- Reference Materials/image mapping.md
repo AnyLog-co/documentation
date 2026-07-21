@@ -4,6 +4,14 @@ description: ""
 layout: page
 source_path: "image mapping.md"
 ---
+
+### 📜 Change Log
+ **Date**   | **Name**       | **Change**         | **Version** |
+ |------------|----------------|------------------|----------|
+ |            |                |                  |          |
+ | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
 # Image Mapping
 
 An AnyLog Operator node can host images (or any type of _blob_ data like videos, photos, voice etc.) locally on the node and transfer the images to a destination node upon request.    

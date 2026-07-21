@@ -4,6 +4,16 @@ description: ""
 layout: page
 source_path: "training/advanced/Pip Install.md"
 ---
+--
+### 📜 Change Log
+ **Date**   | **Name**       | **Version**      | **Change** |
+ |------------|----------------|------------------|----------|
+ |            |                |                  |          |
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ |            |
+
+
+
 # AnyLog as a _pip_ Package 
 
 ## Deployment Process 
