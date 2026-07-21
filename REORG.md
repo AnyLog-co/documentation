@@ -164,18 +164,20 @@ and progressively move through:
 
   Deployment → Data Flow → Security → Metadata → Storage → Applications → Production
 
+---
 
----
-Legend:
-  🆕  New document/content that does not currently exist
-  🔄  Existing content moved/reorganized
-  🔀  Multiple existing documents merged into one
-  ❓  Needs validation or ownership decision
-  👤  Ownership marker
-  📍  Current path(s), added from a fresh file-level scan — annotation only, does not change the plan
-  ⚠️  Flagged discrepancy between this document and the actual current tree — not corrected here, just noted
----
 ## Tree 
+
+**Legend**
+* 🆕  New document/content that does not currently exist
+* 🔄  Existing content moved/reorganized
+* 🔀  Multiple existing documents merged into one
+* ❓  Needs validation or ownership decision
+* 👤  Ownership marker
+* 📍  Current path(s), added from a fresh file-level scan — annotation only, does not change the plan
+* ⚠️  Flagged discrepancy between this document and the actual current tree — not corrected here, just noted
+
+
 ```
 01- Getting Started/
 |- intro-to-anylog.md 🆕
