@@ -176,6 +176,7 @@ Legend:
   ⚠️  Flagged discrepancy between this document and the actual current tree — not corrected here, just noted
 ---
 ## Tree 
+```
 01- Getting Started/
 |- intro-to-anylog.md 🆕
 |   Purpose:  Primary introduction to AnyLog and Edge Data Fabric.
@@ -218,7 +219,7 @@ Legend:
 |   Purpose: Step-by-step zero-touch deployment. 
 |   Source: Installation/deployment documentation
 |   📍 Best match (source line was not a specific path): 01- Getting Started/08 Installing 3 Anylog node.md
-
+```
 **Comments**: 
 1. It might be worthwhile to have `deployment-journey.md` as part of the `intro-to-anylog.md` and `full-deployment.md` as part 
 of the `install.md` document. 
@@ -242,6 +243,7 @@ a part of intro, while the node should be a part of install.
       - Supported connectors
 
 
+```
 02- Installation & Deployment/
   |- intro.md 🆕
   |   Purpose: Explain deployment models before showing commands.
@@ -303,7 +305,9 @@ a part of intro, while the node should be a part of install.
   |  |    📍 09- Integrations/C- Deployment tools/01 DELL Distributed Private Cloud.md
   |  |- zededa.md 🆕 (Planned but not documented)
   |     📍 Confirmed — no file by this name or subject exists anywhere in the current tree.
+```
 
+```
 03- Training & Tutorials/
   |- background-processes.md 🔄
   |   Existing tutorial.
@@ -359,13 +363,14 @@ a part of intro, while the node should be a part of install.
   |- sample-scripts/ 🔄
   |  |- Contains: Go examples, Python examples
   |     📍 15- Development & Scripting/A- Scripting/Sample Go Scripts/, Sample Python Scripts/
-
+```
 **Comments**: 
 1. `querying-data-basics.md` and `data-flow-and-query-flow.md` could be merged into: here's what happens when you run a query (cmd: `query explain`) and 
 here's how to run the query.
 2. sample-scripts/ - we want a repo that has a "pip" capability for customers to download and use. That repo would contain
 examples of python scripts and potentially the same thing for go, shell and other commonly used langauges.  
 
+```
 04- Southbound Interfaces/
   |- intro.md 🆕
   |   Purpose: Explain how external systems send data into AnyLog.
@@ -442,14 +447,14 @@ examples of python scripts and potentially the same thing for go, shell and othe
   |  |   📍 07-.../B- Third-party.../01 kubearmor.md
   |  |- Mosquitto.md  🆕 <-- remote MQTT broker 
   |     📍 Confirmed — no file by this name or subject exists anywhere in the current tree.
-
+```
 **Comment**: 
 1. if we're dealing with `message broker` and that covers AnyLog as an MQTT broker + "Kaflka" broker, then we need to discuss
 _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQTT foreign / remote broker. 
 2. Syslog.md can reside as either 3rd party, which makes sense because it's an extrnal app sending dat ainto AnyLog. But also 
 
 
-
+```
 05- Northbound Connectors/
   |- intro.md 🆕
   |   Purpose: Explain how applications consume AnyLog data.
@@ -500,7 +505,8 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |- llm-dashboard-generation.md 🔄
   |    Source: Visualization & Dashboards/
   |    📍 10- Visualization & Dashboards/01 LLM Dashboard Generation.md
- 
+ ```
+```
 06- Network & Security/
   |- intro.md 🆕 <-- This should be the entry point before TPM, certificates, and networking details.
   |   Purpose: Explain the security model of the Edge Data Fabric.
@@ -567,12 +573,13 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |  |  📍 05- Anylog Nodes Network & Security/A- Trusted Platform Module (TPM)/01 TMP Configuration.md,
   |  |     02 Software TPM.md
 
-
+```
 **Comments**:
 1. Maybe we should merge the authentication documents into 1: explain -> here's how to do it
 2. DNP3 (`os-reorg`) does not have  all the certification, but rather is broken into 3 files
 3. DNP3 is a southbound services not networking
 
+```
 07- Blockchain + Metadata/
   |- intro.md 🆕
   |   Purpose: Explain the Edge Data Fabric control plane.
@@ -628,10 +635,11 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |  |      or to uns-dynamic-custom-example.md below — worth confirming)
   |  |- uns-dynamic-custom-example.md 🔄
   |     📍 13-.../UNS-dynamic-custom-example.md
+  ```
 
 **Comment**: This section probably has a lot of content that can be merged into a single file.
 
-
+```
 08- Data Management/
   |- intro.md 🆕
   |   Purpose: Explain how AnyLog stores and manages data.
@@ -679,11 +687,12 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |  |    📍 09- Integrations/A- Databases/02 configuring mongodb.md
   |  |- Minio.md 🔄
   |     📍 19- Appendices/C- Reference Materials/minio.md
-
+```
 **Comments**: 
 1. The SQL stuff, I'm not sure if it's standalone files or multiple files in the repo
 2. We could potentially merge some stuff here as well 
 
+```
 09- Extended Services/
   |- intro.md 🆕
   |   Purpose: Advanced operational capabilities.
@@ -742,8 +751,8 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |    - Version compatibility
   |    - Upgrade process
   |    - Migration considerations
-
-
+```
+```
 10- EDM (Edge Data Manager)/ 👤 100% Roy
   |- edm.md <-- Main EDM overview.
   |   📍 11- EDM tool (Edge Data Manager)/02 EDM.md
@@ -811,7 +820,8 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   | 📍 This whole section's likely source material — not individually cited above — is
   |    16- Examples & Use Cases/01 Onboarding Commands.md, 02 Connecting Nodes.md, 03 Data Monitoring.md,
   |    04 Resource Monitoring.md, 05 Video Streaming.md.
-
+```
+```
 12- Support & Troubleshooting/
   |- intro.md 🆕
   |   Purpose: Explain troubleshooting methodology.
@@ -851,15 +861,15 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |    - Scaling recommendations
   |    - Backup strategies
   |    - Monitoring recommendations
-
-
+```
+```
 13- RELEASE Notes/ <--  Existing release documentation.
   📍 18- Releases Notes/01 AnylogEDF Releases Notes.md, 02 AnylogEDF SOURCE-CHANGELOGS.md,
      03 AnylogEDF DEPLOYMENT_SCRIPTS-CHANGELOGS.md, 04 AnylogEDF DOCKER_COMPOSE-CHANGELOG.md
      (a previously-flagged "MOSHE-NOTES.md" file does not appear in the current source folder in this scan —
      worth confirming it was intentionally removed rather than just missed.)
-
-
+```
+```
 14- Appendices/
   Purpose: Reference information that does not belong in the main learning path.
   |- A- Legal & Licensing 🔄
@@ -874,3 +884,4 @@ _Confluent_ as opposed to Kafka.md and include Mosquitto.md as a counter for MQT
   |      helpers.md, image mapping.md, minio.md, sql setup.md, streaming conditions.md
   |      (the FAQ.md and sql setup.md here are both still-open duplicate/fragmentation issues flagged
   |      elsewhere in this project — see the FAQ note under 12- Support & Troubleshooting above.) 
+  ```
