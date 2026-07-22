@@ -4,7 +4,6 @@ description: How to install, configure, and deploy a 3-node AnyLog network using
 layout: page
 ---
 
----
 <!---
 ### 📜 Change Log
 | **Date**   | **Name**      | **Change**            | **Version** |

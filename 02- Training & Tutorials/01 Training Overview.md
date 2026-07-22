@@ -4,7 +4,6 @@ description: ""
 layout: page
 source_path: "training/anylog as a serivceOverview.md"
 ---
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       |  **Change**            | **Version** |

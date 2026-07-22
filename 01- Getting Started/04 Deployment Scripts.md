@@ -8,7 +8,6 @@ tags:
 - install
 - getting-started
 ---
----
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**      | **Version** |
@@ -34,7 +33,7 @@ tags:
       on an already-running node) instead of one ambiguous 4-step sequence.
     - Flagged two open items below for a decision: whether `test-network-local-scripts/` belongs in the
       top-level tree, and whether the "define relative paths" step belongs in the Deployment Process list.
--->
+--->
 
 # Deployment Scripts
 

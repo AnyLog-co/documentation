@@ -4,8 +4,6 @@ description: ""
 layout: page
 source_path: "training/Session II (Deployment).md"
 ---
-
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       |   **Change**            | **Version** |

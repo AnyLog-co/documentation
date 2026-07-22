@@ -4,7 +4,6 @@ description: ""
 layout: page
 source_path: "training/05 Fast Deployment or 4 nodes.md"
 ---
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |

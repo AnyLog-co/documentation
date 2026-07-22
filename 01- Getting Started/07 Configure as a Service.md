@@ -3,7 +3,6 @@ title: "Configure as Service"
 description: ""
 layout: page
 source_path: "examples/Service AnyLog/07 Configure as a Service.md"
-
 ---
 <!---
 ### 📜 Change Log

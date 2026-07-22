@@ -4,7 +4,6 @@ description: ""
 layout: page
 source_path: "training/advanced/Background Deployment.md"
 ---
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Version**      | **Change** |

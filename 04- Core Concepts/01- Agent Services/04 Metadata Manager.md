@@ -1,4 +1,3 @@
-
 ---
 title: "Using a Metadata Manager (aka Master) Node"
 description: ""
@@ -6,7 +5,6 @@ layout: page
 source_path: "Metadata Manager.md"
 ---
 
-    
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |

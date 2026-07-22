@@ -1,10 +1,8 @@
-
 ---
 title: Node Architecture
 description: How AnyLog nodes form a distributed fabric and what runs inside each node.
 layout: page
 ---
-
 
 <!---
 ### 📜 Change Log

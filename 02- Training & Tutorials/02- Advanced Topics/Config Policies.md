@@ -4,7 +4,6 @@ description: ""
 layout: page
 source_path: "training/advanced/Config 01 Policies.md"
 ---
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Version**      | **Change** |

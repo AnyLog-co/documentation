@@ -4,8 +4,6 @@ description: ""
 layout: page
 source_path: "training/Connectors to Data Sources.md"
 ---
-
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |

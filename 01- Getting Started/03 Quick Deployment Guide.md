@@ -3,7 +3,6 @@ title: "Quick Deployment"
 description: ""
 layout: page
 source_path: "deployments/03 Quick Deployment Guide.md"
-
 ---
 <!---
 ### 📜 Change Log
@@ -12,7 +11,7 @@ source_path: "deployments/03 Quick Deployment Guide.md"
  |            |                |                  |          |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
--->
+--->
 
 ---
 ## Quick Deployment 

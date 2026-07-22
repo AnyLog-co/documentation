@@ -4,8 +4,6 @@ description: ""
 layout: page
 source_path: "training/04 Data Generator.md"
 ---
-
---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |
