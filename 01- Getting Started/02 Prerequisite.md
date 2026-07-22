@@ -3,7 +3,6 @@ title: "Prerequisite and setup considerations"
 description: ""
 layout: page
 source_path: "training/02 Prerequisite.md"
-
 ---
 <!---
 ### 📜 Change Log
@@ -12,7 +11,7 @@ source_path: "training/02 Prerequisite.md"
  |            |                |            |             |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606    |
  |            |
-
+--->
 
 
 
