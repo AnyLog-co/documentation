@@ -5,11 +5,13 @@ layout: page
 source_path: "04 Continuous Monitoring with Automated Alerts.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
+--->
 
 
 AnyLog provides multiple layers of monitoring: real-time inspection via `get` commands, continuous polling via the `continuous` command, scheduler-driven metrics collection, streaming conditions for real-time alerting, and aggregator nodes for network-wide visibility.

@@ -4,12 +4,14 @@ description: How to get data into AnyLog using REST, MQTT, Kafka, OPC-UA, and gR
 layout: page
 ---
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**    | **Version** |
  |------------|----------------|---------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |                | hyperlinks  |  |
  | 2026-04-17 |                | file creation |  |
+--->
 
 ## Southbound services overview
 

@@ -5,13 +5,14 @@ layout: page
 ---
 
 ---
+<!---
 ### 📜 Change Log
 | **Date**   | **Name**      | **Change**            | **Version** |
  |------------|---------------|-----------------|---------------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606      |
  | 2026-04-26 |               |                 | hyperlink fix | 
  |  2026-04-17 |               |                 | Created document | 
-
+--->
 
 
 > This guide covers a standard 3-node deployment (master, operator, query) on a single machine. For a conceptual 

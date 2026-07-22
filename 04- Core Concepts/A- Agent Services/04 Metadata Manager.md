@@ -7,13 +7,14 @@ source_path: "Metadata Manager.md"
 ---
 
     
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
-
+--->
 
 
 

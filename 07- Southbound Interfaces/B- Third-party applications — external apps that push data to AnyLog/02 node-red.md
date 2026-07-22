@@ -5,13 +5,14 @@ layout: page
 ---
 
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**   | **Version** |
  |------------|--|--------------|--|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
 | 2026-04-25 |  | hyperlinks   |  |
 | 2026-04-17 |  | file created |  |
-
+--->
 
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool for connecting hardware, APIs, and services visually. This guide shows how to stream timestamp/value data from a Node-RED flow into an AnyLog operator via REST POST.
 

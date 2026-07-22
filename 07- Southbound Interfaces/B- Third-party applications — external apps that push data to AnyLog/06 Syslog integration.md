@@ -5,13 +5,14 @@ layout: page
 source_path: "Syslog integration.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+--->
 
-
-wsl# Syslog with AnyLog 
+# Syslog with AnyLog 
 
 Syslog is a standardized protocol used for sending and receiving log messages in a computer network. It facilitates the 
 collection and centralization of system logs from various devices and applications for monitoring, analysis, and 

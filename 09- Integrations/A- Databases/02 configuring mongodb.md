@@ -5,11 +5,12 @@ layout: page
 source_path: "deployments/Support/02 configuring mongodb.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # Accessing MongoDB via AnyLog
 The following is based on the example in `!local_scripts/sample_code/mongodb_process.al`, within AnyLog, to demonstrate 

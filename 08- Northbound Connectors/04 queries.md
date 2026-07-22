@@ -4,12 +4,13 @@ description: Run SQL queries across distributed operator nodes, with time-series
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 Queries are issued to a **Query Node** which uses blockchain metadata to locate the relevant Operator nodes, distributes the query, and assembles a unified result. See <a href="{{ '/docs/introduction//#how-querying-works' | relative_url }}">How Querying Works</a> for the architecture background.
 

@@ -5,6 +5,7 @@ layout: page
 source_path: ""
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|

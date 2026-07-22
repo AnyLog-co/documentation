@@ -5,11 +5,12 @@ layout: page
 source_path: "03 Monitoring Calls.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # Monitoring calls from external applications
 

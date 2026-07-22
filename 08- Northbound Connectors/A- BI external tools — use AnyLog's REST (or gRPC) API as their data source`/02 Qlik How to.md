@@ -3,12 +3,13 @@ title: Qlik
 description: Demonstration on how to connect between AnyLog and Qlik BI REST service
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
- 
+ --->
 
 Qlik is a data integration, analytics, and artificial intelligence platform. Using their <a href="https://help.qlik.com/en-US/connectors/Subsystems/REST_connector_help/Content/Connectors_REST/REST-connector.htm" target="_blank">REST connector plugin</a>, 
 users are able to pull data from AnyLog/EdgeLake and use it to generate insight on their data. 

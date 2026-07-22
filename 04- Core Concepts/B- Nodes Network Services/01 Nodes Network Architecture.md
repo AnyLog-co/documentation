@@ -6,6 +6,7 @@ layout: page
 ---
 
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
@@ -13,7 +14,7 @@ layout: page
  | 2026-04-25 |         | Created document    |               | 
  | 2026-04-25 |         | hyperlink |                  |
 
-
+--->
 
 
 AnyLog is a **peer-to-peer data fabric**. There is no central broker or cloud gateway — each node connects directly to 

@@ -3,13 +3,14 @@ title: Blockchain & Metadata
 description: Use AnyLog's blockchain commands to manage the distributed metadata ledger — adding, querying, updating, and syncing policies.
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |         | Created document    |               | 
  | 2026-04-25 |         | hyperlink |                  |
- 
+ --->
 
 AnyLog maintains a distributed metadata ledger using either a **master node** (a simple AnyLog node hosting the ledger in a local database) or a **blockchain platform** (e.g. Optimism, Ethereum). Every node maintains a local copy of the relevant metadata and uses it to route data, resolve queries, and enforce configuration — without depending on the availability of the global ledger at runtime.
 

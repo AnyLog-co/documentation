@@ -4,6 +4,7 @@ description: Execute AnyLog commands and publish data over HTTP using GET, PUT, 
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**                                                                                     | **Version** |
  |------------|----------------|------------------------------------------------------------------------------------------------|----------|
@@ -13,7 +14,7 @@ layout: page
  | 2026-04-24 |                | there was an issue with the REST POST of commands example                                      |  |
  | 2026-04-23 |                | added POST as GET alternative, AnyLog-Agent header, blockchain insert command, Python examples |  |
  | 2026-04-17 |                | creation                                                                                       |  |
-
+--->
 
 Any AnyLog node with the REST service enabled, can receive commands and data over HTTP. This lets external applications, 
 dashboards, and scripts interact with the network without running AnyLog themselves.

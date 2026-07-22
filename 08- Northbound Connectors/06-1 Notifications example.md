@@ -5,10 +5,12 @@ layout: page
 source_path: "northbound connectors/06-1 Notifications example.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+--->
 
 # System Notification 
 

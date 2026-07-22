@@ -4,13 +4,14 @@ description: Ingest BSD and IETF syslog messages from Linux, Mac, and network de
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**     | **Change**       | **Version** |
  |------------|--------------|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 | 2026-04-26 |  | updated to explain how to change syslog configs to get the data         |  |
 | 2026-04-17 |  | creation         |  |
-
+--->
 
 
 <a href="https://en.wikipedia.org/wiki/Syslog" target="_blank">Syslog</a> is a standardized protocol for sending and 
