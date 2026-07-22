@@ -3,6 +3,7 @@ title: Node Status
 description: Validate node is connected to the network
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
@@ -10,8 +11,7 @@ layout: page
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |                | hyperlinks       |          |
  | 2026-04-17 |                | file created     |          |
-
-
+--->
 
 A key component of AnyLog is the having nodes able to communicate between one another, in order to share both data and 
 metadata. As such, validating the state of the node - both in terms of running services and network connectivity is 

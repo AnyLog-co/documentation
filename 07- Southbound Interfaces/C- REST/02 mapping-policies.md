@@ -3,13 +3,14 @@ title: Mapping Policies
 description: How to define mapping policies to store incoming JSON data into AnyLog tables
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**    | **Version** |
  |------------|----------------|---------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-18 |                | Switched examples to REST ingestion; added curl publish examples  |  |
  | 2026-04-18 |                | file creation covers policy structure, inline vs policy mapping, wildcard schemas, split and combined table patterns|  |
-
+--->
 
 When data arrives at an AnyLog node via REST, AnyLog needs to know how to interpret the incoming JSON — which 
 database and table to write to, and how to extract and type-cast each field. This is defined in a **mapping policy**: 

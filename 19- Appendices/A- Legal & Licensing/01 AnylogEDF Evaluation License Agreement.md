@@ -5,13 +5,14 @@ layout: page
 source_path: "license/01 AnylogEDF Evaluation License Agreement.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2023-09-07 |                | update           |          |
-
+--->
 
 ANYLOG SOFTWARE EVALUATION AGREEMENT
 

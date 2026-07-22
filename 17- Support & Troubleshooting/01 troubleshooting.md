@@ -3,13 +3,14 @@ title: Troubleshooting
 description: Commands to validate node accessibility, active services, network connectivity, and blockchain consistency.
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |                | creation         |          |
-
+--->
 
 Use these commands from the AnyLog CLI or via REST to diagnose connectivity and confirm your node and network are 
 operating correctly.

@@ -3,12 +3,13 @@ title: Google Drive
 description: Demonstration on how to connect to AnyLog and gather data for analysis on Google Drive applicaitons
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 
 

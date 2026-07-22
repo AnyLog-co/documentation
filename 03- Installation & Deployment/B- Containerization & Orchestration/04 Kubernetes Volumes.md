@@ -5,6 +5,7 @@ layout: page
 source_path: "deployments/D- Networking & Security/04 Kubernetes Volumes.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |
  |------------|----------------|------------------|----------|
@@ -12,7 +13,7 @@ source_path: "deployments/D- Networking & Security/04 Kubernetes Volumes.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 
-
+--->
 
 
 

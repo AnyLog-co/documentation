@@ -9,6 +9,7 @@ tags:
 - getting-started
 ---
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**      | **Version** |
  |------------|----------------|------------------|----------|
@@ -16,12 +17,6 @@ tags:
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 
-
-
-
-
-
-<!--
 ## Changelog
 - 2026-04-17 | Created document
 - 2026-04-25 | updated hyperlinks

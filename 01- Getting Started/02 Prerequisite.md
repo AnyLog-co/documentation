@@ -5,6 +5,7 @@ layout: page
 source_path: "training/02 Prerequisite.md"
 
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change** | **Version** |
  |------------|----------------|------------|-------------|

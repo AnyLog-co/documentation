@@ -5,11 +5,12 @@ parent: Southbound
 nav_order: 5
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # KubeArmor / gRPC Integrations
 

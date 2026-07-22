@@ -3,12 +3,13 @@ title: Node Monitoring
 description: Collect node health metrics and stream them for live viewing via Remote GUI or persistent storage across Operator nodes.
 layout: page
 ---
+<!---
 ### 📜 Change Log
 | **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|-------------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606    |
 | 2026-04-17 |                | creation         |             |
-
+--->
 
 Each AnyLog node can collect its own health metrics and distribute them in one or both of two ways:
 

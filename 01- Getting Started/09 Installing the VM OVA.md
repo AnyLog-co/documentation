@@ -3,6 +3,7 @@ title: Installing AnyLog via OVA
 description: Deploy a pre-configured AnyLog demo environment using the OVA virtual machine image.
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |
  |------------|----------------|------------------|-----------|
@@ -11,7 +12,7 @@ layout: page
  |            |
 | 2026-04-17 |                | Created document |           |
  |            |
-
+--->
 
 
 The AnyLog Demo OVA is a pre-configured virtual machine image containing a complete, multi-node AnyLog environment. It is designed for demonstrations, training, evaluations, and proof-of-concept deployments — everything runs inside a single VM.

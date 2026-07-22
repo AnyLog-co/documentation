@@ -5,6 +5,7 @@ layout: page
 source_path: "examples/Service AnyLog/07 Configure as a Service.md"
 
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |
  |------------|----------------|------------------|----------|

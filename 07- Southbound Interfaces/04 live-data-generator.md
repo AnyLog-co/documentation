@@ -3,12 +3,13 @@ title: Live Data Generator
 description: Connect to AnyLog's shared data generator and ingest synthetic industrial data in minutes.
 layout: page
 ---
+<!---
 ### 📜 Change Log
 | **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|-------------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606    |
 | 2026-04-17 |                | creation         |             |
-
+--->
  
 
 AnyLog provides two tools that work together for testing and demos:
