@@ -1,4 +1,20 @@
-# AWS Setup
+---
+title: "AWS Setup"
+description: ""
+layout: page
+source_path: ""
+---
+
+### 📜 Change Log
+ **Date**   | **Name**       | **Change**            | **Version** |
+ |------------|----------------|------------------|----------|
+ |            |                |                  |          |
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ |            |
+
+
+
+
 
 The following provides directions for using an EC2 AWS instance(s) to configure and deploy AnyLog.  
 

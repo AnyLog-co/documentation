@@ -1,3 +1,18 @@
+---
+title: "MinIO object storage"
+description: ""
+layout: page
+source_path: ""
+---
+
+### 📜 Change Log
+ **Date**   | **Name**       | **Change**         | **Version** |
+ |------------|----------------|------------------|----------|
+ |            |                |                  |          |
+ | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
+
 # MinIO object storage
 
 AnyLog connects to a **MinIO** endpoint for bucket file management (upload, download, list, delete) via the `bucket` commands.

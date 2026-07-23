@@ -4,7 +4,19 @@ description: ""
 layout: page
 source_path: "High Availability.md"
 ---
+
+### 📜 Change Log
+ **Date**   | **Name** | **Change**       | **Version** |
+ |------------|--|------------------|----------|
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+
+
+
 # High Availability (HA)
+
+> **AnyLog only.** High Availability is not available in EdgeLake.
+
+HA is achieved by assigning multiple Operator nodes to the same **cluster**. Each operator in a cluster maintains an identical copy of the cluster's data. If one operator fails, surviving operators continue to serve queries without interruption.
 
 To achieve highly availability, AnyLog nodes are configured such that multiple Operators maintain copies of the data.
 Using this setup, if an Operator fails, the data is available on a surviving Operator and queries are directed to the 
@@ -12,7 +24,35 @@ surviving node.
 This document explains how to configure AnyLog to provide High Availability, and details the commands that 
 monitor and report the HA state.
 
-## Overview
+## How it works
+
+### Data organisation
+
+- Data is stored in **tables** within logical **databases**
+- Each table's data is partitioned into one or more **clusters**
+- Each cluster is supported by multiple **Operators**, all holding identical data
+- The number of operators per cluster = number of copies of that data
+
+### Example layout
+
+```
+Database
+└── Tables 1–4
+    ├── Cluster 1 ──► Operator 1
+    │              ──► Operator 2
+    │              ──► Operator 3
+    └── Cluster 2 ──► Operator 4
+                   ──► Operator 5
+                   ──► Operator 6
+```
+
+### Data replication flow
+
+When an operator receives data, it stores it locally and **pushes** it to all peer operators in the same cluster. Each operator also continuously **pulls** any data it is missing from its peers. This push/pull sync keeps all cluster members in sync automatically.
+
+---
+
+## Prerequisites for HA configuration
 
 High Availability (HA) is enabled by configuring the network nodes to maintain multiple copies of the data.    
 To be in a state where multiple nodes have identical set of data, each participating Operator node is configured with 
@@ -38,7 +78,7 @@ In the example below, the data of tables 1-4 is distributed to 2 clusters. Each 
 The data of each cluster is maintained by 3 Operators such that if an Operator fails, the data remains available with the surviving Operators.  
 IN addition, if an Operator node fails, the network protocol will initiate a new Operator and a process to replicate the data to the new Operator.
 
-```anylog
+```
                                                                             
        Database                 |--------------------|          |--------------------|        
 |--------------------|          |                    |   --->   |     Operator 1     |  
@@ -55,9 +95,9 @@ IN addition, if an Operator node fails, the network protocol will initiate a new
 |                    |          |                    |          |--------------------|
 |                    |   --->   |      Cluster 2     |   --->   |     Operator 5     |  
 |                    |          |                    |          |--------------------|  
-|                    |          |                    |          |--------------------|
-|--------------------|          |-                   |   --->   |     Operator 6     |
-                                |--------------------|          |--------------------|
+|                    |          |-                   |   --->   |     Operator 6     |
+                                |-
+-------------------|          |--------------------|
   
 ```
 
@@ -68,7 +108,7 @@ process will transfer the data to all the nodes that are assigned to the cluster
 As the Operator is assigned to a cluster, pushing the data to the Operator associates the data with a cluster, and in HA 
 mode, the data will be replicated to all the Operators assigned to the cluster.  
 For example, using the diagram above, if operator 5 receives data, the data is associated with cluster 2 and will be replicated 
-to Operators 4 and 6.  
+to Operators 4 and 6. 
 The selection of an Operator can be done dynamically using a Publisher node that distributes the data based on predetermined logic,
 or by configuring a data source to a particular Operator.
 
@@ -93,7 +133,7 @@ Notes:
      
 ## The Cluster Policy
 
-HA is based on distributing the data to clusters. A cluster represents a logical distribution of the data and 
+HA is based on distributing the data to clusters. A cluster represents a logical distribution of the data and  
 the collection of clusters represent the complete data set. Each cluster is supported by one or more operators. 
 Operators are assigned to clusters (each operator can be assigned to only one cluster), and the number of
 operators assigned to each cluster determine the number of copies of the data hosted by the cluster (all the operators
@@ -136,7 +176,7 @@ An Operator is assigned to a cluster in the following manner:
                 'port' : 7848,
                 'id' : '52612f21b18cf29f7d2e511e3ca56ca6',
                 'date' : '2021-04-02T21:43:20.129597Z',
-                'member' : 145}}]
+                'member' : 145}}
 ```
 
 Note: 
@@ -151,10 +191,10 @@ By enabling these processes on all Operators, the data will be synchronized amon
 databases on each Operator maintain a complete data set and all the Operators supporting the cluster maintain identical data.
 
 | Command        | Functionality  | 
-| ---------- | -------| 
-| [run operator](background%20processes.md#operator-process) | Enables the process that ingests data to the local databases. |
-| [run data distributor](background%20processes.md#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
-| [run data consumer](background%20processes.md#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
+| ---------- | -------|
+| [run operator](/docs/core-concepts/background-processes/#operator-process) | Enables the process that ingests data to the local databases. |
+| [run data distributor](/docs/core-concepts/background-processes/#invoking-the-data-distributor-process) | Distributes data received from external sources, like sensors, to the operators that support the cluster. |
+| [run data consumer](/docs/core-concepts/background-processes/#invoking-the-data-consumer-process) | Enables the process that retrieves data which is missing on the Operator Node from the peer operators that support the cluster. |
 
 Example:
 
@@ -179,8 +219,8 @@ test cluster setup
 </pre>
 The command returns the HA configuration and relevant status. The info includes the following:
 
-| Functionality | Expected Status                    | Details       |
-| --------------| ---------------------------------- | --------------- | 
+| Functionality | Expected Status                    | Details      |
+| --------------| ---------------------------------- | --------------- 
 | Operator      | Running: distributor flag enabled  | Configure Operator in the **run operator** command with command option **distributor = true**.  |
 | Distributor   | Running                            |                |
 | Consumer      | Running                            |                |
@@ -201,10 +241,11 @@ assigned to each cluster (The command ***get data nodes*** provides the same inf
 ```anylog
 |- Company -|     |-- DBMS  --|     |------ Table -----|     |------------- Cluster ID and Name------------|    |---- Operator IP, Port, Member ID, Status -----|
      
-litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
+      litsanleandro ==> litsanleandro ==> ping_sensor          ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
                                                                                                              ==> 139.12.224.186:2048        [0008  remote active]
                                                          ==> 8ceb5aecc8d2a739099551cf48fed201 (lsl-cluster2) ==> 139.162.164.95:2048        [0168  remote active]
-                                                                                                             ==> 173.138.24.86:2048         [0015  remote active]
+                                                 
+                                                             ==> 173.138.24.86:2048         [0015  remote active]
                                                          ==> 5631d115eb456882a6c6f0173808e63f (lsl-cluster3) ==> 172.105.13.202:2048        [0243  remote active]
                                                                                                              ==> 142.10.83.145:2048         [0012  remote active]
                                 ==> percentagecpu_sensor ==> 2436e8aeeee5f0b0d9a55aa8de396cc2 (lsl-cluster1) ==> 139.162.126.241:2048       [0206  local  active]
@@ -226,11 +267,12 @@ blockchain test cluster
 The following list summarizes the commands supporting the HA processes:
  
 | command           | Details | 
-| ----------------- | ----------------| 
+| ----------------- | ----------------|
 | get data nodes    | The list of user tables and the physical nodes that manage each table |
 | get metadata version | The ID representing the metadata version used on the node |
 | blockchain query metadata   | Similar to the "get data nodes" command, with a different output format |
-| blockchain test cluster   | Validates that the structure of the cluster policies is correct |
+| 
+blockchain test cluster   | Validates that the structure of the cluster policies is correct |
 | get tsd list   | The list of tsd tables on the current node |
 | get tsd details  | Query one or more TSD tables  |
 | get tsd summary  | Summary info of TSD tables  |
@@ -275,14 +317,15 @@ AL anylog-node > get cluster info
 Cluster ID : 2436e8aeeee5f0b0d9a55aa8de396cc2
 Member ID  : 206
 Participating Operators:
-      IP              Port Member Status 
+      IP          
+    Port Member Status 
       ---------------|----|------|------|
       139.162.126.241|2048|   206|active|
       139.12.224.186 |2048|   008|active|
 Tables Supported:
       Company       DBMS          Table                
       -------------|-------------|--------------------|
-      litsanleandro|litsanleandro|ping_sensor         |
+      litsanleandro|litsanleandro|ping_sensor        |
       litsanleandro|litsanleandro|percentagecpu_sensor|
 ```
 
@@ -291,10 +334,10 @@ Tables Supported:
 
 As multiple Operators support each cluster and as each operator can receive data from different sources, the operators sync the data they receive
 such that all operators supporting the same cluster host identical set of data.  
-The synchronization is supported by push and pull processes:  
+The synchronization is supported by push and pull processes: 
 The push is done when an Operator receives data from a data source, the data is pushed by the Operator to the peer members of the cluster.
 The pull is done by each member when the member determines that data available on peer nodes is missing.  
-The state of the data on each node is recorded on a set of tables called TSD tables in the following manner:  
+The state of the data on each node is recorded on a set of tables called TSD tables in the following manner: 
 * Data received from a data source is registered in a table called TSD_INFO.
 * Data received from a different member of the cluster is registered in a table called TSD_ID whereas ID is the Member ID.
 Note: When an Operator policy is added, the policy is updated with an attribute called member and a value representing an ID. The member ID is unique among the cluster members.
@@ -316,8 +359,9 @@ The following command retrieves information from a TSD table. The information in
 ```anylog 
 get tsd [info type] [options]
 ```
+
 * **Info type** is one of the following keywords:
-   * details - the last entries in the requested TSD tables (note: by default, the list has a limit of the last 1-- entries of each table).
+   * details - the last entries in the requested TSD tables (note: by default, the list has a limit of the last 100 entries of each table).
    * summary - a summary view of the info in the requested TSD tables.
    * errors - entries in TSD tables that represent sync processes that failed.
 
@@ -335,8 +379,8 @@ get tsd [info type] [options]
 
 ### Retrieve details from TSD tables
 Each ingested log file is represented as an entry in one TSD table.    
-Log files with data from devices are represented in tsd_info and files with log files from peers are represented in tsd_id whereas ID is the peer member ID.       
-  
+Log files with data from devices are represented in tsd_info and files with log files from peers are represented in tsd_id whereas ID is the peer member ID.      
+
 **Examples**:  
 ```anylog 
 get tsd details
@@ -450,7 +494,7 @@ get tsd sync status
 get tsd sync status where table = tsd_128
 ```
 
-Additional information on the time file commands is available at the [Time File Commands](managing%20data%20files%20status.md#time-file-commands) section.
+Additional information on the time file commands is available at the [Time File Commands](/docs/data-management/monitoring-alerts/managing-data-files-status/#time-file-commands) section.
 
 
 ## Cluster databases
@@ -490,7 +534,6 @@ Table                Node_128        Node_222
                      10.0.0.78:7848  10.0.0.78:3048
 --------------------|---------------|---------------|
 lsl_demo.ping_sensor|1034/21778        |1034/21     |
-
 ```
 In the example above, 2 operators supporting the cluster. The cluster table ping_sensor (in DBMS) lsl_demo was update by
 1034 files and a total of 21778 rows.
@@ -506,7 +549,7 @@ The following command displays the location:
 !archive_dir
 ```
 The subdirectories of the archive partition the files by days using the following hierarchy: Year --> Month --> Day.  
-Users can navigate in the hiereachy using the ***get directories*** and ***get files*** commands.  
+Users can navigate in the hierarchy using the ***get directories*** and ***get files*** commands.  
 The example below retrieves the list of files ingested on April 4th, 2021:
 ```anylog
 get files !archive_dir/21/04/04
@@ -519,7 +562,7 @@ A listed file name:
 ```
 The archive directory is determined by the first 6 digits of the last field in the file name (the name segment before the file type 
 representing the file ingestion date and time - 210404201021 in the example below).  
-Details on file naming are available at the [file naming convention](managing%20data%20files%20status.md#the-file-naming-convention) section.
+Details on file naming are available at the [file naming convention](/docs/data-management/monitoring-alerts/managing-data-files-status/#the-file-naming-convention) section.
 
 ## Query execution
 
@@ -532,7 +575,7 @@ The following command provides information on the queries being executed, their 
 ```anylog
 query status
 ```
-Additional information is available in [Command options for profiling and monitoring queries](profiling%20and%20monitoring%20queries.md#command-options-for-monitoring-queries).
+Additional information is available in [Command options for profiling and monitoring queries](/docs/data-management/query-aggregations/profiling-and-monitoring-queries/#command-options-for-monitoring-queries).
 
 ## Adding Operator Nodes to a Cluster
 
@@ -568,3 +611,20 @@ Usage:
 test network clusters
 ```
 
+---
+
+## Query behaviour in HA mode
+
+Queries are routed to an active operator in the relevant cluster. If an operator fails to respond, it is flagged as non-active and excluded from future query routing automatically.
+
+Monitor in-flight queries:
+```anylog
+query status
+```
+
+Query options relevant to HA:
+
+| Option | Default | Description |
+|---|---|---|
+| `nodes` | `main` | `main`: query designated main operators only; `all`: round-robin across all operators |
+| `committed` | `false` | `true`: only return data confirmed synced across cluster nodes |
