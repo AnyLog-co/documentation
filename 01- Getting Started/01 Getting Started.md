@@ -3,14 +3,16 @@
 # title: Getting Started
 # description: Introduction to AnyLog Edge Data Fabric (EDF) — architecture, node types, metadata, and core CLI operations.
 layout: page
-
 ---
+
+<!---
 ### 📜 Change Log
    **Date**       | **Name**       | **Change**            | **Version** |
  |----------------|----------------|-----------------------|-------------|
  | 2026-07-17     | Eric Aquaronne | correction/merged duplicates | 2.0.2606    |
  | 2026-07-08     | Ori Shadmon    | initial file          | 1.5.2510    |
  | |
+--->
 
 
 

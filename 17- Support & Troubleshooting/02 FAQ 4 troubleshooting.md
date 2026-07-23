@@ -4,6 +4,7 @@ description: Common questions, known issues, and troubleshooting guidance for An
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**                                                                                                             | **Version** |
  |------------|----------------|------------------------------------------------------------------------------------------------------------------------|----------|
@@ -11,7 +12,7 @@ layout: page
  | 2026-07-20 | Eric Aquaronne | added change log                                                                                                       | 2.0.2606 |
  | 2026-04-23 |                | Added REST/CORS/AnyLog-Agent, POST vs GET, blockchain insert, mapping policy pitfalls, MCP, Docker networking sections |          |
  | 2026-04-17 |                | creation                                                                                                               |          |
-
+--->
 
 ---
 

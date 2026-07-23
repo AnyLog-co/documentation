@@ -3,12 +3,13 @@ title: AnyLog with PowerBI + Microsoft Office Suite
 description: 
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
-
+--->
  
 
 The following provides insight as to how to generate graphs and images using <a href="https://powerbi.microsoft.com/en-us/downloads/" target="_blank">Microsoft PowerBI</a> with data from AnyLog. 

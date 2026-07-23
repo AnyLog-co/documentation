@@ -3,13 +3,14 @@ title: A- Northbound Connectors
 description: Connect BI tools, dashboards, and applications to AnyLog for querying distributed edge data.
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |  | hyperlinks       |  |
 | 2026-04-17 |  | created document |  |
-
+--->
  
 
 AnyLog exposes query and data access through a REST API, enabling standard BI tools, dashboards, and applications to query distributed edge data as if it were a single database.

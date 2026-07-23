@@ -5,13 +5,14 @@ layout: page
 source_path: "license/02 Privacy Policy.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2023-10-06 |                | update           |          |
-
+--->
 
 # Privacy @ AnyLog
 

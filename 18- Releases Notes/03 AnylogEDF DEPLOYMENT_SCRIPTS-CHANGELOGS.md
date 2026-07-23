@@ -4,13 +4,14 @@ description: Release history and notable changes for AnyLog deployment scripts.
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 
-
+--->
 
 
 

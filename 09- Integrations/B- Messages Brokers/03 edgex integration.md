@@ -4,13 +4,14 @@ description: Connect EdgeX Foundry to AnyLog as a southbound data source using M
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|-----------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |  | hyperlink |  |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 
 [EdgeX Foundry](https://www.edgexfoundry.org) is an open source, vendor-neutral edge computing framework under the LF Edge umbrella. It provides a southbound platform for connecting IoT devices using standard protocols including Modbus, MQTT, BACnet, SNMP, OPC-UA, REST, and more.

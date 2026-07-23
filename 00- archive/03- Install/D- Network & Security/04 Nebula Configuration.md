@@ -5,6 +5,7 @@ layout: page
 source_path: "deployments/D- Networking & Security/04 Nebula Configuration.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       |  **Change**            | **Version** |
  |------------|----------------|------------------|----------|
@@ -13,7 +14,7 @@ source_path: "deployments/D- Networking & Security/04 Nebula Configuration.md"
  |            |
 
 
-
+--->
 
 
 # Overlay Networks

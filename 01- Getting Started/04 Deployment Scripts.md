@@ -8,7 +8,7 @@ tags:
 - install
 - getting-started
 ---
----
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**      | **Version** |
  |------------|----------------|------------------|----------|
@@ -16,12 +16,6 @@ tags:
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 
-
-
-
-
-
-<!--
 ## Changelog
 - 2026-04-17 | Created document
 - 2026-04-25 | updated hyperlinks
@@ -39,7 +33,7 @@ tags:
       on an already-running node) instead of one ambiguous 4-step sequence.
     - Flagged two open items below for a decision: whether `test-network-local-scripts/` belongs in the
       top-level tree, and whether the "define relative paths" step belongs in the Deployment Process list.
--->
+--->
 
 # Deployment Scripts
 

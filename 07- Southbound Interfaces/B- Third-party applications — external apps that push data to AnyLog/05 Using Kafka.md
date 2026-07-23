@@ -5,6 +5,7 @@ layout: page
 ---
 
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**    | **Version** |
  |------------|--|---------------|----------|
@@ -12,7 +13,7 @@ layout: page
  | 2026-07-22 | Ori | file cleanup  |  |
  | 2026-07-22 | Massimiliano | file cleanup  |  |
  | 2026-07-17 |  | file creation |  |
-
+--->
 
 AnyLog interacts with Kafka in two directions:
 

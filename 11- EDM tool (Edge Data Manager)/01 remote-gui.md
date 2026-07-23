@@ -5,13 +5,14 @@ layout: page
 ---
 
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |                | file creation    |  |
-
+--->
 
 
 > **Audience:** This page covers the internal architecture of the Remote GUI and is primarily intended for developers extending or contributing to it. For end-user usage, refer to the GUI itself.

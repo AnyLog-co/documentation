@@ -4,13 +4,14 @@ description: Ingest video streams from IP cameras, RTSP feeds, YouTube, and loca
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |  | hyperlinks       |  |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 AnyLog can connect to video streams, record segmented clips to a blob database, and optionally run AI inference (e.g. YOLOv5 object detection) via a gRPC server.
 

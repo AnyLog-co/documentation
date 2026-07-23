@@ -3,13 +3,14 @@ title: Unified Namespace
 description: How AnyLog generates and manages a Unified Namespace (UNS) for operational data
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |  | hyperlinks       |  |
  | 2026-04-18 |  | created document covers UNS concept, auto-generated vs user-defined, dynamic=true ingestion, and UNS policy structure|  |
-
+--->
 
 
 # Unified Namespace

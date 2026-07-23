@@ -4,7 +4,6 @@ description: Demonstration on how to connect between AnyLog and Qlik BI REST ser
 layout: page
 source_path: "northbound connectors/02 Qlik How to.md"
 ---
-<<<<<<<< HEAD:08- Northbound Connectors/A- BI external tools — Office/Qlik Connector.md
 <!--
 ## Changelog
 - 2026-04-17 | Created document
@@ -14,13 +13,11 @@ source_path: "northbound connectors/02 Qlik How to.md"
               typo carried in Qlik Connector.md ("QLik" -> "Qlik"). Kept Qlik.md's fuller Period function
               explanation (the filter-criteria caveat and the worked "3 days" example), which Qlik Connector.md
               was missing.
--->
-========
 ### 📜 Change Log
  **Date**   | **Name**     | **Change**        | **Version** |
  |------------|--------------|-------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log  | 2.0.2606 |
-
+--->
 
 
 

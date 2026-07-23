@@ -3,23 +3,18 @@ title: Querying Data (Northbound)
 description: Run SQL queries across distributed operator nodes, with time-series functions, casting, and formatting options.
 layout: page
 ---
-<<<<<<< HEAD:08- Northbound Connectors/queries.md
 <!--
 ## Changelog
 - 2026-04-17 | Created document
 - 2026-07-14 | Trimmed "Discover tables and columns" down to a pointer — that content (get virtual tables,
               get data nodes, get columns) now lives in Databases & Tables.md (02- Training & Tutorials), which
               is the better home for table/column discovery than a page about querying the data itself.
---> 
-=======
-
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
-
->>>>>>> origin/pre-develop:08- Northbound Connectors/04 queries.md
+--->
 
 Queries are issued to a **Query Node** which uses blockchain metadata to locate the relevant Operator nodes, distributes the query, and assembles a unified result. See <a href="{{ '/docs/introduction//#how-querying-works' | relative_url }}">How Querying Works</a> for the architecture background.
 

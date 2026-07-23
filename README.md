@@ -75,14 +75,14 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [05 Fast Deployment or 4 nodes](02-%20Training%20%26%20Tutorials/05%20Fast%20Deployment%20or%204%20nodes.md)
   * [Databases & Tables](02-%20Training%20%26%20Tutorials/Databases%20%26%20Tables.md)
   * [Query Data](02-%20Training%20%26%20Tutorials/Query%20Data.md)
-  * **A- Beginner Sessions**
-    * [Session I (Demo)](02-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20I%20%28Demo%29.md)
-    * [Session II (Deployment)](02-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20II%20%28Deployment%29.md)
-  * **B- Advanced Topics**
-    * [Background Deployment](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Background%20Deployment.md)
-    * [Config Policies](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Config%20Policies.md)
-    * [Network Setup](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Network%20Setup.md)
-    * [Pip Install](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Pip%20Install.md)
+  * **01- Beginner Sessions**
+    * [Session I (Demo)](02-%20Training%20%26%20Tutorials/01-%20Beginner%20Sessions/Session%20I%20%28Demo%29.md)
+    * [Session II (Deployment)](02-%20Training%20%26%20Tutorials/01-%20Beginner%20Sessions/Session%20II%20%28Deployment%29.md)
+  * **02- Advanced Topics**
+    * [Background Deployment](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Background%20Deployment.md)
+    * [Config Policies](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Config%20Policies.md)
+    * [Network Setup](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Network%20Setup.md)
+    * [Pip Install](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Pip%20Install.md)
     * **samples**
 * **03- Installation & Deployment**
   * [Network Processing](03-%20Installation%20%26%20Deployment/Network%20Processing.md)
@@ -108,18 +108,18 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [02 Metadata Management](04-%20Core%20Concepts/02%20Metadata%20Management.md)
   * [03 Bucket Data Management](04-%20Core%20Concepts/03%20Bucket%20Data%20Management.md)
   * [04 Background Processes](04-%20Core%20Concepts/04%20Background%20Processes.md)
-  * **A- Agent Services**
-    * [01 Operator](04-%20Core%20Concepts/A-%20Agent%20Services/01%20Operator.md)
-    * [02 Query](04-%20Core%20Concepts/A-%20Agent%20Services/02%20Query.md)
-    * [03 Publisher](04-%20Core%20Concepts/A-%20Agent%20Services/03%20Publisher.md)
-    * [04 Metadata Manager](04-%20Core%20Concepts/A-%20Agent%20Services/04%20Metadata%20Manager.md)
-  * **B- Nodes Network Services**
-    * [01 Nodes Network Architecture](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/01%20Nodes%20Network%20Architecture.md)
-    * [02 Network Configurations](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/02%20Network%20Configurations.md)
-    * [03 Blockchain & Metadata](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/03%20Blockchain%20%26%20Metadata.md)
-    * [03 policies-metadata](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/03%20policies-metadata.md)
-    * [04 background-services](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/04%20background-services.md)
-    * [05 messaging-services](04-%20Core%20Concepts/B-%20Nodes%20Network%20Services/05%20messaging-services.md)
+  * **01- Agent Services**
+    * [01 Operator](04-%20Core%20Concepts/01-%20Agent%20Services/01%20Operator.md)
+    * [02 Query](04-%20Core%20Concepts/01-%20Agent%20Services/02%20Query.md)
+    * [03 Publisher](04-%20Core%20Concepts/01-%20Agent%20Services/03%20Publisher.md)
+    * [04 Metadata Manager](04-%20Core%20Concepts/01-%20Agent%20Services/04%20Metadata%20Manager.md)
+  * **02- Nodes Network Services**
+    * [01 Nodes Network Architecture](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/01%20Nodes%20Network%20Architecture.md)
+    * [02 Network Configurations](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/02%20Network%20Configurations.md)
+    * [03 Blockchain & Metadata](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/03%20Blockchain%20%26%20Metadata.md)
+    * [03 policies-metadata](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/03%20policies-metadata.md)
+    * [04 background-services](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/04%20background-services.md)
+    * [05 messaging-services](04-%20Core%20Concepts/02-%20Nodes%20Network%20Services/05%20messaging-services.md)
 * **05- Anylog Nodes Network &  Security**
   * [01 Network Exchanges](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/01%20Network%20Exchanges.md)
   * [02 Authentication](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/02%20Authentication.md)

@@ -5,11 +5,13 @@ layout: page
 source_path: "06 Starting an Anylog Instance.md"
 ---
 
+<!---
 ### 📜 Change Log
    **Date**       | **Name**       | **Change**            | **Version** |
  |----------------|----------------|-----------------------|-------------|
  | 2026-07-17     | Eric Aquaronne | correction/merged duplicates | 2.0.2606    |                 |                |                       |         |
- 
+
+--->
 
 
 

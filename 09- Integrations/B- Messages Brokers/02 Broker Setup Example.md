@@ -5,11 +5,12 @@ layout: page
 source_path: "examples/02 Broker Setup Example.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 
 # Setting AnyLog as a Message Broker

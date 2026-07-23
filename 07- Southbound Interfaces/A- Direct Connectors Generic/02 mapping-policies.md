@@ -3,14 +3,13 @@ title: MQTT & Message Broker
 description: Connecting to an external MQTT broker, running AnyLog as a message broker, and ingesting via run msg client with or without a mapping policy
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**    | **Version** |
  |------------|----------------|---------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-18 |                | Switched examples to REST ingestion; added curl publish examples  |  |
  | 2026-04-18 |                | file creation covers policy structure, inline vs policy mapping, wildcard schemas, split and combined table patterns|  |
-
-<<<<<<<< HEAD:07- Southbound Interfaces/A- Direct Connectors Generic/message-broker.md
 <!--
 ## Changelog
 - 2026-04-18 | (as mapping-policies.md) Created document; covers policy structure, inline vs policy mapping,
@@ -21,8 +20,6 @@ layout: page
               (`dynamic=true`) ingestion mode alongside the existing mapping-based content, which now sits as
               one section of this broader page rather than the whole page.
 -->
-========
->>>>>>>> origin/pre-develop:07- Southbound Interfaces/A- Direct Connectors Generic/02 mapping-policies.md
 
 # MQTT & Message Broker
 
