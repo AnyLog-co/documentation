@@ -2,7 +2,7 @@
 title: "SQL setup, management and configuration"
 description: ""
 layout: page
-source_path: "sql setup.md"
+source_path: "03- sql setup.md"
 ---
 
 <!---

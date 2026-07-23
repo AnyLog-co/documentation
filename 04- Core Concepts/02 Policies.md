@@ -2,7 +2,7 @@
 title: "Policies based Metadata"
 description: ""
 layout: page
-source_path: "01 Policies.md"
+source_path: "02 Policies.md"
 ---
 <!---
 ### 📜 Change Log

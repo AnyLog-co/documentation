@@ -2,7 +2,7 @@
 title: "Image Mapping"
 description: ""
 layout: page
-source_path: "image mapping.md"
+source_path: "05-image mapping.md"
 ---
 
 <!---

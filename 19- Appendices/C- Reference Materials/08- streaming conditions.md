@@ -2,7 +2,7 @@
 title: "Streaming Conditions"
 description: ""
 layout: page
-source_path: "streaming conditions.md"
+source_path: "08- streaming conditions.md"
 ---
 
 <!---

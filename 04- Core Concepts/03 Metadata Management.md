@@ -2,7 +2,7 @@
 title: "Managing Metadata"
 description: ""
 layout: page
-source_path: "02 Metadata Management.md"
+source_path: "03 Metadata Management.md"
 ---
 <!---
 ### 📜 Change Log

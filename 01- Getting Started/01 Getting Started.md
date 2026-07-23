@@ -301,7 +301,7 @@ Applications never need to know where data is physically stored — the AnylogED
 AnylogEDF can be installed via Docker, Kubernetes, or by downloading the codebase from GitHub and running an installation script.
 
 * Deployment options: [Deployment Options](/docs/installation-deployment/deployment-options/deploying-a-node/)
-* Prerequisites: [Prerequisite](02 Prerequisite.md)
+* Prerequisites: [Prerequisite](02 Prerequisites.md)
 * A guided walkthrough: [Quick Deployment Guide](03 Quick Deployment Guide.md)
 
 ---

@@ -2,7 +2,7 @@
 title: "Prerequisite and setup considerations"
 description: ""
 layout: page
-source_path: "training/02 Prerequisite.md"
+source_path: "training/02 Prerequisites.md"
 ---
 <!---
 ### 📜 Change Log

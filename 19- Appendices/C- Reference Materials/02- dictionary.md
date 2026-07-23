@@ -2,7 +2,7 @@
 title: "The local dictionary"
 description: ""
 layout: page
-source_path: "dictionary.md"
+source_path: "02- dictionary.md"
 ---
 
 <!---
