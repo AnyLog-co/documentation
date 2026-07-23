@@ -39,6 +39,14 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 ## Table of Contents
 
 * **00- archive**
+  * **01- Getting Started**
+    * [01 Getting Started](00-%20archive/01-%20Getting%20Started/01%20Getting%20Started.md)
+    * [03 Quick Deployment Guide](00-%20archive/01-%20Getting%20Started/03%20Quick%20Deployment%20Guide.md)
+    * [04 Deployment Scripts](00-%20archive/01-%20Getting%20Started/04%20Deployment%20Scripts.md)
+    * [05 Executable Deployment](00-%20archive/01-%20Getting%20Started/05%20Executable%20Deployment.md)
+    * [06 Starting an Anylog Instance](00-%20archive/01-%20Getting%20Started/06%20Starting%20an%20Anylog%20Instance.md)
+    * [08 Installing 3 Anylog node](00-%20archive/01-%20Getting%20Started/08%20Installing%203%20Anylog%20node.md)
+    * [Getting Started](00-%20archive/01-%20Getting%20Started/Getting%20Started.md)
   * **03- Install**
     * **D- Network & Security**
       * [01 Securing the Anylog Network](00-%20archive/03-%20Install/D-%20Network%20%26%20Security/01%20Securing%20the%20Anylog%20Network.md)
@@ -57,29 +65,23 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
       * [overlay-certificate-authority](00-%20archive/05-%20Networking%20%26%20Security/B-%20Networking/overlay-certificate-authority.md)
       * [overlay-network](00-%20archive/05-%20Networking%20%26%20Security/B-%20Networking/overlay-network.md)
 * **01- Getting Started**
-  * [01 Getting Started](01-%20Getting%20Started/01%20Getting%20Started.md)
-  * [02 Prerequisite](01-%20Getting%20Started/02%20Prerequisite.md)
-  * [03 Quick Deployment Guide](01-%20Getting%20Started/03%20Quick%20Deployment%20Guide.md)
-  * [04 Deployment Scripts](01-%20Getting%20Started/04%20Deployment%20Scripts.md)
-  * [05 Executable Deployment](01-%20Getting%20Started/05%20Executable%20Deployment.md)
-  * [06 Starting an Anylog Instance](01-%20Getting%20Started/06%20Starting%20an%20Anylog%20Instance.md)
-  * [07 Configure as a Service](01-%20Getting%20Started/07%20Configure%20as%20a%20Service.md)
-  * [08 Installing 3 Anylog node](01-%20Getting%20Started/08%20Installing%203%20Anylog%20node.md)
-  * [09 Installing the VM OVA](01-%20Getting%20Started/09%20Installing%20the%20VM%20OVA.md)
-  * [Getting Started](01-%20Getting%20Started/Getting%20Started.md)
+  * [01- intro-to-anylog](01-%20Getting%20Started/01-%20intro-to-anylog.md)
+  * [02- Prerequisite](01-%20Getting%20Started/02-%20Prerequisite.md)
+  * [03- install](01-%20Getting%20Started/03-%20install.md)
 * **02- Installation & Deployment**
-  * **01- Getting Started**
-    * [01- Getting Started](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/01-%20Getting%20Started.md)
-    * [deployment-scripts](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/deployment-scripts.md)
-    * [Executable](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/Executable.md)
-    * [install-ova](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/install-ova.md)
-    * [installing-anylog](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/installing-anylog.md)
-    * [Overview](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/Overview.md)
-    * [Prerequisite](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/Prerequisite.md)
-    * [Quick Deployment Guide](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/Quick%20Deployment%20Guide.md)
-    * [quick-start](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/quick-start.md)
-    * [Service](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/Service.md)
-    * [starting an anylog instance](02-%20Installation%20%26%20Deployment/01-%20Getting%20Started/starting%20an%20anylog%20instance.md)
+  * **01- Deployment Options**
+    * [01- Docker](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/01-%20Docker.md)
+    * [02- Installing the VM OVA](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Installing%20the%20VM%20OVA.md)
+    * [03- Kubernetes](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/03-%20Kubernetes.md)
+    * [05- Configure as a Service](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/05-%20Configure%20as%20a%20Service.md)
+    * **02- Kubernetes**
+      * [03 Kubernetes Networking](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Kubernetes/03%20Kubernetes%20Networking.md)
+      * [04 Kubernetes Volumes](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Kubernetes/04%20Kubernetes%20Volumes.md)
+  * **02- Orchestrators**
+    * [01- Open Horizon](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/01-%20Open%20Horizon.md)
+    * [02- IBM IEAM (Edge Application Manager)](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/02-%20IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
+    * [03- Barbara](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/03-%20Barbara.md)
+    * [04- DELL Distributed Private Cloud](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/04-%20DELL%20Distributed%20Private%20Cloud.md)
 * **02- Training & Tutorials**
   * [01 Training Overview](02-%20Training%20%26%20Tutorials/01%20Training%20Overview.md)
   * [02 Docker Compose](02-%20Training%20%26%20Tutorials/02%20Docker%20Compose.md)
@@ -110,10 +112,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [06 Deploying a DBMS](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/06%20Deploying%20a%20DBMS.md)
     * [07 Deploying Anylog as a Service](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/07%20Deploying%20Anylog%20as%20a%20Service.md)
   * **B- Containerization & Orchestration**
-    * [01 Docker Image](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/01%20Docker%20Image.md)
     * [02 Docker Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/02%20Docker%20Volumes.md)
-    * [03 Kubernetes Networking](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/03%20Kubernetes%20Networking.md)
-    * [04 Kubernetes Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/04%20Kubernetes%20Volumes.md)
   * **C- Cloud**
     * [AWS Deployment](03-%20Installation%20%26%20Deployment/C-%20Cloud/AWS%20Deployment.md)
 * **04- Core Concepts**
@@ -261,15 +260,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [03 edgex integration](09-%20Integrations/B-%20Messages%20Brokers/03%20edgex%20integration.md)
     * [03-1 EdgeX Foundry Integration example](09-%20Integrations/B-%20Messages%20Brokers/03-1%20EdgeX%20Foundry%20Integration%20example.md)
   * **C- Deployment tools**
-    * [01 DELL Distributed Private Cloud](09-%20Integrations/C-%20Deployment%20tools/01%20DELL%20Distributed%20Private%20Cloud.md)
-    * [02 Barbara](09-%20Integrations/C-%20Deployment%20tools/02%20Barbara.md)
-    * [03 IBM IEAM (Edge Application Manager)](09-%20Integrations/C-%20Deployment%20tools/03%20IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
-    * **A- Open-Horizon (IBM)**
-      * [Open Horizon](09-%20Integrations/C-%20Deployment%20tools/A-%20Open-Horizon%20%28IBM%29/Open%20Horizon.md)
-      * **imgs**
-      * **master**
-      * **operator**
-      * **query**
 * **10- Visualization & Dashboards**
   * [01 LLM Dashboard Generation](10-%20Visualization%20%26%20Dashboards/01%20LLM%20Dashboard%20Generation.md)
   * [02 Node Red](10-%20Visualization%20%26%20Dashboards/02%20Node%20Red.md)
