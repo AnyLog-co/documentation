@@ -14,7 +14,7 @@ source_path: "Databases & Tables.md"
               sql-setup.md files can be retired/redirected here. Querying the data itself (SELECT syntax,
               period/increments, run client ()) is deliberately out of scope — see Query Data (Training &
               Tutorials), which now fully absorbs queries.md as the single canonical querying doc.
-- 2026-07-14 | Fixed relative links (this file lives in 02- Training & Tutorials, one level deep, not two as
+- 2026-07-14 | Fixed relative links (this file lives in 03- Training & Tutorials, one level deep, not two as
               originally assumed) and corrected the querying on-ramp's actual filename (Query Data.md, not
               "Introduction to Querying Data.md"). Pulled the "Discover tables and columns" content (get
               virtual tables, get data nodes) forward from queries.md's own discovery section, since it's

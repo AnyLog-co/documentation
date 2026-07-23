@@ -2,7 +2,7 @@
 title: "AnyLog as a _pip_ Package"
 description: ""
 layout: page
-source_path: "training/advanced/Pip Install.md"
+source_path: "training/advanced/05- Pip Install.md"
 ---
 --
 ### 📜 Change Log

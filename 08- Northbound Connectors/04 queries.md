@@ -8,7 +8,7 @@ layout: page
 ## Changelog
 - 2026-04-17 | Created document
 - 2026-07-14 | Trimmed "Discover tables and columns" down to a pointer — that content (get virtual tables,
-              get data nodes, get columns) now lives in Databases & Tables.md (02- Training & Tutorials), which
+              get data nodes, get columns) now lives in Databases & Tables.md (03- Training & Tutorials), which
               is the better home for table/column discovery than a page about querying the data itself.
 --> 
 =======

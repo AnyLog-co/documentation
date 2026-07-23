@@ -26,9 +26,27 @@ layout: page
                where the guide ended without confirming the deployment actually worked.
 -->
 
-> This guide covers a standard 3-node deployment (master, operator, query) on a single machine. For a conceptual 
-> overview of node types, see <a href="{{ '/docs/Getting-Started/getting-started/' | relative_url }}">Introduction to AnyLog</a>.
+The directions below provide a zero-touch* quick deployment that does not persist the data — the goal here is just to get 
+off the ground and get a feel for AnyLog, not to stand up a production-ready system.
+ 
+This document covers deploying AnyLog from a single node all the way to a small network consisting of 1 master / metadata 
+node, 2 operators, and 1 query node. We start with a single node running the three major services combined — metadata 
+management (blockchain database / ledger table), data storage (sensor data coming into AnyLog), and `system_query` (the 
+logical database used for aggregating results from operator(s) into a unified result for the user) — and then grow that 
+out into a dedicated master, query, and 2 operators, each running on its own node.
+ 
+For a more comprehensive deployment, please visit:
+ 
+* [Docker](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/01-%20Docker.md) — includes directions for a persistent, volume-based deployment
+* [Virtual Machine (OVA)](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/02-%20Installing%20the%20VM%20OVA.md)
+* [Kubernetes](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/03-%20Kubernetes.md)
 
+<sub>*A zero-touch deployment is a simple deployment where everything is automatically defined by the blockchain / 
+default values. In general, this means not providing any env variables. However, since this is a single codebase 
+that's able to deploy different services, the user must include the type of AnyLog agent (`NODE_TYPE`), the connection 
+information to join the network — IP:Port for the Master / metadata node (`LEDGER_CONN`) — and the activation key for 
+AnyLog (`LICENSE_KEY`).</sub>
+ 
 ## Prerequisites
 
 ### Machine requirements
