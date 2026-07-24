@@ -7,8 +7,8 @@ source_path: "Databases & Tables.md"
 <!--
 ## Changelog
 - 2026-07-14 | Created document, consolidating database/table administration content that was split across
-              08- Northbound Connectors/sql-setup.md (newer, cleaner, but missing most administrative depth)
-              and 19- Appendices/C- Reference Materials/sql setup.md (older, far more complete on connection
+              05- Northbound Connectors/sql-setup.md (newer, cleaner, but missing most administrative depth)
+              and 14- Appendices/C- Reference Materials/sql setup.md (older, far more complete on connection
               options, system databases, and the get local/global/table/columns/rows/distribution family of
               inspection commands, but never migrated forward). This page is the canonical version; both
               sql-setup.md files can be retired/redirected here. Querying the data itself (SELECT syntax,

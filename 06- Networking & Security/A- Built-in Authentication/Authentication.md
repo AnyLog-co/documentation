@@ -9,7 +9,7 @@ source_path: "Authentication.md"
 ## Changelog
 - (original) Created as "Users and nodes Authentication, making the data secure" under
               03- Installation & Deployment/Authentication.md
-- 2026-07-14 | Moved to 05- Networking & Security/Built-in Authentication/Authentication.md, alongside a new
+- 2026-07-14 | Moved to 06- Networking & Security/Built-in Authentication/Authentication.md, alongside a new
               worked-example sub-file (Policy-Based Users and Keys — Example.md). Updated cross-references
               accordingly. For a general overview of all of AnyLog's security options (this document plus TPM
               and overlay networking), see Securing the Network.

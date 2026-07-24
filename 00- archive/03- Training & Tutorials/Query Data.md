@@ -7,7 +7,7 @@ source_path: "Query Data.md"
 <!--
 ## Changelog
 - 2026-07-14 | Created document as a beginner-friendly on-ramp for 03- Training & Tutorials, distinct from the
-              full reference in 08- Northbound Connectors/queries.md (query options, casts, formatting) — this
+              full reference in 05- Northbound Connectors/queries.md (query options, casts, formatting) — this
               page covers run client (), the REST/curl equivalent, and period/increments, then hands off to the
               full reference for everything else.
 - 2026-07-14 | Added a "Before you start" pointer to Databases & Tables' discovery commands (get virtual

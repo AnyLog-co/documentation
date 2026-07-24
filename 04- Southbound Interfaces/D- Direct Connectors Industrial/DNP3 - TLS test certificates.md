@@ -7,12 +7,12 @@ source_path: "DNP3-tls-test-certificates.md"
 
 <!--
 ## Changelog
-- (original) Lived as ca_chain/README.md under 05- Networking & Security/C- DNP3 certificates/, alongside
+- (original) Lived as ca_chain/README.md under 06- Networking & Security/C- DNP3 certificates/, alongside
               committed .cert/.key files (including private keys) and create_certificates.sh
 - 2026-07-14 | Rewritten as a standalone document for 04- Southbound Interfaces, alongside DNP3.md. The
               generation script is now embedded here directly, so nothing needs to be committed to the repo —
               readers generate their own CA chain locally, in a directory outside version control. The prior
-              05- Networking & Security/C- DNP3 certificates/ directory (committed certs, keys, and .gitignore)
+              06- Networking & Security/C- DNP3 certificates/ directory (committed certs, keys, and .gitignore)
               can be removed once this replaces it.
 -->
 

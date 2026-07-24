@@ -22,10 +22,10 @@ tags:
 - 2026-04-25 | updated [page.html](../../_layouts/page.html) to support pop-up for env configs 
 - 2026-07-12 | 
     - Restructured around 4 sections: the AnyLog/deployment-scripts split, repo structure (top-level only —
-      see 09- Integrations for the file-by-file tree), what happens at startup + local_script.al, and the
+      see 09- Extended Services for the file-by-file tree), what happens at startup + local_script.al, and the
       DEPLOYMENTS_REPO/DEPLOYMENTS_BRANCH env vars (including the default = `main`, built into the image).
     - Intentionally kept at "general sense" depth — internals, policy/script mechanics, process vs thread, and
-      the full build/runtime env-var matrix live in 09- Integrations instead.
+      the full build/runtime env-var matrix live in 09- Extended Services instead.
 - 2026-07-12 (rev 2) |
     - Grammar/typo pass: "that work with" -> "that works with", `local_scripts.al` -> `local_script.al`,
       "writting" -> "writing", stray double comma, missing "that" in the env-var sentence.

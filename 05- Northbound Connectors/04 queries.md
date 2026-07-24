@@ -21,7 +21,7 @@ layout: page
  | 2026-04-17 |  | created document |  |
 <<<<<<< HEAD
 
->>>>>>> origin/pre-develop:08- Northbound Connectors/04 queries.md
+>>>>>>> origin/pre-develop:05- Northbound Connectors/04 queries.md
 =======
 --->
 >>>>>>> origin/pre-develop

@@ -2,7 +2,7 @@
 title: "Training & Tutorials"
 description: "A quick run through of the training for AnyLog"
 layout: page
-source_path: "training/01- Introduction.md"
+source_path: "training/01- Training.md"
 ---
 
 The [previous section](../02-%20Installation%20&%20Deployment) covered the different ways a user can download and

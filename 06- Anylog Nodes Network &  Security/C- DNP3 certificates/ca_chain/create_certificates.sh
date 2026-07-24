@@ -2,7 +2,7 @@
 # Generate a small CA chain for DNP3 TLS lab tests (AnyLog master ↔ outstation).
 #
 # Usage:
-#   cd "05- Networking & Security/C- DNP3 certificates/ca_chain"
+#   cd "06- Networking & Security/C- DNP3 certificates/ca_chain"
 #   bash create_certificates.sh
 #
 # AnyLog master (TLS client):  anylogDNP3ca.cert, master1.cert, master1.key

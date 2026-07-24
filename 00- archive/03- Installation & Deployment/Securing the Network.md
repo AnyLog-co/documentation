@@ -10,9 +10,9 @@ source_path: "Securing the Network.md"
 - (original) Created as a single combined document covering key-based authentication, a full policy demo, and
   certificate-based authentication for 3rd parties
 - 2026-07-14 | Rewritten as a general overview. The step-by-step policy demo moved to
-              05- Networking & Security/Built-in Authentication/Policy-Based Users and Keys — Example.md.
+              06- Networking & Security/Built-in Authentication/Policy-Based Users and Keys — Example.md.
               The command-level authentication reference moved to
-              05- Networking & Security/Built-in Authentication/Authentication.md. This page now summarizes all
+              06- Networking & Security/Built-in Authentication/Authentication.md. This page now summarizes all
               three security mechanisms and links out to the detailed docs for each.
 -->
 

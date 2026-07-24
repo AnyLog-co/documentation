@@ -9,7 +9,7 @@ source_path: "06 DNP3.md"
 ## Changelog
 - 2026-07-14 | Created document
 - 2026-07-14 | Updated TLS certificate references to point to the new DNP3 TLS Test Certificates document
-              (the previous 05- Networking & Security/C- DNP3 certificates/ directory, which committed actual
+              (the previous 06- Networking & Security/C- DNP3 certificates/ directory, which committed actual
               key material, is being removed). Added cross-references to the new companion documents covering
               scripted deployment and reusable mapping policies.
 -->
