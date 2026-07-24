@@ -16,7 +16,7 @@ layout: page
                     that this content lives inside `03- Installation & Deployment/A- Deployment Options/Node Configuration.md` 
                     or `Deploying a Node.md`, or (b) a new page created for it.
                  2. **"Using EdgeX" link is ambiguous.** Two candidate targets exist in the numbered tree — 
-                    `03- Installation & Deployment/03- Cloud & Edge Deployments/EdgeX - complete example.md` and 
+                    `03- Installation & Deployment/03- Cloud Support & Edge Deployments/EdgeX - complete example.md` and 
                     `07- Connectors & Integrations/B- Southbound Interfaces/Using MQTT (EdgeX).md` — and it's unclear 
                     which one the original link meant.
                  3. **"Starting an AnyLog Instance" has no numeric home.** This content only exists at 
@@ -347,7 +347,7 @@ Applications never need to know where data is physically stored — the AnyLog n
 | [Profiling and Monitoring Queries](../06- Data Management/B- Query & Aggregations/Profiling & Monitoring Queries.md) | Identifying and profiling slow queries. |
 | [Using Grafana](../07- Connectors & Integrations/A- Northbound Connectors/Using Grafana.md#using-grafana) | Integrating Grafana to visualize data. |
 
-<!-- LINK NEEDS TARGET: legacy "Using EdgeX" link is ambiguous between ../03- Installation & Deployment/03- Cloud & Edge Deployments/EdgeX - complete example.md and ../07- Connectors & Integrations/B- Southbound Interfaces/Using MQTT (EdgeX).md. Pick one (or link both) before publishing. -->
+<!-- LINK NEEDS TARGET: legacy "Using EdgeX" link is ambiguous between ../03- Installation & Deployment/03- Cloud Support & Edge Deployments/EdgeX - complete example.md and ../07- Connectors & Integrations/B- Southbound Interfaces/Using MQTT (EdgeX).md. Pick one (or link both) before publishing. -->
 
 ---
 
