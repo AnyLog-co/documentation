@@ -3,13 +3,14 @@ title: Scheduler & Scheduled Tasks
 description: Run repeatable tasks on a fixed interval to monitor node state, collect metrics, and trigger actions.
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-05-29 |                | creation         |          |
-
+--->
 
 The scheduler executes commands or scripts at a configured interval without manual intervention. Tasks can read local or remote node state, query data across the network, update summary tables, and trigger alerts.
 

@@ -3,12 +3,13 @@ title: PostgresSQL Connector
 description: Direct connection into PostgresSQL in order to gather insight from AnyLog data 
 layout: page
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
 the `system_query` database. To connect `system_query` in  PostgresSQL

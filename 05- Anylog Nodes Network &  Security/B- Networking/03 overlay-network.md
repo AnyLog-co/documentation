@@ -11,13 +11,14 @@ tags:
 - third-party
 ---
  
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-07-13 |  | created document | 2.0.2606 |
  
-
+--->
 # Overlay Networking
 
 An overlay network is a virtual network built on top of an existing physical network, allowing logical communication 

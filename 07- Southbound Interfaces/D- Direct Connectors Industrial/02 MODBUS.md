@@ -5,12 +5,13 @@ layout: page
 source_path: "02 MODBUS.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-05-08 |  | created document |  |
-
+--->
 
 
 AnyLog can act as a **Modbus TCP client** (over **hostname** and **port**, typically port **502**). Data is read on a schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as [OPC-UA](04 OPC UA Integration.md#continuous-data-pull) and [EtherNet/IP](../EtherNet%20IP.md#the-run-plc-client-command).

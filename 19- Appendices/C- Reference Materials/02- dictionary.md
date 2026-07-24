@@ -2,15 +2,16 @@
 title: "The local dictionary"
 description: ""
 layout: page
-source_path: "dictionary.md"
+source_path: "02- dictionary.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # The local dictionary
 

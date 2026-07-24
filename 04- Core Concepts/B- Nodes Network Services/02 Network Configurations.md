@@ -4,12 +4,14 @@ description: Configure IP addresses, ports, NAT, bind settings, and overlay netw
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-17 |         | Created document    |               | 
  
+--->
 
 AnyLog nodes communicate over a peer-to-peer TCP network. Correctly configuring IP addresses and ports ensures nodes are discoverable, reachable, and able to participate in the network — whether they sit on a local LAN, behind NAT, or across an overlay network.
 

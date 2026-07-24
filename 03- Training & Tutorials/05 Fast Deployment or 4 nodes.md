@@ -4,14 +4,14 @@ description: ""
 layout: page
 source_path: "training/05 Fast Deployment or 4 nodes.md"
 ---
---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
-
+--->
 
 
 

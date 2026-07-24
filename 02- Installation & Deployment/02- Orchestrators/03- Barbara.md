@@ -4,6 +4,10 @@ description: ""
 layout: page
 source_path: ""
 ---
+<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/03- Barbara.md
+=======
+
+>>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/02 Barbara.md
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |

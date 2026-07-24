@@ -4,6 +4,10 @@ description: ""
 layout: page
 source_path: ""
 ---
+<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/02- IBM IEAM (Edge Application Manager).md
+=======
+
+>>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/03 IBM IEAM (Edge Application Manager).md
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |

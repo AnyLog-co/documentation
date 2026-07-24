@@ -4,13 +4,14 @@ description: Understand AnyLog's policy-based metadata layer — how policies ar
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |         | Created document    |               | 
  
-
+--->
 
 AnyLog uses a **policy-based metadata layer** stored on a blockchain or master node. Policies are JSON objects that describe nodes, clusters, data schemas, configuration rules, and more. Every node in the network maintains a local copy of the relevant policies and uses them to route data, resolve queries, and enforce configuration.
 

@@ -5,11 +5,12 @@ layout: page
 source_path: "examples/02 Broker Setup Example.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 
 # Setting AnyLog as a Message Broker
@@ -25,6 +26,7 @@ Additional information:
   is detailed in [Using a Message Broker](../message%20broker.md#using-a-message-broker).
 * Adding data is detailed in [Adding Data to Nodes in the Network](../adding%20data.md#adding-data-to-nodes-in-the-network).
 * Configuring a node as a message broker is detailed in [Message Broker](../../background%20processes.md#message-broker).
+* MQTT TLS and client authentication is detailed in [Broker Setup TLS Example](02-1%20Broker%20Setup%20TLS%20Example.md).
 
 Note: Setting AnyLog as a Message Broker is referenced as Option B in [The Southbound Connectors Diagram](../adding%20data.md#the-southbound-connectors-diagram).
 Note

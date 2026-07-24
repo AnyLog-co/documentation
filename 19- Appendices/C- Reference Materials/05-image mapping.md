@@ -2,15 +2,16 @@
 title: "Image Mapping"
 description: ""
 layout: page
-source_path: "image mapping.md"
+source_path: "05-image mapping.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # Image Mapping
 

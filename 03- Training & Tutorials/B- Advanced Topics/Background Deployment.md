@@ -4,14 +4,14 @@ description: ""
 layout: page
 source_path: "training/advanced/Background Deployment.md"
 ---
---
+<!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Version**      | **Change** |
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
-
+--->
 
 
 # Deploy AnyLog as a background process 

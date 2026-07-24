@@ -5,11 +5,12 @@ layout: page
 source_path: "06 Managing Data Files Status.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
-
+--->
 
 # Managing Data files
 

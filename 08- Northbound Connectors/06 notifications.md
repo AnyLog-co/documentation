@@ -9,13 +9,14 @@ tags:
     - northbound 
     - rest
 ---
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-07-07 |  | Merged with legacy Notifications.md; added Automating Notifications with Scripts section |  |
  | 2026-04-17 |  | created document |  |
-
+--->
 
 AnyLog provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
 the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped / created.

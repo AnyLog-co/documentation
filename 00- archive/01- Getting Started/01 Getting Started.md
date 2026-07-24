@@ -3,14 +3,16 @@
 # title: Getting Started
 # description: Introduction to AnyLog Edge Data Fabric (EDF) — architecture, node types, metadata, and core CLI operations.
 layout: page
-
 ---
+
+<!---
 ### 📜 Change Log
    **Date**       | **Name**       | **Change**            | **Version** |
  |----------------|----------------|-----------------------|-------------|
  | 2026-07-17     | Eric Aquaronne | correction/merged duplicates | 2.0.2606    |
  | 2026-07-08     | Ori Shadmon    | initial file          | 1.5.2510    |
  | |
+--->
 
 
 
@@ -299,7 +301,11 @@ Applications never need to know where data is physically stored — the AnylogED
 AnylogEDF can be installed via Docker, Kubernetes, or by downloading the codebase from GitHub and running an installation script.
 
 * Deployment options: [Deployment Options](/docs/installation-deployment/deployment-options/deploying-a-node/)
+<<<<<<< HEAD:00- archive/01- Getting Started/01 Getting Started.md
 * Prerequisites: [Prerequisite](../../01-%20Getting%20Started/02%20Prerequisite.md)
+=======
+* Prerequisites: [Prerequisite](02 Prerequisites.md)
+>>>>>>> origin/pre-develop:01- Getting Started/01 Getting Started.md
 * A guided walkthrough: [Quick Deployment Guide](03 Quick Deployment Guide.md)
 
 ---

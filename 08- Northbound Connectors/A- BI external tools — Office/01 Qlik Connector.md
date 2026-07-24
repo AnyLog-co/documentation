@@ -4,6 +4,7 @@ description: Demonstration on how to connect between AnyLog and Qlik BI REST ser
 layout: page
 source_path: "northbound connectors/02 Qlik How to.md"
 ---
+<<<<<<< HEAD:08- Northbound Connectors/A- BI external tools — Office/01 Qlik Connector.md
 <<<<<<<< HEAD:08- Northbound Connectors/A- BI external tools — Office/Qlik Connector.md
 <!--
 ## Changelog
@@ -16,11 +17,14 @@ source_path: "northbound connectors/02 Qlik How to.md"
               was missing.
 -->
 ========
+=======
+<!---
+>>>>>>> origin/pre-develop:08- Northbound Connectors/A- BI external tools — use AnyLog's REST (or gRPC) API as their data source`/01 Qlik Connector.md
 ### 📜 Change Log
  **Date**   | **Name**     | **Change**        | **Version** |
  |------------|--------------|-------------------|----------|
  | 2026-07-20 | Eric Aquaronne | added change log  | 2.0.2606 |
-
+--->
 
 
 

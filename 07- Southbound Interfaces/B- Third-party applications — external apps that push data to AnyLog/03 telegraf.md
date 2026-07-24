@@ -4,16 +4,17 @@ description: How to publish Telegraf metrics into AnyLog via MQTT or REST
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**                                                                         | **Version** |
  |------------|--|------------------------------------------------------------------------------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log                                                                   | 2.0.2606 |
 | 2026-04-25 |  | hyperlinks                                                                         |  |
 | 2026-04-21 |  | edit title                                                                         |  |
-| 2026-04-18 |  | Simplified to Telegraf setup only; mapping details moved to mapping-01 Policies.md |  |
+| 2026-04-18 |  | Simplified to Telegraf setup only; mapping details moved to mapping-02 Policies.md |  |
 | 2026-04-17 |  | created file                                                                       |  |
 
-
+--->
 
 <a href="https://www.influxdata.com/time-b-platform/telegraf/" target="_blank">Telegraf</a> is _InfluxData_'s 
 open-source agent for collecting, processing, and forwarding metrics and events. It connects southbound data sources — 

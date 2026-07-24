@@ -4,7 +4,10 @@ description: ""
 layout: page
 source_path: "deployments/Open-Horizon/01- Open Horizon.md"
 ---
+<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/01- Open Horizon.md
 
+=======
+>>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/A- Open-Horizon (IBM)/Open Horizon.md
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
@@ -13,6 +16,13 @@ source_path: "deployments/Open-Horizon/01- Open Horizon.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 --->
+<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/01- Open Horizon.md
+=======
+
+
+to be completed
+
+>>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/A- Open-Horizon (IBM)/Open Horizon.md
 
 
 
