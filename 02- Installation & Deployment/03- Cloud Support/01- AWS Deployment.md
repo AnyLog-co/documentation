@@ -1,13 +1,9 @@
 ---
 title: "AWS Setup"
-description: ""
+description: "support for AWS"
 layout: page
 source_path: ""
 ---
-<<<<<<<< HEAD:02- Installation & Deployment/03- Cloud/01- AWS Deployment.md
-========
-
->>>>>>>> origin/pre-develop:02- Installation & Deployment/C- Cloud/AWS Deployment.md
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**            | **Version** |

@@ -1,13 +1,7 @@
 ---
 title: "Prerequisite and setup considerations"
-description: ""
+description: "pre-req for AnyLog"
 layout: page
-<<<<<<<< HEAD:01- Getting Started/02- Prerequisite.md
-source_path: "training/02- Prerequisite.md"
-
-========
-source_path: "training/02 Prerequisites.md"
->>>>>>>> origin/pre-develop:01- Getting Started/02 Prerequisites.md
 ---
 <!---
 ### 📜 Change Log
@@ -16,12 +10,7 @@ source_path: "training/02 Prerequisites.md"
  |            |                |            |             |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606    |
  |            |
-<<<<<<<< HEAD:01- Getting Started/02- Prerequisite.md
----> 
-========
 --->
-
->>>>>>>> origin/pre-develop:01- Getting Started/02 Prerequisites.md
 
 
 ---

@@ -4,7 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a605e2e-b8b2-4a83-831e-fd8fce1fcfd3" name="Changes" comment="" />
+    <list default="true" id="7a605e2e-b8b2-4a83-831e-fd8fce1fcfd3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00- archive/01- Getting Started/Getting Started.md" beforeDir="false" afterPath="$PROJECT_DIR$/00- archive/01- Getting Started/Getting Started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01- Getting Started/02 Prerequisites.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01- Getting Started/03- install.md" beforeDir="false" afterPath="$PROJECT_DIR$/01- Getting Started/03- install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01- Getting Started/04 Executable Deployment.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01- Getting Started/07 Installing 3 Anylog nodes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01- Getting Started/08 Installing the VM OVA.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/03- Cloud/01- AWS Deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/02- Installation &amp; Deployment/03- Cloud Support/01- AWS Deployment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/01 Code Versions.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/02 Updating Scripts.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/03 Deploying a Node.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/04 Node Configuration.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/05 Deploying EDM.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/06 Deploying a DBMS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/A- Deployment Options/07 Deploying Anylog as a Service.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/B- Containerization &amp; Orchestration/01 Docker Image.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/B- Containerization &amp; Orchestration/02 Docker Volumes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/B- Containerization &amp; Orchestration/03 Kubernetes Networking.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/B- Containerization &amp; Orchestration/04 Kubernetes Volumes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/C- Cloud/AWS Deployment.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/D- Networking &amp; Security/01 Securing the Anylog Network.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/D- Networking &amp; Security/02 Network Configuration.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/D- Networking &amp; Security/03 Configuring Overlay with AnyLog.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/D- Networking &amp; Security/04 Nebula Configuration.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02- Installation &amp; Deployment/D- Networking &amp; Security/05 NGINX Configuration.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/01 Training Overview.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/02 Docker Compose.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/03 Connectors To Data Sources.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/04 Data Generator.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/05 Fast Deployment or 4 nodes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/A- Beginner Sessions/Session I (Demo).md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/A- Beginner Sessions/Session II (Deployment).md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/Background Deployment.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/Config Policies.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/Network Setup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/Pip Install.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/curl.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/edgex_transformation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/node_red_sample_flow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/B- Advanced Topics/samples/sample_config_file.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/Databases &amp; Tables.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/03- Training &amp; Tutorials/Query Data.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/09- Integrations/01 deployment-process.md" beforeDir="false" afterPath="$PROJECT_DIR$/03- Training &amp; Tutorials/04- deployment-process.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/09- Integrations/02 deployment-scripts.md" beforeDir="false" afterPath="$PROJECT_DIR$/03- Training &amp; Tutorials/05- deployment-scripts.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,39 +76,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_toc.executor&quot;: &quot;Run&quot;,
-    &quot;Python.server.executor&quot;: &quot;Run&quot;,
-    &quot;Python.toc_creator.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;os-dev-reorg&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/oshad/AnyLog-code/documentation/02- Installation &amp; Deployment/02- Orchestrators&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/oshad/AnyLog-code/documentation/13- UNS (Unified Name Spaces)/UNS.md&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.Unnamed.executor": "Run",
+    "Python.generate_toc.executor": "Run",
+    "Python.server.executor": "Run",
+    "Python.toc_creator.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "os-dev-reorg",
+    "last_opened_file_path": "C:/Users/oshad/AnyLog-code/documentation/03- Training & Tutorials",
+    "two.files.diff.last.used.file": "C:/Users/oshad/AnyLog-code/documentation/13- UNS (Unified Name Spaces)/UNS.md"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment\02- Orchestrators" />
+      <recent name="C:\Users\oshad\AnyLog-code\documentation\03- Training &amp; Tutorials" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\00- archive" />
+      <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment\02- Orchestrators" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\03- Installation &amp; Deployment" />
-      <recent name="C:\Users\oshad\AnyLog-code\documentation\05- Networking &amp; Security\B- Networking" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\oshad\AnyLog-code\documentation\03- Training &amp; Tutorials" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment\01- Deployment Options" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\00- archive" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment" />
       <recent name="C:\Users\oshad\AnyLog-code\documentation\02- Installation &amp; Deployment\01- Deployment Options\02- Kubernetes" />
-      <recent name="C:\Users\oshad\AnyLog-code\documentation\imgs" />
     </key>
   </component>
   <component name="RunManager" selected="Python.generate_toc">

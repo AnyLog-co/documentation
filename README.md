@@ -47,6 +47,27 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [06 Starting an Anylog Instance](00-%20archive/01-%20Getting%20Started/06%20Starting%20an%20Anylog%20Instance.md)
     * [08 Installing 3 Anylog node](00-%20archive/01-%20Getting%20Started/08%20Installing%203%20Anylog%20node.md)
     * [Getting Started](00-%20archive/01-%20Getting%20Started/Getting%20Started.md)
+  * **02- Installation & Deployment**
+    * **A- Deployment Options**
+      * [02 Updating Scripts](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/02%20Updating%20Scripts.md)
+      * [03 Deploying a Node](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/03%20Deploying%20a%20Node.md)
+      * [04 Node Configuration](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/04%20Node%20Configuration.md)
+      * [05 Deploying EDM](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/05%20Deploying%20EDM.md)
+      * [06 Deploying a DBMS](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/06%20Deploying%20a%20DBMS.md)
+      * [07 Deploying Anylog as a Service](00-%20archive/02-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/07%20Deploying%20Anylog%20as%20a%20Service.md)
+    * **B- Containerization & Orchestration**
+      * [01 Docker Image](00-%20archive/02-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/01%20Docker%20Image.md)
+      * [02 Docker Volumes](00-%20archive/02-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/02%20Docker%20Volumes.md)
+      * [03 Kubernetes Networking](00-%20archive/02-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/03%20Kubernetes%20Networking.md)
+      * [04 Kubernetes Volumes](00-%20archive/02-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/04%20Kubernetes%20Volumes.md)
+    * **C- Cloud**
+      * [AWS Deployment](00-%20archive/02-%20Installation%20%26%20Deployment/C-%20Cloud/AWS%20Deployment.md)
+    * **D- Networking & Security**
+      * [01 Securing the Anylog Network](00-%20archive/02-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/01%20Securing%20the%20Anylog%20Network.md)
+      * [02 Network Configuration](00-%20archive/02-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/02%20Network%20Configuration.md)
+      * [03 Configuring Overlay with AnyLog](00-%20archive/02-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/03%20Configuring%20Overlay%20with%20AnyLog.md)
+      * [04 Nebula Configuration](00-%20archive/02-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/04%20Nebula%20Configuration.md)
+      * [05 NGINX Configuration](00-%20archive/02-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/05%20NGINX%20Configuration.md)
   * **03- Install**
     * **D- Network & Security**
       * [01 Securing the Anylog Network](00-%20archive/03-%20Install/D-%20Network%20%26%20Security/01%20Securing%20the%20Anylog%20Network.md)
@@ -57,6 +78,36 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
       * [Configuring Overlay with AnyLog](00-%20archive/03-%20Install/D-%20Network%20%26%20Security/Configuring%20Overlay%20with%20AnyLog.md)
       * [Network Configuration](00-%20archive/03-%20Install/D-%20Network%20%26%20Security/Network%20Configuration.md)
       * [Secure Network](00-%20archive/03-%20Install/D-%20Network%20%26%20Security/Secure%20Network.md)
+  * **03- Installation & Deployment**
+    * [Network Processing](00-%20archive/03-%20Installation%20%26%20Deployment/Network%20Processing.md)
+    * [Networking](00-%20archive/03-%20Installation%20%26%20Deployment/Networking.md)
+    * [Securing the Network](00-%20archive/03-%20Installation%20%26%20Deployment/Securing%20the%20Network.md)
+    * **A- Deployment Options**
+      * [01 Code Versions](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/01%20Code%20Versions.md)
+      * [02 Updating Scripts](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/02%20Updating%20Scripts.md)
+      * [03 Deploying a Node](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/03%20Deploying%20a%20Node.md)
+      * [04 Node Configuration](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/04%20Node%20Configuration.md)
+      * [05 Deploying EDM](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/05%20Deploying%20EDM.md)
+      * [06 Deploying a DBMS](00-%20archive/03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/06%20Deploying%20a%20DBMS.md)
+    * **B- Containerization & Orchestration**
+      * [02 Docker Volumes](00-%20archive/03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/02%20Docker%20Volumes.md)
+  * **03- Training & Tutorials**
+    * [01 Training Overview](00-%20archive/03-%20Training%20%26%20Tutorials/01%20Training%20Overview.md)
+    * [02 Docker Compose](00-%20archive/03-%20Training%20%26%20Tutorials/02%20Docker%20Compose.md)
+    * [03 Connectors To Data Sources](00-%20archive/03-%20Training%20%26%20Tutorials/03%20Connectors%20To%20Data%20Sources.md)
+    * [04 Data Generator](00-%20archive/03-%20Training%20%26%20Tutorials/04%20Data%20Generator.md)
+    * [05 Fast Deployment or 4 nodes](00-%20archive/03-%20Training%20%26%20Tutorials/05%20Fast%20Deployment%20or%204%20nodes.md)
+    * [Databases & Tables](00-%20archive/03-%20Training%20%26%20Tutorials/Databases%20%26%20Tables.md)
+    * [Query Data](00-%20archive/03-%20Training%20%26%20Tutorials/Query%20Data.md)
+    * **A- Beginner Sessions**
+      * [Session I (Demo)](00-%20archive/03-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20I%20%28Demo%29.md)
+      * [Session II (Deployment)](00-%20archive/03-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20II%20%28Deployment%29.md)
+    * **B- Advanced Topics**
+      * [Background Deployment](00-%20archive/03-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Background%20Deployment.md)
+      * [Config Policies](00-%20archive/03-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Config%20Policies.md)
+      * [Network Setup](00-%20archive/03-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Network%20Setup.md)
+      * [Pip Install](00-%20archive/03-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Pip%20Install.md)
+      * **samples**
   * **05- Networking & Security**
     * [Network Processing](00-%20archive/05-%20Networking%20%26%20Security/Network%20Processing.md)
     * [Securing the Network](00-%20archive/05-%20Networking%20%26%20Security/Securing%20the%20Network.md)
@@ -65,7 +116,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
       * [overlay-certificate-authority](00-%20archive/05-%20Networking%20%26%20Security/B-%20Networking/overlay-certificate-authority.md)
       * [overlay-network](00-%20archive/05-%20Networking%20%26%20Security/B-%20Networking/overlay-network.md)
 * **01- Getting Started**
-<<<<<<< HEAD
   * [01- intro-to-anylog](01-%20Getting%20Started/01-%20intro-to-anylog.md)
   * [02- Prerequisite](01-%20Getting%20Started/02-%20Prerequisite.md)
   * [03- install](01-%20Getting%20Started/03-%20install.md)
@@ -74,7 +124,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [01- Docker](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/01-%20Docker.md)
     * [02- Installing the VM OVA](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Installing%20the%20VM%20OVA.md)
     * [03- Kubernetes](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/03-%20Kubernetes.md)
-    * [05- Configure as a Service](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/05-%20Configure%20as%20a%20Service.md)
+    * [04- AnyLog as a Service](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/04-%20AnyLog%20as%20a%20Service.md)
+    * [05- Pip Install](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/05-%20Pip%20Install.md)
+    * [99- Third-Party Apps](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/99-%20Third-Party%20Apps.md)
     * **02- Kubernetes**
       * [03 Kubernetes Networking](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Kubernetes/03%20Kubernetes%20Networking.md)
       * [04 Kubernetes Volumes](02-%20Installation%20%26%20Deployment/01-%20Deployment%20Options/02-%20Kubernetes/04%20Kubernetes%20Volumes.md)
@@ -83,81 +135,19 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [02- IBM IEAM (Edge Application Manager)](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/02-%20IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
     * [03- Barbara](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/03-%20Barbara.md)
     * [04- DELL Distributed Private Cloud](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/04-%20DELL%20Distributed%20Private%20Cloud.md)
-=======
-  * [01 Getting Started](01-%20Getting%20Started/01%20Getting%20Started.md)
-  * [02 Prerequisite](01-%20Getting%20Started/02%20Prerequisite.md)
-  * [03 Quick Deployment Guide](01-%20Getting%20Started/03%20Quick%20Deployment%20Guide.md)
-  * [04 Deployment Scripts](01-%20Getting%20Started/04%20Deployment%20Scripts.md)
-  * [05 Executable Deployment](01-%20Getting%20Started/05%20Executable%20Deployment.md)
-  * [06 Starting an Anylog Instance](01-%20Getting%20Started/06%20Starting%20an%20Anylog%20Instance.md)
-  * [07 Configure as a Service](01-%20Getting%20Started/07%20Configure%20as%20a%20Service.md)
-  * [08 Installing 3 Anylog node](01-%20Getting%20Started/08%20Installing%203%20Anylog%20node.md)
-  * [09 Installing the VM OVA](01-%20Getting%20Started/09%20Installing%20the%20VM%20OVA.md)
->>>>>>> origin/pre-develop
-* **02- Training & Tutorials**
-  * [01 Training Overview](02-%20Training%20%26%20Tutorials/01%20Training%20Overview.md)
-  * [02 Docker Compose](02-%20Training%20%26%20Tutorials/02%20Docker%20Compose.md)
-  * [03 Connectors To Data Sources](02-%20Training%20%26%20Tutorials/03%20Connectors%20To%20Data%20Sources.md)
-  * [04 Data Generator](02-%20Training%20%26%20Tutorials/04%20Data%20Generator.md)
-  * [05 Fast Deployment or 4 nodes](02-%20Training%20%26%20Tutorials/05%20Fast%20Deployment%20or%204%20nodes.md)
-<<<<<<< HEAD
-  * [Databases & Tables](02-%20Training%20%26%20Tutorials/Databases%20%26%20Tables.md)
-  * [Query Data](02-%20Training%20%26%20Tutorials/Query%20Data.md)
-  * **A- Beginner Sessions**
-    * [Session I (Demo)](02-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20I%20%28Demo%29.md)
-    * [Session II (Deployment)](02-%20Training%20%26%20Tutorials/A-%20Beginner%20Sessions/Session%20II%20%28Deployment%29.md)
-  * **B- Advanced Topics**
-    * [Background Deployment](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Background%20Deployment.md)
-    * [Config Policies](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Config%20Policies.md)
-    * [Network Setup](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Network%20Setup.md)
-    * [Pip Install](02-%20Training%20%26%20Tutorials/B-%20Advanced%20Topics/Pip%20Install.md)
-=======
-  * **01- Beginner Sessions**
-    * [Session I (Demo)](02-%20Training%20%26%20Tutorials/01-%20Beginner%20Sessions/Session%20I%20%28Demo%29.md)
-    * [Session II (Deployment)](02-%20Training%20%26%20Tutorials/01-%20Beginner%20Sessions/Session%20II%20%28Deployment%29.md)
-  * **02- Advanced Topics**
-    * [Background Deployment](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Background%20Deployment.md)
-    * [Config Policies](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Config%20Policies.md)
-    * [Network Setup](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Network%20Setup.md)
-    * [Pip Install](02-%20Training%20%26%20Tutorials/02-%20Advanced%20Topics/Pip%20Install.md)
->>>>>>> origin/pre-develop
-    * **samples**
-* **03- Installation & Deployment**
-  * [Network Processing](03-%20Installation%20%26%20Deployment/Network%20Processing.md)
-  * [Networking](03-%20Installation%20%26%20Deployment/Networking.md)
-  * [Securing the Network](03-%20Installation%20%26%20Deployment/Securing%20the%20Network.md)
-  * **A- Deployment Options**
-    * [01 Code Versions](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/01%20Code%20Versions.md)
-    * [02 Updating Scripts](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/02%20Updating%20Scripts.md)
-    * [03 Deploying a Node](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/03%20Deploying%20a%20Node.md)
-    * [04 Node Configuration](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/04%20Node%20Configuration.md)
-    * [05 Deploying EDM](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/05%20Deploying%20EDM.md)
-    * [06 Deploying a DBMS](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/06%20Deploying%20a%20DBMS.md)
-    * [07 Deploying Anylog as a Service](03-%20Installation%20%26%20Deployment/A-%20Deployment%20Options/07%20Deploying%20Anylog%20as%20a%20Service.md)
-  * **B- Containerization & Orchestration**
-<<<<<<< HEAD
-    * [02 Docker Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/02%20Docker%20Volumes.md)
-  * **C- Cloud**
-    * [AWS Deployment](03-%20Installation%20%26%20Deployment/C-%20Cloud/AWS%20Deployment.md)
-=======
-    * [01 Docker Image](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/01%20Docker%20Image.md)
-    * [02 Docker Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/02%20Docker%20Volumes.md)
-    * [03 Kubernetes Networking](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/03%20Kubernetes%20Networking.md)
-    * [04 Kubernetes Volumes](03-%20Installation%20%26%20Deployment/B-%20Containerization%20%26%20Orchestration/04%20Kubernetes%20Volumes.md)
-  * **C- Cloud**
-    * [AWS Deployment](03-%20Installation%20%26%20Deployment/C-%20Cloud/AWS%20Deployment.md)
-  * **D- Networking & Security**
-    * [01 Securing the Anylog Network](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/01%20Securing%20the%20Anylog%20Network.md)
-    * [02 Network Configuration](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/02%20Network%20Configuration.md)
-    * [03 Configuring Overlay with AnyLog](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/03%20Configuring%20Overlay%20with%20AnyLog.md)
-    * [04 Nebula Configuration](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/04%20Nebula%20Configuration.md)
-    * [05 NGINX Configuration](03-%20Installation%20%26%20Deployment/D-%20Networking%20%26%20Security/05%20NGINX%20Configuration.md)
->>>>>>> origin/pre-develop
+    * [05- Zededa](02-%20Installation%20%26%20Deployment/02-%20Orchestrators/05-%20Zededa.md)
+  * **03- Cloud Support**
+    * [01- AWS Deployment](02-%20Installation%20%26%20Deployment/03-%20Cloud%20Support/01-%20AWS%20Deployment.md)
+* **03- Training & Tutorials**
+  * [01- Introduction](03-%20Training%20%26%20Tutorials/01-%20Introduction.md)
+  * [02- Basic Commands](03-%20Training%20%26%20Tutorials/02-%20Basic%20Commands.md)
+  * [99- Docker & K8s Commands](03-%20Training%20%26%20Tutorials/99-%20Docker%20%26%20K8s%20Commands.md)
 * **04- Core Concepts**
-  * [01 Policies](04-%20Core%20Concepts/01%20Policies.md)
-  * [02 Metadata Management](04-%20Core%20Concepts/02%20Metadata%20Management.md)
-  * [03 Bucket Data Management](04-%20Core%20Concepts/03%20Bucket%20Data%20Management.md)
-  * [04 Background Processes](04-%20Core%20Concepts/04%20Background%20Processes.md)
+  * [01 Deployment Scripts](04-%20Core%20Concepts/01%20Deployment%20Scripts.md)
+  * [02 Policies](04-%20Core%20Concepts/02%20Policies.md)
+  * [03 Metadata Management](04-%20Core%20Concepts/03%20Metadata%20Management.md)
+  * [04 Bucket Data Management](04-%20Core%20Concepts/04%20Bucket%20Data%20Management.md)
+  * [05 Background Processes](04-%20Core%20Concepts/05%20Background%20Processes.md)
   * **A- Agent Services**
     * [01 Operator](04-%20Core%20Concepts/A-%20Agent%20Services/01%20Operator.md)
     * [02 Query](04-%20Core%20Concepts/A-%20Agent%20Services/02%20Query.md)
@@ -181,7 +171,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [01 networking](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/B-%20Networking/01%20networking.md)
     * [02 overlay-certificate-authority](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/B-%20Networking/02%20overlay-certificate-authority.md)
     * [03 overlay-network](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/B-%20Networking/03%20overlay-network.md)
-<<<<<<< HEAD
     * [NGINX Configuration](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/B-%20Networking/NGINX%20Configuration.md)
   * **C- DNP3 certificates**
     * **ca_chain**
@@ -190,11 +179,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * **A- Built-in Authentication**
     * [Authentication-policies](05-%20Networking%20%26%20Security/A-%20Built-in%20Authentication/Authentication-policies.md)
     * [Authentication](05-%20Networking%20%26%20Security/A-%20Built-in%20Authentication/Authentication.md)
-=======
-  * **C- DNP3 certificates**
-    * **ca_chain**
-      * [ca-chain README](05-%20Anylog%20Nodes%20Network%20%26%20%20Security/C-%20DNP3%20certificates/ca_chain/ca-chain%20README.md)
->>>>>>> origin/pre-develop
 * **06- Data Management**
   * **A- Data Ingestion**
     * [01 Adding Data](06-%20Data%20Management/A-%20Data%20Ingestion/01%20Adding%20Data.md)
@@ -224,22 +208,11 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [02 data-ingestion](07-%20Southbound%20Interfaces/02%20data-ingestion.md)
   * [03 node-monitoring](07-%20Southbound%20Interfaces/03%20node-monitoring.md)
   * [04 live-data-generator](07-%20Southbound%20Interfaces/04%20live-data-generator.md)
-<<<<<<< HEAD
   * **A- Direct Connectors Generic**
     * [01 Using REST](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/01%20Using%20REST.md)
     * [02 mapping-policies](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/02%20mapping-policies.md)
     * [message-broker](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/message-broker.md)
     * [Using REST](07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/Using%20REST.md)
-=======
-  * **A- Direct - Built-in connectors (protocols AnyLog natively accepts from devices)**
-    * [01 Using GRPC](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/01%20Using%20GRPC.md)
-    * [02 MODBUS](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/02%20MODBUS.md)
-    * [03 EtherNet IP](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/03%20EtherNet%20IP.md)
-    * [04 OPC UA Integration](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/04%20OPC%20UA%20Integration.md)
-    * [05 data from edgex](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/05%20data%20from%20edgex.md)
-    * [06 DNP3](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/06%20DNP3.md)
-    * [07 video-streaming](07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/07%20video-streaming.md)
->>>>>>> origin/pre-develop
   * **B- Third-party applications — external apps that push data to AnyLog**
     * [01 kubearmor](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/01%20kubearmor.md)
     * [02 node-red](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/02%20node-red.md)
@@ -249,7 +222,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [06 Syslog integration](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/06%20Syslog%20integration.md)
     * [06-1 Using Syslog](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/06-1%20Using%20Syslog.md)
     * [062 Ingesting Syslog msgs](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/062%20Ingesting%20Syslog%20msgs.md)
-<<<<<<< HEAD
     * [EdgeX - complete example](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/EdgeX%20-%20complete%20example.md)
     * [EdgeX](07-%20Southbound%20Interfaces/B-%20Third-party%20applications%20%E2%80%94%20external%20apps%20that%20push%20data%20to%20AnyLog/EdgeX.md)
   * **C- Direct Connectors Monitoring**
@@ -275,11 +247,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * **E- Direct Connectors RPC**
     * [grpc](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/grpc.md)
     * [Using GRPC](07-%20Southbound%20Interfaces/E-%20Direct%20Connectors%20RPC/Using%20GRPC.md)
-=======
-  * **C- REST**
-    * [01 Using REST](07-%20Southbound%20Interfaces/C-%20REST/01%20Using%20REST.md)
-    * [02 mapping-policies](07-%20Southbound%20Interfaces/C-%20REST/02%20mapping-policies.md)
->>>>>>> origin/pre-develop
 * **08- Northbound Connectors**
   * [01 northbound-overview](08-%20Northbound%20Connectors/01%20northbound-overview.md)
   * [02 Postman Integration](08-%20Northbound%20Connectors/02%20Postman%20Integration.md)
@@ -288,7 +255,6 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [05 sql-setup](08-%20Northbound%20Connectors/05%20sql-setup.md)
   * [06 notifications](08-%20Northbound%20Connectors/06%20notifications.md)
   * [06-1 Notifications example](08-%20Northbound%20Connectors/06-1%20Notifications%20example.md)
-<<<<<<< HEAD
   * [forwarding-data](08-%20Northbound%20Connectors/forwarding-data.md)
   * **A- BI external tools — Grafana**
     * [Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20Grafana/Importing%20Grafana%20Dashboard.md)
@@ -308,46 +274,20 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * **A- BI Tools — Generic**
     * [postgres-connector](08-%20Northbound%20Connectors/A-%20BI%20Tools%20%E2%80%94%20Generic/postgres-connector.md)
     * [Postman Integration](08-%20Northbound%20Connectors/A-%20BI%20Tools%20%E2%80%94%20Generic/Postman%20Integration.md)
-=======
-  * **A- BI external tools — use AnyLog's REST (or gRPC) API as their data source`**
-    * [01 Qlik Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/01%20Qlik%20Connector.md)
-    * [02 Qlik How to](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/02%20Qlik%20How%20to.md)
-    * [03 Using Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/03%20Using%20Grafana.md)
-    * [03-1 Connecting Grafana](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/03-1%20Connecting%20Grafana.md)
-    * [03-2 Importing Grafana Dashboard](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/03-2%20Importing%20Grafana%20Dashboard.md)
-    * [04 Power BI Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/04%20Power%20BI%20Connector.md)
-    * [05 Google Drive Connector](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/05%20Google%20Drive%20Connector.md)
-    * [05-1 Google example](08-%20Northbound%20Connectors/A-%20BI%20external%20tools%20%E2%80%94%20use%20AnyLog%27s%20REST%20%28or%20gRPC%29%20API%20as%20their%20data%20source%60/05-1%20Google%20example.md)
->>>>>>> origin/pre-develop
 * **09- Integrations**
   * [01 deployment-process](09-%20Integrations/01%20deployment-process.md)
   * [02 deployment-scripts](09-%20Integrations/02%20deployment-scripts.md)
   * **A- Databases**
     * [01 Postgres Connector](09-%20Integrations/A-%20Databases/01%20Postgres%20Connector.md)
     * [02 configuring mongodb](09-%20Integrations/A-%20Databases/02%20configuring%20mongodb.md)
-<<<<<<< HEAD
     * [milvusdb](09-%20Integrations/A-%20Databases/milvusdb.md)
     * [sql-databases](09-%20Integrations/A-%20Databases/sql-databases.md)
-=======
->>>>>>> origin/pre-develop
   * **B- Messages Brokers**
     * [01 Message Broker Setup](09-%20Integrations/B-%20Messages%20Brokers/01%20Message%20Broker%20Setup.md)
     * [02 Broker Setup Example](09-%20Integrations/B-%20Messages%20Brokers/02%20Broker%20Setup%20Example.md)
+    * [02-1 Broker Setup TLS Example](09-%20Integrations/B-%20Messages%20Brokers/02-1%20Broker%20Setup%20TLS%20Example.md)
     * [03 edgex integration](09-%20Integrations/B-%20Messages%20Brokers/03%20edgex%20integration.md)
     * [03-1 EdgeX Foundry Integration example](09-%20Integrations/B-%20Messages%20Brokers/03-1%20EdgeX%20Foundry%20Integration%20example.md)
-  * **C- Deployment tools**
-<<<<<<< HEAD
-=======
-    * [01 DELL Distributed Private Cloud](09-%20Integrations/C-%20Deployment%20tools/01%20DELL%20Distributed%20Private%20Cloud.md)
-    * [02 Barbara](09-%20Integrations/C-%20Deployment%20tools/02%20Barbara.md)
-    * [03 IBM IEAM (Edge Application Manager)](09-%20Integrations/C-%20Deployment%20tools/03%20IBM%20IEAM%20%28Edge%20Application%20Manager%29.md)
-    * **A- Open-Horizon (IBM)**
-      * [Open Horizon](09-%20Integrations/C-%20Deployment%20tools/A-%20Open-Horizon%20%28IBM%29/Open%20Horizon.md)
-      * **imgs**
-      * **master**
-      * **operator**
-      * **query**
->>>>>>> origin/pre-develop
 * **10- Visualization & Dashboards**
   * [01 LLM Dashboard Generation](10-%20Visualization%20%26%20Dashboards/01%20LLM%20Dashboard%20Generation.md)
   * [02 Node Red](10-%20Visualization%20%26%20Dashboards/02%20Node%20Red.md)
@@ -361,12 +301,9 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 * **13- UNS (Unified Name Spaces)**
   * [01 UNS](13-%20UNS%20%28Unified%20Name%20Spaces%29/01%20UNS.md)
   * [02 UNS example](13-%20UNS%20%28Unified%20Name%20Spaces%29/02%20UNS%20example.md)
-<<<<<<< HEAD
   * [UNS-custom](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-custom.md)
   * [UNS-dynamic-custom-example](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS-dynamic-custom-example.md)
   * [UNS](13-%20UNS%20%28Unified%20Name%20Spaces%29/UNS.md)
-=======
->>>>>>> origin/pre-develop
 * **14- Commands & CLI (Command Line Interface)**
   * [01 Commands cheatsheet](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/01%20Commands%20cheatsheet.md)
   * [02 CLI](14-%20Commands%20%26%20CLI%20%28Command%20Line%20Interface%29/02%20CLI.md)
@@ -401,10 +338,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   * [02 FAQ 4 troubleshooting](17-%20Support%20%26%20Troubleshooting/02%20FAQ%204%20troubleshooting.md)
   * [03 ND common_issues](17-%20Support%20%26%20Troubleshooting/03%20ND%20common_issues.md)
   * [04 ND Issue Networking_MTU_size](17-%20Support%20%26%20Troubleshooting/04%20ND%20Issue%20Networking_MTU_size.md)
-<<<<<<< HEAD
   * [live-data-generator](17-%20Support%20%26%20Troubleshooting/live-data-generator.md)
-=======
->>>>>>> origin/pre-develop
 * **18- Releases Notes**
   * [01 AnylogEDF Releases Notes](18-%20Releases%20Notes/01%20AnylogEDF%20Releases%20Notes.md)
   * [02 AnylogEDF SOURCE-CHANGELOGS](18-%20Releases%20Notes/02%20AnylogEDF%20SOURCE-CHANGELOGS.md)
@@ -421,22 +355,15 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     * [02 Blockchain example](19-%20Appendices/B-%20Blockchain%20Integration/02%20Blockchain%20example.md)
     * [03 Using Ethereum](19-%20Appendices/B-%20Blockchain%20Integration/03%20Using%20Ethereum.md)
   * **C- Reference Materials**
-    * [configuration examples](19-%20Appendices/C-%20Reference%20Materials/configuration%20examples.md)
-<<<<<<< HEAD
-    * [dictionary](19-%20Appendices/C-%20Reference%20Materials/dictionary.md)
+    * [01- configuration examples](19-%20Appendices/C-%20Reference%20Materials/01-%20configuration%20examples.md)
+    * [02- dictionary](19-%20Appendices/C-%20Reference%20Materials/02-%20dictionary.md)
+    * [03- sql setup](19-%20Appendices/C-%20Reference%20Materials/03-%20sql%20setup.md)
+    * [04- helpers](19-%20Appendices/C-%20Reference%20Materials/04-%20helpers.md)
+    * [05-image mapping](19-%20Appendices/C-%20Reference%20Materials/05-image%20mapping.md)
+    * [06- milvusdb](19-%20Appendices/C-%20Reference%20Materials/06-%20milvusdb.md)
+    * [07- minio](19-%20Appendices/C-%20Reference%20Materials/07-%20minio.md)
+    * [08- streaming conditions](19-%20Appendices/C-%20Reference%20Materials/08-%20streaming%20conditions.md)
     * [FAQ](19-%20Appendices/C-%20Reference%20Materials/FAQ.md)
-    * [helpers](19-%20Appendices/C-%20Reference%20Materials/helpers.md)
-    * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
-    * [minio](19-%20Appendices/C-%20Reference%20Materials/minio.md)
-=======
-    * [dictionary](19- Appendices/C- Reference Materials/02- dictionary.md)
-    * [helpers](19- Appendices/C- Reference Materials/04- helpers.md)
-    * [image mapping](19-%20Appendices/C-%20Reference%20Materials/image%20mapping.md)
-    * [milvusdb](19- Appendices/C- Reference Materials/06- milvusdb.md)
-    * [minio](19- Appendices/C- Reference Materials/07- minio.md)
->>>>>>> origin/pre-develop
-    * [sql setup](19-%20Appendices/C-%20Reference%20Materials/sql%20setup.md)
-    * [streaming conditions](19-%20Appendices/C-%20Reference%20Materials/streaming%20conditions.md)
 * **99- INTERNAL & DRAFT sections (NOT publicly visible)**
   * [[deprecated] Remote CLI ](99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/%5Bdeprecated%5D%20Remote%20CLI%20.md)
   * [Contributing to Documentation](99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/Contributing%20to%20Documentation.md)
