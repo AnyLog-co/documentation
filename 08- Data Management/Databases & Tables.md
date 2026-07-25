@@ -37,7 +37,7 @@ databases for different logical databases at the same time.
 
 This page covers the lifecycle: connecting/disconnecting, creating/dropping tables, partitioning, discovering
 and inspecting what's declared where, and backup/archival. For running queries against the data once it's there,
-see [Query Data](Query%20Data.md) (on-ramp) or
+see [Query Data](../00-%20archive/03-%20Training%20&%20Tutorials/Query%20Data.md) (on-ramp) or
 [Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md) (full reference).
 
 ---
@@ -448,7 +448,7 @@ delete archive where days = 60
 
 ## See also
 
-- [Query Data](Query%20Data.md) — a beginner walkthrough of actually querying the tables this page shows you
+- [Query Data](../00-%20archive/03-%20Training%20&%20Tutorials/Query%20Data.md) — a beginner walkthrough of actually querying the tables this page shows you
   how to set up
 - [Querying Data (Northbound)](../08-%20Northbound%20Connectors/queries.md) — the full query reference
 - [Aggregations](../06-%20Data%20Management/B-%20Query%20&%20Aggregations/Aggregations.md)
