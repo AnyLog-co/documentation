@@ -17,6 +17,10 @@ source_path: "postgres-connector.md"
               merged there). Left the "to run in repeat" link flagged rather than guessed — "alerts and
               monitoring.md" doesn't exist anywhere in the current tree; it only survives inside the ORPHANS
               legacy subtree marked for deletion, so this was already a dead link before this merge.
+- 2026-07-25 | "03 postgres-connector.md" resurfaced in a follow-up upload — confirmed it's the same broken-Jekyll-
+              syntax duplicate described above (title "PostgresSQL Connector," `!<a href="{{ ... }}">` image links
+              instead of real Markdown images, and the two dead/unfixed links this file already addresses). Nothing
+              new to merge; excluded again.
 -->
 
 # PostgreSQL Connector & Tableau Visualization

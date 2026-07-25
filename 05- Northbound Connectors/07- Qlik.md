@@ -4,33 +4,27 @@ description: Demonstration on how to connect between AnyLog and Qlik BI REST ser
 layout: page
 source_path: "northbound connectors/02 Qlik How to.md"
 ---
-<<<<<<< HEAD:08- Northbound Connectors/A- BI external tools — Office/01 Qlik Connector.md
-<<<<<<<< HEAD:08- Northbound Connectors/A- BI external tools — Office/Qlik Connector.md
 <!--
-## Changelog
-- 2026-04-17 | Created document
-- 2026-07-14 | Merged the two overlapping Qlik docs (Qlik.md and Qlik Connector.md) into this single file.
-              Base is Qlik Connector.md — its images use working <img> tags, where Qlik.md's use a broken
-              Jekyll-era `!<a href="{{ relative_url }}">` construct that doesn't render as an image. Fixed one
-              typo carried in Qlik Connector.md ("QLik" -> "Qlik"). Kept Qlik.md's fuller Period function
-              explanation (the filter-criteria caveat and the worked "3 days" example), which Qlik Connector.md
-              was missing.
--->
-========
-=======
-<!---
->>>>>>> origin/pre-develop:08- Northbound Connectors/A- BI external tools — use AnyLog's REST (or gRPC) API as their data source`/01 Qlik Connector.md
 ### 📜 Change Log
- **Date**   | **Name**     | **Change**        | **Version** |
- |------------|--------------|-------------------|----------|
- | 2026-07-20 | Eric Aquaronne | added change log  | 2.0.2606 |
---->
 
-
-
-
-
->>>>>>>> origin/pre-develop:08- Northbound Connectors/A- BI external tools — Office/01 Qlik Connector.md
+| **Date** | **Name** | **Change** | **Version** |
+|---|---|---|---|
+| 2026-04-17 | | Created document | |
+| 2026-07-14 | | Merged the two overlapping Qlik docs (`Qlik.md` and `Qlik Connector.md`) into this single file.
+  Base is `Qlik Connector.md` — its images use working `<img>` tags, where `Qlik.md`'s use a broken Jekyll-era
+  `!<a href="{{ relative_url }}">` construct that doesn't render as an image. Fixed one typo carried in
+  `Qlik Connector.md` ("QLik" → "Qlik"). Kept `Qlik.md`'s fuller Period function explanation (the filter-criteria
+  caveat and the worked "3 days" example), which `Qlik Connector.md` was missing. | |
+| 2026-07-20 | Eric Aquaronne | Added change log | 2.0.2606 |
+| 2026-07-25 | Ori Shadmon | Resolved a doubly-nested, unresolved git merge conflict sitting in this file's changelog
+  header (present in two separate re-uploads of this same already-merged file — just the header was still
+  conflicted, not the body). Also confirmed "02 Qlik How to.md," uploaded alongside, is the stale pre-merge
+  `Qlik.md` source already described above — excluded, nothing new in it. **Flagging separately:** one of the
+  conflict markers referenced a folder path containing a stray backtick (`...data source\`/`) — this is the
+  *second* time this exact broken path has turned up (the first was in the Grafana doc's PowerBI cross-link),
+  which suggests an actual typo'd folder name somewhere in the repo rather than two unrelated one-off link typos.
+  Worth fixing the folder name itself rather than patching around it in each link that points to it. | |
+-->
 
 # Qlik
 

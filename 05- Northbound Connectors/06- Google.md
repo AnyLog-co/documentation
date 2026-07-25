@@ -1,6 +1,6 @@
 ---
 title: "Google Drive"
-description: ""
+description: Connect AnyLog to Google Sheets/Drive via the Two Minute Reports add-on to pull query results into reports and graphs.
 layout: page
 source_path: "northbound connectors/05 Google Drive Connector.md"
 ---
@@ -9,12 +9,13 @@ source_path: "northbound connectors/05 Google Drive Connector.md"
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
+ | 2026-04-17 |  | created document |  |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-07-25 | Ori Shadmon | Deduped two identical copies of this file (differing only in changelog formatting).
+   Excluded "05-1 Google example.md" — it's the same content using broken Jekyll-era image syntax
+   (`!<a href="{{ ... }}">`) that the other two copies had already fixed, plus one image link in it was missing
+   its `.png` extension. Nothing unique to restore. Filled in the empty frontmatter description. |
 --->
-
-
-
-
 
 # Google Drive
 

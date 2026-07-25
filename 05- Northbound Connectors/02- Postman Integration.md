@@ -2,7 +2,7 @@
 title: "Sending Queries and Commands to the AnyLog Network with Postman"
 description: ""
 layout: page
-source_path: "northbound connectors/02 Postman Integration.md"
+source_path: "northbound connectors/02- Postman Integration.md"
 ---
 
 <!---
