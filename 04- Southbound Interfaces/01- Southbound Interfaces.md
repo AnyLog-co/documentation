@@ -81,3 +81,8 @@ southbound pipeline — which is why monitoring configuration lives here rather 
 * [Node Monitoring]()
 * [Docker Monitoring]()
 * [Syslog]()
+
+## Dummy Data 
+
+We provide an MQTT connection to an array of different data sets. For details visit [Data Ingestion](07-%20Southbound%20Interfaces.md)
+or [Live Data Generator](99-%20live-data-generator.md) to run locally. 

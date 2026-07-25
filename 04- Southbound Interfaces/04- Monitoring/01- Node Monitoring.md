@@ -1,14 +1,17 @@
 ---
 title: Node Monitoring
-description: Collect node health metrics and stream them for live viewing via Remote GUI or persistent storage across Operator nodes.
+description: Collect node and container health metrics and stream them for live viewing via Remote GUI or persistent storage across Operator nodes.
 layout: page
 ---
+<!---
 ### 📜 Change Log
 | **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|-------------|
+ | 2026-04-17 |                | creation         |             |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606    |
-| 2026-04-17 |                | creation         |             |
-
+ | 2026-07-24 | Ori Shadmon    | merged two duplicate copies of this file; added the Docker Monitoring section (container-level
+   stats via `run scheduled pull`) and a scheduler prerequisite note | |
+--->
 
 Each AnyLog node can collect its own health metrics and distribute them in one or both of two ways:
 
@@ -16,6 +19,32 @@ Each AnyLog node can collect its own health metrics and distribute them in one o
 - **Persistent storage** — stream metrics into an Operator's database for historical queries and dashboards
 
 The monitoring schedule is deployed as a blockchain policy and activated automatically when `NODE_MONITORING=true` is set in the node configuration.
+
+> **Pull, not push:** unlike [Syslog](../Syslog%20Integration.md), where data is *pushed* into AnyLog by an external
+> forwarder (rsyslog), node and Docker monitoring are *pulled* on a schedule — the node actively queries its own OS
+> and Docker metrics at each interval, rather than waiting for something to send data in.
+
+**A node generates its own "insight"** — a JSON object describing its current state. Two kinds exist on this page:
+
+| Insight type | What it captures | Sent to Query Node (live view) | Sent to Operator (archive) |
+|---|---|---|---|
+| `node_insight` | OS/agent-level metrics — CPU, disk, network, ingestion stats (see below) | ✅ | ✅ |
+| `docker_insight` | Container-level stats (see [Docker Monitoring](#docker-monitoring)) | ❌ | ✅ |
+
+The reason for that split:
+* **Query Node** — a live, in-memory snapshot, almost like running `top` across every node in the network. It only
+  makes sense for metrics you'd want to glance at *right now*.
+* **Operator** — a persistent archive for historical queries, trending, and dashboards. This is where you'd look to
+  answer "what happened over the last week," not "what's happening this second."
+
+`docker_insight` is only sent to the Operator archive — there's no live-view path for it (see the Docker Monitoring
+section below).
+
+> **Prerequisite:** any form of monitoring on this page — node insight collection, live view, persistent storage, or
+> Docker monitoring below — runs as a scheduled task. The scheduler itself must be enabled, or nothing will fire:
+> ```anylog
+> run scheduler 1
+> ```
 
 ---
 
@@ -154,6 +183,60 @@ persistent storage for historical analysis and alerting.
 
 ---
 
+## Docker Monitoring
+
+In addition to node-level health metrics, AnyLog can pull container-level stats directly from Docker using a
+**scheduled pull** task — the same general-purpose mechanism used for things like Windows Event Log ingestion.
+
+Unlike `node_insight` (which can go to both the Query Node for live view and an Operator for archiving —
+see [Option 1](#option-1--live-view-via-remote-gui) / [Option 2](#option-2--persistent-storage-across-operators)
+above), `docker_insight` is forwarded to an **Operator node only**. There's no live-view equivalent for Docker
+metrics — the goal here is archival, not a real-time snapshot.
+
+> **Prerequisite:** Docker monitoring reads container stats via the Docker socket (typically `/var/run/docker.sock`
+> on the host). **To verify:** confirm the exact AnyLog-side configuration for pointing at this path (dictionary
+> variable, mount path, or otherwise) before publishing — that detail wasn't provided here and shouldn't be guessed at.
+
+### Enable the pull
+
+```anylog
+run scheduled pull where name = docker_insights and type = docker and frequency = !docker_frequency and continuous = false and dbms = monitoring and table = docker_insight
+```
+
+This streams container stats into `monitoring.docker_insight` — the same `monitoring` logical database used for
+`node_insight` above, so both can be queried side by side.
+
+### Command reference
+
+`run scheduled pull` is a general-purpose command — `type = docker` is one of several supported source types (another
+being `eventlog`, shown below):
+
+```
+AL > help run scheduled pull
+
+Usage:
+        run scheduled pull where name = [unique name] and type = [log typ
+e] and source = [localhost or IP] and frequency = [in seconds] and dbms = [dbms name] and table = [table name]
+
+Explanation:
+        Periodically retrieve data from a specified source (such as Windows Event Log) and insert it into a defined table.
+
+Examples:
+        run scheduled pull where name = local_events and type = eventlog 
+and source = localhost and frequency = 1 and dbms = sensor_data and table = event_log
+
+Index:
+        ['streaming', 'api', 'configuration', 'background processes']   
+```
+
+### Querying Docker stats
+
+```anylog
+run client () sql monitoring format = table "select * from docker_insight order by timestamp desc limit 20"
+```
+
+---
+
 ## Configuration
 
 | Variable | Description | Default |
@@ -161,6 +244,7 @@ persistent storage for historical analysis and alerting.
 | `NODE_MONITORING` | Enable the monitoring schedule | `true` |
 | `STORE_MONITORING` | Enable persistent storage to Operator | `true` |
 | `MONITORING_FREQUENCY` | Collection frequency for operator stats | `60 seconds` |
+| `DOCKER_FREQUENCY` | Collection frequency for `run scheduled pull` docker stats — used as `!docker_frequency` above | *(to verify — not specified in source material)* |
 
 The monitoring schedule is stored as a blockchain policy and can be inspected at any time:
 

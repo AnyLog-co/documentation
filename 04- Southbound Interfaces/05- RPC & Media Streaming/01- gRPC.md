@@ -3,13 +3,28 @@ title: gRPC
 description: Connect AnyLog as a gRPC client to receive data streams from gRPC servers and map them to local database tables.
 layout: page
 ---
-<!--
-## Changelog
-- 2026-04-17 | Created document
-- 2026-04-25 | hyperlinks
---> 
+<!---
+### 📜 Change Log
 
-<a href="https://en.wikipedia.org/wiki/GRPC" target="_blank">gRPC</a> is Google's open-source RPC framework — efficient, language-agnostic, and designed for high-throughput streaming. AnyLog connects as a gRPC **client**, receives data streams from a gRPC server, and maps them to a local database using policies.
+| **Date** | **Name** | **Change** | **Version** |
+|---|---|---|---|
+| 2026-04-17 | | Creation | |
+| 2026-04-25 | | Hyperlinks | |
+| 2026-07-17 | Eric Aquaronne | Added change log | 2.0.2606 |
+| 2026-07-24 | Ori Shadmon | Merged two copies of this doc (`grpc.md` and `Using GRPC.md`) into one. Kept the shorter/corrected
+  parameter descriptions and cleaned example paths from `grpc.md` (the older doc's examples used a real local dev
+  path — `D:/AnyLog-Code/...` — replaced with a generic one; it also mis-described the `function` parameter using
+  the wrong proto field). Restored the `add_info` sub-table and its dedicated example from `Using GRPC.md`, which
+  `grpc.md` had condensed away — worth keeping since it's the only place that shows `add_info` used multiple times
+  in one command. |
+| 2026-07-24 | Ori Shadmon | `Using GRPC.md` resurfaced as a separate file after the merge above — confirmed it's the
+  same pre-merge source, not new content, and still contains the real dev path and wrong `function` description that
+  were already fixed here. Retiring it rather than re-merging: nothing in it isn't already covered by this file. |
+--->
+
+<a href="https://en.wikipedia.org/wiki/GRPC" target="_blank">gRPC</a> is Google's open-source RPC framework — efficient, 
+language-agnostic, and designed for high-throughput streaming. AnyLog connects as a gRPC **client**, receives data 
+streams from a gRPC server, and maps them to a local database using policies.
 
 ---
 
@@ -96,7 +111,7 @@ This generates two files (e.g. `dummy_pb2.py` and `dummy_pb2_grpc.py`) that AnyL
 | `dbms` | — | Target database (if not provided by policy) |
 | `table` | — | Target table (if not provided by policy) |
 | `ingest` | — | `false` disables database ingestion — useful for testing (default: `true`) |
-| `add_info` | — | Append metadata to each row: `conn` (IP:Port), `proto` (proto name), `request` (request type) |
+| `add_info` | — | Append metadata to each row — see [Options for `add_info`](#options-for-add_info) below |
 | `invoke` | — | Whether to invoke immediately when called by another AnyLog process |
 
 ### Examples
@@ -119,6 +134,26 @@ This generates two files (e.g. `dummy_pb2.py` and `dummy_pb2_grpc.py`) that AnyL
   request = NonceMessage and response = ReplyMessage and
   service = LogService and value = (nonce = 10.int) and
   debug = true and limit = 1 and ingest = false>
+```
+
+### Options for `add_info`
+
+When `add_info` is included in the `run grpc client` command, the specified keys are added as extra fields to the
+JSON data retrieved from the server. `add_info` can be repeated — once per key you want added:
+
+| Key | Value added to the JSON |
+|---|---|
+| `proto` | The name of the proto file |
+| `request` | The name of the request message in the proto file |
+| `conn` | The IP and port used |
+
+```anylog
+<run grpc client where name=kubearmor and ip = 127.0.0.1 and port = 50051 and
+  grpc_dir = /app/AnyLog-Network/proto/kubearmor and
+  proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and
+  request = RequestMessage and response = Log and service = LogService and
+  value = (Filter = all) and debug = false and limit = 10000 and ingest = false and
+  add_info = conn and add_info = proto and add_info = request>
 ```
 
 ---

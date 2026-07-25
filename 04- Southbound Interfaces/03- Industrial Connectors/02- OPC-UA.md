@@ -20,6 +20,11 @@ source_path: "OPC UA Integration.md"
               policy-based tag management) are short, tightly-scoped walkthroughs proportional to the rest of
               the page, not a separate large scenario — same shape as DNP3.md and etherip.md, both of which
               keep their policy-management walkthrough inline.
+- 2026-07-24 | `04 OPC UA Integration.md` resurfaced as a separate upload — checked it against this file line by
+              line and confirmed it's the terser predecessor described above (shorter intro, missing `attributes`/
+              `append` options, no validate-failure-behavior explanation, a 5-step aggregations walkthrough vs.
+              this file's 7-step version with the actual query output shown). Nothing in it was missing here, so
+              it's excluded rather than re-merged, consistent with the note above.
 -->
 
 OPC Unified Architecture (OPC UA) is a robust, platform-independent industrial communication protocol with built-in
@@ -174,36 +179,28 @@ The `include` attributes:
 
 Examples:
 ```anylog
-# Multiple nodes, include all attributes
 get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
 
-# Comma-separated list of nodes
+# List format
 get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
-
-# Identify failed reads
-get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and method = individual and failures = true and nodes = ["ns=4;s=AirConditioner_1.StateCondition.EventType","ns=4;s=AirConditioner_1.StateCondition.SourceNode"]
 ```
 
 ---
 
 ## Continuous data pull
 
-The `run plc client` command pulls data from OPC-UA continuously and streams it into a database on the local node:
+Stream data from OPC-UA into the local database continuously:
 
 ```anylog
-run plc client where type = opcua and name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]
+run plc client where type = opcua and name = [unique name] and url = [connect string] and frequency = [seconds] and dbms = [dbms] and node = [node id]
 ```
 
 | Option | Description |
 |---|---|
-| `name` | A unique connection name. |
-| `url` | The endpoint of the OPC UA server. |
-| `user` / `password` | Credentials required by the server. |
-| `frequency` | Read frequency in seconds, or a fraction of a second using hz (e.g. `10 hz`). |
-| `node` | ID of one or more nodes whose value is retrieved. |
-| `nodes` | A comma-separated list of nodes within square brackets. |
-| `policy` | If nodes are not specified on the CLI, the policy determines the nodes and the table to use. |
-| `dbms` | The database to host the data (if not specified in a policy). |
+| `name` | Unique client name. |
+| `frequency` | Read frequency in seconds, or in hz (e.g. `10 hz`). |
+| `node` / `nodes` | One or more node IDs. |
+| `policy` | Use a policy to determine nodes and table (alternative to specifying nodes inline). |
 | `table` | The table to host the data (if not specified in a policy). |
 | `topic` | Route data through the local broker. |
 
@@ -314,6 +311,11 @@ get operator
 ```anylog
 run client () sql nov format = table select timestamp::ljust(19), end_interval::ljust(19), min_val, max_val, avg_val, events from bounds_table_2 order by timestamp desc limit 10
 ```
+
+> **Worth verifying:** unlike every other SQL query example across this doc set, the query text above isn't wrapped
+> in quotes (`"select ..."`). This is consistent in both source files, so it isn't something either merge
+> introduced — but it's worth confirming this is genuinely valid syntax for `run client () sql` rather than a
+> pre-existing typo that was carried through both docs.
 
 ---
 

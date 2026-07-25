@@ -9,8 +9,11 @@ source_path: "02 MODBUS.md"
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
- | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-05-08 |  | created document |  |
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-07-24 | Ori Shadmon | Merged two identical copies of this file (`02 MODBUS.md` and `MODBUS.md`) — same
+   content, one had the changelog as a visible block instead of a hidden comment. Kept the hidden-comment format
+   for consistency with the rest of the doc set. |
 --->
 
 

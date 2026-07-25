@@ -4,13 +4,17 @@ description: Ingest video streams from IP cameras, RTSP feeds, YouTube, and loca
 layout: page
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**       | **Version** |
  |------------|--|------------------|----------|
- | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
- | 2026-04-25 |  | hyperlinks       |  |
  | 2026-04-17 |  | created document |  |
-
+ | 2026-04-25 |  | hyperlinks       |  |
+ | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-07-24 | Ori Shadmon | Merged two identical copies of this file (`02- Video Streaming.md` and `07
+   video-streaming.md`) — same content, one had the changelog as a visible block instead of a hidden comment.
+   Kept the hidden-comment format for consistency with the rest of the doc set. |
+--->
 
 AnyLog can connect to video streams, record segmented clips to a blob database, and optionally run AI inference (e.g. YOLOv5 object detection) via a gRPC server.
 
@@ -46,6 +50,11 @@ AnyLog can connect to video streams, record segmented clips to a blob database, 
 # SQL database
 <connect dbms customers where type = psql and ip = 127.0.0.1 and port = 5432 and user = demo and password = passwd>
 ```
+
+> **Worth confirming:** both connections above use the same logical dbms name (`customers`) for two different
+> physical backends (Mongo for blobs, Postgres for SQL). If AnyLog treats blob storage and SQL storage as separate
+> namespaces under one shared logical name, this is correct as written — but if not, this needs two distinct
+> logical dbms names instead. Flagging since I can't verify AnyLog's actual behavior here.
 
 ---
 

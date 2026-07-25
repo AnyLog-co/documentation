@@ -2,7 +2,7 @@
 title: "DNP3 Mapping Policies — Reusing a Schema Across Connections"
 description: Storing a DNP3 point map once as a blockchain policy and reusing it across multiple connections, instead of repeating the map JSON inline
 layout: page
-source_path: "DNP3 - Mapping-Policies.md"
+source_path: "02- DNP3 - Mapping-Policies.md"
 ---
 
 <!--
@@ -13,7 +13,7 @@ source_path: "DNP3 - Mapping-Policies.md"
 
 # DNP3 Mapping Policies — Reusing a Schema Across Connections
 
-[DNP3](DNP3.md) documents `map` as a JSON array supplied directly in the `get plc values` / `run plc client`
+[DNP3](../DNP3.md) documents `map` as a JSON array supplied directly in the `get plc values` / `run plc client`
 command — every example on that page writes the point list out in full, inline. That's the right approach for a
 single connection, or for testing. For a deployment with several outstations that share the same, or nearly the
 same, point layout — several substations of the same model, for instance — repeating an identical `map` array in
@@ -43,11 +43,11 @@ The policy has one required shape:
 
 - `namespace` + `name` together identify the policy — this pair is the lookup key, and not coincidentally, it's
   the same `namespace`/`name` pair used when registering the connection in the UNS (see
-  [DNP3 — Dynamic ingest with UNS](DNP3.md#dynamic-ingest-with-uns-namespace--master_node)). Using the same
+  [DNP3 — Dynamic ingest with UNS](../DNP3.md#dynamic-ingest-with-uns-namespace--master_node)). Using the same
   values for both isn't required by the platform, but it keeps one connection's identity, UNS registration, and
   mapping policy all pointing at the same pair of values instead of three independently-tracked names.
 - `schema` is exactly the same array documented as `map` in
-  [DNP3 — Connection and map](DNP3.md#connection-and-map) — the same `name`/`type`/`index` (or
+  [DNP3 — Connection and map](../DNP3.md#connection-and-map) — the same `name`/`type`/`index` (or
   `group`/`variation`) objects, just stored as policy data instead of typed inline.
 
 ## Looking up an existing policy
@@ -107,7 +107,7 @@ in the standard `run plc client` command:
 >
 ```
 
-This is identical to every other `run plc client` example in [DNP3](DNP3.md) — the only difference is that `map`
+This is identical to every other `run plc client` example in [DNP3](../DNP3.md) — the only difference is that `map`
 is populated from a variable resolved via a policy lookup, rather than written out as a literal array in the
 command itself.
 
@@ -135,10 +135,10 @@ deployments of otherwise-identical equipment):
 
 The tradeoff is a layer of indirection: reading a deployment script alone (without also checking the published
 policy) won't tell you the actual point map in use. For a one-off connection or a quick test, the inline `map`
-array shown throughout [DNP3](DNP3.md) remains simpler.
+array shown throughout [DNP3](../DNP3.md) remains simpler.
 
 ## See also
 
-- [DNP3](DNP3.md) — the underlying `get plc values`/`run plc client` command reference
+- [DNP3](../DNP3.md) — the underlying `get plc values`/`run plc client` command reference
 - [Deploying a DNP3 Connector via Script](DNP3 - Deploying Connector via Script.md) — a full deployment
   script using this pattern, with TLS branching and error handling

@@ -19,6 +19,19 @@ layout: page
               duplicated Options A/B here; its concrete steps duplicated EdgeX - complete example.md. It also
               contained what appear to be real, non-placeholder broker credentials in two examples — flagged
               separately for rotation, independent of the file's removal.
+- 2026-07-24 | Per explicit request, merged into a single file: folded "EdgeX - complete example.md" in below as
+              an appendix rather than a separate linked file, and anonymized the one real-looking IP it contained.
+              "Using MQTT (EdgeX).md" remains excluded — it's still a duplicate, and the credential-rotation flag
+              from 2026-07-14 stands; re-adding it isn't a documentation fix, it's a security follow-up.
+- 2026-07-25 | A follow-up upload surfaced three more copies: this same file re-uploaded unchanged, the pre-Option-C
+              predecessor ("03 edgex integration.md" — fully superseded, nothing unique), and "EdgeX - complete
+              example.md" again (already folded in above). It also surfaced the *original, fuller* EdgeXpert source
+              ("04- EdgeXpert.md") that Option C below was condensed from — restored what that condensing had
+              dropped: the GUI screenshot references, the second worked JSON example (PeopleCount reading
+              alongside FreezerTemp1), and the direct link to the raw edgex_transformation.js script. That source
+              also references a different document, "EdgeX Foundry Integration.md" under
+              "3- Installation & Deployment/Cloud & Edge Deployments/" — a separate install-time deployment guide,
+              not folded in here; flagging its existence rather than guessing at its relationship to this page.
 -->
 
 [EdgeX Foundry](https://www.edgexfoundry.org) is an open source, vendor-neutral edge computing framework under the LF 
@@ -32,8 +45,8 @@ MQTT or REST — to an AnyLog node, which ingests it like any other southbound s
 
 > **EdgeX version note:** This guide's Options A and B are written for open-source EdgeX 3.x/4.x (Napa / Odesa). 
 > EdgeX 4.0 uses MQTT as the default internal message bus and PostgreSQL as its default database. If you are running an 
-> older open-source release, API ports and endpoint paths will differ — see the retirement note at the 
-> [bottom of this page](#a-note-on-older-edgex-versions) if you're on something closer to EdgeX 1.x.
+> older open-source release, API ports and endpoint paths will differ — see the [legacy appendix](#appendix--legacy-edgex-131-complete-example) 
+> at the bottom of this page if you're on something closer to EdgeX 1.x.
 
 ---
 
@@ -210,6 +223,23 @@ This option applies to **EdgeXpert**, IoTech's commercial edition of EdgeX with 
     "value":"3.140839e+01"
   }]
 }
+{
+  "apiVersion":"v2",
+  "id":"e60989ad-ab59-456e-bb00-b90518ca83e1",
+  "deviceName":"retail-device-1",
+  "profileName":"RetailVirtualDevice",
+  "sourceName":"PeopleCount",
+  "origin":1694737678704913648,
+  "readings":[{
+    "id":"e789d093-0392-4a4e-9890-eee615f647f2",
+    "origin":1694737678704913648,
+    "deviceName":"retail-device-1",
+    "resourceName":"PeopleCount",
+    "profileName":"RetailVirtualDevice",
+    "valueType":"Int32",
+    "value":"48"
+  }]
+}
 ```
 
 > **Note:** this payload shape (`apiVersion`, `sourceName`, `resourceName`) is EdgeXpert's v2 API and differs from
@@ -222,9 +252,16 @@ This option applies to **EdgeXpert**, IoTech's commercial edition of EdgeX with 
 - **URL**: `https://${YOUR_IP}:9090`
 - **Username**: `admin` | **Password**: `admin`
 
-From the left-side menu, go to **App Services**, then add a **Basic Service** from the right-side panel. The
-three transfer methods below all start from this same Basic Service creation screen — what differs is how you
-configure it from there.
+![Login Screen](../../imgs/edgex_login.png)
+
+From the left-side menu, go to **App Services**:
+
+![Xpert Management Homepage](../../imgs/edgex_homepage.png)
+
+...then add a **Basic Service** from the right-side panel. The three transfer methods below all start from this
+same Basic Service creation screen — what differs is how you configure it from there.
+
+![Basic Service location](../../imgs/edgex_basic_service.png)
 
 ### Transferring data from EdgeX to AnyLog
 
@@ -243,7 +280,9 @@ same pattern as [Option B](#option-b--third-party-broker) above.
 Configuration is done entirely on the EdgeXpert side; AnyLog just needs its REST service running with no mapping
 rules. The database and table are specified in the REST headers, not derived from the data.
 
-On your own machine, create a JavaScript transform that extracts the reading value EdgeXpert will send:
+On your own machine, create a JavaScript transform that extracts the reading value EdgeXpert will send — a
+[sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js)
+is available:
 
 ```javascript
 // file name: edgex_transformation.js
@@ -253,11 +292,15 @@ return outputObject;
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: HTTP
+  ![Basic Information](../../imgs/edgex_put_basic_info.png)
 - **Address Info** — Method: PUT; URL (your AnyLog node's REST IP:port); headers: `type: json`, `dbms: <database>`, `table: <table>`, `mode: streaming`, `Content-Type: text/plain`
+  ![Address Information](../../imgs/edgex_put_address_info.png)
 - **Data Format** — JavaScript Transform: `edgex_transformation.js`
+  ![Data Format](../../imgs/edgex_put_data_format.png)
 - **Filter** — Device Filter, as needed
+  ![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
-Save the service; data should begin flowing into AnyLog via PUT.
+Save the service (![Save Button](../../imgs/edgex_save.png)); data should begin flowing into AnyLog via PUT.
 
 #### Method 2: REST POST (with transformation)
 
@@ -285,7 +328,9 @@ On the AnyLog operator node receiving the data, declare the mapping rules and st
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: HTTP
+  ![Basic Information](../../imgs/edgex_post_basic_info.png)
 - **Address Info** — Method: POST; URL (your AnyLog node's REST IP:port); headers: `command: data`, `topic: anylogedgex-post`, `User-Agent: AnyLog/1.23`, `Content-Type: text/plain`
+  ![Address Information](../../imgs/edgex_post_address_info.png)
 - **Filter** — Device Filter, as needed
 
 Save the service; data should begin flowing into AnyLog via POST.
@@ -308,7 +353,9 @@ The mapping rules must include the database and table, since there are no REST h
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: MQTT
+  ![Basic Information](../../imgs/edgex_mqtt_basic_info.png)
 - **Address Info** — URL (your AnyLog node's Message Broker IP:port); Topic
+  ![Address Information](../../imgs/edgex_mqtt_address_info.png)
 - **Filter** — Device Filter, as needed
 
 Save the service; data should begin flowing into AnyLog via the message broker.
@@ -400,21 +447,122 @@ instructions. EdgeXpert deployment is a separate, commercial process — see [Io
 
 ---
 
-## A note on older EdgeX versions
+## Appendix — Legacy EdgeX 1.3.1 Complete Example
 
-The demo previously filed as `EdgeX Foundry Integration.md` walked through an integration against **EdgeX 1.3.1**
-— several major versions behind current EdgeX — using the `AnyLog-co/lfedge-code` demo repo and the deprecated
-`v1` reading API (`/api/v1/reading`). Rather than deleting it, that content has been kept and renamed to
-**[EdgeX - complete example.md](EdgeX - complete example.md)**: a real, standalone worked example, not
-merged into this page. Treat it as a concrete deployment log against an older EdgeX release rather than as
-current guidance — Options A/B above cover the same integration goal against current EdgeX using the supported
-`edgex-compose` deployment path, and are the ones to follow for a new deployment.
+This is a concrete deployment log against **EdgeX 1.3.1** — several major versions behind current EdgeX — using the
+`AnyLog-co/lfedge-code` demo repo and the deprecated `v1` reading API (`/api/v1/reading`). Treat it as a snapshot of
+an older release rather than current guidance: Options A/B above cover the same integration goal against current
+EdgeX using the supported `edgex-compose` deployment path, and are the ones to follow for a new deployment.
+
+The demo uses EdgeX's random data generator, with data sent over its `app-service-mqtt`. Fields that change between
+deployments are set in **bold** below.
+
+### Steps
+
+1. Clone [lfedge-code](https://github.com/AnyLog-co/lfedge-code):
+```shell
+git clone https://github.com/AnyLog-co/lfedge-code 
+cd lfedge-code/edgex 
+```
+
+2. Update configurations in the [.env](https://github.com/AnyLog-co/lfedge-code/blob/main/edgex/.env) file:
+   1. Update the MQTT params to match the credentials on your AnyLog operator node (e.g. `anylog-operator-node1`):
+   ```dotenv
+    MQTT_TOPIC=anylogedgex
+    MQTT_IP_ADDRESS=10.0.0.50
+    MQTT_PORT=32150
+    MQTT_USER=""
+    MQTT_PASSWORD=""
+    ```
+   2. If you're on ARM64, update the `ARCH` value on line 27:
+   ```dotenv
+    # default amd64 machine 
+   ARCH=""
+    # update to arm64 machine 
+   ARCH=-arm64
+   ```
+3. Start the EdgeX instance:
+```shell
+cd lfedge-code/edgex 
+docker-compose up -d
+```
+
+### Validate Deployment
+
+1. Confirm nothing crashed: `docker ps -a | grep edgex`
+```shell
+root@edgex-operator2:~# docker ps -a | grep edgex
+a13b169023b7   emqx/kuiper:1.1.1-alpine                                                   "/usr/bin/docker-ent…"   45 hours ago   Up 44 hours             127.0.0.1:20498->20498/tcp, 9081/tcp, 127.0.0.1:48075->48075/tcp                       edgex-kuiper
+56a3482bdfc8   edgexfoundry/docker-sys-mgmt-agent-go:1.3.1                                "/sys-mgmt-agent -cp…"   45 hours ago   Up 44 hours             127.0.0.1:48090->48090/tcp                                                             edgex-sys-mgmt-agent
+2740875f17a4   edgexfoundry/docker-app-service-configurable:1.3.1                         "/app-service-config…"   45 hours ago   Up 44 hours             48095/tcp, 127.0.0.1:48101->48101/tcp                                                  edgex-app-service-configurable-mqtt
+32b749bbd104   edgexfoundry/docker-device-random-go:1.3.1                                 "/device-random --cp…"   45 hours ago   Up 44 hours             127.0.0.1:49988->49988/tcp                                                             edgex-device-random
+e960f5ff00c5   edgexfoundry/docker-app-service-configurable:1.3.1                         "/app-service-config…"   45 hours ago   Up 44 hours             48095/tcp, 127.0.0.1:48100->48100/tcp                                                  edgex-app-service-configurable-rules
+e50c8de4b879   edgexfoundry/docker-device-modbus-go:1.3.1                                 "/device-modbus --cp…"   45 hours ago   Up 44 hours             127.0.0.1:49991->49991/tcp                                                             edgex-device-modbus
+e91cd4ad63fa   edgexfoundry/docker-core-command-go:1.3.1                                  "/core-command -cp=c…"   45 hours ago   Up 44 hours             127.0.0.1:48082->48082/tcp                                                             edgex-core-command
+59464a3a976d   edgexfoundry/docker-core-data-go:1.3.1                                     "/core-data -cp=cons…"   45 hours ago   Up 44 hours             127.0.0.1:5563->5563/tcp, 127.0.0.1:48080->48080/tcp                                   edgex-core-data
+b706d9584413   edgexfoundry/docker-core-metadata-go:1.3.1                                 "/core-metadata -cp=…"   45 hours ago   Up 44 hours             127.0.0.1:48081->48081/tcp                                                             edgex-core-metadata
+13abb3559d2a   edgexfoundry/docker-support-notifications-go:1.3.1                         "/support-notificati…"   45 hours ago   Up 44 hours             127.0.0.1:48060->48060/tcp                                                             edgex-support-notifications
+ff7d350ca3ba   edgexfoundry/docker-support-scheduler-go:1.3.1                             "/support-scheduler …"   45 hours ago   Up 44 hours             127.0.0.1:48085->48085/tcp                                                             edgex-support-scheduler
+0346e264f6d6   edgexfoundry/docker-edgex-consul:1.3.0                                     "edgex-consul-entryp…"   45 hours ago   Up 44 hours             8300-8302/tcp, 8400/tcp, 8301-8302/udp, 8600/tcp, 8600/udp, 127.0.0.1:8500->8500/tcp   edgex-core-consul
+fab7cbdcc29f   redis:6.0.9-alpine                                                         "docker-entrypoint.s…"   45 hours ago   Up 44 hours             127.0.0.1:6379->6379/tcp                                                               edgex-redis
+f135b724626e   nexus3.edgexfoundry.org:10003/edgex-devops/edgex-modbus-simulator:latest   "/simulator"             45 hours ago   Up 44 hours             127.0.0.1:1502->1502/tcp                                                               edgex-modbus-simulator
+```
+2. Confirm data is coming in: `curl http://127.0.0.1:48080/api/v1/reading 2> /dev/null`
+```json
+[
+  {
+    "id": "000767a3-61bb-49e1-93ff-be4695eb5b43",
+    "created": 1659412501505,
+    "origin": 1659412501498780400,
+    "device": "Random-Integer-Generator01",
+    "name": "RandomValue_Int16",
+    "value": "10380",
+    "valueType": "Int16"
+  },
+  {
+    "id": "000797b4-736b-48b9-bbe5-09594be7099f",
+    "created": 1659403221133,
+    "origin": 1659403221133020700,
+    "device": "Random-Integer-Generator01",
+    "name": "RandomValue_Int32",
+    "value": "771919435",
+    "valueType": "Int32"
+  },
+  {
+    "id": "00079ae9-340a-4d70-9e0b-9a5a8b48e216",
+    "created": 1659412541467,
+    "origin": 1659412541463869400,
+    "device": "Random-Integer-Generator01",
+    "name": "RandomValue_Int8",
+    "value": "27",
+    "valueType": "Int8"
+  },
+  {
+    "id": "0008d23e-7640-4974-aaeb-179e375566cb",
+    "created": 1659425642023,
+    "origin": 1659425642019472400,
+    "device": "Random-Integer-Generator01",
+    "name": "RandomValue_Int8",
+    "value": "-87",
+    "valueType": "Int8"
+  },
+  {
+    "id": "000f547c-25b7-4d96-b862-67467345a74c",
+    "created": 1659461623534,
+    "origin": 1659461623530927000,
+    "device": "Random-Integer-Generator01",
+    "name": "RandomValue_Int8",
+    "value": "-49",
+    "valueType": "Int8"
+  },
+  ...
+]
+```
 
 ---
 
 ## Further reading
 
-- [EdgeX - complete example](EdgeX - complete example.md) — a concrete deployment log against an older EdgeX release (see the note above)
 - [EdgeX Foundry documentation](https://docs.edgexfoundry.org/latest/)
 - [EdgeX Device Services — supported protocols](https://wiki.edgexfoundry.org/display/FA/Device+Services)
 - [IoTech System](https://www.iotechsys.com/) / [EdgeXpert User Guide](https://docs.iotechsys.com/)
