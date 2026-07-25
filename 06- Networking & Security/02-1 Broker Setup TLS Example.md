@@ -132,7 +132,7 @@ In MQTT Explorer, configure the connection to `mqtt://192.168.1.60:8883/` with:
 - **CLIENT CERTIFICATE:** e.g. `user1.crt` / `AnyLogUser1.crt`
 - **CLIENT KEY:** e.g. `user1.key` / `AnyLogUser1.key`
 
-![MQTT Explorer TLS setup](../../imgs/mqtt_explorer_setup.png)
+![MQTT Explorer TLS setup](../imgs/mqtt_explorer_setup.png)
 
 ## Share CA Users in the blockchain
 
