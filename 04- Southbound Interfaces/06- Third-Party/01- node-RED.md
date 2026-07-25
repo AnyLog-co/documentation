@@ -9,9 +9,17 @@ layout: page
 ### 📜 Change Log
  **Date**   | **Name** | **Change**   | **Version** |
  |------------|--|--------------|--|
+ | 2026-04-17 |  | file created |  |
+ | 2026-04-25 |  | hyperlinks   |  |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
-| 2026-04-25 |  | hyperlinks   |  |
-| 2026-04-17 |  | file created |  |
+ | 2026-07-20 | Eric Aquaronne | added change log (second copy of this doc) | 2.0.2606 |
+ | 2026-07-25 | Ori Shadmon | Merged the two copies of this doc. Kept the cleaner numbered-step structure and
+   header table from "01- node-RED.md" — it had already fixed a real inconsistency in "02 Node Red.md" (Step 5 there
+   said "create a new `run mqtt client` process" but showed `run msg client` code; the correct command name is used
+   throughout, so the mislabeled step reference was dropped rather than carried forward). Restored two things the
+   cleaner rewrite had dropped: the two flow/config screenshots, and the fuller sample-output table (with the
+   `tsd_name`/`tsd_id` columns, the `AL anylog-query +>` prompt, and the `Statistics` JSON footer) that matches the
+   fidelity used elsewhere in this doc set (e.g. Syslog Integration's sample query output). |
 --->
 
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool for connecting hardware, APIs, and services visually. This guide shows how to stream timestamp/value data from a Node-RED flow into an AnyLog operator via REST POST.
@@ -37,6 +45,8 @@ Build a flow with these nodes:
 - **Trigger** — repeats every N seconds
 
 A [sample flow JSON](https://github.com/AnyLog-co/documentation/blob/master/examples/node_red_sample_flow.json) is available in the AnyLog documentation repo.
+
+![Sample Node-Red Flow](imgs/node_red_flow.png)
 
 ---
 
@@ -76,6 +86,8 @@ Set the method to **POST** with these headers:
 
 Set the URL to your operator's REST endpoint: `http://[operator-ip]:[rest-port]`
 
+![Node-RED POST configurations](imgs/node_red_http_request.png)
+
 ---
 
 ## Step 4 — Configure the AnyLog operator
@@ -104,22 +116,28 @@ On the operator node, start a message client that subscribes to the `node-red` t
 Start the Node-RED flow, then query the data from a query node:
 
 ```anylog
-run client () sql new_company format=table "SELECT * FROM rand_data LIMIT 15;"
+AL anylog-query +> run client () sql new_company format=table "select * from rand_data limit 15;"
+[3]
+AL anylog-query +>
+row_id insert_timestamp           tsd_name tsd_id timestamp               value
+------ -------------------------- -------- ------ ----------------------- ----- 
+     1 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:34.402    15 
+     2 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:58.632    35 
+     3 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:58.750    97 
+     4 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.029    56 
+     5 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.163    98 
+     6 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.338    20 
+     7 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.523    29 
+     8 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.798    54 
+     9 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:13:59.937    94 
+    10 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.124    68 
+    11 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.267    17 
+    12 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.443     6 
+    13 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.565    70 
+    14 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.702    34 
+    15 2024-02-24 00:14:41.157796      131     17 2024-02-24 00:14:00.856    28 
+
+{"Statistics":[{"Count": 15,
+                "Time":"00:00:00",
+                "Nodes": 1}]}
 ```
-
-Expected output:
-
-```
-row_id  insert_timestamp            timestamp                value
-------- --------------------------- ----------------------- -----
-     1  2024-02-24 00:14:41.157796  2024-02-24 00:13:34.402    15
-     2  2024-02-24 00:14:41.157796  2024-02-24 00:13:58.632    35
-     3  2024-02-24 00:14:41.157796  2024-02-24 00:13:58.750    97
-    ...
-```
-
----
-
-## How it fits in the southbound picture
-
-Node-RED uses the same **REST POST + msg client** pattern as any other POST-based ingestion. The `topic` header is the bridge between the HTTP request and the `run msg client` mapping rule on the operator. See <a href="{{ '/docs/Monitoring-Data-Southbound/data-ingestion/' | relative_url }}">Data Ingestion</a> for the full pattern.
