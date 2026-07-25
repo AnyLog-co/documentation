@@ -40,13 +40,7 @@ run kafka consumer where ip = [ip] and port = [port] and reset = [latest|earlies
 ### Single table example
 
 ```anylog
-<run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (
-    name = ping_data and
-    dbms = lsl_demo and
-    table = ping_sensor and
-    column.timestamp.timestamp = "bring [timestamp]" and
-    column.value.int = "bring [value]"
-)>
+
 ```
 
 ### Dynamic table mapping

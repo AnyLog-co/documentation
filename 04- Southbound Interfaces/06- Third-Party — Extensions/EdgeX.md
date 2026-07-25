@@ -405,7 +405,7 @@ instructions. EdgeXpert deployment is a separate, commercial process — see [Io
 The demo previously filed as `EdgeX Foundry Integration.md` walked through an integration against **EdgeX 1.3.1**
 — several major versions behind current EdgeX — using the `AnyLog-co/lfedge-code` demo repo and the deprecated
 `v1` reading API (`/api/v1/reading`). Rather than deleting it, that content has been kept and renamed to
-**[EdgeX - complete example.md](EdgeX%20-%20complete%20example.md)**: a real, standalone worked example, not
+**[EdgeX - complete example.md](EdgeX - complete example.md)**: a real, standalone worked example, not
 merged into this page. Treat it as a concrete deployment log against an older EdgeX release rather than as
 current guidance — Options A/B above cover the same integration goal against current EdgeX using the supported
 `edgex-compose` deployment path, and are the ones to follow for a new deployment.
@@ -414,7 +414,7 @@ current guidance — Options A/B above cover the same integration goal against c
 
 ## Further reading
 
-- [EdgeX - complete example](EdgeX%20-%20complete%20example.md) — a concrete deployment log against an older EdgeX release (see the note above)
+- [EdgeX - complete example](EdgeX - complete example.md) — a concrete deployment log against an older EdgeX release (see the note above)
 - [EdgeX Foundry documentation](https://docs.edgexfoundry.org/latest/)
 - [EdgeX Device Services — supported protocols](https://wiki.edgexfoundry.org/display/FA/Device+Services)
 - [IoTech System](https://www.iotechsys.com/) / [EdgeXpert User Guide](https://docs.iotechsys.com/)
