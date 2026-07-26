@@ -11,14 +11,14 @@ source_path: "Policy-Based Users and Keys — Example.md"
               alongside general overlay-network and authentication overview content.
 - 2026-07-14 | Split out into its own standalone example file, as the sample logic for policy-based users/keys
               referenced from Securing the Network (overview) and Authentication (implementation reference).
-              Internal links updated to match the new location alongside Authentication.md.
+              Internal links updated to match the new location alongside 01- Authentication.md.
 -->
 
 # Policy-Based Users and Keys — Example
 
 This page demonstrates an end-to-end pattern for AnyLog's key-based authentication: assigning keys to nodes and
 users, defining the policies that determine permissions, and assigning nodes/users to those policies. For the
-concepts and individual commands used here, see [Authentication](Authentication.md). For where this fits
+concepts and individual commands used here, see [Authentication](01- Authentication.md). For where this fits
 alongside TPM and overlay networking, see
 [Securing the Network](../../03-%20Installation%20&%20Deployment/Securing%20the%20Network.md).
 
@@ -391,7 +391,7 @@ A newly initiated node has no permissions and can't publish its own member polic
 add it on the new node's behalf:
 
 1. The new node generates its public/private keys — see
-   [Creating keys for a node in the network](Authentication.md#creating-keys-for-a-node-in-the-network).
+   [Creating keys for a node in the network](01- Authentication.md#creating-keys-for-a-node-in-the-network).
 2. A peer node with proper permissions retrieves the new node's public key:
    ```anylog
    peer_key = run client IP:Port get node id
@@ -574,7 +574,7 @@ run client 10.0.0.78:3048 system ls     # Roy has no restrictions, so this execu
 ## Using certificates
 
 This section extends the policy-based pattern above to 3rd-party applications that aren't network members at
-all — see [Using SSL Certificates](Authentication.md#using-ssl-certificates) for the underlying commands. In
+all — see [Using SSL Certificates](01- Authentication.md#using-ssl-certificates) for the underlying commands. In
 this model, AnyLog acts as a Certificate Authority issuing Client Certificates to 3rd-party applications. Client
 certificates work like this:
 
@@ -599,7 +599,7 @@ get rest server info
 
 ### Example
 
-Assumes the example certificates from [Using SSL Certificates](Authentication.md#using-ssl-certificates) are
+Assumes the example certificates from [Using SSL Certificates](01- Authentication.md#using-ssl-certificates) are
 available in the pem directory (`!pem_dir`).
 
 #### Generate a member policy representing the issued certificate
@@ -662,7 +662,7 @@ blockchain get member bring.table [] [*][name] [*][type] [*][public_key]      # 
 
 #### Query permissions for members
 
-See [Permission Group](Authentication.md#permission-group) for `get permissions`.
+See [Permission Group](01- Authentication.md#permission-group) for `get permissions`.
 
 ```anylog
 public_key = get public key where keys_file = !pem_dir/server-acme-inc-public-key

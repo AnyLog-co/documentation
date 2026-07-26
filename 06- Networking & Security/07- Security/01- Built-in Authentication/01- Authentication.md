@@ -2,14 +2,14 @@
 title: "Users and Nodes Authentication — Implementation"
 description: How to implement AnyLog's built-in authentication options — node/key-based authentication, user authentication, and certificate-based (SSL) authentication
 layout: page
-source_path: "Authentication.md"
+source_path: "01- Authentication.md"
 ---
 
 <!--
 ## Changelog
 - (original) Created as "Users and nodes Authentication, making the data secure" under
-              03- Installation & Deployment/Authentication.md
-- 2026-07-14 | Moved to 06- Networking & Security/Built-in Authentication/Authentication.md, alongside a new
+              03- Installation & Deployment/01- Authentication.md
+- 2026-07-14 | Moved to 06- Networking & Security/Built-in Authentication/01- Authentication.md, alongside a new
               worked-example sub-file (Policy-Based Users and Keys — Example.md). Updated cross-references
               accordingly. For a general overview of all of AnyLog's security options (this document plus TPM
               and overlay networking), see Securing the Network.

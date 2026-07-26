@@ -2,7 +2,7 @@
 title: "Software TPM for AnyLog"
 description: ""
 layout: page
-source_path: "02 Software TPM.md"
+source_path: "02- Software TPM.md"
 ---
 <!---
 ### 📜 Change Log
@@ -329,7 +329,7 @@ curl http://localhost:8001/health
 <<<<<<< HEAD:05- Networking & Security/A- Trusted Platform Module (TPM)/Software TPM.md
 - [Authentication](../A-%20Buit-in%20Authentication/Authentication.md)
 =======
-- [Authentication](../02%20Authentication.md)
+- [Authentication](../../02%20Authentication.md)
 >>>>>>> origin/pre-develop:05- Anylog Nodes Network &  Security/A- Trusted Platform Module (TPM)/02 Software TPM.md
 - [Secure Network](secure%20network.md)
 - [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)

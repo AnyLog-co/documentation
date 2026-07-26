@@ -2,16 +2,17 @@
 title: "Securing the Network"
 description: ""
 layout: page
-source_path: "examples/03 Securing the Network.md"
+source_path: "examples/03- Securing the Network.md"
 ---
 
+<!---
 ### 📜 Change Log
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
 
 
-
+--->
 
 # Securing the Network
 
