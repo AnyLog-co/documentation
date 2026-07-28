@@ -1,21 +1,21 @@
 ---
-title: Unified Namespace
-description: How AnyLog generates and manages a Unified Namespace (UNS) for operational data
+title: "Unified Namespace"
+description: "How AnyLog generates and manages a Unified Namespace (UNS) for operational data"
 layout: page
 source_path: "UNS.md"
 tags:
-- UNS
-- MCP
-
+    - UNS
+    - MCP
 ---
-
-<!--
-## Changelog
-- 2026-04-18 | Created document; covers UNS concept, auto-generated vs user-defined, dynamic=true ingestion, and UNS policy structure
-- 2026-04-25 | hyperlinks
-- 2026-07-14 | Reconciled duplicate copies (13- UNS/UNS.md and 12- MCP & LLMs/ZZZ UNS.md) into one canonical version;
-              fixed a duplicated "see" in the Auto-Generated vs. User-Defined section
--->
+<!---
+### 📜 Change Log
+ **Date**   | **Name**       | **Change**       | **Version** |
+ |------------|----------------|------------------|----------|
+ | 2026-07-27 | Ori Shadmon    | Merged "01 UNS.md" and "UNS.md" into this single canonical file — they were near-duplicates, and "UNS.md" was already the more current of the two (its own changelog documents reconciling two *earlier* duplicate copies). Kept "UNS.md" as the base: it fixes a duplicated "see" and a stray `</a>>` artifact still present in "01 UNS.md", uses image paths matching the repo's actual `imgs/` folder (rather than "01 UNS.md"'s stale `/assets/img/` Jekyll-liquid paths), and includes an extra paragraph on why `id`/`parent` shouldn't be hand-defined for UNS policies that "01 UNS.md" was missing entirely. Flagged two open items inline: the mapping-policies cross-link path, and new evidence bearing on the `get msg client` singular/plural question raised in the Message Broker doc. | |
+ | 2026-07-14 | Ori Shadmon    | Reconciled duplicate copies (13- UNS/UNS.md and 12- MCP & LLMs/ZZZ UNS.md) into one canonical version; fixed a duplicated "see" in the Auto-Generated vs. User-Defined section | |
+ | 2026-04-25 |                | hyperlinks | |
+ | 2026-04-18 |                | Created document; covers UNS concept, auto-generated vs user-defined, dynamic=true ingestion, and UNS policy structure | |
+--->
 
 # Unified Namespace
 
@@ -58,12 +58,20 @@ For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see
 
 ## Ingesting Data with `dynamic=true`
 
-When setting `dynamic=true` in a `run msg client` command, the MQTT message client switches from mapping-based
-processing to scalar-value processing — similar to how OPC-UA data is handled.
+`dynamic=true` in a `run msg client` command replaces specifying a fixed `table=...` — instead of you naming the
+destination table, AnyLog derives and auto-creates it, and generates a UNS structure for it as part of the
+blockchain's metadata. That's independent of whether you also provide column mapping (`column.*`); there are two
+distinct cases depending on the shape of the incoming payload.
 
-In this mode, AnyLog expects each incoming message to carry a **single scalar value** (integer, float, string,
-or boolean) rather than a full JSON payload. The topic path itself becomes the namespace, and AnyLog
-automatically generates a UNS hierarchy from it.
+Because `dynamic=true` always needs to publish the auto-generated table/UNS policy to the blockchain, every example
+below includes `master_node = !ledger_conn` — that's required for `dynamic=true` specifically, unlike plain inline
+or policy-based mapping, which don't create new policies and so don't need it.
+
+### Case 1: no column mapping — single scalar value per message
+
+When no `column.*` mapping is given, AnyLog expects each incoming message to carry a **single scalar value**
+(integer, float, string, or boolean) rather than a full JSON payload — similar to how OPC-UA data is handled. The
+topic path itself becomes the namespace, and each topic segment gets its own table.
 
 ```anylog
 <run msg client where
@@ -82,8 +90,45 @@ In the example above, the `#` wildcard subscribes to all topics under `Enterpris
 Each arriving message — for example `Enterprise C/tff/PCV7X/percent` with value `50` — is stored directly using the
 topic path as the namespace address, with no mapping policy required.
 
-`dynamic=true` topic configuration tells the message client to not only store the data, but also automatically
-create a UNS structure for it as part of the blockchain's metadata.
+### Case 2: with column mapping — a JSON payload with multiple key/value pairs
+
+If the incoming JSON instead carries multiple fields, combine `dynamic=true` with explicit column mapping. Instead
+of exploding the topic hierarchy into many single-value tables, this produces one (dynamically named/created) table
+per topic holding all the mapped columns.
+
+Instead of the fixed-table, inline-mapping form:
+```anylog
+<run msg client where 
+  broker=local and 
+  log=false and topic=(
+   name=my-data and
+   dbms="bring [dbms]" and
+   table="bring [sensor]" and
+   column.timestamp.timestamp="bring [timestamp]" and
+   column.value.float="bring [value]"
+)>
+```
+
+`table="bring [sensor]"` is replaced with `dynamic=true`, and `master_node` is added (per the note above):
+```anylog
+<run msg client where 
+  broker=local and master_node = !ledger_conn and
+  log=false and topic=(
+   name=my-data and
+   dbms="bring [dbms]" and
+   dynamic=true and
+   column.timestamp.timestamp="bring [timestamp]" and
+   column.value.float="bring [value]"
+)>
+```
+
+If the topic itself carries multiple distinct measurements (rather than one clean value per topic), `dynamic=true`
+alone would collapse them into a single table per topic — since it only knows how to walk the topic string segment
+by segment. To split them into separate tables, extract a per-row `table` field from the payload and let it act as
+one more segment beyond the raw topic; see
+[Dynamic Ingestion with Custom UNS — Factory Floor Example](02-%20UNS-dynamic-custom-example.md) for a full traced
+walkthrough of exactly how that works, down to the blockchain queries showing where the raw topic ends and the
+personalized `table` field takes over.
 
 ### Example: ProveIt virtual factory (authenticated MQTT)
 
@@ -162,6 +207,11 @@ Connection:   Connected
 
 AL op1 >
 ```
+> **Note:** this transcript runs `get msg client` (singular, no `where` filter) and gets the full unfiltered
+> subscription list back. That's worth reconciling with the Message Broker doc, where the unfiltered/list-all form
+> was changed to `get msg clients` (plural) based on the Background Processes doc's convention — this real captured
+> session is evidence the singular form may work fine unfiltered too. Worth settling in one place rather than each
+> doc guessing independently.
 
 **`get streaming`** shows streaming statistics for the same dynamic tables (rows staged, buffer fill, time until
 the next process cycle):
@@ -195,13 +245,17 @@ The **`#`** multi-level wildcard subscribes to every topic under `M2/PL1/` (for 
 a scalar payload). Replace host, ports, topic prefix, **`dbms`**, and **`master_node`** with the values for your
 environment (you can use **`master_node = !ledger_conn`** if that is already set in the dictionary).
 
-| Mode | Input format | Schema required | UNS generated |
-|:---|:---:|:---:|:---:|
-| Inline mapping | Full JSON | Yes (inline) | No |
-| Policy mapping | Full JSON | Yes (policy) | No |
-| `dynamic=true` | Scalar value | No | Yes (auto) |
+| Mode | Input format | Schema required | Table | UNS generated |
+|:---|:---:|:---:|:---:|:---:|
+| Inline mapping | Full JSON | Yes (inline) | Fixed (`table=...`) | No |
+| Policy mapping | Full JSON | Yes (policy) | Fixed (`table=...`) | No |
+| `dynamic=true`, no column mapping | Scalar value | No | Auto, per topic segment | Yes (auto) |
+| `dynamic=true`, with column mapping | Full JSON | Yes (inline `column.*`) | Auto, per topic | Yes (auto) |
 
-> For mapping-based ingestion, see [Mapping Data to Tables](../06-%20Data%20Management/A-%20Data%20Ingestion/Mapping%20Data%20to%20Tables.md).
+> For mapping-based ingestion, see [Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md).
+> **To verify:** the prior draft of this link pointed at `../06- Data Management/A- Data Ingestion/Mapping Data to
+> Tables.md` instead — a different path entirely. Pointed this at the Mapping Policy doc built this session since
+> it covers the same ground, but neither path is confirmed against the current repo layout — check before shipping.
 
 ---
 
@@ -292,15 +346,12 @@ these policies live on the blockchain, the hierarchy is immutable and consistent
 that's an analyst, a monitoring dashboard, or an AI agent — regardless of whether the underlying device has
 changed its name, IP address, or hardware vendor.
 
-The id on each policy is assigned automatically by AnyLog when the policy is signed and inserted, based on a hash of the 
-policy's own content. While it's technically possible to define id yourself, it's not recommended when working with 
-UNS — id is the connection between layers, and parent is nothing more than a copy of the level above's actual assigned 
-id. If a parent value is hand-typed, guessed, or reused from another policy's id, the UNS structure can end up broken or 
-incomplete. From a user's point of view, the UNS is simply its namespace hierarchy; underneath, that hierarchy exists 
-only because each level is wired to the next through id and parent.
-
- 
-
+The id on each policy is assigned automatically by AnyLog when the policy is signed and inserted, based on a hash of
+the policy's own content. While it's technically possible to define id yourself, it's not recommended when working
+with UNS — id is the connection between layers, and parent is nothing more than a copy of the level above's actual
+assigned id. If a parent value is hand-typed, guessed, or reused from another policy's id, the UNS structure can end
+up broken or incomplete. From a user's point of view, the UNS is simply its namespace hierarchy; underneath, that
+hierarchy exists only because each level is wired to the next through id and parent.
 
 ---
 

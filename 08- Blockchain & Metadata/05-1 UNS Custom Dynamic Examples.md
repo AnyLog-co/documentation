@@ -1,27 +1,22 @@
 ---
-title: Dynamic Ingestion with Custom UNS — Factory Floor Example
-description: A production-style walkthrough tracing how dynamic=true auto-generation and personalized column/table mapping connect, plus how to design a namespace customers can navigate by their own naming
+title: "Dynamic Ingestion with Custom UNS — Factory Floor Example"
+description: "A production-style walkthrough tracing how dynamic=true auto-generation and personalized column/table mapping connect, plus how to design a namespace customers can navigate by their own naming"
 layout: page
 source_path: "UNS-dynamic-custom-example.md"
 tags:
-- UNS
-- MCP
-- example
+    - UNS
+    - MCP
+    - example
 ---
-
-<!--
-## Changelog
-- 2026-07-14 | Created document — split out of UNS.md's "Ingesting Data with dynamic=true" section to stand alone
-              as a worked production example (factory floor: PLCs, motors, blowers over REST)
-- 2026-07-14 | Strengthened the dynamic/personalized connection: added PUT vs POST/MQTT context, the ISO 8601
-              timestamp-format caveat, and a full traced example (root policy down to leaf table via
-              `blockchain get uns where parent=...`) showing exactly which tree levels come from the raw topic
-              and which come from the personalized `table`-field mapping
-- 2026-07-14 | Added "Building a namespace the customer can actually navigate" section: shaping the publish-side
-              topic string to use the customer's own naming (e.g. association/tag names instead of raw MAC
-              addresses), and where a purely topic-driven tree runs out (many-to-many relationships), with a
-              hybrid pointer to hand-authored policies for that case
--->
+<!---
+### 📜 Change Log
+ **Date**   | **Name**    | **Change**       | **Version** |
+ |------------|-------------|------------------|----------|
+ | 2026-07-27 | Ori Shadmon | Converted changelog to standard table format; flagged a mismatch between the example payloads (no `ts` field) and the `column.timestamp.timestamp = "bring [ts]"` mapping; filled in the missing `id` field on the intermediate `device`/`ac233fad6a3c`/`motor` JSON output blocks (values were already implied by the next query's `parent=`, just not shown at their own level); fixed a missing blank line that risked a paragraph being swallowed into the preceding bullet list | |
+ | 2026-07-14 | Ori Shadmon | Created document — split out of UNS.md's "Ingesting Data with dynamic=true" section to stand alone as a worked production example (factory floor: PLCs, motors, blowers over REST) | |
+ | 2026-07-14 | Ori Shadmon | Strengthened the dynamic/personalized connection: added PUT vs POST/MQTT context, the ISO 8601 timestamp-format caveat, and a full traced example (root policy down to leaf table via `blockchain get uns where parent=...`) showing exactly which tree levels come from the raw topic and which come from the personalized `table`-field mapping | |
+ | 2026-07-14 | Ori Shadmon | Added "Building a namespace the customer can actually navigate" section: shaping the publish-side topic string to use the customer's own naming (e.g. association/tag names instead of raw MAC addresses), and where a purely topic-driven tree runs out (many-to-many relationships), with a hybrid pointer to hand-authored policies for that case | |
+--->
 
 # Dynamic Ingestion with Custom UNS — Factory Floor Example
 
@@ -69,6 +64,8 @@ shared topic prefix (`factory-x/#`). Three source types are in play, each with i
     ]
 }
 ```
+> Shown together above for readability, but these represent three separate messages arriving under three
+> separate topics — not one combined payload on the wire.
 
 Each row carries its own `table`, `tag`, `plc`/`mac` identifier, and `value` — this is full JSON, not a bare
 scalar, and different rows under the same base topic represent different measurements. Neither of those two
@@ -99,6 +96,10 @@ out of the JSON payload using `column.[name].[type] = "bring [json-path]"`:
         dynamic = true
     )>
 ```
+> **To verify:** none of the three example payloads above include a `ts` field — only `table`/`tag`/`plc`/`mac`/`value`.
+> Either the sample payloads are missing a timestamp field that should be added, or this mapping should reference
+> a field that's actually present (or fall back to a `default: "now()"`-style pattern, as used elsewhere in these
+> docs when no source timestamp is available). Worth reconciling before this ships as a copy-pasteable example.
 
 `dynamic=true` combined with `master_node` in the client config is what drives both the automated table naming
 and the `uns` policy declarations published to the blockchain. The explicit `column.*` mappings don't turn this
@@ -107,19 +108,20 @@ hierarchy is still derived automatically from the topic.
 
 ---
 ## Splitting one topic into multiple tables
- 
+
 A mapping logic can either store data dynamically (i.e. `dynamic=true`), and then its (sub) topic resides in its
-own table — or a table that's either hardcoded into the command or is part of the payload coming in. 
+own table — or a table that's either hardcoded into the command or is part of the payload coming in.
 
 Left on the first option alone, every row published under a shared base topic — for example everything under
 `factory-x/device/AC233FAD6A3C/motor` — would collapse into a single table, regardless of whether it represents
-a temperature reading or a vibration reading. 
-The way out is the second option: extract a per-row `table` field from the payload and treat it as the final segment of 
+a temperature reading or a vibration reading.
+The way out is the second option: extract a per-row `table` field from the payload and treat it as the final segment of
 that row's effective topic, so each row's `table` value becomes the differentiator —
- 
+
 - `factory-x/device/AC233FAD6A3C/motor` rows with `"table": "Infeed 3 / Scale Motor Temp"` resolve to their own
   table (`infeed_3_scale_motor_temp`)
 - rows with `"table": "Infeed 3 / Scale Motor Vibr"` resolve to a separate table (`infeed_3_scale_motor_vibr`)
+
 Both tables live side by side under the same `motor` namespace node in the resulting UNS tree, rather than
 merging into one. The same logic applies to the `RobotRead` and `Blower/VFD` topics above — each distinct
 `table` value under a shared sub-topic becomes its own leaf.
@@ -153,7 +155,7 @@ curl -X GET http://192.168.86.29:32149 -H "command: blockchain get uns where par
 ```
 ```json
 [{"uns": {"name": "device", "namespace": "factory-x/device", "dbms": "mydb", "table": "device_1",
-          "parent": "c7e14e59ed39a83555b044d9bdf5174b", "ledger": "global"}}]
+          "id": "9c4be8d724b2472146cd9bdef8a721c9", "parent": "c7e14e59ed39a83555b044d9bdf5174b", "ledger": "global"}}]
 ```
 
 ```bash
@@ -162,7 +164,7 @@ curl -X GET http://192.168.86.29:32149 -H "command: blockchain get uns where par
 ```
 ```json
 [{"uns": {"name": "ac233fad6a3c", "namespace": "factory-x/device/ac233fad6a3c", "dbms": "mydb",
-          "table": "ac233fad6a3c_1", "parent": "9c4be8d724b2472146cd9bdef8a721c9", "ledger": "global"}}]
+          "table": "ac233fad6a3c_1", "id": "ee56a809e7a51af6d64660e6aab34ad7", "parent": "9c4be8d724b2472146cd9bdef8a721c9", "ledger": "global"}}]
 ```
 
 ```bash
@@ -171,7 +173,7 @@ curl -X GET http://192.168.86.29:32149 -H "command: blockchain get uns where par
 ```
 ```json
 [{"uns": {"name": "motor", "namespace": "factory-x/device/ac233fad6a3c/motor", "dbms": "mydb",
-          "table": "motor_1", "parent": "ee56a809e7a51af6d64660e6aab34ad7", "ledger": "global"}}]
+          "table": "motor_1", "id": "9d4cad129914aeb92edda8c18cacbafe", "parent": "ee56a809e7a51af6d64660e6aab34ad7", "ledger": "global"}}]
 ```
 
 ```bash
