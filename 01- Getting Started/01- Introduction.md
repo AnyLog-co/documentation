@@ -18,7 +18,7 @@ layout: page
                Replaced the separate "How Data is Collected" / "How Querying Works" reference tables
                with a single conceptual data-lifecycle walkthrough (PLC → southbound → table → insert →
                query), per the outline. A deeper, protocol-by-protocol version belongs under
-               11- Examples & Use Cases/, not here.
+               12- Examples & Use Cases/, not here.
                Open item carried over from the prior merge, still unresolved: whether `01- Getting
                Started/01 Getting Started.md` (the numbered duplicate) is now fully superseded by this
                file or still holds content that needs reconciling — not confirmed.
