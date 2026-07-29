@@ -7,6 +7,7 @@ layout: page
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
  |------------|----------------|------------------|----------|
+ | 2026-07-29 | Ori Shadmon    | Added "Using Milvus Directly (outside AnyLog)" — Attu walkthrough, direct `pymilvus` SDK access, the metrics endpoint (port 9091, previously exposed but never explained), and standalone-vs-cluster-mode/backup guidance. Flagged that `06- milvusdb.md` is a stale pre-split duplicate reintroducing bugs already fixed here (personal filepath, broken backtick heading, `text` code fences) — recommend retiring it | |
  | 2026-07-28 | Ori Shadmon    | Created — split out of "05- Milvus" to hold the Docker install, authentication, and full deployment walkthrough separately from the concept/command reference, matching the MongoDB/MinIO doc split | |
 --->
 
@@ -104,6 +105,78 @@ The Milvus standalone image enables authentication by default. Credentials (repl
 
 Attu uses the same credentials (`MILVUS_USERNAME` / `MILVUS_PASSWORD` in the compose file above). If you change the
 Milvus password, update Attu and AnyLog to match.
+
+---
+
+## Using Milvus Directly (outside AnyLog)
+
+Everything above stands up a real, standalone Milvus instance — AnyLog is just one client talking to it over gRPC.
+The same instance is fully usable on its own, which is useful for inspecting data AnyLog has written, running
+ad-hoc searches without going through `vector` commands, or handing the same collection to a data science
+workflow that has nothing to do with AnyLog.
+
+### Attu (the GUI)
+
+Attu is Milvus's own official admin console (by Zilliz), already running in the compose stack above at
+`http://MILVUS_HOST:3001`. Once logged in (same `root`/`YOUR_PASSWORD` credentials as AnyLog), it lets you:
+
+- **Browse collections** — schema, index type, row count, and load status, without writing a query
+- **Preview data** — page through actual rows/vectors in a collection
+- **Run vector search interactively** — paste in a query vector (or use Attu's built-in embedding for text, if
+  configured) and see nearest neighbors, without touching the CLI
+- **Manage indexes** — create/drop/rebuild an index on a field, and switch metric type, outside of `vector create`
+- **View collection load state** — Milvus collections must be "loaded" into memory before they're searchable;
+  Attu shows this state directly, which is useful for catching a collection that exists but isn't actually
+  queryable yet
+
+This is often the fastest way to sanity-check that data AnyLog inserted actually looks right, before debugging
+further on the AnyLog side.
+
+### pymilvus (direct SDK access)
+
+Since AnyLog is just a `pymilvus` client itself, you can connect to the exact same instance directly from Python,
+independent of any AnyLog node:
+
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://MILVUS_HOST:19530", token="root:YOUR_PASSWORD")
+
+# list collections AnyLog has created
+print(client.list_collections())
+
+# inspect a collection's schema directly
+print(client.describe_collection("sensors"))
+
+# query rows without going through AnyLog at all
+results = client.query(collection_name="sensors", filter="subject == 'security'", output_fields=["id", "text", "subject"])
+print(results)
+```
+
+This is the same client library `milvus_dbms.py` uses under the hood — nothing AnyLog-specific about the
+connection itself, just a different consumer of the same data.
+
+### Metrics endpoint
+
+Port `9091` (already exposed in the compose file above) is Milvus's own Prometheus-compatible metrics endpoint —
+independent of anything AnyLog reports via `get processes`/`get streaming`. Point a Prometheus/Grafana stack at
+`http://MILVUS_HOST:9091/metrics` for Milvus-level operational metrics (query latency, memory usage, index build
+time) if you're monitoring Milvus as its own service rather than just through AnyLog's lens.
+
+### Standalone vs. cluster mode, and backup
+
+Everything in this doc deploys Milvus **standalone** (one node, backed by etcd + MinIO for metadata/object
+storage) — adequate for development and moderate production load. Milvus also supports a distributed **cluster**
+mode for horizontal scaling, which is a Milvus-level concern entirely separate from AnyLog's own
+operator/cluster model (see [Implementation notes](#implementation-notes) below — AnyLog does not replicate
+across multiple Milvus instances itself). If you outgrow standalone, that's a Milvus deployment decision to make
+independent of AnyLog, following Zilliz's own cluster deployment guidance.
+
+For backup, since standalone Milvus stores its metadata in etcd and its actual vector/object data in MinIO (both
+visible as their own services in the compose file above), backing up the `etcd_data` and `minio_data` volumes
+covers the underlying state. Zilliz also publishes a dedicated
+[milvus-backup](https://github.com/zilliztech/milvus-backup) tool for logical collection-level backup/restore,
+which is generally the more reliable option over raw volume snapshots.
 
 ---
 

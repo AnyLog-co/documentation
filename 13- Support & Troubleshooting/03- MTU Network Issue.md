@@ -14,9 +14,6 @@ source_path: ""
 --->
 
 
-
-
-
 # MTU Size Issue
 
 The following issue appeared to a customer that manages data at the edge with limited network connectivity, using ZeroTier
@@ -26,6 +23,7 @@ to generate a static IP address.
 
 
 ## Use Case
+
 The deployment uses AnyLog to manage data on boats: the ‘floating’ edges run _Operators_ and connect to a central DC 
 (where the _Master_ and _Query_ agenst are located). Communication is done through 4G, which may cause network inconsistencies,  
 and [ZeroTier](https://www.zerotier.com/) VPN is used to secure communications and have static IP addresses.
@@ -40,7 +38,7 @@ inability to execute queries against the network.
 It was clear from the start that this is a networking related issue, however, we had thought the issue ws from either the 
 Docker, Firewall or ZeroTier configurations -- when running each component separately the issue still persisted. 
 
-As it turned out, the root problem was infact relating to ZeroTier, but instead of the regular configurations we were 
+As it turned out, the root problem was in fact relating to ZeroTier, but instead of the regular configurations we were 
 looking at, the issue was the maximum transmission units. 
 
 **Maximum Transmission Unit** (MTU) are the maximum size of each packet in a given transmission. With ZeroTier the default 

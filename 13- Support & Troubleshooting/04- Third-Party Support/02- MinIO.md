@@ -7,6 +7,7 @@ layout: page
 ### 📜 Change Log
  **Date**   | **Name**    | **Change**       | **Version** |
  |------------|-------------|------------------|----------|
+ | 2026-07-29 | Ori Shadmon | Reconstructed: this file (the fixed version) was missing the entire "Implementation notes" and "Troubleshooting" sections, present in the earlier fix but apparently dropped when copied/renamed to `02-` — reattached both from `07- minio.md` (checked for the same bug categories already fixed elsewhere in this doc; both were clean). `07- minio.md` itself is a stale pre-fix duplicate reintroducing the broken `04- Core Concepts/...` link, `local_minio` reused for the remote-host example, a `text` code fence, and the wrong bucket-naming-rules link — same pattern as the Milvus/Data-Generator pairs, recommend retiring it | |
  | 2026-07-28 | Ori Shadmon | Added missing frontmatter (this doc had none). Fixed both cross-reference links, which pointed at paths that don't match this repo (`04- Core Concepts/Bucket Data Management.md` and `06- Data Management/...` — the confirmed real folders are `99- Core Concepts` and `09- Data Management`); repointed the first to the actual Bucket Storage doc. Renamed the "remote host" connect example's group from `local_minio` (reused from the local example right above it) to `remote_minio`, since reusing the same name for a different endpoint was confusing. Flagged the MinIO bucket-naming-rules link, which points at a page about deploying a single-node MinIO server, not bucket naming. Standardized one stray `text` code fence to `anylog` to match every other example in this doc; fixed a trailing space inside a bold heading | |
 --->
 
@@ -14,7 +15,7 @@ layout: page
 
 AnyLog connects to a **MinIO** endpoint for bucket file management (upload, download, list, delete) via the `bucket` commands.
 
-See also: [Bucket Commands](04-%20Bucket%20Storage.md) for the general, provider-agnostic command reference.
+See also: [Bucket Commands](../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md) for the general, provider-agnostic command reference.
 
 ---
 
@@ -361,7 +362,53 @@ bucket drop where group = local_minio and name = python-test-bucket and delete_a
 bucket provider disconnect where group = local_minio
 ```
 
+## Implementation notes
+
+| Topic                   | Detail                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| **API**                 | boto3 S3 client against `endpoint_url`                                         |
+| **Addressing**          | Path-style (`s3.addressing_style = path`) for MinIO                            |
+| **Signature**           | SigV4                                                                          |
+| **Region**              | Optional on connect; defaults to `us-east-1` when omitted                      |
+| **Create bucket**       | MinIO: `create_bucket` without `LocationConstraint`                            |
+| **Drop bucket**         | MinIO can drop the bucket after emptying when `delete_all = true`              |
+| **Credentials aliases** | `id` ↔ `access_key`, `password` ↔ `secret_key`                                 |
+| **Blobs config**        | Deployment scripts may set `BLOB_STORAGE_TYPE=minio` with object-store helpers |
+
+---
+
+## Troubleshooting
+
+**Failed to import provider libraries / boto3 missing**
+
+```bash
+pip install boto3
+```
+
+Restart the node after install.
+
+**Failed to connect to minio at http://…**
+
+- Confirm MinIO is up: `curl -s -o /dev/null -w "%{http_code}" http://MINIO_HOST:9000/minio/health/live` (expect `200`).
+- Check `endpoint_url` scheme (`http` vs `https`) and port (**9000** for API, not the console **9001**).
+- Verify access key / secret match `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD`.
+
+**EndpointResolutionError / empty region**
+
+Omit `region` (AnyLog sets `us-east-1`) or set `region = us-east-1` explicitly.
+
+**Bucket already exists / naming error**
+
+Use a new lowercase bucket name, or drop the existing one with `delete_all = true`.
+
+**Upload / download path errors**
+
+- `source_dir` / `dest_dir` must be directories only.
+- `file_name` is the local file name; `key` is the object name in MinIO.
+
+---
+
 ## Related
 
-- [Bucket Commands](04-%20Bucket%20Storage.md) — general, provider-agnostic command reference
+- [Bucket Commands](../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md) — general, provider-agnostic command reference
 - [MinIO documentation](https://min.io/docs/minio/linux/index.html)

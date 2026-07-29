@@ -7,10 +7,10 @@ layout: page
 ### 📜 Change Log
 | **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|-------------|
+ | 2026-07-29 | Ori Shadmon    | Fixed a visible-changelog-table regression — a duplicate copy of this file (`05- Data Generator.md`) was missing the `<!---`/`--->` wrapper, which would have rendered the changelog table at the top of the published page. Used this file's correctly-wrapped version as the base. Flagged: `proveit_data.py` missing a destination arrow in the Architecture diagram; a real coverage gap where the generator can publish `wind-turbine2` and full ProveIT (Enterprise A/B/C, 4 formats) but the AnyLog-side script reference only covers the original wind-turbine dataset and 2 of 3 ProveIT enterprises via 2 of 4 formats; fixed the final validation query's `mydb` → `test` to match the generator's actual default `--db-name` | |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606    |
-| 2026-04-17 |                | creation         |             |
+ | 2026-04-17 |                | creation         |             |
 --->
- 
 
 AnyLog provides two tools that work together for testing and demos:
 
@@ -82,6 +82,12 @@ data-generator/
     └── wind_turbine_reactive-power.al
 ```
 
+> **Coverage gap:** the Python generator (below) can also publish `wind-turbine2` and full ProveIT data
+> (Enterprise A/B/C, across `print`/`post`/`mqtt`/`opcua`), but this file reference only has ingestion scripts
+> for the original wind-turbine dataset and 2 of 3 ProveIT enterprises (Enterprise C via MQTT, Enterprise A via
+> OPC-UA) — nothing here covers Enterprise B or ProveIT via REST POST. Confirm whether corresponding `.al`
+> scripts exist elsewhere before assuming end-to-end coverage for those combinations.
+
 ### Non-mapping scripts — process commands
 
 | File | Process command | Data source |
@@ -111,7 +117,7 @@ random_data.py          ─────────► REST PUT
 rig_data.py             ─────────► REST POST
 vessel_data.py          ─────────► MQTT
 wind_turbine.py         ─────────► OPC-UA (Proveit only)
-proveit_data.py
+proveit_data.py         ─────────► print / REST POST / MQTT / OPC-UA
 ```
 
 ### Supported datasets and publish formats
@@ -191,6 +197,6 @@ get msg client
 # Check streaming buffer status
 get streaming
 
-# Query the data
-run client () sql mydb format=table "SELECT * FROM rand_data ORDER BY timestamp DESC LIMIT 10"
+# Query the data (replace `test` with your --db-name if you overrode the default)
+run client () sql test format=table "SELECT * FROM rand_data ORDER BY timestamp DESC LIMIT 10"
 ```

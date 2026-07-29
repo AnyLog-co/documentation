@@ -1,19 +1,22 @@
 ---
 title: Troubleshooting
-description: Commands to validate node accessibility, active services, network connectivity, and blockchain consistency.
+description: Systematic diagnostic procedure to validate node accessibility, network connectivity, and blockchain consistency, plus known non-defect issues and their fixes.
 layout: page
 ---
 <!---
 ### 📜 Change Log
- **Date**   | **Name**       | **Change**       | **Version** |
- |------------|----------------|------------------|----------|
- |            |                |                  |          |
+ **Date**   | **Name**    | **Change**       | **Version** |
+ |------------|-------------|------------------|----------|
+ | 2026-07-29 | Ori Shadmon | Merged "02- Troubleshooting.md" (diagnostic procedure) and "03- ND common_issues.md" (known issues) into one doc — they're the same job in practice (run the procedure to isolate where a problem is, then check known issues for a matching error signature). Fixed `blockchcain` → `blockchain` typo in a drop-policy example, `docker-comose_...` → `docker-compose_...` volume name typo, and the "Why is data result in consistent?" heading grammar. Flagged the `start_date=!start_data` variable-name mismatch (recurs identically in the FAQ's deployment config example — likely a real, if confusingly named, deployment-scripts variable rather than a one-off typo, but worth confirming) | |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
- | 2026-04-25 |                | creation         |          |
+ | 2026-04-25 |             | creation | |
 --->
 
-Use these commands from the AnyLog CLI or via REST to diagnose connectivity and confirm your node and network are 
-operating correctly.
+Use these commands from the AnyLog CLI or via REST to diagnose connectivity and confirm your node and network are
+operating correctly. If you recognize a specific error message, jump straight to [Known Issues](#known-issues)
+instead of running the full procedure.
+
+## Diagnostic Procedure
 
 | Step | Command | Confirms |
 |---|---|---|
@@ -26,16 +29,16 @@ operating correctly.
 
 ---
 
-## `get processes`
+### `get processes`
 
-Shows which AnyLog services are currently running on the node. This is the quickest first check — run it any time a node 
+Shows which AnyLog services are currently running on the node. This is the quickest first check — run it any time a node
 is misbehaving or a service is suspected to be down.
 
 ```anylog
 get processes
 ```
 
-Services are listed with their status. Any service shown as `Not declared` or absent is not running. 
+Services are listed with their status. Any service shown as `Not declared` or absent is not running.
 Common services to verify:
 
 ```
@@ -67,9 +70,9 @@ Consumer        | Not declared|
 
 ---
 
-## `test node`
+### `test node`
 
-Validates that the node is self-accessible — checks that the TCP service, REST service, and local blockchain 
+Validates that the node is self-accessible — checks that the TCP service, REST service, and local blockchain
 copy are all reachable and consistent.
 
 ```anylog
@@ -81,7 +84,7 @@ A passing result confirms:
 - REST port is bound and responding
 - Local blockchain file is readable and valid
 
-Run this first when a node appears unreachable from the network — if `test node` fails, the issue is local to the node 
+Run this first when a node appears unreachable from the network — if `test node` fails, the issue is local to the node
 itself rather than a network path problem.
 
 ```
@@ -101,16 +104,16 @@ REST test using http://10.0.1.5:32149       | NODE-01@10.0.1.5:32148 running
 
 ---
 
-## `test network`
+### `test network`
 
-Validates that the node can communicate with the rest of the network — sends a test message to all peer nodes and 
+Validates that the node can communicate with the rest of the network — sends a test message to all peer nodes and
 reports which ones respond.
 
 ```anylog
 test network
 ```
 
-A failure here (while `test node` passes) points to a network path issue between nodes rather than a local 
+A failure here (while `test node` passes) points to a network path issue between nodes rather than a local
 configuration problem.
 
 **Common causes of `test network` failure:**
@@ -162,28 +165,28 @@ reset error log
 
 ---
 
-## Blockchain validation
+### Blockchain validation
 
-The blockchain is AnyLog's metadata layer — it holds node policies, cluster assignments, and network topology. If nodes 
-can reach each other (TCP/REST pass) but queries fail or nodes aren't routing data correctly, a blockchain mismatch is 
+The blockchain is AnyLog's metadata layer — it holds node policies, cluster assignments, and network topology. If nodes
+can reach each other (TCP/REST pass) but queries fail or nodes aren't routing data correctly, a blockchain mismatch is
 the likely cause.
 
-### `blockchain test`
+#### `blockchain test`
 
 **When:** `test network` passes but nodes still aren't finding each other or routing queries correctly.
 
-**Why:** Confirms the local copy of the blockchain file is intact. A corrupted or missing local copy means the node has 
+**Why:** Confirms the local copy of the blockchain file is intact. A corrupted or missing local copy means the node has
 no metadata to work from.
 
 ```anylog
 blockchain test
 ```
 
-### `get metadata version`
+#### `get metadata version`
 
 **When:** Nodes are communicating but behaving inconsistently — one node sees a policy another doesn't.
 
-**Why:** Every node should be running the same metadata version. A mismatch means one or more nodes have a stale local 
+**Why:** Every node should be running the same metadata version. A mismatch means one or more nodes have a stale local
 copy and need to re-sync from the master.
 
 ```anylog
@@ -196,7 +199,7 @@ Run on the problem node, then on the master or a known-good node and compare the
 run client (IP:Port) get metadata version
 ```
 
-### `test cluster`
+#### `test cluster`
 
 **When:** Operator nodes are running and network connectivity is confirmed, but data is not being shared or replicated
 within the cluster.
@@ -207,7 +210,7 @@ missing operator assignment, database/partition mismatch, or stale policy that h
 
 Run all four on each operator node in the cluster, in order:
 
-#### `test cluster setup`
+##### `test cluster setup`
 
 Validates the node's configuration supports HA — confirms the operator is correctly assigned to a cluster and
 the local setup is consistent with what the blockchain policy describes.
@@ -218,7 +221,7 @@ test cluster setup
 
 Start here. If this fails, the remaining tests are not meaningful — fix the configuration first.
 
-#### `test cluster databases`
+##### `test cluster databases`
 
 Compares the databases defined on each member of the cluster — all operators in the same cluster should have
 the same logical databases.
@@ -229,7 +232,7 @@ test cluster databases
 
 A mismatch here means one or more operators are missing a database that peers have, or have an extra one.
 
-#### `test cluster partitions`
+##### `test cluster partitions`
 
 Compares the partition scheme defined on each member — operators in the same cluster must partition data
 identically or queries will return inconsistent results.
@@ -238,7 +241,7 @@ identically or queries will return inconsistent results.
 test cluster partitions
 ```
 
-#### `test cluster data`
+##### `test cluster data`
 
 Compares the actual TSD (time-series data) tables across cluster members to confirm data is being replicated
 consistently. Optionally scope to a recent window:
@@ -251,3 +254,85 @@ test cluster data where start_date = -7d
 A divergence here (after setup, databases, and partitions all pass) means replication is failing at the data
 level — check the Operator and Streamer services are running on all members (`get processes`) and that the
 cluster policy on the blockchain is consistent across nodes.
+
+---
+
+## Known Issues
+
+### Attempting to run a query and getting an error message
+
+**Error Type 1**: `Failed to load table metadata from blockchain`
+
+```AnyLog
+AL query +> run client () sql my_db "select count(*) from t1;"
+Failed to load table metadata from blockchain
+AL query +> get error log
+ID     Count Thread     Time                     Type  Text                                                                                                 
+------|-----|----------|------------------------|-----|----------------------------------------------------------------------------------------------------|
+702271|    1|MainThread|Mon May 26 20:52:20 2025|Error|Failed to retrieve table definition from metadata policy for table: 'my_db.t1'                      |
+702272|    1|MainThread|Mon May 26 20:52:20 2025|Error|Failed to get metadata info from Table Policy with DBMS: 'my_db' and Table: 't1'                    |
+702273|    1|MainThread|Mon May 26 20:52:20 2025|Error|(Failed: Failed to load table metadata from blockchain) run client () sql my_db "select count(*) fro|
+      |     |          |                        |     |m t1;"                                                                                              |
+```
+
+In this situation, the metadata information is not yet accessible, usually due to buffer/blockchain sync timing
+between the nodes. This issue resolves itself once the data is processed and the node is synced against the
+blockchain.
+
+**Error Type 2**: `Local query database not available: 'system_query'`
+
+```AnyLog
+AL query +> run client () sql my_db "select count(*) from t1;" 
+AL query +> DBMS not open
+AL query +> get error log 
+ID     Count Thread     Time                     Type  Text                                                                     
+------|-----|----------|------------------------|-----|--------------------------------------------------------------------------|
+698413|    1|MainThread|Mon May 26 20:45:56 2025|Error|Local query database not available: 'system_query'                        |
+698414|    1|MainThread|Mon May 26 20:45:56 2025|Error|(Failed: DBMS not open) run client () sql my_db "select count(*) from t1;"|
+```
+
+In this situation, the user is missing the `system_query` logical database, which is used to aggregate results
+from operator node(s). See [SQL Storage](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md) for
+connection details.
+
+```AnyLog
+connect dbms system_query where type=sqlite and memory=true
+```
+
+### Why is my replicated data inconsistent?
+
+When users deploy multiple operators, they sometimes notice data coming in from only 1 out of 2 operators, and
+inconsistently at that — data appears and then disappears. This is most commonly because the operators share a
+cluster name, but HA is not actually enabled. Two ways to resolve this:
+
+**Option 1**: Restart the operator nodes with HA enabled, or run the following commands directly on the operator
+nodes:
+```AnyLog
+run data distributor
+run data consumer where start_date=!start_data
+```
+> **To verify:** `start_date=!start_data` — the variable name doesn't match the parameter name. This exact same
+> mismatch appears in the FAQ's deployment config example too, which suggests it's a real (if confusingly named)
+> variable from the actual deployment-scripts repo rather than a one-off typo — worth confirming either way
+> before relying on it.
+
+**Option 2**: Restart the second operator with a new cluster name — this approach works for EdgeLake.
+1. Attach to the node
+```AnyLog
+docker attach --detach-keys=ctrl-d edgelake-operator2
+```
+
+2. Drop the operator policy for the node
+```anylog
+operator_id = blockchain drop policy where name = edgelake-operator2 bring [*][id]
+run client (!ledger_conn) blockchain drop policy where id=!operator_id 
+```
+
+3. Detach from container — `ctrl-d`
+4. Stop the operator — `docker stop edgelake-operator2`
+5. Remove the blockchain volume — `docker volume rm docker-compose_edgelake-operator2-anylog-blockchain`
+6. In the (basic) configuration file for operator 2, update the cluster name.
+7. Start operator 2:
+```shell
+make up ANYLOG_TYPE=operator2 
+```
