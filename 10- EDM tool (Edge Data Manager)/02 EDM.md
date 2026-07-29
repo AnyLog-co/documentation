@@ -37,3 +37,4 @@ there should be the following files:
   |      - Add plugins
   |      - Remove plugins
   |      - Configure plugins
+document explaining how to query blobs through an application using `file to` and `file from` logic 
