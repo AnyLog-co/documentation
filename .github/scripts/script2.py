@@ -1,14 +1,8 @@
 import os
 import re
+import urllib.parse
 from pathlib import Path
 
-# Prefix components
-space = "    "
-branch = "│   "
-
-# Pointers
-tee = "├── "
-last = "└── "
 
 DIR_PATH = Path(
     os.path.expanduser(os.path.expandvars(__file__)).split(".github")[0]
@@ -28,88 +22,123 @@ def sort_key(path: Path):
         05-2 Something.md      -> (5, 2, "05-2 Something.md")
         A- Something.md        -> (inf, 0, "A- Something.md")
     """
+
     match = re.match(r"^(\d+)(?:-(\d+))?", path.name)
 
     if match:
         major = int(match.group(1))
         minor = int(match.group(2) or 0)
-        return (major, minor, path.name.lower())
 
-    return (float("inf"), 0, path.name.lower())
+        return (
+            major,
+            minor,
+            path.name.lower(),
+        )
+
+    # Items without a numeric prefix go at the end.
+    return (
+        float("inf"),
+        0,
+        path.name.lower(),
+    )
 
 
-def markdown_link(path: Path):
-    """Return a markdown link relative to DIR_PATH."""
+def markdown_link(path: Path) -> str:
+    """Return a Markdown link relative to DIR_PATH."""
+
     relative = path.relative_to(DIR_PATH).as_posix()
 
     if path.is_dir():
         relative += "/"
 
-    # Remove the numeric prefix from the displayed name.
-    title = path.name.split("-", 1)[-1].strip()
+    # Encode spaces and special characters while preserving /
+    relative = urllib.parse.quote(relative, safe="/")
+
+    # Remove numeric prefix from displayed name.
+    #
+    # 01- Getting Started -> Getting Started
+    # 02-1 Something      -> 1 Something
+    #
+    # If there is no "-", keep the original name.
+    if "-" in path.name:
+        title = path.name.split("-", 1)[1].strip()
+    else:
+        title = path.name
 
     return f"[{title}]({relative})"
 
 
-def tree(dir_path: Path, prefix: str = ""):
-    """Recursively yield a visual tree structure line by line."""
+def tree(dir_path: Path, depth: int = 0):
+    """
+    Recursively generate a nested Markdown list.
+
+    Markdown indentation is used instead of ├── / └── so that
+    hyperlinks remain clickable.
+    """
 
     contents = sorted(
         dir_path.iterdir(),
-        key=sort_key
+        key=sort_key,
     )
 
-    pointers = [tee] * (len(contents) - 1) + [last]
+    indent = "  " * depth
 
-    for pointer, path in zip(pointers, contents):
-        yield prefix + pointer + markdown_link(path)
+    for path in contents:
+        yield f"{indent}- {markdown_link(path)}"
 
         if path.is_dir():
-            extension = branch if pointer == tee else space
-            yield from tree(path, prefix + extension)
+            yield from tree(path, depth + 1)
 
 
 def get_top_level_directories():
-    """Return only numbered top-level directories 01 through 20."""
+    """Return only top-level directories 01 through 20."""
 
-    directories = [
-        path
-        for path in DIR_PATH.iterdir()
-        if path.is_dir()
-        and path.name.split("-", 1)[0].strip().isdigit()
-        and 1 <= int(path.name.split("-", 1)[0].strip()) <= 20
-    ]
+    directories = []
 
-    return sorted(directories, key=sort_key)
+    for path in DIR_PATH.iterdir():
+        if not path.is_dir():
+            continue
+
+        prefix = path.name.split("-", 1)[0].strip()
+
+        if not prefix.isdigit():
+            continue
+
+        number = int(prefix)
+
+        if 1 <= number <= 20:
+            directories.append(path)
+
+    return sorted(
+        directories,
+        key=sort_key,
+    )
 
 
 def build_tree() -> str:
-    """Build the complete documentation tree as a string."""
+    """Build the complete Markdown TOC."""
 
     lines = []
 
-    directories = get_top_level_directories()
+    for path in get_top_level_directories():
+        lines.append(f"- {markdown_link(path)}")
 
-    pointers = [tee] * (len(directories) - 1) + [last]
-
-    for pointer, path in zip(pointers, directories):
-        lines.append(pointer + markdown_link(path))
-
-        extension = branch if pointer == tee else space
-
-        lines.extend(tree(path, extension))
+        if path.is_dir():
+            lines.extend(
+                tree(path, depth=1)
+            )
 
     return "\n".join(lines)
 
 
 def main():
-    """Generate the tree and write it to README_TOC.md."""
+    """Generate the TOC and write it to README_TOC.md."""
 
     content = build_tree()
 
     OUTPUT_PATH.write_text(
         content + "\n",
-        encoding="utf-8"
+        encoding="utf-8",
     )
 
     print(f"TOC written to: {OUTPUT_PATH}")
