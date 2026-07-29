@@ -1,4 +1,3 @@
-
 ---
 title: "Aggregation Functions"
 description: ""
