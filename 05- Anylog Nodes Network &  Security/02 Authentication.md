@@ -10,6 +10,7 @@ source_path: "02 Authentication.md"
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-07-31 | Massimiliano | remote sign via certificate_authority (Master/Operator) | 2.0.2606 |
 
 --->
 
@@ -517,18 +518,25 @@ The command options:
 | state  | Town, city, village. |
 | org  | Organization name.|
 | hostname  | The URL representing the CA.|
+| output_name  | Optional. PEM stem for the CA files. With `output_name = anylogca`, the command creates `anylogca.crt` / `anylogca.key` (case preserved). Without it, legacy `ca-[org]-*` naming is used. |
+| expiration_days  | Optional. Validity of the CA certificate in days (default 30). |
 
 Example:
 ```anylog
-id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname = anylog.co
+```
+
+Example with optional `output_name` and `expiration_days`:
+```anylog
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and output_name = anylogca and expiration_days = 3650
 ```
 
 When the command is issued 2 files are generated:  
 
 | Type        | Name  | Explanation |
 | ------------- | ------------| ---- |
-| .key  | ca-[org]-private_key | The Private Key for the CA |
-| .crt  | ca-[org]-public_key | The Public Key for the CA. It will be provided to every AnyLog node that authenticates non-member nodes with CR signed by the AnyLog CA |
+| .key  | ca-[org]-private-key.key or `{output_name}.key` | The Private Key for the CA |
+| .crt  | ca-[org]-public-key.crt or `{output_name}.crt` | The Public Key for the CA. It will be provided to every AnyLog node that authenticates non-member nodes with CR signed by the AnyLog CA |
 
 
 ## Generating a certificate request
@@ -551,19 +559,25 @@ The command options:
 | alt_name  | One or more IPs - An extension to the X.509 specification that allows specifying additional host names for a single SSL certificate. |
 | hostname  | The URL representing the node that issues the CR.                                                                                    |
 | ip  | The IP of the node that issues the CR.                                                                                               |
+| output_name  | Optional. PEM stem for the server files. With `output_name = acme-inc`, the command creates `acme-inc.csr` / `.key` / `.pem` (case preserved). Without it, legacy `server-[org]-*` naming is used. |
 
 Example:
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name =  24.5.219.50 and hostname =  acme.co and ip = "192.56.76.4"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 24.5.219.50 and hostname = acme.co and ip = "192.56.76.4"
 ```
 
-When the command is issued 2 files are generated:  
+Example with optional `output_name`:
+```anylog
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 24.5.219.50 and hostname = acme.co and ip = "192.56.76.4" and output_name = acme-inc
+```
+
+When the command is issued 3 files are generated:  
 
 | Type        | Name  | Explanation |
 | ------------- | ------------| ---- |
-| .key  | server-[org]-private_key | The Private Key for the requesting server. |
-| .csr  | server-[org]-csr | A CR representing the server. |
-| .pem  | server-[org]-public_key | The Public Key for the requesting server. This key is updated in the shared metadata layer to determine permissions.|
+| .key  | server-[org]-private-key.key or `{output_name}.key` | The Private Key for the requesting server. |
+| .csr  | server-[org]-csr.csr or `{output_name}.csr` | A CR representing the server. |
+| .pem  | server-[org]-public-key.pem or `{output_name}.pem` | The Public Key for the requesting server. This key is updated in the shared metadata layer to determine permissions.|
 
 
 ## Signing a certificate request
@@ -580,17 +594,26 @@ The command options:
 | ------------- | ------------|
 | ca_org  | The organization name of the CA. |
 | server_org  | The organization name of the server associated with the CR. |
+| output_name  | Optional. PEM stem for the server files. With `output_name = acme-inc`, the command uses `acme-inc.csr` / `acme-inc.crt` (case preserved). Without it, legacy `server-[org]-*` naming is used. |
+| ca_output_name  | Optional. PEM stem for the CA files. With `ca_output_name = anylogca`, the command uses `anylogca.crt` / `anylogca.key`. Without it, legacy `ca-[org]-*` naming is used. |
+| expiration_days  | Optional. Validity of the signed certificate in days (default 30). |
+| certificate_authority  | Optional. Remote CA node as `ip:port` (or a param such as `!master_node`). If set, the CSR is signed on that node and the signed certificate is written to the local `!pem_dir`. |
 
 Example:
 ```anylog
 id sign certificate request where ca_org = AnyLog and server_org = "Acme Inc"
 ```
 
+Example with optional `output_name`, `ca_output_name`, and `expiration_days`:
+```anylog
+id sign certificate request where ca_org = AnyLog and ca_output_name = anylogca and server_org = "Acme Inc" and output_name = acme-inc and expiration_days = 825
+```
+
 When the command is issued 1 file is generated:  
 
 | Type        | Name  | Explanation |
 | ------------- | ------------| ---- |
-| .crt  | server-[org]-public-key | The Signed Certificate Request. |
+| .crt  | server-[org]-public-key.crt or `{output_name}.crt` | The Signed Certificate Request. |
 
 
 ## Generating and signing a certificate request to the AnyLog node
@@ -598,7 +621,7 @@ When the command is issued 1 file is generated:
 The following example generates generate certificate request for the AnyLog node.
 
 ```anylog
-id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and hostname =  anylog.co and ip = "192.38.78.8"
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and hostname = anylog.co and ip = "192.38.78.8"
 ```
 
 Signing the CR using the CA private key:
@@ -606,8 +629,76 @@ Signing the CR using the CA private key:
 id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
 ```
 
+Example with optional naming and expiration:
+```anylog
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and hostname = anylog.co and ip = "192.38.78.8" and output_name = node-128
+id sign certificate request where ca_org = AnyLog and ca_output_name = anylogca and server_org = "Node 128" and output_name = node-128 and expiration_days = 825
+```
+
+## Remote signing with `certificate_authority`
+
+Sign a local Certificate Signing Request (CSR) on a remote Certificate Authority (CA) node — typically the Master — without the Operator getting access to the CA private key.
+
+When `certificate_authority = ip:port` (or a param such as `!master_node`) is set on `id sign certificate request`, the local node:
+
+1. Sends the local CSR to the CA node
+2. Runs `id sign certificate request` on the CA
+3. Gets the signed `.crt`
+
+`ca_org` / `ca_output_name` must match the CA files on the **Master**.  
+`server_org` / `output_name` must match the CSR on the **Operator**.
+
+### Master (CA)
+
+Create the CA once. The private key stays on the Master:
+
+```anylog
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLogCA and output_name = anylogca and expiration_days = 3650
+```
+
+Expected files under `!pem_dir`:
+
+| Type | Name | Explanation |
+| ---- | ---- | ----------- |
+| .crt | anylogca.crt | The public key of the CA |
+| .key | anylogca.key | The private key of the CA |
+
+### Operator (CSR + remote sign)
+
+**1. Generate the certificate request**
+
+The private key stays on the Operator:
+
+```anylog
+id generate certificate request where org = AnyLog and output_name = my_cert1 and hostname = my_cert1
+```
+
+Expected files under `!pem_dir`:
+
+| Type | Name | Explanation |
+| ---- | ---- | ----------- |
+| .csr | my_cert1.csr | The certificate request |
+| .key | my_cert1.key | The private key of the Operator |
+| .pem | my_cert1.pem | The public key of the Operator |
+
+**2. Sign remotely via the Master**
+
+```anylog
+set master_node = 192.168.1.88:32048
+id sign certificate request where ca_org = AnyLogCA and ca_output_name = anylogca and server_org = AnyLog and output_name = my_cert1 and expiration_days = 825 and certificate_authority = !master_node
+```
+
+Expected result on the Operator:
+
+Addition of `my_cert1.crt` under `!pem_dir` (alongside the existing `.csr` / `.key` / `.pem`).
+
+| Type | Name | Explanation |
+| ---- | ---- | ----------- |
+| .crt | my_cert1.crt | The signed certificate |
+
+
 ## Summary of the example files
-With the examples described above, the following files were generated:
+With the examples described above, the following files were generated (legacy naming without `output_name`):
 
 
 | File Name        | Explanation  |
@@ -615,13 +706,15 @@ With the examples described above, the following files were generated:
 | ca-anylog-private-key.key  | The private key of the CA. |
 | ca-anylog-public-key.crt  | The public key of the CA. |
 | server-acme-inc-csr.csr  | The non-signed CR of the server (Acme Inc). |
-| server-acme-inc-private-key.key  | The private key key of the server (Acme Inc). |
+| server-acme-inc-private-key.key  | The private key of the server (Acme Inc). |
 | server-acme-inc-public-key.crt  | The signed certificate request of the server (Acme Inc). |
 | server-acme-inc-public-key.pem  | The public key of the server (Acme Inc). It is represented in the metadata to determine the permissions. |
 | server-node-128-csr.csr  | The non-signed CR of the AnyLog node (Node 128). |
-| server-node-128-private-key.key  | The private key key of the AnyLog node (Node 128). |
+| server-node-128-private-key.key  | The private key of the AnyLog node (Node 128). |
 | server-node-128-public-key.pem  | The public key associated with the private key (Node 128). |
 | server-node-128-public-key.crt  | The signed certificate request of the AnyLog node (Node 128). |
+
+With optional `output_name` / `ca_output_name`, the same material is written as `anylogca.key` / `anylogca.crt`, `acme-inc.csr` / `.key` / `.pem` / `.crt`, and `node-128.csr` / `.key` / `.pem` / `.crt`.
 
 
 ## Setup the AnyLog Node and the connecting Server
@@ -629,9 +722,9 @@ With the examples described above, the following files were generated:
 ### Setup the AnyLog node
 
 Make the following files available in the _pem_ directory:
-1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt)
-2) The Private Key of the AnyLog Node: server-[org]-csr.csr  (using the example files: server-node-128-private-key.key)
-3) The Signed CR of the AnyLog Node: server-[org]-public-key.crt  (using the example files: server-node-128-public-key.crt)
+1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt; or `anylogca.crt` with `output_name`)
+2) The Private Key of the AnyLog Node: server-[org]-private-key.key (using the example files: server-node-128-private-key.key; or `node-128.key` with `output_name`)
+3) The Signed CR of the AnyLog Node: server-[org]-public-key.crt (using the example files: server-node-128-public-key.crt; or `node-128.crt` with `output_name`)
 
 
 Deploy AnyLog with SSL enabled using the following command: 
@@ -648,9 +741,9 @@ get rest server info
 ### Setup the Server (Client Side)
 
 The client is configured using the following files:
-1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt)
-2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
-3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
+1) The Public Key of the CA: ca-[org]-public_key.crt (using the example files: ca-anylog-public-key.crt; or `anylogca.crt` with `output_name`)
+2) The Private Key of the server: server-[org]-private-key.key (using the example files: server-acme-inc-private-key.key; or `acme-inc.key` with `output_name`)
+3) The Signed CR of the server: server-[org]-public-key.crt (using the example files: server-acme-inc-public-key.crt; or `acme-inc.crt` with `output_name`)
 
 An example of Postman configuration is available at [using postman](northbound%20connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
 
@@ -660,16 +753,28 @@ An example of Postman configuration is available at [using postman](northbound%2
 ### Generating certificates:
 
 ```anylog
-id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname =  anylog.co
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and hostname = anylog.co
 
-id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 10.0.0.78 and hostname =  acme.co and ip = "10.0.0.78"
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 10.0.0.78 and hostname = acme.co and ip = "10.0.0.78"
 
 id sign certificate request where ca_org = AnyLog and server_org = "Acme Inc"
 
-id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and alt_name = 24.5.219.50 and hostname =  anylog.co and ip = "10.0.0.78"
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and alt_name = 24.5.219.50 and hostname = anylog.co and ip = "10.0.0.78"
 
 id sign certificate request where ca_org = AnyLog and server_org = "Node 128"
+```
 
+Optional naming and expiration:
+```anylog
+id generate certificate authority where country = US and state = CA and locality = "Redwood City" and org = AnyLog and output_name = anylogca and expiration_days = 3650
+
+id generate certificate request where country = US and state = CA and locality = "Redwood City" and org = "Acme Inc" and alt_name = 10.0.0.78 and hostname = acme.co and ip = "10.0.0.78" and output_name = acme-inc
+
+id sign certificate request where ca_org = AnyLog and ca_output_name = anylogca and server_org = "Acme Inc" and output_name = acme-inc and expiration_days = 825
+
+id generate certificate request where country = US and state = CA and locality = "Palo Alto" and org = "Node 128" and alt_name = 10.0.0.78 and alt_name = 24.5.219.50 and hostname = anylog.co and ip = "10.0.0.78" and output_name = node-128
+
+id sign certificate request where ca_org = AnyLog and ca_output_name = anylogca and server_org = "Node 128" and output_name = node-128 and expiration_days = 825
 ```
 
 ### cURL command using certificate
