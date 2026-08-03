@@ -1,8 +1,0 @@
-{
-  "properties": [
-    { "name": "anylog.node", "value": "master" },
-    { "name": "openhorizon.allowPrivileged", "value": "true" }
-  ],
-  "constraints": [
-  ]
-}
