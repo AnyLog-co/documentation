@@ -37,9 +37,9 @@ out into a dedicated master, query, and 2 operators, each running on its own nod
  
 For a more comprehensive deployment, please visit:
  
-* [Docker](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/01-%20Docker.md) — includes directions for a persistent, volume-based deployment
-* [Virtual Machine (OVA)](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/02-%20Installing%20the%20VM%20OVA.md)
-* [Kubernetes](../02-%20Installation%20&%20Deployment/01-%20Deployment%20Options/03-%20Kubernetes.md)
+* [Docker](../02-%20Installation%20&%20Deployment/02-%20Virtualization/01-%20Docker.md) — includes directions for a persistent, volume-based deployment
+* [Virtual Machine (OVA)](../02-%20Installation%20&%20Deployment/02-%20Virtualization/02-%20Installing%20the%20VM%20OVA.md)
+* [Kubernetes](../02-%20Installation%20&%20Deployment/02-%20Virtualization/03-%20Kubernetes.md)
 
 <sub>*A zero-touch deployment is a deployment where everything is automatically defined by the blockchain and default 
 values. In general, this means not providing any env variables. However, since this is a single codebase that's able to 
