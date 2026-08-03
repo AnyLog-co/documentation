@@ -21,12 +21,12 @@ This document provides examples of configurations to data sources.
 
 **Other Related Documents**
 * [Python and cURL examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20Into%20Anylog.md) 
-* [Configuring the Message Broker service](../background%20processes.md#message-broker)
+* [Configuring the Message Broker service](../07-%20CLI/02-%20Background%20Processes.md#message-broker)
 * [Message Broker](../message%20broker.md)
-* [Using REST](../using%20rest.md)
+* [Using REST](04-%20Using%20REST.md)
 * [Using Kafka](../using%20kafka.md)
 * [Using Edgex](../using%20edgex.md)
-* [The Data Generator](../ORPHANS/x09-examples-training/Data%20Generator.md)
+* [The Data Generator](../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md)
 
 ## Third-Party MQTT Client 
 AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 
@@ -112,7 +112,7 @@ Messaging|198.74.50.131:32150|198.74.50.131:32150|0.0.0.0:32150      |
 ### Publishing to Message Broker 
 Like with a third-party broker, subscribe to the local broker using the `run message client` command.
  
-The example below uses the same data as the [data generator](../ORPHANS/x09-examples-training/Data%20Generator.md), but with a the message client subscribed to
+The example below uses the same data as the [data generator](../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md), but with a the message client subscribed to
 a local message broker. 
  
 **Set Message Client**

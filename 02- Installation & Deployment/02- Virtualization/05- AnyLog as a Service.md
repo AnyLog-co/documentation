@@ -54,8 +54,8 @@ layout: page
 
 # AnyLog as a Service
 
-AnyLog's standard deployment path is a Docker container, run via [Docker](03-%20install.md) or
-[Kubernetes](full-deployment.md). Under certain conditions — limited disk space, regulatory constraints, or
+AnyLog's standard deployment path is a Docker container, run via [Docker](./01-%20Docker.md) or
+[Kubernetes](03-%20Kubernetes.md). Under certain conditions — limited disk space, regulatory constraints, or
 network restrictions — you may instead want to install AnyLog (or EdgeLake) directly as a service on the host,
 with no container runtime involved.
 
@@ -83,8 +83,8 @@ git clone https://github.com/AnyLog-co/deployment-scripts
 ```
 
 3. Build a configuration file. 🟡 *This step is preserved from the source docs as-is — it references an older
-   docker-compose repo layout (`docker-compose/docker-makefile/master-configs/`) that doesn't match the current
-   structure in [full-deployment.md](full-deployment.md). Needs a corrected path before this is trustworthy.*
+   docker-compose repo layout (`docker-compose/docker-makefile/anylog-master/`) that doesn't match the current
+   structure in full-deployment.md. Needs a corrected path before this is trustworthy.*
 ```shell
 cd $HOME/Desktop/anylog/
 git clone https://github.com/AnyLog-co/docker-compose

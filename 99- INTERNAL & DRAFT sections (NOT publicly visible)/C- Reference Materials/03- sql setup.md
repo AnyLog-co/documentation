@@ -208,7 +208,7 @@ drop table tsd_info where dbms = almgm
 ```
 If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
 using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
-[removing policies from a master node](blockchain%20commands.md#removing-policies-from-a-master-node) section.
+[removing policies from a master node](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#removing-policies-from-a-master-node) section.
 
 ### Dropping a table on all nodes
 The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,

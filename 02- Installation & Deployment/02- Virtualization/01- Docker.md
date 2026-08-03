@@ -31,7 +31,7 @@ layout: page
 
 > This is the full, configuration-driven deployment path, built around AnyLog's official
 > [docker-compose](https://github.com/AnyLog-co/docker-compose) repo. For a fast, minimal single-command trial
-> instead, see [Installing & Deploying AnyLog](03-%20install.md).
+> instead, see [Installing & Deploying AnyLog](../../01-%20Getting%20Started/03-%20install.md).
 
 ## 1. Install Docker, Make, and Git
 
@@ -111,12 +111,12 @@ of which of these is actually present on your system.
 
 Every node type runs the exact same AnyLog image — what differs is which services are enabled. Quick summary:
 
-| Node Type | Role |
-|---|---|
-| **Master** (Metadata / `master`) | Hosts the network's metadata — the Metadata Manager described in [Introduction to AnyLog](../01-%20intro-to-anylog.md) |
-| **Operator** (`operator`) | Stores data and answers queries |
-| **Publisher** (`publisher`) | A non-storage node that distributes data from edge sources across Operator nodes |
-| **Query** (`query`) | Coordinates distributed queries across Operators |
+| Node Type | Role                                                                                                                                                              |
+|---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Master** (Metadata / `master`) | Hosts the network's metadata — the Metadata Manager described in [Introduction to AnyLog](../../01-%20Getting%20Started/01-%20Introduction.md)|                                                                    |                                                                  |
+| **Operator** (`operator`) | Stores data and answers queries                                                                                                                                   |
+| **Publisher** (`publisher`) | A non-storage node that distributes data from edge sources across Operator nodes                                                                                  |
+| **Query** (`query`) | Coordinates distributed queries across Operators                                                                                                                  |
 | **Generic** (`generic`) | A sandbox with only TCP, REST, and Message Broker configured — no storage, no cluster role. Useful for testing connectivity before committing to a real node type. |
 
 `standalone-operator` and `standalone-publisher` combine Master with an Operator or Publisher, respectively, on a

@@ -53,42 +53,42 @@ curl -X GET 10.1.2.10:2149 \
 
 1. Under _Get Data_ open _Web_
 
-   ![location of "Web" data source](/docs/assets/img/powerbi_img1.png)
+   ![location of "Web" data source](../imgs/powerbi_img1.png)
 
 2. In the Advanced option fill out the _URL_ and _HEADER_ parameters with `command`, `User-Agent`, and `destination`.
    Once the form is filled out, press "OK"
 
-   !["Web" data source request form](/docs/assets/img/powerbi_img2.png)
+   !["Web" data source request form](../imgs/powerbi_img2.png)
 
 3. Right-click & select JSON
 
-   ![Set results type](/docs/assets/img/powerbi_img3.png)
+   ![Set results type](../imgs/powerbi_img3.png)
 
 4. Right-click on **List** & select _To Table_
 
-   ![convert list of (raw) results into table format](/docs/assets/img/powerbi_img4.png)
+   ![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
 
 5. Keep defaults (None) and press "OK"
 
-   ![value conversion form](/docs/assets/img/powerbi_img5.png)
+   ![value conversion form](../imgs/powerbi_img5.png)
 
 6. Press the button on the right of the column to view the list of columns.
    This will show the different JSON keys that'll be converted to table columns
 
-   | ![list of records](/docs/assets/img/powerbi_img6a.png) | ![list of JSON keys used as column names](/docs/assets/img/powerbi_img6b.png) |
+   | ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
    | --- | --- |
 
 7. For each column, you should update to the correct data type — otherwise PowerBI will assume the data type is string
 
-   ![set data-type](/docs/assets/img/powerbi_img7.png)
+   ![set data-type](../imgs/powerbi_img7.png)
 
 8. Once updated, press Close & Apply
 
-   ![Close & Apply](/docs/assets/img/powerbi_img8.png)
+   ![Close & Apply](../imgs/powerbi_img8.png)
 
 9. From this point you should be able to draw tables & graphs with the data
 
-   ![Sample Graphs](/docs/assets/img/powerbi_img9.png)
+   ![Sample Graphs](../imgs/powerbi_img9.png)
 
    The following shows 3 diagrams, each assigned to its own query:
    * The table shows the number of rows per table in the database
@@ -99,38 +99,38 @@ curl -X GET 10.1.2.10:2149 \
 
 1. Under the _Data_ tab, select the "Web" data source
 
-   ![select data source](/docs/assets/img/excel_img1.png)
+   ![select data source](../imgs/excel_img1.png)
 
 2. In the Advanced option fill out the _URL_ and _HEADER_ parameters with `command`, `User-Agent`, and `destination`.
    Once the form is filled out, press "OK"
 
-   ![data source form](/docs/assets/img/excel_img2.png)
+   ![data source form](../imgs/excel_img2.png)
 
 3. Right-click on **List** & select _To Table_
 
-   ![convert list of (raw) results into table format](/docs/assets/img/powerbi_img4.png)
+   ![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
 
 4. Keep defaults (None) and press "OK"
 
-   ![value conversion form](/docs/assets/img/powerbi_img5.png)
+   ![value conversion form](../imgs/powerbi_img5.png)
 
 5. Press the button on the right of the column to view the list of columns.
    This will show the different JSON keys that'll be converted to table columns
 
-   | ![list of records](/docs/assets/img/powerbi_img6a.png) | ![list of JSON keys used as column names](/docs/assets/img/powerbi_img6b.png) |
+   | ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
    | --- | --- |
 
 6. For each column, you should update to the correct data type — otherwise Excel will assume the data type is string
 
-   ![set data-type](/docs/assets/img/powerbi_img7.png)
+   ![set data-type](../imgs/powerbi_img7.png)
 
 7. Once updated, press Close & Apply
 
-   ![Close & Apply](/docs/assets/img/powerbi_img8.png)
+   ![Close & Apply](../imgs/powerbi_img8.png)
 
 8. From this point you should be able to draw tables & graphs with the data
 
-   ![sample table](/docs/assets/img/excel_img3.png)
+   ![sample table](../imgs/excel_img3.png)
 
    The diagram uses a single query with the <a href="/docs/Querying-Data-Northbound/queries/#the-period-function">period function</a> to generate both the table and graph.
 
@@ -139,4 +139,4 @@ curl -X GET 10.1.2.10:2149 \
 When converting raw content into _Text_, the <a href="https://docs.microsoft.com/en-us/power-query/power-query-ui" target="_blank">PowerQuery Editor</a>
 will show results — but it will not separate the JSON keys into separate columns.
 
-![text output](/docs/assets/img/error_img1.png)
+![text output](../imgs/error_img1.png)

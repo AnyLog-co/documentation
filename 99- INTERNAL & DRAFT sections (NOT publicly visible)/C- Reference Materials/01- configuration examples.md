@@ -47,7 +47,7 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../../background%20processes.md#rest-requests) section).
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section).
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
@@ -81,7 +81,7 @@ Multiple options are available to backup, archive and remove old data.
 
 Declare a second operator node associated with an existing cluster. The second node will be dynamically updated with the
 data assigned to the cluster.  
-This process is detailed in the [High Availability (HA)](../high%20availability.md#high-availability-ha) section.
+This process is detailed in the [High Availability (HA)](../../09-%20Data%20Management/03-%20High%20Availability.md#high-availability-ha) section.
 
 #### Archival of data
 
@@ -122,7 +122,7 @@ Notes:
 #### Disable authentication
 If the nodes are trusted, behind a firewall, authentication can be disabled.  
 If authentication is enabled, there are different layers that can be leveraged: passwords, signature of messages, and certificates.  
-Details are available in the [Users Authentication](../authentication.md#users-authentication) section.
+Details are available in the [Users Authentication](../../06-%20Networking%20%26%20Security/07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#users-authentication) section.
 
 <pre>
 set authentication off
@@ -189,7 +189,7 @@ create work directories
 
 #### Making the node a member of the AnyLog Network
 The node is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
-Details are available in the [TCP Server process](../../background%20processes.md#rest-requests) section.  
+Details are available in the [TCP Server process](../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section.  
 
 <pre>
 run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
@@ -198,7 +198,7 @@ run tcp server !external_ip !anylog_server_port !ip !anylog_server_port
 #### Enabling REST requests
 3rd parties applications communicate with members of the network using REST requests.  
 The node is configured to initiate a listener on a dedicated IP and Port to receive REST requests from 3rd parties applications.  
-Details are available in the [REST requests](../../background%20processes.md#rest-requests) section.
+Details are available in the [REST requests](../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section.
 
 <pre>
 run rest server !ip !anylog_rest_port
@@ -207,7 +207,7 @@ run rest server !ip !anylog_rest_port
 
 #### Metadata
 The nodes are configured to periodically retrieve the metadata (from a blockchain platform or a master node) and host it locally.   
-Details are available in the [Blockchain Synchronizer](../../background%20processes.md#blockchain-synchronizer) section.
+Details are available in the [Blockchain Synchronizer](../../07-%20CLI/02-%20Background%20Processes.md#blockchain-synchronizer) section.
 
 <pre>
 run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node
@@ -216,7 +216,7 @@ run blockchain sync where source=master and time=!sync_time and dest=file and co
 
 #### Configuring the local database
 The local database is used to store the user data and in some cases system data.  
-Details are available in the [configuring a local database](../sql%20setup.md#configuring-a-local-database) section.  
+Details are available in the [configuring a local database](03-%20sql%20setup.md#configuring-a-local-database) section.  
 The sections below configure the system databases and an example of a user database.  
 The command ```get databases``` returns the list of connected databases.
 
@@ -259,7 +259,7 @@ connect dbms !default_dbms where type=psql and user = !db_user and password = !d
 
 Notes: 
 1) ***These policies are declared once*** and the below policies declarations can be moved to a dedicated script file that is called once when the node is installed.
-2) Details on blockchain commands are available in the [blockchain commands](../blockchain%20commands.md#blockchain-commands) section. 
+2) Details on blockchain commands are available in the [blockchain commands](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#blockchain-commands) section. 
 
 In a ***standalone*** contiguration the node serves multiple roles. We use a seperate policy for each role.  
 If only one role is configured, only the policy that determines the configured role is needed.
@@ -351,7 +351,7 @@ Notes:
 
 
 #### Configure data processing functionality
-Note: Details on the streamer process are available in the [Streamer Process](../../background%20processes.md#streamer-process) section.
+Note: Details on the streamer process are available in the [Streamer Process](../../07-%20CLI/02-%20Background%20Processes.md#streamer-process) section.
 
 <pre>
 set buffer threshold where write_immediate = true   # When data is ingested, the local database is updated with no wait time.
@@ -361,7 +361,7 @@ run streamer                                        # Enable a dedicated thread 
 #### Configure a process to map source data to the table structure
 Allowing data to be treated based on a topic declaration - as if the AnyLog node is an MQTT broker.  
 Details on the mapping process are available in the [Using Post Command](../adding%20data.md#using-a-post-command) section 
-and the [Subscribing to REST calls](../using%20rest.md#subscribing-to-rest-calls) section.
+and the [Subscribing to REST calls](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#subscribing-to-rest-calls) section.
 
 
 <pre>
@@ -381,7 +381,7 @@ run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=a
 
 #### Start the Operator processes
 These are the processes that based on the ingested data, create the schemas and update the databases.    
-Details are available in the [Operator Process](../../background%20processes.md#operator-process) section.
+Details are available in the [Operator Process](../../07-%20CLI/02-%20Background%20Processes.md#operator-process) section.
  
 <pre>
 run operator where create_table=true and update_tsd_info=true and archive=true and distributor=true and master_node=!master_node

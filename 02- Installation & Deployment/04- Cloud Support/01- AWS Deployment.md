@@ -18,7 +18,7 @@ source_path: ""
 
 The following provides directions for using an EC2 AWS instance(s) to configure and deploy AnyLog.  
 
-Directions for [deploying an AnyLog Node](../09-examples-training/deployments/deploying_node.md) 
+Directions for [deploying an AnyLog Node](../01-%20Install.md) 
 
 **Terminology**:
 * Node - An AnyLog node that's part of the network (ex. Master, Operator, Query)

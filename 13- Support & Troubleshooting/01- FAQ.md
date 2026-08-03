@@ -213,7 +213,7 @@ Supported Databases:
 
 In addition, AnyLog can coonect to Milvus for vector/similarity search.
 
-See [Databases](../09-%20Data%20Management/02-1%20Databases/02-%20Databases.md) for the full breakdown and how SQL
+See [Databases](../09-%20Data%20Management/02-%20Databases.md) for the full breakdown and how SQL
 and blob storage relate to each other.
 
 **Q: How do I connect to them?**
@@ -222,7 +222,7 @@ CConnectivity logic / command differs by the database type
 
 * [SQL Storage - PostgresSQL / SQLite](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md)
 * [MongoDB](../09-%20Data%20Management/02-1%20Databases/03-%20NoSQL%20(MongoDB).md)
-* [MinIO](../09-%20Data%20Management/02-1%20Databases/99-%20MinIO.md)
+* [MinIO](04-%20Third-Party%20Support/02-%20MinIO.md)
 * [Milvus](../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md) for connection syntax specific to each.
 
 **Q: How is data partitioned, and why do some tables have a `par_` prefix?**
@@ -299,7 +299,7 @@ to also split on a per-row `table` field, or distinct readings under the same to
 
 The three most common causes: `Null` instead of lowercase `null`; a trailing comma on the last key in an object;
 a doubled opening quote on a string (easy to miss when copy-pasting). See
-[Mapping Policy](../09-%20Data%20Management/02-1%20Databases/04-%20Mapping%20Policy.md) for the full schema
+[Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md) for the full schema
 reference.
 
 **Q: My mapping policy is published but the Operator isn't using it.**
@@ -469,7 +469,7 @@ curl -X GET 127.0.0.1:32349 -H "command: get status" -H "AnyLog-Agent: AnyLog/1.
 curl -X POST 127.0.0.1:32349 -H "Content-Type: application/json" \
   -d '{"command": "get status", "AnyLog-Agent": "AnyLog/1.23"}'
 ```
-See [Using REST](../08-%20Northbound%20Connectors/A-%20Direct%20Connectors%20Generic/Using%20REST.md) for full
+See [Using REST](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md) for full
 publish examples (PUT and POST) and Python code.
 
 **Q: Should I use `User-Agent` or `AnyLog-Agent`?**

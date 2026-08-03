@@ -13,7 +13,7 @@ source_path: "02- DNP3 - Mapping-Policies.md"
 
 # DNP3 Mapping Policies — Reusing a Schema Across Connections
 
-[DNP3](../DNP3.md) documents `map` as a JSON array supplied directly in the `get plc values` / `run plc client`
+[DNP3](../04-%20DNP3.md) documents `map` as a JSON array supplied directly in the `get plc values` / `run plc client`
 command — every example on that page writes the point list out in full, inline. That's the right approach for a
 single connection, or for testing. For a deployment with several outstations that share the same, or nearly the
 same, point layout — several substations of the same model, for instance — repeating an identical `map` array in
@@ -43,11 +43,11 @@ The policy has one required shape:
 
 - `namespace` + `name` together identify the policy — this pair is the lookup key, and not coincidentally, it's
   the same `namespace`/`name` pair used when registering the connection in the UNS (see
-  [DNP3 — Dynamic ingest with UNS](../DNP3.md#dynamic-ingest-with-uns-namespace--master_node)). Using the same
+  [DNP3 — Dynamic ingest with UNS](../04-%20DNP3.md#dynamic-ingest-with-uns-namespace--master_node)). Using the same
   values for both isn't required by the platform, but it keeps one connection's identity, UNS registration, and
   mapping policy all pointing at the same pair of values instead of three independently-tracked names.
 - `schema` is exactly the same array documented as `map` in
-  [DNP3 — Connection and map](../DNP3.md#connection-and-map) — the same `name`/`type`/`index` (or
+  [DNP3 — Connection and map](../04-%20DNP3.md#connection-and-map) — the same `name`/`type`/`index` (or
   `group`/`variation`) objects, just stored as policy data instead of typed inline.
 
 ## Looking up an existing policy
@@ -64,7 +64,7 @@ earlier, identical outstation deployment reusing the same namespace/name convent
 ## Publishing a new policy
 
 If no matching policy exists yet, build one and insert it — following the same
-[sign → insert](../../05-%20Networking%20&%20Security/Built-in%20Authentication/Authentication.md#signing-a-policy)
+[sign → insert](../../../06-%20Networking%20%26%20Security/07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#signing-a-policy)
 pattern used for any other policy type:
 
 ```anylog
@@ -82,7 +82,7 @@ blockchain insert where policy = !new_policy and local = true and master = !ledg
 ```
 
 (A full deployment script wraps this with signing and error handling — see
-[Deploying a DNP3 Connector via Script](DNP3 - Deploying Connector via Script.md#prep-policy--build-a-new-mapping-policy)
+[Deploying a DNP3 Connector via Script](01-%20DNP3%20-%20Deploying%20Connector%20via%20Script.md#prep-policy--build-a-new-mapping-policy)
 for the complete pattern, including the check-then-create flow that avoids republishing an identical policy on
 every run.)
 
@@ -107,7 +107,7 @@ in the standard `run plc client` command:
 >
 ```
 
-This is identical to every other `run plc client` example in [DNP3](../DNP3.md) — the only difference is that `map`
+This is identical to every other `run plc client` example in [DNP3](../04-%20DNP3.md) — the only difference is that `map`
 is populated from a variable resolved via a policy lookup, rather than written out as a literal array in the
 command itself.
 
@@ -135,10 +135,10 @@ deployments of otherwise-identical equipment):
 
 The tradeoff is a layer of indirection: reading a deployment script alone (without also checking the published
 policy) won't tell you the actual point map in use. For a one-off connection or a quick test, the inline `map`
-array shown throughout [DNP3](../DNP3.md) remains simpler.
+array shown throughout [DNP3](../04-%20DNP3.md) remains simpler.
 
 ## See also
 
-- [DNP3](../DNP3.md) — the underlying `get plc values`/`run plc client` command reference
-- [Deploying a DNP3 Connector via Script](DNP3 - Deploying Connector via Script.md) — a full deployment
+- [DNP3](../04-%20DNP3.md) — the underlying `get plc values`/`run plc client` command reference
+- [Deploying a DNP3 Connector via Script](01-%20DNP3%20-%20Deploying%20Connector%20via%20Script.md) — a full deployment
   script using this pattern, with TLS branching and error handling

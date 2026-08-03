@@ -72,4 +72,4 @@ To access Remote-CLI the default URL is [http://${YOUR_LOCAL_IP}:31800]()
 When using _Kubernetes_, changes done in `commands.json` will not be persistent due to the way [Kubernetes volumes](../Networking%20%26%20Security/kubernetes%20volumes.md) 
 work. 
 
-* Examples of using Remote-CLI can be found in our [northbound connectors](../../northbound%20connectors/remote_cli.md) section
+* Examples of using Remote-CLI can be found in our [northbound connectors](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/remote_cli.md) section

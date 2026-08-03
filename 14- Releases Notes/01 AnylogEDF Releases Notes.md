@@ -24,20 +24,20 @@ AnyLog Version: 2.0.2606 (ms-dev - 4bd615 [2026-07-06 00:02:19])
 
 AnyLog Version: 1.5.2605 [2026-06-30 18:35:19]
 ### New Features
-1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see [details](../dictionary.md#referencing-values-in-a-list-of-dictionaries).
+1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see [details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/02-%20dictionary.md#referencing-values-in-a-list-of-dictionaries).
 
 AnyLog Version: 1.5.2605 [2026-06-12 18:37:39]
 ### New Features
-1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../sql%20setup.md#the-metadata) 
-2. Add **include** and **exclude** options to the command ```blockchain get root policies``` - See details [here](../blockchain%20commands.md#filtering-root-policies)
+1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#the-metadata) 
+2. Add **include** and **exclude** options to the command ```blockchain get root policies``` - See details [here](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#filtering-root-policies)
 
 AnyLog Version: 1.4.2510-beta3 [e0d9e1] [2026-03-08 17:52:24]
 ### New Features
 1. New options for issuing AnyLog commands via REST: 
-    * [Specifying commands in the message URL](../using%20rest.md#specifying-commands-in-the-message-url)
-    * [Specifying commands in the message body](../using%20rest.md#specifying-commands-in-the-message-body)
+    * [Specifying commands in the message URL](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#specifying-commands-in-the-message-url)
+    * [Specifying commands in the message body](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#specifying-commands-in-the-message-body)
 
-AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../blockchain%20commands.md#retrieving-root-policies)
+AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#retrieving-root-policies)
 ### New Features
 1. New command option: **blockchain get root policies**  
 2. ```set mcp client config``` command - Configure an active MCP connection to automatically disconnect after a specified period of inactivity. The default timeout is one hour.
@@ -54,21 +54,21 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1.  Add timezone to query casting options. [Details](../queries.md#example-8---timezone-and-datetime)
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
-1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../blockchain%20commands.md#join-merge-operations)
+1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#join-merge-operations)
 
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
-1. New command: ```file from``` - Return a file via REST. [Details](../file%20commands.md#return-a-file-via-rest)
+1. New command: ```file from``` - Return a file via REST. [Details](../07-%20CLI/08-%20File%20Commands.md#return-a-file-via-rest)
 
 ## AnyLog Version: 1.3.2504-beta22 [69bf12] [2025-08-16 19:18:49]
 1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../anylog%20commands.md#conditional-execution)
 
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
-1. (AE) New options for ```get columns``` command. [Details](../sql%20setup.md#the-get-columns-command)
+1. (AE) New options for ```get columns``` command. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#the-get-columns-command)
 
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
-1. (A) The command ```run helpers``` initiates AnyLog helper processes. [Details](../helpers.md)
-2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](../helpers.md#dynamic-monitoring-of-internal-processes)
+1. (A) The command ```run helpers``` initiates AnyLog helper processes. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md)
+2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md#dynamic-monitoring-of-internal-processes)
 
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command
@@ -178,12 +178,12 @@ policy = create policy license where company = !company. and expiration = !expir
 ## **Version**: [024a85] [2024-12-21 13:31:31]
 ### New Features:
 1. (AE) A new command: **file to** - write a file to a specified directory, using CLI or via REST. 
-   Details are in [Copy a file to a folder](../file%20commands.md#copy-a-file-to-a-folder) section.  
-   This command can be used to remotely copy configurations to a node. An example is available in the [using rest](../using%20rest.md#examples) section.
+   Details are in [Copy a file to a folder](../07-%20CLI/08-%20File%20Commands.md#copy-a-file-to-a-folder) section.  
+   This command can be used to remotely copy configurations to a node. An example is available in the [using rest](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#examples) section.
 2. The command **process** is supported using REST PUT.
 ### Changes
 1. (AE) The required structure for the file name in the **file store** command is optional. 
-   See details in the [Insert a file to a local database](../image%20mapping.md#insert-a-file-to-a-local-database) section. 
+   See details in the [Insert a file to a local database](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#insert-a-file-to-a-local-database) section. 
 
 ## **Version**: [a4924f] [2024-12-07 16:49:46] /
 ### New Features:
@@ -201,7 +201,7 @@ policy = create policy license where company = !company. and expiration = !expir
 1. (AE) Create EdgeLake branch.
 2. Update **blockchain set account info** call to include the Chain ID. 
 3. (AE) Add options to create HTML documents from a query.
-4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](../sql%20setup.md#connecting-to-a-local-database).
+4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#connecting-to-a-local-database).
 
 ### New Features:
 1. (AE) New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).
@@ -211,23 +211,23 @@ policy = create policy license where company = !company. and expiration = !expir
 ### New Features
 1. (AE) Adding support to gRPC [Using gRPC](../using%20grpc.md)
 2. (AE) Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
-3. (AE) **delete archive** command. Details: [Operator data archival](../background%20processes.md#operator-data-archival). 
+3. (AE) **delete archive** command. Details: [Operator data archival](../07-%20CLI/02-%20Background%20Processes.md#operator-data-archival). 
 4. (AE) Adding support to syslog [Using SysLog](../using%20syslog.md)
 
 ## **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
 ### New Features
 1. (AE) Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
-2. (AE) Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../high%20availability.md#view-the-distribution-of-data-to-clusters)
+2. (AE) Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../09-%20Data%20Management/03-%20High%20Availability.md#view-the-distribution-of-data-to-clusters)
 
 ## **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
 ### New Features:
-1.  (AE) pip Install. Details: [pip Install](../training/advanced/Pip%20Install.md)
+1.  (AE) pip Install. Details: [pip Install](../02-%20Installation%20%26%20Deployment/02-%20Virtualization/06-%20Pip%20Install.md)
 2.  (AE) Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../training/advanced/background%20deployment.md).
 3.  (AE) Map a local CLI to a peer node. Details: [Assigning a CLI to a peer node](../training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
-4.  (AE) Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../blockchain%20commands.md#retrieving-the-metadata-from-a-source-node)
-5.  (AE) [Associating peer replies to a key in the dictionary](../network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary).    
+4.  (AE) Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#retrieving-the-metadata-from-a-source-node)
+5.  (AE) [Associating peer replies to a key in the dictionary](../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md#associating-peer-replies-to-a-key-in-the-dictionary).    
 6.  (AE) wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#the-wait-command)
 7.  (AE) Create policy command - a command option to declare policies and include default attributes. Details:
     [Creating policies using the Create Policy command](../policies.md#creating-policies-using-the-create-policy-command)
@@ -237,7 +237,7 @@ policy = create policy license where company = !company. and expiration = !expir
 ### Changes:
 
 1.  (AE) The command: **run blockchain sync where source = master**, if connection info is not provided, connection info is
-    retrieved from the policy of the Master Node. Details: [Blockchain Synchronizer](../background%20processes.md#blockchain-synchronizer).
+    retrieved from the policy of the Master Node. Details: [Blockchain Synchronizer](../07-%20CLI/02-%20Background%20Processes.md#blockchain-synchronizer).
     
 2. (AE) If echo queue is set to True - all stdout messages which are not the result of the user keyboard input on the CLI are directed to the echo queue.
 

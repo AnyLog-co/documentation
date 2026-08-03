@@ -88,7 +88,7 @@ See [Option C](#option-c--edgexpert-gui-based-1) below for the full walkthrough.
 - **EdgeXpert** (Option C): EdgeX plus the EdgeXpert Management tool installed (see [IoTech System](https://www.iotechsys.com/) / [User Guide](https://docs.iotechsys.com/))
 - An AnyLog node with TCP, REST, Streamer, and Operator services running — see Background Services
 - For Option A: the AnyLog Message Broker service running on the receiving node
-- For Option C's REST paths: the AnyLog REST service configured — see [Using REST](../A-%20Direct%20Connectors%20Generic/Using%20REST.md)
+- For Option C's REST paths: the AnyLog REST service configured — see [Using REST](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
 - For Option C's Message Broker path: the AnyLog Message Broker service — see [Message Broker](../A-%20Direct%20Connectors%20Generic/message%20broker.md)
 
 ---
@@ -567,4 +567,4 @@ f135b724626e   nexus3.edgexfoundry.org:10003/edgex-devops/edgex-modbus-simulator
 - [EdgeX Device Services — supported protocols](https://wiki.edgexfoundry.org/display/FA/Device+Services)
 - [IoTech System](https://www.iotechsys.com/) / [EdgeXpert User Guide](https://docs.iotechsys.com/)
 - [Message Broker](../A-%20Direct%20Connectors%20Generic/message%20broker.md)
-- [Using REST](../A-%20Direct%20Connectors%20Generic/Using%20REST.md)
+- [Using REST](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)

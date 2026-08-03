@@ -118,7 +118,7 @@ This is a node dedicated to querying data across the network. Beyond the [common
 `timeout = 90` for network setup, and the 60–90 second sync interval), it needs:
 
 * `system_query` logical database — where results get aggregated. We recommend using SQLite (in-memory), unless
-the Northbound Services have a [Postgres direct](../05-%20Northbound%20Connectors/04-%20Postgres%20Connector%20(Tableau).md) connection as opposed to using REST.
+the Northbound Services have a [Postgres direct](../05-%20Northbound%20Connectors/04-%20Postgres%20Connector%20%28Tableau%29.md) connection as opposed to using REST.
 
 ```anylog
 <connect dbms system_query where 

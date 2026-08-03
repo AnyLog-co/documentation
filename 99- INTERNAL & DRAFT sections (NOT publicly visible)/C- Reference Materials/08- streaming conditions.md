@@ -58,7 +58,7 @@ Note: to send an email, enable the SMTP server as in the example below:
 ```anylog
 run smtp client where email = anylog.iot@gmail.com and password = oeiussclzecgtkxu
 ```
-Details are available at the [SMTP Client](background%20processes.md#smtp-client) section.
+Details are available at the [SMTP Client](../../07-%20CLI/02-%20Background%20Processes.md#smtp-client) section.
 
 ## View declared conditions
 

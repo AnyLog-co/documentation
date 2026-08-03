@@ -62,7 +62,7 @@ each transaction from tens of dollars to pennies if not less.
 Optimism blockchain. 
 
 ### Links 
-* [Blockchain Commands](blockchain%20commands.md)
+* [Blockchain Commands](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
 * [Blockchain Configuration.md](blockchain%20configuration.md)
 * [policies.md](policies.md)
 

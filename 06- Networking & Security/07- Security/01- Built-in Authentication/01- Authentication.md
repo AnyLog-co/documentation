@@ -20,7 +20,7 @@ source_path: "01- Authentication.md"
 
 This document covers how to implement each of AnyLog's built-in authentication options: the commands, their
 options, and what each one does. For a general overview of how this fits alongside TPM and overlay networking,
-see [Securing the Network](../../03-%20Installation%20&%20Deployment/Securing%20the%20Network.md). For a full
+see [Securing the Network](../../03-%20Securing%20the%20Network.md). For a full
 worked example — assigning keys, building permission and assignment policies, and running a 2-operator demo end
 to end — see [Policy-Based Users and Keys — Example](Policy-Based%20Users%20and%20Keys%20—%20Example.md).
 
@@ -38,7 +38,7 @@ The network provides two layers of authentication:
 1) **Node Authentication** — processes that authenticate users and processes delivering messages from one node
    to another, and that authenticate policies registered on the blockchain. These messages are authenticated
    using the TCP server processes and related calls (see the
-   [TCP Server process](../../04-%20Core%20Concepts/background%20processes.md#the-tcp-server-process) section).
+   [TCP Server process](../../../07-%20CLI/02-%20Background%20Processes.md#the-tcp-server-process) section).
    Message authentication is based on issuing a private key and a public key to nodes and users. Messages are
    signed by the private key of the sender (a user or a node), and the destination node validates the sender
    using their public key and the policies that describe the sender's authorized functionality. Policies
@@ -46,7 +46,7 @@ The network provides two layers of authentication:
 
 2) **User Authentication** — processes that authenticate users and applications that are *not* members of the
    network (for example, a Grafana dashboard or a cURL request issuing a REST request to a node). See
-   [REST requests](../../04-%20Core%20Concepts/background%20processes.md#rest-requests) for details on REST
+   [REST requests](../../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) for details on REST
    handling. Authentication here is based on one of:
    - Usernames and passwords kept on the destination node — see [below](#users-authentication).
    - Client certificates validated against policies that define authorized functionality — see

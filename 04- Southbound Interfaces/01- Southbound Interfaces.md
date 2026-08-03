@@ -51,10 +51,10 @@ Local Database (SQLite / PostgreSQL)
 ## The connectors
 
 ### Built-in Southbound connectors
-* [REST](01-%20Direct%20Connectors/01-%20REST.md)
+* [REST](./02-%20Direct%20Connectors/01-%20REST.md)
   * **PUT** — data is stored as-is.
   * **POST** — requires a [message client](./02-%20Direct%20Connectors/01-%20REST.md) to translate the payload before it's stored.
-* [MQTT / Kafka](01-%20Direct%20Connectors/02-%20Message%20Broker.md) — utilizes AnyLog's built-in MQTT / Kafka message broker.
+* [MQTT / Kafka](02-%20Direct%20Connectors/02-%20Message%20Broker.md) — utilizes AnyLog's built-in MQTT / Kafka message broker.
 * [OPC-UA](03-%20Industrial%20Connectors/02-%20OPC-UA.md)
 * [Modbus](03-%20Industrial%20Connectors/01-%20Modbus.md)
 * [DNP3](03-%20Industrial%20Connectors/04-%20DNP3.md)
@@ -84,5 +84,5 @@ southbound pipeline — which is why monitoring configuration lives here rather 
 
 ## Dummy Data 
 
-We provide an MQTT connection to an array of different data sets. For details visit [Data Ingestion](07-%20Southbound%20Interfaces.md)
-or [Live Data Generator](99-%20live-data-generator.md) to run locally. 
+We provide an MQTT connection to an array of different data sets. For details visit [Data Ingestion](07-%20Data%20Ingestion.md)
+or [Live Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md) to run locally. 

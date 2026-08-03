@@ -20,7 +20,7 @@ There are two types of data within AnyLog: **metadata**, which is covered in
 operator node, whether it's sensor, device, monitoring, or other forms of blob data.
 
 Actual data itself splits further: device/sensor/monitoring data is covered in this section, while model and
-inference data is covered under [Extended Services](../09-%20Extended%20Services), which deals with MCP, LLMs, and
+inference data is covered under [Extended Services](../11-%20Extended%20Services/), which deals with MCP, LLMs, and
 other ML/AI non-device data.
 
 [Southbound](../04-%20Southbound%20Interfaces) services are how data gets **into** AnyLog (sensors,

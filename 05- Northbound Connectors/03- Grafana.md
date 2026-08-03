@@ -227,12 +227,12 @@ wholesale:
 * **[Network Map](../examples/grafana_json/network_summary.json)** — a map of all nodes in the network, a list of
   operator nodes, and a list of tables supported across the network.
 
-  ![grafana_network_map.png](../../imgs/grafana_network_map.png)
+  ![grafana_network_map.png](../imgs/grafana_network_map.png)
 
 * **[EdgeX Diagram](../examples/grafana_json/edgex_dashboard.json)** — a line graph of min/avg/max plus gauges for
   total and per-node row counts, fed from the EdgeX MQTT sample connection.
 
-  ![grafana_edgex_dashboard.png](../../imgs/grafana_edgex_dashboard.png)
+  ![grafana_edgex_dashboard.png](../imgs/grafana_edgex_dashboard.png)
 
 ### Steps
 

@@ -19,7 +19,7 @@ source_path: "02 File Commands.md"
 
 The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.  
 In the examples below, the ***local node*** is the node where the command is executed. 
-The ***remote node*** is identified by the IP and Port declared in the [run tcp server](background%20processes.md#the-tcp-server-process) process.
+The ***remote node*** is identified by the IP and Port declared in the [run tcp server](02-%20Background%20Processes.md#the-tcp-server-process) process.
 
 Operations supported:
 
@@ -47,13 +47,13 @@ List files or directories:
 | [get files](#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
 | [get directories](#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
 
-Operations on files stored in a dedicated database (details are available in the [Image Mapping](image%20mapping.md#image-mapping) document):
+Operations on files stored in a dedicated database (details are available in the [Image Mapping](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping) document):
 
 | Operation  | ---- | 
 | ------------- | ---- |
-| [file remove](image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
-| [file retrieve](image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
-| [file Store](image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
+| [file remove](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
+| [file retrieve](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
+| [file Store](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
 
 ## Files names
 

@@ -124,5 +124,5 @@ Plain TCP, no TLS: run `./outstation-demo` instead, from the same directory.
 
 ## See also
 
-- [DNP3](../07-%20Southbound%20Interfaces/A-%20Direct%20-%20Built-in%20connectors%20%28protocols%20AnyLog%20natively%20accepts%20from%20devices%29/DNP3.md#dnp3-out-station-testing) —
+- [DNP3](../04-%20DNP3.md#dnp3-out-station-testing) —
   the main DNP3 connector doc; this page is referenced from its outstation-testing section.

@@ -243,7 +243,7 @@ exit plc nov.rig8
 ## OPC-UA with aggregations
 
 Aggregation functions summarize streaming data over a time interval, enabling real-time analytics without storing raw
-data. See details in the [Aggregations](../../06-%20Data%20Management/B-%20Query%20&%20Aggregations/Aggregations.md) section.
+data. See details in the [Aggregations](../../09-%20Data%20Management/02-2%20Data%20Aggregations.md) section.
 
 ### 1. Identify the time and value column names
 

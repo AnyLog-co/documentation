@@ -177,7 +177,7 @@ The example above returns th string: ```my_company```
 
 Note: **.len**, **.replies**, and **.diff** are used when the entry in the dictionary aggregates replies 
 from multiple peer nodes. The explanation is available int the 
-[Associating peer replies to a key in the dictionary](network%20processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
+[Associating peer replies to a key in the dictionary](../../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
 
 ## Setting policies using the dictionary

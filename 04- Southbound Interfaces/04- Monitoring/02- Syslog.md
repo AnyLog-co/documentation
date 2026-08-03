@@ -32,7 +32,7 @@ separately.
 > **Prefer automation?** Everything below — the rsyslog forwarding rule and the AnyLog-side message rule — can be set
 > up automatically via the dotenv-driven `syslog.sh` script, wired into `make setup SERVICE=syslog`. It reads
 > `SYSLOG_MONITORING` and `ANYLOG_BROKER_PORT` from your node's `node_configs.env` and is idempotent (safe to re-run,
-> and a no-op if `SYSLOG_MONITORING != "true"`). See the [Docker & K8s Commands](../02-%20Docker%20%26%20K8s%20Commands.md#syslog-forwarding)
+> and a no-op if `SYSLOG_MONITORING != "true"`). See the [Docker & K8s Commands](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20%26%20K8s%20Commands.md#syslog-forwarding)
 > doc for the exact command. The manual walkthrough below is for understanding what that automation is doing, or for
 > setting things up by hand.
 

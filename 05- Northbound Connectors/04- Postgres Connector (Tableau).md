@@ -126,23 +126,23 @@ AL aiops-single-node > query explain
 07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract
 ```
 
-For the full list of SQL query options, see [Query Data — Query options](../../02-%20Training%20%26%20Tutorials/Query%20Data.md#query-options).
+For the full list of SQL query options, see [Query Data — Query options](../03-%20Training%20%26%20Tutorials/03-%20Query%20Data.md#query-options).
 
 ## Extracting data into Tableau
 
 1. [Download & install Tableau](https://www.tableau.com/products/desktop/download)
 2. Under **Data** → **Data Sources**, select the PostgreSQL connector type:
 
-| ![data](../../imgs/tableau_img2a.png) | ![data source](../../imgs/tableau_img2b.png) |
+| ![data](../imgs/tableau_img2a.png) | ![data source](../imgs/tableau_img2b.png) |
 | --- | --- |
 
 3. Fill out the connection information and press "OK":
 
-![connection information](../../imgs/tableau_img3.png)
+![connection information](../imgs/tableau_img3.png)
 
 4. Double-click on the table you want to use (in this case `new_table`) and go to the worksheet:
 
-![prep worksheet data](../../imgs/tableau_img4.png)
+![prep worksheet data](../imgs/tableau_img4.png)
 
 ## Generating graphs
 
@@ -154,8 +154,8 @@ dataset. Because of that, mapping the final result columns to something readable
 - **SUM(SUM__VALUE) / COUNT(new_table_count)** is the `AVG(value)` column
 - **Max 5** is the `MAX(value)` column
 
-![column explanation](../../imgs/tableau_img5.png)
+![column explanation](../imgs/tableau_img5.png)
 
 To generate a graph, use "Min 2" as **Columns** and all the others as **Rows**:
 
-![generated image](../../imgs/tableau_img6.png)
+![generated image](../imgs/tableau_img6.png)

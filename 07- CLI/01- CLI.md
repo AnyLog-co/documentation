@@ -190,7 +190,7 @@ commands, defined through [deployment scripts](../03-%20Training%20&%20Tutorials
 configuration policies, define the node to be a part of the network with the correct services and database associated
 with it.
 
-When a user defines / creates their own script — see [Docker & K8s Commands](../03-%20Training%20&%20Tutorials/99-%20Docker%20&%20K8s%20Commands.md)
+When a user defines / creates their own script — see [Docker & K8s Commands](../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20%26%20K8s%20Commands.md)
 for support — they can then run their script in 2 ways:
 
 * `process` - runs the script on the main AnyLog thread.
@@ -254,4 +254,4 @@ AL >
 ## Next: scripting and control flow
 
 For conditional logic, labeled sections, loops, and the wait command, see
-[Conditional Execution & Control Flow](05-%20Conditional%20Execution%20and%20Control%20Flow.md).
+[Conditional Execution & Control Flow](07-%20Conditional%20Execution%20and%20Control%20Flow.md).

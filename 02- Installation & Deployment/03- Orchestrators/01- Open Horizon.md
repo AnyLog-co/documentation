@@ -4,10 +4,7 @@ description: ""
 layout: page
 source_path: "deployments/Open-Horizon/01- Open Horizon.md"
 ---
-<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/01- Open Horizon.md
-
 =======
->>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/A- Open-Horizon (IBM)/Open Horizon.md
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
@@ -16,13 +13,11 @@ source_path: "deployments/Open-Horizon/01- Open Horizon.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 --->
-<<<<<<< HEAD:02- Installation & Deployment/02- Orchestrators/01- Open Horizon.md
 =======
 
 
 to be completed
 
->>>>>>> origin/pre-develop:09- Integrations/C- Deployment tools/A- Open-Horizon (IBM)/Open Horizon.md
 
 
 
@@ -118,7 +113,7 @@ newgrp docker
 ```
 
 At the end of the process, OpenHorizon should show a new active node
-![OpenHorizon_node_state.png](A- Open-Horizon (IBM)/imgs/OpenHorizon_node_state.png)
+![OpenHorizon_node_state.png](../../imgs/OpenHorizon_node_state.png)
 
 
 # AnyLog
@@ -139,7 +134,7 @@ This process is detailed below.
 
 3. Declare _AnyLog_ as a device image - Docker login credentials are received using: [AnyLog Downloads](https://anylog.co/download-anylog)
 
-![OpenHorizon_device_info.png](A- Open-Horizon (IBM)/imgs/OpenHorizon_device_info.png)
+![OpenHorizon_device_info.png](../../imgs/OpenHorizon_device_info.png)
 
 4. Configure Service variables 
 * `INIT_TYPE` (**value**: training) - Which AnyLog scripts to use for the deployment 
@@ -157,20 +152,20 @@ This process is detailed below.
 
 5. Under "Deployment Options", Enable _Host Network Mode_
 
-![OpenHorizon_deployment_options.png](A- Open-Horizon (IBM)/imgs/OpenHorizon_deployment_options.png)
+![OpenHorizon_deployment_options.png](../../imgs/OpenHorizon_deployment_options.png)
 
 6. Save changes - you should see "anylog-node" as a published service 
 
-![OpenHorizon_published_service.png](A- Open-Horizon (IBM)/imgs/OpenHorizon_published_service.png)
+![OpenHorizon_published_service.png](../../imgs/OpenHorizon_published_service.png)
 
 7. Create an AnyLog pattern 
-![OpenHorizon_sample_pattern.png](A- Open-Horizon (IBM)/imgs/OpenHorizon_sample_pattern.png)
+![OpenHorizon_sample_pattern.png](../../imgs/OpenHorizon_sample_pattern.png)
 
 ## Create AnyLog node as a Service on Open Horizon
 
 1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
 
-2. Update variables in the `service.definition.json` configuration file at ([Operator Node](operator/service.definition.json)) with the following:
+2. Update variables in the `service.definition.json` configuration file at (<a href="https://github.com/open-horizon-services/service-anylog/blob/main/sample-deployment-policy/generic.deployment.json" target="_blank">Operator Node</a>) with the following:
 
 | Variable       | Update with                             | Default Value | Comments     |
 | -------------- | --------------------------------------- |  ------------ | ------------ |

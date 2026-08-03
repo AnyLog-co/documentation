@@ -20,7 +20,7 @@ This page demonstrates an end-to-end pattern for AnyLog's key-based authenticati
 users, defining the policies that determine permissions, and assigning nodes/users to those policies. For the
 concepts and individual commands used here, see [Authentication](01- Authentication.md). For where this fits
 alongside TPM and overlay networking, see
-[Securing the Network](../../03-%20Installation%20&%20Deployment/Securing%20the%20Network.md).
+[Securing the Network](../../03-%20Securing%20the%20Network.md).
 
 ## Definitions
 

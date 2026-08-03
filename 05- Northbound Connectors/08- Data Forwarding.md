@@ -46,7 +46,7 @@ curl -X POST 'http://10.0.0.78:32349' \
   -w "\n"
 ```
 
-Both return the same result set. See [Using REST](../07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/Using%20REST.md)
+Both return the same result set. See [Using REST](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
 for the full GET/POST reference, including why `AnyLog-Agent` (not `User-Agent`) is the key to use in a POST body
 specifically.
 

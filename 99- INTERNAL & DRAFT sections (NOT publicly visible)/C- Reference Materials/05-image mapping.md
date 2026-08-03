@@ -100,7 +100,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 ``` 
 
-Additional information is available at the [configuring a local database](sql%20setup.md#configuring-a-local-database) section.
+Additional information is available at the [configuring a local database](03-%20sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -256,7 +256,7 @@ trace level = 0 file store
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
-The command [file get](file%20commands.md#file-copy-from-a-remote-node-to-a-local-node)
+The command [file get](../../07-%20CLI/08-%20File%20Commands.md#file-copy-from-a-remote-node-to-a-local-node)
 is used to copy files from a remote node to the local node.   
 If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
 
@@ -303,7 +303,7 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
       ```anylog
       run blobs archiver where dbms = true and folder = true and compress = False
       ```
-      Details on configuration of the Blobs Archiver process are available [here](background%20processes.md#the-blobs-archiver).
+      Details on configuration of the Blobs Archiver process are available [here](../../07-%20CLI/02-%20Background%20Processes.md#the-blobs-archiver).
     
 ## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)

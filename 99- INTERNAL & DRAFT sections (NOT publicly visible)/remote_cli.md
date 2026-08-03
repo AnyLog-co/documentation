@@ -25,11 +25,11 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](../background%20processes.md#rest-requests) section.
+Configuring a node to recieve REST requests is detailed in the [REST Requests](../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section.
 
 ## Installing the Remote CLI
 
-Details are available [here](../ORPHANS/x09-examples-training/deployments/Support/%5Bdeprecated%5D%20Remote%20CLI%20.md).
+Details are available [here](../10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/%5Bdeprecated%5D%20Remote%20CLI%20.md).
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  

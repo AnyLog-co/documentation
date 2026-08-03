@@ -91,7 +91,7 @@ def tree(dir_path: Path, depth: int = 0):
 
 
 def get_top_level_directories():
-    """Return only top-level directories 01 through 20."""
+    """Return only top-level directories 01 through 13."""
 
     directories = []
 
@@ -106,7 +106,7 @@ def get_top_level_directories():
 
         number = int(prefix)
 
-        if 1 <= number <= 20:
+        if 1 <= number <= 13:
             directories.append(path)
 
     return sorted(

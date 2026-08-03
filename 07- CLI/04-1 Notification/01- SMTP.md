@@ -47,7 +47,7 @@ run smtp client where email = anylog.iot@gmail.com and password = [password]
 ## Sending a message
 
 To facilitate messages, declare the _SMTP_ client process. Details are available at
-[Background Processes](../07-%20CLI/02-%20Background%20Processes.md) (see the Services overview table — `run smtp client`).
+[Background Processes](../02-%20Background%20Processes.md) (see the Services overview table — `run smtp client`).
 
 ### Sending an email
 **Usage**:

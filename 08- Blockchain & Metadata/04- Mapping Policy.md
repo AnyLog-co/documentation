@@ -135,7 +135,7 @@ function that's able to translate a numeric epoch value into a timestamp.
 ## Blob Data
 
 Blob data is also unique because it requires mapping data that's ultimately stored in a
-[NoSQL database](image%20mapping.md#image-mapping) to its associated SQL representation. For this, AnyLog supports
+[NoSQL database](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping) to its associated SQL representation. For this, AnyLog supports
 base64 encoding and OpenCV encoding.
 
 ```json

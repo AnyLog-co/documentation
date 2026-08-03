@@ -13,7 +13,7 @@ layout: page
 There are 2 ways by which to store blob data - [NoSQL](./03-%20NoSQL%20(MongoDB).md) and bucket storage, whether it's
 MinIO, Akave (Filecoin's S3 alternative), or AWS's S3 and the likes.
 
-* MinIO (S3-compatible) — see [MinIO](99-%20MinIO.md) for connection setup, Docker deployment, and troubleshooting.
+* MinIO (S3-compatible) — see [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md) for connection setup, Docker deployment, and troubleshooting.
 * Akave Cloud (currently supported for file object management).
 * AWS S3 (the API is AWS-compatible, but direct support is not yet fully tested. Official AWS support will be extended soon).
 
@@ -43,7 +43,7 @@ Defines a logical connection to a named bucket object storage.
 | provider       | Provider name (`minio` or `akave` — see note below) |
 | id / access_key | Private access key (either name works)             |
 | password / secret_key | Private secret key (either name works)       |
-| region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. [MinIO](99-%20MinIO.md#credentials)) |
+| region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md#credentials)) |
 | endpoint_url   | URL connection to object storage                    |
 
 > `provider` currently lists `minio`/`akave` — AWS S3 is API-compatible and mentioned above as a future target, but

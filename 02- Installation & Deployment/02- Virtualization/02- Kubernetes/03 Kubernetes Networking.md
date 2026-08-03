@@ -24,14 +24,14 @@ Kubernetes Orchestrator generates a unique virtual IP each time a node is deploy
 Since communication between nodes is policy based, AnyLog cannot have a new virtual IP each time a node is deployed. 
 
 As such, the configuration file, for Kubernetes, has a configuration called `KUBERNETES_SERVICE_IP` which should be set 
-to the service name of the deployment. When using the [deployment scripts](../deploying%20node.md), this step is done 
-automatically. 
+to the service name of the deployment. When using the [deployment scripts](../../../03-%20Training%20&%20Tutorials/05-%20deployment-scripts.md), 
+this step is done automatically. 
 
 Once set, the network connectivity will be done with the virtual IP address for local IP. However, on the blockchain the 
 local_ip will be set to the service name; which other members on the Kubernetes cluster can utilize.
 
 When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/) or other proxy service, as well as our
-[configuration policy](../../policies.md).
+[configuration policy](../../../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md).
 
 Directions for using Kubernetes Cluster Networking can be found [here](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
@@ -49,7 +49,7 @@ The following chart summarizes the setup:
 | REST             | Vritul IP   | Virtual IP | `run rest server...`    |
 | TCP              | External IP | Virtual IP | `run message broker...` |
 
-Farther details regarding things like binding and thread count can be found in our [networking section](../../network%20configuration.md)
+Farther details regarding things like binding and thread count can be found in our [networking section](../../../06-%20Networking%20&%20Security/02-%20Network%20Processing.md)
 
 ## Sample Node Policy for Kubernetes
 The following provides a basic example of both the configuration policy, as-well-as a (master) node policy. 
