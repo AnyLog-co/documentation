@@ -20,9 +20,9 @@ database called system_query and uses blockchain metadata to locate the relevant
 and assemble a unified result — letting a query behave as though all the data resides locally on a single machine.
 
 **Related Topics**:
-* [Data Storage]()
-* [Data Discovery]()
-* [Query Blob Data]()
+* [Data Storage](../09-%20Data%20Management/02-%20Databases.md)
+* Data Discovery
+* [Query Blob Data](../09-%20Data%20Management/02-1%20Databases/02-%20Blob%20Storage.md)
 
 ## SQL + `run client ()`
 

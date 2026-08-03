@@ -20,7 +20,7 @@ The following document provides directions on how to insert data via REST.
 
 The `run rest` connection should be enabled by default as part of the configuration policy.
 
-A more detailed explanation of this command can be found in the [network configuration section]().
+A more detailed explanation of this command can be found in the [network configuration section](../../06-%20Networking%20&%20Security/02-%20Network%20Processing.md).
 
 ```anylog
 <run rest server where 

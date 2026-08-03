@@ -18,11 +18,11 @@ source_path: "background processes.md#message-broker"
   Message Broker*. |
 --->
 
-As described in the [networking]() section, AnyLog contains a built-in message broker that can be used for MQTT,
+As described in the [networking](../../06-%20Networking%20&%20Security) section, AnyLog contains a built-in message broker that can be used for MQTT,
 Kafka, REST, and other services — simply by defining the message-client mapping logic for the topic. Setting AnyLog
 as a message broker is referenced as **Option B** in the Southbound Connectors diagram.
 
-The [Northbound Interfaces]() cover using an AnyLog agent as a producer; this document covers AnyLog as a consumer.
+The [Northbound Interfaces](../../05-%20Northbound%20Connectors) cover using an AnyLog agent as a producer; this document covers AnyLog as a consumer.
 
 This document demonstrates:
 1. Configuring an AnyLog node as a broker.

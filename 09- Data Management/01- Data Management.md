@@ -31,11 +31,11 @@ how that application actually writes to and reads from the database underneath i
 
 ## Topics Covered
 
-* [Database Connectors]()
-* [Data Management](), whether it's HA, validation of what came in, or simply understanding how data works
-* [Data Partitioning]()
-* [Data Aggregation]()
-* [Querying Data]()
+* [Database Connectors](./02-%20Databases.md)
+* Data Management, whether it's HA, validation of what came in, or simply understanding how data works
+* [Data Partitioning](./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
+* [Data Aggregation](./02-2%20Data%20Aggregations.md)
+* [Querying Data](../05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md)
 
 ## The Data Process
 

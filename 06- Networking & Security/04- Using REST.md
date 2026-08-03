@@ -122,7 +122,7 @@ curl -X POST http://[Node IP]:[Node REST Port] \
 
 * publish blockchain policy - this is only a _POST_ command.
 The `blockchain insert` command is interesting as the destination is part of the command as opposed to being part of the header. 
-The document [blockchain.md]() provides more information. 
+The document [blockchain.md](../08-%20Blockchain%20&%20Metadata/01-%20Blockchain.md) provides more information. 
 
 ```shell
 curl -X POST  http://[Node IP]:[Node REST Port] \

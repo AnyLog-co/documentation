@@ -64,7 +64,7 @@ The following provides a breakdown of the different directories under ${CONTAINE
 
 ### Deployment Scripts
 
-Please visit [deployment-scripts]() for more details. 
+Please visit [deployment-scripts](../../03-%20Training%20&%20Tutorials/05-%20deployment-scripts.md) for more details. 
 
 ## Accessing Volumes
 
