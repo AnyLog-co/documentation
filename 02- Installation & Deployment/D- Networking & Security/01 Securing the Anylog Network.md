@@ -181,27 +181,24 @@ Initialize the tpm on operator 1, operator 2, and master. The example below assu
 
 Opr.1
 ```anylog
-tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir1
 tpm_port = 8001
 tpm_ip = $INET_IP
 tpm_base_url = !tpm_ip + : + !tpm_port
-tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+tpm set where conn = !tpm_base_url 
 ```
 Opr.2
 ```anylog
-tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir2
 tpm_port = 8002
 tpm_ip = $INET_IP
 tpm_base_url = !tpm_ip + : + !tpm_port
-tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+tpm set where conn = !tpm_base_url
 ```
 master
 ```anylog
-tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/tpm_shared_dir3
 tpm_port = 8003
 tpm_ip = $INET_IP
 tpm_base_url = !tpm_ip + : + !tpm_port
-tpm set where conn = !tpm_base_url and tpm_dir = !tpm_dir
+tpm set where conn = !tpm_base_url 
 ```
 
 ### Step 1 - Generate keys for the Root User
