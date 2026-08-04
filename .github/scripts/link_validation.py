@@ -237,7 +237,7 @@ def main():
             for r in file_results:
                 status = "OK  " if r.ok else "FAIL"
                 print(f"  [{status}] ({r.kind:6}) {r.raw_dest}"
-                      f"{'  -> ' + r.detail if r.detail else ''}" if )
+                      f"{'  -> ' + r.detail if r.detail else ''}")
 
     # print("\n" + "=" * 60)
     if broken:
