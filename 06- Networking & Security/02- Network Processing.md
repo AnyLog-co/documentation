@@ -97,7 +97,7 @@ EDF, or just an isolated machine that happens to run the software.
 
 AnyLog uses 3 major ports for communication between nodes. These ports are defined in both the config policy and
 node policy. For the default ports assigned per node type (Master, Operator, Query, Publisher, Generic), see
-[Intro to Networking and Security](A-%20Networking%20%26%20Security.md#networking) — the examples below use
+[Intro to Networking and Security](./01-%20Networking%20&%20Security.md) — the examples below use
 bracketed placeholders since the actual values depend on your deployment.
 
 ### TCP Service
@@ -138,7 +138,7 @@ means no wait limit; default is `20` seconds. If `ssl` is set to `true`, the con
 
 ### Broker Service
 
-The Broker service port is a TCP-based connection that acts as AnyLog's built-in [message broker](../07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/message%20broker.md).
+The Broker service port is a TCP-based connection that acts as AnyLog's built-in [message broker](./05-%20Message%20Broker.md).
 This port can accept data from different sources (e.g. Kafka, MQTT, Modbus) from a single point, and understands
 how to interpret it based on a correlating message client service.
 
@@ -173,7 +173,7 @@ inside Docker's internal networking.
 | `<custom-name>` | Attach to a pre-existing external Docker network (`external: true`) — the user must define this network themselves beforehand |
 
 A custom overlay network (e.g. Nebula) is one instance of the `<custom-name>` case — see
-[Overlay Networking](03%20overlay-network.md) for a full worked example.
+[Overlay Networking](06-%20%20Network/01-%20Intro%20Overlay%20Network.md) for a full worked example.
 
 ### `NIC_TYPE` — which interface identifies this agent
 
@@ -195,7 +195,7 @@ requests back to it. Choosing the wrong NIC doesn't cause a startup failure; it 
 address nobody else can actually use.
 
 If the agent is joined to an overlay network, `NIC_TYPE` is typically set to the overlay's virtual interface (e.g.
-`nebula1`) rather than a physical NIC — see [Overlay Networking](03%20overlay-network.md) for how that interface
+`nebula1`) rather than a physical NIC — see [Overlay Networking](06-%20%20Network/01-%20Intro%20Overlay%20Network.md) for how that interface
 gets created.
 
 **`NIC_TYPE` vs. `OVERLAY_IP`:** with only `bind=true`/`false` available today, `OVERLAY_IP` doesn't add much beyond

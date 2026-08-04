@@ -552,4 +552,4 @@ get installed packages           # list of installed Python packages
 ```
 
 For the commands to test connectivity and validate node/network health (`test node`, `test network`, `test process`, etc.),
-see [Test & Network Validation](07-%20Test%20and%20Network%20Validation.md).
+see [Test & Network Validation](06-%20Test%20&%20Node%20Status.md).

@@ -71,7 +71,7 @@ Note on TLS paths: `!anylog_dir` is a volume mounted into the AnyLog container, 
 files locally on the node. The comment in the script also flags an alternative worth knowing about — the
 *public* half of a certificate can instead be stored on the blockchain as part of a policy, avoiding the need to
 persist certificate files on every node that needs them. This script uses the local-file approach; see
-[DNP3 TLS Test Certificates](../../05-%20Networking%20&%20Security/DNP3-tls-test-certificates.md) for generating
+[DNP3 TLS Test Certificates](./03-%20DNP3%20-%20TLS%20test%20certificates.md) for generating
 a chain to use with `tls_ca`/`tls_cert`/`tls_key`.
 
 ### `:check-policy:` — look for an existing mapping policy

@@ -20,13 +20,13 @@ source_path: "training/Connectors to Data Sources.md"
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* [Python and cURL examples of Streaming Data into AnyLog](../examples/Streaming%20Data%20Into%20Anylog.md) 
+* [Python and cURL examples of Streaming Data into AnyLog](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md) 
 * [Configuring the Message Broker service](../07-%20CLI/02-%20Background%20Processes.md#message-broker)
-* [Message Broker](../message%20broker.md)
+* [Message Broker](./05-%20Message%20Broker.md)
 * [Using REST](04-%20Using%20REST.md)
-* [Using Kafka](../using%20kafka.md)
-* [Using Edgex](../using%20edgex.md)
-* [The Data Generator](../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md)
+* [Using Kafka](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md)
+* [Using Edgex](../04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md)
+* [The Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md)
 
 ## Third-Party MQTT Client 
 AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 

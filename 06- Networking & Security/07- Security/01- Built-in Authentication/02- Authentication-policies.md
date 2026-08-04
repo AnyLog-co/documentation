@@ -687,7 +687,7 @@ In the Settings tab:
 ### Example: 3rd-party application via Grafana
 
 Configuring Grafana in general is covered in
-[Using Grafana](../../08-%20Northbound%20Connectors/Using%20Grafana.md). To use a certificate specifically,
+[Using Grafana](../../../05-%20Northbound%20Connectors/03-%20Grafana.md). To use a certificate specifically,
 update the Grafana JSON data source page:
 - Set the AnyLog URL to use HTTPS.
 - Set *TLS Client Auth* to ON.

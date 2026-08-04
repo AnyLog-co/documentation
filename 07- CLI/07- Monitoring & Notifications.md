@@ -75,7 +75,7 @@ of time, and if the situation (e.g. free disk space below 20%) occurs, then send
 
 The following set of scheduled tasks polls CPU, network packet counts, and network errors every 30 seconds, and pushes
 the results into a shared `node_insight` dictionary object that gets sent to an aggregator node via `monitor operators`
-(see [Aggregator node](03-%20Get%20and%20Set%20Reference.md#aggregator-node)):
+(see [Aggregator node](./03-%20Get%20&%20Set.md#aggregator-node)):
 
 ```anylog
 schedule name = get_cpu_percent and time = 30 seconds task cpu_percent = get node info cpu_percent

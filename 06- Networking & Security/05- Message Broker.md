@@ -30,7 +30,7 @@ source_path: "background processes.md#message-broker"
 ## Overview
 
 AnyLog's message broker is one of the network's three core services (alongside TCP and REST — see
-[Network Processing](B-%20Network%20Processing.md#network-services)). It's a TCP-based listener that can accept
+[Network Processing](./02-%20Network%20Processing.md)). It's a TCP-based listener that can accept
 data from different sources (MQTT, Kafka, Modbus, REST, etc.) from a single point, and understands how to interpret
 each source based on a correlating message client (topic mapping) service.
 
@@ -88,7 +88,7 @@ This process initiates a client that subscribes to a list of topics registered o
 added to the broker and matches a subscribed topic, the broker pushes the message to the AnyLog instance, where
 it's mapped to a JSON structure and aggregated into files, processed according to the node's configuration (e.g.
 ingested to a local database, or sent to another node). This message data is treated as **streaming data** — see
-[File Mode and Streaming Mode](adding%20data.md#file-mode-and-streaming-mode).
+[File Mode and Streaming Mode](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file).
 
 ### Command structure
 
@@ -158,7 +158,7 @@ If `run msg client` references the same IP/port used in the `run message broker`
 ### The `bring` command
 
 `bring` extracts data from a JSON structure — the same command used in blockchain queries elsewhere in AnyLog. See
-[JSON Data Transformation](json%20data%20transformation.md#json-data-transformation) for the full syntax.
+[JSON Data Transformation](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#file-mode-and-streaming-mode) for the full syntax.
 
 **Mapping the message data:**
 
