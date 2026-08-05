@@ -12,10 +12,11 @@ layout: page
 
 # Blockchain: Full Circle
 
-As covered in [Blockchain Connectivity](02-%20Blockchain%20Connectivity.md), a node operates identically regardless of
-which global ledger backs it — the difference is only in the connection details. This page walks the full loop once,
-start to finish, showing the Master/Metadata node path and the real blockchain platform path side by side at each
-step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
+As covered in the previous sections, the process by which nodes communicate with a an actual blockchain ledger versus a
+metadata / master node differs only by the connectivity process itself.
+
+This page walks the full loop once, start to finish, showing the Master/Metadata node path and the real blockchain 
+platform path side by side at each step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
 (`node-deployment/`), trimmed down for readability. The full scripts handle considerably more edge-case branching
 (DNS, overlay networks, auth) than shown here — follow the links at each step for the complete version.
 

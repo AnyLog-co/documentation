@@ -52,7 +52,7 @@ or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a
 can coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
 
 For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see
-[Custom UNS (data stream, ISA-95)](UNS-custom.md).
+[Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md).
 
 ---
 
@@ -126,7 +126,7 @@ If the topic itself carries multiple distinct measurements (rather than one clea
 alone would collapse them into a single table per topic — since it only knows how to walk the topic string segment
 by segment. To split them into separate tables, extract a per-row `table` field from the payload and let it act as
 one more segment beyond the raw topic; see
-[Dynamic Ingestion with Custom UNS — Factory Floor Example](02-%20UNS-dynamic-custom-example.md) for a full traced
+[Dynamic Ingestion with Custom UNS — Factory Floor Example](05-1%20UNS%20Custom%20Dynamic%20Examples.md) for a full traced
 walkthrough of exactly how that works, down to the blockchain queries showing where the raw topic ends and the
 personalized `table` field takes over.
 
