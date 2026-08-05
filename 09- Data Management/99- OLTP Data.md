@@ -117,7 +117,7 @@ CREATE INDEX users_insert_timestamp_index ON users(insert_timestamp);
   "table": {
     "dbms": "my_db",
     "name": "users",
-    "create": "CREATE TABLE IF NOT EXISTS users(\n    row_id SERIAL PRIMARY KEY,\n    insert_timestamp TIMESTAMP NOT NULL DEFAULT NOW(),\n    tsd_name CHAR(3),\n    tsd_id INT,\n    username TEXT NOT NULL UNIQUE,\n    password TEXT NOT NULL,\n    role TEXT NOT NULL CHECK (role IN ('admin', 'operator', 'viewer')),\n    email TEXT,\n    assoc_ids TEXT\n);\n\nCREATE INDEX users_tsd_index ON users(tsd_name, tsd_id);\nCREATE INDEX users_insert_timestamp_index ON users(insert_timestamp);"
+    "create": "CREATE TABLE IF NOT EXISTS users(row_id SERIAL PRIMARY KEY, insert_timestamp TIMESTAMP NOT NULL DEFAULT NOW(), tsd_name CHAR(3), tsd_id INT, username TEXT NOT NULL UNIQUE, password TEXT NOT NULL, role TEXT NOT NULL CHECK (role IN ('admin', 'operator', 'viewer')), email TEXT, assoc_ids TEXT\n);\n\nCREATE INDEX users_tsd_index ON users(tsd_name, tsd_id);\nCREATE INDEX users_insert_timestamp_index ON users(insert_timestamp);"
   }
 }>
 
