@@ -79,7 +79,7 @@ email to my_name@my_company.com  where subject = "anylog alert" and message = "V
 > carrier's free "email-to-SMS" gateway address (e.g. `[number]@txt.att.net`), a mechanism most major US carriers have
 > now shut down or are actively winding down due to spam abuse. Before depending on this for anything operationally
 > important (alerting, monitoring, incident response), see the status table below and consider using the `rest post`
-> based notification pattern documented in [Notification Services](../07-%20CLI/08-%20Notifications.md) instead
+> based notification pattern documented in [Notification Services](../07-%20Monitoring%20&%20Notifications.md#notification) instead
 > (Telegram, Pushover, Slack, or a dedicated SMS API such as Twilio) — those go through a real, maintained API rather
 > than a side-channel carriers are actively closing.
 

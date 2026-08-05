@@ -12,7 +12,7 @@ layout: page
 --->
 
 In general the blockchain or metadata layer is the platform that informs all the nodes in the network where data resides
-and which nodes have access to what. The [previous section](02-%20Metadata.md) discussed the different types
+and which nodes have access to what. The [previous section](02-%20Policy%20&%20Metadata.md) discussed the different types
 of policies and metadata content that can be stored in the blockchain. This section covers how to interact with the
 blockchain layer.
 
@@ -304,6 +304,23 @@ Example output:
 ```
 
 Child policies inherit structure from their parent and carry `dbms`/`table` attributes used by the query engine.
+
+## Compare Policies 
+
+Policies can be compared to determine the different attribute and values.  
+The following command returns a report indicating the differences between the two policies, or between lists of policies.  
+Usage:
+```anylog 
+get policies diff [object 1] [object 2]
+``` 
+Object 1 and Object 2 are policies or lists of policies to compare. 
+When lists are compared, the number of policies in the lists needs to be equal with one exception: 
+If a policy is compared to a list with a single policy, the policy is assumed to be in a list, and the comparison is allowed.  
+Example:
+```anylog 
+get policies diff !policy1 !policy2
+```
+
 
 ## Other blockchain commands
 

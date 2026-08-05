@@ -16,13 +16,13 @@ source_path: "01- Authentication.md"
 -  2026-07-31 | Massimiliano | remote sign via certificate_authority (Master/Operator) | 2.0.2606 |
 -->
 
-# Users and Nodes Authentication — Implementation
+~~# Users and Nodes Authentication — Implementation
 
 This document covers how to implement each of AnyLog's built-in authentication options: the commands, their
 options, and what each one does. For a general overview of how this fits alongside TPM and overlay networking,
 see [Securing the Network](../../03-%20Securing%20the%20Network.md). For a full
 worked example — assigning keys, building permission and assignment policies, and running a 2-operator demo end
-to end — see [Policy-Based Users and Keys — Example](Policy-Based%20Users%20and%20Keys%20—%20Example.md).
+to end — see [Policy-Based Users and Keys — Example](02-%20Authentication-policies.md).
 
 The commands in this document facilitate a framework that provides the following:
 
@@ -624,7 +624,7 @@ The client is configured using the following files:
 2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
-An example Postman configuration is available at [Using Postman](../../08-%20Northbound%20Connectors/using%20postman.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
+An example Postman configuration is available at [Using Postman](../../../05-%20Northbound%20Connectors/02-%20Postman%20Integration.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
 
 ## Examples using HTTPS
 
@@ -685,4 +685,4 @@ print(response.text)
 
 For a full worked example that ties keys, permission policies, and assignment policies together in a running
 2-operator demo — including certificate-based permissions for a 3rd-party application — see
-[Policy-Based Users and Keys — Example](Policy-Based%20Users%20and%20Keys%20—%20Example.md).
+[Policy-Based Users and Keys — Example](02-%20Authentication-policies.md).

@@ -114,7 +114,7 @@ command itself.
 ## How this differs from a "mapping policy"
 
 AnyLog also has a generic **mapping policy** type, covered in
-[Mapping data to tables](../southbound-overview.md#mapping-policy), used for REST/MQTT ingestion — those policies
+[Mapping data to tables](../../../08-%20Blockchain%20&%20Metadata/04-%20Mapping%20Policy.md), used for REST/MQTT ingestion — those policies
 describe a `bring`-based extraction schema (`{"type": "float", "bring": "[reading]"}`) for pulling fields out of
 an arbitrary incoming JSON payload. The `dnp3` policy type here is a different, protocol-specific shape: it
 describes DNP3 point addresses (`type`/`index`, or `group`/`variation`) on an outstation, not a JSON-payload

@@ -20,7 +20,7 @@ Each AnyLog node can collect its own health metrics and distribute them in one o
 
 The monitoring schedule is deployed as a blockchain policy and activated automatically when `NODE_MONITORING=true` is set in the node configuration.
 
-> **Pull, not push:** unlike [Syslog](../Syslog%20Integration.md), where data is *pushed* into AnyLog by an external
+> **Pull, not push:** unlike [Syslog](./02-%20Syslog.md), where data is *pushed* into AnyLog by an external
 > forwarder (rsyslog), node and Docker monitoring are *pulled* on a schedule — the node actively queries its own OS
 > and Docker metrics at each interval, rather than waiting for something to send data in.
 

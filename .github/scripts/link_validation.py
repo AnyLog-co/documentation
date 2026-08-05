@@ -233,21 +233,25 @@ def main():
 
         for md_file, file_results in by_file.items():
             rel = md_file.relative_to(root)
-            print(f"\n{rel}  ({len(file_results)} link(s))")
+            # print(f"\n{rel}  ({len(file_results)} link(s))")
             for r in file_results:
                 status = "OK  " if r.ok else "FAIL"
-                print(f"  [{status}] ({r.kind:6}) {r.raw_dest}"
-                      f"{'  -> ' + r.detail if r.detail else ''}" if )
+                # print(f"  [{status}] ({r.kind:6}) {r.raw_dest}"
+                #       f"{'  -> ' + r.detail if r.detail else ''}")
 
     # print("\n" + "=" * 60)
     if broken:
         print(f"{len(broken)} broken link(s) found:\n")
         for r in broken:
             rel = r.md_file.relative_to(root)
-            if last_file is None:
+            if f"[{r.link_text}]({r.raw_dest})" in ["[alt](url)"]:
+                continue
+            elif last_file is None:
                 last_file = rel
-
-            print(f"  {rel}: [{r.link_text}]({r.raw_dest})  -> {r.detail}")
+            elif last_file != rel:
+                sys.exit(1)
+            if last_file:
+                print(f"  {rel}: [{r.link_text}]({r.raw_dest})  -> {r.detail}")
         sys.exit(1)
     else:
         checked = len(results)
