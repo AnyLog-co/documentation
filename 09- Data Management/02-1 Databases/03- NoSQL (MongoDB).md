@@ -173,4 +173,4 @@ locate the file itself:
         selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)">
 ```
 
-> Please review [Extracting blobs](../../10-%20EDM%20tool%20(Edge%20Data%20Manager)) in Edge Data Manager section.
+> Please review [Extracting blobs](../../10-%20Edge%20Data%20Manager/01-%20EDM.md) in Edge Data Manager section.

@@ -10,6 +10,7 @@ source_path: "Aggregations.md"
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-08-05 | Ori Shadmon | enhanced partition + aggregation relation logic | |
 --->
 
 
@@ -55,17 +56,9 @@ In practice:
 
 Two commands provide different perspectives on the aggregated data:
 
-* [get aggregation](#-retrieve-aggregations) - Displays results organized by aggregation (processing) time intervals.
+* [get aggregation](#retrieve-aggregations) - Displays results organized by aggregation (processing) time intervals.
 * [get aggregation by time](#retrieve-aggregations-by-time) - Displays results ordered by the source data timestamps, allowing analysis based on 
 the original event time rather than processing time.
-
-## Notes
-
-1. Aggregation intervals are designed for efficient real-time processing of streaming data. However, because they rely 
-on processing time rather than source time, users should be aware of potential differences when analyzing time-sensitive data.
-2. Deployment examples are available in the [Aggregations Examples](/docs/data-management/query-aggregations/examples/aggregations-examples/) section.
-3. An example of aggregations applied to data retrieved by the AnyLog OPC UA service is available in the
-   [OPC-UA with aggregations](/docs/connectors-integrations/southbound-interfaces/opc-ua-integration/#opc-ua-with-aggregations) section.
 
 ## Aggregations and DBMS Operations
 
@@ -98,6 +91,45 @@ Notes:
 * When source ingestion is disabled, only aggregation results can be persisted.
 
 * This enables aggregation-driven storage, reduced write load, and real-time summarized data.
+
+## Partitioning and Aggregations
+
+If aggregation output is stored in the **same physical database** as the source time-series data (see
+[Aggregations and DBMS Operations](#aggregations-and-dbms-operations) above), avoid partitioning that database with
+a single wildcard rule (`partition [dbms] * using [column] by [interval]` — see
+[Table Partitioning](./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
+A database-wide rule applies the same interval to every table in that database, which doesn't distinguish between
+raw source tables and aggregation output tables — the two typically need very different retention.
+
+Instead, disable the database-wide rule and partition each table individually, so raw data and its aggregation
+output can each use an interval and retention window suited to that table:
+
+```shell
+curl -X POST http://[ip]:[operator port] \
+   -H "command: partition my_data ping_sensor using timestamp by 1 day" \
+   -H "AnyLog-Agent: AnyLog/1.23"
+```
+
+> **Don't apply the same cleanup schedule to the aggregation (target) table as you do to the raw source table.**
+> The raw table's partition-drop schedule is usually tuned to expire data quickly; the aggregation table exists
+> specifically to preserve a compact historical summary *after* the raw data has aged out. Reusing the raw table's
+> short `keep` value on the aggregation table's own partitions will cause that summarized history to disappear on
+> the same short timeline — defeating the point of aggregating in the first place. Aggregation tables can still be
+> partitioned; just give them a `keep` value (or interval) that reflects how long you actually want the summarized
+> history retained, independent of the source table's schedule.
+
+When defining partitioning manually per table, also define the cleanup schedule per table (rather than relying on
+one general schedule for the whole database):
+
+```shell
+curl -X POST http://[ip]:[operator port] \
+   -H 'command: schedule time=30 days and name="Drop Partitions - [db name].[table]" task drop partition where dbms=[db name] and table=[table name] and keep=[number of partitions]' \
+   -H "AnyLog-Agent: AnyLog/1.23"
+```
+
+The advantage of partitioning per table is granularity: a database-wide (`*`) rule forces every table in that
+database onto the same interval unless you additionally define a table-specific partition — at which point the
+table-specific definition takes precedence for that table.
 
 ## View Aggregation Ingest Declaration
 
@@ -221,7 +253,7 @@ Example:
 set aggregation encoding where dbms = lsl_demo_ok and table = rand_table and encoding = arle and tolerance = 5
 ```
 
-## Retrieve Aggregations
+# Retrieve Aggregations
 
 The command `get aggregation` retrieves the aggregation definitions and runtime statistics configured with 
 the `set aggregation` command.
@@ -312,7 +344,7 @@ get aggregation by time where dbms = orics and table = r_50 and value_column = c
 }
 ```
 
-Note: Grafana configuration is detailed in the [Using Grafana](/docs/connectors-integrations/northbound-connectors/using-grafana/) section.
+Note: Grafana configuration is detailed in the [Using Grafana](../05-%20Northbound%20Connectors/03-%20Grafana.md#aggregations-query) section.
 
 ## Retrieve aggregation configurations
 

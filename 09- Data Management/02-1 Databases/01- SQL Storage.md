@@ -24,7 +24,7 @@ layout: page
                   counter-plus-one quirk, `3 months` sets 4-month partitions), the wildcard table/database forms,
                   the `info table` command (exists/columns/partitions/partitions last/first/count/dates), and
                   `drop partition`'s `keep` parameter and wildcard behaviors, which weren't previously documented.
-
+    - 2026-08-05 | Ori Shadmon | enhanced partitioning comment to support aggregation logic 
  **Date**   | **Name**       | **Change** | **Version** |
  |------------|----------------|------------|----------|
  | 2026-07-28 | Ori Shadmon    | Fixed a direct contradiction in "Drop a partition": one sentence said it drops only the single oldest partition, another said it drops all but the newest. Confirmed behavior is all-but-newest; rewrote to state that consistently and added a warning since running it unqualified (no `keep`) can remove a lot of history at once. Also flagged a mismatch between the drop-by-name example's partition (hourly, `insert_timestamp`) and this doc's own earlier partitioning example for the same table (daily, `timestamp`) | |
@@ -196,6 +196,11 @@ partition my_data * using insert_timestamp by 1 week
 partition my_data ping_sensor using timestamp by 1 day
 ```
 > Time interval options: `year`, `month`, `week`, `day` — singular or plural, optionally with a counter:
+
+> **If this database also stores aggregation output** (see [Aggregation Functions](#) <!-- TODO: fill in the actual relative path once file locations are confirmed, e.g. ../02-%20.../02-2%20Data%20Aggregations.md#partitioning-and-aggregations -->),
+> avoid the wildcard (`*`) form above for that database — it forces raw and aggregation tables onto the same
+> interval and retention. Partition (and schedule cleanup for) the raw table and the aggregation table separately
+> instead.
 
 
 * View partitions

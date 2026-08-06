@@ -76,8 +76,8 @@ All AnyLog containers run the same image — configuration determines behavior:
 - **Generic** - this is not documented, but when specifying `NODE_TYPE=generic` the system will automatically deploy an
 empty "stand box" with network (TCP, REST and Message broker) configured. 
 
-See [Nodes](../08-%20Blockchain%20&%20Metadata/02-1%20Nodes.md) for the full breakdown, including cluster
-policy structure and main/backup roles.
+See [Nodes](../01-%20Getting%20Started/01-%20Introduction.md#node-types) for the full breakdown, including cluster policy 
+structure and main/backup roles.
 
 **Q: How do I deploy, and do you support zero-touch?**
 
@@ -141,8 +141,8 @@ Different things, often both needed.
 2. **Defining a policy** publishes new metadata about *you* (a node/operator/cluster policy) that other nodes then sync 
 in. 
 
-See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/02-%20Blockchain%20Connectivity.md) for sync, and
-[Blockchain Policy](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Policy.md) for defining one.
+See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#blockchain-sync) for sync, and
+[Blockchain Policy](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md) for defining one.
 
 **Q: My node can't connect to the network at all — where do I start?**
 
@@ -221,7 +221,7 @@ and blob storage relate to each other.
 CConnectivity logic / command differs by the database type
 
 * [SQL Storage - PostgresSQL / SQLite](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md)
-* [MongoDB](../09-%20Data%20Management/02-1%20Databases/03-%20NoSQL%20(MongoDB).md)
+* [MongoDB](../09-%20Data%20Management/02-1%20Databases/03-%20NoSQL%20%28MongoDB%29.md)
 * [MinIO](04-%20Third-Party%20Support/02-%20MinIO.md)
 * [Milvus](../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md) for connection syntax specific to each.
 
@@ -373,7 +373,7 @@ get query log
 
 A metadata manager (or master) node is a simple AnyLog agent emulating a blockchain locally. A real blockchain 
 (e.g. Optimism) is an actual distributed, trustless ledger. Either works; a real blockchain isn't required. See
-[Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/02-%20Blockchain%20Connectivity.md#master-node-vs-blockchain-platform)
+[Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md#which-ledger)
 for the full tradeoff table.
 
 **Q: How do I connect to a metadata manager node vs. a real blockchain?**
@@ -382,7 +382,7 @@ Connecting to a Metadata manager node by simply enabling the `blockchain sync` l
 of the metadata manager. While an actual blockchain is a bit more comprehensive as it requires wallets, keys and 
 other components needed to conect to an actual blockcahin. 
 
-See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/02-%20Blockchain%20Connectivity.md) for both
+See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md) for both
 paths.
 
 **Q: Which blockchains does AnyLog actually support?**
@@ -396,9 +396,7 @@ A blockchain policy is an object defining node information, data information and
 for the network and is immutable. AnyLog does not store the actual device / sensor data on the blockchain - just the 
 metadata. 
 
-See [Blockchain Policy](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Policy.md) for structure and core
-types, and [Metadata](../08-%20Blockchain%20&%20Metadata/02-%20Metadata.md#policy-vs-metadata) for how a policy
-relates to metadata generally.
+See [Policies & Metadata](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md) for details.
 
 **Q: How do I query the blockchain?**
 

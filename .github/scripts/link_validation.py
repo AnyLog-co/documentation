@@ -56,9 +56,18 @@ class LinkResult:
     suggested_dest: str | None = None     # proposed replacement, if a confident match was found
 
 
+def _has_99_prefix(path: Path, root: Path) -> bool:
+    """True if any path component (relative to root) starts with '99-'."""
+    try:
+        parts = path.relative_to(root).parts
+    except ValueError:
+        parts = path.parts
+    return any(part.startswith("99-") for part in parts)
+
+
 def iter_markdown_files(root: Path, extensions: set[str]):
     for path in sorted(root.rglob("*")):
-        if path.is_file() and path.suffix.lower() in extensions:
+        if path.is_file() and path.suffix.lower() in extensions and not _has_99_prefix(path, root):
             yield path
 
 
@@ -137,6 +146,8 @@ def find_fix(base_dir: Path, decoded_path_part: str, root: Path) -> str | None:
 
     matches = []
     for candidate in root.rglob("*"):
+        if _has_99_prefix(candidate, root):
+            continue
         if wants_dir and not candidate.is_dir():
             continue
         if candidate.name == target_name or _basename_key(candidate.name) == target_key:
@@ -196,7 +207,6 @@ def main():
         print(f"Root path does not exist: {root}", file=sys.stderr)
         sys.exit(2)
 
-    last_file = None
     results: list[LinkResult] = []
 
     for md_file in iter_markdown_files(root, extensions):
@@ -238,20 +248,18 @@ def main():
                 status = "OK  " if r.ok else "FAIL"
                 # print(f"  [{status}] ({r.kind:6}) {r.raw_dest}"
                 #       f"{'  -> ' + r.detail if r.detail else ''}")
-
-    # print("\n" + "=" * 60)
+    last_file = None
     if broken:
         print(f"{len(broken)} broken link(s) found:\n")
         for r in broken:
             rel = r.md_file.relative_to(root)
-            if f"[{r.link_text}]({r.raw_dest})" in ["[alt](url)"]:
+            if f"[{r.link_text}]({r.raw_dest})" == "[alt](url)":
                 continue
-            elif last_file is None:
+            elif not last_file:
                 last_file = rel
             elif last_file != rel:
                 sys.exit(1)
-            if last_file:
-                print(f"  {rel}: [{r.link_text}]({r.raw_dest})  -> {r.detail}")
+            print(f"  {rel}: [{r.link_text}]({r.raw_dest})  -> {r.detail}")
         sys.exit(1)
     else:
         checked = len(results)

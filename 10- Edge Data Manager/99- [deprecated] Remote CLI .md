@@ -1,9 +1,8 @@
 ---
 title: Remote GUI
-description: Architecture and developer reference for the AnyLog Remote GUI.
+description: Architecture, deployment, and developer reference for the AnyLog Remote GUI (successor to Remote-CLI).
 layout: page
 ---
-
 
 <!---
 ### 📜 Change Log
@@ -14,6 +13,7 @@ layout: page
  | 2026-04-17 |                | file creation    |  |
 --->
 
+> **Note:** This page merges and replaces the deprecated *Remote-CLI* documentation. Remote-CLI was AnyLog's earlier web interface for executing REST requests against the network; the Remote GUI is its successor (React frontend + FastAPI backend). Deployment steps below are carried over from the Remote-CLI doc — double-check the paths, image names, and pod/volume names against the current `deployments/` repo before relying on them, since they haven't been re-verified against the new project layout.
 
 > **Audience:** This page covers the internal architecture of the Remote GUI and is primarily intended for developers extending or contributing to it. For end-user usage, refer to the GUI itself.
 
@@ -135,6 +135,73 @@ docker compose -f docker-compose.yaml up -d
 
 ---
 
+## Deploying to production
+
+<!-- Carried over from the deprecated Remote-CLI doc. The directory/volume/pod names below
+     (e.g. "remote-cli") reflect the old product's deployments/ layout — confirm whether the
+     current deployments repo uses "remote-gui" naming instead before publishing. -->
+
+### Via Docker Compose
+1. Clone the deployments directory and `cd` into the Remote GUI's compose directory:
+   ```shell
+   git clone https://github.com/AnyLog-co/deployments
+   cd $HOME/deployments/docker-compose/remote-cli/
+   ```
+2. Update configuration:
+   ```shell
+   vim .env
+   ```
+3. Deploy:
+   ```shell
+   docker-compose up -d
+   ```
+
+### Via Kubernetes (Helm)
+1. Clone the deployments directory:
+   ```shell
+   git clone https://github.com/AnyLog-co/deployments
+   ```
+2. Update configuration:
+   ```shell
+   # volume configuration
+   vim $HOME/deployments/helm/sample-configurations/remote_cli_volume.yaml
+
+   # deployment configuration
+   vim $HOME/deployments/helm/sample-configurations/remote_cli.yaml
+   ```
+3. Deploy the volume — as long as it exists on the node, data will be persistent:
+   ```shell
+   helm install $HOME/deployments/helm/packages/remote-cli-volume-1.0.0.tgz --name-template remote-cli-vol --values $HOME/deployments/helm/sample-configurations/remote_cli_volume.yaml
+   ```
+4. Deploy the instance:
+   ```shell
+   helm install $HOME/deployments/helm/packages/remote-cli-1.0.0.tgz --name-template remote-cli --values $HOME/deployments/helm/sample-configurations/remote_cli.yaml
+   ```
+
+### Accessing the deployed instance
+
+By default the GUI is reachable at `http://${YOUR_LOCAL_IP}:31800`.
+
+Configuration that used to live in Remote-CLI's `commands.json` (default command shortcuts shown in the UI) is superseded in the Remote GUI by `feature_config.json` and `plugin_order.json`, described under [Key terminology](#key-terminology) above. If you still need the old-style editable command list on a running container/pod:
+
+**On Docker:**
+1. Get the volume path: `docker volume inspect remote-cli` (name may differ under the new deployment — check `docker volume ls`)
+2. `cd` into that path
+3. Edit the relevant JSON file with `sudo vim`
+4. Save your changes
+5. If changes don't appear automatically, restart the container: `docker restart <container-name>`
+
+**On Kubernetes:**
+1. Attach to the active pod: `kubectl exec -it ${REMOTE_GUI_POD_NAME} bash`
+2. `cd` into the config directory inside the pod
+3. Edit the relevant JSON file with `vim`
+4. Save
+5. Detach from the pod: `ctrl-p` + `ctrl-q`
+
+> Note: on Kubernetes, changes made this way are **not persistent** across pod restarts unless backed by a [persistent volume](../Networking%20%26%20Security/kubernetes%20volumes.md).
+
+---
+
 ## Plugin system
 
 ### Creating a new plugin
@@ -183,3 +250,9 @@ After changes: restart the backend; rebuild the frontend if running a production
 - Mobile application support
 - Dashboard integration (Grafana or in-app)
 - Full plugin modularization — every feature becomes a plugin; the base Remote GUI becomes a minimal image with a downloadable plugin catalog
+
+---
+
+## See also
+
+- Examples of driving the underlying API can be found in the [northbound connectors](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/remote_cli.md) section.
