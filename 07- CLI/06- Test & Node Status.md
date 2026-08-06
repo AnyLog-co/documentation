@@ -23,7 +23,7 @@ connectivity, then the network as a whole, then the actual data held across the 
 ## Node Status
 
 Before testing connectivity, it's worth confirming what the node itself reports about its own state. For `get status`,
-`get processes`, and `get connections`, see [Get and Set Reference](03-%20Get%20and%20Set%20Reference.md#node-status).
+`get processes`, and `get connections`, see [Get and Set Reference](./03-%20Get%20&%20Set.md#get-status).
 
 ## Test Node
 

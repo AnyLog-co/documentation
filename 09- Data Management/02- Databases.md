@@ -130,7 +130,7 @@ for storage both inside a sub-JSON list (ie `detection`) and outside of it - `fi
 
 
 3. Once the the buffer is full, usually much faster with blob storage than just sensor data, query the results from 
-the [Edge Data Manager](../10-%20EDM%20tool%20(Edge%20Data%20Manager)) or other third party apps.  
+the [Edge Data Manager](../10-%20Edge%20Data%20Manager/01-%20EDM.md) or other third party apps.  
 
 ```anylog
 <run client () sql edgex 

@@ -64,15 +64,15 @@ reference.
 
 ## Connectors
 
-| Tool | What it's for | Doc |
-|---|---|---|
-| **Postman** | Testing AnyLog REST endpoints during development, with or without SSL | [Postman Integration](02-%20Postman%20Integration.md) |
-| **Grafana** | Dashboards over live/historical AnyLog data — increments, period, aggregations, and blockchain metadata visualizations | [Using Grafana](03-%20Grafana.md) |
+| Tool | What it's for | Doc                                                                                           |
+|---|---|-----------------------------------------------------------------------------------------------|
+| **Postman** | Testing AnyLog REST endpoints during development, with or without SSL | [Postman Integration](02-%20Postman%20Integration.md)                                         |
+| **Grafana** | Dashboards over live/historical AnyLog data — increments, period, aggregations, and blockchain metadata visualizations | [Using Grafana](03-%20Grafana.md)                                                             |
 | **PostgreSQL / Tableau** | For tools that only support a PostgreSQL connector (not REST) — routes results through `system_query` into a real Postgres instance | [PostgreSQL Connector & Tableau Visualization](04-%20Postgres%20Connector%20%28Tableau%29.md) |
-| **PowerBI / Excel** | Pull AnyLog data into PowerBI or Excel via the Web connector and PowerQuery | [AnyLog with PowerBI + Microsoft Office Suite](05-%20Microsoft%20%28PowerBI%29.md) |
-| **Google Drive / Sheets** | Pull AnyLog query results into Sheets via the third-party Two Minute Reports add-on | [Google Drive](06-%20Google.md) |
-| **Qlik** | Qlik Sense's REST connector plugin, with worked increments/period examples | [Qlik](07-%20Qlik.md) |
-| **Edge Data Manager** | AnyLog's own management/monitoring UI | [Edge Data Manager](../10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/) |
+| **PowerBI / Excel** | Pull AnyLog data into PowerBI or Excel via the Web connector and PowerQuery | [AnyLog with PowerBI + Microsoft Office Suite](05-%20Microsoft%20%28PowerBI%29.md)            |
+| **Google Drive / Sheets** | Pull AnyLog query results into Sheets via the third-party Two Minute Reports add-on | [Google Drive](06-%20Google.md)                                                               |
+| **Qlik** | Qlik Sense's REST connector plugin, with worked increments/period examples | [Qlik](07-%20Qlik.md)                                                                         |
+| **Edge Data Manager** | AnyLog's own management/monitoring UI | [Edge Data Manager](../10-%20Edge%20Data%20Manager/01-%20EDM.md)                                                                    |                                                                          |
 
 **Sending data the other way:** the connectors above all *pull* data from AnyLog. To *push* data or a message out —
 a SQL result over REST, or a one-off MQTT message — see [Forwarding Data](08-%20Data%20Forwarding.md).

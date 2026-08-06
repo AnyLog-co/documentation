@@ -43,7 +43,7 @@ traffic uses UDP, and by default on port `4242`. Whatever network the lighthouse
 be open (or forwarded, in NAT'd setups) between the machines that need to discover and reach each other — otherwise 
 the overlay has no path to establish tunnels in the first place, regardless of how the AnyLog-side config is set.
 
-For a concrete, worked example, see **[Nebula](G-%20Nebula.md)** — the overlay technology we use for testing and
+For a concrete, worked example, see **[Nebula](./02-%20Nebula.md)** — the overlay technology we use for testing and
 demos. Nothing below is Nebula-specific; it applies to whatever overlay technology sits underneath.
 
 ---
@@ -252,8 +252,8 @@ overlay_ip         |                  192.168.100.1| # <-- overlay IP (e.g. Nebu
 
 ## Related
 
-* **[Nebula](G-%20Nebula.md)** — the overlay technology we use for testing and demos, including how to deploy it.
+* **[Nebula](./02-%20Nebula.md)** — the overlay technology we use for testing and demos, including how to deploy it.
 * **[NGINX](03-%20NGINX.md)** — the reverse-proxy approach to a related-but-different problem (see
   "Not the Same as a Reverse Proxy" above).
-* **[Network Processing](B-%20Network%20Processing.md)** — `NETWORK_TYPE`, `NIC_TYPE`, and binding in full, including
+* **[Network Processing](../02-%20Network%20Processing.md)** — `NETWORK_TYPE`, `NIC_TYPE`, and binding in full, including
   how `NIC_TYPE=nebula1` fits alongside `OVERLAY_IP`.

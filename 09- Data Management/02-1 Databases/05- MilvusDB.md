@@ -30,7 +30,7 @@ same command surface, using two different transport protocols.
 * **Milvus Server**: A physical deployment of the Milvus engine.
 
 For installing Milvus (Docker) and a full connect-to-query deployment walkthrough, see
-[99- Milvus](99-%20Milvus.md).
+[Milvus support](../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md).
 
 ---
 
@@ -167,7 +167,7 @@ Vectors are **768-dimensional** — set `dimension = 768` on `connect dbms`.
 > python3 -c "from pymilvus import model; fn = model.DefaultEmbeddingFunction(); fn.encode_documents(['warmup']); fn.encode_queries(['warmup']); print('OK dim=', fn.dim)"
 > ```
 >
-> Cache location: `HF_HOME` (default `~/.cache/huggingface`). Docker images set `HF_HOME=/app/.anylog-model-cache` (baked in at build time). For downloading the model once and shipping it to an offline node, see [99- Milvus](99-%20Milvus.md#offline-model-setup).
+> Cache location: `HF_HOME` (default `~/.cache/huggingface`). Docker images set `HF_HOME=/app/.anylog-model-cache` (baked in at build time). For downloading the model once and shipping it to an offline node, see [Milvus support](../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md).
 
 ---
 

@@ -10,7 +10,7 @@ layout: page
  | 2026-07-28 | Ori Shadmon | Fixed the connect parameter table, which only listed `access_key`/`secret_key` while the example right below it used `id`/`password` — now documents both as aliases, matching MinIO.md. Added a note explaining why `provider` only lists `minio`/`akave` despite AWS S3 being mentioned in the intro (not yet fully tested). Removed a redundant/contradictory `id = 123` sitting alongside `access_key = [access_key]` in the same example command. Fixed duplicate "Step 8" numbering in the Examples walkthrough. Removed a real person's home directory (`/Users/roy`) from the upload/download examples. Standardized the `key` value used across the entire walkthrough — it previously changed at almost every step (`dir1/test2.txt`, `test.txt`, `test2.txt`), meaning the download/delete/metadata steps were referencing files that were never actually uploaded | |
 --->
 
-There are 2 ways by which to store blob data - [NoSQL](./03-%20NoSQL%20(MongoDB).md) and bucket storage, whether it's
+There are 2 ways by which to store blob data - [NoSQL](./03-%20NoSQL%20%28MongoDB%29.md) and bucket storage, whether it's
 MinIO, Akave (Filecoin's S3 alternative), or AWS's S3 and the likes.
 
 * MinIO (S3-compatible) — see [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md) for connection setup, Docker deployment, and troubleshooting.

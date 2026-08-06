@@ -1,3 +1,9 @@
+<!---
+Large scale changes: 
+  - June / July 2026    | Eric | reorged the documentation
+  - July / August 2026  | Ori  | reorged the documentation 
+  - July 24-Aug 25 2026 | Ori  | updated hyperlinks for URLs 
+--->
 <div align="center">
   <a href="https://anylog.network" target="_blank">
     <img src="imgs/anylog_logo.png" />
@@ -93,7 +99,7 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     - [node-RED.md](04-%20Southbound%20Interfaces/06-%20Third-Party/01-%20node-RED.md)
     - [Telegraf.md](04-%20Southbound%20Interfaces/06-%20Third-Party/02-%20Telegraf.md)
     - [EdgeX.md](04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md)
-    - [Kubearmor.md](04-%20Southbound%20Interfaces/06-%20Third-Party/05-%20Kubearmor.md)
+    - [Kubearmor.md](04-%20Southbound%20Interfaces/06-%20Third-Party/04-%20Kubearmor.md)
   - [Data Ingestion.md](04-%20Southbound%20Interfaces/07-%20Data%20Ingestion.md)
 - [Northbound Connectors](05-%20Northbound%20Connectors/)
   - [Northbound Connectors.md](05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md)
@@ -133,13 +139,15 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
     - [SMTP.md](07-%20CLI/04-1%20Notification/01-%20SMTP.md)
     - [REST.md](07-%20CLI/04-1%20Notification/02-%20REST.md)
     - [1 Webhooks.md](07-%20CLI/04-1%20Notification/02-1%20Webhooks.md)
-  - [Test & Node Status.md](07-%20CLI/05-%20Test%20%26%20Node%20Status.md)
-  - [Monitoring & Notifications.md](07-%20CLI/06-%20Monitoring%20%26%20Notifications.md)
-  - [Conditional Execution and Control Flow.md](07-%20CLI/07-%20Conditional%20Execution%20and%20Control%20Flow.md)
-  - [File Commands.md](07-%20CLI/08-%20File%20Commands.md)
+  - [JSON Data Transformation.md](07-%20CLI/05-%20JSON%20Data%20Transformation.md)
+  - [Test & Node Status.md](07-%20CLI/06-%20Test%20%26%20Node%20Status.md)
+  - [Monitoring & Notifications.md](07-%20CLI/07-%20Monitoring%20%26%20Notifications.md)
+  - [Conditional Execution and Control Flow.md](07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md)
+  - [File Commands.md](07-%20CLI/09-%20File%20Commands.md)
 - [Blockchain & Metadata](08-%20Blockchain%20%26%20Metadata/)
   - [Blockchain.md](08-%20Blockchain%20%26%20Metadata/01-%20Blockchain.md)
   - [Policy & Metadata.md](08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md)
+  - [1 ANMP Policy.md](08-%20Blockchain%20%26%20Metadata/02-1%20ANMP%20Policy.md)
   - [Blockchain Commands.md](08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
   - [1 Blockchain Full Circle.md](08-%20Blockchain%20%26%20Metadata/03-1%20Blockchain%20Full%20Circle.md)
   - [Mapping Policy.md](08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md)
@@ -160,10 +168,10 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
   - [1 HA Support.md](09-%20Data%20Management/03-1%20HA%20Support.md)
   - [File Processing.md](09-%20Data%20Management/04-%20File%20Processing.md)
   - [Query Profiling.md](09-%20Data%20Management/06-%20Query%20Profiling.md)
-- [EDM tool (Edge Data Manager)](10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/)
-  - [gui.md](10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/01%20remote-gui.md)
-  - [02 EDM.md](10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/02%20EDM.md)
-  - [[deprecated] Remote CLI .md](10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/%5Bdeprecated%5D%20Remote%20CLI%20.md)
+  - [OLTP Data.md](09-%20Data%20Management/99-%20OLTP%20Data.md)
+- [Edge Data Manager](10-%20Edge%20Data%20Manager/)
+  - [EDM.md](10-%20Edge%20Data%20Manager/01-%20EDM.md)
+  - [[deprecated] Remote CLI .md](10-%20Edge%20Data%20Manager/99-%20%5Bdeprecated%5D%20Remote%20CLI%20.md)
 - [Extended Services](11-%20Extended%20Services/)
   - [01 LLM Dashboard Generation.md](11-%20Extended%20Services/01%20LLM%20Dashboard%20Generation.md)
   - [01 mcp.md](11-%20Extended%20Services/01%20mcp.md)

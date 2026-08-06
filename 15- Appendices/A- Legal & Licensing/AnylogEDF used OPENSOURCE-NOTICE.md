@@ -18,7 +18,7 @@ source_path: "release/AnylogEDF used OPENSOURCE-NOTICE.md"
 
 This product incorporates the following third-party open-source Python packages. We are grateful to the authors and maintainers of these projects. Package names are listed without version numbers, since versions change frequently but the license does not.
 
-> A sortable, interactive version of this list (sort by name or by license) is available in [`OPEN_SOURCE_NOTICES.html`](./OPEN_SOURCE_NOTICES.html).
+> A sortable, interactive version of this list (sort by name or by license) is available in [`OPEN_SOURCE_NOTICES.html`](./AnylogEDF%20used%20OPENSOURCE-NOTICE.html).
 
 | Software                                                                         | License |
 |----------------------------------------------------------------------------------|---|

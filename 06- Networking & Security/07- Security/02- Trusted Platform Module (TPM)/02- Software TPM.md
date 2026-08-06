@@ -326,11 +326,5 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
-<<<<<<< HEAD:05- Networking & Security/A- Trusted Platform Module (TPM)/Software TPM.md
 - [Authentication](../01-%20Built-in%20Authentication/01-%20Authentication.md)
-=======
-- [Authentication](../01-%20Built-in%20Authentication/01-%20Authentication.md)
->>>>>>> origin/pre-develop:05- Anylog Nodes Network &  Security/A- Trusted Platform Module (TPM)/02 Software TPM.md
-- [Secure Network](secure%20network.md)
-- [Starting an AnyLog Instance](starting%20an%20anylog%20instance.md)
-- [Node Configuration](node%20configuration.md)
+- [Secure Network](../../03-%20Securing%20the%20Network.md)

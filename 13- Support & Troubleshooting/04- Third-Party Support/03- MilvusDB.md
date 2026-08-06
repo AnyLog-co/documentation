@@ -12,7 +12,7 @@ layout: page
 --->
 
 This page covers standing up a Milvus **server** via Docker (for Milvus **Lite**, no server setup is needed — see
-[05- Milvus](05-%20Milvus.md#connect)), then a full walkthrough from first connection through querying data back
+[05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#connect)), then a full walkthrough from first connection through querying data back
 out.
 
 ---
@@ -182,7 +182,7 @@ which is generally the more reliable option over raw volume snapshots.
 
 ## Offline model setup
 
-The text-embedding model (see [05- Milvus](05-%20Milvus.md#text-embedding-text--query)) needs internet access once
+The text-embedding model (see [05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#text-embedding-text--query)) needs internet access once
 to download. For an offline node, download it on a build machine and ship the cache over:
 
 ```bash
@@ -238,7 +238,7 @@ vector insert where dbms = vectors and collection = sensors and text = "temperat
 ```anylog
 vector search where dbms = vectors and collection = sensors and query = "door open" and limit = 5
 ```
-See [Query Data](05-%20Milvus.md#query-data) for what the result looks like and how to interpret the similarity score.
+See [Query Data](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#query-data) for what the result looks like and how to interpret the similarity score.
 
 6. Query across the network (if the collection is hosted on multiple operators)
 ```anylog
@@ -345,4 +345,4 @@ export GLOG_minloglevel=3
 
 ## Related
 
-- [05- Milvus](05-%20Milvus.md) — concepts, connection reference, and the full `vector` command set
+- [05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md) — concepts, connection reference, and the full `vector` command set

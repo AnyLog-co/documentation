@@ -38,7 +38,7 @@ The node name extends the CLI prompt. For example the following command changes 
 AL >  set node name Operator_3
 AL Operator_3 >
 ```
-See [Set node name](03-%20Get%20and%20Set%20Reference.md#set-node-name).
+See [Set node name](./03-%20Get%20&%20Set.md#set-node-name).
 
 A prompt extended by a plus (+) sign indicates a message in the buffer queue.
 For example:
@@ -54,7 +54,7 @@ get echo queue
 ## Basic Commands
 
 The CLI can operate on values maintained in the local dictionary. Details on the dictionary are available in
-[Get and Set Reference](03-%20Get%20and%20Set%20Reference.md#dictionary).
+[Get and Set Reference](./03-%20Get%20&%20Set.md#get-dictionary).
 
 ### Concatenating with `+`
 
@@ -254,4 +254,4 @@ AL >
 ## Next: scripting and control flow
 
 For conditional logic, labeled sections, loops, and the wait command, see
-[Conditional Execution & Control Flow](07-%20Conditional%20Execution%20and%20Control%20Flow.md).
+[Conditional Execution & Control Flow](./08-%20Conditional%20Execution%20and%20Control%20Flow.md).

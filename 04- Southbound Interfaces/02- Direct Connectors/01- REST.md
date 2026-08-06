@@ -52,6 +52,28 @@ curl -X PUT http://[Operator IP]:[Operator Port] \
 
 The data in this example would be stored under the `my_db` logical database, table `table3`.
 
+### Header: Mode - streaming vs file
+
+Data ingested to a local database is organized in files. Each file contains one or more sensor readings (or other type of time series data) organized in a JSON format.
+Users adding data with the REST API determines the mode in which data is processed:
+
+* Using a **File Mode** (the default mode) - a single data file is transferred using the PUT request, the file is registered (in the tsd_info table) and processed independently of other _PUT_ requests.  
+A File Mode is usually used when the PUT request contains a large amount of data or when the data is not frequently created.  
+    
+* Using a **Streaming Mode** - The AnyLog instance receiving the data serves as a buffer that accumulates the data from multiple PUT requests. Upon a threshold, the accumulated data is organized as a file that is processed as a single unit.
+A Streaming Mode is usually used when the frequency of data creation is high and the amount of data transferred in each PUT request is low.
+
+File mode is the default mode. Changing the mode to streaming is by updating the header with the key _mode_ and the value _streaming_.  
+
+**Header options for loading data**:
+
+| key  | value  | Explanation |
+| ---- | -------| ------------|
+| mode | file | The body of the message is JSON data. Database load (on an Operator Node) and data send (on a Publisher Node) are with no wait. File mode is the default behaviour. |
+| mode | streaming | The body of the message is JSON data that is buffered in the node. Database load (on an Operator Node) and data send (on a Publisher Node) are based on time and volume thresholds. |
+
+
+
 ## Publishing Data via POST
 
 When publishing data via POST, we can manipulate the data more, since the user is defining the mapping logic for the

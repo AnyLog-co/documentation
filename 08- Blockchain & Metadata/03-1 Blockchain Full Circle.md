@@ -12,12 +12,27 @@ layout: page
 
 # Blockchain: Full Circle
 
-As covered in [Blockchain Connectivity](02-%20Blockchain%20Connectivity.md), a node operates identically regardless of
-which global ledger backs it — the difference is only in the connection details. This page walks the full loop once,
-start to finish, showing the Master/Metadata node path and the real blockchain platform path side by side at each
-step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
+As covered in the previous sections, the process by which nodes communicate with a an actual blockchain ledger versus a
+metadata / master node differs only by the connectivity process itself.
+
+This page walks the full loop once, start to finish, showing the Master/Metadata node path and the real blockchain 
+platform path side by side at each step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
 (`node-deployment/`), trimmed down for readability. The full scripts handle considerably more edge-case branching
 (DNS, overlay networks, auth) than shown here — follow the links at each step for the complete version.
+
+## Which ledger?
+
+"Real blockchain platform" itself splits into two setups depending on who runs the node you connect to. All three
+options plug into the same loop below — only the connection details in step 1 change.
+
+| | Master / Metadata Manager node | Self-hosted blockchain | Hosted blockchain platform |
+|---|---|---|---|
+| **What it is** | AnyLog's built-in metadata ledger — no external blockchain software involved | You run your own blockchain client (e.g. a local Ethereum/Optimism node) | A managed RPC provider (e.g. Infura, Alchemy) gives access to a public chain without running a node yourself |
+| **Setup complexity** | Low — no contract deployment | Highest — install, sync, and maintain your own blockchain client | Moderate — deploy the AnyLog contract; node infrastructure is managed for you |
+| **Decentralization** | None — single point of failure (an HA pair mitigates this) | Full — you control the node, decentralization of the chain itself still applies | Full chain decentralization, but node *access* depends on the provider's uptime |
+| **Where the ledger lives** | Local `blockchain` database + local JSON file | On your own blockchain node's storage | On the public chain, reached through the provider's endpoint |
+| **Connect via** (step 1) | `connect dbms blockchain where ...` | `blockchain connect to ethereum where provider=http://<your-node-ip>:<port>` | `blockchain connect to ethereum where provider=https://sepolia.infura.io/v3/[INFURA_PROJECT_ID]` |
+| **Best for** | Dev/test and small deployments that want to avoid blockchain complexity entirely | Deployments with compliance/control requirements, or that want no dependency on a third-party RPC provider | The fastest way onto a real chain without operating any infrastructure |
 
 1. [Connect to the ledger](#1-connect-to-the-ledger)
 2. [Sync](#2-sync)

@@ -113,7 +113,7 @@ Here `broker=!ip` publishes to this node's own broker (assuming one is running o
 third-party one — swap in a real broker address and credentials the same way as the plain-string example above if
 publishing externally.
 
-See [Message Broker](../07-%20Southbound%20Interfaces/A-%20Direct%20Connectors%20Generic/message%20broker.md) for
+See [Message Broker](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md) for
 the broader picture of AnyLog's MQTT roles (subscribing as a client vs. running as the broker itself) — `mqtt publish`
 is a separate, simpler command from either of those: it just sends one message and returns, rather than starting a
 standing process.
