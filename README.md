@@ -1,3 +1,9 @@
+<!---
+Large scale changes: 
+  - June / July 2026    | Eric | reorged the documentation
+  - July / August 2026  | Ori  | reorged the documentation 
+  - July 24-Aug 25 2026 | Ori  | updated hyperlinks for URLs 
+--->
 <div align="center">
   <a href="https://anylog.network" target="_blank">
     <img src="imgs/anylog_logo.png" />
