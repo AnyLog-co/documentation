@@ -11,6 +11,7 @@ source_path: "release/notes.md"
  |------------|----------------|------------------|----------|
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-08-0X | Ori Shadmon    | Updated URLs     | 2.0.2606 |   
 --->
 
 
@@ -41,7 +42,7 @@ AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../08-%2
 ### New Features
 1. New command option: **blockchain get root policies**  
 2. ```set mcp client config``` command - Configure an active MCP connection to automatically disconnect after a specified period of inactivity. The default timeout is one hour.
-3. Adding UNS policies generation. [Details](../message%20broker.md#generating-a-unified-namespace-uns-policies)
+3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20Message%20Broker.md#generating-uns-policies)
 
 AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ### New Features
@@ -51,16 +52,16 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1. ```get mcp status``` - Returns information on the MCP clients connected to the node.
 2. ```get node resources``` - Returns info on the resources available to the node.
 ### New Features
-1.  Add timezone to query casting options. [Details](../queries.md#example-8---timezone-and-datetime)
+1.  Add timezone to query casting options. [Details](../07-%20CLI/04-%20SQL.md)
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
 1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#join-merge-operations)
 
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
-1. New command: ```file from``` - Return a file via REST. [Details](../07-%20CLI/08-%20File%20Commands.md#return-a-file-via-rest)
+1. New command: ```file from``` - Return a file via REST. [Details]()
 
 ## AnyLog Version: 1.3.2504-beta22 [69bf12] [2025-08-16 19:18:49]
-1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../anylog%20commands.md#conditional-execution)
+1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md)
 
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
 1. (AE) New options for ```get columns``` command. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#the-get-columns-command)
@@ -76,7 +77,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 
 ## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
 ### New features
-1. (AE) Manage Windows Event Log. Detaile [Run Scheduled Pull](../scheduled%20pull.md)
+1. (AE) Manage Windows Event Log. Detaile [Run Scheduled Pull](../04-%20Southbound%20Interfaces/04-%20Monitoring)
 
 ## AnyLog Version: 1.3.2504-beta7 [009f60] [2025-05-15 21:02:36]
 ### New features
@@ -88,49 +89,49 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
     * Disable trace of TCP messages sent from the node: ```trace method off tcp out```
     * Enable trace of TCP messages received by the node: ```trace method on tcp in```
     * Disable trace of TCP messages received by the node: ```trace method off tcp in```
-2. (AE) New command: **get nics list** - Retrieves and displays a list of all network interfaces (NICs). [Details](../network%20configuration.md#get-the-list-of-nics).
-3. (AE) New command: **set internal ip with [nic name]**. [details](../network%20configuration.md#set-internal-ip-via-network-interface)
+2. (AE) New command: **get nics list** - Retrieves and displays a list of all network interfaces (NICs). [Details](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md#nic_type--which-interface-identifies-this-agent).
+3. (AE) New command: **set internal ip with [nic name]**. [details](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md#nic_type--which-interface-identifies-this-agent)
 
 ## AnyLog Version: 1.3.2504-beta4 [168405] [2025-05-12 21:13:37]
 ### New features
 1. (AE) Adding an option to return a list of objects from the metadata. Example: blockchain get tag bring.list [tag][dbms] . [tag][table]
 ## AnyLog Version: 1.3.2504-beta1 [d483ae] [2025-05-05 10:35:06]
 ### New features
-1. (AE) Adding EtherNet/IP connector. See details in [EtherNet/IP](../enthernetip.md)
+1. (AE) Adding EtherNet/IP connector. See details in [EtherNet/IP](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/03-%20EtherIP.md)
 ### Updates
-1. (AE) Making the OPCUA call consistent with EtherNet/IP - [opcua](../opcua.md)
+1. (AE) Making the OPCUA call consistent with EtherNet/IP - [OPC-UA](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/02-%20OPC-UA.md)
 
 ## AnyLog Version: 1.3.2504 [673f50] [2025-04-27 20:15:35]
 ### New features
-1. (AE) Adding **extend** and **include** options to the Grafana payload. See details in [example 2 in Using Grafana documentation](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
+1. (AE) Adding **extend** and **include** options to the Grafana payload. See details in [example 2 in Using Grafana documentation](../05-%20Northbound%20Connectors/03-%20Grafana.md).
 
 ### Bugs Fixed
 1. (AE) Rejecting tag policies (with OPC-UA) with duplicate String ID or Int ID. 
 
 ## AnyLog Version:  1.3.2501-beta3 [3fd820] [2025-04-12 17:47:39]
 ### New Features:
-1. (AE) Optimized increments function. Details: [Increments Optimized Version](../queries.md#increments-optimized-version)  
-2. (AE) A new AnyLog command: **get increments params**. Details: [get-increments-params-command](../queries.md#the-get-increments-params-command)
-3. (AE) A new option to optimize data points returned in Grafana. Details: [Using the Time-Series Data Visualization](../northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
+1. (AE) Optimized increments function. Details: [Increments Optimized Version](../07-%20CLI/04-%20SQL.md#increments)  
+2. (AE) A new AnyLog command: **get increments params**. Details: [get-increments-params-command](../07-%20CLI/04-%20SQL.md#increments)
+3. (AE) A new option to optimize data points returned in Grafana. Details: [Using the Time-Series Data Visualization](../05-%20Northbound%20Connectors/03-%20Grafana.md ).
 
 ## AnyLog Version: 1.3.2501-beta3 [7ec215] [2025-03-30 16:52:26]
 ### New Features:
 1. (AE) New command to configure output table width: set output table width 250
-2. (AE) New Functionality for String Substring Operations. Details: [Special Bring Values](../json%20data%20transformation.md#special-bring-values)
+2. (AE) New Functionality for String Substring Operations. Details: [Special Bring Values](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#special-bring-values)
 3. (AE) Severe error messages (boxed) are now printed on the node in RED.
 
 ## AnyLog Version: 1.3.2401 [d9321d] [2025-03-07 18:19:06]
 ### New Features:
-1. (AE) Using DNS names. Details: [Get DNS Name](../anylog%20commands.md#get-dns-name)
+1. (AE) Using DNS names. Details: [Get DNS Name](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md)
 
 ## AnyLog Version: 1.3.2401 [d6c050] [2025-02-16 13:59:47]
 ### New Features:
-1. (A) Aggregations over user data. Details: [Aggregations](../aggregations.md)
+1. (A) Aggregations over user data. Details: [Aggregations](../09-%20Data%20Management/02-2%20Data%20Aggregations.md)
 2. (AE) New AnyLog command: **subprocess** to run shell scripts.
 
 ## AnyLog Version: 1.3.2401 [6665e9] [2025-01-26 14:14:09]
 ### New Features:
-1. (AE) wait for a blockchain sync. Details: [AnyLog Commands](../anylog%20commands.md#the-wait-command)
+1. (AE) wait for a blockchain sync. Details: [AnyLog Commands](../07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md#the-wait-command)
 
 ## **Version** [139b43] [2025-01-04 14:23:39]
 ### New Features:
@@ -169,16 +170,16 @@ policy = create policy license where company = !company. and expiration = !expir
 
 ```
 ### Changes
-1. (AE) Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../message%20broker.md#processing-messages-and-terminating-a-subscription).
+1. (AE) Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md).
 
 ## **Version** [c03b82] [2025-01-02 12:30:17]
 ### New Features:
-1. (AE) OPCUA support. Details: [OPCUA](../opcua.md) 
+1. (AE) OPCUA support. Details: [OPCUA](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/02-%20OPC-UA.md) 
 
 ## **Version**: [024a85] [2024-12-21 13:31:31]
 ### New Features:
 1. (AE) A new command: **file to** - write a file to a specified directory, using CLI or via REST. 
-   Details are in [Copy a file to a folder](../07-%20CLI/08-%20File%20Commands.md#copy-a-file-to-a-folder) section.  
+   Details are in [Copy a file to a folder](../07-%20CLI/09-%20File%20Commands.md#copy-a-file-to-a-folder) section.  
    This command can be used to remotely copy configurations to a node. An example is available in the [using rest](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#examples) section.
 2. The command **process** is supported using REST PUT.
 ### Changes
@@ -187,13 +188,13 @@ policy = create policy license where company = !company. and expiration = !expir
 
 ## **Version**: [a4924f] [2024-12-07 16:49:46] /
 ### New Features:
-1. (AE) HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../http%20commands.md). 
+1. (AE) HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md). 
 
 ## **Version**: [be71d3] [2024-08-29 15:18:04] |
 ### New Features:
-1. (AE) New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../queries.md#cast-data)
+1. (AE) New Casting features in SQL: function, lstrip, rstrip, timediff. Details in [CAST Data](../07-%20CLI/04-%20SQL.md#cast-data--formatting-options)
 2. (AE) Increment function without specifying the time range - the time intervals would be provided dynamically.  
-3. (AE) Configuring the number of threads when a message to peers is send. See details [here](../node%20configuration.md#configuring-the-number-of-threads-supporting-message-send-to-peer-nodes).
+3. (AE) Configuring the number of threads when a message to peers is send. See details [here]().
 4. (AE) Monitor inserts using the command: **trace level = 1 insert 10000** 10,000 is the threshold to print stats on inserts
 
 ## **Version**: 1.4 | 
@@ -201,36 +202,36 @@ policy = create policy license where company = !company. and expiration = !expir
 1. (AE) Create EdgeLake branch.
 2. Update **blockchain set account info** call to include the Chain ID. 
 3. (AE) Add options to create HTML documents from a query.
-4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#connecting-to-a-local-database).
+4. (AE) Add option **unlog** to PSQL declaration. Details in [Connecting to a local database](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md).
 
 ### New Features:
-1. (AE) New command: **get policies diff** detailed in [Compare Policies](../policies.md#compare-policies).
+1. (AE) New command: **get policies diff** detailed in [Compare Policies](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#compare-policies-).
 
 ## **Version**: 1.3.240112 | 
 
 ### New Features
-1. (AE) Adding support to gRPC [Using gRPC](../using%20grpc.md)
+1. (AE) Adding support to gRPC [Using gRPC](../04-%20Southbound%20Interfaces/05-%20RPC%20&%20Media%20Streaming/01-%20gRPC.md)
 2. (AE) Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
 3. (AE) **delete archive** command. Details: [Operator data archival](../07-%20CLI/02-%20Background%20Processes.md#operator-data-archival). 
-4. (AE) Adding support to syslog [Using SysLog](../using%20syslog.md)
+4. (AE) Adding support to syslog [Using SysLog](../04-%20Southbound%20Interfaces/04-%20Monitoring/02-%20Syslog.md)
 
 ## **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 
 ### New Features
-1. (AE) Adding sort by columns to **blockchain get** command. Details: [the bring command](../json%20data%20transformation.md#the-bring-keyword)
+1. (AE) Adding sort by columns to **blockchain get** command. Details: [the bring command](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#the-bring-keyword)
 2. (AE) Adding sort by columns to **get data nodes** command. Details: [View the distribution of data to clusters](../09-%20Data%20Management/03-%20High%20Availability.md#view-the-distribution-of-data-to-clusters)
 
 ## **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
 ### New Features:
 1.  (AE) pip Install. Details: [pip Install](../02-%20Installation%20%26%20Deployment/02-%20Virtualization/06-%20Pip%20Install.md)
-2.  (AE) Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../training/advanced/background%20deployment.md).
-3.  (AE) Map a local CLI to a peer node. Details: [Assigning a CLI to a peer node](../training/advanced/background%20deployment.md#assigning-a-cli-to-a-peer-node).
+2.  (AE) Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../02-%20Installation%20&%20Deployment/02-%20Virtualization/05-%20AnyLog%20as%20a%20Service.md).
+3.  (AE) Map a local CLI to a peer node. Details: [Assigning a CLI to a peer node](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md).
 4.  (AE) Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#retrieving-the-metadata-from-a-source-node)
-5.  (AE) [Associating peer replies to a key in the dictionary](../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md#associating-peer-replies-to-a-key-in-the-dictionary).    
-6.  (AE) wait command - pauses execution by time and condition. Details: [The Wait Command](../anylog%20commands.md#the-wait-command)
+5.  (AE) [Associating peer replies to a key in the dictionary]().    
+6.  (AE) wait command - pauses execution by time and condition. Details: [The Wait Command](../07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md#the-wait-command)
 7.  (AE) Create policy command - a command option to declare policies and include default attributes. Details:
-    [Creating policies using the Create Policy command](../policies.md#creating-policies-using-the-create-policy-command)
+    [Creating policies using the Create Policy command](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md)
 8.  (AE) REST requests without a command assume get status. Example: `curl 10.0.0.78:7849` returns: **AnyLog@73.202.142.172:7848 running** 
 
 
@@ -243,7 +244,7 @@ policy = create policy license where company = !company. and expiration = !expir
 
 3. (AE) If license key is not provided - the **get status** command returns a warning on the missing license key.    
 
-4. (AE) Option for **min** and **max** values in the ```bring command```: Details: [The bring keyword](../json%20data%20transformation.md#the-bring-keyword)
+4. (AE) Option for **min** and **max** values in the ```bring command```: Details: [The bring keyword](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#the-bring-keyword)
 
 ### Bugs fixed:
 
