@@ -224,8 +224,8 @@ policy = create policy license where company = !company. and expiration = !expir
 ## **Version**: 1.3.2309 | **Release Date**: Oct.  2 2023 (Official)
 
 ### New Features:
-1.  (AE) pip Install. Details: [pip Install](../02-%20Installation%20%26%20Deployment/02-%20Virtualization/06-%20Pip%20Install.md)
-2.  (AE) Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../02-%20Installation%20&%20Deployment/02-%20Virtualization/05-%20AnyLog%20as%20a%20Service.md).
+1.  (AE) pip Install. Details: [pip Install](../02-%20Installation%20%26%20Deployment/02-%20Virtualization/99-06-%20Pip%20Install.md)
+2.  (AE) Deploy AnyLog node as a background process. Details: [Deploy AnyLog as a background process](../02-%20Installation%20&%20Deployment/02-%20Virtualization/99-05-%20AnyLog%20as%20a%20Service.md).
 3.  (AE) Map a local CLI to a peer node. Details: [Assigning a CLI to a peer node](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md).
 4.  (AE) Start a new node with a seed from a peer node. Details: [Retrieving the metadata from a source node](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#retrieving-the-metadata-from-a-source-node)
 5.  (AE) [Associating peer replies to a key in the dictionary]().    
