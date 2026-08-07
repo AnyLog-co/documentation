@@ -2,7 +2,7 @@
 title: "Evaluation License"
 description: ""
 layout: page
-source_path: "license/01 AnylogEDF Evaluation License Agreement.md"
+source_path: "license/01- AnylogEDF Evaluation License Agreement.md"
 ---
 
 <!---
@@ -32,7 +32,7 @@ ANYLOG SOFTWARE EVALUATION AGREEMENT
     revocable license to use the AnyLog Software.
     2. OPEN SOURCE SOFTWARE. Open source products included in the AnyLog Software are licensed to Customer under 
     the open source software’s own applicable license terms, and are listed with reference to their respective homepage 
-    and license at [Notice of Open Source Usage](03%20Notice%20of%20Open%20Source%20Usage.md). 
+    and license at [Notice of Open Source Usage](./03-%20Notice%20of%20Open%20Source%20Usage.md). 
     These license terms are consistent with the license granted in the Agreement and may contain additional rights 
     benefiting Customer. The open source license terms take precedence over the Agreement to the extent that the Agreement 
     imposes greater restrictions on Customer than the applicable open source license terms.

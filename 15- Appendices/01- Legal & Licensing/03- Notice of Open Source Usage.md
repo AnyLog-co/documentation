@@ -2,7 +2,7 @@
 title: "Notice Of Open Source Usage"
 description: ""
 layout: page
-source_path: "license/03 Notice of Open Source Usage.md"
+source_path: "license/03- Notice of Open Source Usage.md"
 ---
 
 <!---

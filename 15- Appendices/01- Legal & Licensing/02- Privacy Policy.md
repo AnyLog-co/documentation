@@ -2,7 +2,7 @@
 title: "Privacy @ AnyLog"
 description: ""
 layout: page
-source_path: "license/02 Privacy Policy.md"
+source_path: "license/02- Privacy Policy.md"
 ---
 
 <!---
