@@ -4,7 +4,9 @@ description: "Running AnyLog as a systemd service instead of via Docker/Kubernet
 layout: page
 ---
 <!--
-## Changelog
+## Changelog. PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606 
 - 2026-07-22 | Merged from "05- Configure as a Service.md" and "07 Deploying Anylog as a Service.md"
                into a single document, restructured around two steps: (1) run AnyLog as a plain
                executable, (2) wrap that into a systemd service.

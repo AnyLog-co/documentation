@@ -25,7 +25,7 @@ to generate a static IP address.
 ## Use Case
 
 The deployment uses AnyLog to manage data on boats: the ‘floating’ edges run _Operators_ and connect to a central DC 
-(where the _Master_ and _Query_ agenst are located). Communication is done through 4G, which may cause network inconsistencies,  
+(where the _Master_ and _Query_ agents are located). Communication is done through 4G, which may cause network inconsistencies,  
 and [ZeroTier](https://www.zerotier.com/) VPN is used to secure communications and have static IP addresses.
 
 ## Problem Symptoms 
@@ -51,7 +51,7 @@ Override MTU Manually
 ```shell
 sudo ip link set dev zt<interfaceID> mtu 2009
 ```
-* **Mac OSX**
+* **Mac OS X**
 ```shell
 sudo ifconfig zt<interfaceID> mtu 1400
 ```

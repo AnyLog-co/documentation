@@ -8,15 +8,11 @@ tags:
 - install
 - integration
 ---
-<!---
-### 📜 Change Log
-
-| **Date** | **Name** | **Version** |
-|---|---|---|
-| 2026-07-20 | Eric Aquaronne | 2.0.2606 |
-
-**2026-07-20 — Eric Aquaronne:**
-- Added this change log.
+<!--
+## Changelog PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606 
+- 2026-07-20 — 
 - Merged `customizing-scripts.md` into this file; that file is now retired. Two pieces moved over:
   1. A practical framing sentence added right after the Stage A table ("if you've created your own repo with the
      same structure, option 3 or 2 is usually the one you want...") — everything else in that table was already an

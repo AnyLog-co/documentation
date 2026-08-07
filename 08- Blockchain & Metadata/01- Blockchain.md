@@ -30,7 +30,7 @@ _Filecoin_.
 Finally, AnyLog agents of the network are aware they are a part of the network based on the `LEDGER_CONN` (`!ledger_conn`)
 configuration and the metadata (i.e. `blockchain get`) they see.
 
-Note that while nodes are able to see all of the other members in their shared network, via the blockchain, they may
+Note that while nodes are able to see every other members in their shared network, via the blockchain, they may
 not be granted access to all those nodes, as described in [security and permissions](../06-%20Networking%20&%20Security).
 
 * [Blockchain Policy](./02-%20Policy%20&%20Metadata.md) — what a policy is, the core policy types, and how to structure one

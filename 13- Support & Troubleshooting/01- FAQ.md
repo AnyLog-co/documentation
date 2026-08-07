@@ -324,7 +324,7 @@ Please review [blob extraction]() in the Edge Data Manager section.
 **Q: Can `period` and `increments` be used in the same query?**
 
 Not at this time — `increments` needs a continuous range to bucket; `period` is looking for the last occurrence
-before a timestamp. See [SQL Commands → Time-series optimised queries](../07-%20CLI/04-%20SQL.md#time-series-optimised-queries).
+before a timestamp. See [SQL Commands → Time-series optimized queries](../07-%20CLI/04-%20SQL.md#Time-series-optimized-queries).
 
 **Q: Does AnyLog support SQL-style JOINs across tables?**
 
@@ -428,7 +428,7 @@ blockchain seed from [remote tcp ip]:[remote tcp port]
 > an active blockchain service, the file will ultimately be re-synced with the configured ledger conn. 
 
 
-**Q: I added a policy but it's not visible on other nodes.**
+**Q: I added a policy, but it's not visible on other nodes.**
 
 Force an immediate sync: `run blockchain sync`, then confirm on peers with `get metadata version`.
 

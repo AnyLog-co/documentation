@@ -98,8 +98,9 @@ If aggregation output is stored in the **same physical database** as the source 
 [Aggregations and DBMS Operations](#aggregations-and-dbms-operations) above), avoid partitioning that database with
 a single wildcard rule (`partition [dbms] * using [column] by [interval]` — see
 [Table Partitioning](./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
-A database-wide rule applies the same interval to every table in that database, which doesn't distinguish between
-raw source tables and aggregation output tables — the two typically need very different retention.
+A database-wide rule applies the same interval to every table in that database.
+I doesn't distinguish between raw source tables and aggregation output tables :
+the two typically need very different retention.
 
 Instead, disable the database-wide rule and partition each table individually, so raw data and its aggregation
 output can each use an interval and retention window suited to that table:

@@ -88,7 +88,7 @@ helper psql 1 exit node
 ```
 
 
-# 📊 Dynamic monitoring of internal processes
+## Dynamic monitoring of internal processes
 
 The `get dynamic stats` command retrieves **live execution metadata** about a specific operation running in the main or helper processes
 — such as timing, status, or active resource usage — by referencing its associated request or file name.

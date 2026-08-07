@@ -63,8 +63,8 @@ Optimism blockchain.
 
 ### Links 
 * [Blockchain Commands](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
-* [Blockchain Configuration.md](blockchain%20configuration.md)
-* [policies.md](policies.md)
+* [Blockchain Configuration.md](./01%20Blockchain%20%28internet%29%20Configuration.md)
+* [policies.md](../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md)
 
 ## Sepolia for Optimism as Blockchain
 1. Specify [infura](https://www.infura.io/) as our RPC provider and connect to it. 
@@ -152,7 +152,7 @@ blockchain insert where policy=!new_policy and local=true and blockchain=!platfo
 
 Generally speaking, content that's stored on a blockchain is non-fungible (ie cannot change). However, nodes that are 
 part of the AnyLog network can have configuration changes - such as: node ownership, network information, permissions or 
-simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](policies.md#anmp-policy)
+simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md)
 in order to modify existing policies. 
 
 

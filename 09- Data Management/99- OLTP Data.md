@@ -84,7 +84,7 @@ blockchain get table where name=users and dbms=my_db
 blockchain get cluster where table[name] = users and table[dbms] = my_db 
 ```
 
-4. An AnyLog policy create table - the user needs to decide whether or not they want to publish data into the table via 
+4. An AnyLog policy create table - the user needs to decide whether they want to publish data into the table via 
 AnyLog or not. If data will be inserted through AnyLog (southbound interfaces or REST), include the AnyLog system columns 
 (`row_id`, `insert_timestamp`, `tsd_name`, `tsd_id`) required for replication and HA/DR. If the table will only be 
 managed directly through the relational database, these columns and correlated keys are not needed. 
@@ -110,7 +110,7 @@ CREATE INDEX users_insert_timestamp_index ON users(insert_timestamp);
 
 > Since AnyLog connects seamlessly to multiple SQL logical database, you need to make sure the SQL is supported by both 
 > if using both, otherwise choose SQL syntax supported by all target database engines if the same table definition will 
-> be deployed across multiple logical databases..
+> be deployed across multiple logical databases.
 
 ```anylog 
 <new_policy = {

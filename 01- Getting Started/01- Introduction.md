@@ -5,7 +5,9 @@ layout: page
 ---
 <!--
 ## Changelog
-- 2026-04-17 | Created document (legacy)
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606 
+2026-04-17 | Created document (legacy)
 - 2026-04-25 | hyperlink fix (legacy)
 - 2026-07-02 | Unified from: 01- Getting Started/Getting Started.md,
                              ORPHANS/x anylog-docs/Getting-Started/getting-started.md,
@@ -74,49 +76,49 @@ managing infrastructure.
 * Real-time SQL and REST API access from any node
 * Built-in dashboards and analytics
 
-| Feature | EdgeLake          | AnyLog |
-|---|-------------------|---|
-| Cost | Free / Open-Source | Subscription |
-| Virtual edge layer | ✅                 | ✅ |
-| Rule engine | ✅                 | ✅ |
-| Policy-based data management | ✅                 | ✅ |
-| Node management | ✅                 | ✅ |
-| Unified APIs, CLIs, Admin UI | ✅                 | ✅ |
-| Supported IoT connectors | ✅                 | ✅ |
-| Blockchain abstraction | ✅                 | ✅ |
-| MCP Integration | limited           | ✅ |
-| Aggregations | ❌                 | ✅ |
-| Automated Unified Namespace (UNS) | ❌                 | ✅ |
-| Security protocol & High Availability (HA) | ❌                 | ✅ |
-| Publisher node role | ❌                 | ✅ |
+| Feature                                    | EdgeLake           | AnyLog       |
+|--------------------------------------------|--------------------|--------------|
+| Cost                                       | Free / Open-Source | Subscription |
+| Virtual edge layer                         | ✅                  | ✅            |
+| Rule engine                                | ✅                  | ✅            |
+| Policy-based data management               | ✅                  | ✅            |
+| Node management                            | ✅                  | ✅            |
+| Unified APIs, CLIs, Admin UI               | ✅                  | ✅            |
+| Supported IoT connectors                   | ✅                  | ✅            |
+| Blockchain abstraction                     | ✅                  | ✅            |
+| MCP Integration                            | limited            | ✅            |
+| Aggregations                               | ❌                  | ✅            |
+| Automated Unified Namespace (UNS)          | ❌                  | ✅            |
+| Security protocol & High Availability (HA) | ❌                  | ✅            |
+| Publisher node role                        | ❌                  | ✅            |
 
 **AnyLog (Enterprise)** includes everything in EdgeLake plus: advanced security and authentication, federated data
 aggregation and model training, and real-time support with SLA options.
 
 ## Terminology
 
-| Term | Definition |
-|---|---|
-| **Southbound** | Data flowing *in* from devices and sensors, stored into AnyLog/EDF |
-| **Northbound** | Queries and results flowing *out* to applications |
-| **Metadata** | Descriptive information about the data and nodes in the network — not the data itself |
-| **Blockchain** | The mechanism used to store and distribute policies across the network in a consistent, tamper-resistant way. When a blockchain platform isn't in use, the Metadata Manager's local database serves the same role — both documentation and system refer to this repository as "the blockchain" either way. |
-| **Policy** | A JSON-structured record stored in the network's metadata, describing things like node configuration, network connectivity, or cluster membership |
-| **Services** | Components of AnyLog/EDF that can be started and stopped independently |
-| **Nodes / Agents** | Running AnyLog/EDF instances |
-| **Containers** | Docker instances running AnyLog/EDF |
+| Term               | Definition                                                                                                                                                                                                                                                                                                 |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Southbound**     | Data flowing *in* from devices and sensors, stored into AnyLog/EDF                                                                                                                                                                                                                                         |
+| **Northbound**     | Queries and results flowing *out* to applications                                                                                                                                                                                                                                                          |
+| **Metadata**       | Descriptive information about the data and nodes in the network — not the data itself                                                                                                                                                                                                                      |
+| **Blockchain**     | The mechanism used to store and distribute policies across the network in a consistent, tamper-resistant way. When a blockchain platform isn't in use, the Metadata Manager's local database serves the same role — both documentation and system refer to this repository as "the blockchain" either way. |
+| **Policy**         | A JSON-structured record stored in the network's metadata, describing things like node configuration, network connectivity, or cluster membership                                                                                                                                                          |
+| **Services**       | Components of AnyLog/EDF that can be started and stopped independently                                                                                                                                                                                                                                     |
+| **Nodes / Agents** | Running AnyLog/EDF instances                                                                                                                                                                                                                                                                               |
+| **Containers**     | Docker instances running AnyLog/EDF                                                                                                                                                                                                                                                                        |
 
 ## Node Types
 
-AnyLog/EDF uses a single codebase across all node types. With the exception of Operator and Publisher — which are
+AnyLog/EDF uses a single codebase across all node types. Except for Operator and Publisher — which are
 mutually exclusive on the same node — any node can run any combination of services simultaneously.
 
-| Node type | Role | Key characteristic |
-|---|---|---|
-| **Metadata Manager** | Hosts the network's metadata | Also called the Master Node. Optional — only needed when not using a blockchain platform. One per network (or HA pair). |
-| **Operator** | Stores and serves data | Hosts local databases, answers queries, and receives data from southbound connectors or Publishers. |
-| **Publisher** | Routes data to Operators | Receives data from devices or connectors, resolves the target Operator from the metadata layer, and forwards the data. Does not store data locally. Cannot run on the same node as an Operator. AnyLog/EDF-specific — not available in EdgeLake. |
-| **Query** | Orchestrates distributed queries | Receives SQL from applications, fans the query out to relevant Operators, and returns aggregated results. Any node can serve as a Query node — it's a role, not a dedicated machine. |
+| Node type            | Role                             | Key characteristic                                                                                                                                                                                                                               |
+|----------------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Metadata Manager** | Hosts the network's metadata     | Also called the Master Node. Optional — only needed when not using a blockchain platform. One per network (or HA pair).                                                                                                                          |
+| **Operator**         | Stores and serves data           | Hosts local databases, answers queries, and receives data from southbound connectors or Publishers.                                                                                                                                              |
+| **Publisher**        | Routes data to Operators         | Receives data from devices or connectors, resolves the target Operator from the metadata layer, and forwards the data. Does not store data locally. Cannot run on the same node as an Operator. AnyLog/EDF-specific — not available in EdgeLake. |
+| **Query**            | Orchestrates distributed queries | Receives SQL from applications, fans the query out to relevant Operators, and returns aggregated results. Any node can serve as a Query node — it's a role, not a dedicated machine.                                                             |
 
 ### Metadata Manager
 
@@ -267,9 +269,8 @@ southbound connector, or indirectly, through a third-party bridge like Node-RED.
 
 The receiving Operator node ingests the data, converting it from its original format (e.g. JSON) into a SQL table. If
 no table definition exists yet for this data, one is generated automatically as part of ingestion — along with any
-metadata/policies other nodes need in order to know this data now lives on this cluster, and what its schema looks
-like. The data is then stored — both as structured table rows and as the original raw file — and becomes queryable.
-
+metadata/policies other nodes need in order to know this data now lives on this cluster.
+The data is then stored — both as structured table rows and as the original raw file — and becomes queryable.
 The only real "wait" in this pipeline isn't processing delay — it's the Operator's data buffer, which flushes on a
 configurable threshold (default: 100MB or 60 seconds, whichever comes first).
 

@@ -5,6 +5,9 @@ layout: page
 ---
 
 <!---
+## Changelog. PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606
     2026-07-25 | Ori Shadmon | Create document
     2026-07-25 | Ori Shadmon | Fixed grammar (subject/verb agreement in the intro, reworded the "Via Executable"
                  intro sentence for clarity). Made the volume table's container paths match the real mount
@@ -28,12 +31,12 @@ node (physically) resets, or when migrating data from one machine to another.
 In addition to the built-in directories, the `deployment-scripts` directory is downloaded (via `git clone`) locally and used
 to help convert the configurations into actual active services and connected logical databases. 
 
-|             Volume             |               Directory (in container)                |                        Usage                         | 
-|:------------------------------:|:-----------------------------------------------------:|:----------------------------------------------------:|
-|   `${CONTAINER_NAME}-anylog`   | `/app/AnyLog-Network/anylog/` |             used for authentication keys             | 
-| `${CONTAINER_NAME}-blockchain` | `/app/AnyLog-Network/blockchain` | directory that contains a copy of the the blockchain (as JSON) file |
-|    `${CONTAINER_NAME}-data`    | `/app/AnyLog-Network/data` | directory that would contain data coming into the node and blob storage (not in database) and  data stored in SQLite database (file). |
-| `${CONTAINER_NAME}-local-scripts`| `/app/deployment-scripts/` | A copy of <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> used to initiate + configure the AnyLog agent |
+|              Volume               |     Directory (in container)     |                                                                          Usage                                                                           | 
+|:---------------------------------:|:--------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    `${CONTAINER_NAME}-anylog`     |  `/app/AnyLog-Network/anylog/`   |                                                               used for authentication keys                                                               | 
+|  `${CONTAINER_NAME}-blockchain`   | `/app/AnyLog-Network/blockchain` |                                           directory that contains a copy of the the blockchain (as JSON) file                                            |
+|     `${CONTAINER_NAME}-data`      |    `/app/AnyLog-Network/data`    |          directory that would contain data coming into the node and blob storage (not in database) and  data stored in SQLite database (file).           |
+| `${CONTAINER_NAME}-local-scripts` |    `/app/deployment-scripts/`    | A copy of <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> used to initiate + configure the AnyLog agent |
 
 
 ### Data Directory

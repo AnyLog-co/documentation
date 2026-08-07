@@ -30,10 +30,10 @@ The directions below provide a zero-touch* quick deployment that does not persis
 off the ground and get a feel for AnyLog, not to stand up a production-ready system.
  
 This document covers deploying AnyLog from a single node all the way to a small network consisting of 1 master / metadata 
-node, 2 operators, and 1 query node. We start with a single node running the three major services combined — metadata 
-management (blockchain database / ledger table), data storage (sensor data coming into AnyLog), and `system_query` (the 
-logical database used for aggregating results from operator(s) into a unified result for the user) — and then grow that 
-out into a dedicated master, query, and 2 operators, each running on its own node.
+node, 2 operators, and 1 query node. 
+We start with a single node running the three major services combined:  — metadata 
+management (blockchain database / ledger table), data storage (sensor data coming into AnyLog), and `query`. The Query service provides access to the federated multinode query of data: used for aggregating results from operator(s) into a unified result for the user.
+And then we grow that detup into dedicated/separated master, query, and 2 operators, each running on its own node.
  
 For a more comprehensive deployment, please visit:
  
@@ -51,12 +51,12 @@ AnyLog (`LICENSE_KEY`).</sub>
 
 ### Machine requirements
 
-| Component | Requirement |
-|---|---|
+| Component            | Requirement                                                           |
+|----------------------|-----------------------------------------------------------------------|
 | **Operating System** | Linux (Debian/Ubuntu, RedHat, Alpine, CentOS, Suse) · macOS · Windows |
-| **Memory** | 100 MB (without Docker) · 300 MB (with Docker) |
-| **CPU** | Intel, ARM, AMD x64. x86 available on request. |
-| **Networking** | TCP-based network (local, internet, or hybrid) |
+| **Memory**           | 100 MB (without Docker) · 300 MB (with Docker)                        |
+| **CPU**              | Intel, ARM, AMD x64. x86 available on request.                        |
+| **Networking**       | TCP-based network (local, internet, or hybrid)                        |
 
 Recommended minimum for a dev/demo machine: **2 GB RAM, 50 GB disk**. A cloud VM (AWS, DigitalOcean, Linode) works well.
 
@@ -134,8 +134,8 @@ file rather than passing everything through `docker run` environment variables d
 ## Part 2 — From Single Agent to Full Network
 
 The following provides directions on how to deploy a full network  -- 1 master, 2 operator, 1 query. 
-Feel free to skip steps 1&2 if you already have a license. Additionally feel free to skip adding a master node if you'd
-like to extend the network with the existing standalone instance from the pervious set of directions. 
+Feel free to skip steps 1&2 if you already have a license. Feel free to skip adding a master node if you'd
+like to extend the network with the existing standalone instance from the previous set of directions. 
 
 1. Make sure you have [Docker](https://docs.docker.com/engine/install/ubuntu/) and _make_ installed.
 2. <a href="https://www.anylog.network/download" target="_blank">Request License and Access key</a>
@@ -188,7 +188,7 @@ docker run -it --network host \
 --name anylog-operator2 --rm anylogco/anylog-network:2.0.2606 
 ```
 
-if the second operator resides on the same machine is operator 1 / standalone node then make sure to update the env varibale 
+if the second operator resides on the same machine is operator 1 / standalone node then make sure to update the env variable 
 `ANYLOG_SERVER_PORT`, `ANYLOG_REST_PORT` and `ANYLOG_BROKER_PORT` 
 
 8. Start Query node 

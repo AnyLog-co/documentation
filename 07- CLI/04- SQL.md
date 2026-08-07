@@ -27,7 +27,7 @@ and assemble a unified result — letting a query behave as though all the data 
 ## SQL + `run client ()`
 
 In the [previous sections](01-%20CLI.md#executing-on-peer-nodes) we had talked about the idea of `run client` and
-how to specify the proper IP and ports for sending requests between nodes. With the exception of the `sql` command,
+how to specify the proper IP and ports for sending requests between nodes. Except for the `sql` command,
 the content in `run client` must be filled in.
 
 **Invalid**: The example is invalid because `run client` does not know where to send the request.
@@ -133,7 +133,7 @@ SELECT reading_time, speed::float(2) FROM performance WHERE reading_time >= NOW(
 SELECT reading_time, speed::float(2)::format(:,) FROM performance WHERE reading_time >= NOW() -3d
 ```
 
-## Time-series optimised queries
+## Time series optimized queries
 
 In addition to the standard SQL functions mentioned above, AnyLog also has its own time-series optimization windowing
 functions.
@@ -152,7 +152,7 @@ period(time-interval, units, date-time, date-column, filter-criteria)
 ```
 
 In most SQL languages in order to find the last occurrence of data the user usually needs to (slowly) increment the WHERE
-condition. Thus lets say data hasn't came in for over 12 hours the user is not aware of this, they'd probably run
+condition. For example, if data hasn't come in for over 12 hours the user is not aware of this, they'd probably run
 something like this:
 
 ```SQL 
@@ -230,7 +230,7 @@ By defining `increments` as a way to divide a time range into fixed buckets and 
 able to accomplish this across its network no matter the database engine underneath.
 
 
-**Example** — Get 5 minute increments of data over the last 1 hour (from now)
+**Example** — Get 5-minute increments of data over the last 1 hour (from now)
 ```anylog
 AL anylog-query +> <run client () sql cos format=table 
     "SELECT 
@@ -265,7 +265,7 @@ min(timestamp)      max(timestamp)      min(value) max(value) avg(value) count(*
 ## Via REST
 
 For queries sent through an application (via REST) it is recommended to use `format=json:list and stat=false`.
-That way the content returns as a list of JSONs that's machine readable without extra statistics or complex formatting.
+That way the content returns as a list of JSONs that are machine-readable without extra statistics or complex formatting.
 
 ```bash
 curl -X GET 127.0.0.1:32349 \

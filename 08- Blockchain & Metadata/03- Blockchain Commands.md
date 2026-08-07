@@ -43,7 +43,7 @@ contract on the blockchain platform.
 blockchain deploy contract where platform = ethereum and public_key = !public_key
 ```
 
-> A metadata manager (i.e. master node) does not need to define the steps above. Instead it creates a logical
+> A metadata manager (i.e. master node) does not need to define the steps above. Instead, it creates a logical
 > database and table (`blockchain.ledger`) and syncs the content against it.
 
 ### Master / Metadata Node Blockchain
@@ -260,7 +260,7 @@ Output:
 [{"bucket": {...}, "operator": {...}}]
 ```
 
-- If no RHS match → record is omitted (inner join behaviour)
+- If no RHS match → record is omitted (inner join behavior)
 - Path interpolation: `[bucket][operator]` is resolved from the LHS record
 
 ### MERGE — flatten RHS into LHS
@@ -275,7 +275,7 @@ Output:
 ```
 
 - LHS wins on key conflicts
-- If no RHS match → LHS returned unchanged (left merge behaviour)
+- If no RHS match → LHS returned unchanged (left merge behavior)
 
 ### With bring formatting
 

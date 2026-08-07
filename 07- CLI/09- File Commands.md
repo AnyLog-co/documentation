@@ -19,25 +19,25 @@ source_path: "02 File Commands.md"
 
 The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.  
 In the examples below, the ***local node*** is the node where the command is executed. 
-The ***remote node*** is identified by the IP and Port declared in the [run tcp server](02-%20Background%20Processes.md#the-tcp-server-process) process.
+The ***remote node*** is identified by the IP and Port declared in the [run tcp server](02-%20Background%20Processes.md) process.
 
 Operations supported:
 
-| Operation                                                                | ----                                                                                                                    | 
-|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [file decompress](#compress-and-decompress-a-file)                       | Decompress a file.                                                                                                      |
-| [file compress](#compress-and-decompress-a-file)                         | Compress a file.                                                                                                        |
-| [file copy](#copy-files-between-nodes-in-the-network)                    | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| [file to](#copy-a-file-to-a-folder)                                      | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
-| [file from](#return-a-file-via-rest)                                  | Return the file content to a REST request                                                                               |
-| [file delete](#delete-a-file)                                            | Delete a file.                                                                                                          |
-| file deliver                                                             | Copy archived data from a remote node.                                                                                  |
-| [file get](#file-copy-from-a-remote-node-to-a-local-node)                | Copy a file or files from a remote node to the local node.                                                              |
-| [file hash](#calculating-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
-| [file move](#move-a-file)                                                | Move a file to a different location on the local node.                                                                  |
-| [file test](#test-if-a-file-exists)                                      | Test if a file exists.                                                                                                  |
-| [file encode](#encode-and-decode-a-file)                                 | Apply base64 encoding.                                                                                                  |
-| [file decode](#encode-and-decode-a-file)                                 | Apply base64 decoding.                                                                                                  |
+| Operation                                                              | ----                                                                                                                    | 
+|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [file decompress](#compress-and-decompress-a-file)                     | Decompress a file.                                                                                                      |
+| [file compress](#compress-and-decompress-a-file)                       | Compress a file.                                                                                                        |
+| [file copy](#copy-files-between-nodes-in-the-network)                  | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| [file to](#copy-a-file-to-a-folder)                                    | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
+| [file from](#return-a-file-via-rest)                                   | Return the file content to a REST request                                                                               |
+| [file delete](#delete-a-file)                                          | Delete a file.                                                                                                          |
+| file deliver                                                           | Copy archived data from a remote node.                                                                                  |
+| [file get](#file-copy-from-a-remote-node-to-a-local-node)              | Copy a file or files from a remote node to the local node.                                                              |
+| [file hash](#Calculate-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
+| [file move](#move-a-file)                                              | Move a file to a different location on the local node.                                                                  |
+| [file test](#test-if-a-file-exists)                                    | Test if a file exists.                                                                                                  |
+| [file encode](#encode-and-decode-a-file)                               | Apply base64 encoding.                                                                                                  |
+| [file decode](#encode-and-decode-a-file)                               | Apply base64 decoding.                                                                                                  |
 
 
 List files or directories:

@@ -166,10 +166,11 @@ time) if you're monitoring Milvus as its own service rather than just through An
 ### Standalone vs. cluster mode, and backup
 
 Everything in this doc deploys Milvus **standalone** (one node, backed by etcd + MinIO for metadata/object
-storage) — adequate for development and moderate production load. Milvus also supports a distributed **cluster**
-mode for horizontal scaling, which is a Milvus-level concern entirely separate from AnyLog's own
-operator/cluster model (see [Implementation notes](#implementation-notes) below — AnyLog does not replicate
-across multiple Milvus instances itself). If you outgrow standalone, that's a Milvus deployment decision to make
+storage) — adequate for development and moderate production load. 
+Milvus also supports a distributed **cluster** mode for horizontal scaling, which is a Milvus-level concern entirely separate from AnyLog's own
+operator/cluster model.
+AnyLog does not replicate across multiple Milvus instances itself). 
+If you outgrow standalone, that's a Milvus deployment decision to make
 independent of AnyLog, following Zilliz's own cluster deployment guidance.
 
 For backup, since standalone Milvus stores its metadata in etcd and its actual vector/object data in MinIO (both

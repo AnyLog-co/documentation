@@ -8,6 +8,7 @@ layout: page
 
 | **Date** | **Name** | **Change** |
 |---|---|---|
+- 2026-08-07 | Eric Aquaronne | change log format | 2.0.2606 
 | 2026-07-24 | Ori Shadmon | Create introduction document |
 --->
 

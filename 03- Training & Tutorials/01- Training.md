@@ -17,7 +17,7 @@ This section covers what happens once the AnyLog agent(s) is installed and runni
 * [Query Data](03-%20Query%20Data.md)
 * [Deployment Process](04-%20deployment-process.md)
 * [Deployment Scripts](05-%20deployment-scripts.md)
-* [Ndoe Configuration Process](06-%20Nodes.md)
+* [Node Configuration Process](06-%20Nodes.md)
 * [Basic Docker / K8s Commands](../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20&%20K8s%20Commands.md)
 
 [Section 12](../12-%20Examples%20&%20Use%20Cases) provides full examples for deploying a local / demo network from start to finish.

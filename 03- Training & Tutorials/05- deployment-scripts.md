@@ -8,17 +8,11 @@ tags:
 - getting-started
 - integration
 ---
-
-<!---
-### 📜 Change Log
-
-| **Date** | **Name** | **Version** |
-|---|---|---|
-| 2026-07-20 | Eric Aquaronne | 2.0.2606 |
-
-**2026-07-20 — Eric Aquaronne:** added this change log.
-
-**2026-07-09:** changed in this revision:
+<!--
+## Changelog PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606
+- 2026-07-09:** changed in this revision:
 - Fixed heading level: "Last resort: forking the shipped scripts directly" was a sub-heading (`###`) under option 3;
   promoted to a top-level option (`##`) since it's a fourth choice, not a detail of option 3.
 - Added an explicit cross-link to `04- deployment-process.md` next to the condensed table, so the two tables don't

@@ -420,7 +420,7 @@ get table partitions names where dbms = aiops and name = lic1_sp
 get table complete status where name = ping_sensor and dbms = anylog
 ```
 
-### The get columns command 
+### The get columns command
 
 The `get columns` command provides the list of columns names and data types for the named table.  
 **Usage**:
