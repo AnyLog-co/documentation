@@ -5,7 +5,9 @@ layout: page
 source_path: "postgres-connector.md"
 ---
 <!--
-## Changelog
+## Changelog PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606
 - 2026-04-17 | Created document (as postgres-connector.md, Northbound Connectors)
 - (unknown) | A second copy was created under 11- Extended Services/A- Databases/Postgres Connector.md — confirmed
               on comparison to be the same content, not a distinct storage-layer topic. That copy used working

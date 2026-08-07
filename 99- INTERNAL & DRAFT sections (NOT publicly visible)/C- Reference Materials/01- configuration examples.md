@@ -23,7 +23,7 @@ This document provides configuration examples.
 ## Starting a node with a configuration file
 
 When an AnyLog node is initiated, it can be called with a command line parameters. The command line parameters 
-are one or more AnyLog commands (with multiple commands, each command is enclosed by quotation mark and seperated by the keyword ***and***).  
+are one or more AnyLog commands (with multiple commands, each command is enclosed by quotation mark and separated by the keyword ***and***).  
 Usage:
 <pre>
 python3 user_cmd.py "command 1" and "command 2" ... and "command n"
@@ -41,13 +41,13 @@ python3 user_cmd.py "process !local_scripts\autoexec.al"
 
 Users can update the configuration file using an editor.
 
-Alternatively, users can update the configuration file from the ***Remore CLI***.
+Alternatively, users can update the configuration file from the ***Remove CLI***.
 
 ### Configuring a node from the Remote CLI
 
 #### Prerequisite: 
 * An AnyLog node running.
-* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section).
+* The node is configured with a REST connection (configuring a REST connection is detailed in the [Rest Requests](../../07-%20CLI/02-%20Background%20Processes.md) section).
 
 #### Updating the config file
 * In the Remote CLI, select the config section.  
@@ -63,12 +63,12 @@ Alternatively, users can update the configuration file from the ***Remore CLI***
   Standalone
   </pre>
 * Select ***Load*** to retrieve the config file associated with the selected option.
-* Note: Autoexec is the config file currently used. The other options are default options for a target role.
+* Note: autoexec is the config file currently used. The other options are default options for a target role.
 * Update the config file as needed.
 * To update the changes, select ***Save***.
-* Note: ***Changes are saved to the Autoexec file*** regardless the file selected with the ***Load***.
+* Note: ***Changes are saved to the autoexec file*** regardless the file selected with the ***Load***.
 
-Restart the AnyLog Node - if the node is initiated as in the [example above](#starting-a-node-with-a-configuration-file), the updated ***Autoexec*** file will determine the configuration.
+Restart the AnyLog Node - if the node is initiated as in the [example above](#starting-a-node-with-a-configuration-file), the updated ***autoexec*** file will determine the configuration.
 
   
 ## Configuring data removal and archival
@@ -81,15 +81,15 @@ Multiple options are available to backup, archive and remove old data.
 
 Declare a second operator node associated with an existing cluster. The second node will be dynamically updated with the
 data assigned to the cluster.  
-This process is detailed in the [High Availability (HA)](../../09-%20Data%20Management/03-%20High%20Availability.md#high-availability-ha) section.
+This process is detailed in the [High Availability (HA)](../../09-%20Data%20Management/03-%20High%20Availability.md) section.
 
 #### Archival of data
 
-If an Opertaor node is configured with archive option enabled, data that is streaming to the local database is organized in 
+If an Operator node is configured with archive option enabled, data that is streaming to the local database is organized in 
 files, compressed, and stored in the archival directory by ingestion date.  
 The default archival directory is ```AnyLog-Network\data\archive```  
 If needed, these files can be copied to an AnyLog ***watch*** directory to be ingested to a new database.
-Details are availabel in [Placing data in the WATCH directory](../adding%20data.md#placing-data-in-the-watch-directory) section.
+Details are available in [Placing data in the WATCH directory](../adding%20data.md#placing-data-in-the-watch-directory) section.
 
 #### Partitioning of data
 
@@ -145,11 +145,11 @@ company_name = "New Company"        # The node owner (company name)
 
 # IP / Port Variables
 
-#external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise uncomment & define the external IP. 
-#ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise uncomment & define the local IP. 
+#external_ip=<external_ip>          # The node may be able to identify the external IP. Otherwise, uncomment & define the external IP. 
+#ip=<local_ip>                      # The node may be able to identify the local IP. Otherwise, uncomment & define the local IP. 
 anylog_server_port=2148             # The port to use for messages from nodes members of the network.
 anylog_rest_port=2149               # The port to use for messages from 3rd parties applications.
-master_node = !ip + ":" + !anylog_server_port  # This is declaration for a STANDALONE configuration. Otherwise assign the IP and Port of the master node.
+master_node = !ip + ":" + !anylog_server_port  # This is declaration for a STANDALONE configuration. Otherwise, assign the IP and Port of the master node.
 sync_time="30 seconds"              # Synchronize the metadata (from a master node or blockchain) every 30 seconds.
 
 # DBMS Variables
@@ -180,7 +180,7 @@ set anylog home !anylog_root_dir    # Declare the location of the AnyLog root fo
 </pre>
 
 #### Create the AnyLog Directories
-The command below will create the AnyLog folders (under the AnyLog root folder) if the folders do not exists.  
+The command below will create the AnyLog folders (under the AnyLog root folder) if the folders do not exist.  
 The command needs to be issued once (unless the root folder location is changed), and can be placed in a different script file. 
 <pre>
 create work directories
@@ -261,7 +261,7 @@ Notes:
 1) ***These policies are declared once*** and the below policies declarations can be moved to a dedicated script file that is called once when the node is installed.
 2) Details on blockchain commands are available in the [blockchain commands](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#blockchain-commands) section. 
 
-In a ***standalone*** contiguration the node serves multiple roles. We use a seperate policy for each role.  
+In a ***standalone*** configuration the node serves multiple roles. We use a seperate policy for each role.  
 If only one role is configured, only the policy that determines the configured role is needed.
  
 Get the longitude and latitude of the node (this is an optional step). This info can be added to the policy.
@@ -286,7 +286,7 @@ do blockchain insert where policy=!new_policy and local=true and master=!master_
 ***Declare the policy representing the cluster*** (if not available).  
 Note: In the cntext of the network, a cluster represents the group of tables that are managed by an Operator.
 If a second Operator is associated with the same cluster, it will maintain a copy of the data.  
-If a second operator is assigned to a new cluster, but the cluster is associated with a table that is associted to the first cluster, 
+If a second operator is assigned to a new cluster, but the cluster is associated with a table that is associated to the first cluster, 
 the data will be partitioned to the 2 clusters.    
 Use the command ```blockchain get cluster``` (on the CLI or Remote-CLI) to view the cluster policies in use.
 
@@ -325,7 +325,7 @@ run scheduler 1         # Note: users can define multiple schedulers - 1 indicat
 </pre>
 
 #### Data Partitioning
-Data that is hosted in the local database can be partioned by date.     
+Data that is hosted in the local database can be partitioned by date.     
 Details are available in the [Partition Command](../anylog%20commands.md#partition-command) section.  
 Note: The example below sets partition to all the tables in the database. It assumes same column name for the date column.  
 However, if column names are different or partition interval is different - partition can be declared at a table level.

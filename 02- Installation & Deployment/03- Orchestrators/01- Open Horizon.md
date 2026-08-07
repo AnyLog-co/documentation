@@ -41,13 +41,13 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 **For 64-bit Intel or AMD device or virtual machine:**
 
 * 64-bit Intel or AMD device or virtual machine
-* An internet connection for your device (wired or wifi)
+* An internet connection for your device (wired or Wi-Fi)
 
 **For Linux on ARM (32-bit):**
 
 * Hardware requirements - Raspberry Pi 3A+, 3B, 3B+, or 4 (preferred), but also supports  A+, B+, 2B, Zero-W, or Zero-WH
 * MicroSD flash card (32 GB preferred)
-* An Internet connection for your device (wired or WiFi). Note: Some devices can require extra hardware for supporting Wifi.
+* An Internet connection for your device (wired or Wi-Fi). Note: Some devices can require extra hardware for supporting Wi-Fi.
 
 ## Associating Machine to Open Horizon
 The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
@@ -55,7 +55,7 @@ following:
 * [Create an API key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key) 
 * [Install Horizon CLI](https://www.ibm.com/docs/en/eam/4.1?topic=cli-installing-hzn) 
 * [Install Docker](https://docs.docker.com/engine/install/) 
-* Validate Open Horizon is working by deploying an _Hello World_ package
+* Validate Open Horizon is working by deploying a _Hello World_ package
 
 1. On the node Update / Upgrade Node
 ```shell

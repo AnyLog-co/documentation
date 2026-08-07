@@ -357,7 +357,7 @@ hierarchy exists only because each level is wired to the next through id and par
 
 ## Why This Matters
 
-The practical value of UNS becomes clearest when thinking about who — or what — is consuming the data.
+The practical value of UNS becomes clearest when thinking about who/what is consuming the data.
 People are generally forgiving about data formats, but AI and automation systems perform significantly better
 when data is returned in a consistent, predictable structure.
 

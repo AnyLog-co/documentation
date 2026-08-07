@@ -197,7 +197,7 @@ partition my_data ping_sensor using timestamp by 1 day
 ```
 > Time interval options: `year`, `month`, `week`, `day` — singular or plural, optionally with a counter:
 
-> **If this database also stores aggregation output** (see [Aggregation Functions](#) <!-- TODO: fill in the actual relative path once file locations are confirmed, e.g. ../02-%20.../02-2%20Data%20Aggregations.md#partitioning-and-aggregations -->),
+> **If this database also stores aggregation output** (see [Aggregation Functions](../02-2%20Data%20Aggregations.md) <!-- TODO: fill in the actual relative path once file locations are confirmed, e.g. ../02-%20.../02-2%20Data%20Aggregations.md#partitioning-and-aggregations -->),
 > avoid the wildcard (`*`) form above for that database — it forces raw and aggregation tables onto the same
 > interval and retention. Partition (and schedule cleanup for) the raw table and the aggregation table separately
 > instead.

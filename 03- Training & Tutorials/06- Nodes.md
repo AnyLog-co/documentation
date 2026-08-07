@@ -4,8 +4,11 @@ description: "a basic understanding of using AnyLog"
 layout: page
 source_path: "training/06- Nodes.md"
 ---
-<!--- 
-    2026-07-24 | Ori Shadmon | file created 
+<!--
+## Changelog PUT LATEST CHANGES AT THE TOP PLEASE
+-
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606 
+- 2026-07-24 | Ori Shadmon | file created 
 --->
 
 The following document provides directions on the different node types and the critical component needed in each one for

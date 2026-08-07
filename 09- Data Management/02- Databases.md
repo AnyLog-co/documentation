@@ -19,7 +19,7 @@ object storage systems designed for exactly that.
 
 Having an array of database types readily accessible via a unified platform and language allows DBAs and IT teams
 to easily manage different types of data. This also enhances AI / ML capabilities such as federated learning and
-real-time decision making, since there's no need to gather information from different sources — AnyLog does that
+real-time decision-making, since there's no need to gather information from different sources — AnyLog does that
 for you automatically.
 
 ### Supported SQL databases
@@ -129,7 +129,7 @@ for storage both inside a sub-JSON list (ie `detection`) and outside of it - `fi
 ```
 
 
-3. Once the the buffer is full, usually much faster with blob storage than just sensor data, query the results from 
+3. Once the buffer is full, usually much faster with blob storage than just sensor data, query the results from 
 the [Edge Data Manager](../10-%20Edge%20Data%20Manager/01-%20EDM.md) or other third party apps.  
 
 ```anylog

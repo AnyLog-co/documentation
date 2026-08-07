@@ -5,6 +5,7 @@ layout: page
 ---
 <!--
 ## Changelog
+- 2026-08-07 | Eric Aquaronne | change log format adding ref version | 2.0.2606 
 - 2026-07-22 | Created document from AnyLog's docker-compose repo (README.md, deploy.sh, Makefile,
                node_configs.env, TOPOLOGY.md), per the "general sense" outline: install
                docker/make/git → clone repo → configure → start node → explain LEDGER_CONN and

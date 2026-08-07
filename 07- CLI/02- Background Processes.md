@@ -109,7 +109,7 @@ activity on the node.
 trace level = X [command name]
 ```
 
-Trace levels range from 0–3 and can optionally be scoped to a specific command or service:
+Trace levels range is 0 to 3 and can optionally be scoped to a specific command or service:
 * Providing just a level (no command name) traces every command at that level.
 * Providing a level **and** a command name limits the trace to that service only.
 

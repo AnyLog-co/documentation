@@ -114,7 +114,7 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.table.sort``` - returns the values in a sorted table format. Users can specify columns id used in the sort. For example **bring.table.sort(1,0)** sorts by the second column followed by the first.
     * ```bring.count``` - returns the number of entries that satisfy the result.
     * ```bring.null``` - includes null values in the returned JSON.
-    * ```bring.ip_port``` - return a comma seperated list of IP and ports.
+    * ```bring.ip_port``` - return a comma separated list of IP and ports.
     * ```bring.min``` - return the minimum value of an attribute.
     * ```bring.max``` - return the maximum value of an attribute.
     * ```bring.list``` - return the requested attributes as a list.
@@ -169,7 +169,7 @@ blockchain get * bring.table.sort(3,1,0) [] [*][name] [*][ip]
 ```anylog
 blockchain get operator where [country] contains US bring.ip_port
 ```
-  7. Return a list of values (each value in the list is the dbms and table values from the policy, seperated by a comma):   
+  7. Return a list of values (each value in the list is the dbms and table values from the policy, separated by a comma):   
 ```anylog
 blockchain get tag bring.list [tag][dbms] . [tag][table]
 ```

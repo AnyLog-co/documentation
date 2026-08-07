@@ -33,7 +33,7 @@ This guide explains how to ask an LLM (Claude) to generate an HTML dashboard tha
 
 ### Minimum Required Information
 
-Every dashboard request must include all of the following:
+Every dashboard request must include all the following:
 
 | Information | Why It's Needed | Example |
 |-------------|----------------|---------|

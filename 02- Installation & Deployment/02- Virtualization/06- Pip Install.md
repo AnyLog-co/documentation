@@ -54,7 +54,7 @@ python3 -m pip install --upgrade -r https://raw.githubusercontent.com/AnyLog-co/
 2. Install AnyLog as a `pip` package  
 
     Note: Use the following Python version:
-    * python3.10 for Ubuntu and MacOSX
+    * python3.10 for Ubuntu and Mac OS X
     * Python3.11 for Alpine
 
 Versions of AnyLog can be found in the [Downloads Page](http://173.255.254.34:31900/)

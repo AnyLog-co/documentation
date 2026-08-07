@@ -188,9 +188,9 @@ define an operator node policy, but the (root) cluster itself can be defined in 
 }
 ```
 
-* **Node policy** - This provides information on how to interact with the node. With the exception of the _operator_
-node, which requires a node policy, all other nodes' policies are optionally defined. The reason _operator_ is
-required is because otherwise the network wouldn't know where the data is stored.
+* **Node policy** - This provides information on how to interact with the node. Except for the _operator_
+node, which requires a node policy, all other nodes' policies are optionally defined. The  _operator_ is
+required because otherwise the network wouldn't know where the data is stored.
 
 ```json
 {

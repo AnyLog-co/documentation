@@ -43,7 +43,7 @@ Author-email: stuart@stuartbishop.net
 License: MIT  
 __________________________________________________
 Name: cython  
-Summary: Optimising static compiler for Python  
+Summary: Optimizing static compiler for Python  
 Home-page: https://cython.org/  
 Author: Can be found with this link - https://cython.org/#community  
 License: Apache License 2.0 - https://github.com/cython/cython/blob/master/LICENSE.txt  

@@ -179,7 +179,7 @@ Password: edgelake
 
 ## Default dataset
 
-The demo environment ships with a pre-loaded dataset:
+The demo environment ships with a preloaded dataset:
 
 - **Database:** `new_company`
 - **Table:** `rand_data`

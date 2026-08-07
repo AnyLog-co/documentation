@@ -25,7 +25,7 @@ The `bucket` command provides a means to push (upload) and pull (download) files
 |-----------------------------------------------------|--------------------------------------------------------|
 | [bucket provider connect](#bucket-provider-connect) | Connect to bucket object store.                        |
 | [get bucket groups](#get-bucket-groups)             | View all bucket groups.                                |
-| [get bucket names](#get-bucket-names)    | View all buckets by group.                             |
+| [get bucket names](#Get-All-Bucket-Names)           | View all buckets by group.                             |
 | [bucket create](#bucket-create)                     | Create bucket.                                         |
 | [get bucket files](#get-bucket-files)               | List all files from bucket.                            |
 | [bucket file upload](#bucket-file-upload)           | Upload file to bucket.                                 |

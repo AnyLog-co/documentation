@@ -425,7 +425,7 @@ get dns name where ip = !ip
 get dns name where ip = !external_ip
 ```
 
-By default the local dictionary assigns IPs and DNS values to the following keys:
+By default, the local dictionary assigns IPs and DNS values to the following keys:
 
 | Key | Value |
 |---|---|

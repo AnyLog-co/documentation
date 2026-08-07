@@ -73,11 +73,11 @@ Usage:
 query [operation] [id/all]
 ```
 
-| Operation | Command | Details |
-|---|---|---|
-| status | `query status` | The status of each executed query |
-| destination | `query destination` | The participating Operator Nodes |
-| explain | `query explain` | The SQL executed on the local databases |
+| Operation   | Command             | Details                                 |
+|-------------|---------------------|-----------------------------------------|
+| status      | `query status`      | The status of each executed query       |
+| destination | `query destination` | The participating Operator Nodes        |
+| explain     | `query explain`     | The SQL executed on the local databases |
 
 `id`/`all` are optional:
 - Not provided → info on the last executed query
@@ -98,18 +98,18 @@ Job  ID Output   Run Time Operator              Par Status    Blocks Rows Comman
     |  |        |00:00:00|172.105.13.202:32148 |  0|Completed|     1|   0|                                                                                                    |
 ```
 
-| Attribute | Details |
-|---|---|
-| Job | Slot number holding the query info (500 slots by default) |
-| ID | Unique ID of the query |
-| Output | Where the output is directed: stdout, rest, DBMS table, file, kafka |
-| Run Time | Total and per-partition reply time on each Operator |
-| Operator | IP and Port of each participating Operator |
-| Par | Partition ID on each Operator |
-| Status | Status of each Operator/Partition (see below) |
-| Blocks | Number of blocks returned |
-| Rows | Number of rows returned |
-| Command | The query or pushdown function executed |
+| Attribute | Details                                                             |
+|-----------|---------------------------------------------------------------------|
+| Job       | Slot number holding the query info (500 slots by default)           |
+| ID        | Unique ID of the query                                              |
+| Output    | Where the output is directed: stdout, rest, DBMS table, file, kafka |
+| Run Time  | Total and per-partition reply time on each Operator                 |
+| Operator  | IP and Port of each participating Operator                          |
+| Par       | Partition ID on each Operator                                       |
+| Status    | Status of each Operator/Partition (see below)                       |
+| Blocks    | Number of blocks returned                                           |
+| Rows      | Number of rows returned                                             |
+| Command   | The query or pushdown function executed                             |
 
 Status values: **Completed**, **Sending**, **Delivered** (sent, no reply yet), **Processing**, **Empty Set**, **Error**.
 
@@ -139,14 +139,14 @@ Local Create  |create table query_0 (count_all integer );|
 Local Query   |select sum(count_all) from query_0        |
 ```
 
-| Attribute | Details |
-|---|---|
-| Remote DBMS | Logical database name on the Operator Nodes |
-| Remote Table | Logical table name on the Operator Nodes |
-| Source Command | The SQL or pushdown function used |
-| Remote Query | The SQL actually executed on the database node |
-| Local Create | Statement creating the intermediary result-set table on the Query Node |
-| Local Query | SQL run on the Query Node that produces the final result |
+| Attribute      | Details                                                                |
+|----------------|------------------------------------------------------------------------|
+| Remote DBMS    | Logical database name on the Operator Nodes                            |
+| Remote Table   | Logical table name on the Operator Nodes                               |
+| Source Command | The SQL or pushdown function used                                      |
+| Remote Query   | The SQL actually executed on the database node                         |
+| Local Create   | Statement creating the intermediary result-set table on the Query Node |
+| Local Query    | SQL run on the Query Node that produces the final result               |
 
 ## Retrieving the Status of Queries on an Operator Node
 
@@ -190,22 +190,22 @@ Node      Job ID Rows limit threads Completed DBMS     Table       Par ID Par Na
 10.0.0.78|  1| 2|   3|    0|      3|        3|lsl_demo|ping_sensor|     1|par_ping_sensor_2019_11_01_d07_timestamp|    0|     1|   1|00:00:00|00:00:00  |00:00:00    |
 ```
 
-| Attribute | Details |
-|---|---|
-| Node | IP of the node that issued the query |
-| Job | The job ID |
-| ID | Unique Query ID (on the query node) |
-| Rows | Total rows returned |
-| Limit | A limit value included in the query |
-| Threads | Number of query threads that participated |
-| DBMS / Table | Logical dbms/table name |
-| Par ID / Par Name | Partition ID/name participating in the query |
-| Error | 0 = no error; otherwise the error number from that partition |
-| Blocks | Data blocks delivered to the app by that partition |
-| Rows | Data rows retrieved from the database by that partition |
-| SQL Time | Physical database execution time |
-| Fetch Time | Processing time (including DB time) on the operator node |
-| Network Time | Time to send data blocks (high value = busy Query Node) |
+| Attribute         | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Node              | IP of the node that issued the query                         |
+| Job               | The job ID                                                   |
+| ID                | Unique Query ID (on the query node)                          |
+| Rows              | Total rows returned                                          |
+| Limit             | A limit value included in the query                          |
+| Threads           | Number of query threads that participated                    |
+| DBMS / Table      | Logical dbms/table name                                      |
+| Par ID / Par Name | Partition ID/name participating in the query                 |
+| Error             | 0 = no error; otherwise the error number from that partition |
+| Blocks            | Data blocks delivered to the app by that partition           |
+| Rows              | Data rows retrieved from the database by that partition      |
+| SQL Time          | Physical database execution time                             |
+| Fetch Time        | Processing time (including DB time) on the operator node     |
+| Network Time      | Time to send data blocks (high value = busy Query Node)      |
 
 Notes:
 1. `get operator execution` gives the Operator-side view paired with `query status` on the Query Node.
@@ -224,12 +224,12 @@ Retrieve profiler output:
 get profiler output where target = [process name]
 ```
 
-| Process Name | Details |
-|---|---|
-| operator | Profile data inserts in the Operator node |
-| get | Profile REST GET |
-| put | Profile REST PUT |
-| post | Profile REST POST |
+| Process Name | Details                                   |
+|--------------|-------------------------------------------|
+| operator     | Profile data inserts in the Operator node |
+| get          | Profile REST GET                          |
+| put          | Profile REST PUT                          |
+| post         | Profile REST POST                         |
 
 Example:
 ```anylog
