@@ -125,11 +125,11 @@ else if !error_code == 2 then goto prepare-policy-error
 else if !error_code == 3 then goto declare-policy-error
 ```
 
-This delegates to a shared helper script (`publish_policy.al`) that signs `!new_policy` and inserts it onto the
-blockchain — the same helper any connector's deployment script would call, not something DNP3-specific. On
-success, the script loops back to `:check-policy:`, which will now find the freshly published policy and pick up
-`!dnp_schema` from it. A nonzero `!error_code` routes to one of three error labels depending on which stage
-failed (signing, preparing, or declaring the policy) — see [Error handling](#error-handling) below.
+This delegates to a shared helper script (`publish_policy.al`) that signs `!new_policy` and inserts it onto the blockchain — 
+the same helper any connector's deployment script would call, not something DNP3-specific. On success, the script loops 
+back to `:check-policy:`, which will now find the freshly published policy and pick up `!dnp_schema` from it. A nonzero 
+`!error_code` routes to one of three error labels depending on which stage failed (signing, preparing, or declaring the 
+policy) — see [Error handling](#error-handling) below.
 
 ### `:declare-dnp3:` / `:declare-dnp3-tls:` — start the connection
 

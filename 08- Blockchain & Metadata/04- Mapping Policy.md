@@ -3,6 +3,7 @@ title: "Mapping Policy"
 description: "How mapping policies translate incoming JSON data into table rows — the general model, plus epoch timestamps, blob data, and unknown/dynamic content."
 layout: page
 ---
+
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |

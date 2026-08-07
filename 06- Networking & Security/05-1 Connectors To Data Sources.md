@@ -155,6 +155,7 @@ To publish data via REST _POST_ (using the simulator), make the following change
 
 ## Support Functionality  
 * `get streaming` - Monitor the number of rows added via REST or MQTT per table
+
 ```anylog
 AL anylog-operator_1 > get streaming 
 
@@ -181,6 +182,7 @@ test.percentagecpu_sensor|     0|    0| |       47|       47|    15|        15| 
 ```
 
 * `get msg client` – Monitor the number of rows added by topic 
+
 ```anylog
 AL anylog-operator_1 > get msg client 
 
@@ -201,6 +203,7 @@ Connection:   Connected
 ```
 
 * `get local broker` - Monitor the calls to the local broker
+
 ```anylog
 AL anylog-operator_1 +> get local broker
 

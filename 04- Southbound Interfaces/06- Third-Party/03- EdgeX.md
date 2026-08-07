@@ -300,7 +300,10 @@ In the EdgeXpert GUI, configure the Basic App Service:
 - **Filter** — Device Filter, as needed
   ![Filter Value(s)](../../imgs/edgex_put_filter.png)
 
-Save the service (![Save Button](../../imgs/edgex_save.png)); data should begin flowing into AnyLog via PUT.
+Once the service is saved, data should begin flowing into AnyLog via PUT.
+
+![Save Button](../../imgs/edgex_save.png)
+
 
 #### Method 2: REST POST (with transformation)
 

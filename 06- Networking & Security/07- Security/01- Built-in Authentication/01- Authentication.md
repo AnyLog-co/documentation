@@ -16,7 +16,7 @@ source_path: "01- Authentication.md"
 -  2026-07-31 | Massimiliano | remote sign via certificate_authority (Master/Operator) | 2.0.2606 |
 -->
 
-~~# Users and Nodes Authentication — Implementation
+# Users and Nodes Authentication — Implementation
 
 This document covers how to implement each of AnyLog's built-in authentication options: the commands, their
 options, and what each one does. For a general overview of how this fits alongside TPM and overlay networking,
@@ -26,12 +26,12 @@ to end — see [Policy-Based Users and Keys — Example](02-%20Authentication-po
 
 The commands in this document facilitate a framework that provides the following:
 
-a) Authenticates messages sent from nodes to peer nodes.
-b) Authenticates messages sent from nodes to peers with privileges assigned to users.
-c) Determines permissions for network processes and the data maintained by nodes in the network.
-d) Validates policies by authenticating their authors and their assigned permissions (see
+* Authenticates messages sent from nodes to peer nodes.
+* Authenticates messages sent from nodes to peers with privileges assigned to users.
+* Determines permissions for network processes and the data maintained by nodes in the network.
+* Validates policies by authenticating their authors and their assigned permissions (see
    [Adding policies to the blockchain](#adding-policies-to-the-blockchain) below).
-e) Encrypts and decrypts commands and data transferred in the network.
+* Encrypts and decrypts commands and data transferred in the network.
 
 The network provides two layers of authentication:
 

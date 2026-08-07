@@ -250,6 +250,7 @@ Tasks can include AnyLog queries, script files, monitoring checks, or
 <a href="{{ '/docs/Monitoring/alerts-and-monitoring/' | relative_url }}">alerts and monitoring</a> rules.
 
 Monitor:
+
 ```anylog
 get scheduler
 get scheduler 1

@@ -159,8 +159,9 @@ Using the command `set aggregation` users can track data streamed to a node.
 Monitoring applies per DBMS and table, aggregating values from a specified column across predefined time intervals.
 
 ### Aggregated Metrics
+
 | Monitored value option | Details                 |
-| ------------- |----------------------------------|
+| :---: | :---: |
 | Min  | Lowest value recorded in the interval    |
 | Max  | Highest value recorded in the interval   |
 | Avg | Average value in the interval              |
@@ -169,6 +170,7 @@ Monitoring applies per DBMS and table, aggregating values from a specified colum
 
 
 Usage: 
+
 ```anylog
 set aggregation where dbms = [dbms name]
       and table = [table name]

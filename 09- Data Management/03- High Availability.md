@@ -252,6 +252,7 @@ file_id dbms_name table_name source file_hash                        instruction
 ```
 
 3. Using the `file_hash`, locate and view the data
+
 ```anylog 
 # locate 
 AL power-plant-operator1 +> system ls !archive_dir/26/07/29 | grep c2a8b167ab57afe4cf63ef78d922c1ca                             

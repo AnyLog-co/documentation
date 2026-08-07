@@ -404,12 +404,18 @@ json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ```
 Notes:
+
 1) The policy example permits operating on all databases except a database called lsl_demo.
+
 2) The ***tables*** attribute permits 2 tables (temperature_sensor and ping_sensor) in lsl_demo database.
+ 
 3) The derived data permission is as follows: the permission allows operating on all databases, however, 
    only table temperature_sensor and tables ping_sensor are allowed in database lsl_demo.
+ 
 4) The attribute ***enable*** lists the anylog commands which are permitted.
+
 5) The attribute ***disable*** lists the AnyLog commands which are not allowed. 
+
 
 ### Step 10 - Assign limited privileges to nodes
 Use CLI(oper.1) - a user with privileges to assign permissions, provides limited permissions to the operator nodes.
@@ -478,7 +484,8 @@ set private password = demo2 in file
 Note: The key is stored in a file called `auth.id` in _keys directory_.
 
 ### Step 13 - Enable authentication
-Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
+
+Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.     
 When a node receives a message, the message is signed by the private key of the sender (the key of tje node or the user sending the message).   
 The receiving node will first use the public key of the sender to authenticate the sender. Next it will consider the permission 
 policies to determine that the sender is authorized to the type of message received. Authorization is determined if it

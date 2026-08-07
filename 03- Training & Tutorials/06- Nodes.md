@@ -50,7 +50,7 @@ them to actually be configured properly.
 
 ## Common Setup
 
-Every node type — Master, Query, Operator, and Publisher — shares the same network setup and blockchain sync
+Every node type — Metadata Manager (Master), Query, Operator, and Publisher — shares the same network setup and blockchain sync
 mechanism (just with different sync intervals). Both are covered here once; the per-node-type sections below only
 show what's *additional* for that node type.
 
@@ -190,6 +190,7 @@ remove replication of data (based on file hash):
 ```
 
 * Archiver for blob data — this can be used with or without a NoSQL logical database:
+
 ```anylog
 # if a NoSQL logical database is set to true, switch True/False between dbms + folder. 
 
@@ -202,6 +203,7 @@ remove replication of data (based on file hash):
 ```
 
 * Set buffer size — data buffer size before storing into AnyLog:
+
 ```anylog
 <set buffer threshold where 
     time=!threshold_time and 
@@ -260,6 +262,7 @@ Beyond the [common setup](#common-setup) (using the ~5 minute sync interval), it
 
 * Connect to the `almgm.tsd_info` logical database + table. This keeps a record of the files coming in, for HA and to
 remove replication of data (based on file hash):
+
 ```anylog
 <connect dbms almgm where 
     type = psql and 

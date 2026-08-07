@@ -179,6 +179,7 @@ Connection:   Connected to local Message Server
 ```
 
 * `get streaming` - Shows how incoming data is being split across tables; useful for verifying wildcard column expansion
+
 ```anylog
 AL anylog-standalone-operator > get streaming 
 
@@ -193,6 +194,7 @@ mydb.cpu   |     0|    0| |    4,806|    4,806|    28|     4,230|         10|   
 ```
 
 * `get operator` - Confirms data has been processed and written to the database
+
 ```shell
 AL anylog-standalone-operator > get operator 
 

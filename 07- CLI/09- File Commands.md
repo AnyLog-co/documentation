@@ -42,15 +42,15 @@ Operations supported:
 
 List files or directories:
 
-| Operation  | ---- | 
-| ------------- | ---- |
-| [get files](#list-files-in-a-given-directory) | List the files in a given directory on a remote node or the local node. |
-| [get directories](#list-subdirectories-in-a-given-directory) | List the subdirectories in a given directory on a remote node or the local node. |
+| Operation                                                      | ---- | 
+| :---: | :---: |
+| [get files](#list-files-in-a-given-directory)                  | List the files in a given directory on a remote node or the local node. |
+| [get directories](#list-subdirectories-in-a-given-directory)   | List the subdirectories in a given directory on a remote node or the local node. |
 
 Operations on files stored in a dedicated database (details are available in the [Image Mapping](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping) document):
 
 | Operation  | ---- | 
-| ------------- | ---- |
+| :---: | :---: |
 | [file remove](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
 | [file retrieve](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
 | [file Store](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
@@ -65,7 +65,7 @@ File names and paths can be prefixed by a key from a dictionary and are translat
 Below are valid examples:  
 
 | Path/Name | Comments | 
-| ------------- | ---- |
+| :---: | :---: |
 | !blockchain_file | The path and file name of the local blockchain file. | 
 | !prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** in the local node|
 | !!prep_dir/sensor_data.json | The file ***sensor_data.json*** and a path which is the value assigned to the key ***prep_dir*** in the remote node|

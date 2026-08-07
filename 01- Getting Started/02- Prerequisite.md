@@ -14,27 +14,77 @@ layout: page
 
 
 ---
+
 # Prerequisite and setup considerations
 
-| Feature            | Requirement                                                                                                                                                                                                                                                                                              |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-| Operating System   | Linux (Ubuntu, RedHat, Alpine, Suse)                                                                                                                                                                                                                                                                     | 
-|                    | Windows                                                                                                                                                                                                                                                                                                  |
-| Python             | 3.11 - 3.13                                                                                                                                                                                                                                                                                              |
-| Memory footprint   | 100 MB available for the AnyLog deployed without Docker                                                                                                                                                                                                                                                  |
-|                    | 300 MB available for AnyLog deployed with Docker                                                                                                                                                                                                                                                         |
-| Databases          | PostgreSQL installed (optional)                                                                                                                                                                                                                                                                          |
-|                    | SQLite (default, no need to install)                                                                                                                                                                                                                                                                     |
-|                    | MongoDB installed (Only if blob storage is needed)                                                                                                                                                                                                                                                       |
-| CPU                | Intel, ARM and AMD are supported.                                                                                                                                                                                                                                                                        |
-|                    | AnyLog can be deployed on a single CPU machine and up to the largest servers (can be deployed on gateways, Raspberry PI, and all the way to the largest multi-core machines).                                                                                                                            |
-| Storage            | AnyLog supports horizontal scaling - nodes (and storage) are added dynamically as needed, therefore less complexity in scaling considerations. Requirements are based on expected volume and duration of data on each node. AnyLog supports automated archival and transfer to larger nodes (if needed). |
-| Network            | Required: a TCP based network (local TCP based networks, over the internet and combinations are supported)                                                                                                                                                                                               |
-|                    | An overlay network is recommended. Most overlay networks can be used transparently. Nebula used as a default overlay network.                                                                                                                                                                            |
-|                    | Static IP and 3 ports open and accessible on each node (either via an Overlay Network, or without an Overlay).                                                                                                                                                                                           |
-| Cloud Integration  | Build in integration using REST, Pub-Sub, and Kafka.                                                                                                                                                                                                                                                     |
-| Deployment options | Executable (can be deployed as a background process), or Docker or Kubernetes.                                                                                                                                                                                                                           |
-
+<table>
+  <caption>AnyLog Deployment Requirements</caption>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Requirement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="feature-cell" rowspan="2">Operating System</td>
+      <td>Linux (Ubuntu, RedHat, Alpine, Suse)</td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <td class="feature-cell">Python</td>
+      <td>3.11 &ndash; 3.13</td>
+    </tr>
+    <tr>
+      <td class="feature-cell" rowspan="2">Memory footprint</td>
+      <td>100 MB available for AnyLog deployed without Docker</td>
+    </tr>
+    <tr>
+      <td>300 MB available for AnyLog deployed with Docker</td>
+    </tr>
+    <tr>
+      <td class="feature-cell" rowspan="3">Databases</td>
+      <td>PostgreSQL installed (optional)</td>
+    </tr>
+    <tr>
+      <td>SQLite (default, no need to install)</td>
+    </tr>
+    <tr>
+      <td>MongoDB installed (only if blob storage is needed)</td>
+    </tr>
+    <tr>
+      <td class="feature-cell" rowspan="2">CPU</td>
+      <td>Intel, ARM, and AMD are supported.</td>
+    </tr>
+    <tr>
+      <td>AnyLog can be deployed on a single CPU machine and up to the largest servers (gateways, Raspberry Pi, and all the way to the largest multi-core machines).</td>
+    </tr>
+    <tr>
+      <td class="feature-cell">Storage</td>
+      <td>AnyLog supports horizontal scaling &mdash; nodes (and storage) are added dynamically as needed, reducing scaling complexity. Requirements are based on expected data volume and retention duration on each node. AnyLog supports automated archival and transfer to larger nodes (if needed).</td>
+    </tr>
+    <tr>
+      <td class="feature-cell" rowspan="3">Network</td>
+      <td>Required: a TCP-based network (local TCP-based networks, over the internet, and combinations are supported)</td>
+    </tr>
+    <tr>
+      <td>An overlay network is recommended. Most overlay networks can be used transparently. Nebula is used as the default overlay network.</td>
+    </tr>
+    <tr>
+      <td>Static IP and 3 ports open and accessible on each node (either via an Overlay Network or without one).</td>
+    </tr>
+    <tr>
+      <td class="feature-cell">Cloud Integration</td>
+      <td>Built-in integration using REST, Pub-Sub, and Kafka.</td>
+    </tr>
+    <tr>
+      <td class="feature-cell">Deployment options</td>
+      <td>Executable (can be deployed as a background process), Docker, or Kubernetes.</td>
+    </tr>
+  </tbody>
+</table>
 
 **Comments**:
 * Databases: 

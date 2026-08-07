@@ -57,18 +57,19 @@ which provides the ability to import data via REST, Database, Social Media and o
 3. Under _Data Source_ set the Type to API Bridge & Fill-out the form
 
 Notice that for the complete form user should specifiy: _Base URL_, _Authentication_ (if set) and headers.    
-For demo purposes, I'm using a query that consists of [increments function](../07-%20CLI/04-%20SQL.md#the-increment-function) and returns the data as a list of JSON values without statistics:
+For demo purposes, I'm using a query that consists of and returns the data as a list of JSON values without statistics:
+
 ```sql
 sql aiops format=json:list and stat=false "select increments(hour, 1, timestamp), min(timestamp) as timestamp, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from sic1001_mv where timestamp >= NOW() - 1 week"
 ```
 
 | ![type](../imgs/googledrive_execute_step3a.png) | ![form](../imgs/googledrive_execute_step3b.png) |
-| --- | --- |
+| :---: | :---: |
 
 4. Once the form is complete, test and save the changes - this will validate that the request is valid
 
 | ![test & save](../imgs/googledrive_execute_step4a.png) | ![confirm](../imgs/googledrive_execute_step4b.png) | 
-| --- | --- |
+| :---: | :---: |
 
 5. In menu, goto _Data Queries_
 

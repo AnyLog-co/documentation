@@ -103,6 +103,7 @@ equivalent, and it's the one we recommend using.
 ## Examples
 
 * check node status 
+
 ```shell
 # basic GET request for status
 curl -X GET http://[Node IP]:[Node REST Port] \

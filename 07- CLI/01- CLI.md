@@ -212,6 +212,7 @@ sub-thread; when running multiple scripts this way, they will not run in consecu
 There are 2 ways to debug scripts in AnyLog.
 
 * `set debug on` - each command that follows is printed including the execution result.
+
 ```anylog
 AL > process !local_scripts/my-scripts/script3.al
 AL > [] [0002] set debug on --> Success
@@ -220,8 +221,9 @@ AL > [] [0004] run rest server where internal_ip = !ip and internal_port = 7849 
 ```
 
 * `set debug interactive` - a debugging module that allows the user to control when each command in the script runs.
-Unlike `set debug on`, `set debug interactive` cannot be run on the main thread, and thus must be run using the
-`thread` execution command.
+Unlike `set debug on`, `set debug interactive` cannot be run on the main thread, and thus must be run using the `thread` 
+execution command.
+
 ```anylog
 AL > thread !local_scripts/my-scripts/script3.al
 AL > [Thread-9 (_process_script)] [0001] set debug interactive --> Success
@@ -248,6 +250,7 @@ Messaging|Not declared    |Not declared      |Not declared|
 AL > next
 AL >
 ```
+
 > To stop debugging simply remove `set debug [on/interactive]` from the top of the script, or specify `set debug off`
 > when trying to debug a subsection of a script.
 
