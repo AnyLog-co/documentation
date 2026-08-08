@@ -171,7 +171,6 @@ and "monitor_members.json" in the example above).
 
 Each of the file describes the form that is presented to the user including the thresholds that trigger alerts.
 
-
 ## Usage examples
 
 The following demonstrate commands issued via cURL and their web representation using the Remote CLI:

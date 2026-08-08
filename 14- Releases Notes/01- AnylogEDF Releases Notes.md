@@ -14,9 +14,6 @@ source_path: "release/notes.md"
  | 2026-08-0X | Ori Shadmon    | Updated URLs     | 2.0.2606 |   
 --->
 
-
-
-
 # AnyLog Release notes
 
 AnyLog Version: 2.0.2606 (ms-dev - 4bd615 [2026-07-06 00:02:19])
@@ -233,7 +230,6 @@ policy = create policy license where company = !company. and expiration = !expir
 7.  (AE) Create policy command - a command option to declare policies and include default attributes. Details:
     [Creating policies using the Create Policy command](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md)
 8.  (AE) REST requests without a command assume get status. Example: `curl 10.0.0.78:7849` returns: **AnyLog@73.202.142.172:7848 running** 
-
 
 ### Changes:
 

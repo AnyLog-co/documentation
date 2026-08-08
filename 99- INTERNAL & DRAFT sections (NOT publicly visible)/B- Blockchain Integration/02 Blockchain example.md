@@ -5,7 +5,6 @@ layout: page
 source_path: "02 Blockchain example.md"
 ---
 
-
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
@@ -13,8 +12,6 @@ source_path: "02 Blockchain example.md"
  |            |                |                  |          |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
-
-
 
 # Blockchain Demo 
 
@@ -127,7 +124,6 @@ run blockchain sync where source = blockchain and time = !sync_time and dest = f
 
 At this point AnyLog should be connected to the Optimism blockchain. 
 
-
 ## AnyLog Policies on Optimism
 **Declaring a node policy**
 1. Create policy 
@@ -154,11 +150,4 @@ Generally speaking, content that's stored on a blockchain is non-fungible (ie ca
 part of the AnyLog network can have configuration changes - such as: node ownership, network information, permissions or 
 simply adding / removing information for a pre-existing policy. We recommend looking into [ANMP](../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md)
 in order to modify existing policies. 
-
-
- 
-
-
-
-
 

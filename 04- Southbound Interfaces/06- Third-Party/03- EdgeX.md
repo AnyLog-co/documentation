@@ -304,7 +304,6 @@ Once the service is saved, data should begin flowing into AnyLog via PUT.
 
 ![Save Button](../../imgs/edgex_save.png)
 
-
 #### Method 2: REST POST (with transformation)
 
 Here the transformation happens on the AnyLog side via mapping rules attached to a topic, and the database/table

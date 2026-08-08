@@ -82,7 +82,6 @@ get !blockchain_file          # path to the local JSON file
 blockchain test               # validate the local file structure
 ```
 
-
 ## Policy Types
 
 Standard policies that most deployments would have:

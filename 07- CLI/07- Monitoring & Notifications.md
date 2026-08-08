@@ -112,7 +112,6 @@ ID Mode   Name          Counter Run Status Start-Time                 Repeat-Tim
 --|------|-------------|-------|----------|--------------------------|-----------|----------------|
  1|Active|Metadata Ping|  10637|Success   |2026-07-19 19:34:26.436329|0:1:0      |set servers ping|
 
-
 Scheduler ID:     1
 Scheduler Status: Running
 Scheduled Tasks

@@ -13,9 +13,6 @@ source_path: ""
  |            |
 --->
 
-
-
-
 The following provides directions for using an EC2 AWS instance(s) to configure and deploy AnyLog.  
 
 Directions for [deploying an AnyLog Node](../01-%20Install.md) 
@@ -40,7 +37,6 @@ as _Broker_ if configured for Operator or Publisher node.
 * **Publisher Node**: Default TCP: 32248 | Default REST: 32249 | (Default) Broker: 32250
 * **Generic / REST Node**: Default TCP: 32548 | Default REST: 32549 | (Default) Broker: 32550
 
- 
 ![image](../../imgs/aws_sample_security_group.png)
 
 3. Create a new [EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) that's associated with the corresponding _security group_.  
@@ -68,7 +64,4 @@ ANYLOG_REST_PORT=32049
 TCP_BIND=false 
 ...
 ```
-
- 
-
 

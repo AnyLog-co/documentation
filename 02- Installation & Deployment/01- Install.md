@@ -24,7 +24,6 @@ Please review the [prerequisites](../01-%20Getting%20Started/02-%20Prerequisite.
 * [Kubernetes](02-%20Virtualization/03-%20Kubernetes.md)
 * [IBM's Open Horizon](03-%20Orchestrators/01-%20Open%20Horizon.md)
 
-
 ## General Directions
 
 1. Install prerequisites — e.g. `git`, Docker, VirtualBox, etc.

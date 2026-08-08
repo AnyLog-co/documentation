@@ -30,7 +30,7 @@ Operations supported:
 | [file delete](#delete-a-file)                                          | Delete a file.                                                                                                          |
 | file deliver                                                           | Copy archived data from a remote node.                                                                                  |
 | [file get](#file-copy-from-a-remote-node-to-a-local-node)              | Copy a file or files from a remote node to the local node.                                                              |
-| [file hash](#Calculate-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
+| [file hash](#calculate-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
 | [file move](#move-a-file)                                              | Move a file to a different location on the local node.                                                                  |
 | [file test](#test-if-a-file-exists)                                    | Test if a file exists.                                                                                                  |
 | [file encode](#encode-and-decode-a-file)                               | Apply base64 encoding.                                                                                                  |
@@ -238,7 +238,6 @@ file move !prep_dir/my_file !watch_dir
 
 The example above moves the file from the prep directory to the watch directory.
 
- 
 ## Compress and decompress a file
 These commands provide a simple interface to compress and decompress files.   
 Usage:

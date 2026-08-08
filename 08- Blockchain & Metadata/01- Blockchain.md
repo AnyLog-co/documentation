@@ -38,7 +38,6 @@ not be granted access to all those nodes, as described in [security and permissi
 * [Blockchain Connectivity](./03-1%20Blockchain%20Full%20Circle.md) — setting up a Master/Metadata node or connecting to a real blockchain platform
 * [Unified Namespace](05-%20Unitfied%20Namespace.md)
 
-
 ## Terminology
 
 * **blockchain**: A decentralized, distributed ledger technology that securely records transactions across multiple

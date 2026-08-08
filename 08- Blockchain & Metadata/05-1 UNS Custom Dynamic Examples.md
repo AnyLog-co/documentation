@@ -20,7 +20,6 @@ tags:
 
 > **AnyLog only.** `dynamic=true` UNS definitions are not available in EdgeLake.
 
-
 # Dynamic Ingestion with Custom UNS — Factory Floor Example
 
 The [Unified Namespace](./05-%20Unitfied%20Namespace.md) page introduces `dynamic=true` using single-value, single-topic examples (one

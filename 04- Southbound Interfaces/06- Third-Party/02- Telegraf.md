@@ -206,7 +206,6 @@ mydb|mem  |    2|       47|1776471116|00:00:22    |
     |swap |    2|       18|1776471116|00:00:22    |
     |net  |    2|       18|1776471100|00:00:38    |
 
-
 Stats: OPERATOR SQL
 DBMS Table                                Files Immediate Timestamp  Elapsed_time
 ----|------------------------------------|-----|---------|----------|------------|
@@ -215,7 +214,6 @@ mydb|mem.2026_04_01_d14_insert_timestamp |    2|        0|1776469958|00:19:40   
     |net.2026_04_01_d14_insert_timestamp |    2|        0|1776469985|00:19:13    |
     |swap.2026_04_01_d14_insert_timestamp|    2|        0|1776470001|00:18:57    |
 
-
 Stats: OPERATOR INSERTS
 DBMS Table First insert Last insert Batch inserts Immediate inserts DBMS Seconds
 ----|-----|------------|-----------|-------------|-----------------|------------|
@@ -223,7 +221,6 @@ mydb|mem  |00:19:56    |00:00:07   |           22|              524|       7.330
     |cpu  |00:19:41    |00:00:07   |          576|             4230|      58.280|
     |swap |00:19:41    |00:00:07   |          161|              916|      12.757|
     |net  |00:19:40    |00:00:07   |           70|              464|       6.211|
-
 
 Stats: OPERATOR ERROR
 Type        Counter Timestamp Elapsed time Dbms name Table name Last error Last error text
@@ -258,5 +255,4 @@ row_id insert_timestamp           tsd_name tsd_id timestamp             fields_u
                 "Time":"00:00:00",
                 "Nodes": 1}]}
 ```
-
 

@@ -43,7 +43,6 @@ Example:
 run smtp client where email = anylog.iot@gmail.com and password = [password]
 ```
 
-
 ## Sending a message
 
 To facilitate messages, declare the _SMTP_ client process. Details are available at
@@ -71,7 +70,6 @@ Multiple message texts on the command line, like the example below, will be repr
 ```anylog
 email to my_name@my_company.com  where subject = "anylog alert" and message = "Value of Heater sensor is above threshold" and message = "Reporting node: 24.23.250.144 (Operator SF)"
 ```
-
 
 ### Sending SMS messages
 

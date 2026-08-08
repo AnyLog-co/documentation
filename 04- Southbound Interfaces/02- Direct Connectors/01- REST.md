@@ -13,7 +13,6 @@ layout: page
 | 2026-07-24 | Ori Shadmon    | rewrite               |          |
 --->
 
-
 The following document provides directions on how to insert data via REST.
 
 ## Setting Up the Node
@@ -71,8 +70,6 @@ File mode is the default mode. Changing the mode to streaming is by updating the
 | ---- | -------| ------------|
 | mode | file | The body of the message is JSON data. Database load (on an Operator Node) and data send (on a Publisher Node) are with no wait. File mode is the default behaviour. |
 | mode | streaming | The body of the message is JSON data that is buffered in the node. Database load (on an Operator Node) and data send (on a Publisher Node) are based on time and volume thresholds. |
-
-
 
 ## Publishing Data via POST
 

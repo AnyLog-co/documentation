@@ -111,7 +111,6 @@ hzn unregister -f
 At the end of the process, OpenHorizon should show a new active node
 ![OpenHorizon_node_state.png](../../imgs/OpenHorizon_node_state.png)
 
-
 # AnyLog
 By deploying AnyLog, users can monitor Distributed Edge Nodes and Data from a single point, without centralizing the data.
 

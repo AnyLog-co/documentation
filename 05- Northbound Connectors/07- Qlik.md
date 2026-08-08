@@ -52,7 +52,6 @@ The main components of the REST interface delt with are the URL bar and cURL req
 | <img src="../imgs/qlik3.png" height=50% width=50% /> | <img src="../imgs/qlik4.png" height=50% width=50% /> |
 | :----: | :----: |
 
-
 ## Increments Data 
 The [increments function](../07-%20CLI/04-%20SQL.md#the-increment-function) is used to segment time-series data into fixed, contiguous 
 time intervals (e.g., every 5 minutes, every hour, every day).

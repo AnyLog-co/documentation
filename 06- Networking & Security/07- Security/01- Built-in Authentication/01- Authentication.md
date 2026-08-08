@@ -504,13 +504,10 @@ id generate certificate authority where country = US and state = CA and locality
 
 Generates two files:
 
-
 | Type        | Name  | Explanation |
 | ------------- | ------------| ---- |
 | .key  | ca-[org]-private_key | The Private Key for the CA |
 | .crt  | ca-[org]-public_key | The Public Key for the CA. It will be provided to every AnyLog node that authenticates non-member nodes with CR signed by the AnyLog CA |
-
-
 
 ## Generating a certificate request
 

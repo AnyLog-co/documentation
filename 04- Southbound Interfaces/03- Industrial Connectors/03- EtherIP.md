@@ -12,7 +12,6 @@ source_path: "03 EtherNet IP.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 # EtherNet/IP
 
 EtherNet/IP (Ethernet Industrial Protocol) is an industrial network protocol built on the Common Industrial Protocol (CIP) that enables communication between PLCs, sensors, actuators, and control systems over standard Ethernet. AnyLog can act as an EtherNet/IP client, pulling data from any EtherNet/IP device and streaming it into local databases.
@@ -32,7 +31,6 @@ The `get etherip struct` command explores the structure by querying supported cl
 This provides insight into the connected PLC or device, including program tags and system-level data.
 
 The EtherNet/IP structure is explored with the following command:
-
 
 ```anylog
 get etherip struct where url = [connect string] and user = [username] and password = [password] and ...
@@ -128,7 +126,6 @@ The following tables summarizes the command variables:
 | table     | The table to host the data (if not specified in a policy).                                |
 | topic     | If data is processed through the local broker.                                               |
 
-
 Example 1 - listing individual tags:
 ```anylog
 run plc client where type = etherip and name = etherip_reads and url = 127.0.0.1 and frequency = 1 and dbms = my_dbms and node = FreeChlorinatorAI.PV and node = CombinedChlorinatorAI.PV
@@ -145,7 +142,6 @@ Notes:
 2. Each row is added with 2 columns:
    * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
    * Duration - the number of milliseconds between the earliest timestamp and the latest timestamp that were considered in the values that were retrieved from the PLC.
-
 
 ---
 

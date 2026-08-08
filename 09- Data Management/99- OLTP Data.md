@@ -55,7 +55,6 @@ When creating new tables from scratch, the recommended approach is different. If
 AnyLog but should not follow time-series retention behavior (for example, aggregation or historical summary tables), 
 create the table using the standard AnyLog workflow and disable partitioning.
 
-
 ## Processing 
 
 The following creates a sample table called _users_. 

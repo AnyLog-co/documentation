@@ -15,7 +15,6 @@ source_path: "High Availability.md"
 
 > **AnyLog only.** High-Availability & Data Resilience  are not available in EdgeLake.
 
-
 AnyLog's SQL data store layer has a unified solution for both high availability and data resilience — both are
 built on the same underlying structure: clusters of replicated operators. [Key Terminology](#key-terminology)
 covers that structure; [How It Works](#how-it-works) covers the replication and failover mechanism itself, so
@@ -324,14 +323,12 @@ Examples:
 ```anylog 
 AL power-plant-operator1 +> get tsd summary where table=tsd_123 
 
-
 Info on TSD Table: tsd_123
 DBMS       Table          Start Date          From ID End Date            To ID Files Count Source Count Status 1 Status 2 Total Rows 
 ----------|--------------|-------------------|-------|-------------------|-----|-----------|------------|--------|--------|----------|
 monitoring|docker_insight|2026-05-16 05:45:00|      1|2026-05-21 20:30:41|31023|      13357|           1|       2|       2|    131886|
 monitoring|node_insight  |2026-05-16 05:45:15|      3|2026-05-21 20:30:53|31024|      10096|           1|       2|       2|     15973|
 monitoring|syslog        |2026-05-16 05:45:40|      4|2026-05-21 20:30:58|31025|       7572|           1|       2|       2|    141298|
-
 
 Total all TSD Tables
 DBMS       Table          Files Count Total Rows 

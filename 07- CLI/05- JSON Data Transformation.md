@@ -12,10 +12,6 @@ source_path: "05- JSON Data Transformation.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
-
-
-
 # JSON Data Transformation
 
 Using command line instructions, users can transform JSON data to target structures.    
@@ -25,7 +21,6 @@ Examples of usage:
 section in the [Blockchain commands](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md) documentation. 
 * Map source JSON data to a target structure - Details are available at the [Bring Command](#the-bring-keyword)
 section in the [Message Broker](../06-%20Networking%20&%20Security/05-%20Message%20Broker.md) documentation.
-
 
 ## Creating JSON Objects and Policies
 
@@ -42,7 +37,6 @@ operator_port = 2048
                         'name' : !operator_name,
                         'ip' : !external_ip,
                         'port' : !operator_port}} >
-
 
 ```
 
@@ -79,7 +73,6 @@ AL anylog-node > json !new_operator
 }
 ```
  
-
 ### Validating the JSON object structure
 The keyword `test` is optional. If added, the command returns _true_ if the structure is correct and _false_ if the test structure is not in JSON format.
 Example:
@@ -120,20 +113,16 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.list``` - return the requested attributes as a list.
     * ```bring.children``` - Return the immediate children of a policy by retrieving all policies whose 'parent' attribute matches the parent policy's 'id' attribute.
   
-
 ### Special Bring Values
 * **Basic Usage:**
   If the **bring** command values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.
   For example, ```bring [operator][name]``` will pull the name value from an Operator policy.
 
-
 * **Wildcard Usage:**
   If an asterisk (*) sign is used, it is replaced with the policy type. For example, in an Operator policy, ```[*][name]``` is the same as ```[operator][name]```.
 
-
 * **Empty Brackets:**
   Empty brackets ([]) designate the policy processed.
-
 
 * **Substring Operations:**
   These special operations allow to retrieve specific substrings based on certain conditions.  
@@ -143,7 +132,6 @@ values associated with the keys and the string values are added to the retrieved
   * prefix(n) - returns the first n characters of the string, essentially providing a truncated version from the start of the string.
   * suffix(n) - returns the last n characters of the string, essentially providing a truncated version from the end of the string.
 
-  
 ### Examples:
   1. Return policy info in a table structure:
 ```anylog

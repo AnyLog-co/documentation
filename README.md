@@ -29,7 +29,6 @@ cloud providers, applications, or hardware platforms.
 
 To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
-
 <div style="text-align: center;">
   <img src="imgs/deployment_diagram.png" alt="AnyLog Deployment Diagram" width="600" />
 </div>

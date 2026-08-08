@@ -38,7 +38,6 @@ opposed to needing to develop a full application for messaging.
 * <a href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet" target="_blank">Microsoft Teams</a>
 * <a href="https://developers.google.com/workspace/chat/quickstart/webhooks" target="_blank">Google Chat</a>
 
-
 ### Steps
 <ol>
   <li>
@@ -85,7 +84,6 @@ opposed to needing to develop a full application for messaging.
     <img src="../../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
   </li>
 </ol>
-
 
 **Generated URL** (example format — yours will have your own workspace and webhook IDs):
 ```URL

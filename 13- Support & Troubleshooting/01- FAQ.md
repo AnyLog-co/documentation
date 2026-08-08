@@ -427,7 +427,6 @@ blockchain seed from [remote tcp ip]:[remote tcp port]
 > `blockchain seed` works against any node with a blockchain (file) on it. The only word of caution is that if there's 
 > an active blockchain service, the file will ultimately be re-synced with the configured ledger conn. 
 
-
 **Q: I added a policy, but it's not visible on other nodes.**
 
 Force an immediate sync: `run blockchain sync`, then confirm on peers with `get metadata version`.

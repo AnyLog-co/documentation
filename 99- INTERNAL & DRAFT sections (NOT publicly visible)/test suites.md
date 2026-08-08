@@ -69,7 +69,6 @@ Any 2 files in test format can be compared such that:
 * Differences in the body trigger a failure with a message on the reason and location (line number) of the failure.
 * Differences in footer - slower execution time is considered if **time** option is enabled.
 
-
 ## The `analyze` output command
 
 The `analyze output` command compares 2 test files, each represents the result set of a _test case_, 
@@ -146,12 +145,10 @@ test case where source = [file path and name] and inform = [destination for mess
 
 * The value assigned to the **time** key determines if the comparison considers execution time.
   
-
 * The value assigned to **dest** is optional - if included, it specifies the Operator nodes to use.    
 For example: (127.32.52.103:20048, 127.60.34.43:20048).  
   If not specifies, all the Operators with relevant data participate in the query process.
   
-
 * The values assigned to the **inform** key determine where the test results are aggregated. The optional values are detailed 
 in the chart below:    
   
@@ -172,7 +169,6 @@ The test results are delivered to the screen as well as to a remote operator nod
 ```anylog
 test case where source = !test_dir/output_test.out and inform = stdout and inform = dbms.qa.testing@!qa_node
 ``` 
-
 
 The example below shows the output of a test failure. The output identifies the reason for the failure:
 ```anylog

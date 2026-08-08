@@ -95,7 +95,6 @@ databases need different connection details, all supplied as options on the same
 > - `unlog = true` is recommended for `system_query` (below), since query results there are disposable — but not
 >  for your actual user data.
 
-
 ```anylog
 connect dbms [logical-name] where type = [sqlite|psql] and [options]
 
@@ -187,7 +186,6 @@ applications** — you always interact with data using the table's name; AnyLog 
 processing across the underlying partitions itself. Any date-time column on the table can be used as the
 partition column, not just `timestamp`/`insert_timestamp`.
 
-
 * Creating Partitioning
 
 ```anylog
@@ -205,7 +203,6 @@ partition my_data ping_sensor using timestamp by 1 day
 > avoid the wildcard (`*`) form above for that database — it forces raw and aggregation tables onto the same
 > interval and retention. Partition (and schedule cleanup for) the raw table and the aggregation table separately
 > instead.
-
 
 * View partitions
 

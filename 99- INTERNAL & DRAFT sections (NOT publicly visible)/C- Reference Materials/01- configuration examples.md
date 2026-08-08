@@ -13,9 +13,6 @@ source_path: "examples/Configuration.md"
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
-
-
 # Configuration Examples
 
 This document provides configuration examples.
@@ -28,7 +25,6 @@ Usage:
 <pre>
 python3 user_cmd.py "command 1" and "command 2" ... and "command n"
 </pre>
-
 
 The command ***process*** followed by a path and a file name will process all the commands in the specified file.  
 The following example starts an AnyLog node and configures the node according to the commands listed in a file called ***autoexec.al***.
@@ -70,7 +66,6 @@ Alternatively, users can update the configuration file from the ***Remove CLI***
 
 Restart the AnyLog Node - if the node is initiated as in the [example above](#starting-a-node-with-a-configuration-file), the updated ***autoexec*** file will determine the configuration.
 
-  
 ## Configuring data removal and archival
 
 ### Configuring Backup, Archive and Removal of data
@@ -111,7 +106,6 @@ Users can leverage the [archival directory](#archival-of-data) for the data back
 Alternatively, uses can actively archive a partition using the [backup table](../anylog%20commands.md#backup-command) 
 command (and specify the needed partition).
 
-
 # Example Configuration File
 
 The example below demonstrates a configuration file with commonly used configuration options.     
@@ -127,7 +121,6 @@ Details are available in the [Users Authentication](../../06-%20Networking%20%26
 <pre>
 set authentication off
 </pre>
-
 
 #### Assign values to variable names
 Every node maintains a local dictionary with key value pairs. Users can associate values to variable names as needed.  
@@ -169,7 +162,6 @@ partition_keep = 6
 
 </pre>
 
-
 #### Declare the root folder for the AnyLog files
 AnyLog maintains scripts, configurations and data in different folders.  
 The default folders structure is detailed in the a [local directory structure](../getting%20started.md#local-directory-structure) section.
@@ -185,7 +177,6 @@ The command needs to be issued once (unless the root folder location is changed)
 <pre>
 create work directories
 </pre>
-
 
 #### Making the node a member of the AnyLog Network
 The node is configured to initiate a listener on a dedicated IP and Port to receive messages from peer nodes.  
@@ -204,7 +195,6 @@ Details are available in the [REST requests](../../07-%20CLI/02-%20Background%20
 run rest server !ip !anylog_rest_port
 </pre>
 
-
 #### Metadata
 The nodes are configured to periodically retrieve the metadata (from a blockchain platform or a master node) and host it locally.   
 Details are available in the [Blockchain Synchronizer](../../07-%20CLI/02-%20Background%20Processes.md#blockchain-synchronizer) section.
@@ -212,7 +202,6 @@ Details are available in the [Blockchain Synchronizer](../../07-%20CLI/02-%20Bac
 <pre>
 run blockchain sync where source=master and time=!sync_time and dest=file and connection=!master_node
 </pre>
-
 
 #### Configuring the local database
 The local database is used to store the user data and in some cases system data.  
@@ -253,7 +242,6 @@ Note: In this example, the key ***default_dbms*** was assigned with the value **
 <pre>
 connect dbms !default_dbms where type=psql and user = !db_user and password = !db_passwd and ip = !db_ip and port = !db_port
 </pre>
-
 
 #### Declare the policies associated with the node in the metadata layer
 
@@ -334,7 +322,6 @@ However, if column names are different or partition interval is different - part
 partition !default_dbms * using !partition_column by !partition_interval
 </pre>
 
-
 #### Removal of old data
 Using the scheduler, a process is triggered periodically and removes old partitions.
 The [Drop Partition Command](../anylog%20commands.md#drop-partition-command) is used to remove old partitions.  
@@ -349,7 +336,6 @@ Notes:
 1) [This example](../alerts%20and%20monitoring.md#examples) demonstrates how to drop old partitions if disk space availability is lower than a threshold.
 2) ```get scheduler 1``` returns the tasks assigned to scheduler #1.
 
-
 #### Configure data processing functionality
 Note: Details on the streamer process are available in the [Streamer Process](../../07-%20CLI/02-%20Background%20Processes.md#streamer-process) section.
 
@@ -363,7 +349,6 @@ Allowing data to be treated based on a topic declaration - as if the AnyLog node
 Details on the mapping process are available in the [Using Post Command](../adding%20data.md#using-a-post-command) section 
 and the [Subscribing to REST calls](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md#subscribing-to-rest-calls) section.
 
-
 <pre>
 broker=rest
 mqtt_log = false
@@ -373,7 +358,6 @@ mqtt_topic_table="bring [table]"
 mqtt_column_timestamp="bring [ts]"
 mqtt_column_value="bring [value]"
 mqtt_column_value_type=float
-
 
 run mqtt client where broker=!broker and port=!anylog_rest_port and user-agent=anylog and log=!mqtt_log and topic=(name=!mqtt_topic_name and dbms=!mqtt_topic_dbms and table=!mqtt_topic_table and column.timestamp.timestamp=!mqtt_column_timestamp and column.value=(value=!mqtt_column_value and type=!mqtt_column_value_type))
 

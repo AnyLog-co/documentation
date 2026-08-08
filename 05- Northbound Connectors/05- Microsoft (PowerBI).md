@@ -17,13 +17,11 @@ layout: page
    one step, and "Microsft" → "Microsoft." Filled in the empty frontmatter description.
 --->
  
-
 The following provides insight as to how to generate graphs and images using <a href="https://powerbi.microsoft.com/en-us/downloads/" target="_blank">Microsoft PowerBI</a> with data from AnyLog. 
 The same process can be done with _Excel_ and other Microsoft tools. 
 
 ## Sample REST request
 In order to support PowerBI, return data as a list of JSON values without the statistical information.
-
 
 **Sample cURL request**
 ```bash

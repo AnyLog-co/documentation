@@ -13,8 +13,6 @@ source_path: "training/Connectors to Data Sources.md"
  |            |
 --->
 
-
-
 # Streaming Data into AnyLog 
 
 This document provides examples of configurations to data sources. 
@@ -167,7 +165,6 @@ Default Volume   |10,240|        |
 Default Immediate|True  |        |
 Buffered Rows    |    27|        |
 Flushed Rows     |    10|        |
-
 
 Statistics
                           Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process 

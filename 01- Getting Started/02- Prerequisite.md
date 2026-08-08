@@ -12,7 +12,6 @@ layout: page
  |            |
 --->
 
-
 ---
 
 # Prerequisite and setup considerations

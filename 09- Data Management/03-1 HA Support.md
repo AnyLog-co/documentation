@@ -12,7 +12,6 @@ layout: page
 
 > **AnyLog only.** High-Availability & Data Resilience  are not available in EdgeLake.
 
-
 ## Overview
 
 High availability in AnyLog rests on three things working together: every ingested file is **archived** so it can be 
@@ -248,7 +247,6 @@ The following list summarizes the commands supporting the HA processes:
 | `test cluster setup` | The configuration of the node to support HA |
 | `test cluster data` | Compare the data status on all the nodes that support the same cluster |
 | `test network metadata` | Returns metadata version on each participating node |
-
 
 ## TSD Tables & File Commands
 

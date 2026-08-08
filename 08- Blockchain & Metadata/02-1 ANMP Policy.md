@@ -31,7 +31,6 @@ name / owner, and enhancing the reference list of certain UNS policies. It shoul
 to patch in attributes belonging to a different policy type — doing so does not change actual node behavior and only 
 risks creating a misleading or inconsistent policy record.
 
-
 **Related Topics**:
 * [Policy & Metadata](02-%20Policy%20%26%20Metadata.md)
 * [Blockchain Full Circle](03-1%20Blockchain%20Full%20Circle.md)

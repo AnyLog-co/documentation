@@ -67,7 +67,6 @@ set of options that allow it to better unify the result set — whether in terms
 | `nodes` | `main` / `all` | `main` | HA: `main` uses designated primary operators; `all` uses round-robin |
 | `committed` | `true` / `false` | `false` | HA: only return data confirmed synced across cluster nodes          |
 
-
 ```anylog
 sql [db name] format=table and stat=true and timezone=utc and extend=(+node_name) "SELECT ...." 
 ```
@@ -228,7 +227,6 @@ ORDER BY hour_bucket;
 
 By defining `increments` as a way to divide a time range into fixed buckets and aggregate per bucket, AnyLog is
 able to accomplish this across its network no matter the database engine underneath.
-
 
 **Example** — Get 5-minute increments of data over the last 1 hour (from now)
 ```anylog

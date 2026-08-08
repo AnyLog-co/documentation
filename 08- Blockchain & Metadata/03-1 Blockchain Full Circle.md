@@ -159,7 +159,6 @@ Then confirm it landed:
 is_updated = blockchain wait for !new_policy
 ```
 
-
 ## 6. Query
 
 Once policies exist — whichever ledger backed the publishing — querying is identical:
@@ -168,11 +167,8 @@ Once policies exist — whichever ledger backed the publishing — querying is i
 blockchain get *
 ```
 
-
 ## 7. one-node-or-two
 
 to be added
-
-
 
 See [Blockchain Commands](03-%20Blockchain%20Commands.md#query-the-blockchain) for filtering, `bring`, join/merge, etc.

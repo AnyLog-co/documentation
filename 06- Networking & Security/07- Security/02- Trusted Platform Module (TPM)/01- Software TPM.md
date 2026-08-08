@@ -12,8 +12,6 @@ source_path: "01- Software TPM.md"
 
 --->
 
-
-
 # Software TPM for AnyLog
 
 This document summarizes the software TPM implementation used with AnyLog and explains how to deploy it with the [`AnyLog-TPM`](https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file) offering and connect it to an AnyLog node.
@@ -22,7 +20,6 @@ The software TPM flow is useful when you want TPM-backed key operations without 
 
 ## What the Software TPM Provides
 [Software TPM GitHub](https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file)
-
 
 The `AnyLog-TPM` repository packages a TPM2 workflow around:
 

@@ -35,7 +35,6 @@ document explaining how to query blobs through an application using `file to` an
 
 4. We need Examples & Use Cases -- @Mark 
 
-
 # Examples & Use Cases
 
 The following provides an array of examples on deploying AnyLog and EdgeLake from start to finish.

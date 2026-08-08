@@ -219,7 +219,6 @@ the next process cycle):
 ```text
 AL op1 > get streaming
 
-
 Statistics
                        Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process
 DBMS-Table             files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS

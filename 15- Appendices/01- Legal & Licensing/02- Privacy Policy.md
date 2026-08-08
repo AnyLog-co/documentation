@@ -18,7 +18,6 @@ source_path: "license/02- Privacy Policy.md"
 
 ## Privacy Policy for Software Downloads
 
-
 1. Introduction  
 
     Thank you for choosing to download and use AnyLog ("the Software"). We value your privacy and are committed to protecting your personal information. This Privacy Policy is intended to explain how we collect, use, disclose, and protect your data when you download and use our Software.

@@ -15,8 +15,6 @@ source_path: "03 Securing the Network.md"
 
 --->
 
-
-
 # Securing the Network
 
 ## Overview
@@ -49,7 +47,6 @@ The Key-Based Authentication enables the following:
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
 The relevant AnyLog commands are detailed in the section [Node Authentication](./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md).  
-
 
 ## Key-Based-Authentication deployment example
 
@@ -121,11 +118,9 @@ Adding the keyword test, returns ***true*** if the structure is correct, otherwi
 json !member test
 ```
 
-
 ## Required attributes in each policy
 
 The following chart summarizes the policies declared to authenticate users and validate their permissions.
-
 
 | Policy Type | Role                                | Attribute   | Required |  Comments       |
 | ------------| ----------------------------------- | ----------- | -------- | ---------------- |
@@ -148,14 +143,12 @@ This demo is executed on the CLI of the 2 operators.
 * When a command is executed on operator 1 and 2 it is designated by CLI(opr.1.2).
 * If a master
 
-
 ## The demo steps
 The demo is using 2 operator nodes and 2 users (root user and a non-root user). Each node and user is assigned with keys.
 Each node and user is associated with member policies. Each member policy is assigned with permission policy such that 
 each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
 the senders of messages and determine the permissions.  
 If a master node is used, the master node configuration is detailed [below](#master-node-configuration).  
-
 
 The following chart details the processes demonstrated:  
 
@@ -354,7 +347,6 @@ id sign !permissions where key = root_keys and password = abc
 blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ``` 
 
-
 ### Step 8 - Assign privileges to a user
 **Use CLI(oper.1)** - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
 The assignment process and ***assignment policy*** are detailed below:  
@@ -416,7 +408,6 @@ Notes:
 
 5) The attribute ***disable*** lists the AnyLog commands which are not allowed. 
 
-
 ### Step 10 - Assign limited privileges to nodes
 Use CLI(oper.1) - a user with privileges to assign permissions, provides limited permissions to the operator nodes.
 In the example below, roy assign the policy named _node basic permissions_ to the 2 operator nodes:
@@ -462,7 +453,6 @@ Note:
 * [for file-based key management] If the local password is lost, all the relevant files in the _keys directory_ needs to be deleted, and the 
   node needs to be assigned with new keys and a new assignment policy.
 * [for tpm-based key management] If password is forgotten to each key, then delete the node key from the tpm shared directory and generate a new node key.
-
 
 ### Step 12 - Save the node's private key 
 **Only if file-based key management**  
@@ -510,7 +500,6 @@ On CLI(master)
 id create keys for node where password = masterpswd
 ```
  
-
 ### Master node policy
 On CLI(master) 
  
@@ -586,7 +575,6 @@ On CLI(master):
 ```anylog
 set node authentication on
 ```
-
 
 ## Demo authorized and non-authorized commands
 

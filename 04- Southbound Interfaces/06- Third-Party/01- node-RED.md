@@ -4,7 +4,6 @@ description: Send data from Node-RED flows into AnyLog via REST POST.
 layout: page
 ---
 
-
 <!---
 ### 📜 Change Log
  **Date**   | **Name** | **Change**   | **Version** |

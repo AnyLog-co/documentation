@@ -14,7 +14,6 @@ layout: page
  |            |
 --->
 
-
 The AnyLog Demo OVA is a pre-configured virtual machine image containing a complete, multi-node AnyLog environment. It is designed for demonstrations, training, evaluations, and proof-of-concept deployments — everything runs inside a single VM.
 
 ---
