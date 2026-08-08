@@ -4,7 +4,6 @@ description: Connect Claude and other LLM clients to AnyLog via the Model Contex
 layout: page
 ---
 
-
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
@@ -14,7 +13,6 @@ layout: page
  | 2026-04-23 |                | updates based on changes in MCP-Examples related to CORs + AnyLog-Agent     |  |
  | 2026-04-17 |                | file creation    |  |
 --->
-
 
 Every AnyLog query node exposes a **Model Context Protocol (MCP) server** that gives any compatible AI client — Claude Desktop, Claude.ai, Base44 — live access to your network's schema, data, and node topology. No SQL required on your end.
 

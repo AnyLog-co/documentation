@@ -39,7 +39,6 @@ dashboards, and scripts interact with the network without running AnyLog themsel
 | `POST` | All commands (alternative to GET) and data publishing via topic mapping |
 | `PUT` | Publish time-series data directly to a node |
 
-
 ### The AnyLog commands supported by REST
 
 | AnyLog command | HTTP Method       | Comments |
@@ -64,7 +63,6 @@ dashboards, and scripts interact with the network without running AnyLog themsel
 | GET            | test              | Issue a test command                                                          |
 | POST           | reset             | Issue a reset command                                                          |
 | POST           | process           | Process an AnyLog script file                                                  |
-
 
 ## `run client ()` vs `destination` header 
 
@@ -103,6 +101,7 @@ equivalent, and it's the one we recommend using.
 ## Examples
 
 * check node status 
+
 ```shell
 # basic GET request for status
 curl -X GET http://[Node IP]:[Node REST Port] \

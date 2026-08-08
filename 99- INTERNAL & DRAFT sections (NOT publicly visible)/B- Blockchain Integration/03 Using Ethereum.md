@@ -13,7 +13,6 @@ source_path: "03 Using Ethereum.md"
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 # Using Ethereum as a Global Metadata Platform
 
 ## Overview
@@ -26,7 +25,6 @@ initial setup that is needed to facilitate Ethereum as the metadata layer.
 Once the setup is completed, nodes can synchronize their local metadata with the global metadata by configuring the synchronizer 
 to connect to Ethereum. The details of configuring a node to sync with Ethereum are detailed at the
 [Blockchain Configuration](./01%20Blockchain%20%28internet%29%20Configuration.md) section.
-
 
 Connection to the blockchain platform can be done using a local node or a hosted node.
 With a local node, users need to configure and maintain an Ethereum node that hosts a local copy of the blockchain 
@@ -129,7 +127,6 @@ contract = blockchain deploy contract where  platform = ethereum and public_key 
 ```
 
 Executing the `_deploy contract_` command provides the contract address (the example contract address is 0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0).      
-
 
 * Add the contract information to the Ethererum connection information using the command `set account info`
 ```anylog

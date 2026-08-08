@@ -13,7 +13,6 @@ source_path: "training/advanced/99-06- Pip Install.md"
  |            |
 --->
 
-
 # AnyLog as a _pip_ Package 
 
 ## Deployment Process 

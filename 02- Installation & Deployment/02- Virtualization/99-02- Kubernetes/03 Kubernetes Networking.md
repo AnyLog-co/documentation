@@ -13,10 +13,6 @@ source_path: "deployments/D- Networking & Security/03 Kubernetes Networking.md"
  |            |
 --->
 
-
-
-
-
 # Kubernetes Networking
 
 Kubernetes Orchestrator generates a unique virtual IP each time a node is deployed. 
@@ -34,7 +30,6 @@ When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/
 [configuration policy](../../../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md).
 
 Directions for using Kubernetes Cluster Networking can be found [here](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
-
 
 ## Sample Network Setup 
 * The External & Virtual IP are used for setting up TCP connections

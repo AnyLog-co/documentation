@@ -253,6 +253,7 @@ same logical database/table into a single packet for insertion. This logic is us
 
 * `set buffer threshold` - Configure time and volume thresholds for buffered streaming data. The condition can be just
 a buffer threshold size (in terms of time and/or volume), or scoped to a specific database (and table).
+
 ```anylog
 <set buffer threshold where
     dbms = al_demo and
@@ -261,6 +262,7 @@ a buffer threshold size (in terms of time and/or volume), or scoped to a specifi
 ```
 
 * `run streamer` - Writes streaming data to files
+
 ```anylog
 run streamer where prep_dir = !prep_dir and watch_dir = !watch_dir and err_dir = !err_dir
 ```
@@ -268,6 +270,7 @@ run streamer where prep_dir = !prep_dir and watch_dir = !watch_dir and err_dir =
 If directories are not specified, the default paths from the AnyLog dictionary are used (`get dictionary` to view them).
 
 * `get streaming` - Monitor streaming buffer status
+
 ```anylog
 get streaming
 ```

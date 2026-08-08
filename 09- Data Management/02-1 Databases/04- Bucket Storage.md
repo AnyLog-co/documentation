@@ -21,30 +21,30 @@ MinIO, Akave (Filecoin's S3 alternative), or AWS's S3 and the likes.
 
 The `bucket` command provides a means to push (upload) and pull (download) files from a bucket object storage.
 
-| Operation                                           | Use case                                               |
-|-----------------------------------------------------|--------------------------------------------------------|
-| [bucket provider connect](#bucket-provider-connect) | Connect to bucket object store.                        |
-| [get bucket groups](#get-bucket-groups)             | View all bucket groups.                                |
-| [get bucket names](#Get-All-Bucket-Names)           | View all buckets by group.                             |
-| [bucket create](#bucket-create)                     | Create bucket.                                         |
-| [get bucket files](#get-bucket-files)               | List all files from bucket.                            |
-| [bucket file upload](#bucket-file-upload)           | Upload file to bucket.                                 |
-| [bucket file download](#bucket-file-download)       | Download file from bucket.                             |
-| [bucket file delete](#bucket-file-delete)           | Delete file from bucket.                               |
-| [bucket drop](#bucket-drop)                         | Delete bucket.                                         |
+|                      Operation                      |            Use case             |
+|:---------------------------------------------------:|:-------------------------------:|
+| [bucket provider connect](#bucket-provider-connect) | Connect to bucket object store. |
+|       [get bucket groups](#get-bucket-groups)       |     View all bucket groups.     |
+|      [get bucket names](#get-all-bucket-names)      |   View all buckets by group.    |
+|           [bucket create](#bucket-create)           |         Create bucket.          |
+|        [get bucket files](#get-bucket-files)        |   List all files from bucket.   |
+|      [bucket file upload](#bucket-file-upload)      |     Upload file to bucket.      |
+|    [bucket file download](#bucket-file-download)    |   Download file from bucket.    |
+|      [bucket file delete](#bucket-file-delete)      |    Delete file from bucket.     |
+|             [bucket drop](#bucket-drop)             |         Delete bucket.          |
 
 ### Bucket Provider Connect
 
 Defines a logical connection to a named bucket object storage.
 
-| Parameter      | -                                                 |
-|----------------|----------------------------------------------------|
-| group          | Logical connection name                             |
-| provider       | Provider name (`minio` or `akave` — see note below) |
-| id / access_key | Private access key (either name works)             |
-| password / secret_key | Private secret key (either name works)       |
-| region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md#credentials)) |
-| endpoint_url   | URL connection to object storage                    |
+|       Parameter       |                                                                                                 -                                                                                                  |
+|:---------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|         group         |                                                                                      Logical connection name                                                                                       |
+|       provider        |                                                                        Provider name (`minio` or `akave` — see note below)                                                                         |
+|    id / access_key    |                                                                               Private access key (either name works)                                                                               |
+| password / secret_key |                                                                               Private secret key (either name works)                                                                               |
+|        region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md#credentials)) |
+|     endpoint_url      |                                                                                  URL connection to object storage                                                                                  |
 
 > `provider` currently lists `minio`/`akave` — AWS S3 is API-compatible and mentioned above as a future target, but
 > isn't included here yet since direct AWS support isn't fully tested.
@@ -58,6 +58,7 @@ Defines a logical connection to a named bucket object storage.
   endpoint_url = [endpoint_url] and 
   region = [region]>
 ```
+
 > *Note* that `group` is a logical definition of a connection to an object storage location. If you define two
 > different groups that connect to the same `endpoint_url`, `access_key`, and `secret_key`, then queries to either
 > group will return the same object storage view.
@@ -74,9 +75,9 @@ get bucket groups
 
 List all buckets defined or available to the group
 
-| Parameter                                                                  | -                         |
-|----------------------------------------------------------------------------|---------------------------|
-| group                                                                      | Logical connection name   |
+| Parameter |            -            |
+|:---------:|:-----------------------:|
+|   group   | Logical connection name |
 
 ```anylog
 get bucket names where group = [group_name]
@@ -86,89 +87,94 @@ get bucket names where group = [group_name]
 
 Create a physical bucket for file/object storage.
 
-| Parameter | -                                                                                                                                                      |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| group     | Logical connection name (str)                                                                                                                          |
-| name      | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference [bucket naming convention documentation](https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/). |
+| Parameter |                                                                                                              -                                                                                                               |
+|:---------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|   group   |                                                                                                Logical connection name (str)                                                                                                 |
+|   name    | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference [bucket naming convention documentation](https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/). |
 
 ```anylog
 bucket create where group = [group_name] and name = [bucket_name]
 ```
 
-<a id="get-bucket-files"></a>
 ### Get Bucket Files
 List all files in bucket. If prefix is not specified, then all files in bucket are displayed, otherwise only files whose
 keys start with the prefix string will be displayed.
+
+| Parameter |                                                                         |
+|:---------:|:-----------------------------------------------------------------------:|
+|   group   |                         Logical connection name                         |
+|   name    |                               Bucket name                               |
+|  prefix   | String prefix for search. Note that the prefix is an optional parameter |
+
 ```anylog
 get bucket files where group = [group_name] and name = [bucket_name] and prefix = [string-prefix] and format = json
 get bucket files where group = [group_name] and name = [bucket_name] and format = json
 ```
-| Parameter | -                                                                        |
-|-----------|--------------------------------------------------------------------------|
-| group     | Logical connection name                                                  |
-| name      | Bucket name                                                              |
-| prefix    | String prefix for search. Note that the prefix is an optional parameter  |
 
-<a id="bucket-file-upload"></a>
 ### Bucket File Upload
 Upload file to specified bucket.
+
+| Parameter  |                                                                                         |
+|:----------:|:---------------------------------------------------------------------------------------:|
+|   group    |                                 Logical connection name                                 |
+|    name    |                                       Bucket name                                       |
+| source_dir |          Source directory of file location (Note, do not include the filename)          |
+| file_name  |                                   Filename to upload                                    |
+|    key     | Unique filename in bucket (Note that you use this key to download file from the bucket) |
+
 ```anylog
 bucket file upload where group = [group_name] and name = [bucket_name] and source_dir = [local_source_directory] and file_name = [file_name] and key = [file_key]
 ```
-| Parameter  | -                                                                                       |
-|------------|-----------------------------------------------------------------------------------------|
-| group      | Logical connection name                                                                 |
-| name       | Bucket name                                                                             |
-| source_dir | Source directory of file location (Note, do not include the filename)                   |
-| file_name  | Filename to upload                                                                      |
-| key        | Unique filename in bucket (Note that you use this key to download file from the bucket) |
 
-<a id="bucket-file-download"></a>
 ### Bucket File Download
 Download file from bucket
+
+| Parameter |                                             -                                              |
+|:---------:|:------------------------------------------------------------------------------------------:|
+|   group   |                                  Logical connection name                                   |
+|   name    |                                        Bucket name                                         |
+|    key    |                                 Unique filename in bucket                                  |
+| dest_dir  | Destination directory where to download file to (Note only put destination, not file name) |
+| file_name |                              Filename to name downloaded file                              |
+
 ```anylog
 bucket file download where group = [group_name] and name = [bucket_name] and key = [file_key] and dest_dir = [destination_dir] and file_name = [filename]
 ```
-| Parameter | -                                                                                          |
-|-----------|--------------------------------------------------------------------------------------------|
-| group     | Logical connection name                                                                    |
-| name      | Bucket name                                                                                |
-| key       | Unique filename in bucket                                                                  |
-| dest_dir  | Destination directory where to download file to (Note only put destination, not file name) |
-| file_name | Filename to name downloaded file                                                           |
 
-<a id="bucket-file-delete"></a>
 ### Bucket File Delete
 Delete file from bucket by key or a set of files by specified prefix.
+
+| Parameter |             -             |
+|:---------:|:-------------------------:|
+|   group   |  Logical connection name  |
+|   name    |        Bucket name        |
+|    key    | Unique filename in bucket |
+|  prefix   | String prefix for search  |
+
 ```anylog
 bucket file delete where group = [group_name] and name = [bucket_name] and key = [file_key]    # deletes one file
 bucket file delete where group = [group_name] and name = [bucket_name] and prefix = [str-prefix]  # deletes all files with keys that start with the prefix
 bucket file delete where group = [group_name] and name = [bucket_name] and key = [file_key] and prefix = [str-prefix]  # deletes one file and all files with keys that start with the prefix
 ```
-| Parameter | -                          |
-|-----------|----------------------------|
-| group     | Logical connection name    |
-| name      | Bucket name                |
-| key       | Unique filename in bucket  |
-| prefix    | String prefix for search   |
 
-<a id="bucket-drop"></a>
 ### Bucket Drop
 Delete bucket. Note that you cannot delete a non-empty bucket by default; however, we've added support to delete all
 files within the command.
+
+| Parameter    | -                                             |
+|:---:|:---:|
+| group        | Logical connection name                       |
+| name         | Bucket name                                   |
+| delete_all   | Boolean parameter to delete a non-empty bucket |
+
 ```anylog
 bucket drop where group = [group_name] and name = [bucket_name] and delete_all = [true/false]  
 bucket drop where group = [group_name] and name = [bucket_name] and delete_all = false  # will only delete an empty bucket
 bucket drop where group = [group_name] and name = [bucket_name] and delete_all = true  # will delete a non-empty bucket
 ```
-| Parameter    | -                                             |
-|--------------|-----------------------------------------------|
-| group        | Logical connection name                       |
-| name         | Bucket name                                   |
-| delete_all   | Boolean parameter to delete a non-empty bucket |
 
-<a id="examples"></a>
 # Examples
+
 ```anylog
 # Step 1 - declare provider
 bucket provider connect where group = my_group and provider = akave and access_key = [access_key] and secret_key = [secret_key] and region = akave-network and endpoint_url = [endpoint_url]

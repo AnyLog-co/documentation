@@ -25,7 +25,6 @@ tags:
   path before publishing.
 --->
 
-
 # Deployment Integration
 
 The following document describes the relationship between the compiled source code (ie AnyLog agent) and deployment-scripts
@@ -62,7 +61,6 @@ to connect, which policies to publish. It's plain text, not compiled, and it's d
 
 This split is why you never need to rebuild the AnyLog image just to change how a node behaves — you only need to
 change the scripts it's pointed at.
-
 
 ## Initial Deployment
 

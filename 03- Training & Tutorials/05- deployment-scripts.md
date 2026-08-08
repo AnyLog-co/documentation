@@ -105,7 +105,6 @@ It never directly touches any of the actual deployment-script processes that def
 a given node. Those actions get reached indirectly, because the policy generator (`policies/config_policy.al`) defines and
 applies / executes a node-type-specific list of instructions.
 
-
 ## The Deployment Flow
 
 Everything starts with one command:
@@ -125,7 +124,6 @@ When main initiates it does the following steps:
 2. define relative paths to be used through out (ex. `!local_scripts`)
 3. convert environment variables (`-e` in docker) to AnyLog variables (found in dictionary)
 4. define the config policy for the node if one does not exists.
-
 
 ## How Policies and Scripts Actually Communicate
 
@@ -171,7 +169,6 @@ as opposed to hardcoded (`32148`), followed by the actual databases and services
 
 The reason the config policy uses relative network configuration is so that the same policy can be reused across multiple
 instances of the same type.
-
 
 The communication works like this:
 

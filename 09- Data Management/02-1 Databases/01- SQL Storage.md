@@ -95,15 +95,17 @@ databases need different connection details, all supplied as options on the same
 > - `unlog = true` is recommended for `system_query` (below), since query results there are disposable — but not
 >  for your actual user data.
 
-- 
 ```anylog
 connect dbms [logical-name] where type = [sqlite|psql] and [options]
 
 # SQLite 
+
 connect dbms my_data where type = sqlite
+
 connect dbms my_data where type = sqlite and memory = true    # in-memory only
 
 # PostgreSQL 
+
 connect dbms my_data where type = psql and user = anylog and password = demo and ip = 127.0.0.1 and port = 5432
 ```
 
@@ -120,6 +122,7 @@ disconnect dbms [db name]
 ```
 
 * Drop database - note the database must be disconnected before being dropped
+
 ```anylog 
 drop dbms [dbm name] where type = [sqlite|psql] and [options]
 
@@ -183,7 +186,6 @@ applications** — you always interact with data using the table's name; AnyLog 
 processing across the underlying partitions itself. Any date-time column on the table can be used as the
 partition column, not just `timestamp`/`insert_timestamp`.
 
-
 * Creating Partitioning
 
 ```anylog
@@ -201,7 +203,6 @@ partition my_data ping_sensor using timestamp by 1 day
 > avoid the wildcard (`*`) form above for that database — it forces raw and aggregation tables onto the same
 > interval and retention. Partition (and schedule cleanup for) the raw table and the aggregation table separately
 > instead.
-
 
 * View partitions
 
@@ -233,12 +234,14 @@ drop partition [partition table name] where dbms = [db name] and table = [table 
 # example 
 drop partition par_ping_sensor_2026_07_27_01_h12_insert_timestamp where dbms=my_data and table=ping_sensor
 ```
+
 > The example above uses `insert_timestamp` with an hourly-style partition name, but the only partitioning example
 > shown earlier in this doc for `ping_sensor` uses the `timestamp` column, partitioned daily. Worth using a name
 > consistent with that (daily, on `timestamp`) unless `ping_sensor` is genuinely partitioned differently in this
 > context.
 
 * Scheduler process to clean old partitions
+
 ```anylog
 schedule time = 1 day and name = "Drop old data" task drop partition where dbms = my_data and table = ping_sensor and keep=3 
 ```

@@ -20,7 +20,6 @@ blockchain layer.
 * [Publish & Drop Policy](#publish--drop-policy)
 * [Query the Blockchain](#query-the-blockchain)
 
-
 ## Connect & Sync
 
 ### Real Blockchain
@@ -135,7 +134,6 @@ blockchain wait where policy = !operator
 blockchain wait where id = [id]
 blockchain wait where command = "blockchain get cluster where name = cluster_1"
 ```
-
 
 `blockchain update to [blockchain name] [policy_id] [policy]` - update an existing JSON policy on the blockchain platform.
 
@@ -320,7 +318,6 @@ Example:
 ```anylog 
 get policies diff !policy1 !policy2
 ```
-
 
 ## Other blockchain commands
 

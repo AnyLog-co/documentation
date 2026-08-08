@@ -12,7 +12,6 @@ layout: page
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 ## Unreleased
 <!-- last-processed: 4f8345a (2026-04-29) -->
 

@@ -6,13 +6,14 @@ source_path: "deployments/Support/02 configuring mongodb.md"
 ---
 
 <!---
+
 ### 📜 Change Log
- **Date**   | **Name**    | **Change**       | **Version** |
- |------------|-------------|------------------|----------|
- | 2026-07-28 | Ori Shadmon | Rewrote steps 6 and 7 entirely — they were using the unrelated kizu/object-detection payload and query from Databases.md, which doesn't match this doc's actual mapping policy (an EdgeX binary reading: `source`/`timestamp`/`file`/`file_type`, no `class`/`bbox`/`score`/`status`, and video not image). Built a payload matching the real schema (readings array with `deviceName`/`binaryValue`/`mediaType`) and updated the query's columns and `-->` annotation accordingly (dropped `description`, which was specific to drawing a bbox overlay that doesn't apply to plain video) | |
- | 2026-07-28 | Ori Shadmon | Reconciled the dbms/table names across steps 3, 6, and 7 — they previously named three different targets (`test.edgex_data` from the mapping policy, `ntt.deeptector` in the published payload, `edgex.images` in the query), meaning the walkthrough as written would publish data to one place and query an empty one. Updated the payload and query to match the policy's fixed target (`test.edgex_data`), since that's the one actually enforced — flag if the intent was instead to make the policy dynamic (`bring [dbms]`/`bring [table]`) so the payload's own values would be the ones that matter. Noted new evidence on `User-Agent` vs `AnyLog-Agent` (now 2-of-3 examples across the doc set favor `AnyLog-Agent`) | |
- | 2026-07-28 | Ori Shadmon | Fixed `!default_dbms` being used in step 2 before it's defined (moved the assignment earlier); quoted three unquoted dictionary-variable references in the mapping policy JSON (`id`/`dbms`/`table` — same bug fixed twice elsewhere this session); fixed `"default": "now"` → `"now()"` to match every other example's function-call convention; moved the `source` field into `schema` (it was a sibling of `schema` rather than a member of it, and the only field of its kind missing a `type`) — flag if `source` is meant to be a distinct top-level concept instead. Added a missing example for step 1 and typo/grammar fixes | |
- | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
+
+-  2026-07-28 | Ori Shadmon | Rewrote steps 6 and 7 entirely — they were using the unrelated kizu/object-detection payload and query from Databases.md, which doesn't match this doc's actual mapping policy (an EdgeX binary reading: `source`/`timestamp`/`file`/`file_type`, no `class`/`bbox`/`score`/`status`, and video not image). Built a payload matching the real schema (readings array with `deviceName`/`binaryValue`/`mediaType`) and updated the query's columns and `-->` annotation accordingly (dropped `description`, which was specific to drawing a bbox overlay that doesn't apply to plain video)
+- 2026-07-28 | Ori Shadmon | Reconciled the dbms/table names across steps 3, 6, and 7 — they previously named three different targets (`test.edgex_data` from the mapping policy, `ntt.deeptector` in the published payload, `edgex.images` in the query), meaning the walkthrough as written would publish data to one place and query an empty one. Updated the payload and query to match the policy's fixed target (`test.edgex_data`), since that's the one actually enforced — flag if the intent was instead to make the policy dynamic (`bring [dbms]`/`bring [table]`) so the payload's own values would be the ones that matter. Noted new evidence on `User-Agent` vs `AnyLog-Agent` (now 2-of-3 examples across the doc set favor `AnyLog-Agent`)
+- 2026-07-28 | Ori Shadmon | Fixed `!default_dbms` being used in step 2 before it's defined (moved the assignment earlier); quoted three unquoted dictionary-variable references in the mapping policy JSON (`id`/`dbms`/`table` — same bug fixed twice elsewhere this session); fixed `"default": "now"` → `"now()"` to match every other example's function-call convention; moved the `source` field into `schema` (it was a sibling of `schema` rather than a member of it, and the only field of its kind missing a `type`) — flag if `source` is meant to be a distinct top-level concept instead. Added a missing example for step 1 and typo/grammar fixes
+- 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 
+
 --->
 
 MongoDB is a schema-less physical database that's intended for document-oriented data. The NoSQL logic stores data in
@@ -40,6 +41,7 @@ connect dbms !default_dbms where type=psql and user=anylog and password=demo and
 ```
 
 2. Connect to MongoDB
+
 ```anylog
 mongo_db_ip = 127.0.0.1
 mongo_db_port = 27017
@@ -105,6 +107,7 @@ blockchain insert where policy=!mapping_policy and local=true and master=!ledger
 
 4. Set blobs archiver configurations - The example specifies to store, compress and reuse (based on file hash) blob
 data within the NoSQL database (MongoDB).
+
 ```anylog
 <run blobs archiver where
     dbms=true and

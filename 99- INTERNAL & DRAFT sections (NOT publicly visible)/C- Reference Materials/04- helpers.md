@@ -13,7 +13,6 @@ source_path: "04- helpers.md"
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 # Using Helpers
 
 Helpers are independent processes configured to perform background tasks such as data ingestion, or other compute-bound 
@@ -32,7 +31,6 @@ run helpers where type = [helper type] and count = [helpers count]
 |-----------------|------------------------------------------------------------------------------|
 | type            | Helper type (e.g., psql). Defines what kind of task the helper will process. |
 | count           | Number of helper processes to launch. Each runs independently in parallel.   |
-
 
 **Example:**
 ```anylog
@@ -87,12 +85,10 @@ helper * * exit node
 helper psql 1 exit node
 ```
 
-
 ## Dynamic monitoring of internal processes
 
 The `get dynamic stats` command retrieves **live execution metadata** about a specific operation running in the main or helper processes
 — such as timing, status, or active resource usage — by referencing its associated request or file name.
-
 
 **Usage:**
 ```anylog
@@ -107,7 +103,6 @@ get dynamic stats where name = [monitored topic]
 | operator.sql  | psql        | The SQL processing time                               |
 | operator.jql  | psql        | The SQL processing time directly from JSON conversion |
 
-
 **Examples:**
 ```anylog
 helper psql 1 get dynamic stats where name = operator.json
@@ -118,6 +113,4 @@ The following example queries the time difference between first and last row:
 ```anglog
 run client () sql lsl_demo format = table "select max(insert_timestamp) as max, min(insert_timestamp)::timediff(max) as diff from ping_sensor"
 ```
-
-
 

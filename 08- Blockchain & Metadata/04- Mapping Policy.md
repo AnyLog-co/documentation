@@ -3,9 +3,10 @@ title: "Mapping Policy"
 description: "How mapping policies translate incoming JSON data into table rows — the general model, plus epoch timestamps, blob data, and unknown/dynamic content."
 layout: page
 ---
+
 <!---
 ### 📜 Change Log
- **Date**   | **Name**       | **Change**       | **Version** |
+ | **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  | 2026-07-27 | Ori Shadmon    | Fixed invalid JSON throughout (inline `<-- comment -->` annotations aren't valid JSON; unquoted `!policy_id`; a missing closing brace in the epoch-timestamp example; a duplicated `readings` key in the "complete" example where the second occurrence should be `schema`); fixed the `run msg client` example that had copied the pre-fix `{user-agent=anylog}` bug and a `nama`/`name` typo from an earlier Message Broker draft; fixed `[device]`→`[deviceName]` and the `dbms` bring-vs-literal mismatch against the EdgeX sample payload; removed a duplicated line in the sample data; fixed a stray H1 mid-document; typo fixes | |
 --->

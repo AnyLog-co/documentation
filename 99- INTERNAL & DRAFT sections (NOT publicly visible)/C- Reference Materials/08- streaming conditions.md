@@ -53,7 +53,6 @@ set streaming condition where dbms = test and table = rand_data  if [value] < 3 
 ```
 In the example above, the readings are ignored when the value is less than 3  
 
-
 Note: to send an email, enable the SMTP server as in the example below:
 ```anylog
 run smtp client where email = anylog.iot@gmail.com and password = oeiussclzecgtkxu
@@ -97,5 +96,4 @@ reset streaming conditions where dbms = test
 reset streaming conditions where dbms = test and table = rand_data
 reset streaming conditions where dbms = test and table = rand_data and id = 2 and id = 4
 ```
-
 

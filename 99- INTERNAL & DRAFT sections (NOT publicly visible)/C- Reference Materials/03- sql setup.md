@@ -13,10 +13,6 @@ source_path: "03- sql setup.md"
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
-
-
-
 # SQL setup, management and configuration
 
 ## Overview
@@ -90,7 +86,6 @@ data is maintained, for each table in the database, in the default location defi
 | memory     |  true         |  false  |
 | autocommit |  false        |  false   |
 | unlog      |  true         |  false   |
-
 
 **Examples**:
 ```anylog 
@@ -367,7 +362,6 @@ get global tables where dbms = dmci
 get global tables where dbms = aiops and format = json
 ```
 
-
 ### The get tables command
 
 The `get tables` command lists the tables maintained by the named database.  
@@ -437,7 +431,6 @@ Command options:
 | type      | One or multiple data types to project, default - all data types are projected                                                         |
 | format    | The output format. Options: **table** (default), **json**, **list** (a list of columns, used to project values in Grafana dashboards) |
 
-
 **Examples**: 
 ```anylog
 get columns where dbms = aiops and table = ping_sensor
@@ -445,7 +438,6 @@ get columns where dbms = aiops and table = ping_sensor and format = json
 get columns where dbms = aiops and table = ping_sensor and format = json and sys_col = false
 get columns where dbms=lsl_demo and table=ping_sensor and sys_col = false and type = int and type = "character varying" and format = list
 ```
-
 
 ### The get rows count command 
 The `get rows count` command provides the number of rows in every table on the connected node. 

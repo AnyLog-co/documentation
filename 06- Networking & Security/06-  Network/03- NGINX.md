@@ -30,6 +30,7 @@ service) needs to be installed and configured on every machine that needs to com
 ## Installation
 
 1. Install Nginx as a service:
+
 ```shell
 sudo apt-get -y install nginx
 sudo service nginx start
@@ -38,6 +39,7 @@ sudo service nginx start
 2. Validate Nginx is running by browsing to your local IP: `http://${LOCAL_IP}`
 
 * Via cURL:
+
 ```commandline
 curl http://${LOCAL_IP}
 
@@ -71,25 +73,27 @@ Commercial support is available at
 
 * In a browser, it looks like this:
 
-![nginx welcome message](../../imgs/nginx_welcome_message.png)
+<img src="../../imgs/nginx_welcome_message.png" alt="nginx welcome message">
 
 ## Configuring
 
 1. Remove the default files — we'll recreate them in the following steps:
-```commandline
+
+```shell
 sudo rm -rf /etc/nginx/sites-enabled/default
 sudo rm -rf /etc/nginx/sites-available/default
 ```
 
-2. Get the [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) IP
-   address — required for a `minikube` deployment, but may not be needed for other Kubernetes deployment tools
-   such as `kubeadm`:
-```commandline
+2. Get the [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) IP address — required for a `minikube` deployment, but may not be needed for other 
+Kubernetes deployment tools such as `kubeadm`:
+
+```shell
 minikube ip
 ```
 
 3. Create a new file for REST communication:
-```commandline
+
+```shell
 sudo vim /etc/nginx/sites-enabled/anylog.conf
 ```
 
@@ -178,7 +182,8 @@ stream {
 ```
 
 6. After changing the Nginx configuration, reload and restart the service:
-```commandline
+
+```shell
 sudo service nginx reload
 sudo service nginx restart
 ```

@@ -10,6 +10,8 @@ layout: page
  | 2026-07-28 | Ori Shadmon | Split "NoSQL / Blob storage" into two separate categories (NoSQL document DB vs. object/blob storage — different technology categories); restructured the S3-compatible bullets so AWS S3/MinIO/Akave are siblings rather than MinIO/Akave nested under AWS S3; fixed "PostgresSQL" → "PostgreSQL"; added a brief note on what Akave actually is; added frontmatter/H1 (missing entirely); typo/grammar fixes | |
 --->
 
+> **AnyLog only.** High-Availability & Data Resilience  are not available in EdgeLake.
+
 ## Overview
 
 High availability in AnyLog rests on three things working together: every ingested file is **archived** so it can be 
@@ -245,7 +247,6 @@ The following list summarizes the commands supporting the HA processes:
 | `test cluster setup` | The configuration of the node to support HA |
 | `test cluster data` | Compare the data status on all the nodes that support the same cluster |
 | `test network metadata` | Returns metadata version on each participating node |
-
 
 ## TSD Tables & File Commands
 

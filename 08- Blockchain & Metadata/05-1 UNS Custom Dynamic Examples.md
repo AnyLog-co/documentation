@@ -18,6 +18,8 @@ tags:
  | 2026-07-14 | Ori Shadmon | Added "Building a namespace the customer can actually navigate" section: shaping the publish-side topic string to use the customer's own naming (e.g. association/tag names instead of raw MAC addresses), and where a purely topic-driven tree runs out (many-to-many relationships), with a hybrid pointer to hand-authored policies for that case | |
 --->
 
+> **AnyLog only.** `dynamic=true` UNS definitions are not available in EdgeLake.
+
 # Dynamic Ingestion with Custom UNS — Factory Floor Example
 
 The [Unified Namespace](./05-%20Unitfied%20Namespace.md) page introduces `dynamic=true` using single-value, single-topic examples (one

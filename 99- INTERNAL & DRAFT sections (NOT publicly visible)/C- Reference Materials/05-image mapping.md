@@ -47,7 +47,6 @@ A streaming process that includes an image is shown in the following diagram:
                                                                |               |        |               |
                                                                -----------------        -----------------
          
-
 ```
 
 ## Transforming source data to a destination format
@@ -196,7 +195,6 @@ Examples:
   file remove where dbms = blobs_edgex and table = image and date  = 220723
 ```
 
-
 ### Insert a file to a local database
 
 Files can be added to the database and assigned to a table. 
@@ -331,7 +329,6 @@ The data reading below includes a JPEG image (assigned to the binaryValue attrib
 }>
 ```
 
-
 ## Example Policy
 
 The policy below can be applied to the data above to retrieve the columns of interest.  
@@ -434,7 +431,6 @@ database is the same as the logical database name in the relational table with a
 Cut and paste the policy definition above to the AnyLog CLI such that _mapping_policy_ is assigned with the policy info.  
 The following command will display the policy info: `!mapping_policy`
 
- 
 Use the following command to update the metadata with the policy of the example above:  
 ```anylog
 blockchain insert where policy = !mapping_policy and local = true  and master = !master_node
@@ -471,7 +467,6 @@ The command below publishes the data to the _images_ topic and trigger the proce
 mqtt publish where broker=local and topic=images and message=!sample_data 
 ```
 
-
 ### Monitor the process:
 The streaming data is passed through the following processes:  
 * The client subscription receives the published data, and transforms the data according to the policy assigned to the topic.
@@ -500,7 +495,6 @@ Monitor the Operator:
 ```anylog
 get operator
 ```
-
 
 ### Get the list of files stores in the blobs database
 

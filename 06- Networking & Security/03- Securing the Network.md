@@ -15,8 +15,6 @@ source_path: "03 Securing the Network.md"
 
 --->
 
-
-
 # Securing the Network
 
 ## Overview
@@ -49,7 +47,6 @@ The Key-Based Authentication enables the following:
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
 The relevant AnyLog commands are detailed in the section [Node Authentication](./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md).  
-
 
 ## Key-Based-Authentication deployment example
 
@@ -121,11 +118,9 @@ Adding the keyword test, returns ***true*** if the structure is correct, otherwi
 json !member test
 ```
 
-
 ## Required attributes in each policy
 
 The following chart summarizes the policies declared to authenticate users and validate their permissions.
-
 
 | Policy Type | Role                                | Attribute   | Required |  Comments       |
 | ------------| ----------------------------------- | ----------- | -------- | ---------------- |
@@ -148,14 +143,12 @@ This demo is executed on the CLI of the 2 operators.
 * When a command is executed on operator 1 and 2 it is designated by CLI(opr.1.2).
 * If a master
 
-
 ## The demo steps
 The demo is using 2 operator nodes and 2 users (root user and a non-root user). Each node and user is assigned with keys.
 Each node and user is associated with member policies. Each member policy is assigned with permission policy such that 
 each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
 the senders of messages and determine the permissions.  
 If a master node is used, the master node configuration is detailed [below](#master-node-configuration).  
-
 
 The following chart details the processes demonstrated:  
 
@@ -177,7 +170,7 @@ The following chart details the processes demonstrated:
 
 ### (Optional) Step 0 - Connect to TPM
 
-Follow the instructions in [Connecting AnyLog to the Software TPM](07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/02-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm)
+Follow the instructions in [Connecting AnyLog to the Software TPM](./07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/01-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm)
 Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
 
 Opr.1
@@ -354,7 +347,6 @@ id sign !permissions where key = root_keys and password = abc
 blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ``` 
 
-
 ### Step 8 - Assign privileges to a user
 **Use CLI(oper.1)** - the root user provides all privileges to Roy by associating the "no restriction" policy to tne member Roy.  
 The assignment process and ***assignment policy*** are detailed below:  
@@ -404,11 +396,16 @@ json !permissions
 blockchain insert where policy = !permissions and local = true  and master = !ledger_conn
 ```
 Notes:
+
 1) The policy example permits operating on all databases except a database called lsl_demo.
+
 2) The ***tables*** attribute permits 2 tables (temperature_sensor and ping_sensor) in lsl_demo database.
+ 
 3) The derived data permission is as follows: the permission allows operating on all databases, however, 
    only table temperature_sensor and tables ping_sensor are allowed in database lsl_demo.
+ 
 4) The attribute ***enable*** lists the anylog commands which are permitted.
+
 5) The attribute ***disable*** lists the AnyLog commands which are not allowed. 
 
 ### Step 10 - Assign limited privileges to nodes
@@ -457,7 +454,6 @@ Note:
   node needs to be assigned with new keys and a new assignment policy.
 * [for tpm-based key management] If password is forgotten to each key, then delete the node key from the tpm shared directory and generate a new node key.
 
-
 ### Step 12 - Save the node's private key 
 **Only if file-based key management**  
 The private key can be stored on the node and protected using the local password.  
@@ -478,7 +474,8 @@ set private password = demo2 in file
 Note: The key is stored in a file called `auth.id` in _keys directory_.
 
 ### Step 13 - Enable authentication
-Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.    
+
+Enable, on each node a process to authenticate the senders of messages and determine the relevant authorization.     
 When a node receives a message, the message is signed by the private key of the sender (the key of tje node or the user sending the message).   
 The receiving node will first use the public key of the sender to authenticate the sender. Next it will consider the permission 
 policies to determine that the sender is authorized to the type of message received. Authorization is determined if it
@@ -503,7 +500,6 @@ On CLI(master)
 id create keys for node where password = masterpswd
 ```
  
-
 ### Master node policy
 On CLI(master) 
  
@@ -579,7 +575,6 @@ On CLI(master):
 ```anylog
 set node authentication on
 ```
-
 
 ## Demo authorized and non-authorized commands
 
@@ -755,6 +750,6 @@ To use Certificate, update the Grafana JSON data source page as follows:
     * Update the ***Client Cert*** with the content of the `server-acme-inc-public-key.crt` file.
     * Update the ***Client Key*** with the content of the `server-acme-inc-private-key.key` file.
 
-![Grafana Authentication Example](../imgs/grafana_auth_image.png)
+<img src="../imgs/grafana_auth_image.png" alt="Grafana Authentication Example">
 
 With this setup, _Save_ & _Test_ needs to return a green message with the text: **Data Source is working**.

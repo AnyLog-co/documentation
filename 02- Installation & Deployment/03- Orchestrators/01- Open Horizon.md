@@ -4,7 +4,6 @@ description: ""
 layout: page
 source_path: "deployments/Open-Horizon/01- Open Horizon.md"
 ---
-=======
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**         | **Version** |
@@ -13,13 +12,6 @@ source_path: "deployments/Open-Horizon/01- Open Horizon.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 --->
-=======
-
-
-to be completed
-
-
-
 
 # Open Horizon 
 
@@ -65,14 +57,16 @@ for CMD in update upgrade ; do sudo apt-get -y ${CMD} ; done
 2. Create an Open Horizon [API Key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key)
 
 3. Update Environment variables
-   * In `~/.bashrc` (or `~/.profile` for Alpine) add the following variables
+* In `~/.bashrc` (or `~/.profile` for Alpine) add the following variables
+
 ```shell
 export HZN_ORG_ID=<COMPANY_NAME> 
 export HZN_EXCHANGE_USER_AUTH="iamapikey:<API_KEY>"
 export HZN_EXCHANGE_URL=<HZN_EXCHANGE_URL>
 export HZN_FSS_CSSURL=<HZN_FSS_CSSURL> 
 ```
-   * Set Environment variables
+* Set Environment variables
+
 ```shell
 # For non-Alpine operating systems 
 source ~/.bashrc 
@@ -82,6 +76,7 @@ source ~/.profile
 ```
 
 4. Install agent and provide admin privileges
+
 ```shell
 curl -u "${HZN_ORG_ID}/${HZN_EXCHANGE_USER_AUTH}" -k -o agent-install.sh ${HZN_FSS_CSSURL}/api/v1/objects/IBM/agent_files/agent-install.sh/data
 
@@ -91,6 +86,7 @@ sudo -s -E ./agent-install.sh -i 'css:' -p IBM/pattern-ibm.helloworld -w '*' -T 
 ```
 
 5. Validate helloworld sample edge service is running
+
 ```shell
 hzn eventlog list -f
 
@@ -99,22 +95,21 @@ hzn eventlog list -f
 <<COMMENT
 ```
 
-To unregister an edge service: 
+**To unregister an edge service**: 
+
 ```shell
 hzn unregister -f 
 ```
 
-6. Docker is already installed via HZN, however needs permissions to use not as root
-```shell
-USER=`whoami` 
-sudo groupadd docker 
-sudo usermod -aG docker ${USER} 
-newgrp docker
-```
+> If Docker is already installed via _hzn_, however needs permissions to not use root run: 
+>```shell
+> sudo groupadd docker 
+> sudo usermod -aG docker $(whoami)
+> newgrp docker
+>```
 
 At the end of the process, OpenHorizon should show a new active node
-![OpenHorizon_node_state.png](../../imgs/OpenHorizon_node_state.png)
-
+<img src="../../imgs/OpenHorizon_node_state.png" alt="OpenHorizon_node_state.png">
 
 # AnyLog
 By deploying AnyLog, users can monitor Distributed Edge Nodes and Data from a single point, without centralizing the data.
@@ -134,7 +129,7 @@ This process is detailed below.
 
 3. Declare _AnyLog_ as a device image - Docker login credentials are received using: [AnyLog Downloads](https://anylog.co/download-anylog)
 
-![OpenHorizon_device_info.png](../../imgs/OpenHorizon_device_info.png)
+<img src="../../imgs/OpenHorizon_device_info.png" alt="OpenHorizon_device_info.png">
 
 4. Configure Service variables 
 * `INIT_TYPE` (**value**: training) - Which AnyLog scripts to use for the deployment 
@@ -148,18 +143,18 @@ This process is detailed below.
 * `ENABLE_MQTT` (**value**: true) - Enable receiving data from a remote MQTT broker 
 * `ENABLE_MONITORING` (**value**: true) - Enable monitoring of the Node 
 
-![OpenHorizon_serivce_info.png](../../imgs/OpenHorizon_serivce_info.png)
+<img src="../../imgs/OpenHorizon_serivce_info.png" alt="OpenHorizon_serivce_info.png">
 
 5. Under "Deployment Options", Enable _Host Network Mode_
 
-![OpenHorizon_deployment_options.png](../../imgs/OpenHorizon_deployment_options.png)
+<img src="../../imgs/OpenHorizon_deployment_options.png" alt="OpenHorizon_deployment_options.png">
 
 6. Save changes - you should see "anylog-node" as a published service 
 
-![OpenHorizon_published_service.png](../../imgs/OpenHorizon_published_service.png)
+<img src="../../imgs/OpenHorizon_published_service.png" alt="OpenHorizon_published_service.png">
 
 7. Create an AnyLog pattern 
-![OpenHorizon_sample_pattern.png](../../imgs/OpenHorizon_sample_pattern.png)
+<img src="../../imgs/OpenHorizon_sample_pattern.png" alt="OpenHorizon_sample_pattern.png">
 
 ## Create AnyLog node as a Service on Open Horizon
 
@@ -176,7 +171,10 @@ This process is detailed below.
 | COMPANY_NAME   | [your company name]                     |               |  For example: ibm |
 | LEDGER_CONN    | `132.177.125.232:32048`                   | `132.177.125.232:32048` | The Network ID (the IP and Port of the Master) |
 
-3. Deploy Node - Note, `hzn` is not able to deploy more than a single instance on a given machine 
+3. Deploy Node 
+
+> Note, `hzn` is not able to deploy more than a single instance on a given machine 
+
 ```shell
 # Operator Node 
 cd ~/service-anylog/deployments/operator/
@@ -188,7 +186,9 @@ hzn register --policy node.policy.json
 ```
 
 4. Validate node is running - the example is of 
+
 * Validate via `docker log`
+
 ```shell
 docker logs c33bd07d4808467d90fc1ef41ef2bff81d6502d5ca0bfb6b97ce614becda42b6-anylog-node
 
@@ -232,6 +232,7 @@ Connection:   Connected
 ```
 
 * Test Network
+
 ```shell
 curl -X GET 127.0.0.1:32149 -H "command: test network"
 

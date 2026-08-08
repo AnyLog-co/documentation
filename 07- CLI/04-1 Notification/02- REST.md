@@ -56,7 +56,6 @@ Without the `json` prefix, `!telegram_body` is stored as a literal string contai
 goes out — but Telegram will silently reject it since the body isn't valid JSON with real values. Always check the
 variable back (e.g. `!telegram_body`, or `json !telegram_body`) before relying on it in a script.
 
-
 **Pushover**:
 1. Download & setup <a href="https://pushover.net/" target="_blank">_Pushover_</a>
 2. Obtain an application API_TOKEN and a user or group USER/GROUP_ID.
@@ -68,8 +67,6 @@ rest post where
     headers = {"Content-Type":"application/json"} and
     body = {"token":"[API_TOKEN]","user":"[USER/GROUP_ID]","message":"Test 1"}
 ```
-
-
 
 ### Automating Notifications with Scripts
 

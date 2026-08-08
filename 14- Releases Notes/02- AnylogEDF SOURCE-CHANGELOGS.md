@@ -13,7 +13,6 @@ layout: page
 
 --->
 
-
 ## Unreleased
 <!-- last-processed: 8fca3c8 -->
 
@@ -186,7 +185,6 @@ multi-node rollouts.
 |            |          | (AE) `exit mqtt` replaced by `exit msg client [n/all]` |
 | 2025-01-02 | [c03b82] | (AE) OPC-UA support — initial release |
  
-
 ---
 
 ## 2024 — Year in Review
@@ -256,8 +254,6 @@ major theme, enabling operators to manage distributed nodes without direct shell
 introduced for handling unstructured data alongside time-series. PostgreSQL was established as a production-grade 
 backend alongside SQLite. Mapping policies were introduced to declaratively transform incoming data, and the 
 operator/publisher model was refined for multi-node topologies.
-
-
 
 ---
 

@@ -72,7 +72,6 @@ The default ports for a single-machine 3-node deployment:
 
 If nodes are on separate machines, confirm these ports are accessible between them before deploying.
 
-
 ## Part 1 — Quick Install 
 
 The following provides a quick installation of a single AnyLog (docker) instance. 

@@ -13,14 +13,12 @@ source_path: ""
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 # MTU Size Issue
 
 The following issue appeared to a customer that manages data at the edge with limited network connectivity, using ZeroTier
 to generate a static IP address.
 
 <img src="../imgs/mtu_diagram.png" style="text-align: center;" width="25%" height="25%" />
-
 
 ## Use Case
 
@@ -59,6 +57,4 @@ sudo ifconfig zt<interfaceID> mtu 1400
 ```cmd
 netsh interface ipv4 set subinterface "ZeroTier One [<interfaceID>]" mtu=1400 store=persistent
 ```
-
-
 

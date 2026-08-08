@@ -13,8 +13,6 @@ source_path: "Aggregations.md"
  | 2026-08-05 | Ori Shadmon | enhanced partition + aggregation relation logic | |
 --->
 
-
-
 # Aggregation Functions
 
 > **AnyLog only.** Aggregation functions are not available in EdgeLake.
@@ -159,16 +157,17 @@ Using the command `set aggregation` users can track data streamed to a node.
 Monitoring applies per DBMS and table, aggregating values from a specified column across predefined time intervals.
 
 ### Aggregated Metrics
+
 | Monitored value option | Details                 |
-| ------------- |----------------------------------|
+| :---: | :---: |
 | Min  | Lowest value recorded in the interval    |
 | Max  | Highest value recorded in the interval   |
 | Avg | Average value in the interval              |
 | Count | Number of events in the interval         |
 | Events/sec | Count divided by interval duration  |
 
-
 Usage: 
+
 ```anylog
 set aggregation where dbms = [dbms name]
       and table = [table name]
@@ -237,7 +236,6 @@ set aggregations encodeing where dbms = lsl_demo and table = ping_sensor and enc
   * **max_val** - The highest value recorded within the time interval.
   * **avg_val** - The average of the values recorded within the time interval.
   * **events** - The number of events recorded within the time interval.
-
 
 * arle - Approximated Run-Length Encoding, the entries in the time interval are represented in a sequence of entries. Each entry includes:
   * **timestamp** - The earliest date and time of the entries represented in the interval.

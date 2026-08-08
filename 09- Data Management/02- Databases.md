@@ -30,7 +30,6 @@ for you automatically.
 | Blob Storage | FIle storage | MongoDB and S3-compatible file stoe | 
 | Vector Databases | Support for Indexing and searching content stored on the AynLog network  | Milvus |
 
-
 ## How SQL and Blob Storage Connect
 
 Sensor/device data and blob files (images, video, model output, etc.) live in fundamentally different kinds of
@@ -57,7 +56,6 @@ needs to utilize mapping and `run msg client` in order to match between the JSON
 
 The example is a good illustration of `"root": true` param for mapping, as the content coming in data that's critical 
 for storage both inside a sub-JSON list (ie `detection`) and outside of it - `file_content` and `status`.  
-
 
 **Process**: 
 
@@ -127,7 +125,6 @@ for storage both inside a sub-JSON list (ie `detection`) and outside of it - `fi
     "status": "ok"
 }
 ```
-
 
 3. Once the buffer is full, usually much faster with blob storage than just sensor data, query the results from 
 the [Edge Data Manager](../10-%20Edge%20Data%20Manager/01-%20EDM.md) or other third party apps.  

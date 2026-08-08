@@ -23,6 +23,7 @@ source_path: "postgres-connector.md"
               syntax duplicate described above (title "PostgresSQL Connector," `!<a href="{{ ... }}">` image links
               instead of real Markdown images, and the two dead/unfixed links this file already addresses). Nothing
               new to merge; excluded again.
+- 2026-08 | ORi Shadmon | Paths issues 
 -->
 
 # PostgreSQL Connector & Tableau Visualization
@@ -135,16 +136,17 @@ For the full list of SQL query options, see [Query Data — Query options](../03
 1. [Download & install Tableau](https://www.tableau.com/products/desktop/download)
 2. Under **Data** → **Data Sources**, select the PostgreSQL connector type:
 
-| ![data](../imgs/tableau_img2a.png) | ![data source](../imgs/tableau_img2b.png) |
-| --- | --- |
+<table>
+<tr><td><img src="../imgs/tableau_img2a.png" alt="data"></td><td><img src="../imgs/tableau_img2b.png" alt="data source"></td></tr>
+</table>
 
 3. Fill out the connection information and press "OK":
 
-![connection information](../imgs/tableau_img3.png)
+<img src="../imgs/tableau_img3.png" alt="connection information">
 
 4. Double-click on the table you want to use (in this case `new_table`) and go to the worksheet:
 
-![prep worksheet data](../imgs/tableau_img4.png)
+<img src="../imgs/tableau_img4.png" alt="prep worksheet data">
 
 ## Generating graphs
 
@@ -156,8 +158,8 @@ dataset. Because of that, mapping the final result columns to something readable
 - **SUM(SUM__VALUE) / COUNT(new_table_count)** is the `AVG(value)` column
 - **Max 5** is the `MAX(value)` column
 
-![column explanation](../imgs/tableau_img5.png)
+<img src="../imgs/tableau_img5.png" alt="column explanation">
 
 To generate a graph, use "Min 2" as **Columns** and all the others as **Rows**:
 
-![generated image](../imgs/tableau_img6.png)
+<img src="../imgs/tableau_img6.png" alt="generated image">

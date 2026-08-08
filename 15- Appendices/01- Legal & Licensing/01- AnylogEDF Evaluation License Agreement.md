@@ -16,7 +16,6 @@ source_path: "license/01- AnylogEDF Evaluation License Agreement.md"
 
 ANYLOG SOFTWARE EVALUATION AGREEMENT
 
-
 **By downloading or using the AnyLog Software, Customer agrees to be bound by the terms of this Agreement.**
 
 1. General
@@ -127,6 +126,4 @@ ANYLOG SOFTWARE EVALUATION AGREEMENT
   **AnyLog** means AnyLog, Inc., a Delaware corporation.
 
 **By downloading or using the AnyLog Software, Customer agrees to be bound by the terms of this Agreement.**
-
-
 

@@ -38,7 +38,6 @@ to help convert the configurations into actual active services and connected log
 |     `${CONTAINER_NAME}-data`      |    `/app/AnyLog-Network/data`    |          directory that would contain data coming into the node and blob storage (not in database) and  data stored in SQLite database (file).           |
 | `${CONTAINER_NAME}-local-scripts` |    `/app/deployment-scripts/`    | A copy of <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> used to initiate + configure the AnyLog agent |
 
-
 ### Data Directory
 
 The following provides a breakdown of the different directories under ${CONTAINER_NAME}-data

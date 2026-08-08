@@ -13,7 +13,6 @@ source_path: "release/04- AnylogEDF used OPENSOURCE-NOTICE.md"
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
-
 # Powered by Open-Source Software
 
 This product incorporates the following third-party open-source Python packages. We are grateful to the authors and maintainers of these projects. Package names are listed without version numbers, since versions change frequently but the license does not.

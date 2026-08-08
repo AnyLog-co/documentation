@@ -14,7 +14,6 @@ source_path: "01 Blockchain (internet) Configuration.md"
 
 --->
 
-
 # Blockchain Configuration
 
 Nodes in the network can be configured to synchronize their local metadata with a global metadata hosted by a blockchain platform.
@@ -36,7 +35,6 @@ with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Pl
   [Publish the AnyLog contract on the blockchain](03%20Using%20Ethereum.md#publish-the-anylog-contract-on-the-blockchain)).
 * The blockchain connection and contract information.
 * An anylog instance to configure.
-
 
 ## Setup of a new node
 ```anylog
@@ -74,13 +72,10 @@ get platforms
 blockchain commit to ethereum !test_policy
 ```
 
-
-
 ## Pull policies
 ```anylog
 blockchain checkout from ethereum 
 ```
-
 
 ## Synchronize the blockchain data with a local copy every 30 seconds
 ```anylog
