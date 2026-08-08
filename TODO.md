@@ -1,11 +1,15 @@
 1. Orchestration install -- @Mark
+* [03- Kubernetes.md](02-%20Installation%20%26%20Deployment/02-%20Virtualization/03-%20Kubernetes.md) -- Ori will do it 
 * [03- Barbara.md](02-%20Installation%20%26%20Deployment/03-%20Orchestrators/03-%20Barbara.md)
 * [04- DELL Distributed Private Cloud.md](02-%20Installation%20%26%20Deployment/03-%20Orchestrators/04-%20DELL%20Distributed%20Private%20Cloud.md)
 * [05- Zededa.md](02-%20Installation%20%26%20Deployment/03-%20Orchestrators/05-%20Zededa.md)* 
 
+---
 2. [02- TMP Configuration.md](06-%20Networking%20%26%20Security/07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/02-%20TMP%20Configuration.md) -- @Roy / @Massimiliano 
 
-3. Edge Dta Manager -- @Roy 
+---
+
+2. Edge Dta Manager -- @Roy 
 there should be the following files: 
 
 10- EDM (Edge Data Manager)/ 👤 100% Roy
@@ -27,6 +31,7 @@ there should be the following files:
   |      - Configure plugins
 document explaining how to query blobs through an application using `file to` and `file from` logic 
 
+---
 
 4. We need Examples & Use Cases -- @Mark 
 
@@ -66,3 +71,4 @@ This example demonstrates:
 ## Example 4 — Live Video Streaming
 
 TBD
+--- 
