@@ -148,6 +148,7 @@ one or more target nodes; the command output is returned and displayed on the no
 Target nodes can be specified in 3 different ways:
 
 * By their IP and Port.
+
 ```anylog
 # on a single node
 run client (10.1.1.10:32148)
@@ -157,6 +158,7 @@ run client (10.1.1.10:32148,10.1.1.12:32148)
 ```
 
 * By a lookup from the metadata.
+
 ```anylog
 # all operators
 run client (blockchain get operator bring.ip_port) get status
@@ -166,6 +168,7 @@ run client (operator where [country] contains US  bring.ip_port)
 ```
 
 * SQL command without knowing where the data actually resides
+
 ```anylog
 run client () sql
 
@@ -178,6 +181,7 @@ whether to accept only a subset of results (i.e. `subset=true`) if not all the n
 
 The results of a `run client` call against multiple nodes can be organized as a list or as a dictionary, depending on
 how the assignment is written:
+
 ```anylog
 nodes_stat[] = run client (blockchain get operator bring.ip_port, subset = true) get status
 nodes_stat{} = run client (blockchain get operator bring.ip_port, subset = true) get status
@@ -194,11 +198,13 @@ When a user defines / creates their own script — see [Docker & K8s Commands](.
 for support — they can then run their script in 2 ways:
 
 * `process` - runs the script on the main AnyLog thread.
+
 ```anylog
 process !local_scripts/my-scripts/my_script3.al
 ```
 
 * `thread` - runs the script on its own thread.
+
 ```anylog
 thread !local_scripts/my-scripts/my_script3.al
 ```

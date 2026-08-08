@@ -13,6 +13,9 @@ source_path: "High Availability.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
 --->
 
+> **AnyLog only.** High-Availability & Data Resilience  are not available in EdgeLake.
+
+
 AnyLog's SQL data store layer has a unified solution for both high availability and data resilience — both are
 built on the same underlying structure: clusters of replicated operators. [Key Terminology](#key-terminology)
 covers that structure; [How It Works](#how-it-works) covers the replication and failover mechanism itself, so
@@ -227,6 +230,7 @@ When looking at the metadata information, the tsd info in the data table should 
 `tsd_info` and, ultimately, to the actual file.
 
 1. Query the data
+
 ```anylog
 AL anylog-query +> <run client () sql monitoring format=table and stat=false and extend=(+node_name)
     select
@@ -243,6 +247,7 @@ power-plant-operator1   3099 2026-07-29 01:34:19.446337 320817      165
 ```
 
 2. Locate the corresponding file in tsd info
+
 ```anylog
 AL power-plant-operator1 +> sql almgm format=table and stat=false select * from tsd_info where file_id=320817
 
@@ -315,6 +320,7 @@ Examples:
 | `format` | `table` / `json` | `table` | Output format. |
 
 **Example**:
+
 ```anylog 
 AL power-plant-operator1 +> get tsd summary where table=tsd_123 
 
@@ -338,6 +344,7 @@ monitoring|syslog        |       7572|    141298|
 ## Setting Up Operator for High-Availability
 
 1. Cluster Policy
+
 ```json
 {"cluster": {
   "company": "Lit San Leandro",
@@ -384,7 +391,8 @@ monitoring|syslog        |       7572|    141298|
     ```
 
 4. Enabling the TSD tables operations
-```anylog 
+
+   ```anylog 
 connect dbms almgm where ... 
 
 create table tsd_info where dbms=almgm 

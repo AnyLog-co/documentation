@@ -1,3 +1,15 @@
+---
+title: "File Processing"
+description: ""
+layout: page
+---
+<!---
+### 📜 Change Log
+ **Date**   | **Name**    | **Change**       | **Version** |
+ |------------|-------------|------------------|----------|
+ | 2026-07-28 | Ori Shadmon | descriptor on file processing | |
+--->
+
 # File Processing
 
 ## Intro
