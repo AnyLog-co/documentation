@@ -177,7 +177,7 @@ The following chart details the processes demonstrated:
 
 ### (Optional) Step 0 - Connect to TPM
 
-Follow the instructions in [Connecting AnyLog to the Software TPM](07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/02-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm)
+Follow the instructions in [Connecting AnyLog to the Software TPM](./07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/01-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm)
 Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
 
 Opr.1
