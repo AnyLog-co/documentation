@@ -25,11 +25,11 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](../background%20processes.md#rest-requests) section.
+Configuring a node to recieve REST requests is detailed in the [REST Requests](../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section.
 
 ## Installing the Remote CLI
 
-Details are available [here](../ORPHANS/x09-examples-training/deployments/Support/%5Bdeprecated%5D%20Remote%20CLI%20.md).
+Details are available [here](../10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/%5Bdeprecated%5D%20Remote%20CLI%20.md).
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
@@ -171,7 +171,6 @@ and "monitor_members.json" in the example above).
 
 Each of the file describes the form that is presented to the user including the thresholds that trigger alerts.
 
-
 ## Usage examples
 
 The following demonstrate commands issued via cURL and their web representation using the Remote CLI:
@@ -183,7 +182,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get databases](../imgs/remote_cli_get_databases.png)
+<img src="../imgs/remote_cli_get_databases.png" alt="get databases">
 
 ### Return columns in a given table 
 
@@ -193,7 +192,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get columns](../imgs/remote_cli_get_columns.png)
+<img src="../imgs/remote_cli_get_columns.png" alt="get columns">
 
 ### Return Operators nodes associated to a company
 
@@ -203,7 +202,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png)
+<img src="../imgs/remote_cli_blockchain_operators.png" alt="view operators in blockchain">
 
 ### Get the list of nodes that host the data (for each table)
 
@@ -213,7 +212,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Data Nodes](../imgs/remote_cli_data_nodes.png)
+<img src="../imgs/remote_cli_data_nodes.png" alt="Data Nodes">
 
 ### Query the last 90 seconds of data
 
@@ -223,7 +222,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 90 seconds of data](../imgs/remote_cli_select_last_90sec.png)
+<img src="../imgs/remote_cli_select_last_90sec.png" alt="Last 90 seconds of data">
 
 ### Query the last 10 minutes of data including the source node
 
@@ -233,4 +232,4 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 10 minutes of data](../imgs/remote_cli_select_last_10min.png)
+<img src="../imgs/remote_cli_select_last_10min.png" alt="Last 10 minutes of data">

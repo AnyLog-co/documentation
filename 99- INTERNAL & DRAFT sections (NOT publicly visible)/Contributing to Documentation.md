@@ -12,9 +12,6 @@ layout: page
  | 2026-07-08     | Ori Shadmon    | initial file                | 1.5.2510   |
  | |
 
-
-
-
 ## Where users see the documentation ?
  
 The documentation is provided via a website at **https://anylog.network/docs** 
@@ -215,8 +212,6 @@ The following is a real example using `remote-gui.md`. Copy and adapt it for any
 Adjust the URLs, front matter, and the description of changes to match whatever page you are working on.
 
 ---
-
-
 
 ## Local Development with Docker
 
