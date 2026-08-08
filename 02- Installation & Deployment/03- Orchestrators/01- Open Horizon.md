@@ -109,7 +109,7 @@ hzn unregister -f
 >```
 
 At the end of the process, OpenHorizon should show a new active node
-![OpenHorizon_node_state.png](../../imgs/OpenHorizon_node_state.png)
+<img src="../../imgs/OpenHorizon_node_state.png" alt="OpenHorizon_node_state.png">
 
 # AnyLog
 By deploying AnyLog, users can monitor Distributed Edge Nodes and Data from a single point, without centralizing the data.
@@ -129,7 +129,7 @@ This process is detailed below.
 
 3. Declare _AnyLog_ as a device image - Docker login credentials are received using: [AnyLog Downloads](https://anylog.co/download-anylog)
 
-![OpenHorizon_device_info.png](../../imgs/OpenHorizon_device_info.png)
+<img src="../../imgs/OpenHorizon_device_info.png" alt="OpenHorizon_device_info.png">
 
 4. Configure Service variables 
 * `INIT_TYPE` (**value**: training) - Which AnyLog scripts to use for the deployment 
@@ -143,18 +143,18 @@ This process is detailed below.
 * `ENABLE_MQTT` (**value**: true) - Enable receiving data from a remote MQTT broker 
 * `ENABLE_MONITORING` (**value**: true) - Enable monitoring of the Node 
 
-![OpenHorizon_serivce_info.png](../../imgs/OpenHorizon_serivce_info.png)
+<img src="../../imgs/OpenHorizon_serivce_info.png" alt="OpenHorizon_serivce_info.png">
 
 5. Under "Deployment Options", Enable _Host Network Mode_
 
-![OpenHorizon_deployment_options.png](../../imgs/OpenHorizon_deployment_options.png)
+<img src="../../imgs/OpenHorizon_deployment_options.png" alt="OpenHorizon_deployment_options.png">
 
 6. Save changes - you should see "anylog-node" as a published service 
 
-![OpenHorizon_published_service.png](../../imgs/OpenHorizon_published_service.png)
+<img src="../../imgs/OpenHorizon_published_service.png" alt="OpenHorizon_published_service.png">
 
 7. Create an AnyLog pattern 
-![OpenHorizon_sample_pattern.png](../../imgs/OpenHorizon_sample_pattern.png)
+<img src="../../imgs/OpenHorizon_sample_pattern.png" alt="OpenHorizon_sample_pattern.png">
 
 ## Create AnyLog node as a Service on Open Horizon
 

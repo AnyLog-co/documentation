@@ -750,6 +750,6 @@ To use Certificate, update the Grafana JSON data source page as follows:
     * Update the ***Client Cert*** with the content of the `server-acme-inc-public-key.crt` file.
     * Update the ***Client Key*** with the content of the `server-acme-inc-private-key.key` file.
 
-![Grafana Authentication Example](../imgs/grafana_auth_image.png)
+<img src="../imgs/grafana_auth_image.png" alt="Grafana Authentication Example">
 
 With this setup, _Save_ & _Test_ needs to return a green message with the text: **Data Source is working**.

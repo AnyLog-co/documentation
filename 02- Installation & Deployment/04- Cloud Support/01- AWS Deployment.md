@@ -37,7 +37,7 @@ as _Broker_ if configured for Operator or Publisher node.
 * **Publisher Node**: Default TCP: 32248 | Default REST: 32249 | (Default) Broker: 32250
 * **Generic / REST Node**: Default TCP: 32548 | Default REST: 32549 | (Default) Broker: 32550
 
-![image](../../imgs/aws_sample_security_group.png)
+<img src="../../imgs/aws_sample_security_group.png" alt="image">
 
 3. Create a new [EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) that's associated with the corresponding _security group_.  
 

@@ -252,16 +252,16 @@ This option applies to **EdgeXpert**, IoTech's commercial edition of EdgeX with 
 - **URL**: `https://${YOUR_IP}:9090`
 - **Username**: `admin` | **Password**: `admin`
 
-![Login Screen](../../imgs/edgex_login.png)
+<img src="../../imgs/edgex_login.png" alt="Login Screen">
 
 From the left-side menu, go to **App Services**:
 
-![Xpert Management Homepage](../../imgs/edgex_homepage.png)
+<img src="../../imgs/edgex_homepage.png" alt="Xpert Management Homepage">
 
 ...then add a **Basic Service** from the right-side panel. The three transfer methods below all start from this
 same Basic Service creation screen — what differs is how you configure it from there.
 
-![Basic Service location](../../imgs/edgex_basic_service.png)
+<img src="../../imgs/edgex_basic_service.png" alt="Basic Service location">
 
 ### Transferring data from EdgeX to AnyLog
 
@@ -292,17 +292,17 @@ return outputObject;
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: HTTP
-  ![Basic Information](../../imgs/edgex_put_basic_info.png)
+  <img src="../../imgs/edgex_put_basic_info.png" alt="Basic Information">
 - **Address Info** — Method: PUT; URL (your AnyLog node's REST IP:port); headers: `type: json`, `dbms: <database>`, `table: <table>`, `mode: streaming`, `Content-Type: text/plain`
-  ![Address Information](../../imgs/edgex_put_address_info.png)
+  <img src="../../imgs/edgex_put_address_info.png" alt="Address Information">
 - **Data Format** — JavaScript Transform: `edgex_transformation.js`
-  ![Data Format](../../imgs/edgex_put_data_format.png)
+  <img src="../../imgs/edgex_put_data_format.png" alt="Data Format">
 - **Filter** — Device Filter, as needed
-  ![Filter Value(s)](../../imgs/edgex_put_filter.png)
+  <img src="../../imgs/edgex_put_filter.png" alt="Filter Value(s)">
 
 Once the service is saved, data should begin flowing into AnyLog via PUT.
 
-![Save Button](../../imgs/edgex_save.png)
+<img src="../../imgs/edgex_save.png" alt="Save Button">
 
 #### Method 2: REST POST (with transformation)
 
@@ -330,9 +330,9 @@ On the AnyLog operator node receiving the data, declare the mapping rules and st
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: HTTP
-  ![Basic Information](../../imgs/edgex_post_basic_info.png)
+  <img src="../../imgs/edgex_post_basic_info.png" alt="Basic Information">
 - **Address Info** — Method: POST; URL (your AnyLog node's REST IP:port); headers: `command: data`, `topic: anylogedgex-post`, `User-Agent: AnyLog/1.23`, `Content-Type: text/plain`
-  ![Address Information](../../imgs/edgex_post_address_info.png)
+  <img src="../../imgs/edgex_post_address_info.png" alt="Address Information">
 - **Filter** — Device Filter, as needed
 
 Save the service; data should begin flowing into AnyLog via POST.
@@ -355,9 +355,9 @@ The mapping rules must include the database and table, since there are no REST h
 
 In the EdgeXpert GUI, configure the Basic App Service:
 - **Basic Info** — Name; Destination: MQTT
-  ![Basic Information](../../imgs/edgex_mqtt_basic_info.png)
+  <img src="../../imgs/edgex_mqtt_basic_info.png" alt="Basic Information">
 - **Address Info** — URL (your AnyLog node's Message Broker IP:port); Topic
-  ![Address Information](../../imgs/edgex_mqtt_address_info.png)
+  <img src="../../imgs/edgex_mqtt_address_info.png" alt="Address Information">
 - **Filter** — Device Filter, as needed
 
 Save the service; data should begin flowing into AnyLog via the message broker.

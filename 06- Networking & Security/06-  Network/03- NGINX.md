@@ -73,7 +73,7 @@ Commercial support is available at
 
 * In a browser, it looks like this:
 
-![nginx welcome message](../../imgs/nginx_welcome_message.png)
+<img src="../../imgs/nginx_welcome_message.png" alt="nginx welcome message">
 
 ## Configuring
 

@@ -10,7 +10,7 @@ layout: page
  | 2026-04-17 |  | created document |  |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-07-25 | Ori Shadmon | Deduped two identical copies of this file. Fixed broken markup present in *both*
-   copies — every image had used the pattern `![alt](url)>alt</a>` (stray `>text</a>` left over from a bad
+   copies — every image had used the pattern `<img src="url" alt="alt">>alt</a>` (stray `>text</a>` left over from a bad
    Jekyll/HTML conversion) instead of a plain Markdown image, and several links had a stray leading `>` inside
    the anchor text (`<a href="...">>text</a>`). Also fixed a real bug in the sample cURL command (a trailing
    space after a line-continuation backslash, which breaks the continuation in most shells), a stray "and &" in
@@ -51,42 +51,43 @@ curl -X GET 10.1.2.10:2149 \
 
 1. Under _Get Data_ open _Web_
 
-   ![location of "Web" data source](../imgs/powerbi_img1.png)
+   <img src="../imgs/powerbi_img1.png" alt="location of &quot;Web&quot; data source">
 
 2. In the Advanced option fill out the _URL_ and _HEADER_ parameters with `command`, `User-Agent`, and `destination`.
    Once the form is filled out, press "OK"
 
-   !["Web" data source request form](../imgs/powerbi_img2.png)
+   <img src="../imgs/powerbi_img2.png" alt="&quot;Web&quot; data source request form">
 
 3. Right-click & select JSON
 
-   ![Set results type](../imgs/powerbi_img3.png)
+   <img src="../imgs/powerbi_img3.png" alt="Set results type">
 
 4. Right-click on **List** & select _To Table_
 
-   ![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
+   <img src="../imgs/powerbi_img4.png" alt="convert list of (raw) results into table format">
 
 5. Keep defaults (None) and press "OK"
 
-   ![value conversion form](../imgs/powerbi_img5.png)
+   <img src="../imgs/powerbi_img5.png" alt="value conversion form">
 
 6. Press the button on the right of the column to view the list of columns.
    This will show the different JSON keys that'll be converted to table columns
 
-   | ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
-   | --- | --- |
+<table>
+<tr><td><img src="../imgs/powerbi_img6a.png" alt="list of records"></td><td><img src="../imgs/powerbi_img6b.png" alt="list of JSON keys used as column names"></td></tr>
+</table>
 
 7. For each column, you should update to the correct data type — otherwise PowerBI will assume the data type is string
 
-   ![set data-type](../imgs/powerbi_img7.png)
+   <img src="../imgs/powerbi_img7.png" alt="set data-type">
 
 8. Once updated, press Close & Apply
 
-   ![Close & Apply](../imgs/powerbi_img8.png)
+   <img src="../imgs/powerbi_img8.png" alt="Close &amp; Apply">
 
 9. From this point you should be able to draw tables & graphs with the data
 
-   ![Sample Graphs](../imgs/powerbi_img9.png)
+   <img src="../imgs/powerbi_img9.png" alt="Sample Graphs">
 
    The following shows 3 diagrams, each assigned to its own query:
    * The table shows the number of rows per table in the database
@@ -97,38 +98,39 @@ curl -X GET 10.1.2.10:2149 \
 
 1. Under the _Data_ tab, select the "Web" data source
 
-   ![select data source](../imgs/excel_img1.png)
+   <img src="../imgs/excel_img1.png" alt="select data source">
 
 2. In the Advanced option fill out the _URL_ and _HEADER_ parameters with `command`, `User-Agent`, and `destination`.
    Once the form is filled out, press "OK"
 
-   ![data source form](../imgs/excel_img2.png)
+   <img src="../imgs/excel_img2.png" alt="data source form">
 
 3. Right-click on **List** & select _To Table_
 
-   ![convert list of (raw) results into table format](../imgs/powerbi_img4.png)
+   <img src="../imgs/powerbi_img4.png" alt="convert list of (raw) results into table format">
 
 4. Keep defaults (None) and press "OK"
 
-   ![value conversion form](../imgs/powerbi_img5.png)
+   <img src="../imgs/powerbi_img5.png" alt="value conversion form">
 
 5. Press the button on the right of the column to view the list of columns.
    This will show the different JSON keys that'll be converted to table columns
 
-   | ![list of records](../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../imgs/powerbi_img6b.png) |
-   | --- | --- |
+<table>
+<tr><td><img src="../imgs/powerbi_img6a.png" alt="list of records"></td><td><img src="../imgs/powerbi_img6b.png" alt="list of JSON keys used as column names"></td></tr>
+</table>
 
 6. For each column, you should update to the correct data type — otherwise Excel will assume the data type is string
 
-   ![set data-type](../imgs/powerbi_img7.png)
+   <img src="../imgs/powerbi_img7.png" alt="set data-type">
 
 7. Once updated, press Close & Apply
 
-   ![Close & Apply](../imgs/powerbi_img8.png)
+   <img src="../imgs/powerbi_img8.png" alt="Close &amp; Apply">
 
 8. From this point you should be able to draw tables & graphs with the data
 
-   ![sample table](../imgs/excel_img3.png)
+   <img src="../imgs/excel_img3.png" alt="sample table">
 
    The diagram uses a single query with the <a href="/docs/Querying-Data-Northbound/queries/#the-period-function">period function</a> to generate both the table and graph.
 
@@ -137,4 +139,4 @@ curl -X GET 10.1.2.10:2149 \
 When converting raw content into _Text_, the <a href="https://docs.microsoft.com/en-us/power-query/power-query-ui" target="_blank">PowerQuery Editor</a>
 will show results — but it will not separate the JSON keys into separate columns.
 
-![text output](../imgs/error_img1.png)
+<img src="../imgs/error_img1.png" alt="text output">

@@ -25,29 +25,31 @@ which provides the ability to import data via REST, Database, Social Media and o
 ## Install 
 
 1. Under _Extensions_ goto _Add-ons_ → _Get add-ons_
-![extensions → add-ons](../imgs/googledrive_install_step1.png)
+<img src="../imgs/googledrive_install_step1.png" alt="extensions → add-ons">
 
 2. In the search bar look for "Two Minute Reports" & double click it
-![software list](../imgs/googledrive_install_step2.png)
+<img src="../imgs/googledrive_install_step2.png" alt="software list">
 
 3. Install the add-on to your Google Sheets & press "continue"  
 
-| ![install screen 1](../imgs/googledrive_install_step3a.png) | ![install screen 2](../imgs/googledrive_install_step3b.png) |
-| --- | --- |
+<table>
+<tr><td><img src="../imgs/googledrive_install_step3a.png" alt="install screen 1"></td><td><img src="../imgs/googledrive_install_step3b.png" alt="install screen 2"></td></tr>
+</table>
 
 4. Google Requires users to confirm - click on the user you'd like to install the application on & press "Allow" 
 
-| ![confirm account](../imgs/googledrive_install_step4a.png) | ![grant permission](../imgs/googledrive_install_step4b.png) | 
-| --- | --- |
+<table>
+<tr><td><img src="../imgs/googledrive_install_step4a.png" alt="confirm account"></td><td><img src="../imgs/googledrive_install_step4b.png" alt="grant permission"></td></tr>
+</table>
 
 ## Executing REST Request
 
 1. Once that's completed launch _Two Minute Reports_: _Extensions_ → _Two Minute_Reports_ → Launch
-![path](../imgs/googledrive_execute_step1.png)
+<img src="../imgs/googledrive_execute_step1.png" alt="path">
 **Note**: _Two Minute Reports_ works best when only a single account is logged in.
 
 2. Press "Add+" to connect to a new REST connection
-![add](../imgs/googledrive_execute_step2.png)
+<img src="../imgs/googledrive_execute_step2.png" alt="add">
 
 3. Under _Data Source_ set the Type to API Bridge & Fill-out the form
 
@@ -58,27 +60,29 @@ For demo purposes, I'm using a query that consists of and returns the data as a 
 sql aiops format=json:list and stat=false "select increments(hour, 1, timestamp), min(timestamp) as timestamp, min(value) as min_value, avg(value) as avg_value, max(value) as max_value from sic1001_mv where timestamp >= NOW() - 1 week"
 ```
 
-| ![type](../imgs/googledrive_execute_step3a.png) | ![form](../imgs/googledrive_execute_step3b.png) |
-| :---: | :---: |
+<table>
+<tr><td><img src="../imgs/googledrive_execute_step3a.png" alt="type"></td><td><img src="../imgs/googledrive_execute_step3b.png" alt="form"></td></tr>
+</table>
 
 4. Once the form is complete, test and save the changes - this will validate that the request is valid
 
-| ![test & save](../imgs/googledrive_execute_step4a.png) | ![confirm](../imgs/googledrive_execute_step4b.png) | 
-| :---: | :---: |
+<table>
+<tr><td><img src="../imgs/googledrive_execute_step4a.png" alt="test &amp; save"></td><td><img src="../imgs/googledrive_execute_step4b.png" alt="confirm"></td></tr>
+</table>
 
 5. In menu, goto _Data Queries_
 
-![menu options](../imgs/googledrive_execute_step5.png)
+<img src="../imgs/googledrive_execute_step5.png" alt="menu options">
 
 6. Press _Add+_ to create a new Query Form
 
-![add query form](../imgs/googledrive_execute_step6.png)
+<img src="../imgs/googledrive_execute_step6.png" alt="add query form">
 
 7. Fill-out the form, setting _Data Source_ to be the same as the the one created earlier & press "Run Query"
 
-![complete form](../imgs/googledrive_execute_step7.png)
+<img src="../imgs/googledrive_execute_step7.png" alt="complete form">
 
 The steps mentioned above will ultimately result in a table similar to the one shown on the right of the image; with it
 users can generate images and graphs as shown on the right side of the image, just like any other data set
 
-![table & graph](../imgs/googledrive_final_result.png)
+<img src="../imgs/googledrive_final_result.png" alt="table &amp; graph">

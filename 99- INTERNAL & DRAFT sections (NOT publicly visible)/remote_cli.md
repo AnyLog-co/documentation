@@ -182,7 +182,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get databases](../imgs/remote_cli_get_databases.png)
+<img src="../imgs/remote_cli_get_databases.png" alt="get databases">
 
 ### Return columns in a given table 
 
@@ -192,7 +192,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![get columns](../imgs/remote_cli_get_columns.png)
+<img src="../imgs/remote_cli_get_columns.png" alt="get columns">
 
 ### Return Operators nodes associated to a company
 
@@ -202,7 +202,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![view operators in blockchain](../imgs/remote_cli_blockchain_operators.png)
+<img src="../imgs/remote_cli_blockchain_operators.png" alt="view operators in blockchain">
 
 ### Get the list of nodes that host the data (for each table)
 
@@ -212,7 +212,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Data Nodes](../imgs/remote_cli_data_nodes.png)
+<img src="../imgs/remote_cli_data_nodes.png" alt="Data Nodes">
 
 ### Query the last 90 seconds of data
 
@@ -222,7 +222,7 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 90 seconds of data](../imgs/remote_cli_select_last_90sec.png)
+<img src="../imgs/remote_cli_select_last_90sec.png" alt="Last 90 seconds of data">
 
 ### Query the last 10 minutes of data including the source node
 
@@ -232,4 +232,4 @@ Using cURL:
 
 Using the Remote CLI:
 
-![Last 10 minutes of data](../imgs/remote_cli_select_last_10min.png)
+<img src="../imgs/remote_cli_select_last_10min.png" alt="Last 10 minutes of data">

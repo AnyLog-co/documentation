@@ -45,7 +45,7 @@ Build a flow with these nodes:
 
 A [sample flow JSON](https://github.com/AnyLog-co/documentation/blob/master/examples/node_red_sample_flow.json) is available in the AnyLog documentation repo.
 
-![Sample Node-Red Flow](../../imgs/node_red_flow.png)
+<img src="../../imgs/node_red_flow.png" alt="Sample Node-Red Flow">
 
 ---
 
@@ -85,7 +85,7 @@ Set the method to **POST** with these headers:
 
 Set the URL to your operator's REST endpoint: `http://[operator-ip]:[rest-port]`
 
-![Node-RED POST configurations](../../imgs/node_red_http_request.png)
+<img src="../../imgs/node_red_http_request.png" alt="Node-RED POST configurations">
 
 ---
 
