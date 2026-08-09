@@ -11,7 +11,7 @@
 
 2. Edge Dta Manager -- @Roy 
 there should be the following files: 
-
+```text
 10- EDM (Edge Data Manager)/ 👤 100% Roy
   |- edm.md <-- Main EDM overview.
   |   📍 11- EDM tool (Edge Data Manager)/02 EDM.md
@@ -30,7 +30,7 @@ there should be the following files:
   |      - Remove plugins
   |      - Configure plugins
 document explaining how to query blobs through an application using `file to` and `file from` logic 
-
+```
 ---
 
 4. We need Examples & Use Cases -- @Mark 
