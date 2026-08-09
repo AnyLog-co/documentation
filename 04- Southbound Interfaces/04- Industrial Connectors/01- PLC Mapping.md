@@ -58,7 +58,6 @@ The connection keywords themselves are protocol-specific — for example, Modbus
 while OPC-UA and EtherNet/IP use `url`; DNP3 adds `master_id`/`outstation_id`, Modbus adds `device_id`. See each
 protocol's page for its full keyword table.
 
-
 * View the data that's accessible via the PLC 
 
 ```anylog
@@ -188,7 +187,6 @@ blockchain insert where policy=!policy_id and local=true and master=!ledger_conn
 > `[monitor_id, ACC field, PRE field]`. The `schema` block then defines the table's columns and, for each 
 > column, where its value comes from: either lifted straight from the reading (`bring`) or taken positionally 
 > from `params` (`params.0`, `params.1`, ...).
-
 
 2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or 
 alongside) an inline `map`:
