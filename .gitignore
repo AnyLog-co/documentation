@@ -1,3 +1,5 @@
-.idea/
+.idea/*
+.idea/workspace.xml
 __pycache__/
 .DS_Store
+.github/scripts/__pycache__/
