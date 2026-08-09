@@ -16,7 +16,7 @@ source_path: "01 PLC Overview.md"
 
 ## How AnyLog Defines a PLC
 
-A **PLC** (Programmable Logic Controller), in AnyLog's terms, is any industrial controller or field device that
+A **PLC** (Programmable Logic Controller), is any industrial controller or field device that
 exposes its data through one of AnyLog's supported client protocols. AnyLog does not care whether the source
 is a traditional PLC, an RTU, an outstation, or a sensor gateway — if it speaks **Modbus TCP**, **OPC-UA**,
 **EtherNet/IP**, or **DNP3**, AnyLog can act as a client against it.
