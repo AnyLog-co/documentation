@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fa6ff-6629-421f-8f1a-7ac372ff76cd" name="Changes" comment="" />
+    <list default="true" id="8d4fa6ff-6629-421f-8f1a-7ac372ff76cd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ericaquaronne"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AnyLog-co/documentation.git",
+    "accountId": "78ca29b2-38d3-4812-814d-c1cb13234116"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -28,25 +42,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.convert_img.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convert_links.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convert_url.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_toc.executor&quot;: &quot;Run&quot;,
-    &quot;Python.html_extraction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.link_validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.link_validation_ignore99.executor&quot;: &quot;Run&quot;,
-    &quot;Python.script2.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;pre-develop-reorg&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/oshad/AnyLog-code/documentation/.github/scripts&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/oshad/AnyLog-code/documentation/02- Installation &amp; Deployment/D- Networking &amp; Security/01 Securing the Anylog Network.md&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.convert_img.executor": "Run",
+    "Python.convert_links.executor": "Run",
+    "Python.convert_url.executor": "Run",
+    "Python.generate_toc.executor": "Run",
+    "Python.html_extraction.executor": "Run",
+    "Python.link_validation.executor": "Run",
+    "Python.link_validation_ignore99.executor": "Run",
+    "Python.script2.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "os-dev",
+    "last_opened_file_path": "C:/Users/oshad/AnyLog-code/documentation/.github/scripts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "two.files.diff.last.used.file": "C:/Users/oshad/AnyLog-code/documentation/02- Installation & Deployment/D- Networking & Security/01 Securing the Anylog Network.md"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\oshad\AnyLog-code\documentation\.github\scripts" />
@@ -71,11 +92,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -86,6 +107,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/convert_img.py" />
       <option name="PARAMETERS" value="$PROJECT_DIR$/" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -104,11 +126,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -119,6 +141,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/convert_links.py" />
       <option name="PARAMETERS" value="--docs-dir  $PROJECT_DIR$/" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -137,11 +160,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -152,6 +175,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/convert_url.py" />
       <option name="PARAMETERS" value="$PROJECT_DIR$/" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -170,11 +194,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -185,6 +209,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/generate_toc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -203,11 +228,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -218,6 +243,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/html_extraction.py" />
       <option name="PARAMETERS" value="$PROJECT_DIR$/ --dry-run" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -236,11 +262,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.14 virtualenv at C:\Users\oshad\AnyLog-code\AnyLog-Network\venv (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.github/scripts" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -251,6 +277,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.github/scripts/link_validation.py" />
       <option name="PARAMETERS" value="C:\Users\oshad\AnyLog-code\documentation" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -281,7 +308,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-53e2683a6804-9cdd278e9d02-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26094.141" />
+        <option value="bundled-python-sdk-b63d5a1f7c97-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.340" />
       </set>
     </attachedChunks>
   </component>
@@ -294,5 +321,8 @@
       <updated>1785085375559</updated>
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
