@@ -138,7 +138,7 @@ means no wait limit; default is `20` seconds. If `ssl` is set to `true`, the con
 
 ### Broker Service
 
-The Broker service port is a TCP-based connection that acts as AnyLog's built-in [message broker](./05-%20Message%20Broker.md).
+The Broker service port is a TCP-based connection that acts as AnyLog's built-in [MQTT message broker](./05-%20MQTT%20Message%20Broker.md).
 This port can accept data from different sources (e.g. Kafka, MQTT, Modbus) from a single point, and understands
 how to interpret it based on a correlating message client service.
 
