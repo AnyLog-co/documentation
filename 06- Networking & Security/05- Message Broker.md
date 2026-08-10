@@ -24,7 +24,8 @@ source_path: "background processes.md#message-broker"
    indication of whether these are true aliases or one is a typo carried forward repeatedly. Also flagging one
    port that doesn't match this doc set's established convention: `master_node = 10.0.0.185:2548` in the UNS
    example — every other Master TCP port example elsewhere is `32048`; `2548` looks like it may be missing a
-   leading `3`, but I'm not certain enough to silently "fix" a working example.
+   leading `3`, but I'm not certain enough to silently "fix" a working example. |
+ | 2026-08-10 | | Documented MQTT topic params `table_prefix` and `table_name_as_topic` (AnyLog-Network `mp-uns-new`) with a worked dynamic example. |
 --->
 
 ## Overview
@@ -137,15 +138,30 @@ If `run msg client` references the same IP/port used in the `run message broker`
 
 | Option | Details |
 |---|---|
-| `name` | The topic to subscribe to. `#` subscribes to all topics — matching messages are processed per their own subscription; anything else is flushed to a log file. |
+| `name` | The topic to subscribe to. `#` subscribes to all topics — matching messages are processed per their own subscription; anything else is flushed to a log file. A name ending in `#` (for example `C#` or `Enterprise B/Site1/#`) also enables dynamic discovery of child topics under that prefix. |
 | `qos` | Per-topic QoS override — falls back to the Config-level value, then the default, if omitted. |
 | `dbms` | The logical dbms for the topic's data, or a `bring` command to extract the name from the message. |
-| `table` | The table name, or a `bring` command to extract it. |
+| `table` | The table name, or a `bring` command to extract it. In `dynamic = true` mode, omit this to let AnyLog derive the name from the topic (see `table_prefix` / `table_name_as_topic`). |
+| `table_prefix` | Optional. Applied **only when `table` is omitted**: derived table name = `{table_prefix}_{last_topic_segment}`. If `table` is also set, `table_prefix` is ignored. Also ignored when `table_name_as_topic = true`. |
+| `table_name_as_topic` | `true` — use the sanitized **full** MQTT topic as the table name (deterministic across operators). Ignores `table` and `table_prefix`. Example: topic `Plant/CX1/Motor1` → table `plant_cx1_motor1`. |
 | `column.[name].[type]` | A column name + data type, paired with a `bring` command extracting that column's value from the message. |
 | `dynamic` | `true` — auto-generate [UNS policies](#generating-uns-policies) instead of using inline/explicit mapping. |
 | `policy` | Reference a [reusable mapping policy](#registering-a-mapping-policy) instead of inline `dbms`/`table`/`column...` params. |
 
-**Naming rule:** for both `dbms` and `table`, uppercase letters are converted to lowercase and spaces to underscores.
+**Naming rule:** for `dbms`, `table`, `table_prefix`, and names derived via `table_name_as_topic`, uppercase letters are converted to lowercase and spaces (and other non-safe characters) to underscores.
+
+**Case:** MQTT topics are treated as **case-insensitive** for mapping and table/UNS naming. `Plant/CX1/Motor1` and `plant/cx1/motor1` resolve to the same sanitized name (for example `plant_cx1_motor1` when `table_name_as_topic = true`).
+
+**Table naming precedence** (first match wins), for topic `Plant/CX1/Motor1`:
+
+| Topic settings | Resulting table |
+|---|---|
+| `table_name_as_topic = true` (with `name = "Plant/#"` and `dynamic = true`) | `plant_cx1_motor1` — full sanitized topic; `table` / `table_prefix` ignored |
+| `table = some_table` (with or without `table_prefix`) | `some_table` — explicit `table` wins; `table_prefix` is ignored if both are set |
+| `table_prefix = prefix1` (no `table`) | `prefix1_motor1` |
+| neither `table` nor `table_prefix` (dynamic) | `motor1` — last topic segment |
+
+`table_prefix` and `table_name_as_topic` apply when `dynamic = true` (and `table` is omitted). They are not used with `dynamic = false` — that mode requires an explicit `table` (and column mapping).
 
 ### QoS — Quality of Service
 
@@ -343,7 +359,8 @@ Setting `dynamic = true` on a topic (in message-broker mode) enables automatic g
 describing data relationships, letting users navigate the data hierarchically through the Unified Namespace.
 
 * There are no inline mapping instructions or mapping policies in this mode — table names are generated
-  automatically from the topics.
+  automatically from the topics (default last segment, optional `table_prefix`, or full topic via
+  `table_name_as_topic` — see [Topic params](#topic-params)).
 * If the data is JSON, the entire object is ingested: attribute names → column names, attribute values → column
   values.
 * If the data isn't JSON, column names are derived from the topic structure (the last segment of each topic).
@@ -369,6 +386,40 @@ default_dbms = my_dbms
 
 > **Worth double-checking:** `master_node = 10.0.0.185:2548` — every other Master TCP port example in this doc set
 > uses the `32xxx` convention (e.g. `32048`). `2548` doesn't match that pattern and may be missing a leading `3`.
+
+**Full-topic table names** (`table_name_as_topic = true`) — useful when operators must share a stable table name
+derived from the entire MQTT path rather than only the leaf segment:
+
+```anylog
+<run msg client where
+        broker = 192.168.1.88 and port = 1883 and
+        master_node = 192.168.1.60:32048 and
+        topic = (
+                name = "Plant/#" and
+                dbms = new_company and
+                dynamic = true and
+                table_name_as_topic = true
+        )>
+```
+
+For a message on topic `Plant/CX1/Motor1`, the table name is `plant_cx1_motor1`.
+
+**Prefixed leaf table names** (`table_prefix`) — when `table` is omitted, the table name is
+`{table_prefix}_{last_topic_segment}`:
+
+```anylog
+<run msg client where
+        broker = 192.168.1.88 and port = 1883 and
+        master_node = 192.168.1.60:32048 and
+        topic = (
+                name = "Plant/#" and
+                dbms = new_company and
+                dynamic = true and
+                table_prefix = prefix1
+        )>
+```
+
+For a message on topic `Plant/CX1/Motor1`, the table name is `prefix1_motor1`.
 
 ### Enabling the UNS Streamer
 
