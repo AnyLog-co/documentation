@@ -39,7 +39,7 @@ AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../08-%2
 ### New Features
 1. New command option: **blockchain get root policies**  
 2. ```set mcp client config``` command - Configure an active MCP connection to automatically disconnect after a specified period of inactivity. The default timeout is one hour.
-3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20Message%20Broker.md#generating-uns-policies)
+3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md#dynamic-uns-policies)
 
 AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ### New Features
