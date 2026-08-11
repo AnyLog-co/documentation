@@ -1,9 +1,9 @@
 <!---
-Large scale changes: 
+Large scale changes:
   - June / July 2026    | Eric | reorged the documentation
-  - July / August 2026  | Ori  | reorged the documentation 
-  - July 24-Aug 25 2026 | Ori  | updated hyperlinks for URLs 
-  - 2026-08-08 | Ori Shadmon | updated to provide direction on how to write / update Markdown files 
+  - July / August 2026  | Ori  | reorged the documentation
+  - July 24-Aug 25 2026 | Ori  | updated hyperlinks for URLs
+  - 2026-08-08 | Ori Shadmon | updated to provide direction on how to write / update Markdown files
 --->
 <div align="center">
   <a href="https://anylog.network" target="_blank">
@@ -11,20 +11,20 @@ Large scale changes:
   </a>
 <br/>
 </div>
-<div align="justify"><br/>AnyLog is a Real-Time Visibility and Management platform for distributed edge data, 
+<div align="justify"><br/>AnyLog is a Real-Time Visibility and Management platform for distributed edge data,
 applications, and infrastructure
 
-AnyLog transforms the edge into a scalable data tier optimized for IoT and time-series data, enabling organizations to 
-extract real-time insights for virtually any use case. Industries such as Manufacturing, Utilities, Oil & Gas, Retail, 
+AnyLog transforms the edge into a scalable data tier optimized for IoT and time-series data, enabling organizations to
+extract real-time insights for virtually any use case. Industries such as Manufacturing, Utilities, Oil & Gas, Retail,
 Robotics, Smart Cities, Automotive, and others can all benefit from this capability.
 
-By deploying AnyLog at the edge, each node becomes part of a peer-to-peer (P2P) network that enables unified access to 
+By deploying AnyLog at the edge, each node becomes part of a peer-to-peer (P2P) network that enables unified access to
 distributed IoT data—as if it were all managed on a single machine. This architecture introduces two key tiers
-* **Tier 1**: A physical tier that automates data management directly on the edge nodes. 
+* **Tier 1**: A physical tier that automates data management directly on the edge nodes.
 * **Tier 2**: A virtualized tier that enables seamless access to the distributed data from a single point.
 
-This setup delivers a cloud-like experience for the distributed edge—making IoT data accessible in real time, from 
-anywhere, at any time, and for any use case. Importantly, it eliminates the need to move data or commit to specific 
+This setup delivers a cloud-like experience for the distributed edge—making IoT data accessible in real time, from
+anywhere, at any time, and for any use case. Importantly, it eliminates the need to move data or commit to specific
 cloud providers, applications, or hardware platforms.
 </div>
 
@@ -49,25 +49,25 @@ To receive additional info, email to: [info@anylog.co](mailto:info@anylog.co)
 
 1. Clone the [Frontend](https://github.com/AnyLog-co/anylog-docs.github.io) & [Content](https://github.com/AnyLog-co/documentation) repositories
 
-```shell 
-mkdir docs 
+```shell
+mkdir docs
 
-git clone https://github.com/AnyLog-co/anylog-docs.github.io anylog-docs 
+git clone https://github.com/AnyLog-co/anylog-docs.github.io anylog-docs
 git clone https://github.com/AnyLog-co/documentation
 ```
 
-2. switch to your own branch 
+2. switch to your own branch
 ```shell
 cd documentation
 git checkout -b [branch name]
 ```
 
-3. Make your changes 
+3. Make your changes
 
-4. To test 
+4. To test
 
 ```shell
-cd ../anylog-docs 
+cd ../anylog-docs
 
 make up LOCAL_DOCS=${PATH to documentation}
 
@@ -78,7 +78,7 @@ make up LOCAL_DOCS=/mnt/c/Users/oshad/AnyLog-docs/documentation
 
 5. visit URL - http://127.0.0.1:4000
 
-6. Commit + Push changes in documentation 
+6. Commit + Push changes in documentation
 
 7. Create [PR](https://github.com/AnyLog-co/documentation/pulls) against _pre-develop_
 
@@ -88,13 +88,13 @@ make up LOCAL_DOCS=/mnt/c/Users/oshad/AnyLog-docs/documentation
 
 ```
 
-Your content 
+Your content
 
 \```{language}
 code block
 \```
 
-more content 
+more content
 ```
 
 ### Formatting
@@ -121,7 +121,7 @@ layout: page
 ## Changelog
 - 2026-04-17 | Created document
 - 2026-05-12 | updated by ...
---> 
+-->
 ```
 Evey file **must** contain a header change log so when reading it one knows when changed / who did it / what date and Anylog version,  use this table format
 | Date of change | Relevant Anylog code version | Author | Description |
@@ -131,7 +131,7 @@ Evey file **must** contain a header change log so when reading it one knows when
 
 #### Images
 
-* Adding an image - you can use a script to validate format `python3 .github/scripts/convert_img.py`  
+* Adding an image - you can use a script to validate format `python3 .github/scripts/convert_img.py`
 
 ```shell
 <img src="../imgs/{path}" alt="image name" />
@@ -184,32 +184,30 @@ Evey file **must** contain a header change log so when reading it one knows when
   - [Nodes.md](03-%20Training%20%26%20Tutorials/06-%20Nodes.md)
 - [Southbound Interfaces](04-%20Southbound%20Interfaces/)
   - [Southbound Interfaces.md](04-%20Southbound%20Interfaces/01-%20Southbound%20Interfaces.md)
-  - [Mapping Policy.md](04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md)
-  - [Direct Connectors](04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/)
-    - [REST.md](04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md)
-    - [Message Broker.md](04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md)
-  - [Industrial Connectors](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/)
-    - [PLC Mapping.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/01-%20PLC%20Mapping.md)
-    - [Modbus.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/02-%20Modbus.md)
-    - [OPC-UA.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/03-%20OPC-UA.md)
-    - [EtherIP.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-%20EtherIP.md)
-    - [1 DNP3](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-1%20DNP3/)
-      - [DNP3 - Deploying Connector via Script.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-1%20DNP3/01-%20DNP3%20-%20Deploying%20Connector%20via%20Script.md)
-      - [DNP3 - Mapping-Policies.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-1%20DNP3/02-%20DNP3%20-%20Mapping-Policies.md)
-      - [DNP3 - TLS test certificates.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-1%20DNP3/03-%20DNP3%20-%20TLS%20test%20certificates.md)
-    - [DNP3.md](04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/05-%20DNP3.md)
-  - [Monitoring](04-%20Southbound%20Interfaces/05-%20Monitoring/)
-    - [Node Monitoring.md](04-%20Southbound%20Interfaces/05-%20Monitoring/01-%20Node%20Monitoring.md)
-    - [Syslog.md](04-%20Southbound%20Interfaces/05-%20Monitoring/02-%20Syslog.md)
-  - [RPC & Media Streaming](04-%20Southbound%20Interfaces/06-%20RPC%20%26%20Media%20Streaming/)
-    - [gRPC.md](04-%20Southbound%20Interfaces/06-%20RPC%20%26%20Media%20Streaming/01-%20gRPC.md)
-    - [Video Streaming.md](04-%20Southbound%20Interfaces/06-%20RPC%20%26%20Media%20Streaming/02-%20Video%20Streaming.md)
-  - [Third-Party](04-%20Southbound%20Interfaces/07-%20Third-Party/)
-    - [node-RED.md](04-%20Southbound%20Interfaces/07-%20Third-Party/01-%20node-RED.md)
-    - [Telegraf.md](04-%20Southbound%20Interfaces/07-%20Third-Party/02-%20Telegraf.md)
-    - [EdgeX.md](04-%20Southbound%20Interfaces/07-%20Third-Party/03-%20EdgeX.md)
-    - [Kubearmor.md](04-%20Southbound%20Interfaces/07-%20Third-Party/04-%20Kubearmor.md)
-  - [Data Ingestion.md](04-%20Southbound%20Interfaces/08-%20Data%20Ingestion.md)
+  - [Direct Connectors](04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/)
+    - [REST.md](04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md)
+    - [Message Broker.md](04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md)
+  - [Industrial Connectors](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/)
+    - [Modbus.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/01-%20Modbus.md)
+    - [OPC-UA.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/02-%20OPC-UA.md)
+    - [EtherIP.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/03-%20EtherIP.md)
+    - [DNP3.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/04-%20DNP3.md)
+    - [1 DNP3](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/04-1%20DNP3/)
+      - [DNP3 - Deploying Connector via Script.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/04-1%20DNP3/01-%20DNP3%20-%20Deploying%20Connector%20via%20Script.md)
+      - [DNP3 - Mapping-Policies.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/04-1%20DNP3/02-%20DNP3%20-%20Mapping-Policies.md)
+      - [DNP3 - TLS test certificates.md](04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/04-1%20DNP3/03-%20DNP3%20-%20TLS%20test%20certificates.md)
+  - [Monitoring](04-%20Southbound%20Interfaces/04-%20Monitoring/)
+    - [Node Monitoring.md](04-%20Southbound%20Interfaces/04-%20Monitoring/01-%20Node%20Monitoring.md)
+    - [Syslog.md](04-%20Southbound%20Interfaces/04-%20Monitoring/02-%20Syslog.md)
+  - [RPC & Media Streaming](04-%20Southbound%20Interfaces/05-%20RPC%20%26%20Media%20Streaming/)
+    - [gRPC.md](04-%20Southbound%20Interfaces/05-%20RPC%20%26%20Media%20Streaming/01-%20gRPC.md)
+    - [Video Streaming.md](04-%20Southbound%20Interfaces/05-%20RPC%20%26%20Media%20Streaming/02-%20Video%20Streaming.md)
+  - [Third-Party](04-%20Southbound%20Interfaces/06-%20Third-Party/)
+    - [node-RED.md](04-%20Southbound%20Interfaces/06-%20Third-Party/01-%20node-RED.md)
+    - [Telegraf.md](04-%20Southbound%20Interfaces/06-%20Third-Party/02-%20Telegraf.md)
+    - [EdgeX.md](04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md)
+    - [Kubearmor.md](04-%20Southbound%20Interfaces/06-%20Third-Party/04-%20Kubearmor.md)
+  - [Data Ingestion.md](04-%20Southbound%20Interfaces/07-%20Data%20Ingestion.md)
 - [Northbound Connectors](05-%20Northbound%20Connectors/)
   - [Northbound Connectors.md](05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md)
   - [Postman Integration.md](05-%20Northbound%20Connectors/02-%20Postman%20Integration.md)
@@ -224,8 +222,9 @@ Evey file **must** contain a header change log so when reading it one knows when
   - [Network Processing.md](06-%20Networking%20%26%20Security/02-%20Network%20Processing.md)
   - [Securing the Network.md](06-%20Networking%20%26%20Security/03-%20Securing%20the%20Network.md)
   - [Using REST.md](06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
-  - [Message Broker.md](06-%20Networking%20%26%20Security/05-%20Message%20Broker.md)
-  - [1 Connectors To Data Sources.md](06-%20Networking%20%26%20Security/05-1%20Connectors%20To%20Data%20Sources.md)
+  - [MQTT Message Broker.md](06-%20Networking%20%26%20Security/05-%20MQTT%20Message%20Broker.md)
+  - [1 Kafka Message Client.md](06-%20Networking%20%26%20Security/05-1%20Kafka%20Message%20Client.md)
+  - [2 Connectors To Data Sources.md](06-%20Networking%20%26%20Security/05-2%20Connectors%20To%20Data%20Sources.md)
   - [Network](06-%20Networking%20%26%20Security/06-%20%20Network/)
     - [Intro Overlay Network.md](06-%20Networking%20%26%20Security/06-%20%20Network/01-%20Intro%20Overlay%20Network.md)
     - [Nebula.md](06-%20Networking%20%26%20Security/06-%20%20Network/02-%20Nebula.md)
@@ -259,6 +258,7 @@ Evey file **must** contain a header change log so when reading it one knows when
   - [1 ANMP Policy.md](08-%20Blockchain%20%26%20Metadata/02-1%20ANMP%20Policy.md)
   - [Blockchain Commands.md](08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
   - [1 Blockchain Full Circle.md](08-%20Blockchain%20%26%20Metadata/03-1%20Blockchain%20Full%20Circle.md)
+  - [Mapping Policy.md](08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md)
   - [Unitfied Namespace.md](08-%20Blockchain%20%26%20Metadata/05-%20Unitfied%20Namespace.md)
   - [1 UNS Custom Dynamic Examples.md](08-%20Blockchain%20%26%20Metadata/05-1%20UNS%20Custom%20Dynamic%20Examples.md)
   - [2 UNS Custom Examples.md](08-%20Blockchain%20%26%20Metadata/05-2%20UNS%20Custom%20Examples.md)

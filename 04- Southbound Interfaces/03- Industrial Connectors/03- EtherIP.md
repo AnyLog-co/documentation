@@ -18,16 +18,16 @@ EtherNet/IP (Ethernet Industrial Protocol) is an industrial network protocol bui
 
 ## The EtherNet/IP Structure
 
-EtherNet/IP organizes industrial automation data through a set of well-defined CIP (Common Industrial Protocol) objects, 
-which represent device attributes, configurations, and runtime data. Unlike OPC UA's tree-based model, EtherNet/IP uses a flat, 
-object-oriented structure where each device exposes standard or vendor-specific classes, instances, and attributes. 
+EtherNet/IP organizes industrial automation data through a set of well-defined CIP (Common Industrial Protocol) objects,
+which represent device attributes, configurations, and runtime data. Unlike OPC UA's tree-based model, EtherNet/IP uses a flat,
+object-oriented structure where each device exposes standard or vendor-specific classes, instances, and attributes.
 These are accessed using CIP messaging over Ethernet.
 
-Each class (such as Identity Object, Assembly Object, or Connection Object) may contain multiple instances, and each instance 
-can expose multiple attributes, forming a structured view of the device's capabilities and status. 
+Each class (such as Identity Object, Assembly Object, or Connection Object) may contain multiple instances, and each instance
+can expose multiple attributes, forming a structured view of the device's capabilities and status.
 While the structure is not hierarchical like OPC UA, it provides a standardized way to navigate and interact with device data.
 
-The `get etherip struct` command explores the structure by querying supported classes and retrieving their instances and attributes. 
+The `get etherip struct` command explores the structure by querying supported classes and retrieving their instances and attributes.
 This provides insight into the connected PLC or device, including program tags and system-level data.
 
 The EtherNet/IP structure is explored with the following command:
@@ -109,7 +109,7 @@ The command **run plc client*** pulls data from the PLC continuously and streams
 ```anylog
 run plc client where type = etherip and name = [unique name] and url = [connect string] and frequency = [frequency] and dbms = [dbms name] and table = [table name] and node = [node id]]
 ```
- 
+
 The following tables summarizes the command variables:
 
 | keyword   | Details                                                                                      |
@@ -137,7 +137,7 @@ Example 2 - providing a list of tags:
 ,"TIMER.PRE","COUNTER.ACC","COUNTER.PRE","DATE_TIME","ATSNormalRdyDI","CombinedChlorinatorAI.PV","FreeChlorinatorAI.PV"]>
 ```
 
-Notes: 
+Notes:
 1. Multiple clients can be declared on the same node.
 2. Each row is added with 2 columns:
    * Timestamp - representing the earliest source_timestamp of the values considered (if source_timestamp is missing, the server_timestamp is considered).
