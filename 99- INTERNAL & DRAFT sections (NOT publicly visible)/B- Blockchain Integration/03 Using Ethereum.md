@@ -17,7 +17,7 @@ source_path: "03 Using Ethereum.md"
 
 ## Overview
 
-Users can configure their network to use [Ethereum](https://en.wikipedia.org/wiki/Ethereum) as a global metadata layer such 
+Users can configure their network to use <a href="https://en.wikipedia.org/wiki/Ethereum" target="_blank">Ethereum</a> as a global metadata layer such 
 that all updates to the metadata are represented by the blockchain and shared among all members of the network.
 
 This document explains how to leverage Ethereum as the underlying global metadata platform for the AnyLog Network and demonstrates the 
@@ -30,13 +30,13 @@ Connection to the blockchain platform can be done using a local node or a hosted
 With a local node, users need to configure and maintain an Ethereum node that hosts a local copy of the blockchain 
 data and needs to verify all the transactions of the Ethereum Network.  
 With a hosted node, users connect to a 3rd party node that provides the local node functionality but maintained by a 3rd party.  
-The AnyLog network is agnostic to how Ethereum services are provided, in this document we use [Infura](https://infura.io/) hosted node.
+The AnyLog network is agnostic to how Ethereum services are provided, in this document we use <a href="https://infura.io/" target="_blank">Infura</a> hosted node.
 With Infura, users can connect to an Ethereum network and for testing purposes, to the Ethereum TestNet.
 
 **Note**: In the examples below, the accounts and keys are exposed and are not maintained in a secure way. In a deployment which 
 is using the Ethereum MainNet, users should do the following:
-* Delegate private key creation and management to software clients (like [Geth](https://geth.ethereum.org/)) 
-  or wallets (like [MetaMask](https://metamask.io/)). These projects provide a secure way to generate and handle private keys for blockchain interactions.
+* Delegate private key creation and management to software clients (like <a href="https://geth.ethereum.org/" target="_blank">Geth</a>) 
+  or wallets (like <a href="https://metamask.io/" target="_blank">MetaMask</a>). These projects provide a secure way to generate and handle private keys for blockchain interactions.
 * Enable the AnyLog encryption functionality for the keys that are stored and used by the AnyLog node.
  
 This document details how to use Ethereum as the metadata layer by providing and enabling the following functionality:
@@ -50,7 +50,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 
 ## Prerequisites
 
-* Open an account in Infura - instructions are [here](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
+* Open an account in Infura - instructions are <a href="https://blog.infura.io/getting-started-with-infura-28e41844cc89/" target="_blank">here</a>.
 * From Infura get a Project ID and an API endpoint.
   Or use the following demo ID and endpoint:
   * Project Endpoint: https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1
@@ -111,7 +111,7 @@ blockchain set account info where platform = ethereum and private_key = !private
 ```
 
 ## Transfer funds to the account
-For a Rinkeby TestNet, funds can be added from this [website](https://www.rinkeby.io/#faucet). 
+For a Rinkeby TestNet, funds can be added from this <a href="https://www.rinkeby.io/#faucet" target="_blank">website</a>. 
 
 ## Publish the AnyLog contract on the blockchain
 

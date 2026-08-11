@@ -16,7 +16,7 @@ As covered in the previous sections, the process by which nodes communicate with
 metadata / master node differs only by the connectivity process itself.
 
 This page walks the full loop once, start to finish, showing the Master/Metadata node path and the real blockchain 
-platform path side by side at each step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
+platform path side by side at each step, using the actual logic from AnyLog's <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> repo
 (`node-deployment/`), trimmed down for readability. The full scripts handle considerably more edge-case branching
 (DNS, overlay networks, auth) than shown here — follow the links at each step for the complete version.
 

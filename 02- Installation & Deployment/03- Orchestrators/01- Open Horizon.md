@@ -20,15 +20,15 @@ learning assets. It enables autonomous management of applications deployed to di
 computing nodes and devices without requiring on-premise administrators.
 
 Open Horizon can be used to easily manage and deploy AnyLog node(s) through their interface.
-* [Open Horizon Website](https://www.lfedge.org/projects/openhorizon/)
-* [IBM Documentation for Open Horizon](https://developer.ibm.com/components/open-horizon/)
-* [Open Source Documentation](https://open-horizon.github.io/)
-* [AnyLog Documentation](https://github.com/AnyLog-co/documentation)
-* [AnyLog Website](https://anylog.co)
+* <a href="https://www.lfedge.org/projects/openhorizon/" target="_blank">Open Horizon Website</a>
+* <a href="https://developer.ibm.com/components/open-horizon/" target="_blank">IBM Documentation for Open Horizon</a>
+* <a href="https://open-horizon.github.io/" target="_blank">Open Source Documentation</a>
+* <a href="https://github.com/AnyLog-co/documentation" target="_blank">AnyLog Documentation</a>
+* <a href="https://anylog.co" target="_blank">AnyLog Website</a>
 
 ## Requirements 
 * A physical / virtual machine for each node, as OpenHorizon is unable to deploy more than 1 instance per node 
-* [Machine requirements](https://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-devicehttps://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-device)
+* <a href="https://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-devicehttps://www.ibm.com/docs/en/eam/4.0?topic=devices-preparing-edge-device" target="_blank">Machine requirements</a>
 
 **For 64-bit Intel or AMD device or virtual machine:**
 
@@ -44,9 +44,9 @@ Open Horizon can be used to easily manage and deploy AnyLog node(s) through thei
 ## Associating Machine to Open Horizon
 The following steps will associate a new machine with the Open Horizon management platform. The process will complete the 
 following:  
-* [Create an API key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key) 
-* [Install Horizon CLI](https://www.ibm.com/docs/en/eam/4.1?topic=cli-installing-hzn) 
-* [Install Docker](https://docs.docker.com/engine/install/) 
+* <a href="https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key" target="_blank">Create an API key</a> 
+* <a href="https://www.ibm.com/docs/en/eam/4.1?topic=cli-installing-hzn" target="_blank">Install Horizon CLI</a> 
+* <a href="https://docs.docker.com/engine/install/" target="_blank">Install Docker</a> 
 * Validate Open Horizon is working by deploying a _Hello World_ package
 
 1. On the node Update / Upgrade Node
@@ -54,7 +54,7 @@ following:
 for CMD in update upgrade ; do sudo apt-get -y ${CMD} ; done
 ```
 
-2. Create an Open Horizon [API Key](https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key)
+2. Create an Open Horizon <a href="https://www.ibm.com/docs/en/eam/4.3?topic=installation-creating-your-api-key" target="_blank">API Key</a>
 
 3. Update Environment variables
 * In `~/.bashrc` (or `~/.profile` for Alpine) add the following variables
@@ -123,11 +123,11 @@ This process is detailed below.
 
 ## Associate AnyLog Deployment with OpenHorizon
 
-1. Log into [IBM Edge Application Manager](https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/edge#/#0?content=snapshot)
+1. Log into <a href="https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/edge#/#0?content=snapshot" target="_blank">IBM Edge Application Manager</a>
 
 2. Under _Services_ add an "Edge Device"
 
-3. Declare _AnyLog_ as a device image - Docker login credentials are received using: [AnyLog Downloads](https://anylog.co/download-anylog)
+3. Declare _AnyLog_ as a device image - Docker login credentials are received using: <a href="https://anylog.co/download-anylog" target="_blank">AnyLog Downloads</a>
 
 <img src="../../imgs/OpenHorizon_device_info.png" alt="OpenHorizon_device_info.png">
 
@@ -158,14 +158,14 @@ This process is detailed below.
 
 ## Create AnyLog node as a Service on Open Horizon
 
-1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: [AnyLog Downloads](https://anylog.co/download-anylog) 
+1. Request the AnyLog license key to download AnyLog from the _Docker_ repository using: <a href="https://anylog.co/download-anylog" target="_blank">AnyLog Downloads</a> 
 
 2. Update variables in the `service.definition.json` configuration file at (<a href="https://github.com/open-horizon-services/service-anylog/blob/main/sample-deployment-policy/generic.deployment.json" target="_blank">Operator Node</a>) with the following:
 
 | Variable       | Update with                             | Default Value | Comments     |
 | -------------- | --------------------------------------- |  ------------ | ------------ |
 | INIT_TYPE | training | training | Used to decide which AnyLog scripts to use for the deployment |   
-| LICENSE_KEY    | The Docker Hub key provided by AnyLog   |               |  Request key using [AnyLog Downloads](https://anylog.co/download-anylog) |
+| LICENSE_KEY    | The Docker Hub key provided by AnyLog   |               |  Request key using <a href="https://anylog.co/download-anylog" target="_blank">AnyLog Downloads</a> |
 | NODE_TYPE      | operator                                | operator      |  A node configured to host data |
 | NODE_NAME      | [your company name]_operator[node id]   |               |  For example: ibm_operator123 |
 | COMPANY_NAME   | [your company name]                     |               |  For example: ibm |

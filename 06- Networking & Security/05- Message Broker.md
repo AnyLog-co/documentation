@@ -468,7 +468,7 @@ For securing MQTT with certificate-based client authentication, in brief:
 
 > This section is condensed from a much more detailed worked example (full commands, directory structure, and a
 > blockchain-based CA-sharing walkthrough) — see **Broker Setup TLS Example** for the complete version, including
-> [mosquitto-tls](https://mosquitto.org/man/mosquitto-tls-7.html) reference links.
+> <a href="https://mosquitto.org/man/mosquitto-tls-7.html" target="_blank">mosquitto-tls</a> reference links.
 
 ---
 

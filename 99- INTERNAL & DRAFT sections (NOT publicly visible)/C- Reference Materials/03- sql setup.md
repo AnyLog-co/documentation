@@ -35,7 +35,7 @@ Note: Issuing a query to multiple nodes is explained in the [Query nodes in the 
 ## Configuring a local database
 
 Anylog nodes host data. It is up to the administrator to determine the physical database to use. Examples of supported databases 
-are [PostgresSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/) and [MongoDB](https://www.mongodb.com/) for blobs storage.   
+are <a href="https://www.postgresql.org/" target="_blank">PostgresSQL</a>, <a href="https://www.sqlite.org/" target="_blank">SQLite</a> and <a href="https://www.mongodb.com/" target="_blank">MongoDB</a> for blobs storage.   
 Users determine which physical database to use and a node operates indifferently regardless of the physical database selected.  
 When a logical database is created, users name the physical database that is assigned to the logical database. The association
 will host the database tables in the physical database associated with the logical database.  
@@ -264,7 +264,7 @@ get database size lsl_demo
 # SQL Commands
 
 SQL commands are issued in 2 ways:
-1) To the local database of a particular node. This option is relevant to all [SQL DDL commands and DML commands](https://en.wikipedia.org/wiki/Data_manipulation_language).  
+1) To the local database of a particular node. This option is relevant to all <a href="https://en.wikipedia.org/wiki/Data_manipulation_language" target="_blank">SQL DDL commands and DML commands</a>.  
 2) Issue queries (DML commands) through the network protocol. This approach allows to treat the data hosted on different nodes
 of the network as a single collection of data.
    

@@ -14,12 +14,12 @@ source_path: "01- Software TPM.md"
 
 # Software TPM for AnyLog
 
-This document summarizes the software TPM implementation used with AnyLog and explains how to deploy it with the [`AnyLog-TPM`](https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file) offering and connect it to an AnyLog node.
+This document summarizes the software TPM implementation used with AnyLog and explains how to deploy it with the <a href="https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file" target="_blank">`AnyLog-TPM`</a> offering and connect it to an AnyLog node.
 
 The software TPM flow is useful when you want TPM-backed key operations without depending on a physical TPM chip on every machine. In this model, the TPM logic is provided by `swtpm`, exposed through a FastAPI service, and consumed by AnyLog through the `tpm` commands documented below.
 
 ## What the Software TPM Provides
-[Software TPM GitHub](https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file)
+<a href="https://github.com/royshadmon/AnyLog-TPM/tree/fulltest?tab=readme-ov-file" target="_blank">Software TPM GitHub</a>
 
 The `AnyLog-TPM` repository packages a TPM2 workflow around:
 

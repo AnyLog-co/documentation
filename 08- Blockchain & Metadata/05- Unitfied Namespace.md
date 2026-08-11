@@ -19,7 +19,7 @@ tags:
 
 # Unified Namespace
 
-A [Unified Namespace (UNS)](https://www.iiot.university/blog/what-is-uns%3F) is a modeling tool for organizing and
+A <a href="https://www.iiot.university/blog/what-is-uns%3F" target="_blank">Unified Namespace (UNS)</a> is a modeling tool for organizing and
 representing physical or logical assets in a structured hierarchy — similar in purpose to Historian Asset
 Frameworks, but designed for decentralized, real-time operational environments.
 
@@ -47,7 +47,7 @@ the namespace tree to find any data point without any manual configuration.
 that don't arrive dynamically and gives teams the ability to model assets in a way that reflects their own
 organizational or project structure. This is an ability most historians do not support.
 
-The UNS structure can follow a rigid standard like [ISA-95](https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard),
+The UNS structure can follow a rigid standard like <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard" target="_blank">ISA-95</a>,
 or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a type of metadata, both approaches
 can coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
 
@@ -151,7 +151,7 @@ starting the client, if needed).
 
 ### Example: Mosquitto (dev) on a LAN broker
 
-[Mosquitto](https://mosquitto.org/) is a common MQTT broker for local development. In this pattern, Mosquitto
+<a href="https://mosquitto.org/" target="_blank">Mosquitto</a> is a common MQTT broker for local development. In this pattern, Mosquitto
 listens on **`192.168.1.88:1883`**, and the AnyLog **master** (ledger) is reachable at **`192.168.1.88:32048`**.
 Connect the logical DBMS on the operator, then start the message client with **`dynamic=true`** so topic paths
 under **`M2/PL1/`** drive auto-generated UNS and storage under **`new_company`**.
@@ -171,7 +171,7 @@ connect dbms new_company where type = sqlite
     )>
 ```
 
-With the [Mosquitto clients](https://mosquitto.org/download/) installed, you can publish scalar payloads to the
+With the <a href="https://mosquitto.org/download/" target="_blank">Mosquitto clients</a> installed, you can publish scalar payloads to the
 same broker for testing (`-m` is the message body, `-t` is the topic):
 
 ```bash

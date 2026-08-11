@@ -176,7 +176,7 @@ independent of AnyLog, following Zilliz's own cluster deployment guidance.
 For backup, since standalone Milvus stores its metadata in etcd and its actual vector/object data in MinIO (both
 visible as their own services in the compose file above), backing up the `etcd_data` and `minio_data` volumes
 covers the underlying state. Zilliz also publishes a dedicated
-[milvus-backup](https://github.com/zilliztech/milvus-backup) tool for logical collection-level backup/restore,
+<a href="https://github.com/zilliztech/milvus-backup" target="_blank">milvus-backup</a> tool for logical collection-level backup/restore,
 which is generally the more reliable option over raw volume snapshots.
 
 ---

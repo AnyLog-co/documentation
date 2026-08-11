@@ -42,7 +42,7 @@ abstraction, aggregations, the security protocol, HA, test suites, training, and
 | Technical Support | ❌ | ✅ |
 | Publisher node | ❌ Not supported | ✅ |
 
-For pricing: [AnyLog Pricing](https://www.anylog.network/pricing). Upgrading is as simple as changing the
+For pricing: <a href="https://www.anylog.network/pricing" target="_blank">AnyLog Pricing</a>. Upgrading is as simple as changing the
 `docker-compose` image from `anylogco/edgelake` to `anylogco/anylog-network`. *(Detailed upgrade steps: not yet
 documented.)*
 
@@ -81,7 +81,7 @@ structure and main/backup roles.
 
 **Q: How do I deploy, and do you support zero-touch?**
 
-Deployment is entirely configuration based with default values pre-set in the [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts). 
+Deployment is entirely configuration based with default values pre-set in the <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a>. 
 
 From a Docker or Kubernetes point of view (as an example) the process is: 
 1. User defines configurations in a dotenv file 

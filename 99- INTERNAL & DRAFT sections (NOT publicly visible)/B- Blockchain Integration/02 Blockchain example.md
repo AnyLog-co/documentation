@@ -16,7 +16,7 @@ source_path: "02 Blockchain example.md"
 # Blockchain Demo 
 
 AnyLog Network, which is available with both EdgeLake and Enterprise uses layer-2 logic to publish data onto the 
-blockchain. The following demonstrates two nodes on [Optimism](https://www.optimism.io/) test network.
+blockchain. The following demonstrates two nodes on <a href="https://www.optimism.io/" target="_blank">Optimism</a> test network.
 
  The steps provided below are automatically executed when deploying EdgeLake & EdgeLake enterprise via a AnyLog's deployment 
  processes. 
@@ -33,7 +33,7 @@ blockchain network provided.
 * `SYNC_TIME` (default: 30 seconds) - How often to sync from blockchain
 
 * `PROVIDER` (default: infura) - SubQuery network participant who is responsible for serving RPC queries for blockchain 
-data to their customers. We're using [infura](https://www.infura.io/)
+data to their customers. We're using <a href="https://www.infura.io/" target="_blank">infura</a>
 * `PLATFORM` (default: optimism) - Blockchain to use. We're using an off-chain extension (layer-2) 
 blockchain named <a herf="https://www.optimism.io/" target="_blank">Optimism</a>
 * `CONTRACT` (default: 0x8fD816a62e8E7985154248019520915778eB4013) - Smart Contract ID. Smart contracts are self-executing 
@@ -48,14 +48,14 @@ time you're deploying/restarting node(s).
 * `CHAIN_ID` - Wallet ID
 
 ### Key Term
-* **[Layer-2](https://iq.wiki/wiki/layer-2/)** sits on top of layer-1 blockchain (example Ethereum), allowing to have 
+* **<a href="https://iq.wiki/wiki/layer-2/" target="_blank">Layer-2</a>** sits on top of layer-1 blockchain (example Ethereum), allowing to have 
 seem-less security and network infrastructure guarantees of the blockchain layer-1 for less. 
-* **[Optimism](https://www.optimism.io/)** is a layer-2 protocol for Ethereum. The reason we've selected it as our blockchain
+* **<a href="https://www.optimism.io/" target="_blank">Optimism</a>** is a layer-2 protocol for Ethereum. The reason we've selected it as our blockchain
 protocol is due to its ability to execute **rollups**; which batches multiple transactions into a single transaction that is committed 
 on-chain. The batching approach ultimately improves the transaction throughput while drastically reducing the cost of 
 each transaction from tens of dollars to pennies if not less.
-*  **[Sepolia](https://sepolia.etherscan.io/)** is _Optimism_'s test network.   
-* **[Infera](https://www.infera.org/)** is a remote procedure call (RPC), provides us with an endpoint to connect to 
+*  **<a href="https://sepolia.etherscan.io/" target="_blank">Sepolia</a>** is _Optimism_'s test network.   
+* **<a href="https://www.infera.org/" target="_blank">Infera</a>** is a remote procedure call (RPC), provides us with an endpoint to connect to 
 Optimism blockchain. 
 
 ### Links 
@@ -64,7 +64,7 @@ Optimism blockchain.
 * [policies.md](../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md)
 
 ## Sepolia for Optimism as Blockchain
-1. Specify [infura](https://www.infura.io/) as our RPC provider and connect to it. 
+1. Specify <a href="https://www.infura.io/" target="_blank">infura</a> as our RPC provider and connect to it. 
 
 Infura is a _RPC_ provider, which allows us to connect AnyLog to Optimism blockchain. Optimism is a layer-2
 with a test network platform named **Sepolia**.

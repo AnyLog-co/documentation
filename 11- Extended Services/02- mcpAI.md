@@ -59,7 +59,7 @@ http://[HOST]:[REST_PORT]/mcp/sse
 
 ### 1. Install prerequisites
 
-Install [Claude Desktop](https://claude.ai/download), then install `mcp-proxy` (bridges Claude's stdio MCP to the AnyLog SSE endpoint):
+Install <a href="https://claude.ai/download" target="_blank">Claude Desktop</a>, then install `mcp-proxy` (bridges Claude's stdio MCP to the AnyLog SSE endpoint):
 
 ```bash
 pip install --upgrade mcp-proxy
@@ -163,7 +163,7 @@ The MCP connection lets Claude discover your live schema, sample data, and node 
 ### Quick start
 
 1. Connect Claude Desktop to AnyLog MCP (steps above)
-2. Pick a prompt template from [AnyLog-co/MCP-Examples/prompts/](https://github.com/AnyLog-co/MCP-Examples/tree/main/prompts)
+2. Pick a prompt template from <a href="https://github.com/AnyLog-co/MCP-Examples/tree/main/prompts" target="_blank">AnyLog-co/MCP-Examples/prompts/</a>
 3. Fill in the parameters at the top:
    ```
    DATA_TYPE      = "Wind Turbine"
@@ -215,7 +215,7 @@ This requires the Flask proxy running in MCP mode — nginx alone cannot support
 
 ## Ready-made dashboards
 
-The [MCP-Examples repo](https://github.com/AnyLog-co/MCP-Examples) ships three production-ready dashboards in `html/`:
+The <a href="https://github.com/AnyLog-co/MCP-Examples" target="_blank">MCP-Examples repo</a> ships three production-ready dashboards in `html/`:
 
 | File | Description |
 |---|---|
@@ -340,7 +340,7 @@ Response: `{"results": [...], "row_count": N, "dbms": "mydb"}`
 
 ## Base44 integration
 
-[Base44](https://base44.com) is an AI-native app builder. Instead of a static HTML file, Base44 produces a hosted application. The workflow is two phases:
+<a href="https://base44.com" target="_blank">Base44</a> is an AI-native app builder. Instead of a static HTML file, Base44 produces a hosted application. The workflow is two phases:
 
 ```
 Phase 1 — Claude + AnyLog MCP          Phase 2 — Claude (no MCP)

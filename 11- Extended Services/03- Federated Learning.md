@@ -157,7 +157,7 @@ The net result: a single, more accurate temperature-prediction model trained on 
 
 ## 5. Sources
 
-- [EdgeLake-FL: An Automated Federated Learning Platform for the Edge](https://www.youtube.com/watch?v=eQWARlXZvoc) — presentation, PET Conf 2025 (uploaded PDF), talk by Ori Shadmon & Moshe Shadmon
-- [AnyLog — Enabling Federated Learning](https://www.youtube.com/watch?v=4qooadahj0Q) (YouTube, LF Open Source Summit)
-- [AI Federated Learning with AnyLog Edge (EdgeLake) in 5 mins](https://www.youtube.com/watch?v=UzmagWhQUQU) (YouTube)
-- [Solving the Hardest Problem in Federated Learning: Deployment at Scale with AnyLog & EdgeLake](https://medium.com/anylog-network/solving-the-hardest-problem-in-federated-learning-deployment-at-scale-with-anylog-edgelake-2c673c0e4f27) — Roy Shadmon, AnyLog Network (Medium)
+- <a href="https://www.youtube.com/watch?v=eQWARlXZvoc" target="_blank">EdgeLake-FL: An Automated Federated Learning Platform for the Edge</a> — presentation, PET Conf 2025 (uploaded PDF), talk by Ori Shadmon & Moshe Shadmon
+- <a href="https://www.youtube.com/watch?v=4qooadahj0Q" target="_blank">AnyLog — Enabling Federated Learning</a> (YouTube, LF Open Source Summit)
+- <a href="https://www.youtube.com/watch?v=UzmagWhQUQU" target="_blank">AI Federated Learning with AnyLog Edge (EdgeLake) in 5 mins</a> (YouTube)
+- <a href="https://medium.com/anylog-network/solving-the-hardest-problem-in-federated-learning-deployment-at-scale-with-anylog-edgelake-2c673c0e4f27" target="_blank">Solving the Hardest Problem in Federated Learning: Deployment at Scale with AnyLog & EdgeLake</a> — Roy Shadmon, AnyLog Network (Medium)

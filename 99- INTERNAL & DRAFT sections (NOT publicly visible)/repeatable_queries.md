@@ -11,7 +11,7 @@ to update a target table with the query results.
 
 A common use case is to provide result sets to BI tools and third-party applications that do not support the _REST_ API.  
 For these tools and applications, results sets of queries over the network data are hosted in a database.  
-For example, [Tableu](https://www.tableau.com/) and [Lookr](https://developers.google.com/looker-studio) do not support 
+For example, <a href="https://www.tableau.com/" target="_blank">Tableu</a> and <a href="https://developers.google.com/looker-studio" target="_blank">Lookr</a> do not support 
 the REST API but can leverage Repeatable Queries.
 
 The examples below places the network data in PotgreSQL. 
@@ -60,7 +60,7 @@ The examples below places the network data in PotgreSQL.
 Note:
 * In the example above, output is placed in table named: **fic11_mv**.
 * If **drop** is set to True, every query execution deletes the previous result sets. Users can configure the process to be incremental to the previous result sets.  
-* The [Query Options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) document details the query configuration options.
+* The <a href="https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options" target="_blank">Query Options</a> document details the query configuration options.
 
 ## Extract Data onto Tableau
 <ol start="1">
