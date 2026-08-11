@@ -10,6 +10,7 @@ source_path: "background processes.md#message-broker"
  **Date**   | **Name** | **Change** | **Version** |
  |------------|--|------------|----------|
  | 2026-08-10 | | Split Kafka content out of the MQTT Message Broker page. |
+ | 2026-08-11 | | Local Kafka for development (Docker container) section from earlier Using Kafka docs. |
 --->
 
 ## Overview
@@ -72,10 +73,90 @@ After data is ingested, query it through the AnyLog network:
 run client () sql [dbms] format=table and extend=(+ip, +node_name, @table_name) "select * from [table] limit 10"
 ```
 
+## Local Kafka for development
+
+Use a local Docker-based Kafka broker for testing consumer mappings without a production cluster.
+
+### Start the broker
+
+```bash
+docker run -d --rm --name kafka-dev -p 9092:9092 apache/kafka:latest
+```
+
+> Use `localhost:9092` as `--bootstrap-server` when running Kafka CLI commands inside the container via `docker exec`. Use the broker machine's LAN IP (e.g. `192.168.1.101:9092`) when connecting from another host.
+
+### Create a topic
+
+```bash
+docker exec kafka-dev /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --create --if-not-exists \
+  --topic test --partitions 1 --replication-factor 1
+```
+
+### Publish a message
+
+```bash
+echo '{"timestamp":1776294106000,"value":42.0,"deviceID":"d1"}' | \
+docker exec -i kafka-dev /opt/kafka/bin/kafka-console-producer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic test
+```
+
+### Verify messages
+
+```bash
+docker exec kafka-dev /opt/kafka/bin/kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic test \
+  --group "tmp-$(date +%s)" \
+  --consumer-property auto.offset.reset=earliest \
+  --max-messages 5
+```
+
+### Connect AnyLog and start consuming
+
+On the Operator node, connect the database and start the consumer:
+
+```anylog
+connect dbms new_company where type = sqlite
+
+<run kafka consumer where ip = localhost and
+    port = 9092 and
+    reset = earliest and
+    topic = (name = test and
+        dbms = new_company and
+        table = kafka_demo and
+        column.timestamp.timestamp = "bring [timestamp]" and
+        column.value.float = "bring [value]" and
+        column.deviceid.str = "bring [deviceID]")
+>
+```
+
+Topic mapping for Kafka uses the same JSON/`bring` model as MQTT — see
+[MQTT Message Broker](./05-%20MQTT%20Message%20Broker.md#mapping-json-payloads) and
+[Mapping Policy](../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md).
+
+**Verify data is flowing**:
+
+```anylog
+get streaming
+sql new_company "select * from kafka_demo"
+```
+
+### Stop the broker
+
+```bash
+docker stop kafka-dev
+```
+
+The `--rm` flag on `docker run` removes the container automatically when it stops.
+
 ## Notes
 
-Unlike MQTT's `broker = local` shorthand, this Kafka consumer syntax expects a concrete Kafka broker `ip` and
-`port`. Use the actual Kafka endpoint until a local Kafka shorthand is explicitly documented.
+Unlike MQTT's `broker = local` shorthand, Kafka has no AnyLog-local broker. For local testing, run a real Kafka
+endpoint (see [Local Kafka for development](#local-kafka-for-development)) and point `ip` / `port` at it
+(for example `localhost` and `9092`).
 
 For deployments that use both MQTT and Kafka, keep the topic-to-table naming rules consistent across consumers so
 queries can target predictable AnyLog tables.
