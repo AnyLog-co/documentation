@@ -38,7 +38,7 @@ The node name extends the CLI prompt. For example the following command changes 
 AL >  set node name Operator_3
 AL Operator_3 >
 ```
-See [Set node name](./03-%20Get%20&%20Set.md#set-node-name).
+See <a href="./03-%20Get%20&%20Set.md#set-node-name" target="_blank">Set node name</a>.
 
 A prompt extended by a plus (+) sign indicates a message in the buffer queue.
 For example:
@@ -54,7 +54,7 @@ get echo queue
 ## Basic Commands
 
 The CLI can operate on values maintained in the local dictionary. Details on the dictionary are available in
-[Get and Set Reference](./03-%20Get%20&%20Set.md#get-dictionary).
+<a href="./03-%20Get%20&%20Set.md#get-dictionary" target="_blank">Get and Set Reference</a>.
 
 ### Concatenating with `+`
 
@@ -62,7 +62,7 @@ In AnyLog, the `+` symbol concatenates strings by default — including numeric 
 strings unless a data type is specified with a `.int` or `.float` suffix (e.g. `!var.int`). On its own, `+` always
 concatenates rather than performing arithmetic, even when a `.int`/`.float` suffix is present; to actually add
 values as numbers rather than joining them as text, prefix the whole expression with the `python` command (see
-[below](#the-python-command)).
+<a href="#the-python-command" target="_blank">below</a>).
 
 Given the following values:
 ```anylog
@@ -189,12 +189,12 @@ nodes_stat{} = run client (blockchain get operator bring.ip_port, subset = true)
 
 ## Scripting
 
-As described in [section 3](../03-%20Training%20&%20Tutorials), when an AnyLog agent is brought up, a series of
-commands, defined through [deployment scripts](../03-%20Training%20&%20Tutorials/05-%20deployment-scripts.md) and
+As described in <a href="../03-%20Training%20&%20Tutorials" target="_blank">section 3</a>, when an AnyLog agent is brought up, a series of
+commands, defined through <a href="../03-%20Training%20&%20Tutorials/05-%20deployment-scripts.md" target="_blank">deployment scripts</a> and
 configuration policies, define the node to be a part of the network with the correct services and database associated
 with it.
 
-When a user defines / creates their own script — see [Docker & K8s Commands](../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20%26%20K8s%20Commands.md)
+When a user defines / creates their own script — see <a href="../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20%26%20K8s%20Commands.md" target="_blank">Docker & K8s Commands</a>
 for support — they can then run their script in 2 ways:
 
 * `process` - runs the script on the main AnyLog thread.
@@ -263,4 +263,4 @@ AL >
 ## Next: scripting and control flow
 
 For conditional logic, labeled sections, loops, and the wait command, see
-[Conditional Execution & Control Flow](./08-%20Conditional%20Execution%20and%20Control%20Flow.md).
+<a href="./08-%20Conditional%20Execution%20and%20Control%20Flow.md" target="_blank">Conditional Execution & Control Flow</a>.

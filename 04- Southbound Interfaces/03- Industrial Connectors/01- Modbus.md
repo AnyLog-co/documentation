@@ -18,7 +18,7 @@ source_path: "02 MODBUS.md"
 
 AnyLog can act as a **Modbus TCP client** (over **hostname** and **port**, typically port **502**). Data is read on a
 schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as
-[OPC-UA](./02-%20OPC-UA.md) and [EtherNet/IP](./03-%20EtherIP.md#the-run-plc-client-command).
+<a href="./02-%20OPC-UA.md" target="_blank">OPC-UA</a> and <a href="./03-%20EtherIP.md#the-run-plc-client-command" target="_blank">EtherNet/IP</a>.
 
 ---
 
@@ -127,7 +127,7 @@ run plc client where type = modbus and
 **Table names** follow the **same pattern** as plain **`dynamic = true`** (client **`name`** plus map **`name`**, e.g. **`fdev11_desk_lamp`** for the example above). Under UNS, the **read value** is usually stored in a **column named like the tag**—the map **`name`** (here **`desk_lamp`**), not a generic **`value`** column.
 
 With **`namespace`**, table and column layout follow **UNS policies**. **`namespace`** and **`master_node`** drive how
-tables are registered in the UNS. See [Unified Namespace](../../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md) for background.
+tables are registered in the UNS. See <a href="../../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a> for background.
 
 ---
 
@@ -151,7 +151,7 @@ tables are registered in the UNS. See [Unified Namespace](../../08-%20Blockchain
 
 ## Related
 
-- [Adding Data to Nodes in the Network](../../04-%20Southbound%20Interfaces/01-%20Southbound%20Interfaces.md)
-- [Unified Namespace](../../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md)
-- [OPC-UA](./02-%20OPC-UA.md)
-- [EtherNet/IP](./03-%20EtherIP.md)
+- <a href="../../04-%20Southbound%20Interfaces/01-%20Southbound%20Interfaces.md" target="_blank">Adding Data to Nodes in the Network</a>
+- <a href="../../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a>
+- <a href="./02-%20OPC-UA.md" target="_blank">OPC-UA</a>
+- <a href="./03-%20EtherIP.md" target="_blank">EtherNet/IP</a>

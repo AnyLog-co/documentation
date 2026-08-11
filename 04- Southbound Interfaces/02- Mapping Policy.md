@@ -12,7 +12,6 @@ layout: page
  | 2026-08-08 | Moshe Shadmon | moved from blockchain dir + added content | |
 --->
 
-
 # AnyLog Mapping Policies
 
 ## Overview

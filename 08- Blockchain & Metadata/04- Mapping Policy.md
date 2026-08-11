@@ -13,7 +13,7 @@ layout: page
 
 Mapping policies are a way to synchronize between the content coming in (i.e. data in JSON format) and the way it is stored.
 
-In previous sections ([Message Broker](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md))
+In previous sections (<a href="../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">Message Broker</a>)
 the idea of mapping was covered indirectly via `run msg client` and a quick explanation of mapping policies.
 
 ## Components of the Mapping Policy
@@ -64,7 +64,7 @@ The associated mapping policy would be:
 * `dbms` — the logical database where content is to be stored.
 * `table` — the table within the logical database the content is stored under.
 * `readings` — empty here because this payload is already flat (no nested array to unwrap); see
-  [the `readings` key](#readings-key) below for when it's used.
+  <a href="#readings-key" target="_blank">the `readings` key</a> below for when it's used.
 
 As a `run msg client`:
 
@@ -136,7 +136,7 @@ function that's able to translate a numeric epoch value into a timestamp.
 ## Blob Data
 
 Blob data is also unique because it requires mapping data that's ultimately stored in a
-[NoSQL database](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping) to its associated SQL representation. For this, AnyLog supports
+<a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping" target="_blank">NoSQL database</a> to its associated SQL representation. For this, AnyLog supports
 base64 encoding and OpenCV encoding.
 
 ```json

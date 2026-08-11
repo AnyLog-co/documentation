@@ -10,10 +10,10 @@ layout: page
  | 2026-07-28 | Ori Shadmon | Fixed the connect parameter table, which only listed `access_key`/`secret_key` while the example right below it used `id`/`password` — now documents both as aliases, matching MinIO.md. Added a note explaining why `provider` only lists `minio`/`akave` despite AWS S3 being mentioned in the intro (not yet fully tested). Removed a redundant/contradictory `id = 123` sitting alongside `access_key = [access_key]` in the same example command. Fixed duplicate "Step 8" numbering in the Examples walkthrough. Removed a real person's home directory (`/Users/roy`) from the upload/download examples. Standardized the `key` value used across the entire walkthrough — it previously changed at almost every step (`dir1/test2.txt`, `test.txt`, `test2.txt`), meaning the download/delete/metadata steps were referencing files that were never actually uploaded | |
 --->
 
-There are 2 ways by which to store blob data - [NoSQL](./03-%20NoSQL%20%28MongoDB%29.md) and bucket storage, whether it's
+There are 2 ways by which to store blob data - <a href="./03-%20NoSQL%20%28MongoDB%29.md" target="_blank">NoSQL</a> and bucket storage, whether it's
 MinIO, Akave (Filecoin's S3 alternative), or AWS's S3 and the likes.
 
-* MinIO (S3-compatible) — see [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md) for connection setup, Docker deployment, and troubleshooting.
+* MinIO (S3-compatible) — see <a href="../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md" target="_blank">MinIO</a> for connection setup, Docker deployment, and troubleshooting.
 * Akave Cloud (currently supported for file object management).
 * AWS S3 (the API is AWS-compatible, but direct support is not yet fully tested. Official AWS support will be extended soon).
 
@@ -23,15 +23,15 @@ The `bucket` command provides a means to push (upload) and pull (download) files
 
 |                      Operation                      |            Use case             |
 |:---------------------------------------------------:|:-------------------------------:|
-| [bucket provider connect](#bucket-provider-connect) | Connect to bucket object store. |
-|       [get bucket groups](#get-bucket-groups)       |     View all bucket groups.     |
-|      [get bucket names](#get-all-bucket-names)      |   View all buckets by group.    |
-|           [bucket create](#bucket-create)           |         Create bucket.          |
-|        [get bucket files](#get-bucket-files)        |   List all files from bucket.   |
-|      [bucket file upload](#bucket-file-upload)      |     Upload file to bucket.      |
-|    [bucket file download](#bucket-file-download)    |   Download file from bucket.    |
-|      [bucket file delete](#bucket-file-delete)      |    Delete file from bucket.     |
-|             [bucket drop](#bucket-drop)             |         Delete bucket.          |
+| <a href="#bucket-provider-connect" target="_blank">bucket provider connect</a> | Connect to bucket object store. |
+|       <a href="#get-bucket-groups" target="_blank">get bucket groups</a>       |     View all bucket groups.     |
+|      <a href="#get-all-bucket-names" target="_blank">get bucket names</a>      |   View all buckets by group.    |
+|           <a href="#bucket-create" target="_blank">bucket create</a>           |         Create bucket.          |
+|        <a href="#get-bucket-files" target="_blank">get bucket files</a>        |   List all files from bucket.   |
+|      <a href="#bucket-file-upload" target="_blank">bucket file upload</a>      |     Upload file to bucket.      |
+|    <a href="#bucket-file-download" target="_blank">bucket file download</a>    |   Download file from bucket.    |
+|      <a href="#bucket-file-delete" target="_blank">bucket file delete</a>      |    Delete file from bucket.     |
+|             <a href="#bucket-drop" target="_blank">bucket drop</a>             |         Delete bucket.          |
 
 ### Bucket Provider Connect
 
@@ -43,7 +43,7 @@ Defines a logical connection to a named bucket object storage.
 |       provider        |                                                                        Provider name (`minio` or `akave` — see note below)                                                                         |
 |    id / access_key    |                                                                               Private access key (either name works)                                                                               |
 | password / secret_key |                                                                               Private secret key (either name works)                                                                               |
-|        region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. [MinIO](../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md#credentials)) |
+|        region         | Region name (behavior/defaults vary by provider — see the provider-specific doc, e.g. <a href="../../13-%20Support%20%26%20Troubleshooting/04-%20Third-Party%20Support/02-%20MinIO.md#credentials" target="_blank">MinIO</a>) |
 |     endpoint_url      |                                                                                  URL connection to object storage                                                                                  |
 
 > `provider` currently lists `minio`/`akave` — AWS S3 is API-compatible and mentioned above as a future target, but
@@ -90,7 +90,7 @@ Create a physical bucket for file/object storage.
 | Parameter |                                                                                                              -                                                                                                               |
 |:---------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |   group   |                                                                                                Logical connection name (str)                                                                                                 |
-|   name    | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference [bucket naming convention documentation](https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/). |
+|   name    | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference <a href="https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/" target="_blank">bucket naming convention documentation</a>. |
 
 ```anylog
 bucket create where group = [group_name] and name = [bucket_name]

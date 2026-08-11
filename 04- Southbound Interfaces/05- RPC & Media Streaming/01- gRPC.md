@@ -111,7 +111,7 @@ This generates two files (e.g. `dummy_pb2.py` and `dummy_pb2_grpc.py`) that AnyL
 | `dbms` | — | Target database (if not provided by policy) |
 | `table` | — | Target table (if not provided by policy) |
 | `ingest` | — | `false` disables database ingestion — useful for testing (default: `true`) |
-| `add_info` | — | Append metadata to each row — see [Options for `add_info`](#options-for-add_info) below |
+| `add_info` | — | Append metadata to each row — see <a href="#options-for-add_info" target="_blank">Options for `add_info`</a> below |
 | `invoke` | — | Whether to invoke immediately when called by another AnyLog process |
 
 ### Examples

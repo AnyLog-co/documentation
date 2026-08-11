@@ -30,10 +30,10 @@ Every PLC client, regardless of protocol, follows the same shape:
 Because every protocol funnels into that same shape, the table structure, mapping logic, and command patterns
 described below are shared across all four — only the connection keywords (Section 3) differ per protocol.
 
-* [Modbus TCP](./02-%20Modbus.md) - Reading coils, discrete inputs, and holding/input registers from Modbus TCP devices.
-* [OPC-UA](./03-%20OPC-UA.md) | Traversing an OPC-UA server's node tree and reading tag values.
-* [EtherNet/IP](./04-%20EtherIP.md) | Reading CIP object tags from PLCs and controllers over EtherNet/IP.
-* [DNP3](./05-%20DNP3.md) | Acting as a DNP3 master against outstations over TCP or TLS. |
+* <a href="./02-%20Modbus.md" target="_blank">Modbus TCP</a> - Reading coils, discrete inputs, and holding/input registers from Modbus TCP devices.
+* <a href="./03-%20OPC-UA.md" target="_blank">OPC-UA</a> | Traversing an OPC-UA server's node tree and reading tag values.
+* <a href="./04-%20EtherIP.md" target="_blank">EtherNet/IP</a> | Reading CIP object tags from PLCs and controllers over EtherNet/IP.
+* <a href="./05-%20DNP3.md" target="_blank">DNP3</a> | Acting as a DNP3 master against outstations over TCP or TLS. |
 
 ## Standard Command Format:
 
@@ -53,7 +53,6 @@ Keywords common to every protocol:
 The connection keywords themselves are protocol-specific — for example, Modbus and DNP3 use `hostname`/`port`,
 while OPC-UA and EtherNet/IP use `url`; DNP3 adds `master_id`/`outstation_id`, Modbus adds `device_id`. See each
 protocol's page for its full keyword table.
-
 
 * View the data that's accessible via the PLC
 
@@ -184,7 +183,6 @@ blockchain insert where policy=!policy_id and local=true and master=!ledger_conn
 > `[monitor_id, ACC field, PRE field]`. The `schema` block then defines the table's columns and, for each
 > column, where its value comes from: either lifted straight from the reading (`bring`) or taken positionally
 > from `params` (`params.0`, `params.1`, ...).
-
 
 2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or
 alongside) an inline `map`:

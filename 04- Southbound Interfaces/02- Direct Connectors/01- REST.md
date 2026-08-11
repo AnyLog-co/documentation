@@ -19,7 +19,7 @@ The following document provides directions on how to insert data via REST.
 
 The `run rest` connection should be enabled by default as part of the configuration policy.
 
-A more detailed explanation of this command can be found in the [network configuration section](../../06-%20Networking%20&%20Security/02-%20Network%20Processing.md).
+A more detailed explanation of this command can be found in the <a href="../../06-%20Networking%20&%20Security/02-%20Network%20Processing.md" target="_blank">network configuration section</a>.
 
 ```anylog
 <run rest server where
@@ -113,7 +113,7 @@ curl -X POST http://[Operator IP]:[Operator Port] \
   ]'
 ```
 
-Unlike with [REST-PUT](#publishing-data-via-put), each timestamp/value pair would be stored in its own table,
+Unlike with <a href="#publishing-data-via-put" target="_blank">REST-PUT</a>, each timestamp/value pair would be stored in its own table,
 based on _sensor_, in the `my_db` logical database.
 
 ## Support Commands

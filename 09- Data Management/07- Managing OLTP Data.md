@@ -144,7 +144,7 @@ CREATE TABLE TS_17 (
 
 > AnyLog automatically creates an index for columns defined with the `TIMESTAMP` data type. Additional constraints 
 > and indexes are typically needed on non-timestamp columns instead (e.g. sensor ID, username, or other lookup 
-> fields)—see [Creating and Managing a Non-Time-Series Table](./07-1%20Creating%20and%20Managing%20a%20Non-Time-Series%20Table.md) 
+> fields)—see <a href="./07-1%20Creating%20and%20Managing%20a%20Non-Time-Series%20Table.md" target="_blank">Creating and Managing a Non-Time-Series Table</a> 
 > for how to define those.
 
 ## Considerations
@@ -167,7 +167,7 @@ create the table using the standard AnyLog workflow and disable partitioning.
 
 **Typical use cases include:**
 1. Static or slowly changing OLTP data, such as users, devices, assets, equipment metadata, and configuration records.
-2. Historical [aggregation tables](./02-2%20Data%20Aggregations.md) (hourly, daily, weekly, etc.) that are maintained independently of the raw time-series data and are intended to be retained indefinitely.
+2. Historical <a href="./02-2%20Data%20Aggregations.md" target="_blank">aggregation tables</a> (hourly, daily, weekly, etc.) that are maintained independently of the raw time-series data and are intended to be retained indefinitely.
 
 ## Two Ways to Register a Table
 
@@ -180,7 +180,7 @@ ones, define the `CREATE TABLE` statement yourself and register it—either by h
 using a script to generate it from your SQL file. This path also requires disabling partitioning, since static 
 relational tables shouldn't be subject to time-based retention.
 
-See [Creating and Managing a Non-Time-Series Table](./07-1%20Creating%20and%20Managing%20a%20Non-Time-Series%20Table.md) 
+See <a href="./07-1%20Creating%20and%20Managing%20a%20Non-Time-Series%20Table.md" target="_blank">Creating and Managing a Non-Time-Series Table</a> 
 for a full worked example of the custom/manual path.
 
 ## Dropping a Table

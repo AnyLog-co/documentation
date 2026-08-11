@@ -25,14 +25,14 @@ blockchain platform and how to configure to continuously receive metadata update
 
 Notes:
 * Using the blockchain as a metadata platform requires a contract that manages the metadata information. The initial contract setup
-with Ethereum is detailed at the section [Using Ethereum as a Global Metadata Platform](03%20Using%20Ethereum.md).
-* The published metadata is represented as Policies which are detailed in the [Policies](metadata%20management.md#policies) section.
-* The examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using [Infura](https://infura.io/).  
+with Ethereum is detailed at the section <a href="03%20Using%20Ethereum.md" target="_blank">Using Ethereum as a Global Metadata Platform</a>.
+* The published metadata is represented as Policies which are detailed in the <a href="metadata%20management.md#policies" target="_blank">Policies</a> section.
+* The examples below use Ethereum (TestNet) as the blockchain platform and a hosted node using <a href="https://infura.io/" target="_blank">Infura</a>.  
 
 ## Prerequisites
 
 * An AnyLog contract on the blockchain platform. The contract manages the metadata policies (publishing the contract is detailed at 
-  [Publish the AnyLog contract on the blockchain](03%20Using%20Ethereum.md#publish-the-anylog-contract-on-the-blockchain)).
+  <a href="03%20Using%20Ethereum.md#publish-the-anylog-contract-on-the-blockchain" target="_blank">Publish the AnyLog contract on the blockchain</a>).
 * The blockchain connection and contract information.
 * An anylog instance to configure.
 

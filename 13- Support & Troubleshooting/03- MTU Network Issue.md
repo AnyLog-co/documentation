@@ -24,7 +24,7 @@ to generate a static IP address.
 
 The deployment uses AnyLog to manage data on boats: the ‘floating’ edges run _Operators_ and connect to a central DC 
 (where the _Master_ and _Query_ agents are located). Communication is done through 4G, which may cause network inconsistencies,  
-and [ZeroTier](https://www.zerotier.com/) VPN is used to secure communications and have static IP addresses.
+and <a href="https://www.zerotier.com/" target="_blank">ZeroTier</a> VPN is used to secure communications and have static IP addresses.
 
 ## Problem Symptoms 
 When the Operator nodes are started, they are able to communicate with the central Master. This can be seen as the two 

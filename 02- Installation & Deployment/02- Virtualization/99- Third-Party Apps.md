@@ -21,14 +21,14 @@ layout: page
 
 | Service | Managed by Makefile? | Purpose |
 |---|---|---|
-| [Remote-GUI](#remote-gui) | ✅ | Web UI for AnyLog |
-| [Grafana](#grafana) | ✅ | Dashboards / visualization |
-| [PostgreSQL](#postgresql) | ✅ | Relational datastore |
-| [MongoDB](#mongodb) | ✅ | Document datastore |
-| [Ollama](#ollama) | ❌ (standalone) | Local LLM runtime for MCP function calling |
-| [Video Inference Models](#video-inference-models) | ❌ (standalone) | CV/ML inference on edge video streams |
-| [Nebula Overlay Network](#nebula-overlay-network) | ❌ (standalone) | Encrypted peer-to-peer overlay networking |
-| [Syslog Forwarding](#syslog-forwarding) | ✅ (special-cased) | Forwards host syslog traffic to the AnyLog broker port |
+| <a href="#remote-gui" target="_blank">Remote-GUI</a> | ✅ | Web UI for AnyLog |
+| <a href="#grafana" target="_blank">Grafana</a> | ✅ | Dashboards / visualization |
+| <a href="#postgresql" target="_blank">PostgreSQL</a> | ✅ | Relational datastore |
+| <a href="#mongodb" target="_blank">MongoDB</a> | ✅ | Document datastore |
+| <a href="#ollama" target="_blank">Ollama</a> | ❌ (standalone) | Local LLM runtime for MCP function calling |
+| <a href="#video-inference-models" target="_blank">Video Inference Models</a> | ❌ (standalone) | CV/ML inference on edge video streams |
+| <a href="#nebula-overlay-network" target="_blank">Nebula Overlay Network</a> | ❌ (standalone) | Encrypted peer-to-peer overlay networking |
+| <a href="#syslog-forwarding" target="_blank">Syslog Forwarding</a> | ✅ (special-cased) | Forwards host syslog traffic to the AnyLog broker port |
 
 ### Requirements
 

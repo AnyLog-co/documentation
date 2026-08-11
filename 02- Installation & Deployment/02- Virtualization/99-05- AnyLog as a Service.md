@@ -56,8 +56,8 @@ layout: page
 
 # AnyLog as a Service
 
-AnyLog's standard deployment path is a Docker container, run via [Docker](./01-%20Docker.md) or
-[Kubernetes](03-%20Kubernetes.md). Under certain conditions — limited disk space, regulatory constraints, or
+AnyLog's standard deployment path is a Docker container, run via <a href="./01-%20Docker.md" target="_blank">Docker</a> or
+<a href="03-%20Kubernetes.md" target="_blank">Kubernetes</a>. Under certain conditions — limited disk space, regulatory constraints, or
 network restrictions — you may instead want to install AnyLog (or EdgeLake) directly as a service on the host,
 with no container runtime involved.
 

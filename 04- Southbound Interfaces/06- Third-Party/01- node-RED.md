@@ -21,13 +21,13 @@ layout: page
    fidelity used elsewhere in this doc set (e.g. Syslog Integration's sample query output). |
 --->
 
-[Node-RED](https://nodered.org/) is an open-source flow-based programming tool for connecting hardware, APIs, and services visually. This guide shows how to stream timestamp/value data from a Node-RED flow into an AnyLog operator via REST POST.
+<a href="https://nodered.org/" target="_blank">Node-RED</a> is an open-source flow-based programming tool for connecting hardware, APIs, and services visually. This guide shows how to stream timestamp/value data from a Node-RED flow into an AnyLog operator via REST POST.
 
 ---
 
 ## Prerequisites
 
-- [Node-RED installed](https://nodered.org/docs/getting-started/local)
+- <a href="https://nodered.org/docs/getting-started/local" target="_blank">Node-RED installed</a>
 - An AnyLog operator node running with REST service enabled (see <a href="{{ '/docs/Network-Services/background-services//#rest-service' | relative_url }}">Background Services</a>)
 
 ---
@@ -43,7 +43,7 @@ Build a flow with these nodes:
 - **HTTP response** — handles the reply
 - **Trigger** — repeats every N seconds
 
-A [sample flow JSON](https://github.com/AnyLog-co/documentation/blob/master/examples/node_red_sample_flow.json) is available in the AnyLog documentation repo.
+A <a href="https://github.com/AnyLog-co/documentation/blob/master/examples/node_red_sample_flow.json" target="_blank">sample flow JSON</a> is available in the AnyLog documentation repo.
 
 <img src="../../imgs/node_red_flow.png" alt="Sample Node-Red Flow">
 

@@ -20,7 +20,7 @@ This page demonstrates an end-to-end pattern for AnyLog's key-based authenticati
 users, defining the policies that determine permissions, and assigning nodes/users to those policies. For the
 concepts and individual commands used here, see [Authentication](01- Authentication.md). For where this fits
 alongside TPM and overlay networking, see
-[Securing the Network](../../03-%20Securing%20the%20Network.md).
+<a href="../../03-%20Securing%20the%20Network.md" target="_blank">Securing the Network</a>.
 
 ## Definitions
 
@@ -121,7 +121,7 @@ This demo runs on the CLI of the two operators:
 The demo uses 2 operator nodes and 2 users (a root user and a non-root user). Each node and user is assigned
 keys and a member policy; each member policy is assigned a permission policy via an assignment policy, so
 senders can be authenticated and their permissions determined. If a master node is used, its configuration is
-detailed [below](#master-node-configuration).
+detailed <a href="#master-node-configuration" target="_blank">below</a>.
 
 | Step | Node | Process | Details |
 |---|---|---|---|
@@ -383,7 +383,7 @@ set node authentication on
 ```
 
 Note: if a master node is used, enable authentication on the operators only after the
-[master node setup](#master-node-configuration) below.
+<a href="#master-node-configuration" target="_blank">master node setup</a> below.
 
 ## Adding members to an existing network
 
@@ -687,7 +687,7 @@ In the Settings tab:
 ### Example: 3rd-party application via Grafana
 
 Configuring Grafana in general is covered in
-[Using Grafana](../../../05-%20Northbound%20Connectors/03-%20Grafana.md). To use a certificate specifically,
+<a href="../../../05-%20Northbound%20Connectors/03-%20Grafana.md" target="_blank">Using Grafana</a>. To use a certificate specifically,
 update the Grafana JSON data source page:
 - Set the AnyLog URL to use HTTPS.
 - Set *TLS Client Auth* to ON.

@@ -290,8 +290,8 @@ Each script below is a ready-to-run AnyLog script (`.al` file) that sets up a `r
 
 The simplest example. Subscribes to the `anylog-demo` topic and maps `timestamp` and `value` fields into your default database.
 
-- **Script:** [basic_msg_client.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/basic_msg_client.al) — configurable via node env vars (`ENABLE_MQTT=true`)
-- **Live generator:** [rand_data.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/rand_data.al)
+- **Script:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/basic_msg_client.al" target="_blank">basic_msg_client.al</a> — configurable via node env vars (`ENABLE_MQTT=true`)
+- **Live generator:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/rand_data.al" target="_blank">rand_data.al</a>
 
 Sample data published:
 ```json
@@ -317,9 +317,9 @@ Sample data published:
 
 Ingests real-time drilling metrics (depth, ROP, WOB, torque, pressure, flow rate, mud weight) from multiple rig topics. Uses a **mapping policy** for schema definition, making it easy to fan across many topics with a single `run msg client`.
 
-- **Script:** [edgex.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/edgex.al) (policy-based msg client)
-- **Live generator:** [oil_rig_data.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/oil_rig_data.al)
-- **Mapping policy:** [rig_rig-data.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/mapping/rig_rig-data.al)
+- **Script:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/edgex.al" target="_blank">edgex.al</a> (policy-based msg client)
+- **Live generator:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/oil_rig_data.al" target="_blank">oil_rig_data.al</a>
+- **Mapping policy:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/mapping/rig_rig-data.al" target="_blank">rig_rig-data.al</a>
 
 Sample data:
 ```json
@@ -346,11 +346,11 @@ Sample data:
 
 ### Telegraf — node monitoring data
 
-Ingests system metrics (CPU, memory, network, swap) collected by [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Telegraf agents installed on your machines publish metrics to the broker; AnyLog maps them into time-series tables.
+Ingests system metrics (CPU, memory, network, swap) collected by <a href="https://www.influxdata.com/time-series-platform/telegraf/" target="_blank">Telegraf</a>. Telegraf agents installed on your machines publish metrics to the broker; AnyLog maps them into time-series tables.
 
 The mapping policy uses a wildcard `"*"` schema to dynamically capture all fields from both `fields` and `tags` sections — ideal when the exact field set varies by metric type.
 
-- **Script:** [telegraf.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/telegraf.al)
+- **Script:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/telegraf.al" target="_blank">telegraf.al</a>
 
 Sample data published by Telegraf:
 ```json
@@ -378,7 +378,7 @@ Sample data published by Telegraf:
 
 Ingests wind turbine operational data (wind speed, RPM, power output, pitch, pressure, humidity) across multiple turbines. Each topic maps to several policies that route different metric groups into separate tables.
 
-- **Live generator:** [wind_turbine_data.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/wind_turbine_data.al)
+- **Live generator:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/wind_turbine_data.al" target="_blank">wind_turbine_data.al</a>
 
 Sample data:
 ```json
@@ -412,7 +412,7 @@ Sample data:
 
 Ingests high-density battery and charger telemetry from electric boats (DLT/DLB sides). Each topic carries multiple device types, each mapped to its own table via separate policies.
 
-- **Live generator:** [vessel_data.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/vessel_data.al)
+- **Live generator:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/vessel_data.al" target="_blank">vessel_data.al</a>
 
 Tables populated: `BATTERY-PACK-DEVICE-LOGS`, `BATTERY-PACK-LOGS`, `CHARGER-DEVICE-LOGS`, `CHARGER-LOGS`, `VESSEL-POWER-LOGS`, `VESSEL-STATE-LOGS`
 
@@ -441,7 +441,7 @@ Tables populated: `BATTERY-PACK-DEVICE-LOGS`, `BATTERY-PACK-LOGS`, `CHARGER-DEVI
 
 Ingests drone swarm telemetry (position, altitude, heading, speed, battery, leader estimation) via REST POST. Uses a mapping policy to define the schema, with `dbms` and `table` derived dynamically from the payload.
 
-- **Live generator:** [drone_telemetry.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/drone_telemetry.al)
+- **Live generator:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/data-generator/drone_telemetry.al" target="_blank">drone_telemetry.al</a>
 
 Sample data:
 ```json
@@ -470,7 +470,7 @@ Sample data:
 
 The `run kafka consumer` command follows the same topic/mapping pattern as `run msg client`:
 
-- **Script:** [basic_kafka_client.al](https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/basic_kafka_client.al)
+- **Script:** <a href="https://github.com/AnyLog-co/deployment-scripts/blob/os-dev/sample-scripts/basic_kafka_client.al" target="_blank">basic_kafka_client.al</a>
 
 ```anylog
 <run kafka consumer where

@@ -14,13 +14,13 @@ layout: page
 
 One of the features AnyLog provides is node monitoring through a schedule or rules engine logic.
 
-* [Node Monitoring](#node-monitoring)
-* [Scheduler](#scheduler)
-* [Notification](#notification)
+* <a href="#node-monitoring" target="_blank">Node Monitoring</a>
+* <a href="#scheduler" target="_blank">Scheduler</a>
+* <a href="#notification" target="_blank">Notification</a>
 
 ## Node Monitoring
 
-The following provides commands for getting insight about the node. Please review [Southbound Monitoring](../04-%20Southbound%20Interfaces/04-%20Monitoring)
+The following provides commands for getting insight about the node. Please review <a href="../04-%20Southbound%20Interfaces/04-%20Monitoring" target="_blank">Southbound Monitoring</a>
 for further details on node, docker and syslog monitoring.
 
 * `get stats where service = [type] and topic = [type]` - provide statistics on a service enabled on the node (e.g. `operator`, `publisher`).
@@ -75,7 +75,7 @@ of time, and if the situation (e.g. free disk space below 20%) occurs, then send
 
 The following set of scheduled tasks polls CPU, network packet counts, and network errors every 30 seconds, and pushes
 the results into a shared `node_insight` dictionary object that gets sent to an aggregator node via `monitor operators`
-(see [Aggregator node](./03-%20Get%20&%20Set.md#aggregator-node)):
+(see <a href="./03-%20Get%20&%20Set.md#aggregator-node" target="_blank">Aggregator node</a>):
 
 ```anylog
 schedule name = get_cpu_percent and time = 30 seconds task cpu_percent = get node info cpu_percent
@@ -125,7 +125,7 @@ ID Mode   Name                         Counter Run Status                       
 ## Notification
 
 AnyLog is able to send notifications via both REST and webhooks, meaning we can send to an array of services:
-* [Telegram / Pushover](04-1%20Notification/02-%20REST.md#telegram--pushover)
-* [Slack](04-1%20Notification/02-1%20Webhooks.md#slack-webhooks)
-* [SMTP](04-1%20Notification/01-%20SMTP.md)
-* [others](04-1%20Notification)
+* <a href="04-1%20Notification/02-%20REST.md#telegram--pushover" target="_blank">Telegram / Pushover</a>
+* <a href="04-1%20Notification/02-1%20Webhooks.md#slack-webhooks" target="_blank">Slack</a>
+* <a href="04-1%20Notification/01-%20SMTP.md" target="_blank">SMTP</a>
+* <a href="04-1%20Notification" target="_blank">others</a>

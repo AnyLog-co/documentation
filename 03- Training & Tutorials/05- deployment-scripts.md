@@ -34,10 +34,10 @@ and the execution model behind them.*
 
 This document covers:
 
-1. [Why This Repository Exists](#why-this-repository-exists)
-2. [The Deployment Flow](#the-deployment-flow)
-3. [How Policies and Scripts Actually Communicate](#how-policies-and-scripts-actually-communicate)
-4. [`process` vs. `thread` — the Execution Model](#process-vs-thread--the-execution-model)
+1. <a href="#why-this-repository-exists" target="_blank">Why This Repository Exists</a>
+2. <a href="#the-deployment-flow" target="_blank">The Deployment Flow</a>
+3. <a href="#how-policies-and-scripts-actually-communicate" target="_blank">How Policies and Scripts Actually Communicate</a>
+4. <a href="#process-vs-thread--the-execution-model" target="_blank">`process` vs. `thread` — the Execution Model</a>
 
 ## Why This Repository Exists
 

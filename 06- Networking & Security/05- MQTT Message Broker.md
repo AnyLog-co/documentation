@@ -53,23 +53,23 @@ as a subscriber to the external broker and the same single logical system view i
 
 Use this page as a configuration reference and jump to the section that matches the task:
 
-* [Enable AnyLog as an MQTT Broker](#enable-anylog-as-an-mqtt-broker): start the built-in broker, review broker
+* <a href="#enable-anylog-as-an-mqtt-broker" target="_blank">Enable AnyLog as an MQTT Broker</a>: start the built-in broker, review broker
   options, and validate that the MQTT port is active.
-* [Run an MQTT Message Client](#run-an-mqtt-message-client): subscribe to MQTT topics and define the connection,
+* <a href="#run-an-mqtt-message-client" target="_blank">Run an MQTT Message Client</a>: subscribe to MQTT topics and define the connection,
   client, and topic options that map messages into AnyLog.
-* [Topic matching and table naming](#topic-matching-and-table-naming): understand MQTT case sensitivity, AnyLog
+* <a href="#topic-matching-and-table-naming" target="_blank">Topic matching and table naming</a>: understand MQTT case sensitivity, AnyLog
   name normalization, generated table precedence, and possible case-only table collisions.
-* [Mapping JSON Payloads](#mapping-json-payloads): use `bring` expressions and explicit column mappings when
+* <a href="#mapping-json-payloads" target="_blank">Mapping JSON Payloads</a>: use `bring` expressions and explicit column mappings when
   dynamic table generation is not used.
-* [Dynamic UNS Policies](#dynamic-uns-policies): generate tables and UNS policies automatically from matching
+* <a href="#dynamic-uns-policies" target="_blank">Dynamic UNS Policies</a>: generate tables and UNS policies automatically from matching
   topics and JSON payloads.
-* [Registering a Mapping Policy](#registering-a-mapping-policy): store reusable mappings on the blockchain and
+* <a href="#registering-a-mapping-policy" target="_blank">Registering a Mapping Policy</a>: store reusable mappings on the blockchain and
   reference them from message-client subscriptions.
-* [Publishing MQTT Data](#publishing-mqtt-data): publish test messages from AnyLog or Mosquitto.
-* [MQTT over TLS and mTLS](#mqtt-over-tls-and-mtls): configure certificate-based broker security.
-* [Debugging and Validation](#debugging-and-validation): inspect clients, broker activity, streaming status,
+* <a href="#publishing-mqtt-data" target="_blank">Publishing MQTT Data</a>: publish test messages from AnyLog or Mosquitto.
+* <a href="#mqtt-over-tls-and-mtls" target="_blank">MQTT over TLS and mTLS</a>: configure certificate-based broker security.
+* <a href="#debugging-and-validation" target="_blank">Debugging and Validation</a>: inspect clients, broker activity, streaming status,
   generated tables, and ingestion errors.
-* [Example Use Cases](#example-use-cases): walk through multi-operator ingestion, `table_prefix`,
+* <a href="#example-use-cases" target="_blank">Example Use Cases</a>: walk through multi-operator ingestion, `table_prefix`,
   `table_name_as_topic`, schema-change behavior, case-sensitive topics, and AnyLog as the broker.
 
 ## Enable AnyLog as an MQTT Broker
@@ -157,7 +157,6 @@ run msg client where [connection parameters] and [config parameters] and topic =
 
 A single `run msg client` command can include multiple `topic = (...)` blocks.
 
-
 ### Connection options
 
 | Option | Description |
@@ -198,8 +197,6 @@ A single `run msg client` command can include multiple `topic = (...)` blocks.
 | `dynamic` | `true` auto-generates tables and UNS policies from the topic and JSON payload. |
 | `policy` | Reusable mapping policy previously inserted into the blockchain. Replaces inline `dbms`, `table`, and `column...` mappings. |
 
-
-
 ## Topic matching and table naming
 
 MQTT topic matching is traditionally case-sensitive. A subscription to `C/#` matches `C/data`; it does not match `c/data`.
@@ -216,7 +213,6 @@ are converted to lowercase, while spaces and unsupported characters are converte
 This prevents logically equivalent objects from being created under names that differ only by
 capitalization and provides consistent references across local storage, distributed queries,
 metadata, and applications, especially because databases are case insensitive.
-
 
 > **Important:** MQTT subscription matching itself remains case-sensitive. `C/#` does not match `c/data`. To ingest both topic paths, configure subscriptions for both `C/#` and `c/#`. If they represent different data sources, ensure that their generated or explicitly configured AnyLog table names do not collide.
 
@@ -328,7 +324,6 @@ Data will be written to `dbms=mydb` and `table_name = my_new_table` (table overw
 		dynamic = true
 	)>
 ```
-
 
 ### QoS
 
@@ -504,7 +499,6 @@ mosquitto_pub \
   -m '{"Broker":"A","value":50.7}'
 ```
 
-
 ## Debugging and Validation
 
 ```anylog
@@ -591,7 +585,6 @@ Company    DBMS Table       Cluster ID                       Cluster Status Node
 AnyLog Co.|mydb|data       |fed71895ee0161ffe92bb79f7e85791c|active        |operator1|       68|192.168.0.138:32148|             | +  |active     |
           |    |           |6ca7df77cc8f4777cfd427dff870af5f|active        |operator2|      212|192.168.0.138:32248|             | +  |active     |
 ```
-
 
 This data hosted by two AnyLog operators on two physical machines or sites can then be queried:
 ```anylog
@@ -810,8 +803,8 @@ The message inserts into `mydb.broker_data`, with no external MQTT broker hop.
 
 ## Related
 
-* [Kafka Message Client](./05-1%20Kafka%20Message%20Client.md)
-* [Connectors To Data Sources](./05-2%20Connectors%20To%20Data%20Sources.md)
-* [Network Processing](./02-%20Network%20Processing.md)
-* [Using REST](./04-%20Using%20REST.md)
-* [Unified Namespace](../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md)
+* <a href="./05-1%20Kafka%20Message%20Client.md" target="_blank">Kafka Message Client</a>
+* <a href="./05-2%20Connectors%20To%20Data%20Sources.md" target="_blank">Connectors To Data Sources</a>
+* <a href="./02-%20Network%20Processing.md" target="_blank">Network Processing</a>
+* <a href="./04-%20Using%20REST.md" target="_blank">Using REST</a>
+* <a href="../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a>

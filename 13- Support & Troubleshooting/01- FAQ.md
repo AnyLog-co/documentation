@@ -42,7 +42,7 @@ abstraction, aggregations, the security protocol, HA, test suites, training, and
 | Technical Support | ❌ | ✅ |
 | Publisher node | ❌ Not supported | ✅ |
 
-For pricing: [AnyLog Pricing](https://www.anylog.network/pricing). Upgrading is as simple as changing the
+For pricing: <a href="https://www.anylog.network/pricing" target="_blank">AnyLog Pricing</a>. Upgrading is as simple as changing the
 `docker-compose` image from `anylogco/edgelake` to `anylogco/anylog-network`. *(Detailed upgrade steps: not yet
 documented.)*
 
@@ -57,7 +57,7 @@ documented.)*
 | Network | TCP-based network required; overlay networks recommended (Nebula is default); static IP and 3 open ports per node |
 | Deployment options | Executable (background process), Docker, or Kubernetes |
 
-See [Prerequisites](../01-%20Getting%20Started/02-%20Prerequisite.md) for the full compatibility matrix.
+See <a href="../01-%20Getting%20Started/02-%20Prerequisite.md" target="_blank">Prerequisites</a> for the full compatibility matrix.
 
 **Q: What are the node types, and what's a Cluster?**
 
@@ -76,12 +76,12 @@ All AnyLog containers run the same image — configuration determines behavior:
 - **Generic** - this is not documented, but when specifying `NODE_TYPE=generic` the system will automatically deploy an
 empty "stand box" with network (TCP, REST and Message broker) configured. 
 
-See [Nodes](../01-%20Getting%20Started/01-%20Introduction.md#node-types) for the full breakdown, including cluster policy 
+See <a href="../01-%20Getting%20Started/01-%20Introduction.md#node-types" target="_blank">Nodes</a> for the full breakdown, including cluster policy 
 structure and main/backup roles.
 
 **Q: How do I deploy, and do you support zero-touch?**
 
-Deployment is entirely configuration based with default values pre-set in the [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts). 
+Deployment is entirely configuration based with default values pre-set in the <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a>. 
 
 From a Docker or Kubernetes point of view (as an example) the process is: 
 1. User defines configurations in a dotenv file 
@@ -102,8 +102,8 @@ docker run -it -d --detach-keys=ctrl-d --network host \
     -e LICENSE_KEY=XXX
 ```
 
-See [Getting Started](../01-%20Getting%20Started/03-%20install.md) and
-[Installation & Deployment](../02-%20Installation%20&%20Deployment/01-%20Install.md) for the full walkthrough.
+See <a href="../01-%20Getting%20Started/03-%20install.md" target="_blank">Getting Started</a> and
+<a href="../02-%20Installation%20&%20Deployment/01-%20Install.md" target="_blank">Installation & Deployment</a> for the full walkthrough.
 
 **Q: What is the difference between an Operator and a Publisher?**
 
@@ -131,7 +131,7 @@ use the Remote CLI or REST API instead.
 **Q: How do I connect to TCP / REST / the message broker, and what's the difference?**
 
 TCP is peer-to-peer (node-to-node); REST is for external apps/scripts; the broker is MQTT-style pub/sub. See
-[Background Processes → Network services](../07-%20CLI/02-%20Background%20Processes.md#network-services) for
+<a href="../07-%20CLI/02-%20Background%20Processes.md#network-services" target="_blank">Background Processes → Network services</a> for
 setup commands and config options for all three.
 
 **Q: How do I join a network — is that blockchain sync, or defining a policy?**
@@ -141,16 +141,16 @@ Different things, often both needed.
 2. **Defining a policy** publishes new metadata about *you* (a node/operator/cluster policy) that other nodes then sync 
 in. 
 
-See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#blockchain-sync) for sync, and
-[Blockchain Policy](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md) for defining one.
+See <a href="../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#blockchain-sync" target="_blank">Blockchain Connectivity</a> for sync, and
+<a href="../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md" target="_blank">Blockchain Policy</a> for defining one.
 
 **Q: My node can't connect to the network at all — where do I start?**
 
 There are 2 questions here: 
-    1. are you connected to _TCP_ service? If no, please review [network connectivity](../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md)
-    2. do you have `blockchain sync` configured? If no, please review  [blockchain connect & sync section](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#connect--sync)
+    1. are you connected to _TCP_ service? If no, please review <a href="../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md" target="_blank">network connectivity</a>
+    2. do you have `blockchain sync` configured? If no, please review  <a href="../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#connect--sync" target="_blank">blockchain connect & sync section</a>
 
-See [Troubleshooting → `test node`](02-%20Troubleshooting.md#test-node) — run that first; if it fails, the
+See <a href="02-%20Troubleshooting.md#test-node" target="_blank">Troubleshooting → `test node`</a> — run that first; if it fails, the
 problem is local to the node, not a network path issue.
 
 **Q: My node can't communicate with other nodes.**
@@ -159,7 +159,7 @@ problem is local to the node, not a network path issue.
 2. When running `test node` does the node reply to itself 
 3. are firewalls open? 
 
-See [Troubleshooting → `test network`](02-%20Troubleshooting.md#test-network), including the common-causes list
+See <a href="02-%20Troubleshooting.md#test-network" target="_blank">Troubleshooting → `test network`</a>, including the common-causes list
 for DNS/firewall/port-forwarding issues.
 
 **Q: What does `bind = true` vs `bind = false` mean?**
@@ -213,24 +213,24 @@ Supported Databases:
 
 In addition, AnyLog can coonect to Milvus for vector/similarity search.
 
-See [Databases](../09-%20Data%20Management/02-%20Databases.md) for the full breakdown and how SQL
+See <a href="../09-%20Data%20Management/02-%20Databases.md" target="_blank">Databases</a> for the full breakdown and how SQL
 and blob storage relate to each other.
 
 **Q: How do I connect to them?**
 
 CConnectivity logic / command differs by the database type
 
-* [SQL Storage - PostgresSQL / SQLite](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md)
-* [MongoDB](../09-%20Data%20Management/02-1%20Databases/03-%20NoSQL%20%28MongoDB%29.md)
-* [MinIO](04-%20Third-Party%20Support/02-%20MinIO.md)
-* [Milvus](../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md) for connection syntax specific to each.
+* <a href="../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md" target="_blank">SQL Storage - PostgresSQL / SQLite</a>
+* <a href="../09-%20Data%20Management/02-1%20Databases/03-%20NoSQL%20%28MongoDB%29.md" target="_blank">MongoDB</a>
+* <a href="04-%20Third-Party%20Support/02-%20MinIO.md" target="_blank">MinIO</a>
+* <a href="../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md" target="_blank">Milvus</a> for connection syntax specific to each.
 
 **Q: How is data partitioned, and why do some tables have a `par_` prefix?**
 
 Partitioning is a configurable parameter that maybe used to split data into smaller logical tables (by timestamp data 
 type) for better data management and query performance. 
 
-See [SQL Storage → Table Partitioning](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
+See <a href="../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning" target="_blank">SQL Storage → Table Partitioning</a>
 for interval syntax, viewing partitions, and dropping them.
 
 **Q: Why did `drop partition` remove more data than I expected?**
@@ -242,7 +242,7 @@ in the database. Always double-check `table=` and `keep=` before running this.
 **Q: Do you support HA / DR?**
 
 Yes — at least 2 operators residing in the same cluster gets you both data resilience (replication) and high
-availability (query failover). See [High Availability & Data Resilience](../09-%20Data%20Management/03-%20High%20Availability.md) 
+availability (query failover). See <a href="../09-%20Data%20Management/03-%20High%20Availability.md" target="_blank">High Availability & Data Resilience</a> 
 for the full mechanism.
 
 **Q: Why isn't my data replicating across the cluster even though distributor/consumer are enabled?**
@@ -299,7 +299,7 @@ to also split on a per-row `table` field, or distinct readings under the same to
 
 The three most common causes: `Null` instead of lowercase `null`; a trailing comma on the last key in an object;
 a doubled opening quote on a string (easy to miss when copy-pasting). See
-[Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md) for the full schema
+<a href="../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md" target="_blank">Mapping Policy</a> for the full schema
 reference.
 
 **Q: My mapping policy is published but the Operator isn't using it.**
@@ -324,7 +324,7 @@ Please review [blob extraction]() in the Edge Data Manager section.
 **Q: Can `period` and `increments` be used in the same query?**
 
 Not at this time — `increments` needs a continuous range to bucket; `period` is looking for the last occurrence
-before a timestamp. See [SQL Commands → Time-series optimized queries](../07-%20CLI/04-%20SQL.md#Time-series-optimized-queries).
+before a timestamp. See <a href="../07-%20CLI/04-%20SQL.md#Time-series-optimized-queries" target="_blank">SQL Commands → Time-series optimized queries</a>.
 
 **Q: Does AnyLog support SQL-style JOINs across tables?**
 
@@ -333,7 +333,7 @@ Yes, via `include` (not a `JOIN` keyword) — it pulls in data from additional t
 ```anylog
 sql my_data include=(other_table) and extend=(+table_name) "select * from my_table where reading_time >= now() -1d"
 ```
-See [SQL Commands](../07-%20CLI/04-%20SQL.md#the-sql-command) for the full option reference.
+See <a href="../07-%20CLI/04-%20SQL.md#the-sql-command" target="_blank">SQL Commands</a> for the full option reference.
 
 **Q: My query returns no results even though data exists.**
 
@@ -373,7 +373,7 @@ get query log
 
 A metadata manager (or master) node is a simple AnyLog agent emulating a blockchain locally. A real blockchain 
 (e.g. Optimism) is an actual distributed, trustless ledger. Either works; a real blockchain isn't required. See
-[Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md#which-ledger)
+<a href="../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md#which-ledger" target="_blank">Blockchain Connectivity</a>
 for the full tradeoff table.
 
 **Q: How do I connect to a metadata manager node vs. a real blockchain?**
@@ -382,7 +382,7 @@ Connecting to a Metadata manager node by simply enabling the `blockchain sync` l
 of the metadata manager. While an actual blockchain is a bit more comprehensive as it requires wallets, keys and 
 other components needed to conect to an actual blockcahin. 
 
-See [Blockchain Connectivity](../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md) for both
+See <a href="../08-%20Blockchain%20&%20Metadata/03-1%20Blockchain%20Full%20Circle.md" target="_blank">Blockchain Connectivity</a> for both
 paths.
 
 **Q: Which blockchains does AnyLog actually support?**
@@ -396,20 +396,20 @@ A blockchain policy is an object defining node information, data information and
 for the network and is immutable. AnyLog does not store the actual device / sensor data on the blockchain - just the 
 metadata. 
 
-See [Policies & Metadata](../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md) for details.
+See <a href="../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md" target="_blank">Policies & Metadata</a> for details.
 
 **Q: How do I query the blockchain?**
 
 The command `blockchain get [* | node type]` is the basic command struct used to query the blockchain. In addition, 
 the command allows for `where` and `bring` conditions.    
 
-See [Blockchain Commands → Query the Blockchain](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#query-the-blockchain).
+See <a href="../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#query-the-blockchain" target="_blank">Blockchain Commands → Query the Blockchain</a>.
 
 **Q: What does the blockchain actually do for AnyLog?**
 
 The blockchain layer is the component that informs an AnyLog agent these are the nodes and data in your network.
 
-See [Blockchain](../08-%20Blockchain%20&%20Metadata/01-%20Blockchain.md) for farther details.
+See <a href="../08-%20Blockchain%20&%20Metadata/01-%20Blockchain.md" target="_blank">Blockchain</a> for farther details.
 
 **Q: `blockchain test` fails.**
 
@@ -466,7 +466,7 @@ curl -X GET 127.0.0.1:32349 -H "command: get status" -H "AnyLog-Agent: AnyLog/1.
 curl -X POST 127.0.0.1:32349 -H "Content-Type: application/json" \
   -d '{"command": "get status", "AnyLog-Agent": "AnyLog/1.23"}'
 ```
-See [Using REST](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md) for full
+See <a href="../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Using REST</a> for full
 publish examples (PUT and POST) and Python code.
 
 **Q: Should I use `User-Agent` or `AnyLog-Agent`?**

@@ -39,7 +39,7 @@ into SQL and executed on the relevant Operators, with results aggregated and ret
 
 A node can connect to multiple databases simultaneously. Each database is identified by a **logical name** (the
 `dbms` parameter used in commands and queries). Additionally, the capabilities and limitations of the supported
-[SQL](../../07-%20CLI/04-%20SQL.md) derive from the incompatibility between the different databases.
+<a href="../../07-%20CLI/04-%20SQL.md" target="_blank">SQL</a> derive from the incompatibility between the different databases.
 
 Every AnyLog node hosts its data in a local relational database, but you never address that physical database
 directly. Instead, you work with a **logical database** — a name you choose, associated with whatever physical
@@ -155,7 +155,7 @@ one of the pre-defined tables (`blockchain.ledger` and `almgm.tsd_info`) in the 
 create table [table-name] where dbms = [dbms-name]
 ```
 
-* Drop a table - if [partitioning](#table-partitioning) is defined, then dropping the table will also remove the
+* Drop a table - if <a href="#table-partitioning" target="_blank">partitioning</a> is defined, then dropping the table will also remove the
 associated partitioning.
 
 ```anylog
@@ -199,7 +199,7 @@ partition my_data ping_sensor using timestamp by 1 day
 ```
 > Time interval options: `year`, `month`, `week`, `day` — singular or plural, optionally with a counter:
 
-> **If this database also stores aggregation output** (see [Aggregation Functions](../02-2%20Data%20Aggregations.md) <!-- TODO: fill in the actual relative path once file locations are confirmed, e.g. ../02-%20.../02-2%20Data%20Aggregations.md#partitioning-and-aggregations -->),
+> **If this database also stores aggregation output** (see <a href="../02-2%20Data%20Aggregations.md" target="_blank">Aggregation Functions</a> <!-- TODO: fill in the actual relative path once file locations are confirmed, e.g. ../02-%20.../02-2%20Data%20Aggregations.md#partitioning-and-aggregations -->),
 > avoid the wildcard (`*`) form above for that database — it forces raw and aggregation tables onto the same
 > interval and retention. Partition (and schedule cleanup for) the raw table and the aggregation table separately
 > instead.

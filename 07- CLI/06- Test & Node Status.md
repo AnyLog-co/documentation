@@ -23,7 +23,7 @@ connectivity, then the network as a whole, then the actual data held across the 
 ## Node Status
 
 Before testing connectivity, it's worth confirming what the node itself reports about its own state. For `get status`,
-`get processes`, and `get connections`, see [Get and Set Reference](./03-%20Get%20&%20Set.md#get-status).
+`get processes`, and `get connections`, see <a href="./03-%20Get%20&%20Set.md#get-status" target="_blank">Get and Set Reference</a>.
 
 ## Test Node
 
@@ -152,7 +152,7 @@ test network table * where dbms = lsl_demo
 ### High Availability Tests
 
 These commands validate a cluster's HA configuration and confirm that its member nodes agree on setup, databases,
-partitions, and data. See [High Availability & Data Consumer](02-1%20Nodes.md#high-availability--data-consumer) for
+partitions, and data. See <a href="02-1%20Nodes.md#high-availability--data-consumer" target="_blank">High Availability & Data Consumer</a> for
 how HA/clustering works.
 
 `test cluster setup` - test the configuration and setup of the node to support HA.

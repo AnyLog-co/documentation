@@ -37,9 +37,9 @@ And then we grow that detup into dedicated/separated master, query, and 2 operat
  
 For a more comprehensive deployment, please visit:
  
-* [Docker](../02-%20Installation%20&%20Deployment/02-%20Virtualization/01-%20Docker.md) — includes directions for a persistent, volume-based deployment
-* [Virtual Machine (OVA)](../02-%20Installation%20&%20Deployment/02-%20Virtualization/02-%20Installing%20the%20VM%20OVA.md)
-* [Kubernetes](../02-%20Installation%20&%20Deployment/02-%20Virtualization/03-%20Kubernetes.md)
+* <a href="../02-%20Installation%20&%20Deployment/02-%20Virtualization/01-%20Docker.md" target="_blank">Docker</a> — includes directions for a persistent, volume-based deployment
+* <a href="../02-%20Installation%20&%20Deployment/02-%20Virtualization/02-%20Installing%20the%20VM%20OVA.md" target="_blank">Virtual Machine (OVA)</a>
+* <a href="../02-%20Installation%20&%20Deployment/02-%20Virtualization/03-%20Kubernetes.md" target="_blank">Kubernetes</a>
 
 <sub>*A zero-touch deployment is a deployment where everything is automatically defined by the blockchain and default 
 values. In general, this means not providing any env variables. However, since this is a single codebase that's able to 
@@ -76,7 +76,7 @@ If nodes are on separate machines, confirm these ports are accessible between th
 
 The following provides a quick installation of a single AnyLog (docker) instance. 
 
-1. Make sure you have [Docker](https://docs.docker.com/engine/install/ubuntu/) and _make_ installed.
+1. Make sure you have <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> and _make_ installed.
 2. <a href="https://www.anylog.network/download" target="_blank">Request License and Access key</a>
 3. Login to Docker
 
@@ -92,7 +92,7 @@ docker run -it --network host \
   -e LICENSE_KEY={LICENSE_KEY} \
 --name anylog-standalone --rm anylogco/anylog-network:2.0.2606 
 ```
-Please use `make` functionality (in [Install](03-%20install.md)) to deploy a persistent / volume-based AnyLog agent.
+Please use `make` functionality (in <a href="03-%20install.md" target="_blank">Install</a>) to deploy a persistent / volume-based AnyLog agent.
 
 5. At this point a single instance of AnyLog is installed on your system 
 
@@ -136,7 +136,7 @@ The following provides directions on how to deploy a full network  -- 1 master, 
 Feel free to skip steps 1&2 if you already have a license. Feel free to skip adding a master node if you'd
 like to extend the network with the existing standalone instance from the previous set of directions. 
 
-1. Make sure you have [Docker](https://docs.docker.com/engine/install/ubuntu/) and _make_ installed.
+1. Make sure you have <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> and _make_ installed.
 2. <a href="https://www.anylog.network/download" target="_blank">Request License and Access key</a>
 3. Login to Docker -- this is required on each machine 
 
@@ -203,7 +203,7 @@ docker run -it --network host \
 ### Verify the Network
 
 Once all four nodes are running, confirm each is up and that the network has formed correctly. Run these against any
-node's REST port (see the [Open ports](#open-ports) table) — for example `http://127.0.0.1:32349` for the Query node.
+node's REST port (see the <a href="#open-ports" target="_blank">Open ports</a> table) — for example `http://127.0.0.1:32349` for the Query node.
 
 **Check status** — confirms the node is up and its REST service is reachable:
 ```shell
@@ -221,4 +221,4 @@ curl -X GET http://[ip]:[port] -H "command: test network" -H "User-Agent: AnyLog
 ```
 
 If `test network` doesn't show all expected peers, double-check `LEDGER_CONN` was set correctly on each node and that
-the required ports (see [Open ports](#open-ports)) are reachable between them.
+the required ports (see <a href="#open-ports" target="_blank">Open ports</a>) are reachable between them.

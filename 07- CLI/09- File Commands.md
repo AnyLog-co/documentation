@@ -16,40 +16,40 @@ source_path: "02 File Commands.md"
 
 The ***file*** command provides the means to operate on files hosted on the local node and files hosted on peer nodes.  
 In the examples below, the ***local node*** is the node where the command is executed. 
-The ***remote node*** is identified by the IP and Port declared in the [run tcp server](02-%20Background%20Processes.md) process.
+The ***remote node*** is identified by the IP and Port declared in the <a href="02-%20Background%20Processes.md" target="_blank">run tcp server</a> process.
 
 Operations supported:
 
 | Operation                                                              | Description                                                                                                             | 
 |------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [file decompress](#compress-and-decompress-a-file)                     | Decompress a file.                                                                                                      |
-| [file compress](#compress-and-decompress-a-file)                       | Compress a file.                                                                                                        |
-| [file copy](#copy-files-between-nodes-in-the-network)                  | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
-| [file to](#copy-a-file-to-a-folder)                                    | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
-| [file from](#return-a-file-via-rest)                                   | Return the file content to a REST request                                                                               |
-| [file delete](#delete-a-file)                                          | Delete a file.                                                                                                          |
+| <a href="#compress-and-decompress-a-file" target="_blank">file decompress</a>                     | Decompress a file.                                                                                                      |
+| <a href="#compress-and-decompress-a-file" target="_blank">file compress</a>                       | Compress a file.                                                                                                        |
+| <a href="#copy-files-between-nodes-in-the-network" target="_blank">file copy</a>                  | Copy a file or files from the local node to a remote node or, on the local node, copy the file to a different location. | 
+| <a href="#copy-a-file-to-a-folder" target="_blank">file to</a>                                    | Copy a file to a specified folder, with HTTP request, the file can be specified using the -F option.                    | 
+| <a href="#return-a-file-via-rest" target="_blank">file from</a>                                   | Return the file content to a REST request                                                                               |
+| <a href="#delete-a-file" target="_blank">file delete</a>                                          | Delete a file.                                                                                                          |
 | file deliver                                                           | Copy archived data from a remote node.                                                                                  |
-| [file get](#file-copy-from-a-remote-node-to-a-local-node)              | Copy a file or files from a remote node to the local node.                                                              |
-| [file hash](#calculate-the-hash-value-of-the-data-contained-in-a-file) | Calculate the hash value of the data contained in the file.                                                             |
-| [file move](#move-a-file)                                              | Move a file to a different location on the local node.                                                                  |
-| [file test](#test-if-a-file-exists)                                    | Test if a file exists.                                                                                                  |
-| [file encode](#encode-and-decode-a-file)                               | Apply base64 encoding.                                                                                                  |
-| [file decode](#encode-and-decode-a-file)                               | Apply base64 decoding.                                                                                                  |
+| <a href="#file-copy-from-a-remote-node-to-a-local-node" target="_blank">file get</a>              | Copy a file or files from a remote node to the local node.                                                              |
+| <a href="#calculate-the-hash-value-of-the-data-contained-in-a-file" target="_blank">file hash</a> | Calculate the hash value of the data contained in the file.                                                             |
+| <a href="#move-a-file" target="_blank">file move</a>                                              | Move a file to a different location on the local node.                                                                  |
+| <a href="#test-if-a-file-exists" target="_blank">file test</a>                                    | Test if a file exists.                                                                                                  |
+| <a href="#encode-and-decode-a-file" target="_blank">file encode</a>                               | Apply base64 encoding.                                                                                                  |
+| <a href="#encode-and-decode-a-file" target="_blank">file decode</a>                               | Apply base64 decoding.                                                                                                  |
 
 List files or directories:
 
 | Operation                                                      | Description | 
 |:---|:---|
-| [get files](#list-files-in-a-given-directory)                  | List the files in a given directory on a remote node or the local node. |
-| [get directories](#list-subdirectories-in-a-given-directory)   | List the subdirectories in a given directory on a remote node or the local node. |
+| <a href="#list-files-in-a-given-directory" target="_blank">get files</a>                  | List the files in a given directory on a remote node or the local node. |
+| <a href="#list-subdirectories-in-a-given-directory" target="_blank">get directories</a>   | List the subdirectories in a given directory on a remote node or the local node. |
 
-Operations on files stored in a dedicated database (details are available in the [Image Mapping](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping) document):
+Operations on files stored in a dedicated database (details are available in the <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#image-mapping" target="_blank">Image Mapping</a> document):
 
 | Operation  | Description | 
 |:---|:---|
-| [file remove](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#delete-a-file-or-a-group-of-files) | Delete a file from a blob database. |
-| [file retrieve](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#retrieve-a-file-or-files) | Retrieve a file from a blob database. |
-| [file Store](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#insert-a-file-to-a-local-database) | Insert a file from to the blob database. |
+| <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#delete-a-file-or-a-group-of-files" target="_blank">file remove</a> | Delete a file from a blob database. |
+| <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#retrieve-a-file-or-files" target="_blank">file retrieve</a> | Retrieve a file from a blob database. |
+| <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/05-image%20mapping.md#insert-a-file-to-a-local-database" target="_blank">file Store</a> | Insert a file from to the blob database. |
 
 ## Files names
 

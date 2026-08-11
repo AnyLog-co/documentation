@@ -22,7 +22,7 @@ requesting application. This allows non-time-series data to participate in the s
 time-series data, without requiring the data to be centralized.
 
 This document walks through the custom/manual path described in 
-[Managing Relational (OLTP) Data in AnyLog](./07%20OLTP%20Data.md): defining your own `CREATE TABLE` statement and 
+<a href="./07%20OLTP%20Data.md" target="_blank">Managing Relational (OLTP) Data in AnyLog</a>: defining your own `CREATE TABLE` statement and 
 registering it with the AnyLog metadata layer, so the table remains discoverable and queryable from any node in the 
 network.
 

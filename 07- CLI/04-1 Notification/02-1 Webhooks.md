@@ -21,7 +21,7 @@ tags:
 
 # Webhooks
 
-Webhooks are an extension of the [raw REST call](02-%20REST.md#rest-calls) pattern — instead of you constructing the
+Webhooks are an extension of the <a href="02-%20REST.md#rest-calls" target="_blank">raw REST call</a> pattern — instead of you constructing the
 target URL/body yourself for a general REST/Telegram/Pushover endpoint, the destination service (Slack, Discord,
 Microsoft Teams, Google Chat) hands you a pre-built URL that you `rest post` to directly.
 
@@ -93,7 +93,7 @@ https://hooks.slack.com/services/[team_id]/[webhook_id]/[token]
 ## Send Notifications via AnyLog
 
 ### Slack Webhooks
-AnyLog allows sending cURL requests via the [_rest_ command](02-%20REST.md#rest-calls). Since _Webhooks_ are
+AnyLog allows sending cURL requests via the <a href="02-%20REST.md#rest-calls" target="_blank">_rest_ command</a>. Since _Webhooks_ are
 essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifications from AnyLog into
 Slack.
 

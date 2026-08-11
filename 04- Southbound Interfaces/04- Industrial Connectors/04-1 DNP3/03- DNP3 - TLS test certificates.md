@@ -19,7 +19,7 @@ source_path: "DNP3-tls-test-certificates.md"
 # DNP3 TLS Test Certificates
 
 This page generates a small, local CA chain for mutual TLS between an AnyLog DNP3 **master** and an
-**outstation** — for example, [opendnp3](https://github.com/dnp3/opendnp3)'s `outstation-demo`, configured for
+**outstation** — for example, <a href="https://github.com/dnp3/opendnp3" target="_blank">opendnp3</a>'s `outstation-demo`, configured for
 TLS. It produces a root CA plus one client certificate (the AnyLog master) and two server certificates
 (outstations), all signed by that CA.
 
@@ -124,5 +124,5 @@ Plain TCP, no TLS: run `./outstation-demo` instead, from the same directory.
 
 ## See also
 
-- [DNP3](../04-%20DNP3.md#dnp3-out-station-testing) —
+- <a href="../04-%20DNP3.md#dnp3-out-station-testing" target="_blank">DNP3</a> —
   the main DNP3 connector doc; this page is referenced from its outstation-testing section.

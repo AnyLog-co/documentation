@@ -34,10 +34,10 @@ layout: page
               not folded in here; flagging its existence rather than guessing at its relationship to this page.
 -->
 
-[EdgeX Foundry](https://www.edgexfoundry.org) is an open source, vendor-neutral edge computing framework under the LF
+<a href="https://www.edgexfoundry.org" target="_blank">EdgeX Foundry</a> is an open source, vendor-neutral edge computing framework under the LF
 Edge umbrella. It provides a southbound platform for connecting IoT devices using standard protocols including Modbus,
 MQTT, BACnet, SNMP, OPC-UA, REST, and more. **EdgeXpert**, from IoTech Systems, is a commercial edition of EdgeX with an
-additional browser-based management GUI for configuring application services — see [Option C](#option-c--edgexpert-gui-based)
+additional browser-based management GUI for configuring application services — see <a href="#option-c--edgexpert-gui-based" target="_blank">Option C</a>
 below if that's what you're running.
 
 Integration between EdgeX (either edition) and AnyLog is achieved by configuring EdgeX to export sensor data — over
@@ -45,7 +45,7 @@ MQTT or REST — to an AnyLog node, which ingests it like any other southbound s
 
 > **EdgeX version note:** This guide's Options A and B are written for open-source EdgeX 3.x/4.x (Napa / Odesa).
 > EdgeX 4.0 uses MQTT as the default internal message bus and PostgreSQL as its default database. If you are running an
-> older open-source release, API ports and endpoint paths will differ — see the [legacy appendix](#appendix--legacy-edgex-131-complete-example)
+> older open-source release, API ports and endpoint paths will differ — see the <a href="#appendix--legacy-edgex-131-complete-example" target="_blank">legacy appendix</a>
 > at the bottom of this page if you're on something closer to EdgeX 1.x.
 
 ---
@@ -63,7 +63,7 @@ EdgeX  →  AnyLog Message Broker  →  AnyLog Operator
 
 ### Option B — Third-party broker
 
-Configure EdgeX to publish to an external MQTT broker (e.g. [Eclipse Mosquitto](https://mosquitto.org/), HiveMQ), and
+Configure EdgeX to publish to an external MQTT broker (e.g. <a href="https://mosquitto.org/" target="_blank">Eclipse Mosquitto</a>, HiveMQ), and
 configure AnyLog to subscribe to that broker.
 
 ```
@@ -78,18 +78,18 @@ browser GUI instead of Docker Compose environment variables. Three transfer meth
 * REST POST (with transform)
 * Direct MQTT (with transform)
 
-See [Option C](#option-c--edgexpert-gui-based-1) below for the full walkthrough.
+See <a href="#option-c--edgexpert-gui-based-1" target="_blank">Option C</a> below for the full walkthrough.
 
 ---
 
 ## Prerequisites
 
-- **Open-source EdgeX** (Options A/B): deployed via Docker (see [EdgeX Quick Start](https://docs.edgexfoundry.org/latest/getting-started/quick-start/))
-- **EdgeXpert** (Option C): EdgeX plus the EdgeXpert Management tool installed (see [IoTech System](https://www.iotechsys.com/) / [User Guide](https://docs.iotechsys.com/))
+- **Open-source EdgeX** (Options A/B): deployed via Docker (see <a href="https://docs.edgexfoundry.org/latest/getting-started/quick-start/" target="_blank">EdgeX Quick Start</a>)
+- **EdgeXpert** (Option C): EdgeX plus the EdgeXpert Management tool installed (see <a href="https://www.iotechsys.com/" target="_blank">IoTech System</a> / <a href="https://docs.iotechsys.com/" target="_blank">User Guide</a>)
 - An AnyLog node with TCP, REST, Streamer, and Operator services running — see Background Services
 - For Option A: the AnyLog Message Broker service running on the receiving node
-- For Option C's REST paths: the AnyLog REST service configured — see [Using REST](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
-- For Option C's Message Broker path: the AnyLog Message Broker service — see [Message Broker](../02-%20Direct%20Connectors/02-%20Message%20Broker.md)
+- For Option C's REST paths: the AnyLog REST service configured — see <a href="../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Using REST</a>
+- For Option C's Message Broker path: the AnyLog Message Broker service — see <a href="../02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">Message Broker</a>
 
 ---
 
@@ -243,7 +243,7 @@ This option applies to **EdgeXpert**, IoTech's commercial edition of EdgeX with 
 ```
 
 > **Note:** this payload shape (`apiVersion`, `sourceName`, `resourceName`) is EdgeXpert's v2 API and differs from
-> the open-source EdgeX event shape shown under [Data mapping notes](#data-mapping-notes) below (`device`,
+> the open-source EdgeX event shape shown under <a href="#data-mapping-notes" target="_blank">Data mapping notes</a> below (`device`,
 > `readings[].name`). Map against whichever shape your actual deployment sends — don't assume the two are
 > interchangeable.
 
@@ -273,7 +273,7 @@ EdgeXpert can transfer data into AnyLog using three methods:
 - **AnyLog Message Broker** — transformation supported, delivered over MQTT instead of REST.
 
 AnyLog can also be configured to receive data from third-party brokers (CloudMQTT, Eclipse Mosquitto, etc.) — the
-same pattern as [Option B](#option-b--third-party-broker) above.
+same pattern as <a href="#option-b--third-party-broker" target="_blank">Option B</a> above.
 
 #### Method 1: REST PUT (no transformation)
 
@@ -281,7 +281,7 @@ Configuration is done entirely on the EdgeXpert side; AnyLog just needs its REST
 rules. The database and table are specified in the REST headers, not derived from the data.
 
 On your own machine, create a JavaScript transform that extracts the reading value EdgeXpert will send — a
-[sample script](https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js)
+<a href="https://raw.githubusercontent.com/AnyLog-co/documentation/master/deployments/Support/edgex_transformation.js" target="_blank">sample script</a>
 is available:
 
 ```javascript
@@ -308,7 +308,7 @@ Once the service is saved, data should begin flowing into AnyLog via PUT.
 
 Here the transformation happens on the AnyLog side via mapping rules attached to a topic, and the database/table
 can be derived from the incoming data itself rather than fixed in the headers. This uses the same underlying
-mechanism as [running AnyLog as a message broker](../02-%20Direct%20Connectors/02-%20Message%20Broker.md) —
+mechanism as <a href="../02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">running AnyLog as a message broker</a> —
 mapping rules declared via a client service.
 
 On the AnyLog operator node receiving the data, declare the mapping rules and start the client service:
@@ -421,7 +421,7 @@ The `bring` expressions in the `run msg client` command extract values from this
 
 Adjust the mapping to match the actual structure of your EdgeX device readings. EdgeXpert's event structure
 (Option C) uses different field names (`deviceName`, `sourceName`, `resourceName`) — see the payload example
-under [Option C](#option-c--edgexpert-gui-based) rather than reusing this table for that path.
+under <a href="#option-c--edgexpert-gui-based" target="_blank">Option C</a> rather than reusing this table for that path.
 
 ---
 
@@ -443,9 +443,9 @@ docker compose up -d
 docker ps
 ```
 
-See the [EdgeX Quick Start](https://docs.edgexfoundry.org/latest/getting-started/quick-start/) for full deployment
-instructions. EdgeXpert deployment is a separate, commercial process — see [IoTech System](https://www.iotechsys.com/) /
-[User Guide](https://docs.iotechsys.com/).
+See the <a href="https://docs.edgexfoundry.org/latest/getting-started/quick-start/" target="_blank">EdgeX Quick Start</a> for full deployment
+instructions. EdgeXpert deployment is a separate, commercial process — see <a href="https://www.iotechsys.com/" target="_blank">IoTech System</a> /
+<a href="https://docs.iotechsys.com/" target="_blank">User Guide</a>.
 
 ---
 
@@ -461,13 +461,13 @@ deployments are set in **bold** below.
 
 ### Steps
 
-1. Clone [lfedge-code](https://github.com/AnyLog-co/lfedge-code):
+1. Clone <a href="https://github.com/AnyLog-co/lfedge-code" target="_blank">lfedge-code</a>:
 ```shell
 git clone https://github.com/AnyLog-co/lfedge-code
 cd lfedge-code/edgex
 ```
 
-2. Update configurations in the [.env](https://github.com/AnyLog-co/lfedge-code/blob/main/edgex/.env) file:
+2. Update configurations in the <a href="https://github.com/AnyLog-co/lfedge-code/blob/main/edgex/.env" target="_blank">.env</a> file:
    1. Update the MQTT params to match the credentials on your AnyLog operator node (e.g. `anylog-operator-node1`):
    ```dotenv
     MQTT_TOPIC=anylogedgex
@@ -565,8 +565,8 @@ f135b724626e   nexus3.edgexfoundry.org:10003/edgex-devops/edgex-modbus-simulator
 
 ## Further reading
 
-- [EdgeX Foundry documentation](https://docs.edgexfoundry.org/latest/)
-- [EdgeX Device Services — supported protocols](https://wiki.edgexfoundry.org/display/FA/Device+Services)
-- [IoTech System](https://www.iotechsys.com/) / [EdgeXpert User Guide](https://docs.iotechsys.com/)
-- [Message Broker](../02-%20Direct%20Connectors/02-%20Message%20Broker.md)
-- [Using REST](../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
+- <a href="https://docs.edgexfoundry.org/latest/" target="_blank">EdgeX Foundry documentation</a>
+- <a href="https://wiki.edgexfoundry.org/display/FA/Device+Services" target="_blank">EdgeX Device Services — supported protocols</a>
+- <a href="https://www.iotechsys.com/" target="_blank">IoTech System</a> / <a href="https://docs.iotechsys.com/" target="_blank">EdgeXpert User Guide</a>
+- <a href="../02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">Message Broker</a>
+- <a href="../../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Using REST</a>

@@ -31,12 +31,12 @@ Finally, AnyLog agents of the network are aware they are a part of the network b
 configuration and the metadata (i.e. `blockchain get`) they see.
 
 Note that while nodes are able to see every other members in their shared network, via the blockchain, they may
-not be granted access to all those nodes, as described in [security and permissions](../06-%20Networking%20&%20Security).
+not be granted access to all those nodes, as described in <a href="../06-%20Networking%20&%20Security" target="_blank">security and permissions</a>.
 
-* [Blockchain Policy](./02-%20Policy%20&%20Metadata.md) — what a policy is, the core policy types, and how to structure one
-* [Blockchain Commands](./03-%20Blockchain%20Commands.md) — full command reference for adding, querying, updating, and deleting policies
-* [Blockchain Connectivity](./03-1%20Blockchain%20Full%20Circle.md) — setting up a Master/Metadata node or connecting to a real blockchain platform
-* [Unified Namespace](05-%20Unitfied%20Namespace.md)
+* <a href="./02-%20Policy%20&%20Metadata.md" target="_blank">Blockchain Policy</a> — what a policy is, the core policy types, and how to structure one
+* <a href="./03-%20Blockchain%20Commands.md" target="_blank">Blockchain Commands</a> — full command reference for adding, querying, updating, and deleting policies
+* <a href="./03-1%20Blockchain%20Full%20Circle.md" target="_blank">Blockchain Connectivity</a> — setting up a Master/Metadata node or connecting to a real blockchain platform
+* <a href="05-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a>
 
 ## Terminology
 
@@ -47,8 +47,8 @@ subsequent blocks, ensuring data integrity and security.
 * **metadata**: The policies stored on the blockchain (master, operator, cluster, and table definitions, among others)
 that describe the structure and configuration of the network.
 * **policy**: A JSON object with a single root key — the policy type — that represents one metadata record (a node,
-a cluster, a table schema, a scheduled task, etc.). See [Blockchain Policy](02-%20Policy%20&%20Metadata.md) for the full
+a cluster, a table schema, a scheduled task, etc.). See <a href="02-%20Policy%20&%20Metadata.md" target="_blank">Blockchain Policy</a> for the full
 structure.
 * **ledger_conn**: AnyLog's configuration variable specifying which ledger the node syncs against.
 * **master node** or **metadata node**: a proprietary alternative to an actual blockchain, that acts as a blockchain
-emulator to store the metadata. See [Blockchain Connectivity](04-%20Mapping%20Policy.md) for setup.
+emulator to store the metadata. See <a href="04-%20Mapping%20Policy.md" target="_blank">Blockchain Connectivity</a> for setup.

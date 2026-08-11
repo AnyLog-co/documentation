@@ -182,7 +182,7 @@ docker compose -f docker-compose.yaml up -d
 
 By default the GUI is reachable at `http://${YOUR_LOCAL_IP}:31800`.
 
-Configuration that used to live in Remote-CLI's `commands.json` (default command shortcuts shown in the UI) is superseded in the Remote GUI by `feature_config.json` and `plugin_order.json`, described under [Key terminology](#key-terminology) above. If you still need the old-style editable command list on a running container/pod:
+Configuration that used to live in Remote-CLI's `commands.json` (default command shortcuts shown in the UI) is superseded in the Remote GUI by `feature_config.json` and `plugin_order.json`, described under <a href="#key-terminology" target="_blank">Key terminology</a> above. If you still need the old-style editable command list on a running container/pod:
 
 **On Docker:**
 1. Get the volume path: `docker volume inspect remote-cli` (name may differ under the new deployment — check `docker volume ls`)
@@ -198,7 +198,7 @@ Configuration that used to live in Remote-CLI's `commands.json` (default command
 4. Save
 5. Detach from the pod: `ctrl-p` + `ctrl-q`
 
-> Note: on Kubernetes, changes made this way are **not persistent** across pod restarts unless backed by a [persistent volume](../Networking%20%26%20Security/kubernetes%20volumes.md).
+> Note: on Kubernetes, changes made this way are **not persistent** across pod restarts unless backed by a <a href="../Networking%20%26%20Security/kubernetes%20volumes.md" target="_blank">persistent volume</a>.
 
 ---
 
@@ -255,4 +255,4 @@ After changes: restart the backend; rebuild the frontend if running a production
 
 ## See also
 
-- Examples of driving the underlying API can be found in the [northbound connectors](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/remote_cli.md) section.
+- Examples of driving the underlying API can be found in the <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/remote_cli.md" target="_blank">northbound connectors</a> section.

@@ -19,7 +19,7 @@ tags:
 
 This page records an end-to-end pattern: define **`uns`** policy dictionaries, insert them on the blockchain with **`blockchain insert`**, then verify with **`blockchain get uns`**. Parent IDs from earlier inserts are reused for child policies.
 
-For the broader UNS model (including auto-generated MQTT with **`dynamic=true`**), see [Unified Namespace](./05-1%20UNS%20Custom%20Dynamic%20Examples.md).
+For the broader UNS model (including auto-generated MQTT with **`dynamic=true`**), see <a href="./05-1%20UNS%20Custom%20Dynamic%20Examples.md" target="_blank">Unified Namespace</a>.
 
 ---
 

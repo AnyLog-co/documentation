@@ -29,7 +29,7 @@ its nature. Object storage (S3, MinIO, Akave) holds opaque blobs with no interna
 documents are already field-structured, mapping much more directly onto SQL's row/column model — making it a great
 tool to demonstrate the relationship between data and blob storage.
 
-> MongoDB has the same interaction commands with AnyLog as a [SQL database](01-%20SQL%20Storage.md) for dis/connecting
+> MongoDB has the same interaction commands with AnyLog as a <a href="01-%20SQL%20Storage.md" target="_blank">SQL database</a> for dis/connecting
 > and creating / dropping databases (collections in MongoDB) and tables.
 
 1. Connect to SQL-based database
@@ -176,4 +176,4 @@ locate the file itself:
         selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)">
 ```
 
-> Please review [Extracting blobs](../../10-%20Edge%20Data%20Manager/01-%20EDM.md) in Edge Data Manager section.
+> Please review <a href="../../10-%20Edge%20Data%20Manager/01-%20EDM.md" target="_blank">Extracting blobs</a> in Edge Data Manager section.

@@ -54,7 +54,7 @@ The main components of the REST interface delt with are the URL bar and cURL req
 </table>
 
 ## Increments Data 
-The [increments function](../07-%20CLI/04-%20SQL.md#the-increment-function) is used to segment time-series data into fixed, contiguous 
+The <a href="../07-%20CLI/04-%20SQL.md#the-increment-function" target="_blank">increments function</a> is used to segment time-series data into fixed, contiguous 
 time intervals (e.g., every 5 minutes, every hour, every day).
 
 1. For the URL specify the REST IP and port of the node to send the request against
@@ -81,7 +81,7 @@ time intervals (e.g., every 5 minutes, every hour, every day).
 <img src="../imgs/qlik9_increments.png" height="50%" width="50%" alt="">
 
 ## Period Data 
-The [period function](../07-%20CLI/04-%20SQL.md#the-period-function) finds the first occurrence of data before or at a specified 
+The <a href="../07-%20CLI/04-%20SQL.md#the-period-function" target="_blank">period function</a> finds the first occurrence of data before or at a specified 
 date (and if a filter-criteria is specified, the occurrence needs to satisfy the filter-criteria) and considers the 
 readings in a period of time which is measured by the type of the time interval (Minutes, Hours, Days, Weeks, Months 
 or Years) and the number of units of the time interval (i.e. 3 days - whereas time-interval is day and unit is 3).

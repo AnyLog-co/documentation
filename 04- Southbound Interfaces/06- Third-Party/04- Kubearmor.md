@@ -17,15 +17,15 @@ nav_order: 5
 gRPC (Google Remote Procedure Calls) is an open-source framework developed by Google.
 It is designed to be efficient, scalable, and interoperable across different programming languages.
 gRPC is used in distributed systems, microservices architectures, and client-server applications to enable efficient
-communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).
+communication between components. Detailed gRPC documentation is available <a href="https://grpc.io/docs/what-is-grpc/introduction/#overview" target="_blank">here</a>.
 
 EdgeLake can connect as a gRPC client to a gRPC Server to receive the data streams. Using EdgeLake policies, streams
 are mapped to a target schema, and the data is hosted on the local EdgeLakee node.
 
 EdgeLake comes pre-configured with the gRPC protocol files for KubeArmor
 
-* [KubeArmor](https://kubernetes.io/docs/setup/)
-* [Integration Architecture (with OpenHorizon)](https://wiki.lfedge.org/display/OH/EdgeLake+-+KubeArmor+Integration)
+* <a href="https://kubernetes.io/docs/setup/" target="_blank">KubeArmor</a>
+* <a href="https://wiki.lfedge.org/display/OH/EdgeLake+-+KubeArmor+Integration" target="_blank">Integration Architecture (with OpenHorizon)</a>
 
 ## KubeArmor and EdgeLake
 
@@ -38,7 +38,7 @@ of data (whereas the physical data remains distributed at the edge).
 By sending KubeArmor data into EdgeLake (via *gRPC*), users and applications are able to query the distributed data.
 This approach distributes each query to the edge nodes with relevant data and aggregates the individual replies to form
 a unified and complete result set equivalent to a reply from a cloud based database. A more detailed information on how
-EdgeLake  Operates is available in [Value Proposition article](https://medium.com/anylog-network/anylog-value-proposition-7746f04fd0a3).
+EdgeLake  Operates is available in <a href="https://medium.com/anylog-network/anylog-value-proposition-7746f04fd0a3" target="_blank">Value Proposition article</a>.
 
 Users deploying EdgeLake to manage the KubeArmor's event data are able to extract real time insight from their data,
 enable real-time alerts and monitoring and service the data to analysis and AI applications, all of that without cloud
