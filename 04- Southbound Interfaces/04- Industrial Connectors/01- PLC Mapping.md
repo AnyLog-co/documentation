@@ -54,11 +54,7 @@ The connection keywords themselves are protocol-specific — for example, Modbus
 while OPC-UA and EtherNet/IP use `url`; DNP3 adds `master_id`/`outstation_id`, Modbus adds `device_id`. See each
 protocol's page for its full keyword table.
 
-<<<<<<< HEAD
-* View the data that's accessible via the PLC 
-=======
 * View the data that's accessible via the PLC
->>>>>>> origin/os-dev
 
 ```anylog
 get <plc type - opcua | etherip> struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer
@@ -188,11 +184,7 @@ blockchain insert where policy=!policy_id and local=true and master=!ledger_conn
 > column, where its value comes from: either lifted straight from the reading (`bring`) or taken positionally
 > from `params` (`params.0`, `params.1`, ...).
 
-<<<<<<< HEAD
-2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or 
-=======
 2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or
->>>>>>> origin/os-dev
 alongside) an inline `map`:
 
 ```anylog

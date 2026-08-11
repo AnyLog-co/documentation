@@ -168,31 +168,23 @@ The humidity message without a `timestamp` intentionally demonstrates the `defau
 
 ## 4. `id`
 
-The `id` attribute identifies the mapping policy.
-
-When a policy is added to the metadata, AnyLog automatically generates a unique policy ID based on the hash value of the policy.
-
-Users can explicitly specify an `id` when creating the policy. A user-defined ID provides a meaningful and predictable identifier that can be used to reference the policy.
-
-For example:
+`id` identifies the mapping policy.
 
 ```json
 "id": "sensor-policy"
 ```
 
-The following example creates a mapping policy with the ID `my_policy` and inserts it into the local metadata:
+The mapping-policy validator requires an ID.
+
+When the policy is referenced by a human-readable variable from commands such as:
 
 ```text
-<policy = {"mapping": {
-    "id": "my_policy",
-    "dbms": "my_dbms",
-    "table": "my_table",
-    "readings": "",
-    ...
-}}>
-
-blockchain insert where policy = !policy and local = true
+policy=!policy_id
 ```
+
+it is often useful to assign the policy ID explicitly rather than relying on an automatically generated identifier.
+
+---
 
 ## 5. `dbms`
 
