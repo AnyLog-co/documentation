@@ -106,7 +106,7 @@ Each script internally calls the relevant `mapping/*.al` files first, then decla
 
 ## Python data generator
 
-> **Repo:** [AnyLog-co/Sample-Data-Generator](https://github.com/AnyLog-co/Sample-Data-Generator) (branch: `data-generator2`)
+> **Repo:** <a href="https://github.com/AnyLog-co/Sample-Data-Generator" target="_blank">AnyLog-co/Sample-Data-Generator</a> (branch: `data-generator2`)
 
 ### Architecture
 

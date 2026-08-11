@@ -46,7 +46,7 @@ curl -X POST 'http://10.0.0.78:32349' \
   -w "\n"
 ```
 
-Both return the same result set. See [Using REST](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
+Both return the same result set. See <a href="../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Using REST</a>
 for the full GET/POST reference, including why `AnyLog-Agent` (not `User-Agent`) is the key to use in a POST body
 specifically.
 
@@ -113,7 +113,7 @@ Here `broker=!ip` publishes to this node's own broker (assuming one is running o
 third-party one — swap in a real broker address and credentials the same way as the plain-string example above if
 publishing externally.
 
-See [Message Broker](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md) for
+See <a href="../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">Message Broker</a> for
 the broader picture of AnyLog's MQTT roles (subscribing as a client vs. running as the broker itself) — `mqtt publish`
 is a separate, simpler command from either of those: it just sends one message and returns, rather than starting a
 standing process.

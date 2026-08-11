@@ -17,10 +17,10 @@ source_path: "05- JSON Data Transformation.md"
 Using command line instructions, users can transform JSON data to target structures.    
 Examples of usage:
 * Retrieve needed values from JSON objects.
-* Retrieve needed values from the ledger policies. Details ate available at the [Query policies](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#query-the-blockchain) 
-section in the [Blockchain commands](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md) documentation. 
-* Map source JSON data to a target structure - Details are available at the [Bring Command](#the-bring-keyword)
-section in the [Message Broker](../06-%20Networking%20&%20Security/05-%20Message%20Broker.md) documentation.
+* Retrieve needed values from the ledger policies. Details ate available at the <a href="../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#query-the-blockchain" target="_blank">Query policies</a> 
+section in the <a href="../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md" target="_blank">Blockchain commands</a> documentation. 
+* Map source JSON data to a target structure - Details are available at the <a href="#the-bring-keyword" target="_blank">Bring Command</a>
+section in the <a href="../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md" target="_blank">MQTT Message Broker</a> documentation.
 
 ## Creating JSON Objects and Policies
 
@@ -61,7 +61,7 @@ Usage:
 json [JSON object] [test]
 ```
  
-Example (referencing the [script in the example above](#creating-json-objects-and-policies)):
+Example (referencing the <a href="#creating-json-objects-and-policies" target="_blank">script in the example above</a>):
 ```anylog
 AL anylog-node > json !new_operator
 {'operator' : {

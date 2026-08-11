@@ -43,14 +43,14 @@ traffic uses UDP, and by default on port `4242`. Whatever network the lighthouse
 be open (or forwarded, in NAT'd setups) between the machines that need to discover and reach each other — otherwise 
 the overlay has no path to establish tunnels in the first place, regardless of how the AnyLog-side config is set.
 
-For a concrete, worked example, see **[Nebula](./02-%20Nebula.md)** — the overlay technology we use for testing and
+For a concrete, worked example, see **<a href="./02-%20Nebula.md" target="_blank">Nebula</a>** — the overlay technology we use for testing and
 demos. Nothing below is Nebula-specific; it applies to whatever overlay technology sits underneath.
 
 ---
 
 ## Not the Same as a Reverse Proxy
 
-This doc set also covers **[NGINX](03-%20NGINX.md)**, which solves a related but genuinely different problem —
+This doc set also covers **<a href="03-%20NGINX.md" target="_blank">NGINX</a>**, which solves a related but genuinely different problem —
 worth being clear on which one you actually need:
 
 * **Overlay networking (Nebula)** solves cross-network reachability: nodes on *separate physical networks or
@@ -102,7 +102,7 @@ threads = 3
 
 ### Configuration-based deployment
 
-If deploying via the [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts), the overlay IP is used
+If deploying via the <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a>, the overlay IP is used
 automatically once configured. In `node_configs.env`:
 
 1. Set **`OVERLAY_IP`** to the physical machine's overlay address.
@@ -252,8 +252,8 @@ overlay_ip         |                  192.168.100.1| # <-- overlay IP (e.g. Nebu
 
 ## Related
 
-* **[Nebula](./02-%20Nebula.md)** — the overlay technology we use for testing and demos, including how to deploy it.
-* **[NGINX](03-%20NGINX.md)** — the reverse-proxy approach to a related-but-different problem (see
+* **<a href="./02-%20Nebula.md" target="_blank">Nebula</a>** — the overlay technology we use for testing and demos, including how to deploy it.
+* **<a href="03-%20NGINX.md" target="_blank">NGINX</a>** — the reverse-proxy approach to a related-but-different problem (see
   "Not the Same as a Reverse Proxy" above).
-* **[Network Processing](../02-%20Network%20Processing.md)** — `NETWORK_TYPE`, `NIC_TYPE`, and binding in full, including
+* **<a href="../02-%20Network%20Processing.md" target="_blank">Network Processing</a>** — `NETWORK_TYPE`, `NIC_TYPE`, and binding in full, including
   how `NIC_TYPE=nebula1` fits alongside `OVERLAY_IP`.

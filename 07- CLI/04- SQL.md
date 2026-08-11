@@ -20,13 +20,13 @@ database called system_query and uses blockchain metadata to locate the relevant
 and assemble a unified result — letting a query behave as though all the data resides locally on a single machine.
 
 **Related Topics**:
-* [Data Storage](../09-%20Data%20Management/02-%20Databases.md)
+* <a href="../09-%20Data%20Management/02-%20Databases.md" target="_blank">Data Storage</a>
 * Data Discovery
-* [Query Blob Data](../09-%20Data%20Management/02-1%20Databases/02-%20Blob%20Storage.md)
+* <a href="../09-%20Data%20Management/02-1%20Databases/02-%20Blob%20Storage.md" target="_blank">Query Blob Data</a>
 
 ## SQL + `run client ()`
 
-In the [previous sections](01-%20CLI.md#executing-on-peer-nodes) we had talked about the idea of `run client` and
+In the <a href="01-%20CLI.md#executing-on-peer-nodes" target="_blank">previous sections</a> we had talked about the idea of `run client` and
 how to specify the proper IP and ports for sending requests between nodes. Except for the `sql` command,
 the content in `run client` must be filled in.
 
@@ -75,7 +75,7 @@ sql [db name] format=table and stat=true and timezone=utc and extend=(+node_name
 
 AnyLog is a time-series focused platform, providing SQL support across different database types as though they are
 unified. While we support much of the standard functionality, we also support extended functionality or lack certain
-functionality that may be of interest. Please reach out to [info@anylog.network](mailto:info@anylog.network) if you
+functionality that may be of interest. Please reach out to <a href="mailto:info@anylog.network" target="_blank">info@anylog.network</a> if you
 are looking to get support for something that's not there.
 
 **Supported Aggregation functions**:
@@ -136,8 +136,8 @@ SELECT reading_time, speed::float(2)::format(:,) FROM performance WHERE reading_
 
 In addition to the standard SQL functions mentioned above, AnyLog also has its own time-series optimization windowing
 functions.
-* [`period`](#period) which brings the last before a given timestamp
-* [`increments`](#increments) which aggregate the data into buckets of time.
+* <a href="#period" target="_blank">`period`</a> which brings the last before a given timestamp
+* <a href="#increments" target="_blank">`increments`</a> which aggregate the data into buckets of time.
 
 > **Note:** the two functions cannot co-exist on the same query at this time.
 

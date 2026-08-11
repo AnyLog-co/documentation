@@ -16,7 +16,7 @@ As covered in the previous sections, the process by which nodes communicate with
 metadata / master node differs only by the connectivity process itself.
 
 This page walks the full loop once, start to finish, showing the Master/Metadata node path and the real blockchain 
-platform path side by side at each step, using the actual logic from AnyLog's [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts) repo
+platform path side by side at each step, using the actual logic from AnyLog's <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> repo
 (`node-deployment/`), trimmed down for readability. The full scripts handle considerably more edge-case branching
 (DNS, overlay networks, auth) than shown here — follow the links at each step for the complete version.
 
@@ -34,13 +34,13 @@ options plug into the same loop below — only the connection details in step 1 
 | **Connect via** (step 1)   | `connect dbms blockchain where ...`                                              | `blockchain connect to ethereum where provider=http://<your-node-ip>:<port>`                               | `blockchain connect to ethereum where provider=https://sepolia.infura.io/v3/[INFURA_PROJECT_ID]`             |
 | **Best for**               | Dev/test and small deployments that want to avoid blockchain complexity entirely | Deployments with compliance/control requirements, or that want no dependency on a third-party RPC provider | The fastest way onto a real chain without operating any infrastructure                                       |
 
-1. [Connect to the ledger](#1-connect-to-the-ledger)
-2. [Sync](#2-sync)
-3. [Check if the policy already exists](#3-check-if-the-policy-already-exists)
-4. [Define the policy](#4-define-the-policy)
-5. [Publish the policy](#5-publish-the-policy)
-6. [Query](#6-query)
-7. [One node or two?](#7-one-node-or-two)
+1. <a href="#1-connect-to-the-ledger" target="_blank">Connect to the ledger</a>
+2. <a href="#2-sync" target="_blank">Sync</a>
+3. <a href="#3-check-if-the-policy-already-exists" target="_blank">Check if the policy already exists</a>
+4. <a href="#4-define-the-policy" target="_blank">Define the policy</a>
+5. <a href="#5-publish-the-policy" target="_blank">Publish the policy</a>
+6. <a href="#6-query" target="_blank">Query</a>
+7. <a href="#7-one-node-or-two" target="_blank">One node or two?</a>
 
 ---
 
@@ -171,4 +171,4 @@ blockchain get *
 
 to be added
 
-See [Blockchain Commands](03-%20Blockchain%20Commands.md#query-the-blockchain) for filtering, `bring`, join/merge, etc.
+See <a href="03-%20Blockchain%20Commands.md#query-the-blockchain" target="_blank">Blockchain Commands</a> for filtering, `bring`, join/merge, etc.

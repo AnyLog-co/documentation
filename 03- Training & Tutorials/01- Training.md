@@ -5,7 +5,7 @@ layout: page
 source_path: "training/01- Training.md"
 ---
 
-The [previous section](../02-%20Installation%20&%20Deployment) covered the different ways a user can download and
+The <a href="../02-%20Installation%20&%20Deployment" target="_blank">previous section</a> covered the different ways a user can download and
 install AnyLog — whether via Docker / Kubernetes, directly on the machine, via pip or as a service, or using an
 orchestration tool like IBM's Open Horizon or ZEDEDA.
 
@@ -13,14 +13,14 @@ This section covers what happens once the AnyLog agent(s) is installed and runni
 
 ## What's in This Section
 
-* [Basic commands](02-%20Basic%20Commands.md)
-* [Query Data](03-%20Query%20Data.md)
-* [Deployment Process](04-%20deployment-process.md)
-* [Deployment Scripts](05-%20deployment-scripts.md)
-* [Node Configuration Process](06-%20Nodes.md)
-* [Basic Docker / K8s Commands](../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20&%20K8s%20Commands.md)
+* <a href="02-%20Basic%20Commands.md" target="_blank">Basic commands</a>
+* <a href="03-%20Query%20Data.md" target="_blank">Query Data</a>
+* <a href="04-%20deployment-process.md" target="_blank">Deployment Process</a>
+* <a href="05-%20deployment-scripts.md" target="_blank">Deployment Scripts</a>
+* <a href="06-%20Nodes.md" target="_blank">Node Configuration Process</a>
+* <a href="../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/01-%20Docker%20&%20K8s%20Commands.md" target="_blank">Basic Docker / K8s Commands</a>
 
-[Section 12](../12-%20Examples%20&%20Use%20Cases) provides full examples for deploying a local / demo network from start to finish.
+<a href="../12-%20Examples%20&%20Use%20Cases" target="_blank">Section 12</a> provides full examples for deploying a local / demo network from start to finish.
 
 ## The Process
 
@@ -40,7 +40,7 @@ Once a user executes `make up` on an AnyLog agent, the following steps occur:
      provided.
 2. `docker compose up` is executed.
 3. The deployment-scripts repo is downloaded if needed, or reused if it already exists (see the
-   [deployment scripts deep dive](./04-%20deployment-process.md) for the different sourcing strategies).
+   <a href="./04-%20deployment-process.md" target="_blank">deployment scripts deep dive</a> for the different sourcing strategies).
 4. The AnyLog agent starts inside the docker container.
 
 What happens inside AnyLog:

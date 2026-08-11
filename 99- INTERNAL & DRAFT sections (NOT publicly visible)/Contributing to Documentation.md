@@ -131,8 +131,8 @@ The slug is the synced path without the `.md` extension after the sync script no
 
 - **Use absolute permalink paths** for links between doc pages — Jekyll builds each page at `/docs/<section>/<slug>/` regardless of which folder the source file is in, so relative paths will break:
 ```markdown
-  [Install](/docs/getting-started/installing-anylog/)
-  [Background Services](/docs/network-services/background-services/#rest-service)
+  <a href="/docs/getting-started/installing-anylog/" target="_blank">Install</a>
+  <a href="/docs/network-services/background-services/#rest-service" target="_blank">Background Services</a>
 ```
   The slug is always the filename without `.md`, lowercased, under its section directory name (also lowercased with hyphens).
 - **External links** must open in a new tab:

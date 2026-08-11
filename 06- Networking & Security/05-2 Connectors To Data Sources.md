@@ -12,44 +12,43 @@ source_path: "training/Connectors to Data Sources.md"
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  |            |
 --->
+# Streaming Data into AnyLog
 
-# Streaming Data into AnyLog 
-
-This document provides examples of configurations to data sources. 
+This document provides examples of configurations to data sources.
 
 **Other Related Documents**
-* [Python and cURL examples of Streaming Data into AnyLog](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md) 
-* [Configuring the Message Broker service](../07-%20CLI/02-%20Background%20Processes.md#message-broker)
-* [Message Broker](./05-%20Message%20Broker.md)
-* [Using REST](04-%20Using%20REST.md)
-* [Using Kafka](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md)
-* [Using Edgex](../04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md)
-* [The Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md)
+* <a href="../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md" target="_blank">Python and cURL examples of Streaming Data into AnyLog</a>
+* <a href="../07-%20CLI/02-%20Background%20Processes.md#message-broker" target="_blank">Configuring the Message Broker service</a>
+* <a href="./05-%20MQTT%20Message%20Broker.md" target="_blank">MQTT Message Broker</a>
+* <a href="04-%20Using%20REST.md" target="_blank">Using REST</a>
+* <a href="./05-1%20Kafka%20Message%20Client.md" target="_blank">Kafka Message Client</a>
+* <a href="../04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md" target="_blank">Using Edgex</a>
+* <a href="../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md" target="_blank">The Data Generator</a>
 
-## Third-Party MQTT Client 
-AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 
+## Third-Party MQTT Client
+AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka.
 
-In order to process data from a message broker, users specify the mapping between the source data and the table's 
-schema. The following example demonstrates subscription to a third-party broker (_CloudMQTT_). 
- 
+In order to process data from a message broker, users specify the mapping between the source data and the table's
+schema. The following example demonstrates subscription to a third-party broker (_CloudMQTT_).
+
 ```anylog
 broker = driver.cloudmqtt.com
 port = 18785
 user = ibglowct
 password = MSY4e009J7ts
-mqtt_logs = false 
-db_name=test 
+mqtt_logs = false
+db_name=test
 <run mqtt client where broker=!broker and port=!port and user=!user and password=!password and log=!mqtt_log  and topic=(
-    name=anylogedgex-demo and 
-    dbms=!db_name and 
-    table="bring [sourceName]" and 
-    column.timestamp.timestamp=now and 
+    name=anylogedgex-demo and
+    dbms=!db_name and
+    table="bring [sourceName]" and
+    column.timestamp.timestamp=now and
     column.value.float="bring [readings][][value]"
-)>	
+)>
 ```
-Note: In the training, the data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in dbms "test".  
+Note: In the training, the data coming in will generate 4 tables (lightout1, lightout2, lightout3, lightout4) and will be stored in dbms "test".
 
-Sample Source Data: 
+Sample Source Data:
 ```json
 {
   "apiVersion":"v2",
@@ -69,55 +68,55 @@ Sample Source Data:
         "value":"1"
       }
   ]
-}	
+}
 ```
 
-## Local MQTT broker 
+## Local MQTT broker
 An AnyLog node can be configured with a local message broker service.
-   
-The needed configuration:  
-1. Configure a message broker service on the AnyLog node 
+
+The needed configuration:
+1. Configure a message broker service on the AnyLog node
 2. Configure an MQTT client process against the local broker with the proper data mapping of the source data.
 
 ### Enable the Message Broker Service
 ```anylog
-anylog_broker_port=32150 
-broker_bind = false 
+anylog_broker_port=32150
+broker_bind = false
 broker_threads = 3
 
 <run message broker where
-    external_ip=!external_ip and 
+    external_ip=!external_ip and
     external_port=!anylog_broker_port and
-    internal_ip=!ip and 
+    internal_ip=!ip and
     internal_port=!anylog_broker_port and
-    bind=!broker_bind and 
+    bind=!broker_bind and
     threads=!broker_threads>
 ```
 
-**Validate local Message Broker is running**: 
+**Validate local Message Broker is running**:
 
-After enabling the message broker service, the connection information is validated as follows:  
+After enabling the message broker service, the connection information is validated as follows:
 ```anylog
 AL anylog-operator_1 > get connections
 
-Type      External Address    Internal Address    Bind Address        
+Type      External Address    Internal Address    Bind Address
 ---------|-------------------|-------------------|-------------------|
 TCP      |198.74.50.131:32148|198.74.50.131:32148|198.74.50.131:32148|
 REST     |198.74.50.131:32149|198.74.50.131:32149|0.0.0.0:32149      |
 Messaging|198.74.50.131:32150|198.74.50.131:32150|0.0.0.0:32150      |
 ```
 
-### Publishing to Message Broker 
+### Publishing to Message Broker
 Like with a third-party broker, subscribe to the local broker using the `run message client` command.
- 
-The example below uses the same data as the [data generator](../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md), but with a the message client subscribed to
-a local message broker. 
- 
+
+The example below uses the same data as the <a href="../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md" target="_blank">data generator</a>, but with a the message client subscribed to
+a local message broker.
+
 **Set Message Client**
 ```anylog
 broker = local
-anylog_broker_port = 32150 
-mqtt_logs = false 
+anylog_broker_port = 32150
+mqtt_logs = false
 topic_name = ping-percentage
 <run mqtt client where broker=!broker and port=!anylog_broker_port and user-agent=anylog and log=!mqtt_log and topic=(
     name=!topic_name and
@@ -128,11 +127,11 @@ topic_name = ping-percentage
     column.parentelement.str="bring [parentelement]" and
     column.webid.str="bring [webid]" and
     column.value.float="bring [value]"
-)> 
+)>
 ```
 
-**Sending Data** (using the data simulator) - make sure to update **CONN** to your MQTT IP + Port 
- 
+**Sending Data** (using the data simulator) - make sure to update **CONN** to your MQTT IP + Port
+
 ```shell
 docker run -d --name data-generator --network host \
    -e DATA_TYPE=ping,percentagecpu \
@@ -147,18 +146,18 @@ docker run -d --name data-generator --network host \
 --rm anylogco/sample-data-generator:latest &
 ```
 
-To publish data via REST _POST_ (using the simulator), make the following changes: 
+To publish data via REST _POST_ (using the simulator), make the following changes:
 1. In the `run message client`, change _broker_ from **local** to _rest_ and _port_ from **anylog_broker_port** to **anylog_rest_port**
 2. In the sending data, change _DATA_TYPE_ from **mqtt** to **post** and update the _CONN_ info, to the REST connection information
 
-## Support Functionality  
+## Support Functionality
 * `get streaming` - Monitor the number of rows added via REST or MQTT per table
 
 ```anylog
-AL anylog-operator_1 > get streaming 
+AL anylog-operator_1 > get streaming
 
 Flush Thresholds
-Threshold         Value  Streamer 
+Threshold         Value  Streamer
 -----------------|------|--------|
 Default Time     |    60|Running |
 Default Volume   |10,240|        |
@@ -167,8 +166,8 @@ Buffered Rows    |    27|        |
 Flushed Rows     |    10|        |
 
 Statistics
-                          Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process 
-DBMS-Table                files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS     
+                          Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process
+DBMS-Table                files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS
 -------------------------|------|-----|-|---------|---------|------|----------|-----------|--------|----------|---------|------------|
 test.ping_sensor         |     0|    0| |       48|       93|    14|        63|         10|   43.15|        60|        4|00:00:07    |
 test.lightout4           |     0|    0| |       30|       30|     2|        27|         10|    1.04|        60|       10|00:00:20    |
@@ -178,10 +177,10 @@ test.lightout1           |     0|    0| |       29|       29|     1|        25| 
 test.percentagecpu_sensor|     0|    0| |       47|       47|    15|        15|         10|   46.29|        60|        3|00:00:09    |
 ```
 
-* `get msg client` – Monitor the number of rows added by topic 
+* `get msg client` – Monitor the number of rows added by topic
 
 ```anylog
-AL anylog-operator_1 > get msg client 
+AL anylog-operator_1 > get msg client
 
 Subscription ID: 0001
 User:         ibglowct
@@ -191,9 +190,9 @@ Connection:   Connected
      Messages    Success     Errors      Last message time    Last error time      Last Error
      ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
             113         113           0  2023-08-02 22:38:40
-     
+
      Subscribed Topics:
-     Topic            QOS DBMS Table            Column name Column Type Mapping Function        Optional Policies 
+     Topic            QOS DBMS Table            Column name Column Type Mapping Function        Optional Policies
      ----------------|---|----|----------------|-----------|-----------|-----------------------|--------|--------|
      anylogedgex-demo|  0|test|['[sourceName]']|timestamp  |timestamp  |now()                  |False   |        |
                      |   |    |                |value      |int        |['[readings][][value]']|False   |        |
@@ -205,7 +204,7 @@ Connection:   Connected
 AL anylog-operator_1 +> get local broker
 
 Message Broker Stat
-Protocol IP              Event   Success Last message time   Error Last error time Error Code Details 
+Protocol IP              Event   Success Last message time   Error Last error time Error Code Details
 --------|---------------|-------|-------|-------------------|-----|---------------|----------|-------|
 MQTT    |172.104.180.110|CONNECT|  1,463|2023-08-02 23:21:41|    0|               |          |       |
 MQTT    |172.104.180.110|PUBLISH| 43,887|2023-08-02 23:22:07|    0|               |          |       |

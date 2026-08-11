@@ -20,9 +20,9 @@ source_path: "01- Authentication.md"
 
 This document covers how to implement each of AnyLog's built-in authentication options: the commands, their
 options, and what each one does. For a general overview of how this fits alongside TPM and overlay networking,
-see [Securing the Network](../../03-%20Securing%20the%20Network.md). For a full
+see <a href="../../03-%20Securing%20the%20Network.md" target="_blank">Securing the Network</a>. For a full
 worked example — assigning keys, building permission and assignment policies, and running a 2-operator demo end
-to end — see [Policy-Based Users and Keys — Example](02-%20Authentication-policies.md).
+to end — see <a href="02-%20Authentication-policies.md" target="_blank">Policy-Based Users and Keys — Example</a>.
 
 The commands in this document facilitate a framework that provides the following:
 
@@ -30,7 +30,7 @@ The commands in this document facilitate a framework that provides the following
 * Authenticates messages sent from nodes to peers with privileges assigned to users.
 * Determines permissions for network processes and the data maintained by nodes in the network.
 * Validates policies by authenticating their authors and their assigned permissions (see
-   [Adding policies to the blockchain](#adding-policies-to-the-blockchain) below).
+   <a href="#adding-policies-to-the-blockchain" target="_blank">Adding policies to the blockchain</a> below).
 * Encrypts and decrypts commands and data transferred in the network.
 
 The network provides two layers of authentication:
@@ -38,7 +38,7 @@ The network provides two layers of authentication:
 1) **Node Authentication** — processes that authenticate users and processes delivering messages from one node
    to another, and that authenticate policies registered on the blockchain. These messages are authenticated
    using the TCP server processes and related calls (see the
-   [TCP Server process](../../../07-%20CLI/02-%20Background%20Processes.md#the-tcp-server-process) section).
+   <a href="../../../07-%20CLI/02-%20Background%20Processes.md#the-tcp-server-process" target="_blank">TCP Server process</a> section).
    Message authentication is based on issuing a private key and a public key to nodes and users. Messages are
    signed by the private key of the sender (a user or a node), and the destination node validates the sender
    using their public key and the policies that describe the sender's authorized functionality. Policies
@@ -46,11 +46,11 @@ The network provides two layers of authentication:
 
 2) **User Authentication** — processes that authenticate users and applications that are *not* members of the
    network (for example, a Grafana dashboard or a cURL request issuing a REST request to a node). See
-   [REST requests](../../../07-%20CLI/02-%20Background%20Processes.md#rest-requests) for details on REST
+   <a href="../../../07-%20CLI/02-%20Background%20Processes.md#rest-requests" target="_blank">REST requests</a> for details on REST
    handling. Authentication here is based on one of:
-   - Usernames and passwords kept on the destination node — see [below](#users-authentication).
+   - Usernames and passwords kept on the destination node — see <a href="#users-authentication" target="_blank">below</a>.
    - Client certificates validated against policies that define authorized functionality — see
-     [below](#using-ssl-certificates).
+     <a href="#using-ssl-certificates" target="_blank">below</a>.
 
 Enabling and disabling authentication (both node and user authentication together) is done with:
 
@@ -60,9 +60,9 @@ set authentication [on/off]
 
 Notes:
 - Node authentication can optionally be enabled on its own using `set node authentication`, detailed
-  [below](#node-authentication).
+  <a href="#node-authentication" target="_blank">below</a>.
 - User authentication can optionally be enabled on its own using `set user authentication`, detailed
-  [below](#add-users).
+  <a href="#add-users" target="_blank">below</a>.
 
 The following command determines how the node is currently configured:
 
@@ -74,7 +74,7 @@ get authentication
 
 AnyLog provides mechanisms to encrypt messages transferred over the network. Messages are encrypted using the
 public key of the receiver and decrypted by the receiver with their private key. These processes are detailed
-[below](#encrypt-and-decrypt-messages).
+<a href="#encrypt-and-decrypt-messages" target="_blank">below</a>.
 
 # Passwords
 
@@ -99,7 +99,7 @@ set local password = [password]
 ## The private password
 
 Protects the node's private key. Set with `set private password`, and can optionally be stored in a local file,
-itself protected by the node's [local password](#the-local-password).
+itself protected by the node's <a href="#the-local-password" target="_blank">local password</a>.
 
 Usage:
 
@@ -128,7 +128,7 @@ set node authentication off
 ## Creating private and public keys
 
 A private key and a public key are issued for each node that is a member of the network. The public key is
-assigned privileges (see [Permission Group](#permission-group) below) that determine whether a command sent from
+assigned privileges (see <a href="#permission-group" target="_blank">Permission Group</a> below) that determine whether a command sent from
 the node to a peer can be executed on that peer. Users can also be issued their own private/public key pair —
 this lets an individual user's privileges (rather than the node's) determine whether their commands are
 processed on a peer, which is useful for an administrator who needs elevated access beyond what the node itself
@@ -267,7 +267,7 @@ get member permissions where name = value
 Notes:
 - The `where` condition is applied against the member policy; the permissions returned are whatever's assigned
   to that member via an assignment policy.
-- If a [signatory](#setting-the-signatory) is assigned to the node, `get member permissions` (no `where`)
+- If a <a href="#setting-the-signatory" target="_blank">signatory</a> is assigned to the node, `get member permissions` (no `where`)
   returns the signatory's permissions instead of the node's own.
 
 ## Signing a policy
@@ -391,7 +391,7 @@ set user authentication off
 get authentication
 ```
 
-Note: node authentication is detailed [above](#node-authentication).
+Note: node authentication is detailed <a href="#node-authentication" target="_blank">above</a>.
 
 Users and passwords are added per node, and `id add user` can specify an expiration after which the user's
 access is revoked:
@@ -442,9 +442,9 @@ id update user password where name = ori and old = 123456 and new = iugsek88ekA
 ### Enabling Basic Authentication on a node
 
 1. On the AnyLog node:
-   a. Provide the [local password](#the-local-password), if not already set: `set local password = [password]`
+   a. Provide the <a href="#the-local-password" target="_blank">local password</a>, if not already set: `set local password = [password]`
    b. Enable user authentication: `set user authentication on`
-   c. Add permitted users: [id add user](#add-users)
+   c. Add permitted users: <a href="#add-users" target="_blank">id add user</a>
 2. On the REST call, include in the header:
    - key: `Authorization`
    - value: Base64-encoded `username:password`
@@ -462,11 +462,11 @@ In the Authorization tab: select *Basic Auth*, then update username and password
 # Using SSL Certificates
 
 Nodes that aren't network members ("servers" below) can be authenticated using certificates. An example is
-Grafana using a [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
+Grafana using a <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path" target="_blank">Client Certificate</a>
 delivered with its query requests. Network member nodes can also be issued Signed Certificate Requests, so a
 non-member server can authenticate them using the Certificate Authority's public key.
 
-The process follows the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard:
+The process follows the <a href="https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate" target="_blank">X.509</a> standard:
 - The root user (or a designated user) acts as the Certificate Authority (CA).
 - A server (non-member node) is issued a Certificate Request (CR).
 - The AnyLog CA validates the server's identity and, if valid, signs the CR — giving the server a signed
@@ -490,7 +490,7 @@ id generate certificate authority where [command options]
 | Option | Explanation |
 |---|---|
 | password | Protects the CA private key. |
-| country | [Two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the organization's country. |
+| country | <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">Two-letter ISO code</a> for the organization's country. |
 | locality | Province, region, county, or state. |
 | state | Town, city, village. |
 | org | Organization name. |
@@ -621,7 +621,7 @@ The client is configured using the following files:
 2) The Private Key of the server: server-[org]-csr.csr  (using the example files: server-acme-inc-private-key.key)
 3) The Signed CR of the server: server-[org]-public-key.crt  (using the example files: server-acme-inc-public-key.crt)
 
-An example Postman configuration is available at [Using Postman](../../../05-%20Northbound%20Connectors/02-%20Postman%20Integration.md#sending-queries-and-commands-to-the-anylog-network-with-postman).
+An example Postman configuration is available at <a href="../../../05-%20Northbound%20Connectors/02-%20Postman%20Integration.md#sending-queries-and-commands-to-the-anylog-network-with-postman" target="_blank">Using Postman</a>.
 
 ## Examples using HTTPS
 
@@ -682,4 +682,4 @@ print(response.text)
 
 For a full worked example that ties keys, permission policies, and assignment policies together in a running
 2-operator demo — including certificate-based permissions for a 3rd-party application — see
-[Policy-Based Users and Keys — Example](02-%20Authentication-policies.md).
+<a href="02-%20Authentication-policies.md" target="_blank">Policy-Based Users and Keys — Example</a>.

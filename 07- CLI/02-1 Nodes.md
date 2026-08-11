@@ -23,7 +23,7 @@ aggregating results from multiple operator nodes.
 nodes seamlessly.
 
 A detailed explanation of the (minimal) commands needed to run each type of AnyLog agent can be found under
-[section 3 - Nodes](../03-%20Training%20&%20Tutorials/06-%20Nodes.md).
+<a href="../03-%20Training%20&%20Tutorials/06-%20Nodes.md" target="_blank">section 3 - Nodes</a>.
 
 ---
 

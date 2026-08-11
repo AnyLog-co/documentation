@@ -19,7 +19,7 @@ tags:
 
 # Unified Namespace
 
-A [Unified Namespace (UNS)](https://www.iiot.university/blog/what-is-uns%3F) is a modeling tool for organizing and
+A <a href="https://www.iiot.university/blog/what-is-uns%3F" target="_blank">Unified Namespace (UNS)</a> is a modeling tool for organizing and
 representing physical or logical assets in a structured hierarchy — similar in purpose to Historian Asset
 Frameworks, but designed for decentralized, real-time operational environments.
 
@@ -47,12 +47,12 @@ the namespace tree to find any data point without any manual configuration.
 that don't arrive dynamically and gives teams the ability to model assets in a way that reflects their own
 organizational or project structure. This is an ability most historians do not support.
 
-The UNS structure can follow a rigid standard like [ISA-95](https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard),
+The UNS structure can follow a rigid standard like <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-95-standard" target="_blank">ISA-95</a>,
 or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a type of metadata, both approaches
 can coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
 
 For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see
-[Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md).
+<a href="./05-2%20UNS%20Custom%20Examples.md" target="_blank">Custom UNS (data stream, ISA-95)</a>.
 
 ---
 
@@ -126,7 +126,7 @@ If the topic itself carries multiple distinct measurements (rather than one clea
 alone would collapse them into a single table per topic — since it only knows how to walk the topic string segment
 by segment. To split them into separate tables, extract a per-row `table` field from the payload and let it act as
 one more segment beyond the raw topic; see
-[Dynamic Ingestion with Custom UNS — Factory Floor Example](05-1%20UNS%20Custom%20Dynamic%20Examples.md) for a full traced
+<a href="05-1%20UNS%20Custom%20Dynamic%20Examples.md" target="_blank">Dynamic Ingestion with Custom UNS — Factory Floor Example</a> for a full traced
 walkthrough of exactly how that works, down to the blockchain queries showing where the raw topic ends and the
 personalized `table` field takes over.
 
@@ -151,7 +151,7 @@ starting the client, if needed).
 
 ### Example: Mosquitto (dev) on a LAN broker
 
-[Mosquitto](https://mosquitto.org/) is a common MQTT broker for local development. In this pattern, Mosquitto
+<a href="https://mosquitto.org/" target="_blank">Mosquitto</a> is a common MQTT broker for local development. In this pattern, Mosquitto
 listens on **`192.168.1.88:1883`**, and the AnyLog **master** (ledger) is reachable at **`192.168.1.88:32048`**.
 Connect the logical DBMS on the operator, then start the message client with **`dynamic=true`** so topic paths
 under **`M2/PL1/`** drive auto-generated UNS and storage under **`new_company`**.
@@ -171,7 +171,7 @@ connect dbms new_company where type = sqlite
     )>
 ```
 
-With the [Mosquitto clients](https://mosquitto.org/download/) installed, you can publish scalar payloads to the
+With the <a href="https://mosquitto.org/download/" target="_blank">Mosquitto clients</a> installed, you can publish scalar payloads to the
 same broker for testing (`-m` is the message body, `-t` is the topic):
 
 ```bash
@@ -251,7 +251,7 @@ environment (you can use **`master_node = !ledger_conn`** if that is already set
 | `dynamic=true`, no column mapping | Scalar value | No | Auto, per topic segment | Yes (auto) |
 | `dynamic=true`, with column mapping | Full JSON | Yes (inline `column.*`) | Auto, per topic | Yes (auto) |
 
-> For mapping-based ingestion, see [Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md).
+> For mapping-based ingestion, see <a href="../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md" target="_blank">Mapping Policy</a>.
 > **To verify:** the prior draft of this link pointed at `../06- Data Management/A- Data Ingestion/Mapping Data to
 > Tables.md` instead — a different path entirely. Pointed this at the Mapping Policy doc built this session since
 > it covers the same ground, but neither path is confirmed against the current repo layout — check before shipping.

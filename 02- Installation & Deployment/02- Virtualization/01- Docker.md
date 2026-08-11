@@ -31,8 +31,8 @@ layout: page
 -->
 
 > This is the full, configuration-driven deployment path, built around AnyLog's official
-> [docker-compose](https://github.com/AnyLog-co/docker-compose) repo. For a fast, minimal single-command trial
-> instead, see [Installing & Deploying AnyLog](../../01-%20Getting%20Started/03-%20install.md).
+> <a href="https://github.com/AnyLog-co/docker-compose" target="_blank">docker-compose</a> repo. For a fast, minimal single-command trial
+> instead, see <a href="../../01-%20Getting%20Started/03-%20install.md" target="_blank">Installing & Deploying AnyLog</a>.
 
 ## 1. Install Docker, Make, and Git
 
@@ -69,7 +69,7 @@ git clone -b os-dev https://github.com/AnyLog-co/docker-compose
 cd docker-compose
 ```
 
-AnyLog is a private image repository — [request credentials](https://www.anylog.network/download) for both your
+AnyLog is a private image repository — <a href="https://www.anylog.network/download" target="_blank">request credentials</a> for both your
 Docker login and your license key, then log in:
 
 ```shell
@@ -114,7 +114,7 @@ Every node type runs the exact same AnyLog image — what differs is which servi
 
 | Node Type | Role                                                                                                                                                              |
 |---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Master** (Metadata / `master`) | Hosts the network's metadata — the Metadata Manager described in [Introduction to AnyLog](../../01-%20Getting%20Started/01-%20Introduction.md)|                                                                    |                                                                  |
+| **Master** (Metadata / `master`) | Hosts the network's metadata — the Metadata Manager described in <a href="../../01-%20Getting%20Started/01-%20Introduction.md" target="_blank">Introduction to AnyLog</a>|                                                                    |                                                                  |
 | **Operator** (`operator`) | Stores data and answers queries                                                                                                                                   |
 | **Publisher** (`publisher`) | A non-storage node that distributes data from edge sources across Operator nodes                                                                                  |
 | **Query** (`query`) | Coordinates distributed queries across Operators                                                                                                                  |
@@ -139,13 +139,13 @@ Edit `docker-makefiles/my-operator/node_configs.env`. At minimum, update:
 | `NODE_NAME` | Must be unique per node |
 | `COMPANY_NAME` | Owner of the node |
 | `ANYLOG_SERVER_PORT`, `ANYLOG_REST_PORT` | Must be unique per machine |
-| `LEDGER_CONN` | IP:port of the Master/Metadata Manager node — see [below](#6-understanding-ledger_conn) |
+| `LEDGER_CONN` | IP:port of the Master/Metadata Manager node — see <a href="#6-understanding-ledger_conn" target="_blank">below</a> |
 | `CLUSTER_NAME` | Unique per Operator, unless HA is enabled |
-| `LICENSE_KEY` | Optional to set here — see [License Key](#license-key) below |
+| `LICENSE_KEY` | Optional to set here — see <a href="#license-key" target="_blank">License Key</a> below |
 | `DB_USER` / `DB_PASSWD` | Only if using PostgreSQL |
 
 You'll also want to decide your networking setup (`NETWORK_TYPE`, `OVERLAY_IP`, etc.) — covered in
-[Understanding the Network Configuration](#7-understanding-the-network-configuration) below.
+<a href="#7-understanding-the-network-configuration" target="_blank">Understanding the Network Configuration</a> below.
 
 ### License Key
 

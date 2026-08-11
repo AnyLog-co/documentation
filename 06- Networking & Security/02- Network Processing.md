@@ -23,12 +23,12 @@ source_path: "01 Network Exchanges.md"
 
 ## Contents
 
-1. [Overview](#overview)
-2. [Edge Data Fabric: A Quick Explanation](#edge-data-fabric-a-quick-explanation)
-3. [Network Services](#network-services)
-4. [Network Types & Binding](#network-types--binding)
-5. [Binding](#binding)
-6. [Configuring It](#configuring-it)
+1. <a href="#overview" target="_blank">Overview</a>
+2. <a href="#edge-data-fabric-a-quick-explanation" target="_blank">Edge Data Fabric: A Quick Explanation</a>
+3. <a href="#network-services" target="_blank">Network Services</a>
+4. <a href="#network-types--binding" target="_blank">Network Types & Binding</a>
+5. <a href="#binding" target="_blank">Binding</a>
+6. <a href="#configuring-it" target="_blank">Configuring It</a>
 
 ## Overview
 
@@ -51,7 +51,7 @@ The AnyLog Network Protocol deploys 2 layers of messaging:
 
 * **Messages between users/applications and the network.** These are REST-based ("REST messages"), delivered to
   one node in the network. When a REST message arrives, the AnyLog protocol on that node transforms it into a TCP
-  message (see [Network Services](#network-services) below) and delivers it to the proper nodes; if a reply is
+  message (see <a href="#network-services" target="_blank">Network Services</a> below) and delivers it to the proper nodes; if a reply is
   needed, it's returned to the user or application over that same REST connection.
 
 * **Messages between nodes that are members of the network.** A member node is any instance running the AnyLog
@@ -97,7 +97,7 @@ EDF, or just an isolated machine that happens to run the software.
 
 AnyLog uses 3 major ports for communication between nodes. These ports are defined in both the config policy and
 node policy. For the default ports assigned per node type (Master, Operator, Query, Publisher, Generic), see
-[Intro to Networking and Security](./01-%20Networking%20&%20Security.md) — the examples below use
+<a href="./01-%20Networking%20&%20Security.md" target="_blank">Intro to Networking and Security</a> — the examples below use
 bracketed placeholders since the actual values depend on your deployment.
 
 ### TCP Service
@@ -138,7 +138,7 @@ means no wait limit; default is `20` seconds. If `ssl` is set to `true`, the con
 
 ### Broker Service
 
-The Broker service port is a TCP-based connection that acts as AnyLog's built-in [message broker](./05-%20Message%20Broker.md).
+The Broker service port is a TCP-based connection that acts as AnyLog's built-in <a href="./05-%20MQTT%20Message%20Broker.md" target="_blank">MQTT message broker</a>.
 This port can accept data from different sources (e.g. Kafka, MQTT, Modbus) from a single point, and understands
 how to interpret it based on a correlating message client service.
 
@@ -173,7 +173,7 @@ inside Docker's internal networking.
 | `<custom-name>` | Attach to a pre-existing external Docker network (`external: true`) — the user must define this network themselves beforehand |
 
 A custom overlay network (e.g. Nebula) is one instance of the `<custom-name>` case — see
-[Overlay Networking](06-%20%20Network/01-%20Intro%20Overlay%20Network.md) for a full worked example.
+<a href="06-%20%20Network/01-%20Intro%20Overlay%20Network.md" target="_blank">Overlay Networking</a> for a full worked example.
 
 ### `NIC_TYPE` — which interface identifies this agent
 
@@ -195,12 +195,12 @@ requests back to it. Choosing the wrong NIC doesn't cause a startup failure; it 
 address nobody else can actually use.
 
 If the agent is joined to an overlay network, `NIC_TYPE` is typically set to the overlay's virtual interface (e.g.
-`nebula1`) rather than a physical NIC — see [Overlay Networking](06-%20%20Network/01-%20Intro%20Overlay%20Network.md) for how that interface
+`nebula1`) rather than a physical NIC — see <a href="06-%20%20Network/01-%20Intro%20Overlay%20Network.md" target="_blank">Overlay Networking</a> for how that interface
 gets created.
 
 **`NIC_TYPE` vs. `OVERLAY_IP`:** with only `bind=true`/`false` available today, `OVERLAY_IP` doesn't add much beyond
 what `NIC_TYPE=nebula1` already gives you — the NIC already resolves to the overlay address. `OVERLAY_IP` becomes
-genuinely useful once `bind=explicit` exists (see [Binding](#binding) below): that's the field that would let an
+genuinely useful once `bind=explicit` exists (see <a href="#binding" target="_blank">Binding</a> below): that's the field that would let an
 agent bind to its internal IP *and* its overlay IP together, rather than being restricted to `NIC_TYPE`'s single
 address.
 

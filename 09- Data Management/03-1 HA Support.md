@@ -250,7 +250,7 @@ The following list summarizes the commands supporting the HA processes:
 
 ## TSD Tables & File Commands
 
-A detailed document on TSD table logic can be found in the [previous section](03-%20High%20Availability.md#tsd--almgm-logical-database).
+A detailed document on TSD table logic can be found in the <a href="03-%20High%20Availability.md#tsd--almgm-logical-database" target="_blank">previous section</a>.
 
 ### TSD (Time Series Data) File Management Tables
 

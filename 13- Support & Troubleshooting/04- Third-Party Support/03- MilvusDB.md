@@ -12,7 +12,7 @@ layout: page
 --->
 
 This page covers standing up a Milvus **server** via Docker (for Milvus **Lite**, no server setup is needed — see
-[05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#connect)), then a full walkthrough from first connection through querying data back
+<a href="../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#connect" target="_blank">05- Milvus</a>), then a full walkthrough from first connection through querying data back
 out.
 
 ---
@@ -176,14 +176,14 @@ independent of AnyLog, following Zilliz's own cluster deployment guidance.
 For backup, since standalone Milvus stores its metadata in etcd and its actual vector/object data in MinIO (both
 visible as their own services in the compose file above), backing up the `etcd_data` and `minio_data` volumes
 covers the underlying state. Zilliz also publishes a dedicated
-[milvus-backup](https://github.com/zilliztech/milvus-backup) tool for logical collection-level backup/restore,
+<a href="https://github.com/zilliztech/milvus-backup" target="_blank">milvus-backup</a> tool for logical collection-level backup/restore,
 which is generally the more reliable option over raw volume snapshots.
 
 ---
 
 ## Offline model setup
 
-The text-embedding model (see [05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#text-embedding-text--query)) needs internet access once
+The text-embedding model (see <a href="../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#text-embedding-text--query" target="_blank">05- Milvus</a>) needs internet access once
 to download. For an offline node, download it on a build machine and ship the cache over:
 
 ```bash
@@ -206,7 +206,7 @@ export HF_HUB_OFFLINE=1    # optional
 Set `MILVUS_HOST` to the machine running the compose stack (`localhost` on the same machine, or the host IP from a
 remote client) before starting.
 
-1. Bring up the Milvus stack (see [Docker setup](#docker-setup-milvus-standalone) above)
+1. Bring up the Milvus stack (see <a href="#docker-setup-milvus-standalone" target="_blank">Docker setup</a> above)
 ```bash
 docker compose -f docker-compose.milvus.yml up -d
 ```
@@ -239,7 +239,7 @@ vector insert where dbms = vectors and collection = sensors and text = "temperat
 ```anylog
 vector search where dbms = vectors and collection = sensors and query = "door open" and limit = 5
 ```
-See [Query Data](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#query-data) for what the result looks like and how to interpret the similarity score.
+See <a href="../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md#query-data" target="_blank">Query Data</a> for what the result looks like and how to interpret the similarity score.
 
 6. Query across the network (if the collection is hosted on multiple operators)
 ```anylog
@@ -346,4 +346,4 @@ export GLOG_minloglevel=3
 
 ## Related
 
-- [05- Milvus](../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md) — concepts, connection reference, and the full `vector` command set
+- <a href="../../09-%20Data%20Management/02-1%20Databases/05-%20MilvusDB.md" target="_blank">05- Milvus</a> — concepts, connection reference, and the full `vector` command set

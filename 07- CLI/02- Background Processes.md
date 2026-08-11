@@ -102,7 +102,7 @@ exit SMTP
 
 ## Trace Level
 
-Like with [debug mode in scripts](01-%20CLI.md#debugging-scripts), AnyLog has a built-in trace mechanism to help trace
+Like with <a href="01-%20CLI.md#debugging-scripts" target="_blank">debug mode in scripts</a>, AnyLog has a built-in trace mechanism to help trace
 activity on the node.
 
 ```anylog
@@ -184,7 +184,7 @@ to it. See <a href="{{ '/docs/Managing-Data-Southbound/node-red/' | relative_url
 
 The message broker enables the AnyLog agent to act as an MQTT or Kafka broker, but does not actually understand the data
 flowing into said broker. For that the agent needs to have an active `msg client` that's either MQTT specific **or**
-Kafka. A more detailed description of both can be found in [southbound services](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md).
+Kafka. A more detailed description of both can be found in <a href="../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">southbound services</a>.
 
 ```anylog
 # MQTT Message Client descriptor command

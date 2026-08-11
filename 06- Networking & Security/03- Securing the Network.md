@@ -20,7 +20,7 @@ source_path: "03 Securing the Network.md"
 ## Overview
 
 The AnyLog Network is using 3 mechanisms to make the network secure:
-1) Using a 3rd party Overlay Network. An example of an overlay network is [Nebula](https://nebula.defined.net/docs/).
+1) Using a 3rd party Overlay Network. An example of an overlay network is <a href="https://nebula.defined.net/docs/" target="_blank">Nebula</a>.
 2) Securing the messages transferred between AnyLog nodes using Key-Based Authentication (Public Key Authentication).
 3) Securing messages transferred between 3rd parties applications and AnyLog nodes using certificates and passwords.
 
@@ -46,7 +46,7 @@ The Key-Based Authentication enables the following:
 ^Note: A private key and a public key can be assigned to users - it allows for administrators to operate on the node's CLI
 using their assigned permissions which may be less restrictive compared to the permissions assigned to the node.
 
-The relevant AnyLog commands are detailed in the section [Node Authentication](./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md).  
+The relevant AnyLog commands are detailed in the section <a href="./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md" target="_blank">Node Authentication</a>.  
 
 ## Key-Based-Authentication deployment example
 
@@ -148,7 +148,7 @@ The demo is using 2 operator nodes and 2 users (root user and a non-root user). 
 Each node and user is associated with member policies. Each member policy is assigned with permission policy such that 
 each node and member are associated with permissions. Relevant policies are signed such that it is possible to authenticate
 the senders of messages and determine the permissions.  
-If a master node is used, the master node configuration is detailed [below](#master-node-configuration).  
+If a master node is used, the master node configuration is detailed <a href="#master-node-configuration" target="_blank">below</a>.  
 
 The following chart details the processes demonstrated:  
 
@@ -170,7 +170,7 @@ The following chart details the processes demonstrated:
 
 ### (Optional) Step 0 - Connect to TPM
 
-Follow the instructions in [Connecting AnyLog to the Software TPM](./07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/01-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm)
+Follow the instructions in <a href="./07-%20Security/02-%20Trusted%20Platform%20Module%20%28TPM%29/01-%20Software%20TPM.md#connecting-anylog-to-the-software-tpm" target="_blank">Connecting AnyLog to the Software TPM</a>
 Initialize the tpm on operator 1, operator 2, and master. The example below assumes 3 software TPM docker containers are deployed.
 
 Opr.1
@@ -488,7 +488,7 @@ On CLI(oper.1.2):
 set node authentication on
 ```
 
-Note: If master node is used, enable authentication on the nodes after the [setup of the master node](#master-node-configuration).
+Note: If master node is used, enable authentication on the nodes after the <a href="#master-node-configuration" target="_blank">setup of the master node</a>.
 
 ## Master Node Configuration
 This setup is optional (if a master node is used).    
@@ -642,7 +642,7 @@ run client 10.0.0.78:3048 system ls     # Roy has no restrictions and the comman
 ## Using certificates
 
 This process makes AnyLog a Certificate Authority (CA) that issues Client Certificates to 3rd parties applications.   
-This process id detailed in the [Using SSL Certificates](./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates) section.  
+This process id detailed in the <a href="./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates" target="_blank">Using SSL Certificates</a> section.  
 Client Certificates enable the following:  
 * Only clients holding certificates can communicate with the network nodes.
 * A message from a holder of a certificate includes a public key. The public key is treated like a member of the network such that:
@@ -663,7 +663,7 @@ get rest server info
 
 ### Example
 
-The following example assumes that the example certificates detailed in the [Using SSL Certificates](./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates) 
+The following example assumes that the example certificates detailed in the <a href="./07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates" target="_blank">Using SSL Certificates</a> 
 section are available in the pem directory (!pem_dir). 
 
 ### Generate a Member Policy representing the issued certificate:
@@ -740,7 +740,7 @@ Use the Setting Tab to configure the REST calls as follows:
 
 ### Example of a third part application - Grafana
 
-Note: Configuring Grafana is detailed in the [Using Grafana](../05-%20Northbound%20Connectors/03-%20Grafana.md) section.  
+Note: Configuring Grafana is detailed in the <a href="../05-%20Northbound%20Connectors/03-%20Grafana.md" target="_blank">Using Grafana</a> section.  
 
 To use Certificate, update the Grafana JSON data source page as follows:
 * Update the AnyLog URL to use HTTPS (Encrypted Connection).

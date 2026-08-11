@@ -22,24 +22,24 @@ AnyLog Version: 2.0.2606 (ms-dev - 4bd615 [2026-07-06 00:02:19])
 
 AnyLog Version: 1.5.2605 [2026-06-30 18:35:19]
 ### New Features
-1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see [details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/02-%20dictionary.md#referencing-values-in-a-list-of-dictionaries).
+1. Using ```for loop``` in scripts and pulling attribute values from the dictionary - see <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/02-%20dictionary.md#referencing-values-in-a-list-of-dictionaries" target="_blank">details</a>.
 
 AnyLog Version: 1.5.2605 [2026-06-12 18:37:39]
 ### New Features
-1. New commands: ```get global tables``` and ```get local tables``` See details under [The metadata](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#the-metadata) 
-2. Add **include** and **exclude** options to the command ```blockchain get root policies``` - See details [here](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
+1. New commands: ```get global tables``` and ```get local tables``` See details under <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#the-metadata" target="_blank">The metadata</a> 
+2. Add **include** and **exclude** options to the command ```blockchain get root policies``` - See details <a href="../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md" target="_blank">here</a>
 
 AnyLog Version: 1.4.2510-beta3 [e0d9e1] [2026-03-08 17:52:24]
 ### New Features
 1. New options for issuing AnyLog commands via REST: 
-    * [Specifying commands in the message URL](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
-    * [Specifying commands in the message body](../06-%20Networking%20%26%20Security/04-%20Using%20REST.md)
+    * <a href="../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Specifying commands in the message URL</a>
+    * <a href="../06-%20Networking%20%26%20Security/04-%20Using%20REST.md" target="_blank">Specifying commands in the message body</a>
 
-AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
+AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] <a href="../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md" target="_blank">Details</a>
 ### New Features
 1. New command option: **blockchain get root policies**  
 2. ```set mcp client config``` command - Configure an active MCP connection to automatically disconnect after a specified period of inactivity. The default timeout is one hour.
-3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20Message%20Broker.md#generating-uns-policies)
+3. Adding UNS policies generation. <a href="../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md#dynamic-uns-policies" target="_blank">Details</a>
 
 AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ### New Features
@@ -49,24 +49,24 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1. ```get mcp status``` - Returns information on the MCP clients connected to the node.
 2. ```get node resources``` - Returns info on the resources available to the node.
 ### New Features
-1.  Add timezone to query casting options. [Details](../07-%20CLI/04-%20SQL.md)
+1.  Add timezone to query casting options. <a href="../07-%20CLI/04-%20SQL.md" target="_blank">Details</a>
 
 ## AnyLog Version: 1.4.2509-beta1 [2a53f6] [2025-10-18 17:07:29]
-1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. [Details](../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
+1. New options to merge and join policies dynamicaly, in a ```blockchain get``` command. <a href="../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md" target="_blank">Details</a>
 
 ## AnyLog Version: 1.3.2504-beta22 [fb9340] [2025-09-24 19:54:29]
 1. New command: ```file from``` - Return a file via REST. [Details]()
 
 ## AnyLog Version: 1.3.2504-beta22 [69bf12] [2025-08-16 19:18:49]
-1. New option for where condition to retrieve immediate child ```childfrom``` command. [Details](../07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md)
+1. New option for where condition to retrieve immediate child ```childfrom``` command. <a href="../07-%20CLI/08-%20Conditional%20Execution%20and%20Control%20Flow.md" target="_blank">Details</a>
 
 ## AnyLog Version: 1.3.2504-beta22 [77ce52] [2025-08-04 16:59:25]
-1. (AE) New options for ```get columns``` command. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#The-get-columns-command)
+1. (AE) New options for ```get columns``` command. <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/03-%20sql%20setup.md#The-get-columns-command" target="_blank">Details</a>
 
 ## AnyLog Version: 1.3.2504-beta22 [cc7a3b] [2025-07-26 14:24:20]
 ### New Commands
-1. (A) The command ```run helpers``` initiates AnyLog helper processes. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md)
-2. (AE) The command ```get dynamic stats``` provides info on internal processes. [Details](../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md#Dynamic-monitoring-of-internal-processes)
+1. (A) The command ```run helpers``` initiates AnyLog helper processes. <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md" target="_blank">Details</a>
+2. (AE) The command ```get dynamic stats``` provides info on internal processes. <a href="../99-%20INTERNAL%20%26%20DRAFT%20sections%20%28NOT%20publicly%20visible%29/C-%20Reference%20Materials/04-%20helpers.md#Dynamic-monitoring-of-internal-processes" target="_blank">Details</a>
 
 ## AnyLog Version: 1.3.2504-beta22 [318361] [2025-07-11 20:49:13]
 ### New Command
@@ -74,7 +74,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 
 ## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
 ### New features
-1. (AE) Manage Windows Event Log. Detaile [Run Scheduled Pull](../04-%20Southbound%20Interfaces/04-%20Monitoring)
+1. (AE) Manage Windows Event Log. Detaile <a href="../04-%20Southbound%20Interfaces/04-%20Monitoring" target="_blank">Run Scheduled Pull</a>
 
 ## AnyLog Version: 1.3.2504-beta7 [009f60] [2025-05-15 21:02:36]
 ### New features

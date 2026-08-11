@@ -11,8 +11,8 @@ The GUI extends the command-line-interface offered by each node of the network, 
 This functionality allows to interact, using a web based graphical application, with nodes of the network, from a single point
 (with valid certificate).    
 
-A similar functionality is achieved using [cURL](https://curl.se/) as well as with other tools such as [Postman](https://www.postman.com/).  
-Note: [Using Postman](using%20postman.md) details the usage of Postman with AnyLog nodes.
+A similar functionality is achieved using <a href="https://curl.se/" target="_blank">cURL</a> as well as with other tools such as <a href="https://www.postman.com/" target="_blank">Postman</a>.  
+Note: <a href="using%20postman.md" target="_blank">Using Postman</a> details the usage of Postman with AnyLog nodes.
 
 The Remote CLI contains the following:
 1. A client form to issue commands and queries to nodes in the network.
@@ -25,11 +25,11 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](../07-%20CLI/02-%20Background%20Processes.md#rest-requests) section.
+Configuring a node to recieve REST requests is detailed in the <a href="../07-%20CLI/02-%20Background%20Processes.md#rest-requests" target="_blank">REST Requests</a> section.
 
 ## Installing the Remote CLI
 
-Details are available [here](../10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/%5Bdeprecated%5D%20Remote%20CLI%20.md).
+Details are available <a href="../10-%20EDM%20tool%20%28Edge%20Data%20Manager%29/%5Bdeprecated%5D%20Remote%20CLI%20.md" target="_blank">here</a>.
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  

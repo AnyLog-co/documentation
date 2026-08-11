@@ -62,13 +62,13 @@ For the full picture — how these ports are actually used (TCP/REST/Broker serv
 
 AnyLog secures the network through three real mechanisms, which can be combined:
 
-* **Overlay network** — a third-party overlay (e.g. [Nebula](https://nebula.defined.net/docs/)) that authorizes
+* **Overlay network** — a third-party overlay (e.g. <a href="https://nebula.defined.net/docs/" target="_blank">Nebula</a>) that authorizes
   which nodes can participate, gives each member a stable IP:port identity, resolves routing issues, and encrypts
   messaging between members. Configured via the third-party vendor's own tooling, not AnyLog directly.
 * **Key-based authentication (node/user)** — each node or user is assigned a private/public key pair. Messages are
   signed with the private key; the receiving peer authenticates the sender with the public key, then checks that
   sender's permissions against the network's policies before processing the message. Node keys can optionally be
-  backed by a **software TPM** (`swtpm` + a REST API, via the [`AnyLog-TPM`](https://github.com/royshadmon/AnyLog-TPM)
+  backed by a **software TPM** (`swtpm` + a REST API, via the <a href="https://github.com/royshadmon/AnyLog-TPM" target="_blank">`AnyLog-TPM`</a>
   project) rather than stored as plain files — configured with `tpm set`, `tpm enabled = on`, and
   `tpm set node key password`. Despite the name, this is a software emulation, not a physical TPM chip — it doesn't
   provide hardware isolation, per the TPM doc's own operational notes. See **Software TPM for AnyLog** for the full

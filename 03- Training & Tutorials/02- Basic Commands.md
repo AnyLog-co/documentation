@@ -22,7 +22,7 @@ The assumption for this document is that the node is already running and configu
 
 ## REST Formatting
 
-A quick reference for connecting to AnyLog via REST. A more detailed document can be found [here](../06-%20Networking%20&%20Security/04-%20Using%20REST.md).
+A quick reference for connecting to AnyLog via REST. A more detailed document can be found <a href="../06-%20Networking%20&%20Security/04-%20Using%20REST.md" target="_blank">here</a>.
 
 **REST `GET` example**
 
@@ -276,7 +276,7 @@ set is_file = file test !blockchain_dir/blockchain.json
 ## Networking & Services
 
 By default, user-defined configurations and the config policy set the network IPs and ports. A more detailed
-document can be found [here](../02-%20Installation%20&%20Deployment/01-%20Install.md).
+document can be found <a href="../02-%20Installation%20&%20Deployment/01-%20Install.md" target="_blank">here</a>.
 
 > **Note:** IP addresses and node names shown in the examples below are illustrative placeholders, not a real
 > network.
@@ -302,7 +302,7 @@ IP, AnyLog only accepts messages sent to that address.
 
 The TCP connection is the internal IP + port AnyLog agents use to communicate with one another — it is **not**
 intended for a user to send data through directly; that's what the REST and Message Broker ports are for, covered
-[here](../06-%20Networking%20&%20Security/02-%20Network%20Processing.md).
+<a href="../06-%20Networking%20&%20Security/02-%20Network%20Processing.md" target="_blank">here</a>.
 
 **View services** — lists all services available to enable/disable, and which are currently active. By default,
 TCP, REST, and Blockchain Sync should be active.

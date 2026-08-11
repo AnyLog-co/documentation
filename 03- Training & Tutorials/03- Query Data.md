@@ -47,7 +47,7 @@ Contoso    process_data   turbine_pitch   9a8b7c6d5e4f9a8b7c6d5e4f9a8b7c6d  acti
 * **`blockchain get *`** — view all metadata on the blockchain.
 * **`blockchain get [policy type]`** — list all metadata of a given policy type (e.g. `operator`, `cluster`, `table`).
 
-A more thorough set of documentation regarding querying the Blockchain / Metadata can be found [here](../08-%20Blockchain%20&%20Metadata).
+A more thorough set of documentation regarding querying the Blockchain / Metadata can be found <a href="../08-%20Blockchain%20&%20Metadata" target="_blank">here</a>.
 
 ---
 
@@ -116,4 +116,4 @@ curl -X POST http://[Node ip]:[Node port] \
   -d '{"command": "sql my_dbms \"SELECT * FROM sensor_data\""}'
 ```
 
-A more thorough set of documentation regarding querying the SQL can be found [here](../05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md).
+A more thorough set of documentation regarding querying the SQL can be found <a href="../05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md" target="_blank">here</a>.
