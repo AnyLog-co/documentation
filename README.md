@@ -80,7 +80,7 @@ make up LOCAL_DOCS=/mnt/c/Users/oshad/AnyLog-docs/documentation
 
 6. Commit + Push changes in documentation 
 
-7. Create <a href="https://github.com/AnyLog-co/documentation/pulls" target="_blank">PR</a> against _pre-develop_
+7. Create [PR](https://github.com/AnyLog-co/documentation/pulls) against _pre-develop_
 
 ### Code Blocks
 
