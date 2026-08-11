@@ -52,7 +52,7 @@ or a more flexible project-defined hierarchy. Because AnyLog treats the UNS as a
 can coexist — a dynamically generated namespace can be extended or paralleled with additional user-defined context.
 
 For a working example of hand-authored UNS policies (ex. ISA-95 metadata), see
-[Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md).
+<a href="./04-2%20UNS%20Custom%20Examples.md" target="_blank">Custom UNS (data stream, ISA-95)</a>.
 
 ---
 
@@ -126,7 +126,7 @@ If the topic itself carries multiple distinct measurements (rather than one clea
 alone would collapse them into a single table per topic — since it only knows how to walk the topic string segment
 by segment. To split them into separate tables, extract a per-row `table` field from the payload and let it act as
 one more segment beyond the raw topic; see
-[Dynamic Ingestion with Custom UNS — Factory Floor Example](05-1%20UNS%20Custom%20Dynamic%20Examples.md) for a full traced
+<a href="./04-1%20UNS%20Custom%20Dynamic%20Examples.md" target="_blank">Dynamic Ingestion with Custom UNS — Factory Floor Example</a> for a full traced
 walkthrough of exactly how that works, down to the blockchain queries showing where the raw topic ends and the
 personalized `table` field takes over.
 
@@ -251,7 +251,7 @@ environment (you can use **`master_node = !ledger_conn`** if that is already set
 | `dynamic=true`, no column mapping | Scalar value | No | Auto, per topic segment | Yes (auto) |
 | `dynamic=true`, with column mapping | Full JSON | Yes (inline `column.*`) | Auto, per topic | Yes (auto) |
 
-> For mapping-based ingestion, see [Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md).
+> For mapping-based ingestion, see <a href="../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md" target="_blank">Mapping Policy</a>.
 > **To verify:** the prior draft of this link pointed at `../06- Data Management/A- Data Ingestion/Mapping Data to
 > Tables.md` instead — a different path entirely. Pointed this at the Mapping Policy doc built this session since
 > it covers the same ground, but neither path is confirmed against the current repo layout — check before shipping.

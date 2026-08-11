@@ -22,16 +22,16 @@ tags:
 
 # Dynamic Ingestion with Custom UNS — Factory Floor Example
 
-The [Unified Namespace](./05-%20Unitfied%20Namespace.md) page introduces `dynamic=true` using single-value, single-topic examples (one
+The <a href="./04-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a> page introduces `dynamic=true` using single-value, single-topic examples (one
 scalar per MQTT topic). In production, data rarely arrives that cleanly — a single topic often carries multiple
 JSON rows covering different measurements from different equipment. This page walks through that more realistic
 case: a factory floor publishing PLC and device readings over REST, where `dynamic=true` still drives automatic
 UNS generation, but the mapping and table-splitting need to be defined explicitly rather than left fully
 automatic.
 
-This sits between the two approaches described in [Unified Namespace](./05-%20Unitfied%20Namespace.md#auto-generated-vs-user-defined):
+This sits between the two approaches described in <a href="./04-%20Unitfied%20Namespace.md#auto-generated-vs-user-defined" target="_blank">Unified Namespace</a>:
 still auto-generated (no `blockchain insert` of hand-authored policies, as in
-[Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md)), but with enough explicit column mapping that the resulting
+<a href="./04-2%20UNS%20Custom%20Examples.md" target="_blank">Custom UNS (data stream, ISA-95)</a>), but with enough explicit column mapping that the resulting
 namespace and table layout is effectively **personalized** rather than purely derived from the raw topic string.
 
 ### Why this requires POST or MQTT, not PUT
@@ -205,7 +205,7 @@ step — so the tree is fully traversable and the namespace path stays human-rea
 
 ## Why this counts as "personalized" UNS
 
-This pattern sits deliberately between the two poles described in [Unified Namespace](./05-%20Unitfied%20Namespace.md), and the tree
+This pattern sits deliberately between the two poles described in <a href="./04-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a>, and the tree
 traced above is the product of exactly that middle position:
 
 | | Fully auto-generated | This pattern | Fully user-defined |
@@ -255,7 +255,7 @@ AnyLog's blockchain policies also don't currently enforce foreign-key-style refe
 "belonging" to an association here is a naming and hierarchy convention, not a database-level constraint. If the
 many-to-many case matters, the practical options are either to publish the same reading under more than one
 topic (accepting some duplication) or to hand-author the association/tag layer as explicit policies — the
-approach in [Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md) — while still using `dynamic=true` for the raw
+approach in <a href="./04-2%20UNS%20Custom%20Examples.md" target="_blank">Custom UNS (data stream, ISA-95)</a> — while still using `dynamic=true` for the raw
 sensor stream underneath it. That's a hybrid: a manually curated, meaningful structure at the levels the customer
 actually browses, with fully automated ingestion still doing the work at the leaves.
 
@@ -263,5 +263,5 @@ actually browses, with fully automated ingestion still doing the work at the lea
 
 ## See also
 
-- [Unified Namespace](./05-%20Unitfied%20Namespace.md) — the base `dynamic=true` model (scalar values, MQTT/OPC-UA)
-- [Custom UNS (data stream, ISA-95)](./05-2%20UNS%20Custom%20Examples.md) — the fully hand-authored, policy-based approach
+- <a href="./04-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a> — the base `dynamic=true` model (scalar values, MQTT/OPC-UA)
+- <a href="./04-2%20UNS%20Custom%20Examples.md" target="_blank">Custom UNS (data stream, ISA-95)</a> — the fully hand-authored, policy-based approach
