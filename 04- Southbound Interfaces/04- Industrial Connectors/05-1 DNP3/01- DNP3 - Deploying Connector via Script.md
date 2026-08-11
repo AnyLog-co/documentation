@@ -12,7 +12,7 @@ source_path: "01- DNP3 - Deploying Connector via Script.md"
 
 # Deploying a DNP3 Connector via Script
 
-[DNP3](../04-%20DNP3.md) documents the `get plc values` / `run plc client` commands directly — typed once on the CLI, or
+<a href="../05-%20DNP3.md" target="_blank">DNP3</a> documents the `get plc values` / `run plc client` commands directly — typed once on the CLI, or
 pasted into a one-off script, with the point `map` written out as a literal JSON array each time. For a
 production deployment, it's more common to run DNP3 connections from a standing `.al` script that a node
 executes on startup (or on demand), with parameters set at the top and the point map itself stored once as a
@@ -20,7 +20,7 @@ reusable blockchain policy rather than duplicated in every script. This page wal
 sample script, `dnp3_connector.al`.
 
 For the reusable-mapping-policy pattern itself (the `dnp3` policy type this script checks for and creates), see
-[DNP3 Mapping Policies — Reusing a Schema Across Connections](02-%20DNP3%20-%20Mapping-Policies.md).
+<a href="02-%20DNP3%20-%20Mapping-Policies.md" target="_blank">DNP3 Mapping Policies — Reusing a Schema Across Connections</a>.
 
 Run the script with:
 
@@ -71,7 +71,7 @@ Note on TLS paths: `!anylog_dir` is a volume mounted into the AnyLog container, 
 files locally on the node. The comment in the script also flags an alternative worth knowing about — the
 *public* half of a certificate can instead be stored on the blockchain as part of a policy, avoiding the need to
 persist certificate files on every node that needs them. This script uses the local-file approach; see
-[DNP3 TLS Test Certificates](./03-%20DNP3%20-%20TLS%20test%20certificates.md) for generating
+<a href="./03-%20DNP3%20-%20TLS%20test%20certificates.md" target="_blank">DNP3 TLS Test Certificates</a> for generating
 a chain to use with `tls_ca`/`tls_cert`/`tls_key`.
 
 ### `:check-policy:` — look for an existing mapping policy
@@ -108,7 +108,7 @@ into `!dnp_schema` and the script jumps straight to declaring the connection. If
 }>
 ```
 
-This is the point map — the same shape documented as the `map` array in [DNP3](../04-%20DNP3.md#connection-and-map) —
+This is the point map — the same shape documented as the `map` array in <a href="../05-%20DNP3.md#connection-and-map" target="_blank">DNP3</a> —
 but declared once, as data, rather than repeated inline in every `run plc client` call.
 
 ### `:publish-policy:` — sign and insert the policy
@@ -129,7 +129,7 @@ This delegates to a shared helper script (`publish_policy.al`) that signs `!new_
 the same helper any connector's deployment script would call, not something DNP3-specific. On success, the script loops 
 back to `:check-policy:`, which will now find the freshly published policy and pick up `!dnp_schema` from it. A nonzero 
 `!error_code` routes to one of three error labels depending on which stage failed (signing, preparing, or declaring the 
-policy) — see [Error handling](#error-handling) below.
+policy) — see <a href="#error-handling" target="_blank">Error handling</a> below.
 
 ### `:declare-dnp3:` / `:declare-dnp3-tls:` — start the connection
 
@@ -173,7 +173,7 @@ goto end-script
 ```
 
 Both branches are the same `run plc client where type = dnp3 ...` call documented in
-[DNP3 — Dynamic ingest with UNS](../04-%20DNP3.md#dynamic-ingest-with-uns-namespace--master_node); the only difference is
+<a href="../05-%20DNP3.md#dynamic-ingest-with-uns-namespace--master_node" target="_blank">DNP3 — Dynamic ingest with UNS</a>; the only difference is
 whether the four `enable_tls`/`tls_*` keywords are included. `!dnp_schema` (from either `:check-policy:` or
 `:prep-policy:` → `:publish-policy:` → `:check-policy:`) supplies `map`, and `!base_namespace` /
 `!dnp_name` supply `namespace` — so the UNS registration and the policy lookup key are the same values,
@@ -219,10 +219,10 @@ At minimum, change in `:set-params:`:
 - `dnp_name`, `base_namespace` — pick values that uniquely identify this connection; these double as the lookup
   key for the reusable mapping policy.
 - The `schema` array in `:prep-policy:` — to match the actual points on your outstation (see
-  [DNP3 — Connection and map](../04-%20DNP3.md#connection-and-map) for the supported `type` values).
+  <a href="../05-%20DNP3.md#connection-and-map" target="_blank">DNP3 — Connection and map</a> for the supported `type` values).
 - `enable_tls` and the three `tls_*` paths, if using TLS.
 
 If you're deploying several identical or near-identical outstations (for example, several substations with the
 same point layout), give them the same `base_namespace`/`dnp_name` pattern deliberately, so later deployments hit
 the `:check-policy:` fast path and reuse the schema already published by the first one, rather than re-declaring
-it. See [DNP3 Mapping Policies](02-%20DNP3%20-%20Mapping-Policies.md) for more on this reuse pattern.
+it. See <a href="02-%20DNP3%20-%20Mapping-Policies.md" target="_blank">DNP3 Mapping Policies</a> for more on this reuse pattern.

@@ -57,8 +57,8 @@ This command enables users to query both system-level and user-defined tags, mak
 Format options:
 * tree - the OPC-UA tree structure (default).
 * policy - generating a policy representing the tag. If target is specified, output is "blockchain insert" command for every policy.
-* get_value - generating a [get plc value](#the-get-plc-values-command) command with the tags visited in the **get plc struct** command.
-* run_client - generating a [run plc client](#the-run-plc-client-command) command with the tags visited in the **get plc struct** command.
+* get_value - generating a <a href="#the-get-plc-values-command" target="_blank">get plc value</a> command with the tags visited in the **get plc struct** command.
+* run_client - generating a <a href="#the-run-plc-client-command" target="_blank">run plc client</a> command with the tags visited in the **get plc struct** command.
 
 ### Traversal examples
 
