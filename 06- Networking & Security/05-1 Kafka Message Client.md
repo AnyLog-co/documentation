@@ -48,7 +48,7 @@ lightweight devices or MQTT brokers are already deployed at the edge.
 | `topic` | One or more topic blocks with mapping instructions. | |
 
 Topic mapping supports the same `dbms`, `table`, `column.[name].[type]`, and `bring` expressions used by MQTT
-message clients. See [MQTT Message Broker](./05-%20MQTT%20Message%20Broker.md#mapping-json-payloads) for the JSON
+message clients. See [MQTT Message Broker](../) for the JSON
 mapping syntax.
 
 ## Example

@@ -184,7 +184,7 @@ to it. See <a href="{{ '/docs/Managing-Data-Southbound/node-red/' | relative_url
 
 The message broker enables the AnyLog agent to act as an MQTT or Kafka broker, but does not actually understand the data
 flowing into said broker. For that the agent needs to have an active `msg client` that's either MQTT specific **or**
-Kafka. A more detailed description of both can be found in [southbound services](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md).
+Kafka. A more detailed description of both can be found in [southbound services](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md).
 
 ```anylog
 # MQTT Message Client descriptor command

@@ -18,12 +18,12 @@ source_path: "training/Connectors to Data Sources.md"
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* [Python and cURL examples of Streaming Data into AnyLog](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md) 
+* [Python and cURL examples of Streaming Data into AnyLog](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md) 
 * [Configuring the Message Broker service](../07-%20CLI/02-%20Background%20Processes.md#message-broker)
-* [Message Broker](./05-%20Message%20Broker.md)
+* [Message Broker](./05-%20MQTT%20Message%20Broker.md)
 * [Using REST](04-%20Using%20REST.md)
-* [Using Kafka](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md)
-* [Using Edgex](../04-%20Southbound%20Interfaces/06-%20Third-Party/03-%20EdgeX.md)
+* [Using Kafka](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md)
+* [Using Edgex](../04-%20Southbound%20Interfaces/07-%20Third-Party/03-%20EdgeX.md)
 * [The Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md)
 
 ## Third-Party MQTT Client 

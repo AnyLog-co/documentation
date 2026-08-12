@@ -299,7 +299,7 @@ to also split on a per-row `table` field, or distinct readings under the same to
 
 The three most common causes: `Null` instead of lowercase `null`; a trailing comma on the last key in an object;
 a doubled opening quote on a string (easy to miss when copy-pasting). See
-[Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md) for the full schema
+[Mapping Policy](../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md) for the full schema
 reference.
 
 **Q: My mapping policy is published but the Operator isn't using it.**

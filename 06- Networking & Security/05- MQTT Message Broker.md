@@ -88,7 +88,7 @@ This process initiates a client that subscribes to a list of topics registered o
 added to the broker and matches a subscribed topic, the broker pushes the message to the AnyLog instance, where
 it's mapped to a JSON structure and aggregated into files, processed according to the node's configuration (e.g.
 ingested to a local database, or sent to another node). This message data is treated as **streaming data** — see
-[File Mode and Streaming Mode](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file).
+[File Mode and Streaming Mode](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file).
 
 ### Command structure
 
