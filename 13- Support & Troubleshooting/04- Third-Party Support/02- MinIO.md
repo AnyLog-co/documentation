@@ -411,4 +411,4 @@ Use a new lowercase bucket name, or drop the existing one with `delete_all = tru
 ## Related
 
 - [Bucket Commands](../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md) — general, provider-agnostic command reference
-- [MinIO documentation](https://min.io/docs/minio/linux/index.html)
+- <a href="https://min.io/docs/minio/linux/index.html" target="_blank">MinIO documentation</a>

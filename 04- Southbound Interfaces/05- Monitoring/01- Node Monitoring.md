@@ -20,7 +20,7 @@ Each AnyLog node can collect its own health metrics and distribute them in one o
 
 The monitoring schedule is deployed as a blockchain policy and activated automatically when `NODE_MONITORING=true` is set in the node configuration.
 
-> **Pull, not push:** unlike [Syslog](./02-%20Syslog.md), where data is *pushed* into AnyLog by an external
+> **Pull, not push:** unlike <a href="./02-%20Syslog.md" target="_blank">Syslog</a>, where data is *pushed* into AnyLog by an external
 > forwarder (rsyslog), node and Docker monitoring are *pulled* on a schedule — the node actively queries its own OS
 > and Docker metrics at each interval, rather than waiting for something to send data in.
 
@@ -29,7 +29,7 @@ The monitoring schedule is deployed as a blockchain policy and activated automat
 | Insight type | What it captures | Sent to Query Node (live view) | Sent to Operator (archive) |
 |---|---|---|---|
 | `node_insight` | OS/agent-level metrics — CPU, disk, network, ingestion stats (see below) | ✅ | ✅ |
-| `docker_insight` | Container-level stats (see [Docker Monitoring](#docker-monitoring)) | ❌ | ✅ |
+| `docker_insight` | Container-level stats (see <a href="#docker-monitoring" target="_blank">Docker Monitoring</a>) | ❌ | ✅ |
 
 The reason for that split:
 * **Query Node** — a live, in-memory snapshot, almost like running `top` across every node in the network. It only
@@ -189,7 +189,7 @@ In addition to node-level health metrics, AnyLog can pull container-level stats 
 **scheduled pull** task — the same general-purpose mechanism used for things like Windows Event Log ingestion.
 
 Unlike `node_insight` (which can go to both the Query Node for live view and an Operator for archiving —
-see [Option 1](#option-1--live-view-via-remote-gui) / [Option 2](#option-2--persistent-storage-across-operators)
+see <a href="#option-1--live-view-via-remote-gui" target="_blank">Option 1</a> / <a href="#option-2--persistent-storage-across-operators" target="_blank">Option 2</a>
 above), `docker_insight` is forwarded to an **Operator node only**. There's no live-view equivalent for Docker
 metrics — the goal here is archival, not a real-time snapshot.
 

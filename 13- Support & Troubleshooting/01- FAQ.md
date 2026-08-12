@@ -42,7 +42,7 @@ abstraction, aggregations, the security protocol, HA, test suites, training, and
 | Technical Support | ❌ | ✅ |
 | Publisher node | ❌ Not supported | ✅ |
 
-For pricing: [AnyLog Pricing](https://www.anylog.network/pricing). Upgrading is as simple as changing the
+For pricing: <a href="https://www.anylog.network/pricing" target="_blank">AnyLog Pricing</a>. Upgrading is as simple as changing the
 `docker-compose` image from `anylogco/edgelake` to `anylogco/anylog-network`. *(Detailed upgrade steps: not yet
 documented.)*
 
@@ -81,7 +81,7 @@ structure and main/backup roles.
 
 **Q: How do I deploy, and do you support zero-touch?**
 
-Deployment is entirely configuration based with default values pre-set in the [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts). 
+Deployment is entirely configuration based with default values pre-set in the <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a>. 
 
 From a Docker or Kubernetes point of view (as an example) the process is: 
 1. User defines configurations in a dotenv file 
@@ -299,7 +299,7 @@ to also split on a per-row `table` field, or distinct readings under the same to
 
 The three most common causes: `Null` instead of lowercase `null`; a trailing comma on the last key in an object;
 a doubled opening quote on a string (easy to miss when copy-pasting). See
-[Mapping Policy](../08-%20Blockchain%20%26%20Metadata/04-%20Mapping%20Policy.md) for the full schema
+[Mapping Policy](../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md) for the full schema
 reference.
 
 **Q: My mapping policy is published but the Operator isn't using it.**

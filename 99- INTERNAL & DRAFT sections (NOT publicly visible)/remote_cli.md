@@ -11,7 +11,7 @@ The GUI extends the command-line-interface offered by each node of the network, 
 This functionality allows to interact, using a web based graphical application, with nodes of the network, from a single point
 (with valid certificate).    
 
-A similar functionality is achieved using [cURL](https://curl.se/) as well as with other tools such as [Postman](https://www.postman.com/).  
+A similar functionality is achieved using <a href="https://curl.se/" target="_blank">cURL</a> as well as with other tools such as <a href="https://www.postman.com/" target="_blank">Postman</a>.  
 Note: [Using Postman](using%20postman.md) details the usage of Postman with AnyLog nodes.
 
 The Remote CLI contains the following:

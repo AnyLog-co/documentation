@@ -84,7 +84,7 @@ sudo rm -rf /etc/nginx/sites-enabled/default
 sudo rm -rf /etc/nginx/sites-available/default
 ```
 
-2. Get the [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) IP address — required for a `minikube` deployment, but may not be needed for other 
+2. Get the <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/" target="_blank">kube-apiserver</a> IP address — required for a `minikube` deployment, but may not be needed for other 
 Kubernetes deployment tools such as `kubeadm`:
 
 ```shell

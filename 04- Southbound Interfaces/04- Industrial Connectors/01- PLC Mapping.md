@@ -16,10 +16,10 @@ source_path: "01 PLC Overview.md"
 
 ## How AnyLog Defines a PLC
 
-A **PLC** (Programmable Logic Controller), in AnyLog's terms, is any industrial controller or field device that
-exposes its data through one of AnyLog's supported client protocols. AnyLog does not care whether the source
-is a traditional PLC, an RTU, an outstation, or a sensor gateway — if it speaks **Modbus TCP**, **OPC-UA**,
-**EtherNet/IP**, or **DNP3**, AnyLog can act as a client against it.
+A **PLC** (Programmable Logic Controller), is any industrial controller or field device that  exposes its data through 
+one of AnyLog's supported client protocols. AnyLog does not care whether the source is a traditional PLC, an RTU, an 
+outstation, or a sensor gateway — if it speaks **Modbus TCP**, **OPC-UA**, **EtherNet/IP**, or **DNP3**, AnyLog can act 
+as a client against it.
 
 Every PLC client, regardless of protocol, follows the same shape:
 
@@ -30,12 +30,12 @@ Every PLC client, regardless of protocol, follows the same shape:
 Because every protocol funnels into that same shape, the table structure, mapping logic, and command patterns
 described below are shared across all four — only the connection keywords (Section 3) differ per protocol.
 
-* [Modbus TCP](./02-%20Modbus.md) - Reading coils, discrete inputs, and holding/input registers from Modbus TCP devices.
-* [OPC-UA](./03-%20OPC-UA.md) | Traversing an OPC-UA server's node tree and reading tag values.
-* [EtherNet/IP](./04-%20EtherIP.md) | Reading CIP object tags from PLCs and controllers over EtherNet/IP.
-* [DNP3](./05-%20DNP3.md) | Acting as a DNP3 master against outstations over TCP or TLS. |
-
-## Standard Command Format:
+* <a href="./02-%20Modbus.md" target="_blank">Modbus TCP</a> - Reading coils, discrete inputs, and holding/input registers from Modbus TCP devices.
+* <a href="./03-%20OPC-UA.md" target="_blank">OPC-UA</a> | Traversing an OPC-UA server's node tree and reading tag values. 
+* <a href="./04-%20EtherIP.md" target="_blank">EtherNet/IP</a> | Reading CIP object tags from PLCs and controllers over EtherNet/IP. 
+* <a href="./05-%20DNP3.md" target="_blank">DNP3</a> | Acting as a DNP3 master against outstations over TCP or TLS. |
+ 
+## Standard Command Format: 
 
 Keywords common to every protocol:
 
@@ -54,8 +54,7 @@ The connection keywords themselves are protocol-specific — for example, Modbus
 while OPC-UA and EtherNet/IP use `url`; DNP3 adds `master_id`/`outstation_id`, Modbus adds `device_id`. See each
 protocol's page for its full keyword table.
 
-
-* View the data that's accessible via the PLC
+* View the data that's accessible via the PLC 
 
 ```anylog
 get <plc type - opcua | etherip> struct where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer
@@ -71,25 +70,25 @@ get <plc type - opcua | etherip> struct where url = opc.tcp://10.0.0.111:53530/O
     map|nodes = [{"name":"sensor_1","register":0}]>
 ```
 
-* (Continuously) pull content and store into table
+* (Continuously) pull content and store into table 
 ```anylog
-<run plc client where
-    type = opcua and name = <plc type - opcua | etherip | modbus | dnp3> and
-    url = [connect string] and
-    frequency = [seconds] and
-    dbms = [dbms] and
+<run plc client where 
+    type = opcua and name = <plc type - opcua | etherip | modbus | dnp3> and 
+    url = [connect string] and 
+    frequency = [seconds] and 
+    dbms = [dbms] and 
     node = [node id]>
 ```
 
 ## Generic Command Pattern
 
-`run plc client` service, by default converts the _tags_ into column names of the table.
-Alternatively, the metadata can be converted into mapping, so data can be store in  a more consistent format.
+`run plc client` service, by default converts the _tags_ into column names of the table. 
+Alternatively, the metadata can be converted into mapping, so data can be store in  a more consistent format. 
 
-**Example I**:
+**Example I**: 
 
 1. A _PLC_ publishes data with tags: `timestamp`, `duration`, `DelayTimer.ACC`, `DelayTimer.PRE`,
-`CycleCounter.ACC` and `CycleCounter.PRE`, with data looking like:
+`CycleCounter.ACC` and `CycleCounter.PRE`, with data looking like: 
 
 ```json
 {
@@ -105,32 +104,32 @@ Alternatively, the metadata can be converted into mapping, so data can be store 
 2. Initiate a `run plc client`
 
 ```anylog
-<run plc client where
-    type = etherip and
-    name = device1 and
-    url = 10.10.1.19,1,0 and
-    frequency = 10 and
-    dbms = my_db and
-    table = my_data and
+<run plc client where 
+    type = etherip and 
+    name = device1 and 
+    url = 10.10.1.19,1,0 and 
+    frequency = 10 and 
+    dbms = my_db and 
+    table = my_data and 
     nodes = ["DelayTimer.ACC", "DelayTimer.ACC", "CycleCounter.ACC", "CycleCounter.PRE"]]>
 ```
 
-3. Data would be stored in logical database `my_db` and table `my_data`
+3. Data would be stored in logical database `my_db` and table `my_data` 
 ```sql
 CREATE TABLE my_data (
-   row_id SERIAL PRIMARY KEY,
-   insert_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   tsd_name character(3),
+   row_id SERIAL PRIMARY KEY, 
+   insert_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+   tsd_name character(3), 
    tsd_id integer,
    timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
    DelayTimer_ACC INT,
    DelayTimer_PRE INT,
    CycleCounter_ACC INT,
    CycleCounter_PRE INT
-);
+); 
 
 # Row
-| row_id | insert_timestamp            | tsd_name | tsd_id | timestamp                   | DelayTimer_ACC | DelayTimer_PRE | CycleCounter_ACC | CycleCounter_PRE |
+| row_id | insert_timestamp            | tsd_name | tsd_id | timestamp                   | DelayTimer_ACC | DelayTimer_PRE | CycleCounter_ACC | CycleCounter_PRE | 
 |      1 | 2026-08-08T18:23:35.709272Z |        0 |      0 | 2026-08-08T18:23:34.709272Z |            140 |           2105 |              494 |             2341 |
 ```
 
@@ -141,7 +140,7 @@ columns instead of related rows.
 **Example 2**: A **mapping policy** reshapes the same read into a narrower, repeating structure — one row per monitor instead
 of one row per poll:
 
-1. Define a mapping policy
+1. Define a mapping policy 
 
 ```anylog
 <new_policy = {"mapping": {
@@ -181,12 +180,11 @@ of one row per poll:
 blockchain insert where policy=!policy_id and local=true and master=!ledger_conn
 ```
 > The policy's `params` list defines each output row as a group of source fields — here, each group is
-> `[monitor_id, ACC field, PRE field]`. The `schema` block then defines the table's columns and, for each
-> column, where its value comes from: either lifted straight from the reading (`bring`) or taken positionally
+> `[monitor_id, ACC field, PRE field]`. The `schema` block then defines the table's columns and, for each 
+> column, where its value comes from: either lifted straight from the reading (`bring`) or taken positionally 
 > from `params` (`params.0`, `params.1`, ...).
 
-
-2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or
+2. Initiate a `run plc client` - Once the policy is published, reference it by ID on `run plc client` instead of (or 
 alongside) an inline `map`:
 
 ```anylog
@@ -202,14 +200,14 @@ run plc client where type = <protocol> and <connection keywords> and
 
 ```sql
 CREATE TABLE <table_name> (
-   timestamp DATETIME,
+   timestamp DATETIME, 
    monitor_id VARCHAR,
    ACC        INT,
    PRE        INT
 );
 
 # Row
-| row_id | insert_timestamp            | tsd_name | tsd_id | timestamp                   | monitor_id   | ACC | PRE  |
+| row_id | insert_timestamp            | tsd_name | tsd_id | timestamp                   | monitor_id   | ACC | PRE  | 
 |      1 | 2026-08-08T18:23:35.709272Z |        0 |      0 | 2026-08-08T18:23:34.709272Z | DelayTimer   | 140 | 2105 |
 |      2 | 2026-08-08T18:23:35.709272Z |        0 |      0 | 2026-08-08T18:23:34.709272Z | CycleCounter | 494 | 2341 |
 ```

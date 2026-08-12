@@ -19,31 +19,31 @@ source_path: "training/advanced/99-06- Pip Install.md"
 1. Prerequisites
  
    **General**
-   * [cython](https://pypi.org/project/Cython/)
-   * [ast](https://docs.python.org/3/library/ast.html)
-   * [requests](https://pypi.org/project/requests/)
-   * [cryptography](https://pypi.org/project/cryptography/)
-   * [jwt](https://pypi.org/project/jwt/) (for alpine - install [py3-jwt](https://pyjwt.readthedocs.io/en/stable/))
-   * [pyOpenSSL](https://pypi.org/project/pyOpenSSL/)
-   * [psutil](https://pypi.org/project/psutil/)
-   * [python-dateutil](https://pypi.org/project/python-dateutil/)
-   * [pytz](https://pypi.org/project/pytz/)
+   * <a href="https://pypi.org/project/Cython/" target="_blank">cython</a>
+   * <a href="https://docs.python.org/3/library/ast.html" target="_blank">ast</a>
+   * <a href="https://pypi.org/project/requests/" target="_blank">requests</a>
+   * <a href="https://pypi.org/project/cryptography/" target="_blank">cryptography</a>
+   * <a href="https://pypi.org/project/jwt/" target="_blank">jwt</a> (for alpine - install <a href="https://pyjwt.readthedocs.io/en/stable/" target="_blank">py3-jwt</a>)
+   * <a href="https://pypi.org/project/pyOpenSSL/" target="_blank">pyOpenSSL</a>
+   * <a href="https://pypi.org/project/psutil/" target="_blank">psutil</a>
+   * <a href="https://pypi.org/project/python-dateutil/" target="_blank">python-dateutil</a>
+   * <a href="https://pypi.org/project/pytz/" target="_blank">pytz</a>
    
    **Database Specific** (optional)
-   * [psycopg2-binary](https://www.psycopg.org/docs/) (for PostgresSQL, if you're using SQLite, there's no need to install this)
-   * [pymongo](https://pymongo.readthedocs.io/en/stable/) (for storing blobs in MongoDB, alternatively, users can store blobs in files)
+   * <a href="https://www.psycopg.org/docs/" target="_blank">psycopg2-binary</a> (for PostgresSQL, if you're using SQLite, there's no need to install this)
+   * <a href="https://pymongo.readthedocs.io/en/stable/" target="_blank">pymongo</a> (for storing blobs in MongoDB, alternatively, users can store blobs in files)
    
    **North / Southbound** (optional)
-   * [paho-mqtt](https://pypi.org/project/paho-mqtt/)
-   * [kafka-python](https://pypi.org/project/kafka-python/) (for accepting and sending data via Kafka)
+   * <a href="https://pypi.org/project/paho-mqtt/" target="_blank">paho-mqtt</a>
+   * <a href="https://pypi.org/project/kafka-python/" target="_blank">kafka-python</a> (for accepting and sending data via Kafka)
    
    **Utilizing Blockchain instead of Master Node** (optional)
-   * [web3](https://pypi.org/project/web3/)
-   * [py4j](https://pypi.org/project/py4j/)
+   * <a href="https://pypi.org/project/web3/" target="_blank">web3</a>
+   * <a href="https://pypi.org/project/py4j/" target="_blank">py4j</a>
 
     **Images & Video Processing** (optional)
-    * [numpy](https://pypi.org/project/numpy/) (for alpine - install [py3-numpy](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy))
-    * [opencv-python](https://pypi.org/project/opencv-python/) (for alpine - install [py3-opencv](https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv))
+    * <a href="https://pypi.org/project/numpy/" target="_blank">numpy</a> (for alpine - install <a href="https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-numpy" target="_blank">py3-numpy</a>)
+    * <a href="https://pypi.org/project/opencv-python/" target="_blank">opencv-python</a> (for alpine - install <a href="https://pkgs.alpinelinux.org/package/edge/community/armv7/py3-opencv" target="_blank">py3-opencv</a>)
 
 The script below installs all prerequisites.
 ```shell
@@ -56,7 +56,7 @@ python3 -m pip install --upgrade -r https://raw.githubusercontent.com/AnyLog-co/
     * python3.10 for Ubuntu and Mac OS X
     * Python3.11 for Alpine
 
-Versions of AnyLog can be found in the [Downloads Page](http://173.255.254.34:31900/)
+Versions of AnyLog can be found in the <a href="http://173.255.254.34:31900/" target="_blank">Downloads Page</a>
 
 ```shell
 # Ubuntu
@@ -69,7 +69,7 @@ python3 -m pip install --upgrade http://173.255.254.34:31900/alpine/anylog_netwo
 python3 -m pip install --upgrade http://173.255.254.34:31900/macosx/anylog_network-0.0.7-cp310-cp310-macosx_12_0_x86_64.whl
 ```
 
-3. Deploy [AnyLog node](https://raw.githubusercontent.com/AnyLog-co/deployment-scripts/main/scripts/anylog.py) 
+3. Deploy <a href="https://raw.githubusercontent.com/AnyLog-co/deployment-scripts/main/scripts/anylog.py" target="_blank">AnyLog node</a> 
 ```python
 import sys
 import anylog_node.cmd.user_cmd as user_cmd  # import AnyLog Node 

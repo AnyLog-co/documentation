@@ -19,7 +19,7 @@ All connectors ultimately produce JSON files that flow through a common pipeline
 This page covers the pipeline, prerequisites, and mapping. For connector-specific configuration see the individual pages
 linked below.
 
-> **See also:** [Northbound Interfaces (data egress)](../05-%20Northbound%20Connectors) — the counterpart to this page, covering how AnyLog forwards
+> **See also:** <a href="../05-%20Northbound%20Connectors" target="_blank">Northbound Interfaces (data egress)</a> — the counterpart to this page, covering how AnyLog forwards
 > data onward once it's ingested and stored.
 
 ### The ingestion pipeline
@@ -51,16 +51,16 @@ Local Database (SQLite / PostgreSQL)
 ## The connectors
 
 ### Built-in Southbound connectors
-* [REST](./02-%20Direct%20Connectors/01-%20REST.md)
+* <a href="./03-%20Direct%20Connectors/01-%20REST.md" target="_blank">REST</a>
   * **PUT** — data is stored as-is.
-  * **POST** — requires a [message client](./02-%20Direct%20Connectors/01-%20REST.md) to translate the payload before it's stored.
-* [MQTT / Kafka](02-%20Direct%20Connectors/02-%20Message%20Broker.md) — utilizes AnyLog's built-in MQTT / Kafka message broker.
-* [OPC-UA](03-%20Industrial%20Connectors/02-%20OPC-UA.md)
-* [Modbus](03-%20Industrial%20Connectors/01-%20Modbus.md)
-* [DNP3](03-%20Industrial%20Connectors/04-%20DNP3.md)
-* [EtherIP](03-%20Industrial%20Connectors/03-%20EtherIP.md)
-* [gRPC](05-%20RPC%20&%20Media%20Streaming/01-%20gRPC.md)
-* [Video](05-%20RPC%20&%20Media%20Streaming/02-%20Video%20Streaming.md)
+  * **POST** — requires a <a href="./03-%20Direct%20Connectors/01-%20REST.md" target="_blank">message client</a> to translate the payload before it's stored.
+* <a href="03-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">MQTT / Kafka</a> — utilizes AnyLog's built-in MQTT / Kafka message broker.
+* <a href="04-%20Industrial%20Connectors/03-%20OPC-UA.md" target="_blank">OPC-UA</a>
+* <a href="04-%20Industrial%20Connectors/02-%20Modbus.md" target="_blank">Modbus</a>
+* <a href="04-%20Industrial%20Connectors/05-%20DNP3.md" target="_blank">DNP3</a>
+* <a href="04-%20Industrial%20Connectors/04-%20EtherIP.md" target="_blank">EtherIP</a>
+* <a href="06-%20RPC%20&%20Media%20Streaming/01-%20gRPC.md" target="_blank">gRPC</a>
+* <a href="06-%20RPC%20&%20Media%20Streaming/02-%20Video%20Streaming.md" target="_blank">Video</a>
 
 ### Third-Party Southbound Connectors
 
@@ -68,21 +68,21 @@ AnyLog focuses on the data management side rather than pulling data directly fro
 we don't have a built-in connector, we recommend placing a third-party app between the device and AnyLog to bridge
 the gap — the app talks to the device/sensor, and forwards the result to AnyLog over REST, MQTT, or Kafka.
 
-* [External MQTT / Kafka](02-%20Direct%20Connectors/02-%20Message%20Broker.md)
-* [EdgeX](06-%20Third-Party/03-%20EdgeX.md)
-* [Node-RED](06-%20Third-Party/01-%20node-RED.md)
-* [Telegraf](06-%20Third-Party/02-%20Telegraf.md)
+* <a href="03-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">External MQTT / Kafka</a>
+* <a href="07-%20Third-Party/03-%20EdgeX.md" target="_blank">EdgeX</a>
+* <a href="07-%20Third-Party/01-%20node-RED.md" target="_blank">Node-RED</a>
+* <a href="07-%20Third-Party/02-%20Telegraf.md" target="_blank">Telegraf</a>
 
 ### Node Monitoring
 
 Node and container health metrics (CPU, memory, disk, container status) are themselves ingested through this same
 southbound pipeline — which is why monitoring configuration lives here rather than under Extended Services.
 
-* [Node Monitoring](04-%20Monitoring/01-%20Node%20Monitoring.md)
-* [Docker Monitoring](04-%20Monitoring/01-%20Node%20Monitoring.md)
-* [Syslog](04-%20Monitoring/02-%20Syslog.md)
+* <a href="05-%20Monitoring/01-%20Node%20Monitoring.md" target="_blank">Node Monitoring</a>
+* <a href="05-%20Monitoring/01-%20Node%20Monitoring.md" target="_blank">Docker Monitoring</a>
+* <a href="05-%20Monitoring/02-%20Syslog.md" target="_blank">Syslog</a>
 
 ## Dummy Data 
 
-We provide an MQTT connection to an array of different data sets. For details visit [Data Ingestion](07-%20Data%20Ingestion.md)
-or [Live Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md) to run locally. 
+We provide an MQTT connection to an array of different data sets. For details visit <a href="08-%20Data%20Ingestion.md" target="_blank">Data Ingestion</a>
+or <a href="../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md" target="_blank">Live Data Generator</a> to run locally. 

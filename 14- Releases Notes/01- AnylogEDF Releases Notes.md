@@ -39,7 +39,7 @@ AnyLog Version: 1.4.2510-beta3 [8ca403] [2026-02-02 16:13:21] [Details](../08-%2
 ### New Features
 1. New command option: **blockchain get root policies**  
 2. ```set mcp client config``` command - Configure an active MCP connection to automatically disconnect after a specified period of inactivity. The default timeout is one hour.
-3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md#dynamic-uns-policies)
+3. Adding UNS policies generation. [Details](../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md#generating-uns-policies)
 
 AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 ### New Features
@@ -74,7 +74,7 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 
 ## AnyLog Version: 1.3.2504-beta9 [1c2753] [2025-06-07 19:14:56]
 ### New features
-1. (AE) Manage Windows Event Log. Detaile [Run Scheduled Pull](../04-%20Southbound%20Interfaces/04-%20Monitoring)
+1. (AE) Manage Windows Event Log. Detaile [Run Scheduled Pull](../04-%20Southbound%20Interfaces/05-%20Monitoring)
 
 ## AnyLog Version: 1.3.2504-beta7 [009f60] [2025-05-15 21:02:36]
 ### New features
@@ -94,9 +94,9 @@ AnyLog Version: 1.4.2510-beta3 [845952] [2025-11-30 18:01:37]
 1. (AE) Adding an option to return a list of objects from the metadata. Example: blockchain get tag bring.list [tag][dbms] . [tag][table]
 ## AnyLog Version: 1.3.2504-beta1 [d483ae] [2025-05-05 10:35:06]
 ### New features
-1. (AE) Adding EtherNet/IP connector. See details in [EtherNet/IP](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/03-%20EtherIP.md)
+1. (AE) Adding EtherNet/IP connector. See details in [EtherNet/IP](../04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/04-%20EtherIP.md)
 ### Updates
-1. (AE) Making the OPCUA call consistent with EtherNet/IP - [OPC-UA](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/02-%20OPC-UA.md)
+1. (AE) Making the OPCUA call consistent with EtherNet/IP - [OPC-UA](../04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/03-%20OPC-UA.md)
 
 ## AnyLog Version: 1.3.2504 [673f50] [2025-04-27 20:15:35]
 ### New features
@@ -167,11 +167,11 @@ policy = create policy license where company = !company. and expiration = !expir
 
 ```
 ### Changes
-1. (AE) Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/02-%20Message%20Broker.md).
+1. (AE) Modify the command **exit mqtt** to **exit msg client [n/all]** - Details are in: [Processing messages and terminating a subscription](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md).
 
 ## **Version** [c03b82] [2025-01-02 12:30:17]
 ### New Features:
-1. (AE) OPCUA support. Details: [OPCUA](../04-%20Southbound%20Interfaces/03-%20Industrial%20Connectors/02-%20OPC-UA.md) 
+1. (AE) OPCUA support. Details: [OPCUA](../04-%20Southbound%20Interfaces/04-%20Industrial%20Connectors/03-%20OPC-UA.md) 
 
 ## **Version**: [024a85] [2024-12-21 13:31:31]
 ### New Features:
@@ -185,7 +185,7 @@ policy = create policy license where company = !company. and expiration = !expir
 
 ## **Version**: [a4924f] [2024-12-07 16:49:46] /
 ### New Features:
-1. (AE) HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../04-%20Southbound%20Interfaces/02-%20Direct%20Connectors/01-%20REST.md). 
+1. (AE) HTTP Commands - specifying commands and output format using http requests. Details in [http commands](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md). 
 
 ## **Version**: [be71d3] [2024-08-29 15:18:04] |
 ### New Features:
@@ -207,10 +207,10 @@ policy = create policy license where company = !company. and expiration = !expir
 ## **Version**: 1.3.240112 | 
 
 ### New Features
-1. (AE) Adding support to gRPC [Using gRPC](../04-%20Southbound%20Interfaces/05-%20RPC%20&%20Media%20Streaming/01-%20gRPC.md)
+1. (AE) Adding support to gRPC [Using gRPC](../04-%20Southbound%20Interfaces/06-%20RPC%20&%20Media%20Streaming/01-%20gRPC.md)
 2. (AE) Deprecated: "run mqtt client" --> Replaced by: "run msg client" 
 3. (AE) **delete archive** command. Details: [Operator data archival](../07-%20CLI/02-%20Background%20Processes.md). 
-4. (AE) Adding support to syslog [Using SysLog](../04-%20Southbound%20Interfaces/04-%20Monitoring/02-%20Syslog.md)
+4. (AE) Adding support to syslog [Using SysLog](../04-%20Southbound%20Interfaces/05-%20Monitoring/02-%20Syslog.md)
 
 ## **Version**: 1.3.23110 | **Release Date**: Oct.  12 2023 (Official)
 

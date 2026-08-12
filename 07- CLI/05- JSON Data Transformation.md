@@ -20,7 +20,7 @@ Examples of usage:
 * Retrieve needed values from the ledger policies. Details ate available at the [Query policies](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md#query-the-blockchain) 
 section in the [Blockchain commands](../08-%20Blockchain%20&%20Metadata/03-%20Blockchain%20Commands.md) documentation. 
 * Map source JSON data to a target structure - Details are available at the [Bring Command](#the-bring-keyword)
-section in the [MQTT Message Broker](../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md) documentation.
+section in the [Message Broker](../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md) documentation.
 
 ## Creating JSON Objects and Policies
 

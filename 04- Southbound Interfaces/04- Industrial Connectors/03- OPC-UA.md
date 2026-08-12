@@ -99,8 +99,8 @@ get opcua struct where url = [connect string] and [options]
 | `tree` | OPC-UA tree structure (default). |
 | `path` | Full path strings for each node. |
 | `stats` | Count of entries per class. |
-| `get_value` | Generates [get opcua value](#read-node-values) commands for the visited nodes. |
-| `run_client` | Generates [run opcua client](#continuous-data-pull) commands for the visited nodes. |
+| `get_value` | Generates <a href="#read-node-values" target="_blank">get opcua value</a> commands for the visited nodes. |
+| `run_client` | Generates <a href="#continuous-data-pull" target="_blank">run opcua client</a> commands for the visited nodes. |
 | `policy` | Generates a policy per tag; combine with `target` for `blockchain insert` commands. |
 
 **The validate option:**
@@ -243,7 +243,7 @@ exit plc nov.rig8
 ## OPC-UA with aggregations
 
 Aggregation functions summarize streaming data over a time interval, enabling real-time analytics without storing raw
-data. See details in the [Aggregations](../../09-%20Data%20Management/02-2%20Data%20Aggregations.md) section.
+data. See details in the <a href="../../09-%20Data%20Management/02-2%20Data%20Aggregations.md" target="_blank">Aggregations</a> section.
 
 ### 1. Identify the time and value column names
 
@@ -370,7 +370,7 @@ get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/server and forma
 ```
 
 Notes:
-* The [run opcua client](#continuous-data-pull) command is stored in the file `!tmp_dir/my_run_cmd.out`.
+* The <a href="#continuous-data-pull" target="_blank">run opcua client</a> command is stored in the file `!tmp_dir/my_run_cmd.out`.
 * The `table` name is not specified, as it is derived from the policies (based on the namespace and node id).
 
 ### Execute the command

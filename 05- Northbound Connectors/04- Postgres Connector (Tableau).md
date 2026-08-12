@@ -41,7 +41,7 @@ connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and us
 
 ## Setting up Postgres
 
-0. [Install Postgres](https://www.postgresqltutorial.com/install-postgresql/)
+0. <a href="https://www.postgresqltutorial.com/install-postgresql/" target="_blank">Install Postgres</a>
 
 ```bash
 docker run -d --network host \
@@ -52,7 +52,7 @@ docker run -d --network host \
   --rm postgres:14.0-alpine
 ```
 
-Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-allow-remote-user-access-in-postgresql.html) if the Postgres (north-bound) connector is on a separate machine.
+Update Postgres to support <a href="https://mellowhost.com/blog/how-to-allow-remote-user-access-in-postgresql.html" target="_blank">remote access</a> if the Postgres (north-bound) connector is on a separate machine.
 
 1. Locate and open `data/postgresql.conf`:
 
@@ -133,7 +133,7 @@ For the full list of SQL query options, see [Query Data — Query options](../03
 
 ## Extracting data into Tableau
 
-1. [Download & install Tableau](https://www.tableau.com/products/desktop/download)
+1. <a href="https://www.tableau.com/products/desktop/download" target="_blank">Download & install Tableau</a>
 2. Under **Data** → **Data Sources**, select the PostgreSQL connector type:
 
 <table>

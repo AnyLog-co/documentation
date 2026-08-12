@@ -102,7 +102,7 @@ threads = 3
 
 ### Configuration-based deployment
 
-If deploying via the [deployment-scripts](https://github.com/AnyLog-co/deployment-scripts), the overlay IP is used
+If deploying via the <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a>, the overlay IP is used
 automatically once configured. In `node_configs.env`:
 
 1. Set **`OVERLAY_IP`** to the physical machine's overlay address.

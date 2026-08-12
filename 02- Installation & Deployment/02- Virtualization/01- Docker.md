@@ -31,7 +31,7 @@ layout: page
 -->
 
 > This is the full, configuration-driven deployment path, built around AnyLog's official
-> [docker-compose](https://github.com/AnyLog-co/docker-compose) repo. For a fast, minimal single-command trial
+> <a href="https://github.com/AnyLog-co/docker-compose" target="_blank">docker-compose</a> repo. For a fast, minimal single-command trial
 > instead, see [Installing & Deploying AnyLog](../../01-%20Getting%20Started/03-%20install.md).
 
 ## 1. Install Docker, Make, and Git
@@ -69,7 +69,7 @@ git clone -b os-dev https://github.com/AnyLog-co/docker-compose
 cd docker-compose
 ```
 
-AnyLog is a private image repository — [request credentials](https://www.anylog.network/download) for both your
+AnyLog is a private image repository — <a href="https://www.anylog.network/download" target="_blank">request credentials</a> for both your
 Docker login and your license key, then log in:
 
 ```shell

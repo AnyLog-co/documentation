@@ -90,7 +90,7 @@ Create a physical bucket for file/object storage.
 | Parameter |                                                                                                              -                                                                                                               |
 |:---------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |   group   |                                                                                                Logical connection name (str)                                                                                                 |
-|   name    | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference [bucket naming convention documentation](https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/). |
+|   name    | The bucket name. Note that there are restrictions on bucket naming conventions. Please check the reference <a href="https://docs.akave.xyz/akave-o3/bucket-management/bucket-naming-rules/" target="_blank">bucket naming convention documentation</a>. |
 
 ```anylog
 bucket create where group = [group_name] and name = [bucket_name]
