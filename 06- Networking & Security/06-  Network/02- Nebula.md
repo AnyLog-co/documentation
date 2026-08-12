@@ -24,15 +24,15 @@ tags:
    summarized rather than reproduced in full, flagged for a decision on whether to keep, update, or retire it.
 --->
 
-[Nebula](https://github.com/slackhq/nebula) is a mutually authenticated peer-to-peer overlay network, originally
-built for Slack and now managed by [Defined](https://www.defined.net/), based on the
-[Noise Protocol Framework](https://noiseprotocol.org/). Nodes use certificates — not shared secrets — to assert
+<a href="https://github.com/slackhq/nebula" target="_blank">Nebula</a> is a mutually authenticated peer-to-peer overlay network, originally
+built for Slack and now managed by <a href="https://www.defined.net/" target="_blank">Defined</a>, based on the
+<a href="https://noiseprotocol.org/" target="_blank">Noise Protocol Framework</a>. Nodes use certificates — not shared secrets — to assert
 their IP address, name, and membership in user-defined groups. It's the overlay technology we use as a working
 example for AnyLog deployments; see **[Overlay Networking](01-%20Intro%20Overlay%20Network.md)** for the general concept
 this fits into.
 
-**Documentation:** [GitHub](https://github.com/slackhq/nebula) · [Docs](https://nebula.defined.net/docs) ·
-[Defined's website](https://www.defined.net/)
+**Documentation:** <a href="https://github.com/slackhq/nebula" target="_blank">GitHub</a> · <a href="https://nebula.defined.net/docs" target="_blank">Docs</a> ·
+<a href="https://www.defined.net/" target="_blank">Defined's website</a>
 
 ---
 
@@ -66,7 +66,7 @@ Nebula's overlay requires a minimum of two node types, plus certificates to asso
 
   > Relying on a single lighthouse creates a single point of failure for *discovery* specifically (existing tunnels
   > keep working, but new nodes can't join and existing nodes can't find new peers if it goes down). Nebula
-  > supports [multiple lighthouses](https://www.defined.net/blog/newsletter-admin-api-cert-rotation-multiple-lighthouses/#support-for-multiple-lighthouses)
+  > supports <a href="https://www.defined.net/blog/newsletter-admin-api-cert-rotation-multiple-lighthouses/#support-for-multiple-lighthouses" target="_blank">multiple lighthouses</a>
   > to eliminate this. **Note:** this is a Nebula capability in theory, not something we've applied in an AnyLog
   > deployment — treat it as a known option to investigate if single-lighthouse availability becomes a real
   > concern, not as a documented, ready-to-use path today.
@@ -104,7 +104,7 @@ concerns for convenience.
 
 ## Setting up Nebula (Docker-based)
 
-Using the [`oshadmon/nebula-anylog`](https://github.com/oshadmon/nebula-anylog) repo, deployment splits by role.
+Using the <a href="https://github.com/oshadmon/nebula-anylog" target="_blank">`oshadmon/nebula-anylog`</a> repo, deployment splits by role.
 
 ### Lighthouse
 

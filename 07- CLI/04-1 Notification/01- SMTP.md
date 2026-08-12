@@ -90,7 +90,7 @@ sms to [receiver phone] where gateway = [sms gateway] and subject = [message sub
 | Option        | Explanation  | Default  |
 | ------------- | ------------| ---- |
 | receiver phone | The destination phone number | |
-| gateway | [The SMS carrier gateway](https://en.wikipedia.org/wiki/SMS_gateway) |  |
+| gateway | <a href="https://en.wikipedia.org/wiki/SMS_gateway" target="_blank">The SMS carrier gateway</a> |  |
 | message subject | Any text | AnyLog Alert |
 | message text | Any text | AnyLog Network Alert from Node: [node name] |
 
@@ -117,4 +117,4 @@ depending on any of these — this space has been changing quickly and carriers 
 | Virgin Mobile | vmobl.com | **Dead** — Virgin Mobile USA is defunct; folded into Boost, whose new owner (Dish) shut the gateway down |
 
 For a currently-maintained list and more background on why these are disappearing, see
-[this 2026 overview of email-to-SMS gateways](https://20somethingfinance.com/how-to-send-text-messages-sms-via-email-for-free/).
+<a href="https://20somethingfinance.com/how-to-send-text-messages-sms-via-email-for-free/" target="_blank">this 2026 overview of email-to-SMS gateways</a>.

@@ -26,10 +26,10 @@ this step is done automatically.
 Once set, the network connectivity will be done with the virtual IP address for local IP. However, on the blockchain the 
 local_ip will be set to the service name; which other members on the Kubernetes cluster can utilize.
 
-When deploying with Kubernetes we recommend using [Nginx](https://www.nginx.com/) or other proxy service, as well as our
+When deploying with Kubernetes we recommend using <a href="https://www.nginx.com/" target="_blank">Nginx</a> or other proxy service, as well as our
 [configuration policy](../../../08-%20Blockchain%20&%20Metadata/02-%20Policy%20&%20Metadata.md).
 
-Directions for using Kubernetes Cluster Networking can be found [here](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+Directions for using Kubernetes Cluster Networking can be found <a href="https://kubernetes.io/docs/concepts/cluster-administration/networking/" target="_blank">here</a>
 
 ## Sample Network Setup 
 * The External & Virtual IP are used for setting up TCP connections

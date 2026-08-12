@@ -20,7 +20,7 @@ One of the features AnyLog provides is node monitoring through a schedule or rul
 
 ## Node Monitoring
 
-The following provides commands for getting insight about the node. Please review [Southbound Monitoring](../04-%20Southbound%20Interfaces/04-%20Monitoring)
+The following provides commands for getting insight about the node. Please review [Southbound Monitoring](../04-%20Southbound%20Interfaces/05-%20Monitoring)
 for further details on node, docker and syslog monitoring.
 
 * `get stats where service = [type] and topic = [type]` - provide statistics on a service enabled on the node (e.g. `operator`, `publisher`).

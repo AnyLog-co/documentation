@@ -76,7 +76,7 @@ If nodes are on separate machines, confirm these ports are accessible between th
 
 The following provides a quick installation of a single AnyLog (docker) instance. 
 
-1. Make sure you have [Docker](https://docs.docker.com/engine/install/ubuntu/) and _make_ installed.
+1. Make sure you have <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> and _make_ installed.
 2. <a href="https://www.anylog.network/download" target="_blank">Request License and Access key</a>
 3. Login to Docker
 
@@ -136,7 +136,7 @@ The following provides directions on how to deploy a full network  -- 1 master, 
 Feel free to skip steps 1&2 if you already have a license. Feel free to skip adding a master node if you'd
 like to extend the network with the existing standalone instance from the previous set of directions. 
 
-1. Make sure you have [Docker](https://docs.docker.com/engine/install/ubuntu/) and _make_ installed.
+1. Make sure you have <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> and _make_ installed.
 2. <a href="https://www.anylog.network/download" target="_blank">Request License and Access key</a>
 3. Login to Docker -- this is required on each machine 
 

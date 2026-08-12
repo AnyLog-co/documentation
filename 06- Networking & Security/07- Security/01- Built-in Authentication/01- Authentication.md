@@ -462,11 +462,11 @@ In the Authorization tab: select *Basic Auth*, then update username and password
 # Using SSL Certificates
 
 Nodes that aren't network members ("servers" below) can be authenticated using certificates. An example is
-Grafana using a [Client Certificate](https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path)
+Grafana using a <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#client_cert_path" target="_blank">Client Certificate</a>
 delivered with its query requests. Network member nodes can also be issued Signed Certificate Requests, so a
 non-member server can authenticate them using the Certificate Authority's public key.
 
-The process follows the [X.509](https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate) standard:
+The process follows the <a href="https://en.wikipedia.org/wiki/X.509#Structure_of_a_certificate" target="_blank">X.509</a> standard:
 - The root user (or a designated user) acts as the Certificate Authority (CA).
 - A server (non-member node) is issued a Certificate Request (CR).
 - The AnyLog CA validates the server's identity and, if valid, signs the CR — giving the server a signed
@@ -490,7 +490,7 @@ id generate certificate authority where [command options]
 | Option | Explanation |
 |---|---|
 | password | Protects the CA private key. |
-| country | [Two-letter ISO code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for the organization's country. |
+| country | <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">Two-letter ISO code</a> for the organization's country. |
 | locality | Province, region, county, or state. |
 | state | Town, city, village. |
 | org | Organization name. |

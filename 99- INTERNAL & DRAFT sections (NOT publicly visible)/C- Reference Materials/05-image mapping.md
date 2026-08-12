@@ -353,7 +353,7 @@ When the policy is applied (on the data) the following processes generate the in
     * It is derived from the "binaryValue" attribute.
     * It will be placed in a file with an extension "png".
     * It is uniquely identified by the Hash value (based on md5 hashing).
-    * When stored, it will be decoded using base 64 decoding (see details [here](https://en.wikipedia.org/wiki/Base64).)
+    * When stored, it will be decoded using base 64 decoding (see details <a href="https://en.wikipedia.org/wiki/Base64" target="_blank">here</a>.)
     
 This process ends with a table _image_ assigned to a database _edgex_ that includes the following columns:    
 a. _Timestamp_ - the current time   
@@ -412,7 +412,7 @@ and a database _blobs_edgex_.
 Follow the following commands to configure the needed setup and process the data:
 
 ### Declare the participating databases
-The [data example](#example-data) was generated from an [EdgeX](https://www.edgexfoundry.org/) based platform.  
+The [data example](#example-data) was generated from an <a href="https://www.edgexfoundry.org/" target="_blank">EdgeX</a> based platform.  
 The example names the logical database as follows:  
 * _edgex_ - to represent the streaming data in a PostgresSQL database.
 * _blobs_edgex_ - to represent the image (blob) data in a MongoDB database.

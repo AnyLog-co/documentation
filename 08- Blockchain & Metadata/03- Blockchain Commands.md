@@ -12,13 +12,13 @@ layout: page
 --->
 
 In general the blockchain or metadata layer is the platform that informs all the nodes in the network where data resides
-and which nodes have access to what. The [previous section](02-%20Policy%20&%20Metadata.md) discussed the different types
+and which nodes have access to what. The <a href="02-%20Policy%20&%20Metadata.md" target="_blank">previous section</a> discussed the different types
 of policies and metadata content that can be stored in the blockchain. This section covers how to interact with the
 blockchain layer.
 
-* [Connect & Sync](#connect--sync)
-* [Publish & Drop Policy](#publish--drop-policy)
-* [Query the Blockchain](#query-the-blockchain)
+* <a href="#connect--sync" target="_blank">Connect & Sync</a>
+* <a href="#publish--drop-policy" target="_blank">Publish & Drop Policy</a>
+* <a href="#query-the-blockchain" target="_blank">Query the Blockchain</a>
 
 ## Connect & Sync
 

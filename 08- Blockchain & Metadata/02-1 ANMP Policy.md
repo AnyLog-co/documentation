@@ -32,9 +32,9 @@ to patch in attributes belonging to a different policy type — doing so does no
 risks creating a misleading or inconsistent policy record.
 
 **Related Topics**:
-* [Policy & Metadata](02-%20Policy%20%26%20Metadata.md)
-* [Blockchain Full Circle](03-1%20Blockchain%20Full%20Circle.md)
-* [Network Processing](../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md)
+* <a href="02-%20Policy%20%26%20Metadata.md" target="_blank">Policy & Metadata</a>
+* <a href="03-1%20Blockchain%20Full%20Circle.md" target="_blank">Blockchain Full Circle</a>
+* <a href="../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md" target="_blank">Network Processing</a>
 
 ## ANMP vs Other Policies 
 
