@@ -10,18 +10,6 @@ layout: page
  | 2026-08-11 | Ori Shadmon    | define performance document based on https://github.com/AnyLog-co/documentation/blob/2026.08.07-bkup/helpers.md | |
 ---> 
 
----
-title: "Performance"
-description: "AnyLog insertion performance"
-layout: page
----
-<!---
-### 📜 Change Log
- **Date**   | **Name**       | **Change**         | **Version** |
- |------------|----------------|------------------|----------|
- | 2026-08-11 | Ori Shadmon    | define performance document based on https://github.com/AnyLog-co/documentation/blob/2026.08.07-bkup/helpers.md | |
----> 
-
 # Performance
 
 Data insertion is a critical component of AnyLog as sensors can publish large amounts of data at a very fast rate. 
