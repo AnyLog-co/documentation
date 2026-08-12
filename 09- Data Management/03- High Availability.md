@@ -16,8 +16,8 @@ source_path: "High Availability.md"
 > **AnyLog only.** High-Availability & Data Resilience  are not available in EdgeLake.
 
 AnyLog's SQL data store layer has a unified solution for both high availability and data resilience — both are
-built on the same underlying structure: clusters of replicated operators. <a href="#key-terminology" target="_blank">Key Terminology</a>
-covers that structure; <a href="#how-it-works" target="_blank">How It Works</a> covers the replication and failover mechanism itself, so
+built on the same underlying structure: clusters of replicated operators. [Key Terminology](#key-terminology)
+covers that structure; [How It Works](#how-it-works) covers the replication and failover mechanism itself, so
 neither is explained twice.
 
 **Data Resilience** (DR) is the ability of a system to protect, retain, and recover data against loss.
@@ -121,14 +121,14 @@ peers, so its local data set stays complete.
 ## Data Ingestion Logic
 
 1. A PLC or another device generates data and publishes it out.
-2. Either a direct <a href="../04-%20Southbound%20Interfaces" target="_blank">southbound connection</a> built into AnyLog, or a third-party
+2. Either a direct [southbound connection](../04-%20Southbound%20Interfaces) built into AnyLog, or a third-party
    connector (e.g. Node-RED), accepts the data from the PLC device or sensor. If the data is first passed through
    a third-party application, that application then forwards the data into AnyLog — usually via MQTT or REST.
 3. To avoid continuously writing to the database, incoming content resides in a configurable buffer.
 4. Once the buffer is full, AnyLog then processes the data into the appropriate databases (assuming they are
    already connected) and tables.
 5. For HA/clustered deployments, the receiving operator then pushes/pulls the data with its cluster peers — see
-   <a href="#how-it-works" target="_blank">How It Works</a> above for that mechanism.
+   [How It Works](#how-it-works) above for that mechanism.
 
 ```diagram
 PLC / Device-Sensor

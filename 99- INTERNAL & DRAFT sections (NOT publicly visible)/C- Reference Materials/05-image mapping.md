@@ -87,7 +87,7 @@ The following commands allow to store, retrieve and monitor blob data:
 Using a database for blob storage requires associating the logical database name with a physical storage.  
 The command `connect dbms` is used to associate the logical database name with a physical database.  
 The default choice for a logical name would be as the logical database name in the relational dbms that is referencing the blob data
-- see details <a href="#the-blobs-database" target="_blank">above</a>.  
+- see details [above](#the-blobs-database).  
 
 Usage:
 ```anylog 
@@ -99,7 +99,7 @@ Example:
 connect dbms blobs_lsl where type = mongo and ip = localhost and port = 27017
 ``` 
 
-Additional information is available at the <a href="03-%20sql%20setup.md#configuring-a-local-database" target="_blank">configuring a local database</a> section.
+Additional information is available at the [configuring a local database](03-%20sql%20setup.md#configuring-a-local-database) section.
 
 ### Dropping the blobs database
 
@@ -254,7 +254,7 @@ trace level = 0 file store
 ### Retrieve a blob file from a different node
 
 A node in the network can copy a file from a storage database of a peer node (assuming proper permissions).  
-The command <a href="../../07-%20CLI/08-%20File%20Commands.md#file-copy-from-a-remote-node-to-a-local-node" target="_blank">file get</a>
+The command [file get](../../07-%20CLI/08-%20File%20Commands.md#file-copy-from-a-remote-node-to-a-local-node)
 is used to copy files from a remote node to the local node.   
 If the file on the remote node is stored in a database, the file to copy is specified by identifying the database name and the file unique ID.  
 
@@ -295,13 +295,13 @@ it allows to cut and paste the commands to the AnyLog CLI and process the comman
       ```anylog
       run message broker where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
       ```
-      Details on configuration of AnyLog as a broker are available <a href="message%20broker.md#configuring-an-anylog-node-as-a-message-broker" target="_blank">here</a>.
+      Details on configuration of AnyLog as a broker are available [here](message%20broker.md#configuring-an-anylog-node-as-a-message-broker).
     * As a Blobs Archiver - this process loads the images into blobs database (such as MongoDB).  
       Example:    
       ```anylog
       run blobs archiver where dbms = true and folder = true and compress = False
       ```
-      Details on configuration of the Blobs Archiver process are available <a href="../../07-%20CLI/02-%20Background%20Processes.md#the-blobs-archiver" target="_blank">here</a>.
+      Details on configuration of the Blobs Archiver process are available [here](../../07-%20CLI/02-%20Background%20Processes.md#the-blobs-archiver).
     
 ## Example data
 The data reading below includes a JPEG image (assigned to the binaryValue attribute)
@@ -412,7 +412,7 @@ and a database _blobs_edgex_.
 Follow the following commands to configure the needed setup and process the data:
 
 ### Declare the participating databases
-The <a href="#example-data" target="_blank">data example</a> was generated from an <a href="https://www.edgexfoundry.org/" target="_blank">EdgeX</a> based platform.  
+The [data example](#example-data) was generated from an <a href="https://www.edgexfoundry.org/" target="_blank">EdgeX</a> based platform.  
 The example names the logical database as follows:  
 * _edgex_ - to represent the streaming data in a PostgresSQL database.
 * _blobs_edgex_ - to represent the image (blob) data in a MongoDB database.
@@ -451,7 +451,7 @@ run mqtt msg where broker=local and log=false and topic=( name=images and policy
 ### Publish the data
 To test the setup above, the configured node can publish the data to the broker.  
 The data example contain some image characters that are modified when are pasted on the AnyLog CLI.  
-To publish, cut and paste the <a href="#example-data" target="_blank">data example</a> to a file (i.e.: image_setup.al in the prep directory) and assign the data using the command:
+To publish, cut and paste the [data example](#example-data) to a file (i.e.: image_setup.al in the prep directory) and assign the data using the command:
 ```anylog
 process !prep_dir/image_setup.al 
 ``` 

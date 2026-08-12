@@ -17,12 +17,12 @@ layout: page
 The following provides directions on how to install AnyLog — whether through an orchestration tool, via
 virtualization, or directly on bare metal.
 
-Please review the <a href="../01-%20Getting%20Started/02-%20Prerequisite.md" target="_blank">prerequisites</a> before getting started.
+Please review the [prerequisites](../01-%20Getting%20Started/02-%20Prerequisite.md) before getting started.
 
-* <a href="02-%20Virtualization/01-%20Docker.md" target="_blank">Docker / Podman</a>
-* <a href="02-%20Virtualization/02-%20Installing%20the%20VM%20OVA.md" target="_blank">VirtualBox - OVA</a>
-* <a href="02-%20Virtualization/03-%20Kubernetes.md" target="_blank">Kubernetes</a>
-* <a href="03-%20Orchestrators/01-%20Open%20Horizon.md" target="_blank">IBM's Open Horizon</a>
+* [Docker / Podman](02-%20Virtualization/01-%20Docker.md)
+* [VirtualBox - OVA](02-%20Virtualization/02-%20Installing%20the%20VM%20OVA.md)
+* [Kubernetes](02-%20Virtualization/03-%20Kubernetes.md)
+* [IBM's Open Horizon](03-%20Orchestrators/01-%20Open%20Horizon.md)
 
 ## General Directions
 

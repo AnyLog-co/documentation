@@ -13,8 +13,8 @@ layout: page
 
 REST-based notifications are probably the most common form of sending notifications.
 
-* <a href="#rest-calls" target="_blank">Raw REST call</a> where the notification is sent as a `cURL` request from server to the notification system.
-* <a href="02-1%20Webhooks.md" target="_blank">Webhook</a> is an event-driven communication between applications, and is effectively an extension
+* [Raw REST call](#rest-calls) where the notification is sent as a `cURL` request from server to the notification system.
+* [Webhook](02-1%20Webhooks.md) is an event-driven communication between applications, and is effectively an extension
 of the raw REST call below — see that page for Slack, Discord, Microsoft Teams, and Google Chat specifically.
 
 ## REST Calls
@@ -29,7 +29,7 @@ rest [operation] where url=[url] and [option] = [value] and [option] = [value] .
 
 **Explanation**: When an AnyLog node is running, it offers a REST API. The REST API accepts REST calls from users and
 applications (like Grafana) to network members. Activating the REST API on a particular node is explained in
-<a href="../02-%20Background%20Processes.md#network-services" target="_blank">Background Processes</a>. Using the `rest` command, users can issue REST calls between members of the
+[Background Processes](../02-%20Background%20Processes.md#network-services). Using the `rest` command, users can issue REST calls between members of the
 network and between non-members and members of the network. The rest call provides the target URL (of the REST
 server) and additional values. The URL must be provided; the other key/value pairs are optional headers and data
 values. Supported operations include `get` (retrieve data and metadata from the AnyLog Network) and `post` (send data

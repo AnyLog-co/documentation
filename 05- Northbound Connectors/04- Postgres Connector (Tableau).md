@@ -129,7 +129,7 @@ AL aiops-single-node > query explain
 07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract
 ```
 
-For the full list of SQL query options, see <a href="../03-%20Training%20%26%20Tutorials/03-%20Query%20Data.md#query-options" target="_blank">Query Data — Query options</a>.
+For the full list of SQL query options, see [Query Data — Query options](../03-%20Training%20%26%20Tutorials/03-%20Query%20Data.md#query-options).
 
 ## Extracting data into Tableau
 

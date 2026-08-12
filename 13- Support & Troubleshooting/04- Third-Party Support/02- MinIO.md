@@ -15,7 +15,7 @@ layout: page
 
 AnyLog connects to a **MinIO** endpoint for bucket file management (upload, download, list, delete) via the `bucket` commands.
 
-See also: <a href="../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md" target="_blank">Bucket Commands</a> for the general, provider-agnostic command reference.
+See also: [Bucket Commands](../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md) for the general, provider-agnostic command reference.
 
 ---
 
@@ -410,5 +410,5 @@ Use a new lowercase bucket name, or drop the existing one with `delete_all = tru
 
 ## Related
 
-- <a href="../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md" target="_blank">Bucket Commands</a> — general, provider-agnostic command reference
+- [Bucket Commands](../../09-%20Data%20Management/02-1%20Databases/04-%20Bucket%20Storage.md) — general, provider-agnostic command reference
 - <a href="https://min.io/docs/minio/linux/index.html" target="_blank">MinIO documentation</a>

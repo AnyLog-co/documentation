@@ -18,13 +18,13 @@ source_path: "training/Connectors to Data Sources.md"
 This document provides examples of configurations to data sources. 
 
 **Other Related Documents**
-* <a href="../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md" target="_blank">Python and cURL examples of Streaming Data into AnyLog</a> 
-* <a href="../07-%20CLI/02-%20Background%20Processes.md#message-broker" target="_blank">Configuring the Message Broker service</a>
-* <a href="./05-%20Message%20Broker.md" target="_blank">Message Broker</a>
-* <a href="04-%20Using%20REST.md" target="_blank">Using REST</a>
-* <a href="../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md" target="_blank">Using Kafka</a>
-* <a href="../04-%20Southbound%20Interfaces/07-%20Third-Party/03-%20EdgeX.md" target="_blank">Using Edgex</a>
-* <a href="../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md" target="_blank">The Data Generator</a>
+* [Python and cURL examples of Streaming Data into AnyLog](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md) 
+* [Configuring the Message Broker service](../07-%20CLI/02-%20Background%20Processes.md#message-broker)
+* [Message Broker](./05-%20MQTT%20Message%20Broker.md)
+* [Using REST](04-%20Using%20REST.md)
+* [Using Kafka](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/02-%20Message%20Broker.md)
+* [Using Edgex](../04-%20Southbound%20Interfaces/07-%20Third-Party/03-%20EdgeX.md)
+* [The Data Generator](../13-%20Support%20&%20Troubleshooting/05-%20Data%20Generator.md)
 
 ## Third-Party MQTT Client 
 AnyLog can accept data from third-party message brokers such as CloudMQTT, Eclipse Mosquitto and Kafka. 
@@ -110,7 +110,7 @@ Messaging|198.74.50.131:32150|198.74.50.131:32150|0.0.0.0:32150      |
 ### Publishing to Message Broker 
 Like with a third-party broker, subscribe to the local broker using the `run message client` command.
  
-The example below uses the same data as the <a href="../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md" target="_blank">data generator</a>, but with a the message client subscribed to
+The example below uses the same data as the [data generator](../13-%20Support%20%26%20Troubleshooting/05-%20Data%20Generator.md), but with a the message client subscribed to
 a local message broker. 
  
 **Set Message Client**

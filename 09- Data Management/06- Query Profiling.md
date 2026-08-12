@@ -66,7 +66,7 @@ When a query is executed, AnyLog maintains information on its status — which O
 transferred, and execution time. Since multiple queries run concurrently, each is assigned a Job ID.
 
 The `query` command (issued on the Query Node) reports on the last executed queries. To see the same query from the 
-Operator side, use <a href="#retrieving-the-status-of-queries-on-an-operator-node" target="_blank">`get operator execution`</a>.
+Operator side, use [`get operator execution`](#retrieving-the-status-of-queries-on-an-operator-node).
 
 Usage:
 ```anylog

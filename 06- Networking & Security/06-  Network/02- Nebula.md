@@ -17,7 +17,7 @@ tags:
  | 2026-07-13 |  | created document | 2.0.2606 |
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-07-25 | Ori Shadmon | Split from the general overlay-networking concept doc (now
-   **<a href="01-%20Intro%20Overlay%20Network.md" target="_blank">Overlay Networking</a>**) — this file is Nebula-specific. Kept the Docker-based
+   **[Overlay Networking](01-%20Intro%20Overlay%20Network.md)**) — this file is Nebula-specific. Kept the Docker-based
    deployment (via `oshadmon/nebula-anylog`) as the primary how-to, since it's the current, actively-maintained
    approach. A second, older raw-binary/manual method exists ("04 Nebula Configuration.md" — `wget` the Nebula
    binary directly, hand-edit YAML, run inside `screen`) but predates the Docker workflow and looks superseded;
@@ -28,7 +28,7 @@ tags:
 built for Slack and now managed by <a href="https://www.defined.net/" target="_blank">Defined</a>, based on the
 <a href="https://noiseprotocol.org/" target="_blank">Noise Protocol Framework</a>. Nodes use certificates — not shared secrets — to assert
 their IP address, name, and membership in user-defined groups. It's the overlay technology we use as a working
-example for AnyLog deployments; see **<a href="01-%20Intro%20Overlay%20Network.md" target="_blank">Overlay Networking</a>** for the general concept
+example for AnyLog deployments; see **[Overlay Networking](01-%20Intro%20Overlay%20Network.md)** for the general concept
 this fits into.
 
 **Documentation:** <a href="https://github.com/slackhq/nebula" target="_blank">GitHub</a> · <a href="https://nebula.defined.net/docs" target="_blank">Docs</a> ·
@@ -77,7 +77,7 @@ Nebula's overlay requires a minimum of two node types, plus certificates to asso
 
 * **Certificate Authority (CA)** — two files: a CA certificate (distributed to and trusted by every host) and its
   private key (never distributed; can be kept offline except when signing new hosts in). See
-  **<a href="./02-1%20Nebula%20Certifications.md" target="_blank">Certificate Authority</a>** for why this is a separate concern from the
+  **[Certificate Authority](./02-1%20Nebula%20Certifications.md)** for why this is a separate concern from the
   lighthouse, and how to handle the CA key more safely than this doc's own quick-start default.
 
 ### Where Should the Lighthouse Live?
@@ -192,7 +192,7 @@ network_mode: "container:nebula"
 This makes the AnyLog container share Nebula's network namespace directly, so `nebula1` becomes visible to it —
 confirm with `get nics list`. Then set the node config's `NIC_TYPE` to `nebula1` so AnyLog binds/advertises on the
 overlay interface rather than its default `eth0`. See
-**<a href="../02-%20Network%20Processing.md" target="_blank">Network Processing</a>** for the full `NIC_TYPE`/binding reference — this is just the
+**[Network Processing](../02-%20Network%20Processing.md)** for the full `NIC_TYPE`/binding reference — this is just the
 overlay-specific value to set once Nebula is running.
 
 **Gotcha:** `network_mode: "container:nebula"` is incompatible with `extra_hosts` (e.g.

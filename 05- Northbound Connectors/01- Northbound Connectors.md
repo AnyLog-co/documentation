@@ -66,13 +66,13 @@ reference.
 
 | Tool | What it's for | Doc                                                                                           |
 |---|---|-----------------------------------------------------------------------------------------------|
-| **Postman** | Testing AnyLog REST endpoints during development, with or without SSL | <a href="02-%20Postman%20Integration.md" target="_blank">Postman Integration</a>                                         |
-| **Grafana** | Dashboards over live/historical AnyLog data — increments, period, aggregations, and blockchain metadata visualizations | <a href="03-%20Grafana.md" target="_blank">Using Grafana</a>                                                             |
-| **PostgreSQL / Tableau** | For tools that only support a PostgreSQL connector (not REST) — routes results through `system_query` into a real Postgres instance | <a href="04-%20Postgres%20Connector%20%28Tableau%29.md" target="_blank">PostgreSQL Connector & Tableau Visualization</a> |
-| **PowerBI / Excel** | Pull AnyLog data into PowerBI or Excel via the Web connector and PowerQuery | <a href="05-%20Microsoft%20%28PowerBI%29.md" target="_blank">AnyLog with PowerBI + Microsoft Office Suite</a>            |
-| **Google Drive / Sheets** | Pull AnyLog query results into Sheets via the third-party Two Minute Reports add-on | <a href="06-%20Google.md" target="_blank">Google Drive</a>                                                               |
-| **Qlik** | Qlik Sense's REST connector plugin, with worked increments/period examples | <a href="07-%20Qlik.md" target="_blank">Qlik</a>                                                                         |
-| **Edge Data Manager** | AnyLog's own management/monitoring UI | <a href="../10-%20Edge%20Data%20Manager/01-%20EDM.md" target="_blank">Edge Data Manager</a>                                                                    |                                                                          |
+| **Postman** | Testing AnyLog REST endpoints during development, with or without SSL | [Postman Integration](02-%20Postman%20Integration.md)                                         |
+| **Grafana** | Dashboards over live/historical AnyLog data — increments, period, aggregations, and blockchain metadata visualizations | [Using Grafana](03-%20Grafana.md)                                                             |
+| **PostgreSQL / Tableau** | For tools that only support a PostgreSQL connector (not REST) — routes results through `system_query` into a real Postgres instance | [PostgreSQL Connector & Tableau Visualization](04-%20Postgres%20Connector%20%28Tableau%29.md) |
+| **PowerBI / Excel** | Pull AnyLog data into PowerBI or Excel via the Web connector and PowerQuery | [AnyLog with PowerBI + Microsoft Office Suite](05-%20Microsoft%20%28PowerBI%29.md)            |
+| **Google Drive / Sheets** | Pull AnyLog query results into Sheets via the third-party Two Minute Reports add-on | [Google Drive](06-%20Google.md)                                                               |
+| **Qlik** | Qlik Sense's REST connector plugin, with worked increments/period examples | [Qlik](07-%20Qlik.md)                                                                         |
+| **Edge Data Manager** | AnyLog's own management/monitoring UI | [Edge Data Manager](../10-%20Edge%20Data%20Manager/01-%20EDM.md)                                                                    |                                                                          |
 
 **Sending data the other way:** the connectors above all *pull* data from AnyLog. To *push* data or a message out —
-a SQL result over REST, or a one-off MQTT message — see <a href="08-%20Data%20Forwarding.md" target="_blank">Forwarding Data</a>.
+a SQL result over REST, or a one-off MQTT message — see [Forwarding Data](08-%20Data%20Forwarding.md).

@@ -24,7 +24,7 @@ This document explains how to leverage Ethereum as the underlying global metadat
 initial setup that is needed to facilitate Ethereum as the metadata layer.   
 Once the setup is completed, nodes can synchronize their local metadata with the global metadata by configuring the synchronizer 
 to connect to Ethereum. The details of configuring a node to sync with Ethereum are detailed at the
-<a href="./01%20Blockchain%20%28internet%29%20Configuration.md" target="_blank">Blockchain Configuration</a> section.
+[Blockchain Configuration](./01%20Blockchain%20%28internet%29%20Configuration.md) section.
 
 Connection to the blockchain platform can be done using a local node or a hosted node.
 With a local node, users need to configure and maintain an Ethereum node that hosts a local copy of the blockchain 
@@ -44,7 +44,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * Create accounts, the accounts are used for blockchain transactions payments. Note that although accounts creation is available 
   directly from an AnyLog node, the functionality is supported to simplify testing and users should create accounts using proper tools (see the highlighted note above). 
 * Publish the AnyLog contract, the contract manages the global metadata (in the form of Policies) which is shared by members of the network.
-  Policies are detailed in the <a href="../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md" target="_blank">Managing Metadata</a> section.
+  Policies are detailed in the [Managing Metadata](../../08-%20Blockchain%20%26%20Metadata/02-%20Policy%20%26%20Metadata.md) section.
 * Update a policy on the blockchain.
 * Configure an AnyLog node to continuously synchronize the local copy of the metadata (that is hosted on the node) with the global copy of the metadata (that is hosted on the blockchain).
 
@@ -57,7 +57,7 @@ This document details how to use Ethereum as the metadata layer by providing and
 * An AnyLog node to configure.
 
 ## The blockchain commands
-The AnyLog Blockchain commands are detailed <a href="../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md" target="_blank">here</a>.
+The AnyLog Blockchain commands are detailed [here](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md).
 
 ## Connecting to Ethereum
 
@@ -144,7 +144,7 @@ Name     Active Balance                          URL                            
 ethereum|True  |Ether: 2 Wei: 999567574000000000|https://rinkeby.infura.io/v3/45e96d7ac85c4caab102b84e13e795a1|0xb425E72041d1c5a640BFc4479A808Da83b83b515|
         |      |                                |                                                             |0x0202D1880bA61406dB316f3E096a91bDD5DEE3E0|
 ```
-Note that the Ethereum connection is now associated with the contract (and the balance is the outcome of the <a href="#transfer-funds-to-the-account" target="_blank">transfer funds</a> step).
+Note that the Ethereum connection is now associated with the contract (and the balance is the outcome of the [transfer funds](#transfer-funds-to-the-account) step).
 
 ## Updating a policy on the blockchain
 
@@ -158,4 +158,4 @@ The variable _`test_policy`_ is assigned with the policy to update.
 
 ## Synchronize the local copy of the metadata with the blockchain data
 
-Details are available in the <a href="./01%20Blockchain%20%28internet%29%20Configuration.md" target="_blank">Blockchain Configuration</a> section.
+Details are available in the [Blockchain Configuration](./01%20Blockchain%20%28internet%29%20Configuration.md) section.

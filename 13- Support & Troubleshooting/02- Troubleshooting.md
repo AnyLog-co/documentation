@@ -13,7 +13,7 @@ layout: page
 --->
 
 Use these commands from the AnyLog CLI or via REST to diagnose connectivity and confirm your node and network are
-operating correctly. If you recognize a specific error message, jump straight to <a href="#known-issues" target="_blank">Known Issues</a>
+operating correctly. If you recognize a specific error message, jump straight to [Known Issues](#known-issues)
 instead of running the full procedure.
 
 ## Diagnostic Procedure
@@ -149,7 +149,7 @@ Address               Node Type  Node Name                    Status
 
 > During `test network` you may see blockchain sync warnings such as `Policy #NNNN is not recognized` or
 > `Terminating blockchain sync process — unrecognized file format`. These indicate a blockchain consistency issue
-> between nodes — proceed to the <a href="#blockchain-validation" target="_blank">blockchain validation</a> steps below.
+> between nodes — proceed to the [blockchain validation](#blockchain-validation) steps below.
 
 If no error appears on screen, check the error log:
 
@@ -292,7 +292,7 @@ ID     Count Thread     Time                     Type  Text
 ```
 
 In this situation, the user is missing the `system_query` logical database, which is used to aggregate results
-from operator node(s). See <a href="../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md" target="_blank">SQL Storage</a> for
+from operator node(s). See [SQL Storage](../09-%20Data%20Management/02-1%20Databases/01-%20SQL%20Storage.md) for
 connection details.
 
 ```AnyLog

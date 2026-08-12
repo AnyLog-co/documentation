@@ -108,7 +108,7 @@ run client 10.0.0.78:7848 get status
 
 ### get processes
 
-Lists all background services, their status, and key configuration details. See <a href="02-%20Background%20Processes.md" target="_blank">Background Processes</a>.
+Lists all background services, their status, and key configuration details. See [Background Processes](02-%20Background%20Processes.md).
 
 ```anylog
 get processes
@@ -145,7 +145,7 @@ get platform info
 ### get node name
 
 Return the node name including the IP and Port that identifies the node. The node name is assigned using
-<a href="#set-node-name" target="_blank">set node name</a>. If a name was not assigned, the name returned is "AnyLog".
+[set node name](#set-node-name). If a name was not assigned, the name returned is "AnyLog".
 
 ---
 
@@ -176,7 +176,7 @@ The ***set*** command allows setting variables and configuration parameters.
 | `set self ip = [ip]` | Set the IP address when the sender and receiver are the same node. |
 | `set consumer mode = [mode]` | Change the consumer mode of operation: `active` or `suspend`. |
 | `set rest timeout [time and time-unit]` | Sets a time limit for a REST reply. If limit is 0, the process waits without timeout. |
-| `set data distribution where ...` | Define how data is distributed to the storage nodes — see <a href="#set-data-distribution" target="_blank">below</a>. |
+| `set data distribution where ...` | Define how data is distributed to the storage nodes — see [below](#set-data-distribution). |
 | `set streaming condition` | Declare a condition on streaming data. |
 | `set output table width [table width]` | Configure the display width of a table in a report. |
 | `set internal ip with [interface_name]` | Set the node's internal IP address based on a network interface (NIC). |
@@ -552,4 +552,4 @@ get installed packages           # list of installed Python packages
 ```
 
 For the commands to test connectivity and validate node/network health (`test node`, `test network`, `test process`, etc.),
-see <a href="06-%20Test%20&%20Node%20Status.md" target="_blank">Test & Network Validation</a>.
+see [Test & Network Validation](06-%20Test%20&%20Node%20Status.md).

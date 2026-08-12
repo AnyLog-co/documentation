@@ -55,6 +55,9 @@ def escape_attr(value: str) -> str:
 def convert_links(line: str, converted: list) -> str:
     def repl(m):
         text, url = m.group(1), m.group(2)
+        if not url.startswith(("http://", "https://")):
+            # Leave relative links, mailto:, #anchors, etc. untouched.
+            return m.group(0)
         new = f'<a href="{url}" target="_blank">{text}</a>'
         converted.append((m.group(0), new))
         return new

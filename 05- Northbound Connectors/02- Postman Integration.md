@@ -33,7 +33,7 @@ To run AnyLog queries using Postman without SSL enabled, follow the following st
 
 ### With SSL
 
-For SSL, the explanation on generating the needed files is available at the <a href="../06-%20Networking%20%26%20Security/07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates" target="_blank">Using SSL Certificates</a> section.
+For SSL, the explanation on generating the needed files is available at the [Using SSL Certificates](../06-%20Networking%20%26%20Security/07-%20Security/01-%20Built-in%20Authentication/01-%20Authentication.md#using-ssl-certificates) section.
 
 To run AnyLog queries using Postman with SSL enabled, follow the following steps:
 1. Follow steps 1-3 above

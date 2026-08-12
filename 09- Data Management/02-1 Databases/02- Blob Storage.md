@@ -56,7 +56,7 @@ get blobs archiver
 ## Querying Blobs
 
 When blob data gets queried as part of the SQL request — example in
-<a href="../02-%20Databases.md#example-an-object-detection-models-output" target="_blank">02- Databases.md</a> — the SQL content gets
+[02- Databases.md](../02-%20Databases.md#example-an-object-detection-models-output) — the SQL content gets
 aggregated from across the network into a unified table within `system_query`, but the actual blobs can either
 remain locally at the edge **or** get copied over into the query.
 

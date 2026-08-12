@@ -23,7 +23,7 @@ For example: IPs and Ports, paths to files and directories are referenced by the
 to the appropriate value.  
 Some entries in the dictionary represent default setups and configurations, and users can add or modify entries in
 the dictionary as needed.  
-For example, all the directories in the <a href="getting%20started.md#local-directory-structure" target="_blank">default folders structure</a>
+For example, all the directories in the [default folders structure](getting%20started.md#local-directory-structure)
 can be referenced by their keys, whereas in each deployment the physical location of the folders may be different.
 Using this example, users can reference the path to the **archive directory** using the key **!archive_dir**, the
 path to the **blobs directory** using the key **!blobs_dir** etc. allowing a shared configuration process whereas the 
@@ -176,7 +176,7 @@ The example above returns th string: ```my_company```
 
 Note: **.len**, **.replies**, and **.diff** are used when the entry in the dictionary aggregates replies 
 from multiple peer nodes. The explanation is available int the 
-<a href="../../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md#associating-peer-replies-to-a-key-in-the-dictionary" target="_blank">Associating peer replies to a key in the dictionary</a> section.
+[Associating peer replies to a key in the dictionary](../../06-%20Networking%20%26%20Security/02-%20Network%20Processing.md#associating-peer-replies-to-a-key-in-the-dictionary) section.
 
 ## Setting policies using the dictionary
 
@@ -226,4 +226,4 @@ json !operator_policy
 ```
 
 Additional information on the construction and tertieval of policies is available in the
-<a href="json%20data%20transformation.md#json-data-transformation" target="_blank">JSON Data Transformation</a> section.
+[JSON Data Transformation](json%20data%20transformation.md#json-data-transformation) section.

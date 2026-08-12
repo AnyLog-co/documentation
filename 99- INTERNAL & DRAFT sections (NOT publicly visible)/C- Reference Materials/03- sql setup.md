@@ -23,14 +23,14 @@ the data, as if the data is hosted in a single machine. In addition, users and a
 a single particular node or from a list of nodes.
 
 This chapter covers the following topics:
-* <a href="#configuring-a-local-database" target="_blank">Configuring a local database</a> on a node
-* <a href="#system-databases-and-system-tables" target="_blank">System databases and system tables</a> configured on nodes. 
-* Issuing a <a href="#sql-commands" target="_blank">SQL command</a> to the local database
-* Issuing a <a href="queries.md#query-nodes-in-the-network" target="_blank">SQL query</a> to the local database
-* The <a href="#the-metadata" target="_blank">metadata layer</a>
+* [Configuring a local database](#configuring-a-local-database) on a node
+* [System databases and system tables](#system-databases-and-system-tables) configured on nodes. 
+* Issuing a [SQL command](#sql-commands) to the local database
+* Issuing a [SQL query](queries.md#query-nodes-in-the-network) to the local database
+* The [metadata layer](#the-metadata)
 * Monitoring the tables in a local database
 
-Note: Issuing a query to multiple nodes is explained in the <a href="queries.md#query-nodes-in-the-network" target="_blank">Query nodes in the network</a> section.
+Note: Issuing a query to multiple nodes is explained in the [Query nodes in the network](queries.md#query-nodes-in-the-network) section.
 
 ## Configuring a local database
 
@@ -170,7 +170,7 @@ There is no need to declare tables in the `system_query` databases as tables are
 | create table ledger where dbms = blockchain    | Creates a system table to host the metadata                                                     | The user DBMS blockchain |
 | create table tsd_info where dbms = almgm       | Creates a system table to host High availability information                                    | The user DBMS almgm      |
         
- The databases (lsl_demo, blockchain and almgm) are to be declared using the <a href="#connecting-to-a-local-database" target="_blank">connect dbms command</a>
+ The databases (lsl_demo, blockchain and almgm) are to be declared using the [connect dbms command](#connecting-to-a-local-database)
         
 ## Monitoring the status of a table across multiple nodes
 The **test network table** command monitors the status of the table across all nodes that host the table.
@@ -179,7 +179,7 @@ Usage:
 ```anylog
 test network table where name = [table name] and dbms = [dbms name]
 ```
-Details are available at the <a href="test%20commands.md#test-network-table" target="_blank">Test netork Table</a> section. 
+Details are available at the [Test netork Table](test%20commands.md#test-network-table) section. 
 
 ## Dropping Tables
 Dropping a table requires to drop the table on multiple nodes as well as the table's policy on the shared metadata.  
@@ -203,7 +203,7 @@ drop table tsd_info where dbms = almgm
 ```
 If the table is dropped on each node using the **drop table** command, the tables's policy on the metadata is removed 
 using the **blockchain drop policy** command. Details on how a policy is dropped are available in the 
-<a href="../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#removing-policies-from-a-master-node" target="_blank">removing policies from a master node</a> section.
+[removing policies from a master node](../../08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md#removing-policies-from-a-master-node) section.
 
 ### Dropping a table on all nodes
 The **drop network table** is a single call to drop the table from the local databases on all the nodes hosting the table,
@@ -216,7 +216,7 @@ Example:
 ```anylog
 drop network table where name = ping_sensor and dbms = lsl_demo and master = 10.0.0.25:2548
 ```
-**Note:** Because nodes may not be online, it is recommended to use issue the <a href="#monitoring-the-status-of-a-table-across-multiple-nodes" target="_blank">test network table</a>
+**Note:** Because nodes may not be online, it is recommended to use issue the [test network table](#monitoring-the-status-of-a-table-across-multiple-nodes)
 command before and after the drop.
 
 ## The get databases command
@@ -276,7 +276,7 @@ The command `sql` directs the node to process a sql command on a local node. The
 sql [dbms name] [query options] [sql command or select statement]
 ```  
 * [dbms name] is the logical DBMS containing the data.
-* [query option] are formatting instructions and output directions (<a href="#issuing-a-query-to-the-network" target="_blank">and are detailed below</a>).
+* [query option] are formatting instructions and output directions ([and are detailed below](#issuing-a-query-to-the-network)).
 * [SQL command] a SQL command including a SQL query.
 
 **Example**: issuing a SQL command on a local node
@@ -305,7 +305,7 @@ run client () sql [dbms name] [query options] [select statement]
 **Note 1**: The SQL queries that are supported by the network protocol are limited to a subset of queries.
 **Note 2**: The network protocol also supports pre-defined functions.
 
-Details on how to query multiple data from multiple nodes are available in the section <a href="queries.md#query-nodes-in-the-network" target="_blank">Query nodes in the network</a>.
+Details on how to query multiple data from multiple nodes are available in the section [Query nodes in the network](queries.md#query-nodes-in-the-network).
 
 ## The metadata
 The data in the network is treated as if it is maintained in a relational database and similarly to a centralized database, 

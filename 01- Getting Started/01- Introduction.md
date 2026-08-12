@@ -37,7 +37,7 @@ the cloud, it stays at the edge, close to where it's generated. Across that edge
 through shared metadata and protocols.
 
 Every node runs the same AnyLog software, though which services are active differs by node type (see
-<a href="#node-types" target="_blank">Node Types</a> below). Queries travel **peer-to-peer**: a query sent by a user goes directly to the
+[Node Types](#node-types) below). Queries travel **peer-to-peer**: a query sent by a user goes directly to the
 relevant Operator node(s), and results come directly back — there's no central broker or hop in between routing the
 traffic.
 

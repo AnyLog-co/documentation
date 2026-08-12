@@ -91,7 +91,7 @@ analyze output where file = !test_dir/test_file3.out and source = !test_dir/test
 
 ## Directing a query output to a file and organizing the output in a test format
 
-Using the <a href="queries.md#query-options" target="_blank">query options</a>, 
+Using the [query options](queries.md#query-options), 
 the query output can be directed to a file and organized as a test format.  
    
 The following key-value pairs (added to the query in the query options section) are used to direct the query to a file in a test format:
@@ -106,7 +106,7 @@ Note: If file name is prefixed with asterisk, the system will extend the output 
 
 The following example generates an output file in the folder with a name assigned to "test_dir". The asterisk on the file
 name extends the name created to make the output name unique. The output file is in a _test format_ similar to the example 
-in section <a href="#the-test-format" target="_blank">the test format</a> above.
+in section [the test format](#the-test-format) above.
 
 ```anylog
 run client () sql lsl_demo format=json and stat=true and test = true and  file = !test_dir\query_*.out and title = "Data set #35" "select distinct(value) as value from ping_sensor order by value"
@@ -201,5 +201,5 @@ test suite where source = !test_dir/test_*.out and inform = stdout and subdir = 
 
 ## Example
 
-A detailed example is available in <a href="examples/testsuite.md" target="_blank">test suite example</a>
+A detailed example is available in [test suite example](examples/testsuite.md)
 

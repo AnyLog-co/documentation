@@ -15,12 +15,12 @@ Basic Docker and Kubernetes (K8s) commands for working with AnyLog containers â€
 
 ## Table of Contents
 
-- <a href="#docker" target="_blank">Docker</a>
-  - <a href="#command-reference" target="_blank">Command Reference</a>
-  - <a href="#accessing-volumes" target="_blank">Accessing Volumes</a>
-    - <a href="#how-data-persistence-works" target="_blank">How Data Persistence Works</a>
-    - <a href="#working-with-volumes" target="_blank">Working with Volumes</a>
-- <a href="#kubernetes" target="_blank">Kubernetes</a>
+- [Docker](#docker)
+  - [Command Reference](#command-reference)
+  - [Accessing Volumes](#accessing-volumes)
+    - [How Data Persistence Works](#how-data-persistence-works)
+    - [Working with Volumes](#working-with-volumes)
+- [Kubernetes](#kubernetes)
 
 ---
 

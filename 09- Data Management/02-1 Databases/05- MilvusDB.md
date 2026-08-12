@@ -30,7 +30,7 @@ same command surface, using two different transport protocols.
 * **Milvus Server**: A physical deployment of the Milvus engine.
 
 For installing Milvus (Docker) and a full connect-to-query deployment walkthrough, see
-<a href="../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md" target="_blank">Milvus support</a>.
+[Milvus support](../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md).
 
 ---
 
@@ -50,7 +50,7 @@ databases under the same command surface, not as an extension of any particular 
 
 Collections **are** registered on the blockchain — after `vector create`/`vector insert`, the collection becomes
 discoverable the same way a SQL table is, which is what lets `run client()` fan a `vector search`/`query`/`delete`
-out to whichever operators actually host that collection (see <a href="#cluster--run-client" target="_blank">Cluster / `run client()`</a>
+out to whichever operators actually host that collection (see [Cluster / `run client()`](#cluster--run-client)
 below).
 
 > **To verify:** the source material confirms collections get registered on the blockchain, but doesn't name the
@@ -167,7 +167,7 @@ Vectors are **768-dimensional** — set `dimension = 768` on `connect dbms`.
 > python3 -c "from pymilvus import model; fn = model.DefaultEmbeddingFunction(); fn.encode_documents(['warmup']); fn.encode_queries(['warmup']); print('OK dim=', fn.dim)"
 > ```
 >
-> Cache location: `HF_HOME` (default `~/.cache/huggingface`). Docker images set `HF_HOME=/app/.anylog-model-cache` (baked in at build time). For downloading the model once and shipping it to an offline node, see <a href="../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md" target="_blank">Milvus support</a>.
+> Cache location: `HF_HOME` (default `~/.cache/huggingface`). Docker images set `HF_HOME=/app/.anylog-model-cache` (baked in at build time). For downloading the model once and shipping it to an offline node, see [Milvus support](../../13-%20Support%20&%20Troubleshooting/04-%20Third-Party%20Support/03-%20MilvusDB.md).
 
 ---
 
@@ -194,7 +194,7 @@ vector insert where dbms = vectors and collection = sensors and id = 1 and text 
 If both `vector` and `text` are present, the explicit `vector` wins; `text` is stored as metadata only.
 
 Extra scalar fields (e.g. `subject`, `measure`) are stored as metadata on either form — this is the mechanism
-described in <a href="#data-association" target="_blank">Data association</a> above for relating a vector row to other context.
+described in [Data association](#data-association) above for relating a vector row to other context.
 
 If the collection does not exist, it is created automatically on insert.
 
@@ -278,7 +278,7 @@ vector delete where dbms = vectors and collection = readings and filter = "text 
 ## Cluster / `run client()`
 
 Vector **query**, **search**, and **delete** can fan out to operators that host the collection (registered on the
-blockchain after create/insert — see <a href="#blockchain-association" target="_blank">Blockchain association</a> above).
+blockchain after create/insert — see [Blockchain association](#blockchain-association) above).
 
 ```anylog
 run client () vector search where dbms = vectors and collection = sensors and query = "door open" and limit = 5

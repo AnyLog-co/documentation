@@ -16,15 +16,15 @@ layout: page
 
 AnyLog hosts data on nodes configured as **Operator** nodes. Any connected node can act as an Operator as long as it's connected to the right logical databases and has the `run operator` process active.
 
-Data reaches the network either through a <a href="../04-%20Southbound%20Interfaces" target="_blank">southbound service</a> or by writing directly to the `!watch_dir`. This document covers how a file moves from ingestion to storage, and the commands used to manage files along the way.
+Data reaches the network either through a [southbound service](../04-%20Southbound%20Interfaces) or by writing directly to the `!watch_dir`. This document covers how a file moves from ingestion to storage, and the commands used to manage files along the way.
 
 ## Operator vs Publisher
 
 - **Operator** — an agent that stores data directly. When a query node needs data, it queries the Operator(s) that hold it.
 - **Publisher** — an agent that distributes incoming data across multiple Operators. Used for large-scale, fast-paced data that a single Operator can't process quickly enough.
 
-> Publisher is an enterprise feature, same as <a href="./03-%20High%20Availability.md" target="_blank">High-Availability and Data Resilience</a>. 
-> See <a href="../07-%20CLI/02-1%20Nodes.md" target="_blank">nodes.md</a> for more detail.
+> Publisher is an enterprise feature, same as [High-Availability and Data Resilience](./03-%20High%20Availability.md). 
+> See [nodes.md](../07-%20CLI/02-1%20Nodes.md) for more detail.
 
 ## Tree Structure
 

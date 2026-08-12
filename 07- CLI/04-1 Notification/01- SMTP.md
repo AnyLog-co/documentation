@@ -13,7 +13,7 @@ layout: page
 
 Simple Mail Transfer Protocol (SMTP) is a protocol to send and relay emails. In addition it can be used as a tool to
 send SMS messages via email (i.e. email -> phone) as well — though see the important caveat under
-<a href="#sending-sms-messages" target="_blank">Sending SMS messages</a> before relying on that path.
+[Sending SMS messages](#sending-sms-messages) before relying on that path.
 
 This document describes how to initiate the SMTP service on AnyLog and how to use it.
 
@@ -46,7 +46,7 @@ run smtp client where email = anylog.iot@gmail.com and password = [password]
 ## Sending a message
 
 To facilitate messages, declare the _SMTP_ client process. Details are available at
-<a href="../02-%20Background%20Processes.md" target="_blank">Background Processes</a> (see the Services overview table — `run smtp client`).
+[Background Processes](../02-%20Background%20Processes.md) (see the Services overview table — `run smtp client`).
 
 ### Sending an email
 **Usage**:
@@ -77,7 +77,7 @@ email to my_name@my_company.com  where subject = "anylog alert" and message = "V
 > carrier's free "email-to-SMS" gateway address (e.g. `[number]@txt.att.net`), a mechanism most major US carriers have
 > now shut down or are actively winding down due to spam abuse. Before depending on this for anything operationally
 > important (alerting, monitoring, incident response), see the status table below and consider using the `rest post`
-> based notification pattern documented in <a href="../07-%20Monitoring%20&%20Notifications.md#notification" target="_blank">Notification Services</a> instead
+> based notification pattern documented in [Notification Services](../07-%20Monitoring%20&%20Notifications.md#notification) instead
 > (Telegram, Pushover, Slack, or a dedicated SMS API such as Twilio) — those go through a real, maintained API rather
 > than a side-channel carriers are actively closing.
 

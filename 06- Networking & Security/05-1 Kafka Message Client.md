@@ -48,7 +48,7 @@ lightweight devices or MQTT brokers are already deployed at the edge.
 | `topic` | One or more topic blocks with mapping instructions. | |
 
 Topic mapping supports the same `dbms`, `table`, `column.[name].[type]`, and `bring` expressions used by MQTT
-message clients. See <a href="./05-%20Message%20Broker.md#mapping-json-payloads" target="_blank">MQTT Message Broker</a> for the JSON
+message clients. See [MQTT Message Broker](../) for the JSON
 mapping syntax.
 
 ## Example
@@ -134,8 +134,8 @@ connect dbms new_company where type = sqlite
 ```
 
 Topic mapping for Kafka uses the same JSON/`bring` model as MQTT — see
-<a href="./05-%20Message%20Broker.md#mapping-json-payloads" target="_blank">MQTT Message Broker</a> and
-<a href="../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md" target="_blank">Mapping Policy</a>.
+[MQTT Message Broker](./05-%20MQTT%20Message%20Broker.md#mapping-json-payloads) and
+[Mapping Policy](../04-%20Southbound%20Interfaces/02-%20Mapping%20Policy.md).
 
 **Verify data is flowing**:
 
@@ -155,7 +155,7 @@ The `--rm` flag on `docker run` removes the container automatically when it stop
 ## Notes
 
 Unlike MQTT's `broker = local` shorthand, Kafka has no AnyLog-local broker. For local testing, run a real Kafka
-endpoint (see <a href="#local-kafka-for-development" target="_blank">Local Kafka for development</a>) and point `ip` / `port` at it
+endpoint (see [Local Kafka for development](#local-kafka-for-development)) and point `ip` / `port` at it
 (for example `localhost` and `9092`).
 
 For deployments that use both MQTT and Kafka, keep the topic-to-table naming rules consistent across consumers so
@@ -163,6 +163,6 @@ queries can target predictable AnyLog tables.
 
 ## Related
 
-* <a href="./05-%20Message%20Broker.md" target="_blank">MQTT Message Broker</a>
-* <a href="./05-2%20Connectors%20To%20Data%20Sources.md" target="_blank">Connectors To Data Sources</a>
-* <a href="../04-%20Southbound%20Interfaces/08-%20Data%20Ingestion.md" target="_blank">Data Ingestion</a>
+* [MQTT Message Broker](./05-%20MQTT%20Message%20Broker.md)
+* [Connectors To Data Sources](./05-2%20Connectors%20To%20Data%20Sources.md)
+* [Data Ingestion](../04-%20Southbound%20Interfaces/08-%20Data%20Ingestion.md)

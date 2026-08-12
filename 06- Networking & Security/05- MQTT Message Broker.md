@@ -30,15 +30,15 @@ source_path: "background processes.md#message-broker"
 ## Overview
 
 AnyLog's message broker is one of the network's three core services (alongside TCP and REST — see
-<a href="./02-%20Network%20Processing.md" target="_blank">Network Processing</a>). It's a TCP-based listener that can accept
+[Network Processing](./02-%20Network%20Processing.md)). It's a TCP-based listener that can accept
 data from different sources (MQTT, Kafka, Modbus, REST, etc.) from a single point, and understands how to interpret
 each source based on a correlating message client (topic mapping) service.
 
 There are three ways to configure a node around it:
 
-* As a <a href="#subscribing-to-a-broker" target="_blank">subscriber to a third-party message broker</a> — pulling data from an external MQTT/Kafka broker.
-* As <a href="#enable-the-message-broker" target="_blank">the message broker itself</a> — receiving data pushed directly from clients using standard APIs like MQTT.
-* As a <a href="#rest-broker-mode" target="_blank">broker receiving REST commands</a> — mapping data delivered over REST/POST to the needed schema, based on the provided topic.
+* As a [subscriber to a third-party message broker](#subscribing-to-a-broker) — pulling data from an external MQTT/Kafka broker.
+* As [the message broker itself](#enable-the-message-broker) — receiving data pushed directly from clients using standard APIs like MQTT.
+* As a [broker receiving REST commands](#rest-broker-mode) — mapping data delivered over REST/POST to the needed schema, based on the provided topic.
 
 In all three cases:
 
@@ -46,7 +46,7 @@ In all three cases:
 * Users can publish data directly to an AnyLog node configured as a broker.
 * When configured as a message broker, an AnyLog node can automatically generate UNS policies describing data
   relationships, enabling hierarchical navigation through the Unified Namespace — see
-  <a href="#generating-uns-policies" target="_blank">Generating UNS Policies</a>.
+  [Generating UNS Policies](#generating-uns-policies).
 
 ---
 
@@ -88,7 +88,7 @@ This process initiates a client that subscribes to a list of topics registered o
 added to the broker and matches a subscribed topic, the broker pushes the message to the AnyLog instance, where
 it's mapped to a JSON structure and aggregated into files, processed according to the node's configuration (e.g.
 ingested to a local database, or sent to another node). This message data is treated as **streaming data** — see
-<a href="../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file" target="_blank">File Mode and Streaming Mode</a>.
+[File Mode and Streaming Mode](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file).
 
 ### Command structure
 
@@ -142,8 +142,8 @@ If `run msg client` references the same IP/port used in the `run message broker`
 | `dbms` | The logical dbms for the topic's data, or a `bring` command to extract the name from the message. |
 | `table` | The table name, or a `bring` command to extract it. |
 | `column.[name].[type]` | A column name + data type, paired with a `bring` command extracting that column's value from the message. |
-| `dynamic` | `true` — auto-generate <a href="#generating-uns-policies" target="_blank">UNS policies</a> instead of using inline/explicit mapping. |
-| `policy` | Reference a <a href="#registering-a-mapping-policy" target="_blank">reusable mapping policy</a> instead of inline `dbms`/`table`/`column...` params. |
+| `dynamic` | `true` — auto-generate [UNS policies](#generating-uns-policies) instead of using inline/explicit mapping. |
+| `policy` | Reference a [reusable mapping policy](#registering-a-mapping-policy) instead of inline `dbms`/`table`/`column...` params. |
 
 **Naming rule:** for both `dbms` and `table`, uppercase letters are converted to lowercase and spaces to underscores.
 
@@ -158,7 +158,7 @@ If `run msg client` references the same IP/port used in the `run message broker`
 ### The `bring` command
 
 `bring` extracts data from a JSON structure — the same command used in blockchain queries elsewhere in AnyLog. See
-<a href="../07-%20CLI/05-%20JSON%20Data%20Transformation.md#file-mode-and-streaming-mode" target="_blank">JSON Data Transformation</a> for the full syntax.
+[JSON Data Transformation](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#file-mode-and-streaming-mode) for the full syntax.
 
 **Mapping the message data:**
 

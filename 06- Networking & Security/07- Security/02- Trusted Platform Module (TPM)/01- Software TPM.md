@@ -323,5 +323,5 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
-- <a href="../01-%20Built-in%20Authentication/01-%20Authentication.md" target="_blank">Authentication</a>
-- <a href="../../03-%20Securing%20the%20Network.md" target="_blank">Secure Network</a>
+- [Authentication](../01-%20Built-in%20Authentication/01-%20Authentication.md)
+- [Secure Network](../../03-%20Securing%20the%20Network.md)

@@ -29,7 +29,7 @@ tags:
 # Certificate Authority (CA)
 
 > This document assumes familiarity with Nebula's lighthouse/host roles, covered in
-> <a href="./02-%20Nebula.md#terminology" target="_blank">Nebula</a>. It expands on one part of that setup: the certificate authority that
+> [Nebula](./02-%20Nebula.md#terminology). It expands on one part of that setup: the certificate authority that
 > establishes trust between nodes in the mesh.
 
 Every Nebula mesh has exactly one Certificate Authority: a certificate (`ca.crt`) trusted by every member of the mesh, 

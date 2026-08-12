@@ -224,12 +224,12 @@ Display node metadata as a table.
 Rather than building panels one at a time as above, AnyLog provides pre-built dashboard JSON files you can import
 wholesale:
 
-* **<a href="../imgs/grafana_json/network_summary.json" target="_blank">Network Map</a>** — a map of all nodes in the network, a list of
+* **[Network Map](../imgs/grafana_json/network_summary.json)** — a map of all nodes in the network, a list of
   operator nodes, and a list of tables supported across the network.
 
   <img src="../imgs/grafana_network_map.png" alt="grafana_network_map.png">
 
-* **<a href="../imgs/grafana_json/edgex_dashboard.json" target="_blank">EdgeX Diagram</a>** — a line graph of min/avg/max plus gauges for
+* **[EdgeX Diagram](../imgs/grafana_json/edgex_dashboard.json)** — a line graph of min/avg/max plus gauges for
   total and per-node row counts, fed from the EdgeX MQTT sample connection.
 
   <img src="../imgs/grafana_edgex_dashboard.png" alt="grafana_edgex_dashboard.png">
@@ -241,7 +241,7 @@ wholesale:
    <img src="../imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
 
 2. Go to **JSON Model** and paste in the desired model — the JSON object that defines the dashboard (e.g. the
-   <a href="../imgs/grafana_json/edgex_dashboard.json" target="_blank">EdgeX Dashboard</a> above):
+   [EdgeX Dashboard](../imgs/grafana_json/edgex_dashboard.json) above):
 
    | Empty JSON Model | Filled JSON Model |
    |:---:|:---:|
@@ -294,4 +294,4 @@ repo as a versioned example (like `network_summary.json` / `edgex_dashboard.json
 
 - Set **Max data points** in Query Options to control result density for time-series panels — without it, min/max/avg lines collapse into a single line.
 - Use `format_as: timeseries` for time-series panels (Time series, Gauge) and `table` for table panels.
-- See <a href="../07-%20CLI/04-%20SQL.md" target="_blank">Querying Data</a> for the full `increments`/`period` reference and query options like `include`/`extend`.
+- See [Querying Data](../07-%20CLI/04-%20SQL.md) for the full `increments`/`period` reference and query options like `include`/`extend`.

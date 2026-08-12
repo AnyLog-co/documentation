@@ -24,14 +24,14 @@ them to actually be configured properly.
 
 ## Contents
 
-1. <a href="#general-process" target="_blank">General Process</a>
-2. <a href="#common-setup" target="_blank">Common Setup</a>
-   * <a href="#network-setup" target="_blank">Network Setup</a>
-   * <a href="#blockchain-sync" target="_blank">Blockchain Sync</a>
-3. <a href="#the-master--metadata-node" target="_blank">The Master / Metadata Node</a>
-4. <a href="#query-node" target="_blank">Query Node</a>
-5. <a href="#the-operator-node" target="_blank">The Operator Node</a>
-6. <a href="#the-publisher-node" target="_blank">The Publisher Node</a>
+1. [General Process](#general-process)
+2. [Common Setup](#common-setup)
+   * [Network Setup](#network-setup)
+   * [Blockchain Sync](#blockchain-sync)
+3. [The Master / Metadata Node](#the-master--metadata-node)
+4. [Query Node](#query-node)
+5. [The Operator Node](#the-operator-node)
+6. [The Publisher Node](#the-publisher-node)
 
 ## General Process
 
@@ -97,7 +97,7 @@ node type:
 
 ## The Master / Metadata Node
 
-The metadata node is our blockchain emulator, and requires 2 things beyond the <a href="#common-setup" target="_blank">common setup</a>
+The metadata node is our blockchain emulator, and requires 2 things beyond the [common setup](#common-setup)
 (using the 60–90 second sync interval):
 
 * `blockchain` Database + `ledger` table
@@ -117,11 +117,11 @@ AnyLog has built-in table definitions for:
 
 ## Query Node
 
-This is a node dedicated to querying data across the network. Beyond the <a href="#common-setup" target="_blank">common setup</a> (remember:
+This is a node dedicated to querying data across the network. Beyond the [common setup](#common-setup) (remember:
 `timeout = 90` for network setup, and the 60–90 second sync interval), it needs:
 
 * `system_query` logical database — where results get aggregated. We recommend using SQLite (in-memory), unless
-the Northbound Services have a <a href="../05-%20Northbound%20Connectors/04-%20Postgres%20Connector%20%28Tableau%29.md" target="_blank">Postgres direct</a> connection as opposed to using REST.
+the Northbound Services have a [Postgres direct](../05-%20Northbound%20Connectors/04-%20Postgres%20Connector%20%28Tableau%29.md) connection as opposed to using REST.
 
 ```anylog
 <connect dbms system_query where 
@@ -132,7 +132,7 @@ the Northbound Services have a <a href="../05-%20Northbound%20Connectors/04-%20P
 ## The Operator Node
 
 This node is dedicated to storing the actual data coming in from devices and sensors. Beyond the
-<a href="#common-setup" target="_blank">common setup</a> (using the ~5 minute sync interval), it needs:
+[common setup](#common-setup) (using the ~5 minute sync interval), it needs:
 
 * Define Cluster + Blockchain policy — unlike the other nodes, this is a **must** so that the network knows where the data
 resides and how to reach it.
@@ -254,7 +254,7 @@ different operator (ideally within the same cluster group).
 * **Reduced attack/complexity surface** — only the publisher needs to be reachable by external devices; operators can sit behind it.
 * **Cleanup/lifecycle management** — the publisher's `delete_json` / `delete_sql` flags also manage what happens to source files/records after a successful distribution.
 
-Beyond the <a href="#common-setup" target="_blank">common setup</a> (using the ~5 minute sync interval), it needs:
+Beyond the [common setup](#common-setup) (using the ~5 minute sync interval), it needs:
 
 > **To verify:** if the Publisher receives southbound traffic directly (MQTT/REST push, syslog, etc.) rather than
 > picking up files already dropped to disk, it likely also needs `run message broker` — the same as an Operator

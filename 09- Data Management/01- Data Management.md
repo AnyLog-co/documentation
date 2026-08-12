@@ -16,26 +16,26 @@ layout: page
 # Data Management
 
 There are two types of data within AnyLog: **metadata**, which is covered in
-<a href="../08-%20Blockchain%20&%20Metadata/01-%20Blockchain.md" target="_blank">Blockchain</a>, and **actual data** — the content stored on an
+[Blockchain](../08-%20Blockchain%20&%20Metadata/01-%20Blockchain.md), and **actual data** — the content stored on an
 operator node, whether it's sensor, device, monitoring, or other forms of blob data.
 
 Actual data itself splits further: device/sensor/monitoring data is covered in this section, while model and
-inference data is covered under <a href="../11-%20Extended%20Services/" target="_blank">Extended Services</a>, which deals with MCP, LLMs, and
+inference data is covered under [Extended Services](../11-%20Extended%20Services/), which deals with MCP, LLMs, and
 other ML/AI non-device data.
 
-<a href="../04-%20Southbound%20Interfaces" target="_blank">Southbound</a> services are how data gets **into** AnyLog (sensors,
-devices, MQTT, etc.), and <a href="../05-%20Northbound%20Connectors" target="_blank">Northbound</a> services are how data gets **out** of
+[Southbound](../04-%20Southbound%20Interfaces) services are how data gets **into** AnyLog (sensors,
+devices, MQTT, etc.), and [Northbound](../05-%20Northbound%20Connectors) services are how data gets **out** of
 AnyLog (BI tools and other consumers). This section sits between the two: it's what AnyLog does internally, once
 data has arrived and before anything queries it back out — think of AnyLog as the application, and this section as
 how that application actually writes to and reads from the database underneath it.
 
 ## Topics Covered
 
-* <a href="./02-%20Databases.md" target="_blank">Database Connectors</a>
+* [Database Connectors](./02-%20Databases.md)
 * Data Management, whether it's HA, validation of what came in, or simply understanding how data works
-* <a href="./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning" target="_blank">Data Partitioning</a>
-* <a href="./02-2%20Data%20Aggregations.md" target="_blank">Data Aggregation</a>
-* <a href="../05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md" target="_blank">Querying Data</a>
+* [Data Partitioning](./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
+* [Data Aggregation](./02-2%20Data%20Aggregations.md)
+* [Querying Data](../05-%20Northbound%20Connectors/01-%20Northbound%20Connectors.md)
 
 ## The Data Process
 
@@ -44,7 +44,7 @@ Data processing has 2 parts.
 **Part 1**: Data coming from a device (PLC) and stored into AnyLog
 
 1. A PLC or another device generates data and publishes it out.
-2. Either a direct <a href="../04-%20Southbound%20Interfaces" target="_blank">southbound connection</a> built into AnyLog, or a third-party
+2. Either a direct [southbound connection](../04-%20Southbound%20Interfaces) built into AnyLog, or a third-party
    connector (e.g. Node-RED), accepts the data from the PLC device or sensor. If the data is first passed through
    a third-party application, that application then forwards the data into AnyLog — usually via MQTT or REST.
 3. To avoid continuously writing to the database, incoming content resides in a configurable buffer.

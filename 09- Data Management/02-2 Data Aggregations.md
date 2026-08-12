@@ -54,8 +54,8 @@ In practice:
 
 Two commands provide different perspectives on the aggregated data:
 
-* <a href="#retrieve-aggregations" target="_blank">get aggregation</a> - Displays results organized by aggregation (processing) time intervals.
-* <a href="#retrieve-aggregations-by-time" target="_blank">get aggregation by time</a> - Displays results ordered by the source data timestamps, allowing analysis based on 
+* [get aggregation](#retrieve-aggregations) - Displays results organized by aggregation (processing) time intervals.
+* [get aggregation by time](#retrieve-aggregations-by-time) - Displays results ordered by the source data timestamps, allowing analysis based on 
 the original event time rather than processing time.
 
 ## Aggregations and DBMS Operations
@@ -93,9 +93,9 @@ Notes:
 ## Partitioning and Aggregations
 
 If aggregation output is stored in the **same physical database** as the source time-series data (see
-<a href="#aggregations-and-dbms-operations" target="_blank">Aggregations and DBMS Operations</a> above), avoid partitioning that database with
+[Aggregations and DBMS Operations](#aggregations-and-dbms-operations) above), avoid partitioning that database with
 a single wildcard rule (`partition [dbms] * using [column] by [interval]` — see
-<a href="./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning" target="_blank">Table Partitioning</a>
+[Table Partitioning](./02-1%20Databases/01-%20SQL%20Storage.md#table-partitioning)
 A database-wide rule applies the same interval to every table in that database.
 I doesn't distinguish between raw source tables and aggregation output tables :
 the two typically need very different retention.
@@ -343,7 +343,7 @@ get aggregation by time where dbms = orics and table = r_50 and value_column = c
 }
 ```
 
-Note: Grafana configuration is detailed in the <a href="../05-%20Northbound%20Connectors/03-%20Grafana.md#aggregations-query" target="_blank">Using Grafana</a> section.
+Note: Grafana configuration is detailed in the [Using Grafana](../05-%20Northbound%20Connectors/03-%20Grafana.md#aggregations-query) section.
 
 ## Retrieve aggregation configurations
 

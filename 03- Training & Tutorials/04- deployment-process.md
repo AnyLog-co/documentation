@@ -32,11 +32,11 @@ which defines which services to run on a given AnyLog agent.
 
 As such the document covers a few things: 
 
-1. <a href="#the-break-between-anylog-and-deployment-scripts" target="_blank">The break between AnyLog and deployment-scripts</a>
-2. <a href="#initial-deployment" target="_blank">How to deploy AnyLog (simple)</a>
-3. <a href="#what-happens-in-the-docker-container" target="_blank">The connection between AnyLog & `deployment-scripts`</a>
-4. <a href="#overriding-the-entry-point" target="_blank">Overriding the Entry Point</a>
-5. <a href="#patches--version-updates" target="_blank">Patches & Version Updates</a>
+1. [The break between AnyLog and deployment-scripts](#the-break-between-anylog-and-deployment-scripts)
+2. [How to deploy AnyLog (simple)](#initial-deployment)
+3. [The connection between AnyLog & `deployment-scripts`](#what-happens-in-the-docker-container)
+4. [Overriding the Entry Point](#overriding-the-entry-point)
+5. [Patches & Version Updates](#patches--version-updates)
 
 <img src="../imgs/deployment_stack_layers.png" height="50%" width="50%" />
 
@@ -78,7 +78,7 @@ change the scripts it's pointed at.
 
 AnyLog is the actual source code. To configure its services, AnyLog agents use configuration policies driven by a set of 
 scripts called **deployment-scripts**. For the internals of how those policies and scripts actually communicate (and 
-the `process` vs. `thread` execution model behind them), see <a href="05-%20deployment-scripts.md" target="_blank">Deployment Scripts — Integration Reference</a>.
+the `process` vs. `thread` execution model behind them), see [Deployment Scripts — Integration Reference](05-%20deployment-scripts.md).
 
 By default, the docker image ships with the `main` deployment-scripts already baked in. Using the environment params 
 `DEPLOYMENTS_REPO` and `DEPLOYMENTS_BRANCH`, a user can point at a different set of deployment-scripts instead.
