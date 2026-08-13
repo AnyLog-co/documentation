@@ -72,8 +72,8 @@ headings, but the left sidebar label is always the Markdown filename without the
 
 Numeric IDs keep file ordering, which guarantees their location in the table of contents / sidebar. Additionally, 
 files with `99-` numeric ID are **ignored** and will not be added to the documentation. The `<ID>-<subID>` naming 
-pattern (e.g., `02-1`, `04-2` in the tree example below) keeps files within the same topic (such as Unified Namespace 
-- UNS) grouped under the same numeric ID, in logical order.
+pattern (e.g., `02-1`, `04-2` in the tree example below) keeps files within the same topic (such as Unified Namespace - UNS) 
+grouped under the same numeric ID, in logical order.
 
 **Choosing an ID for a new page:** Existing top-level content is ordered to follow a typical user journey (e.g., 
 intro to AnyLog → setting up your machine → installing AnyLog), so a page that fits into that sequence should be 
