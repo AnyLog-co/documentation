@@ -50,10 +50,13 @@ git merge origin/pre-develop --sign
 ```shell
 cd $HOME/anylog-docs 
 
-docker compose -f ./docker-compose.yaml up --build -d 
+make up LOCAL_DOCS=$HOME/documentation
 ```
 
-4. View docs in browser - http://127.0.0.1:4000
+> For the full backend setup — Makefile targets, running without `make`, troubleshooting, and Mac-native development 
+> — see the [anylog-docs.github.io README](https://github.com/AnyLog-co/anylog-docs.github.io/blob/main/README.md).
+
+4. View docs in browser - http://localhost:4000
 
 
 ## Documenting
@@ -131,14 +134,15 @@ Alternatively, the change log section can also be written  in table format
 
 Jekyll builds each page at `/docs/<section>/<slug>/`, regardless of which folder the source file lives in. Because of 
 this, links between doc pages should be written as standard **relative** Markdown paths — relative to the current 
-file, the same way you'd link files in any repository. Pretend we are in the file 
-[01- Getting Started/01- Introduction.md](01-%20Getting%20Started/01-%20Introduction.md):
+file, the same way you'd link files in any repository. 
+
+Pretend we are in the file [01- Getting Started/01- Introduction.md](01-%20Getting%20Started/01-%20Introduction.md):
 
 ```markdown
-# Example: same directory as 01- Introduction.md
+<!--  Example: same directory as 01- Introduction.md --> 
 [install anylog](./03-%20install.md) 
 
-# Example: different directory than 01- Introduction.md 
+<!-- Example: different directory than 01- Introduction.md --> 
 [Background Services](../07-%20CLI/02-%20Background%20Processes.md)
 ```
 
@@ -230,3 +234,55 @@ python3 .github/scripts/generate_toc.py
 ```
 
 5. Commit + Push Changes
+
+6. Write a PR against _pre-develop_ to integrate into the _main_ path
+
+--- 
+
+## Leveraging Claude LLM to Update a Doc Page
+
+A reliable pattern for getting Claude to rewrite or update a page while keeping it consistent with the rest of the docs:
+
+1. Provide the **raw GitHub URL** of the file to update — in GitHub, open the file and click **Raw**, then copy the address bar URL
+2. Provide the **raw GitHub URL** of an existing page whose layout you want the output to match
+3. Include the required front matter block in your prompt
+4. Ask Claude to rewrite the first file to match the structure and style of the second
+
+Keep the prompt substantive — include at least a short paragraph describing the intent and audience for each major 
+section you want changed, not just bullet points. The more context you give about tone, audience, and structure, 
+the better the result.
+
+### Sample prompt
+
+The following is a real example using `remote-gui.md`. Copy and adapt it for any page you want to update.
+
+> I need you to update the AnyLog documentation page for the Remote GUI.
+>
+> **File to update (raw URL):**
+> `https://raw.githubusercontent.com/AnyLog-co/anylog-docs.github.io/refs/heads/main/_docs/Tools-UI/remote-gui.md`
+>
+> **Example file to match in style and structure (raw URL):**
+> `https://raw.githubusercontent.com/AnyLog-co/anylog-docs.github.io/refs/heads/main/_docs/Getting-Started/getting-started.md`
+>
+> **Required front matter — keep this exactly at the top of the file:**
+> ```yaml
+> ---
+> title: Remote GUI
+> description: Architecture and developer reference for the AnyLog Remote GUI.
+> layout: page
+> ---
+> ```
+>
+> **What to change:**
+>
+> The current page reads like internal notes — it's dense and assumes the reader already knows the codebase. Rewrite it so a new developer joining the project can follow it from top to bottom. The architecture diagram and key terminology table are good and should stay, but the surrounding prose needs more context.
+>
+> The "Running locally" section currently has two terminal blocks with commands that aren't explained — add a sentence before each block describing what it does and why. The `uvicorn` command in particular looks like it may have a path issue (`CLI.local-cli-backend.main:app` uses dots but the `cd` above already entered the subdirectory); please flag that or correct it.
+>
+> The "Plugin system" section is the most important part for contributors — expand the intro paragraph to explain *when* someone would want to build a plugin versus modifying a core feature. Keep the code examples as-is.
+>
+> Use relative paths for links to other pages in `_docs/` — e.g. `../network-services/background-services.md`. These are converted to permalinks automatically; do not hand-write `/docs/...` paths. Any link to an external repo or external site should use `<a href="URL" target="_blank">` format. Do not change any section headings — the navigation relies on them.
+
+---
+
+Adjust the URLs, front matter, and the description of changes to match whatever page you are working on.
