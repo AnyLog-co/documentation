@@ -492,18 +492,23 @@ For certificate-based MQTT security:
 2. Create and sign a server certificate request.
 3. Start the broker with TLS enabled.
 
+Example using existing certificate files under `!pem_dir` (for example files provided by an outside organization; use distinct names such as an `ext_` prefix):
+
 ```anylog
 <run message broker where external_ip = [ip] and external_port = 8883 and threads = 6
   and enable_tls = true
-  and tls_cert = ./data/pem/server_tls.crt
-  and tls_key = ./data/pem/server_tls.key
-  and users_ca = ./data/pem/CA_users.crt
+  and tls_cert = !pem_dir/ext_server_tls.crt
+  and tls_key = !pem_dir/ext_server_tls.key
+  and users_ca = !pem_dir/ext_MQTT_CA_users.crt
   and allowed_users = (user1, user2)
 >
 ```
 
 `allowed_users` is optional. When set, the listed names are the CN values in client certificates permitted to
 connect. `users_ca` is the CA that issued the client certificates.
+
+When you generate the listener certificate in AnyLog (for example `output_name = "server-mqtt-op1"`), use those
+written file names instead — for example `!pem_dir/server-mqtt-op1.crt` and `!pem_dir/server-mqtt-op1.key`.
 
 Publish from a TLS-capable MQTT client such as `mosquitto_pub`:
 
@@ -517,6 +522,9 @@ mosquitto_pub \
   -t broker/data \
   -m '{"Broker":"A","value":50.7}'
 ```
+
+For the full mTLS walkthrough (CA creation, `id sign certificate request`, user certs, MQTT Explorer, external
+org certs, and optional CA on the blockchain), see [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md).
 
 
 ## Debugging and Validation
@@ -824,6 +832,7 @@ The message inserts into `mydb.broker_data`, with no external MQTT broker hop.
 
 ## Related
 
+* [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md) — full mTLS setup walkthrough
 * [Kafka Message Client](./05-1%20Kafka%20Message%20Client.md)
 * [Connectors To Data Sources](./05-2%20Connectors%20To%20Data%20Sources.md)
 * [Network Processing](./02-%20Network%20Processing.md)
