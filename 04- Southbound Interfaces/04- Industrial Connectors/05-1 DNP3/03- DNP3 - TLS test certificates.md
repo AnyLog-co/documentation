@@ -126,3 +126,6 @@ Plain TCP, no TLS: run `./outstation-demo` instead, from the same directory.
 
 - <a href="../05-%20DNP3.md#dnp3-out-station-testing" target="_blank">DNP3</a> —
   the main DNP3 connector doc; this page is referenced from its outstation-testing section.
+
+- <a href="04-%20DNP3%20-%20TLS%20Setup%20Example.md" target="_blank">DNP3 TLS Setup Example</a> —
+  AnyLog certificate commands and optional Master/Operator remote signing (same ideas as the MQTT TLS broker example).
