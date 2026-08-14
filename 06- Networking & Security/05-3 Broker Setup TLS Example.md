@@ -324,6 +324,8 @@ set master_node = 192.168.1.88:32048
   "name": "MQTT_CA_users",
   "company": "AnyLog",
   "usage": "CA for mqtt_users",
+  "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n"
+}}
 >
 
 blockchain prepare policy !policy
