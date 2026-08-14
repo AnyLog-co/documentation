@@ -156,7 +156,7 @@ Official URL: http://docs.anylog.network/
   - [1 ANMP Policy.md](08-%20Blockchain%20%26%20Metadata/02-1%20ANMP%20Policy.md)
   - [Blockchain Commands.md](08-%20Blockchain%20%26%20Metadata/03-%20Blockchain%20Commands.md)
   - [1 Blockchain Full Circle.md](08-%20Blockchain%20%26%20Metadata/03-1%20Blockchain%20Full%20Circle.md)
-  - [Unitfied Namespace.md](08-%20Blockchain%20%26%20Metadata/04-%20Unitfied%20Namespace.md)
+  - [Unified Namespace.md](08-%20Blockchain%20%26%20Metadata/04-%20Unified%20Namespace.md)
   - [1 UNS Custom Dynamic Examples.md](08-%20Blockchain%20%26%20Metadata/04-1%20UNS%20Custom%20Dynamic%20Examples.md)
   - [2 UNS Custom Examples.md](08-%20Blockchain%20%26%20Metadata/04-2%20UNS%20Custom%20Examples.md)
 - [Data Management](09-%20Data%20Management/)
