@@ -255,7 +255,12 @@ def main():
             rel = r.md_file.relative_to(root)
             if f"[{r.link_text}]({r.raw_dest})" == "[alt](url)":
                 continue
+            elif not last_file:
+                last_file = rel
+            elif last_file != rel:
+                sys.exit(1)
             print(f"  {rel}: [{r.link_text}]({r.raw_dest})  -> {r.detail}")
+        sys.exit(1)
     else:
         checked = len(results)
         print(f"All {checked} link(s) OK."

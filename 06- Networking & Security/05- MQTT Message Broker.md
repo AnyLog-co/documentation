@@ -1,6 +1,6 @@
 ---
-title: "Message Broker"
-description: AnyLog's built-in message broker — one of the network's three core services. Covers subscribing to MQTT/Kafka/REST sources, publishing, mapping, UNS policies, TLS, and debugging.
+title: "MQTT Message Broker"
+description: Configure AnyLog for MQTT ingestion, including external brokers, AnyLog as the broker, dynamic UNS policies, table naming, TLS, debugging, and worked use cases.
 layout: page
 source_path: "background processes.md#message-broker"
 ---
@@ -25,242 +25,396 @@ source_path: "background processes.md#message-broker"
    port that doesn't match this doc set's established convention: `master_node = 10.0.0.185:2548` in the UNS
    example — every other Master TCP port example elsewhere is `32048`; `2548` looks like it may be missing a
    leading `3`, but I'm not certain enough to silently "fix" a working example.
+| 2026-08-13 | Roy Shadmon | New descriptions on how to use MQTT in AnyLog and separating Kafka to a different page. | 
 --->
 
 ## Overview
 
-AnyLog's message broker is one of the network's three core services (alongside TCP and REST — see
-[Network Processing](./02-%20Network%20Processing.md)). It's a TCP-based listener that can accept
-data from different sources (MQTT, Kafka, Modbus, REST, etc.) from a single point, and understands how to interpret
-each source based on a correlating message client (topic mapping) service.
+MQTT is useful when devices, gateways, and applications need to publish telemetry through a lightweight
+publish/subscribe protocol. AnyLog handles MQTT with two cooperating services:
 
-There are three ways to configure a node around it:
+* **Message broker**: receives MQTT messages from publishers. This can be an external broker such as Mosquitto,
+  HiveMQ, CloudMQTT, or AnyLog's built-in broker.
+* **Message client**: subscribes to MQTT topics and maps matching messages into AnyLog tables and UNS policies.
 
-* As a [subscriber to a third-party message broker](#subscribing-to-a-broker) — pulling data from an external MQTT/Kafka broker.
-* As [the message broker itself](#enable-the-message-broker) — receiving data pushed directly from clients using standard APIs like MQTT.
-* As a [broker receiving REST commands](#rest-broker-mode) — mapping data delivered over REST/POST to the needed schema, based on the provided topic.
+Even when AnyLog is the broker, the `AnyLog Message Client` is still required. The broker accepts the MQTT packet;
+the message client decides how the topic and payload become tables, columns, and Unified Namespace metadata. The
+advantage is that publishers can send directly to the AnyLog operator's MQTT broker port, removing the separate
+external broker hop. For example, a sensor publishing to `[topic]` can be mapped by the local message client into
+`[dbms].[table]` and made available to distributed SQL queries.
 
-In all three cases:
+| External broker pattern | AnyLog-as-broker pattern   |
+|---|----------------------------|
+| `Sensor / Publisher` | `Sensor / Publisher`       |
+| ↓ | ↓                          |
+| `External MQTT Broker` | `AnyLog MQTT Broker` & `AnyLog Message Client`    |
+| ↓ |                           |
+| `AnyLog Message Client` |                            |
+| ↓ | ↓                          |
+| `AnyLog table + UNS policies` | `AnyLog table + UNS policies` |
 
-* Users can subscribe to and retrieve data from one or more topics on a broker.
-* Users can publish data directly to an AnyLog node configured as a broker.
-* When configured as a message broker, an AnyLog node can automatically generate UNS policies describing data
-  relationships, enabling hierarchical navigation through the Unified Namespace — see
-  [Generating UNS Policies](#generating-uns-policies).
+This AnyLog as a broker pattern reduces latency, network egress, failure points, and the need to manage an additional software
+service. Here, AnyLog manages both the broker and the client, which simplifies deployments and operational
+management. Another advantage is that AnyLog enables broker and client parallelization:
+multiple AnyLog Brokers and Message Clients can run across operators, sites, or locations while still
+presenting distributed data as if it is hosted on a single logical system through the AnyLog network.
 
----
+External brokers are still useful when a site already has MQTT infrastructure, when multiple AnyLog or non-AnyLog
+consumers must read the same feed, or given a specific use case or requirement. In that pattern, configure AnyLog
+as a subscriber to the external broker and the same single logical system view is still provided.
 
-## Enable the Message Broker
+## Page Summary
 
-```anylog
-<run message broker where 
-    external_ip = [ip] and external_port = [port] and 
-    internal_ip = [local_ip] and internal_port = [local_port] and 
-    bind = [true/false] and threads = [threads count]>
-```
+Use this page as a configuration reference and jump to the section that matches the task:
 
-The first IP/port pair binds to the external network; the second (optional) pair binds to the local network, if
-applicable. `threads` defaults to `6`.
+* [Enable AnyLog as an MQTT Broker](#enable-anylog-as-an-mqtt-broker): start the built-in broker, review broker
+  options, and validate that the MQTT port is active.
+* [Run an MQTT Message Client](#run-an-mqtt-message-client): subscribe to MQTT topics and define the connection,
+  client, and topic options that map messages into AnyLog.
+* [Topic matching and table naming](#topic-matching-and-table-naming): understand MQTT case sensitivity, AnyLog
+  name normalization, generated table precedence, and possible case-only table collisions.
+* [Mapping JSON Payloads](#mapping-json-payloads): use `bring` expressions and explicit column mappings when
+  dynamic table generation is not used.
+* [Dynamic UNS Policies](#dynamic-uns-policies): generate tables and UNS policies automatically from matching
+  topics and JSON payloads.
+* [Registering a Mapping Policy](#registering-a-mapping-policy): store reusable mappings on the blockchain and
+  reference them from message-client subscriptions.
+* [Publishing MQTT Data](#publishing-mqtt-data): publish test messages from AnyLog or Mosquitto.
+* [MQTT over TLS and mTLS](#mqtt-over-tls-and-mtls): configure certificate-based broker security.
+* [Debugging and Validation](#debugging-and-validation): inspect clients, broker activity, streaming status,
+  generated tables, and ingestion errors.
+* [Example Use Cases](#example-use-cases): walk through multi-operator ingestion, `table_prefix`,
+  `table_name_as_topic`, schema-change behavior, case-sensitive topics, and AnyLog as the broker.
 
-**Validate & monitor:**
+## Enable AnyLog as an MQTT Broker
 
-```anylog
-get connections        -- confirm the process is configured and bound
-get broker              -- monitor messages received by the broker
-get msg broker          -- monitor messages per topic by broker
-get local broker        -- summary of messages processed on AnyLog as a broker (broker IP/port only — data
-                        --   published via "local" is not included in this command's statistics)
-```
-
-**Helper commands** — if the broker process fails to bind:
-
-```anylog
-get ip list                                   -- list available IPs on the node
-get machine connections                       -- list active connections + the process ID holding each socket
-get machine connections where port = 7850     -- detail the process using a specific port
-```
-
----
-
-## Subscribing to a Broker
-
-This process initiates a client that subscribes to a list of topics registered on a broker. When a new message is
-added to the broker and matches a subscribed topic, the broker pushes the message to the AnyLog instance, where
-it's mapped to a JSON structure and aggregated into files, processed according to the node's configuration (e.g.
-ingested to a local database, or sent to another node). This message data is treated as **streaming data** — see
-[File Mode and Streaming Mode](../04-%20Southbound%20Interfaces/03-%20Direct%20Connectors/01-%20REST.md#header-mode---streaming-vs-file).
-
-### Command structure
+Use this command when publishers should connect directly to the AnyLog node:
 
 ```anylog
-run msg client where [connection parameters] and [config parameters] and topic = (topic 1 params) and topic = (topic 2 params) ...
+<run message broker where
+    external_ip = [ip] and external_port = [port] and
+    internal_ip = [local_ip] and internal_port = [local_port] and
+    bind = [true|false] and threads = [threads count]>
 ```
 
-Options are `key = value` pairs joined with `and`. Providing `broker` is mandatory; everything else is optional
-depending on the broker and how messages need to be processed. A single command can subscribe to multiple topics —
-each topic's details go in their own parentheses.
+### Broker options
 
-There are three types of parameters:
-1. **Connection params** — how to connect to the broker.
-2. **Config params** — settings that apply to all messages, regardless of topic.
-3. **Topic params** — the topic name and the rules for mapping the message so AnyLog can process it.
-
-### Connection params
-
-| Option | Details |
+| Option | Description |
 |---|---|
-| `broker` | The URL or IP of the broker. Set to `local` to subscribe to this node's own broker instead of a third party. |
-| `port` | The broker's port. Default `1883`. |
-| `user` | The authorized user's name. |
-| `password` | The password for that user. |
-| `client_id` | A client ID associated with the account. |
-| `project_id` | A project ID associated with the broker account. |
-| `location` | A name identifying the service location. |
-| `private_key` | A private key to authenticate requests. |
+| `external_ip` | IP address advertised or used by external publishers. |
+| `external_port` | MQTT broker port exposed to external publishers. Common defaults are `1883` for MQTT and `8883` for MQTT over TLS. |
+| `internal_ip` | Optional internal/local network IP. |
+| `internal_port` | Optional internal/local broker port. |
+| `bind` | `true` binds to the configured address; `false` commonly binds to all interfaces for the exposed port. |
+| `threads` | Number of broker worker threads. Default is `6` when omitted. |
+| `enable_tls` | `true` enables TLS for the broker listener. |
+| `tls_cert` | Server certificate file used by the broker. |
+| `tls_key` | Server private key file used by the broker. |
+| `users_ca` | CA certificate used to validate client certificates for mTLS. |
+| `allowed_users` | Optional list of permitted client certificate CN values. |
 
-If `run msg client` references the same IP/port used in the `run message broker` command, it resolves the same as
-`broker = local` explicitly.
+### Example: starting an AnyLog MQTT broker
+```anylog
+<run message broker where
+    external_ip = 192.168.0.138 and external_port = 2001 and
+    internal_ip = 192.168.0.138 and internal_port = 2001 and
+    bind = true and threads = 3>
+```
 
-### Config params
+Validate that the broker is bound:
 
-| Option | Details |
+```anylog
+AL operator1 > get connections
+Type      External Address    Internal Address    Bind Address
+---------|-------------------|-------------------|-------------------|
+TCP      |192.168.0.138:32148|192.168.0.138:32148|192.168.0.138:32148|
+REST     |192.168.0.138:32149|192.168.0.138:32149|0.0.0.0:32149      |
+Messaging|192.168.0.138:2001 |192.168.0.138:2001 |192.168.0.138:2001 |
+```
+You will see broker and topic information once you assign a Message Client
+```anylog
+AL operator1 > get msg broker
+     Broker Topic    Client ID Messages Success Failure
+     ------|--------|---------|--------|-------|-------|
+     local |broker/#|        1|       0|      0|      0|
+```
+You will MQTT stats after the first publish
+```anylog
+AL operator1 > get local broker
+Message Broker Stat
+Protocol IP            Event   TLS User Success Last message time   Error Last error time     Error Code              Details
+--------|-------------|-------|---|----|-------|-------------------|-----|-------------------|-----------------------|-----------|
+MQTT    |192.168.0.138|CONNECT|no |    |      1|2026-08-10 09:53:12|    0|                   |                       |           |
+
+AL operator1 > get streaming
+Statistics
+                 Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process
+DBMS-Table       files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS
+----------------|------|-----|-|---------|---------|------|----------|-----------|--------|----------|---------|------------|
+mydb.broker_data|     0|    0| |        1|        1|     0|         0|         10|     0.0|         1|        1|00:00:30    |
+```
+
+If a port fails to bind:
+
+```anylog
+get error log
+get ip list
+```
+
+## Run an MQTT Message Client
+
+The message client subscribes to MQTT topics and maps matching messages into AnyLog.
+
+```anylog
+run msg client where [connection parameters] and [config parameters] and topic = (topic params)
+```
+
+A single `run msg client` command can include multiple `topic = (...)` blocks.
+
+
+### Connection options
+
+| Option | Description |
 |---|---|
-| `log` | `true`/`false` — output the broker log messages (the MQTT `on_log()` callback). No effect if this node *is* the broker. |
-| `log_error` | `true` — log messages that failed to process to a file named `err_<broker ID>_<topic>` in the error directory. |
-| `qos` | Quality of Service — default `0`. |
+| `broker` | Broker URL or IP. Use `local` for this node's own AnyLog broker. If the IP/port matches a local `run message broker`, it resolves like `local`. |
+| `port` | Broker port. Default is `1883`. |
+| `user` | MQTT username, if required. |
+| `password` | MQTT password, if required. |
+| `client_id` | MQTT client ID, if required by the broker. |
+| `project_id` | Broker/project identifier for brokers that require it. |
+| `location` | Name identifying the broker/service location. |
+| `private_key` | Private key used by broker integrations that require key-based authentication. |
+| `master_node` | Master node TCP address used when `dynamic = true` creates UNS policies. |
+
+### Client options
+
+| Option | Description |
+|---|---|
+| `log` | `true` enables MQTT client log callback output. No effect when the node itself is the broker. |
+| `log_error` | `true` writes messages that fail processing to `err_<broker ID>_<topic>` in the error directory. |
+| `qos` | Default MQTT Quality of Service for subscriptions. Default is `0`. |
 | `prep_dir` | Directory for organizing incoming message data. |
-| `watch_dir` | The watch directory location. |
-| `err_dir` | The error directory location. |
-| `persist` | `true` — flush incoming messages to a file (named by broker ID + topic) instead of processing them, useful for capturing raw source data. |
+| `watch_dir` | Watch directory location. |
+| `err_dir` | Error directory location. |
+| `persist` | `true` writes incoming messages to files instead of processing them immediately. Useful for capturing raw input. |
 
-### Topic params
+### Topic options
 
-| Option | Details |
+| Option | Description |
 |---|---|
-| `name` | The topic to subscribe to. `#` subscribes to all topics — matching messages are processed per their own subscription; anything else is flushed to a log file. |
-| `qos` | Per-topic QoS override — falls back to the Config-level value, then the default, if omitted. |
-| `dbms` | The logical dbms for the topic's data, or a `bring` command to extract the name from the message. |
-| `table` | The table name, or a `bring` command to extract it. |
-| `column.[name].[type]` | A column name + data type, paired with a `bring` command extracting that column's value from the message. |
-| `dynamic` | `true` — auto-generate [UNS policies](#generating-uns-policies) instead of using inline/explicit mapping. |
-| `policy` | Reference a [reusable mapping policy](#registering-a-mapping-policy) instead of inline `dbms`/`table`/`column...` params. |
+| `name` | MQTT topic subscription. `#` subscribes to all topics. A suffix such as `A/#` dynamically matches child topics under `A/`. |
+| `qos` | Per-topic QoS override. |
+| `dbms` | Logical AnyLog database name, or a `bring` command that extracts it from the message. |
+| `table` | Explicit table name, or a `bring` command that extracts it from the message. In `dynamic = true`, omit this when AnyLog should derive table names from topics. |
+| `table_prefix` | In `dynamic = true`, when `table` is omitted, writes to `{table_prefix}_{last_topic_segment}`. Ignored when `table` is set or `table_name_as_topic = true`. |
+| `table_name_as_topic` | `true` derives the table from the full topic path. For example, `C/A/data` becomes `c_a_data`. Ignores `table` and `table_prefix`. |
+| `column.[name].[type]` | Explicit column mapping paired with a `bring` command. Used when `dynamic` is omitted or `false`. |
+| `dynamic` | `true` auto-generates tables and UNS policies from the topic and JSON payload. |
+| `policy` | Reusable mapping policy previously inserted into the blockchain. Replaces inline `dbms`, `table`, and `column...` mappings. |
 
-**Naming rule:** for both `dbms` and `table`, uppercase letters are converted to lowercase and spaces to underscores.
 
-### QoS — Quality of Service
+
+## Topic matching and table naming
+
+MQTT topic matching is traditionally case-sensitive. A subscription to `C/#` matches `C/data`; it does not match `c/data`.
+
+AnyLog preserves MQTT's case-sensitive subscription behavior.
+However, AnyLog does more than subscribe to and forward MQTT messages.
+It ingests MQTT data directly into local storage at the edge, automatically
+creating and managing the database objects needed to make that data immediately queryable.
+
+Because these database objects become part of a distributed AnyLog environment and can be
+queried across many independent nodes, AnyLog normalizes generated database, table, prefix,
+and column names to provide a consistent naming convention across the system. Uppercase letters
+are converted to lowercase, while spaces and unsupported characters are converted to underscores.
+This prevents logically equivalent objects from being created under names that differ only by
+capitalization and provides consistent references across local storage, distributed queries,
+metadata, and applications, especially because databases are case insensitive.
+
+
+> **Important:** MQTT subscription matching itself remains case-sensitive. `C/#` does not match `c/data`. To ingest both topic paths, configure subscriptions for both `C/#` and `c/#`. If they represent different data sources, ensure that their generated or explicitly configured AnyLog table names do not collide.
+
+For example, MQTT considers these two topics different:
+
+```text
+Plant/CX1/Motor1
+plant/cx1/motor1
+```
+
+With:
+
+```text
+table_name_as_topic = true
+```
+
+both are normalized by AnyLog to:
+
+```text
+plant_cx1_motor1
+```
+
+Similarly:
+
+```text
+C/data
+c/data
+```
+
+both generate `c_data` when `table_name_as_topic = true`, and both generate `data` when using the default last-segment table naming.
+
+If publishers use capitalization to distinguish different data sources, configure those sources to map to distinct database objects by assigning different `table` values, unique `table_prefix` values, separate `dbms` names, or by changing the MQTT topic convention so that the distinction is not based only on case.
+
+For the topic `Plant/CX1/Motor1`, table naming precedence is:
+
+| Topic settings                          | Resulting table    |
+| --------------------------------------- | ------------------ |
+| `table_name_as_topic = true`            | `plant_cx1_motor1` |
+| `table = some_table`                    | `some_table`       |
+| `table_prefix = prefix1` and no `table` | `prefix1_motor1`   |
+| `dynamic = true` with no table settings | `motor1`           |
+
+### Example Message Client Commands
+Say you want to subscribe to the topic `data/#`, and publish data like:
+```bash
+mosquitto_pub \
+  -p 2001 \
+  -h 192.168.0.138 \
+  -t data/my_data \
+  -m '{"Broker":"A","value":50.7, "temp": 12.2}'
+ ```
+Data will be written to `dbms=mydb` and `table_name = data_my_data`
+```anylog
+<run msg client where
+	broker = 192.168.0.138 and port = 2001 and
+	master_node = 192.168.0.138:32048 and
+	topic = (
+		name = "data/#" and
+		dbms = mydb and
+		dynamic = true and
+		table_name_as_topic = true
+	)>
+```
+Data will be written to `dbms=mydb` and `table_name = my_prefix_my_data`:
+```anylog
+<run msg client where
+	broker = 192.168.0.138 and port = 1884 and
+	master_node = 192.168.0.138:32048 and
+	topic = (
+		name = "data/#" and
+		dbms = mydb and
+		dynamic = true and
+		table_prefix = my_prefix
+	)>
+```
+Data will be written to `dbms=mydb` and `table_name = my_data`:
+```anylog
+<run msg client where
+	broker = 192.168.0.138 and port = 1884 and
+	master_node = 192.168.0.138:32048 and
+	topic = (
+		name = "data/#" and
+		dbms = mydb and
+		dynamic = true
+	)>
+```
+Data will be written to `dbms=mydb` and `table_name = my_new_table`:
+```anylog
+<run msg client where
+	broker = 192.168.0.138 and port = 1884 and
+	master_node = 192.168.0.138:32048 and
+	topic = (
+		name = "data/#" and
+		table = my_new_table
+		dbms = mydb and
+		dynamic = true
+	)>
+```
+Data will be written to `dbms=mydb` and `table_name = my_new_table` (table overwrites prefix):
+```anylog
+<run msg client where
+	broker = 192.168.0.138 and port = 1884 and
+	master_node = 192.168.0.138:32048 and
+	topic = (
+		name = "data/#" and
+		table = my_new_table and
+		table_prefix = my_prefix and
+		dbms = mydb and
+		dynamic = true
+	)>
+```
+
+
+### QoS
 
 | Level | Meaning |
 |---|---|
-| `0` | No delivery guarantee — the recipient doesn't acknowledge receipt. Default. |
-| `1` | Delivered at least once — the same message may arrive more than once. |
-| `2` | Delivered exactly once — the highest guarantee. |
+| `0` | No delivery guarantee. The recipient does not acknowledge receipt. Default. |
+| `1` | Delivered at least once. Duplicate messages may arrive. |
+| `2` | Delivered exactly once. Highest guarantee. |
 
-### The `bring` command
+## Mapping JSON Payloads
 
-`bring` extracts data from a JSON structure — the same command used in blockchain queries elsewhere in AnyLog. See
-[JSON Data Transformation](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#file-mode-and-streaming-mode) for the full syntax.
-
-**Mapping the message data:**
-
-| Field | Command form | Comments |
-|---|---|---|
-| `dbms` | `dbms=value` or `dbms=[bring command]` | Uppercase→lowercase, space→underscore |
-| `table` | `table=value` or `table=[bring command]` | Uppercase→lowercase, space→underscore |
-| `column` | `column.[name].[type] = [bring command]` | One entry per column |
-
-**Column value/type — two equivalent forms:**
+When `dynamic = false` or omitted, define the table and each column explicitly:
 
 ```anylog
-# Form 1: type in the key, value via bring
+<run msg client where broker = local and topic = (
+    name = mqtt-test and
+    dbms = my_dbms and
+    table = rand_data and
+    column.timestamp.timestamp = now and
+    column.value.float = "bring [readings][][value]"
+)>
+```
+
+`bring` extracts values from JSON payloads. Two equivalent column forms are supported:
+
+```anylog
 column.value.float = "bring [readings][][value]"
-
-# Form 2: type and value both via bring
-column.value = (value="bring [readings][][value]" and type="bring [readings][][valueType]")
+column.value = (value = "bring [readings][][value]" and type = "bring [readings][][valueType]")
 ```
 
-Supported data types: `str`, `int`, `float`, `timestamp`, `bool`.
+Supported data types include `str`, `int`, `float`, `timestamp`, and `bool`.
 
-By default, an error is returned if a `bring` command fails to produce a value. Set `optional = true` on that
-column to continue processing without erroring instead:
+If a `bring` expression is allowed to be missing, set `optional = true`:
 
 ```anylog
-column.info = (type=str and value="bring [info]" and optional=true)
+column.info = (type = str and value = "bring [info]" and optional = true)
 ```
 
-**Examples:**
-```anylog
-dbms = machines_data
-table = "bring [metadata][machine_name] _ [metadata][serial_number]"
-column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]"
-```
+## Dynamic UNS Policies
 
-### Worked example — subscribing to a third-party broker
+Set `dynamic = true` when AnyLog should infer schema and generate UNS policies from matching MQTT topics.
 
 ```anylog
-<run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo
-    and log = false and topic = (
-        name = test and 
-        dbms = "bring [metadata][company]" and 
-        table = "bring [metadata][machine_name] _ [metadata][serial_number]" and 
-        column.timestamp.timestamp = "bring [ts]" and 
-        column.value = (type=int and value="bring [value]")
-)>
+<run msg client where
+    broker = 192.168.1.88 and port = 1883 and
+    master_node = 192.168.1.60:32048 and
+    topic = (
+        name = "Plant/#" and
+        dbms = new_company and
+        dynamic = true and
+        table_name_as_topic = true
+    )>
 ```
 
-### Worked example — subscribing to this node's own broker
+Dynamic mode behavior:
+
+* JSON object attributes become columns.
+* The initial table schema controls later inserts. If a later message includes a new field that is not in the
+  table, the existing columns can still insert while the new field is ignored.
+* UNS policies are generated from matched topics. If the topic configuration is too broad or the table naming mode
+  is not what was intended, policies can be created for topic paths that do not successfully insert data.
+* Run the UNS streamer so generated UNS metadata is written regularly.
 
 ```anylog
-<run mqtt client where broker=local and log=false and topic=(name=mqtt-test and dbms=my_dbms and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')>
+run uns streamer
+run uns streamer where frequency = 3
 ```
-
-Equivalent, written with an explicit IP/port that happens to match this node's own broker (`10.0.0.78:7850`):
-
-```anylog
-<run mqtt client where broker=10.0.0.78 and port=7850 and log=false and topic=(name=mqtt-test and dbms=my_dbms and table=rand_data and column.timestamp.timestamp=now and column.value.float='bring [readings][][value]')>
-```
-
----
-
-## Kafka Message Client
-
-AnyLog can also act as a Kafka-like interface, using the same column-mapping syntax as MQTT.
-
-| Option | Description | Default |
-|---|---|---|
-| `ip` | Kafka broker IP | |
-| `port` | Kafka broker port | |
-| `reset` | Offset policy: `latest` or `earliest` | `latest` |
-| `topic` | One or more topics with mapping instructions | |
-
-```anylog
-<run kafka consumer where 
-    ip = [ip] and 
-    port = [port] and 
-    reset = [latest|earliest] and 
-    topic = [topic and mapping instructions]>
-```
-
-**Example:**
-```anylog
-<run kafka consumer where ip = [ip] and port = [port] and reset = latest and topic = (
-    name=my-data and
-    dbms="bring [dbms]" and
-    table="bring [sensor]" and
-    column.timestamp.timestamp="bring [timestamp]" and
-    column.value.float="bring [value]"
-)>
-```
-
-> **To verify:** unlike MQTT's `broker = local` shorthand, nothing here documents an equivalent for a Kafka
-> consumer pointed at this node's own broker. Use a real `ip`/`port` until that's confirmed.
-
----
 
 ## Registering a Mapping Policy
 
-Rather than writing a topic's mapping inline on every `run msg client` call, register the mapping once as a
-**policy** on the blockchain and reference it by name — useful when the same mapping is reused across multiple
-subscriptions, or when you want it managed centrally.
+Instead of repeating inline mapping in every `run msg client` command, register a mapping policy on the blockchain
+and reference it by name.
 
 ```anylog
 policy_id = telegraf-mapping
@@ -284,131 +438,36 @@ policy_id = telegraf-mapping
     }
 }}>
 
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+blockchain insert where policy = !new_policy and local = true and master = !ledger_conn
 
-run msg client where broker=local and log=false and topic=(name=my-topic and policy=!new_policy)
+run msg client where broker = local and log = false and topic = (name = my-topic and policy = !new_policy)
 ```
 
-Once inserted, `topic=(name=... and policy=!new_policy)` replaces the inline `dbms=... and table=... and column...`
-parameters entirely — the mapping lives in the policy instead.
+## Publishing MQTT Data
 
----
-
-## REST-Broker Mode
-
-Lets you map data streamed to AnyLog over REST to the needed schema, based on a topic — no third-party broker
-involved at all. Requires two settings:
-
-1. `broker = rest` — data delivered to the REST server via `POST` is mapped as defined in the topic assignment.
-2. `user-agent = anylog` — identifies the target API so the call is routed to AnyLog's native process.
-
-```anylog
-run msg client where broker = rest and user-agent = anylog and [config parameters] and topic = (topic 1 params) and topic = (topic 2 params) ...
-```
-
-**Subscribe:**
-```anylog
-run msg client where broker = rest and user-agent=anylog and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-```
-
-**Publish via REST:**
-```shell
-curl --location --request POST '10.0.0.78:7849' \
---header 'User-Agent: AnyLog/1.23' \
---header 'command: data' \
---header 'topic: test' \
---header 'Content-Type: text/plain' \
---data-raw '[{"value":210,
-            "ts":1607959427550,
-            "protocol":"modbus",
-            "measurement":"temp02",
-            "metadata":{
-                    "company":"Anylog",
-                    "machine_name":"cutter 23",
-                    "serial_number":"1234567890"}}]'
-```
-
-### Debugging REST-broker POST calls
-
-```anylog
-trace level = 1 run rest server    -- shows the REST command issued by a client
-trace level = 2 run rest server    -- also shows headers and message body
-```
-
----
-
-## Generating UNS Policies
-
-Setting `dynamic = true` on a topic (in message-broker mode) enables automatic generation of UNS policies
-describing data relationships, letting users navigate the data hierarchically through the Unified Namespace.
-
-* There are no inline mapping instructions or mapping policies in this mode — table names are generated
-  automatically from the topics.
-* If the data is JSON, the entire object is ingested: attribute names → column names, attribute values → column
-  values.
-* If the data isn't JSON, column names are derived from the topic structure (the last segment of each topic).
-* The **UNS Streamer** must be enabled in this mode (see below) — it periodically writes the updated data.
-
-```anylog
-BROKER = "virtualfactory.proveit.services"
-PORT = 1883
-USERNAME = "proveitreadonly"
-PASSWORD = "proveitreadonlypassword"
-default_dbms = my_dbms
-
-<run msg client where 
-	broker = !BROKER and port=!PORT and 
-	user = !USERNAME and password = !PASSWORD and 
-	master_node = 10.0.0.185:2548 and
-	topic = (
-		name="Enterprise B/Site1/#" and 
-		dbms=proveit and 
-		dynamic = true 
-	)>
-```
-
-> **Worth double-checking:** `master_node = 10.0.0.185:2548` — every other Master TCP port example in this doc set
-> uses the `32xxx` convention (e.g. `32048`). `2548` doesn't match that pattern and may be missing a leading `3`.
-
-### Enabling the UNS Streamer
-
-```anylog
-run uns streamer where frequency = [time in seconds]
-```
-
-```anylog
-run uns streamer
-run uns streamer where frequency = 3
-```
-
----
-
-## Publishing Data
-
-With a broker configured and a subscription mapping in place, data assigned to that topic gets processed according
-to the subscription's rules. Two ways to publish:
-
-### Direct MQTT publish
+From AnyLog:
 
 ```anylog
 mqtt publish where broker = [url] and port = [port] and user = [user] and password = [password] and topic = [topic] and qos = [value] and message = [message]
 ```
 
-If the broker and publishing node are the same, use `broker = local` to send directly without network overhead:
+When publishing from the same node that runs the broker:
 
 ```anylog
 mqtt publish where broker = local and topic = [topic] and qos = [value] and message = [message]
 ```
 
-**Plain string example:**
-```anylog
-mqtt publish where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = "hello world"
+From Mosquitto:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t A/data \
+  -m '{"Broker":"A","value":42.7}'
 ```
 
-### Publishing structured JSON data
-
-For anything beyond a quick string test — or to simulate a device sending a real reading — define the message as a
-JSON object first, then reference it by variable name:
+For structured payloads in the AnyLog CLI, define JSON first and publish the variable:
 
 ```anylog
 <message = {"value":210,
@@ -419,101 +478,363 @@ JSON object first, then reference it by variable name:
                     "company":"Anylog",
                     "machine_name":"cutter 23",
                     "serial_number":"1234567890"}}>
-```
 
-The `< >` wrapper lets the AnyLog CLI treat this multi-line JSON as a single command — paste the block directly
-into the CLI as-is. Validate the structure before publishing:
-
-```anylog
 json !message test
+
+mqtt publish where broker = local and topic = test and message = !message
 ```
 
-**Publish it** — `!message` refers back to the variable just defined:
+## MQTT over TLS and mTLS
+
+For certificate-based MQTT security:
+
+1. Create a CA for self-signed TLS certificates.
+2. Create and sign a server certificate request.
+3. Start the broker with TLS enabled.
+
+Example using existing certificate files under `!pem_dir` (for example files provided by an outside organization; use distinct names such as an `ext_` prefix):
 
 ```anylog
-mqtt publish where broker = !ip and port = 7850 and user = mqwdtklv and password = uRimssLO4dIo and topic = test and message = !message
+<run message broker where external_ip = [ip] and external_port = 8883 and threads = 6
+  and enable_tls = true
+  and tls_cert = !pem_dir/ext_server_tls.crt
+  and tls_key = !pem_dir/ext_server_tls.key
+  and users_ca = !pem_dir/ext_MQTT_CA_users.crt
+  and allowed_users = (user1, user2)
+>
 ```
 
-The data is received by the node as a broker (on the IP/port configured in `run message broker`), then processed
-by the mapping instructions tied to the topic declared in the corresponding `run msg client` command.
+`allowed_users` is optional. When set, the listed names are the CN values in client certificates permitted to
+connect. `users_ca` is the CA that issued the client certificates.
 
----
+When you generate the listener certificate in AnyLog (for example `output_name = "server-mqtt-op1"`), use those
+written file names instead — for example `!pem_dir/server-mqtt-op1.crt` and `!pem_dir/server-mqtt-op1.key`.
 
-## MQTT over TLS (mTLS)
+Publish from a TLS-capable MQTT client such as `mosquitto_pub`:
 
-For securing MQTT with certificate-based client authentication, in brief:
+```shell
+mosquitto_pub \
+  --cafile ./data/pem/CA.crt \
+  --cert ./data/pem/user1.crt \
+  --key ./data/pem/user1.key \
+  -h 192.168.0.138 \
+  -p 8883 \
+  -t broker/data \
+  -m '{"Broker":"A","value":50.7}'
+```
 
-1. **Create a CA** for self-signed TLS certificates (`id generate certificate authority`).
-2. **Create and sign a server certificate request** (`id generate certificate request` → `id sign certificate request`), writing `.crt`/`.key`/`.csr`/`.pem` files under `!pem_dir`.
-3. **Start the broker with TLS enabled:**
-   ```anylog
-   <run message broker where external_ip = [ip] and external_port = 8883 and threads = 6
-     and enable_tls = true
-     and tls_cert = ./data/pem/server_tls.crt
-     and tls_key = ./data/pem/server_tls.key
-     and users_ca = ./data/pem/CA_users.crt
-     and allowed_users = (user1, user2)
-   >
-   ```
-   `allowed_users` is optional — when set, the listed names are the **CN** values in client certificates permitted
-   to connect. `users_ca` is the CA that issued the *client* certificates (mTLS) — typically provided by the
-   connecting organization, not the same file as the broker's own listener CA.
-4. **Issue user certificates** for the connecting organization (one CA-signed cert/key pair per user), sharing only
-   the user cert/key pairs and the broker's public CA cert — never any private key beyond what that user needs.
-5. **Subscribe locally** the same way as any local broker subscription (see above).
-6. **Publish from a TLS client** (e.g. `mosquitto_pub --cafile ... --cert ... --key ...`, or MQTT Explorer with the
-   CA/cert/key configured in its connection settings).
-7. **(Optional) Share the CA in the blockchain** — publish the organization's CA public certificate as a `ca`
-   policy, and load `users_ca` from that policy at broker startup instead of a static file path.
+For the full mTLS walkthrough (CA creation, `id sign certificate request`, user certs, MQTT Explorer, external
+org certs, and optional CA on the blockchain), see [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md).
 
-> This section is condensed from a much more detailed worked example (full commands, directory structure, and a
-> blockchain-based CA-sharing walkthrough) — see **Broker Setup TLS Example** for the complete version, including
-> <a href="https://mosquitto.org/man/mosquitto-tls-7.html" target="_blank">mosquitto-tls</a> reference links.
 
----
-
-## Debugging
-
-* **`log = true`** on `run msg client` — enables the MQTT `on_log()` callback, displaying MQTT processing/calls for
-  third-party brokers. No effect if this node is the broker.
-* **`set mqtt debug on/off`** — streams incoming messages and processing status to stdout.
-* **`persist = true`** on a topic — flushes incoming messages to a file (named by broker ID + topic) instead of
-  processing them.
-* **`log_error = true`** on `run msg client` — writes failed-to-process messages to `err_<broker ID>_<topic>` in
-  the error directory.
-* **Subscribing to `#`** — matches all topics; anything with an actual subscription is processed normally,
-  everything else is flushed to a log file.
-
----
-
-## Validating Data Storage
+## Debugging and Validation
 
 ```anylog
-get databases                                          -- confirm the logical dbms maps to a physical database
-get processes                                          -- confirm Operator config
-get operator                                           -- track Operator status
-get streaming                                          -- view streaming buffer status
-get tables where dbms=*                                -- tables created
-get columns where dbms=my_dbms and table=rand_data     -- columns created
-get msg clients                                        -- status/config of all subscribed clients
-get msg client where id = [n]                          -- status/config of one client
+set mqtt debug on
+set mqtt debug off
+get msg clients
+get msg client where id = [n]
+get streaming
+get tables where dbms = *
+get columns where dbms = mydb and table = data
+get local broker
 ```
 
-Once buffers flush, query the data directly:
+Useful client settings:
+
+* `log = true` shows MQTT client processing callbacks for external brokers.
+* `persist = true` writes incoming messages to files instead of processing them.
+* `log_error = true` writes failed messages to the error directory.
+* Subscribing to `#` captures all topics; matched subscriptions are processed and unmatched topics are flushed to
+  log files.
+
+Terminate clients:
+
 ```anylog
-run client () sql my_dbms format=table "select timestamp, value from rand_data"
-run client () sql my_dbms format=table and extend=(+ip, +node_name) "select count(*) from rand_data"
+exit msg client [ID|all]
 ```
+Note you can find the ID of a message client using the `get msg clients` AnyLog CLI command.
 
-**Terminating clients:**
+## Example Use Cases
+
+The following examples assume two operators subscribe to two MQTT broker ports on the same host. Run each
+`run msg client` command on the operator that should ingest from that broker port.
+
+### Case 1: two operators, default dynamic table names
+
+Operator subscribed to broker port `1883`:
+
 ```anylog
-exit msg client [ID/all]
+<run msg client where
+    broker = 192.168.0.138 and port = 1883 and
+    master_node = 192.168.0.138:32048 and
+    log = true and
+    topic = (
+        name = "A/#" and
+        dbms = mydb and
+        dynamic = true
+    )>
 ```
 
----
+Operator subscribed to broker port `1884`:
+
+```anylog
+<run msg client where
+    broker = 192.168.0.138 and port = 1884 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "A/#" and
+        dbms = mydb and
+        dynamic = true
+    )>
+```
+
+Publish one message to each broker:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t A/data \
+  -m '{"Broker":"A","value":42.7}'
+
+mosquitto_pub \
+  -p 1884 \
+  -h 127.0.0.1 \
+  -t A/data \
+  -m '{"Broker":"B","value":45.7}'
+```
+
+Both messages insert into `mydb.data`, which can be verified with AnyLog CLI command:
+```anylog
+AL operator2 > get data nodes
+Company    DBMS Table       Cluster ID                       Cluster Status Node Name Member ID External IP/Port    Local IP/Port Main Node Status
+----------|----|-----------|--------------------------------|--------------|---------|---------|-------------------|-------------|----|-----------|
+AnyLog Co.|mydb|data       |fed71895ee0161ffe92bb79f7e85791c|active        |operator1|       68|192.168.0.138:32148|             | +  |active     |
+          |    |           |6ca7df77cc8f4777cfd427dff870af5f|active        |operator2|      212|192.168.0.138:32248|             | +  |active     |
+```
+
+
+This data hosted by two AnyLog operators on two physical machines or sites can then be queried:
+```anylog
+AL operator2 > run client () sql mydb format=table and extend=(+ip, +node_name, @table_name) "select broker, value from data"
+ip            node_name table_name broker value
+------------- --------- ---------- ------ -----
+192.168.0.138 operator2 data       B       45.7
+ip            node_name table_name broker value
+------------- --------- ---------- ------ -----
+192.168.0.138 operator1 data       A       42.7
+{"Statistics":[{"Count": 2,
+                "Time":"00:00:00",
+                "Nodes": 2}]}
+```
+
+Unintended configuration:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t A/B/data \
+  -m '{"Broker":"A","value":42.7}'
+```
+
+This can create new UNS policies for `A/B/data`, but the data may fail to insert and leave those UNS policies
+orphaned. If nested topic paths should be stored separately, configure the client with `table_name_as_topic = true`
+before publishing. If nested paths should not be accepted, publish only to the intended topic shape, such as
+`A/data`.
+
+### Case 2: two operators with `table_prefix`
+
+```anylog
+<run msg client where
+    broker = 192.168.0.138 and port = 1883 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "B/#" and
+        dbms = mydb and
+        dynamic = true and
+        table_prefix = PRE1
+    )>
+
+<run msg client where
+    broker = 192.168.0.138 and port = 1884 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "B/#" and
+        dbms = mydb and
+        dynamic = true and
+        table_prefix = PRE1
+    )>
+```
+
+Publish to both brokers:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t B/data \
+  -m '{"Broker":"A","value":42.7}'
+
+mosquitto_pub \
+  -p 1884 \
+  -h 127.0.0.1 \
+  -t B/data \
+  -m '{"Broker":"B","value":45.7}'
+```
+
+Both messages insert into `mydb.pre1_data`. `PRE1` is normalized to lowercase.
+
+This message also inserts into the same `pre1_data` table, because the last topic segment is still `data`:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t B/A/data \
+  -m '{"Broker":"A","value":42.7}'
+```
+
+Unintended configuration: if `B/data` and `B/A/data` should be separate tables, use `table_name_as_topic = true`
+instead of `table_prefix`.
+
+Schema change behavior:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t B/A/data \
+  -m '{"Broker":"A","value":42.7, "temp": 12.2}'
+```
+
+The new `temp` value is not inserted if the existing `pre1_data` table schema does not include that column. The
+existing columns still insert. To ingest the new field, update the table/schema before publishing, or publish the
+new schema to a new topic/table.
+
+### Case 3: two operators with `table_name_as_topic`
+
+```anylog
+<run msg client where
+    broker = 192.168.0.138 and port = 1883 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "C/#" and
+        dbms = mydb and
+        dynamic = true and
+        table_name_as_topic = true
+    )>
+
+<run msg client where
+    broker = 192.168.0.138 and port = 1884 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "C/#" and
+        dbms = mydb and
+        dynamic = true and
+        table_name_as_topic = true
+    )>
+```
+
+Publish to `C/data`:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t C/data \
+  -m '{"Broker":"A","value":42.7}'
+
+mosquitto_pub \
+  -p 1884 \
+  -h 127.0.0.1 \
+  -t C/data \
+  -m '{"Broker":"B","value":45.7}'
+```
+
+Both messages insert into `mydb.c_data`.
+
+Publish to a nested topic:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t C/A/data \
+  -m '{"Broker":"A","value":42.7}'
+```
+
+This inserts into `mydb.c_a_data`, because the full topic path becomes the table name.
+
+Schema change behavior:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t C/data \
+  -m '{"Broker":"A","value":50.7, "temp": 12.2}'
+```
+
+If `c_data` was already created without `temp`, the new `temp` column is not inserted; existing columns still
+insert. Update the schema first, or route schema variants to separate tables.
+
+Case-sensitive topic matching:
+
+```shell
+mosquitto_pub \
+  -p 1883 \
+  -h 127.0.0.1 \
+  -t c/data \
+  -m '{"Broker":"A","value":50.7, "temp": 12.2}'
+```
+
+This does not match `name = "C/#"` because MQTT topics are case-sensitive. Publish to `C/data`, or configure an
+additional subscription for `c/#` if lowercase publishers are expected.
+
+### Case 4: AnyLog as the broker
+
+Start AnyLog's MQTT broker:
+
+```anylog
+<run message broker where
+    external_ip = 192.168.0.138 and external_port = 2001 and
+    internal_ip = 192.168.0.138 and internal_port = 2001 and
+    bind = true and threads = 3>
+```
+
+Subscribe a message client to that broker:
+
+```anylog
+<run msg client where
+    broker = 192.168.0.138 and port = 2001 and
+    master_node = 192.168.0.138:32048 and
+    topic = (
+        name = "broker/#" and
+        dbms = mydb and
+        dynamic = true and
+        table_name_as_topic = true
+    )>
+```
+
+Publish directly into AnyLog:
+
+```shell
+mosquitto_pub \
+  -p 2001 \
+  -h 192.168.0.138 \
+  -t broker/data \
+  -m '{"Broker":"A","value":50.7, "temp": 12.2}'
+```
+
+The message inserts into `mydb.broker_data`, with no external MQTT broker hop.
 
 ## Related
 
-* **Network Processing** — the three core network services (TCP, REST, Broker), and how `NETWORK_TYPE`/`NIC_TYPE`/binding determine reachability.
-* **Broker Setup TLS Example** — full mTLS setup walkthrough.
-* **Using REST** — the REST GET/POST reference this doc's REST-broker mode builds on.
+* [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md) — full mTLS setup walkthrough
+* [Kafka Message Client](./05-1%20Kafka%20Message%20Client.md)
+* [Connectors To Data Sources](./05-2%20Connectors%20To%20Data%20Sources.md)
+* [Network Processing](./02-%20Network%20Processing.md)
+* [Using REST](./04-%20Using%20REST.md)
+* [Unified Namespace](../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md)
