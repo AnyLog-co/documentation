@@ -9,327 +9,908 @@ layout: page
  |------------|----------------|------------------|----------|
  | 2026-07-27 | Ori Shadmon    | Removed a duplicated "help blockchain set account info" block; fixed `blockchain deploy contract` example to match its own Usage line; condensed `help` transcripts into command+description style; flagged several open questions between this reference and other docs (see inline notes): `run blockchain sync`'s `connection` vs `master_node` param, `dest` specified twice in one call, `blockchain wait for` vs `blockchain wait where`, and whether the `where`-style `blockchain update` form still exists; restored the narrower `add`/`push`/`commit` insert-variant table; typo fixes | |
  | 2026-07-27 | Ori Shadmon    | New page — split out of "03 Blockchain & Metadata.md". Moved the master-vs-blockchain-platform comparison and all connect/sync/seed commands to the new standalone Blockchain Connectivity doc, since those are about wiring a node to a ledger source rather than managing policies once connected. Fixed `master_npode` typo. | |
+ | 2026-08-15 | Moshe Shadmon    | Updated Page. | |
+
 --->
+---
+title: Blockchain Commands
+description: Insert, query, and remove AnyLog metadata policies using the blockchain ledger.
+layout: page
+source_path: blockchain commands.md
+---
 
-In general the blockchain or metadata layer is the platform that informs all the nodes in the network where data resides
-and which nodes have access to what. The <a href="02-%20Policy%20&%20Metadata.md" target="_blank">previous section</a> discussed the different types
-of policies and metadata content that can be stored in the blockchain. This section covers how to interact with the
-blockchain layer.
+# Blockchain Commands
 
-* <a href="#connect--sync" target="_blank">Connect & Sync</a>
-* <a href="#publish--drop-policy" target="_blank">Publish & Drop Policy</a>
-* <a href="#query-the-blockchain" target="_blank">Query the Blockchain</a>
+AnyLog uses a distributed ledger to maintain the metadata that describes the network: where data resides, which nodes 
+and services are available, how data is organized, and which policies control access and operation.
 
-## Connect & Sync
+The metadata ledger can be maintained using a blockchain platform, or alternatively using AnyLog's blockchain emulator,
+referred to as a master node.
 
-### Real Blockchain
+Most blockchain commands are compatible with both implementations, allowing users to switch between a blockchain platform and a master node with minimal changes to their applications or workflows.
+The metadata is stored as **policies**. A policy is a JSON object with a single root key, called the **policy type**. 
+Examples of policy types include `operator`, `cluster`, `publisher`, and `uns`.
 
-`blockchain set account info where platform = [platform name] and [platform parameters]` - associate parameters
-(private key, public key, chain ID, etc.) with a blockchain platform.
-
-```anylog
-<blockchain set account info where 
-    platform = ethereum and 
-    private_key = !private_key and 
-    public_key = !public_key and 
-    chain_id = 11155111>
-```
-
-`blockchain deploy contract where platform = [platform name] and public_key = [public key]` - deploy the AnyLog
-contract on the blockchain platform.
+For normal operation, most users interact with the metadata layer through three commands:
 
 ```anylog
-blockchain deploy contract where platform = ethereum and public_key = !public_key
+blockchain insert
+blockchain get
+blockchain update
+blockchain drop
 ```
 
-> A metadata manager (i.e. master node) does not need to define the steps above. Instead, it creates a logical
-> database and table (`blockchain.ledger`) and syncs the content against it.
-
-### Master / Metadata Node Blockchain
-
-Master nodes, and optionally any node, can maintain the ledger in a local database:
-
-```anylog
-blockchain create table                           # create the ledger table
-blockchain pull to json [output-file]             # export to JSON file
-blockchain pull to sql [output-file]              # export as INSERT statements
-blockchain pull to stdout                         # print to console
-blockchain update dbms [file]                     # load file into local DB
-sql blockchain "select * from ledger"             # query directly with SQL
-```
-
-### Pull from a master node
-
-```anylog
-master_node = 127.45.35.12:32048
-run client (!master_node) blockchain pull to json
-run client (!master_node) file get !!blockchain_file !blockchain_file
-blockchain load metadata                          # force node to use updated file
-```
-
-### Blockchain sync
-
-`blockchain seed from [ip:port]` - pull the metadata from a source node (typically used once, on startup).
-
-```anylog
-blockchain seed from 73.202.142.172:7848
-```
-
-`run blockchain sync where [options]` - repeatedly update the local copy of the blockchain.
-
-| Option | Description |
+| Command | Purpose |
 |---|---|
-| `source` | The source of the metadata (`blockchain` or `master`) |
-| `dest` | Destination for the blockchain data — `file` (local file) and/or `dbms` (local database) |
-| `connection` | Connection info needed to retrieve the data — for a master, its IP:Port |
-| `time` | Frequency of updates |
+| `blockchain insert` | Add a policy to the metadata ledger |
+| `blockchain get` | Query policies from the local metadata view |
+| `blockchain update` | Update an existing policy while preserving its policy ID |
+| `blockchain drop` | Remove or invalidate an existing policy |
 
-```anylog
-run blockchain sync where source = master and time = 60 seconds and dest = file and dest = dbms and connection = !ip_port
-run blockchain sync where source = blockchain and time = !sync_time and dest = file and platform = ethereum
-```
+These commands provide a consistent interface whether the global metadata ledger is maintained by a **master / metadata node** or by a blockchain platform such as Ethereum.
 
-> The sync logic should run on every node in the network (though frequency may differ based on node type).
+> **Note:** Every AnyLog node maintains a local view of the metadata it needs. Queries are executed against this local view, so `blockchain get` does not depend on the availability or latency of the global ledger.
 
 ---
 
-## Publish & Drop Policy
+## Metadata Storage Model
 
-`blockchain prepare policy [policy]` - add `id` and `date` attributes to a policy.
+AnyLog metadata is managed by the blockchain platform or master node, which serves as the shared metadata ledger for the network.
+
+Nodes in the network periodically synchronize with this ledger to maintain a local copy of the metadata. The local copy can be maintained as a JSON file, in a local database, or both.
+
+AnyLog commands and services use this local copy during normal operation, allowing each node to access the metadata it needs without requiring continuous access to the blockchain or master node.
+
+A node operates in the same manner regardless of how the global ledger is implemented. The configuration determines whether updates are sent to a master node or to a blockchain platform.
+
+When a policy is inserted into the local ledger before it is confirmed by the global ledger, AnyLog marks it with:
+
+```json
+"ledger": "local"
+```
+
+After synchronization confirms the policy on the global ledger, the value changes to:
+
+```json
+"ledger": "global"
+```
+
+---
+
+# `blockchain insert`
+
+`blockchain insert` adds a policy to the metadata ledger.
+
+It is the primary command for publishing metadata because it can update the local ledger and the configured global ledger in one operation.
+
+## Syntax
+
+```anylog
+blockchain insert where
+    policy = [policy]
+    and local = [true|false]
+    and master = [IP:Port]
+    and blockchain = [platform]
+```
+The `local`, `master`, and `blockchain` parameters identify the **destination(s) for the policy**. Only the destinations that apply to the deployment need to be specified.
+
+| Parameter | Policy Destination |
+|---|---|
+| `local` | The node's local metadata copy |
+| `master` | The AnyLog master node / blockchain emulator |
+| `blockchain` | The configured blockchain platform, such as Ethereum |
+
+A policy can be written to one or multiple destinations in the same command.
+
+For example, to insert a policy locally and into the master node:
+
+```anylog
+blockchain insert where policy = !policy and local = true and master = !master_node
+```
+## Parameters
+
+| Parameter | Description |
+|---|---|
+| `policy` | JSON policy to insert |
+| `local` | If `true`, update the local JSON ledger. Default: `true` |
+| `master` | IP and port of the master / metadata node |
+| `blockchain` | Connected blockchain platform, for example `ethereum` |
+
+A typical deployment writes to the local ledger and to **one** global ledger:
+
+- local ledger + master node, or
+- local ledger + blockchain platform.
+
+## Insert using a master node
+
+```anylog
+blockchain insert where
+    policy = !policy
+    and local = true
+    and master = !master_node
+```
+
+## Insert using a blockchain platform
+
+```anylog
+blockchain insert where
+    policy = !policy
+    and local = true
+    and blockchain = ethereum
+```
+
+## Policy ID and date
+
+When a policy is inserted, AnyLog validates the policy and associates metadata such as its unique ID and update date.
+
+A policy ID can be provided explicitly, but in most cases AnyLog should generate the ID automatically from the policy content.
+
+If a policy needs a short, stable identifier because it will be referenced manually and frequently, a user-defined ID may be appropriate.
+
+### Prepare a policy before insertion
 
 ```anylog
 blockchain prepare policy !operator
 ```
 
-`blockchain insert where policy = [policy] and blockchain = [platform] and local = [true/false] and master = [IP:Port]` -
-add a JSON policy to the specified destination(s).
+If the policy `id` or `date` is not provided by the user, `blockchain prepare policy` adds the `id` and `date` attributes before the policy is published.
 
-```anylog
-blockchain insert where policy = !policy and local = true and master = !ledger_conn
-blockchain insert where policy = !policy and local = true and blockchain = ethereum
-```
+## Lower-level insert commands
 
-| Key | Description |
-|---|---|
-| `policy` | The JSON policy to add |
-| `local` | `true` — also update the local JSON file |
-| `master` | IP:Port of the master node |
-| `blockchain` | Blockchain platform name (e.g. `ethereum`) |
-
-When inserted locally, the policy gets `"ledger": "local"`. Once confirmed on the global ledger, it changes to `"ledger": "global"`.
-
-### Narrower insert variants
+`blockchain insert` is the recommended general command. The following lower-level commands target a specific storage layer.
 
 | Command | Target |
 |---|---|
-| `blockchain add [policy]` | Local JSON file only |
-| `blockchain push [policy]` | Local database only |
+| `blockchain add [policy]` | Local JSON ledger only |
+| `blockchain push [policy]` | Local metadata database only |
 | `blockchain commit [policy]` | Blockchain platform only |
 
-`blockchain wait where [condition]` - pause the process until the local copy of the blockchain is updated with the
-policy. `[condition]` is specified as `[key] = [value]`.
+Examples:
 
 ```anylog
-blockchain wait where policy = !operator
-blockchain wait where id = [id]
-blockchain wait where command = "blockchain get cluster where name = cluster_1"
+blockchain add !policy
+blockchain push !policy
+blockchain commit !policy
 ```
 
-`blockchain update to [blockchain name] [policy_id] [policy]` - update an existing JSON policy on the blockchain platform.
+Use these commands when working directly with a specific ledger layer. For normal application workflows, prefer `blockchain insert`.
+
+---
+
+# `blockchain get`
+
+`blockchain get` queries metadata policies.
+
+Queries are processed against the **local metadata view** maintained by the node. This allows applications and commands to use metadata without waiting for a remote blockchain platform or master node.
+
+## Syntax
 
 ```anylog
-blockchain update to ethereum !policy_id !policy
+blockchain get [policy-type] [where ...] [bring ...]
 ```
 
-`blockchain drop policy where id = [policy id]` / `blockchain drop policy [policy]` - on the master node, delete the
-provided policy (or policies) from the local blockchain database.
+The command has three main parts:
+
+1. **Policy type** — selects the type of policy.
+2. **`where`** — optionally filters the policies.
+3. **`bring`** — optionally extracts and formats values from the returned policies.
+
+---
+
+## Select policies by type
+
+Return all operator policies:
 
 ```anylog
-blockchain drop policy where id = 4a0c16ff565c6dfc05eb5a1aca4bf825
-blockchain drop policy !operator
+blockchain get operator
 ```
 
-Blockchain drop is interesting because the actual ledger is immutable - i.e. cannot be changed. So when a user executes
-`blockchain drop policy` when using the master / metadata manager node, the policy / row is actually removed.
-However, when using an actual blockchain, `blockchain drop policy` instead adds an annotation telling the network to
-ignore the policy with the given ID.
-
-Each policy has a unique ID, which can either be manually defined or automatically assigned based on a hash of the
-policy's content. Since the id must be unique, we recommend letting AnyLog assign it automatically, unless the policy
-is one you'll reference manually and often — where a short, readable ID is easier to work with than an auto-generated
-hash (e.g. a schedule policy used to monitor nodes).
-
-### Securing Policies
-
-By default, each policy has a unique ID that's based on the hash of the policy, or is defined by the user (though
-this is less recommended). The system is also intelligent enough to stop a user from registering multiple nodes of
-the same type on the same IP and port.
-
-Since the blockchain is intended as a tool for untrusted groups to view / share data (almost like an immutable
-contract), it may also be worth validating who is writing to the blockchain, using public / private keys:
-
-`id sign [JSON Policy] where key = [private key] and password = [password]` / `id sign [JSON Policy] where password = [password]` -
-sign a policy, adding the public key and signature to it.
+Return multiple policy types:
 
 ```anylog
-id sign !json_script where password = !my_password
-id sign !json_script where key = !my_key and password = !my_password
+blockchain get (operator, publisher)
+```
+
+Return all policies:
+
+```anylog
+blockchain get *
 ```
 
 ---
 
-## Query the Blockchain
+## Filter policies with `where`
 
-Queries run against the **local copy** and do not depend on global ledger availability.
-
-| Command | Description |
-|---|---|
-| `blockchain get` | Returns policies after runtime dynamic updates (use this normally) |
-| `blockchain read` | Returns policies exactly as received from the global ledger, without dynamic updates |
-
-### Basic get
-
-```anylog
-blockchain get [policy-type]
-blockchain get operator
-blockchain get (operator, publisher)       # multiple types
-blockchain get *                           # all policies
-```
-
-### Where conditions
+A simple condition uses attribute/value pairs:
 
 ```anylog
 blockchain get operator where dbms = my_data
-blockchain get operator where dbms = my_data and ip = 24.23.250.144
+```
+
+Multiple conditions can be combined with `and`:
+
+```anylog
+blockchain get operator where
+    dbms = my_data
+    and ip = 24.23.250.144
+```
+
+Another example:
+
+```anylog
 blockchain get cluster where company = my-company
 ```
 
-Using conditional expressions (square-bracket paths):
-```anylog
-blockchain get operator where [name] == operator1 or [name] == operator2
-blockchain get operator where [country] == US and ([city] == "San Francisco" or [city] == "San Jose")
-```
+### Conditional expressions
 
-Special path operators:
-```anylog
-blockchain get tag where [path] startwith 'Root/Objects/DeviceSet'
-blockchain get tag where [path] childfrom 'Root/Objects/DeviceSet'
-```
-
-### bring — format the output
+Square-bracket paths can be used when more complex Boolean logic is needed.
 
 ```anylog
-blockchain get operator bring [name]                        # single field
-blockchain get operator bring [name] [ip]:[port]            # concatenate fields
-blockchain get operator bring.ip_port                       # standard IP:Port list
-blockchain get operator bring.table                         # tabular output
-blockchain get operator bring.json                          # JSON output
-blockchain get operator bring.table.sort [operator][name]   # sorted table
+blockchain get operator where
+    [name] == operator1
+    or [name] == operator2
 ```
 
-### from — apply bring to a variable
+```anylog
+blockchain get operator where
+    [country] == US
+    and ([city] == "San Francisco" or [city] == "San Jose")
+```
+
+A path can identify nested values inside a policy. For example:
+
+```text
+[operator][name]
+```
+
+The root element may be omitted when the policy type is already known:
+
+```text
+[name]
+```
+
+---
+
+## Path matching
+
+Metadata paths can be filtered using path operators.
+
+### `startwith`
+
+Return paths beginning with the specified value:
+
+```anylog
+blockchain get tag where
+    [path] startwith 'Root/Objects/DeviceSet'
+```
+
+### `childfrom`
+
+Return child paths below the specified path:
+
+```anylog
+blockchain get tag where
+    [path] childfrom 'Root/Objects/DeviceSet'
+```
+
+---
+
+# Formatting results with `bring`
+
+By default, `blockchain get` returns matching policy objects. `bring` can extract specific fields or transform the result.
+
+A detailed explanation of the ```bring``` option is available in the [05- JSON Data Transformation.md](../07-%20CLI/05-%20JSON%20Data%20Transformation.md#the-bring-keyword) section.
+
+## Return a single field
+
+```anylog
+blockchain get operator bring [name]
+```
+
+## Combine fields
+
+```anylog
+blockchain get operator bring [name] [ip]:[port]
+```
+
+## Return IP:Port values
+
+```anylog
+blockchain get operator bring.ip_port
+```
+
+## Table output
+
+```anylog
+blockchain get operator bring.table
+```
+
+## JSON output
+
+```anylog
+blockchain get operator bring.json
+```
+
+## Sorted table
+
+```anylog
+blockchain get operator bring.table.sort [operator][name]
+```
+
+---
+
+## Query examples
+
+### Find operators supporting a table
+
+```anylog
+blockchain get operator where
+    dbms = my_data
+    and table = ping_sensor
+    bring [name] [ip]:[port]
+```
+
+### Get operator addresses by country
+
+```anylog
+blockchain get operator where
+    [country] == US
+    or [country] == UK
+    bring.ip_port
+```
+
+### Get the cluster ID for a table
+
+```anylog
+blockchain get cluster where
+    table[dbms] = my_data
+    and table[name] = ping_sensor
+    bring [cluster][id] separator = ,
+```
+
+---
+
+# Save results and apply `bring` later
+
+The result of `blockchain get` can be assigned to a variable and processed separately.
 
 ```anylog
 operators = blockchain get operator
+```
+
+Then:
+
+```anylog
 from !operators bring [name] [ip]:[port]
 ```
 
-**Examples**
+This is useful when the same set of policies is reused for multiple operations or output formats.
+
+---
+
+# Use metadata to determine command destinations
+
+A common AnyLog pattern is to query metadata and use the result as the destination of another command.
+
+For example:
 
 ```anylog
-# All operators supporting a specific table
-blockchain get operator where dbms = my_data and table = ping_sensor bring [name] [ip]:[port]
-
-# Operators in specific countries
-blockchain get operator where [country] == US or [country] == UK bring.ip_port
-
-# Cluster ID for a specific table
-blockchain get cluster where table[dbms] = my_data and table[name] = ping_sensor bring [cluster][id] separator = ,
+destinations = blockchain get (operator, query) where
+    [country] == US
+    or [country] == IL
+    bring [*][ip]:[*][port] separator = ,
 ```
 
-### JOIN — keep both objects separate
+Then:
 
 ```anylog
-blockchain get bucket where name = my_bucket join (blockchain get operator where name = [bucket][operator])
+run client (!destinations) get node info net_io_counters
 ```
 
-Output:
+The query can also be embedded directly:
+
+```anylog
+run client (
+    blockchain get (operator, query) where
+        [country] == US
+        or [country] == IL
+        bring [*][ip]:[*][port] separator = ,
+) get node info net_io_counters
+```
+
+This allows policies to dynamically define which AnyLog nodes receive a command.
+
+---
+
+# Join and Merge Policy Queries
+
+`blockchain get` can combine metadata from related policies using `join` or `merge`.
+
+## `join`
+
+`join` preserves both policy objects as separate objects in the result.
+
+```anylog
+blockchain get bucket where
+    name = my_bucket
+    join (
+        blockchain get operator where
+            name = [bucket][operator]
+    )
+```
+
+Example result:
+
 ```json
-[{"bucket": {...}, "operator": {...}}]
+[
+  {
+    "bucket": {
+      "name": "my_bucket",
+      "operator": "operator1"
+    },
+    "operator": {
+      "name": "operator1",
+      "ip": "24.5.219.50",
+      "port": 7848
+    }
+  }
+]
 ```
 
-- If no RHS match → record is omitted (inner join behavior)
-- Path interpolation: `[bucket][operator]` is resolved from the LHS record
+Behavior:
 
-### MERGE — flatten RHS into LHS
+- the left-hand and right-hand policies remain separate;
+- values from the left-hand policy can be referenced in the right-hand query;
+- if the right-hand query has no match, the record is omitted.
+
+### Format joined results
 
 ```anylog
-blockchain get bucket where name = my_bucket merge (blockchain get operator where name = [bucket][operator])
+blockchain get bucket where
+    name = my_bucket
+    join (
+        blockchain get operator where
+            name = [bucket][operator]
+    )
+    bring.table
+        [bucket][name]
+        [operator][ip]
+        [operator][port]
 ```
 
-Output:
+---
+
+## `merge`
+
+`merge` adds fields returned by the second query directly into the first policy object.
+
+```anylog
+blockchain get bucket where
+    name = my_bucket
+    merge (
+        blockchain get operator where
+            name = [bucket][operator]
+    )
+```
+
+Example result:
+
 ```json
-[{"bucket": {"name": "my_bucket", "operator": "op1", "ip": "24.5.219.50", "port": 7848}}]
+[
+  {
+    "bucket": {
+      "name": "my_bucket",
+      "operator": "operator1",
+      "ip": "24.5.219.50",
+      "port": 7848
+    }
+  }
+]
 ```
 
-- LHS wins on key conflicts
-- If no RHS match → LHS returned unchanged (left merge behavior)
+Behavior:
 
-### With bring formatting
+- fields from the right-hand result are added to the left-hand object;
+- the left-hand policy wins if both objects contain the same key;
+- if no right-hand policy matches, the left-hand policy is returned unchanged.
 
-```anylog
-# Table output with join
-blockchain get bucket where name = my_bucket join (blockchain get operator where name = [bucket][operator]) bring.table [bucket][name] [operator][ip] [operator][port]
+---
 
-# JSON output with merge
-blockchain get bucket where name = my_bucket merge (blockchain get operator where name = [bucket][operator]) bring.json [bucket][name] [bucket][ip] [bucket][port]
-```
+# Root and Child Policies
 
-## Root and child policies (UNS hierarchy)
+AnyLog policies can form a hierarchy. This is used, among other things, to represent Unified Namespace (UNS) structures.
 
-Root policies have no `parent` attribute. Child policies reference a parent via the `parent` field, forming a hierarchy used by the Unified Namespace (UNS).
+A **root policy** does not contain a `parent` attribute.
+
+A **child policy** references another policy through its `parent` attribute.
+
+Return root policies:
 
 ```anylog
 blockchain get root policies
 ```
 
-Example output:
+Example:
+
 ```json
 [
-  {"uns": {"name": "Enterprise_A", "namespace": "Enterprise_A", "id": "00ddf..."}},
-  {"uns": {"name": "Sensors", "namespace": "Enterprise_A/Sensors", "parent": "00ddf...", "dbms": "my_data", "table": "ping_sensor"}}
+  {
+    "uns": {
+      "name": "Enterprise_A",
+      "namespace": "Enterprise_A",
+      "id": "00ddf..."
+    }
+  },
+  {
+    "uns": {
+      "name": "Sensors",
+      "namespace": "Enterprise_A/Sensors",
+      "parent": "00ddf...",
+      "dbms": "my_data",
+      "table": "ping_sensor"
+    }
+  }
 ]
 ```
 
-Child policies inherit structure from their parent and carry `dbms`/`table` attributes used by the query engine.
+In this example, `Enterprise_A` is a root policy and `Sensors` is a child policy.
 
-## Compare Policies 
+## Include selected root policy types
 
-Policies can be compared to determine the different attribute and values.  
-The following command returns a report indicating the differences between the two policies, or between lists of policies.  
-Usage:
-```anylog 
-get policies diff [object 1] [object 2]
-``` 
-Object 1 and Object 2 are policies or lists of policies to compare. 
-When lists are compared, the number of policies in the lists needs to be equal with one exception: 
-If a policy is compared to a list with a single policy, the policy is assumed to be in a list, and the comparison is allowed.  
+```anylog
+blockchain get root policies include cluster uns
+```
+
+## Exclude selected root policy types
+
+```anylog
+blockchain get root policies exclude cluster
+```
+
+---
+
+# `blockchain get` vs. `blockchain read`
+
+For normal metadata queries, use:
+
+```anylog
+blockchain get
+```
+
+`blockchain get` returns the node's operational view of the policies after AnyLog has applied runtime and dynamic updates.
+
+`blockchain read` returns the policies as they were received from the global ledger, before those dynamic updates.
+
+```anylog
+blockchain read operator
+```
+
+Use `blockchain read` primarily for troubleshooting or for examining the source representation of a policy.
+
+---
+
+# `blockchain drop`
+
+`blockchain drop` removes or invalidates metadata policies.
+
+The exact behavior depends on the type of global ledger.
+
+## Drop by policy ID
+
+```anylog
+blockchain drop policy where
+    id = 4a0c16ff565c6dfc05eb5a1aca4bf825
+```
+
+A variable can also be used:
+
+```anylog
+blockchain drop policy where id = !policy_id
+```
+
+## Drop using a policy object
+
+```anylog
+blockchain drop policy !operator
+```
+
+---
+
+## Master node vs. immutable blockchain
+
+The meaning of "drop" is important because a blockchain ledger is immutable.
+
+### Master / metadata node
+
+When the global ledger is maintained by a master / metadata node, the matching policy can be removed from the master's local metadata database.
+
+### Blockchain platform
+
+When the global ledger is an immutable blockchain platform, the original ledger entry cannot be physically deleted.
+
+Instead, AnyLog records metadata that identifies the policy as dropped so that the network ignores the policy.
+
+From the application's point of view, the policy is no longer active even though the historical blockchain record remains immutable.
+
+---
+
+## Drop policies associated with a host
+
+A master metadata database can remove policies associated with a particular host:
+
+```anylog
+blockchain drop by host
+```
+
+This is a lower-level administrative operation and should be used when cleaning metadata associated with a node or host rather than removing an individual policy.
+
+---
+
+# Securing Policies
+
+Policies can be signed to verify the identity of the party writing metadata.
+
+## Sign using the configured key
+
+```anylog
+id sign !json_script where
+    password = !my_password
+```
+
+## Sign using a specified private key
+
+```anylog
+id sign !json_script where
+    key = !my_key
+    and password = !my_password
+```
+
+The signature information is added to the JSON policy and can be used to validate the source of metadata written to the ledger.
+
+---
+
+# Connecting and Synchronizing the Ledger
+
+Most application users only need `blockchain insert`, `blockchain get`, and `blockchain drop`.
+
+The commands in this section are primarily used when configuring or administering the metadata infrastructure.
+
+---
+
+## Seed a node from another AnyLog node
+
+When a new node joins an existing network, it can retrieve an initial metadata copy from another node:
+
+```anylog
+blockchain seed from 73.202.142.172:7848
+```
+
+General form:
+
+```anylog
+blockchain seed from [IP:Port]
+```
+
+This operation is commonly used during startup. Ongoing updates should normally be handled by blockchain synchronization.
+
+---
+
+# Blockchain Synchronization
+
+`run blockchain sync` continuously refreshes the local metadata representation.
+
+## Synchronize from a master node
+
+```anylog
+run blockchain sync where
+    source = master
+    and time = 60 seconds
+    and dest = file
+    and dest = dbms
+    and connection = !ip_port
+```
+
+## Synchronize from a blockchain platform
+
+```anylog
+run blockchain sync where
+    source = blockchain
+    and time = !sync_time
+    and dest = file
+    and platform = ethereum
+```
+
+## Synchronization options
+
+| Option | Description |
+|---|---|
+| `source` | Metadata source: `master` or `blockchain` |
+| `dest` | Destination to update: `file` and/or `dbms` |
+| `connection` | Connection information for a master node |
+| `platform` | Blockchain platform when `source = blockchain` |
+| `time` | Synchronization frequency |
+
+Every node that depends on changing metadata should maintain an appropriate synchronization process. The required frequency may vary by node role.
+
+---
+
+# Master / Metadata Node Administration
+
+A master / metadata node maintains a complete metadata ledger in a local database.
+
+## Create the ledger table
+
+```anylog
+blockchain create table
+```
+
+The ledger is stored in:
+
+```text
+blockchain.ledger
+```
+
+## Export the ledger as JSON
+
+```anylog
+blockchain pull to json [output-file]
+```
+
+## Export the ledger as SQL
+
+```anylog
+blockchain pull to sql [output-file]
+```
+
+## Print the ledger
+
+```anylog
+blockchain pull to stdout
+```
+
+## Load a ledger file into the local database
+
+```anylog
+blockchain update dbms [file]
+```
+
+## Query the master ledger directly
+
+```anylog
+sql blockchain "select * from ledger"
+```
+
+Direct SQL access is primarily an administrative and troubleshooting capability. Application logic should normally query metadata using `blockchain get`.
+
+---
+
+# Copy Metadata from a Master Node
+
+A node can explicitly retrieve the ledger from a master node.
+
+```anylog
+master_node = 127.45.35.12:32048
+```
+
+Retrieve the ledger:
+
+```anylog
+run client (!master_node) blockchain pull to json
+```
+
+Copy the generated file:
+
+```anylog
+run client (!master_node) file get !!blockchain_file !blockchain_file
+```
+
+If automatic synchronization is not running, force AnyLog to reload the updated local metadata:
+
+```anylog
+blockchain load metadata
+```
+
+---
+
+# Blockchain Platform Setup
+
+When the global ledger is maintained on a blockchain platform, the platform must be configured before policies can be published.
+
+## Configure account information
+
+```anylog
+blockchain set account info where
+    platform = ethereum
+    and private_key = !private_key
+    and public_key = !public_key
+    and chain_id = 11155111
+```
+
+## Deploy the AnyLog contract
+
+```anylog
+blockchain deploy contract where
+    platform = ethereum
+    and public_key = !public_key
+```
+
+A master / metadata node does not require blockchain account or smart-contract configuration because its global ledger is maintained in the local metadata database.
+
+---
+
+# Update an Existing Policy
+
+An existing policy can be updated while preserving its policy ID.
+
+The ID must already exist on the target ledger, and the ID in the policy must match the ID supplied to the update command.
+
+Example for Ethereum:
+
+```anylog
+blockchain update to ethereum !policy_id !policy
+```
+
+An update should be used when the policy represents the same logical object. Use `blockchain insert` when publishing a new policy.
+
+---
+
+# Compare Policies
+
+Policies can be compared to identify differences in attributes and values.
+
+## Syntax
+
+```anylog
+get policies diff [object-1] [object-2]
+```
+
 Example:
-```anylog 
+
+```anylog
 get policies diff !policy1 !policy2
 ```
 
-## Other blockchain commands
+The objects can be individual policies or lists of policies.
+
+When two lists are compared, the lists normally need to contain the same number of policies. A single policy may also be compared with a list containing one policy.
+
+---
+
+# Additional Blockchain Commands
+
+The following commands are useful for validation, troubleshooting, administration, or direct manipulation of a specific metadata layer.
 
 | Command | Description |
 |---|---|
-| `blockchain test` | Validate local JSON file structure |
-| `blockchain test id` | Check if a policy ID exists locally |
-| `blockchain get id [json]` | Return the hash of a JSON structure |
-| `blockchain prepare policy [json]` | Add ID and date to a policy |
-| `blockchain checkout` | Pull latest data from blockchain platform to local JSON |
-| `blockchain update file [path]` | Replace local blockchain file (backs up `.old`) |
-| `blockchain delete local file` | Delete the local JSON file |
-| `blockchain query metadata` | Diagram view of the local metadata structure |
-| `blockchain test cluster` | Analyse cluster policies |
-| `blockchain state where platform = [name]` | State of the active contract |
+| `blockchain test` | Validate the local blockchain JSON file and its structure |
+| `blockchain test id` | Test whether a policy ID exists locally |
+| `blockchain get id [json]` | Return the hash / ID associated with a JSON structure |
+| `blockchain prepare policy [json]` | Add an ID and date to a policy |
+| `blockchain checkout` | Retrieve the latest ledger data from a blockchain platform |
+| `blockchain update file [path]` | Replace the local blockchain file and preserve the prior version as `.old` |
+| `blockchain delete local file` | Delete the local JSON ledger file |
+| `blockchain query metadata` | Display a diagram view of the local metadata structure |
+| `blockchain test cluster` | Analyze cluster policies |
+| `blockchain state where platform = [name]` | Return the state of the active blockchain contract |
+
+---
+
+# Recommended Usage
+
+For most AnyLog applications and integrations, the primary blockchain commands are `insert`, `get`, `update`, and `drop`:
+
+```anylog
+# Publish metadata
+blockchain insert where policy = !policy and local = true and master = !master_node
+
+# Query metadata
+blockchain get operator where dbms = my_data bring [name] [ip]:[port]
+
+# Update existing metadata
+blockchain update to ethereum !policy_id !policy
+
+# Remove metadata
+blockchain drop policy where id = !policy_id
+```
+
+The remaining blockchain commands support deployment configuration, synchronization, administration, debugging, or direct access to an individual ledger layer.
