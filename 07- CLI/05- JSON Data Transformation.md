@@ -111,8 +111,11 @@ values associated with the keys and the string values are added to the retrieved
     * ```bring.min``` - return the minimum value of an attribute.
     * ```bring.max``` - return the maximum value of an attribute.
     * ```bring.list``` - return the requested attributes as a list.
-    * ```bring.children``` - Return the immediate children of a policy by retrieving all policies whose 'parent' attribute matches the parent policy's 'id' attribute.
-  
+    * ```bring.children``` - returns the immediate children of a policy by retrieving all policies whose `parent` attribute matches the policy's `id`.
+    * ```bring.parents``` - returns the policy with a dynamic `parents` attribute containing the IDs of all policies that reference it as their immediate child.
+    * ```bring.paths``` - returns the policy with all paths that contain the policy.
+    * ```bring.extend``` - returns the policy extended with the policy identified by the value of its `object_id` attribute.
+
 ### Special Bring Values
 * **Basic Usage:**
   If the **bring** command values are wrapped in square brackets, it designates keys into the policy, and the associated values are returned.
@@ -237,3 +240,356 @@ blockchain get tag bring.table [tag][table] [tag][path(find(/))]
 blockchain get tag bring.table [tag][table] [tag][path(suffix(10))]
 blockchain get tag bring.table [tag][table] [tag][path(prefix(10))]
 ```
+
+## Navigating Policy Relationships with `bring`
+
+Policies can reference other policies to create relationships and hierarchical structures. A common example is a Unified Namespace (UNS), where `uns` policies define paths and reference `object` policies containing the metadata associated with each object.
+
+The following `bring` extensions allow applications to navigate and resolve these relationships:
+
+| Command | Description |
+|---|---|
+| `bring.extend` | Extends a policy with the policy referenced by its `object_id` |
+| `bring.children` | Returns the immediate child policies of the selected policy |
+| `bring.parents` | Returns the UNS policies that reference the selected object |
+| `bring.paths` | Returns the complete UNS path or paths associated with an object |
+
+Consider the following UNS hierarchy:
+
+```text
+manufacturer
+    └── Caterpillar
+          └── Generator
+```
+
+The hierarchy is represented by `uns` policies, while the information associated with each element is maintained in separate `object` policies.
+
+For example:
+
+```json
+{
+    "object": {
+        "name": "Generator",
+        "id": "85b7bcddf4e0cf05ce32f002af42d6fb"
+    }
+}
+```
+
+The corresponding UNS policy references the object using `object_id`:
+
+```json
+{
+    "uns": {
+        "namespace": "manufacturer/Caterpillar/Generator",
+        "object_id": "85b7bcddf4e0cf05ce32f002af42d6fb",
+        "parent": "0fa2a4130b6e132bf5d982c33b9a6204",
+        "id": "e23c9eadfe2182db44252ed7b0e30ff2"
+    }
+}
+```
+
+This separation allows the same object to participate in different hierarchies or paths without duplicating the object metadata.
+
+---
+
+### `bring.extend`
+
+`bring.extend` resolves the `object_id` referenced by a UNS policy and returns the corresponding `object` policy together with the UNS policy.
+
+```anylog
+blockchain get uns bring.extend
+```
+
+Example result:
+
+```json
+[
+    {
+        "uns": {
+            "namespace": "manufacturer/Caterpillar",
+            "object_id": "257e7557a2206c8517e913606eb56cf7",
+            "parent": "06bd59ebecfa093a1015527055bed273",
+            "id": "0fa2a4130b6e132bf5d982c33b9a6204"
+        },
+        "object": {
+            "name": "Caterpillar",
+            "id": "257e7557a2206c8517e913606eb56cf7"
+        }
+    }
+]
+```
+
+The returned structure contains both:
+
+- the `uns` policy defining the position in the hierarchy; and
+- the `object` policy containing the metadata associated with that element.
+
+For example, the root UNS policy:
+
+```json
+{
+    "uns": {
+        "namespace": "manufacturer",
+        "object_id": "e47882f7e3f920b05ddca15c9b3aa314"
+    }
+}
+```
+
+can be extended with the referenced object:
+
+```json
+{
+    "object": {
+        "name": "manufacturer",
+        "description": "Asset/provenance view: organized by manufacturer, device type, model, customer type, and customer instance.",
+        "id": "e47882f7e3f920b05ddca15c9b3aa314"
+    }
+}
+```
+
+`bring.extend` is useful when the UNS defines the relationship or hierarchy while the object policy maintains the descriptive metadata.
+
+---
+
+### `bring.children`
+
+`bring.children` returns the **immediate child policies** of the selected policy.
+
+For example, the root of the hierarchy is:
+
+```text
+manufacturer
+```
+
+with policy ID:
+
+```text
+06bd59ebecfa093a1015527055bed273
+```
+
+To return its children:
+
+```anylog
+blockchain get * where id = 06bd59ebecfa093a1015527055bed273 bring.children
+```
+
+Result:
+
+```json
+[
+    {
+        "uns": {
+            "namespace": "manufacturer/Caterpillar",
+            "object_id": "257e7557a2206c8517e913606eb56cf7",
+            "parent": "06bd59ebecfa093a1015527055bed273",
+            "id": "0fa2a4130b6e132bf5d982c33b9a6204"
+        }
+    }
+]
+```
+
+In this example:
+
+```text
+manufacturer
+    └── Caterpillar
+```
+
+`Caterpillar` is returned because its UNS policy identifies the `manufacturer` policy as its parent.
+
+`bring.children` returns the next level of the hierarchy rather than recursively returning every descendant.
+
+---
+
+### `bring.parents`
+
+An object can be referenced by one or more UNS policies. `bring.parents` identifies the UNS policy or policies that reference the selected object.
+
+For example:
+
+```anylog
+blockchain get * where id = 85b7bcddf4e0cf05ce32f002af42d6fb bring.parents
+```
+
+Result:
+
+```json
+[
+    {
+        "object": {
+            "name": "Generator",
+            "id": "85b7bcddf4e0cf05ce32f002af42d6fb"
+        },
+        "parents": [
+            "e23c9eadfe2182db44252ed7b0e30ff2"
+        ]
+    }
+]
+```
+
+The `parents` array contains the IDs of the UNS policies that reference the object.
+
+In this example:
+
+```text
+85b7bcddf4e0cf05ce32f002af42d6fb
+```
+
+is the ID of the `Generator` object, while:
+
+```text
+e23c9eadfe2182db44252ed7b0e30ff2
+```
+
+is the ID of the UNS policy that places the object at:
+
+```text
+manufacturer/Caterpillar/Generator
+```
+
+An object can participate in multiple UNS hierarchies. In that case, `parents` can contain multiple UNS policy IDs.
+
+---
+
+### `bring.paths`
+
+`bring.paths` resolves the complete UNS hierarchy associated with an object.
+
+For example:
+
+```anylog
+blockchain get object where id = 85b7bcddf4e0cf05ce32f002af42d6fb bring.paths
+```
+
+The selected object is:
+
+```text
+Generator
+```
+
+and its UNS path is:
+
+```text
+manufacturer → Caterpillar → Generator
+```
+
+The result contains the object together with a `paths` object:
+
+```json
+[
+    {
+        "object": {
+            "name": "Generator",
+            "id": "85b7bcddf4e0cf05ce32f002af42d6fb"
+        },
+        "paths": {
+            "e23c9eadfe2182db44252ed7b0e30ff2": [
+                {
+                    "uns": {
+                        "namespace": "manufacturer",
+                        "object_id": "e47882f7e3f920b05ddca15c9b3aa314",
+                        "id": "06bd59ebecfa093a1015527055bed273"
+                    },
+                    "object": {
+                        "name": "manufacturer",
+                        "id": "e47882f7e3f920b05ddca15c9b3aa314"
+                    }
+                },
+                {
+                    "uns": {
+                        "namespace": "manufacturer/Caterpillar",
+                        "object_id": "257e7557a2206c8517e913606eb56cf7",
+                        "parent": "06bd59ebecfa093a1015527055bed273",
+                        "id": "0fa2a4130b6e132bf5d982c33b9a6204"
+                    },
+                    "object": {
+                        "name": "Caterpillar",
+                        "id": "257e7557a2206c8517e913606eb56cf7"
+                    }
+                },
+                {
+                    "uns": {
+                        "namespace": "manufacturer/Caterpillar/Generator",
+                        "object_id": "85b7bcddf4e0cf05ce32f002af42d6fb",
+                        "parent": "0fa2a4130b6e132bf5d982c33b9a6204",
+                        "id": "e23c9eadfe2182db44252ed7b0e30ff2"
+                    },
+                    "object": {
+                        "name": "Generator",
+                        "id": "85b7bcddf4e0cf05ce32f002af42d6fb"
+                    }
+                }
+            ]
+        }
+    }
+]
+```
+
+The key under `paths` is the ID of the UNS policy that references the selected object.
+
+The array describes the complete hierarchy from the root policy to the selected object:
+
+```text
+manufacturer
+    ↓
+Caterpillar
+    ↓
+Generator
+```
+
+Each element contains both the UNS policy and its associated object policy.
+
+---
+
+### Objects in Multiple Paths
+
+An important property of the AnyLog metadata model is that an object can participate in more than one hierarchy.
+
+For example, the same `Generator` object could appear in:
+
+```text
+manufacturer → Caterpillar → Generator
+```
+
+and:
+
+```text
+City → Plant → Electricity → Generator
+```
+
+The `Generator` object does not need to be duplicated. Each UNS hierarchy can reference the same object ID:
+
+```text
+85b7bcddf4e0cf05ce32f002af42d6fb
+```
+
+In this case:
+
+```anylog
+blockchain get object where id = 85b7bcddf4e0cf05ce32f002af42d6fb bring.parents
+```
+
+can return multiple UNS policy IDs, and:
+
+```anylog
+blockchain get object where id = 85b7bcddf4e0cf05ce32f002af42d6fb bring.paths
+```
+
+can return the complete path associated with each of those UNS policies.
+
+This allows AnyLog to maintain **multiple logical views of the same physical or logical object** while keeping the object's metadata in a single object policy.
+
+---
+
+### Summary
+
+The relationship-oriented `bring` commands provide different views of the same metadata graph:
+
+| Command | Starting Point | Returns |
+|---|---|---|
+| `bring.extend` | UNS policy | The UNS policy together with its referenced object policy |
+| `bring.children` | Policy | Its immediate child policies |
+| `bring.parents` | Object policy | UNS policy IDs that reference the object |
+| `bring.paths` | Object policy | Complete root-to-object path(s), including UNS and object policies |
+
+Together, these commands allow applications to navigate the AnyLog metadata and UNS structure without manually resolving policy IDs and parent relationships.
