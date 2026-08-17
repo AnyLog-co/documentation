@@ -171,7 +171,6 @@ run msg client where [connection parameters] and [config parameters] and topic =
 
 A single `run msg client` command can include multiple `topic = (...)` blocks.
 
-
 ### Connection options
 
 | Option | Description |
@@ -212,8 +211,6 @@ A single `run msg client` command can include multiple `topic = (...)` blocks.
 | `dynamic` | `true` auto-generates tables and UNS policies from the topic and JSON payload. |
 | `policy` | Reusable mapping policy previously inserted into the blockchain. Replaces inline `dbms`, `table`, and `column...` mappings. |
 
-
-
 ## Topic matching and table naming
 
 MQTT topic matching is traditionally case-sensitive. A subscription to `C/#` matches `C/data`; it does not match `c/data`.
@@ -230,7 +227,6 @@ are converted to lowercase, while spaces and unsupported characters are converte
 This prevents logically equivalent objects from being created under names that differ only by
 capitalization and provides consistent references across local storage, distributed queries,
 metadata, and applications, especially because databases are case insensitive.
-
 
 > **Important:** MQTT subscription matching itself remains case-sensitive. `C/#` does not match `c/data`. To ingest both topic paths, configure subscriptions for both `C/#` and `c/#`. If they represent different data sources, ensure that their generated or explicitly configured AnyLog table names do not collide.
 
@@ -342,7 +338,6 @@ Data will be written to `dbms=mydb` and `table_name = my_new_table` (table overw
 		dynamic = true
 	)>
 ```
-
 
 ### QoS
 
@@ -526,7 +521,6 @@ mosquitto_pub \
 For the full mTLS walkthrough (CA creation, `id sign certificate request`, user certs, MQTT Explorer, external
 org certs, and optional CA on the blockchain), see [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md).
 
-
 ## Debugging and Validation
 
 ```anylog
@@ -613,7 +607,6 @@ Company    DBMS Table       Cluster ID                       Cluster Status Node
 AnyLog Co.|mydb|data       |fed71895ee0161ffe92bb79f7e85791c|active        |operator1|       68|192.168.0.138:32148|             | +  |active     |
           |    |           |6ca7df77cc8f4777cfd427dff870af5f|active        |operator2|      212|192.168.0.138:32248|             | +  |active     |
 ```
-
 
 This data hosted by two AnyLog operators on two physical machines or sites can then be queried:
 ```anylog
@@ -837,4 +830,4 @@ The message inserts into `mydb.broker_data`, with no external MQTT broker hop.
 * [Connectors To Data Sources](./05-2%20Connectors%20To%20Data%20Sources.md)
 * [Network Processing](./02-%20Network%20Processing.md)
 * [Using REST](./04-%20Using%20REST.md)
-* [Unified Namespace](../08-%20Blockchain%20&%20Metadata/05-%20Unitfied%20Namespace.md)
+* [Unified Namespace](../08-%20Blockchain%20&%20Metadata/04-%20Unified%20Namespace.md)
