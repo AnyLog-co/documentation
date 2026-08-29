@@ -83,9 +83,7 @@ publishes a policy to the Master Node and, with local=true, also updates the nod
 The sections below describe each command, its syntax, available options, and examples.
 
 # `blockchain insert`
-
 <!-- search: command_blockchain_insert blockchain_insert blockchain insert -->
-
 
 `blockchain insert` adds a policy to the metadata ledger.
 
@@ -186,6 +184,7 @@ Use these commands when working directly with a specific ledger layer. For norma
 ---
 
 # `blockchain get`
+<!-- search: command_blockchain_get blockchain_get blockchain get -->
 
 `blockchain get` queries metadata policies.
 
