@@ -681,7 +681,7 @@ nav:
       slug: "08-blockchain-and-metadata/02-1-anmp-policy"
       url: "/docs/08-blockchain-and-metadata/02-1-anmp-policy/"
       file: "08-blockchain-and-metadata/02-1-anmp-policy.md"
-      source_path: "08- Blockchain & Metadata/02-1 ANMP Policy.md"
+      source_path: "08- Blockchain & Metadata/99- ANMP Policy.md"
     - kind: "page"
       title: "Blockchain Commands"
       match_path: "/docs/08-blockchain-and-metadata/03-blockchain-commands/"
