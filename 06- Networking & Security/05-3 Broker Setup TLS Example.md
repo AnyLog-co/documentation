@@ -183,7 +183,7 @@ In MQTT Explorer, configure the connection to `mqtt://192.168.1.60:8883/` with:
 - **CLIENT CERTIFICATE:** e.g. `user1.crt` / `AnyLogUser1.crt`
 - **CLIENT KEY:** e.g. `user1.key` / `AnyLogUser1.key`
 
-![MQTT Explorer TLS setup](../imgs/mqtt_explorer_setup.png)
+<img src="../imgs/mqtt_explorer_setup.png" alt="MQTT Explorer TLS setup" />
 
 ## Share CA Users in the blockchain
 
@@ -394,5 +394,5 @@ Additional Operators repeat the CSR + remote-sign steps with their own `output_n
 
 ## Link to resources
 
-- [mosquitto-tls man page](https://mosquitto.org/man/mosquitto-tls-7.html)
-- [Mosquitto broker TLS config (Medium)](https://medium.com/@sonadorje/mosquitto-broker-tls-config-5f8bfaa5c047)
+- <a href="https://mosquitto.org/man/mosquitto-tls-7.html" target="_blank">mosquitto-tls man page</a>
+- <a href="https://medium.com/@sonadorje/mosquitto-broker-tls-config-5f8bfaa5c047" target="_blank">Mosquitto broker TLS config (Medium)</a>

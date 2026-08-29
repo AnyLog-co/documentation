@@ -79,7 +79,6 @@ run helpers where type = [helper type] and count = [helpers count]
 | type            | Helper type (e.g., psql). Defines what kind of task the helper will process. |
 | count           | Number of helper processes to launch. Each runs independently in parallel.   |
 
-
 **Example:**
 ```anylog
 run helpers where type = psql and count = 2
@@ -134,12 +133,10 @@ helper * * exit node
 helper psql 1 exit node
 ```
 
-
 ## Dynamic monitoring of internal processes
 
 The `get dynamic stats` command retrieves **live execution metadata** about a specific operation running in the main or helper processes
 — such as timing, status, or active resource usage — by referencing its associated request or file name.
-
 
 **Usage:**
 ```anylog
@@ -154,7 +151,6 @@ get dynamic stats where name = [monitored topic]
 | operator.sql  | psql        | The SQL processing time                               |
 | operator.jql  | psql        | The SQL processing time directly from JSON conversion |
 
-
 **Examples:**
 ```anylog
 helper psql 1 get dynamic stats where name = operator.json
@@ -167,7 +163,6 @@ As discussed in the [database section](../09-%20Data%20Management/02-1%20Databas
 supports multiple types of SQL-based physical databases. However, we do not recommend using the SQLite option for 
 performance-dependent insertion as it's a single-file store with concurrency limitations. Instead it is recommended to 
 use a server-based physical database like Postgres. 
-
 
 However, even with Postgres, the default configuration can still be improved substantially. On a mid-size machine with configuration: 
 
@@ -211,7 +206,6 @@ max_parallel_workers = 16            # Match to your logical cores
 ```
 
 > Disk and Indexing: Remember to drop indexes before bulk inserts and recreate afterward for better performance
-
 
 ## Sample Results 
 
