@@ -10,7 +10,7 @@ layout: page
  | 2026-07-27 | Ori Shadmon    | Removed a duplicated "help blockchain set account info" block; fixed `blockchain deploy contract` example to match its own Usage line; condensed `help` transcripts into command+description style; flagged several open questions between this reference and other docs (see inline notes): `run blockchain sync`'s `connection` vs `master_node` param, `dest` specified twice in one call, `blockchain wait for` vs `blockchain wait where`, and whether the `where`-style `blockchain update` form still exists; restored the narrower `add`/`push`/`commit` insert-variant table; typo fixes | |
  | 2026-07-27 | Ori Shadmon    | New page — split out of "03 Blockchain & Metadata.md". Moved the master-vs-blockchain-platform comparison and all connect/sync/seed commands to the new standalone Blockchain Connectivity doc, since those are about wiring a node to a ledger source rather than managing policies once connected. Fixed `master_npode` typo. | |
  | 2026-08-15 | Moshe Shadmon    | Updated Page. | |
-
+ | 2026-08-29 | Moshe Shadmon    | Updated Page. | |
 --->
 ---
 title: Blockchain Commands
