@@ -1,3 +1,14 @@
+---
+title: "AnyLog Quick Start"
+description: "Quick command reference for configuring, joining, testing, and working with an AnyLog network."
+layout: page
+---
+<!---
+### 📜 Change Log
+ **Date**   | **Name**        | **Change**        | **Version** |
+ |----------|-----------------|-------------------|-------------|
+ | 2026-08-29 | Moshe Shadmon | created document  | 2026 |
+--->
 # AnyLog Quick Start
 
 This page provides a quick command reference for working with a running AnyLog node and connecting it to an existing AnyLog network.
@@ -151,7 +162,7 @@ Both dictionary and environment variables can be used in AnyLog commands and con
 
 ## Find the Node Directories
 
-AnyLog uses configured directories for data, metadata, processing, logs, and other node operations.
+AnyLog uses a set of working directories for data ingestion, processing, storage, distribution, security, and error handling.
 
 A quick way to find the configured directories is:
 
@@ -161,19 +172,30 @@ get dictionary _dir
 
 Common directories include:
 
-- `blockchain` — the node's local synchronized metadata.
-- `data` — operational and intermediate data.
-- `dbms` — local database files when applicable.
-- `watch` — files waiting to be processed.
-- `error` — files that failed processing.
-- `distr` — files used by distribution and replication processes.
+- `archive` — stores archived data files after they have been processed.
+- `bkup` — stores backup copies of files.
+- `blobs` — stores binary or large-object data managed separately from structured table data.
+- `bwatch` — watch directory for incoming blob data.
+- `dbms` — stores local database files when file-based databases such as SQLite are used.
+- `distr` — stores files waiting to be distributed or replicated to other Operator nodes.
+- `error` — stores files that could not be successfully processed.
+- `pem` — stores certificates and keys used for secure communication and authentication.
+- `prep` — stores data that has been prepared for the next stage of processing.
+- `test` — workspace used for testing.
+- `tmp` — stores temporary files created during processing.
+- `watch` — watch directory for incoming data waiting to be processed.
 
-Configured work directories can be created using:
-
+When a node is initialized for the first time, create the configured AnyLog work directories using:
 ~~~anylog
 create work directories
 ~~~
+This command only needs to be run **once when the node is first initialized**. It creates the directory structure used by the node for data ingestion, processing, storage, distribution, backups, and other operations.
 
+The directories can be reviewed using:
+
+~~~anylog
+get dictionary _dir
+~~~
 ---
 
 ## Join an Existing Network
@@ -209,7 +231,7 @@ Conceptually:
            Shared AnyLog Network
 ~~~
 
-After the node is associated with the network, the metadata synchronization process maintains its local metadata copy.
+After the node is associated with the network, the node maintains its local metadata copy.
 
 The seed node is therefore used to **discover and join the network**; it does not become a permanent dependency for normal node operation.
 
@@ -217,12 +239,6 @@ After seeding the node, verify the network and metadata:
 
 ~~~anylog
 test network
-~~~
-
-and:
-
-~~~anylog
-blockchain get *
 ~~~
 
 ---
@@ -303,27 +319,31 @@ These commands are useful when validating configuration, ingestion, network comm
 
 ---
 
-## Run a Command on Another Node
+## Run Commands as a Client to the Network
 
-AnyLog commands can be sent to another AnyLog node using `run client`.
+The `run client` command executes a request with the current AnyLog node acting as a **client to the AnyLog network**.
 
-For example:
+The destination determines how the request is routed. A client request can be directed to a specific AnyLog node, to multiple nodes, or — for commands such as distributed SQL — resolved dynamically using the network metadata.
+
+To run a command on a specific node:
 
 ~~~anylog
 run client 10.0.0.78:20348 get processes
 ~~~
 
-The command is executed by the remote node and the result is returned to the requesting node.
-
-A command can also be sent to multiple nodes:
+To run the same command on multiple nodes:
 
 ~~~anylog
 run client (10.0.0.78:20348, 10.0.0.79:20348) get processes
 ~~~
 
-This provides a simple mechanism for interacting with and managing distributed AnyLog nodes from a single CLI.
+For distributed SQL, the destination can be left empty:
 
----
+~~~anylog
+run client () sql plant_data format = table and stat = select timestamp, temperature from sensors
+~~~
+
+In this case, AnyLog uses the metadata to determine which nodes in the network should process the request.
 
 ## Query Distributed Data
 

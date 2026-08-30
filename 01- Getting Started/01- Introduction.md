@@ -24,6 +24,7 @@ layout: page
                Open item carried over from the prior merge, still unresolved: whether `01- Getting
                Started/01 Getting Started.md` (the numbered duplicate) is now fully superseded by this
                file or still holds content that needs reconciling — not confirmed.
+- 2026-08-29 | Moshe Shadmon | Update Page content |
 -->
 
 
