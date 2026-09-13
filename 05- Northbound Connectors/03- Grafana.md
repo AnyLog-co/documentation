@@ -711,7 +711,7 @@ Queries are issued via the **Additional JSON Data** panel field, either using An
 ## Query types reference
 
 | Field | Description |
-|---|---|
+| :--- | :--- |
 | `type` | `increments` (default), `period`, `info`, `map`, `aggregations` |
 | `sql` | Custom SQL statement |
 | `details` | Any non-SQL AnyLog command |
@@ -720,12 +720,13 @@ Queries are issued via the **Additional JSON Data** panel field, either using An
 | `value_column` | Name of the value column |
 | `functions` | List of aggregation functions to apply |
 | `include` | Treat additional tables as part of the queried table |
-| `extend` | Append node metadata to results (e.g. `@table_name`, `@ip`) |
+| `extend` | Append node metadata to results (e.g., `@table_name`, `@ip`) |
 | `timezone` | `utc` (default) or `local` |
-| `time_range` | `true`/`false` — whether to apply the Grafana time range to the query |
+| `time_range` | `true` / `false` — whether to apply the Grafana time range to the query |
 | `servers` | Override network-determined nodes with a specific IP:Port list |
 | `grafana.format_as` | `timeseries` or `table` |
 | `grafana.data_points` | Approximate number of data points — auto-tunes the increments interval |
+| `grafana.data_types` | Optional dictionary with the column name as the key and the Grafana data type (`timestamp`, `string`, or `number`) as the value |
 
 ---
 
