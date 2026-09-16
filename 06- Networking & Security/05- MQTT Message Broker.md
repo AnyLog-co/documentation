@@ -1,6 +1,6 @@
 ---
 title: "MQTT Message Broker"
-description: Configure AnyLog for MQTT ingestion, including external brokers, AnyLog as the broker, dynamic UNS policies, table naming, TLS, debugging, and worked use cases.
+description: Configure AnyLog for MQTT ingestion, including external brokers, AnyLog as the broker, dynamic UNS policies, table naming, TLS, MQTT over WebSocket (WS/WSS), debugging, and worked use cases.
 layout: page
 source_path: "background processes.md#message-broker"
 ---
@@ -26,6 +26,7 @@ source_path: "background processes.md#message-broker"
    example — every other Master TCP port example elsewhere is `32048`; `2548` looks like it may be missing a
    leading `3`, but I'm not certain enough to silently "fix" a working example.
 | 2026-08-13 | Roy Shadmon | New descriptions on how to use MQTT in AnyLog and separating Kafka to a different page. | 
+| 2026-09-10 | Massimiliano Pinto | Added MQTT over WebSocket (WS/WSS): `transport`, `ws_path`, `tls`, `tls_insecure`; subscribe and publish examples; EMQX lab setup. Placed section after MQTT over TLS and mTLS. |
 --->
 
 ## Overview
@@ -81,6 +82,7 @@ Use this page as a configuration reference and jump to the section that matches 
   reference them from message-client subscriptions.
 * [Publishing MQTT Data](#publishing-mqtt-data): publish test messages from AnyLog or Mosquitto.
 * [MQTT over TLS and mTLS](#mqtt-over-tls-and-mtls): configure certificate-based broker security.
+* [MQTT over WebSocket (WS/WSS)](#mqtt-over-websocket-wswss): subscribe and publish over WS/WSS to an external broker (for example EMQX).
 * [Debugging and Validation](#debugging-and-validation): inspect clients, broker activity, streaming status,
   generated tables, and ingestion errors.
 * [Example Use Cases](#example-use-cases): walk through multi-operator ingestion, `table_prefix`,
@@ -175,8 +177,12 @@ A single `run msg client` command can include multiple `topic = (...)` blocks.
 
 | Option | Description |
 |---|---|
-| `broker` | Broker URL or IP. Use `local` for this node's own AnyLog broker. If the IP/port matches a local `run message broker`, it resolves like `local`. |
-| `port` | Broker port. Default is `1883`. |
+| `broker` | Broker URL or IP. Use `local` for this node's own AnyLog broker. If the IP/port matches a local `run message broker`, it resolves like `local`. Optional `ws://host` or `wss://host[/path]` sets WebSocket transport (and TLS when using `wss://`). |
+| `port` | Broker port. Default is `1883`. Common external-broker ports: `1883` (MQTT TCP), `8083` (MQTT over WS), `8084` (MQTT over WSS) on EMQX. |
+| `transport` | `tcp` (default) or `websockets` (`ws` / `websocket` are accepted aliases). Use `websockets` for MQTT over WebSocket. |
+| `ws_path` | WebSocket URL path. Default is `/mqtt` when `transport = websockets`. Broker-specific (EMQX and HiveMQ commonly use `/mqtt`). |
+| `tls` | `true` enables TLS for the MQTT client connection (required for WSS when not using `broker = wss://...`). Not implied by port number alone. |
+| `tls_insecure` | `true` skips certificate verification. For self-signed certificates (ie lab), for example EMQX default WSS on `8084`. Do not use against production CAs. |
 | `user` | MQTT username, if required. |
 | `password` | MQTT password, if required. |
 | `client_id` | MQTT client ID, if required by the broker. |
@@ -520,6 +526,119 @@ mosquitto_pub \
 
 For the full mTLS walkthrough (CA creation, `id sign certificate request`, user certs, MQTT Explorer, external
 org certs, and optional CA on the blockchain), see [Broker Setup TLS Example](./05-3%20Broker%20Setup%20TLS%20Example.md).
+
+## MQTT over WebSocket (WS/WSS)
+
+AnyLog can connect to an **external** MQTT broker as a client using MQTT over WebSocket (`transport = websockets`).
+This is useful when firewalls allow outbound HTTPS-style traffic (often port `443`) but block classic MQTT TCP ports.
+Topic mapping (`topic = (...)`) is unchanged from TCP MQTT.
+
+> **Note:** This is outbound client WS/WSS to a third-party broker. It is not AnyLog's built-in `run message broker` listening as a WebSocket server.
+
+### Connection options for WS / WSS
+
+| Mode | Typical settings |
+|---|---|
+| WS (plain WebSocket) | `transport = websockets`, port such as `8083`, no `tls` |
+| WSS (WebSocket + TLS) | `transport = websockets`, `tls = true`, port such as `8084` or `443` |
+| Self Signed Certificates (ie Lab) | Add `tls_insecure = true` (EMQX default cert on `8084`) |
+| Production WSS with a real CA | `tls = true` only — omit `tls_insecure` |
+
+`ws_path` defaults to `/mqtt` and can be omitted when the broker uses that path.
+
+The same `transport` / `tls` / `tls_insecure` / `ws_path` options apply to **`mqtt publish`**.
+
+### Subscribe — WS
+
+```anylog
+<run msg client where broker = 127.0.0.1 and
+   port = 8083 and transport = websockets and
+   topic = (name = anylog/ws and dbms = env_sensor and table = mqtt_ws and
+                 column.timestamp.timestamp = "bring [ts]" and
+                 column.value.int = "bring [value]")
+>
+```
+
+### Subscribe — WSS (WebSocket Secure)
+
+```anylog
+<run msg client where broker = 127.0.0.1 and
+   port = 8084 and transport = websockets and
+   tls = true and
+   tls_insecure = true and
+   topic = (name = anylog/ws and dbms = env_sensor and table = mqtt_ws and
+                 column.timestamp.timestamp = "bring [ts]" and
+                 column.value.int = "bring [value]")
+>
+```
+
+### Publish via WS / WSS
+
+```anylog
+<mqtt publish where broker = 127.0.0.1 and
+   port = 8083 and
+   transport = websockets and
+   topic = anylog/ws and message = '{"ts":"2026-09-09T10:30:00Z","value":1}'
+>
+```
+
+```anylog
+<mqtt publish where broker = 127.0.0.1 and
+  port = 8084 and
+  transport = websockets and
+  tls = true and
+  tls_insecure = true and
+  topic = anylog/ws and message = '{"ts":"2026-09-09T10:30:00Z","value":2}'
+>
+```
+
+### Lab setup (EMQX)
+
+Run an EMQX broker with MQTT TCP, WS, and WSS listeners:
+
+```shell
+docker run -d --name emqx \
+  -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 \
+  emqx/emqx:5.6.1
+```
+
+| Port | Listener |
+|---|---|
+| `1883` | MQTT TCP |
+| `8083` | MQTT over WebSocket (`ws`) |
+| `8084` | MQTT over WebSocket Secure (`wss`) |
+| `18083` | EMQX Dashboard |
+
+Check listeners:
+
+```shell
+docker exec emqx emqx ctl listeners
+```
+
+Example output (abbreviated):
+
+```text
+tcp:default
+  listen_on       : 0.0.0.0:1883
+  running         : true
+ws:default
+  listen_on       : 0.0.0.0:8083
+  running         : true
+wss:default
+  listen_on       : 0.0.0.0:8084
+  running         : true
+  current_conn    : 1
+```
+
+`ws` means WebSocket; `wss` means WebSocket Secure. EMQX does not always print the full word `websocket` in the Clients table — use **Listeners** or `emqx ctl listeners`, or capture `Upgrade: websocket` on the wire.
+
+#### GUI access
+
+* URL: [http://127.0.0.1:18083/](http://127.0.0.1:18083/)
+* User: `admin`
+* Password: `public`
+
+In the dashboard: **Management → Listeners** for `ws:default` / `wss:default`, and **Clients** for connected client IDs (open a client for listener detail).
 
 ## Debugging and Validation
 
