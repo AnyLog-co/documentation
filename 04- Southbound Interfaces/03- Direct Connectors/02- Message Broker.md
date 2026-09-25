@@ -99,6 +99,9 @@ broker's address in place of `local` — and credentials if the broker requires 
 * `port` — the broker's port (required for third-party brokers).
 * `user` / `password` — only needed if the broker requires authentication; omit both for an open broker.
 
+For MQTT over WebSocket (WS/WSS) to an external broker — including `transport = websockets`, `tls`, and a lab EMQX setup — see
+[MQTT Message Broker — MQTT over WebSocket (WS/WSS)](../../06-%20Networking%20&%20Security/05-%20MQTT%20Message%20Broker.md#mqtt-over-websocket-wswss).
+
 ---
 
 ## Kafka Message Client

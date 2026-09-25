@@ -1,54 +1,53 @@
 ---
-title: "Blockchain & Metadata"
-description: "Why AnyLog uses a blockchain/ledger for metadata, core terminology, and where to find policy structure, commands, and connectivity setup."
+title: "Blockchain"
+description: "Metadata Overview"
 layout: page
 ---
 <!---
 ### 📜 Change Log
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
- | 2026-07-27 | Ori Shadmon    | Split into 4 docs: this intro (concept only), Blockchain Policy, Blockchain Commands, and a new standalone Blockchain Connectivity doc. Removed duplicate content that had been pasted in twice. Fixed the "blockchain as a service" dead link to point at the new standalone doc. | |
- | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
- | 2026-04-25 |                | Created document | |
+ | 2026-07-27 | Ori Shadmon    | created document | 2025 |
+ | 2026-08-29 | Moshe Shadmon    | updated document | 2025 |
 --->
 
 # Blockchain & Metadata
 
-The idea of the _blockchain_ is probably one of the most innovative things in modern technology due to its immutability
-mechanism. At the core, AnyLog is a series of nodes that share data — from sensors and devices — among themselves in order
-to remove the need for centralization and provide real-time insight.
+AnyLog uses a **shared metadata layer** to describe and coordinate the distributed network. This metadata defines what exists across the network and how it operates — including nodes, clusters, data locations and schemas, permissions, services, Unified Namespace (UNS) definitions, and other configuration information.
 
-The reason we use the blockchain is simply because it's able to provide a way for untrusting groups
-(e.g. a factory-line component manufacturer and the factory owner) to see the same data without needing to move it around,
-with the blockchain acting as a guarantee of what each can actually see, and that it has not been manipulated or 
-tampered with.
+The metadata is organized as **policies**. A policy is a JSON document representing a specific metadata object or configuration. Different policy types describe different aspects of the network, such as an operator, cluster, data source, table, permission, or UNS object.
 
-Additionally, when growing the network out to the idea of blockchain as a service individuals can become "personalized" 
-cloud providers, while the data owners can still offload their data to untrusted machine(s) - think of _Storj_ or 
-_Filecoin_.
+AnyLog provides a common API for managing this metadata. Applications and AnyLog nodes can **add, update, and delete policies**, as well as use a rich set of **query commands** to discover and retrieve policies based on their type, attributes, relationships, and other conditions. This allows the metadata layer to operate as a distributed directory describing the resources and capabilities available across the network.
 
-Finally, AnyLog agents of the network are aware they are a part of the network based on the `LEDGER_CONN` (`!ledger_conn`)
-configuration and the metadata (i.e. `blockchain get`) they see.
+## Blockchain and the Master Node
 
-Note that while nodes are able to see every other members in their shared network, via the blockchain, they may
-not be granted access to all those nodes, as described in <a href="../06-%20Networking%20&%20Security" target="_blank">security and permissions</a>.
+The metadata can be maintained using either a **blockchain** or an AnyLog **Master Node (blockchain emulator)**.
 
-* <a href="./02-%20Policy%20&%20Metadata.md" target="_blank">Blockchain Policy</a> — what a policy is, the core policy types, and how to structure one
-* <a href="./03-%20Blockchain%20Commands.md" target="_blank">Blockchain Commands</a> — full command reference for adding, querying, updating, and deleting policies
-* <a href="./03-1%20Blockchain%20Full%20Circle.md" target="_blank">Blockchain Connectivity</a> — setting up a Master/Metadata node or connecting to a real blockchain platform
-* <a href="04-%20Unitfied%20Namespace.md" target="_blank">Unified Namespace</a>
+A blockchain provides a decentralized and immutable mechanism for maintaining metadata across organizations that may not fully trust one another. Participants can share a common view of the network configuration while retaining control over their individual data and systems.
+
+However, many deployments do not require the complexity of a blockchain. For these environments, AnyLog provides the **Master Node**, which operates as a blockchain emulator. The Master Node maintains and distributes the same policy-based metadata while providing a simpler deployment model.
+
+From the perspective of AnyLog nodes and applications, the two approaches are interchangeable. **The blockchain and Master Node expose the same AnyLog metadata APIs and policy model.** A deployment can therefore use a Master Node and later switch to a blockchain, or move from a blockchain to a Master Node, without changing the applications, policies, or commands used to manage and query the metadata.
+
+Importantly, **the blockchain or Master Node does not store the operational data itself**. Sensor, device, historian, database, and application data remains distributed across the nodes and systems where it is managed. The metadata layer describes that distributed environment and allows AnyLog to determine where data and services are located, how they are organized, and how they can be accessed.
+
+## Metadata Policies
+
+Policies provide a consistent representation for all metadata maintained by AnyLog. Each policy is a JSON object with a single root key identifying the policy type and attributes describing that object.
+
+Through the AnyLog metadata API, users and applications can:
+
+- **Add policies** to register new metadata and resources.
+- **Update policies** as network configuration or definitions change.
+- **Delete policies** that are no longer applicable.
+- **Query policies** using a rich set of commands and conditions to discover resources, retrieve configuration, traverse relationships, and identify where data or services are available.
+
+Because the same policy model and APIs are supported by both the blockchain and the Master Node, the rest of AnyLog operates independently of which metadata backend is selected.
 
 ## Terminology
 
-* **blockchain**: A decentralized, distributed ledger technology that securely records transactions across multiple
-computers. It is designed to be immutable, meaning that once data is recorded, it cannot be altered without altering all
-subsequent blocks, ensuring data integrity and security.
-* **ledger**: The list of records residing on the blockchain.
-* **metadata**: The policies stored on the blockchain (master, operator, cluster, and table definitions, among others)
-that describe the structure and configuration of the network.
-* **policy**: A JSON object with a single root key — the policy type — that represents one metadata record (a node,
-a cluster, a table schema, a scheduled task, etc.). See <a href="02-%20Policy%20&%20Metadata.md" target="_blank">Blockchain Policy</a> for the full
-structure.
-* **ledger_conn**: AnyLog's configuration variable specifying which ledger the node syncs against.
-* **master node** or **metadata node**: a proprietary alternative to an actual blockchain, that acts as a blockchain
-emulator to store the metadata. See <a href="./03-%20Blockchain%20Commands.md" target="_blank">Blockchain Connectivity</a> for setup.
+- **blockchain**: A decentralized and distributed ledger that can be used by AnyLog to maintain shared, immutable network metadata.
+- **ledger**: The collection of metadata policies maintained by the blockchain or Master Node.
+- **metadata**: Policies describing the structure, resources, configuration, data, services, permissions, and logical organization of an AnyLog network.
+- **policy**: A JSON object with a single root key identifying the policy type and containing the attributes describing a metadata object or configuration.
+- **Master Node / Metadata Node**: AnyLog's blockchain emulator. It maintains and distributes the same policy-based metadata and supports the same APIs as a blockchain, allowing deployments to switch between the two without changing how AnyLog nodes and applications interact with the metadata.

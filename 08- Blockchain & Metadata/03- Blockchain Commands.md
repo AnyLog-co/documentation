@@ -10,7 +10,7 @@ layout: page
  | 2026-07-27 | Ori Shadmon    | Removed a duplicated "help blockchain set account info" block; fixed `blockchain deploy contract` example to match its own Usage line; condensed `help` transcripts into command+description style; flagged several open questions between this reference and other docs (see inline notes): `run blockchain sync`'s `connection` vs `master_node` param, `dest` specified twice in one call, `blockchain wait for` vs `blockchain wait where`, and whether the `where`-style `blockchain update` form still exists; restored the narrower `add`/`push`/`commit` insert-variant table; typo fixes | |
  | 2026-07-27 | Ori Shadmon    | New page — split out of "03 Blockchain & Metadata.md". Moved the master-vs-blockchain-platform comparison and all connect/sync/seed commands to the new standalone Blockchain Connectivity doc, since those are about wiring a node to a ledger source rather than managing policies once connected. Fixed `master_npode` typo. | |
  | 2026-08-15 | Moshe Shadmon    | Updated Page. | |
-
+ | 2026-08-29 | Moshe Shadmon    | Updated Page. | |
 --->
 ---
 title: Blockchain Commands
@@ -53,31 +53,37 @@ These commands provide a consistent interface whether the global metadata ledger
 
 ---
 
-## Metadata Storage Model
+## Metadata Commands
 
-AnyLog metadata is managed by the blockchain platform or master node, which serves as the shared metadata ledger for the network.
+The blockchain commands provide the interface for managing and querying AnyLog metadata. Although the commands use the term blockchain, 
+the same commands are used whether the shared metadata is maintained by a blockchain platform or an AnyLog Master Node.
 
-Nodes in the network periodically synchronize with this ledger to maintain a local copy of the metadata. The local copy can be maintained as a JSON file, in a local database, or both.
+Most metadata queries operate on the node's local synchronized metadata, allowing policies to be searched and processed without accessing the shared ledger for every request.
 
-AnyLog commands and services use this local copy during normal operation, allowing each node to access the metadata it needs without requiring continuous access to the blockchain or master node.
+The command set provides operations to:
 
-A node operates in the same manner regardless of how the global ledger is implemented. The configuration determines whether updates are sent to a master node or to a blockchain platform.
+Query policies by policy type, attributes, values, and relationships.
+Insert policies and publish them to the shared metadata.
+Update policies already maintained by the network.
+Delete policies that are no longer required.
 
-When a policy is inserted into the local ledger before it is confirmed by the global ledger, AnyLog marks it with:
+For example:
 
-```json
-"ledger": "local"
-```
+blockchain get operator where company = AnyLog
 
-After synchronization confirms the policy on the global ledger, the value changes to:
+queries the local metadata, while:
 
-```json
-"ledger": "global"
-```
+blockchain insert where
+    policy=!new_policy and
+    local=true and
+    master=!ledger_conn
 
----
+publishes a policy to the Master Node and, with local=true, also updates the node's local metadata immediately.
+
+The sections below describe each command, its syntax, available options, and examples.
 
 # `blockchain insert`
+<!-- search: command_blockchain_insert blockchain_insert blockchain insert -->
 
 `blockchain insert` adds a policy to the metadata ledger.
 
@@ -178,6 +184,7 @@ Use these commands when working directly with a specific ledger layer. For norma
 ---
 
 # `blockchain get`
+<!-- search: command_blockchain_get blockchain_get blockchain get -->
 
 `blockchain get` queries metadata policies.
 

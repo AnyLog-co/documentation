@@ -24,8 +24,560 @@ layout: page
                Open item carried over from the prior merge, still unresolved: whether `01- Getting
                Started/01 Getting Started.md` (the numbered duplicate) is now fully superseded by this
                file or still holds content that needs reconciling — not confirmed.
+- 2026-08-29 | Moshe Shadmon | Update Page content |
 -->
 
+
+
+# Getting Started
+
+AnyLog is a distributed data platform designed to manage and provide unified access to operational data across edge environments.
+
+An AnyLog network consists of nodes that provide different services. **Operator nodes host and process the operational data**, while a shared **metadata layer** describes the network, the data available across it, where that data is located, and how it can be accessed.
+
+The fundamental design is:
+
+> **The data remains distributed. The metadata describes the distributed environment. AnyLog uses the metadata to provide a unified view of the data.**
+
+Applications and users do not need to know which node physically hosts the requested data. AnyLog uses the metadata to identify the relevant nodes, routes requests to those nodes, and returns a unified result.
+
+This page introduces the main concepts needed to deploy and operate an AnyLog network.
+
+---
+
+## Architecture Overview
+
+AnyLog decouples the **logical organization of data** from its **physical organization**.
+
+```text
+                   Users / Applications / AI
+                             │
+                    SQL / REST / APIs / UNS
+                             │
+                       AnyLog Network
+                             │
+                    Metadata determines
+                    where data resides
+                             │
+              ┌──────────────┼──────────────┐
+              │              │              │
+              ▼              ▼              ▼
+         Operator A     Operator B     Operator C
+          Local Data     Local Data     Local Data
+            Site A         Site B         Site C
+```
+
+### Physical Data Organization
+
+Operational data is distributed across AnyLog **Operator nodes**.
+
+Data streamed to an Operator is managed locally by that node and does not need to be moved to a centralized database or cloud repository. Different Operators can use different local databases depending on the deployment requirements.
+
+### Logical Data Organization
+
+The **metadata layer** describes the distributed environment, including:
+
+- nodes and the services they provide,
+- clusters and relationships between nodes,
+- tables supported by the network,
+- where data is located,
+- table schemas,
+- data mappings,
+- permissions and configuration,
+- Unified Namespace (UNS) definitions,
+- and other application or user-defined metadata.
+
+This allows users, applications, and AI agents to access and understand the distributed data without needing to know its physical location.
+
+---
+
+## Node Roles
+
+Every AnyLog node runs the same software. The services enabled in the node configuration determine its role in the network.
+
+A node can provide one or more roles.
+
+| Node Role | Purpose |
+| --- | --- |
+| **Operator** | Hosts operational data, processes data locally, and satisfies queries. |
+| **Publisher** | Receives data from devices or applications and distributes it to Operators. |
+| **Query** | Receives distributed queries, identifies the relevant Operators, and aggregates their results. |
+| **Master** | Hosts the shared metadata ledger when a blockchain platform is not used. |
+
+### Operator
+
+The **Operator** is the node that hosts and processes operational data.
+
+An Operator can:
+
+- receive streamed data,
+- map incoming data into the required structure,
+- maintain the data in a local database,
+- execute SQL queries locally,
+- respond to distributed queries,
+- and replicate data to other Operators when high availability is configured.
+
+Operators are typically deployed close to the systems generating the data — for example at a plant, site, gateway, machine, or other edge location.
+
+### Publisher
+
+A **Publisher** receives data from devices, applications, brokers, or other data sources and distributes the data to the appropriate Operators.
+
+The Publisher uses metadata to determine where the data should be delivered. This allows data sources to publish data without knowing which Operator physically manages it.
+
+A Publisher is optional. Data can also be delivered directly to an Operator.
+
+### Query Node
+
+A **Query Node** is the entry point for a distributed query.
+
+When a query is submitted, the Query Node:
+
+1. Uses the metadata to determine which Operators host the requested data.
+2. Sends the query to those Operators.
+3. Each Operator processes the query against its local data.
+4. The Query Node collects the replies.
+5. The results are returned as a unified result.
+
+```text
+                         SQL Query
+                            │
+                            ▼
+                       Query Node
+                            │
+                     Metadata Lookup
+                            │
+             ┌──────────────┼──────────────┐
+             ▼              ▼              ▼
+        Operator A     Operator B     Operator C
+             │              │              │
+             └──────────────┼──────────────┘
+                            ▼
+                     Unified Result
+```
+
+The user or application does not need to identify the nodes that host the relevant data.
+
+### Master Node
+
+The **Master Node** hosts the shared metadata when a blockchain platform is not used.
+
+The Master Node is a **blockchain emulator**. It supports the same AnyLog metadata APIs and policy model as a blockchain, allowing nodes and applications to operate in the same way regardless of which metadata backend is selected.
+
+---
+
+## Metadata
+
+Metadata is the information shared by members of an AnyLog network that describes the network and its data.
+
+The metadata is organized as JSON objects called **policies**.
+
+For example:
+
+```json
+{
+  "operator": {
+    "name": "operator-1",
+    "company": "AnyLog",
+    "ip": "10.0.0.10",
+    "port": 32148,
+    "rest_port": 32149
+  }
+}
+```
+
+Different policy types describe different parts of the network, such as:
+
+- Operators and other nodes,
+- clusters,
+- tables,
+- mappings,
+- configuration,
+- permissions,
+- UNS objects and relationships,
+- and user-defined metadata.
+
+The shared metadata can be maintained using either:
+
+- an AnyLog **Master Node**, or
+- a supported **blockchain platform**.
+
+The AnyLog APIs and policy model are the same in both cases.
+
+### Local Metadata
+
+Each node periodically synchronizes the shared metadata and maintains a local copy.
+
+```text
+        Master Node / Blockchain
+                  │
+                  │ synchronization
+                  ▼
+           Local Metadata
+                  │
+                  ▼
+            AnyLog Node
+```
+
+During normal operation, the node uses its local metadata. As a result, metadata lookups do not require continuous access to the Master Node or blockchain.
+
+If access to the shared metadata is temporarily unavailable, the node can continue operating using its most recently synchronized metadata.
+
+> Only metadata is synchronized through this process. Operational data remains distributed across the Operator nodes.
+
+See [Blockchain & Metadata](/docs/08-blockchain-and-metadata/) for details on policies, metadata synchronization, Master Node configuration, and metadata commands.
+
+---
+
+## Clusters
+
+A **cluster** represents a logical partition of the data in the AnyLog network, while Operator nodes host and manage the physical data associated with that partition.
+
+A logical table can span multiple clusters, with each cluster representing a different partition of the table's data. One or more Operator nodes are assigned to each cluster and physically maintain that cluster's data.
+
+Without High Availability (HA), a cluster is assigned to a single Operator. With HA enabled, multiple Operators are assigned to the same cluster and replicate the cluster's data so that they eventually maintain the same physical data.
+
+A logical table can exist across **multiple clusters**. Each cluster may contain different rows of that table, allowing the table's data to be distributed across locations, sites, or other partitions of the network.
+
+For example, without High Availability (HA), each cluster is assigned to a single Operator:
+
+~~~text
+                         Table A
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+             Cluster 1               Cluster 2
+          Data Partition 1         Data Partition 2
+                │                       │
+                ▼                       ▼
+           Operator 1              Operator 2
+~~~
+
+In this example, `Table A` exists in both clusters, but the data maintained by `Cluster 1` is different from the data maintained by `Cluster 2`. Together, the clusters provide the distributed data associated with the logical table.
+
+### High Availability
+
+By default, without High Availability (HA), **each cluster is assigned to a single Operator**. That Operator maintains the data partition associated with the cluster.
+
+When HA is enabled, **multiple Operators are assigned to the same cluster**. When data is received by any Operator in the cluster, it is replicated to the other Operators assigned to that cluster.
+
+For example:
+
+~~~text
+                         Table A
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+             Cluster 1               Cluster 2
+          Data Partition 1         Data Partition 2
+                │                       │
+          ┌─────┼─────┐             ┌───┴───┐
+          ▼     ▼     ▼             ▼       ▼
+        Op 1  Op 2  Op 3          Op 4    Op 5
+~~~
+
+Within `Cluster 1`, Operators 1, 2, and 3 maintain replicas of Data Partition 1. Within `Cluster 2`, Operators 4 and 5 maintain replicas of Data Partition 2.
+
+Replication is asynchronous, so Operators assigned to the same cluster may not contain identical data at every instant. However, **the Operators within a cluster eventually maintain the same data**.
+
+The distinction between clusters and Operators is therefore important:
+
+- **Across clusters, data is partitioned** — different clusters can maintain different portions of the same logical table.
+- **Within a cluster, data is replicated when HA is enabled** — Operators assigned to the same cluster eventually maintain the same data.
+- **Without HA, a cluster has one Operator** — that Operator maintains the cluster's data partition.
+
+When a distributed query references a table, AnyLog uses the metadata to identify the clusters that maintain that table and the Operators assigned to those clusters. The query is processed against the distributed data partitions, and the results are combined into a unified result.
+
+This allows a single logical table to span distributed locations while optionally providing redundancy and high availability within each cluster.
+
+## Distributed Queries
+
+Data can be distributed across many Operator nodes while applications query it as a single logical data environment.
+
+Distributed SQL queries are issued using the `run client` command. The query identifies the logical database and table, while AnyLog uses the metadata to determine which clusters and Operator nodes maintain the requested data.
+
+For example:
+
+~~~anylog
+run client () sql plant_data format = table and stat = select timestamp, temperature from sensors where timestamp >= NOW() - INTERVAL '10 minutes'
+~~~
+
+The application does not need to specify which Operator nodes host the data.
+
+AnyLog uses the metadata to identify the clusters that maintain the requested table and the Operators assigned to those clusters. The query is distributed to the relevant Operators, processed against their local data, and the results are aggregated into a unified result.
+
+Conceptually:
+
+~~~text
+             Logical SQL Query
+                    │
+                    ▼
+            Metadata Resolution
+                    │
+         ┌──────────┼──────────┐
+         ▼          ▼          ▼
+     Cluster 1  Cluster 2  Cluster 3
+         │          │          │
+         ▼          ▼          ▼
+     Operator    Operator    Operator
+         │          │          │
+         └──────────┼──────────┘
+                    ▼
+               Unified Result
+~~~
+
+The physical distribution of the data is therefore decoupled from the logical SQL interface presented to users and applications.
+
+See [SQL Commands](/docs/07-cli/04-sql/) for the complete AnyLog SQL syntax, distributed query options, output formats, and examples.
+
+## Unified Namespace
+
+The **Unified Namespace (UNS)** provides a logical hierarchy over the distributed operational data.
+
+For example:
+
+```text
+Enterprise
+└── Site
+    └── Production Line
+        └── Machine
+            └── Sensor
+```
+
+The hierarchy is described in metadata. The underlying operational data does not need to be reorganized or moved.
+
+AnyLog supports multiple ways to create a UNS:
+
+- users can explicitly define the hierarchy,
+- existing structures such as OPC-UA hierarchies or MQTT topics can be used to generate it,
+- and AI can generate or extend the hierarchy from available metadata and data structures.
+
+SQL and UNS provide complementary ways to access the same distributed data:
+
+- **SQL** provides direct analytical access.
+- **UNS** provides contextual navigation through logical objects and relationships.
+
+See [Unified Namespace](/docs/08-blockchain-and-metadata/04-unified-namespace/) for details.
+
+---
+
+## Installing AnyLog
+
+AnyLog can be deployed using:
+
+- **Docker**
+- **Kubernetes**
+- a direct installation from the AnyLog source distribution
+
+The deployment and configuration determine which services the node provides.
+
+See the installation and deployment documentation for the supported deployment options and configuration examples.
+
+---
+
+## The AnyLog Command Line
+
+When an AnyLog node starts, it provides the AnyLog Command Line Interface (CLI).
+
+The default prompt is:
+
+```text
+AL >
+```
+
+The CLI can be used to inspect the node, configure services, manage metadata, communicate with peer nodes, and query data.
+
+### Help
+
+Use:
+
+```anylog
+help
+```
+
+to list available commands.
+
+Commands can also be searched by prefix:
+
+```anylog
+help get
+help set
+help blockchain
+```
+
+To retrieve usage and examples for a specific command:
+
+```anylog
+help blockchain get
+```
+
+or:
+
+```anylog
+help blockchain insert
+```
+
+The command help provides the command syntax, explanation, examples, and a link to the relevant documentation.
+
+---
+
+## The Node Dictionary and Environment Variables
+
+AnyLog provides two types of variables that can be referenced from CLI commands:
+
+- **Dictionary variables** — maintained by AnyLog and referenced using `!`.
+- **Environment variables** — maintained in the process environment and referenced using `$`.
+
+### Dictionary Variables
+
+Use `set` to assign a value to the AnyLog dictionary.
+
+For example:
+
+~~~anylog
+set data_dir = /app/AnyLog-Network/data
+~~~
+
+The value can then be referenced using `!data_dir`:
+
+~~~anylog
+get !data_dir
+~~~
+
+or used as part of another command:
+
+~~~anylog
+set backup_dir = !data_dir/backup
+~~~
+
+To view the complete dictionary:
+
+~~~anylog
+get dictionary
+~~~
+
+To search the dictionary for keys containing a particular string, specify the search string:
+
+~~~anylog
+get dictionary _dir
+~~~
+
+This returns dictionary entries whose keys contain `_dir`, making it useful for locating configuration values such as `data_dir`, `backup_dir`, or other directory settings.
+
+### Environment Variables
+
+Environment variables are referenced using `$`.
+
+For example:
+
+~~~anylog
+get $HOME
+~~~
+
+Environment variables can also be created or changed directly from the AnyLog CLI using `set`:
+
+~~~anylog
+set $ANYLOG_SITE = plant_1
+~~~
+
+The value can then be referenced from AnyLog commands:
+
+~~~anylog
+get $ANYLOG_SITE
+~~~
+
+Both dictionary and environment variables can therefore be configured and used directly from the AnyLog CLI:
+
+~~~anylog
+set company_name = AnyLog
+set $ANYLOG_SITE = plant_1
+
+get !company_name
+get $ANYLOG_SITE
+~~~
+
+Dictionary variables are commonly used by AnyLog configuration and deployment scripts, while environment variables provide access to values maintained in the process environment.
+
+---
+
+## Check a Running Node
+
+A few commands are particularly useful after starting a node.
+
+### View Active Processes
+
+```anylog
+get processes
+```
+
+This displays the background services currently running on the node.
+
+### Test the Node
+
+```anylog
+test node
+```
+
+This tests the basic node configuration.
+
+### Test the Network
+
+```anylog
+test network
+```
+
+This tests the availability of network members known to the node.
+
+---
+
+## Basic Deployment Flow
+
+At a high level, deploying an AnyLog network consists of the following steps:
+
+1. **Install AnyLog** on the physical machines, virtual machines, gateways, or containers that will participate in the network.
+2. **Configure the metadata layer** using a Master Node or blockchain platform.
+3. **Configure each node** with the services it will provide, such as Operator, Publisher, or Query services.
+4. **Connect the nodes to the shared metadata** so they can discover the network and synchronize their local metadata.
+5. **Configure data ingestion** from the required devices, brokers, databases, or applications.
+6. **Verify the nodes and network** using `get processes`, `test node`, `test network`, and `blockchain get *`.
+7. **Query the distributed data** using SQL, REST, or another supported interface.
+8. **Add logical context** using mappings, UNS definitions, permissions, and other metadata as required.
+
+The same architecture can be used for a small deployment on a single machine or a distributed network spanning many edge locations.
+
+---
+
+## Next Steps
+
+After understanding the concepts on this page, continue with the documentation based on what you want to configure:
+
+| Topic | What it covers |
+| --- | --- |
+| **Installation & Deployment** | Installing and starting AnyLog nodes. |
+| **Node Configuration** | Configuring node services, networking, databases, and directories. |
+| **Data Ingestion & Mapping** | Connecting data sources and transforming incoming data. |
+| **Queries** | Querying local and distributed operational data. |
+| **Blockchain & Metadata** | Policies, metadata synchronization, Master Node configuration, and metadata commands. |
+| **Unified Namespace** | Creating logical asset hierarchies over distributed operational data. |
+| **Networking & Security** | Network connectivity, authentication, permissions, and secure communication. |
+| **High Availability** | Replication and failover across Operator nodes. |
+
+The key model to keep in mind throughout the documentation is:
+
+```text
+Distributed Operational Data
+            +
+Shared Metadata and Context
+            +
+Distributed Query and Routing
+            =
+Unified Access Without Centralizing the Data
+```
+
+
+<!--
 Welcome to AnyLog! This guide introduces the platform's architecture, terminology, node types, and the
 lifecycle of data as it moves through the network.
 
@@ -288,3 +840,5 @@ Users can also layer on database-level redundancy for **vertical** scaling or ad
 PostgreSQL's built-in backup/replication features, or an orchestration layer like Kubernetes. These are supported at
 the user's own discretion: they sit outside AnyLog's own HA guarantees unless described in the relevant chapter(s)
 covering that specific integration.
+
+-->

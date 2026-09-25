@@ -8,167 +8,216 @@ layout: page
  **Date**   | **Name**       | **Change**       | **Version** |
  |------------|----------------|------------------|----------|
  | 2026-07-27 | Ori Shadmon    | New page — walks the full connect → sync → check → define → publish → query loop, based on the real deployment scripts in AnyLog-co/deployment-scripts. Confirms `blockchain wait for !policy` (not `blockchain wait where`) is the correct syntax per the actual `publish_policy.al` source and the upstream blockchain-commands.md — resolving that open question from the Blockchain Commands doc. | |
+ | 2026-08-29 | Moshe Shadmon    | Update | |
 --->
-
 # Blockchain: Full Circle
 
-As covered in the previous sections, the process by which nodes communicate with an actual blockchain ledger versus a
-metadata / master node differs only by the connectivity process itself.
+This section walks through the command-by-command logic used to configure access to the metadata ledger, synchronize metadata, define policies, and publish them.
 
-This page walks the full loop once, start to finish, showing the Master/Metadata node path and the real blockchain 
-platform path side by side at each step, using the actual logic from AnyLog's <a href="https://github.com/AnyLog-co/deployment-scripts" target="_blank">deployment-scripts</a> repo
-(`node-deployment/`), trimmed down for readability. The full scripts handle considerably more edge-case branching
-(DNS, overlay networks, auth) than shown here — follow the links at each step for the complete version.
+The examples are based on AnyLog's `deployment-scripts` repository under `node-deployment/`, with some configuration and edge-case branches removed for readability.
 
-## Which ledger?
+The same policy structure and APIs are used whether the metadata backend is an AnyLog **Master Node** or a **blockchain platform**. The examples below use a Master Node.
 
-"Real blockchain platform" itself splits into two setups depending on who runs the node you connect to. All three
-options plug into the same loop below — only the connection details in step 1 change.
+The basic flow is:
 
-|                            | Master / Metadata Manager node                                                   | Self-hosted blockchain                                                                                     | Hosted blockchain platform                                                                                   |
-|----------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| **What it is**             | AnyLog's built-in metadata ledger — no external blockchain software involved     | You run your own blockchain client (e.g. a local Ethereum/Optimism node)                                   | A managed RPC provider (e.g. Infura, Alchemy) gives access to a public chain without running a node yourself |
-| **Setup complexity**       | Low — no contract deployment                                                     | Highest — install, sync, and maintain your own blockchain client                                           | Moderate — deploy the AnyLog contract; node infrastructure is managed for you                                |
-| **Decentralization**       | None — single point of failure (an HA pair mitigates this)                       | Full — you control the node, decentralization of the chain itself still applies                            | Full chain decentralization, but node *access* depends on the provider's uptime                              |
-| **Where the ledger lives** | Local `blockchain` database + local JSON file                                    | On your own blockchain node's storage                                                                      | On the public chain, reached through the provider's endpoint                                                 |
-| **Connect via** (step 1)   | `connect dbms blockchain where ...`                                              | `blockchain connect to ethereum where provider=http://<your-node-ip>:<port>`                               | `blockchain connect to ethereum where provider=https://sepolia.infura.io/v3/[INFURA_PROJECT_ID]`             |
-| **Best for**               | Dev/test and small deployments that want to avoid blockchain complexity entirely | Deployments with compliance/control requirements, or that want no dependency on a third-party RPC provider | The fastest way onto a real chain without operating any infrastructure                                       |
-
-1. <a href="#1-connect-to-the-ledger" target="_blank">Connect to the ledger</a>
-2. <a href="#2-sync" target="_blank">Sync</a>
-3. <a href="#3-check-if-the-policy-already-exists" target="_blank">Check if the policy already exists</a>
-4. <a href="#4-define-the-policy" target="_blank">Define the policy</a>
-5. <a href="#5-publish-the-policy" target="_blank">Publish the policy</a>
-6. <a href="#6-query" target="_blank">Query</a>
-7. <a href="#7-one-node-or-two" target="_blank">One node or two?</a>
+1. Connect to the ledger (configuration)
+2. Synchronize metadata (configuration)
+3. Define a policy
+4. Publish the policy
 
 ---
 
-## 1. Connect to the ledger
+## 1. Connect to the Ledger
 
-Both paths start by making sure the node has somewhere to store metadata.
+When using a Master Node, the metadata is stored in the local `blockchain` database.
 
-**Master / Metadata node** — create the local `blockchain` database and `ledger` table:
-```anylog
+The database connection is part of the Master Node configuration and must be established whenever the Master Node starts or restarts.
+
+The value of `!db_type` determines which database implementation is used:
+
+- `psql` for PostgreSQL
+- `sqlite` for SQLite
+
+The same configuration handles both:
+
+~~~anylog
 <if !db_type == psql then connect dbms blockchain where
     type=!db_type and
-    user = !db_user and
-    password = !db_passwd and
-    ip = !db_ip and
-    port = !db_port>
-else connect dbms blockchain  where type=!db_type
+    user=!db_user and
+    password=!db_passwd and
+    ip=!db_ip and
+    port=!db_port>
+else connect dbms blockchain where type=!db_type
+~~~
 
+For example, when using PostgreSQL:
+
+~~~text
+db_type = psql
+db_user = admin
+db_passwd = passwd
+db_ip = 127.0.0.1
+db_port = 5432
+~~~
+
+When using SQLite:
+
+~~~text
+db_type = sqlite
+~~~
+
+The logical database name is `blockchain` in both cases.
+
+The `ledger` table needs to be created **once** when the Master Node is initially configured:
+
+~~~anylog
 create table ledger where dbms=blockchain
-```
+~~~
 
-**Real blockchain platform** — connect to the platform and (if needed) deploy the AnyLog contract, per blockchain 
-connectivity.
-```anylog
-blockchain connect to ethereum where provider=https://sepolia.infura.io/v3/[INFURA_PROJECT_ID]
-
-<blockchain set account info where
-    platform = !blockchain_source and
-    private_key = !blockchain_private_key and
-    public_key = !blockchain_public_key and
-    chain_id = !chain_id>
-    
-blockchain deploy contract where platform = !blockchain_source and public_key = !blockchain_public_key
-```
-
-## 2. Sync
-
-Every node keeps its local metadata copy current via `run blockchain sync`. Master / metadata node is the only one that 
-keeps 2 copies - both a JSON file and the actual connection the blockchain logical databaase. 
-
-```anylog
-# Master
-run blockchain sync where source = master and time = 60 seconds and dest = file and connection = !ledger_conn
-
-# Real blockchain platform
-run blockchain sync where source = blockchain and time = !sync_time and dest = file and platform = ethereum
-```
-
-## 3. Check if the policy already exists
-
-Before creating a new policy, check whether one already matches this node — by company, IP, and port.
-```anylog
-<is_policy = blockchain get !node_type where
-    company = !company_name and
-    ip = !ip and
-    port = !anylog_server_port bring.first>
-```
-
-This same check runs identically whether the local copy came from a master node sync or a real blockchain sync — the
-query only ever hits the **local copy**. If `!is_policy` comes back non-empty, the node already has a policy and
-skips straight to step 6; if it's empty, move on to step 4.
-
-The real script branches this same check four different ways depending on DNS/overlay-network/bind configuration
-(`ip = !external_dns`, `local_ip = !overlay_ip`, etc.) — see the full script for those variants.
+Once created, the table remains in the database and does not need to be recreated when the Master Node restarts.
 
 ---
 
-## 4. Define the policy
+## 2. Synchronize Metadata
 
-If no policy exists yet, build one field by field. 
+Each AnyLog node maintains a local metadata file.
 
-```anylog
-new_policy = ""
+Metadata synchronization is part of the node configuration and runs automatically according to the configured synchronization interval.
+
+When using a Master Node:
+
+~~~anylog
+run blockchain sync where
+    source=master and
+    time=60 seconds and
+    dest=file and
+    connection=!ledger_conn
+~~~
+
+The `time` value determines how frequently the node synchronizes its local metadata file with the metadata maintained by the Master Node.
+
+For example, `time=60 seconds` causes the node to synchronize its metadata every 60 seconds.
+
+Once configured, the synchronization process runs continuously in the background.
+
+---
+
+## 3. Define a Policy
+
+A policy can be constructed locally before it is published.
+
+For example, assume the following values:
+
+~~~text
+node_type = operator
+node_name = operator-1
+company_name = AnyLog
+external_ip = 10.0.0.10
+anylog_server_port = 32148
+anylog_rest_port = 32149
+~~~
+
+The policy can be constructed using:
+
+~~~anylog
+new_policy = {}
+
 set policy new_policy [!node_type] = {}
 set policy new_policy [!node_type][name] = !node_name
 set policy new_policy [!node_type][company] = !company_name
 set policy new_policy [!node_type][ip] = !external_ip
 set policy new_policy [!node_type][port] = !anylog_server_port.int
 set policy new_policy [!node_type][rest_port] = !anylog_rest_port.int
-```
+~~~
 
-This part is identical regardless of master vs. real blockchain — the policy JSON doesn't know or care which ledger
-it'll be published to; that only matters at the publishing step.
+With the values above, `!new_policy` contains:
 
-For an `operator` node specifically, the script also has to attach cluster membership, and decide whether this
-operator is the primary or a backup for that cluster (by checking whether a primary already exists):
+~~~json
+{
+  "operator": {
+    "name": "operator-1",
+    "company": "AnyLog",
+    "ip": "10.0.0.10",
+    "port": 32148,
+    "rest_port": 32149
+  }
+}
+~~~
 
-```anylog
-set policy new_policy [!node_type][cluster] = !cluster_id
+---
 
-if not !is_main then is_primary = blockchain get operator where cluster = !cluster_id
-if not !is_main and !is_primary then
-do set is_main = false
-do node_name = !node_name + "-bkup"
-do set policy new_policy [!node_type][name] = !node_name
-else if not !is_main and not !is_primary then set is_main = true
-set policy new_policy [!node_type][main] = !is_main.bool
-```
+## 4. Publish the Policy
 
-## 5. Publish the policy
+The policy is published to the Master Node using `blockchain insert`:
 
-Once built, the policy gets signed (if auth is enabled), prepared (assigned an `id`/`date`), and inserted. 
+~~~anylog
+blockchain insert where
+    policy=!new_policy and
+    local=true and
+    master=!ledger_conn
+~~~
 
-```anylog
-if !enable_auth == true then new_policy = id sign !new_policy where key = !node_private_key and password = !node_password
+This command performs two updates:
 
+1. The policy is published to the Master Node and added to the shared metadata.
+2. Because `local=true` is specified, the policy is also added immediately to the node's local metadata file.
+
+The policy therefore becomes immediately available locally without waiting for the next synchronization cycle.
+
+If `local=true` is omitted:
+
+~~~anylog
+blockchain insert where
+    policy=!new_policy and
+    master=!ledger_conn
+~~~
+
+the policy is published to the Master Node, but the node's local metadata file is not updated immediately. The policy will become available locally during the next synchronization cycle.
+
+In other words:
+
+~~~text
+With local=true:
+
+Policy
+  ├──► Master Node
+  └──► Local metadata file
+~~~
+
+Without `local=true`:
+
+~~~text
+Policy
+  └──► Master Node
+          │
+          │ next synchronization
+          ▼
+       Local metadata file
+~~~
+
+### Preparing a Policy
+
+A policy can optionally be prepared before it is inserted:
+
+~~~anylog
 blockchain prepare policy !new_policy
+~~~
 
-policy_type = from !new_policy bring [*]
-if !policy_type == config or !master_configs == true then
-do blockchain insert where policy=!new_policy and local=true
-else blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
-```
+This adds system-managed attributes such as the policy `id` and `date`.
 
-Then confirm it landed:
-```anylog
-is_updated = blockchain wait for !new_policy
-```
+However, explicitly preparing the policy is **not required**. If `blockchain prepare policy` is not called, the required system-managed attributes are added dynamically as part of the `blockchain insert` process.
 
-## 6. Query
+Therefore, the normal flow can simply be:
 
-Once policies exist — whichever ledger backed the publishing — querying is identical:
+~~~anylog
+new_policy = {}
 
-```anylog
-blockchain get *
-```
+set policy new_policy [operator] = {}
+set policy new_policy [operator][name] = operator-1
+set policy new_policy [operator][company] = AnyLog
 
-## 7. one-node-or-two
-
-to be added
-
-See <a href="03-%20Blockchain%20Commands.md#query-the-blockchain" target="_blank">Blockchain Commands</a> for filtering, `bring`, join/merge, etc.
+blockchain insert where
+    policy=!new_policy and
+    local=true and
+    master=!ledger_conn
+~~~
