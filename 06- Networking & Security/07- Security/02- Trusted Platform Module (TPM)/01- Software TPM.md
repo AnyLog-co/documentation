@@ -346,5 +346,6 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
+- [Hardware TPM](./02-%20TMP%20Configuration.md)
 - [Authentication](../01-%20Built-in%20Authentication/01-%20Authentication.md)
 - [Secure Network](../../03-%20Securing%20the%20Network.md)
