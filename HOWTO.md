@@ -198,7 +198,7 @@ This converts external links and image references from Markdown syntax into HTML
 
 ```markdown
 <!-- Current --> 
-[my link](https://example.com) 
+<a href="https://example.com" target="_blank">my link</a> 
 ![my img](../imgs/[img path].png) 
 
 <!-- updated to --> 

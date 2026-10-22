@@ -158,7 +158,6 @@ sensors/data {"device_name":"sensor-2","timestamp":"2026-10-22T22:16:47Z","value
 
 Confirm the data reaches HiveMQ with the subscriber from the previous section (`-t 'sensors/#'`).
 
-
 ## Accepting Data in AnyLog
 
 AnyLog subscribes to HiveMQ as a regular MQTT broker (Option A). `dynamic=true` does two things:
