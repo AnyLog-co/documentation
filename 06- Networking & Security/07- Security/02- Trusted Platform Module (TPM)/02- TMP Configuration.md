@@ -16,7 +16,7 @@ source_path: "01 TPM Configuration.md"
 
 # Hardware TPM for AnyLog
 
-A hardware TPM is a physical TPM 2.0 chip on the machine. AnyLog does not talk to the chip directly. It uses the same [AnyLog-TPM](https://github.com/royshadmon/AnyLog-TPM/tree/fulltest) REST API as the [software TPM](./01-%20Software%20TPM.md). The API is pointed at the chip instead of `swtpm`.
+A hardware TPM is a physical TPM 2.0 chip on the machine. AnyLog does not talk to the chip directly. It uses the same <a href="https://github.com/royshadmon/AnyLog-TPM/tree/fulltest" target="_blank">AnyLog-TPM</a> REST API as the [software TPM](./01-%20Software%20TPM.md). The API is pointed at the chip instead of `swtpm`.
 
 The AnyLog commands after that are the same, including `make_persistent = true`.
 

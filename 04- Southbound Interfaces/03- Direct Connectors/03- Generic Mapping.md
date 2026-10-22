@@ -103,7 +103,6 @@ are published to.
     )>
 ```
 
-
 ### The result
 
 1. **A table, created automatically.** The last topic segment becomes the table name, lowercased and suffixed
