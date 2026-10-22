@@ -78,45 +78,78 @@ The message should appear in the subscriber, and the client should show up under
 
 ## Publishing Data
 
-HiveMQ is a standard MQTT broker, so any MQTT client can publish to it. The script below 
-(`hivemq_publisher.sh`) publishes a random reading for three devices every second, using `mosquitto_pub` inside 
-the `eclipse-mosquitto` image – nothing to install locally.
+HiveMQ is a standard MQTT broker, so any MQTT client can publish to it. `hivemq_publisher.sh` publishes a random 
+reading for three devices every second using `mosquitto_pub`. If `mosquitto_pub` is not installed, the script 
+re-runs itself inside the `eclipse-mosquitto` Docker image, so only Docker is required.
 
 ```shell
 #!/bin/sh
-# hivemq_publisher.sh - publish random sensor readings to an MQTT broker
+# hivemq_publisher.sh - publish random sensor readings to an MQTT broker (HiveMQ)
+# Message: {"device_name":"sensor-1","timestamp":"2026-10-22T18:00:00Z","value":42.17}
+#
+# Usage:   ./hivemq_publisher.sh
+# Options: BROKER=10.0.0.5 TOPIC=plant/line1 INTERVAL=5 ./hivemq_publisher.sh
+#
+# MODE=flat (default)  topic: sensors/data           payload: {"device_name":"sensor-1","timestamp":...,"value":...}
+# MODE=uns             topic: sensors/data/sensor-1  payload: {"timestamp":...,"value":...}
+#
+# If mosquitto_pub is not installed locally, the script re-runs itself inside the
+# eclipse-mosquitto Docker image (requires Docker).
+#
+# Save with LF line endings. If you see "$'\r': command not found", run:  sed -i 's/\r$//' hivemq_publisher.sh
+
+if ! command -v mosquitto_pub >/dev/null 2>&1; then
+  echo "mosquitto_pub not found locally - running inside eclipse-mosquitto container"
+  tr -d '\r' < "$0" | docker run --rm -i --init --network host \
+    -e BROKER -e PORT -e TOPIC -e INTERVAL -e DEVICES -e MODE \
+    eclipse-mosquitto:2 sh -s
+  exit $?
+fi
+
 BROKER=${BROKER:-localhost}
 PORT=${PORT:-1883}
 TOPIC=${TOPIC:-sensors/data}
 INTERVAL=${INTERVAL:-1}
 DEVICES=${DEVICES:-"sensor-1 sensor-2 sensor-3"}
+MODE=${MODE:-flat}
 
-echo "Publishing to ${BROKER}:${PORT} topic '${TOPIC}' every ${INTERVAL}s (Ctrl+C to stop)"
+echo "Publishing to ${BROKER}:${PORT} topic '${TOPIC}' (mode: ${MODE}) every ${INTERVAL}s (Ctrl+C to stop)"
 
 while true; do
   for DEVICE in $DEVICES; do
     TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
     R=$(( $(od -An -N2 -tu2 /dev/urandom) % 10000 ))
-    PAYLOAD=$(printf '{"device_name":"%s","timestamp":"%s","value":%d.%02d}' "$DEVICE" "$TS" $((R / 100)) $((R % 100)))
-    mosquitto_pub -h "$BROKER" -p "$PORT" -t "$TOPIC" -q 1 -m "$PAYLOAD" && echo "$TOPIC $PAYLOAD"
+    VALUE=$(printf '%d.%02d' $((R / 100)) $((R % 100)))
+    if [ "$MODE" = "uns" ]; then
+      T="$TOPIC/$DEVICE"
+      PAYLOAD=$(printf '{"timestamp":"%s","value":%s}' "$TS" "$VALUE")
+    else
+      T="$TOPIC"
+      PAYLOAD=$(printf '{"device_name":"%s","timestamp":"%s","value":%s}' "$DEVICE" "$TS" "$VALUE")
+    fi
+    mosquitto_pub -h "$BROKER" -p "$PORT" -t "$T" -q 1 -m "$PAYLOAD" && echo "$T $PAYLOAD"
   done
   sleep "$INTERVAL"
 done
 ```
 
-Run it from the directory containing the script (Linux / macOS / PowerShell):
+Run it (Linux / macOS / Git Bash / WSL):
 
 ```shell
-docker run --rm -it --network host \
-  -v "${PWD}:/scripts" \
-  --entrypoint sh eclipse-mosquitto:2 /scripts/hivemq_publisher.sh
+chmod +x hivemq_publisher.sh
+./hivemq_publisher.sh
+
+# override defaults
+BROKER=10.0.0.5 TOPIC=plant/line1 INTERVAL=5 ./hivemq_publisher.sh
+
+# device in the topic (UNS-style) - see Method 3
+MODE=uns ./hivemq_publisher.sh
 ```
 
-Override defaults with environment variables, e.g. `-e BROKER=10.0.0.5 -e TOPIC=plant/line1 -e INTERVAL=5`.
+> **Windows:** save the script with **LF** line endings. If you see `$'\r': command not found`, run 
+> `sed -i 's/\r$//' hivemq_publisher.sh`.
 
-> **Windows:** save the script with **LF** line endings (not CRLF), otherwise `sh` fails with `$'\r'` errors.
-
-Sample output / message:
+Sample output (`MODE=flat`, default):
 
 ```
 sensors/data {"device_name":"sensor-1","timestamp":"2026-10-22T22:16:47Z","value":12.33}
@@ -125,75 +158,143 @@ sensors/data {"device_name":"sensor-2","timestamp":"2026-10-22T22:16:47Z","value
 
 Confirm the data reaches HiveMQ with the subscriber from the previous section (`-t 'sensors/#'`).
 
-### Alternative – Python Publisher
-
-The same data using Python (`pip install paho-mqtt`):
-
-```python
-# hivemq_publisher.py   ->   pip install paho-mqtt
-import json, random, time
-from datetime import datetime, timezone
-import paho.mqtt.client as mqtt
-
-BROKER = "localhost"      # HiveMQ host
-PORT = 1883
-TOPIC = "sensors/data"
-DEVICES = ["sensor-1", "sensor-2", "sensor-3"]
-
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="anylog-demo-publisher")
-client.connect(BROKER, PORT)
-client.loop_start()
-
-try:
-    while True:
-        for device in DEVICES:
-            payload = {
-                "device_name": device,
-                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                "value": round(random.uniform(0, 100), 2),
-            }
-            client.publish(TOPIC, json.dumps(payload), qos=1)
-            print(TOPIC, payload)
-        time.sleep(5)
-except KeyboardInterrupt:
-    pass
-finally:
-    client.loop_stop()
-    client.disconnect()
-```
 
 ## Accepting Data in AnyLog
 
-The policies below map the publisher's message into table `hivemq_sensor`. 
-Use `!default_dbms` or replace it with your logical database name.
+AnyLog subscribes to HiveMQ as a regular MQTT broker (Option A). `dynamic=true` does two things:
 
-### Option A – Subscribe directly to HiveMQ
+1. **Table name from the topic** – if no table name is provided, the table is generated from the topic.
+2. **Unified Namespace (UNS)** – a namespace is built from the topic path and stored as `uns` / `object` policies.
 
-AnyLog acts as an MQTT client of the HiveMQ broker.
+Because the topic drives both, the topic layout decides the table layout:
+
+| Method | Publisher topic | Device stored as | Tables |
+|---|---|---|---|
+| 1 – Inline mapping | `sensors/data` | `device_name` column | one |
+| 2 – Mapping policy | `sensors/data` | `device_name` column, UNS grouped by device | one (`my_data`) |
+| 3 – Device in topic | `sensors/data/<device>` | table name | one per device |
+
+### Method 1 – Inline mapping (table from topic)
+
+The table name is derived from the last level of the topic (`sensors/data` → `data_1`).
 
 ```anylog
-<run msg client where 
-   broker = <HIVEMQ_IP> and 
-   port = 1883 and 
-   log = false and 
-   topic = (
-      name = sensors/data and 
-      dbms = !default_dbms and 
-      table = hivemq_sensor and 
-      column.timestamp.timestamp = "bring [timestamp]" and 
-      column.device_name = (type = str and value = "bring [device_name]") and 
-      column.value = (type = float and value = "bring [value]")
-   )
->
+<run msg client where
+    broker=<HIVEMQ_IP> and
+    port=1883 and
+    log=false and
+    master_node=!ledger_conn and
+    topic=(
+        name="sensors/#" and
+        dbms=!default_dbms and
+        dynamic=true and
+        column.timestamp.timestamp = "bring [timestamp]" and
+        column.device_name.str = "bring [device_name]" and
+        column.value.float = "bring [value]"
+    )>
 ```
 
-If HiveMQ authentication is enabled, add `user = <USER> and password = <PASSWORD>` to the `where` clause.
+Resulting UNS (`blockchain get (uns, object)`):
 
-### Option B (MQTT) – HiveMQ forwards to AnyLog's local broker
+```json
+[{"object" : {"name" : "sensors", "description" : "object for MQTT sensors", "ledger" : "global"}},
+ {"uns" : {"name" : "sensors", "namespace" : "sensors", "object_id" : "748c797a53ab937b51659573b7c20688"}},
+ {"object" : {"name" : "data_1", "description" : "object for MQTT data_1", "dbms" : "mydb", "table" : "data_1"}},
+ {"uns" : {"name" : "data", "namespace" : "sensors/data", "parent" : "0a8fd51f26b92f6966f11aa1f0161620",
+           "object_id" : "0412966d267b13e8220694d168331d8a"}}]
+```
 
-> **Untested** – Bridge / Kafka forwarding is documented from HiveMQ's docs only; validate Option A first.
+### Method 2 – Mapping policy with `group_by_attributes`
 
-1. Enable the message broker on the AnyLog node (skip if already running): 
+The mapping is stored as a policy and referenced by `run msg client`. `group_by_attributes` lets the UNS 
+objects be defined per attribute value (e.g. per `device_name`).
+
+1. Declare the mapping policy:
+
+```anylog
+<new_policy = {
+    "mapping": {
+        "id": "my-data",
+        "dbms": !default_dbms,
+        "table": "my_data",
+        "group_by_attributes": ["device_name"],
+        "readings": "",
+        "schema": {
+            "timestamp": {"type": "timestamp", "bring": "[timestamp]"},
+            "device_name": {"type": "string", "bring": "[device_name]"},
+            "value": {"type": "float", "bring": "[value]"}
+        }
+    }
+}>
+
+process !local_scripts/node-deployment/policies/publish_policy.al
+```
+
+2. Subscribe using the policy:
+
+```anylog
+<run msg client where
+    broker=<HIVEMQ_IP> and
+    port=1883 and
+    log=false and
+    master_node=!ledger_conn and
+    topic=(
+        name="sensors/#" and
+        policy="my-data" and
+        dynamic=true
+    )>
+```
+
+Resulting UNS – the object for `sensors/data` carries a `where` condition from the group-by attribute:
+
+```json
+{"object" : {"name" : "my_data", "description" : "object for MQTT sensors/data",
+             "dbms" : "mydb", "table" : "my_data", "where" : "device_name = 'sensor-1'"}}
+```
+
+### Method 3 – Device in the topic (table per device)
+
+Common in UNS deployments: the device is part of the topic and the payload holds only the reading. Run the 
+publisher with `MODE=uns`:
+
+```
+sensors/data/sensor-1 {"timestamp":"2026-10-22T23:16:03Z","value":77.05}
+sensors/data/sensor-2 {"timestamp":"2026-10-22T23:16:03Z","value":53.65}
+```
+
+With `dynamic=true` and no table name, each device topic becomes its own table and UNS node 
+(`sensors/data/sensor-1`, `sensors/data/sensor-2`, ...):
+
+```anylog
+<run msg client where
+    broker=<HIVEMQ_IP> and
+    port=1883 and
+    log=false and
+    master_node=!ledger_conn and
+    topic=(
+        name="sensors/#" and
+        dbms=!default_dbms and
+        dynamic=true and
+        column.timestamp.timestamp = "bring [timestamp]" and
+        column.value.float = "bring [value]"
+    )>
+```
+
+### Option B – HiveMQ forwards to AnyLog's message broker (Bridge)
+
+Used when HiveMQ is the customer's central broker / UNS and should **push** data to AnyLog (e.g. AnyLog cannot 
+reach HiveMQ). The <a href="https://docs.hivemq.com/hivemq-bridge-extension/latest/index.html" target="_blank">HiveMQ Enterprise Bridge Extension</a> 
+ships with HiveMQ (disabled by default) and is covered by the Lab license. 
+
+Data flow: `publisher → HiveMQ (sensors/#) → Bridge → AnyLog message broker → run msg client (broker=local)`
+
+1. On AnyLog, make sure the message broker is running and note its port:
+
+```anylog
+get connections                  # "Messaging" line shows the broker IP:port
+```
+
+If it is not running:
 
 ```anylog
 <run message broker where 
@@ -203,16 +304,45 @@ If HiveMQ authentication is enabled, add `user = <USER> and password = <PASSWORD
 >
 ```
 
-2. Configure the HiveMQ Enterprise Bridge Extension 
-   (<a href="https://docs.hivemq.com/hivemq-bridge-extension/latest/index.html" target="_blank">docs</a>) to forward `sensors/#` to AnyLog. 
-   Sample bridge configuration (verify element names against the extension version you deploy):
+2. Stop any `run msg client` subscribed directly to HiveMQ (Option A), so data is not ingested twice, and 
+   subscribe to AnyLog's local broker instead – any of Methods 1-3 with `broker=local` in place of 
+   `broker=<HIVEMQ_IP> and port=1883`:
+
+```anylog
+<run msg client where
+    broker=local and
+    log=false and
+    master_node=!ledger_conn and
+    topic=(
+        name="sensors/#" and
+        policy="my-data" and
+        dynamic=true
+    )>
+```
+
+3. Create `bridge-config.xml` (replace `ANYLOG_IP` / `ANYLOG_BROKER_PORT`):
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  HiveMQ Enterprise Bridge Extension - forward sensors/# from HiveMQ to AnyLog's message broker.
+  Location in the container: /opt/hivemq/extensions/hivemq-bridge-extension/conf/config.xml
+  Replace ANYLOG_IP / ANYLOG_BROKER_PORT (AnyLog: `get connections` -> Messaging).
+-->
 <hivemq-bridge-extension>
     <bridges>
         <bridge>
-            <name>anylog</name>
+            <name>hivemq-to-anylog</name>
             <remote-broker>
+                <mqtt>
+                    <!-- MQTT 3.1.1: AnyLog's broker is a lightweight broker; PUB mode supports 3.1.1 -->
+                    <version>3</version>
+                </mqtt>
+                <authentication>
+                    <mqtt-simple-authentication>
+                        <client-identifier>hivemq-bridge</client-identifier>
+                    </mqtt-simple-authentication>
+                </authentication>
                 <connection>
                     <static>
                         <host>ANYLOG_IP</host>
@@ -222,7 +352,9 @@ If HiveMQ authentication is enabled, add `user = <USER> and password = <PASSWORD
             </remote-broker>
             <topics>
                 <topic>
+                    <!-- PUB = HiveMQ -> AnyLog; topic is forwarded unchanged -->
                     <filter>sensors/#</filter>
+                    <mode>PUB</mode>
                 </topic>
             </topics>
         </bridge>
@@ -230,63 +362,47 @@ If HiveMQ authentication is enabled, add `user = <USER> and password = <PASSWORD
 </hivemq-bridge-extension>
 ```
 
-3. Subscribe to the forwarded topic on AnyLog's local broker:
+4. Start HiveMQ with the config mounted, then enable the extension by removing its `DISABLED` file:
 
-```anylog
-<run msg client where 
-   broker = local and 
-   log = false and 
-   topic = (
-      name = sensors/data and 
-      dbms = !default_dbms and 
-      table = hivemq_sensor and 
-      column.timestamp.timestamp = "bring [timestamp]" and 
-      column.device_name = (type = str and value = "bring [device_name]") and 
-      column.value = (type = float and value = "bring [value]")
-   )
->
+```shell
+docker run --name hivemq \
+  -p 8080:8080 \
+  -p 1883:1883 \
+  -e HIVEMQ_LICENSE_KEY='<HIVEMQ_LICENSE_KEY>' \
+  -e HIVEMQ_LOG_BASED_CLUSTERING_ENABLED=true \
+  -v "${PWD}/bridge-config.xml:/opt/hivemq/extensions/hivemq-bridge-extension/conf/config.xml" \
+  --rm -d hivemq/hivemq4:latest
+
+docker exec hivemq rm -f /opt/hivemq/extensions/hivemq-bridge-extension/DISABLED
+docker logs -f hivemq            # look for the Bridge extension starting and connecting
 ```
 
-> If the bridge adds a prefix to forwarded topics, use the prefixed name (e.g. `hivemq/sensors/data`) in `name`.
+> If the configuration is invalid, HiveMQ re-creates the `DISABLED` file and logs the error. 
+> Without a license key the extension runs in a 5-hour trial.
 
-### Option B (Kafka) – HiveMQ forwards to Kafka
-
-The <a href="https://docs.hivemq.com/hivemq-kafka-extension/latest/index.html" target="_blank">HiveMQ Enterprise Extension for Kafka</a> 
-writes MQTT messages from `sensors/#` into a Kafka topic (e.g. `hivemq-sensors`). The MQTT payload is forwarded 
-as the Kafka record value, so the same JSON mapping applies.
-
-> `run kafka consumer` connects to a Kafka cluster – point `ip` / `port` at the Kafka bootstrap server that 
-> HiveMQ writes to.
-
-```anylog
-<run kafka consumer where 
-   ip = <KAFKA_IP> and 
-   port = 9092 and 
-   reset = latest and 
-   log = false and 
-   topic = (
-      name = hivemq-sensors and 
-      dbms = !default_dbms and 
-      table = hivemq_sensor and 
-      column.timestamp.timestamp = "bring [timestamp]" and 
-      column.device_name = (type = str and value = "bring [device_name]") and 
-      column.value = (type = float and value = "bring [value]")
-   )
->
-```
+5. Run the publisher against HiveMQ (unchanged – `./hivemq_publisher.sh`). Data now arrives in AnyLog through 
+   its local broker; validate with the commands below.
 
 ## Validating
 
 On the AnyLog node:
 
 ```anylog
-get msg client                         # subscription status + message counters
-get streaming                          # data being buffered for the table 
-get operator                           # rows inserted (operator node)
+get msg client                          # subscription status + message counters
+blockchain get (uns, object)            # UNS generated from the topic hierarchy
+blockchain get mapping                  # mapping policy (Method 2)
 ```
 
 Query the data:
 
 ```anylog
-run client () sql !default_dbms format=table "select device_name, min(value), max(value), count(*) from hivemq_sensor group by device_name"
+AL anylog-standalone-operator +> run client () sql mydb format=table "SELECT * FROM my_data LIMIT 5;"
+
+row_id insert_timestamp           tsd_name tsd_id timestamp           device_name value
+------ -------------------------- -------- ------ ------------------- ----------- -----
+     1 2026-10-22 16:08:36.190546      234      2 2026-10-22 16:07:31 sensor-1     43.4
+     2 2026-10-22 16:08:36.190546      234      2 2026-10-22 16:07:31 sensor-2     5.09
+     3 2026-10-22 16:08:36.190546      234      2 2026-10-22 16:07:31 sensor-3    54.13
+     4 2026-10-22 16:08:36.190546      234      2 2026-10-22 16:07:36 sensor-1    78.62
+     5 2026-10-22 16:08:36.190546      234      2 2026-10-22 16:07:36 sensor-2    10.73
 ```
