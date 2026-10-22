@@ -65,7 +65,7 @@ nav:
       slug: "01-getting-started/03-install"
       url: "/docs/01-getting-started/03-install/"
       file: "01-getting-started/03-install.md"
-      source_path: "01- Getting Started/03- install.md"
+      source_path: "01- Getting Started/03- Rnstall.md"
 - kind: "section"
   title: "Installation & Deployment"
   match_path: "/docs/02-installation-and-deployment/"

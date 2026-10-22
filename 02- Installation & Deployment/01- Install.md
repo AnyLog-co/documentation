@@ -8,6 +8,7 @@ layout: page
 
 | **Date** | **Name** | **Change** |
 |---|---|---|
+- 2026-10-22 | Eric Aquaronne | fixed broken url to download | all 
 - 2026-08-07 | Eric Aquaronne | change log format | 2.0.2606 
 | 2026-07-24 | Ori Shadmon | Create introduction document |
 --->
@@ -28,6 +29,6 @@ Please review the [prerequisites](../01-%20Getting%20Started/02-%20Prerequisite.
 
 1. Install prerequisites — e.g. `git`, Docker, VirtualBox, etc.
 2. Download the appropriate repo with configuration support.
-3. <a href="https://anylog.network/downloads" target="_blank">Request a license</a>.
+3. <a href="https://anylog.network/download" target="_blank">Request a license</a>.
 4. Update the configuration files.
 5. Deploy the AnyLog agent(s).
