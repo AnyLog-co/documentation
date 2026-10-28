@@ -27,8 +27,6 @@ layout: page
 - 2026-08-29 | Moshe Shadmon | Update Page content |
 -->
 
-
-
 # Getting Started
 
 AnyLog is a distributed data platform designed to manage and provide unified access to operational data across edge environments.
@@ -575,7 +573,6 @@ Distributed Query and Routing
             =
 Unified Access Without Centralizing the Data
 ```
-
 
 <!--
 Welcome to AnyLog! This guide introduces the platform's architecture, terminology, node types, and the

@@ -54,10 +54,9 @@ make up LOCAL_DOCS=$HOME/documentation
 ```
 
 > For the full backend setup — Makefile targets, running without `make`, troubleshooting, and Mac-native development 
-> — see the [anylog-docs.github.io README](https://github.com/AnyLog-co/anylog-docs.github.io/blob/main/README.md).
+> — see the <a href="https://github.com/AnyLog-co/anylog-docs.github.io/blob/main/README.md" target="_blank">anylog-docs.github.io README</a>.
 
 4. View docs in browser - http://localhost:4000
-
 
 ## Documenting
 
@@ -126,7 +125,6 @@ Alternatively, the change log section can also be written  in table format
 | Date of change | Relevant Anylog code version | Author | Description |
 |---|---|---|---|
 | 2026-04-19 | All | Eric Aquaronne | update readme for Anylog |
-
 
 3. Documentation Formatting 
 
@@ -200,7 +198,7 @@ This converts external links and image references from Markdown syntax into HTML
 
 ```markdown
 <!-- Current --> 
-[my link](https://example.com) 
+<a href="https://example.com" target="_blank">my link</a> 
 ![my img](../imgs/[img path].png) 
 
 <!-- updated to --> 

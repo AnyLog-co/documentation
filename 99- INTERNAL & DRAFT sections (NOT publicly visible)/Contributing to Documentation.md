@@ -217,7 +217,7 @@ Adjust the URLs, front matter, and the description of changes to match whatever 
 
 The easiest way to preview the docs locally is via Docker — no Ruby or Jekyll installation required.
 
-**Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+**Prerequisites:** <a href="https://docs.docker.com/get-docker/" target="_blank">Docker</a> and <a href="https://docs.docker.com/compose/install/" target="_blank">Docker Compose</a>
 
 ```bash
 git clone https://github.com/AnyLog-co/anylog-docs.github.io.git

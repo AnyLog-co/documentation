@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  HiveMQ Enterprise Bridge Extension - forward sensors/# from HiveMQ to AnyLog's message broker.
+  Location in the container: /opt/hivemq/extensions/hivemq-bridge-extension/conf/config.xml
+  Replace ANYLOG_IP / ANYLOG_BROKER_PORT (AnyLog: `get connections` -> Messaging).
+-->
+<hivemq-bridge-extension>
+    <bridges>
+        <bridge>
+            <name>hivemq-to-anylog</name>
+            <remote-broker>
+                <mqtt>
+                    <!-- MQTT 3.1.1: AnyLog's broker is a lightweight broker; PUB mode supports 3.1.1 -->
+                    <version>3</version>
+                </mqtt>
+                <authentication>
+                    <mqtt-simple-authentication>
+                        <client-identifier>hivemq-bridge</client-identifier>
+                    </mqtt-simple-authentication>
+                </authentication>
+                <connection>
+                    <static>
+                        <host>192.168.86.30</host>
+                        <port>32050</port>
+                    </static>
+                </connection>
+            </remote-broker>
+            <topics>
+                <topic>
+                    <!-- PUB = HiveMQ -> AnyLog; topic is forwarded unchanged -->
+                    <filter>sensors/#</filter>
+                    <mode>PUB</mode>
+                </topic>
+            </topics>
+        </bridge>
+    </bridges>
+</hivemq-bridge-extension>
