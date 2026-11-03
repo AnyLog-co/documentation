@@ -49,6 +49,8 @@ AnyLog (`LICENSE_KEY`).</sub>
  
 ## Prerequisites
 
+See also the 'Prerequisite.md' chapter
+
 ### Machine requirements
 
 | Component            | Requirement                                                           |
