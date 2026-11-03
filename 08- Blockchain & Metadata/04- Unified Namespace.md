@@ -363,7 +363,6 @@ The UNS provides the contextual navigation layer over this distributed environme
 
 Together, they provide a unified view of operational data and context without requiring the data to be centralized.
 
-
 <!---
 # Unified Namespace
 

@@ -7,6 +7,7 @@ layout: page
 ### 📜 Change Log
  **Date**   | **Name**    | **Change**       | **Version** |
  |------------|-------------|------------------|----------|
+ | 2026-10-28 | Ori Shadmon | Added "Restoring a service that didn't start" under `get processes`, added `get streaming` as diagnostic step 7, and added the "Node is healthy but no new data is arriving" known issue, based on the PowerPlant recovery (AnyLog came back on its own; the data source's license had dropped) | |
  | 2026-07-29 | Ori Shadmon | Merged "02- Troubleshooting.md" (diagnostic procedure) and "03- ND common_issues.md" (known issues) into one doc — they're the same job in practice (run the procedure to isolate where a problem is, then check known issues for a matching error signature). Fixed `blockchcain` → `blockchain` typo in a drop-policy example, `docker-comose_...` → `docker-compose_...` volume name typo, and the "Why is data result in consistent?" heading grammar. Flagged the `start_date=!start_data` variable-name mismatch (recurs identically in the FAQ's deployment config example — likely a real, if confusingly named, deployment-scripts variable rather than a one-off typo, but worth confirming) | |
  | 2026-07-20 | Eric Aquaronne | added change log | 2.0.2606 |
  | 2026-04-25 |             | creation | |
@@ -26,6 +27,7 @@ instead of running the full procedure.
 | 4 | `blockchain test` | Local blockchain is intact |
 | 5 | `get metadata version` | Metadata is in sync with peers |
 | 6 | `test cluster` | Cluster config — operator nodes only |
+| 7 | `get streaming` | Data is arriving at the node |
 
 ---
 
@@ -67,6 +69,22 @@ Publisher       | Not declared|
 Distributor     | Not declared|
 Consumer        | Not declared|
 ```
+
+#### Restoring a service that didn't start
+
+Compare the list against what the node's configuration is supposed to run. A service the deployment should have
+started, but that shows as `Not declared`, usually failed during startup — for example because a policy wasn't synced
+yet or a port was still held by a previous instance. Check `get error log` for the reason, then use either approach:
+
+- **Restart the AnyLog agent container.** The deployment scripts run again from the top and start every configured
+  service. This is the simplest option and the right one when several services are missing.
+  ```shell
+  docker restart <container-name>
+  ```
+- **Start (or stop) the single service manually** from the AnyLog CLI, or send the same command through REST. This
+  avoids a restart and leaves the other services untouched — useful on a production node that is otherwise healthy.
+  Use the same command and parameters the deployment scripts use for that service, then run `get processes` again to
+  confirm its status changed to `Running`.
 
 ---
 
@@ -257,7 +275,48 @@ cluster policy on the blockchain is consistent across nodes.
 
 ---
 
+### `get streaming`
+
+Shows the data the node has received through its streaming services, per table. Run it last: once steps 1–6 pass,
+this answers whether data is actually reaching the node.
+
+```anylog
+get streaming
+```
+
+If the node is healthy but `get streaming` shows no data (or the counts aren't increasing between runs), the problem
+is upstream of AnyLog — see [Node is healthy but no new data is arriving](#node-is-healthy-but-no-new-data-is-arriving).
+
+---
+
 ## Known Issues
+
+### Node is healthy but no new data is arriving
+
+A typical case is after a machine restart or power outage at the edge: the AnyLog node comes back up on its own, but
+data stops flowing into the network. Usually the node is fine and the device or software feeding it didn't recover.
+
+**Example: PowerPlant**
+
+Data from the PowerPlant site stopped reaching the network. The fix was:
+
+1. Connect to the site's network (VPN) and attach to the AnyLog node.
+2. Run the diagnostic procedure:
+   - `test node` — passed
+   - `test network` — passed
+   - `get processes` — every expected service was `Running`
+   - `get streaming` — no data
+3. Because AnyLog itself was healthy, check the upstream data source. At PowerPlant this is a Dynics edge device (a
+   third-party product, not AnyLog), managed through its own web UI on the same machine.
+4. The Dynics license was no longer configured, so it had stopped publishing. Re-apply the license.
+5. Restart the data flows in Dynics (at PowerPlant: start v6 with the Sabetha PV in the flows).
+6. Run `get streaming` again to confirm data is arriving.
+
+No action was needed on the AnyLog side — it had restarted automatically without errors.
+
+**General approach:** if `test node`, `test network` and `get processes` all pass but `get streaming` stays empty,
+don't restart AnyLog. Check the data source instead: is it running, licensed, configured to publish to this node's
+broker or REST port, and are its flows started?
 
 ### Attempting to run a query and getting an error message
 

@@ -634,7 +634,7 @@ wss:default
 
 #### GUI access
 
-* URL: [http://127.0.0.1:18083/](http://127.0.0.1:18083/)
+* URL: <a href="http://127.0.0.1:18083/" target="_blank">http://127.0.0.1:18083/</a>
 * User: `admin`
 * Password: `public`
 
