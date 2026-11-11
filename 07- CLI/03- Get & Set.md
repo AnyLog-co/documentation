@@ -147,6 +147,56 @@ get platform info
 Return the node name including the IP and Port that identifies the node. The node name is assigned using
 [set node name](#set-node-name). If a name was not assigned, the name returned is "AnyLog".
 
+
+### get unique id
+
+Generates a unique numeric ID for a new cluster or replica in the network. The command is typically executed on a dedicated node (usually the master node) to coordinate ID assignments.
+
+The command uses the blockchain ledger and locally maintained counters to determine the next available ID.
+
+**Syntax**
+
+```anylog
+get unique id where type = <id_type> [and cluster_id = <cluster_id>]
+```
+
+**Parameters**
+
+| Parameter | Description |
+|---|---|
+| `type` | Required. `cluster_id` or `replica_id`. |
+| `cluster_id` | Required when `type = replica_id`. Identifies the cluster to which the replica belongs. |
+
+**Examples**
+
+Generate a unique cluster ID:
+
+```text
+get unique id where type = cluster_id
+```
+
+Generate a unique replica ID within a cluster:
+
+```text
+get unique id where type = replica_id and cluster_id = 2a5f83e1f2e63c16bbf5339988bf7489
+```
+
+**Response**
+
+Returns a JSON object containing the assigned numeric ID:
+
+```json
+{"unique_id": 3}
+```
+
+**Notes**
+
+- Cluster IDs are generated using the number of root clusters recorded in the blockchain ledger and the local counter.
+- Replica IDs are maintained independently for each cluster, using the number of operators registered to that cluster.
+- The command should be executed through a single designated node to avoid duplicate ID assignments.
+- On an error, `unique_id` is returned as `-1` with an error status.
+
+
 ---
 
 ## Set command
