@@ -1,31 +1,11 @@
 ---
-title: Modbus TCP
+
+## title: Modbus TCP
 description: Pull coils, discrete inputs, and holding/input registers from Modbus TCP devices into AnyLog using run plc client.
 layout: page
 source_path: "02 MODBUS.md"
----
 
-<!---
-### 📜 Change Log
- **Date**   | **Name** | **Change**       | **Version** |
- |------------|--|------------------|----------|
- | 2026-05-08 |  | created document |  |
- | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
- | 2026-07-24 | Ori Shadmon | Merged two identical copies of this file (`02 MODBUS.md` and `MODBUS.md`) — same
-   content, one had the changelog as a visible block instead of a hidden comment. Kept the hidden-comment format
-   for consistency with the rest of the doc set. |
- | 2026-11-25 | pintomax | Added the Formulas section (formula and outputs map options) and the emit and value (constant) map options |  |
- | 2026-11-25 | pintomax | Moved Word order (swap) before Formulas |  |
- | 2026-11-25 | pintomax | Promoted Formulas on the map to a top-level heading |  |
- | 2026-11-25 | pintomax | Removed Two bytes in one register (covered by swap and formulas) |  |
- | 2026-11-25 | pintomax | Moved Data reading/conversion error before Continuous ingest |  |
- | 2026-11-25 | pintomax | Renamed dynamic = true to auto_uns = true; per-value tables use table_per_value |  |
- | 2026-11-25 | pintomax | Continuous ingest examples use hostname 192.168.1.62 (local Modbus/AnyLog) |  |
- | 2026-11-25 | pintomax | table_per_value example: one device, three map entries |  |
- | 2026-11-25 | pintomax | Continuous ingest examples include a map constant; wide table stores it, table_per_value does not |  |
- | 2026-11-25 | pintomax | Documented UNS ingest: table_per_value with/without namespace, fixed table; tables, columns, objects |  |
- | 2026-11-25 | pintomax | Documented command-line constants and group_by_attributes |  |
---->
+
 
 AnyLog can act as a **Modbus TCP client** (over `hostname` and `port`, typically port **502**). Data is read on a 
 schedule and streamed into your local operator database as JSON, using the same `run plc client` pattern as 
@@ -82,6 +62,19 @@ A **holding register** and an **input register** are both 16-bit words. Each one
 Device manuals often number the Modbus objects in ranges: coils `00001`–`09999`, discrete inputs `10001`–`19999`, input registers `30001`–`39999` and holding registers `40001`–`49999`.   
 
 The `coil`, `input`, `inputRegister` and `register` values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
+
+---
+
+In AnyLog, we use a map (a JSON array of points).  
+Each point has a `name` (the column name) and a Modbus key (`input`, `coil`, `inputRegister` or `register`) that tells the client where to read the value from.  
+Other keys such as `type`, `scale`, `offset`, `formula` and `value` (for constants) are optional.
+
+```json
+[{"name":"door_open","input":0},
+ {"name":"alarm_active","coil":0},
+ {"name":"motor_current","inputRegister":5396},
+ {"name":"temperature_setpoint","register":101}]
+```
 
 ---
 
@@ -539,7 +532,7 @@ Rules:
 * A map needs at least one register point. A map that contains only constants is rejected with `map['values'] has no entries`. Keep the constants in the same map as the points they describe.
 * The `name` must be unique in the map. A duplicate name is rejected.
 * In a `run plc client` command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `table_per_value = true` path (no `namespace`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
-* You can also set constants on the `run plc client` command itself — see [Command-line `constants` and `group_by_attributes`](#command-line-constants-and-group_by_attributes). A command-line value **replaces** a map constant with the same `name`.
+* You can also set constants on the `run plc client` command itself — see [Command-line `constants` and `group_by_attributes](#command-line-constants-and-group_by_attributes)`. A command-line value **replaces** a map constant with the same `name`.
 
 ---
 
