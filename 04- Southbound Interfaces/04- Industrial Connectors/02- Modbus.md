@@ -36,7 +36,7 @@ schedule and streamed into your local operator database as JSON, using the same 
 
 | Requirement    | Notes                                                |
 | -------------- | ---------------------------------------------------- |
-| `**pymodbus**` | Must be installed in the AnyLog runtime environment. |
+| **`pymodbus`** | Must be installed in the AnyLog runtime environment. |
 
 Declare the target DBMS before streaming, for example:
 
@@ -78,7 +78,9 @@ A **holding register** and an **input register** are both 16-bit words. Each one
 
 ### Addresses in the device manual
 
-Device manuals often number the Modbus objects in ranges: coils `00001`–`09999`, discrete inputs `10001`–`19999`, input registers `30001`–`39999` and holding registers `40001`–`49999`. The `**coil**`, `**input**`, `**inputRegister**` and `**register**` values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
+Device manuals often number the Modbus objects in ranges: coils `00001`–`09999`, discrete inputs `10001`–`19999`, input registers `30001`–`39999` and holding registers `40001`–`49999`.   
+  
+The `**coil**`, `**input**`, `**inputRegister**` and `**register**` values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
 
 ---
 
@@ -114,13 +116,13 @@ The **Tag** prefix shows the Modbus object: `hr:` is a holding register, `ir:` a
 
 ## Mapping with type
 
-`**type**` decodes one or more registers into one value. There are three types:
+**`type`** decodes one or more registers into one value. There are three types:
 
-* `**float`**: two registers form one 32-bit IEEE 754 float.
-* `**long`**: one to four registers form one signed integer. Two registers give 32 bits, four give 64 bits.
-* `**byte`**: more than four registers. The result is a list, one 16-bit value per register.
+* **`float`**: two registers form one 32-bit IEEE 754 float.
+* **`long`**: one to four registers form one signed integer. Two registers give 32 bits, four give 64 bits.
+* **`byte`**: more than four registers. The result is a list, one 16-bit value per register.
 
-Without `**type**`, one register is an unsigned 16-bit value.
+Without **`type`**, one register is an unsigned 16-bit value.
 
 Holding registers on the simulator, with the values the node returns:
 
@@ -216,9 +218,9 @@ Rules:
 
 * `scale` and `offset` must be numbers. Any other value rejects the whole command.
 * The result is a decimal number. `offset` alone on the register `452` returns `402.0`.
-* Without `**type`**, a list of several registers is not scaled. `[100, 200]` with `scale` `0.5` and `offset` `10` returns `[100, 200]`. Use `**type*`*, `**formula**` or `**outputs**` instead.
-* `scale` and `offset` are not applied to text. With `**convert`** `"string"`, the text is returned unchanged.
-* Do not combine `scale` or `offset` with `**formula`** on the same item. The formula does the calculation instead; see [Formulas](#formulas).
+* Without `**type*`*, a list of several registers is not scaled. `[100, 200]` with `scale` `0.5` and `offset` `10` returns `[100, 200]`. Use `**type**`, `**formula**` or `**outputs**` instead.
+* `scale` and `offset` are not applied to text. With `**convert*`* `"string"`, the text is returned unchanged.
+* Do not combine `scale` or `offset` with `**formula*`* on the same item. The formula does the calculation instead; see [Formulas](#formulas).
 * Floating-point arithmetic can add noise. For example, the float `23.5` with `offset` `-273.15` returns `-249.64999999999998`.
 
 ### Text from registers (`convert`)
@@ -316,11 +318,11 @@ The raw words are processed in this order: `**swap**` → `**type**` → `**form
 
 ### Rules
 
-* Formulas apply to `**register`** and `**inputRegister*`* items only. `**coil**` and `**input**` items do not support modifiers.
-* A `**formula`** replaces `**convert*`*, `**scale**` and `**offset**`. Using them on the same item is rejected with `formula is used instead of convert, scale, and offset`.
+* Formulas apply to `**register*`* and `**inputRegister**` items only. `**coil**` and `**input**` items do not support modifiers.
+* A `**formula*`* replaces `**convert**`, `**scale**` and `**offset**`. Using them on the same item is rejected with `formula is used instead of convert, scale, and offset`.
 * The expression is checked when the command is issued. A syntax error, an unknown name, or a call to a function that is not in the list above rejects the whole command with a message such as `Modbus: map item 't': formula: unknown name 'foo'`.
 * A formula that fails while reading (for example a division by zero) returns no value for that point. The Error column shows the reason, such as `decode error: division by zero`. The other points of the command are still returned.
-* A register can be used by one map item only. If two items read the same register, the first one is silently dropped and only the last one is returned. In the test, `first` (`0.1 * x`) and `second` (plain) both read `5396`, and only `second` came back (`452`). To derive several values from one block, use `**outputs`**.
+* A register can be used by one map item only. If two items read the same register, the first one is silently dropped and only the last one is returned. In the test, `first` (`0.1 * x`) and `second` (plain) both read `5396`, and only `second` came back (`452`). To derive several values from one block, use `**outputs*`*.
 
 ### How formulas evaluate
 
@@ -380,9 +382,9 @@ mix          |hr:5409+2|12000|     |    |
 ```
 
 * `humidity_pct`: the register holds `452`, and `0.1 * x` gives `45.2`.
-* `temperature_f`: `**type`** `float` first turns the two registers into `23.5`, then the formula gives `74.3`.
+* `temperature_f`: `**type*`* `float` first turns the two registers into `23.5`, then the formula gives `74.3`.
 * `mix`: the two registers hold `100` and `200`, so `20 * 100 + 50 * 200 = 12000`.
-* Floating-point arithmetic can add noise: without `**round`**, the `temperature_f` formula returns `74.30000000000001`. Use `round(..., n)` to keep the stored value clean.
+* Floating-point arithmetic can add noise: without `**round*`*, the `temperature_f` formula returns `74.30000000000001`. Use `round(..., n)` to keep the stored value clean.
 
 ---
 
@@ -414,7 +416,7 @@ max_all|hr:5409+4|  400|     |    |
 
 One read of four registers (`hr:5409+4`) produced three columns. `sum_01` is `100 + 200`, `half_2` is half of `x[2]` (`300`), and `max_all` is the largest of the four registers.
 
-**Note:** you only add an `**outputs`** entry for each column you want — you do **not** need one output per register. To skip a value, omit it from `**outputs`**.   
+**Note:** you only add an `**outputs`** entry for each column you want — you do **not** need one output per register. To skip a value, omit it from `**outputs`**.  
 That matters when the device forces a wide read (for example **10** registers at once) but only **3** of them hold useful data: list those three in `**outputs`** and ignore the rest.
 
 If one output fails while reading, only that column reports the error. Here `x[1] - 200` is `0`:
@@ -440,18 +442,18 @@ bad   |hr:5409+2|     |formula error: division by zero|    |
 
 Rules for `outputs`:
 
-* The item must be a `**register`** or `**inputRegister*`* block (a list of registers) and `**outputs**` must be a non-empty list.
-* The block can use `**swap`**, but not `**type*`*, `**convert**`, `**formula**`, `**scale**` or `**offset**`.
-* Every output needs a `**name`** and a `**formula*`*, and every formula is checked when the command is issued.
+* The item must be a `**register*`* or `**inputRegister**` block (a list of registers) and `**outputs**` must be a non-empty list.
+* The block can use `**swap*`*, but not `**type**`, `**convert**`, `**formula**`, `**scale**` or `**offset**`.
+* Every output needs a `**name*`* and a `**formula**`, and every formula is checked when the command is issued.
 * If one output fails while reading, only that column is reported as a `formula error`; the other outputs of the block are still returned.
-* Each output is its own column. `**emit`** on the block does not hide them (see below).
-* The block needs at least two registers. With a one-register list, `**outputs`** is not applied: the raw value is returned instead (for example, `hr:5404` returns `34561`). For one register, use a formula or `**swap*`*.
+* Each output is its own column. `**emit*`* on the block does not hide them (see below).
+* The block needs at least two registers. With a one-register list, `**outputs*`* is not applied: the raw value is returned instead (for example, `hr:5404` returns `34561`). For one register, use a formula or `**swap**`.
 
 ---
 
 ## Reading without storing (`emit`)
 
-By default every point in `**map**` is stored. Set `**"emit": false**` on a point to read it without storing it:
+By default every point in `**map**` is stored. Set `**"emit": false`** on a point to read it without storing it:
 
 ```json
 {"name":"module_2_status","register":5403,"emit":false}
@@ -459,8 +461,8 @@ By default every point in `**map**` is stored. Set `**"emit": false**` on a poin
 
 With `**emit: false**`:
 
-* The register is still read on every poll, and its value and any error are shown by `**get plc values`**. The **Note** column shows `not emitted`.
-* The point is not written to the table (wide table or `**table_per_value`** table), and it does not get a UNS object or a policy column.
+* The register is still read on every poll, and its value and any error are shown by `**get plc values*`*. The **Note** column shows `not emitted`.
+* The point is not written to the table (wide table or `**table_per_value*`* table), and it does not get a UNS object or a policy column.
 
 Use it for a value you want to see on the command line, or check during testing, but do not want in the database. Typical cases are a module status or diagnostic register, or a raw register that a formula or another point depends on.
 
@@ -486,11 +488,11 @@ module_2_status|hr:5403  |   87|     |not emitted|
 
 Rules:
 
-* The value must be a JSON boolean: `false` or `true`. The string `"false"` is rejected with `emit must be true or false`. If `**emit`** is omitted, the point is stored.
-* `**emit`** applies to `**register*`*, `**inputRegister**`, `**coil**` and `**input**` items.
-* `**emit`** on a constant (`**value*`*) item is accepted and ignored: the constant is still copied onto the row, and `**get plc values**` does not show `not emitted` for it.
-* `**emit`** on a block with `**outputs*`* does not hide the outputs. They are still returned and stored, because each output is named by its own `**name**`, not by the block's.
-* `**emit`** does not reduce polling. To stop reading a point, remove it from `**map*`*.
+* The value must be a JSON boolean: `false` or `true`. The string `"false"` is rejected with `emit must be true or false`. If `**emit*`* is omitted, the point is stored.
+* `**emit*`* applies to `**register**`, `**inputRegister**`, `**coil**` and `**input**` items.
+* `**emit*`* on a constant (`**value**`) item is accepted and ignored: the constant is still copied onto the row, and `**get plc values**` does not show `not emitted` for it.
+* `**emit*`* on a block with `**outputs**` does not hide the outputs. They are still returned and stored, because each output is named by its own `**name**`, not by the block's.
+* `**emit*`* does not reduce polling. To stop reading a point, remove it from `**map**`.
 
 ---
 
@@ -532,10 +534,10 @@ The constants have `-` in the Tag column because nothing is read for them, and `
 
 Rules:
 
-* A constant item has `**name`** and `**value*`* only. Combining `**value**` with `**register**`, `**inputRegister**`, `**coil**` or `**input**` is rejected with `value is a constant and cannot be combined with a register`.
+* A constant item has `**name*`* and `**value**` only. Combining `**value**` with `**register**`, `**inputRegister**`, `**coil**` or `**input**` is rejected with `value is a constant and cannot be combined with a register`.
 * A map needs at least one register point. A map that contains only constants is rejected with `map['values'] has no entries`. Keep the constants in the same map as the points they describe.
-* The `**name`** must be unique in the map. A duplicate name is rejected.
-* In a `**run plc client`** command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `**table_per_value = true*`* path (no `**namespace**`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
+* The `**name*`* must be unique in the map. A duplicate name is rejected.
+* In a `**run plc client*`* command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `**table_per_value = true**` path (no `**namespace**`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
 
 ---
 
@@ -583,9 +585,9 @@ station_id     |        -|WST_1       |     |constant   |
 
 How to read it:
 
-* **Column** is the map `**name`**: the variable name used as the column in the table.
+* **Column** is the map `**name*`*: the variable name used as the column in the table.
 * **Tag** is what was read: `hr:5394+2` is two holding registers starting at 5394, `hr:5403` is one register.
-* `temperature_c`, `pressure_hpa` and `counter` are decoded with `**type`** (`float` from two registers, `long` from four registers). No formula is needed.
+* `temperature_c`, `pressure_hpa` and `counter` are decoded with `**type*`* (`float` from two registers, `long` from four registers). No formula is needed.
 * `humidity_pct`, `level_m`, `temp_f` and `mix` are formula results: `0.1 * 452`, `34561 * 0.001`, `34561 * 0.0018 + 32`, and `20 * 100 + 50 * 200`.
 * `module_2_status` was read (`87`) but is marked `not emitted`, so it is not stored.
 * The four constants have `-` as the Tag and `constant` as the Note.
@@ -688,7 +690,7 @@ station_id      |char(5)                    |
 
 ## Continuous ingest — one table per value (`table_per_value = true`)
 
-Omit `**table**` for plain `**table_per_value**` ingest. Each object in `**map**` is written to its **own table**. The table name is derived from the client `**name`** and the map `**name`** (for example, `**fdev10_temperature**` when `**name = fdev10**` and the map entry’s `**name**` is `**temperature**`). Each row includes `**timestamp**`, `**tag**`, and `**value**`.
+Omit `**table**` for plain `**table_per_value**` ingest. Each object in `**map**` is written to its **own table**. The table name is derived from the client `**name`** and the map `**name**` (for example, `**fdev10_temperature**` when `**name = fdev10**` and the map entry’s `**name**` is `**temperature**`). Each row includes `**timestamp**`, `**tag**`, and `**value**`.
 
 ```anylog
 <run plc client where type = modbus and
