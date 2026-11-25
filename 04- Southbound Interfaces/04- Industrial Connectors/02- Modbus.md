@@ -493,7 +493,7 @@ Rules:
 
 ## Constant columns (`value`)
 
-A map item with a `value` and no address is not read from the device. Its `name` becomes a column, and the same value is copied onto every row:
+A map item with a `value` and no address is not read from the device. Its `name` becomes a column, and the same value is copied onto every row of a fixed (wide) table:
 
 ```json
 {"name":"station_id","value":"WST_1"}
@@ -532,7 +532,7 @@ Rules:
 * A constant item has `name` and `value` only. Combining `value` with `register`, `inputRegister`, `coil` or `input` is rejected with `value is a constant and cannot be combined with a register`.
 * A map needs at least one register point. A map that contains only constants is rejected with `map['values'] has no entries`. Keep the constants in the same map as the points they describe.
 * The `name` must be unique in the map. A duplicate name is rejected.
-* In a `run plc client` command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `table_per_value = true` path (no `namespace`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
+* In a `run plc client` command, constants are copied onto each stored row of a fixed (wide) table and onto the objects of a fixed-table UNS path. Per-value tables and per-value UNS objects do not carry constants. The plain `table_per_value = true` path (no `namespace`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
 * You can also set constants on the `run plc client` command itself — see [Command-line `constants` and `group_by_attributes](#command-line-constants-and-group_by_attributes)`. A command-line value **replaces** a map constant with the same `name`.
 
 ---
@@ -1051,7 +1051,7 @@ blockchain get uns where name = fdev14_temperature bring.extend
 | `table_per_value` | `true` for one table per map point (omit `table`) |
 | `auto_uns` | Set `true` with `master_node` (and optional `namespace`) to register the ingested data in the UNS |
 | `map` | JSON array of points |
-| `constants` | Optional JSON object; copies those values onto every row (overrides a map constant with the same name) |
+| `constants` | Optional JSON object; copies those values onto fixed (wide) table rows and fixed-table UNS objects (overrides a map constant with the same name) |
 | `group_by_attributes` | Optional list of constant names; stored on each UNS object as `where` |
 | `namespace` | Optional UNS path used with `auto_uns` |
 | `master_node` | Required when `auto_uns` builds or updates UNS policies |
