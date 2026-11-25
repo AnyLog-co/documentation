@@ -26,8 +26,8 @@ source_path: "02 MODBUS.md"
  | 2026-11-25 | pintomax | Documented UNS ingest: table_per_value with/without namespace, fixed table; tables, columns, objects |  |
 --->
 
-AnyLog can act as a **Modbus TCP client** (over **hostname** and **port**, typically port **502**). Data is read on a 
-schedule and streamed into your local operator database as JSON, using the same **`run plc client`** pattern as 
+AnyLog can act as a **Modbus TCP client** (over `hostname` and `port`, typically port **502**). Data is read on a 
+schedule and streamed into your local operator database as JSON, using the same `run plc client` pattern as 
 [OPC-UA](./03-%20OPC-UA.md) and [EtherNet/IP](./04-%20EtherIP.md#the-run-plc-client-command).
 
 ---
@@ -36,7 +36,7 @@ schedule and streamed into your local operator database as JSON, using the same 
 
 | Requirement    | Notes                                                |
 | -------------- | ---------------------------------------------------- |
-| **`pymodbus`** | Must be installed in the AnyLog runtime environment. |
+| `pymodbus` | Must be installed in the AnyLog runtime environment. |
 
 Declare the target DBMS before streaming, for example:
 
@@ -51,7 +51,7 @@ connect dbms modbus_sensors where type = sqlite
 AnyLog only reads values from the Modbus device and it never writes to coils or registers.  
 The **Device access** column below describes what the device allows, not what AnyLog does.
 
-Modbus uses **`hostname**` and `**port`** (not `url`). **`device_id`** is the **Modbus PDU unit id** (often `0` or `1` on TCP). **`map`** is a **JSON array** of points; each object must include a **`name`** (column / logical label) and exactly one address field:
+Modbus uses `hostname` and `port` (not `url`). `device_id` is the **Modbus PDU unit id** (often `0` or `1` on TCP). `map` is a **JSON array** of points; each object must include a `name` (column / logical label) and exactly one address field:
 
 | Key | Kind | Size | Modbus function | Device access | Meaning |
 |---|---|---|---|---|---|
@@ -71,16 +71,16 @@ Bit items are emitted as `0` or `1`.
 
 ### Words: holding registers and input registers
 
-A **holding register** and an **input register** are both 16-bit words. Each one holds a whole number from 0 to 65535. A list of registers can be combined into a larger value with **`type`** (for example `float` from two registers, or `long` from four). They differ in who controls them:
+A **holding register** and an **input register** are both 16-bit words. Each one holds a whole number from 0 to 65535. A list of registers can be combined into a larger value with `type` (for example `float` from two registers, or `long` from four). They differ in who controls them:
 
 * A **holding register** is read and write on the device, so it is used for settings and setpoints as well as values. AnyLog reads it with `register`.
-* An **input register** is read only, and is normally used for sensor measurements. AnyLog reads it with `inputRegister`.
+* An `input` `register` is read only, and is normally used for sensor measurements. AnyLog reads it with `inputRegister`.
 
 ### Addresses in the device manual
 
 Device manuals often number the Modbus objects in ranges: coils `00001`–`09999`, discrete inputs `10001`–`19999`, input registers `30001`–`39999` and holding registers `40001`–`49999`.   
   
-The **`coil**`, `**input**`, `**inputRegister**` and `**register`** values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
+The `coil`, `input`, `inputRegister` and `register` values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
 
 ---
 
@@ -100,7 +100,7 @@ This map has one item for each address key: `register`, `inputRegister`, `coil` 
 >
 ```
 
-Alias: **`get modbus values`** (same keywords).
+Alias: `get modbus values` (same keywords).
 
 ```
 Modbus TCP values
@@ -116,13 +116,13 @@ The **Tag** prefix shows the Modbus object: `hr:` is a holding register, `ir:` a
 
 ## Mapping with type
 
-**`type`** decodes one or more registers into one value. There are three types:
+`type` decodes one or more registers into one value. There are three types:
 
-* **`float`**: two registers form one 32-bit IEEE 754 float.
-* **`long`**: one to four registers form one signed integer. Two registers give 32 bits, four give 64 bits.
-* **`byte`**: more than four registers. The result is a list, one 16-bit value per register.
+* `float`: two registers form one 32-bit IEEE 754 float.
+* `long`: one to four registers form one signed integer. Two registers give 32 bits, four give 64 bits.
+* `byte`: more than four registers. The result is a list, one 16-bit value per register.
 
-Without **`type`**, one register is an unsigned 16-bit value.
+Without `type`, one register is an unsigned 16-bit value.
 
 Holding registers on the simulator, with the values the node returns:
 
@@ -180,13 +180,13 @@ pressure   |ir:5397+2|    0|     |    |
 
 ## Scale, offset and convert
 
-These options change a value after it is read. They apply to **`register**` and `**inputRegister**` items only. The steps run in this order: `**swap**`, `**type**`, `**scale**` and `**offset**`, then `**convert`**.
+These options change a value after it is read. They apply to `register` and `inputRegister` items only. The steps run in this order: `swap`, `type`, `scale` and `offset`, then `convert`.
 
 The examples in this section were run against the AnyLog Modbus simulator (`hostname = 127.0.0.1`, `port = 1502`, `device_id = 1`).
 
 ### Scale and offset (`scale`, `offset`)
 
-**`scale**` multiplies the value and `**offset`** adds to it: `value * scale + offset`. You can use either one alone.
+`scale` multiplies the value and `offset` adds to it: `value * scale + offset`. You can use either one alone.
 
 ```anylog
 <get plc values where type = modbus and
@@ -218,9 +218,9 @@ Rules:
 
 * `scale` and `offset` must be numbers. Any other value rejects the whole command.
 * The result is a decimal number. `offset` alone on the register `452` returns `402.0`.
-* Without **`type`**, a list of several registers is not scaled. `[100, 200]` with `scale` `0.5` and `offset` `10` returns `[100, 200]`. Use **`type**`, `**formula**` or `**outputs`** instead.
-* `scale` and `offset` are not applied to text. With **`convert`** `"string"`, the text is returned unchanged.
-* Do not combine `scale` or `offset` with **`formula`** on the same item. The formula does the calculation instead; see [Formulas](#formulas).
+* Without `type`, a list of several registers is not scaled. `[100, 200]` with `scale` `0.5` and `offset` `10` returns `[100, 200]`. Use `type`, `formula` or `outputs` instead.
+* `scale` and `offset` are not applied to text. With `convert` `"string"`, the text is returned unchanged.
+* Do not combine `scale` or `offset` with `formula` on the same item. The formula does the calculation instead; see [Formulas](#formulas).
 * Floating-point arithmetic can add noise. For example, the float `23.5` with `offset` `-273.15` returns `-249.64999999999998`.
 
 ### Text from registers (`convert`)
@@ -249,7 +249,7 @@ model_text|hr:5406+3|ANYLOG|     |    |
 
 ## Word order (`swap`)
 
-**`swap**` reorders the words before `**type**`, `**scale**`, `**offset**`, `**convert**` or a `**formula`** runs. The registers hold `100` and `200`; with `"swap":"words"` they are read as `200`, `100`:
+`swap` reorders the words before `type`, `scale`, `offset`, `convert` or a `formula` runs. The registers hold `100` and `200`; with `"swap":"words"` they are read as `200`, `100`:
 
 ```anylog
 <get plc values where type = modbus and
@@ -288,7 +288,7 @@ With one register, `words` has no effect. `bytes` and `both` give the same resul
 
 ## Formulas
 
-A **`register**` or `**inputRegister**` map item can carry a `**formula**`: a math expression that converts the raw register value into the value you want. The formula runs on every read, in `**get plc values**` and in `**run plc client`**.
+A `register` or `inputRegister` map item can carry a `formula`: a math expression that converts the raw register value into the value you want. The formula runs on every read, in `get plc values` and in `run plc client`.
 
 ```json
 {"name":"humidity_pct","register":5396,"formula":"0.1 * x"}
@@ -296,14 +296,14 @@ A **`register**` or `**inputRegister**` map item can carry a `**formula**`: a ma
 
 ### What `x` is
 
-The raw words are processed in this order: **`swap**` → `**type**` → `**formula**`. `**x`** is the result of the first two steps:
+The raw words are processed in this order: `swap` → `type` → `formula`. `x` is the result of the first two steps:
 
 | Map item                       | `x` is                                                              |
 | ------------------------------ | ------------------------------------------------------------------- |
 | One register, no `type`        | The unsigned 16-bit value (0 to 65535)                              |
 | `"type":"long"`                | The signed integer (1 to 4 consecutive registers)                   |
 | `"type":"float"`               | The IEEE 754 float (2 consecutive registers)                        |
-| A list of registers, no `type` | The list of 16-bit words; use **`x[0]`**, `**x[1]`**, ... (0-based) |
+| A list of registers, no `type` | The list of 16-bit words; use `x[0]`, `x[1]`, ... (0-based) |
 
 ### What a formula can contain
 
@@ -318,11 +318,11 @@ The raw words are processed in this order: **`swap**` → `**type**` → `**form
 
 ### Rules
 
-* Formulas apply to **`register`** and **`inputRegister**` items only. `**coil**` and `**input`** items do not support modifiers.
-* A **`formula`** replaces **`convert**`, `**scale**` and `**offset`**. Using them on the same item is rejected with `formula is used instead of convert, scale, and offset`.
+* Formulas apply to `register` and `inputRegister` items only. `coil` and `input` items do not support modifiers.
+* A `formula` replaces `convert`, `scale` and `offset`. Using them on the same item is rejected with `formula is used instead of convert, scale, and offset`.
 * The expression is checked when the command is issued. A syntax error, an unknown name, or a call to a function that is not in the list above rejects the whole command with a message such as `Modbus: map item 't': formula: unknown name 'foo'`.
 * A formula that fails while reading (for example a division by zero) returns no value for that point. The Error column shows the reason, such as `decode error: division by zero`. The other points of the command are still returned.
-* A register can be used by one map item only. If two items read the same register, the first one is silently dropped and only the last one is returned. In the test, `first` (`0.1 * x`) and `second` (plain) both read `5396`, and only `second` came back (`452`). To derive several values from one block, use **`outputs`**.
+* A register can be used by one map item only. If two items read the same register, the first one is silently dropped and only the last one is returned. In the test, `first` (`0.1 * x`) and `second` (plain) both read `5396`, and only `second` came back (`452`). To derive several values from one block, use `outputs`.
 
 ### How formulas evaluate
 
@@ -382,15 +382,15 @@ mix          |hr:5409+2|12000|     |    |
 ```
 
 * `humidity_pct`: the register holds `452`, and `0.1 * x` gives `45.2`.
-* `temperature_f`: **`type`** `float` first turns the two registers into `23.5`, then the formula gives `74.3`.
+* `temperature_f`: `type` `float` first turns the two registers into `23.5`, then the formula gives `74.3`.
 * `mix`: the two registers hold `100` and `200`, so `20 * 100 + 50 * 200 = 12000`.
-* Floating-point arithmetic can add noise: without **`round`**, the `temperature_f` formula returns `74.30000000000001`. Use `round(..., n)` to keep the stored value clean.
+* Floating-point arithmetic can add noise: without `round`, the `temperature_f` formula returns `74.30000000000001`. Use `round(..., n)` to keep the stored value clean.
 
 ---
 
 ## Several values from one register block (`outputs`)
 
-When a device packs several values in consecutive registers, read the block once and derive each column with its own formula. The block item lists the registers and an **`outputs`** array of `{"name": ..., "formula": ...}`. In each formula, **`x[i]`** is register `i` of the block (0-based), after the block's **`swap**`. Each output becomes a column named by its `**name`**.
+When a device packs several values in consecutive registers, read the block once and derive each column with its own formula. The block item lists the registers and an `outputs` array of `{"name": ..., "formula": ...}`. In each formula, `x[i]` is register `i` of the block (0-based), after the block's `swap`. Each output becomes a column named by its `name`.
 
 ```anylog
 <get plc values where type = modbus and
@@ -416,8 +416,8 @@ max_all|hr:5409+4|  400|     |    |
 
 One read of four registers (`hr:5409+4`) produced three columns. `sum_01` is `100 + 200`, `half_2` is half of `x[2]` (`300`), and `max_all` is the largest of the four registers.
 
-**Note:** you only add an **`outputs`** entry for each column you want — you do **not** need one output per register. To skip a value, omit it from **`outputs`**.  
-That matters when the device forces a wide read (for example **10** registers at once) but only **3** of them hold useful data: list those three in **`outputs`** and ignore the rest.
+**Note:** you only add an `outputs` entry for each column you want — you do **not** need one output per register. To skip a value, omit it from `outputs`.  
+That matters when the device forces a wide read (for example **10** registers at once) but only **3** of them hold useful data: list those three in `outputs` and ignore the rest.
 
 If one output fails while reading, only that column reports the error. Here `x[1] - 200` is `0`:
 
@@ -442,27 +442,27 @@ bad   |hr:5409+2|     |formula error: division by zero|    |
 
 Rules for `outputs`:
 
-* The item must be a **`register`** or **`inputRegister**` block (a list of registers) and `**outputs`** must be a non-empty list.
-* The block can use **`swap`**, but not **`type**`, `**convert**`, `**formula**`, `**scale**` or `**offset`**.
-* Every output needs a **`name`** and a **`formula`**, and every formula is checked when the command is issued.
+* The item must be a `register` or `inputRegister` block (a list of registers) and `outputs` must be a non-empty list.
+* The block can use `swap`, but not `type`, `convert`, `formula`, `scale` or `offset`.
+* Every output needs a `name` and a `formula`, and every formula is checked when the command is issued.
 * If one output fails while reading, only that column is reported as a `formula error`; the other outputs of the block are still returned.
-* Each output is its own column. **`emit`** on the block does not hide them (see below).
-* The block needs at least two registers. With a one-register list, **`outputs`** is not applied: the raw value is returned instead (for example, `hr:5404` returns `34561`). For one register, use a formula or **`swap`**.
+* Each output is its own column. `emit` on the block does not hide them (see below).
+* The block needs at least two registers. With a one-register list, `outputs` is not applied: the raw value is returned instead (for example, `hr:5404` returns `34561`). For one register, use a formula or `swap`.
 
 ---
 
 ## Reading without storing (`emit`)
 
-By default every point in **`map**` is stored. Set `**"emit": false`** on a point to read it without storing it:
+By default every point in `map` is stored. Set `"emit": false` on a point to read it without storing it:
 
 ```json
 {"name":"module_2_status","register":5403,"emit":false}
 ```
 
-With **`emit: false`**:
+With `emit: false`:
 
-* The register is still read on every poll, and its value and any error are shown by **`get plc values`**. The **Note** column shows `not emitted`.
-* The point is not written to the table (wide table or **`table_per_value`** table), and it does not get a UNS object or a policy column.
+* The register is still read on every poll, and its value and any error are shown by `get plc values`. The **Note** column shows `not emitted`.
+* The point is not written to the table (wide table or `table_per_value` table), and it does not get a UNS object or a policy column.
 
 Use it for a value you want to see on the command line, or check during testing, but do not want in the database. Typical cases are a module status or diagnostic register, or a raw register that a formula or another point depends on.
 
@@ -488,17 +488,17 @@ module_2_status|hr:5403  |   87|     |not emitted|
 
 Rules:
 
-* The value must be a JSON boolean: `false` or `true`. The string `"false"` is rejected with `emit must be true or false`. If **`emit`** is omitted, the point is stored.
-* **`emit`** applies to **`register**`, `**inputRegister**`, `**coil**` and `**input`** items.
-* **`emit`** on a constant (**`value**`) item is accepted and ignored: the constant is still copied onto the row, and `**get plc values`** does not show `not emitted` for it.
-* **`emit`** on a block with **`outputs**` does not hide the outputs. They are still returned and stored, because each output is named by its own `**name`**, not by the block's.
-* **`emit`** does not reduce polling. To stop reading a point, remove it from **`map`**.
+* The value must be a JSON boolean: `false` or `true`. The string `"false"` is rejected with `emit must be true or false`. If `emit` is omitted, the point is stored.
+* `emit` applies to `register`, `inputRegister`, `coil` and `input` items.
+* `emit` on a constant (`value`) item is accepted and ignored: the constant is still copied onto the row, and `get plc values` does not show `not emitted` for it.
+* `emit` on a block with `outputs` does not hide the outputs. They are still returned and stored, because each output is named by its own `name`, not by the block's.
+* `emit` does not reduce polling. To stop reading a point, remove it from `map`.
 
 ---
 
 ## Constant columns (`value`)
 
-A map item with a **`value**` and no address is not read from the device. Its `**name`** becomes a column, and the same value is copied onto every row:
+A map item with a `value` and no address is not read from the device. Its `name` becomes a column, and the same value is copied onto every row:
 
 ```json
 {"name":"station_id","value":"WST_1"}
@@ -534,16 +534,16 @@ The constants have `-` in the Tag column because nothing is read for them, and `
 
 Rules:
 
-* A constant item has **`name`** and **`value**` only. Combining `**value**` with `**register**`, `**inputRegister**`, `**coil**` or `**input`** is rejected with `value is a constant and cannot be combined with a register`.
+* A constant item has `name` and `value` only. Combining `value` with `register`, `inputRegister`, `coil` or `input` is rejected with `value is a constant and cannot be combined with a register`.
 * A map needs at least one register point. A map that contains only constants is rejected with `map['values'] has no entries`. Keep the constants in the same map as the points they describe.
-* The **`name`** must be unique in the map. A duplicate name is rejected.
-* In a **`run plc client`** command, constants are copied onto each stored row of the wide table and of the UNS path. The plain **`table_per_value = true**` path (no `**namespace`**) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
+* The `name` must be unique in the map. A duplicate name is rejected.
+* In a `run plc client` command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `table_per_value = true` path (no `namespace`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
 
 ---
 
 ## All map options together
 
-One command with a float, formulas, a two-register formula, a point that is read but not stored (**`emit`**), and constants:
+One command with a float, formulas, a two-register formula, a point that is read but not stored (`emit`), and constants:
 
 ```anylog
 <get plc values where type = modbus and
@@ -585,9 +585,9 @@ station_id     |        -|WST_1       |     |constant   |
 
 How to read it:
 
-* **Column** is the map **`name`**: the variable name used as the column in the table.
+* **Column** is the map `name`: the variable name used as the column in the table.
 * **Tag** is what was read: `hr:5394+2` is two holding registers starting at 5394, `hr:5403` is one register.
-* `temperature_c`, `pressure_hpa` and `counter` are decoded with **`type`** (`float` from two registers, `long` from four registers). No formula is needed.
+* `temperature_c`, `pressure_hpa` and `counter` are decoded with `type` (`float` from two registers, `long` from four registers). No formula is needed.
 * `humidity_pct`, `level_m`, `temp_f` and `mix` are formula results: `0.1 * 452`, `34561 * 0.001`, `34561 * 0.0018 + 32`, and `20 * 100 + 50 * 200`.
 * `module_2_status` was read (`87`) but is marked `not emitted`, so it is not stored.
 * The four constants have `-` as the Tag and `constant` as the Note.
@@ -646,7 +646,7 @@ good   |hr:5396| 45.2|                              |    |
 
 ## Continuous ingest — one table with all data
 
-With **`table**` and `**dbms**` set, all points from `**map`** land in **one table**. Each poll inserts **one row**; every object in **`map`** is **one column**: the map **`name`** is the **column name**, and that column stores the **value** read for that point.
+With `table` and `dbms` set, all points from `map` land in **one table**. Each poll inserts **one row**; every object in `map` is **one column**: the map `name` is the **column name**, and that column stores the **value** read for that point.
 
 ```anylog
 <run plc client where type = modbus and
@@ -668,7 +668,7 @@ Tables:
 
 * `modbus_sensors`
 
-The constant **`station_id`** is a column on the same table, copied onto every row:
+The constant `station_id` is a column on the same table, copied onto every row:
 
 ```
 Schema for DBMS: 'env_sensor' and Table: 'modbus_sensors'
@@ -690,7 +690,7 @@ station_id      |char(5)                    |
 
 ## Continuous ingest — one table per value (`table_per_value = true`)
 
-Omit **`table**` for plain `**table_per_value**` ingest. Each object in `**map`** is written to its **own table**. The table name is derived from the client **`name`** and the map **`name**` (for example, `**fdev10_temperature**` when `**name = fdev10**` and the map entry’s `**name**` is `**temperature**`). Each row includes `**timestamp**`, `**tag**`, and `**value`**.
+Omit `table` for plain `table_per_value` ingest. Each object in `map` is written to its **own table**. The table name is derived from the client `name` and the map `name` (for example, `fdev10_temperature` when `name = fdev10` and the map entry’s `name` is `temperature`). Each row includes `timestamp`, `tag`, and `value`.
 
 ```anylog
 <run plc client where type = modbus and
@@ -715,7 +715,7 @@ Tables:
 * `fdev10_humidity_pct`
 * `fdev10_pressure`
 
-A map constant such as **`station_id**` is accepted, but with plain `**table_per_value`** (no UNS) it does **not** become a table and is **not** added as a column on the per-value tables. Example columns for **`fdev10_pressure`** (the other two tables use the same layout):
+A map constant such as `station_id` is accepted, but with plain `table_per_value` (no UNS) it does **not** become a table and is **not** added as a column on the per-value tables. Example columns for `fdev10_pressure` (the other two tables use the same layout):
 
 ```
 Schema for DBMS: 'env_sensor' and Table: 'fdev10_pressure'
@@ -734,7 +734,7 @@ value           |decimal                    |
 
 ## Ingest with UNS (`auto_uns` + `master_node`)
 
-With **`auto_uns = true**` and `**master_node**`, Modbus ingest is registered in the UNS (object policies on the blockchain). Optional `**namespace`** sets the UNS path. See [Unified Namespace](../../08-%20Blockchain%20&%20Metadata/04-%20Unified%20Namespace.md) for background.
+With `auto_uns = true` and `master_node`, Modbus ingest is registered in the UNS (object policies on the blockchain). Optional `namespace` sets the UNS path. See [Unified Namespace](../../08-%20Blockchain%20&%20Metadata/04-%20Unified%20Namespace.md) for background.
 
 ### `table_per_value` with `namespace`
 
@@ -765,7 +765,7 @@ Tables:
 
 (The trailing `_1` is from the UNS mapping.)
 
-Example columns for **`fdev11_temperature_1`** (the other two tables use the same layout, with the value column named for that map point):
+Example columns for `fdev11_temperature_1` (the other two tables use the same layout, with the value column named for that map point):
 
 ```
 Schema for DBMS: 'env_sensor' and Table: 'fdev11_temperature_1'
@@ -779,7 +779,7 @@ temperature     |decimal                    |
 timestamp       |timestamp without time zone|
 ```
 
-Namespace (one leaf per map point; constant **`station_id`** is not a table):
+Namespace (one leaf per map point; constant `station_id` is not a table):
 
 * `fa9/mid9/device9/fdev11_temperature`
 * `fa9/mid9/device9/fdev11_humidity_pct`
@@ -817,7 +817,7 @@ blockchain get uns where name = fdev11_temperature bring.extend
 
 ### `table_per_value` without `namespace`
 
-Same map, different client **`name**`, no `**namespace`**:
+Same map, different client `name`, no `namespace`:
 
 ```anylog
 <run plc client where type = modbus and
@@ -843,7 +843,7 @@ Tables:
 * `fdev12_humidity_pct_1`
 * `fdev12_pressure_1`
 
-Columns match the **`fdev11_*`** layout above (value column named for the map point). Namespace (auto, no user `**namespace**`):
+Columns match the `fdev11_*` layout above (value column named for the map point). Namespace (auto, no user `namespace`):
 
 * `fdev12_1/register/temperature`
 * `fdev12_1/register/humidity_pct`
@@ -881,7 +881,7 @@ blockchain get uns where name = fdev12_temperature bring.extend
 
 ### Fixed table with `namespace`
 
-One wide table, same map, with **`auto_uns**` and `**namespace`**:
+One wide table, same map, with `auto_uns` and `namespace`:
 
 ```anylog
 <run plc client where type = modbus and
@@ -922,7 +922,7 @@ pressure        |decimal                    |
 station_id      |char(5)                    |
 ```
 
-Namespace (one leaf per sensor column; constant **`station_id`** is on each object and as a table column):
+Namespace (one leaf per sensor column; constant `station_id` is on each object and as a table column):
 
 * `fa9/mid9/device9/fdev13_temperature`
 * `fa9/mid9/device9/fdev13_humidity_pct`
@@ -964,7 +964,7 @@ blockchain get uns where name = fdev13_temperature bring.extend
 
 ### Fixed table without `namespace`
 
-Same wide-table pattern, no **`namespace`**:
+Same wide-table pattern, no `namespace`:
 
 ```anylog
 <run plc client where type = modbus and
@@ -988,7 +988,7 @@ Tables:
 
 * `modbus_sensors_uns2`
 
-Columns match **`modbus_sensors_uns`** above (`temperature`, `humidity_pct`, `pressure`, `station_id`). Namespace (auto, no user **`namespace`**):
+Columns match `modbus_sensors_uns` above (`temperature`, `humidity_pct`, `pressure`, `station_id`). Namespace (auto, no user `namespace`):
 
 * `fdev14_1/register/fdev14_temperature`
 * `fdev14_1/register/fdev14_humidity_pct`
@@ -1032,20 +1032,20 @@ blockchain get uns where name = fdev14_temperature bring.extend
 
 ## Command keywords (summary)
 
-| Keyword            | Required / notes                                                                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`             | `modbus`                                                                                                                                                            |
-| `hostname`, `port` | Modbus TCP target                                                                                                                                                   |
-| `device_id`        | PDU unit id                                                                                                                                                         |
-| `frequency`        | Poll interval                                                                                                                                                       |
-| `name`             | Unique client name                                                                                                                                                  |
-| `dbms`             | Target DBMS                                                                                                                                                         |
-| `table`            | Wide-table ingest; omit with **`table_per_value = true**` or `**auto_uns = true`**                                                                                  |
-| `table_per_value`  | `true` for one table per map point (omit **`table`**)                                                                                                               |
-| `auto_uns`         | Default **`true**` on Enterprise with `**table_per_value**`; set `**false**` to skip UNS. Use with `**master_node**` (and optional `**namespace`**) to register UNS |
-| `map`              | JSON array of points                                                                                                                                                |
-| `namespace`        | Optional UNS path with **`table_per_value**` / `**auto_uns`**                                                                                                       |
-| `master_node`      | Required when **`auto_uns`** builds or updates UNS policies                                                                                                         |
+| Keyword | Required / notes |
+|---|---|
+| `type` | `modbus` |
+| `hostname`, `port` | Modbus TCP target |
+| `device_id` | PDU unit id |
+| `frequency` | Poll interval |
+| `name` | Unique client name |
+| `dbms` | Target DBMS |
+| `table` | Wide-table ingest; omit with `table_per_value = true` or `auto_uns = true` |
+| `table_per_value` | `true` for one table per map point (omit `table`) |
+| `auto_uns` | Default `true` on Enterprise with `table_per_value`; set `false` to skip UNS. Use with `master_node` (and optional `namespace`) to register UNS |
+| `map` | JSON array of points |
+| `namespace` | Optional UNS path with `table_per_value` / `auto_uns` |
+| `master_node` | Required when `auto_uns` builds or updates UNS policies |
 
 ---
 
