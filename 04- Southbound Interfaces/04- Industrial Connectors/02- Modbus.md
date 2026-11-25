@@ -24,6 +24,7 @@ source_path: "02 MODBUS.md"
  | 2026-11-25 | pintomax | table_per_value example: one device, three map entries |  |
  | 2026-11-25 | pintomax | Continuous ingest examples include a map constant; wide table stores it, table_per_value does not |  |
  | 2026-11-25 | pintomax | Documented UNS ingest: table_per_value with/without namespace, fixed table; tables, columns, objects |  |
+ | 2026-11-25 | pintomax | Documented command-line constants and group_by_attributes |  |
 --->
 
 AnyLog can act as a **Modbus TCP client** (over `hostname` and `port`, typically port **502**). Data is read on a 
@@ -79,7 +80,7 @@ A **holding register** and an **input register** are both 16-bit words. Each one
 ### Addresses in the device manual
 
 Device manuals often number the Modbus objects in ranges: coils `00001`–`09999`, discrete inputs `10001`–`19999`, input registers `30001`–`39999` and holding registers `40001`–`49999`.   
-  
+
 The `coil`, `input`, `inputRegister` and `register` values in the map are the Modbus addresses, so check your manual for the address base: a coil listed as `00001` is usually address `0` in the map.
 
 ---
@@ -538,6 +539,7 @@ Rules:
 * A map needs at least one register point. A map that contains only constants is rejected with `map['values'] has no entries`. Keep the constants in the same map as the points they describe.
 * The `name` must be unique in the map. A duplicate name is rejected.
 * In a `run plc client` command, constants are copied onto each stored row of the wide table and of the UNS path. The plain `table_per_value = true` path (no `namespace`) writes each point to its own table with `tag` and `value` columns, and does not carry the constant columns.
+* You can also set constants on the `run plc client` command itself — see [Command-line `constants` and `group_by_attributes`](#command-line-constants-and-group_by_attributes). A command-line value **replaces** a map constant with the same `name`.
 
 ---
 
@@ -729,6 +731,17 @@ timestamp       |timestamp without time zone|
 tag             |char(8)                    |
 value           |decimal                    |
 ```
+
+---
+
+## Command-line `constants` and `group_by_attributes`
+
+On `run plc client`, you can specify constants on the **command line** (`constants = {...}`) and/or in the **map** (`{"name":...,"value":...}`). Which you use is up to you. Either way, each constant becomes a **column** in the table. You can also pass `group_by_attributes` as a command keyword.
+
+* `constants = {"station_id":"WS-001",...}` copies those keys onto **every stored row** (schema columns). A command-line constant **replaces** a map `{"name":...,"value":...}` entry with the same name.
+* `group_by_attributes = [station_id]` stores those attribute values on each UNS **object** as a `where` clause (for example `station_id = 'WS-001'`). Names in the list must match keys from `constants`. Only schema columns are inserted as data; `group_by_attributes` shapes the object/`where`.
+
+See [Use case with multiple weather stations with multiple operators](#use-case-with-multiple-weather-stations-with-multiple-operators) for a full example.
 
 ---
 
@@ -1032,20 +1045,133 @@ blockchain get uns where name = fdev14_temperature bring.extend
 
 ## Command keywords (summary)
 
-| Keyword | Required / notes |
-|---|---|
-| `type` | `modbus` |
-| `hostname`, `port` | Modbus TCP target |
-| `device_id` | PDU unit id |
-| `frequency` | Poll interval |
-| `name` | Unique client name |
-| `dbms` | Target DBMS |
-| `table` | Wide-table ingest; omit with `table_per_value = true` or `auto_uns = true` |
+| Keyword            | Required / notes                                                                |
+| ------------------ | ------------------------------------------------------------------------------- |
+| `type`             | `modbus`                                                                        |
+| `hostname`, `port` | Modbus TCP target                                                               |
+| `device_id`        | PDU unit id                                                                     |
+| `frequency`        | Poll interval                                                                   |
+| `name`             | Unique client name                                                              |
+| `dbms`             | Target DBMS                                                                     |
+| `table` | Wide-table ingest; omit when `table_per_value = true` |
 | `table_per_value` | `true` for one table per map point (omit `table`) |
-| `auto_uns` | Default `true` on Enterprise with `table_per_value`; set `false` to skip UNS. Use with `master_node` (and optional `namespace`) to register UNS |
+| `auto_uns` | Set `true` with `master_node` (and optional `namespace`) to register the ingested data in the UNS |
 | `map` | JSON array of points |
-| `namespace` | Optional UNS path with `table_per_value` / `auto_uns` |
+| `constants` | Optional JSON object; copies those values onto every row (overrides a map constant with the same name) |
+| `group_by_attributes` | Optional list of constant names; stored on each UNS object as `where` |
+| `namespace` | Optional UNS path used with `auto_uns` |
 | `master_node` | Required when `auto_uns` builds or updates UNS policies |
+
+---
+
+## Use case with multiple weather stations with multiple operators
+
+Each operator node runs **one** `run plc client` for its station — same map and shared table `weather_stations_modbus`, different host, client `name`, and `constants` (here `station_id` **WS-001** vs **WS-002**). `group_by_attributes = [station_id]` keeps each station’s UNS objects scoped by station.
+
+**The map and the constant names must be the same on every operator.** All operators that write to `weather_stations_modbus` must use the identical `map` (same `name` values and the same register addresses) and the same constant keys (`device`, `model`, `station_id`). Otherwise the rows do not match the table schema. Only the values change from one operator to the next: `hostname`, client `name`, and the constant values (`station_id`, `device`, `model`).
+
+Note: The table `weather_stations_modbus` is virtual and its information stays in the ledger once created, so the first node that runs the command creates the table and its metadata, and every other operator node sees that it exists and writes its data into it, as long as it uses the same `dbms`, `table`, and `map`.
+
+**Operator 1 — station WS-001**
+
+```anylog
+<run plc client where type = modbus and
+    name = modbus-1 and
+    hostname = 127.0.0.1 and
+    port = 1502 and
+    device_id = 1 and
+    frequency = 10 and
+    dbms = env_sensor and
+    table = weather_stations_modbus and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    group_by_attributes = [station_id] and
+    constants = {"device":"mb1-dev1","model":"MX1234D1","station_id":"WS-001"} and
+    map = [{"name":"pressure_hpa","register":5394},
+           {"name":"temperature_f","register":5395},
+           {"name":"relative_humidity_pct","register":5396},
+           {"name":"wind_speed_ms","register":5397},
+           {"name":"wind_direction_deg","register":5398}]
+>
+```
+
+**Operator 2 — station WS-002**
+
+```anylog
+<run plc client where type = modbus and
+    name = modbus-2 and
+    hostname = 127.0.0.2 and
+    port = 1502 and
+    device_id = 1 and
+    frequency = 10 and
+    dbms = env_sensor and
+    table = weather_stations_modbus and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    group_by_attributes = [station_id] and
+    constants = {"device":"mb2-dev2","model":"FX1234D9","station_id":"WS-002"} and
+    map = [{"name":"pressure_hpa","register":5394},
+           {"name":"temperature_f","register":5395},
+           {"name":"relative_humidity_pct","register":5396},
+           {"name":"wind_speed_ms","register":5397},
+           {"name":"wind_direction_deg","register":5398}]
+>
+```
+
+Tables:
+
+* `weather_stations_modbus`
+
+Both operators write to the same table. Rows are distinguished by `station_id` (and the other constants). The table has the five sensor columns plus `device`, `model`, and `station_id`:
+
+```
+Schema for DBMS: 'env_sensor' and Table: 'weather_stations_modbus'
+Column Name             Column Type                 
+-----------------------|---------------------------|
+row_id                 |integer                    |
+insert_timestamp       |timestamp without time zone|
+tsd_name               |char(3)                    |
+tsd_id                 |int                        |
+timestamp              |timestamp without time zone|
+duration               |int                        |
+pressure_hpa           |decimal                    |
+temperature_f          |decimal                    |
+relative_humidity_pct  |decimal                    |
+wind_speed_ms          |decimal                    |
+wind_direction_deg     |decimal                    |
+device                 |char(...)                  |
+model                  |char(...)                  |
+station_id             |char(...)                  |
+```
+
+Sample rows from both operators in the same table (`station_id` **WS-001** vs **WS-002**):
+
+```
+timestamp       pressure_hpa temperature_f relative_humidity_pct wind_speed_ms wind_direction_deg device   model    station_id
+--------------- ------------ ------------- --------------------- ------------- ------------------ -------- -------- ----------
+YY-MM-DD H:M:S          1013          72.5                  45.0           3.2                180 mb1-dev1 MX1234D1 WS-001
+YY-MM-DD H:M:S          1009          68.1                  52.0           4.1                225 mb2-dev2 FX1234D9 WS-002
+YY-MM-DD H:M:S          1013          72.6                  45.0           3.3                182 mb1-dev1 MX1234D1 WS-001
+YY-MM-DD H:M:S          1009          68.0                  52.0           4.0                224 mb2-dev2 FX1234D9 WS-002
+```
+
+Example UNS object for station **WS-001** (`where` from `group_by_attributes`) of temperature — see `column` and `where`:
+
+```json
+{
+  "object": {
+    "device": "mb1-dev1",
+    "model": "MX1234D1",
+    "station_id": "WS-001",
+    "name": "temperature_f",
+    "column": "temperature_f",
+    "modbus": {"register": "hr:5395"},
+    "dbms": "env_sensor",
+    "table": "weather_stations_modbus",
+    "where": "station_id = 'WS-001'"
+  }
+}
+```
 
 ---
 
