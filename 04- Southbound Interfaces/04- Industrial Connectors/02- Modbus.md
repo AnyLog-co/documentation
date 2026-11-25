@@ -1,9 +1,10 @@
 ---
 
-## title: Modbus TCP
+title: Modbus TCP
 description: Pull coils, discrete inputs, and holding/input registers from Modbus TCP devices into AnyLog using run plc client.
 layout: page
 source_path: "02 MODBUS.md"
+---
 
 
 
