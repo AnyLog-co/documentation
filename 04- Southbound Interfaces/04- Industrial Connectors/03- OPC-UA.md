@@ -426,13 +426,13 @@ Each file holds one of the two commands above. `my_run_cmd.out` is for the run w
 
 This pulls the data using OPC-UA and assigns it to the tables according to the info in the policies.
 
-### `constants` and `group_by_attributes`
+### Constants and `group_by_attributes`
 
 Both are optional on `run plc client`. `get opcua struct` with `format = run_client` copies `group_by_attributes` onto the generated command. It does not accept `constants`, so that keyword is added on the `run plc client` command.
 
 ```anylog
 constants = {"station_id":"RIG-1", "site":"WEST"} and
-group_by_attributes = [rig_name]
+group_by_attributes = ["rig_name"]
 ```
 
 * `constants` copies each key onto the stored row. A value is a string, a number, or a bool. The row keeps the value when the table has a column for it: a fixed table, or a mapping schema that names the column.  
@@ -471,6 +471,14 @@ The two examples below use the same policy, `b06e3717bc7ea3e237111c89fe4e3064`, 
   }
 }
 ```
+
+The command and the policy can also set constants, such as `modeid` and `serialno`:
+
+```anylog
+constants = {"station_id":"RIG-1", "modeid":"MODEL-X1", "serialno":"SN-0042"}
+```
+
+These keys are copied onto a row only when the table has a column for them, as described in [Constants and `group_by_attributes`](#constants-and-group_by_attributes).
 
 #### Named table, no UNS
 
