@@ -22,6 +22,8 @@ every connection command means the same schema has to be kept in sync by hand in
 The alternative: declare the point map once as a policy on the blockchain, and have each connection look it up
 by name instead of restating it.
 
+AnyLog only reads data from the DNP3 outstation. It never writes to the outstation, and the policy only describes which points to read. The `dnp3` policy does not send commands or change any value on the device.
+
 ## The `dnp3` policy type
 
 The policy has one required shape:
@@ -43,7 +45,7 @@ The policy has one required shape:
 
 - `namespace` + `name` together identify the policy — this pair is the lookup key, and not coincidentally, it's
   the same `namespace`/`name` pair used when registering the connection in the UNS (see
-  <a href="../05-%20DNP3.md#dynamic-ingest-with-uns-namespace--master_node" target="_blank">DNP3 — Dynamic ingest with UNS</a>). Using the same
+  <a href="../05-%20DNP3.md#ingest-with-uns-auto_uns--namespace--master_node" target="_blank">DNP3 — Ingest with UNS</a>). Using the same
   values for both isn't required by the platform, but it keeps one connection's identity, UNS registration, and
   mapping policy all pointing at the same pair of values instead of three independently-tracked names.
 - `schema` is exactly the same array documented as `map` in
@@ -100,7 +102,7 @@ in the standard `run plc client` command:
     frequency = !dnp_frequency and
     name = !dnp_name and
     dbms = !default_dbms and
-    dynamic = true and
+    auto_uns = true and
     namespace = !base_namespace and
     master_node = !ledger_conn and
     map = !dnp_schema

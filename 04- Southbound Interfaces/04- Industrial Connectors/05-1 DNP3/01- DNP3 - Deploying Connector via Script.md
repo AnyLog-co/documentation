@@ -145,7 +145,7 @@ if !enable_tls == true goto declare-dnp3-tls
     frequency = !dnp_frequency and
     name = !dnp_name and
     dbms = !default_dbms and
-    dynamic = true and
+    auto_uns = true and
     namespace = !base_namespace and
     master_node = !ledger_conn and
     map =  !dnp_schema
@@ -161,7 +161,7 @@ goto end-script
     frequency = !dnp_frequency and
     name = !dnp_name and
     dbms = !default_dbms and
-    dynamic = true and
+    auto_uns = true and
     namespace = !base_namespace and
     master_node = !ledger_conn and
     map =  !dnp_schema and
@@ -173,7 +173,7 @@ goto end-script
 ```
 
 Both branches are the same `run plc client where type = dnp3 ...` call documented in
-<a href="../05-%20DNP3.md#dynamic-ingest-with-uns-namespace--master_node" target="_blank">DNP3 — Dynamic ingest with UNS</a>; the only difference is
+<a href="../05-%20DNP3.md#ingest-with-uns-auto_uns--namespace--master_node" target="_blank">DNP3 — Ingest with UNS</a>; the only difference is
 whether the four `enable_tls`/`tls_*` keywords are included. `!dnp_schema` (from either `:check-policy:` or
 `:prep-policy:` → `:publish-policy:` → `:check-policy:`) supplies `map`, and `!base_namespace` /
 `!dnp_name` supply `namespace` — so the UNS registration and the policy lookup key are the same values,
