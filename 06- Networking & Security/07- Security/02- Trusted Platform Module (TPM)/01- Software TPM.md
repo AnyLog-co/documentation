@@ -9,6 +9,7 @@ source_path: "01- Software TPM.md"
  **Date**   | **Name**      | **Change**         | **Version** |
  |------------|---------------|---------------|----------|
  | 2026-07-17 | Eric Aquaronne | added change log | 2.0.2606 |
+ | 2026-10-09 | Massimiliano | Document make_persistent for TPM keys |  |
 
 --->
 
@@ -175,7 +176,7 @@ A common sequence is:
 1. Start the TPM API instance
 2. Configure the AnyLog node with `tpm set`
 3. Enable TPM support with `tpm enabled = on`
-4. Create node keys with `id create keys for node where password = [password]`
+4. Create node keys with `id create keys for node where password = [password] and make_persistent = true`
 5. Optionally store the node key password with `tpm set node key password = [password]`
 6. Verify the TPM configuration with `tpm get info`
 7. Enable node authentication with `set node authentication on`
@@ -185,11 +186,33 @@ Example:
 ```anylog
 tpm set where conn = 192.168.86.31:8001 and tpm_dir = /Users/roy/Github-Repos/AnyLog-TPM/multiple-instances/shared_dir_node1
 tpm enabled = on
-id create keys for node where password = abc
+id create keys for node where password = abc and make_persistent = true
 tpm set node key password = abc
 tpm get info
 set node authentication on
 ```
+
+`make_persistent = true` keeps a TPM key across a TPM restart. It is accepted on these commands:
+
+```anylog
+id create keys for node where password = abc and make_persistent = true
+```
+
+```anylog
+id create keys where password = abc and keys_file = root_keys and make_persistent = true
+```
+
+```anylog
+<id generate certificate authority where country = US and state = CA and locality = "Redwood City" and
+    org = AnyLog and output_name = anylogca and
+    hostname = anylogca and
+    expiration_days = 3650 and
+    tpm = true and
+    make_persistent = true
+>
+```
+
+`id generate certificate request` and `id sign certificate request` do not create a TPM key, so they do not take `make_persistent`.
 
 ## TPM Commands in AnyLog
 
@@ -274,7 +297,7 @@ Important behavior from the implementation:
 
 - the TPM configuration must already be set
 - the node key must already exist in TPM
-- if the node key does not exist, AnyLog returns an error instructing you to create it with `id create keys for node ...`
+- if the node key does not exist, AnyLog returns an error instructing you to create it with `id create keys for node where password = [password] and make_persistent = true`
 
 In practice, run this command after creating the node key.
 
@@ -323,5 +346,6 @@ curl http://localhost:8001/health
 
 ## Related Documentation
 
+- [Hardware TPM](./02-%20TMP%20Configuration.md)
 - [Authentication](../01-%20Built-in%20Authentication/01-%20Authentication.md)
 - [Secure Network](../../03-%20Securing%20the%20Network.md)

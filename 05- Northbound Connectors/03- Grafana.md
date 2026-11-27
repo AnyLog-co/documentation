@@ -28,7 +28,7 @@ layout: page
 
 # Grafana
 
-[Grafana](https://grafana.com/) can be used to visualize operational data and metadata available through an AnyLog network.
+<a href="https://grafana.com/" target="_blank">Grafana</a> can be used to visualize operational data and metadata available through an AnyLog network.
 
 Grafana connects to an AnyLog node through the **AnyLog REST API**. The connected node acts as a client to the AnyLog network and provides Grafana with access to distributed data without requiring Grafana to connect directly to each Operator or underlying database.
 
@@ -695,7 +695,6 @@ Testing the query from the CLI helps determine whether an issue is related to th
 - **Networking & Security** — authentication, TLS, permissions, and network configuration.
 
 <!---
-
 
 This assumes Grafana is already deployed and connected to an AnyLog node as a JSON data source — see
 **AnyLog & Grafana** if you haven't done that yet.
