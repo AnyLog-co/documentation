@@ -610,6 +610,7 @@ Tables:
 
 The mapping sets the columns:  
 
+- `rig_name` is `Permian Star` from `params.0`  
 - `station_id` is the defined constant `RIG-1`  
 - `rop` goes to `drill_rate`  
 - `wob` to `bit_weight`  
@@ -918,8 +919,7 @@ Root/Objects/WS-001/rain
 Root/Objects/WS-001/rain_unit
 ```
 
-On this server the browse name of the station object is `WS-001`, and its display name is `WeatherStation1`. The UNS folder `ws_001` is the browse name in lowercase, with `-` replaced by `_`. The display name does not change the UNS path.
-
+On this server the browse name of the station object is `WS-001`, and its display name is `WeatherStation1`.
 ```anylog
 get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and node = "ns=2;i=1"
 ```
