@@ -30,6 +30,8 @@ source_path: "OPC UA Integration.md"
 - 2026-11-27 | Multiple weather stations UNS example
 -->
 
+
+
 OPC Unified Architecture (OPC UA) is a robust, platform-independent industrial communication protocol with built-in
 security (encryption, authentication, and access control), widely used in industrial automation for secure and reliable
 data exchange between devices, systems, and applications. Designed as an evolution of the OPC Classic standard, it
@@ -324,12 +326,6 @@ Each leaf has a UNS policy and an object policy. The object names the table, the
 
 The constants `device`, `model`, and `station_id` are stored on the object, and `station_id` is also in `where`. The `column` is the column of the table that holds the leaf's value.
 
-To list the leaves:
-
-```anylog
-blockchain get uns where name = pressure
-```
-
 ### Check client status
 
 ```anylog
@@ -614,7 +610,7 @@ Tables:
 
 The mapping sets the columns:  
 
-- `station_id` comes from the constant `RIG-1`  
+- `station_id` is the defined constant `RIG-1`  
 - `rop` goes to `drill_rate`  
 - `wob` to `bit_weight`  
 - `torque` to `rotary_torque`.
@@ -639,7 +635,7 @@ rotary_torque   |float                      |
 
 #### Named table with UNS
 
-Uses the same policy as the named-table example (`b06e3717bc7ea3e237111c89fe4e3064`), with `auto_uns = true` and UNS prefix `opc_stations_uns3`.  
+Uses the same policy as the named-table example (`b06e3717bc7ea3e237111c89fe4e3064`), with `auto_uns = true` and UNS prefix `opc_stations_uns3`. The table `opcua_stations` has the same columns as the named-table example above, including `station_id`.  
 The constant `station_id = RIG-1` is set on the command.
 
 The policy has `group_by_attributes = ["rig_name", "station_id"]`, so the `where` on each UNS object is built from the row values, including the constant. Use this form when a field's value comes from the row or the constant.
@@ -868,13 +864,10 @@ To see the whole address space of the weather server, start the browse at the ro
 get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and depth = 4
 ```
 
-The browse at `depth = 4` returns 65 nodes. The block below keeps only the path from `Root` to the station object and its 14 variables. The other nodes, such as `Server`, `Aliases`, `Types`, and `Views`, are left out:
-
 ```text
 Root
   [object], (ns=0;i=85, name=Objects, datatype=None)
     [object], (ns=2;i=1, name=WeatherStation1, datatype=None)
-      [variable], (ns=2;i=10, name=station_id, datatype=VariantType.String)
       [variable], (ns=2;i=11, name=location, datatype=VariantType.String)
       [variable], (ns=2;i=20, name=temperature, datatype=VariantType.Double)
       [variable], (ns=2;i=30, name=temperature_unit, datatype=VariantType.String)
@@ -902,11 +895,14 @@ Each line has the same parts, which the node printer builds in `print_info` in `
 Each node also has a browse name. It is the name the UNS path is built from. The tree output above does not show it. To see the browse names, use `format = path`. The output is the browse path of each variable under `WS-001`, built from the browse names:
 
 ```anylog
-get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and node = "ns=2;i=1" and format = path and output = /tmp/anylog_test/path_ws001.out
+<get opcua struct where
+    url = opc.tcp://127.0.0.1:4844/freeopcua/weather and
+    node = "ns=2;i=1" and
+    format = path
+>
 ```
 
 ```text
-Root/Objects/WS-001/station_id
 Root/Objects/WS-001/location
 Root/Objects/WS-001/temperature
 Root/Objects/WS-001/temperature_unit
@@ -930,7 +926,6 @@ get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and node
 
 ```text
 [object], (ns=2;i=1, name=WeatherStation1, datatype=None)
-  [variable], (ns=2;i=10, name=station_id, datatype=VariantType.String)
   [variable], (ns=2;i=11, name=location, datatype=VariantType.String)
   [variable], (ns=2;i=20, name=temperature, datatype=VariantType.Double)
   [variable], (ns=2;i=30, name=temperature_unit, datatype=VariantType.String)
@@ -1008,8 +1003,8 @@ rain              |0.0     |
 rain_unit         |mm      |
 ```
 
-If the server has `station_id` and `location` as nodes, read them too, for example `ns=2;i=10` for `station_id` and `ns=2;i=11` for `location`.  
-If not, set them as constants on the `run plc client` command, for example `constants = {"station_id":"WS-001","location":"Fresno, CA"}`.
+The servers do not have a `station_id` node, so `station_id` is always set as a constant on the `run plc client` command. If the server has a `location` node, read it, for example `ns=2;i=11`.  
+If not, set `location` as a constant too, for example `constants = {"station_id":"WS-001","location":"Fresno, CA"}`.
 
 WS-002 is the same command with a different client name and constants.
 
@@ -1106,7 +1101,38 @@ Tables:
 
 * `weather_stations_opcua`
 
-Both operators write to the same table, and the `station_id` column keeps their rows apart.
+Both operators write to the same table.
+
+Columns:
+
+```
+Schema for DBMS: 'env_sensor' and Table: 'weather_stations_opcua'
+Column Name         Column Type                
+-------------------|---------------------------|
+row_id             |integer                    |
+insert_timestamp   |timestamp without time zone|
+tsd_name           |char(3)                    |
+tsd_id             |int                        |
+timestamp          |timestamp without time zone|
+device             |character varying          |
+model              |character varying          |
+station_id         |character varying          |
+temperature        |float                      |
+temperature_unit   |character varying          |
+pressure           |float                      |
+pressure_unit      |character varying          |
+humidity           |float                      |
+humidity_unit      |character varying          |
+wind_speed         |float                      |
+wind_speed_unit    |character varying          |
+wind_direction     |float                      |
+wind_direction_unit|character varying          |
+rain               |float                      |
+rain_unit          |character varying          |
+```
+
+
+`station_id`, `model`, and `device` come from constants.
 
 The two OPC-UA servers have different browse names, `WS-001` and `WS-002`, so their UNS leaves are separate: `opcua_ws_stations/objects/ws_001/` and `opcua_ws_stations/objects/ws_002/`. The display name does not change the UNS path, so if both servers have the same display name, that is not an issue. How the UNS leaves are created is described in [UNS leaves](#uns-leaves).
 
@@ -1238,30 +1264,3 @@ multiweather
 ```
 
 The two clones are separate servers, so each client reads its own clone. Both clients write to `weather_stations_opcua_full`, and the `station_id` column keeps their rows apart.
-
-#### Table columns
-
-The columns of `weather_stations_opcua`, from `get columns where dbms = env_sensor and table = weather_stations_opcua`:
-
-| Column                | Type                        | Source                            |
-|-----------------------|-----------------------------|-----------------------------------|
-| `row_id`              | integer                     | Added by the node                 |
-| `insert_timestamp`    | timestamp without time zone | Added by the node                 |
-| `tsd_name`            | char(3)                     | Added by the node                 |
-| `tsd_id`              | int                         | Added by the node                 |
-| `timestamp`           | timestamp without time zone | Policy, `[timestamp]`             |
-| `device`              | character varying           | Constant `device`                 |
-| `model`               | character varying           | Constant `model`                  |
-| `station_id`          | character varying           | Constant `station_id`             |
-| `temperature`         | float                       | Node `ns=2;i=20`, `params.0`      |
-| `temperature_unit`    | character varying           | Node `ns=2;i=30`, `params.1`      |
-| `pressure`            | float                       | Node `ns=2;i=21`, `params.2`      |
-| `pressure_unit`       | character varying           | Node `ns=2;i=31`, `params.3`      |
-| `humidity`            | float                       | Node `ns=2;i=22`, `params.4`      |
-| `humidity_unit`       | character varying           | Node `ns=2;i=32`, `params.5`      |
-| `wind_speed`          | float                       | Node `ns=2;i=23`, `params.6`      |
-| `wind_speed_unit`     | character varying           | Node `ns=2;i=33`, `params.7`      |
-| `wind_direction`      | float                       | Node `ns=2;i=24`, `params.8`      |
-| `wind_direction_unit` | character varying           | Node `ns=2;i=34`, `params.9`      |
-| `rain`                | float                       | Node `ns=2;i=25`, `params.10`     |
-| `rain_unit`           | character varying           | Node `ns=2;i=35`, `params.11`     |
