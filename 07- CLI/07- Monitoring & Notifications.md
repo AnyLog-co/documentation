@@ -8,6 +8,7 @@ layout: page
  **Date**   | **Name**    | **Change**   | **Version** |
  |------------|-------------|--------------|----------|
  | 2026-07-26 | Ori Shadmon | initial file |          |
+ | 2026-11-26 | mOSHE Shadmon | initial uPDATED |          |
 --->
 
 # Scheduler & Notifications
@@ -22,6 +23,48 @@ One of the features AnyLog provides is node monitoring through a schedule or rul
 
 The following provides commands for getting insight about the node. Please review [Southbound Monitoring](../04-%20Southbound%20Interfaces/05-%20Monitoring)
 for further details on node, docker and syslog monitoring.
+
+### The get resources command
+
+The `get node resources` command returns detailed information about the computing environment in which an AnyLog node is running, including its operating system, processor, CPU cores, memory, and disk resources.
+
+The command can be used to monitor resource availability, evaluate node capacity, identify resource constraints, and troubleshoot individual nodes or groups of nodes across a distributed AnyLog network.
+
+**Syntax**
+
+```anylog
+get node resources [where format = table | json]
+```
+
+**Returned Information**
+
+| Property | Description |
+| --- | --- |
+| `ip` | The IP address associated with the node's `!ip` dictionary variable. |
+| `system` | The operating system, such as Linux or Windows. |
+| `version` | The operating system version. |
+| `node` | The hostname of the machine. |
+| `machine` | The machine architecture, such as x86_64 or ARM64. |
+| `processor` | The processor type. |
+| `physical_cores` | The number of physical CPU cores. |
+| `logical_cores` | The number of logical CPU cores. |
+| `memory_total` | Total physical memory. |
+| `memory_available` | Memory available to applications without swapping, including reclaimable memory. |
+| `memory_used` | Physical memory currently in use. |
+| `memory_free` | Physical memory that is currently unused. |
+| `disk_total` | Total capacity of the filesystem associated with the node's current working directory. |
+| `disk_used` | Used disk space. |
+| `disk_free` | Available disk space. |
+
+**Examples**
+
+**Retrieve resource information from the local node:**
+
+```anylog
+get node resources
+```
+
+### The get stats command
 
 * `get stats where service = [type] and topic = [type]` - provide statistics on a service enabled on the node (e.g. `operator`, `publisher`).
 

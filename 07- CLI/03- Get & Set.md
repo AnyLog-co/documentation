@@ -189,6 +189,26 @@ Returns a JSON object containing the assigned numeric ID:
 {"unique_id": 3}
 ```
 
+#### Get Timezone Info
+
+The `get timezone info` command returns the timezone and current local date and time of the computing environment in which the AnyLog node is running.
+
+```anylog
+get timezone info
+```
+
+Example output:
+
+```text
+PST : 2026-11-27 15:15:30
+```
+
+The command is useful for verifying timezone configurations, troubleshooting timestamp-related issues, and comparing local times across distributed AnyLog nodes.
+
+The returned information reflects the timezone configured in the operating system or container in which AnyLog is running.
+
+If timezone information is unavailable, the command returns only the local date and time. If neither can be retrieved, the command returns `Failed to retrieve timezone info`.
+
 **Notes**
 
 - Cluster IDs are generated using the number of root clusters recorded in the blockchain ledger and the local counter.
@@ -196,7 +216,65 @@ Returns a JSON object containing the assigned numeric ID:
 - The command should be executed through a single designated node to avoid duplicate ID assignments.
 - On an error, `unique_id` is returned as `-1` with an error status.
 
+### Get Datetime Command
 
+The `get datetime` command evaluates a date-time function or expression and returns the resulting date-time string in the specified timezone.
+
+The command supports retrieving the current date and time, adding or subtracting time intervals, and applying date-time functions with multiple modifiers.
+
+**Usage**
+
+```anylog
+get datetime <timezone> <date-time expression>
+```
+
+| Parameter | Description |
+| --- | --- |
+| `timezone` | The timezone in which the resulting date-time string is returned. Supported values include `utc`, `local`, timezone aliases such as `et`, and named timezones such as `Europe/London` and `Asia/Shanghai`. |
+| `date-time expression` | A date-time value, function, or expression used to derive the resulting date-time string. |
+
+**Examples**
+
+**Retrieve the current date and time in different timezones:**
+
+```anylog
+get datetime utc now()
+get datetime local now()
+get datetime et now()
+get datetime Europe/London now()
+get datetime Asia/Shanghai now()
+```
+
+**Add time intervals to a date-time expression:**
+
+```anylog
+get datetime local now() + 3 days
+get datetime utc date() + 2 days
+get datetime utc '2021-03-10 22:10:01.0' + 5 minutes
+```
+
+**Apply multiple date-time modifiers:**
+
+```anylog
+get datetime local timestamp('now','start of month','+1 month','-1 day','-2 hours','+2 minutes')
+get datetime Asia/Shanghai timestamp('now','start of month','+1 month','-1 day','-2 hours','+2 minutes')
+```
+
+**Assign the resulting date-time string to a dictionary variable:**
+
+```anylog
+date_str = get datetime utc now() + 3 days
+```
+
+The resulting value can be referenced in subsequent AnyLog commands using `!date_str`.
+
+**Notes**
+
+* The date-time expression is evaluated before the result is converted to the requested timezone.
+* The `local` timezone refers to the timezone of the computing environment in which the AnyLog node is running.
+* Invalid timezone names or date-time expressions result in an error.
+* The command is particularly useful in scripts, scheduled processes, and dynamically constructing time-based SQL queries.
+* To retrieve the node's configured timezone and current local date and time, use the `get timezone info` command.
 ---
 
 ## Set command
