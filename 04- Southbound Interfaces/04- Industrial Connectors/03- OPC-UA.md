@@ -286,17 +286,6 @@ The `where` of each object is built once, from the values of the `group_by_attri
 
 The attributes only set the `where`. They do not change the path of the leaf.
 
-#### Two clients on the same server
-
-The path comes from the server, so two clients that read the same nodes of the same server get the same leaves. The second client does not create new leaves, and the leaves keep the `where` of the first client. For example, a second client with `station_id = WS-002` that reads the nodes `ns=2;i=20` to `ns=2;i=35` writes its rows to the table with `station_id = WS-002`, but the leaves under `ws_001` still have `where = station_id = 'WS-001'`.
-
-To get a separate set of leaves for each station, use one of:
-
-* Read the nodes of a different object on the server, for example `Objects/WS-002/...`, so the browse path is different.
-* Use a different `uns_prefix` for each client.
-
-Start the clients one after the other. When two clients start at the same moment with the same `uns_prefix`, both try to create the shared root object, and the second one stops with `Duplicate blockchain object id`.
-
 Each leaf has a UNS policy and an object policy. The object names the table, the column, and the `where` that selects the station. Example, the `pressure` leaf of WS-001:
 
 ```json
