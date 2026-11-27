@@ -4,6 +4,7 @@ description: Configure AnyLog as an OPC-UA client to explore a server, read valu
 layout: page
 source_path: "OPC UA Integration.md"
 ---
+
 <!--
 ## Changelog
 - 2026-04-17 | Created document (as opcua.md)
@@ -25,7 +26,8 @@ source_path: "OPC UA Integration.md"
               `append` options, no validate-failure-behavior explanation, a 5-step aggregations walkthrough vs.
               this file's 7-step version with the actual query output shown). Nothing in it was missing here, so
               it's excluded rather than re-merged, consistent with the note above.
-- 2026-11-26 | Addition of UNS (26 November 2026: four OPC UA runs).
+- 2026-11-26 | Addition of UNS
+- 2026-11-27 | Multiple weather stations UNS example
 -->
 
 OPC Unified Architecture (OPC UA) is a robust, platform-independent industrial communication protocol with built-in
@@ -50,11 +52,13 @@ get opcua namespace where url = [connect string] and user = [username] and passw
 ```
 
 Details:
+
 * `url` — the endpoint of the OPC UA server.
 * `user` — the username required by the OPC UA server for access.
 * `password` — the password associated with the username.
 
 Example:
+
 ```anylog
 get opcua namespace where url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer
 ```
@@ -98,16 +102,17 @@ get opcua struct where url = [connect string] and [options]
 
 **Format options:**
 
-| Format | Output |
-|---|---|
-| `tree` | OPC-UA tree structure (default). |
-| `path` | Full path strings for each node. |
-| `stats` | Count of entries per class. |
-| `get_value` | Generates <a href="#read-node-values" target="_blank">get opcua value</a> commands for the visited nodes. |
-| `run_client` | Generates <a href="#continuous-data-pull" target="_blank">run opcua client</a> commands for the visited nodes. |
-| `policy` | Generates a policy per tag; combine with `target` for `blockchain insert` commands. |
+| Format       | Output                                                                              |
+| ------------ | ----------------------------------------------------------------------------------- |
+| `tree`       | OPC-UA tree structure (default).                                                    |
+| `path`       | Full path strings for each node.                                                    |
+| `stats`      | Count of entries per class.                                                         |
+| `get_value`  | Generates [get opcua value](#read-node-values) commands for the visited nodes.      |
+| `run_client` | Generates [run opcua client](#continuous-data-pull) commands for the visited nodes. |
+| `policy`     | Generates a policy per tag; combine with `target` for `blockchain insert` commands. |
 
 **The validate option:**
+
 * The default value is `false`.
 * If set to `true`, the value of each considered node is read during traversal.
 * If the read fails:
@@ -173,6 +178,7 @@ get plc values where type = opcua and url = [connect string] and user = [usernam
 | `failures` | Requires `method = individual`. `false` (default) collects successful and failed reads; `true` collects only failed reads. |
 
 The `include` attributes:
+
 * `id` — the id of the attribute.
 * `name` — the attribute name.
 * `source_timestamp` — the timestamp of the value as determined by the data source (e.g. a sensor or device).
@@ -182,6 +188,7 @@ The `include` attributes:
 > Note: if `include` is assigned the keyword `all`, all attributes are included in the output.
 
 Examples:
+
 ```anylog
 get plc values where type = opcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and node = "ns=0;i=2257" and node = "ns=0;i=2258" and include = all
 
@@ -216,10 +223,12 @@ run plc client where type = opcua and name = [unique name] and url = [connect st
 See [Mapping policy, constants, and UNS](#mapping-policy-constants-and-uns) for examples.
 
 Each row is stored with two columns added automatically:
+
 - `timestamp` — the earliest source timestamp of the values considered (if `source_timestamp` is missing, the `server_timestamp` is used).
 - `duration` — the number of milliseconds between the earliest and latest timestamp considered in this read.
 
 Examples:
+
 ```anylog
 # Individual nodes
 run plc client where type = opcua and name = myopcua and url = opc.tcp://10.0.0.111:53530/OPCUA/SimulationServer and frequency = 10 and dbms = nov and table = sensor and node = "ns=0;i=2257" and node = "ns=0;i=2258"
@@ -229,6 +238,108 @@ run plc client where type = opcua and name = myopcua and url = opc.tcp://10.0.0.
 ```
 
 > Multiple OPC-UA clients can run on the same node simultaneously.
+
+### UNS leaves
+
+With `auto_uns = true`, the client creates one UNS leaf for each node in `nodes`, and an object policy for it. The namespace of each leaf is `uns_prefix` (if set) followed by the path of the variable, without `Root`:
+
+```text
+namespace = uns_prefix + "/" + path of the variable
+```
+
+The leaf is built from these parts:
+
+| Part              | Where it comes from                                                                                                                                  |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Namespace         | `uns_prefix` (if set), followed by the path of the variable on the OPC-UA server, without `Root`, in lower case, with `-` replaced by `_`. The variable `Root/Objects/WS-001/temperature` with `uns_prefix = opcua_ws_stations` gets the namespace `opcua_ws_stations/objects/ws_001/temperature`. If `uns_prefix` is not set, the namespace is only the path. |
+| Object attributes | `column`, `table`, and `dbms` come from the mapping policy. The constants (`device`, `model`, `station_id`) are copied to the object.                |
+| `where`           | Built from `group_by_attributes`, see below.                                                                                                         |
+
+Example. The server has these nodes, with `ns=X;i=Y` as the node id of each:
+
+```text
+Paths for ns=X;i=Y
+Root/Objects/Data/Temp
+Root/Objects/Data/Name
+Root/Objects/Data/Torque
+```
+
+With `uns_prefix = plant1`, the UNS leaves are:
+
+```text
+plant1
+└── objects
+    └── data
+        ├── temp
+        ├── name
+        └── torque
+```
+
+For an example with several weather stations, see [Use case with multiple weather stations](#use-case-with-multiple-weather-stations-with-multiple-operators).
+
+#### `group_by_attributes` and the `where`
+
+The `where` of each object is built once, from the values of the `group_by_attributes` names, using the constants of the command and the first read:
+
+* One attribute, `"group_by_attributes": ["station_id"]`: `where = station_id = 'WS-001'`.
+* Two attributes, `"group_by_attributes": ["station_id", "device"]`: the comparisons are joined with `and`, `where = station_id = 'WS-001' and device = 'opc1-dev1'`. If one of the attributes has no value, the object gets no `where`.
+
+The attributes only set the `where`. They do not change the path of the leaf.
+
+#### Two clients on the same server
+
+The path comes from the server, so two clients that read the same nodes of the same server get the same leaves. The second client does not create new leaves, and the leaves keep the `where` of the first client. For example, a second client with `station_id = WS-002` that reads the nodes `ns=2;i=20` to `ns=2;i=35` writes its rows to the table with `station_id = WS-002`, but the leaves under `ws_001` still have `where = station_id = 'WS-001'`.
+
+To get a separate set of leaves for each station, use one of:
+
+* Read the nodes of a different object on the server, for example `Objects/WS-002/...`, so the browse path is different.
+* Use a different `uns_prefix` for each client.
+
+Start the clients one after the other. When two clients start at the same moment with the same `uns_prefix`, both try to create the shared root object, and the second one stops with `Duplicate blockchain object id`.
+
+Each leaf has a UNS policy and an object policy. The object names the table, the column, and the `where` that selects the station. Example, the `pressure` leaf of WS-001:
+
+```json
+{
+  "uns": {
+    "name": "pressure",
+    "namespace": "opcua_ws_stations/objects/ws_001/pressure",
+    "object_id": "8f51cfed95f6662c98ff5e2f2ed4f630",
+    "parent": "f4b625e659b0423109e912ee0cb784ae",
+    "id": "ff0fbcb0bc3f1fb810963ed491fea50a",
+    "date": "2026-11-27T08:58:00.616328Z",
+    "ledger": "global"
+  },
+  "object": {
+    "device": "opc1-dev1",
+    "model": "MX1234D1",
+    "station_id": "WS-001",
+    "opcua": {
+      "ns": "ns=2;i=21",
+      "class": "variable",
+      "node_sid": "mud_weight_out",
+      "datatype": "String",
+      "parent": "rig-1",
+      "path": "Root/Objects/rig-data/rig-1/mud_weight_out"
+    },
+    "column": "pressure",
+    "dbms": "env_sensor",
+    "table": "weather_stations_opcua",
+    "where": "station_id = 'WS-001'",
+    "id": "8f51cfed95f6662c98ff5e2f2ed4f630",
+    "date": "2026-11-27T08:58:00.611856Z",
+    "ledger": "global"
+  }
+}
+```
+
+The constants `device`, `model`, and `station_id` are stored on the object, and `station_id` is also in `where`. The `column` is the column of the table that holds the leaf's value.
+
+To list the leaves:
+
+```anylog
+blockchain get uns where name = pressure
+```
 
 ### Check client status
 
@@ -254,7 +365,7 @@ exit plc nov.rig8
 ## OPC-UA with aggregations
 
 Aggregation functions summarize streaming data over a time interval, enabling real-time analytics without storing raw
-data. See details in the <a href="../../09-%20Data%20Management/02-2%20Data%20Aggregations.md" target="_blank">Aggregations</a> section.
+data. See details in the [Aggregations](../../09-%20Data%20Management/02-2%20Data%20Aggregations.md) section.
 
 ### 1. Identify the time and value column names
 
@@ -389,7 +500,8 @@ process !tmp_dir/my_file.out
 ```
 
 Notes:
-* The <a href="#continuous-data-pull" target="_blank">run opcua client</a> command is stored in the file `!tmp_dir/my_run_cmd.out`.
+
+* The [run opcua client](#continuous-data-pull) command is stored in the file `!tmp_dir/my_run_cmd.out`.
 * The `table` name is not specified, as it is derived from the policies (based on the namespace and node id).
 
 To register the data in the UNS, add `auto_uns`, `master_node` and, optionally, `group_by_attributes`. They are copied onto the generated `run plc client` command:
@@ -410,6 +522,7 @@ To register the data in the UNS, add `auto_uns`, `master_node` and, optionally, 
 ```
 
 Notes:
+
 * The `run plc client` command is stored in the file `!tmp_dir/my_run_cmd_uns.out`.
 * `auto_uns` is accepted only with `format = run_client`, and it requires `master_node`.
 * `group_by_attributes` is accepted only with `format = run_client` and `auto_uns = true`.
@@ -478,7 +591,7 @@ The command and the policy can also set constants, such as `modeid` and `serialn
 constants = {"station_id":"RIG-1", "modeid":"MODEL-X1", "serialno":"SN-0042"}
 ```
 
-These keys are copied onto a row only when the table has a column for them, as described in [Constants and `group_by_attributes`](#constants-and-group_by_attributes).
+These keys are copied onto a row only when the table has a column for them, as described in [Constants and `group_by_attributes](#constants-and-group_by_attributes)`.
 
 #### Named table, no UNS
 
@@ -486,7 +599,7 @@ A mapping policy sets the table and the column for each node. `auto_uns = false`
 
 A table can be either in policy or in the command. If neither names a table, the run fails with "mapping policy requires table (in policy or on the command)".  
 
-The following example uses table `opcua_stations`, set in the policy.   
+The following example uses table `opcua_stations`, set in the policy.  
 The policy has a `station_id` column, which is filled from the constant `constants = {"station_id":"RIG-1"}` on the command.  
 The rows have `station_id = RIG-1`, `rig_name = Permian Star`, and the three measurements.
 
@@ -750,3 +863,416 @@ blockchain get uns where name = rig_name bring.extend
   }
 ]
 ```
+
+---
+
+### Use case with multiple weather stations with multiple operators
+
+Each operator runs one client into the same fixed table `weather_stations_opcua`, with `auto_uns = true`.  
+The mapping policy below sets the table and the columns for the weather readings and for the constants. The policy, the nodes, the UNS prefix `opcua_ws_stations`, and the constant names are the same on every operator.  
+
+#### Browse the station object
+
+To see the whole address space of the weather server, start the browse at the root:
+
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and depth = 4
+```
+
+The browse at `depth = 4` returns 65 nodes. The block below keeps only the path from `Root` to the station object and its 14 variables. The other nodes, such as `Server`, `Aliases`, `Types`, and `Views`, are left out:
+
+```text
+Root
+  [object], (ns=0;i=85, name=Objects, datatype=None)
+    [object], (ns=2;i=1, name=WeatherStation1, datatype=None)
+      [variable], (ns=2;i=10, name=station_id, datatype=VariantType.String)
+      [variable], (ns=2;i=11, name=location, datatype=VariantType.String)
+      [variable], (ns=2;i=20, name=temperature, datatype=VariantType.Double)
+      [variable], (ns=2;i=30, name=temperature_unit, datatype=VariantType.String)
+      [variable], (ns=2;i=21, name=pressure, datatype=VariantType.Double)
+      [variable], (ns=2;i=31, name=pressure_unit, datatype=VariantType.String)
+      [variable], (ns=2;i=22, name=humidity, datatype=VariantType.Double)
+      [variable], (ns=2;i=32, name=humidity_unit, datatype=VariantType.String)
+      [variable], (ns=2;i=23, name=wind_speed, datatype=VariantType.Double)
+      [variable], (ns=2;i=33, name=wind_speed_unit, datatype=VariantType.String)
+      [variable], (ns=2;i=24, name=wind_direction, datatype=VariantType.Double)
+      [variable], (ns=2;i=34, name=wind_direction_unit, datatype=VariantType.String)
+      [variable], (ns=2;i=25, name=rain, datatype=VariantType.Double)
+      [variable], (ns=2;i=35, name=rain_unit, datatype=VariantType.String)
+```
+
+Each line is one node. The indentation shows its depth. `Root` is at depth 0, `Objects` at depth 1, and the station object at depth 2. In the output it is named `WeatherStation1`, and its browse name is `WS-001`. Its variables are one level below it, so they appear at `depth = 4`.
+
+Each line has the same parts, which the node printer builds in `print_info` in `struct_tree.py`:
+
+* `[object]`: the node class, from `get_node_class`. Other classes are `[variable]`, `[method]`, and so on.
+* `ns=2;i=1`: the namespace index, then the node id. The id type is `i` for numeric ids and `s` for string ids. Root shows `?` because its id type is not in the lookup table.
+* `name=WeatherStation1`: the display name of the node. `get opcua struct` prints this name.
+* `datatype=None`: the value type. Objects have no value, so it is `None`. A variable shows its type, such as `VariantType.Double`.
+
+Each node also has a browse name. It is the name the UNS path is built from. The tree output above does not show it. To see the browse names, use `format = path`. The output is the browse path of each variable under `WS-001`, built from the browse names:
+
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and node = "ns=2;i=1" and format = path and output = /tmp/anylog_test/path_ws001.out
+```
+
+```text
+Root/Objects/WS-001/station_id
+Root/Objects/WS-001/location
+Root/Objects/WS-001/temperature
+Root/Objects/WS-001/temperature_unit
+Root/Objects/WS-001/pressure
+Root/Objects/WS-001/pressure_unit
+Root/Objects/WS-001/humidity
+Root/Objects/WS-001/humidity_unit
+Root/Objects/WS-001/wind_speed
+Root/Objects/WS-001/wind_speed_unit
+Root/Objects/WS-001/wind_direction
+Root/Objects/WS-001/wind_direction_unit
+Root/Objects/WS-001/rain
+Root/Objects/WS-001/rain_unit
+```
+
+On this server the browse name of the station object is `WS-001`, and its display name is `WeatherStation1`. The UNS folder `ws_001` is the browse name in lowercase, with `-` replaced by `_`. The display name does not change the UNS path.
+
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4844/freeopcua/weather and node = "ns=2;i=1"
+```
+
+```text
+[object], (ns=2;i=1, name=WeatherStation1, datatype=None)
+  [variable], (ns=2;i=10, name=station_id, datatype=VariantType.String)
+  [variable], (ns=2;i=11, name=location, datatype=VariantType.String)
+  [variable], (ns=2;i=20, name=temperature, datatype=VariantType.Double)
+  [variable], (ns=2;i=30, name=temperature_unit, datatype=VariantType.String)
+  [variable], (ns=2;i=21, name=pressure, datatype=VariantType.Double)
+  [variable], (ns=2;i=31, name=pressure_unit, datatype=VariantType.String)
+  [variable], (ns=2;i=22, name=humidity, datatype=VariantType.Double)
+  [variable], (ns=2;i=32, name=humidity_unit, datatype=VariantType.String)
+  [variable], (ns=2;i=23, name=wind_speed, datatype=VariantType.Double)
+  [variable], (ns=2;i=33, name=wind_speed_unit, datatype=VariantType.String)
+  [variable], (ns=2;i=24, name=wind_direction, datatype=VariantType.Double)
+  [variable], (ns=2;i=34, name=wind_direction_unit, datatype=VariantType.String)
+  [variable], (ns=2;i=25, name=rain, datatype=VariantType.Double)
+  [variable], (ns=2;i=35, name=rain_unit, datatype=VariantType.String)
+```
+
+The command ends with a summary of the nodes it considered:
+
+```text
+PLC Nodes Considered
+Type          Counter 
+-------------|-------|
+total        |     15|
+object       |      1|
+variable     |     14|
+method       |      0|
+objecttype   |      0|
+variabletype |      0|
+referencetype|      0|
+datatype     |      0|
+view         |      0|
+read_failure |      0|
+unknown      |      0|
+```
+
+How these object names become the UNS folders is described in [UNS leaves](#uns-leaves).
+
+The weather server used in this section has only the `WS-001` object (`ns=2;i=1`). A `WS-002` object is not on the server yet, so browsing `ns=2;i=N` for WS-002 returns nothing until the station is added to the server.
+
+Read the station first.  
+One `get plc values` returns every measurement and its unit, node list is the same on every station.  
+Only the `url` is the parameter to change.
+
+**Station WS-001**
+
+```anylog
+<get plc values where type = opcua and
+    url = opc.tcp://127.0.0.1:4844/freeopcua/weather and
+    nodes = ["ns=2;i=20","ns=2;i=30",
+             "ns=2;i=21","ns=2;i=31",
+             "ns=2;i=22","ns=2;i=32",
+             "ns=2;i=23","ns=2;i=33",
+             "ns=2;i=24","ns=2;i=34",
+             "ns=2;i=25","ns=2;i=35"] and
+    include = name
+>
+```
+
+One read of that server:
+
+```text
+OPCUA Nodes values
+name              value
+------------------|--------|
+temperature       |63.2    |
+temperature_unit  |degF    |
+pressure          |1007.41 |
+pressure_unit     |hPa     |
+humidity          |45.33   |
+humidity_unit     |%       |
+wind_speed        |2.45    |
+wind_speed_unit   |m/s     |
+wind_direction    |205.76  |
+wind_direction_unit|deg    |
+rain              |0.0     |
+rain_unit         |mm      |
+```
+
+If the server has `station_id` and `location` as nodes, read them too, for example `ns=2;i=10` for `station_id` and `ns=2;i=11` for `location`.  
+If not, set them as constants on the `run plc client` command, for example `constants = {"station_id":"WS-001","location":"Fresno, CA"}`.
+
+WS-002 is the same command with a different client name and constants.
+
+The policy has one column per node, values and units, plus `device`, `model`, and `station_id` filled from the constants.  
+Each entry in `params` is the browse name of an OPC-UA node, written in square brackets, for example `"[temperature]"`. The names must match the browse names returned by `get plc values ... include = name`, and they must be in the same order as the `nodes` list of the `run plc client` command. The schema picks each value by its position, `params.0`, `params.1`, and so on.  
+The node ids `ns=2;i=20` to `ns=2;i=35` are the nodes of the weather server used above. Replace them with the nodes of your server before you run the commands:
+
+```json
+{
+  "mapping": {
+    "name": "weather_stations_opcua",
+    "dbms": "env_sensor",
+    "table": "weather_stations_opcua",
+    "readings": "",
+    "params": [
+      ["[temperature]", "[temperature_unit]",
+       "[pressure]", "[pressure_unit]",
+       "[humidity]", "[humidity_unit]",
+       "[wind_speed]", "[wind_speed_unit]",
+       "[wind_direction]", "[wind_direction_unit]",
+       "[rain]", "[rain_unit]"]
+    ],
+    "group_by_attributes": ["station_id"],
+    "schema": {
+      "timestamp": {"type": "timestamp", "default": "now()", "bring": "[timestamp]"},
+      "device": {"type": "str", "default": null, "bring": "[device]"},
+      "model": {"type": "str", "default": null, "bring": "[model]"},
+      "station_id": {"type": "str", "default": null, "bring": "[station_id]"},
+      "temperature": {"type": "float", "default": null, "bring": "params.0"},
+      "temperature_unit": {"type": "str", "default": null, "bring": "params.1"},
+      "pressure": {"type": "float", "default": null, "bring": "params.2"},
+      "pressure_unit": {"type": "str", "default": null, "bring": "params.3"},
+      "humidity": {"type": "float", "default": null, "bring": "params.4"},
+      "humidity_unit": {"type": "str", "default": null, "bring": "params.5"},
+      "wind_speed": {"type": "float", "default": null, "bring": "params.6"},
+      "wind_speed_unit": {"type": "str", "default": null, "bring": "params.7"},
+      "wind_direction": {"type": "float", "default": null, "bring": "params.8"},
+      "wind_direction_unit": {"type": "str", "default": null, "bring": "params.9"},
+      "rain": {"type": "float", "default": null, "bring": "params.10"},
+      "rain_unit": {"type": "str", "default": null, "bring": "params.11"}
+    },
+    "id": "7e0c1a9f4b2d4c58a3b6d1f90e2a5c73",
+    "date": "2026-11-26T20:30:00.000000Z",
+    "ledger": "global"
+  }
+}
+```
+
+**Operator 1 — station WS-001**
+
+```anylog
+<run plc client where type = opcua and
+    name = opc-1 and
+    url = opc.tcp://127.0.0.1:4840/freeopcua/data-generator and
+    frequency = 10 and
+    dbms = env_sensor and
+    policy = 7e0c1a9f4b2d4c58a3b6d1f90e2a5c73 and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    uns_prefix = opcua_ws_stations and
+    constants = {"device":"opc1-dev1","model":"MX1234D1","station_id":"WS-001"} and
+    nodes = ["ns=2;i=20","ns=2;i=30",
+             "ns=2;i=21","ns=2;i=31",
+             "ns=2;i=22","ns=2;i=32",
+             "ns=2;i=23","ns=2;i=33",
+             "ns=2;i=24","ns=2;i=34",
+             "ns=2;i=25","ns=2;i=35"]
+>
+```
+
+**Operator 2 — station WS-002**
+
+```anylog
+<run plc client where type = opcua and
+    name = opc-2 and
+    url = opc.tcp://127.0.0.2:4840/freeopcua/data-generator and
+    frequency = 10 and
+    dbms = env_sensor and
+    policy = 7e0c1a9f4b2d4c58a3b6d1f90e2a5c73 and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    uns_prefix = opcua_ws_stations and
+    constants = {"device":"opc2-dev2","model":"FX1234D9","station_id":"WS-002"} and
+    nodes = ["ns=2;i=20","ns=2;i=30",
+             "ns=2;i=21","ns=2;i=31",
+             "ns=2;i=22","ns=2;i=32",
+             "ns=2;i=23","ns=2;i=33",
+             "ns=2;i=24","ns=2;i=34",
+             "ns=2;i=25","ns=2;i=35"]
+>
+```
+
+Tables:
+
+* `weather_stations_opcua`
+
+Both operators write to the same table, and the `station_id` column keeps their rows apart.
+
+The two OPC-UA servers have different browse names, `WS-001` and `WS-002`, so their UNS leaves are separate: `opcua_ws_stations/objects/ws_001/` and `opcua_ws_stations/objects/ws_002/`. The display name does not change the UNS path, so if both servers have the same display name, that is not an issue. How the UNS leaves are created is described in [UNS leaves](#uns-leaves).
+
+The `ws_002` branch is created when the `WS-002` client starts. Each station gets its own branch, under the same `opcua_ws_stations` prefix.
+
+Each station is one object directly under `Objects`. The browse path of the object is `Root/Objects/` followed by its browse name. The display name is not used. Each station has its own server, so the node id `ns=2;i=1` is the same on each one:
+
+```text
+Root/Objects/WS-001    [object], (ns=2;i=1, name=WeatherStation1, datatype=None)    server 1, opc.tcp://127.0.0.1:4844
+Root/Objects/WS-002    [object], (ns=2;i=1, name=WeatherStation2, datatype=None)    server 2, opc.tcp://127.0.0.1:4845
+Root/Objects/WS-00N    [object], (ns=2;i=1, name=..., datatype=None)                server N
+```
+
+The variables of each station are one level below its object, for example `Root/Objects/WS-001/temperature`. The browse name of the object becomes the folder under `objects` after the name is normalized: `WS-001` creates `opcua_ws_stations/objects/ws_001/`, `WS-002` creates `opcua_ws_stations/objects/ws_002/`, and `WS-00N` creates `opcua_ws_stations/objects/ws_00n/`. The leaves are:
+
+```text
+opcua_ws_stations
+└── objects
+    ├── ws_001
+    │   ├── temperature
+    │   ├── temperature_unit
+    │   ├── pressure
+    │   ├── pressure_unit
+    │   └── ...
+    └── ws_002
+        ├── temperature
+        ├── temperature_unit
+        ├── pressure
+        ├── pressure_unit
+        └── ...
+```
+
+#### If the servers are identical
+
+**Warning:** if the servers are identical, with the same browse names (`WeatherData`) and the same display name (`Weather`), the two clients write to the same leaves. **Each client must have its own `uns_prefix`.**
+
+```text
+client1: uns_prefix = testmulti/WS-01
+client2: uns_prefix = testmulti/WS-02
+```
+
+All other options are the same as in `Operator 1` and `Operator 2` above.
+
+Example. Each clone is the same server, with the same node ids and the same layout. Only the URL changes:
+
+* Browse name: `WeatherData`. The UNS path uses it, so both clones create the folder `weatherdata`.
+* Display name: `Weather`. `get opcua struct` prints it, and the UNS path does not use it.
+* Station object: `ns=2;i=1`. Values: `ns=2;i=20` to `25`. Units: `ns=2;i=30` to `35`.
+
+Browse one clone to check its names:
+
+```anylog
+get opcua struct where url = opc.tcp://127.0.0.1:4840/freeopcua/weather and node = "ns=2;i=1"
+```
+
+```text
+[object], (ns=2;i=1, name=Weather, datatype=None)
+  [variable], (ns=2;i=20, name=temperature, datatype=VariantType.Double)
+  [variable], (ns=2;i=30, name=temperature_unit, datatype=VariantType.String)
+  ...
+```
+
+The browse paths of the clone are `Root/Objects/WeatherData/<name>`.
+
+Each operator runs one `run plc client` command. The two commands are the same except for the client name, the URL, `uns_prefix`, and `constants`.
+
+**Operator 1 — Station 1**
+
+```anylog
+run plc client where type = opcua and
+    name = opc-mw-1 and
+    url = opc.tcp://127.0.0.1:4840/freeopcua/weather and
+    frequency = 10 and
+    dbms = env_sensor and
+    policy = 5b2f7c1e9a3d4e60b8c4f1a27d9e3a15 and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    uns_prefix = multiweather/WS-001 and
+    constants = {"device":"mw-dev1","model":"MW1234","station_id":"WS-001"} and
+    nodes = ["ns=2;i=20","ns=2;i=30",
+             "ns=2;i=21","ns=2;i=31",
+             "ns=2;i=22","ns=2;i=32",
+             "ns=2;i=23","ns=2;i=33",
+             "ns=2;i=24","ns=2;i=34",
+             "ns=2;i=25","ns=2;i=35"]
+```
+
+**Operator 2 — Station 2**
+
+```anylog
+run plc client where type = opcua and
+    name = opc-mw-2 and
+    url = opc.tcp://127.0.0.2:4840/freeopcua/weather and
+    frequency = 10 and
+    dbms = env_sensor and
+    policy = 5b2f7c1e9a3d4e60b8c4f1a27d9e3a15 and
+    auto_uns = true and
+    master_node = 192.168.1.62:32148 and
+    uns_prefix = multiweather/WS-002 and
+    constants = {"device":"mw-dev2","model":"MW1234","station_id":"WS-002"} and
+    nodes = ["ns=2;i=20","ns=2;i=30",
+             "ns=2;i=21","ns=2;i=31",
+             "ns=2;i=22","ns=2;i=32",
+             "ns=2;i=23","ns=2;i=33",
+             "ns=2;i=24","ns=2;i=34",
+             "ns=2;i=25","ns=2;i=35"]
+```
+
+The `uns_prefix` is lower case in the leaves, so the two clients create these branches:
+
+The squeezed list of the leaves under each station:
+
+```text
+multiweather
+├── ws_001
+│   └── objects/weatherdata/
+│       ├── humidity
+│       ├── humidity_unit
+│       ├── pressure
+│       ├── pressure_unit
+│       └── ...
+└── ws_002
+    └── objects/weatherdata/
+        ├── humidity
+        ├── humidity_unit
+        ├── pressure
+        ├── pressure_unit
+        └── ...
+```
+
+The two clones are separate servers, so each client reads its own clone. Both clients write to `weather_stations_opcua_full`, and the `station_id` column keeps their rows apart.
+
+#### Table columns
+
+The columns of `weather_stations_opcua`, from `get columns where dbms = env_sensor and table = weather_stations_opcua`:
+
+| Column                | Type                        | Source                            |
+|-----------------------|-----------------------------|-----------------------------------|
+| `row_id`              | integer                     | Added by the node                 |
+| `insert_timestamp`    | timestamp without time zone | Added by the node                 |
+| `tsd_name`            | char(3)                     | Added by the node                 |
+| `tsd_id`              | int                         | Added by the node                 |
+| `timestamp`           | timestamp without time zone | Policy, `[timestamp]`             |
+| `device`              | character varying           | Constant `device`                 |
+| `model`               | character varying           | Constant `model`                  |
+| `station_id`          | character varying           | Constant `station_id`             |
+| `temperature`         | float                       | Node `ns=2;i=20`, `params.0`      |
+| `temperature_unit`    | character varying           | Node `ns=2;i=30`, `params.1`      |
+| `pressure`            | float                       | Node `ns=2;i=21`, `params.2`      |
+| `pressure_unit`       | character varying           | Node `ns=2;i=31`, `params.3`      |
+| `humidity`            | float                       | Node `ns=2;i=22`, `params.4`      |
+| `humidity_unit`       | character varying           | Node `ns=2;i=32`, `params.5`      |
+| `wind_speed`          | float                       | Node `ns=2;i=23`, `params.6`      |
+| `wind_speed_unit`     | character varying           | Node `ns=2;i=33`, `params.7`      |
+| `wind_direction`      | float                       | Node `ns=2;i=24`, `params.8`      |
+| `wind_direction_unit` | character varying           | Node `ns=2;i=34`, `params.9`      |
+| `rain`                | float                       | Node `ns=2;i=25`, `params.10`     |
+| `rain_unit`           | character varying           | Node `ns=2;i=35`, `params.11`     |
